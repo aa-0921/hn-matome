@@ -34,6 +34,11 @@ jobs:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         run: cd core && python -m scripts.fetch_and_generate
 
+      - name: 生成した docs をワークフロー対象リポジトリへ同期
+        run: |
+          rm -rf docs/archive docs/pagefind docs/index.html docs/about.html docs/privacy.html docs/sitemap.xml docs/robots.txt docs/latest
+          cp -R core/docs/. docs/
+
       - name: Pagefind 検索インデックスを生成
         run: npx pagefind --site docs --output-path docs/pagefind
 
