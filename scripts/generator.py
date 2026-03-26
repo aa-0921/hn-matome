@@ -6,6 +6,7 @@ from scripts.models import DailyReport
 class HTMLGenerator:
     def __init__(self, templates_dir: Path, output_dir: Path):
         self.output_dir = output_dir
+        self.output_dir.mkdir(parents=True, exist_ok=True)
         self.env = Environment(
             loader=FileSystemLoader(str(templates_dir)),
             autoescape=True,

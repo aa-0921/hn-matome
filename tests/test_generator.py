@@ -52,3 +52,11 @@ def test_generate_index(generator, sample_report, tmp_path):
     content = out.read_text()
     assert "2026年3月26日" in content
     assert "2026-03-26" in content
+
+
+def test_generate_static_pages(generator, tmp_path):
+    generator.generate_static_pages()
+    assert (tmp_path / "about.html").exists()
+    assert (tmp_path / "privacy.html").exists()
+    about_content = (tmp_path / "about.html").read_text()
+    assert "HN日報について" in about_content
