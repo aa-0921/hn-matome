@@ -1,7 +1,7 @@
 # UI・デザイン・仕様・技術スタック調査
 
 > 作成日: 2026-03-26
-> 対象: HackerNews 日本語まとめ & AI要約（GitHub Pages 静的サイト）
+> 対象: HackerNews 日本語まとめ & AI要約（Cloudflare Pages 静的サイト）
 
 ---
 
@@ -305,7 +305,8 @@ Sitemap: https://hn-matome.com/sitemap.xml
 
 ### 3.8 Core Web Vitals 対策
 
-静的 HTML のため元々有利だが、以下を遵守する:
+静的 HTML のため元々有利だが、以下を遵守する。
+Cloudflare Pages のグローバル CDN により LCP はさらに短縮できる:
 
 | 指標 | 目標値 | 対策 |
 |---|---|---|
@@ -319,14 +320,22 @@ Sitemap: https://hn-matome.com/sitemap.xml
 
 ### 4.1 Python 側
 
+**Python を採用する理由**:
+- GitHub Actions に Python がプリインストールされており、追加セットアップが不要
+- Jinja2 は HTML テンプレート生成ライブラリとして最も成熟しており、エスケープ・継承・フィルタが揃っている
+- httpx の async モードで HN API の並列取得が自然に書ける
+- 外部ライブラリを 2 つに絞れる軽量な構成が実現できる
+- Node.js/TypeScript でも同等に実装可能だが、このスクリプト的ユースケースでは Python が最もシンプル
+
 | コンポーネント | 採用技術 | 理由 |
 |---|---|---|
-| テンプレートエンジン | **Jinja2** | Python 標準的。HTML 生成に最適。ループ・条件分岐・フィルタが揃っている |
-| HTTP クライアント | **httpx** (async) または **requests** | HN API は並列取得で高速化。httpx の async が推奨 |
-| 翻訳・要約 | **OpenRouter API** (requests/httpx) | 無料枠あり。DeepSeek R1 等を使用 |
+| テンプレートエンジン | **Jinja2** | HTML 生成に最適。ループ・条件分岐・フィルタが揃っている |
+| HTTP クライアント | **httpx** (async) | HN API の並列取得で高速化 |
+| 翻訳・要約 | **OpenRouter API** (httpx) | 無料枠あり。DeepSeek R1 等を使用 |
 | サイトマップ生成 | **xml.etree.ElementTree** (標準ライブラリ) | 外部ライブラリ不要 |
 | 日時処理 | **datetime** + **zoneinfo** (標準ライブラリ) | JST 変換に使用 |
 | HTML エスケープ | Jinja2 の autoescaping | XSS 対策として自動エスケープを有効化 |
+| 検索インデックス生成 | **Pagefind CLI** (npx 経由) | Python ビルド後に HTML を解析してインデックスを生成 |
 
 **requirements.txt 想定**:
 
@@ -377,11 +386,72 @@ docs/
 ├── privacy.html
 ├── sitemap.xml
 ├── robots.txt
-└── assets/
-    └── style.css          # 単一 CSS ファイル（200〜300行）
+├── assets/
+│   └── style.css          # 単一 CSS ファイル（200〜300行）
+└── pagefind/              # Pagefind が自動生成（git管理外でも可）
+    ├── pagefind.js
+    ├── pagefind-ui.js
+    ├── pagefind-ui.css
+    └── *.pf_meta          # 検索インデックス（バイナリ）
 ```
 
 JavaScript ファイルは原則不要。AdSense コードのみ `<script async>` で読み込む。
+検索 UI は Pagefind が提供する `pagefind-ui.js` のみを使用する。
+
+### 4.3b 検索機能（Pagefind）
+
+**既存サービスとの差別化として、過去の全記事を日本語・英語で全文検索できる機能を提供する。**
+
+#### Pagefind を採用する理由
+
+| 比較軸 | Pagefind | Lunr.js | Algolia |
+|---|---|---|---|
+| 日本語対応 | WASM で文字単位 n-gram | 別途形態素解析が必要 | 有料プランで対応 |
+| 静的サイト対応 | ネイティブ対応 | JS バンドル要 | 外部 API 依存 |
+| インデックスサイズ | 圧縮効率が良い | 全量 JS に含む | 外部管理 |
+| 無料 | 完全無料 | 完全無料 | 無料枠に制限あり |
+| セットアップ | `npx pagefind` のみ | 要実装 | 要登録・設定 |
+
+#### ビルドフロー
+
+```bash
+# 1. Python でHTML生成
+python scripts/fetch_and_generate.py
+
+# 2. Pagefind で検索インデックスをビルド
+npx pagefind --site docs --output-path docs/pagefind
+```
+
+GitHub Actions のワークフローに上記を順番に組み込む。
+
+#### 検索UIの組み込み
+
+```html
+<!-- index.html の <head> に追加 -->
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+<script src="/pagefind/pagefind-ui.js"></script>
+
+<!-- 検索ボックスの設置場所（ヘッダー下） -->
+<div id="search"></div>
+<script>
+  new PagefindUI({ element: "#search", showSubResults: false });
+</script>
+```
+
+#### 検索対象の制御
+
+各アーカイブページに `data-pagefind-body` 属性を設定することで、
+記事一覧部分のみを検索対象にする（ヘッダー・フッターを除外）。
+
+```html
+<!-- archive/YYYY-MM-DD.html の記事一覧部分に付与 -->
+<main data-pagefind-body>
+  <!-- 日本語タイトル + コメント要約がインデックスされる -->
+</main>
+```
+
+翻訳後の日本語タイトルと、元の英語タイトル・コメント要約の両方がインデックスに含まれるため、
+日本語・英語どちらのキーワードでも検索可能になる。
 
 ### 4.4 Jinja2 テンプレート構成
 
@@ -389,7 +459,7 @@ JavaScript ファイルは原則不要。AdSense コードのみ `<script async>
 scripts/
 ├── fetch_and_generate.py  # メインスクリプト
 ├── templates/
-│   ├── base.html          # 共通レイアウト（head, header, footer）
+│   ├── base.html          # 共通レイアウト（head, header, footer, 検索ボックス）
 │   ├── archive.html       # 日付アーカイブページ（base.html を継承）
 │   ├── index.html         # トップページ（最新 + アーカイブ一覧）
 │   ├── about.html         # about ページ
@@ -409,13 +479,63 @@ scripts/
 
 ---
 
-## 5. まとめ・実装優先順位
+## 5. ホスティング: Cloudflare Pages
+
+### 5.1 GitHub Pages ではなく Cloudflare Pages を採用する理由
+
+| 比較軸 | GitHub Pages | Cloudflare Pages |
+|---|---|---|
+| CDN | GitHubのCDN（拠点数限定） | Anycast グローバルエッジ（日本拠点多数） |
+| 帯域制限 | 100GB/月ソフトリミット | **無制限** |
+| カスタムドメイン SSL | 無料 | 無料 |
+| リダイレクト設定 | 不便 | `_redirects` ファイルで簡単 |
+| デプロイ連携 | GitHub連携OK | GitHub リポジトリと直接連携 |
+| アクセス分析 | なし | Cloudflare Analytics あり |
+| 将来の拡張 | 制限あり | Cloudflare Workers で動的機能追加可 |
+
+AdSense 収益は PV 数に直結するため CDN 性能は重要。
+Cloudflare の日本拠点経由で配信されることで LCP が短縮される。
+
+### 5.2 デプロイフロー
+
+```
+GitHub リポジトリ（main ブランチ）
+  └── GitHub Actions（毎日 JST 8:00 cron）
+        ├── python scripts/fetch_and_generate.py  → docs/ に HTML 生成
+        ├── npx pagefind --site docs              → docs/pagefind/ に検索インデックス生成
+        └── git push → main ブランチに push
+              └── Cloudflare Pages が自動検出 → docs/ フォルダをデプロイ
+```
+
+Cloudflare Pages の「ビルドコマンド」を空にして「出力ディレクトリ」を `docs` に設定するだけ。
+GitHub Actions 側でビルドを完結させ、成果物を push する方式にする。
+
+### 5.3 設定手順
+
+1. Cloudflare Pages でプロジェクト作成 → GitHub リポジトリを連携
+2. ビルドコマンド: なし（空欄）
+3. 出力ディレクトリ: `docs`
+4. カスタムドメインを設定（Cloudflare DNS に委任すると自動設定）
+5. `_redirects` ファイルを `docs/` に追加:
+
+```
+/ /archive/YYYY-MM-DD.html 302
+```
+
+（毎日 Python スクリプトが最新日付にリダイレクトする `_redirects` を自動上書き生成）
+
+---
+
+## 6. まとめ・実装優先順位
 
 | 優先度 | タスク |
 |---|---|
 | 必須（Day 1） | `fetch_and_generate.py` 骨格、Jinja2 テンプレート、style.css |
 | 必須（Day 1） | `robots.txt`、`privacy.html`（静的）、`about.html`（静的） |
+| 必須（Day 1） | Cloudflare Pages セットアップ、独自ドメイン取得・連携 |
 | 必須（Week 1） | JSON-LD 構造化データ、メタタグ・OGP タグ、sitemap.xml 自動生成 |
-| 推奨（Month 1） | Google Search Console 登録、独自ドメイン取得 |
+| 必須（Week 1） | Pagefind 検索インデックス生成をビルドフローに組み込み |
+| 必須（Week 1） | 検索ボックスをヘッダーに設置（`data-pagefind-body` 属性設定含む） |
+| 推奨（Month 1） | Google Search Console 登録 |
 | 推奨（Month 1） | アーカイブ 30日分蓄積 → AdSense 申請 |
 | 将来 | OGP 画像自動生成、PWA 対応 |
