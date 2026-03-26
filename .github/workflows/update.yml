@@ -14,11 +14,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: hn-matome-core（scripts）をチェックアウト
+      - name: hn-matome-core（core）をチェックアウト
         uses: actions/checkout@v4
         with:
           repository: aa-0921/hn-matome-core
-          path: scripts
+          path: core
           ref: main
           token: ${{ secrets.CORE_REPO_TOKEN }}
 
@@ -32,7 +32,7 @@ jobs:
       - name: HN データ取得・翻訳・HTML 生成
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-        run: python -m scripts.fetch_and_generate
+        run: cd core && python -m scripts.fetch_and_generate
 
       - name: Pagefind 検索インデックスを生成
         run: npx pagefind --site docs --output-path docs/pagefind
