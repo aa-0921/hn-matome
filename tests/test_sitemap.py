@@ -1,0 +1,37 @@
+import pytest
+from pathlib import Path
+from scripts.sitemap import SitemapGenerator
+
+BASE_URL = "https://hn-matome.pages.dev"
+
+
+@pytest.fixture
+def gen(tmp_path):
+    return SitemapGenerator(output_dir=tmp_path, base_url=BASE_URL)
+
+
+def test_generate_sitemap(gen, tmp_path):
+    gen.generate(archive_dates=["2026-03-25", "2026-03-26"])
+    sitemap = tmp_path / "sitemap.xml"
+    assert sitemap.exists()
+    content = sitemap.read_text()
+    assert f"{BASE_URL}/" in content
+    assert "2026-03-26" in content
+    assert "<urlset" in content
+
+
+def test_generate_redirects(gen, tmp_path):
+    gen.generate_redirects(latest_date="2026-03-26")
+    redirects = tmp_path / "_redirects"
+    assert redirects.exists()
+    content = redirects.read_text()
+    assert "/archive/2026-03-26.html" in content
+
+
+def test_generate_robots(gen, tmp_path):
+    gen.generate_robots()
+    robots = tmp_path / "robots.txt"
+    assert robots.exists()
+    content = robots.read_text()
+    assert "Sitemap:" in content
+    assert f"{BASE_URL}/sitemap.xml" in content
