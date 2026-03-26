@@ -25,7 +25,20 @@ def test_generate_redirects(gen, tmp_path):
     redirects = tmp_path / "_redirects"
     assert redirects.exists()
     content = redirects.read_text()
-    assert "/archive/2026-03-26.html" in content
+    assert "/ /archive/2026-03-26.html 302" in content
+
+
+def test_sitemap_xml_declaration(gen, tmp_path):
+    gen.generate(archive_dates=[])
+    content = (tmp_path / "sitemap.xml").read_text()
+    assert content.startswith('<?xml version="1.0" encoding="UTF-8"?>')
+    assert content.count("<?xml") == 1  # 宣言が重複していない
+
+
+def test_sitemap_has_xmlns(gen, tmp_path):
+    gen.generate(archive_dates=[])
+    content = (tmp_path / "sitemap.xml").read_text()
+    assert 'xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' in content
 
 
 def test_generate_robots(gen, tmp_path):

@@ -6,6 +6,7 @@ from xml.dom.minidom import parseString
 class SitemapGenerator:
     def __init__(self, output_dir: Path, base_url: str):
         self.output_dir = output_dir
+        self.output_dir.mkdir(parents=True, exist_ok=True)
         self.base_url = base_url.rstrip("/")
 
     def generate(self, archive_dates: list[str]) -> Path:
@@ -30,8 +31,11 @@ class SitemapGenerator:
             )
 
         xml_str = parseString(tostring(root, encoding="unicode")).toprettyxml(indent="  ")
-        # minidom が追加する XML 宣言を差し替える
-        xml_str = '<?xml version="1.0" encoding="UTF-8"?>\n' + "\n".join(xml_str.splitlines()[1:])
+        # minidom が追加する XML 宣言を差し替える（1行目が宣言の場合のみスキップ）
+        lines = xml_str.splitlines()
+        if lines and lines[0].startswith("<?xml"):
+            lines = lines[1:]
+        xml_str = '<?xml version="1.0" encoding="UTF-8"?>\n' + "\n".join(lines)
 
         out = self.output_dir / "sitemap.xml"
         out.write_text(xml_str, encoding="utf-8")
