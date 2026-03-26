@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}{{ report.date_ja }} HN日報 | HackerNews日本語まとめ{% endblock %}
+{% block description %}{{ report.date_ja }}のHacker Newsトップ{{ report.stories|length }}記事を日本語翻訳・AI要約。{% endblock %}
+{% block canonical %}<link rel="canonical" href="https://hn-matome.pages.dev/archive/{{ report.date_str }}.html">{% endblock %}
+{% block og_type %}article{% endblock %}
+{% block og_title %}{{ report.date_ja }} HN日報{% endblock %}
+{% block og_url %}https://hn-matome.pages.dev/archive/{{ report.date_str }}.html{% endblock %}
+
+{% block head_extra %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  "headline": "{{ report.date_ja }} HackerNews 日本語まとめ トップ{{ report.stories|length }}記事",
+  "datePublished": "{{ report.date_str }}T08:00:00+09:00",
+  "dateModified": "{{ report.date_str }}T08:00:00+09:00",
+  "author": {"@type": "Organization", "name": "HN日報"},
+  "publisher": {"@type": "Organization", "name": "HN日報"},
+  "inLanguage": "ja",
+  "url": "https://hn-matome.pages.dev/archive/{{ report.date_str }}.html"
+}
+</script>
+{% endblock %}
+
+{% block body_attr %}data-pagefind-body{% endblock %}
+
+{% block content %}
+<h1 class="page-title">{{ report.date_ja }} のトップ記事</h1>
+<nav class="date-nav">
+  {% if prev_date %}<a href="/archive/{{ prev_date }}.html">← 前日</a>{% endif %}
+  {% if next_date %}<a href="/archive/{{ next_date }}.html">翌日 →</a>{% endif %}
+</nav>
+
+<ol class="article-list">
+{% for story in report.stories %}
+<li class="article-item" id="story-{{ story.rank }}">
+  <div class="article-rank">#{{ story.rank }}</div>
+  <div class="article-body">
+    <h2 class="article-title">
+      <a href="{{ story.url or story.hn_url }}" target="_blank" rel="noopener">{{ story.title_ja or story.title_en }}</a>
+    </h2>
+    <div class="article-meta">
+      <span>{{ story.score }}点</span>
+      <span>{{ story.comment_count }}コメント</span>
+      <a href="{{ story.hn_url }}" target="_blank" rel="noopener">HNで見る</a>
+      {% if story.url %}<a href="{{ story.url }}" target="_blank" rel="noopener">元記事</a>{% endif %}
+    </div>
+    {% if story.summary_ja %}
+    <details class="article-summary">
+      <summary>コミュニティの反応</summary>
+      <p>{{ story.summary_ja }}</p>
+    </details>
+    {% endif %}
+  </div>
+</li>
+{% endfor %}
+</ol>
+{% endblock %}

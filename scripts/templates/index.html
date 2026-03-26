@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}HN日報 | HackerNews日本語まとめ - 毎日更新{% endblock %}
+
+{% block head_extra %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "HN日報",
+  "url": "https://hn-matome.pages.dev/"
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<h1 class="page-title">HN日報 — HackerNews 日本語まとめ</h1>
+<p class="site-description">Hacker Newsのトップ記事を毎朝JST 8時に日本語翻訳・AI要約してお届けします。</p>
+
+{% if latest_report %}
+<section>
+  <h2>最新: {{ latest_report.date_ja }}</h2>
+  <a href="/archive/{{ latest_report.date_str }}.html" class="btn-latest">今日のまとめを読む</a>
+</section>
+{% endif %}
+
+<section class="archive-section">
+  <h2>アーカイブ</h2>
+  <ul class="archive-list">
+  {% for date_str in archive_dates %}
+    <li><a href="/archive/{{ date_str }}.html">{{ date_str }}</a></li>
+  {% endfor %}
+  </ul>
+</section>
+{% endblock %}

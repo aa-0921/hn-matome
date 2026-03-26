@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}HN日報 | HackerNews日本語まとめ{% endblock %}</title>
+  <meta name="description" content="{% block description %}HackerNewsのトップ記事を毎日日本語翻訳・AI要約。毎朝JST8時更新。{% endblock %}">
+  <meta name="robots" content="index, follow">
+  {% block canonical %}<link rel="canonical" href="https://hn-matome.pages.dev/">{% endblock %}
+  <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+  <meta property="og:title" content="{% block og_title %}HN日報{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}HackerNewsのトップ記事を毎日日本語翻訳・AI要約{% endblock %}">
+  <meta property="og:url" content="{% block og_url %}https://hn-matome.pages.dev/{% endblock %}">
+  <meta property="og:site_name" content="HN日報">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary">
+  <link rel="stylesheet" href="/assets/style.css">
+  <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+  <script src="/pagefind/pagefind-ui.js"></script>
+  {% block head_extra %}{% endblock %}
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <a href="/" class="site-title">HN日報</a>
+      <nav class="site-nav">
+        <a href="/">トップ</a>
+        <a href="/about.html">About</a>
+      </nav>
+    </div>
+    <div class="container search-container">
+      <div id="search"></div>
+    </div>
+  </header>
+  <main class="container" {% block body_attr %}{% endblock %}>
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <p>翻訳・要約は AI によるものです。内容の正確性は保証しません。</p>
+      <p><a href="/about.html">About</a> · <a href="/privacy.html">プライバシーポリシー</a></p>
+    </div>
+  </footer>
+  <script>
+    new PagefindUI({ element: "#search", showSubResults: false, translations: { placeholder: "過去記事を検索..." } });
+  </script>
+</body>
+</html>
