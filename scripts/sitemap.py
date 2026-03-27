@@ -9,7 +9,7 @@ class SitemapGenerator:
         self.output_dir.mkdir(parents=True, exist_ok=True)
         self.base_url = base_url.rstrip("/")
 
-    def generate(self, archive_dates: list[str]) -> Path:
+    def generate(self, archive_slugs: list[str]) -> Path:
         root = Element("urlset")
         root.set("xmlns", "http://www.sitemaps.org/schemas/sitemap/0.9")
 
@@ -24,10 +24,12 @@ class SitemapGenerator:
         add_url(f"{self.base_url}/", "daily", "1.0")
         add_url(f"{self.base_url}/about.html", "monthly", "0.3")
 
-        for date_str in sorted(archive_dates, reverse=True):
+        for slug in sorted(archive_slugs, reverse=True):
+            # lastmod はスロット部分を除いた日付部分のみ使用
+            date_part = slug[:10]
             add_url(
-                f"{self.base_url}/archive/{date_str}.html",
-                "never", "0.8", lastmod=date_str
+                f"{self.base_url}/archive/{slug}.html",
+                "never", "0.8", lastmod=date_part
             )
 
         xml_str = parseString(tostring(root, encoding="unicode")).toprettyxml(indent="  ")

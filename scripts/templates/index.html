@@ -15,7 +15,7 @@
 
 {% block content %}
 <h1 class="page-title">HackerNews 日本語まとめ & AI要約</h1>
-<p class="site-description">Hacker Newsのトップ記事を毎朝JST 8時に日本語翻訳・AI要約してお届けします。</p>
+<p class="site-description">Hacker Newsのトップ記事を1日3回（JST 7時・12時・23時）日本語翻訳・AI要約してお届けします。</p>
 
 <details class="hn-info-box">
   <summary>Hacker News の仕組み</summary>
@@ -26,7 +26,7 @@
       <dt>トップページのランキング基準</dt>
       <dd>得点が多く新しい記事ほど上位に表示され、時間が経つと自然に順位が下がります。</dd>
       <dt>このサイトのデータ取得タイミング</dt>
-      <dd>毎朝 JST 8:00 に Hacker News API からその時点のトップ30記事を取得しています。リアルタイムではなく、朝8時時点のスナップショットです。</dd>
+      <dd>JST 7:00・12:00・23:00 の1日3回、Hacker News API からその時点のトップ30記事を取得しています。各スナップショットは取得時刻ごとに保存されます。</dd>
     </dl>
   </div>
 </details>
@@ -35,6 +35,7 @@
 <section>
   <h2 class="latest-heading">
     最新: {{ latest_report.date_ja }}
+    {% if latest_report.fetched_at %}<span class="fetch-slot">{{ latest_report.fetched_at }}</span>{% endif %}
     <span class="current-datetime" id="currentDatetime"></span>
   </h2>
   <ol class="article-list">
@@ -46,11 +47,11 @@
         <a href="{{ story.url or story.hn_url }}" target="_blank" rel="noopener">{{ story.title_ja or story.title_en }}</a>
       </h2>
       <div class="article-meta">
-        <span class="meta-score" title="Hacker News での upvote 数">▲ {{ story.score }}点</span>
         <span class="meta-comments">💬 {{ story.comment_count }}件</span>
         <span class="meta-time" data-posted-at="{{ story.posted_at.isoformat() }}"></span>
         <a href="{{ story.hn_url }}" target="_blank" rel="noopener" class="meta-link">元コメントを読む ↗</a>
         {% if story.url %}<a href="{{ story.url }}" target="_blank" rel="noopener" class="meta-link">元記事を読む ↗</a>{% endif %}
+        <span class="meta-score" title="Hacker News での upvote 数">▲ {{ story.score }}点</span>
       </div>
       {% if story.summary_ja %}
       <details class="article-summary">
@@ -68,8 +69,13 @@
 <section class="archive-section">
   <h2>アーカイブ</h2>
   <ul class="archive-list">
-  {% for date_str in archive_dates %}
-    <li><a href="/archive/{{ date_str }}.html">{{ date_str | to_date_ja }}</a></li>
+  {% for group in archive_groups %}
+    <li class="archive-date-group">
+      <span class="archive-date-label">{{ group.date_ja }}</span>
+      {% for entry in group.entries %}
+        <a href="/archive/{{ entry.slug }}.html" class="archive-slot-link">{{ entry.label or '取得データ' }}</a>
+      {% endfor %}
+    </li>
   {% endfor %}
   </ul>
 </section>

@@ -11,7 +11,7 @@ def gen(tmp_path):
 
 
 def test_generate_sitemap(gen, tmp_path):
-    gen.generate(archive_dates=["2026-03-25", "2026-03-26"])
+    gen.generate(archive_slugs=["2026-03-25", "2026-03-26"])
     sitemap = tmp_path / "sitemap.xml"
     assert sitemap.exists()
     content = sitemap.read_text()
@@ -29,14 +29,14 @@ def test_generate_redirects(gen, tmp_path):
 
 
 def test_sitemap_xml_declaration(gen, tmp_path):
-    gen.generate(archive_dates=[])
+    gen.generate(archive_slugs=[])
     content = (tmp_path / "sitemap.xml").read_text()
     assert content.startswith('<?xml version="1.0" encoding="UTF-8"?>')
     assert content.count("<?xml") == 1  # 宣言が重複していない
 
 
 def test_sitemap_has_xmlns(gen, tmp_path):
-    gen.generate(archive_dates=[])
+    gen.generate(archive_slugs=[])
     content = (tmp_path / "sitemap.xml").read_text()
     assert 'xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' in content
 

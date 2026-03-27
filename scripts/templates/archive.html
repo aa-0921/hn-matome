@@ -1,24 +1,24 @@
 {% extends "base.html" %}
 
-{% block title %}{{ report.date_ja }} | HackerNews 日本語まとめ & AI要約{% endblock %}
-{% block description %}{{ report.date_ja }}のHacker Newsトップ{{ report.stories|length }}記事を日本語翻訳・AI要約。{% endblock %}
-{% block canonical %}<link rel="canonical" href="https://hn-matome-2ht.pages.dev/archive/{{ report.date_str }}.html">{% endblock %}
+{% block title %}{{ report.date_ja }}{% if report.fetched_at %}（{{ report.fetched_at }}）{% endif %} | HackerNews 日本語まとめ & AI要約{% endblock %}
+{% block description %}{{ report.date_ja }}{% if report.fetched_at %}（{{ report.fetched_at }}）{% endif %}のHacker Newsトップ{{ report.stories|length }}記事を日本語翻訳・AI要約。{% endblock %}
+{% block canonical %}<link rel="canonical" href="https://hn-matome-2ht.pages.dev/archive/{{ report.slug }}.html">{% endblock %}
 {% block og_type %}article{% endblock %}
-{% block og_title %}{{ report.date_ja }} | HackerNews 日本語まとめ & AI要約{% endblock %}
-{% block og_url %}https://hn-matome-2ht.pages.dev/archive/{{ report.date_str }}.html{% endblock %}
+{% block og_title %}{{ report.date_ja }}{% if report.fetched_at %}（{{ report.fetched_at }}）{% endif %} | HackerNews 日本語まとめ & AI要約{% endblock %}
+{% block og_url %}https://hn-matome-2ht.pages.dev/archive/{{ report.slug }}.html{% endblock %}
 
 {% block head_extra %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "NewsArticle",
-  "headline": "{{ report.date_ja }} HackerNews 日本語まとめ トップ{{ report.stories|length }}記事",
-  "datePublished": "{{ report.date_str }}T08:00:00+09:00",
-  "dateModified": "{{ report.date_str }}T08:00:00+09:00",
+  "headline": "{{ report.date_ja }}{% if report.fetched_at %}（{{ report.fetched_at }}）{% endif %} HackerNews 日本語まとめ トップ{{ report.stories|length }}記事",
+  "datePublished": "{{ report.date_str }}T{{ report.slot or '08' }}:00:00+09:00",
+  "dateModified": "{{ report.date_str }}T{{ report.slot or '08' }}:00:00+09:00",
   "author": {"@type": "Organization", "name": "HackerNews 日本語まとめ & AI要約"},
   "publisher": {"@type": "Organization", "name": "HackerNews 日本語まとめ & AI要約"},
   "inLanguage": "ja",
-  "url": "https://hn-matome-2ht.pages.dev/archive/{{ report.date_str }}.html"
+  "url": "https://hn-matome-2ht.pages.dev/archive/{{ report.slug }}.html"
 }
 </script>
 {% endblock %}
@@ -26,10 +26,13 @@
 {% block body_attr %}data-pagefind-body{% endblock %}
 
 {% block content %}
-<h1 class="page-title">{{ report.date_ja }} のトップ記事</h1>
+<h1 class="page-title">
+  {{ report.date_ja }} のトップ記事
+  {% if report.fetched_at %}<span class="fetch-slot">{{ report.fetched_at }}</span>{% endif %}
+</h1>
 <nav class="date-nav">
-  {% if prev_date %}<a href="/archive/{{ prev_date }}.html">← 前日</a>{% endif %}
-  {% if next_date %}<a href="/archive/{{ next_date }}.html">翌日 →</a>{% endif %}
+  {% if prev_date %}<a href="/archive/{{ prev_date }}.html">← 前</a>{% endif %}
+  {% if next_date %}<a href="/archive/{{ next_date }}.html">次 →</a>{% endif %}
 </nav>
 
 <ol class="article-list">
@@ -41,11 +44,11 @@
       <a href="{{ story.url or story.hn_url }}" target="_blank" rel="noopener">{{ story.title_ja or story.title_en }}</a>
     </h2>
     <div class="article-meta">
-      <span class="meta-score" title="Hacker News での upvote 数">▲ {{ story.score }}点</span>
       <span class="meta-comments">💬 {{ story.comment_count }}件</span>
       <span class="meta-time" data-posted-at="{{ story.posted_at.isoformat() }}"></span>
       <a href="{{ story.hn_url }}" target="_blank" rel="noopener" class="meta-link">元コメントを読む ↗</a>
-      {% if story.url %}<a href="{{ story.url }}" target="_blank" rel="noopener" class="meta-link">元記事を読む ↗</a>{% endif %}
+      {% if story.url %}<a href="{{ story.url }}" target="_blank" rel="noopener" class="meta-link"> </a>{% endif %}
+      <span class="meta-score" title="Hacker News での upvote 数">▲ {{ story.score }}点</span>
     </div>
     {% if story.summary_ja %}
     <details class="article-summary">

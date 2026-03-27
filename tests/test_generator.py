@@ -46,7 +46,7 @@ def test_generate_archive_includes_summary(generator, sample_report, tmp_path):
 
 
 def test_generate_index(generator, sample_report, tmp_path):
-    generator.generate_index(latest_report=sample_report, archive_dates=["2026-03-26"])
+    generator.generate_index(latest_report=sample_report, archive_slugs=["2026-03-26"])
     out = tmp_path / "index.html"
     assert out.exists()
     content = out.read_text()
