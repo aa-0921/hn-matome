@@ -47,5 +47,11 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add docs/
-          git diff --cached --quiet || git commit -m "Update: $(TZ=Asia/Tokyo date +%Y-%m-%d)"
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+            exit 0
+          fi
+          git commit -m "Update: $(TZ=Asia/Tokyo date +%Y-%m-%d)"
+          # 同時実行や手動pushがある場合でも fast-forward 可能にしてから push する
+          git pull --rebase origin main
           git push
