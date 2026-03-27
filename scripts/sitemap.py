@@ -23,6 +23,7 @@ class SitemapGenerator:
 
         add_url(f"{self.base_url}/", "daily", "1.0")
         add_url(f"{self.base_url}/about.html", "monthly", "0.3")
+        add_url(f"{self.base_url}/privacy.html", "monthly", "0.2")
 
         for slug in sorted(archive_slugs, reverse=True):
             # lastmod はスロット部分を除いた日付部分のみ使用

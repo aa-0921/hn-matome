@@ -35,6 +35,26 @@ def get_existing_slugs() -> list[str]:
     )
 
 
+def compute_target_dates(
+    today: datetime,
+    backfill_days: int,
+    target_date_str: str | None,
+) -> list[datetime]:
+    """生成対象日一覧を返す。target_date_str 指定時は単日のみ。"""
+    if target_date_str:
+        try:
+            parsed = datetime.strptime(target_date_str, "%Y-%m-%d")
+        except ValueError:
+            print(
+                f"ERROR: --date の形式が不正です: {target_date_str} (YYYY-MM-DD を指定してください)",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+        return [parsed.replace(tzinfo=today.tzinfo)]
+
+    return [today - timedelta(days=i) for i in range(max(backfill_days, 0), -1, -1)]
+
+
 async def main():
     load_dotenv()
 
@@ -50,6 +70,12 @@ async def main():
         type=int,
         default=0,
         help="過去N日分を追加生成（当日分に加えて過去分を生成）",
+    )
+    parser.add_argument(
+        "--date",
+        type=str,
+        default=None,
+        help="生成対象日（YYYY-MM-DD）。指定時はその1日だけ生成し、--backfill-days より優先",
     )
     parser.add_argument(
         "--limit",
@@ -98,7 +124,11 @@ async def main():
             print("ERROR: OPENROUTER_API_KEY が設定されていません", file=sys.stderr)
             sys.exit(1)
 
-        target_dates = [today - timedelta(days=i) for i in range(max(args.backfill_days, 0), -1, -1)]
+        target_dates = compute_target_dates(
+            today=today,
+            backfill_days=args.backfill_days,
+            target_date_str=args.date,
+        )
         print("生成対象日:", ", ".join([d.strftime("%Y-%m-%d") for d in target_dates]))
 
         async with HNClient() as hn:
@@ -184,6 +214,7 @@ async def main():
     generator.generate_static_pages(
         last_updated_ja=f"{run_started_at.year}年{run_started_at.month}月{run_started_at.day}日"
     )
+    generator.generate_feed(archive_slugs=archive_slugs, base_url=BASE_URL)
     sitemap_gen.generate(archive_slugs=archive_slugs)
     sitemap_gen.generate_redirects(latest_date=latest_slug or today.strftime("%Y-%m-%d"))
     sitemap_gen.generate_robots()

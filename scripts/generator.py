@@ -1,7 +1,10 @@
 import json
 from collections import OrderedDict
 from datetime import date as date_type, datetime, timezone, timedelta
+from email.utils import formatdate
 from pathlib import Path
+from xml.etree.ElementTree import Element, SubElement, tostring
+from xml.dom.minidom import parseString
 from jinja2 import Environment, FileSystemLoader
 from scripts.models import DailyReport
 
@@ -91,6 +94,62 @@ class HTMLGenerator:
         if not data_dir.exists():
             return []
         return sorted([p.stem for p in data_dir.glob("*.json")], reverse=True)
+
+    def generate_feed(
+        self,
+        archive_slugs: list[str],
+        base_url: str = "https://hn-matome-2ht.pages.dev",
+        max_items: int = 20,
+    ) -> Path:
+        """RSS 2.0 フィードを docs/feed.xml として生成する"""
+        jst = timezone(timedelta(hours=9))
+
+        rss = Element("rss")
+        rss.set("version", "2.0")
+        channel = SubElement(rss, "channel")
+        SubElement(channel, "title").text = "HN日報 - HackerNews 日本語まとめ & AI要約"
+        SubElement(channel, "link").text = f"{base_url}/"
+        SubElement(channel, "description").text = "HackerNewsのトップ記事を毎日日本語翻訳・AI要約して配信"
+        SubElement(channel, "language").text = "ja"
+        SubElement(channel, "lastBuildDate").text = formatdate(usegmt=True)
+
+        for slug in archive_slugs[:max_items]:
+            report = self.load_report_json(slug)
+            if report is None:
+                continue
+            date_part = slug[:10]
+            slot = slug[11:] if len(slug) > 10 and slug[10] == "_" else None
+            hour = int(slot) if slot else 8
+            pub_dt = datetime(
+                *[int(x) for x in date_part.split("-")], hour, 0, 0, tzinfo=jst
+            )
+
+            description_lines = []
+            for story in report.stories[:10]:
+                title = story.title_ja or story.title_en
+                description_lines.append(f"#{story.rank} {title}")
+            description_text = "\n".join(description_lines)
+
+            item = SubElement(channel, "item")
+            SubElement(item, "title").text = (
+                f"{report.date_ja}"
+                + (f"（{slot}:00取得）" if slot else "")
+                + " HackerNews トップ記事"
+            )
+            SubElement(item, "link").text = f"{base_url}/archive/{slug}.html"
+            SubElement(item, "guid").text = f"{base_url}/archive/{slug}.html"
+            SubElement(item, "pubDate").text = formatdate(pub_dt.timestamp(), usegmt=True)
+            SubElement(item, "description").text = description_text
+
+        xml_str = parseString(tostring(rss, encoding="unicode")).toprettyxml(indent="  ")
+        lines = xml_str.splitlines()
+        if lines and lines[0].startswith("<?xml"):
+            lines = lines[1:]
+        xml_str = '<?xml version="1.0" encoding="UTF-8"?>\n' + "\n".join(lines)
+
+        out = self.output_dir / "feed.xml"
+        out.write_text(xml_str, encoding="utf-8")
+        return out
 
     def generate_static_pages(self, last_updated_ja: str | None = None) -> None:
         """about.html と privacy.html を生成する"""
