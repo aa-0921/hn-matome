@@ -197,12 +197,17 @@ async def main():
     # HTML 生成（prev / next を全スラグで計算）
     generated_slugs = list(reports.keys())
     all_slugs = sorted(set(existing_slugs + generated_slugs))
+    recent_slugs_all = sorted(all_slugs, reverse=True)[:12]
     for slug in generated_slugs:
         idx = all_slugs.index(slug)
         prev_date = all_slugs[idx - 1] if idx > 0 else None
         next_date = all_slugs[idx + 1] if idx < len(all_slugs) - 1 else None
+        # 自身を除いた最新10件を内部リンク用に渡す
+        recent_slugs = [s for s in recent_slugs_all if s != slug][:10]
         print(f"archive/{slug}.html を生成中...")
-        generator.generate_archive(reports[slug], prev_date=prev_date, next_date=next_date)
+        generator.generate_archive(
+            reports[slug], prev_date=prev_date, next_date=next_date, recent_slugs=recent_slugs
+        )
 
     # index + サイトマップ更新
     archive_slugs = sorted(all_slugs, reverse=True)

@@ -52,9 +52,15 @@ class HTMLGenerator:
         report: DailyReport,
         prev_date: str | None,
         next_date: str | None,
+        recent_slugs: list[str] | None = None,
     ) -> Path:
         tmpl = self.env.get_template("archive.html")
-        html = tmpl.render(report=report, prev_date=prev_date, next_date=next_date)
+        html = tmpl.render(
+            report=report,
+            prev_date=prev_date,
+            next_date=next_date,
+            recent_slugs=recent_slugs or [],
+        )
         out = self.output_dir / "archive" / f"{report.slug}.html"
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(html, encoding="utf-8")
