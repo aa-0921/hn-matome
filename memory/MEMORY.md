@@ -34,14 +34,17 @@ tests/                    # pytest テスト（21 passed）
 
 ## 残作業（手動）
 
-1. GitHub Secrets に `OPENROUTER_API_KEY` 登録
-2. Cloudflare Pages プロジェクト作成（出力ディレクトリ: `docs`）
-3. Actions workflow_dispatch で動作確認
-4. 独自ドメイン取得（AdSense申請用、月約170円）
+1. Cloudflare Pages の Production 設定最終確認（branch=`main`, output=`docs`）
+2. Actions `workflow_dispatch` 実行結果の最終確認（`docs/archive`, `docs/pagefind`, `docs/sitemap.xml`）
+3. Search Console 登録・サイトマップ送信
+4. 30日蓄積後の AdSense 申請
 
 ## 重要な設計決定
 
-- **リポジトリ**: private 単体推奨（月消費 ~150min、無料枠 2,000min の 8%）
+- **リポジトリ**: public/private 分離を採用
+  - public: `hn-matome`（workflow + docs）
+  - private: `hn-matome-core`（scripts）
+  - 必須 secret: `CORE_REPO_TOKEN`, `OPENROUTER_API_KEY`
 - **LLMリクエスト**: タイトル一括翻訳 1req + コメント要約 最大30req = 31req/日
 - **Jinja2**: `autoescape=True` で XSS 対策済み
 - **検索**: Pagefind（`npx pagefind --site docs --output-path docs/pagefind`）

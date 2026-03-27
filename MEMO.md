@@ -1,41 +1,42 @@
-# HackerNews 日本語まとめ & AI要約
+# HN日報 開発メモ
 
-Hacker News のトップ記事・コメントを毎日日本語に翻訳・AI要約して公開するサービス。
+Hacker News のトップ記事とコメントを毎日日本語に翻訳・要約して公開するプロジェクト。
 
-## コンセプト
+## 現在の運用アーキテクチャ
 
-- HN のトップ記事タイトルを日本語翻訳
-- 上位コメント（英語コミュニティの反応）を AI で日本語要約
-- 毎日 GitHub Actions が自動実行 → 静的 HTML → GitHub Pages で公開
-- 運用コスト: ドメインなし 0円 / ドメインあり 月約170円
+- 公開リポジトリ `hn-matome`:
+  - `.github/workflows/update.yml`
+  - `docs/`（公開用成果物）
+  - `requirements.txt` など運用補助ファイル
+- 非公開リポジトリ `hn-matome-core`:
+  - `scripts/`（取得・翻訳・要約・生成ロジック）
+- 実行フロー:
+  - GitHub Actions（`HN日報 毎日更新`）が `hn-matome-core` を checkout
+  - `core/scripts/fetch_and_generate.py` 実行で `core/docs` を生成
+  - `core/docs` を公開リポジトリの `docs/` に同期
+  - `npx pagefind --site docs` を実行
+  - `docs/` の差分をコミットして Cloudflare Pages が自動デプロイ
 
-## 差別化ポイント
+## 進捗
 
-1. **コメント・議論の日本語要約**（最大の差別化 — HN API で完結）
-2. **アーカイブ・検索** （静的 HTML の蓄積による）
-3. **モバイル最適化**
+- [x] MVP 実装（取得・翻訳・要約・静的生成）
+- [x] コメント要約表示
+- [x] アーカイブ・検索（Pagefind）
+- [x] モバイル表示対応（基本）
+- [x] Cloudflare Pages 公開構成
+- [x] public/private 分離運用
 
-## 技術スタック（予定）
+## 運用上の必須事項
 
-| コンポーネント | 技術 |
-|---|---|
-| データ取得 | HN 公式 Firebase API（無料・無制限） |
-| 翻訳・要約 | OpenRouter 無料枠（DeepSeek R1 等） |
-| 自動実行 | GitHub Actions cron |
-| ホスティング | GitHub Pages（静的 HTML） |
+- GitHub Secrets:
+  - `OPENROUTER_API_KEY`
+  - `CORE_REPO_TOKEN`
+- Cloudflare Pages:
+  - Production branch: `main`
+  - Build command: 空欄
+  - Build output directory: `docs`
 
-## ドキュメント
+## 方針メモ
 
-| ファイル | 内容 |
-|---|---|
-| `海外テックニュース日本語翻訳サービス調査.md` | 競合調査・実現可能性・差別化評価 |
-| `サービス設計書.md` | アーキテクチャ・MVP仕様 |
-| `GitHub_Actions定期実行_収益化アイデア集.md` | GitHub Actions cron 活用事例 |
-| `GitHub_Actions_cron収益化アイデア調査.md` | インフラ調査 |
-
-## 開発フェーズ
-
-- [ ] MVP: HN API 取得 → 翻訳 → 静的 HTML → GitHub Pages
-- [ ] コメント要約追加
-- [ ] アーカイブ・検索
-- [ ] モバイル最適化 / PWA
+- README は公開しない（情報漏えい対策）
+- プロジェクト情報は本 `MEMO.md` と `memory/MEMORY.md` を一次情報として管理

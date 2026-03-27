@@ -1553,12 +1553,12 @@ python -m http.server 8000 --directory docs
 ```
 
 確認項目:
-- [ ] トップページが表示される
-- [ ] アーカイブリンクが機能する
-- [ ] 日本語タイトルが正しく表示される
-- [ ] コメント要約が `<details>` で表示される
-- [ ] prev/next ナビゲーションが機能する
-- [ ] モバイル表示（幅 375px）でレイアウトが崩れない
+- [x] トップページが表示される
+- [x] アーカイブリンクが機能する
+- [x] 日本語タイトルが正しく表示される
+- [x] コメント要約が `<details>` で表示される
+- [x] prev/next ナビゲーションが機能する
+- [x] モバイル表示（幅 375px）でレイアウトが崩れない
 
 **Step 3: Pagefind を手動実行して検索を確認**
 
@@ -1580,18 +1580,18 @@ git push
 
 ## 完了チェックリスト
 
-- [ ] Task 1: プロジェクト骨格
-- [ ] Task 2: データモデル
-- [ ] Task 3: HN API クライアント
-- [ ] Task 4: OpenRouter LLM クライアント
-- [ ] Task 5: Jinja2 テンプレート + CSS
-- [ ] Task 6: HTML ジェネレーター
-- [ ] Task 7: サイトマップ・_redirects 生成
-- [ ] Task 8: 静的ページ（about / privacy）
-- [ ] Task 9: メインオーケストレーター
-- [ ] Task 10: GitHub Actions ワークフロー
-- [ ] Task 11: Cloudflare Pages セットアップ
-- [ ] Task 12: 全テスト・最終確認
+- [x] Task 1: プロジェクト骨格
+- [x] Task 2: データモデル
+- [x] Task 3: HN API クライアント
+- [x] Task 4: OpenRouter LLM クライアント
+- [x] Task 5: Jinja2 テンプレート + CSS
+- [x] Task 6: HTML ジェネレーター
+- [x] Task 7: サイトマップ・_redirects 生成
+- [x] Task 8: 静的ページ（about / privacy）
+- [x] Task 9: メインオーケストレーター
+- [x] Task 10: GitHub Actions ワークフロー
+- [ ] Task 11: Cloudflare Pages セットアップ（環境側の最終確認）
+- [x] Task 12: 全テスト・最終確認
 
 ## 次のステップ（MVP 後）
 

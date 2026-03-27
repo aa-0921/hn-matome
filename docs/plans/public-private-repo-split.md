@@ -1,5 +1,15 @@
 # public/private リポジトリ分割手順
 
+## 採用方針（このプロジェクトの現行方針）
+
+本プロジェクトは **public/private 分離構成を採用** する。
+
+- public: `hn-matome`（workflow、`docs/`、運用ドキュメント）
+- private: `hn-matome-core`（`scripts/`）
+- 運用に必要な GitHub Secrets:
+  - `CORE_REPO_TOKEN`
+  - `OPENROUTER_API_KEY`
+
 ## 概要
 
 GitHub Actions を public リポジトリで実行することで、private リポジトリの無料枠（月 2,000 分）を消費せずに毎日更新を実現する。

@@ -58,7 +58,8 @@ async def main():
         print("ERROR: OPENROUTER_API_KEY が設定されていません", file=sys.stderr)
         sys.exit(1)
 
-    today = datetime.now(tz=JST).replace(hour=0, minute=0, second=0, microsecond=0)
+    run_started_at = datetime.now(tz=JST)
+    today = run_started_at.replace(hour=0, minute=0, second=0, microsecond=0)
     print(f"実行日時: {today.strftime('%Y-%m-%d %H:%M')} JST")
     target_dates = [today - timedelta(days=i) for i in range(max(args.backfill_days, 0), -1, -1)]
     print("生成対象日:", ", ".join([d.strftime("%Y-%m-%d") for d in target_dates]))
@@ -67,6 +68,13 @@ async def main():
     sitemap_gen = SitemapGenerator(output_dir=DOCS_DIR, base_url=BASE_URL)
     existing_dates = get_existing_dates()
     reports_by_date: dict[str, DailyReport] = {}
+    metrics = {
+        "translate_requests": 0,
+        "translate_failures": 0,
+        "summarize_requests": 0,
+        "summarize_failures": 0,
+        "summaries_success": 0,
+    }
 
     async with HNClient() as hn:
         llm = LLMClient(api_key=api_key)
@@ -81,12 +89,23 @@ async def main():
 
             print(f"[{target_date_str}] {len(stories)} 件取得完了。コメント取得中...")
             for story in stories:
-                story.comments = await hn.fetch_comments(story, max_comments=5)
+                try:
+                    story.comments = await hn.fetch_comments(story, max_comments=5)
+                except Exception as e:
+                    # 個別記事の失敗で全体を止めない
+                    story.comments = []
+                    print(f"[WARN] [{target_date_str}] story_id={story.id} コメント取得失敗: {e}")
 
             # LLM で翻訳・要約
             print(f"[{target_date_str}] タイトルを一括翻訳中...")
             titles_en = [s.title_en for s in stories]
-            titles_ja = await llm.translate_titles(titles_en)
+            metrics["translate_requests"] += 1
+            try:
+                titles_ja = await llm.translate_titles(titles_en)
+            except Exception as e:
+                metrics["translate_failures"] += 1
+                titles_ja = titles_en
+                print(f"[WARN] [{target_date_str}] タイトル翻訳失敗のため英語タイトルを使用: {e}")
             for story, ja in zip(stories, titles_ja):
                 story.title_ja = ja
 
@@ -94,7 +113,18 @@ async def main():
             for story in stories:
                 if story.comments:
                     texts = [c.text for c in story.comments if c.text]
-                    story.summary_ja = await llm.summarize_comments(story.title_en, texts)
+                    if not texts:
+                        continue
+                    metrics["summarize_requests"] += 1
+                    try:
+                        story.summary_ja = await llm.summarize_comments(story.title_en, texts)
+                        metrics["summaries_success"] += 1
+                    except Exception as e:
+                        metrics["summarize_failures"] += 1
+                        story.summary_ja = ""
+                        print(
+                            f"[WARN] [{target_date_str}] story_id={story.id} コメント要約失敗（継続）: {e}"
+                        )
 
             reports_by_date[target_date_str] = DailyReport(date=target_date, stories=stories)
 
@@ -113,11 +143,19 @@ async def main():
     latest_date = archive_dates[0] if archive_dates else None
     latest_report = reports_by_date.get(latest_date) if latest_date else None
     generator.generate_index(latest_report=latest_report, archive_dates=archive_dates)
-    generator.generate_static_pages()
+    generator.generate_static_pages(
+        last_updated_ja=f"{run_started_at.year}年{run_started_at.month}月{run_started_at.day}日"
+    )
     sitemap_gen.generate(archive_dates=archive_dates)
     sitemap_gen.generate_redirects(latest_date=latest_date or today.strftime("%Y-%m-%d"))
     sitemap_gen.generate_robots()
 
+    print(
+        "[METRICS] 翻訳req={translate_requests}, 翻訳失敗={translate_failures}, "
+        "要約req={summarize_requests}, 要約成功={summaries_success}, 要約失敗={summarize_failures}".format(
+            **metrics
+        )
+    )
     print("完了")
 
 

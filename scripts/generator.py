@@ -1,4 +1,4 @@
-from datetime import date as date_type
+from datetime import date as date_type, datetime, timezone, timedelta
 from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
 from scripts.models import DailyReport
@@ -44,10 +44,14 @@ class HTMLGenerator:
         out.write_text(html, encoding="utf-8")
         return out
 
-    def generate_static_pages(self) -> None:
+    def generate_static_pages(self, last_updated_ja: str | None = None) -> None:
         """about.html と privacy.html を生成する"""
+        if last_updated_ja is None:
+            jst_now = datetime.now(timezone(timedelta(hours=9)))
+            last_updated_ja = f"{jst_now.year}年{jst_now.month}月{jst_now.day}日"
+
         for page in ("about", "privacy"):
             tmpl = self.env.get_template(f"{page}.html")
-            html = tmpl.render()
+            html = tmpl.render(last_updated_ja=last_updated_ja)
             out = self.output_dir / f"{page}.html"
             out.write_text(html, encoding="utf-8")
