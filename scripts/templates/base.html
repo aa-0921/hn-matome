@@ -43,6 +43,63 @@
   </footer>
   <script>
     new PagefindUI({ element: "#search", showSubResults: false, translations: { placeholder: "過去記事を検索..." } });
+
+    (function() {
+      var searchEl = document.getElementById('search');
+      if (!searchEl) return;
+
+      // 検索結果カード全体をクリック可能にする
+      searchEl.addEventListener('click', function(e) {
+        var result = e.target.closest('.pagefind-ui__result');
+        if (!result) return;
+        var link = result.querySelector('a.pagefind-ui__result-link');
+        if (!link || e.target.closest('a')) return;
+
+        var input = searchEl.querySelector('.pagefind-ui__search-input');
+        var query = input ? input.value.trim() : '';
+        var href = link.getAttribute('href');
+        if (query && href) href += (href.indexOf('?') === -1 ? '?' : '&') + 'hl=' + encodeURIComponent(query);
+        window.location.href = href;
+      });
+
+      // 検索結果リンクにも検索語パラメータを付与
+      searchEl.addEventListener('click', function(e) {
+        var link = e.target.closest('a.pagefind-ui__result-link');
+        if (!link) return;
+
+        e.preventDefault();
+        var input = searchEl.querySelector('.pagefind-ui__search-input');
+        var query = input ? input.value.trim() : '';
+        var href = link.getAttribute('href');
+        if (query && href) href += (href.indexOf('?') === -1 ? '?' : '&') + 'hl=' + encodeURIComponent(query);
+        window.location.href = href;
+      });
+
+      // ページ読み込み時: hlパラメータがあれば該当記事をハイライト
+      var params = new URLSearchParams(window.location.search);
+      var hl = params.get('hl');
+      if (hl) {
+        var term = hl.toLowerCase();
+        var articles = document.querySelectorAll('.article-item');
+        var firstMatch = null;
+
+        articles.forEach(function(item) {
+          var titleEl = item.querySelector('.article-title a');
+          var summaryEl = item.querySelector('.article-summary p');
+          var text = (titleEl ? titleEl.textContent : '') + ' ' + (summaryEl ? summaryEl.textContent : '');
+          if (text.toLowerCase().indexOf(term) !== -1) {
+            if (!firstMatch) firstMatch = item;
+            item.classList.add('highlight');
+          }
+        });
+
+        if (firstMatch) {
+          setTimeout(function() {
+            firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 100);
+        }
+      }
+    })();
   </script>
 </body>
 </html>
