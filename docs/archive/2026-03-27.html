@@ -687,6 +687,89 @@
   </footer>
   <script>
     new PagefindUI({ element: "#search", showSubResults: false, translations: { placeholder: "過去記事を検索..." } });
+
+    (function() {
+      function formatRelativeTime(isoString) {
+        var postedAt = new Date(isoString);
+        if (isNaN(postedAt.getTime())) return '';
+        var diffMs = Date.now() - postedAt.getTime();
+        if (diffMs < 0) return 'just now';
+        var diffMinutes = Math.floor(diffMs / (60 * 1000));
+        if (diffMinutes < 1) return 'just now';
+        if (diffMinutes < 60) return diffMinutes + ' minutes ago';
+        var diffHours = Math.floor(diffMinutes / 60);
+        if (diffHours < 48) return 'about ' + diffHours + ' hours ago';
+        var diffDays = Math.floor(diffHours / 24);
+        return 'about ' + diffDays + ' days ago';
+      }
+
+      function applyRelativeTimes() {
+        var els = document.querySelectorAll('.meta-time[data-posted-at]');
+        els.forEach(function(el) {
+          var iso = el.getAttribute('data-posted-at');
+          if (!iso) return;
+          var text = formatRelativeTime(iso);
+          if (text) el.textContent = '🕒 ' + text;
+        });
+      }
+
+      var searchEl = document.getElementById('search');
+      if (!searchEl) return;
+
+      // 検索結果カード全体をクリック可能にする
+      searchEl.addEventListener('click', function(e) {
+        var result = e.target.closest('.pagefind-ui__result');
+        if (!result) return;
+        var link = result.querySelector('a.pagefind-ui__result-link');
+        if (!link || e.target.closest('a')) return;
+
+        var input = searchEl.querySelector('.pagefind-ui__search-input');
+        var query = input ? input.value.trim() : '';
+        var href = link.getAttribute('href');
+        if (query && href) href += (href.indexOf('?') === -1 ? '?' : '&') + 'hl=' + encodeURIComponent(query);
+        window.location.href = href;
+      });
+
+      // 検索結果リンクにも検索語パラメータを付与
+      searchEl.addEventListener('click', function(e) {
+        var link = e.target.closest('a.pagefind-ui__result-link');
+        if (!link) return;
+
+        e.preventDefault();
+        var input = searchEl.querySelector('.pagefind-ui__search-input');
+        var query = input ? input.value.trim() : '';
+        var href = link.getAttribute('href');
+        if (query && href) href += (href.indexOf('?') === -1 ? '?' : '&') + 'hl=' + encodeURIComponent(query);
+        window.location.href = href;
+      });
+
+      // ページ読み込み時: hlパラメータがあれば該当記事をハイライト
+      var params = new URLSearchParams(window.location.search);
+      var hl = params.get('hl');
+      if (hl) {
+        var term = hl.toLowerCase();
+        var articles = document.querySelectorAll('.article-item');
+        var firstMatch = null;
+
+        articles.forEach(function(item) {
+          var titleEl = item.querySelector('.article-title a');
+          var summaryEl = item.querySelector('.article-summary p');
+          var text = (titleEl ? titleEl.textContent : '') + ' ' + (summaryEl ? summaryEl.textContent : '');
+          if (text.toLowerCase().indexOf(term) !== -1) {
+            if (!firstMatch) firstMatch = item;
+            item.classList.add('highlight');
+          }
+        });
+
+        if (firstMatch) {
+          setTimeout(function() {
+            firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 100);
+        }
+      }
+
+      applyRelativeTimes();
+    })();
   </script>
 </body>
 </html>
