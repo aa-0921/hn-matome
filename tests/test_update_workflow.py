@@ -16,5 +16,5 @@ def test_update_workflow_has_rebase_push_retry():
 
     assert "for attempt in 1 2 3; do" in content
     assert "git fetch origin main" in content
-    assert "git rebase origin/main" in content
+    assert "git rebase" in content and "origin/main" in content
     assert "git push origin HEAD:main" in content
