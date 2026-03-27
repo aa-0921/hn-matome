@@ -1,26 +1,49 @@
 {% extends "base.html" %}
 
-{% block title %}HN日報 | HackerNews日本語まとめ - 毎日更新{% endblock %}
+{% block title %}HackerNews 日本語まとめ & AI要約 - 毎日更新{% endblock %}
 
 {% block head_extra %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "HN日報",
+  "name": "HackerNews 日本語まとめ & AI要約",
   "url": "https://hn-matome.pages.dev/"
 }
 </script>
 {% endblock %}
 
 {% block content %}
-<h1 class="page-title">HN日報 — HackerNews 日本語まとめ</h1>
+<h1 class="page-title">HackerNews 日本語まとめ & AI要約</h1>
 <p class="site-description">Hacker Newsのトップ記事を毎朝JST 8時に日本語翻訳・AI要約してお届けします。</p>
 
 {% if latest_report %}
 <section>
   <h2>最新: {{ latest_report.date_ja }}</h2>
-  <a href="/archive/{{ latest_report.date_str }}.html" class="btn-latest">今日のまとめを読む</a>
+  <ol class="article-list">
+  {% for story in latest_report.stories %}
+  <li class="article-item" id="story-{{ story.rank }}">
+    <div class="article-rank">#{{ story.rank }}</div>
+    <div class="article-body">
+      <h2 class="article-title">
+        <a href="{{ story.url or story.hn_url }}" target="_blank" rel="noopener">{{ story.title_ja or story.title_en }}</a>
+      </h2>
+      <div class="article-meta">
+        <span>{{ story.score }}点</span>
+        <span>{{ story.comment_count }}コメント</span>
+        <a href="{{ story.hn_url }}" target="_blank" rel="noopener">HNで見る</a>
+        {% if story.url %}<a href="{{ story.url }}" target="_blank" rel="noopener">元記事</a>{% endif %}
+      </div>
+      {% if story.summary_ja %}
+      <details class="article-summary">
+        <summary>AIコメント要約</summary>
+        <p>{{ story.summary_ja }}</p>
+      </details>
+      {% endif %}
+    </div>
+  </li>
+  {% endfor %}
+  </ol>
 </section>
 {% endif %}
 
