@@ -43,6 +43,16 @@
     {% if latest_report.fetched_at %}<span class="fetch-slot">{{ latest_report.fetched_at }}</span>{% endif %}
     <span class="current-datetime" id="currentDatetime"></span>
   </h2>
+  <!-- 記事一覧上部広告 -->
+  <div class="ad-unit">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+         data-ad-slot="XXXXXXXXXX"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
   <ol class="article-list">
   {% for story in latest_report.stories %}
   <li class="article-item" id="story-{{ story.rank }}">
@@ -66,6 +76,20 @@
       {% endif %}
     </div>
   </li>
+  {% if loop.index == 5 %}
+  </ol>
+  <!-- 記事一覧中間広告（#5〜#6 の間） -->
+  <div class="ad-unit">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+         data-ad-slot="XXXXXXXXXX"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  <ol class="article-list">
+  {% endif %}
   {% endfor %}
   </ol>
 </section>

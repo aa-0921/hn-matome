@@ -92,6 +92,17 @@ async def main():
 
     run_started_at = datetime.now(tz=JST)
     today = run_started_at.replace(hour=0, minute=0, second=0, microsecond=0)
+
+    # --slot 省略時は実行時刻から自動計算（Actions と同じロジック）
+    if args.slot is None:
+        hour = run_started_at.hour
+        if 6 <= hour < 10:
+            args.slot = "07"
+        elif 10 <= hour < 16:
+            args.slot = "12"
+        else:
+            args.slot = "23"
+
     slot_label = f" スロット={args.slot}" if args.slot else ""
     print(f"実行日時: {today.strftime('%Y-%m-%d %H:%M')} JST{slot_label}")
 
