@@ -2,7 +2,7 @@ import pytest
 from pathlib import Path
 from scripts.sitemap import SitemapGenerator
 
-BASE_URL = "https://hn-matome.pages.dev"
+BASE_URL = "https://hn-matome-2ht.pages.dev"
 
 
 @pytest.fixture

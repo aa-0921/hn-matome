@@ -14,7 +14,7 @@ class LLMClient:
         headers = {
             "Authorization": f"Bearer {self.api_key}",
             "Content-Type": "application/json",
-            "HTTP-Referer": "https://hn-matome.pages.dev",
+            "HTTP-Referer": "https://hn-matome-2ht.pages.dev",
         }
         body = {
             "model": self.model,

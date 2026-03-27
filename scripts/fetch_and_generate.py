@@ -20,7 +20,7 @@ from scripts.sitemap import SitemapGenerator
 
 DOCS_DIR = Path(__file__).parent.parent / "docs"
 TEMPLATES_DIR = Path(__file__).parent / "templates"
-BASE_URL = "https://hn-matome.pages.dev"
+BASE_URL = "https://hn-matome-2ht.pages.dev"
 JST = timezone(timedelta(hours=9))
 
 
