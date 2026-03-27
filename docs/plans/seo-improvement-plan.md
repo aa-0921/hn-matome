@@ -42,58 +42,31 @@
 
 ### 優先度: 高（クロール・インデックスに直結）
 
-- [ ] **about.html の canonical URL が誤っている** ← 2026-03-27 監査で発見
-  `docs/about.html:9` が `https://hn-matome-2ht.pages.dev/` (トップページ) を指している
-  → Google が about.html をトップページの重複と判断し、インデックス除外の恐れ
-  Fix: `scripts/templates/about.html` に追加:
-  ```
-  {% block canonical %}<link rel="canonical" href="https://hn-matome-2ht.pages.dev/about.html">{% endblock %}
-  ```
+- [x] **about.html の canonical URL が誤っている** ← 2026-03-27 修正済み
+  `scripts/templates/about.html` に `{% block canonical %}` を追加
 
-- [ ] **favicon** 未設定
-  `<link rel="icon" href="/favicon.ico">` をbase.htmlに追加
-  → ブラウザタブ表示 + Googleサーチ結果のブランド感に影響
+- [x] **favicon** 未設定 ← 2026-03-27 対応済み
+  `docs/assets/favicon.svg`（HNオレンジ #ff6600）を作成、`base.html` に `<link rel="icon">` 追加
 
-- [ ] **OG画像 (og:image)** 未設定
-  Twitter/Facebook/Slackでシェアされたときに画像が表示されない
-  → 静的OG画像 `/assets/og-image.png` を作成して全ページに追加
-  推奨サイズ: 1200x630px
-  ```html
-  <meta property="og:image" content="https://hn-matome-2ht.pages.dev/assets/og-image.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  ```
+- [x] **OG画像 (og:image)** 未設定 ← 2026-03-27 対応済み
+  `docs/assets/og-image.svg`（1200x630）を作成、`base.html` に og:image / og:image:width / og:image:height 追加
 
-- [ ] **twitter:title / twitter:description / twitter:image** 未設定
-  `<meta name="twitter:card">` だけでは不十分
-  → base.html に追加:
-  ```html
-  <meta name="twitter:title" content="{% block twitter_title %}HackerNews 日本語まとめ & AI要約{% endblock %}">
-  <meta name="twitter:description" content="{% block twitter_description %}HackerNewsのトップ記事を毎日日本語翻訳・AI要約。毎朝JST8時更新。{% endblock %}">
-  <meta name="twitter:image" content="https://hn-matome-2ht.pages.dev/assets/og-image.png">
-  ```
+- [x] **twitter:title / twitter:description / twitter:image** 未設定 ← 2026-03-27 対応済み
+  `base.html` に twitter:title / twitter:description / twitter:image 追加。
+  twitter:card を `summary` → `summary_large_image` に変更
 
-- [ ] **archive ページの og:description がデフォルト文言のまま** ← 2026-03-27 監査で発見
-  `archive.html` テンプレートに `{% block og_description %}` が未定義
-  → 全アーカイブページで同一の汎用 og:description が出力される（重複 description）
-  Fix: `scripts/templates/archive.html` に追加:
-  ```
-  {% block og_description %}{{ report.date_ja }}のHacker Newsトップ{{ report.stories|length }}記事を日本語翻訳・AI要約。{% endblock %}
-  ```
+- [x] **archive ページの og:description がデフォルト文言のまま** ← 2026-03-27 修正済み
+  `scripts/templates/archive.html` に `{% block og_description %}` を追加
 
-- [ ] **sitemap.xml に privacy.html が未掲載**
-  `scripts/sitemap.py` の `add_url(f"{self.base_url}/about.html", ...)` の後に追加:
-  ```python
-  add_url(f"{self.base_url}/privacy.html", "monthly", "0.2")
-  ```
+- [x] **sitemap.xml に privacy.html が未掲載** ← 2026-03-27 対応済み
+  `scripts/sitemap.py` に `add_url(privacy.html, "monthly", "0.2")` を追加
 
-- [ ] **`<details>` タグ内のコメント要約がインデックスされない可能性**
-  GoogleはJSレンダリング後にインデックスするが `<details>` は折りたたみ状態のためクロール優先度が低い
-  → AI要約の冒頭数文を `<details>` 外に `<p class="summary-preview">` として出力することを検討
+- [x] **`<details>` タグ内のコメント要約がインデックスされない可能性** ← 2026-03-27 対応済み
+  `archive.html` で `summary_ja` の冒頭1文を `<p class="summary-preview">` として `<details>` 外に出力
 
 ### 優先度: 中（構造化データ・リッチリザルト）
 
-- [ ] **JSON-LD: WebSite に SearchAction を追加**（サイトリンク検索ボックス）
+- [ ] **JSON-LD: WebSite に SearchAction を追加**（サイトリンク検索ボックス、未対応）
   ```json
   "potentialAction": {
     "@type": "SearchAction",
@@ -102,56 +75,35 @@
   }
   ```
 
-- [ ] **JSON-LD: NewsArticle の publisher に logo を追加**
-  ```json
-  "publisher": {
-    "@type": "Organization",
-    "name": "HN日報",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https://hn-matome-2ht.pages.dev/assets/logo.png"
-    }
-  }
-  ```
+- [x] **JSON-LD: NewsArticle の publisher に logo を追加** ← 2026-03-27 対応済み
+  `favicon.svg` を logo URL として使用
 
-- [ ] **JSON-LD: BreadcrumbList を archive ページに追加**
-  ```json
-  {
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      {"@type": "ListItem", "position": 1, "name": "トップ", "item": "https://..."},
-      {"@type": "ListItem", "position": 2, "name": "2026年3月27日", "item": "https://.../archive/2026-03-27.html"}
-    ]
-  }
-  ```
+- [x] **JSON-LD: BreadcrumbList を archive ページに追加** ← 2026-03-27 対応済み
+  `archive.html` の `{% block head_extra %}` に BreadcrumbList JSON-LD を追加
 
 - [ ] **JSON-LD: NewsArticle の `dateModified` を再収集時に更新する**
-  現状は `datePublished` と同値。スロット更新時に正しい時刻を反映する
+  現状は `datePublished` と同値。スロット更新時に正しい時刻を反映する（未対応）
 
-- [ ] **JSON-LD: NewsArticle に `image` フィールドを追加**
-  リッチリザルトの条件: image が必須
-  → OG画像と同じURLで設定可能
+- [x] **JSON-LD: NewsArticle に `image` フィールドを追加** ← 2026-03-27 対応済み
+  `og-image.svg` を image URL として設定
 
 ### 優先度: 中（パフォーマンス・Core Web Vitals）
 
 - [ ] **CSS のプリロード**
   `<link rel="preload" href="/assets/style.css" as="style">` を追加
-  レンダーブロッキングを軽減
+  レンダーブロッキングを軽減（未対応）
 
-- [ ] **pagefind-ui.js の遅延ロード**
-  検索UIは初期レンダリングに不要。`defer` または動的ロードに変更
-  ```html
-  <script src="/pagefind/pagefind-ui.js" defer></script>
-  ```
+- [x] **pagefind-ui.js の遅延ロード** ← 2026-03-27 対応済み
+  `base.html` の pagefind-ui.js script タグに `defer` を追加
 
 - [ ] **画像の `width` / `height` 属性指定**
-  OG画像・ロゴ等を追加する際は必ずサイズ指定でCLS(累積レイアウトシフト)を防ぐ
+  OG画像・ロゴ等を追加する際は必ずサイズ指定でCLS(累積レイアウトシフト)を防ぐ（SVGのためviewBox指定済み）
 
 ### 優先度: 低（長期的な評価向上）
 
-- [ ] **RSS / Atom フィード** の追加
-  `docs/feed.xml` を生成。`<link rel="alternate" type="application/rss+xml">` をheadに追加
-  → RSSリーダー経由の流入 + Googleのクロール頻度向上
+- [x] **RSS / Atom フィード** ← 2026-03-27 対応済み
+  `generator.generate_feed()` を追加。次回実行時に `docs/feed.xml` 自動生成。
+  `base.html` に `<link rel="alternate" type="application/rss+xml">` 追加済み
 
 - [ ] **カスタムドメイン取得**
   `hn-matome-2ht.pages.dev` はCFのサブドメイン。独自ドメインで信頼性・ブランド力向上
@@ -170,21 +122,32 @@
 
 ## 優先実装順序（推奨）
 
-※ 2026-03-27 の `/seo-audit` 実行結果を踏まえて更新
+※ 2026-03-27 の `/seo-audit` 実行結果を踏まえて更新。全11タスク完了済み（2026-03-27）
 
-| 順 | タスク | 対象ファイル | 工数 | 効果 |
-|----|--------|-------------|------|------|
-| 1 | about.html の canonical バグ修正 | `templates/about.html` | 5分 | インデックス正常化 |
-| 2 | pagefind-ui.js に `defer` 追加 | `templates/base.html` | 1分 | LCP改善 |
-| 3 | archive の og:description ブロック追加 | `templates/archive.html` | 10分 | SNS/SERP CTR向上 |
-| 4 | sitemap.xml に privacy.html 追加 | `scripts/sitemap.py` | 5分 | クロール漏れ解消 |
-| 5 | favicon 作成・設定 | `templates/base.html` + 画像 | 30分 | ブランド認知 |
-| 6 | OG画像作成・全ページ og:image 設定 | `templates/base.html` + 画像 | 1〜2h | SNS CTR向上 |
-| 7 | Twitter meta タグ補完 | `templates/base.html` | 10分 | Twitter/X表示改善 |
-| 8 | JSON-LD: image + publisher logo 追加 | `templates/archive.html` | 30分 | リッチリザルト取得 |
-| 9 | JSON-LD: BreadcrumbList 追加 | `templates/archive.html` | 20分 | パンくずリッチリザルト |
-| 10 | `<details>` 外への要約プレビュー出力 | `templates/archive.html` | 1h | コンテンツインデックス向上 |
-| 11 | RSS フィード生成 | `scripts/generator.py` | 2h | クロール頻度・流入強化 |
+| 順 | タスク | 対象ファイル | 状態 |
+|----|--------|-------------|------|
+| 1 | about.html の canonical バグ修正 | `templates/about.html` | 完了 |
+| 2 | pagefind-ui.js に `defer` 追加 | `templates/base.html` | 完了 |
+| 3 | archive の og:description ブロック追加 | `templates/archive.html` | 完了 |
+| 4 | sitemap.xml に privacy.html 追加 | `scripts/sitemap.py` | 完了 |
+| 5 | favicon 作成・設定（SVG） | `docs/assets/favicon.svg` + `base.html` | 完了 |
+| 6 | OG画像作成・全ページ og:image 設定（SVG 1200x630） | `docs/assets/og-image.svg` + `base.html` | 完了 |
+| 7 | Twitter meta タグ補完（summary_large_image） | `templates/base.html` | 完了 |
+| 8 | JSON-LD: image + publisher logo 追加 | `templates/archive.html` | 完了 |
+| 9 | JSON-LD: BreadcrumbList 追加 | `templates/archive.html` | 完了 |
+| 10 | `<details>` 外への要約プレビュー出力 | `templates/archive.html` | 完了 |
+| 11 | RSS フィード生成 | `scripts/generator.py` + `fetch_and_generate.py` | 完了 |
+
+### 残課題（未対応）
+
+| タスク | 理由 |
+|--------|------|
+| JSON-LD: NewsArticle の `dateModified` をスロット更新時に正しい時刻に更新 | 設計変更が必要 |
+| JSON-LD: WebSite に SearchAction を追加 | Pagefind の URL 構造と要検討 |
+| CSS のプリロード | 効果が小さいため後回し |
+| カスタムドメイン取得 | 手動作業・費用が発生 |
+| 内部リンク強化（アーカイブページ末尾に「他の日付を見る」リンク） | 低優先度 |
+| Google Search Console のサイトマップ送信確認 | 手動作業 |
 
 ---
 
@@ -221,3 +184,21 @@
 - pagefind-ui.js に defer なし
 - privacy.html が sitemap 未掲載
 - JSON-LD NewsArticle に image / publisher.logo / BreadcrumbList 未設定
+
+### 2026-03-27 全11タスク実装完了
+
+- **実施:** `executing-plans` スキルで優先実装順序の全タスクを順次実装
+- **テスト:** 27 passed（全テスト通過）
+
+**実装内容:**
+1. `about.html` canonical 修正（`/` → `/about.html`）
+2. `pagefind-ui.js` に `defer` 追加
+3. `archive.html` に `{% block og_description %}` 追加
+4. `sitemap.py` に `privacy.html` 追加
+5. `docs/assets/favicon.svg` 作成（HNオレンジ #ff6600）、`base.html` に `<link rel="icon">` 追加
+6. `docs/assets/og-image.svg` 作成（1200x630）、`base.html` に og:image メタ追加
+7. `base.html` に twitter:title / twitter:description / twitter:image 追加、card を `summary_large_image` に変更
+8. `archive.html` JSON-LD NewsArticle に image・publisher.logo 追加
+9. `archive.html` に BreadcrumbList JSON-LD 追加
+10. `archive.html` の summary_ja 冒頭1文を `<p class="summary-preview">` として `<details>` 外に出力
+11. `generator.py` に `generate_feed()` メソッド追加（RSS 2.0）、`fetch_and_generate.py` から呼び出し
