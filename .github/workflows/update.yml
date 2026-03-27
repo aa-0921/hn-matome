@@ -83,10 +83,15 @@ jobs:
           fi
           git commit -m "Update: $(TZ=Asia/Tokyo date +%Y-%m-%d) ${SLOT}:00"
           # リモートが進んだ場合を考慮して、rebase + push をリトライする
+          # docs は自動生成物なので、衝突時はこのジョブで生成した内容を優先する
           for attempt in 1 2 3; do
             echo "Push attempt ${attempt}/3"
             git fetch origin main
-            git rebase origin/main
+            if ! git rebase -X ours origin/main; then
+              git rebase --abort || true
+              sleep $((attempt * 2))
+              continue
+            fi
             if git push origin HEAD:main; then
               exit 0
             fi
