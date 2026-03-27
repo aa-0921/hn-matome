@@ -45,6 +45,30 @@
     new PagefindUI({ element: "#search", showSubResults: false, translations: { placeholder: "過去記事を検索..." } });
 
     (function() {
+      function formatRelativeTime(isoString) {
+        var postedAt = new Date(isoString);
+        if (isNaN(postedAt.getTime())) return '';
+        var diffMs = Date.now() - postedAt.getTime();
+        if (diffMs < 0) return 'just now';
+        var diffMinutes = Math.floor(diffMs / (60 * 1000));
+        if (diffMinutes < 1) return 'just now';
+        if (diffMinutes < 60) return diffMinutes + ' minutes ago';
+        var diffHours = Math.floor(diffMinutes / 60);
+        if (diffHours < 48) return 'about ' + diffHours + ' hours ago';
+        var diffDays = Math.floor(diffHours / 24);
+        return 'about ' + diffDays + ' days ago';
+      }
+
+      function applyRelativeTimes() {
+        var els = document.querySelectorAll('.meta-time[data-posted-at]');
+        els.forEach(function(el) {
+          var iso = el.getAttribute('data-posted-at');
+          if (!iso) return;
+          var text = formatRelativeTime(iso);
+          if (text) el.textContent = '🕒 ' + text;
+        });
+      }
+
       var searchEl = document.getElementById('search');
       if (!searchEl) return;
 
@@ -99,6 +123,8 @@
           }, 100);
         }
       }
+
+      applyRelativeTimes();
     })();
   </script>
 </body>
