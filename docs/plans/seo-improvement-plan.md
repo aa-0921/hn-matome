@@ -177,7 +177,7 @@
 |--------|-------------|------|
 | CSS プリロード追加 | `templates/base.html` | 完了（2026-03-27） |
 | JSON-LD: WebSite に SearchAction 追加 | `templates/index.html` | 完了（2026-03-27） |
-| 内部リンク強化（アーカイブページ末尾に「他の日付を見る」） | `templates/archive.html` | 未対応 |
+| 内部リンク強化（アーカイブページ末尾に「他の日付を見る」） | `templates/archive.html` | 完了（2026-03-27） |
 | JSON-LD: NewsArticle の `dateModified` をスロット更新時に正しい時刻に更新 | `scripts/generator.py` | 未対応（設計変更必要） |
 | カスタムドメイン取得 | — | 手動作業・費用発生 |
 
@@ -197,6 +197,60 @@
 これらのスキルは改善実装後に実行して、残課題を洗い出すことを推奨。
 
 ---
+
+## 次回実装タスク（2026-03-27 追加調査分）
+
+### 緊急（クロール破壊リスク）
+
+| タスク | ファイル | 内容 |
+|--------|----------|------|
+| docs/robots.txt のドメイン修正 | `docs/robots.txt:3` | 完了（2026-03-27） |
+| docs/sitemap.xml のドメイン統一 + privacy追加 | `docs/sitemap.xml` | 完了（2026-03-27） |
+
+**背景:** `scripts/sitemap.py` と `fetch_and_generate.py` は正しく `hn-matome-2ht.pages.dev` を使用するが、
+現在の `docs/` 静的ファイルは旧ドメインのまま。スクリプト再実行で自動修正されるが、直接編集で即時修正可能。
+
+### 中優先度（on-page SEO 補完）
+
+| タスク | ファイル | 内容 |
+|--------|----------|------|
+| about.html に description ブロック追加 | `scripts/templates/about.html` | 完了（2026-03-27） |
+| privacy.html に canonical + description 追加 | `scripts/templates/privacy.html` | 完了（2026-03-27） |
+
+### 低優先度
+
+| タスク | ファイル | 内容 |
+|--------|----------|------|
+| アーカイブ末尾に「他の日付を見る」内部リンク | `scripts/generator.py` + `scripts/templates/archive.html` | 完了（2026-03-27） |
+| dateModified の動的更新 | モデル + generator + archive.html | report に `last_updated_at` フィールド追加（設計変更大） |
+
+---
+
+完了しました。実施内容のサマリーです。                
+
+  ---                                                                                               
+  実施内容（全4タスク）
+                                                                                                    
+  緊急修正（クロール破壊リスク解消）                                                             
+  - docs/robots.txt — Sitemap URL のドメインを hn-matome-2ht.pages.dev に修正
+  - docs/sitemap.xml — 旧ドメイン混在を全統一、privacy.html エントリを追加
+
+  テンプレート meta 補完
+  - scripts/templates/about.html — {% block description %} 追加（固有の説明文）
+  - scripts/templates/privacy.html — {% block canonical %} と {% block description %} 追加
+
+  内部リンク強化
+  - scripts/generator.py — generate_archive() に recent_slugs パラメータ追加
+  - scripts/fetch_and_generate.py — 自身を除いた最新10件のスラグを計算して渡す
+  - scripts/templates/archive.html — ページ末尾に「他の日報を見る」リンクリストを追加
+
+  テスト: 27 passed（全通過）
+
+  ---
+  残課題（手動作業 or 大きな設計変更が必要なため未対応）:
+  - dateModified の動的更新（モデル設計変更が必要）
+  - カスタムドメイン取得（費用・手動作業）
+  - Google Search Console サイトマップ送信確認（手動作業）
 
 ## 監査ログ
 
