@@ -2,8 +2,10 @@ name: HN日報 毎日更新
 
 on:
   schedule:
-    - cron: '0 23 * * *'  # UTC 23:00 = JST 8:00
-  workflow_dispatch:       # 手動実行用
+    - cron: '0 22 * * *'   # UTC 22:00 = JST 7:00
+    - cron: '0 3 * * *'    # UTC 3:00  = JST 12:00
+    - cron: '0 14 * * *'   # UTC 14:00 = JST 23:00
+  workflow_dispatch:        # 手動実行用
 
 concurrency:
   group: hn-daily-update-main
@@ -35,10 +37,30 @@ jobs:
       - name: 依存インストール
         run: pip install -r requirements.txt
 
+      - name: 既存JSONキャッシュを core へコピー
+        run: |
+          mkdir -p core/docs/data
+          if [ -d docs/data ] && [ "$(ls -A docs/data 2>/dev/null)" ]; then
+            cp -R docs/data/. core/docs/data/
+          fi
+
+      - name: 実行スロットを決定
+        id: slot
+        run: |
+          HOUR=$(TZ=Asia/Tokyo date +%H)
+          if [ "$HOUR" -ge 6 ] && [ "$HOUR" -lt 10 ]; then
+            echo "value=07" >> $GITHUB_OUTPUT
+          elif [ "$HOUR" -ge 10 ] && [ "$HOUR" -lt 16 ]; then
+            echo "value=12" >> $GITHUB_OUTPUT
+          else
+            echo "value=23" >> $GITHUB_OUTPUT
+          fi
+
       - name: HN データ取得・翻訳・HTML 生成
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-        run: cd core && python -m scripts.fetch_and_generate
+          SLOT: ${{ steps.slot.outputs.value }}
+        run: cd core && python -m scripts.fetch_and_generate --slot "$SLOT"
 
       - name: 生成した docs をワークフロー対象リポジトリへ同期
         run: |
@@ -49,6 +71,8 @@ jobs:
         run: npx pagefind --site docs --output-path docs/pagefind
 
       - name: 変更をコミット・プッシュ
+        env:
+          SLOT: ${{ steps.slot.outputs.value }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -57,7 +81,7 @@ jobs:
             echo "No changes to commit"
             exit 0
           fi
-          git commit -m "Update: $(TZ=Asia/Tokyo date +%Y-%m-%d)"
+          git commit -m "Update: $(TZ=Asia/Tokyo date +%Y-%m-%d) ${SLOT}:00"
           # リモートが進んだ場合を考慮して、rebase + push をリトライする
           for attempt in 1 2 3; do
             echo "Push attempt ${attempt}/3"
