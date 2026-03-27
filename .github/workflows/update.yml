@@ -5,6 +5,10 @@ on:
     - cron: '0 23 * * *'  # UTC 23:00 = JST 8:00
   workflow_dispatch:       # 手動実行用
 
+concurrency:
+  group: hn-daily-update-main
+  cancel-in-progress: false
+
 permissions:
   contents: write
 
@@ -13,6 +17,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: hn-matome-core（core）をチェックアウト
         uses: actions/checkout@v4
@@ -52,6 +58,16 @@ jobs:
             exit 0
           fi
           git commit -m "Update: $(TZ=Asia/Tokyo date +%Y-%m-%d)"
-          # 同時実行や手動pushがある場合でも fast-forward 可能にしてから push する
-          git pull --rebase origin main
-          git push
+          # リモートが進んだ場合を考慮して、rebase + push をリトライする
+          for attempt in 1 2 3; do
+            echo "Push attempt ${attempt}/3"
+            git fetch origin main
+            git rebase origin/main
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            git rebase --abort || true
+            sleep $((attempt * 2))
+          done
+          echo "Push failed after 3 attempts"
+          exit 1
