@@ -151,6 +151,38 @@
 
 ---
 
+## SEOスコア確認方法
+
+### PageSpeed Insights
+1. `https://pagespeed.web.dev/` にアクセス
+2. `https://hn-matome-2ht.pages.dev/` を入力して分析
+3. **モバイル・デスクトップ両方**でスコアを確認
+4. Core Web Vitals（LCP / FID / CLS）の実測値を記録
+
+### Rich Results Test（構造化データ確認）
+1. `https://search.google.com/test/rich-results` にアクセス
+2. `https://hn-matome-2ht.pages.dev/` を入力
+3. WebSite（SearchAction）・NewsArticle・BreadcrumbList が検出されることを確認
+
+### Google Search Console (GSC)
+1. GSC に `https://hn-matome-2ht.pages.dev/` を登録済み（認証ファイル設置済み）
+2. 「サイトマップ」→ `https://hn-matome-2ht.pages.dev/sitemap.xml` を送信
+3. 「URL 検査」でインデックス状態を確認
+
+---
+
+## 次の実装タスク
+
+| タスク | 対象ファイル | 状態 |
+|--------|-------------|------|
+| CSS プリロード追加 | `templates/base.html` | 完了（2026-03-27） |
+| JSON-LD: WebSite に SearchAction 追加 | `templates/index.html` | 完了（2026-03-27） |
+| 内部リンク強化（アーカイブページ末尾に「他の日付を見る」） | `templates/archive.html` | 未対応 |
+| JSON-LD: NewsArticle の `dateModified` をスロット更新時に正しい時刻に更新 | `scripts/generator.py` | 未対応（設計変更必要） |
+| カスタムドメイン取得 | — | 手動作業・費用発生 |
+
+---
+
 ## 参考: スキルの実行方法
 
 ```bash
