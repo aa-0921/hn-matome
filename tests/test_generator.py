@@ -59,4 +59,4 @@ def test_generate_static_pages(generator, tmp_path):
     assert (tmp_path / "about.html").exists()
     assert (tmp_path / "privacy.html").exists()
     about_content = (tmp_path / "about.html").read_text()
-    assert "HN日報について" in about_content
+    assert "HackerNews 日本語まとめ & AI要約について" in about_content
