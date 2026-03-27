@@ -42,7 +42,8 @@ class SitemapGenerator:
         return out
 
     def generate_redirects(self, latest_date: str) -> Path:
-        content = f"/ /archive/{latest_date}.html 302\n"
+        # 本番/ローカルでの遷移挙動を揃えるため、ルートは index.html へ固定する
+        content = "/ /index.html 200\n"
         out = self.output_dir / "_redirects"
         out.write_text(content, encoding="utf-8")
         return out

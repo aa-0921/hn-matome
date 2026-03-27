@@ -25,7 +25,7 @@ def test_generate_redirects(gen, tmp_path):
     redirects = tmp_path / "_redirects"
     assert redirects.exists()
     content = redirects.read_text()
-    assert "/ /archive/2026-03-26.html 302" in content
+    assert "/ /index.html 200" in content
 
 
 def test_sitemap_xml_declaration(gen, tmp_path):
