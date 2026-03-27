@@ -23,7 +23,13 @@ class LLMClient:
         async with httpx.AsyncClient(timeout=60.0) as client:
             resp = await client.post(OPENROUTER_URL, headers=headers, json=body)
             resp.raise_for_status()
-        return resp.json()["choices"][0]["message"]["content"].strip()
+        data = resp.json()
+        content = data.get("choices", [{}])[0].get("message", {}).get("content")
+        if content is None:
+            return ""
+        if isinstance(content, str):
+            return content.strip()
+        return str(content).strip()
 
     async def translate_titles(self, titles: list[str]) -> list[str]:
         """タイトル一覧を一括翻訳する。件数不一致の場合は元のタイトルをフォールバック"""

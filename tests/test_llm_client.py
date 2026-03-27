@@ -59,3 +59,15 @@ async def test_summarize_comments_empty(client):
     # コメントがない場合は API を呼ばない（respx.mock なしで通ること）
     result = await client.summarize_comments("Test Article", [])
     assert result == ""
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_translate_titles_fallback_when_content_is_null(client):
+    # API が content=null を返しても例外にせずフォールバックする
+    respx.post(OPENROUTER_URL).mock(
+        return_value=httpx.Response(200, json=make_response(None))
+    )
+    titles = ["Title 1", "Title 2"]
+    result = await client.translate_titles(titles)
+    assert result == titles
