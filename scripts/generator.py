@@ -1,6 +1,13 @@
+from datetime import date as date_type
 from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
 from scripts.models import DailyReport
+
+
+def _to_date_ja(date_str: str) -> str:
+    """'YYYY-MM-DD' → 'YYYY年M月D日'"""
+    d = date_type.fromisoformat(date_str)
+    return f"{d.year}年{d.month}月{d.day}日"
 
 
 class HTMLGenerator:
@@ -11,6 +18,7 @@ class HTMLGenerator:
             loader=FileSystemLoader(str(templates_dir)),
             autoescape=True,
         )
+        self.env.filters["to_date_ja"] = _to_date_ja
 
     def generate_archive(
         self,
