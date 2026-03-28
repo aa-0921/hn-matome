@@ -88,14 +88,24 @@ jobs:
             echo "Push attempt ${attempt}/3"
             git fetch origin main
             if ! git rebase -X ours origin/main; then
-              git rebase --abort || true
-              sleep $((attempt * 2))
-              continue
+              # modify/delete 衝突（DU）を解消: docs/ は再生成物なので削除を優先
+              if git status --short | grep -q '^DU '; then
+                git status --short | grep '^DU ' | cut -c4- | xargs git rm -f
+                if ! git rebase --continue --no-edit; then
+                  git rebase --abort || true
+                  sleep $((attempt * 2))
+                  continue
+                fi
+              else
+                git rebase --abort || true
+                sleep $((attempt * 2))
+                continue
+              fi
             fi
             if git push origin HEAD:main; then
               exit 0
             fi
-            git rebase --abort || true
+            git rebase --abort 2>/dev/null || true
             sleep $((attempt * 2))
           done
           echo "Push failed after 3 attempts"
