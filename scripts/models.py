@@ -1,12 +1,32 @@
 import re
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
+from html.parser import HTMLParser
 from typing import Optional, Any
+
+
+class _TextExtractor(HTMLParser):
+    """HN コメント本文からタグを除いたテキスト断片を収集する。"""
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self._parts: list[str] = []
+
+    def handle_data(self, data: str) -> None:
+        self._parts.append(data)
+
+    def get_text(self) -> str:
+        return " ".join(self._parts)
 
 
 def _strip_html(text: str) -> str:
     """HN コメントの HTML タグを除去し、&amp; 等をデコードする"""
-    text = re.sub(r"<[^>]+>", " ", text)
+    if not text:
+        return ""
+    extractor = _TextExtractor()
+    extractor.feed(text)
+    extractor.close()
+    text = extractor.get_text()
     text = text.replace("&amp;", "&").replace("&lt;", "<").replace("&gt;", ">")
     text = text.replace("&quot;", '"').replace("&#x27;", "'").replace("&nbsp;", " ")
     return re.sub(r"\s+", " ", text).strip()
