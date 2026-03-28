@@ -60,3 +60,39 @@ def test_generate_static_pages(generator, tmp_path):
     assert (tmp_path / "privacy.html").exists()
     about_content = (tmp_path / "about.html").read_text()
     assert "HackerNews 日本語まとめ & AI要約について" in about_content
+
+
+class TestUIRegression:
+    """テンプレート変更時に重要UI要素が消えないことを保証するリグレッションテスト"""
+
+    REQUIRED_ELEMENTS = [
+        ('<div id="search">',   "検索バー"),
+        ('pagefind-ui.css',     "Pagefind CSS"),
+        ('pagefind-ui.js',      "Pagefind JS"),
+        ('class="site-header"', "サイトヘッダー"),
+        ('href="/index.html"',  "トップへのリンク"),
+        ('href="/about.html"',  "Aboutへのリンク"),
+        ('class="site-footer"', "フッター"),
+    ]
+
+    def _assert_required_elements(self, content: str, page_name: str):
+        for element, name in self.REQUIRED_ELEMENTS:
+            assert element in content, f"{page_name} に {name} が含まれていません"
+
+    def test_archive_has_required_ui(self, generator, tmp_path, sample_report):
+        generator.generate_archive(sample_report, prev_date=None, next_date=None)
+        path = tmp_path / "archive" / f"{sample_report.slug}.html"
+        self._assert_required_elements(path.read_text(), "アーカイブページ")
+
+    def test_index_has_required_ui(self, generator, tmp_path, sample_report):
+        generator.generate_index(latest_report=sample_report, archive_slugs=[sample_report.slug])
+        self._assert_required_elements(
+            (tmp_path / "index.html").read_text(), "トップページ"
+        )
+
+    def test_static_pages_have_required_ui(self, generator, tmp_path):
+        generator.generate_static_pages()
+        for page in ["about.html", "privacy.html"]:
+            self._assert_required_elements(
+                (tmp_path / page).read_text(), page
+            )
