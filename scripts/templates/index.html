@@ -23,7 +23,7 @@
 <p class="site-description">Hacker Newsのトップ記事を1日3回（JST 7時・12時・23時）日本語翻訳・AI要約してお届けします。</p>
 
 <details class="hn-info-box">
-  <summary class="hn-info-heading">Hacker News の仕組み</summary>
+  <summary class="hn-info-heading" aria-label="Hacker News の仕組みの説明を展開">Hacker News の仕組み</summary>
   <div class="hn-info-content">
     <dl>
       <dt>Points（得点）とは？</dt>
@@ -44,9 +44,13 @@
 <section>
   <h2 class="latest-heading">
     最新: {{ latest_report.date_ja }}
-    {% if latest_report.fetched_at %}<span class="fetch-slot">{{ latest_report.fetched_at }}</span>{% endif %}
+    {% if latest_report.fetched_at %}<span class="fetch-slot" title="毎日この時刻（JST）に Hacker News のトップ記事を取得しています">{{ latest_report.fetched_at }}</span>{% endif %}
     <span class="current-datetime" id="currentDatetime"></span>
   </h2>
+  <div class="summary-toolbar" role="toolbar" aria-label="AI要約の一括表示">
+    <button type="button" class="btn-summary-bulk" id="openAllSummaries">全て開く</button>
+    <button type="button" class="btn-summary-bulk" id="closeAllSummaries">全て閉じる</button>
+  </div>
   <!-- 記事一覧上部広告 -->
   <div class="ad-unit">
     <ins class="adsbygoogle"
@@ -74,7 +78,7 @@
       </div>
       {% if story.summary_ja %}
       <details class="article-summary">
-        <summary>AIコメント要約</summary>
+        <summary aria-label="{{ (story.title_ja or story.title_en) }}のコメント要約を展開" title="Hacker News の上位コメントを AI（DeepSeek）で日本語要約しています">AIコメント要約</summary>
         <p>{{ story.summary_ja }}</p>
       </details>
       {% endif %}
@@ -99,14 +103,17 @@
 </section>
 {% endif %}
 
-<section class="archive-section">
+<section class="archive-section" id="archive-section">
   <h2>アーカイブ</h2>
+  <p class="archive-intro"><a href="/archive/index.html">アーカイブ一覧ページ</a>で全スロットから探せます。</p>
   <ul class="archive-list">
   {% for group in archive_groups %}
     <li class="archive-date-group">
       <span class="archive-date-label">{{ group.date_ja }}</span>
       {% for entry in group.entries %}
-        <a href="/archive/{{ entry.slug }}.html" class="archive-slot-link">{{ entry.label or '取得データ' }}</a>
+        <a href="/archive/{{ entry.slug }}.html"
+           class="archive-slot-link"
+           title="毎日この時刻（JST）に Hacker News のトップ記事を取得しています">{{ entry.label or '取得データ' }}</a>
       {% endfor %}
     </li>
   {% endfor %}

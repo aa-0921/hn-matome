@@ -241,6 +241,7 @@ async def main():
             break
 
     generator.generate_index(latest_report=latest_report, archive_slugs=archive_slugs)
+    generator.generate_archive_index(archive_slugs=archive_slugs)
     generator.generate_static_pages(
         last_updated_ja=f"{run_started_at.year}年{run_started_at.month}月{run_started_at.day}日"
     )

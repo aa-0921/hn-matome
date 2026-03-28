@@ -24,6 +24,7 @@ class SitemapGenerator:
         add_url(f"{self.base_url}/", "daily", "1.0")
         add_url(f"{self.base_url}/about.html", "monthly", "0.3")
         add_url(f"{self.base_url}/privacy.html", "monthly", "0.2")
+        add_url(f"{self.base_url}/archive/index.html", "daily", "0.85")
 
         for slug in sorted(archive_slugs, reverse=True):
             # lastmod はスロット部分を除いた日付部分のみ使用
@@ -50,7 +51,10 @@ class SitemapGenerator:
         slug_redirects: list[tuple[str, str]] | None = None,
     ) -> Path:
         # 本番/ローカルでの遷移挙動を揃えるため、ルートは index.html へ固定する
-        lines = ["/ /index.html 200"]
+        lines = [
+            "/ /index.html 200",
+            "/archive/ /archive/index.html 200",
+        ]
         for old_slug, new_slug in (slug_redirects or []):
             lines.append(f"/archive/{old_slug}.html /archive/{new_slug}.html 301")
         out = self.output_dir / "_redirects"

@@ -15,6 +15,15 @@ def _to_date_ja(date_str: str) -> str:
     return f"{d.year}年{d.month}月{d.day}日"
 
 
+def _slug_nav_label(slug: str) -> str:
+    """アーカイブスラグを日付ナビ用ラベルに（例: 2026-03-29_23 → 2026年3月29日（23:00））"""
+    date_part, slot = _slug_to_parts(slug)
+    ja = _to_date_ja(date_part)
+    if slot:
+        return f"{ja}（{slot}:00）"
+    return ja
+
+
 def _slug_to_parts(slug: str) -> tuple[str, str | None]:
     """'2026-03-27_07' → ('2026-03-27', '07'), '2026-03-27' → ('2026-03-27', None)"""
     if len(slug) > 10 and slug[10] == "_":
@@ -46,6 +55,7 @@ class HTMLGenerator:
             autoescape=True,
         )
         self.env.filters["to_date_ja"] = _to_date_ja
+        self.env.filters["slug_nav_label"] = _slug_nav_label
 
     def generate_archive(
         self,
@@ -63,6 +73,17 @@ class HTMLGenerator:
             recent_groups=recent_groups,
         )
         out = self.output_dir / "archive" / f"{report.slug}.html"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(html, encoding="utf-8")
+        return out
+
+    def generate_archive_index(self, archive_slugs: list[str]) -> Path:
+        """アーカイブ一覧ページ archive/index.html を生成する"""
+        ordered = sorted(archive_slugs, reverse=True)
+        archive_groups = _build_archive_groups(ordered)
+        tmpl = self.env.get_template("archive_index.html")
+        html = tmpl.render(archive_groups=archive_groups)
+        out = self.output_dir / "archive" / "index.html"
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(html, encoding="utf-8")
         return out
