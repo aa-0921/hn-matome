@@ -329,3 +329,38 @@
 9. `archive.html` に BreadcrumbList JSON-LD 追加
 10. `archive.html` の summary_ja 冒頭1文を `<p class="summary-preview">` として `<details>` 外に出力
 11. `generator.py` に `generate_feed()` メソッド追加（RSS 2.0）、`fetch_and_generate.py` から呼び出し
+
+
+----------------
+
+# Google AdSense について
+
+https://adsense.google.com/adsense/u/0/pub-6175472643627734/sites/list 
+
+で、
+ads.txtのステータス　が　不明となっているのですが、　これはこのままでも審査はすすむのでしょうか
+↓
+状況を確認しました。ads.txt のステータス: 不明 が審査進行に影響するか、公式情報ベースで要点を整理して回答します。
+
+gpt-5.3-codex-low
+
+結論から言うと、ads.txt のステータスが「不明」でも、サイト審査自体は進むことが多いです。
+ただし、審査通過後の広告配信や収益面では不利になる可能性があるので、早めに修正しておくのが安全です。
+
+不明 は「まだ確認できていない / クロール未反映」のケースが多いです
+反映には数日、トラフィックが少ないとより時間がかかることがあります
+放置すると「Earnings at risk（収益に影響）」系の警告につながることがあります
+今やるべき最短チェック:
+
+https://あなたのドメイン/ads.txt に直接アクセスして開けるか確認
+内容が google.com, pub-6175472643627734, DIRECT, f08c47fec0942fa0 になっているか確認
+ルート直下配置・HTTP 200応答・robots等でブロックされていないか確認
+修正後は数日待ってステータス再確認
+参考:
+
+Check the status of your AdSense sites
+Ads.txt guide
+Ensure your ads.txt files can be crawled
+Resolve common ads.txt issues
+AdSense 管理画面（ご提示URL）
+gpt-5.3-codex-low
