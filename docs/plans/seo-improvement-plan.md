@@ -1,4 +1,4 @@
-# SEO改善計画 - HN日報
+# SEO改善計画 - HackerNews 日本語まとめ & AI要約
 
 作成日: 2026-03-27
 対象URL: https://hn-matome-2ht.pages.dev/

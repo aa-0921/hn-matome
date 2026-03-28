@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-HN日報 メインスクリプト
+HackerNews 日本語まとめ & AI要約 メインスクリプト
 HN API からデータ取得 → OpenRouter で翻訳・要約 → 静的 HTML 生成
 """
 
@@ -58,7 +58,9 @@ def compute_target_dates(
 async def main():
     load_dotenv()
 
-    parser = argparse.ArgumentParser(description="HN日報の取得・翻訳・HTML生成")
+    parser = argparse.ArgumentParser(
+        description="HackerNews 日本語まとめ & AI要約の取得・翻訳・HTML生成"
+    )
     parser.add_argument(
         "--slot",
         type=str,

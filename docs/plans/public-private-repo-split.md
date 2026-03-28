@@ -125,7 +125,7 @@ git push -u origin main
 `.github/workflows/update.yml` を以下に差し替える:
 
 ```yaml
-name: HN日報 毎日更新
+name: "HackerNews 日本語まとめ & AI要約 毎日更新"
 
 on:
   schedule:
@@ -177,7 +177,7 @@ jobs:
 
 ### Step 6: 動作確認
 
-1. `hn-matome` → Actions → 「HN日報 毎日更新」→ Run workflow
+1. `hn-matome` → Actions → 「HackerNews 日本語まとめ & AI要約 毎日更新」→ Run workflow
 2. ジョブが成功することを確認
 3. `docs/` に HTML が生成・コミットされることを確認
 

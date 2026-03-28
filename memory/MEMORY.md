@@ -1,10 +1,10 @@
-# HN日報 プロジェクト メモリ
+# HackerNews 日本語まとめ & AI要約 プロジェクト メモリ
 
 ## プロジェクト概要
 
 HN Top30記事の日本語翻訳・コメント要約を毎日自動生成して公開する静的サイト。
 
-- **サービス名**: HN日報
+- **サービス名**: HackerNews 日本語まとめ & AI要約
 - **ホスティング**: Cloudflare Pages（`docs/` ディレクトリ）
 - **自動実行**: GitHub Actions cron 3本 (UTC 22:00/3:00/14:00 = JST 7:00/12:00/23:00)
 - **翻訳/要約**: OpenRouter API（DeepSeek R1）

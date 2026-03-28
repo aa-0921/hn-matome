@@ -113,7 +113,7 @@ class HTMLGenerator:
         rss = Element("rss")
         rss.set("version", "2.0")
         channel = SubElement(rss, "channel")
-        SubElement(channel, "title").text = "HN日報 - HackerNews 日本語まとめ & AI要約"
+        SubElement(channel, "title").text = "HackerNews 日本語まとめ & AI要約"
         SubElement(channel, "link").text = f"{base_url}/"
         SubElement(channel, "description").text = "HackerNewsのトップ記事を毎日日本語翻訳・AI要約して配信"
         SubElement(channel, "language").text = "ja"

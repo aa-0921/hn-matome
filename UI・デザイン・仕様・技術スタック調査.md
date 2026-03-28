@@ -134,7 +134,7 @@ docs/
 
 | 要素 | 内容 |
 |---|---|
-| `<title>` | `YYYY年MM月DD日 HN日報 - HackerNews日本語まとめ` |
+| `<title>` | アーカイブ: `YYYY年MM月DD日 \| HackerNews 日本語まとめ & AI要約`／トップ: `HackerNews 日本語まとめ & AI要約 - 毎日更新` |
 | `<meta description>` | `YYYY年MM月DD日のHacker Newsトップ記事30件を日本語に翻訳・AI要約。エンジニア向け最新テック情報を毎日更新。` |
 | OGP タグ | `og:title`, `og:description`, `og:url`, `og:type` |
 | JSON-LD | NewsArticle 構造化データ |
@@ -208,11 +208,11 @@ AdSense 利用には必須。以下を記載する:
   "dateModified": "2026-03-26T08:00:00+09:00",
   "author": {
     "@type": "Organization",
-    "name": "HN日報"
+    "name": "HackerNews 日本語まとめ & AI要約"
   },
   "publisher": {
     "@type": "Organization",
-    "name": "HN日報",
+    "name": "HackerNews 日本語まとめ & AI要約",
     "url": "https://hn-matome.com"
   },
   "inLanguage": "ja",
@@ -235,15 +235,15 @@ AdSense 利用には必須。以下を記載する:
 
 <!-- OGP -->
 <meta property="og:type" content="article">
-<meta property="og:title" content="YYYY年MM月DD日 HN日報 | HackerNews日本語まとめ">
+<meta property="og:title" content="YYYY年MM月DD日 | HackerNews 日本語まとめ & AI要約">
 <meta property="og:description" content="今日のHacker Newsトップ記事30件を日本語に翻訳・AI要約しました。">
 <meta property="og:url" content="https://hn-matome.com/archive/YYYY-MM-DD.html">
-<meta property="og:site_name" content="HN日報">
+<meta property="og:site_name" content="HackerNews 日本語まとめ & AI要約">
 <meta property="og:locale" content="ja_JP">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="YYYY年MM月DD日 HN日報">
+<meta name="twitter:title" content="YYYY年MM月DD日 HackerNews 日本語まとめ & AI要約">
 <meta name="twitter:description" content="今日のHacker Newsトップ記事30件を日本語まとめ。">
 ```
 
