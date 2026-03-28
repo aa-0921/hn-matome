@@ -4,27 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>プライバシーポリシー | HackerNews 日本語まとめ & AI要約</title>
-  <meta name="description" content="HackerNewsのトップ記事を毎日日本語翻訳・AI要約。毎朝JST8時更新。">
+  <meta name="description" content="プライバシーポリシー。アクセスログ収集・Google AdSense・Cloudflare Analytics の利用方針について説明します。">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://hn-matome.pages.dev/">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="canonical" href="https://hn-matome-2ht.pages.dev/privacy.html">
   <meta property="og:type" content="website">
   <meta property="og:title" content="HackerNews 日本語まとめ & AI要約">
   <meta property="og:description" content="HackerNewsのトップ記事を毎日日本語翻訳・AI要約">
-  <meta property="og:url" content="https://hn-matome.pages.dev/">
+  <meta property="og:url" content="https://hn-matome-2ht.pages.dev/">
   <meta property="og:site_name" content="HackerNews 日本語まとめ & AI要約">
   <meta property="og:locale" content="ja_JP">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="https://hn-matome-2ht.pages.dev/assets/og-image.svg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="HackerNews 日本語まとめ & AI要約">
+  <meta name="twitter:description" content="HackerNewsのトップ記事を毎日日本語翻訳・AI要約。毎朝JST8時更新。">
+  <meta name="twitter:image" content="https://hn-matome-2ht.pages.dev/assets/og-image.svg">
+  <link rel="alternate" type="application/rss+xml" title="HackerNews 日本語まとめ &amp; AI要約" href="/feed.xml">
+  <link rel="preload" href="/assets/style.css" as="style">
   <link rel="stylesheet" href="/assets/style.css">
   <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
-  <script src="/pagefind/pagefind-ui.js"></script>
+  <script src="/pagefind/pagefind-ui.js" defer></script>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6175472643627734" crossorigin="anonymous"></script>
   
 </head>
 <body>
   <header class="site-header">
     <div class="container">
-      <a href="/" class="site-title">HackerNews 日本語まとめ & AI要約</a>
+      <a href="/index.html" class="site-title">HackerNews 日本語まとめ & AI要約</a>
       <nav class="site-nav">
-        <a href="/">トップ</a>
+        <a href="/index.html">トップ</a>
         <a href="/about.html">About</a>
       </nav>
     </div>
@@ -35,7 +46,7 @@
   <main class="container" >
     
 <h1>プライバシーポリシー</h1>
-<p>最終更新: 2026年3月26日</p>
+<p>最終更新: 2026年3月29日</p>
 <h2>取得する情報</h2>
 <p>当サービスはアクセスログ（IPアドレス、ブラウザ情報、参照元URL）を収集します。個人を特定できる情報は収集しません。</p>
 <h2>広告について</h2>
@@ -45,6 +56,16 @@
 <p>Cloudflare Analytics を使用しています。収集データは匿名化されており、個人を特定しません。</p>
 
   </main>
+  <!-- フッター上部広告：data-ad-slot を AdSense 管理画面で取得した値に置き換える -->
+  <div class="ad-unit container">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+         data-ad-slot="XXXXXXXXXX"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
   <footer class="site-footer">
     <div class="container">
       <p>翻訳・要約は AI によるものです。内容の正確性は保証しません。</p>
@@ -53,6 +74,89 @@
   </footer>
   <script>
     new PagefindUI({ element: "#search", showSubResults: false, translations: { placeholder: "過去記事を検索..." } });
+
+    (function() {
+      function formatRelativeTime(isoString) {
+        var postedAt = new Date(isoString);
+        if (isNaN(postedAt.getTime())) return '';
+        var diffMs = Date.now() - postedAt.getTime();
+        if (diffMs < 0) return 'just now';
+        var diffMinutes = Math.floor(diffMs / (60 * 1000));
+        if (diffMinutes < 1) return 'just now';
+        if (diffMinutes < 60) return diffMinutes + ' minutes ago';
+        var diffHours = Math.floor(diffMinutes / 60);
+        if (diffHours < 48) return 'about ' + diffHours + ' hours ago';
+        var diffDays = Math.floor(diffHours / 24);
+        return 'about ' + diffDays + ' days ago';
+      }
+
+      function applyRelativeTimes() {
+        var els = document.querySelectorAll('.meta-time[data-posted-at]');
+        els.forEach(function(el) {
+          var iso = el.getAttribute('data-posted-at');
+          if (!iso) return;
+          var text = formatRelativeTime(iso);
+          if (text) el.textContent = '🕒 ' + text;
+        });
+      }
+
+      var searchEl = document.getElementById('search');
+      if (!searchEl) return;
+
+      // 検索結果カード全体をクリック可能にする
+      searchEl.addEventListener('click', function(e) {
+        var result = e.target.closest('.pagefind-ui__result');
+        if (!result) return;
+        var link = result.querySelector('a.pagefind-ui__result-link');
+        if (!link || e.target.closest('a')) return;
+
+        var input = searchEl.querySelector('.pagefind-ui__search-input');
+        var query = input ? input.value.trim() : '';
+        var href = link.getAttribute('href');
+        if (query && href) href += (href.indexOf('?') === -1 ? '?' : '&') + 'hl=' + encodeURIComponent(query);
+        window.location.href = href;
+      });
+
+      // 検索結果リンクにも検索語パラメータを付与
+      searchEl.addEventListener('click', function(e) {
+        var link = e.target.closest('a.pagefind-ui__result-link');
+        if (!link) return;
+
+        e.preventDefault();
+        var input = searchEl.querySelector('.pagefind-ui__search-input');
+        var query = input ? input.value.trim() : '';
+        var href = link.getAttribute('href');
+        if (query && href) href += (href.indexOf('?') === -1 ? '?' : '&') + 'hl=' + encodeURIComponent(query);
+        window.location.href = href;
+      });
+
+      // ページ読み込み時: hlパラメータがあれば該当記事をハイライト
+      var params = new URLSearchParams(window.location.search);
+      var hl = params.get('hl');
+      if (hl) {
+        var term = hl.toLowerCase();
+        var articles = document.querySelectorAll('.article-item');
+        var firstMatch = null;
+
+        articles.forEach(function(item) {
+          var titleEl = item.querySelector('.article-title a');
+          var summaryEl = item.querySelector('.article-summary p');
+          var text = (titleEl ? titleEl.textContent : '') + ' ' + (summaryEl ? summaryEl.textContent : '');
+          if (text.toLowerCase().indexOf(term) !== -1) {
+            if (!firstMatch) firstMatch = item;
+            item.classList.add('highlight');
+          }
+        });
+
+        if (firstMatch) {
+          setTimeout(function() {
+            firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 100);
+        }
+      }
+
+      applyRelativeTimes();
+    })();
   </script>
 </body>
 </html>

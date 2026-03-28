@@ -3,27 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HackerNews 日本語まとめ & AI要約 | 毎日更新</title>
+  <title>HackerNews 日本語まとめ & AI要約 - 毎日更新</title>
   <meta name="description" content="HackerNewsのトップ記事を毎日日本語翻訳・AI要約。毎朝JST8時更新。">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://hn-matome.pages.dev/">
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="canonical" href="https://hn-matome-2ht.pages.dev/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="HackerNews 日本語まとめ & AI要約">
   <meta property="og:description" content="HackerNewsのトップ記事を毎日日本語翻訳・AI要約">
-  <meta property="og:url" content="https://hn-matome.pages.dev/">
+  <meta property="og:url" content="https://hn-matome-2ht.pages.dev/">
   <meta property="og:site_name" content="HackerNews 日本語まとめ & AI要約">
   <meta property="og:locale" content="ja_JP">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="https://hn-matome-2ht.pages.dev/assets/og-image.svg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="HackerNews 日本語まとめ & AI要約">
+  <meta name="twitter:description" content="HackerNewsのトップ記事を毎日日本語翻訳・AI要約。毎朝JST8時更新。">
+  <meta name="twitter:image" content="https://hn-matome-2ht.pages.dev/assets/og-image.svg">
+  <link rel="alternate" type="application/rss+xml" title="HackerNews 日本語まとめ &amp; AI要約" href="/feed.xml">
+  <link rel="preload" href="/assets/style.css" as="style">
   <link rel="stylesheet" href="/assets/style.css">
   <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
-  <script src="/pagefind/pagefind-ui.js"></script>
+  <script src="/pagefind/pagefind-ui.js" defer></script>
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6175472643627734" crossorigin="anonymous"></script>
   
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "HackerNews 日本語まとめ & AI要約",
-  "url": "https://hn-matome.pages.dev/"
+  "url": "https://hn-matome-2ht.pages.dev/",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://hn-matome-2ht.pages.dev/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
 }
 </script>
 
@@ -31,9 +47,9 @@
 <body>
   <header class="site-header">
     <div class="container">
-      <a href="/" class="site-title">HackerNews 日本語まとめ & AI要約</a>
+      <a href="/index.html" class="site-title">HackerNews 日本語まとめ & AI要約</a>
       <nav class="site-nav">
-        <a href="/">トップ</a>
+        <a href="/index.html">トップ</a>
         <a href="/about.html">About</a>
       </nav>
     </div>
@@ -44,12 +60,736 @@
   <main class="container" >
     
 <h1 class="page-title">HackerNews 日本語まとめ & AI要約</h1>
-<p class="site-description">Hacker Newsのトップ記事を毎朝JST 8時に日本語翻訳・AI要約してお届けします。</p>
+<p class="site-description">Hacker Newsのトップ記事を1日3回（JST 7時・12時・23時）日本語翻訳・AI要約してお届けします。</p>
+
+<section class="hn-info-box">
+  <h2 class="hn-info-heading">Hacker News の仕組み</h2>
+  <div class="hn-info-content">
+    <dl>
+      <dt>Points（得点）とは？</dt>
+      <dd>ユーザーが記事を upvote（賛成票）した合計数です。多くの人が「面白い・有益だ」と評価した記事ほど高い得点になります。</dd>
+      <dt>トップページのランキング基準</dt>
+      <dd>得点が多く新しい記事ほど上位に表示され、時間が経つと自然に順位が下がります。</dd>
+      <dt>このサイトのデータ取得タイミング</dt>
+      <dd>JST 7:00・12:00・23:00 の1日3回、Hacker News API からその時点のトップ30記事を取得しています。各スナップショットは取得時刻ごとに保存されます。</dd>
+    </dl>
+  </div>
+</section>
+
 
 
 <section>
-  <h2>最新: 2026年3月28日</h2>
-  <a href="/archive/2026-03-28.html" class="btn-latest">今日のまとめを読む</a>
+  <h2 class="latest-heading">
+    最新: 2026年3月29日
+    <span class="fetch-slot">23:00取得</span>
+    <span class="current-datetime" id="currentDatetime"></span>
+  </h2>
+  <!-- 記事一覧上部広告 -->
+  <div class="ad-unit">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+         data-ad-slot="XXXXXXXXXX"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  <ol class="article-list">
+  
+  <li class="article-item" id="story-1">
+    <div class="article-rank">#1</div>
+    <div class="article-body">
+      <h2 class="article-title">
+        <a href="https://github.com/EnriqueLop/legalize-es" target="_blank" rel="noopener">8,642件全てのスペイン法をGitに投入——あらゆる改正はコミットとして記録</a>
+      </h2>
+      <div class="article-meta">
+        <span class="meta-comments">💬 112件</span>
+        <span class="meta-time" data-posted-at="2026-03-28T12:01:27+00:00"></span>
+        <a href="https://news.ycombinator.com/item?id=47553798" target="_blank" rel="noopener" class="meta-link">元コメントを読む ↗</a>
+        <a href="https://github.com/EnriqueLop/legalize-es" target="_blank" rel="noopener" class="meta-link">元記事を読む ↗</a>
+        <span class="meta-score" title="Hacker News での upvote 数">▲ 348点</span>
+      </div>
+      
+      <details class="article-summary">
+        <summary>AIコメント要約</summary>
+        <p>スペインの法律をGitでバージョン管理し、改正履歴をコミットとして可視化するプロジェクトが話題。法律の変更を差分で確認でき、透明性と効率化が図れると評価。フランスでも同様の取り組みがあり、技術を用いた法律管理の進展に期待が寄せられている。</p>
+      </details>
+      
+    </div>
+  </li>
+  
+  
+  <li class="article-item" id="story-2">
+    <div class="article-rank">#2</div>
+    <div class="article-body">
+      <h2 class="article-title">
+        <a href="https://grid.iamkate.com/" target="_blank" rel="noopener">イギリス、本日は電力の90％以上を再生可能エネルギーで発電</a>
+      </h2>
+      <div class="article-meta">
+        <span class="meta-comments">💬 140件</span>
+        <span class="meta-time" data-posted-at="2026-03-28T11:06:44+00:00"></span>
+        <a href="https://news.ycombinator.com/item?id=47553484" target="_blank" rel="noopener" class="meta-link">元コメントを読む ↗</a>
+        <a href="https://grid.iamkate.com/" target="_blank" rel="noopener" class="meta-link">元記事を読む ↗</a>
+        <span class="meta-score" title="Hacker News での upvote 数">▲ 219点</span>
+      </div>
+      
+      <details class="article-summary">
+        <summary>AIコメント要約</summary>
+        <p>英国の高い再生可能エネルギー割合の主張に対し、電力価格が世界で最も高く、CO2排出量もフランスより多いなど実態と乖離があると指摘。変動料金プランの利点はあるが、再生可能エネルギーの定義（例：Drax発電所）や脱工業化の影響も批判され、エネルギーコスト上昇と環境政策の課題が議論されている。</p>
+      </details>
+      
+    </div>
+  </li>
+  
+  
+  <li class="article-item" id="story-3">
+    <div class="article-rank">#3</div>
+    <div class="article-body">
+      <h2 class="article-title">
+        <a href="https://news.stanford.edu/stories/2026/03/ai-advice-sycophantic-models-research" target="_blank" rel="noopener">AIチャットボットは「イエスマン」的に悪い人間関係判断を強化すると研究が発見</a>
+      </h2>
+      <div class="article-meta">
+        <span class="meta-comments">💬 22件</span>
+        <span class="meta-time" data-posted-at="2026-03-28T14:08:33+00:00"></span>
+        <a href="https://news.ycombinator.com/item?id=47554773" target="_blank" rel="noopener" class="meta-link">元コメントを読む ↗</a>
+        <a href="https://news.stanford.edu/stories/2026/03/ai-advice-sycophantic-models-research" target="_blank" rel="noopener" class="meta-link">元記事を読む ↗</a>
+        <span class="meta-score" title="Hacker News での upvote 数">▲ 40点</span>
+      </div>
+      
+      <details class="article-summary">
+        <summary>AIコメント要約</summary>
+        <p>AIチャットボットはRLHFによる文化バイアスを持ち、ユーザーの自己欺瞞に対応できず「イエスマン」として機能する。関係アドバイスでは破局を勧める傾向が強く、データで確認できる。人間同様にお世辞を言う特性が、悪い決定を強化する問題がある。</p>
+      </details>
+      
+    </div>
+  </li>
+  
+  
+  <li class="article-item" id="story-4">
+    <div class="article-rank">#4</div>
+    <div class="article-body">
+      <h2 class="article-title">
+        <a href="https://www.youtube.com/watch?v=lXxmIw9axWw" target="_blank" rel="noopener">N64用オープンワールドエンジンを構築【動画】</a>
+      </h2>
+      <div class="article-meta">
+        <span class="meta-comments">💬 12件</span>
+        <span class="meta-time" data-posted-at="2026-03-28T11:49:28+00:00"></span>
+        <a href="https://news.ycombinator.com/item?id=47553717" target="_blank" rel="noopener" class="meta-link">元コメントを読む ↗</a>
+        <a href="https://www.youtube.com/watch?v=lXxmIw9axWw" target="_blank" rel="noopener" class="meta-link">元記事を読む ↗</a>
+        <span class="meta-score" title="Hacker News での upvote 数">▲ 123点</span>
+      </div>
+      
+      <details class="article-summary">
+        <summary>AIコメント要約</summary>
+        <p>N64用オープンワールドエンジンの開発を巡り、制約下での技術的創造性が議論された。類似プロジェクト（PortalリメイクやMario 64最適化）や過去のゲーム機との比較を通じて、性能向上策やメモリ制限への対応に関心が集まっている。</p>
+      </details>
+      
+    </div>
+  </li>
+  
+  
+  <li class="article-item" id="story-5">
+    <div class="article-rank">#5</div>
+    <div class="article-body">
+      <h2 class="article-title">
+        <a href="https://github.com/J-x-Z/cocoa-way" target="_blank" rel="noopener">Cocoa-Way——Linuxアプリをシームレスに実行するネイティブmacOS Waylandコンポジター</a>
+      </h2>
+      <div class="article-meta">
+        <span class="meta-comments">💬 56件</span>
+        <span class="meta-time" data-posted-at="2026-03-28T10:06:13+00:00"></span>
+        <a href="https://news.ycombinator.com/item?id=47553185" target="_blank" rel="noopener" class="meta-link">元コメントを読む ↗</a>
+        <a href="https://github.com/J-x-Z/cocoa-way" target="_blank" rel="noopener" class="meta-link">元記事を読む ↗</a>
+        <span class="meta-score" title="Hacker News での upvote 数">▲ 166点</span>
+      </div>
+      
+      <details class="article-summary">
+        <summary>AIコメント要約</summary>
+        <p>記事に対するコメントでは、Linux GUIアプリをmacOSでシームレスに実行する意義について、ネイティブビルドがないアプリの例が少ないと疑問が呈される。一方で、コンテナ内でのGUI実行の実用性やAppleのデスクトップ地位低下への指摘、macOSのUNIX化や他のデスクトップ環境利用への期待、さらにGNUstepへの関心喚起やEGLサーフェス作成の技術的可能性が議論されている。</p>
+      </details>
+      
+    </div>
+  </li>
+  
+  </ol>
+  <!-- 記事一覧中間広告（#5〜#6 の間） -->
+  <div class="ad-unit">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+         data-ad-slot="XXXXXXXXXX"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  <ol class="article-list">
+  
+  
+  <li class="article-item" id="story-6">
+    <div class="article-rank">#6</div>
+    <div class="article-body">
+      <h2 class="article-title">
+        <a href="https://theopenreader.org/Journalism:CERN_Uses_Tiny_AI_Models_Burned_into_Silicon_for_Real-Time_LHC_Data_Filtering" target="_blank" rel="noopener">CERN、リアルタイムLHCデータフィルタリングにシリコン焼き込みの小型AIモデルを採用</a>
+      </h2>
+      <div class="article-meta">
+        <span class="meta-comments">💬 90件</span>
+        <span class="meta-time" data-posted-at="2026-03-28T08:06:19+00:00"></span>
+        <a href="https://news.ycombinator.com/item?id=47552562" target="_blank" rel="noopener" class="meta-link">元コメントを読む ↗</a>
+        <a href="https://theopenreader.org/Journalism:CERN_Uses_Tiny_AI_Models_Burned_into_Silicon_for_Real-Time_LHC_Data_Filtering" target="_blank" rel="noopener" class="meta-link">元記事を読む ↗</a>
+        <span class="meta-score" title="Hacker News での upvote 数">▲ 186点</span>
+      </div>
+      
+      <details class="article-summary">
+        <summary>AIコメント要約</summary>
+        <p>CERNのLHCデータフィルタリング用小型AIモデルについて、技術的詳細（自動エンコーダーや畳み込み層の使用、過去データでの訓練）が記事で不十分との指摘。類似技術がCPUの分岐予測に既に利用されていることや、FPGAを「シリコンに焼き込む」表現への疑問が議論された。</p>
+      </details>
+      
+    </div>
+  </li>
+  
+  
+  <li class="article-item" id="story-7">
+    <div class="article-rank">#7</div>
+    <div class="article-body">
+      <h2 class="article-title">
+        <a href="https://github.com/dbrll/ATTN-11" target="_blank" rel="noopener">紙テープこそが全て——1976年製ミニコンピューターでTransformerを訓練</a>
+      </h2>
+      <div class="article-meta">
+        <span class="meta-comments">💬 8件</span>
+        <span class="meta-time" data-posted-at="2026-03-25T15:20:08+00:00"></span>
+        <a href="https://news.ycombinator.com/item?id=47518568" target="_blank" rel="noopener" class="meta-link">元コメントを読む ↗</a>
+        <a href="https://github.com/dbrll/ATTN-11" target="_blank" rel="noopener" class="meta-link">元記事を読む ↗</a>
+        <span class="meta-score" title="Hacker News での upvote 数">▲ 65点</span>
+      </div>
+      
+      <details class="article-summary">
+        <summary>AIコメント要約</summary>
+        <p>1976年のミニコンピュータでTransformerを訓練する試みは、現代AI手法が過去の技術環境でどこまで可能かを考察し、固定小数点演算などの制約下での実装に関心が集まっている。古いハードウェアで動作することへの驚きも交え、技術進歩の相対的評価が議論されている。</p>
+      </details>
+      
+    </div>
+  </li>
+  
+  
+  <li class="article-item" id="story-8">
+    <div class="article-rank">#8</div>
+    <div class="article-body">
+      <h2 class="article-title">
+        <a href="https://jai.scs.stanford.edu/" target="_blank" rel="noopener">ファイルシステムではなく、エージェントに本腰を入れる</a>
+      </h2>
+      <div class="article-meta">
+        <span class="meta-comments">💬 268件</span>
+        <span class="meta-time" data-posted-at="2026-03-28T00:39:54+00:00"></span>
+        <a href="https://news.ycombinator.com/item?id=47550282" target="_blank" rel="noopener" class="meta-link">元コメントを読む ↗</a>
+        <a href="https://jai.scs.stanford.edu/" target="_blank" rel="noopener" class="meta-link">元記事を読む ↗</a>
+        <span class="meta-score" title="Hacker News での upvote 数">▲ 465点</span>
+      </div>
+      
+      <details class="article-summary">
+        <summary>AIコメント要約</summary>
+        <p>AIエージェントのシステム保護には、sandboxingによるアクセス制限とverificationによる行動監視の両方が必要であり、OSレベルの権限分離も有効な対策となる。</p>
+      </details>
+      
+    </div>
+  </li>
+  
+  
+  <li class="article-item" id="story-9">
+    <div class="article-rank">#9</div>
+    <div class="article-body">
+      <h2 class="article-title">
+        <a href="https://github.com/xtellect/spaces" target="_blank" rel="noopener">明示的ヒープとチューニングノブを備えた単一ファイルCアロケーター</a>
+      </h2>
+      <div class="article-meta">
+        <span class="meta-comments">💬 18件</span>
+        <span class="meta-time" data-posted-at="2026-03-25T17:49:33+00:00"></span>
+        <a href="https://news.ycombinator.com/item?id=47520807" target="_blank" rel="noopener" class="meta-link">元コメントを読む ↗</a>
+        <a href="https://github.com/xtellect/spaces" target="_blank" rel="noopener" class="meta-link">元記事を読む ↗</a>
+        <span class="meta-score" title="Hacker News での upvote 数">▲ 32点</span>
+      </div>
+      
+      <details class="article-summary">
+        <summary>AIコメント要約</summary>
+        <p>Spacesアロケータは、Cのサブシステムでヒープを明示的に制御するため、64KBスラブとポインタマスクを採用。free()でキャッシュミスが発生するが、メタデータなし領域や構造体の即時破棄を実現。性能はjemallocに匹敵し、一般使用での実用性や既存のdlmallocとの違いが議論されている。</p>
+      </details>
+      
+    </div>
+  </li>
+  
+  
+  <li class="article-item" id="story-10">
+    <div class="article-rank">#10</div>
+    <div class="article-body">
+      <h2 class="article-title">
+        <a href="https://arstechnica.com/gadgets/2026/03/amds-ryzen-9-9950x3d2-dual-edition-crams-208mb-of-cache-into-a-single-chip/" target="_blank" rel="noopener">AMDのRyzen 9 9950X3D2 Dual Edition、単一チップに208MBのキャッシュを詰め込む</a>
+      </h2>
+      <div class="article-meta">
+        <span class="meta-comments">💬 120件</span>
+        <span class="meta-time" data-posted-at="2026-03-28T02:17:04+00:00"></span>
+        <a href="https://news.ycombinator.com/item?id=47550878" target="_blank" rel="noopener" class="meta-link">元コメントを読む ↗</a>
+        <a href="https://arstechnica.com/gadgets/2026/03/amds-ryzen-9-9950x3d2-dual-edition-crams-208mb-of-cache-into-a-single-chip/" target="_blank" rel="noopener" class="meta-link">元記事を読む ↗</a>
+        <span class="meta-score" title="Hacker News での upvote 数">▲ 223点</span>
+      </div>
+      
+      <details class="article-summary">
+        <summary>AIコメント要約</summary>
+        <p>AMDの大容量キャッシュCPUに対し、キャッシュサイズの進歩に驚く声がある一方で、性能向上はキャッシュ自体より低電圧技術によるクロック向上が主因との技術的指摘。ビニングを活用した製品戦略を評価する意見も。メディアの記事質への批判や、キャッシュが単一プールかどうか等の技術的疑問が提起されている。</p>
+      </details>
+      
+    </div>
+  </li>
+  
+  
+  <li class="article-item" id="story-11">
+    <div class="article-rank">#11</div>
+    <div class="article-body">
+      <h2 class="article-title">
+        <a href="https://nickjanetakis.com/blog/awesome-git-diffs-with-delta-fzf-and-a-little-shell-scripting" target="_blank" rel="noopener">Delta、Fzf、そして少しのシェルスクリプトによる改良版Git差分表示</a>
+      </h2>
+      <div class="article-meta">
+        <span class="meta-comments">💬 3件</span>
+        <span class="meta-time" data-posted-at="2026-03-24T15:02:38+00:00"></span>
+        <a href="https://news.ycombinator.com/item?id=47503687" target="_blank" rel="noopener" class="meta-link">元コメントを読む ↗</a>
+        <a href="https://nickjanetakis.com/blog/awesome-git-diffs-with-delta-fzf-and-a-little-shell-scripting" target="_blank" rel="noopener" class="meta-link">元記事を読む ↗</a>
+        <span class="meta-score" title="Hacker News での upvote 数">▲ 17点</span>
+      </div>
+      
+      <details class="article-summary">
+        <summary>AIコメント要約</summary>
+        <p>deltaからdifftasticへの移行を進める一方で、従来からあるツールが新規ユーザーに「新発見」として話題になる現象に対し、古参ユーザーが複雑な感情を抱いている。Hacker Newsで基本的な機能が注目されることに違和感を覚えつつも、コミュニティの拡大は歓迎し、ツールの歴史を認識してほしいとの意見。</p>
+      </details>
+      
+    </div>
+  </li>
+  
+  
+  <li class="article-item" id="story-12">
+    <div class="article-rank">#12</div>
+    <div class="article-body">
+      <h2 class="article-title">
+        <a href="https://www.ycombinator.com/companies/toma/jobs/2lrQI7S-sr-staff-software-engineer" target="_blank" rel="noopener">Toma (YC W24)、AI自動車分野の同僚を構築するシニア/スタッフエンジニアを募集</a>
+      </h2>
+      <div class="article-meta">
+        <span class="meta-comments">💬 0件</span>
+        <span class="meta-time" data-posted-at="2026-03-28T12:01:07+00:00"></span>
+        <a href="https://news.ycombinator.com/item?id=47553796" target="_blank" rel="noopener" class="meta-link">元コメントを読む ↗</a>
+        <a href="https://www.ycombinator.com/companies/toma/jobs/2lrQI7S-sr-staff-software-engineer" target="_blank" rel="noopener" class="meta-link">元記事を読む ↗</a>
+        <span class="meta-score" title="Hacker News での upvote 数">▲ 1点</span>
+      </div>
+      
+    </div>
+  </li>
+  
+  
+  <li class="article-item" id="story-13">
+    <div class="article-rank">#13</div>
+    <div class="article-body">
+      <h2 class="article-title">
+        <a href="https://naturalist.bearblog.dev/the-bee-that-everyone-wants-to-save/" target="_blank" rel="noopener">誰もが救いたがっている一匹の蜂</a>
+      </h2>
+      <div class="article-meta">
+        <span class="meta-comments">💬 58件</span>
+        <span class="meta-time" data-posted-at="2026-03-25T17:35:16+00:00"></span>
+        <a href="https://news.ycombinator.com/item?id=47520599" target="_blank" rel="noopener" class="meta-link">元コメントを読む ↗</a>
+        <a href="https://naturalist.bearblog.dev/the-bee-that-everyone-wants-to-save/" target="_blank" rel="noopener" class="meta-link">元記事を読む ↗</a>
+        <span class="meta-score" title="Hacker News での upvote 数">▲ 176点</span>
+      </div>
+      
+      <details class="article-summary">
+        <summary>AIコメント要約</summary>
+        <p>ミツバチは絶滅危惧ではないが、ダニや気候変動など複数の脅威に直面している。在来蜂との資源競合や病気蔓延を懸念し、飼育を控える事例がある。一方、商業養蜂による過剰採蜜が蜂を飢えさせ、近隣に攻撃的な蜂が発生する問題も指摘される。蜂の多様性（在来種など）を観察・保護する動きもみられる。</p>
+      </details>
+      
+    </div>
+  </li>
+  
+  
+  <li class="article-item" id="story-14">
+    <div class="article-rank">#14</div>
+    <div class="article-body">
+      <h2 class="article-title">
+        <a href="https://lr0.org/blog/p/macos/" target="_blank" rel="noopener">皮肉抜きでmacOSを一貫して悪くする</a>
+      </h2>
+      <div class="article-meta">
+        <span class="meta-comments">💬 325件</span>
+        <span class="meta-time" data-posted-at="2026-03-27T19:15:19+00:00"></span>
+        <a href="https://news.ycombinator.com/item?id=47547009" target="_blank" rel="noopener" class="meta-link">元コメントを読む ↗</a>
+        <a href="https://lr0.org/blog/p/macos/" target="_blank" rel="noopener" class="meta-link">元記事を読む ↗</a>
+        <span class="meta-score" title="Hacker News での upvote 数">▲ 462点</span>
+      </div>
+      
+      <details class="article-summary">
+        <summary>AIコメント要約</summary>
+        <p>macOS Tahoeのアップグレード後、WindowServerの高CPU使用率や動作の遅延、保存ダイアログやSafariの不具合などパフォーマンス問題が発生。タブや通知操作のUI劣化やApple Musicの変更も批判され、Appleの品質低下が懸念される。一方、ウィンドウの角丸など些細な議論は、OSが比較的ましである逆説的な評価や、ユーザーが細部にこだわる傾向を示すとも指摘。全体的に、一貫して悪化した状態への不満が中心。</p>
+      </details>
+      
+    </div>
+  </li>
+  
+  
+  <li class="article-item" id="story-15">
+    <div class="article-rank">#15</div>
+    <div class="article-body">
+      <h2 class="article-title">
+        <a href="https://www.alexedwards.net/blog/go-naming-conventions" target="_blank" rel="noopener">Go命名規約：実践ガイド</a>
+      </h2>
+      <div class="article-meta">
+        <span class="meta-comments">💬 15件</span>
+        <span class="meta-time" data-posted-at="2026-03-24T20:49:09+00:00"></span>
+        <a href="https://news.ycombinator.com/item?id=47509031" target="_blank" rel="noopener" class="meta-link">元コメントを読む ↗</a>
+        <a href="https://www.alexedwards.net/blog/go-naming-conventions" target="_blank" rel="noopener" class="meta-link">元記事を読む ↗</a>
+        <span class="meta-score" title="Hacker News での upvote 数">▲ 46点</span>
+      </div>
+      
+      <details class="article-summary">
+        <summary>AIコメント要約</summary>
+        <p>Goの命名規則では変数名の明確性が重視され、記事は有用だがコンパイルエラー例を含む不備を指摘。構造体命名はインターフェースと衝突せず、AI時代には規則の自動適用も考慮すべき。</p>
+      </details>
+      
+    </div>
+  </li>
+  
+  
+  <li class="article-item" id="story-16">
+    <div class="article-rank">#16</div>
+    <div class="article-body">
+      <h2 class="article-title">
+        <a href="https://www.pcworld.com/article/3096432/lgs-new-1hz-display-is-the-secret-behind-a-new-laptops-battery-life.html" target="_blank" rel="noopener">LGの新1Hzディスプレイが新型ノートPCのバッテリー寿命の秘密に</a>
+      </h2>
+      <div class="article-meta">
+        <span class="meta-comments">💬 138件</span>
+        <span class="meta-time" data-posted-at="2026-03-23T21:18:53+00:00"></span>
+        <a href="https://news.ycombinator.com/item?id=47495245" target="_blank" rel="noopener" class="meta-link">元コメントを読む ↗</a>
+        <a href="https://www.pcworld.com/article/3096432/lgs-new-1hz-display-is-the-secret-behind-a-new-laptops-battery-life.html" target="_blank" rel="noopener" class="meta-link">元記事を読む ↗</a>
+        <span class="meta-score" title="Hacker News での upvote 数">▲ 281点</span>
+      </div>
+      
+      <details class="article-summary">
+        <summary>AIコメント要約</summary>
+        <p>1Hz表示による省電力効果への疑問と、既存製品（スマートウォッチやタブレット）での適用事例の指摘。Oxideバックプレーン技術や、画面全体か部分的な刷新率制御の可能性についての関心が議論されている。</p>
+      </details>
+      
+    </div>
+  </li>
+  
+  
+  <li class="article-item" id="story-17">
+    <div class="article-rank">#17</div>
+    <div class="article-body">
+      <h2 class="article-title">
+        <a href="https://blog.dailydoseofds.com/p/anatomy-of-the-claude-folder" target="_blank" rel="noopener">.claude/フォルダーの解剖学</a>
+      </h2>
+      <div class="article-meta">
+        <span class="meta-comments">💬 235件</span>
+        <span class="meta-time" data-posted-at="2026-03-27T14:35:45+00:00"></span>
+        <a href="https://news.ycombinator.com/item?id=47543139" target="_blank" rel="noopener" class="meta-link">元コメントを読む ↗</a>
+        <a href="https://blog.dailydoseofds.com/p/anatomy-of-the-claude-folder" target="_blank" rel="noopener" class="meta-link">元記事を読む ↗</a>
+        <span class="meta-score" title="Hacker News での upvote 数">▲ 535点</span>
+      </div>
+      
+      <details class="article-summary">
+        <summary>AIコメント要約</summary>
+        <p>AIエージェントの利用では、複雑な設定や過剰なドキュメントは逆効果であり、シンプルな手法が最も効果的である。.claudeフォルダーや関連ファイルは最小限に保ち、まず基本操作を学び、計画と実装を分離してコンテキストの蓄積を避けるべきだ。多くのスキルや設定はAIを混乱させ、パフォーマンスを低下させる。</p>
+      </details>
+      
+    </div>
+  </li>
+  
+  
+  <li class="article-item" id="story-18">
+    <div class="article-rank">#18</div>
+    <div class="article-body">
+      <h2 class="article-title">
+        <a href="https://arstechnica.com/space/2026/03/what-happens-next-with-nasas-plan-to-replace-the-iss-source-it-could-get-ugly/" target="_blank" rel="noopener">NASAの民間宇宙ステーション新構想に誰も満足していない</a>
+      </h2>
+      <div class="article-meta">
+        <span class="meta-comments">💬 39件</span>
+        <span class="meta-time" data-posted-at="2026-03-28T11:13:23+00:00"></span>
+        <a href="https://news.ycombinator.com/item?id=47553516" target="_blank" rel="noopener" class="meta-link">元コメントを読む ↗</a>
+        <a href="https://arstechnica.com/space/2026/03/what-happens-next-with-nasas-plan-to-replace-the-iss-source-it-could-get-ugly/" target="_blank" rel="noopener" class="meta-link">元記事を読む ↗</a>
+        <span class="meta-score" title="Hacker News での upvote 数">▲ 56点</span>
+      </div>
+      
+      <details class="article-summary">
+        <summary>AIコメント要約</summary>
+        <p>NASAの民間宇宙ステーション構想に対し、Starshipの登場で既存計画が陳腐化する懸念、ISSの科学的意義への疑問、NASAの目標不在と政府主導の限りが指摘されている。</p>
+      </details>
+      
+    </div>
+  </li>
+  
+  
+  <li class="article-item" id="story-19">
+    <div class="article-rank">#19</div>
+    <div class="article-body">
+      <h2 class="article-title">
+        <a href="https://www.cnbc.com/2026/03/24/arm-launches-its-own-cpu-with-meta-as-first-customer.html" target="_blank" rel="noopener">Armが自社初のチップを発表、初回顧客はMeta</a>
+      </h2>
+      <div class="article-meta">
+        <span class="meta-comments">💬 16件</span>
+        <span class="meta-time" data-posted-at="2026-03-24T23:34:06+00:00"></span>
+        <a href="https://news.ycombinator.com/item?id=47511112" target="_blank" rel="noopener" class="meta-link">元コメントを読む ↗</a>
+        <a href="https://www.cnbc.com/2026/03/24/arm-launches-its-own-cpu-with-meta-as-first-customer.html" target="_blank" rel="noopener" class="meta-link">元記事を読む ↗</a>
+        <span class="meta-score" title="Hacker News での upvote 数">▲ 51点</span>
+      </div>
+      
+      <details class="article-summary">
+        <summary>AIコメント要約</summary>
+        <p>Armの自社チップ発表を巡り、MetaのRivos買収との整合性や戦略的競合リスクが議論され、RISC-V陣営への脅威が指摘されている。また、歴史的事実から「初の自社チップ」という表現の正確性や、製造がTSMC依存である点が問題視されている。</p>
+      </details>
+      
+    </div>
+  </li>
+  
+  
+  <li class="article-item" id="story-20">
+    <div class="article-rank">#20</div>
+    <div class="article-body">
+      <h2 class="article-title">
+        <a href="https://en.wikipedia.org/wiki/Gerard_of_Cremona" target="_blank" rel="noopener">ジェラルド・オブ・クレモナ</a>
+      </h2>
+      <div class="article-meta">
+        <span class="meta-comments">💬 1件</span>
+        <span class="meta-time" data-posted-at="2026-03-26T07:52:39+00:00"></span>
+        <a href="https://news.ycombinator.com/item?id=47527723" target="_blank" rel="noopener" class="meta-link">元コメントを読む ↗</a>
+        <a href="https://en.wikipedia.org/wiki/Gerard_of_Cremona" target="_blank" rel="noopener" class="meta-link">元記事を読む ↗</a>
+        <span class="meta-score" title="Hacker News での upvote 数">▲ 7点</span>
+      </div>
+      
+      <details class="article-summary">
+        <summary>AIコメント要約</summary>
+        <p>イスラム学者が古代テキストを保存した重要性と、ギリシャ語・ラテン語からアラビア語を経てラテン語へ翻訳される過程で意味が失われた可能性への疑問が提起されている。</p>
+      </details>
+      
+    </div>
+  </li>
+  
+  
+  <li class="article-item" id="story-21">
+    <div class="article-rank">#21</div>
+    <div class="article-body">
+      <h2 class="article-title">
+        <a href="https://matadisco.org/" target="_blank" rel="noopener">Matadisco——分散型データディスカバリー</a>
+      </h2>
+      <div class="article-meta">
+        <span class="meta-comments">💬 4件</span>
+        <span class="meta-time" data-posted-at="2026-03-25T16:45:52+00:00"></span>
+        <a href="https://news.ycombinator.com/item?id=47519845" target="_blank" rel="noopener" class="meta-link">元コメントを読む ↗</a>
+        <a href="https://matadisco.org/" target="_blank" rel="noopener" class="meta-link">元記事を読む ↗</a>
+        <span class="meta-score" title="Hacker News での upvote 数">▲ 32点</span>
+      </div>
+      
+      <details class="article-summary">
+        <summary>AIコメント要約</summary>
+        <p>分散型Webインデックスは、Googleなど非公開のインデックスや、不透明な選好に基づく検索結果から脱却する重要な手段であり、デモではSentinel画像タイルが表示される。</p>
+      </details>
+      
+    </div>
+  </li>
+  
+  
+  <li class="article-item" id="story-22">
+    <div class="article-rank">#22</div>
+    <div class="article-body">
+      <h2 class="article-title">
+        <a href="https://computeradsfromthepast.substack.com/p/byte-interviews-chuck-peddle-father" target="_blank" rel="noopener">Byte誌がMOS 6502とコモドールPETの父チャック・ペドルにインタビュー（1982年）</a>
+      </h2>
+      <div class="article-meta">
+        <span class="meta-comments">💬 1件</span>
+        <span class="meta-time" data-posted-at="2026-03-28T12:27:45+00:00"></span>
+        <a href="https://news.ycombinator.com/item?id=47553957" target="_blank" rel="noopener" class="meta-link">元コメントを読む ↗</a>
+        <a href="https://computeradsfromthepast.substack.com/p/byte-interviews-chuck-peddle-father" target="_blank" rel="noopener" class="meta-link">元記事を読む ↗</a>
+        <span class="meta-score" title="Hacker News での upvote 数">▲ 26点</span>
+      </div>
+      
+      <details class="article-summary">
+        <summary>AIコメント要約</summary>
+        <p>チャック・ペドルが6502マイクロプロセッサとコモドールPETの開発でマイクロコンピューター革新に貢献した「無名の先駆者」と紹介され、歴史的インタビューの記録が公開されている点。</p>
+      </details>
+      
+    </div>
+  </li>
+  
+  
+  <li class="article-item" id="story-23">
+    <div class="article-rank">#23</div>
+    <div class="article-body">
+      <h2 class="article-title">
+        <a href="https://reviewcanada.ca/magazine/2026/04/desperately-seeking-space-friends-review-the-pale-blue-data-point/" target="_blank" rel="noopener">宇宙の友を必死に求めて</a>
+      </h2>
+      <div class="article-meta">
+        <span class="meta-comments">💬 1件</span>
+        <span class="meta-time" data-posted-at="2026-03-26T03:53:47+00:00"></span>
+        <a href="https://news.ycombinator.com/item?id=47526468" target="_blank" rel="noopener" class="meta-link">元コメントを読む ↗</a>
+        <a href="https://reviewcanada.ca/magazine/2026/04/desperately-seeking-space-friends-review-the-pale-blue-data-point/" target="_blank" rel="noopener" class="meta-link">元記事を読む ↗</a>
+        <span class="meta-score" title="Hacker News での upvote 数">▲ 28点</span>
+      </div>
+      
+      <details class="article-summary">
+        <summary>AIコメント要約</summary>
+        <p>宇宙観測に最適な地球上の場所は、ほとんど居住が不可能な極限環境であるという、技術的理想と現実の居住可能性の矛盾が指摘されている。</p>
+      </details>
+      
+    </div>
+  </li>
+  
+  
+  <li class="article-item" id="story-24">
+    <div class="article-rank">#24</div>
+    <div class="article-body">
+      <h2 class="article-title">
+        <a href="https://www.axios.com/local/nashville/2026/03/16/nashville-library-digitize-home-movies" target="_blank" rel="noopener">ナッシュビル図書館、ホームムービー保存用メモリラボを開設</a>
+      </h2>
+      <div class="article-meta">
+        <span class="meta-comments">💬 42件</span>
+        <span class="meta-time" data-posted-at="2026-03-24T04:22:15+00:00"></span>
+        <a href="https://news.ycombinator.com/item?id=47498571" target="_blank" rel="noopener" class="meta-link">元コメントを読む ↗</a>
+        <a href="https://www.axios.com/local/nashville/2026/03/16/nashville-library-digitize-home-movies" target="_blank" rel="noopener" class="meta-link">元記事を読む ↗</a>
+        <span class="meta-score" title="Hacker News での upvote 数">▲ 170点</span>
+      </div>
+      
+      <details class="article-summary">
+        <summary>AIコメント要約</summary>
+        <p>個人の家庭用メディア（ビデオテープ、写真など）のデジタル化・長期保存への社会的関心が高まる中、公共図書館等の取り組みは評価されるが、持続可能な非営利モデルの構築、費用面でのアクセシビリティ、セルフサービスの技術的ハードル、そしてデジタル化後のデータの恒久的維持（「forever problem」）といった課題が指摘されている。地域に根差したサービス形態の可能性も議論されている。</p>
+      </details>
+      
+    </div>
+  </li>
+  
+  
+  <li class="article-item" id="story-25">
+    <div class="article-rank">#25</div>
+    <div class="article-body">
+      <h2 class="article-title">
+        <a href="https://www.reuters.com/world/us/iran-linked-hackers-claim-breach-of-fbi-directors-personal-email-doj-official-2026-03-27/" target="_blank" rel="noopener">イラン関連ハッカー、FBI長官の個人メールを侵害</a>
+      </h2>
+      <div class="article-meta">
+        <span class="meta-comments">💬 449件</span>
+        <span class="meta-time" data-posted-at="2026-03-27T14:38:28+00:00"></span>
+        <a href="https://news.ycombinator.com/item?id=47543167" target="_blank" rel="noopener" class="meta-link">元コメントを読む ↗</a>
+        <a href="https://www.reuters.com/world/us/iran-linked-hackers-claim-breach-of-fbi-directors-personal-email-doj-official-2026-03-27/" target="_blank" rel="noopener" class="meta-link">元記事を読む ↗</a>
+        <span class="meta-score" title="Hacker News での upvote 数">▲ 335点</span>
+      </div>
+      
+      <details class="article-summary">
+        <summary>AIコメント要約</summary>
+        <p>FBI長官の個人メール侵害をめぐり、政府高官の無能さや腐敗への懸念が高まっている。個人メールの内容がプロフェッショナルかどうか注目される一方、過去の大規模データ漏洩事件を踏まえ、驚きは少ないとの見方もある。政府のセキュリティ脆弱性やリーダーシップの質に対する批判が議論の中心である。</p>
+      </details>
+      
+    </div>
+  </li>
+  
+  
+  <li class="article-item" id="story-26">
+    <div class="article-rank">#26</div>
+    <div class="article-body">
+      <h2 class="article-title">
+        <a href="https://twitchroulette.net/" target="_blank" rel="noopener">Show HN: Twitchルーレット——視聴者が最も必要なライブ配信者を発見</a>
+      </h2>
+      <div class="article-meta">
+        <span class="meta-comments">💬 83件</span>
+        <span class="meta-time" data-posted-at="2026-03-27T22:22:20+00:00"></span>
+        <a href="https://news.ycombinator.com/item?id=47549160" target="_blank" rel="noopener" class="meta-link">元コメントを読む ↗</a>
+        <a href="https://twitchroulette.net/" target="_blank" rel="noopener" class="meta-link">元記事を読む ↗</a>
+        <span class="meta-score" title="Hacker News での upvote 数">▲ 155点</span>
+      </div>
+      
+      <details class="article-summary">
+        <summary>AIコメント要約</summary>
+        <p>Twitch Rouletteサービスをめぐり、視聴者と配信者の一方的な支援関係の倫理的問題、真に支援が必要な人への効果的な援助方法についての疑念、サービスタイトルの表現への批判、視聴者不在の配信者の実情など、複数の観点から議論されている。</p>
+      </details>
+      
+    </div>
+  </li>
+  
+  
+  <li class="article-item" id="story-27">
+    <div class="article-rank">#27</div>
+    <div class="article-body">
+      <h2 class="article-title">
+        <a href="https://www.euronews.com/2026/03/26/suddenly-energy-independence-feels-practical-europeans-are-building-mini-solar-farms-at-ho" target="_blank" rel="noopener">「エネルギー自立は実用的」：ミニ太陽光発電所を建設するヨーロッパの人々</a>
+      </h2>
+      <div class="article-meta">
+        <span class="meta-comments">💬 298件</span>
+        <span class="meta-time" data-posted-at="2026-03-27T08:55:43+00:00"></span>
+        <a href="https://news.ycombinator.com/item?id=47540383" target="_blank" rel="noopener" class="meta-link">元コメントを読む ↗</a>
+        <a href="https://www.euronews.com/2026/03/26/suddenly-energy-independence-feels-practical-europeans-are-building-mini-solar-farms-at-ho" target="_blank" rel="noopener" class="meta-link">元記事を読む ↗</a>
+        <span class="meta-score" title="Hacker News での upvote 数">▲ 328点</span>
+      </div>
+      
+      <details class="article-summary">
+        <summary>AIコメント要約</summary>
+        <p>欧州（特にドイツ・英国）における個人・小規模太陽光発電の普及事例。経済的メリット（短い回収期間）と、英国のバルコニー設置規制緩和の意義が主な話題。エネルギー自給と分散型システムの重要性が全体の議論の核心。</p>
+      </details>
+      
+    </div>
+  </li>
+  
+  
+  <li class="article-item" id="story-28">
+    <div class="article-rank">#28</div>
+    <div class="article-body">
+      <h2 class="article-title">
+        <a href="https://annas-archive.gd/isbn-visualization?" target="_blank" rel="noopener">ISBNの可視化</a>
+      </h2>
+      <div class="article-meta">
+        <span class="meta-comments">💬 32件</span>
+        <span class="meta-time" data-posted-at="2026-03-27T20:02:05+00:00"></span>
+        <a href="https://news.ycombinator.com/item?id=47547508" target="_blank" rel="noopener" class="meta-link">元コメントを読む ↗</a>
+        <a href="https://annas-archive.gd/isbn-visualization?" target="_blank" rel="noopener" class="meta-link">元記事を読む ↗</a>
+        <span class="meta-score" title="Hacker News での upvote 数">▲ 202点</span>
+      </div>
+      
+      <details class="article-summary">
+        <summary>AIコメント要約</summary>
+        <p>ISBNビジュアライゼーションの構築記事と公開について、著者が説明。ユーザーは書籍評価の信頼性に懸念を示し、Anna&#39;s Archiveを利用後購入する方法を紹介。地域によるアクセス制限やビジュアライゼーションの機能にも触れる。</p>
+      </details>
+      
+    </div>
+  </li>
+  
+  
+  <li class="article-item" id="story-29">
+    <div class="article-rank">#29</div>
+    <div class="article-body">
+      <h2 class="article-title">
+        <a href="https://github.com/davidmonterocrespo24/velxio" target="_blank" rel="noopener">Velxio 2.0——ブラウザ内でArduino、ESP32、Raspberry Pi 3をエミュレート</a>
+      </h2>
+      <div class="article-meta">
+        <span class="meta-comments">💬 47件</span>
+        <span class="meta-time" data-posted-at="2026-03-27T20:44:33+00:00"></span>
+        <a href="https://news.ycombinator.com/item?id=47548013" target="_blank" rel="noopener" class="meta-link">元コメントを読む ↗</a>
+        <a href="https://github.com/davidmonterocrespo24/velxio" target="_blank" rel="noopener" class="meta-link">元記事を読む ↗</a>
+        <span class="meta-score" title="Hacker News での upvote 数">▲ 171点</span>
+      </div>
+      
+      <details class="article-summary">
+        <summary>AIコメント要約</summary>
+        <p>Velxio 2.0は、ArduinoやESP32など19種類の組込みボードをブラウザでエミュレートする無料のオープンソースツール。ローカル実行でクラウド依存がなく、教育機関向けにセルフホスト可能。技術的にはWebAssemblyの性能やレンダリング方法、クライアント側とバックエンドQEMUのトレードオフが議論され、実用面ではEsphome連携の可能性について質問があった。また、画像サイズの最適化提案も出ている。</p>
+      </details>
+      
+    </div>
+  </li>
+  
+  
+  <li class="article-item" id="story-30">
+    <div class="article-rank">#30</div>
+    <div class="article-body">
+      <h2 class="article-title">
+        <a href="https://www.theregister.com/2026/03/27/sycophantic_ai_risks/" target="_blank" rel="noopener">人々は常に自分の正しさを肯定するAIに危険なほど依存しつつある</a>
+      </h2>
+      <div class="article-meta">
+        <span class="meta-comments">💬 0件</span>
+        <span class="meta-time" data-posted-at="2026-03-28T14:49:25+00:00"></span>
+        <a href="https://news.ycombinator.com/item?id=47555090" target="_blank" rel="noopener" class="meta-link">元コメントを読む ↗</a>
+        <a href="https://www.theregister.com/2026/03/27/sycophantic_ai_risks/" target="_blank" rel="noopener" class="meta-link">元記事を読む ↗</a>
+        <span class="meta-score" title="Hacker News での upvote 数">▲ 3点</span>
+      </div>
+      
+    </div>
+  </li>
+  
+  
+  </ol>
 </section>
 
 
@@ -57,12 +797,40 @@
   <h2>アーカイブ</h2>
   <ul class="archive-list">
   
-    <li><a href="/archive/2026-03-28.html">2026-03-28</a></li>
+    <li class="archive-date-group">
+      <span class="archive-date-label">2026年3月29日</span>
+      
+        <a href="/archive/2026-03-29_23.html" class="archive-slot-link">23:00取得</a>
+      
+    </li>
   
   </ul>
 </section>
 
+<script>
+(function() {
+  var el = document.getElementById('currentDatetime');
+  if (!el) return;
+  var now = new Date();
+  var fmt = new Intl.DateTimeFormat('ja-JP', {
+    timeZone: 'Asia/Tokyo', month: 'numeric', day: 'numeric',
+    hour: '2-digit', minute: '2-digit', hour12: false
+  });
+  el.textContent = '（現在: ' + fmt.format(now) + '）';
+})();
+</script>
+
   </main>
+  <!-- フッター上部広告：data-ad-slot を AdSense 管理画面で取得した値に置き換える -->
+  <div class="ad-unit container">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+         data-ad-slot="XXXXXXXXXX"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
   <footer class="site-footer">
     <div class="container">
       <p>翻訳・要約は AI によるものです。内容の正確性は保証しません。</p>
@@ -71,6 +839,89 @@
   </footer>
   <script>
     new PagefindUI({ element: "#search", showSubResults: false, translations: { placeholder: "過去記事を検索..." } });
+
+    (function() {
+      function formatRelativeTime(isoString) {
+        var postedAt = new Date(isoString);
+        if (isNaN(postedAt.getTime())) return '';
+        var diffMs = Date.now() - postedAt.getTime();
+        if (diffMs < 0) return 'just now';
+        var diffMinutes = Math.floor(diffMs / (60 * 1000));
+        if (diffMinutes < 1) return 'just now';
+        if (diffMinutes < 60) return diffMinutes + ' minutes ago';
+        var diffHours = Math.floor(diffMinutes / 60);
+        if (diffHours < 48) return 'about ' + diffHours + ' hours ago';
+        var diffDays = Math.floor(diffHours / 24);
+        return 'about ' + diffDays + ' days ago';
+      }
+
+      function applyRelativeTimes() {
+        var els = document.querySelectorAll('.meta-time[data-posted-at]');
+        els.forEach(function(el) {
+          var iso = el.getAttribute('data-posted-at');
+          if (!iso) return;
+          var text = formatRelativeTime(iso);
+          if (text) el.textContent = '🕒 ' + text;
+        });
+      }
+
+      var searchEl = document.getElementById('search');
+      if (!searchEl) return;
+
+      // 検索結果カード全体をクリック可能にする
+      searchEl.addEventListener('click', function(e) {
+        var result = e.target.closest('.pagefind-ui__result');
+        if (!result) return;
+        var link = result.querySelector('a.pagefind-ui__result-link');
+        if (!link || e.target.closest('a')) return;
+
+        var input = searchEl.querySelector('.pagefind-ui__search-input');
+        var query = input ? input.value.trim() : '';
+        var href = link.getAttribute('href');
+        if (query && href) href += (href.indexOf('?') === -1 ? '?' : '&') + 'hl=' + encodeURIComponent(query);
+        window.location.href = href;
+      });
+
+      // 検索結果リンクにも検索語パラメータを付与
+      searchEl.addEventListener('click', function(e) {
+        var link = e.target.closest('a.pagefind-ui__result-link');
+        if (!link) return;
+
+        e.preventDefault();
+        var input = searchEl.querySelector('.pagefind-ui__search-input');
+        var query = input ? input.value.trim() : '';
+        var href = link.getAttribute('href');
+        if (query && href) href += (href.indexOf('?') === -1 ? '?' : '&') + 'hl=' + encodeURIComponent(query);
+        window.location.href = href;
+      });
+
+      // ページ読み込み時: hlパラメータがあれば該当記事をハイライト
+      var params = new URLSearchParams(window.location.search);
+      var hl = params.get('hl');
+      if (hl) {
+        var term = hl.toLowerCase();
+        var articles = document.querySelectorAll('.article-item');
+        var firstMatch = null;
+
+        articles.forEach(function(item) {
+          var titleEl = item.querySelector('.article-title a');
+          var summaryEl = item.querySelector('.article-summary p');
+          var text = (titleEl ? titleEl.textContent : '') + ' ' + (summaryEl ? summaryEl.textContent : '');
+          if (text.toLowerCase().indexOf(term) !== -1) {
+            if (!firstMatch) firstMatch = item;
+            item.classList.add('highlight');
+          }
+        });
+
+        if (firstMatch) {
+          setTimeout(function() {
+            firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 100);
+        }
+      }
+
+      applyRelativeTimes();
+    })();
   </script>
 </body>
 </html>
