@@ -198,3 +198,61 @@ jobs:
 |------|------------|
 | 現状（private 単体） | ~150 分/月（無料枠の 8%） |
 | 変更後（public + private） | **0 分/月**（public は無制限） |
+
+---
+
+## Q&A: 1つのローカルディレクトリから2つのGitHubリポジトリへ push できるか？
+
+### 結論: 可能。ただし「ネストした別 git repo」として管理する
+
+1つのローカルディレクトリ（`/Users/aa/projects/ClaudeCode/products/hn-matome/`）から
+`hn-matome`（public）と `hn-matome-core`（private）の2つに push する場合、
+**単一の `.git` で2リポジトリに異なるコンテンツを push することは git の仕様上できない**。
+
+正しいアプローチ: `scripts/` ディレクトリを**独立した git リポジトリ**として初期化する。
+
+### 現在の状態（確認済み: 2026-03-28）
+
+| 項目 | 状態 |
+|------|------|
+| ローカル root の remote | `git@github.com:aa-0921/hn-matome.git` |
+| `.gitignore` に `scripts/` | 記載済み（public に漏洩しない） |
+| `scripts/` の git 初期化 | **未実施** |
+
+### 正しいローカル構成
+
+```
+/Users/aa/projects/ClaudeCode/products/hn-matome/   ← git repo #1
+  .git/                                               remote: hn-matome (public)
+  .gitignore  (scripts/ を除外)
+  .github/workflows/update.yml
+  docs/
+  scripts/                                            ← git repo #2（ネスト）
+    .git/                                             remote: hn-matome-core (private)
+    fetch_and_generate.py
+    ...
+```
+
+git は `.gitignore` で `scripts/` を無視するため、root と `scripts/` は完全に独立した別 repo として動作する。これはモノレポ内のネスト git repo として一般的なパターン。
+
+### scripts/ を git repo として初期化する手順
+
+```bash
+cd /Users/aa/projects/ClaudeCode/products/hn-matome/scripts
+
+git init
+git remote add origin git@github.com:aa-0921/hn-matome-core.git
+git add .
+git commit -m "feat: scripts を hn-matome-core に初期 push"
+git push -u origin main
+```
+
+### 日常的な push の違い
+
+| 対象 | 操作ディレクトリ | push 先 |
+|------|----------------|---------|
+| workflow / docs の変更 | `/Users/aa/projects/ClaudeCode/products/hn-matome/` | `hn-matome` (public) |
+| scripts/ の変更 | `/Users/aa/projects/ClaudeCode/products/hn-matome/scripts/` | `hn-matome-core` (private) |
+
+それぞれのディレクトリで `git add`, `git commit`, `git push` を行う。
+root からの `git push` が `scripts/` に影響することはない（`.gitignore` で除外されているため）。
