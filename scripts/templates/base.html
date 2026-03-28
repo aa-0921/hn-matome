@@ -64,7 +64,7 @@
   </footer>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      new PagefindUI({ element: "#search", showSubResults: false, translations: { placeholder: "過去記事を検索..." } });
+      new PagefindUI({ element: "#search", showSubResults: true, translations: { placeholder: "過去記事を検索..." } });
     });
 
     (function() {
@@ -105,7 +105,13 @@
         var input = searchEl.querySelector('.pagefind-ui__search-input');
         var query = input ? input.value.trim() : '';
         var href = link.getAttribute('href');
-        if (query && href) href += (href.indexOf('?') === -1 ? '?' : '&') + 'hl=' + encodeURIComponent(query);
+        if (query && href) {
+          var hashIdx = href.indexOf('#');
+          var base = hashIdx === -1 ? href : href.slice(0, hashIdx);
+          var hash = hashIdx === -1 ? '' : href.slice(hashIdx);
+          base += (base.indexOf('?') === -1 ? '?' : '&') + 'hl=' + encodeURIComponent(query);
+          href = base + hash;
+        }
         window.location.href = href;
       });
 
@@ -118,7 +124,13 @@
         var input = searchEl.querySelector('.pagefind-ui__search-input');
         var query = input ? input.value.trim() : '';
         var href = link.getAttribute('href');
-        if (query && href) href += (href.indexOf('?') === -1 ? '?' : '&') + 'hl=' + encodeURIComponent(query);
+        if (query && href) {
+          var hashIdx = href.indexOf('#');
+          var base = hashIdx === -1 ? href : href.slice(0, hashIdx);
+          var hash = hashIdx === -1 ? '' : href.slice(hashIdx);
+          base += (base.indexOf('?') === -1 ? '?' : '&') + 'hl=' + encodeURIComponent(query);
+          href = base + hash;
+        }
         window.location.href = href;
       });
 
@@ -133,10 +145,18 @@
         articles.forEach(function(item) {
           var titleEl = item.querySelector('.article-title a');
           var summaryEl = item.querySelector('.article-summary p');
-          var text = (titleEl ? titleEl.textContent : '') + ' ' + (summaryEl ? summaryEl.textContent : '');
+          var previewEl = item.querySelector('.summary-preview');
+          var text = [titleEl, summaryEl, previewEl]
+            .map(function(el) { return el ? el.textContent : ''; })
+            .join(' ');
           if (text.toLowerCase().indexOf(term) !== -1) {
             if (!firstMatch) firstMatch = item;
             item.classList.add('highlight');
+            // 要約内マッチの場合は details を開く
+            var details = item.querySelector('.article-summary');
+            if (details && summaryEl && summaryEl.textContent.toLowerCase().indexOf(term) !== -1) {
+              details.open = true;
+            }
           }
         });
 

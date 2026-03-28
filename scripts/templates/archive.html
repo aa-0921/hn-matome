@@ -70,7 +70,7 @@
 <li class="article-item" id="story-{{ story.rank }}">
   <div class="article-rank">#{{ story.rank }}</div>
   <div class="article-body">
-    <h2 class="article-title">
+    <h2 id="article-{{ story.rank }}" class="article-title">
       <a href="{{ story.url or story.hn_url }}" target="_blank" rel="noopener">{{ story.title_ja or story.title_en }}</a>
     </h2>
     <div class="article-meta">
@@ -106,12 +106,17 @@
 {% endfor %}
 </ol>
 
-{% if recent_slugs %}
+{% if recent_groups %}
 <nav class="recent-dates" aria-label="他の日報">
   <h2>他の日報を見る</h2>
-  <ul>
-    {% for s in recent_slugs %}
-    <li><a href="/archive/{{ s }}.html">{{ s[:10] | to_date_ja }}</a></li>
+  <ul class="archive-list">
+    {% for group in recent_groups %}
+    <li class="archive-date-group">
+      <span class="archive-date-label">{{ group.date_ja }}</span>
+      {% for entry in group.entries %}
+        <a href="/archive/{{ entry.slug }}.html" class="archive-slot-link">{{ entry.label or '閲覧' }}</a>
+      {% endfor %}
+    </li>
     {% endfor %}
   </ul>
 </nav>

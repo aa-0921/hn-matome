@@ -44,11 +44,17 @@ class SitemapGenerator:
         out.write_text(xml_str, encoding="utf-8")
         return out
 
-    def generate_redirects(self, latest_date: str) -> Path:
+    def generate_redirects(
+        self,
+        latest_date: str,
+        slug_redirects: list[tuple[str, str]] | None = None,
+    ) -> Path:
         # 本番/ローカルでの遷移挙動を揃えるため、ルートは index.html へ固定する
-        content = "/ /index.html 200\n"
+        lines = ["/ /index.html 200"]
+        for old_slug, new_slug in (slug_redirects or []):
+            lines.append(f"/archive/{old_slug}.html /archive/{new_slug}.html 301")
         out = self.output_dir / "_redirects"
-        out.write_text(content, encoding="utf-8")
+        out.write_text("\n".join(lines) + "\n", encoding="utf-8")
         return out
 
     def generate_robots(self) -> Path:

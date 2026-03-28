@@ -55,11 +55,12 @@ class HTMLGenerator:
         recent_slugs: list[str] | None = None,
     ) -> Path:
         tmpl = self.env.get_template("archive.html")
+        recent_groups = _build_archive_groups(recent_slugs or [])
         html = tmpl.render(
             report=report,
             prev_date=prev_date,
             next_date=next_date,
-            recent_slugs=recent_slugs or [],
+            recent_groups=recent_groups,
         )
         out = self.output_dir / "archive" / f"{report.slug}.html"
         out.parent.mkdir(parents=True, exist_ok=True)
@@ -102,7 +103,11 @@ class HTMLGenerator:
         data_dir = self.output_dir / "data"
         if not data_dir.exists():
             return []
-        return sorted([p.stem for p in data_dir.glob("*.json")], reverse=True)
+        # アンダースコア始まりはメタファイル（_slug_redirects.json 等）なので除外
+        return sorted(
+            [p.stem for p in data_dir.glob("*.json") if not p.stem.startswith("_")],
+            reverse=True,
+        )
 
     def generate_feed(
         self,
