@@ -66,7 +66,7 @@
 
 ### 優先度: 中（構造化データ・リッチリザルト）
 
-- [ ] **JSON-LD: WebSite に SearchAction を追加**（サイトリンク検索ボックス、未対応）
+- [x] **JSON-LD: WebSite に SearchAction を追加** ← 2026-03-27 対応済み（サイトリンク検索ボックス）
   ```json
   "potentialAction": {
     "@type": "SearchAction",
@@ -89,9 +89,15 @@
 
 ### 優先度: 中（パフォーマンス・Core Web Vitals）
 
-- [ ] **CSS のプリロード**
+- [x] **CSS のプリロード** ← 2026-03-27 対応済み
   `<link rel="preload" href="/assets/style.css" as="style">` を追加
-  レンダーブロッキングを軽減（未対応）
+  レンダーブロッキングを軽減
+
+- [ ] **`.summary-preview` CSS スタイル未定義** ← 新規発見（2026-03-28）
+  `archive.html` の84行目で `<p class="summary-preview">` を使用しているが、
+  `docs/assets/style.css` にスタイル定義がない。
+  デフォルトの `<p>` スタイルで表示されており、意図した見た目になっていない可能性あり。
+  数行の CSS 追加で完結する小さな作業。
 
 - [x] **pagefind-ui.js の遅延ロード** ← 2026-03-27 対応済み
   `base.html` の pagefind-ui.js script タグに `defer` を追加
@@ -109,8 +115,8 @@
   `hn-matome-2ht.pages.dev` はCFのサブドメイン。独自ドメインで信頼性・ブランド力向上
   例: `hn-daily.jp` / `hnmatome.com` など
 
-- [ ] **内部リンクの強化**
-  各アーカイブページの末尾に「他の日付を見る」リンクを追加
+- [x] **内部リンクの強化** ← 2026-03-27 対応済み
+  各アーカイブページの末尾に「他の日報を見る」リンクを追加
   → ページランクの均一な分散
 
 - [ ] **`hreflang` 不要**（日本語のみのサイトのため対応不要）
@@ -140,14 +146,12 @@
 
 ### 残課題（未対応）
 
-| タスク | 理由 |
-|--------|------|
-| JSON-LD: NewsArticle の `dateModified` をスロット更新時に正しい時刻に更新 | 設計変更が必要 |
-| JSON-LD: WebSite に SearchAction を追加 | Pagefind の URL 構造と要検討 |
-| CSS のプリロード | 効果が小さいため後回し |
-| カスタムドメイン取得 | 手動作業・費用が発生 |
-| 内部リンク強化（アーカイブページ末尾に「他の日付を見る」リンク） | 低優先度 |
-| Google Search Console のサイトマップ送信確認 | 手動作業 |
+| タスク | 状態 | 理由 |
+|--------|------|------|
+| JSON-LD: NewsArticle の `dateModified` をスロット更新時に正しい時刻に更新 | 未対応 | 設計変更が必要 |
+| `.summary-preview` CSS スタイルを `style.css` に追加 | 未対応・実施推奨 | 数行追加で完結、視覚的品質に影響 |
+| カスタムドメイン取得 | 未対応 | 手動作業・費用が発生 |
+| Google Search Console のサイトマップ送信確認 | 未対応 | 手動作業 |
 
 ---
 
@@ -198,60 +202,6 @@
 
 ---
 
-## 次回実装タスク（2026-03-27 追加調査分）
-
-### 緊急（クロール破壊リスク）
-
-| タスク | ファイル | 内容 |
-|--------|----------|------|
-| docs/robots.txt のドメイン修正 | `docs/robots.txt:3` | 完了（2026-03-27） |
-| docs/sitemap.xml のドメイン統一 + privacy追加 | `docs/sitemap.xml` | 完了（2026-03-27） |
-
-**背景:** `scripts/sitemap.py` と `fetch_and_generate.py` は正しく `hn-matome-2ht.pages.dev` を使用するが、
-現在の `docs/` 静的ファイルは旧ドメインのまま。スクリプト再実行で自動修正されるが、直接編集で即時修正可能。
-
-### 中優先度（on-page SEO 補完）
-
-| タスク | ファイル | 内容 |
-|--------|----------|------|
-| about.html に description ブロック追加 | `scripts/templates/about.html` | 完了（2026-03-27） |
-| privacy.html に canonical + description 追加 | `scripts/templates/privacy.html` | 完了（2026-03-27） |
-
-### 低優先度
-
-| タスク | ファイル | 内容 |
-|--------|----------|------|
-| アーカイブ末尾に「他の日付を見る」内部リンク | `scripts/generator.py` + `scripts/templates/archive.html` | 完了（2026-03-27） |
-| dateModified の動的更新 | モデル + generator + archive.html | report に `last_updated_at` フィールド追加（設計変更大） |
-
----
-
-完了しました。実施内容のサマリーです。                
-
-  ---                                                                                               
-  実施内容（全4タスク）
-                                                                                                    
-  緊急修正（クロール破壊リスク解消）                                                             
-  - docs/robots.txt — Sitemap URL のドメインを hn-matome-2ht.pages.dev に修正
-  - docs/sitemap.xml — 旧ドメイン混在を全統一、privacy.html エントリを追加
-
-  テンプレート meta 補完
-  - scripts/templates/about.html — {% block description %} 追加（固有の説明文）
-  - scripts/templates/privacy.html — {% block canonical %} と {% block description %} 追加
-
-  内部リンク強化
-  - scripts/generator.py — generate_archive() に recent_slugs パラメータ追加
-  - scripts/fetch_and_generate.py — 自身を除いた最新10件のスラグを計算して渡す
-  - scripts/templates/archive.html — ページ末尾に「他の日報を見る」リンクリストを追加
-
-  テスト: 27 passed（全通過）
-
-  ---
-  残課題（手動作業 or 大きな設計変更が必要なため未対応）:
-  - dateModified の動的更新（モデル設計変更が必要）
-  - カスタムドメイン取得（費用・手動作業）
-  - Google Search Console サイトマップ送信確認（手動作業）
-
 ## 監査ログ
 
 ### 2026-03-27 `/seo-audit` 実行
@@ -271,53 +221,12 @@
 - privacy.html が sitemap 未掲載
 - JSON-LD NewsArticle に image / publisher.logo / BreadcrumbList 未設定
 
-### 2026-03-27 全11タスク実装完了
+### 2026-03-27 全11タスク実装完了 + 追加タスク対応
 
 - **実施:** `executing-plans` スキルで優先実装順序の全タスクを順次実装
 - **テスト:** 27 passed（全テスト通過）
 
-
-実装完了サマリー                                                                               
-                                                                                                    
-変更ファイル一覧                                                                               
-                                         
-  ┌────────────────────────────────┬─────────────────────────────────────────────────┐
-  │            ファイル            │                    変更内容                     │
-  ├────────────────────────────────┼─────────────────────────────────────────────────┤
-  │ scripts/templates/base.html    │ AdSenseスクリプト（<head>）+ フッター上部広告枠 │
-  ├────────────────────────────────┼─────────────────────────────────────────────────┤
-  │ scripts/templates/index.html   │ 記事一覧上部 + #5〜#6間の中間広告枠             │
-  ├────────────────────────────────┼─────────────────────────────────────────────────┤
-  │ scripts/templates/archive.html │ 記事一覧上部 + #15〜#16間の中間広告枠           │
-  ├────────────────────────────────┼─────────────────────────────────────────────────┤
-  │ scripts/templates/about.html   │ Amazon Associates 技術書セクション              │
-  ├────────────────────────────────┼─────────────────────────────────────────────────┤
-  │ docs/assets/style.css          │ .ad-unit / .book-list スタイル追加              │
-  └────────────────────────────────┴─────────────────────────────────────────────────┘
-
-  AdSense 申請後の作業（2箇所のみ）
-
-  AdSense 審査が通ったら、全テンプレートの以下を一括置換する:
-
-  # publisher ID を置換（全テンプレート）
-  sed -i 's/ca-pub-XXXXXXXXXXXXXXXX/ca-pub-実際のID/g' scripts/templates/*.html
-
-  # 広告スロット ID を置換（位置ごとに異なるIDを使う場合は個別に編集）
-  # AdSense 管理画面で「広告ユニット」を作成 → 10桁の data-ad-slot を取得
-
-  Amazon Associates 申請後の作業
-
-  scripts/templates/about.html 内の XXXXXXXXXX-22 を取得した Associates タグ（例:
-  hn-matome-22）に置換するだけです。
-
-  注意事項
-
-  - AdSense コードは 申請前から置いておいてOK（審査時に自動で検出される）
-  - 現状のプレースホルダー ID のままだと広告は表示されないが、サイト表示は正常
-  - テンプレート変更は次回の GitHub Actions 実行時（JST 7:00/12:00/23:00）に自動反映される
-
-
-**実装内容:**
+**実装内容（全11タスク）:**
 1. `about.html` canonical 修正（`/` → `/about.html`）
 2. `pagefind-ui.js` に `defer` 追加
 3. `archive.html` に `{% block og_description %}` 追加
@@ -330,37 +239,58 @@
 10. `archive.html` の summary_ja 冒頭1文を `<p class="summary-preview">` として `<details>` 外に出力
 11. `generator.py` に `generate_feed()` メソッド追加（RSS 2.0）、`fetch_and_generate.py` から呼び出し
 
+**追加対応（2026-03-27 第2弾）:**
+- `docs/robots.txt` — Sitemap URL のドメインを `hn-matome-2ht.pages.dev` に修正
+- `docs/sitemap.xml` — 旧ドメイン混在を全統一、privacy.html エントリを追加
+- `scripts/templates/about.html` — `{% block description %}` 追加
+- `scripts/templates/privacy.html` — `{% block canonical %}` と `{% block description %}` 追加
+- `scripts/generator.py` — `generate_archive()` に `recent_slugs` パラメータ追加
+- `scripts/templates/archive.html` — ページ末尾に「他の日報を見る」リンクリスト追加
 
-----------------
+**AdSense 実装（2026-03-27）:**
+- `base.html` に AdSense スクリプト（publisher ID: `ca-pub-6175472643627734`）追加
+- 各テンプレートに広告枠追加（スロット ID はプレースホルダー `XXXXXXXXXX` のまま）
+- `docs/assets/style.css` に `.ad-unit` / `.book-list` スタイル追加
+- `docs/ads.txt` に `google.com, pub-6175472643627734, DIRECT, f08c47fec0942fa0` 配置済み、URL アクセスで表示確認済み
 
-# Google AdSense について
+### 2026-03-28 実装状態確認
 
-https://adsense.google.com/adsense/u/0/pub-6175472643627734/sites/list 
+- **調査内容:** テンプレート・generator.py・style.css の実装状態を精査
+- **確認済み完了事項（計画書に未反映だったもの）:**
+  - CSS preload (`<link rel="preload" href="/assets/style.css" as="style">`) → 完了済み
+  - SearchAction JSON-LD (index.html) → 完了済み
+  - 内部リンク強化（archive ページ末尾の「他の日報を見る」） → 完了済み
+  - AdSense スクリプト（`ca-pub-6175472643627734`）→ `base.html` に実装済み
 
-で、
-ads.txtのステータス　が　不明となっているのですが、　これはこのままでも審査はすすむのでしょうか
-↓
-状況を確認しました。ads.txt のステータス: 不明 が審査進行に影響するか、公式情報ベースで要点を整理して回答します。
+- **新規発見:**
+  - `archive.html` の `<p class="summary-preview">` に対応する CSS クラスが `style.css` に未定義
+  - デフォルト `<p>` スタイルで表示中。意図した視覚的強調がなされていない可能性あり
 
-gpt-5.3-codex-low
+- **AdSense 残作業:** 広告スロット ID がプレースホルダーのまま（審査通過後に一括置換予定）
 
-結論から言うと、ads.txt のステータスが「不明」でも、サイト審査自体は進むことが多いです。
-ただし、審査通過後の広告配信や収益面では不利になる可能性があるので、早めに修正しておくのが安全です。
+---
 
-不明 は「まだ確認できていない / クロール未反映」のケースが多いです
-反映には数日、トラフィックが少ないとより時間がかかることがあります
-放置すると「Earnings at risk（収益に影響）」系の警告につながることがあります
-今やるべき最短チェック:
+## 次のアクション推奨
 
-https://あなたのドメイン/ads.txt に直接アクセスして開けるか確認
-内容が google.com, pub-6175472643627734, DIRECT, f08c47fec0942fa0 になっているか確認
-ルート直下配置・HTTP 200応答・robots等でブロックされていないか確認
-修正後は数日待ってステータス再確認
-参考:
+### 最優先: Core Web Vitals 計測
 
-Check the status of your AdSense sites
-Ads.txt guide
-Ensure your ads.txt files can be crawled
-Resolve common ads.txt issues
-AdSense 管理画面（ご提示URL）
-gpt-5.3-codex-low
+コードレベルの SEO タスク（meta, JSON-LD, sitemap 等）はほぼ完了。
+残る主な改善余地は「パフォーマンス（Core Web Vitals）」と「実際のクロール状況」であり、
+**Lighthouse / PageSpeed Insights による計測が最善の次のステップ**。
+
+**推奨手順:**
+1. PageSpeed Insights（`https://pagespeed.web.dev/`）で本番 URL を計測
+   - モバイル・デスクトップ両方で実施
+   - `https://hn-matome-2ht.pages.dev/` と代表的なアーカイブページを対象に
+2. LCP / CLS / TBT の実数値を記録
+3. Opportunities（改善提案）を確認し、次の実装タスクを決定
+
+### 優先度付き残タスク
+
+| 優先度 | タスク | 備考 |
+|--------|--------|------|
+| 高 | `.summary-preview` CSS を `style.css` に追加 | 数行で完結、視覚品質に影響 |
+| 中 | AdSense 広告スロット ID を本番 ID に置換 | 審査通過後に実施 |
+| 中 | Google Search Console サイトマップ送信確認 | 手動作業 |
+| 低 | JSON-LD: NewsArticle の `dateModified` 動的更新 | 設計変更が必要 |
+| 低 | カスタムドメイン取得 | 費用・手動作業 |

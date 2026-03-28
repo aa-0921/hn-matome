@@ -71,6 +71,9 @@ class HTMLGenerator:
         latest_report: DailyReport | None,
         archive_slugs: list[str],
     ) -> Path:
+        # 【重要】latest_report が None の場合、トップページの記事一覧セクションが
+        # 非表示になる（index.html テンプレートの {% if latest_report %} による）。
+        # 呼び出し元で必ず JSON が存在するスラグを選んで渡すこと。
         archive_groups = _build_archive_groups(archive_slugs)
         tmpl = self.env.get_template("index.html")
         html = tmpl.render(latest_report=latest_report, archive_groups=archive_groups)

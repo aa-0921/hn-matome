@@ -224,16 +224,28 @@ async def main():
 
     # index + サイトマップ更新
     archive_slugs = sorted(all_slugs, reverse=True)
-    latest_slug = archive_slugs[0] if archive_slugs else None
-    latest_report = reports.get(latest_slug) if latest_slug else None
-    if latest_report is None and latest_slug:
-        latest_report = generator.load_report_json(latest_slug)
+
+    # 【重要・デグレ防止】
+    # トップページには「JSONデータが存在する最新のレポート」を表示する。
+    # archive_slugs の先頭スラグが archive/*.html のみ存在し docs/data/*.json が
+    # 欠損しているケース（例: 当日の archive HTML のみ生成済み等）があるため、
+    # JSON が見つかるまでスラグを順番に試す。
+    # latest_report が None のままだと index.html の {% if latest_report %} ブロックが
+    # スキップされ、トップページに記事一覧が一切表示されなくなる。
+    latest_report = None
+    for slug in archive_slugs:
+        candidate = reports.get(slug) or generator.load_report_json(slug)
+        if candidate is not None:
+            latest_report = candidate
+            break
+
     generator.generate_index(latest_report=latest_report, archive_slugs=archive_slugs)
     generator.generate_static_pages(
         last_updated_ja=f"{run_started_at.year}年{run_started_at.month}月{run_started_at.day}日"
     )
     generator.generate_feed(archive_slugs=archive_slugs, base_url=BASE_URL)
     sitemap_gen.generate(archive_slugs=archive_slugs)
+    latest_slug = archive_slugs[0] if archive_slugs else None
     sitemap_gen.generate_redirects(latest_date=latest_slug or today.strftime("%Y-%m-%d"))
     sitemap_gen.generate_robots()
 
