@@ -160,7 +160,7 @@
 | [C] pagefind-ui.js 遅延ロード | 低 | なし | 完了 |
 | [D] コントラスト不足の修正 | **高** | **スコアに影響** | 完了 |
 | [E] 同一リンクの目的統一 | 低 | なし | 完了 |
-| セキュリティヘッダー設定 | 中 | なし（推奨） | 未着手 |
+| セキュリティヘッダー設定 | 中 | なし（推奨） | 完了 |
 
 ---
 
@@ -197,3 +197,10 @@
 
 - **方針**: メインの `style.css` を非同期化すると FOUC（未スタイルの一瞬表示）のリスクがあり、見た目の仕様を変えない方針のため **未実施**。
 - **間接対応**: 上記 [C] により初期のメインスレッド長時間タスクを後ろにずらし、h1 周辺のレンダリング競合を緩和しうる。
+
+### 2026-03-29 — セキュリティヘッダー（Cloudflare Pages）
+
+- **追加ファイル**: `docs/_headers`（[Pages の Headers 設定](https://developers.cloudflare.com/pages/configuration/headers/) に従いサイトルートに配置）
+- **設定内容**: `Strict-Transport-Security`（2 年・サブドメイン・preload）、`X-Frame-Options: DENY`、`Cross-Origin-Opener-Policy: same-origin`、`Content-Security-Policy`（`default-src 'self'`、インライン script/style は既存の `<script>` / 属性スタイルのため `unsafe-inline` を許可、`img-src` に `https:` を含む外部画像リンク先のプレビュー等に備える）
+- **未設定**: ドキュメントにあった `Trusted Types` は、現状のインラインスクリプトと相性が悪いため入れていない。
+- **注意**: Google AdSense 等を `base.html` で有効化する場合は、`script-src` / `frame-src` 等に Google ドメインを追加する必要がある。
