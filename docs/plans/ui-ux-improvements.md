@@ -175,6 +175,7 @@
 - **対応案**: `a:visited { color: #7B5EA7; }` 等コントラスト比を計算して設定（確認ツール: WebAIM Contrast Checker）。
 - **対応状況: 済**
 - **実装内容**: `.article-title a:visited` を `--link-visited`（ライト `#5C3D8B`）に統一。ダーク時は `--link-visited: #c9a8e8`。フッター訪問済みは `color-mix` で微調整。
+- **未対応（任意）**: 対応案の **WebAIM 等でのコントラスト比の記録** はドキュメント化していない（色指定のみ実施）。
 
 ---
 
@@ -215,6 +216,7 @@
 - **対応案**: スロットラベルに `title="毎日この時刻にHackerNewsのトップ記事を取得しています"` 等の tooltip を付与。または About ページに説明追加。
 - **対応状況: 済**
 - **実装内容**: `.fetch-slot`（index / archive の見出し）、`.archive-slot-link`（index・アーカイブ一覧・他日報リンク）、`archive_index.html` のスロットリンクに、文言を少し具体化した `title` を付与（「毎日この時刻（JST）に Hacker News の…」）。
+- **未対応（任意）**: 対応案の **「または About ページに説明追加」** は未実施。上記ツールチップ等で代替。About に専用段落を足す場合は別タスク。
 
 ---
 
