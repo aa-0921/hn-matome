@@ -14,13 +14,14 @@
   <meta property="og:url" content="{% block og_url %}https://hn-matome-2ht.pages.dev/{% endblock %}">
   <meta property="og:site_name" content="HackerNews 日本語まとめ & AI要約">
   <meta property="og:locale" content="ja_JP">
-  <meta property="og:image" content="{% block og_image %}https://hn-matome-2ht.pages.dev/assets/og-image.svg{% endblock %}">
+  <meta property="og:image" content="{% block og_image %}https://hn-matome-2ht.pages.dev/assets/og-image.png{% endblock %}">
+  <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{% block twitter_title %}HackerNews 日本語まとめ & AI要約{% endblock %}">
   <meta name="twitter:description" content="{% block twitter_description %}HackerNewsのトップ記事を毎日日本語翻訳・AI要約。毎朝JST8時更新。{% endblock %}">
-  <meta name="twitter:image" content="{% block twitter_image %}https://hn-matome-2ht.pages.dev/assets/og-image.svg{% endblock %}">
+  <meta name="twitter:image" content="{% block twitter_image %}https://hn-matome-2ht.pages.dev/assets/og-image.png{% endblock %}">
   <link rel="alternate" type="application/rss+xml" title="HackerNews 日本語まとめ &amp; AI要約" href="/feed.xml">
   <link rel="preload" href="/assets/style.css" as="style">
   <link rel="stylesheet" href="/assets/style.css">
@@ -68,6 +69,7 @@
   <footer class="site-footer">
     <div class="container">
       <p>翻訳・要約は AI によるものです。内容の正確性は保証しません。</p>
+      <p class="footer-ai-note">コメント要約は Hacker News の上位コメントを AI（DeepSeek）で日本語要約しています。</p>
       <p class="footer-links">
         <a href="/about.html">About</a>
         <span class="footer-sep" aria-hidden="true">|</span>
@@ -157,20 +159,33 @@
         var item = detailsEl.closest('.article-item');
         return item && item.id ? item.id : null;
       }
+      function refreshDetailsAriaExpanded() {
+        document.querySelectorAll('details').forEach(function(d) {
+          var s = d.querySelector('summary');
+          if (s) s.setAttribute('aria-expanded', d.open ? 'true' : 'false');
+        });
+      }
+
       document.querySelectorAll('details.article-summary').forEach(function(d) {
         var key = articleKey(d);
         if (!key) return;
         var saved = loadDetailState();
         if (saved[key] === true) d.open = true;
       });
+      refreshDetailsAriaExpanded();
+
       document.addEventListener('toggle', function(e) {
         var t = e.target;
-        if (!t || !t.classList || !t.classList.contains('article-summary')) return;
-        var key = articleKey(t);
-        if (!key) return;
-        var map = loadDetailState();
-        map[key] = t.open;
-        saveDetailState(map);
+        if (!t || t.tagName !== 'DETAILS') return;
+        var sum = t.querySelector('summary');
+        if (sum) sum.setAttribute('aria-expanded', t.open ? 'true' : 'false');
+        if (t.classList && t.classList.contains('article-summary')) {
+          var key = articleKey(t);
+          if (!key) return;
+          var map = loadDetailState();
+          map[key] = t.open;
+          saveDetailState(map);
+        }
       }, true);
 
       var openAll = document.getElementById('openAllSummaries');
@@ -184,6 +199,7 @@
             if (key) map[key] = true;
           });
           saveDetailState(map);
+          refreshDetailsAriaExpanded();
         });
       }
       if (closeAll) {
@@ -195,6 +211,7 @@
             if (key) map[key] = false;
           });
           saveDetailState(map);
+          refreshDetailsAriaExpanded();
         });
       }
 
@@ -285,6 +302,7 @@
             }
           }
         });
+        refreshDetailsAriaExpanded();
 
         if (firstMatch) {
           setTimeout(function() {
