@@ -45,6 +45,13 @@ jobs:
             cp -R docs/data/. core/docs/data/
           fi
 
+      - name: 既存アーカイブHTMLを core へコピー（データ保全）
+        run: |
+          mkdir -p core/docs/archive
+          if [ -d docs/archive ] && [ "$(ls -A docs/archive 2>/dev/null)" ]; then
+            cp -R docs/archive/. core/docs/archive/
+          fi
+
       - name: 実行スロットを決定
         id: slot
         run: |
