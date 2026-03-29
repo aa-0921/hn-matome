@@ -159,7 +159,7 @@
 | [B] LCP レンダリング遅延解消 | 中 | なし | 未着手 |
 | [C] pagefind-ui.js 遅延ロード | 低 | なし | 未着手 |
 | [D] コントラスト不足の修正 | **高** | **スコアに影響** | 完了 |
-| [E] 同一リンクの目的統一 | 低 | なし | 未着手 |
+| [E] 同一リンクの目的統一 | 低 | なし | 完了 |
 | セキュリティヘッダー設定 | 中 | なし（推奨） | 未着手 |
 
 ---
@@ -174,3 +174,8 @@
   - ダークモードの `--text-meta` を `#9a9a9a` → `#b5b5b5` に調整。
   - スコア・順位表示用に `--accent-muted` を追加（ライト `#a84609`、ダーク `#ff9f5c`）。`.article-rank` と `.meta-score` は `var(--accent)` の代わりに `var(--accent-muted)` を使用（オレンジの視認性は保ちつつ AA を意識）。
 - **仕様**: 記事件数・レイアウト・文言・リンク先は変更なし。CTA ボタン等の `--accent` は従来どおり。
+
+### 2026-03-29 — [E] 同一 URL のリンク（タイトルと「元記事を読む」）
+
+- **変更ファイル**: `scripts/templates/index.html`, `scripts/templates/archive.html`（`python scripts/fetch_and_generate.py --regenerate-all` で `docs/index.html`・`docs/archive/*.html` を再生成）
+- **内容**: `story.url` があるとき、タイトル行の `<a>` と「元記事を読む ↗」が同一 URL になるため、補助技術向けに「元記事」側に `aria-label="{{ 記事タイトル }}"` を付与。表示テキストは従来どおり。タイトルリンクの算出（`story.url or story.hn_url`）も変更なし。
