@@ -1,4 +1,5 @@
 import json
+import re
 from collections import OrderedDict
 from datetime import date as date_type, datetime, timezone, timedelta
 from email.utils import formatdate
@@ -7,6 +8,19 @@ from xml.etree.ElementTree import Element, SubElement, tostring
 from xml.dom.minidom import parseString
 from jinja2 import Environment, FileSystemLoader
 from scripts.models import DailyReport
+
+# 日報JSONのファイル名（例: 2026-03-29_23.json）。index 等の別用途JSONを除外する
+_REPORT_SLUG_RE = re.compile(r"^\d{4}-\d{2}-\d{2}(_\d+)?$")
+
+
+def _is_valid_report_slug(stem: str) -> bool:
+    if not _REPORT_SLUG_RE.match(stem):
+        return False
+    try:
+        date_type.fromisoformat(stem[:10])
+    except ValueError:
+        return False
+    return True
 
 
 def _to_date_ja(date_str: str) -> str:
@@ -125,8 +139,13 @@ class HTMLGenerator:
         if not data_dir.exists():
             return []
         # アンダースコア始まりはメタファイル（_slug_redirects.json 等）なので除外
+        # YYYY-MM-DD 形式でない stem（index.json 等）は日報ではないため除外
         return sorted(
-            [p.stem for p in data_dir.glob("*.json") if not p.stem.startswith("_")],
+            [
+                p.stem
+                for p in data_dir.glob("*.json")
+                if not p.stem.startswith("_") and _is_valid_report_slug(p.stem)
+            ],
             reverse=True,
         )
 

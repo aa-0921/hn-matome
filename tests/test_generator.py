@@ -54,6 +54,17 @@ def test_generate_index(generator, sample_report, tmp_path):
     assert "2026-03-26" in content
 
 
+def test_get_existing_slugs_ignores_non_report_json(tmp_path):
+    """docs/data/index.json 等があっても日報スラグ一覧に混ぜない（to_date_ja 等の前提）"""
+    data = tmp_path / "data"
+    data.mkdir(parents=True)
+    (data / "2026-03-26_23.json").write_text("{}", encoding="utf-8")
+    (data / "index.json").write_text("{}", encoding="utf-8")
+    (data / "_slug_redirects.json").write_text("{}", encoding="utf-8")
+    gen = HTMLGenerator(templates_dir=TEMPLATES_DIR, output_dir=tmp_path)
+    assert gen.get_existing_slugs() == ["2026-03-26_23"]
+
+
 def test_generate_static_pages(generator, tmp_path):
     generator.generate_static_pages()
     assert (tmp_path / "about.html").exists()

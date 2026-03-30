@@ -25,17 +25,6 @@ BASE_URL = "https://hn-matome-2ht.pages.dev"
 JST = timezone(timedelta(hours=9))
 
 
-def get_existing_slugs() -> list[str]:
-    """既存のアーカイブスラグ一覧を取得する"""
-    archive_dir = DOCS_DIR / "archive"
-    if not archive_dir.exists():
-        return []
-    return sorted(
-        [p.stem for p in archive_dir.glob("*.html")],
-        reverse=True
-    )
-
-
 def compute_target_dates(
     today: datetime,
     backfill_days: int,
