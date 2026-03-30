@@ -24,13 +24,18 @@ def _is_valid_report_slug(stem: str) -> bool:
 
 
 def _to_date_ja(date_str: str) -> str:
-    """'YYYY-MM-DD' → 'YYYY年M月D日'"""
-    d = date_type.fromisoformat(date_str[:10])
+    """'YYYY-MM-DD' → 'YYYY年M月D日'。日付でない文字列はそのまま返す（テンプレ／データ互換）。"""
+    try:
+        d = date_type.fromisoformat(date_str[:10])
+    except ValueError:
+        return date_str[:10] if date_str else ""
     return f"{d.year}年{d.month}月{d.day}日"
 
 
 def _slug_nav_label(slug: str) -> str:
     """アーカイブスラグを日付ナビ用ラベルに（例: 2026-03-29_23 → 2026年3月29日（23:00））"""
+    if not _is_valid_report_slug(slug):
+        return slug
     date_part, slot = _slug_to_parts(slug)
     ja = _to_date_ja(date_part)
     if slot:
@@ -49,6 +54,8 @@ def _build_archive_groups(slugs: list[str]) -> list[dict]:
     """スラグ一覧を日付ごとにグループ化して返す（新しい順）"""
     groups: dict[str, list] = OrderedDict()
     for slug in slugs:
+        if not _is_valid_report_slug(slug):
+            continue
         date_part, slot = _slug_to_parts(slug)
         if date_part not in groups:
             groups[date_part] = []
@@ -79,7 +86,8 @@ class HTMLGenerator:
         recent_slugs: list[str] | None = None,
     ) -> Path:
         tmpl = self.env.get_template("archive.html")
-        recent_groups = _build_archive_groups(recent_slugs or [])
+        safe_recent = [s for s in (recent_slugs or []) if _is_valid_report_slug(s)]
+        recent_groups = _build_archive_groups(safe_recent)
         html = tmpl.render(
             report=report,
             prev_date=prev_date,
@@ -93,7 +101,9 @@ class HTMLGenerator:
 
     def generate_archive_index(self, archive_slugs: list[str]) -> Path:
         """アーカイブ一覧ページ archive/index.html を生成する"""
-        ordered = sorted(archive_slugs, reverse=True)
+        ordered = sorted(
+            [s for s in archive_slugs if _is_valid_report_slug(s)], reverse=True
+        )
         archive_groups = _build_archive_groups(ordered)
         tmpl = self.env.get_template("archive_index.html")
         html = tmpl.render(archive_groups=archive_groups)
@@ -110,7 +120,8 @@ class HTMLGenerator:
         # 【重要】latest_report が None の場合、トップページの記事一覧セクションが
         # 非表示になる（index.html テンプレートの {% if latest_report %} による）。
         # 呼び出し元で必ず JSON が存在するスラグを選んで渡すこと。
-        archive_groups = _build_archive_groups(archive_slugs)
+        safe_slugs = [s for s in archive_slugs if _is_valid_report_slug(s)]
+        archive_groups = _build_archive_groups(safe_slugs)
         tmpl = self.env.get_template("index.html")
         html = tmpl.render(latest_report=latest_report, archive_groups=archive_groups)
         out = self.output_dir / "index.html"

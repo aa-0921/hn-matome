@@ -142,6 +142,15 @@ def test_to_date_ja():
     assert _to_date_ja("2026-03-29_23") == "2026年3月29日"
     assert _to_date_ja("2026-03-29") == "2026年3月29日"
     assert _to_date_ja("2026-01-01") == "2026年1月1日"
+    assert _to_date_ja("index") == "index"
+    assert _to_date_ja("") == ""
+
+
+def test_build_archive_groups_skips_invalid_slugs():
+    slugs = ["index", "2026-03-29_23", "2026-03-28_23"]
+    groups = _build_archive_groups(slugs)
+    assert len(groups) == 2
+    assert groups[0]["date_ja"] == "2026年3月29日"
 
 
 def test_build_archive_groups():
@@ -157,11 +166,9 @@ def test_build_archive_groups():
 
 
 def test_generate_archive_no_crash_with_valid_slugs(tmp_path, sample_report):
-    """recent_slugs に 'index' が混入しても（実際はしない）generate_archive がクラッシュしない確認。
-    get_existing_slugs が適切にフィルタするため index は渡されないことが本来の保証。"""
+    """recent_slugs に 'index' 等が混入しても generate_archive がクラッシュしない。"""
     gen = HTMLGenerator(templates_dir=TEMPLATES_DIR, output_dir=tmp_path)
-    # 有効なスラグのみ渡す（get_existing_slugs の戻り値の想定通り）
-    recent_slugs = ["2026-03-29_23", "2026-03-28_07"]
+    recent_slugs = ["index", "2026-03-29_23", "2026-03-28_07", "_bad"]
     out = gen.generate_archive(sample_report, prev_date=None, next_date=None, recent_slugs=recent_slugs)
     assert out.exists()
     content = out.read_text()

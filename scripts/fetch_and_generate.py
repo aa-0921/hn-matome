@@ -16,7 +16,7 @@ from dotenv import load_dotenv
 from scripts.hn_client import HNClient
 from scripts.llm_client import LLMClient
 from scripts.models import DailyReport
-from scripts.generator import HTMLGenerator
+from scripts.generator import HTMLGenerator, _is_valid_report_slug
 from scripts.sitemap import SitemapGenerator
 
 DOCS_DIR = Path(__file__).parent.parent / "docs"
@@ -196,7 +196,9 @@ async def main():
 
     # HTML 生成（prev / next を全スラグで計算、既存スラグも再生成してナビを最新化）
     generated_slugs = list(reports.keys())
-    all_slugs = sorted(set(existing_slugs + generated_slugs))
+    all_slugs = sorted(
+        {s for s in existing_slugs + generated_slugs if _is_valid_report_slug(s)}
+    )
     recent_slugs_all = sorted(all_slugs, reverse=True)[:12]
     for slug in all_slugs:
         report = reports.get(slug) or generator.load_report_json(slug)
