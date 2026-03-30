@@ -204,3 +204,19 @@
 - **設定内容**: `Strict-Transport-Security`（2 年・サブドメイン・preload）、`X-Frame-Options: DENY`、`Cross-Origin-Opener-Policy: same-origin`、`Content-Security-Policy`（`default-src 'self'`、インライン script/style は既存の `<script>` / 属性スタイルのため `unsafe-inline` を許可、`img-src` に `https:` を含む外部画像リンク先のプレビュー等に備える）
 - **未設定**: ドキュメントにあった `Trusted Types` は、現状のインラインスクリプトと相性が悪いため入れていない。
 - **注意**: Google AdSense 等を `base.html` で有効化する場合は、`script-src` / `frame-src` 等に Google ドメインを追加する必要がある。
+
+---
+
+## 本ドキュメントのクローズ（2026-03-29）
+
+**対応状況表に挙げた項目について、フォローアップはすべて完了した。**
+
+| 区分 | 内容 |
+|---|---|
+| 実装済み | [C] Pagefind 遅延読込、[D] コントラスト、[E] `aria-label`、セキュリティヘッダー（`docs/_headers`。Trusted Types は意図的に未設定） |
+| 仕様維持のため未実施（記録済み） | [A] DOM 最適化（仮想スクロール・件数制限は行わない） |
+| 縮小・間接対応でクローズ（記録済み） | [B] LCP 内訳のレンダリング遅延 — メイン CSS の非同期化は FOUC 回避のため行わず、[C] による間接的な負荷分散に留めた |
+
+スコア概要の **Speed Index（要注意）** は、本リストでは個別タスク化しておらず、上記パフォーマンス関連対応の範囲に含めて扱う。
+
+再診断や新たな Lighthouse 指摘が出た場合は、別メモまたは本ファイルにセクションを追加して追記すること。
