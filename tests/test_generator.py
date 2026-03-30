@@ -2,7 +2,7 @@ import pytest
 from pathlib import Path
 from datetime import datetime, timezone
 from scripts.models import DailyReport, Story, Comment
-from scripts.generator import HTMLGenerator
+from scripts.generator import HTMLGenerator, _is_valid_report_slug, _to_date_ja, _build_archive_groups
 
 
 TEMPLATES_DIR = Path(__file__).parent.parent / "scripts" / "templates"
@@ -107,3 +107,63 @@ class TestUIRegression:
             self._assert_required_elements(
                 (tmp_path / page).read_text(), page
             )
+
+
+# --- 回帰テスト: index.json 等が混入してクラッシュしないことを保証 ---
+
+def test_is_valid_report_slug_valid():
+    assert _is_valid_report_slug("2026-03-29_23") is True
+    assert _is_valid_report_slug("2026-03-29") is True
+
+
+def test_is_valid_report_slug_invalid():
+    assert _is_valid_report_slug("index") is False
+    assert _is_valid_report_slug("_slug_redirects") is False
+    assert _is_valid_report_slug("about") is False
+    assert _is_valid_report_slug("2026-13-99") is False
+
+
+def test_get_existing_slugs_excludes_non_date_files(tmp_path):
+    data = tmp_path / "data"
+    data.mkdir(parents=True)
+    (data / "2026-03-29_23.json").write_text("{}", encoding="utf-8")
+    (data / "2026-03-28_07.json").write_text("{}", encoding="utf-8")
+    (data / "index.json").write_text("{}", encoding="utf-8")
+    (data / "_slug_redirects.json").write_text("{}", encoding="utf-8")
+    gen = HTMLGenerator(templates_dir=TEMPLATES_DIR, output_dir=tmp_path)
+    slugs = gen.get_existing_slugs()
+    assert "index" not in slugs
+    assert "_slug_redirects" not in slugs
+    assert "2026-03-29_23" in slugs
+    assert "2026-03-28_07" in slugs
+
+
+def test_to_date_ja():
+    assert _to_date_ja("2026-03-29_23") == "2026年3月29日"
+    assert _to_date_ja("2026-03-29") == "2026年3月29日"
+    assert _to_date_ja("2026-01-01") == "2026年1月1日"
+
+
+def test_build_archive_groups():
+    slugs = ["2026-03-29_23", "2026-03-29_07", "2026-03-28_23"]
+    groups = _build_archive_groups(slugs)
+    assert len(groups) == 2
+    assert groups[0]["date_ja"] == "2026年3月29日"
+    assert len(groups[0]["entries"]) == 2
+    assert groups[0]["entries"][0]["label"] == "23:00取得"
+    assert groups[0]["entries"][1]["label"] == "07:00取得"
+    assert groups[1]["date_ja"] == "2026年3月28日"
+    assert len(groups[1]["entries"]) == 1
+
+
+def test_generate_archive_no_crash_with_valid_slugs(tmp_path, sample_report):
+    """recent_slugs に 'index' が混入しても（実際はしない）generate_archive がクラッシュしない確認。
+    get_existing_slugs が適切にフィルタするため index は渡されないことが本来の保証。"""
+    gen = HTMLGenerator(templates_dir=TEMPLATES_DIR, output_dir=tmp_path)
+    # 有効なスラグのみ渡す（get_existing_slugs の戻り値の想定通り）
+    recent_slugs = ["2026-03-29_23", "2026-03-28_07"]
+    out = gen.generate_archive(sample_report, prev_date=None, next_date=None, recent_slugs=recent_slugs)
+    assert out.exists()
+    content = out.read_text()
+    assert "2026年3月29日" in content
+    assert "2026年3月28日" in content
