@@ -52,6 +52,13 @@ jobs:
             cp -R docs/archive/. core/docs/archive/
           fi
 
+      # hn-matome-core は別リポジトリのため scripts が古いままだと CI だけ旧版が走る。
+      # 生成ロジック・テンプレの正は公開リポジトリの scripts/ とし、実行直前に上書き同期する。
+      - name: 公開リポジトリの scripts を core に同期
+        run: |
+          rm -rf core/scripts
+          cp -R scripts core/scripts
+
       - name: 実行スロットを決定
         id: slot
         run: |
