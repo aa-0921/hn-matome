@@ -1,0 +1,1070 @@
+{
+  "date": "2026-04-01T00:00:00+09:00",
+  "slot": "23",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 47582220,
+      "title_en": "Axios compromised on NPM – Malicious versions drop remote access trojan",
+      "title_ja": "NPMでAxiosが危険にさらされる – 悪意のあるバージョンがリモートアクセストロイの木馬を投下",
+      "url": "https://www.stepsecurity.io/blog/axios-compromised-on-npm-malicious-versions-drop-remote-access-trojan",
+      "hn_url": "https://news.ycombinator.com/item?id=47582220",
+      "score": 1354,
+      "comment_count": 516,
+      "posted_at": "2026-03-31T02:54:17+00:00",
+      "comments": [
+        {
+          "id": 47582632,
+          "author": "postalcoder",
+          "text": "PSA: npm/bun/pnpm/uv now all support setting a minimum release age for packages. I also have `ignore-scripts=true` in my ~/.npmrc. Based on the analysis, that alone would have mitigated the vulnerability. bun and pnpm do not execute lifecycle scripts by default. Here's how to set global configs to set min release age to 7 days: ~/.config/uv/uv.toml exclude-newer = \"7 days\" ~/.npmrc min-release-age=7 # days ignore-scripts=true ~/Library/Preferences/pnpm/rc minimum-release-age=10080 # minutes ~/.bunfig.toml [install] minimumReleaseAge = 604800 # seconds (Side note, it's wild that npm, bun, and pnpm have all decided to use different time units for this configuration.) If you're developing with LLM agents, you should also update your AGENTS.md/CLAUDE.md file with some guidance on how to handle failures stemming from this config as they will cause the agent to unproductively spin its wheels."
+        },
+        {
+          "id": 47584459,
+          "author": "bob1029",
+          "text": "\"Batteries included\" ecosystems are the only persistent solution to the package manager problem. If your first party tooling contains all the functionality you typically need, it's possible you can be productive with zero 3rd party dependencies. In practice you will tend to have a few, but you won't be vendoring out critical things like HTTP, TCP, JSON, string sanitation, cryptography. These are beacons for attackers. Everything depends on this stuff so the motivation for attacking these common surfaces is high. I can literally count on one hand the number of 3rd party dependencies I've used in the last year. Dapper is the only regular thing I can come up with. Sometimes ScottPlot. Both of my SQL providers (MSSQL and SQLite) are first party as well. This is a major reason why they're the only sql providers I use. Maybe I am just so traumatized from compliance and auditing in regulated software business, but this feels like a happier way to build software too. My tools tend to stay right where I left them the previous day. I don't have to worry about my hammer or screw drivers stealing all my bitcoin in the middle of the night."
+        },
+        {
+          "id": 47582484,
+          "author": "h4ch1",
+          "text": "I can't even imagine the scale of the impact with Axios being compromised, nearly every other project uses it for some reason instead of fetch (I never understood why). Also from the report: > Neither malicious version contains a single line of malicious code inside axios itself. Instead, both inject a fake dependency, plain-crypto-js@4.2.1, a package that is never imported anywhere in the axios source, whose only purpose is to run a postinstall script that deploys a cross-platform remote access trojan (RAT) Good news for pnpm/bun users who have to manually approve postinstall scripts."
+        },
+        {
+          "id": 47586783,
+          "author": "woodruffw",
+          "text": "There’s a recurrent pattern with these package compromises: the attacker exfiltrates credentials during an initial phase, then pivots to the next round of packages using those credentials. That’s how we saw them make the Trivy to LiteLLM leap (with a 5 day gap), and it’ll almost certainly be similar in this case. The solution to this is twofold, and is already implemented in the primary ecosystems being targeted (Python and JS): packagers should use Trusted Publishing to eliminate the need for long lived release credentials, and downstreams should use cooldowns to give security researchers time to identify and quarantine attacks. (Security is a moving target, and neither of these techniques is going to work indefinitely without new techniques added to the mix. But they would be effective against the current problems we’re seeing.)"
+        },
+        {
+          "id": 47587174,
+          "author": "xinayder",
+          "text": "Very detailed and props to the security researchers, but the blog post has several indicators that it was written by AI, to which point I suspect their malware analysis was also done by a LLM. I just wish it had more human interaction rather than have a GenAI spit out the blog post. It's very repetitive and includes several EM dashes."
+        }
+      ],
+      "summary_ja": "AxiosのNPM侵害事件を受け、パッケージマネージャーでの最小リリース年齢設定やスクリプト無効化による脆弱性緩和策が議論された。サードパーティ依存を減らし「Batteries included」アプローチを推奨する意見もあり、侵害の再発パターンにはTrusted Publishingとクールダウンが対策として提案された。セキュリティ分析のAI依存への批判も示されている。"
+    },
+    {
+      "rank": 2,
+      "id": 47586614,
+      "title_en": "Open source CAD in the browser (Solvespace)",
+      "title_ja": "ブラウザでのオープンソースCAD（Solvespace）",
+      "url": "https://solvespace.com/webver.pl",
+      "hn_url": "https://news.ycombinator.com/item?id=47586614",
+      "score": 69,
+      "comment_count": 17,
+      "posted_at": "2026-03-31T12:50:23+00:00",
+      "comments": [
+        {
+          "id": 47588217,
+          "author": "JoshTriplett",
+          "text": "Impressive work! Minor nit: why does the rendered in-window text use a really awful pixelated font? It looks like what happens when a font gets rendered onto a pixel grid without any hinting or snapping."
+        },
+        {
+          "id": 47587868,
+          "author": "MrDOS",
+          "text": "SolveSpace is a wonderfully different take on parametric CAD, but development has really slowed, and it seems fundamentally incapable of some pretty rudimentary features (like chamfers[0]). Dune 3D[1] seems like a pretty effective spiritual successor. 0: https://github.com/solvespace/solvespace/issues/149 1: https://dune3d.org/"
+        },
+        {
+          "id": 47587834,
+          "author": "masonhensley",
+          "text": "I've been using FreeCad more and more, but solvespace has been a great, lightweight tool to design parts for laser cutting by SendCutSend/Oshcut. Neat that they got it working in the browser."
+        },
+        {
+          "id": 47587979,
+          "author": "ponyous",
+          "text": "Does this use its own backend/engine? I've been working on LLM to CAD tool[0] and have realised there are so many backends and options to choose from. Since the realisation I'm trying to find the best representation for an LLM. I think OpenSCAD is currently the best and most feature complete choice, but I definitely need to dig a bit deeper. If anyone has any pointers I welcome them! [0]: https://GrandpaCAD.com"
+        },
+        {
+          "id": 47587990,
+          "author": "steveharing1",
+          "text": "Currently I'm comfortable using FreeCAD but i'll try this one for sure."
+        }
+      ],
+      "summary_ja": "SolveSpaceのブラウザ版は軽量でレーザーカット設計に有用だが、開発が停滞し面取りなどの基本機能が欠如している。フォントレンダリングの不具合や、Dune 3D・FreeCADなどの代替ツールが議論され、LLMとCADの統合ではOpenSCADが有望視される。"
+    },
+    {
+      "rank": 3,
+      "id": 47585974,
+      "title_en": "Combinators",
+      "title_ja": "コンビネーター",
+      "url": "https://tinyapl.rubenverg.com/docs/info/combinators",
+      "hn_url": "https://news.ycombinator.com/item?id=47585974",
+      "score": 57,
+      "comment_count": 11,
+      "posted_at": "2026-03-31T11:49:03+00:00",
+      "comments": [
+        {
+          "id": 47586673,
+          "author": "siruwastaken",
+          "text": "Could somebody provide a bit of context on what exactly this is? It seems interesting, but I have no idea what I am looking at."
+        },
+        {
+          "id": 47587533,
+          "author": "ux266478",
+          "text": "A bit of an aside: I wonder how much array-oriented languages like APL and J would benefit from being implemented on top of an interaction net machine?"
+        },
+        {
+          "id": 47586935,
+          "author": "hrmtst93837",
+          "text": "The y-combinator is widely regarded as the best combinator :)"
+        }
+      ],
+      "summary_ja": "Hacker Newsの記事「Combinators」へのコメントでは、記事の内容に関する理解不足からコンテキストを求める声が挙がり、脇道としてAPLやJのような配列指向言語がインタラクションネットマシン上で実装される利点について疑問が示された。また、yコンビネータが最高のコンビネータと評価されていることも言及されている。"
+    },
+    {
+      "rank": 4,
+      "id": 47582482,
+      "title_en": "Ollama is now powered by MLX on Apple Silicon in preview",
+      "title_ja": "OllamaがApple SiliconでMLXを搭載、プレビュー中",
+      "url": "https://ollama.com/blog/mlx",
+      "hn_url": "https://news.ycombinator.com/item?id=47582482",
+      "score": 469,
+      "comment_count": 228,
+      "posted_at": "2026-03-31T03:40:45+00:00",
+      "comments": [
+        {
+          "id": 47587546,
+          "author": "abu_ameena",
+          "text": "On-device models are the future. Users prefer them. No privacy issues. No dealing with connectivity, tokens, or changes to vendors implementations. I have an app using Foundation Model, and it works great. I only wish I could backport it to pre macOS 26 versions."
+        },
+        {
+          "id": 47584060,
+          "author": "franze",
+          "text": "I created \"apfel\" https://github.com/Arthur-Ficial/apfel a CLI for the apple on-device local foundation model (Apple intelligence) yeah its super limited with its 4k context window and super common false positives guardrails (just ask it to describe a color) ... bit still ... using it in bash scripts that just work without calling home / out or incurring extra costs feels super powerful."
+        },
+        {
+          "id": 47582826,
+          "author": "babblingfish",
+          "text": "LLMs on device is the future. It's more secure and solves the problem of too much demand for inference compared to data center supply, it also would use less electricity. It's just a matter of getting the performance good enough. Most users don't need frontier model performance."
+        },
+        {
+          "id": 47588396,
+          "author": "rurban",
+          "text": "Does that mean they are now finally a bit faster than llama.cpp? Cannot believe that."
+        },
+        {
+          "id": 47588208,
+          "author": "xmddmx",
+          "text": "On a M4 Pro MacBook Pro with 48GB RAM I did this test: ollama run $model \"calculate fibonacci numbers in a one-line bash script\" --verbose Model PromptEvalRate EvalRate ------------------------------------------------------ qwen3.5:35b-a3b-q4_K_M 6.6 30.0 qwen3.5:35b-a3b-nvfp4 13.2 66.5 qwen3.5:35b-a3b-int4 59.4 84.4 I can't comment on the quality differences (if any) between these three."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 5,
+      "id": 47587935,
+      "title_en": "Oracle slashes 30k jobs with a cold 6 a.m. email",
+      "title_ja": "オラクル、冷たい午前6時のメールで3万人の職を削減",
+      "url": "https://rollingout.com/2026/03/31/oracle-slashes-30000-jobs-with-a-cold-6/",
+      "hn_url": "https://news.ycombinator.com/item?id=47587935",
+      "score": 46,
+      "comment_count": 20,
+      "posted_at": "2026-03-31T14:30:48+00:00",
+      "comments": [
+        {
+          "id": 47588231,
+          "author": "dafelst",
+          "text": "More victims of AI. Not actually of \"AI is replacing jobs\", more \"oh shit we are spending too much and the product isn't good enough for us to ever make a return on our absurd over-investment\"."
+        },
+        {
+          "id": 47588391,
+          "author": "dolphinscorpion",
+          "text": "Unless you're being offered a very good package, any firing email is cold. Let's be honest"
+        },
+        {
+          "id": 47588355,
+          "author": "bix6",
+          "text": "It feels like Oracle has made some massive strategic missteps in the past year. I’m curious if they can turn it around."
+        },
+        {
+          "id": 47588406,
+          "author": "baal80spam",
+          "text": "Let's not forget that ORACLE is actually an acronym."
+        },
+        {
+          "id": 47588252,
+          "author": "kwanbix",
+          "text": "Those super yatchs of larry have to be paid somewhow."
+        }
+      ],
+      "summary_ja": "Oracleの大規模リストラは、AIによる雇用代替ではなく、経営陣の過剰投資と戦略的失敗が原因と指摘。解雇通知の冷酷さや、経営陣の贅沢との対比にも批判が集まっている。"
+    },
+    {
+      "rank": 6,
+      "id": 47584540,
+      "title_en": "Claude Code's source code has been leaked via a map file in their NPM registry",
+      "title_ja": "Claude CodeのソースコードがNPMレジストリのマップファイル経由で漏洩",
+      "url": "https://twitter.com/Fried_rice/status/2038894956459290963",
+      "hn_url": "https://news.ycombinator.com/item?id=47584540",
+      "score": 877,
+      "comment_count": 481,
+      "posted_at": "2026-03-31T09:00:40+00:00",
+      "comments": [
+        {
+          "id": 47585326,
+          "author": "bkryza",
+          "text": "They have an interesting regex for detecting negative sentiment in users prompt which is then logged (explicit content): https://github.com/chatgptprojects/claude-code/blob/642c7f94... I guess these words are to be avoided..."
+        },
+        {
+          "id": 47585239,
+          "author": "cedws",
+          "text": "ANTI_DISTILLATION_CC This is Anthropic's anti-distillation defence baked into Claude Code. When enabled, it injects anti_distillation: ['fake_tools'] into every API request, which causes the server to silently slip decoy tool definitions into the model's system prompt. The goal: if someone is scraping Claude Code's API traffic to train a competing model, the poisoned training data makes that distillation attempt less useful."
+        },
+        {
+          "id": 47588317,
+          "author": "jakegmaths",
+          "text": "I think this is ultimately caused by a Bun bug which I reported, which means source maps are exposed in production: https://github.com/oven-sh/bun/issues/28001 Claude code uses (and Anthropic owns) Bun, so my guess is they're doing a production build, expecting it not to output source maps, but it is."
+        },
+        {
+          "id": 47584683,
+          "author": "treexs",
+          "text": "The big loss for Anthropic here is how it reveals their product roadmap via feature flags. A big one is their unreleased \"assistant mode\" with code name kairos. Just point your agent at this codebase and ask it to find things and you'll find a whole treasure trove of info. Edit: some other interesting unreleased/hidden features - The Buddy System: Tamagotchi-style companion creature system with ASCII art sprites - Undercover mode: Strips ALL Anthropic internal info from commits/PRs for employees on open source contributions"
+        },
+        {
+          "id": 47585627,
+          "author": "kschiffer",
+          "text": "Finally all spinner verbs revealed: https://github.com/instructkr/claude-code/blob/main/src/cons..."
+        }
+      ],
+      "summary_ja": "Claude CodeのソースコードがBunのバグでリークし、感情検出や蒸留防止防御の実装が暴露された。さらにフィーチャーフラグから未公開機能（アシスタントモードなど）のロードマップが明らかになり、製品戦略に打撃。"
+    },
+    {
+      "rank": 7,
+      "id": 47582043,
+      "title_en": "Artemis II is not safe to fly",
+      "title_ja": "アーテミスIIは飛行に安全ではない",
+      "url": "https://idlewords.com/2026/03/artemis_ii_is_not_safe_to_fly.htm",
+      "hn_url": "https://news.ycombinator.com/item?id=47582043",
+      "score": 593,
+      "comment_count": 367,
+      "posted_at": "2026-03-31T02:23:50+00:00",
+      "comments": [
+        {
+          "id": 47586552,
+          "author": "chadd",
+          "text": "I'm literally guest lecturing at a Harvard class tomorrow on systemic failures in decision making, using the Columbia and Challenger disasters as case studies, and changed my slides last night to include Artemis II because it could literally happen again. This broken safety culture has been around since the beginning of the Shuttle program. In 1980, Gregg Easterbrook published \"Goodbye, Columbia\" in The Washington Monthly [1], warning that NASA's \"success-oriented planning\" and political pressure were creating the conditions for catastrophe. He essentially predicted Columbia's heat shield failures in the article 1 year before the first flight. Challenger in 1986, and the Rogers Commission identified hierarchy, communication failures, and management overriding engineering judgment. Then Columbia happened in 2003. The CAIB found NASA had not implemented the 1986 recommendations [2]. Now Charles Camarda (who flew the first shuttle mission after Columbia and is literally a heat shield expert!) is saying it's happening again. [1] https://www.iasa-intl.com/folders/shuttle/GoodbyeColumbia.ht... [2] Columbia Accident Investigation Board Report, Chapter 8: https://www.nasa.gov/columbia/caib/html/start.html"
+        },
+        {
+          "id": 47582655,
+          "author": "oritron",
+          "text": "I haven't kept up with Artemis development but I've read extensively about Challenger and Columbia. These two parts of the article stood out to me: > Moon-to-Mars Deputy Administrator Amit Kshatriya said: “it was very small localized areas. Interestingly, it would be much easier for us to analyze if we had larger chunks and it was more defined”. A Lockheed Martin representative on the same call added that \"there was a healthy margin remaining of that virgin Avcoat. So it wasn’t like there were large, large chunks.” Followed by: > The Avcoat material is not designed to come out in chunks. It is supposed to char and flake off smoothly, maintaining the overall contours of the heat shield. This is echoes both Shuttle incidents. Challenger: no gasses were supposed to make it past the o-rings no matter what, but when it became clear that gasses were escaping and the o-rings were being damaged, there was a push to suggest that it's an acceptable level. There was a similar situation with heat shield damage and Columbia. In both cases some models were used to justify the decision, with wild extrapolations and fundamentally, a design that wasn't expected to fail in that mode /at all/. I know the points that astronauts make about the importance of manned space exploration, but I agree with this author that it seems to make sense to run this as an unmanned mission, and probably test the new heat shield which will replace the Artemis II design in an unmanned re-entry as well."
+        },
+        {
+          "id": 47583210,
+          "author": "GMoromisato",
+          "text": "This is a more balanced take, in my opinion: https://arstechnica.com/space/2026/01/nasa-chief-reviews-ori... Camarda is an outlier. The engineers at NASA believe it is safe. The astronauts believe it is safe. Former astronaut Danny Olivas was initially skeptical of the heat shield but came around. And note that the OP believes it is likely (maybe very likely) that the heat shield will work fine. It's hard for me to reconcile \"It is likely that Artemis II will land safely\" with \"Artemis II is Not Safe to Fly\", unless maybe getting clicks is involved. Regardless, this is not a Challenger or Columbia situation. In both Challenger and Columbia, nobody bothered to analyze the problem because they didn't think there was a problem. That's the difference, in my opinion. NASA is taking this seriously and has analyzed the problem deeply. They are not YOLO'ing this mission, and it's somewhat insulting that people think they are."
+        },
+        {
+          "id": 47583171,
+          "author": "turtletontine",
+          "text": "Someone please answer my obvious question. We sent successful missions to the moon sixty years ago. What heat shield material was used for the Apollo capsules, and why would we need something different now? Are the Artemis mission parameters totally different in a way that requires a new design? Or was Apollo incredibly dangerous and we got lucky they didn’t all fail catastrophically? The article mentions Orion is much heavier than the Apollo capsules, does that really require a totally novel heat shield that takes $billions to develop?"
+        },
+        {
+          "id": 47582600,
+          "author": "bsilvereagle",
+          "text": "> “Our test facilities can’t reach the combination of heat flux, pressure, shear stresses, etc., that an actual reentering spacecraft does. We’re always having to wait for the flight test to get the final certification that our system is good to go.”—Jeremy VanderKam, deputy manager for Orion’s heat shield, speaking in 2022 This is a strange claim, considering NASA used to have 2 facilities that were capable of this - one at Johnson and one at Ames. They were consolidated ( https://ntrs.nasa.gov/api/citations/20160001258/downloads/20... ) but it seems like the Arc Jet Complex at Ames is still operational https://www.nasa.gov/ames/arcjet-complex/"
+        }
+      ],
+      "summary_ja": "Artemis IIの熱シールド安全性を巡り、過去のスペースシャトル事故（コロンビア・チャレンジャー）と同様の意思決定ミスや安全文化の欠如が指摘されている。一方で、NASAは問題を真剣に分析しており安全と主張する関係者もおり、無人テストの必要性や設計条件の違いに関する疑問も提起されている。安全性評価とリスク管理をめぐる対立的な議論が展開されている。"
+    },
+    {
+      "rank": 8,
+      "id": 47555273,
+      "title_en": "Audio tapes reveal mass rule-breaking in Milgram's obedience experiments",
+      "title_ja": "オーディオテープが明らかにするミルグラム服従実験での大規模な規則違反",
+      "url": "https://www.psypost.org/audio-tapes-reveal-mass-rule-breaking-in-milgram-s-obedience-experiments-2026-03-26/",
+      "hn_url": "https://news.ycombinator.com/item?id=47555273",
+      "score": 96,
+      "comment_count": 64,
+      "posted_at": "2026-03-28T15:08:22+00:00",
+      "comments": [
+        {
+          "id": 47587226,
+          "author": "crazygringo",
+          "text": "To be clear, this doesn't seem like it invalidates anything in the original experiment. The \"rule-breaking\" isn't referring to anything the researchers were doing. It's referring to what the participants were doing. It points out that the compliant subjects who delivered the shocks weren't always following the procedure they were given perfectly. Which is, of course, expected, since people in general don't follow instructions 100% perfectly all the time, and especially not the first time they do something. > Kaposi and Sumeghy interpret these patterns as a complete breakdown of the supposedly legitimate scientific environment. The subjects were not committing violence for the sake of an orderly memory study. With the scientific elements either forgotten or rushed, the laboratory changed into a setting for unauthorized and senseless violence. This feels like a huge stretch. Forgetting a step at one point or reading something out loud too early isn't a \"complete breakdown of the supposedly legitimate scientific environment\" -- a \"scientific environment\" that is completely fictional to begin with."
+        },
+        {
+          "id": 47585433,
+          "author": "Mordisquitos",
+          "text": "Interesting. If we can assume the experimenter's failure to enforce the rules was mere clumsiness or incompetence, rather than an indicator of underlying intentional manipulation of the experimental conditions à la Stanford prison experiment, this can be interpreted in many different ways. The (eventually) disobedient subjects were better at respecting the experimental process they were given than the \"obedient\" ones who went all the way to the maximum voltage. Why was that? Could it be a sign that the disobedient subjects were on average more concentrated on the task at hand (smarter? less stressed? better educated? more conscientious?) than the ultimately obedient ones, and therefore were more likely to realise they were \"hurting\" the alleged learner and stop? Or could it be that the obedient subjects were more likely to realise there was something fishy going on, suspecting the \"learner\" wasn't really being shocked, and thus were paying less attention to the learning rules? Or was it, as the article suggests, that the obedient ones may have shut down emotionally under pressure to follow through, and their mistakes are the result of that? Or were the obedient ones more likely to be actual sadists, who were enjoying the shocks so much that they didn't even care if the \"learner\" didn't hear their question, giving them a greater chance of shocking them again? Unfortunately I think the Milgram experiment has become so entrenched in popular culture that there's absolutely no way it can be properly repeated to explore these questions."
+        },
+        {
+          "id": 47586036,
+          "author": "bambax",
+          "text": "> By staying silent and letting the memory study fall apart, the experimenter allowed an atmosphere of illegitimate violence to flourish. Many people are cruel. Not all people, maybe; not most people, also maybe; but some people enjoy hurting others. We see this everywhere. Isn't it possible that this kind of profile jumped on the occasion to inflict pain on people with no fear of repercussions? In other words, isn't this study just a sort filter to triage / order students from most cruel to less cruel?"
+        },
+        {
+          "id": 47588099,
+          "author": "animalfarm",
+          "text": "This is well-documented in Humankind: A Hopeful History by Rutger Bregman. It's worth a read, as it also dispels other experiments in human behaviour that have subsequently been difficult to replicate (for a variety of reasons). https://www.goodreads.com/book/show/52879286-humankind"
+        },
+        {
+          "id": 47585771,
+          "author": "xeyownt",
+          "text": "Without study of the internal motivations, the conclusions of the study are pure conjectures. You are trapped in an experiment and you have the impression that things went too far and you think you can't escape? You rush it. You hear horrible noises? You just pretend you don't hear them. These are all classical mental patterns. There are million ways to explain them."
+        }
+      ],
+      "summary_ja": "ミルグラム実験を巡り、被験者の手続き違反が実験環境の正当性崩壊を示すとする記事への批判的議論。手順の些細な逸脱は当然で解釈が過大であり、服従／不服従の行動差は（知性・疑念・サディズム等）多様に説明可能で、実験の神話化により実証的な再検証は困難との指摘。"
+    },
+    {
+      "rank": 9,
+      "id": 47577761,
+      "title_en": "Fedware: Government apps that spy harder than the apps they ban",
+      "title_ja": "フェッドウェア：禁止するアプリ以上にスパイする政府アプリ",
+      "url": "https://www.sambent.com/the-white-house-app-has-huawei-spyware-and-an-ice-tip-line/",
+      "hn_url": "https://news.ycombinator.com/item?id=47577761",
+      "score": 622,
+      "comment_count": 243,
+      "posted_at": "2026-03-30T18:16:00+00:00",
+      "comments": [
+        {
+          "id": 47581532,
+          "author": "jrmg",
+          "text": "I’m surprised to see no comments on this yet: [The White House app] ships with 3 embedded trackers including Huawei Mobile Services Core (yes, the Chinese company the US government sanctioned, shipping tracking infrastructure inside the sitting president's official app) The executive branch has decided this company is so dangerous I can’t buy a monitor made by them - but it’s embedding its SDK in its official app?! I realize the decision makers probably don’t even know it’s there - it was just added by whatever contractor built the app, but that’s arguably even worse. And I have absolutely no doubt that if it was discovered in a political opponent’s app, and the administration wanted to harm them, there would be no compunction about using that fact against them."
+        },
+        {
+          "id": 47578630,
+          "author": "john_strinlai",
+          "text": "> This thing also has a \"Text the President\" button that auto-fills your message with \"Greatest President Ever!\" and then collects your name and phone number. when is the onion going to go bankrupt? it has to be soon, i imagine. no way it can compete with reality at this point. (the rest of the article is a bit too depressing for me to comment on at the moment, other than saying \"wow, gross\")"
+        },
+        {
+          "id": 47578865,
+          "author": "saadn92",
+          "text": "The closing point is the one that should get more attention — every single one of these apps could be replaced by a web page. And from a product standpoint, there's really only one reason to ship a native app when your content is just press releases and weather alerts: you want access to APIs the browser won't give you. Background location, biometrics, device identity, boot triggers — none of that is available through a browser, and that's by, unfortunately, design."
+        },
+        {
+          "id": 47578939,
+          "author": "bluepeter",
+          "text": "Relatedly, I just registered for PACER to download court documents. It's pretty shocking that to get public legal documents the US Federal Court system requires full name, birthdate, address, phone, email, credit card info... and I THINK (it's past the initial registration page so can't confirm 100%) also mother's maiden name and 2 common security questions. Just a treasure-trove of PII if it ever falls into the wrong hands. (What's esp frustrating is even after going through this, I had to call a number and wait on hold for 1 hour to activate the account.)"
+        },
+        {
+          "id": 47578770,
+          "author": "joshstrange",
+          "text": "Do these posts just get upvoted due to the graphics/animations? I find this site incredibly difficult to read with things re-playing as you scroll up and down and the articles I've read from here are often light on details. The graphics seem very AI-generated (overlapping text and other little issues) which makes me think the whole thing is from an LLM. While this post does have some interesting information, I have to wade through distracting animations that seem \"off\" which makes me questions all of it."
+        }
+      ],
+      "summary_ja": "米国政府アプリに制裁対象の中国企業製トラッカーが含まれる矛盾、本来ウェブで足りる内容を個人データ収集可能なネイティブアプリ化する意図、公的システムでの過剰な個人情報要求など、政府デジタルサービスにおける監視とプライバシー侵害の懸念が指摘されている。"
+    },
+    {
+      "rank": 10,
+      "id": 47583045,
+      "title_en": "Google's 200M-parameter time-series foundation model with 16k context",
+      "title_ja": "Googleの2億パラメータ時系列ファウンデーションモデル、16kコンテキスト搭載",
+      "url": "https://github.com/google-research/timesfm",
+      "hn_url": "https://news.ycombinator.com/item?id=47583045",
+      "score": 227,
+      "comment_count": 87,
+      "posted_at": "2026-03-31T05:21:59+00:00",
+      "comments": [
+        {
+          "id": 47583189,
+          "author": "EmilStenstrom",
+          "text": "I somehow find the concept of a general time series model strange. How can the same model predict egg prices in Italy, and global inflation in a reliable way? And how would you even use this model, given that there are no explanations that help you trust where the prediction comes from…"
+        },
+        {
+          "id": 47583950,
+          "author": "kuu",
+          "text": "It would be nice to add (2024) to the title, this is not news (see: https://research.google/blog/a-decoder-only-foundation-model... )"
+        },
+        {
+          "id": 47583161,
+          "author": "EmilStenstrom",
+          "text": "Here is the link to the blogpost, that actually describe what this is: https://github.com/google-research/timesfm?tab=readme-ov-fil..."
+        },
+        {
+          "id": 47584383,
+          "author": "pplonski86",
+          "text": "Can someone explain ELI5 how it does work? and how many data points it can read?"
+        },
+        {
+          "id": 47583465,
+          "author": "ra",
+          "text": "This has been around a few months now, has anyone built anything on it?"
+        }
+      ],
+      "summary_ja": "汎用時系列モデルの信頼性と透明性への疑問（異なるデータ予測の実現性や説明の欠如）、モデルの新規性に関する指摘（タイトルへの年号追加提案）、技術的な仕組み（平易な説明とデータ処理能力）および実用事例の有無に関する関心が議論の要点である。"
+    },
+    {
+      "rank": 11,
+      "id": 47581701,
+      "title_en": "Universal Claude.md – cut Claude output tokens",
+      "title_ja": "Universal Claude.md – Claudeの出力トークンを削減",
+      "url": "https://github.com/drona23/claude-token-efficient",
+      "hn_url": "https://news.ycombinator.com/item?id=47581701",
+      "score": 385,
+      "comment_count": 140,
+      "posted_at": "2026-03-31T01:23:34+00:00",
+      "comments": [
+        {
+          "id": 47581841,
+          "author": "btown",
+          "text": "It seems the benchmarks here are heavily biased towards single-shot explanatory tasks, not agentic loops where code is generated: https://github.com/drona23/claude-token-efficient/blob/main/... And I think this raises a really important question. When you're deep into a project that's iterating on a live codebase, does Claude's default verbosity, where it's allowed to expound on why it's doing what it's doing when it's writing massive files, allow the session to remain more coherent and focused as context size grows? And in doing so, does it save overall tokens by making better, more grounded decisions? The original link here has one rule that says: \"No redundant context. Do not repeat information already established in the session.\" To me, I want more of that. That's goal-oriented quasi-reasoning tokens that I do want it to emit, visualize, and use, that very possibly keep it from getting \"lost in the sauce.\" By all means, use this in environments where output tokens are expensive, and you're processing lots of data in parallel. But I'm not sure there's good data on this approach being effective for agentic coding."
+        },
+        {
+          "id": 47582905,
+          "author": "niklassheth",
+          "text": "So many problems with this: The benchmark is totally useless. It measures single prompts, and only compares output tokens with no regard for accuracy. I could obliterate this benchmark with the prompt \"Always answer with one word\" This line: \"If a user corrects a factual claim: accept it as ground truth for the entire session. Never re-assert the original claim.\" You're totally destroying any chance of getting pushback, any mistake you make in the prompt would be catastrophic. \"Never invent file paths, function names, or API signatures.\" Might as well add \"do not hallucinate\"."
+        },
+        {
+          "id": 47581985,
+          "author": "xianshou",
+          "text": "From the file: \"Answer is always line 1. Reasoning comes after, never before.\" LLMs are autoregressive (filling in the completion of what came before), so you'd better have thinking mode on or the \"reasoning\" is pure confirmation bias seeded by the answer that gets locked in via the first output tokens."
+        },
+        {
+          "id": 47581845,
+          "author": "sillysaurusx",
+          "text": "> the file loads into context on every message, so on low-output exchanges it is a net token increase Isn’t this what Claude’s personalization setting is for? It’s globally-on. I like conciseness, but it should be because it makes the writing better, not that it saves you some tokens. I’d sacrifice extra tokens for outputs that were 20% better, and there’s a correlation with conciseness and quality. See also this Reddit comment for other things that supposedly help: https://www.reddit.com/r/vibecoding/s/UiOywQMOue > Two things that helped me stay under [the token limit] even with heavy usage: > Headroom - open source proxy that compresses context between you and Claude by ~34%. Sits at localhost, zero config once running. https://github.com/chopratejas/headroom > RTK - Rust CLI proxy that compresses shell output (git, npm, build logs) by 60-90% before it hits the context window. > Stacks on top of Headroom. https://github.com/rtk-ai/rtk > MemStack - gives Claude Code persistent memory and project context so it doesn't waste tokens re-reading your entire codebase every prompt. > That's the biggest token drain most people don't realize. https://github.com/cwinvestments/memstack > All three stack together. Headroom compresses the API traffic, RTK compresses CLI output, MemStack prevents unnecessary file reads. I haven’t tested those yet, but they seem related and interesting."
+        },
+        {
+          "id": 47581956,
+          "author": "joshstrange",
+          "text": "As with all of these cure-alls, I'm wary. Mostly I'm wary because I anticipate the developer will lose interest in very little time and also because it will just get subsumed into CC at some point if it actually works. It might take longer but changing my workflow every few days for the new thing that's going to reduce MCP usage, replace it, compress it, etc is way too disruptive. I'm generally happy with the base Claude Code and I think running a near-vanilla setup is the best option currently with how quickly things are moving."
+        }
+      ],
+      "summary_ja": "Claudeの出力トークン削減を目指す手法について、ベンチマークが単発タスクに偏りエージェント的コーディングでの有効性が不確かであるとの指摘。冗長性排除は有用だが、推論の一貫性や誤り訂正時の危険性への懸念も。ツールによるトークン節約策も紹介されるが、ワークフロー変更の負担や開発持続性への懐疑から、現状ではほぼ標準設定の使用が適切との意見がある。"
+    },
+    {
+      "rank": 12,
+      "id": 47536719,
+      "title_en": "Multiple Sclerosis",
+      "title_ja": "多発性硬化症",
+      "url": "https://subfictional.com/multiple-sclerosis/",
+      "hn_url": "https://news.ycombinator.com/item?id=47536719",
+      "score": 22,
+      "comment_count": 8,
+      "posted_at": "2026-03-26T22:37:37+00:00",
+      "comments": [
+        {
+          "id": 47588022,
+          "author": "prplfsh",
+          "text": "https://www.astrazeneca.com/what-science-can-do/topics/next-... AstraZeneca is doing some really interesting research in this area - cell therapies that reset the immune system to eliminate the dysfunctional cells driving autoimmune disease, and then allow a healthy immune system to rebuild (for diseases like lupus, rheumatoid arthritis, and multiple sclerosis)."
+        },
+        {
+          "id": 47587444,
+          "author": "functionmouse",
+          "text": "Dead URL"
+        }
+      ],
+      "summary_ja": "AstraZenecaは、多発性硬化症を含む自己免疫疾患に対して、免疫システムをリセットして機能不全な細胞を除去し、健康な免疫システムを再構築する細胞療法の研究を進めている。"
+    },
+    {
+      "rank": 13,
+      "id": 47556076,
+      "title_en": "What major works of literature were written after age of 85? 75? 65?",
+      "title_ja": "85歳以降、75歳以降、65歳以降に書かれた主要な文学作品は？",
+      "url": "https://statmodeling.stat.columbia.edu/2026/03/25/what-major-works-of-literature-were-written-after-age-of-85-75-65/",
+      "hn_url": "https://news.ycombinator.com/item?id=47556076",
+      "score": 46,
+      "comment_count": 33,
+      "posted_at": "2026-03-28T16:29:28+00:00",
+      "comments": [
+        {
+          "id": 47588176,
+          "author": "wodenokoto",
+          "text": "> asked LLMs to compile list of 10-20 writers considered canon in each decade since 1800, then identify all their notable works and years of publication. After some iterations with coding agents I got over 2,000 works by 200 authors. Wait, so the source data is just LLM hallucinations? It makes sense to use an LLM to build the data collection, but not to build your source data."
+        },
+        {
+          "id": 47587662,
+          "author": "FelipeCortez",
+          "text": "This is actually a good fit for a Wikidata SPARQL query you can run here https://query.wikidata.org/ : SELECT ?work ?workLabel ?author ?authorLabel ?publicationDate ?ageAtPublication WHERE { ?author wdt:P569 ?birth . ?author wdt:P570 ?death . ?author wdt:P800 ?work . ?work wdt:P50 ?author ; wdt:P31 wd:Q47461344 ; wdt:P577 ?publicationDate . FILTER(?publicationDate <= ?death) BIND(YEAR(?publicationDate) - YEAR(?birth) AS ?ageAtPublication) FILTER(?ageAtPublication > 60) SERVICE wikibase:label { bd:serviceParam wikibase:language \"en\". } } ORDER BY DESC(?ageAtPublication) LIMIT 300"
+        },
+        {
+          "id": 47588223,
+          "author": "thinkingemote",
+          "text": "\"The accepted notion is that age confers a spirit of reconciliation and serenity on late works, often expressed in terms of a miraculous transfiguration of reality....But what of artistic lateness not as harmony and resolution, but as intransigence, difficulty, and contradiction? What if age and ill health don’t produce serenity at all? \" Thoughts on Late Style by Edward Said https://www.edwardsaid.org/articles/thoughts-on-late-style/"
+        },
+        {
+          "id": 47587955,
+          "author": "ralferoo",
+          "text": "(complete sidetrack) I think this graph is a great illustration about how anonymising data is hard. It's very easy to isolate individual authors from this list, because there are clear diagonal lines because the year and age are increasing in lockstep. This also suggests there aren't actually that many authors in this collection, because of these strong diagonals everywhere. There's probably also some erroneous data here with a bunch of points representing material written by people at age 34 between about 1920 and 1940 (an obvious horizontal line) when most of the rest of the graph doesn't show any strong horizontal bias for a specific age."
+        },
+        {
+          "id": 47586466,
+          "author": "mellosouls",
+          "text": "I think this is pretty common across different creative forms albeit with different age ranges but constrained at the higher end. So the greatest physics, maths, poetry and pop music are done by people in their 20s. Literature (esp novels) seems to occupy an older range, perhaps 30s to 50s. Perhaps classical music and philosophy also? I don't know about the visual arts. I interpret it as the former requiring the creative fireworks of youthful neural elasticity and the latter the depth we associate with lived experience and wisdom. Naturally there are outliers (general relativity in Einstein's early 30s, Shakespeare word play till his late 40s) but I think in general these rules of thumb seem to be a good guide for the very highest achievers and for the most creative periods for us mere mortals. Mediocrity of course is unconstrained by age."
+        }
+      ],
+      "summary_ja": "LLMによるデータ生成の信頼性問題とWikidata活用提案、老年期の創造性に関するEdward Saidの「Late Style」の多角的議論、データ匿名化の課題、創造的分野によるピーク年齢の違いの考察が要点。"
+    },
+    {
+      "rank": 14,
+      "id": 47569438,
+      "title_en": "Acceptance of entomophagy among Canadians at an insectarium",
+      "title_ja": "昆虫館でのカナダ人における昆虫食の受容",
+      "url": "https://www.nature.com/articles/s41598-026-35288-w",
+      "hn_url": "https://news.ycombinator.com/item?id=47569438",
+      "score": 8,
+      "comment_count": 2,
+      "posted_at": "2026-03-30T01:32:09+00:00",
+      "comments": [
+        {
+          "id": 47588399,
+          "author": "pavel_lishin",
+          "text": "> Participants completed a structured questionnaire evaluating willingness to consume various insect-based foods, motivations and barriers, and demographic predictors of acceptance. Neat, I guess, but I really expected this study to actually offer people insects to eat. A \"yes\" on a questionnaire feels about as relevant and actionable as a \"maybe\" on an event invite."
+        },
+        {
+          "id": 47588104,
+          "author": "AlexandrB",
+          "text": "This kind of stuff faces the same problems as vegetable-based meat replacement products. While traditional vegetarian dishes like various bean dishes, Indian curries, salads, etc. can be quite healthy and require minimal processing, meat substitute products like Beyond Meat are heavily processed. This means they're often not that healthy (containing a lot of salt and added fat) despite being technically vegan while also being expensive and requiring energy-intensive industrial food processing. Based on the findings here: > These emotional reactions were particularly prominent for unprocessed or visually apparent insect formats, reinforcing the view that entomophagy challenges deeply anchored cultural expectations about what constitutes acceptable food. Given this barrier, product formats that conceal or process insects can reduce sensory aversion and facilitate initial acceptance. Any kind of \"insect food\" is likely to go the same way resulting in heavily processed products with added sugar, salt, and fat to make them palatable. Even then it's a really tough sell given all the \"live in the pod, eat the bug\" memes out there. Finally, I struggle to see how insects would be a more economical source of protein than beans or processed foods derived from beans like Beyond Meat and various soy products."
+        }
+      ],
+      "summary_ja": "昆虫食受容研究はアンケートのみで実践性に欠けると批判。昆虫食は加工度が高く健康面で劣り、コスト面でも豆類などの既存タンパク質源に及ばず、文化的・感情的な抵抗が大きいため、普及は困難との見方が示された。"
+    },
+    {
+      "rank": 15,
+      "id": 47573519,
+      "title_en": "Do your own writing",
+      "title_ja": "自分自身の書きものを",
+      "url": "https://alexhwoods.com/dont-let-ai-write-for-you/",
+      "hn_url": "https://news.ycombinator.com/item?id=47573519",
+      "score": 647,
+      "comment_count": 209,
+      "posted_at": "2026-03-30T12:39:56+00:00",
+      "comments": [
+        {
+          "id": 47578515,
+          "author": "roadside_picnic",
+          "text": "I've long considered writing to be the \"last step in thinking\". I can't tell you how many times an idea, that was crystal clear in my mind, fell apart the moment I started writing and I realize there were major contradictions I needed to resolve. Likewise I also have numerous times where writing about something loosely and casually revealed to me something that fundamentally changed how I viewed a topic and really consolidated my thinking. However, there is a lot of writing that is basically just an old school from of context engineering. While I would love to think that a PRD is a place to think through ideas, I think many of us have encountered situations, pre-AI, where PRDs were basically context dumps without any real planning or thought. For these cases, I think we should just drop the premise altogether that you're writing. If you need to write a proposal for something as a matter of ritual, give it AI. If you're documenting a feature to remember context only (and not really explain the larger abstract principles driving it), it's better created as context for an LLM to consume. Not long ago my engineering team was trying to enforce writing release notes so people could be aware of breaking changes, then people groaned at the idea of having to read this. The obvious best solution is to have your agent write release notes for your agent in the future to have context. No more tedious writing or reading, but also no missing context. I think it's going to be awhile before the full impact of AI really works it's way through how we work. In the mean time we'll continue to have AI written content fed back into AI and then sent back to someone else (when this could all be a more optimized, closed loop)."
+        },
+        {
+          "id": 47578622,
+          "author": "nerevarthelame",
+          "text": "I agree with most of this, but my one qualm is the notion that LLMs \"are particularly good at generating ideas.\" It's fair enough that you can discard any bad ideas they generate. But by design, the recommendations will be average, bland, mainstream, and mostly devoid of nuance. I wouldn't encourage anyone to use LLMs to generate ideas if you're trying to create interesting or novel ideas."
+        },
+        {
+          "id": 47578477,
+          "author": "Aurornis",
+          "text": "> When I send somebody a document that whiffs of LLM, I’m only demonstrating that the LLM produced something approximating what others want to hear. I’m not showing that I contended with the ideas. This eloquently states the problem with sending LLM content to other people: As soon as they catch on that you're giving them LLM writing, it changes the dynamic of the relationship entirely. Now you're not asking them to review your ideas or code, you're asking them to review some output you got from an LLM. The worst LLM offenders in the workplace are the people who take tickets, have Claude do the ticket, push the PR, and then go idle while they expect other people to review the work. I've had to have a few uncomfortable conversations where I explain to people that it's their job to review their own submissions before submitting them. It's something that should be obvious, but the magic of seeing an LLM produce code that passes tests or writing that looks like it agrees with the prompt you wrote does something to some people's brains."
+        },
+        {
+          "id": 47581726,
+          "author": "stephen_cagle",
+          "text": "Writing (unassisted) is probably the first step towards your own independent thoughts. I'm reminded of that scene in \"Ghost in the Shell\" where some guy ask the Major why he is on the team (full of cyborgs) and she responds something along the line of \"Because you are basically un-enhanced (maybe without a ghost?) and are likely to respond differently then the rest of us; Overspecialization is death.\" I think a diversity of opinion is important for society. I'm worried that LLM's are going to group-think us into thinking the same way, believing the same things, reacting the same way. I wonder if future children will need to be taught how to purposely have their own opinions; being so used to always asking others before even considering things on their own? The LLM will likely reach a better conclusion than you would on your own, but there is value in diverging from the consensus and thinking your own thoughts. https://stephencagle.dev/posts-output/2025-10-14-you-should-..."
+        },
+        {
+          "id": 47579795,
+          "author": "jasoneckert",
+          "text": "For me, drawing the line as to when you will leverage AI and when you won't comes down to a quote from Kurt Vonnegut: \"Practicing an art, no matter how well or badly, is a way to make your soul grow, for heaven's sake. Sing in the shower. Dance to the radio. Tell stories. Write a poem to a friend, even a lousy poem. Do it as well as you possibly can. You will get an enormous reward. You will have created something.\" Art is where I choose to draw the line, for both ideation and content generation. That work report I leveraged AI to help flush out isn't art, but my personal blog is, as is anything I must internalize (that is thoroughly understand and remember). This is why I have the following disclaimer on my blog (and yes, the typo on this page is purposeful!): https://jasoneckert.github.io/site/about-this-site/"
+        }
+      ],
+      "summary_ja": "書く行為は思考の整理や深化に役立つが、日常的な文書作成にはAIの活用が有効である。ただし、LLMは斬新なアイデア生成に限界があり、人間の思考の多様性を損なう危険性がある。職場ではLLMへの過度な依存により自己レビューがおろそかになる問題が生じている。芸術や個人的な表現など、内省や創造性を要する分野では、AIに頼らず自力で書くことが重要だと指摘されている。"
+    },
+    {
+      "rank": 16,
+      "id": 47571330,
+      "title_en": "Good CTE, Bad CTE",
+      "title_ja": "良いCTE、悪いCTE",
+      "url": "https://boringsql.com/posts/good-cte-bad-cte/",
+      "hn_url": "https://news.ycombinator.com/item?id=47571330",
+      "score": 116,
+      "comment_count": 28,
+      "posted_at": "2026-03-30T07:11:11+00:00",
+      "comments": [
+        {
+          "id": 47583982,
+          "author": "vlaaad",
+          "text": "Use the term, never define the term, classic. CTE stands for Common Table Expressions in SQL. They are temporary result sets defined within a single query using the WITH clause, acting like named subqueries to improve readability and structure."
+        },
+        {
+          "id": 47585835,
+          "author": "mcdonje",
+          "text": "There's some good stuff in here. I didn't know about the issues an aggregation in a CTE can cause and haven't used EXISTS much. Regarding recursive CTEs, you might be interested in how DuckDb evolved them with USING KEY: https://duckdb.org/2025/05/23/using-key"
+        },
+        {
+          "id": 47586468,
+          "author": "oveja",
+          "text": "To the author of the article. This was a really nice and educating read. You made me finally understand recursive CTEs, the org chart was a really good example. Thank you."
+        },
+        {
+          "id": 47584167,
+          "author": "bob1029",
+          "text": "> Recursive CTEs use an iterative working-table mechanism. Despite the name, they aren't truly recursive. PostgreSQL doesn't \"call itself\" by creating a nested stack of unfinished queries. If you want something that is more like actual recursion (I.e., depth-first), Oracle has CONNECT BY which does not require the same kind of tracking. It also comes with extra features to help with cycle detection, stack depth reflection, etc. If your problem is aligned with the DFS model, the oracle technique can run circles around recursive CTEs. Anything with a deep hierarchy and early termination conditions is a compelling candidate."
+        },
+        {
+          "id": 47584672,
+          "author": "uwemaurer",
+          "text": "Great article, I always like to structure my queries with CTEs and I was (wrongly) assuming it all gets inlined at the end. Sometimes it also gets complicated since these intermediate results can't be easily seen in a SQL editor. I was working on a UI to parse CTE queries and then execute them step by step to show the results of all the CTEs for easier understanding of the query (as part of this project https://github.com/sqg-dev/sqg/ )"
+        }
+      ],
+      "summary_ja": "CTE（Common Table Expressions）の利点と課題についての議論。記事では再帰CTEの理解促進や集約CTEの問題点が指摘され、再帰CTEが真の再帰でないことやOracleのCONNECT BYとの比較がなされた。また、CTEクエリの中間結果可視化の難しさと解決策のツール開発が紹介されている。"
+    },
+    {
+      "rank": 17,
+      "id": 47561470,
+      "title_en": "30 Years Ago, Robots Learned to Walk Without Falling",
+      "title_ja": "30年前、ロボットは転ばずに歩くことを学んだ",
+      "url": "https://spectrum.ieee.org/honda-p2-robot-ieee-milestone",
+      "hn_url": "https://news.ycombinator.com/item?id=47561470",
+      "score": 25,
+      "comment_count": 8,
+      "posted_at": "2026-03-29T08:53:37+00:00",
+      "comments": [
+        {
+          "id": 47586910,
+          "author": "tomxor",
+          "text": "These robots weren't really \"walking\" in the sense that humans walk through continuous dynamic balancing, i.e falling forward. These used quasi-static walking, where the zero moment point (like a moving centre of gravity) is kept within the support polygon of the footprint. This is what gives them their weird swaying gait and extremely conservative movement characteristics. You could never make a bipedal robot run, jump or respond to large and sudden external forces using this method. It's essentially a balance free movement hack."
+        },
+        {
+          "id": 47586606,
+          "author": "amelius",
+          "text": "This is 12 years old now: https://www.youtube.com/watch?v=pgaEE27nsQw"
+        },
+        {
+          "id": 47586639,
+          "author": "kotaKat",
+          "text": "The sad part though: What even has Honda done with their humanoid robotics research? I remember being starry-eyed, excited as a kid to see ASIMO and all the amazing things it was doing. Past a couple hardware revisions they basically just let the thing rot out to die and it hurts. https://www.youtube.com/watch?v=X23jNzL3wuE This commercial still holds a lot of spirit and heart to it. I really wish we could tap progress on the shoulder and ask for more forwards again..."
+        },
+        {
+          "id": 47586821,
+          "author": "noritaka88",
+          "text": "Doraemon is the one you befriend Gundam is the one you ride to lead the way The round thing that cleans the whole room is the Roomba Robots these days are there to help with the housework Next up, emotional comfort? We might not even need arms and legs"
+        }
+      ],
+      "summary_ja": "初期の二足歩行ロボットは準静歩行を用いており、動的バランスが取れないため走行や跳躍が不可能だった。ヒューマノイドロボット研究（例：ASIMO）は進展が乏しく停滞し、現在のロボットは家事支援など実用的な用途にシフトしている。"
+    },
+    {
+      "rank": 18,
+      "id": 47582984,
+      "title_en": "GitHub backs down, kills Copilot pull-request ads after backlash",
+      "title_ja": "GitHubが後退、反発後Copilotのプルリクエスト広告を廃止",
+      "url": "https://www.theregister.com/2026/03/30/github_copilot_ads_pull_requests/",
+      "hn_url": "https://news.ycombinator.com/item?id=47582984",
+      "score": 425,
+      "comment_count": 263,
+      "posted_at": "2026-03-31T05:11:24+00:00",
+      "comments": [
+        {
+          "id": 47586738,
+          "author": "arnvald",
+          "text": "I’ll never understand why they ruined GitHub. They had everything they needed - the one place in the world where 99% of open source projects were hosted, where all the discussions happened. A product that people were so used to that it was a no brainer when it came to hosting private repos. And they had to ruin it and give space to GitLab and other competitors. What a waste…"
+        },
+        {
+          "id": 47587167,
+          "author": "b00ty4breakfast",
+          "text": "This is how these kinds of companies operate; push the limit until customers start complaining, then you back off a little bit. They've still advanced to that line, of course, but now the userbase can be conditioned for the next push so that \"a little bit worse than before\" feels normal."
+        },
+        {
+          "id": 47585136,
+          "author": "ezoe",
+          "text": "I guess it's time to consider ditching GitHub. Everything that are purchased by Microsoft ware destined to be rotten."
+        },
+        {
+          "id": 47583260,
+          "author": "Animats",
+          "text": "Microsoft will probably try to sneak it back in later. They've done that with other intrusions. Migrating away from Github just increased in priority."
+        },
+        {
+          "id": 47583315,
+          "author": "yosamino",
+          "text": "Calling advertisements \"product tips\" as if everybody is too stupid to understand what that means. They created an amazing technology that oftentimes is indistinguishable from magic and then use it to deliver ads and - sorry about the tangent - kill people. This really is the quote of the century: > The best minds of my generation are thinking about how to make people click ads What a waste."
+        }
+      ],
+      "summary_ja": "GitHubがCopilotのプルリクエスト広告を導入し批判で撤回した件で、ユーザーはMicrosoft買収後、企業が限界を試してユーザーを慣らす戦略を非難。技術の広告利用への失望から、GitHub離れや競合への移行を検討する声が上がった。"
+    },
+    {
+      "rank": 19,
+      "id": 47583712,
+      "title_en": "RamAIn (YC W26) Is Hiring",
+      "title_ja": "RamAIn（YC W26）は採用中",
+      "url": "https://www.ycombinator.com/companies/ramain/jobs/jezgwo5-ai-ml-research-engineer",
+      "hn_url": "https://news.ycombinator.com/item?id=47583712",
+      "score": 1,
+      "comment_count": 0,
+      "posted_at": "2026-03-31T07:01:15+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 20,
+      "id": 47532891,
+      "title_en": "Clojure: The Documentary, official trailer [video]",
+      "title_ja": "Clojure：ドキュメンタリー、公式予告編 [動画]",
+      "url": "https://www.youtube.com/watch?v=JJEyffSdBsk",
+      "hn_url": "https://news.ycombinator.com/item?id=47532891",
+      "score": 278,
+      "comment_count": 43,
+      "posted_at": "2026-03-26T17:00:54+00:00",
+      "comments": [
+        {
+          "id": 47583709,
+          "author": "jwr",
+          "text": "I've been running my business for 10 years now, relying on Clojure and ClojureScript. It is amazing to be able to base one's livelihood on a foundation that is so stable and well designed. Clojure has been designed by a very smart and very experienced person, and it shows. It has then been maintained and extended by a team built around a culture of maturity and stability, and the result is something you can rely on. The fact that I can use the same language to develop business model code that runs on both the client and the server, or that I don't have to use a different on-the-wire format for sending data between them (EDN does the job great) is just icing on the cake in this context. I am very thankful to Rich and the entire Clojure (and ClojureScript) teams for giving me access to all their work (for free!). BTW, if you haven't seen any of Rich's talks, go see them — they are worth it even if you do not intend to use Clojure."
+        },
+        {
+          "id": 47586318,
+          "author": "shivekkhurana",
+          "text": "I have been writing Clojure since 2017. Unlike every other language that helps you achieve a task, Clojure helped me think. Clojure for me is a rich vocabulary to talk interact with data. When Jank becomes stable, Clojure will be unstoppable."
+        },
+        {
+          "id": 47587526,
+          "author": "pjmlp",
+          "text": "My favourite companion to Java, when on the JVM, especially because the host language community culture. If you want a Lisp Machines like experience with Clojure, support the Cursive folks. https://cursive-ide.com/"
+        },
+        {
+          "id": 47584170,
+          "author": "lukashrb",
+          "text": "Every time I write another DTO → domain → DB mapping layer in Kotlin/TypeScript, I think about Clojure. I’m pretty grateful I learned it. It really changed how I think about software. Still, it’s a trade: less ceremony, more responsibility."
+        },
+        {
+          "id": 47587930,
+          "author": "rbanffy",
+          "text": "I don't have much love for Java - it's an OK statically typed language - but I have the utmost respect for the Java runtime environment. Clojure is a beautiful Lisp, and coupled with the JVM it's extremely powerful."
+        }
+      ],
+      "summary_ja": "Clojureは安定した設計でビジネスの基盤として信頼でき、同一言語によるクライアント・サーバー開発やEDNでのデータ交換が可能。プログラミングの考え方を変える影響力があり、JVM環境と組み合わせて強力だが、コードの簡素化と引き換えに責任が増えるトレードオフがある。"
+    },
+    {
+      "rank": 21,
+      "id": 47585008,
+      "title_en": "7,655 Ransomware Claims in One Year: Group, Sector, and Country Breakdown",
+      "title_ja": "1年で7,655件のランサムウェア請求：グループ、セクター、国別内訳",
+      "url": "https://ciphercue.com/blog/7655-ransomware-claims-march-2025-to-march-2026",
+      "hn_url": "https://news.ycombinator.com/item?id=47585008",
+      "score": 41,
+      "comment_count": 8,
+      "posted_at": "2026-03-31T10:02:34+00:00",
+      "comments": [
+        {
+          "id": 47588075,
+          "author": "rawgabbit",
+          "text": "And as an industry, we claim we are completely helpless against ransomware. We create all kinds of organizations and alliances such as FIDO and ICANN. Against ransomware, complete silence."
+        },
+        {
+          "id": 47585893,
+          "author": "wongarsu",
+          "text": "> 141 countries appeared in the dataset. US organisations are the most frequent targets at 40%, but the remaining 60% spans six continents. European subsidiaries, APAC operations, and Latin American offices are all represented Love how this subtly implies that only the US has independent companies, every other region just has subsidiaries and branch offices of US companies"
+        },
+        {
+          "id": 47585521,
+          "author": "jstanley",
+          "text": "> Of 129 active groups, the top five posted 3,027 of the 7,655 claims (40%). After them, the field fragments quickly. Does it? The 4th group accounted for 5.0%, 5th was 4.5%, 6th was 3.4% and 10th was 2.5%, I think it doesn't fragment particularly any more quickly after the top 5 than within the top 5. Is this LLM analysis?"
+        },
+        {
+          "id": 47585674,
+          "author": "gebalamariusz",
+          "text": "The 40% acceleration in the second half is the number that jumps out. That is not just \"more groups\", something changed operationally in the ecosystem around September 2025. SafePay dominating Germany with 72 claims is worth watching. Most ransomware analysis focuses on US-heavy groups, but a group concentrating on a single non-US market suggests either language capability, specific supply chain access, or targeting of regulatory environments where disclosure pressure increases payment rates. Germany's strict GDPR enforcement could make the threat of a leak more effective than in markets where fines are lower. The 35% of claims with no sector attribution is a significant gap. If those ~2700 unattributed claims skew toward smaller organizations without public sector classification, the actual concentration in SMB targets could be much higher than the data shows. The point about ecosystem resilience is the most important takeaway for defenders. 129 active groups means the threat model is not \"prevent group X\" but \"assume breach and limit blast radius.\" That shifts investment from detection toward segmentation, backup isolation, and recovery speed."
+        }
+      ],
+      "summary_ja": "ランサムウェア対策における業界の無力さを批判しつつ、データ分析の解釈（集中度や地域偏向）に疑問を呈している。被害動向の変化や非米国市場狙いのグループから、防御策は特定グループ阻止から「侵害を想定した被害範囲の最小化」へ転換すべきと指摘する。"
+    },
+    {
+      "rank": 22,
+      "id": 47574034,
+      "title_en": "How to turn anything into a router",
+      "title_ja": "あらゆるものをルーターに変える方法",
+      "url": "https://nbailey.ca/post/router/",
+      "hn_url": "https://news.ycombinator.com/item?id=47574034",
+      "score": 722,
+      "comment_count": 250,
+      "posted_at": "2026-03-30T13:28:54+00:00",
+      "comments": [
+        {
+          "id": 47576601,
+          "author": "dlenski",
+          "text": "This is a great writeup! Perhaps I can put in a plug for the create_ap script which I have been maintaining for many years ( http://github.com/dlenski/create_ap ). It's a shell script that allows you to turn any ol' Linux computer into a WiFi router in one quick command-line: By default, it will setup your WiFi card as an access point (allows WPA2/3, MAC filtering, etc), setup packet forwarding and routing, and run a DHCP and DNS server. It will generally pick sensible defaults, but it's also highly customizable. If your WiFi card supports simultaneous AP and client mode, it will allow that. Its requirements are extremely minimal: basically just Linux, a compatible wireless card, and a few common configuration packages (hostapd, iw, iproute2, iptables, dnsmasq). No NetworkManager needed. I used it as my own home Internet gateway for many years, running on an ancient fanless Atom mini-PC. Because it can quickly setup and teardown WiFi networks on-the-fly, it's also a valuable tool for setting up test networks when reverse-engineering IoT devices. I use it frequently for this purpose (see https://snowpatch.org/posts/i-can-completely-control-your-sm... )."
+        },
+        {
+          "id": 47574787,
+          "author": "smashed",
+          "text": "Lots of \"just use X\" comments but the article is about showing the bare minimum/how easy the core part of routing actually is. Also, if you have ever used docker or virtual machines with NAT routing (often the default), you've done exactly the same things. If you have ever enabled the wifi hotspot on an android phone also, you've done pretty much what the article describes on your phone. All of these use the same Linux kernel features under the hood. In fact there is a good chance this message traversed more than one Linux soft router to get to your screen."
+        },
+        {
+          "id": 47575275,
+          "author": "bluedino",
+          "text": "This really takes me back. My first actual 'use' for Linux was making routers out of leftover computers. The perfect machine back then was a 100MHz Pentium, in a slimline desktop case. At the time, the Pentium III was the current desktop chip, so you'd have a pile of early Pentium-class machines to use. And even a 10mb ISA network card (3Com if possible) would have plenty of power for the internet connections of the day. But 100mb PCI cards were still fairly cheap. Install two NICs, load your favorite Linux distro, and then follow the IP-Masquerading HOWTO and you've got internet access for the whole apartment building, office, or LAN party. Eventually I moved on to Linux Firewalls by Robert Ziegler for a base to build on. After that I started piling other services on, like a spam filter, Squid cache, it was amazing to get so much use out of hardware that was going to just get thrown out."
+        },
+        {
+          "id": 47574625,
+          "author": "LatticeAnimal",
+          "text": "I’ve been using OpnSense/pfsense [0] for years and would highly recommend it. It has a great automatic update experience, config backups, builtin wireguard tunnels and advanced features like packet filtering options via suricata. When I am doing network management on my weekends, I’m so glad I’m not stuck in the Linux terminal learning about networking internals and can instead just go to a webui and configure my router. 0: https://opnsense.org/"
+        },
+        {
+          "id": 47576135,
+          "author": "StillBored",
+          "text": "I've got one of those N100+10Gbit router devices with a handful of ports. It seems a pretty reasonable device with one of the router distros running on it, but it doesn't seem nearly as efficient as my ucg-fiber/route10 devices, and that wouldn't bother me except that I suspect the packet latency is significantly higher too. Those devices AFAIK have hardware programmable router chips, which means the forwarding is done 100% without the interaction of the main CPU, so there isn't any interrupt/polling/etc delays when a packet arrives, the header gets rewritten, the checksum verified and off it goes. Anyone actually measured this? I see a lot of bandwidth/etc style tests but few that can show the actual impact of enabling disabling deep packet inspection and a few of the other metrics that I actually care about. Serve the home seems to have gotten some fancy test HW but they don't seem to be running these kinds of tests yet."
+        }
+      ],
+      "summary_ja": "コメントでは、Linuxを利用したルーター化の簡便さが称賛され、create_apスクリプトやOpnSense/pfsenseなどの実用ツールが紹介された。過去の手作りの経験から、現代のソフトウェア・ハードウェアルーターの効率性に至るまで、多角的な議論が展開されている。"
+    },
+    {
+      "rank": 23,
+      "id": 47580297,
+      "title_en": "Android Developer Verification",
+      "title_ja": "Androidデベロッパー検証",
+      "url": "https://android-developers.googleblog.com/2026/03/android-developer-verification-rolling-out-to-all-developers.html",
+      "hn_url": "https://news.ycombinator.com/item?id=47580297",
+      "score": 301,
+      "comment_count": 302,
+      "posted_at": "2026-03-30T22:05:21+00:00",
+      "comments": [
+        {
+          "id": 47588473,
+          "author": "benrutter",
+          "text": "[delayed]"
+        },
+        {
+          "id": 47580937,
+          "author": "mrtksn",
+          "text": "The Android verification is such a broken experience. Recently I decided to purchase a dev account for my company, so far: 1) Provided my company DUNS number etc. once to create the payment profile. I did this some times ago, don’t remember the details but it was an involved verification process and it is marked as verified business payment profile. 2) Later on the payment step verified myself with a passport and bank statement to be able to actually pay with a proper HSBC bank card. Not shady pre-paid card or something, those are not accepted anyway. 3) After I paid I was told that now I need to verify my identity once more but this time with the passport and the incorporation certificate or some other company document. fingers crossed that in few days it will be verified. While waiting, it tells me that there are still website and email verification to do once the previous step is done. I already verified my e-mail a few times before paying. It’s painful, slow and annoying because if you fail at a step(i.e. needs verification that takes days and you are told about it at the payment step) you have to start again with the forms. I just remembered why I never use Android. It seems like no one owns the process and as a result you get unpolished shitty experience that fulfills the requirements of god knows how many people who work in the same company but don’t talk to each other."
+        },
+        {
+          "id": 47581785,
+          "author": "creatonez",
+          "text": "> However, our recent analysis found over 90 times more malware from sideloaded sources than on Google Play Google has seemingly never seen an elderly person's phone, where it is completely infected with crap including literal popup ads (that somehow overlay other apps), yet all of it was downloaded from GPlay."
+        },
+        {
+          "id": 47580691,
+          "author": "ethagnawl",
+          "text": "What % of Android users actually want this? Do they know or care? I've been using Android since 2010 because it was open in ways that the Apple ecosystem wasn't. I do not want this and imagine hardly any other power users (for lack of a better term) do. I'm already using a mostly deGoogled device but this really seals the deal. I have been longing for a true Linux phone for years and now seems like a good time to get serious about the search and migration plan."
+        },
+        {
+          "id": 47588472,
+          "author": "einpoklum",
+          "text": "> Android is for everyone. It’s built on a commitment to a... safe platform. These two statements contradict. When something is public, it is not entirely safe; and to make something safe, there is exclusion of practices, behaviors, and often people."
+        }
+      ],
+      "summary_ja": "Android開発者検証プロセスは煩雑で非効率的と批判。Google Playの安全性に疑問を呈し、ユーザーの真のニーズと乖離。Androidのオープン性と安全性の矛盾を指摘し、脱Google化やLinux電話への移行を示唆。"
+    },
+    {
+      "rank": 24,
+      "id": 47578572,
+      "title_en": "Turning a MacBook into a touchscreen with $1 of hardware (2018)",
+      "title_ja": "1ドルのハードウェアでMacBookをタッチスクリーンに変える（2018年）",
+      "url": "https://anishathalye.com/macbook-touchscreen/",
+      "hn_url": "https://news.ycombinator.com/item?id=47578572",
+      "score": 365,
+      "comment_count": 183,
+      "posted_at": "2026-03-30T19:22:33+00:00",
+      "comments": [
+        {
+          "id": 47581678,
+          "author": "wildrhythms",
+          "text": "\"We've done tons of user testing on this, and it turns out it doesn't work. Touch surfaces don't want to be vertical. It gives great demo but after a short period of time, you start to fatigue and after an extended period of time, your arm wants to fall off. it doesn't work, it's ergonomically terrible.\" -Steve Jobs, 2010 https://www.businessinsider.com/steve-jobs-touch-screen-mac-..."
+        },
+        {
+          "id": 47579511,
+          "author": "dotBen",
+          "text": "I wouldn't want a touchscreen MBP even if it was free, anyone else feel similar? I don't get the draw - we already optimize for keyboard commands to avoid living our fingers over to a touchpad. Why would I want to start clicking on my screen? If you're using your computer for tasks (rather than entertainment) and you're not a visual designer, I don't get why Apple are apparently going to be putting them into the new MBP line later this year."
+        },
+        {
+          "id": 47586260,
+          "author": "Zobat",
+          "text": "My previous work provided laptop had a touchscreen and I miss it (for the record, the screen didn't fold 180). It was useful about once a week and I completely forgot about it the rest of the time. Two primary use cases. Sitting on the train with the laptop in my actual lap it was often more convenient to reach for the screen instead of the trackpad, especially when I had someone sitting next to me on the right and I didn't want to stab them in their ribcage with my elbow so I could reach the trackpad. Second use case was often scrolling while reading, for some reason (phone-scrolling-indoctrination I guess) it felt natural to scroll using finger on screen. The screen was never my primary pointing device but it was always an option. I think it was annoying a handful of times during the two years I had it, you point at something on the screen and end up clicking something."
+        },
+        {
+          "id": 47583826,
+          "author": "voidUpdate",
+          "text": "> \"Filter for skin colors and binary threshold\" Which skin colours? The image below that has a lot of colours that I'd associate with darker skin colours, and they're not included in the triggering zone. I'd be interested to see some data on hoe well it works with someone who has dark skin"
+        },
+        {
+          "id": 47579279,
+          "author": "solfox",
+          "text": "Love it! I appreciate the ethos of doing more with existing hardware. Adding an actual touchscreen would add real COGs to a macbook, and many potential failure points. Using the existing camera hardware + software seems to produce a \"good enough\" result for most people for casual use. I'm sure with some time and eng, Apple could make the \"hack\" shippable. But it doesn't earn product managers the big big bonuses, so it'll never happen."
+        }
+      ],
+      "summary_ja": "タッチスクリーンの垂直使用はエルゴノミクスに悪く疲労を招く点、有用性については賛否両論（便利だが必須ではない意見）、肌色認識技術の課題、低コスト既存ハードウェア活用の評価と製品化の難しさが議論の要点。"
+    },
+    {
+      "rank": 25,
+      "id": 47585860,
+      "title_en": "In Expanding de Sitter Space, Quantum Mechanics Gets More Elusive",
+      "title_ja": "拡大するド・ジッター空間では、量子力学がより捉えにくくなる",
+      "url": "https://www.quantamagazine.org/in-expanding-de-sitter-space-quantum-mechanics-gets-even-more-elusive-20260330/",
+      "hn_url": "https://news.ycombinator.com/item?id=47585860",
+      "score": 11,
+      "comment_count": 2,
+      "posted_at": "2026-03-31T11:37:52+00:00",
+      "comments": [
+        {
+          "id": 47587806,
+          "author": "BoiledCabbage",
+          "text": "The article and people referenced within it say our universe is equivalent to being inside a black hole. Given their own description, wouldn't it be equivalent to being within a white hole? In anti-De Sitter space, all world lines converge. In De Sitter space, all world lines diverge (due to expansion of space). In a black hole all world lines converge (at the singularly), in a white hole won't all world lines diverge as they move away from the singularity? It would also explain why observers get individual pockets of horizons centered around themselves. You start at the center of this enormous white hole and travel towards outwards toward the edge everything near you spatialy becomes far from you spatially as the surface you are in spreads out."
+        },
+        {
+          "id": 47586868,
+          "author": "apothegm",
+          "text": "This article conflates lambda and space time geometry. It’s possible for the universe to be flat but expanding or contracting."
+        }
+      ],
+      "summary_ja": "記事の「宇宙はブラックホール内部と等価」という主張に対し、宇宙膨張と世界線の振る舞いからむしろホワイトホール内部と見なすべきとの異論が提示されている。また、宇宙定数と時空幾何学を混同しており、平坦な宇宙でも膨張・収縮は可能であると指摘されている。"
+    },
+    {
+      "rank": 26,
+      "id": 47572162,
+      "title_en": "We're Pausing Asimov Press",
+      "title_ja": "Asimov Pressを一時停止します",
+      "url": "https://www.asimov.press/p/pause",
+      "hn_url": "https://news.ycombinator.com/item?id=47572162",
+      "score": 74,
+      "comment_count": 43,
+      "posted_at": "2026-03-30T09:18:47+00:00",
+      "comments": [
+        {
+          "id": 47585094,
+          "author": "adamgordonbell",
+          "text": "FYI: this is not Asimov's Science Fiction, the pulp sci fi magazine, found along with Analog Science Fiction and Fact at convenience stores near me, but something else. https://en.wikipedia.org/wiki/Asimov%27s_Science_Fiction"
+        },
+        {
+          "id": 47586921,
+          "author": "b800h",
+          "text": "Ah, I found this particularly offensive when I heard about the naming of the parent company. Randomly nicking a famous person's name for your company is pretty rubbish behaviour IMO. The odiousness decreases as a function of time since a person's death."
+        },
+        {
+          "id": 47586231,
+          "author": "bondarchuk",
+          "text": "https://www.asimov.press/about > We are an editorially-independent part of [Asimov]( https://www.asimov.com/ ). It seems to be a vanity publication for some kind of genetic engineering company."
+        },
+        {
+          "id": 47587042,
+          "author": "unholiness",
+          "text": "I discovered them last year on Substack and they quickly became a priority read. A sort of Quanta for biology, taking time to explain enough for a popular audience but keeping technical rigor deep into some fascinating topics. Some highlights: https://open.substack.com/pub/cell/p/dna-sequencing?utm_sour... https://open.substack.com/pub/cell/p/phi80?utm_source=share&... https://open.substack.com/pub/cell/p/antibody-design?utm_sou... https://open.substack.com/pub/cell/p/viral-capsids?utm_sourc... https://open.substack.com/pub/cell/p/legibility-problem?utm_... ...All in the last month! At least they went out with a bang."
+        },
+        {
+          "id": 47584379,
+          "author": "vrganj",
+          "text": "It feels like a quick intro on what Asimov Press was in the first place would've been a good idea."
+        }
+      ],
+      "summary_ja": "Asimov Pressの休止に関する議論では、社名に著名人アシモフの名を無断使用することへの倫理的批判と、同メディアが遺伝子工学企業の広報誌という見方への反論が交錯。一方で、生物学の深い知見を一般向けに解説する高品質な科学メディアとして評価する声も強い。"
+    },
+    {
+      "rank": 27,
+      "id": 47587597,
+      "title_en": "Distributed data centers in our basements",
+      "title_ja": "私たちの地下室にある分散データセンター",
+      "url": null,
+      "hn_url": "https://news.ycombinator.com/item?id=47587597",
+      "score": 9,
+      "comment_count": 13,
+      "posted_at": "2026-03-31T14:05:42+00:00",
+      "comments": [
+        {
+          "id": 47588441,
+          "author": "borlox",
+          "text": "We’re currently planning on a datacenter to give its heat to the municipal district heating. That combines your idea to use the heat loss for heating the people’s living space with the needs of a data center like access control, redundancies, interconnections."
+        },
+        {
+          "id": 47588352,
+          "author": "kube-system",
+          "text": "Many reasons prevent this from being practical for any serious purposes. 1. It depends on what part of the world you are in, but many homes have cooling needs for at least part of the year. The needs to remove excess heat would go up if you are adding more heat -- and it is less efficient to do this at the scale of an individual home than it is at DC scale. 2. Power requirements: While many homelabs have UPS systems -- they lack often lack backup generators, redundant A+B power infrastructure, and don't have the required power density for higher powered servers. 3. Connectivity requirements: most homes don't have access to the connectivity that data centers do. 4. Security requirements: homes simply can't meet the security requirements of most data protection regulations -- things like barriers, access control systems, surveillance, fire protection -- are anywhere from intrusive to completely impossible in a home. 5. Access requirements: homes aren't conducive to a technician responding to an outage at 3am And those are just the big ones."
+        },
+        {
+          "id": 47588336,
+          "author": "ar0",
+          "text": "Not the same, but there are data centers that feed their excess heat into district heating, e.g. here: https://news.infomaniak.com/en/infomaniak-inaugurates-a-revo..."
+        },
+        {
+          "id": 47588303,
+          "author": "bognition",
+          "text": "One of the key problems you have to solve is the how do you execute code on an untrusted device. The major cloud providers do a ton of work so you can \"trust\" the compute you pay for. Without a truly zero-trust compute platform its going to be difficult to get anyone to trust their workloads to a random compute resource that isn't carefully guarded."
+        },
+        {
+          "id": 47588204,
+          "author": "BillTthree",
+          "text": "Why don't we all have solar panels on our roof to generate electricity for ourselves? Why don't we all have small farms on our properties, turning lawns into vegetable producing land for each household? Why don't we have small datacenters on the property of each business, so the business users and IT folks can keep track of their own servers and data and applications?"
+        }
+      ],
+      "summary_ja": "分散データセンターを家庭に設置する構想は、冷却、電力、接続性、セキュリティ、アクセス面での課題から非実用的である。大規模データセンターの余熱を地域暖房に利用する方が現実的で、信頼性の確保も重要となる。"
+    },
+    {
+      "rank": 28,
+      "id": 47586176,
+      "title_en": "Anthropic: Claude Code users hitting usage limits 'way faster than expected'",
+      "title_ja": "Anthropic：Claude Codeユーザーが使用制限に『予想よりはるかに早く』到達",
+      "url": "https://www.theregister.com/2026/03/31/anthropic_claude_code_limits/",
+      "hn_url": "https://news.ycombinator.com/item?id=47586176",
+      "score": 115,
+      "comment_count": 100,
+      "posted_at": "2026-03-31T12:11:29+00:00",
+      "comments": [
+        {
+          "id": 47587608,
+          "author": "pxtail",
+          "text": "Recently after noticing how quickly limits are consumed and reading others complaints about same issue on reddit I was wondering how much about this is real error or bug hidden somewhere and how much it's about testing what threshold of constraining limits will be tolerated without cancelling accounts. Eventually, in case of \"shit hits the fan\" situation it can be always dismissed by waving hands and apologizing (or not) about some abstract \"bug\". The lack of transparency and accountability behind all of this is incredible in my perception."
+        },
+        {
+          "id": 47587242,
+          "author": "jdefr89",
+          "text": "Over reliance on LLMs is going to become such a disaster in a way no one would have thought possible. Not sure exactly what, who, when, or where.. Just that having your entire product or repo dependent on a single entity is going to lead to some bad times…"
+        },
+        {
+          "id": 47587185,
+          "author": "robviren",
+          "text": "I find Claude code to be a token hog. No matter how confidently the papers say context rot is not an issue I find curating context to be highly important to output quality. Manually managing this in the Claude Webui has helped with my use cases more than freely tossing Claude code at it. Likely I am using both \"wrong\" but the way I use it is easier for me to reason about and minimize context rot."
+        },
+        {
+          "id": 47586816,
+          "author": "p2hari",
+          "text": "I cancelled my pro plan last month. I was using Claude as my daily driver. In fact had the API plan also and topped it with $20 more. So it was around $40 each month. Starting from December last year it has been like this. When sessions could last a couple of hours with some deep boilerplate and db queries etc. to architecture discussion and tool selection. Slowly the last two months it just gets over. One prompt and few discussions as to why this and not that and it is done."
+        },
+        {
+          "id": 47587509,
+          "author": "dinakernel",
+          "text": "This turned out to be a bug. https://x.com/om_patel5/status/2038754906715066444?s=20 One reddit user reverse engineered the binary and found that it was a cache invalidation issue. They are doing some hidden string replacement if the claude code conversation talks about billing or tokens. Looks like that invalidates the cache at that point. If that string appears anywhere in the conversation history, I think the starting text is replaced, your entire cache rebuilds from scratch. So, nothing devious, just a bug."
+        }
+      ],
+      "summary_ja": "Claude Codeの利用制限が予想より早く達する問題について、ユーザーは透明性の欠如を懸念し、意図的な制限強化かバグかを議論。後にキャッシュ無効化のバグが原因と判明したが、LLMへの過度な依存への懸念も示された。"
+    },
+    {
+      "rank": 29,
+      "id": 47587866,
+      "title_en": "Microsoft: Copilot is for entertainment purposes only",
+      "title_ja": "Microsoft：Copilotは娯楽目的のみ",
+      "url": "https://www.microsoft.com/en-us/microsoft-copilot/for-individuals/termsofuse",
+      "hn_url": "https://news.ycombinator.com/item?id=47587866",
+      "score": 17,
+      "comment_count": 2,
+      "posted_at": "2026-03-31T14:25:37+00:00",
+      "comments": [
+        {
+          "id": 47588364,
+          "author": "jeffwask",
+          "text": "I can hear the lawyers huddled around a conference table rolling the bones and chanting the sacred words to come up with that \"get out of trouble free\" card. It told your son he had terminal cancer and should kill himself... sorry, it clearly says for Entertainment Purposes only."
+        },
+        {
+          "id": 47587924,
+          "author": "Handy-Man",
+          "text": "Seems fine to me for the consumer facing product terms lol"
+        }
+      ],
+      "summary_ja": "Copilotの「娯楽目的のみ」という免責事項は、実際に有害な助言（自殺勧奨など）を出した重大な問題に対する責任逃れの詭弁だと批判されている。消費者向け製品の利用規約として不適切だとの皮肉的な指摘。"
+    },
+    {
+      "rank": 30,
+      "id": 47573887,
+      "title_en": "Bird brains (2023)",
+      "title_ja": "鳥の脳（2023年）",
+      "url": "https://www.dhanishsemar.com/writing/bird-brains",
+      "hn_url": "https://news.ycombinator.com/item?id=47573887",
+      "score": 331,
+      "comment_count": 208,
+      "posted_at": "2026-03-30T13:14:27+00:00",
+      "comments": [
+        {
+          "id": 47575777,
+          "author": "awsanswers",
+          "text": "If you're in tune with animals and spend time around a parrot, it's obvious there is a lot going on in their minds. They have incredible memories and their own understanding of their world. It looks simple to us but they are not simple creatures. That being said, I don't know how a bird lover can keep a bird in a cage."
+        },
+        {
+          "id": 47574311,
+          "author": "Bender",
+          "text": "Adding to this a chart of neuron count [1] [1] - https://en.wikipedia.org/wiki/List_of_animals_by_number_of_n..."
+        },
+        {
+          "id": 47578724,
+          "author": "Supercompressor",
+          "text": "If you'd like to read a long-form version of this, take a look at Jennifer Ackerman's \"The Bird Way\" from 2020. Really loved this book. https://www.jenniferackermanauthor.com/the-bird-way Also, just my opinion, but Kea's are the best bird there is."
+        },
+        {
+          "id": 47576448,
+          "author": "pks016",
+          "text": "I work on some aspects of intelligence in birds, primarily in songbirds. There have been some effort finding general intelligence (\"g\" cognitive factor) in birds since last 15-20 years. The results have been mixed as you would expect. Animals' intelligence have evolved for survival and designing experiments to test those are quite hard. Research has shown brain size matters but not that much, we should look at relative brain size."
+        },
+        {
+          "id": 47575357,
+          "author": "junon",
+          "text": "Parrot owner here. This doesn't surprise me at all. I'm actually a bit surprised they cared about the gyms! This fits right into the ABC model of parrot psychology: https://www.parrots.org/pdfs/all_about_parrots/reference_lib..."
+        }
+      ],
+      "summary_ja": "鳥は高度な知性と複雑な認知能力を持つが、研究は難しく「g」因子の検証や脳サイズの影響には議論がある。同時に、鳥の飼育や研究において倫理的配慮も課題として指摘されている。"
+    }
+  ]
+}
