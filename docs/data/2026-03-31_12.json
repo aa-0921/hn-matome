@@ -1,0 +1,968 @@
+{
+  "date": "2026-03-31T00:00:00+09:00",
+  "slot": "12",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 47582220,
+      "title_en": "Axios compromised on NPM – Malicious versions drop remote access trojan",
+      "title_ja": "AxiosがNPMで侵害 – 悪意のあるバージョンがリモートアクセストロイの木馬を配布",
+      "url": "https://www.stepsecurity.io/blog/axios-compromised-on-npm-malicious-versions-drop-remote-access-trojan",
+      "hn_url": "https://news.ycombinator.com/item?id=47582220",
+      "score": 252,
+      "comment_count": 70,
+      "posted_at": "2026-03-31T02:54:17+00:00",
+      "comments": [
+        {
+          "id": 47582632,
+          "author": "postalcoder",
+          "text": "PSA: npm/bun/pnpm/uv now all support setting a minimum release age for packages. I also have `ignore-scripts=true` in my ~/.npmrc. Based on the analysis, that alone would have mitigated the vulnerability. bun and pnpm do not execute lifecycle scripts by default. Here's how to set global configs to set min release age to 7 days: ~/.config/uv/uv.toml exclude-newer = \"7 days\" ~/.npmrc min-release-age=7 # days ignore-scripts=true ~/Library/Preferences/pnpm/rc minimum-release-age=10080 # minutes ~/.bunfig.toml [install] minimumReleaseAge = 604800 # seconds (Side note, it's wild that npm, bun, and pnpm have all decided to use different time units for this configuration.) If you're developing with LLM agents, you should also update your AGENTS.md/CLAUDE.md file with some guidance on how to handle failures stemming from this config as they will cause the agent to unproductively spin its wheels."
+        },
+        {
+          "id": 47582484,
+          "author": "h4ch1",
+          "text": "I can't even imagine the scale of the impact with Axios being compromised, nearly every other project uses it for some reason instead of fetch (I never understood why). Also from the report: > Neither malicious version contains a single line of malicious code inside axios itself. Instead, both inject a fake dependency, plain-crypto-js@4.2.1, a package that is never imported anywhere in the axios source, whose only purpose is to run a postinstall script that deploys a cross-platform remote access trojan (RAT) Good news for pnpm/bun users who have to manually approve postinstall scripts."
+        },
+        {
+          "id": 47582927,
+          "author": "tkel",
+          "text": "JS package managers (pnpm, bun) now will ignore postinstall scripts by default. Except for npm, it still runs them for legacy reasons. You should probably set your default to not run those scripts. They are mostly unnecessary. ~/.npmrc : ignore-scripts=true"
+        },
+        {
+          "id": 47582834,
+          "author": "vsgherzi",
+          "text": "Not to beat a dead horse but I see this again and again with dependencies. Each time I get more worried that the same will happen with rust. I understand the fat std library approach won’t work but I really still want a good solution where I can trust packages to be safe and high quality."
+        },
+        {
+          "id": 47582823,
+          "author": "acheong08",
+          "text": "There are so many scanners these days these things get caught pretty quick. I think we need either npm or someone else to have a registry that only lets through packages that pass these scanners. Can even do the virustotal thing of aggregating reports by multiple scanners. NPM publishes attestation for trusted build environments. Google has oss-rebuild. All it takes is an `npm config set` to switch registries anyways. The hard part is having a central party that is able to convince all the various security companies to collaborate rather than having dozens of different registries each from each company. Rather than just a hard-coded delay, I think having policies on what checks must pass first makes sense with overrides for when CVEs show up. (WIP)"
+        }
+      ],
+      "summary_ja": "Axios侵害事件を受け、パッケージマネージャーでpostinstallスクリプトを無効化しリリース期間を制限する予防策が共有されている。依存関係のセキュリティ問題が繰り返される中、信頼性の高いパッケージレジストリと包括的なセキュリティチェックの仕組みの必要性が議論されている。"
+    },
+    {
+      "rank": 2,
+      "id": 47581701,
+      "title_en": "Universal Claude.md – cut Claude output tokens",
+      "title_ja": "Universal Claude.md – Claudeの出力トークンを削減",
+      "url": "https://github.com/drona23/claude-token-efficient",
+      "hn_url": "https://news.ycombinator.com/item?id=47581701",
+      "score": 197,
+      "comment_count": 73,
+      "posted_at": "2026-03-31T01:23:34+00:00",
+      "comments": [
+        {
+          "id": 47581841,
+          "author": "btown",
+          "text": "It seems the benchmarks here are heavily biased towards single-shot explanatory tasks, not agentic loops where code is generated: https://github.com/drona23/claude-token-efficient/blob/main/... And I think this raises a really important question. When you're deep into a project that's iterating on a live codebase, does Claude's default verbosity, where it's allowed to expound on why it's doing what it's doing when it's writing massive files, allow the session to remain more coherent and focused as context size grows? And in doing so, does it save overall tokens by making better, more grounded decisions? The original link here has one rule that says: \"No redundant context. Do not repeat information already established in the session.\" To me, I want more of that. That's goal-oriented quasi-reasoning tokens that I do want it to emit, visualize, and use, that very possibly keep it from getting \"lost in the sauce.\" By all means, use this in environments where output tokens are expensive, and you're processing lots of data in parallel. But I'm not sure there's good data on this approach being effective for agentic coding."
+        },
+        {
+          "id": 47582905,
+          "author": "niklassheth",
+          "text": "So many problems with this: The benchmark is totally useless. It measures single prompts, and only compares output tokens with no regard for accuracy. I could obliterate this benchmark with the prompt \"Always answer with one word\" This line: \"If a user corrects a factual claim: accept it as ground truth for the entire session. Never re-assert the original claim.\" You're totally destroying any chance of getting pushback, any mistake you make in the prompt would be catastrophic. \"Never invent file paths, function names, or API signatures.\" Might as well add \"do not hallucinate\"."
+        },
+        {
+          "id": 47581985,
+          "author": "xianshou",
+          "text": "From the file: \"Answer is always line 1. Reasoning comes after, never before.\" LLMs are autoregressive (filling in the completion of what came before), so you'd better have thinking mode on or the \"reasoning\" is pure confirmation bias seeded by the answer that gets locked in via the first output tokens."
+        },
+        {
+          "id": 47581845,
+          "author": "sillysaurusx",
+          "text": "> the file loads into context on every message, so on low-output exchanges it is a net token increase Isn’t this what Claude’s personalization setting is for? It’s globally-on. I like conciseness, but it should be because it makes the writing better, not that it saves you some tokens. I’d sacrifice extra tokens for outputs that were 20% better, and there’s a correlation with conciseness and quality. See also this Reddit comment for other things that supposedly help: https://www.reddit.com/r/vibecoding/s/UiOywQMOue > Two things that helped me stay under [the token limit] even with heavy usage: > Headroom - open source proxy that compresses context between you and Claude by ~34%. Sits at localhost, zero config once running. https://github.com/chopratejas/headroom > RTK - Rust CLI proxy that compresses shell output (git, npm, build logs) by 60-90% before it hits the context window. > Stacks on top of Headroom. https://github.com/rtk-ai/rtk > MemStack - gives Claude Code persistent memory and project context so it doesn't waste tokens re-reading your entire codebase every prompt. > That's the biggest token drain most people don't realize. https://github.com/cwinvestments/memstack > All three stack together. Headroom compresses the API traffic, RTK compresses CLI output, MemStack prevents unnecessary file reads. I haven’t tested those yet, but they seem related and interesting."
+        },
+        {
+          "id": 47581956,
+          "author": "joshstrange",
+          "text": "As with all of these cure-alls, I'm wary. Mostly I'm wary because I anticipate the developer will lose interest in very little time and also because it will just get subsumed into CC at some point if it actually works. It might take longer but changing my workflow every few days for the new thing that's going to reduce MCP usage, replace it, compress it, etc is way too disruptive. I'm generally happy with the base Claude Code and I think running a near-vanilla setup is the best option currently with how quickly things are moving."
+        }
+      ],
+      "summary_ja": "Claudeの出力トークン削減方法について、ベンチマークが単発タスクに偏りエージェント的コーディングを考慮せず、提案されたルールには正確性や推論の偏りなどの問題があると批判。一方で、Claudeの詳細な出力がプロジェクトの一貫性を保ちトークン節約に寄与する可能性も指摘。代替ツールは紹介されるが、万能薬的アプローチへの懐疑や基本設定の使用が現実的との見解が示されている。"
+    },
+    {
+      "rank": 3,
+      "id": 47582482,
+      "title_en": "Ollama is now powered by MLX on Apple Silicon in preview",
+      "title_ja": "OllamaがApple SiliconでMLXを搭載、プレビュー公開",
+      "url": "https://ollama.com/blog/mlx",
+      "hn_url": "https://news.ycombinator.com/item?id=47582482",
+      "score": 39,
+      "comment_count": 6,
+      "posted_at": "2026-03-31T03:40:45+00:00",
+      "comments": [
+        {
+          "id": 47582925,
+          "author": "LuxBennu",
+          "text": "Already running qwen 70b 4-bit on m2 max 96gb through llama.cpp and it's pretty solid for day to day stuff. The mlx switch is interesting because ollama was basically shelling out to llama.cpp on mac before, so native mlx should mean better memory handling on apple silicon. Curious to see how it compares on the bigger models vs the gguf path"
+        },
+        {
+          "id": 47582826,
+          "author": "babblingfish",
+          "text": "LLMs on device is the future. It's more secure and solves the problem of too much demand for inference compared to data center supply, it also would use less electricity. It's just a matter of getting the performance good enough. Most users don't need frontier model performance."
+        },
+        {
+          "id": 47582875,
+          "author": "codelion",
+          "text": "How does it compare to some of the newer mlx inference engines like optiq that support turboquantization - https://mlx-optiq.pages.dev/"
+        },
+        {
+          "id": 47582878,
+          "author": "dial9-1",
+          "text": "still waiting for the day I can comfortably run Claude Code with local llm's on MacOS with only 16gb of ram"
+        }
+      ],
+      "summary_ja": "OllamaがMLXを採用しApple Silicon向けに最適化され、メモリ管理の改善が期待される。ローカルLLMは安全性と電力効率に優れ、データセンター需要を緩和する将来の方向性だが、パフォーマンス向上が課題。既存のllama.cpp（gguf）やoptiqなどの他の推論エンジンとの比較に関心が集まる。また、限られたRAMでの快適な実行を求める声がある。"
+    },
+    {
+      "rank": 4,
+      "id": 47582043,
+      "title_en": "Artemis II is not safe to fly",
+      "title_ja": "Artemis IIは飛行に安全ではない",
+      "url": "https://idlewords.com/2026/03/artemis_ii_is_not_safe_to_fly.htm",
+      "hn_url": "https://news.ycombinator.com/item?id=47582043",
+      "score": 116,
+      "comment_count": 51,
+      "posted_at": "2026-03-31T02:23:50+00:00",
+      "comments": [
+        {
+          "id": 47582655,
+          "author": "oritron",
+          "text": "I haven't kept up with Artemis development but I've read extensively about Challenger and Columbia. These two parts of the article stood out to me: > Moon-to-Mars Deputy Administrator Amit Kshatriya said: “it was very small localized areas. Interestingly, it would be much easier for us to analyze if we had larger chunks and it was more defined”. A Lockheed Martin representative on the same call added that \"there was a healthy margin remaining of that virgin Avcoat. So it wasn’t like there were large, large chunks.” Followed by: > The Avcoat material is not designed to come out in chunks. It is supposed to char and flake off smoothly, maintaining the overall contours of the heat shield. This is echoes both Shuttle incidents. Challenger: no gasses were supposed to make it past the o-rings no matter what, but when it became clear that gasses were escaping and the o-rings were being damaged, there was a push to suggest that it's an acceptable level. There was a similar situation with heat shield damage and Columbia. In both cases some models were used to justify the decision, with wild extrapolations and fundamentally, a design that wasn't expected to fail in that mode /at all/. I know the points that astronauts make about the importance of manned space exploration, but I agree with this author that it seems to make sense to run this as an unmanned mission, and probably test the new heat shield which will replace the Artemis II design in an unmanned re-entry as well."
+        },
+        {
+          "id": 47582926,
+          "author": "isoprophlex",
+          "text": "[delayed]"
+        },
+        {
+          "id": 47582627,
+          "author": "delichon",
+          "text": "I am very not brave but I'd volunteer. The trip is far more awesome than anything I have planned for the rest of my life. And if the shield fails on reentry it would only hurt for a few seconds. So if the crew and the backups and their backups read this and have second thoughts, ping me."
+        },
+        {
+          "id": 47582600,
+          "author": "bsilvereagle",
+          "text": "> “Our test facilities can’t reach the combination of heat flux, pressure, shear stresses, etc., that an actual reentering spacecraft does. We’re always having to wait for the flight test to get the final certification that our system is good to go.”—Jeremy VanderKam, deputy manager for Orion’s heat shield, speaking in 2022 This is a strange claim, considering NASA used to have 2 facilities that were capable of this - one at Johnson and one at Ames. They were consolidated ( https://ntrs.nasa.gov/api/citations/20160001258/downloads/20... ) but it seems like the Arc Jet Complex at Ames is still operational https://www.nasa.gov/ames/arcjet-complex/"
+        },
+        {
+          "id": 47582340,
+          "author": "anitil",
+          "text": "This is a concerning read, I'm not quite sure what the driving motivation is for Artemis, but the following answered at least part of my question - > That context is a moon program that has spent close to $100 billion and 25 years with nothing to show for itself, at an agency that has just experienced mass firings and been through a near-death experience with its science budget"
+        }
+      ],
+      "summary_ja": "Artemis IIの耐熱シールドに設計と異なる剥離が見られ、過去のチャレンジャー号やコロンビア号事故との類似性が指摘されている。安全性への懸念から無人ミッションでの検証を求める声があり、計画の背景にある膨大な予算と時間的圧力も批判されている。"
+    },
+    {
+      "rank": 5,
+      "id": 47582545,
+      "title_en": "Semantic – Reducing LLM \"Agent Loops\" by 27.78% via AST Logic Graphs",
+      "title_ja": "Semantic – ASTロジックグラフによりLLM「エージェントループ」を27.78%削減",
+      "url": "https://github.com/concensure/Semantic",
+      "hn_url": "https://news.ycombinator.com/item?id=47582545",
+      "score": 24,
+      "comment_count": 2,
+      "posted_at": "2026-03-31T03:50:07+00:00",
+      "comments": [
+        {
+          "id": 47582830,
+          "author": "gbnwl",
+          "text": "OK I'll take the opportunity to be the the first non-self-promotional comment on this thread now that concensure and rohan2003 have done their ads. Based on this post's current position on the front page it kind of seems to fall in line with a pattern we've all been seeing the past few months: HN is finally majority onboard with believing in the usefullness of coding agents and is celebrating this by rediscovering each and every personal \"I improved CC by doing [blank] thing\" from scratch project. That's all whatever. Fine. But what I'm really curious about is does the HN community actually look at the random LLM-generated statistic-vomit text posted by creators like this and find themselves convinced? I ask because if you're new to random stat vomit you're going to find yourself having to deal with it all the time soon, and I've yet to find good meta discussions about how we find signal in this noise. I used to use HN or selected reddit community upvotes as a first pass \"possibly important\" signal, but its been getting worse and worse, illustrated by posts like this getting upvoted to the top without any genuine discssion."
+        },
+        {
+          "id": 47582813,
+          "author": "rs545837",
+          "text": "Cool to see more people building on tree-sitter + logic graphs for agents. We've been going deeper on this direction with sem"
+        }
+      ],
+      "summary_ja": "このコメントは、Hacker Newsで増加するLLMエージェント関連の個人プロジェクト記事に対し、LLM生成の統計データの信頼性に疑問を呈し、ノイズの中から有用な情報を見分ける方法の議論不足を指摘している。一方で、tree-sitterとロジックグラフの技術進展には一定の評価を示す。"
+    },
+    {
+      "rank": 6,
+      "id": 47577761,
+      "title_en": "Fedware: Government apps that spy harder than the apps they ban",
+      "title_ja": "Fedware: 禁止するアプリ以上に厳しく監視する政府アプリ",
+      "url": "https://www.sambent.com/the-white-house-app-has-huawei-spyware-and-an-ice-tip-line/",
+      "hn_url": "https://news.ycombinator.com/item?id=47577761",
+      "score": 497,
+      "comment_count": 156,
+      "posted_at": "2026-03-30T18:16:00+00:00",
+      "comments": [
+        {
+          "id": 47581532,
+          "author": "jrmg",
+          "text": "I’m surprised to see no comments on this yet: [The White House app] ships with 3 embedded trackers including Huawei Mobile Services Core (yes, the Chinese company the US government sanctioned, shipping tracking infrastructure inside the sitting president's official app) The executive branch has decided this company is so dangerous I can’t buy a monitor made by them - but it’s embedding its SDK in its official app?! I realize the decision makers probably don’t even know it’s there - it was just added by whatever contractor built the app, but that’s arguably even worse. And I have absolutely no doubt that if it was discovered in a political opponent’s app, and the administration wanted to harm them, there would be no compunction about using that fact against them."
+        },
+        {
+          "id": 47578630,
+          "author": "john_strinlai",
+          "text": "> This thing also has a \"Text the President\" button that auto-fills your message with \"Greatest President Ever!\" and then collects your name and phone number. when is the onion going to go bankrupt? it has to be soon, i imagine. no way it can compete with reality at this point. (the rest of the article is a bit too depressing for me to comment on at the moment, other than saying \"wow, gross\")"
+        },
+        {
+          "id": 47578865,
+          "author": "saadn92",
+          "text": "The closing point is the one that should get more attention — every single one of these apps could be replaced by a web page. And from a product standpoint, there's really only one reason to ship a native app when your content is just press releases and weather alerts: you want access to APIs the browser won't give you. Background location, biometrics, device identity, boot triggers — none of that is available through a browser, and that's by, unfortunately, design."
+        },
+        {
+          "id": 47578770,
+          "author": "joshstrange",
+          "text": "Do these posts just get upvoted due to the graphics/animations? I find this site incredibly difficult to read with things re-playing as you scroll up and down and the articles I've read from here are often light on details. The graphics seem very AI-generated (overlapping text and other little issues) which makes me think the whole thing is from an LLM. While this post does have some interesting information, I have to wade through distracting animations that seem \"off\" which makes me questions all of it."
+        },
+        {
+          "id": 47578939,
+          "author": "bluepeter",
+          "text": "Relatedly, I just registered for PACER to download court documents. It's pretty shocking that to get public legal documents the US Federal Court system requires full name, birthdate, address, phone, email, credit card info... and I THINK (it's past the initial registration page so can't confirm 100%) also mother's maiden name and 2 common security questions. Just a treasure-trove of PII if it ever falls into the wrong hands. (What's esp frustrating is even after going through this, I had to call a number and wait on hold for 1 hour to activate the account.)"
+        }
+      ],
+      "summary_ja": "政府アプリが制裁対象の中国企業製トラッカーを含む矛盾や、ネイティブアプリが不必要に個人データを収集できる点を批判。さらに、記事の信頼性への疑念や、裁判文書システムPACERの過剰な個人情報要求など、政府関連デジタルサービスにおけるプライバシー問題が指摘されている。"
+    },
+    {
+      "rank": 7,
+      "id": 47573519,
+      "title_en": "Do your own writing",
+      "title_ja": "自分で書く",
+      "url": "https://alexhwoods.com/dont-let-ai-write-for-you/",
+      "hn_url": "https://news.ycombinator.com/item?id=47573519",
+      "score": 439,
+      "comment_count": 152,
+      "posted_at": "2026-03-30T12:39:56+00:00",
+      "comments": [
+        {
+          "id": 47578515,
+          "author": "roadside_picnic",
+          "text": "I've long considered writing to be the \"last step in thinking\". I can't tell you how many times an idea, that was crystal clear in my mind, fell apart the moment I started writing and I realize there were major contradictions I needed to resolve. Likewise I also have numerous times where writing about something loosely and casually revealed to me something that fundamentally changed how I viewed a topic and really consolidated my thinking. However, there is a lot of writing that is basically just an old school from of context engineering. While I would love to think that a PRD is a place to think through ideas, I think many of us have encountered situations, pre-AI, where PRDs were basically context dumps without any real planning or thought. For these cases, I think we should just drop the premise altogether that you're writing. If you need to write a proposal for something as a matter of ritual, give it AI. If you're documenting a feature to remember context only (and not really explain the larger abstract principles driving it), it's better created as context for an LLM to consume. Not long ago my engineering team was trying to enforce writing release notes so people could be aware of breaking changes, then people groaned at the idea of having to read this. The obvious best solution is to have your agent write release notes for your agent in the future to have context. No more tedious writing or reading, but also no missing context. I think it's going to be awhile before the full impact of AI really works it's way through how we work. In the mean time we'll continue to have AI written content fed back into AI and then sent back to someone else (when this could all be a more optimized, closed loop)."
+        },
+        {
+          "id": 47581726,
+          "author": "stephen_cagle",
+          "text": "Writing (unassisted) is probably the first step towards your own independent thoughts. I'm reminded of that scene in \"Ghost in the Shell\" where some guy ask the Major why he is on the team (full of cyborgs) and she responds something along the line of \"Because you are basically un-enhanced (maybe without a ghost?) and are likely to respond differently then the rest of us; Overspecialization is death.\" I think a diversity of opinion is important for society. I'm worried that LLM's are going to group-think us into thinking the same way, believing the same things, reacting the same way. I wonder if future children will need to be taught how to purposely have their own opinions; being so used to always asking others before even considering things on their own? The LLM will likely reach a better conclusion than you would on your own, but there is value in diverging from the consensus and thinking your own thoughts. https://stephencagle.dev/posts-output/2025-10-14-you-should-..."
+        },
+        {
+          "id": 47578622,
+          "author": "nerevarthelame",
+          "text": "I agree with most of this, but my one qualm is the notion that LLMs \"are particularly good at generating ideas.\" It's fair enough that you can discard any bad ideas they generate. But by design, the recommendations will be average, bland, mainstream, and mostly devoid of nuance. I wouldn't encourage anyone to use LLMs to generate ideas if you're trying to create interesting or novel ideas."
+        },
+        {
+          "id": 47582747,
+          "author": "ozozozd",
+          "text": "I realized that running one’s own writing through an LLM reduces the amount of information in it. Sort of like washing the nutrients of a fruit. When we write about something, inevitably, things about us leak into our writing. How we think about this thing, our value judgments about it, how much we thought about it, whether our perspective and thoughts on it are aged or fresh all come through, even if we don’t intend to. All of this information builds trust, helps the reader empathize and see our point of view. When our writing passes through an LLM, most of these are simply lost. An average expression of those thoughts with all the sharp edges - its character, essence - removed comes out. All writing is opinionated, and when it runs through an LLM, it comes out opinion-less. I noticed that I don’t care for opinion-less writing. Or people. One exception is the official Python documentation. I recently read some of the new documentation, and realized that it reads almost exactly as I first read it in 2010. I couldn’t believe it. Low opinion, high information density. I know for a fact that it has opinions in parts, but it’s shockingly infrequent."
+        },
+        {
+          "id": 47578477,
+          "author": "Aurornis",
+          "text": "> When I send somebody a document that whiffs of LLM, I’m only demonstrating that the LLM produced something approximating what others want to hear. I’m not showing that I contended with the ideas. This eloquently states the problem with sending LLM content to other people: As soon as they catch on that you're giving them LLM writing, it changes the dynamic of the relationship entirely. Now you're not asking them to review your ideas or code, you're asking them to review some output you got from an LLM. The worst LLM offenders in the workplace are the people who take tickets, have Claude do the ticket, push the PR, and then go idle while they expect other people to review the work. I've had to have a few uncomfortable conversations where I explain to people that it's their job to review their own submissions before submitting them. It's something that should be obvious, but the magic of seeing an LLM produce code that passes tests or writing that looks like it agrees with the prompt you wrote does something to some people's brains."
+        }
+      ],
+      "summary_ja": "AI生成の文章は無難で個性がなく、思考の深化や信頼構築には不向きである。独自の執筆は思考を整理し多様な意見を生むが、AI過信は集団思考を招く恐れがある。一方、形式的な文書作成などにはAI活用も有用。"
+    },
+    {
+      "rank": 8,
+      "id": 47580297,
+      "title_en": "Android Developer Verification",
+      "title_ja": "Android開発者検証",
+      "url": "https://android-developers.googleblog.com/2026/03/android-developer-verification-rolling-out-to-all-developers.html",
+      "hn_url": "https://news.ycombinator.com/item?id=47580297",
+      "score": 190,
+      "comment_count": 170,
+      "posted_at": "2026-03-30T22:05:21+00:00",
+      "comments": [
+        {
+          "id": 47580937,
+          "author": "mrtksn",
+          "text": "The Android verification is such a broken experience. Recently I decided to purchase a dev account for my company, so far: 1) Provided my company DUNS number etc. once to create the payment profile. I did this some times ago, don’t remember the details but it was an involved verification process and it is marked as verified business payment profile. 2) Later on the payment step verified myself with a passport and bank statement to be able to actually pay with a proper HSBC bank card. Not shady pre-paid card or something, those are not accepted anyway. 3) After I paid I was told that now I need to verify my identity once more but this time with the passport and the incorporation certificate or some other company document. fingers crossed that in few days it will be verified. While waiting, it tells me that there are still website and email verification to do once the previous step is done. I already verified my e-mail a few times before paying. It’s painful, slow and annoying because if you fail at a step(i.e. needs verification that takes days and you are told about it at the payment step) you have to start again with the forms. I just remembered why I never use Android. It seems like no one owns the process and as a result you get unpolished shitty experience that fulfills the requirements of god knows how many people who work in the same company but don’t talk to each other."
+        },
+        {
+          "id": 47581785,
+          "author": "creatonez",
+          "text": "> However, our recent analysis found over 90 times more malware from sideloaded sources than on Google Play Google has seemingly never seen an elderly person's phone, where it is completely infected with crap including literal popup ads (that somehow overlay other apps), yet all of it was downloaded from GPlay."
+        },
+        {
+          "id": 47580691,
+          "author": "ethagnawl",
+          "text": "What % of Android users actually want this? Do they know or care? I've been using Android since 2010 because it was open in ways that the Apple ecosystem wasn't. I do not want this and imagine hardly any other power users (for lack of a better term) do. I'm already using a mostly deGoogled device but this really seals the deal. I have been longing for a true Linux phone for years and now seems like a good time to get serious about the search and migration plan."
+        },
+        {
+          "id": 47581607,
+          "author": "ecshafer",
+          "text": "> Android is for everyone. It’s built on a commitment to an open and safe platform. Users should feel confident installing apps, no matter where they get them from. This intro immediately tells me that whatever comes after will be horrible for users and developers. Surprise surprise, I was right. Software to \"verify\" side loaded apps is a bad, anti user idea."
+        },
+        {
+          "id": 47580816,
+          "author": "rvnx",
+          "text": "Hey boss: “40M users are running a cracked version of YouTube premium on mobile, what can we do ?”"
+        }
+      ],
+      "summary_ja": "Android開発者認証プロセスが煩雑で非効率的だと批判。支払いや身元確認の繰り返し、時間がかかるステップが不満。Google Playのセキュリティ主張に対する不信感もあり、Androidのオープン性が失われ、ユーザーや開発者に不利益な変化だとの懸念が示されている。"
+    },
+    {
+      "rank": 9,
+      "id": 47532891,
+      "title_en": "Clojure: The Documentary, official trailer [video]",
+      "title_ja": "Clojure: ドキュメンタリー、公式トレーラー [動画]",
+      "url": "https://www.youtube.com/watch?v=JJEyffSdBsk",
+      "hn_url": "https://news.ycombinator.com/item?id=47532891",
+      "score": 83,
+      "comment_count": 4,
+      "posted_at": "2026-03-26T17:00:54+00:00",
+      "comments": [
+        {
+          "id": 47582255,
+          "author": "jakeinspace",
+          "text": "I'll never be as cool as them."
+        }
+      ],
+      "summary_ja": "コメントでは、Clojureドキュメンタリーの登場人物への羨望が示され、Clojureコミュニティのクールさや魅力が感じられることが要点である。"
+    },
+    {
+      "rank": 10,
+      "id": 47574034,
+      "title_en": "How to turn anything into a router",
+      "title_ja": "任意のものをルーターに変える方法",
+      "url": "https://nbailey.ca/post/router/",
+      "hn_url": "https://news.ycombinator.com/item?id=47574034",
+      "score": 634,
+      "comment_count": 219,
+      "posted_at": "2026-03-30T13:28:54+00:00",
+      "comments": [
+        {
+          "id": 47576601,
+          "author": "dlenski",
+          "text": "This is a great writeup! Perhaps I can put in a plug for the create_ap script which I have been maintaining for many years ( http://github.com/dlenski/create_ap ). It's a shell script that allows you to turn any ol' Linux computer into a WiFi router in one quick command-line: By default, it will setup your WiFi card as an access point (allows WPA2/3, MAC filtering, etc), setup packet forwarding and routing, and run a DHCP and DNS server. It will generally pick sensible defaults, but it's also highly customizable. If your WiFi card supports simultaneous AP and client mode, it will allow that. Its requirements are extremely minimal: basically just Linux, a compatible wireless card, and a few common configuration packages (hostapd, iw, iproute2, iptables, dnsmasq). No NetworkManager needed. I used it as my own home Internet gateway for many years, running on an ancient fanless Atom mini-PC. Because it can quickly setup and teardown WiFi networks on-the-fly, it's also a valuable tool for setting up test networks when reverse-engineering IoT devices. I use it frequently for this purpose (see https://snowpatch.org/posts/i-can-completely-control-your-sm... )."
+        },
+        {
+          "id": 47574787,
+          "author": "smashed",
+          "text": "Lots of \"just use X\" comments but the article is about showing the bare minimum/how easy the core part of routing actually is. Also, if you have ever used docker or virtual machines with NAT routing (often the default), you've done exactly the same things. If you have ever enabled the wifi hotspot on an android phone also, you've done pretty much what the article describes on your phone. All of these use the same Linux kernel features under the hood. In fact there is a good chance this message traversed more than one Linux soft router to get to your screen."
+        },
+        {
+          "id": 47575275,
+          "author": "bluedino",
+          "text": "This really takes me back. My first actual 'use' for Linux was making routers out of leftover computers. The perfect machine back then was a 100MHz Pentium, in a slimline desktop case. At the time, the Pentium III was the current desktop chip, so you'd have a pile of early Pentium-class machines to use. And even a 10mb ISA network card (3Com if possible) would have plenty of power for the internet connections of the day. But 100mb PCI cards were still fairly cheap. Install two NICs, load your favorite Linux distro, and then follow the IP-Masquerading HOWTO and you've got internet access for the whole apartment building, office, or LAN party. Eventually I moved on to Linux Firewalls by Robert Ziegler for a base to build on. After that I started piling other services on, like a spam filter, Squid cache, it was amazing to get so much use out of hardware that was going to just get thrown out."
+        },
+        {
+          "id": 47574625,
+          "author": "LatticeAnimal",
+          "text": "I’ve been using OpnSense/pfsense [0] for years and would highly recommend it. It has a great automatic update experience, config backups, builtin wireguard tunnels and advanced features like packet filtering options via suricata. When I am doing network management on my weekends, I’m so glad I’m not stuck in the Linux terminal learning about networking internals and can instead just go to a webui and configure my router. 0: https://opnsense.org/"
+        },
+        {
+          "id": 47576135,
+          "author": "StillBored",
+          "text": "I've got one of those N100+10Gbit router devices with a handful of ports. It seems a pretty reasonable device with one of the router distros running on it, but it doesn't seem nearly as efficient as my ucg-fiber/route10 devices, and that wouldn't bother me except that I suspect the packet latency is significantly higher too. Those devices AFAIK have hardware programmable router chips, which means the forwarding is done 100% without the interaction of the main CPU, so there isn't any interrupt/polling/etc delays when a packet arrives, the header gets rewritten, the checksum verified and off it goes. Anyone actually measured this? I see a lot of bandwidth/etc style tests but few that can show the actual impact of enabling disabling deep packet inspection and a few of the other metrics that I actually care about. Serve the home seems to have gotten some fancy test HW but they don't seem to be running these kinds of tests yet."
+        }
+      ],
+      "summary_ja": "コメントでは、Linuxを用いたソフトウェアルーターの構築方法が議論されている。create_apスクリプトなど簡易ツールからOpnSenseのような本格的なルーターOSまで様々な選択肢があり、ルーティングの基本はLinuxカーネル機能に基づく。また、ハードウェアとソフトウェアの性能比較にも言及されている。"
+    },
+    {
+      "rank": 11,
+      "id": 47578572,
+      "title_en": "Turning a MacBook into a touchscreen with $1 of hardware (2018)",
+      "title_ja": "MacBookを1ドルのハードウェアでタッチスクリーンに変える方法（2018年）",
+      "url": "https://anishathalye.com/macbook-touchscreen/",
+      "hn_url": "https://news.ycombinator.com/item?id=47578572",
+      "score": 250,
+      "comment_count": 111,
+      "posted_at": "2026-03-30T19:22:33+00:00",
+      "comments": [
+        {
+          "id": 47581678,
+          "author": "wildrhythms",
+          "text": "\"We've done tons of user testing on this, and it turns out it doesn't work. Touch surfaces don't want to be vertical. It gives great demo but after a short period of time, you start to fatigue and after an extended period of time, your arm wants to fall off. it doesn't work, it's ergonomically terrible.\" -Steve Jobs, 2010 https://www.businessinsider.com/steve-jobs-touch-screen-mac-..."
+        },
+        {
+          "id": 47579511,
+          "author": "dotBen",
+          "text": "I wouldn't want a touchscreen MBP even if it was free, anyone else feel similar? I don't get the draw - we already optimize for keyboard commands to avoid living our fingers over to a touchpad. Why would I want to start clicking on my screen? If you're using your computer for tasks (rather than entertainment) and you're not a visual designer, I don't get why Apple are apparently going to be putting them into the new MBP line later this year."
+        },
+        {
+          "id": 47580901,
+          "author": "wek",
+          "text": "This is cool. Simple prototype. Is it dependent on lighting ... what if you are outside or backlit or glare etc...?"
+        },
+        {
+          "id": 47579542,
+          "author": "nothrowaways",
+          "text": "Touch screens are not pleasant for laptops. I prefer not to have them."
+        }
+      ],
+      "summary_ja": "タッチスクリーンをMacBookに導入することに対して、人間工学的に腕が疲れる、キーボードとタッチパッドの方が効率的で不要、プロトタイプは照明条件に依存する懸念がある、といった否定的な意見が多数。多くのユーザーがラップトップでのタッチスクリーンを好まない。"
+    },
+    {
+      "rank": 12,
+      "id": 47579229,
+      "title_en": "Learn Claude Code by doing, not reading",
+      "title_ja": "読むのではなく、実践してClaude Codeを学ぶ",
+      "url": "https://claude.nagdy.me/",
+      "hn_url": "https://news.ycombinator.com/item?id=47579229",
+      "score": 210,
+      "comment_count": 97,
+      "posted_at": "2026-03-30T20:19:43+00:00",
+      "comments": [
+        {
+          "id": 47580242,
+          "author": "MeetingsBrowser",
+          "text": "I use claude code every day, I've written plugins and skills, use MCP servers, subagent workflows, and filled out the \"Find your level\" quiz as such. According to the quiz, I am a beginner!"
+        },
+        {
+          "id": 47580062,
+          "author": "npilk",
+          "text": "Strongly agree with the sentiment, but I'd say if you're familiar with the terminal you may as well just install it and truly 'learn by doing'! I could see this being great for true beginners, but for them it might be nice to have even some more basics to start (how do I open the terminal, what is a command, etc)."
+        },
+        {
+          "id": 47582422,
+          "author": "theptip",
+          "text": "I’m missing something here. Isn’t the best “doing” to actually use Claude to build stuff? The barrier to entry is so low. Why do you need to memorize slash commands? They are somewhat useful and you can just read them from the autocomplete."
+        },
+        {
+          "id": 47580181,
+          "author": "Yiin",
+          "text": "find your level -> answer D to everything -> you're a beginner! And I thought I have high standards..."
+        },
+        {
+          "id": 47582744,
+          "author": "deemeng",
+          "text": "thank you to OP -- this was a really easy way to look up how plugins inside of the claude code"
+        }
+      ],
+      "summary_ja": "Claude Codeの学習は実践が重要だが、初心者にはターミナル操作など基礎ガイドが必要。コマンド暗記より実際に構築しオートコンプリートを活用すべきで、「Find your level」クイズの評価方法には疑問が示されている。"
+    },
+    {
+      "rank": 13,
+      "id": 47581721,
+      "title_en": "Incident March 30th, 2026 – Accidental CDN Caching",
+      "title_ja": "2026年3月30日のインシデント – 偶発的なCDNキャッシング",
+      "url": "https://blog.railway.com/p/incident-report-march-30-2026-accidental-cdn-caching",
+      "hn_url": "https://news.ycombinator.com/item?id=47581721",
+      "score": 39,
+      "comment_count": 13,
+      "posted_at": "2026-03-31T01:28:18+00:00",
+      "comments": [
+        {
+          "id": 47582295,
+          "author": "varun_chopra",
+          "text": "The status page [1] has the actual root cause (enabling \"Surrogate Keys\" silently bypassed their CDN-off logic). The blog post doesn't. That's backwards. \"0.05% of domains\" is a vanity metric -- what matters is how many requests were mis-served cross-user. \"Cache-Control was respected where provided\" is technically true but misleading when most apps don't set it because CDN was off. The status page is more honest here too: they confirmed content without cache-control was cached. They call it a \"trust boundary violation\" in the last line but the rest of the post reads like a press release. No accounting of what data was actually exposed. [1] https://status.railway.com/incident/X0Q39H56"
+        },
+        {
+          "id": 47582093,
+          "author": "stingraycharles",
+          "text": "This write up doesn’t make sense. Authenticated users are the ones without a Set-Cookie? Surely the ones with the cookie set are the authenticated ones? There are dozens of contradictions, like first they say: “this may have resulted in potentially authenticated data being served to unauthenticated users” and then just a few sentences later say “potentially unauthenticated data is served to authenticated users” which is the opposite. Which one is it? Am I missing something, or is this article poorly reviewed?"
+        },
+        {
+          "id": 47582674,
+          "author": "rileymichael",
+          "text": "pretty hard to find this on their blog, looks like incidents are tucked away at the bottom. an issue of this size deserve a higher spot. (also looks like two versions of the 'postmortem' are published at https://blog.railway.com/engineering )"
+        },
+        {
+          "id": 47582634,
+          "author": "muragekibicho",
+          "text": "Does Stripe use Railway? The dashboard was down today and this is the only incident report I've encountered and the timeline matches Stripe's downtime."
+        },
+        {
+          "id": 47582105,
+          "author": "sublinear",
+          "text": "I'm curious if having unique URLs per user session would mitigate this. I think that's already best practice in most API designs anyway?"
+        }
+      ],
+      "summary_ja": "RailwayのCDNキャッシュインシデント報告は、根本原因の説明が不十分でブログとステータスページに差異があり、記事内に矛盾点や虚栄指標が見られる。データ露出の詳細が不明で、コミュニケーションの透明性に欠けるとの批判がされている。"
+    },
+    {
+      "rank": 14,
+      "id": 47580910,
+      "title_en": "Show HN: I turned a sketch into a 3D-print pegboard for my kid with an AI agent",
+      "title_ja": "Show HN: AIエージェントを使って子供のためにスケッチを3Dプリント可能なペグボードに変えた",
+      "url": "https://github.com/virpo/pegboard",
+      "hn_url": "https://news.ycombinator.com/item?id=47580910",
+      "score": 25,
+      "comment_count": 3,
+      "posted_at": "2026-03-30T23:20:02+00:00",
+      "comments": [
+        {
+          "id": 47582827,
+          "author": "royschwartz",
+          "text": "This is wonderful. The sketch-to-physical-toy pipeline is such a satisfying use of AI — you skipped the tedious CAD modeling part and spent that time actually iterating on fit and feel with your kid instead. That's the dream."
+        },
+        {
+          "id": 47582540,
+          "author": "laser9",
+          "text": "This looks pretty awesome! You can take up a notch and start generating Lego blocks!"
+        },
+        {
+          "id": 47582329,
+          "author": "prodigycorp",
+          "text": "Great work. The Agent x Parent combo has become my favorite niche in LLM space. It's unlocked so much creativity at a time where we have the least disposable time."
+        }
+      ],
+      "summary_ja": "AIによるスケッチから3Dプリントおもちゃへの変換が、CADモデリングの手間を省き、親子での試行錯誤に時間を割ける利点を指摘。AIエージェントと親の協業が、時間不足の中で創造性を解き放ち、さらなる応用が期待されると称賛されている。"
+    },
+    {
+      "rank": 15,
+      "id": 47573887,
+      "title_en": "Bird brains (2023)",
+      "title_ja": "鳥の脳（2023年）",
+      "url": "https://www.dhanishsemar.com/writing/bird-brains",
+      "hn_url": "https://news.ycombinator.com/item?id=47573887",
+      "score": 305,
+      "comment_count": 194,
+      "posted_at": "2026-03-30T13:14:27+00:00",
+      "comments": [
+        {
+          "id": 47575777,
+          "author": "awsanswers",
+          "text": "If you're in tune with animals and spend time around a parrot, it's obvious there is a lot going on in their minds. They have incredible memories and their own understanding of their world. It looks simple to us but they are not simple creatures. That being said, I don't know how a bird lover can keep a bird in a cage."
+        },
+        {
+          "id": 47578724,
+          "author": "Supercompressor",
+          "text": "If you'd like to read a long-form version of this, take a look at Jennifer Ackerman's \"The Bird Way\" from 2020. Really loved this book. https://www.jenniferackermanauthor.com/the-bird-way Also, just my opinion, but Kea's are the best bird there is."
+        },
+        {
+          "id": 47574311,
+          "author": "Bender",
+          "text": "Adding to this a chart of neuron count [1] [1] - https://en.wikipedia.org/wiki/List_of_animals_by_number_of_n..."
+        },
+        {
+          "id": 47576448,
+          "author": "pks016",
+          "text": "I work on some aspects of intelligence in birds, primarily in songbirds. There have been some effort finding general intelligence (\"g\" cognitive factor) in birds since last 15-20 years. The results have been mixed as you would expect. Animals' intelligence have evolved for survival and designing experiments to test those are quite hard. Research has shown brain size matters but not that much, we should look at relative brain size."
+        },
+        {
+          "id": 47575357,
+          "author": "junon",
+          "text": "Parrot owner here. This doesn't surprise me at all. I'm actually a bit surprised they cared about the gyms! This fits right into the ABC model of parrot psychology: https://www.parrots.org/pdfs/all_about_parrots/reference_lib..."
+        }
+      ],
+      "summary_ja": "鳥は高度な認知能力と複雑な心を持つが、生存適応のため知性測定は困難であり、脳の相対的大きさが重要との指摘。同時に鳥の飼育、特にケージ飼いの倫理的疑問も提起されている。"
+    },
+    {
+      "rank": 16,
+      "id": 47547843,
+      "title_en": "Agents of Chaos",
+      "title_ja": "混沌のエージェント",
+      "url": "https://agentsofchaos.baulab.info/report.html",
+      "hn_url": "https://news.ycombinator.com/item?id=47547843",
+      "score": 90,
+      "comment_count": 10,
+      "posted_at": "2026-03-27T20:30:05+00:00",
+      "comments": [
+        {
+          "id": 47582736,
+          "author": "whatever1",
+          "text": "I don't understand why LLMs get a free pass when all of the existing businesses have to play by the rules. Businesses have to comply with IP, privacy, HIPAA, security and safety laws to name just a few. NONE of these apply to the LLMs. Of course I can now build and deploy an app to hospitals in a weekend since I can circumvent all of the difficult parts using the magic LLMs. If asked why, the response is \"It's AI!\""
+        },
+        {
+          "id": 47582276,
+          "author": "e7h4nz",
+          "text": "In this problem domain, I believe humanity is still in a very early stage. What we can do is treat the agent and its operating environment as a \"black box\" and audit all incoming and outgoing network request traffic. This approach is similar to DLP (Data leak prevention) strategies in enterprise-level security. Although we cannot guarantee that every single network request is secure, we can probabilistically improve safety by adjust network defense rules and conducting post-event audits on traffic flow"
+        },
+        {
+          "id": 47582456,
+          "author": "iqihs",
+          "text": "as someone who is working in the cybersecurity space and recently obtained my CISSP designation, i am left wondering when the pedagogy of my field will expand and include a separate domain dedicated to AI agent safety and security best practices it really does feel like we are way behind in the way we train people in cyber compared to the pace of the development of agentic AI, robotics etc"
+        },
+        {
+          "id": 47580253,
+          "author": "manmal",
+          "text": "The TLDR is that current agents are as problematic as many of us already know they are: > unauthorized compliance with non-owners, disclosure of sensitive information, execution of destructive system-level actions, denial-of-service conditions, uncontrolled resource consumption, identity spoofing vulnerabilities, cross-agent propagation of unsafe practices, and partial system takeover"
+        },
+        {
+          "id": 47580239,
+          "author": "cyanydeez",
+          "text": "This is begging to turned into a youtube style \"Real World\", where you pit 12 humans with 12 AIs and they're only allowed to interact through CLIs. Then you slowly reveal they're all humans."
+        }
+      ],
+      "summary_ja": "AIエージェントは既存の規制を免れ、セキュリティ・プライバシー面で深刻な問題を抱える。サイバーセキュリティ教育がAIの進展に遅れており、ネットワーク監査などの対策が提案されるが、根本的な解決には至っていない。"
+    },
+    {
+      "rank": 17,
+      "id": 47582056,
+      "title_en": "Mr. Chatterbox is a Victorian-era ethically trained model",
+      "title_ja": "Mr. Chatterboxはビクトリア朝時代に倫理的に訓練されたモデル",
+      "url": "https://simonwillison.net/2026/Mar/30/mr-chatterbox/",
+      "hn_url": "https://news.ycombinator.com/item?id=47582056",
+      "score": 10,
+      "comment_count": 0,
+      "posted_at": "2026-03-31T02:26:15+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 18,
+      "id": 47579754,
+      "title_en": "OpenGridWorks: The Electricity Infrasctructure, Mapped",
+      "title_ja": "OpenGridWorks: 電力インフラのマッピング",
+      "url": "https://www.opengridworks.com",
+      "hn_url": "https://news.ycombinator.com/item?id=47579754",
+      "score": 74,
+      "comment_count": 7,
+      "posted_at": "2026-03-30T21:12:46+00:00",
+      "comments": [
+        {
+          "id": 47582703,
+          "author": "eliaspro",
+          "text": "The map is missing a proper attribution as it is required by OpenStreetMap when using the project's data: https://www.openstreetmap.org/copyright/attribution-guide/"
+        },
+        {
+          "id": 47582162,
+          "author": "nullhole",
+          "text": "Related, mapping of OSM infrastructure data: https://openinframap.org/"
+        },
+        {
+          "id": 47582912,
+          "author": "ninininino",
+          "text": "its like a military targeting map for our geopolitical adversaries"
+        },
+        {
+          "id": 47581989,
+          "author": "curiouscrow55",
+          "text": "This is really cool! As a weird coincidence I was actually working on something similar focusing on datacenter load per ISO literally earlier today! https://energy-vis-chi.vercel.app/"
+        },
+        {
+          "id": 47582584,
+          "author": "mcbishop",
+          "text": "This is awesome. It'd be even more awesome if it was easier to show a power plant's info upon hover / click. ...It's currently too much of a cat-and-mouse game for me."
+        }
+      ],
+      "summary_ja": "OpenGridWorksの地図はOpenStreetMapデータ使用時の帰属表示欠如を指摘され、類似プロジェクトが紹介された。地政学的リスクや悪用懸念が示される一方、有用性は評価され、操作性向上の提案がなされている。"
+    },
+    {
+      "rank": 19,
+      "id": 47549824,
+      "title_en": "Cherri – programming language that compiles to an Apple Shortuct",
+      "title_ja": "Cherri – Apple Shortcutにコンパイルされるプログラミング言語",
+      "url": "https://github.com/electrikmilk/cherri",
+      "hn_url": "https://news.ycombinator.com/item?id=47549824",
+      "score": 281,
+      "comment_count": 56,
+      "posted_at": "2026-03-27T23:39:44+00:00",
+      "comments": [
+        {
+          "id": 47577875,
+          "author": "alin23",
+          "text": "I've just used this extensively to build 200 Shortcuts for my event-based automation app on macOS [0], because some actions you simply can't do without Shortcuts: changing Focus Mode, toggling Accessibility functions like Color Filters, accessing the Private Cloud Compute model etc. I also wrote about how Claude was able to basically learn the language from scratch and write those fully compilable Shortcuts for me [1] because it was mind boggling to me that an LLM can do that. Curiously, this is becoming more and more normal in my mind. [0] https://lowtechguys.com/crank [1] https://alinpanaitiu.com/blog/how-good-is-claude-really/#che..."
+        },
+        {
+          "id": 47578314,
+          "author": "lemontheme",
+          "text": "Cool! As a professional programmer few things consistently succeed in making me feel inept like trying to build an Apple Shortcut"
+        },
+        {
+          "id": 47579404,
+          "author": "wiether",
+          "text": "Oh boy! Creating/maintaining Shortcuts is such a pain! Having to do it on a small iPhone screen with a touchscreen keyboard, through a no-code interface... I want an actual text editor, I want to version things with git... It feels like with Cherri I'll finally be able to actually do things! Thanks!"
+        },
+        {
+          "id": 47580227,
+          "author": "wwalexander",
+          "text": "I take it this only supports Apple’s built-in actions, and doesn’t plug into the broader AppIntents system? AppIntents includes a packaging concept, would be cool to see if this could use third-party AppIntents in a similar way to how scientific Python uses C modules for performance critical sections."
+        },
+        {
+          "id": 47578344,
+          "author": "RationPhantoms",
+          "text": "Still confused on why there is no social component of this? What is the best place to find examples of actual useful Apple Shortcuts?"
+        }
+      ],
+      "summary_ja": "CherriはAppleショートカットにコンパイルされるプログラミング言語で、ユーザーは実用的な自動化に活用し、LLMによるコード生成の可能性を評価。一方、従来のショートカット作成はインターフェースの難しさから苦痛であり、テキスト編集やgitでのバージョン管理を求める声が強い。技術的にはAppIntentsシステムとの統合や、ソーシャル機能・有用な例の共有手段の不足が課題として指摘されている。"
+    },
+    {
+      "rank": 20,
+      "id": 47548164,
+      "title_en": "Researchers find 3,500-year-old loom that reveals textile revolution",
+      "title_ja": "研究者が3,500年前の織機を発見、繊維革命を明らかに",
+      "url": "https://web.ua.es/en/actualidad-universitaria/2026/marzo2026/23-31/ua-researchers-find-3-500-year-old-loom-that-reveals-key-aspects-of-textile-revolution-in-the-bronze-age.html",
+      "hn_url": "https://news.ycombinator.com/item?id=47548164",
+      "score": 95,
+      "comment_count": 9,
+      "posted_at": "2026-03-27T20:57:17+00:00",
+      "comments": [
+        {
+          "id": 47580125,
+          "author": "srean",
+          "text": "I am always pleasantly amused that many HN folks share with me a love for weaving, knitting and knotting; not to mention ropes. Dang had once posted a long list of HN discussions on these topics. I think there is something about them that squirts a little bit of dopamine in our pattern seeking, puzzle solving brains. For me, one of draws was how does the symmetry of the woven pattern get weft into the cloth. Multi-shaft looms does it differently from, say, a Kashmiri rug. When I had joined HN decades ago I had no idea that there would be this shared interest. Frankly, there were no reason for this to be the case. Then one day this happened https://news.ycombinator.com/item?id=44462404"
+        }
+      ],
+      "summary_ja": "Hacker Newsコミュニティにおいて、機織りや編み物など織物技術への共通の興味が多くのユーザーに共有されていることへの驚きと喜び。パターン認識やパズル解決に関わる脳の働きがこの関心を引き起こすと推測され、投稿者は自身の経験から、予想外に発見されたこの共有された熱意に言及している。"
+    },
+    {
+      "rank": 21,
+      "id": 47533079,
+      "title_en": "Unit: A self-replicating Forth mesh agent running in a browser tab",
+      "title_ja": "Unit: ブラウザタブで動作する自己複製型Forthメッシュエージェント",
+      "url": "https://davidcanhelp.github.io/unit/",
+      "hn_url": "https://news.ycombinator.com/item?id=47533079",
+      "score": 19,
+      "comment_count": 1,
+      "posted_at": "2026-03-26T17:15:33+00:00",
+      "comments": [
+        {
+          "id": 47582386,
+          "author": "andai",
+          "text": "Very interesting. What are goals, fitness and mutation in this context?"
+        }
+      ],
+      "summary_ja": "このコメントでは、自己複製するForthメッシュエージェントにおいて、進化的アルゴリズムの核心概念（目標・適応度・突然変異）が具体的にどのように定義・実装されるのかについて質問が投げかけられています。"
+    },
+    {
+      "rank": 22,
+      "id": 47575403,
+      "title_en": "CodingFont: A game to help you pick a coding font",
+      "title_ja": "CodingFont: コーディング用フォントを選ぶのを助けるゲーム",
+      "url": "https://www.codingfont.com/",
+      "hn_url": "https://news.ycombinator.com/item?id=47575403",
+      "score": 360,
+      "comment_count": 189,
+      "posted_at": "2026-03-30T15:16:35+00:00",
+      "comments": [
+        {
+          "id": 47579119,
+          "author": "DiabloD3",
+          "text": "Something I never liked about this game is its showing it in your browser at your chosen font size. Chrome (assuming you're using Chrome) draws it a specific way. This does not match how Freetype (using typical tuning) or DirectWrite draws it. Chrome's choices in font renderer tuning and blending makes it kind of split the difference between Windows-style and OSX-style, and isn't native to either. What it should be doing is showing you lossless screenshots of actual in-app renders at different sizes. Some in Chrome (to represent the Electron apps), some in DirectWrite, some in OSX post-Retina, etc. Some fonts look amazing at larger sizes, but are unreadable at smaller ones. Some perform exceptionally well at smaller sizes. Some look great on every font renderer but OSX's, but some only look right on OSX and look bad everywhere else. I've sorta played this game with myself, in a semi-objective way: take a bunch of fonts, ignore the subjective art nature of them, and throw them at a bunch of common renderers and see what the optimal size is, and then sort by smallest legible size. If we define Fira Code, the most popular code font out there, as the bare minimum, 8 of the ones I tested beat it, while 17 were worse. https://github.com/Diablo-D3/dotfiles/blob/master/fontsizes...."
+        },
+        {
+          "id": 47578956,
+          "author": "dylan604",
+          "text": "Going through this, I was introduced to <= being converted to a ligature which immediately ruled it as a nope for me. No monkey business with the characters of my code thank you very much."
+        },
+        {
+          "id": 47578385,
+          "author": "torgeros",
+          "text": "Knowing that everything in here is people asking why their font is missing: I highly recommend having a look at [ MAPLE MONO ] (on Github https://github.com/subframe7536/Maple-font ). It has amazing readability, looks nice, is compatible with NF if you use that. I received compliments from people looking over my shoulder for my f'ing font?! Huge shoutout to subframe7536 ^^"
+        },
+        {
+          "id": 47577943,
+          "author": "sedatk",
+          "text": "Berkeley Mono, Iosevka, and Cascadia Code are missing which are my favorite fonts. The game handed me Roboto Mono instead. What I noticed while playing was that when fonts are similar, I really pay attention to the rendering of \"m\" and \"r\". When they look off, the whole font looks off to me."
+        },
+        {
+          "id": 47582613,
+          "author": "spankalee",
+          "text": "I love this, but I really wish it were structured as a \"Hot or Not\" type of round robin system rather than a bracket. Some fonts are close enough that I don't know if I'd choose one over the other consistently, and I'd be curious to see a percentage score of how much I like a particular font."
+        }
+      ],
+      "summary_ja": "CodingFontゲームはブラウザ表示が実際のフォントレンダリングと異なる問題があり、アプリ内のスクリーンショットで評価すべきとの指摘。フォントはサイズやOSによって見やすさが変わり、個人的なテストや「m」「r」の描画で判断する意見も。ゲーム形式の改善提案や特定フォントの推薦もなされている。"
+    },
+    {
+      "rank": 23,
+      "id": 47572748,
+      "title_en": "R3 Bio pitched “brainless clones” to serve the role of backup human bodies",
+      "title_ja": "R3 Bioが「脳なしクローン」をバックアップ人間ボディとして提案",
+      "url": "https://www.technologyreview.com/2026/03/30/1134780/r3-bio-brainless-human-clones-full-body-replacement-john-schloendorn-aging-longevity/",
+      "hn_url": "https://news.ycombinator.com/item?id=47572748",
+      "score": 45,
+      "comment_count": 53,
+      "posted_at": "2026-03-30T11:02:14+00:00",
+      "comments": [
+        {
+          "id": 47580532,
+          "author": "babblingfish",
+          "text": "I don't think this idea could work. There's this common misconception that our brains control our bodies, like how software can control hardware. The fact is that our brains are intrinsically connected to the rest of our body: via the central nervous system, sensory, and motor neurons. You can't just swap out our brains. It's integrated with the rest of our body in a fundamental way. If you cloned someone, the neuronal connections between the CNS and organs would not be the same, because these interconnections develop over a lifetime and are not predetermined at birth. It also feels super unethical to me. Reminds me of \"Never let me go\" by Kazuo Ishiguro."
+        },
+        {
+          "id": 47580533,
+          "author": "nathanh4903",
+          "text": "These type of research seems to always assume that we are a ghost in a machine: the brain is what really matters, and the body is nothing more than a suit. The mind-body problem fascinates me, and I'm skeptical of anyone who held any position with certainty. The only thing thats certain is that the debate on the mind-body problem is going to be no longer just philosophical/theological, but a practical problem with real world implication. Its exciting and terrifying that we may soon have empirical data refuting or supporting dualism."
+        },
+        {
+          "id": 47580325,
+          "author": "Animats",
+          "text": "Cloning works rather well now. Here are six polo ponies, Cuartetera 01 through 06, all clones of a famous polo pony.[1] Their owner has been winning world class polo matches on these mares. They're strong and healthy and very real. [1] https://www.science.org/content/article/six-cloned-horses-he..."
+        },
+        {
+          "id": 47580342,
+          "author": "nwah1",
+          "text": "Is there any danger of transplanting organs into you that have genes which signal not to develop a brain? Would those genes potentially affect your actual brain?"
+        },
+        {
+          "id": 47580352,
+          "author": "johnpdoe1234",
+          "text": "Spares (1996, HarperCollins) – ISBN 978-0002246569 Michael Marshall Smith"
+        }
+      ],
+      "summary_ja": "「脳なしクローン」をバックアップ体とする提案に対し、脳と体は神経系で統合されており交換不可能という生物学的批判、心身問題が哲学的議論から実証的課題となりうる点、クローン技術の現実的進歩と倫理的懸念、遺伝子操作による未知のリスクなどが議論されている。"
+    },
+    {
+      "rank": 24,
+      "id": 47582418,
+      "title_en": "Safeguarding cryptocurrency by disclosing quantum vulnerabilities responsibly",
+      "title_ja": "暗号通貨を保護：量子脆弱性を責任を持って開示",
+      "url": "https://research.google/blog/safeguarding-cryptocurrency-by-disclosing-quantum-vulnerabilities-responsibly/",
+      "hn_url": "https://news.ycombinator.com/item?id=47582418",
+      "score": 9,
+      "comment_count": 0,
+      "posted_at": "2026-03-31T03:28:03+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 25,
+      "id": 47556063,
+      "title_en": "Seeing Like a Spreadsheet",
+      "title_ja": "スプレッドシートのように見る",
+      "url": "https://davidoks.blog/p/how-the-spreadsheet-reshaped-america",
+      "hn_url": "https://news.ycombinator.com/item?id=47556063",
+      "score": 93,
+      "comment_count": 33,
+      "posted_at": "2026-03-28T16:28:32+00:00",
+      "comments": [
+        {
+          "id": 47579297,
+          "author": "dcre",
+          "text": "This looks really good. Haven't read in full yet, but I was hoping to see him credit Ben Evans's \"Office, messaging and verbs\" (2015): \"In effect, every person on that floor is a cell in a spreadsheet. The floor is a worksheet and the building is an Excel file, with thousands of cells each containing a single person.\" https://www.ben-evans.com/benedictevans/2015/5/21/office-mes..."
+        },
+        {
+          "id": 47581534,
+          "author": "JSR_FDED",
+          "text": "This is really two articles in one. First a (great) history of the spreadsheet. Then it goes into the risk that comes from looking at everything in a company as numbers, attractive now that you have the spreadsheet to manipulate numbers easily, but there are many things that can’t adequately be represented as a spreadsheet without losing valuable information in the process. Finally, AI agents now make it tempting to think of everything in a business as a collection of potentially automatable tasks, which similarly risks losing what makes companies special."
+        },
+        {
+          "id": 47582090,
+          "author": "shermantanktop",
+          "text": "> But you will be hard-pressed to find a true admirer of Excel. It’s a keyword search away. There are many, and they love Excel. How did you not find them? https://excel-esports.com/ https://en.wikipedia.org/wiki/Financial_Modeling_World_Cup https://www.reddit.com/r/excel/comments/15r53rc/why_i_unapol..."
+        },
+        {
+          "id": 47582611,
+          "author": "arjunchint",
+          "text": "Really do think that spreadsheets are the most optimal way to coordinate agents. Each row spins up a parallel agent, columns mapped as input, agent executes and writes new columns as output. We tried initial implementation of this with rtrvr.ai building out Sheets Workflows, but I can't help but feel that there is a thread we're pulling towards a deeper insight on this"
+        },
+        {
+          "id": 47580495,
+          "author": "nbaksalyar",
+          "text": "I think spreadsheets have been severely undervalued by software engineers and they're generally under-researched. It's definitely possible to use them in more non-obvious and interesting ways. E.g., see AmbSheets [1] [1] https://www.inkandswitch.com/ambsheets/notebook/"
+        }
+      ],
+      "summary_ja": "スプレッドシートの歴史的意義と、ビジネスを単純に数値化することによる情報の喪失リスクが指摘される一方で、Excel愛好家の存在やAIエージェントとの連携など、スプレッドシートの新たな可能性や過小評価されている価値についての議論が交わされている。"
+    },
+    {
+      "rank": 26,
+      "id": 47578464,
+      "title_en": "William Blake, Remote by the Sea",
+      "title_ja": "ウィリアム・ブレイク、海辺の遠隔地",
+      "url": "https://www.laphamsquarterly.org/roundtable/william-blake-remote-sea",
+      "hn_url": "https://news.ycombinator.com/item?id=47578464",
+      "score": 72,
+      "comment_count": 4,
+      "posted_at": "2026-03-30T19:13:05+00:00",
+      "comments": [
+        {
+          "id": 47580046,
+          "author": "srean",
+          "text": "Blake's and Durer's artwork are two of my favorites. What I find so teasingly difficult to explain is that despite being so different there is some shared aesthetic value between them that I cannot quite pin down in words. Perhaps their strong geometric undertones and a certain muscularity in them."
+        }
+      ],
+      "summary_ja": "ウィリアム・ブレイクとデューラーの作品は一見異なるが、強い幾何学的基調と力強さといった言葉に尽くしがたい共通の美的価値を感じる、という著者の個人的な印象。"
+    },
+    {
+      "rank": 27,
+      "id": 47567790,
+      "title_en": "Oscar Reutersvärd (2021)",
+      "title_ja": "オスカー・ロイタースヴァルド（2021年）",
+      "url": "https://escherinhetpaleis.nl/en/about-escher/escher-today/oscar-reutersvard",
+      "hn_url": "https://news.ycombinator.com/item?id=47567790",
+      "score": 6,
+      "comment_count": 0,
+      "posted_at": "2026-03-29T21:53:42+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 28,
+      "id": 47575417,
+      "title_en": "Show HN: Coasts – Containerized Hosts for Agents",
+      "title_ja": "Show HN: Coasts – エージェント向けコンテナ化ホスト",
+      "url": "https://github.com/coast-guard/coasts",
+      "hn_url": "https://news.ycombinator.com/item?id=47575417",
+      "score": 73,
+      "comment_count": 28,
+      "posted_at": "2026-03-30T15:17:51+00:00",
+      "comments": [
+        {
+          "id": 47580145,
+          "author": "fabianlindfors",
+          "text": "We have been trying to solve the same problem (and a bunch of other ones) with https://specific.dev as well. We’ve tried to stay away from Docker as much as we can though because of the still pretty bad experience on Mac. Our approach is having our CLI handle port assignments (and pass any connection details/ports along as env vars) and that way being able to spin up “isolated” copies of the local dev environment. Has the added benefit of us being able to deploy the same config straight to production and switch in production database connections strings and anything else needed."
+        },
+        {
+          "id": 47582381,
+          "author": "adrq",
+          "text": "How reliably do agents stick to the 'coast exec' boundary in practice? Especially when they spawn subagents that may or may not inherit the instructions."
+        },
+        {
+          "id": 47577675,
+          "author": "dbla",
+          "text": "This looks really cool and I've definitely been feeling this pain. I've been building out a solution for myself on top of docker. What are the advantages of using coasts over docker?"
+        },
+        {
+          "id": 47575970,
+          "author": "oelmgren",
+          "text": "This is pretty cool, have personally felt this limitation many a time. Basically been relying on spinning up cursor / niteshift / devin workflows since they have their own containers but this could be interesting to keep it all on your main machine."
+        },
+        {
+          "id": 47575434,
+          "author": "jsunderland323",
+          "text": "HN questions we know are coming our way: 1) Could you run an agent in the coast? You could... sort of. We started out with this in mind. We wanted to get Claude Max plans to work so we built a way to inject OAuth secrets from the host into the containerized host... unfortunately because the Coast runtime doesn't match the host machine the OAuth token is created on, Anthropic rapidly invalidates the OAuth tokens. This would really only work for TUIs/CLIs and you'd almost certainly have to bring a usage key (at least for Anthropic). You would also need to figure out how to get a browser runtime into the containerized host if you wanted things like playwright to work for your agent. There's so many good host-side solutions for sandboxing. Coasts is not a sandboxing tool and we don't try to be. We should play well with all host-side sandboxing solutions though. 2) Why DinD and why not mount namespaces with unshare / nsenter? Yes, DinD is heavy. A core principle of our design was to run the user's docker-compose unmodified. We wanted the full docker api inside the running containerized host. Raw mount namespaces can't provide image caches, network namespaces, and build layers without running against the host daemon or reimplementing Docker itself. In practice, I've seen about 200mb of overhead with each containerized host running Dind. We have a Podman runtime in the works, which may cut that down some. But the bulk of utilization comes from the services you're running and how you decide to optimize your containerized hosts and docker stack. We have a concept of \"shared-services\". For example if you don't need isolated postgres or redis, you can declare those services as shared in your Coastfile, and they'll run once on the host Docker daemon instead of being duplicated inside each containerized host, coasts will route to them."
+        }
+      ],
+      "summary_ja": "Coastsはエージェント用のコンテナ化ホストを提供する。ユーザーからはDockerとの比較や実行境界の信頼性、利点が質問される。開発者はDocker互換性のためにDinDを使用し、サンドボックスではなく、共有サービスで効率化を図ると説明している。"
+    },
+    {
+      "rank": 29,
+      "id": 47577120,
+      "title_en": "Recover Apple Keychain",
+      "title_ja": "Apple Keychainを回復",
+      "url": "https://arkoinad.com/posts/apple_keychain_recovery.html",
+      "hn_url": "https://news.ycombinator.com/item?id=47577120",
+      "score": 74,
+      "comment_count": 23,
+      "posted_at": "2026-03-30T17:21:49+00:00",
+      "comments": [
+        {
+          "id": 47581264,
+          "author": "oneplane",
+          "text": "There is a lot of documentation from Apple on how all of this works, but this is indeed expected behaviour. A way to make this smoother would have been: 1. Doing the password reset 2. Reboot straight back into recovery 3. Update your new password back into your old password 4. Boot into macOS, your default keychain will unlock but you'll still have to re-authenticate to iCloud since your machine-user identity combo will no longer match with what iCloud expects. (not sure if this is part of Octagon Trust, but there are various interesting layers to this) Check the escalation path of key revocation for example where you don't just have longer time delays but also stricter environments where new attempts can be made (near the end): https://support.apple.com/en-gb/guide/security/sec20230a10d/... There are a number of much more in-depth technical guides and specs, but just listing out random articles (or the Black Hat talk(s)) would probably rob someone of a nice excursion into platform security."
+        },
+        {
+          "id": 47579382,
+          "author": "nabbed",
+          "text": "Based on this description, it sounds like someone walking past your unattended desk and bent on disrupting your day but not stealing your data, could enter in a garbage password into the lock screen a few times and lock you out of your own laptop. I guess the same also works for cloud accounts as well. I remember, back in the mid-2000s, trying to log into my hotmail account (never having failed to log in before) and getting a \"locked out due to too many bad passwords\". So someone, only knowing my user account name (which was the same as my email address), locked me out of my own account. The problem was, I couldn't remember what my recovery accounts were (I eventually figured it out)."
+        },
+        {
+          "id": 47582297,
+          "author": "Brajeshwar",
+          "text": "I kinda feel uncomfortable with the comfort of Touch ID. So, I tend to type Passwords once in a while to keep my muscle memory, especially for key accounts, which are the entry points to other Passwords (Apple, 1Password, Google, etc.). These days, I believe that the only reason one does not get such misfortunes of being hacked/attacked, is that most of us are not important enough to get the attention of any external threats. Hence, mostly luck more than actually being secure. I have been working towards a process/pattern, as a last resort, to be able to walk out of anything and have backup options when misfortunes strikes or my luck runs out. I don’t even know the path yet."
+        },
+        {
+          "id": 47579286,
+          "author": "xd1936",
+          "text": "It Just Works™... until you don't want to take the default option. I'm sure your average user would just be SoL if going through this same experience."
+        },
+        {
+          "id": 47581296,
+          "author": "JSR_FDED",
+          "text": "Forgetting what the password is because you always just use the fingerprint reader…that’s why for elderly family members I nowadays set it up not to use the fingerprint any more. I thought they’d be annoyed but funnily enough they experience it as a sense of agency, that they are the one unlocking the computer and are in charge of it."
+        }
+      ],
+      "summary_ja": "Apple Keychainの回復は想定内の動作だが、パスワードリセット後の手順改善が提案されている。セキュリティ面では、ロックアウトのリスクや生体認証への依存が懸念され、パスワード記憶の重要性が指摘される。高齢者がパスワード入力で主体性を感じる例もあり、「It Just Works」だがデフォルトから外れると問題が生じ、平均ユーザーは対応に苦労する可能性がある。"
+    },
+    {
+      "rank": 30,
+      "id": 47531644,
+      "title_en": "Principles and Gear",
+      "title_ja": "原則と装備",
+      "url": "https://arun.is/blog/on-running/",
+      "hn_url": "https://news.ycombinator.com/item?id=47531644",
+      "score": 16,
+      "comment_count": 4,
+      "posted_at": "2026-03-26T15:22:46+00:00",
+      "comments": [
+        {
+          "id": 47581817,
+          "author": "pertique",
+          "text": "I'm of two minds on this. On one hand, I appreciate a good piece of gear and the feeling of having things just work. I think anyone who's been on a hunt and one day found a perfect something knows that spark of satisfaction every time you use it. On the other hand, and this is probably isn't right, the brandification and fetishization of gear doesn't sit right with me. I ackownledge it's unfair - there should not be any difference between being proud of some thrifted hat and some fancy running shorts. Yet it still tripped me up. Regardless, I can 100% corroborate the meat of the post. Running is, by far, one of the best ways to explore a new or old place. There's something about the pace of it that helps you notice details that you miss on a bike or when walking. At least, despite biking, walking, and driving through my last neighborhood for years, I'd regularly pick up on new things during runs."
+        },
+        {
+          "id": 47582284,
+          "author": "peterldowns",
+          "text": "That's cool. The double watch is smart. I never run longer than a half marathon in training so I don't bother with headphones but most of my serious running friends insist, makes sense when they're running 80-100mi weeks. If you're thinking about getting into running, I'd say the first piece of gear to buy is a good pair of shoes from your local running store. Don't worry about fancy watches or gels or arm sleeves or whatever. I did finally buy a smartwatch (coros) last year, after training my whole life with just a casio. It's made me a lot more adventurous as having the GPS tracking means I can run offroad and even off-trail without worrying about keeping accurate track of my distances and paces. This is probably the second piece of gear I'd recommend buying and I wish I had done it sooner. The numbers are useful, it makes it easier to do the hobby, and it means I can use Strava which is a fun way to stay in touch with my fitness friends. Third piece of unsolicited advice is that you absolutely don't have to run marathons. > t. slow, but ran the fastest mile of my life last year, good friends with many semi pros."
+        }
+      ],
+      "summary_ja": "ギアの実用性と満足感は認めるが、ブランド化や崇拝には違和感がある。ランニングは場所を探索する最良の方法の一つで、適切なペースにより細部を発見できる。初心者はまず良いシューズを購入し、次にGPSスマートウォッチがオフロード走行やデータ管理に有用である。数字は練習を容易にし、Stravaで友人と繋がれる楽しみもある。ランニングはマラソンなど競技に縛られず、個人のペースで楽しめる。"
+    }
+  ]
+}
