@@ -1,0 +1,1094 @@
+{
+  "date": "2026-04-03T00:00:00+09:00",
+  "slot": "07",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 47616361,
+      "title_en": "Google releases Gemma 4 open models",
+      "title_ja": "Google、Gemma 4オープンモデルを公開",
+      "url": "https://deepmind.google/models/gemma/gemma-4/",
+      "hn_url": "https://news.ycombinator.com/item?id=47616361",
+      "score": 951,
+      "comment_count": 293,
+      "posted_at": "2026-04-02T16:10:54+00:00",
+      "comments": [
+        {
+          "id": 47616439,
+          "author": "danielhanchen",
+          "text": "Thinking / reasoning + multimodal + tool calling. We made some quants at https://huggingface.co/collections/unsloth/gemma-4 for folks to run them - they work really well! Guide for those interested: https://unsloth.ai/docs/models/gemma-4 Also note to use temperature = 1.0, top_p = 0.95, top_k = 64 and the EOS is \"<turn|>\". \"<|channel>thought\\n\" is also used for the thinking trace!"
+        },
+        {
+          "id": 47616761,
+          "author": "scrlk",
+          "text": "Comparison of Gemma 4 vs. Qwen 3.5 benchmarks, consolidated from their respective Hugging Face model cards: | Model | MMLUP | GPQA | LCB | ELO | TAU2 | MMMLU | HLE-n | HLE-t | |----------------|-------|-------|-------|------|-------|-------|-------|-------| | G4 31B | 85.2% | 84.3% | 80.0% | 2150 | 76.9% | 88.4% | 19.5% | 26.5% | | G4 26B A4B | 82.6% | 82.3% | 77.1% | 1718 | 68.2% | 86.3% | 8.7% | 17.2% | | G4 E4B | 69.4% | 58.6% | 52.0% | 940 | 42.2% | 76.6% | - | - | | G4 E2B | 60.0% | 43.4% | 44.0% | 633 | 24.5% | 67.4% | - | - | | G3 27B no-T | 67.6% | 42.4% | 29.1% | 110 | 16.2% | 70.7% | - | - | | GPT-5-mini | 83.7% | 82.8% | 80.5% | 2160 | 69.8% | 86.2% | 19.4% | 35.8% | | GPT-OSS-120B | 80.8% | 80.1% | 82.7% | 2157 | -- | 78.2% | 14.9% | 19.0% | | Q3-235B-A22B | 84.4% | 81.1% | 75.1% | 2146 | 58.5% | 83.4% | 18.2% | -- | | Q3.5-122B-A10B | 86.7% | 86.6% | 78.9% | 2100 | 79.5% | 86.7% | 25.3% | 47.5% | | Q3.5-27B | 86.1% | 85.5% | 80.7% | 1899 | 79.0% | 85.9% | 24.3% | 48.5% | | Q3.5-35B-A3B | 85.3% | 84.2% | 74.6% | 2028 | 81.2% | 85.2% | 22.4% | 47.4% | MMLUP: MMLU-Pro GPQA: GPQA Diamond LCB: LiveCodeBench v6 ELO: Codeforces ELO TAU2: TAU2-Bench MMMLU: MMMLU HLE-n: Humanity's Last Exam (no tools / CoT) HLE-t: Humanity's Last Exam (with search / tool) no-T: no think"
+        },
+        {
+          "id": 47617370,
+          "author": "simonw",
+          "text": "I ran these in LM Studio and got unrecognizable pelicans out of the 2B and 4B models and an outstanding pelican out of the 26b-a4b model - I think the best I've seen from a model that runs on my laptop. https://simonwillison.net/2026/Apr/2/gemma-4/ The gemma-4-31b model is completely broken for me - it just spits out \"---\\n\" no matter what prompt I feed it. I got a pelican out of it via the AI Studio API hosted model instead."
+        },
+        {
+          "id": 47619651,
+          "author": "neonstatic",
+          "text": "Prompt: > what is the Unix timestamp for this: 2026-04-01T16:00:00Z Qwen 3.5-27b-dwq > Thought for 8 minutes 34 seconds. 7074 tokens. > The Unix timestamp for 2026-04-01T16:00:00Z is: > 1775059200 (my comment: Wednesday, 1 April 2026 at 16:00:00) Gemma-4-26b-a4b > Thought for 33.81 seconds. 694 tokens. > The Unix timestamp for 2026-04-01T16:00:00Z is: > 1775060800 (my comment: Wednesday, 1 April 2026 at 16:26:40) Gemma considered three options to solve this problem. From the thinking trace: > Option A: Manual calculation (too error-prone). > Option B: Use a programming language (Python/JavaScript). > Option C: Knowledge of specific dates. It then wrote a python script: from datetime import datetime, timezone date_str = \"2026-04-01T16:00:00Z\" # Replace Z with +00:00 for ISO format parsing or just strip it dt = datetime.strptime(date_str, \"%Y-%m-%dT%H:%M:%SZ\").replace(tzinfo=timezone.utc) ts = int(dt.timestamp()) print(ts) Then it verified the timestamp with a command: date -u -d @1775060800 All of this to produce a wrong result. Running the python script it produced gives the correct result. Running the verification date command leads to a runtime error (hallucinated syntax). On the other hand Qwen went straight to Option A and kept overthinking the question, verifying every step 10 times, experienced a mental breakdown, then finally returned the right answer. I think Gemma would be clearly superior here if it used the tools it came up with rather than hallucinating using them."
+        },
+        {
+          "id": 47617137,
+          "author": "canyon289",
+          "text": "Hi all! I work on the Gemma team, one of many as this one was a bigger effort given it was a mainline release. Happy to answer whatever questions I can"
+        }
+      ],
+      "summary_ja": "Gemma 4は思考・推論・マルチモーダル・ツール呼び出しを特徴とするが、ベンチマークではQwen 3.5と競合。実践テストではモデルサイズによる性能差が大きく、小規模モデルは出力が不安定で、ツール使用時に幻覚を起こす例も報告された。開発チームが質疑に対応する姿勢を示している。"
+    },
+    {
+      "rank": 2,
+      "id": 47618189,
+      "title_en": "Tailscale's new macOS home",
+      "title_ja": "Tailscaleの新しいmacOSホーム",
+      "url": "https://tailscale.com/blog/macos-notch-escape",
+      "hn_url": "https://news.ycombinator.com/item?id=47618189",
+      "score": 234,
+      "comment_count": 113,
+      "posted_at": "2026-04-02T18:22:03+00:00",
+      "comments": [
+        {
+          "id": 47618574,
+          "author": "paxys",
+          "text": "I haven't had enough menu bar icons to run into this but is it really the case that the notch just hides whatever icons happen to be behind it? Like, the OS doesn't handle this incredibly obvious edge case? Why not just put an overflow dropdown next to the notch (something Windows XP managed to figure out 25 years ago)? I know software quality has been going down in recent versions of macOS but this is absurd."
+        },
+        {
+          "id": 47618946,
+          "author": "corlinp",
+          "text": "Every time I get a new Mac, I run these commands to reduce the spacing between menu bar icons. Lets you fit at least 2x the number of items in the menu bar. ``` defaults -currentHost write -globalDomain NSStatusItemSpacing -int 2 defaults -currentHost write -globalDomain NSStatusItemSelectionPadding -int 2 ```"
+        },
+        {
+          "id": 47619626,
+          "author": "alin23",
+          "text": "The notch hiding menubar icons is such a stupid problem to have. I waste hours every week trying to help people who send me frustrated emails because they bought one of my apps and they say: \"it doesn't launch\" or \"why doesn't it have any interface??\" No amount of FAQ will help these people. And this also results in hasty refund requests and even worse, chargebacks that take 2x the amount the users paid out of my pocket. I recently helped my brother launch a simple app for making any window a PiP window ( https://lowtechguys.com/pipiri ) and in the first two days, half of the sales turned into refunds exactly because of this issue. People had so many menubar icons that they thought the app just doesn't work. Not an encouraging launch for his first app. Not to mention the fact that the best solution that helped alleviate this, the Bartender app, was completely broken by Apple's internal API changes in macOS Tahoe. This could have been handled better."
+        },
+        {
+          "id": 47621024,
+          "author": "ed_mercer",
+          "text": "> Apple could certainly make some changes to prevent this being an issue at all. Why Apple still hasn't fixed this in 2026 baffles me. The fact that a company the size of Tailscale has to find workarounds for an Apple blunder like this speaks volumes about how terrible Apple's software management is."
+        },
+        {
+          "id": 47618880,
+          "author": "jedberg",
+          "text": "This seems like a good place to ask: What is the current state of the art for connecting back to my home network while remote? I want: access to my home server ability to stream US TV when abroad (by exiting from my home network) ability to make it easy for others with non-tech backgrounds to connect with their devices (parents, kids, etc) ability to have remote linux servers connect automatically on boot. This one is because I can't get OTA TV at home and want to set up a simple streaming box at someone else's house to do it that connects back to my house, so we can stream off all of our devices. I'm guessing tailscale will be a part of this setup which is why I ask here."
+        }
+      ],
+      "summary_ja": "macOSのノッチがメニューバーアイコンを隠す設計問題が、ユーザーの誤解や開発者の返金対応を招いている。Appleが長年修正せず、ソフトウェア品質の低下が批判されており、Tailscaleなども回避策を迫られる状況だ。"
+    },
+    {
+      "rank": 3,
+      "id": 47618084,
+      "title_en": "Cursor 3",
+      "title_ja": "Cursor 3",
+      "url": "https://cursor.com/blog/cursor-3",
+      "hn_url": "https://news.ycombinator.com/item?id=47618084",
+      "score": 218,
+      "comment_count": 176,
+      "posted_at": "2026-04-02T18:13:41+00:00",
+      "comments": [
+        {
+          "id": 47618253,
+          "author": "seamossfet",
+          "text": "Man, I wish they'd keep the old philosophy of letting the developer drive and the agent assist. I feel like this design direction is leaning more towards a chat interface as a first class citizen and the code itself as a secondary concern. I really don't like that. Even when I'm using AI agents to write code, I still find myself spending most of my time reading and reasoning about code. Showing me little snippets of my repo in a chat window and changes made by the agent in a PR type visual does not help with this. If anything, it makes it more confusing to keep the context of the code in my head. It's why I use Cursor over Claude Code, I still want to _code_ not just vibe my way through tickets."
+        },
+        {
+          "id": 47619752,
+          "author": "nu11ptr",
+          "text": "I've been running Claude Code in my Cursor IDE for a while now via extension. I like the setup, and I direct Claude on one task at a time, while still having full access to my code (and nice completions via Cursor). I still spend time tweaking, etc. before committing. I have zero interest in these new \"swarms of agents\" they are trying to force on us from every direction. I can barely keep straight my code working on one feature at a time. AI has greatly helped me speed that up, but working serially has resulted in the best quality for me. I'll likely drop Cursor for good now and switch back to vanilla VsCode with CC."
+        },
+        {
+          "id": 47620790,
+          "author": "Gimpei",
+          "text": "I used to have a pro-cursor subscription, but it was way too expensive because I'd always hit my limit. I realized I could just use claude code + the free version of cursor for autocomplete and it worked even better. At this point, I'm not understanding the value that cursor is bringing. A souped up claude code? All I have to do is wait a few months and anything useful will be in claude code or codex or whatever."
+        },
+        {
+          "id": 47618140,
+          "author": "minimaxir",
+          "text": "So it has converged to the same UI/UX as the Claude/Codex desktop apps. If that's the case, why use Cursor over those more canonical apps?"
+        },
+        {
+          "id": 47620164,
+          "author": "hokkos",
+          "text": "I don't think this is the direction where cursor users want to go, they basically free up the market for VSCode and Zed, and won't be able to compete against lab owning their model."
+        }
+      ],
+      "summary_ja": "Cursor 3の新デザインはチャット優先でコード編集が軽視され、開発者主導の哲学から外れていると懸念。ユーザーは高価なサブスクリプションやAIエージェントの過剰自動化を嫌い、Claude Codeなど他のツールへの移行を検討。この方向性はVSCodeやZedに市場を譲り、競争力を弱める可能性がある。"
+    },
+    {
+      "rank": 4,
+      "id": 47609356,
+      "title_en": "Artemis II's toilet is a moon mission milestone",
+      "title_ja": "Artemis IIのトイレは月面ミッションのマイルストーン",
+      "url": "https://www.scientificamerican.com/article/artemis-iis-toilet-is-a-moon-mission-milestone/",
+      "hn_url": "https://news.ycombinator.com/item?id=47609356",
+      "score": 64,
+      "comment_count": 21,
+      "posted_at": "2026-04-02T02:37:12+00:00",
+      "comments": [
+        {
+          "id": 47620653,
+          "author": "0x38B",
+          "text": "More on what astronauts found “objectionable” and “distasteful” with Apollo's system, from the PDF linked in the OP (1): \"In general, the Apollo waste management system worked satisfactorily from an engineering standpoint. From the point of view of crew acceptance, however, the system must be given poor marks. The principal problem with both the urine and fecal collection systems was the fact that these required more manipulation than crewmen were used to in the Earth environment and were, as a consequence, found to be objectionable. The urine receptacle assembly represented an attempt to preclude crew handling of urine specimens but, because urine spills were frequent, the objective of “sanitizing” the process was thwarted. The fecal collection system presented an even more distasteful set of problems. The collection process required a great deal of skill to preclude escape of feces from the collection bag and consequent soiling of the crew, their clothing, or cabin surfaces. The fecal collection process was, moreover, extremely time consuming because of the level of difficulty involved with use of the system. An Apollo 7 astronaut estimated the time required to correctly accomplish the process at 45 minutes.* Good placement of fecal bags was difficult to attain; this was further complicated by the fact that the flap at the back of the constant wear garment created an opening that was too small for easy placement of the bags.** As was noted earlier, kneading of the bags was required for dispersal of the germicide. *Entry in the log of Apollo 7 by Astronaut Walter Cunningham. **The configuration of the constant wear garments on later Apollo missions were modified to correct this problem.\" 1: https://ntrs.nasa.gov/api/citations/19760005603/downloads/19..."
+        },
+        {
+          "id": 47620485,
+          "author": "Alupis",
+          "text": "Listening to the live stream yesterday evening - they performed a significant amount of troubleshooting for the toilet. This required consulting with a full team of experts, including a \"Toilet Lead\". It seems it wasn't \"flushing\" waste into the collection bag or something similar - but they were eventually able to get it working. I found the language NASA and the astronauts used to communicate absolutely hilarious - \"Yes, we're excited and eager to begin immediate fluid disposal!\" Glad they got it working - best of luck to Atemis II mission!"
+        },
+        {
+          "id": 47620745,
+          "author": "azalemeth",
+          "text": "Toileting is really fecking important. As someone with a spinal injury you really don't realise just how important until it goes wrong. Apparently one of the down sides about the previous system was that the separation of solid and liquid excreta ideally required someone to separate their excretion of both kinds. Apparently this is something that male astronauts found much much easier than female ones. Artemis's toilet can handle both at the same time. I still think they have the good old fashioned Maximum Absorbency Garment for space walks though. (CF https://en.wikipedia.org/wiki/Maximum_Absorbency_Garment )"
+        },
+        {
+          "id": 47620581,
+          "author": "faster",
+          "text": "I worked on the shuttle for a summer a long time ago, and my group's admin was obsessed with the toilet plumbing so she had engineers stopping by with specs and diagrams a few times per week. True story: there was a component in the liquid waste system called the \"last drop pinch tube\". She laughed about that for weeks."
+        },
+        {
+          "id": 47620996,
+          "author": "detourdog",
+          "text": "One of the good laughs I had watching 2001 was Haywood reading the instructions for the toilet. The joke being we have evolved to the point that at most basic human functions has become complex. https://sites.google.com/site/theageofplastic3d/2001s-zero-g..."
+        }
+      ],
+      "summary_ja": "宇宙ミッションにおけるトイレ技術の進歩と課題が議論されている。アポロ計画では廃棄物管理システムが技術的には機能したものの、乗組員には操作が煩雑で不快であった。Artemis IIでは改良型トイレが導入され、トラブルシューティングを経て動作し、男女共に使いやすい設計となった。トイレシステムの重要性が、ユーモアを交えたNASAや宇宙飛行士の経験談を通じて強調されている。"
+    },
+    {
+      "rank": 5,
+      "id": 47618176,
+      "title_en": "George Goble has died",
+      "title_ja": "ジョージ・ゴーブルが死去",
+      "url": "https://www.legacy.com/us/obituaries/wlfi/name/george-goble-obituary?id=61144779",
+      "hn_url": "https://news.ycombinator.com/item?id=47618176",
+      "score": 83,
+      "comment_count": 18,
+      "posted_at": "2026-04-02T18:21:08+00:00",
+      "comments": [
+        {
+          "id": 47620646,
+          "author": "svggrfgovgf",
+          "text": "Sorry to hear. I remember George running the EE PDP-11 as a time share system with Lear Siegler ADM-3A terminals at Purdue while the CS department (as part of the school of science) was using punch cards! The EE department had a room with 10 or so ADM-3As connected to a single PDP-11 that had a few 100KBs of RAM (512KB?). (photos of ADM-3A at http://dunfield.classiccmp.org/altair/altair5.htm It has 24 lines of 80 characters with green text on black background plus some graphics characters which could be used to draw pictures.)"
+        },
+        {
+          "id": 47618177,
+          "author": "finaard",
+          "text": "His obituary or wikipedia page are well worth a read for what he was involved in - though he probably is best known for lighting a BBQ in under 5 seconds by use of liquid oxygen, and getting into trouble with the local firedepartment for that. He used to have that video on his website - which I've discovered via a Usenet discussion not too long after it happened. It was one of the first videos I've downloaded via a web browser, and almost certainly the first video made with a digital camera I've ever seen."
+        },
+        {
+          "id": 47619423,
+          "author": "nullbyte808",
+          "text": "\"A striking example of his forward-thinking occurred years ago on a beach in Ft. Lauderdale, Florida, where George-sitting on the sand with a laptop connected via his cell phone-became one of the first people to read email over a mobile connection to a computer at Purdue. As a friend noted, \"This was a real bit of history… At the time Apple had a whole engineering team trying to do this and here's George on the beach making it happen.\"\" Amazing. RIP."
+        },
+        {
+          "id": 47618370,
+          "author": "tantalor",
+          "text": "Lighting a charcoal grill with liquid oxygen: https://www.youtube.com/watch?v=UjPxDOEdsX8"
+        },
+        {
+          "id": 47618492,
+          "author": "sponaugle",
+          "text": "Sad to hear! I worked for George for all of my undergraduate time at Purdue. He was an amazing boss with such a passion for all things unix. For a while he had the UNIX license plate on his minivan."
+        }
+      ],
+      "summary_ja": "George Goble氏の死を悼み、彼の技術的先駆性を回想。Purdue大学で先進的コンピュータシステムを運営し、液体酸素によるバーベキュー点火や早期のモバイル通信実験で知られる。UNIXへの深い情熱と個性的な人柄が称えられている。"
+    },
+    {
+      "rank": 6,
+      "id": 47615002,
+      "title_en": "Qwen3.6-Plus: Towards real world agents",
+      "title_ja": "Qwen3.6-Plus：実世界エージェントに向けて",
+      "url": "https://qwen.ai/blog?id=qwen3.6",
+      "hn_url": "https://news.ycombinator.com/item?id=47615002",
+      "score": 387,
+      "comment_count": 134,
+      "posted_at": "2026-04-02T14:28:52+00:00",
+      "comments": [
+        {
+          "id": 47615397,
+          "author": "Aurornis",
+          "text": "This is their hosted-only model, not an open weight model like they’ve become known for. They got a lot of good publicity for their open weight model releases, which was the goal. The hard part is pivoting from an open weight provider to being considered as a competitor to Claude and ChatGPT. Initial reactions are mostly anger from everyone who didn’t realize that the play along was to give away the smaller models as advertising, not because they were feeling generous. Comparing to Opus 4.5 instead of the current 4.6 and other last-gen models is clearly an attempt to deceive, which isn’t winning them any points either. I think there is a moderately large market for models like this that aren’t quite SOTA level but can be served up much cheaper. I don’t know how successful they’ll be in the race to the bottom in this market niche, though. Most users of cheap API tokens are not loyal to any brand and will change providers overnight each time someone releases a slightly better model."
+        },
+        {
+          "id": 47616314,
+          "author": "Alifatisk",
+          "text": "I understand peoples reactions of Qwen team comparing against Opus 4.5 instead of 4.6. And them comparing against Gemini Pro 3.0 instead of 3.1. But calling it misleading is a bit of stretch in my eyes, people here are acting like we immediately forgot how previous generations performed just because a new version is released. This field is going in a incredible pace, the providers release a new model every quarter or so. The amount of criticism is a bit overblown in my opinion. The benchmarks still look very good to me. I’ve used GLM-5 (latest is GLM-5.1) and Kimi K2.5, they are decent and gets the job done, so seeing how this model of Qwen performs compared to it is kinda impressive. Also, why are so many pointing out the fact that this model is not open-weight as if this is their first time doing so. Qwen-3.5-plus, Qwen-3-Max is also closed source. This is not something new. I think Qwen trying to catch up to the SOTA models is still healthy for us, the consumers. Sure, its sad news that this version is closed-weight, but I won’t downplay their progress."
+        },
+        {
+          "id": 47621022,
+          "author": "XCSme",
+          "text": "3.6 Plus seems to be simply a refined/more consistent 3.5 Plus: https://aibenchy.com/compare/qwen-qwen3-5-plus-02-15-medium/..."
+        },
+        {
+          "id": 47616561,
+          "author": "simonw",
+          "text": "Pretty solid Pelican: https://gist.github.com/simonw/ca081b679734bc0e5997a43d29fad... I used the https://modelstudio.alibabacloud.com/ API to generate that one, which required signing up for an account and attaching PayPal billing - but it looks like OpenRouter are offering it for free right now so I could have used that: https://openrouter.ai/qwen/qwen3.6-plus:free"
+        },
+        {
+          "id": 47620979,
+          "author": "davesque",
+          "text": "I wish these AI vendors would quit publishing comparisons with the previous generation of their competitors's models. It's just such a glaringly bad look and no one is fooled by it, even if their achievements deserve praise in their own right. The Qwen models are great and don't deserve the reputational hit that comes from dodgy marketing tactics."
+        }
+      ],
+      "summary_ja": "Qwen3.6-Plusがクローズドウェイトモデルであることと、競合の旧世代モデルとの比較が欺瞞的と批判されている。一方で、その進歩は評価する声もあり、マーケティング手法の見直しを求める意見が目立つ。"
+    },
+    {
+      "rank": 7,
+      "id": 47620857,
+      "title_en": "ParadeDB (YC S23) Is Hiring Database Internal Engineers (Rust)",
+      "title_ja": "ParadeDB (YC S23)、データベース内部エンジニア (Rust) を募集",
+      "url": "https://paradedb.notion.site/",
+      "hn_url": "https://news.ycombinator.com/item?id=47620857",
+      "score": 1,
+      "comment_count": 0,
+      "posted_at": "2026-04-02T22:13:03+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 8,
+      "id": 47617415,
+      "title_en": "Good ideas do not need lots of lies in order to gain public acceptance (2008)",
+      "title_ja": "良いアイデアは公的な承認を得るために多くの嘘を必要としない (2008)",
+      "url": "https://blog.danieldavies.com/2004/05/d-squared-digest-one-minute-mba.html",
+      "hn_url": "https://news.ycombinator.com/item?id=47617415",
+      "score": 107,
+      "comment_count": 40,
+      "posted_at": "2026-04-02T17:29:03+00:00",
+      "comments": [
+        {
+          "id": 47619594,
+          "author": "nostrademons",
+          "text": "Interesting that this quote was initially about stock options at tech companies. It turned out that stock options did become nearly universal in tech compensation, and companies that granted them outcompeted companies that did not. So the management that was ostensibly “doing a massive blag at the expense of shareholders” wasn’t really, time vindicated their practices and things like option backdating and not treating them as an expense weren’t even really necessary, but it took a few years. It wasn’t obvious in 2002 that this is how it would play out. And relevant to the title quote: maybe it should be amended to “good ideas do not need a lot of lies to gain public acceptance eventually ”. The dynamic here is that a significant part of public opinion is simply “well, this is how things work now, and it seems to be working”, and any new and innovative idea by definition is not going to be how things work now. The lies are needed to spur action and disturb the equilibrium of today. But if you’re still telling lies a few years in, you’ve failed and it’s a bad idea to begin with."
+        },
+        {
+          "id": 47619054,
+          "author": "dbt00",
+          "text": "2004, actually, with a minor update in 2008. This was the same principle I used coincidentally at the same time to also disbelieve the same thing."
+        },
+        {
+          "id": 47619411,
+          "author": "derrak",
+          "text": "Makes me think of academic papers that overhype their contribution. Also makes me think about AI hype."
+        },
+        {
+          "id": 47620624,
+          "author": "roenxi",
+          "text": "It is also a useful trick to keep in mind the opposite of critical thinking - following the herd. Just copying everyone around you is often a great strategy. So good that even if everyone around you are making mistakes it can still be the dominant strategy (there is a reason a lot of people who don't like war are cowed into silence when war fever descends). Most people are using it. That implies that it is ridiculously easy to be right when everyone else is wrong. People aren't trying to be right. Any sort of principle-based analysis easily outperforms the herd. When leaders in society start lying that is indeed one of those situations. Pretty much any situation where everyone knows something and the hard statistics are telling a different story is. The more pressing problem is how to go from a lovable Cassandra to someone who can preempt major events and convince the herd to not hurt itself in its confusion. Coincidentally that is how markets work, people who have a habit of being right are given full powers to overrule the mob and just do what they want. Markets don't care if everyone believes something. They care if people who got the calls right last time believe something. In this case, the US hasn't seen a good outcome to a war since something like WWII and even there they waited until the war was mostly over and the major participants in the European theatres were exhausted before getting involved. The record is pretty bad. Iraq was an easy call to anyone who cares about making accurate predictions."
+        },
+        {
+          "id": 47620326,
+          "author": "didgetmaster",
+          "text": "This is what scares me the most about AI. You have a handful of really big companies trying to outdo each other as they race to implement it and deploy it as quickly as possible. To try and justify their outrageous capital spending on data centers; they are incentivised to exaggerate its current capabilities and also what it will be capable of 'soon'. There is no time to evaluate each step to make sure it is accurate and going in the right direction, before setting it loose on the public."
+        }
+      ],
+      "summary_ja": "良いアイデアは当初、公衆の受容を得るために嘘や誇大宣伝を必要とする場合もあるが、時間の経過とともに真価が認められれば嘘は不要となる。嘘が持続するなら、そのアイデアは根本的に欠陥がある。群衆心理に流されず原則に基づく分析が重要であり、AI競争のように誇大宣伝が先行して慎重な評価を欠く状況は危険である。"
+    },
+    {
+      "rank": 9,
+      "id": 47616242,
+      "title_en": "Decisions that eroded trust in Azure – by a former Azure Core engineer",
+      "title_ja": "Azureへの信頼を損なった決定 – 元Azure Coreエンジニアによる",
+      "url": "https://isolveproblems.substack.com/p/how-microsoft-vaporized-a-trillion",
+      "hn_url": "https://news.ycombinator.com/item?id=47616242",
+      "score": 122,
+      "comment_count": 25,
+      "posted_at": "2026-04-02T16:00:27+00:00",
+      "comments": [
+        {
+          "id": 47620435,
+          "author": "vintagedave",
+          "text": "What are we reading here? These are extraordinary statements. Also with apparent credibility. They sound reasonable. Is this a whistleblower or an ex employee with a grudge? The appearance is the first. Is it? They’ve put their name to some clear and worrying statements. > On January 7, 2025… I sent a more concise executive summary to the CEO. … When those communications produced no acknowledgment, I took the customary step of writing to the Board through the corporate secretary. Why is that customary? I have not come across it, and though I have seen situations of some concern in the past, I previously had little experience with US corporate norms. What is normal here for such a level of concern? More, why is this public not a court case for wrongful termination? Is Azure really this unreliable? There are concrete numbers in this blog. For those who use Azure, does it match your external experience?"
+        },
+        {
+          "id": 47620989,
+          "author": "Anon1096",
+          "text": "The post is so dramatized and clearly written by someone with a grudge such that it really detracts from any point that is trying to be made, if there is any. From another former Az eng now elsewhere still working on big systems, the post gets way way more boring when you realize that things like \"Principle Group Manager\" is just an M2 and Principal in general is L6 (maybe even L5) Google equivalent. Similarly Sev2 is hardly notable for anyone actually working on the foundational infra. There are certainly problems in Azure, but it's huge and rough edges are to be expected. It mostly marches on. IMO maturity is realizing this and working within the system to improve it rather than trying to lay out all the dirty laundry to an Internet audience that will undoubtedly lap it up and happily cry Microslop. Last thing, the final part 6 comes off as really childish, risks to national security and sending letters to the board, really? Azure is still chugging along apparently despite everything being mentioned. People come in all the time crying that everything is broken and needs to be scrapped and rewritten but it's hardly ever true."
+        },
+        {
+          "id": 47621000,
+          "author": "lokar",
+          "text": "This reads pretty bad, and I believe it was. I worked on (and was at least partly responsible for) systems that do the same thing he described. It took constant force of will, fighting, escalation, etc to hold the line and maintain some basic level of stability and engineering practice. And I've worked other places that had problems similar to the core problems described, not quite as severe, and not at the same scale, but bad enough to doom them (IMO) to a death loop they won't recover from."
+        },
+        {
+          "id": 47621010,
+          "author": "yoyohello13",
+          "text": "I don't know if any of this is true, but as a user of Azure every day this would explain so much. The Azure UI feels like a janky mess, barely being held together. I'm honestly shocked anything manages to stay working at all."
+        },
+        {
+          "id": 47617869,
+          "author": "pRusya",
+          "text": "It's a nice read. Thank you for sharing this. > Microsoft, meanwhile, conducted major layoffs—approximately 15,000 roles across waves in May and July 2025 —most likely to compensate for the immediate losses to CoreWeave ahead of the next earnings calls. This is what people should know when seeing massive layoffs due to AI."
+        }
+      ],
+      "summary_ja": "元Azureエンジニアの内部告発記事に対し、信憑性への疑問（怨恨か事実か）とAzureの信頼性に関する具体的懸念が提起されている。一方で、記事の誇張を指摘し、大規模システムでは問題は不可避で内部改善すべきとの反論も。利用者からはUIの不安定さが実感として支持され、経営陣への対応やレイオフとの関連も議論の対象となった。"
+    },
+    {
+      "rank": 10,
+      "id": 47612724,
+      "title_en": "Lemonade by AMD: a fast and open source local LLM server using GPU and NPU",
+      "title_ja": "AMDのLemonade：GPUとNPUを使用した高速なオープンソースローカルLLMサーバー",
+      "url": "https://lemonade-server.ai",
+      "hn_url": "https://news.ycombinator.com/item?id=47612724",
+      "score": 402,
+      "comment_count": 94,
+      "posted_at": "2026-04-02T11:04:51+00:00",
+      "comments": [
+        {
+          "id": 47613997,
+          "author": "dennemark",
+          "text": "I have been using lemonade for nearly a year already. On Strix Halo I am using nothing else - although kyuz0's toolboxes are also nice ( https://kyuz0.github.io/amd-strix-halo-toolboxes/ ) Nowadays you get TTS, STT, text & image generation and image editing should also be possible. Besides being able to run via rocm, vulkan or on CPU, GPU and NPU. Quite a lot of options. They have a quite good and pragmatic pace in development. Really recommend this for AMD hardware! Edit: OpenAI and i think nowaday ollama compatible endpoints allow me to use it in VSCode Copilot as well as i.e. Open Web UI. More options are shown in their docs."
+        },
+        {
+          "id": 47615527,
+          "author": "Caum",
+          "text": "Been running local LLMs on my 7900 XTX for months and the ROCm experience has been... rough. The fact that AMD is backing an official inference server that handles the driver/dependency maze is huge. My biggest question is NPU support - has anyone actually gotten meaningful throughput from the Ryzen AI NPU vs just using the dGPU? In my testing the NPU was mostly a bottleneck for anything beyond tiny models."
+        },
+        {
+          "id": 47620612,
+          "author": "steffs",
+          "text": "The multi-modal bundling is the part that stands out more than the raw inference speed. If you are building an app that needs text generation, image generation, and speech recognition, right now the local setup is three separate services with three different APIs and three different model management stories. Having one server handle all of that behind OpenAI-compatible endpoints is a real quality of life improvement for anyone prototyping locally. The NPU angle is interesting but probably overstated for most use cases. The discussion in the thread confirms what I would expect: NPUs shine for small always-on models and prefill offloading, not for the chatbot workloads most people care about. Where this gets genuinely compelling is if AMD can make the combined GPU plus NPU scheduling transparent enough that developers do not need to think about which hardware is running which part of the pipeline. That is not a solved problem on any platform yet, and if Lemonade gets it right for even a subset of workloads, it becomes the default choice on AMD hardware regardless of how it benchmarks against Ollama on pure text generation."
+        },
+        {
+          "id": 47613847,
+          "author": "moconnor",
+          "text": "Is... is this named because they have a lemon they're trying to make the most of?"
+        },
+        {
+          "id": 47613875,
+          "author": "sensitiveCal",
+          "text": "Feels like this is sitting somewhere between Ollama and something like LM Studio, but with a stronger focus on being a unified “runtime” rather than just model serving. The interesting part to me isn’t just local inference, but how much orchestration it’s trying to handle (text, image, audio, etc). That’s usually where things get messy when running models locally. Curious how much of this is actually abstraction vs just bundling multiple tools together. Also wondering if the AMD/NPU optimizations end up making it less portable compared to something like Ollama in practice."
+        }
+      ],
+      "summary_ja": "AMD公式のLemonadeはGPU/NPU対応のローカルLLMサーバーで、テキスト・画像・音声を統合した機能とOpenAI互換APIが評価されている。NPUは小規模モデルで有用だが、実用性には疑問も。ROCm環境の課題解消と多機能統合が利点だが、移植性やハードウェア抽象化の課題も指摘されている。"
+    },
+    {
+      "rank": 11,
+      "id": 47618221,
+      "title_en": "The Australian government has announced gambling advertising reforms",
+      "title_ja": "オーストラリア政府、ギャンブル広告改革を発表",
+      "url": "https://www.bbc.com/news/articles/c62492e925lo",
+      "hn_url": "https://news.ycombinator.com/item?id=47618221",
+      "score": 44,
+      "comment_count": 26,
+      "posted_at": "2026-04-02T18:24:12+00:00",
+      "comments": [
+        {
+          "id": 47620091,
+          "author": "NamTaf",
+          "text": "Finally. The deluge of gambling ads on TV during Friday night footy is absolutely appalling. There’s a very robust conduit for normalising sports gambling through advertisements around the broadcasts and it’s clearly influencing young adults. I’ve noticed a dramatic uptick in how common it is compared to when I was that age."
+        },
+        {
+          "id": 47618535,
+          "author": "babaliauskas",
+          "text": "Bold move limiting gambling ads to just three per hour. Next up light-touch bans on cigarettes where you can only smoke during ad breaks."
+        },
+        {
+          "id": 47620642,
+          "author": "amarcheschi",
+          "text": "I'm from italy where we have a ban. Some companies now make advertisements of news websites that it is clear are also part of betting companies. For example, https://www.admiralbet.news/ has as other Google result the betting website. However, I do have to say it is still less than before and it's much better"
+        },
+        {
+          "id": 47620593,
+          "author": "brotchie",
+          "text": "Gambling ads are to Australia what Pharmaceutical ads are to the USA."
+        },
+        {
+          "id": 47620610,
+          "author": "GlacierFox",
+          "text": "This is all I see on ad supporteed TV at night here in the UK. And half the time during the day. It's a serious problem coupled with, I assume, serious lobbyists here in the UK."
+        }
+      ],
+      "summary_ja": "オーストラリアの賭博広告規制をめぐり、広告の氾濫が若者に悪影響を与えるとの懸念が共有されている。規制は評価するが、対策が不十分との指摘や、イタリア・英国など他国でも同様の問題があり、業界の巧妙な回避策や強いロビー活動が課題となっている。"
+    },
+    {
+      "rank": 12,
+      "id": 47613981,
+      "title_en": "LinkedIn is searching your browser extensions",
+      "title_ja": "LinkedInがブラウザ拡張機能を検索",
+      "url": "https://browsergate.eu/",
+      "hn_url": "https://news.ycombinator.com/item?id=47613981",
+      "score": 1489,
+      "comment_count": 659,
+      "posted_at": "2026-04-02T13:09:09+00:00",
+      "comments": [
+        {
+          "id": 47614309,
+          "author": "haswell",
+          "text": "The headline seems pretty misleading. Here’s what seems to actually be going on: > Every time you open LinkedIn in a Chrome-based browser, LinkedIn’s JavaScript executes a silent scan of your installed browser extensions. The scan probes for thousands of specific extensions by ID, collects the results, encrypts them, and transmits them to LinkedIn’s servers. This does seem invasive. It also seems like what I’d expect to find in modern browser fingerprinting code. I’m not deeply familiar with what APIs are available for detecting extensions, but the fact that it scans for specific extensions sounds more like a product of an API limitation (i.e. no available getAllExtensions() or somesuch) vs. something inherently sinister (e.g. “they’re checking to see if you’re a Muslim”). I’m certainly not endorsing it, do think it’s pretty problematic, and I’m glad it’s getting some visibility. But I do take some issue with the alarmist framing of what’s going on. I’ve come to mostly expect this behavior from most websites that run advertising code and this is why I run ad blockers."
+        },
+        {
+          "id": 47620236,
+          "author": "LinkedinHelp",
+          "text": "The claims made on the website linked here are plain wrong. The person behind them is subject to an account restriction for scraping and other violations of LinkedIn’s Terms of Service. To protect the privacy of our members, their data, and to ensure site stability, we do look for extensions that scrape data without members’ consent or otherwise violate LinkedIn’s Terms of Service. Here’s why: some extensions have static resources (images, javascript) available to inject into our webpages. We can detect the presence of these extensions by checking if that static resource URL exists. This detection is visible inside the Chrome developer console. We use this data to determine which extensions violate our terms, to inform and improve our technical defenses, and to understand why a member account might be fetching an inordinate amount of other members' data, which at scale, impacts site stability. We do not use this data to infer sensitive information about members. For additional context, in retaliation for this website owner’s account restriction, they attempted to obtain an injunction in Germany, alleging LinkedIn had violated various laws. The court ruled against them and found their claims against LinkedIn had no merit, and in fact, this individual’s own data practices ran afoul of the law. Unfortunately, this is a case of an individual who lost in the court of law, but is seeking to re-litigate in the court of public opinion without regard for accuracy."
+        },
+        {
+          "id": 47617282,
+          "author": "Beestie",
+          "text": "I don't have a linkedin acct. So imagine my shock when I \"googled\" myself and found a linkedin profile connecting my name to a company I presently have a consulting arrangement with (1099 not W2). I went ballistic and fired off an email to the consulting firm to take down the profile immediately or face legal action (a bluff). Couple days later, the company forwarded an email they received from linkedin confirming the profile had been taken down. So this is just a heads up that even if you don't have a linkedin account, they will create one on your behalf so might better check (assuming you neither have nor want one)."
+        },
+        {
+          "id": 47617658,
+          "author": "ef2k",
+          "text": "A few years ago, intentionally fingerprinting or tracking your users without disclosure was spyware and unethical. Alas, here we are. Anyway, what they're calling \"spectroscopy\", is a combination of extension probing and doing residue detection (looking for what extensions might leave behind in the DOM). An ad blocker is not necessarily equipped to help since the script is embedded with the application code. Since they're targetting Chrome, switching browsers will help with the probing but not the detection part and you'll still be fingerprinted. The only way forward is for browser vendors to offer a real privacy or incognito mode where sites are sandboxed by default. When the default profile is identical across millions of users there won't be anything unique to fingerprint."
+        },
+        {
+          "id": 47614288,
+          "author": "andersonpico",
+          "text": "this is a massive violation of trust > The scan doesn’t just look for LinkedIn-related tools. It identifies whether you use an Islamic content filter (PordaAI — “Blur Haram objects, real-time AI for Islamic values”), whether you’ve installed an anti-Zionist political tagger (Anti-Zionist Tag), or a tool designed for neurodivergent users (simplify)."
+        }
+      ],
+      "summary_ja": "LinkedInのブラウザ拡張機能スキャンに対し、プライバシー侵害や信頼違反の懸念が表明。LinkedInはスクレイピング防止の正当措置と主張するが、ユーザー同意なしの追跡は非倫的と批判。スキャン対象が宗教的・政治的ツールを含み過度に侵襲的との指摘も。ブラウザのプライバシー保護強化が必要との意見あり。"
+    },
+    {
+      "rank": 13,
+      "id": 47572288,
+      "title_en": "JSON Canvas Spec (2024)",
+      "title_ja": "JSON Canvas仕様 (2024)",
+      "url": "https://jsoncanvas.org/spec/1.0/",
+      "hn_url": "https://news.ycombinator.com/item?id=47572288",
+      "score": 76,
+      "comment_count": 28,
+      "posted_at": "2026-03-30T09:38:38+00:00",
+      "comments": [
+        {
+          "id": 47619535,
+          "author": "kepano",
+          "text": "I'm not sure why it popped up today, but it's nice to see it on HN again! A brief timeline with some links to past discussions: - 2022: The .canvas open format was created for Obsidian Canvas [0]. - 2024: Official 1.0 spec of JSON Canvas [1]. - 2024-2025: A number of apps/libraries built up around conversion, storage, and import/export [2]. - 2026: Obsidian Skills [3] includes support for .canvas (along with .md and .base) to make it easy for LLMs to read/write JSON Canvas, and opens interesting visualization/interaction patterns with agents. [0]: https://news.ycombinator.com/item?id=34066824 [1]: https://news.ycombinator.com/item?id=39670922 [2]: https://jsoncanvas.org/docs/apps/ [3]: https://github.com/kepano/obsidian-skills"
+        },
+        {
+          "id": 47618372,
+          "author": "bryanrasmussen",
+          "text": "It would be useful to have examples of data and the representation this would result in. Although you can go to https://jsoncanvas.org/ itself and see an example rendering, you cannot see the exact data that created it - I think, although you can sort of guess since the element names are stuff like node. I sort of doubt this is the best data structure for representing this kind of thing. Maybe I'm wrong though but I would think I would go for something like https://github.com/jsongraph/json-graph-specification which strikes me as closer to graphml which I have some experience with, and maybe give it ability to embed videos etc. (which for all I know someone already has) This is all an initial feeling though, like hmm, no I think it's wrong, and maybe I am just not seeing why this would be better than another solution."
+        },
+        {
+          "id": 47619976,
+          "author": "mort96",
+          "text": "I feel like this page does a good job of telling me nothing. It's a representation of a graph? Where each node can be a text string or a file or a URL or a container of other nodes? And somehow these links and files and containers have a color? What is the purpose of this? Why would I want my file to be blue?"
+        },
+        {
+          "id": 47620192,
+          "author": "jessmartin",
+          "text": "Really cool to see JSON Canvas getting attention. (Hi, kepano!) It was one of the inspirations for OCIF (Open Canvas Interchange Format), which we've been working on since JSON Canvas came out. JSON Canvas nails the simplicity-it's easy to read and easy to implement. We wanted to build on that spirit while tackling some of the challenges showing up in this thread: nested canvases, extensibility for custom app data, text styling, coordinate systems, and round-tripping between different canvas apps without data loss. OCIF v0.7.0 just came out. It's designed to be an interchange format — so different canvas tools (Excalidraw, TLDraw, Obsidian, etc.) can export/import each other's canvases. Some highlights: - Extensible: apps can attach their own data via extensions, so nothing gets lost even if the features aren't supported - Nested canvases via parent-child node relationships - Local coordinate systems (addresses the pixel positioning concerns raised in another comment here) - Text styling, viewport control, and more via built-in extensions If JSON Canvas isn't quite meeting your needs, OCIF[1] might be worth a look. https://canvasprotocol.org"
+        },
+        {
+          "id": 47620715,
+          "author": "atentaten",
+          "text": "I don't use canvas in Obsidian. Tried it when it was released, but haven't used it since. I like Obsidian and want to get the most out of it. I'm curious as too how folks are using canvas in Obsidian."
+        }
+      ],
+      "summary_ja": "JSON Canvasの仕様発表と進化について、データ構造の不明確さや代替形式（OCIF）との比較で議論がなされ、実用性や使用事例への関心も示されている。"
+    },
+    {
+      "rank": 14,
+      "id": 47562762,
+      "title_en": "Significant progress made on Xbox 360 recompilation",
+      "title_ja": "Xbox 360の再コンパイルで大きな進展",
+      "url": "https://readonlymemo.com/rexglue-xbox-360-recompilation-interview/",
+      "hn_url": "https://news.ycombinator.com/item?id=47562762",
+      "score": 49,
+      "comment_count": 15,
+      "posted_at": "2026-03-29T12:53:03+00:00",
+      "comments": [
+        {
+          "id": 47619564,
+          "author": "giancarlostoro",
+          "text": "The blog post reminds me of similar efforts with Shockwave. There's people building decompilers, and runtimes, and if you join enough Discords, you will notice the people in them are cross-contaminating between communities if you will, they share insights with one another, in their efforts towards specific goals. They're hyper focused on making one game or another come back. There's Habbo Hotel, and Coke Studios, as well as other games. The Coke Studios effort is interesting because there were no \"private servers\" developed at the time, unlike Habbo which had many, and there are Shockwave Xtras that no open runtime supports currently. There's several attempts at a full runtime as well, that run in-browser. Projector Rays (decompiler) really was the biggest release to date, and recently people have been really hacking at it, to some extent AI has helped to reverse engineer bytecode far as I can tell. For anyone curious, one of the runtimes is called DirPlayer: https://github.com/igorlira/dirplayer-rs"
+        },
+        {
+          "id": 47621026,
+          "author": "wesfenlon",
+          "text": "Hey, that's my newsletter -- thanks for sharing! :D Some exciting stuff has already happened in the week since I wrote the interview. Here's Viva Pinata: Trouble in Paradise: https://www.youtube.com/watch?v=Kih42KlocII"
+        },
+        {
+          "id": 47620383,
+          "author": "Venn1",
+          "text": "These projects are really neat. Last week, I was able to build (and play) the Xbox 360 release of Sonic Unleashed on a couple of ARM SBCs using Sonic Unleashed Recomp."
+        },
+        {
+          "id": 47619361,
+          "author": "andrewstuart",
+          "text": "What is Xbox 360 recompilation?"
+        },
+        {
+          "id": 47619959,
+          "author": "triangleman",
+          "text": "What's the latest on homebrewing on the actual Xbox 360 these days?"
+        }
+      ],
+      "summary_ja": "Xbox 360再コンパイルの進展について、Shockwaveなどの類似プロジェクトを引き合いに、ゲーム復活を目指すコミュニティ努力が紹介される。デコンパイラやランタイム開発、AI活用によるリバースエンジニアリングの具体例（Sonic Unleashed、Viva Pinata）が挙げられ、コミュニティ間の協力と技術的進歩が強調されている。"
+    },
+    {
+      "rank": 15,
+      "id": 47592614,
+      "title_en": "Prefer do notation over Applicative operators when assembling records (2024)",
+      "title_ja": "レコードを構築する際はApplicative演算子よりもdo記法を推奨 (2024)",
+      "url": "https://haskellforall.com/2024/05/prefer-do-notation-over-applicative",
+      "hn_url": "https://news.ycombinator.com/item?id=47592614",
+      "score": 7,
+      "comment_count": 0,
+      "posted_at": "2026-03-31T19:57:05+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 16,
+      "id": 47617376,
+      "title_en": "OpenAI Acquires TBPN",
+      "title_ja": "OpenAIがTBPNを買収",
+      "url": "https://openai.com/index/openai-acquires-tbpn/",
+      "hn_url": "https://news.ycombinator.com/item?id=47617376",
+      "score": 113,
+      "comment_count": 92,
+      "posted_at": "2026-04-02T17:26:49+00:00",
+      "comments": [
+        {
+          "id": 47618028,
+          "author": "gkoberger",
+          "text": "I bet OpenAI genuinely believes they're using their money to help free media exist. And TBPN genuinely believes this is the right choice for economic freedom so they can continue to operate. I bet they even had a convo such as \"we'll never tell you what to say,\" and both sides genuinely believed it. But this never ends well. Even if there's never a conversation about it, directly, the implication is there. I don't care about TBPN, specifically. I just really, really wish we had a better way for media to fund itself independently. (And I say this as someone who pays for some media, but not nearly enough. I don't have $10/mo for every outlet that deserves it.) EDIT: sama basically said what I said he would: https://x.com/sama/status/2039773740586918137"
+        },
+        {
+          "id": 47618081,
+          "author": "i_have_an_idea",
+          "text": "To be honest, until a month ago, I hadn't even heard of TBPN or seen any of their content. But, seemingly, out of nowhere, they managed to get all the leaders in AI to appear in their programming. The core of the information they present isn't much different than what you'd hear on Dwarkesh or other industry podcasts, the presentation is some weird mix of ESPN and Mad Money that I personally don't get, but maybe makes sense to a US audience. I don't see why that is interesting to OpenAI, but maybe I'm missing something."
+        },
+        {
+          "id": 47618391,
+          "author": "screye",
+          "text": "TBPN, OpenClaw and Astral - that's 3 high profile acquisitions in a month. I smell a PR push to be seen as the 'good guys'. I don't buy it. The leaked emails and actions of OpenAI's leadership point to a cynical growth machine. The winner of this AI cycle will fund the lobbies that decide the politics of the future. OpenAI gives me a 'must escape the permanent underclass' energy. Not the energy I want from possibly the most influential people of the near future."
+        },
+        {
+          "id": 47617954,
+          "author": "csmiller",
+          "text": "Had to double check this wasn’t a late April Fools joke. Each weird acquisition or product launch feels like an implicit admission that anything like “AGI” is never coming."
+        },
+        {
+          "id": 47618174,
+          "author": "operatingthetan",
+          "text": "I don't understand this at all. 58.2K youtube subs and under 3k views on most videos. This seems like they have barely just started?"
+        }
+      ],
+      "summary_ja": "OpenAIによるTBPN買収をめぐり、メディアの独立性への懸念や買収の真意に対する不信感が表明されている。TBPNのコンテンツ価値や影響力に疑問を抱く声もあり、OpenAIの一連の動きがPR戦略や「良い人」アピールではないかと批判されている。AI業界の将来的な政治的影響力への懸念も示された。"
+    },
+    {
+      "rank": 17,
+      "id": 47613078,
+      "title_en": "Inside Nepal's Fake Rescue Racket",
+      "title_ja": "ネパールの偽救助詐欺の内幕",
+      "url": "https://kathmandupost.com/money/2026/03/27/inside-nepal-s-fake-rescue-racket",
+      "hn_url": "https://news.ycombinator.com/item?id=47613078",
+      "score": 238,
+      "comment_count": 105,
+      "posted_at": "2026-04-02T11:40:41+00:00",
+      "comments": [
+        {
+          "id": 47615667,
+          "author": "sonink",
+          "text": "> The second method is more troubling. At altitudes above 3,000 metres, mild symptoms of altitude sickness are common. Blood oxygen saturation can drop, hands and feet tingle, headaches develop. In most cases, rest, hydration or a gradual descent is all that is needed. ...investigators found that Diamox (Acetazolamide) tablets, used to prevent altitude sickness, were administered alongside excessive water intake to induce the very symptoms that would justify a rescue call. This doesnt sound accurate. I have trekked the Himalayas for over a decade - the risks of AMS are very real. Two people I have trekked with have died due to AMS on separate himalayan treks - both had trekked multiple times before, and were well aware of the risks. Both the fatalities were around 12000-14000 feet - much below the Everest Base Camp trek. When AMS hits, you need to descend - as fast as possible, with whatever means you have at your disposal. Otherwise you have unknowingly entered a Russian Roulette. And Diamox is used as a preventative course for AMS - alongside excessive water intake - this is standard guidelines in all high altitude himalayan treks."
+        },
+        {
+          "id": 47620999,
+          "author": "pkoiralap",
+          "text": "While it is true that guides and business owners are always looking for opportunities to earn extra cash, the reporting is a tiny bit off here. Start of AMS like symptoms can easily be mistaken for walking fatigue and dehydration. It is easier to identify if you are at rest, but during the trek that is seldom the case. So when you actually start realizing something is wrong, you already are at an elevated risk. The only thing that works in these cases is to descend and as fast as possible at that. Considering the fact that AMS will absolutely and a 100% kill you if you play around with it, guides presenting trekkers with an option of helicopter rescue is not that bad, at least if you look at the worst that can happen."
+        },
+        {
+          "id": 47614746,
+          "author": "delichon",
+          "text": "> But guides and hotel staff ... tell them they are at risk of dying, that only immediate evacuation will save them. I got Acute Mountain Sickness at just 11k feet. Headache, nausea, dizziness, fatigue. I passed out until hitting the ground woke me up. I was very disoriented and vulnerable. If someone had told me that I had to get to a hospital or I'd die they could have led me like a tame goat. And they could be right. If you have high-altitude cerebral or pulmonary edema it is life threatening. A guide getting a kickback can make it a lot more likely just by cutting short the boring acclimatization time."
+        },
+        {
+          "id": 47614104,
+          "author": "skilled",
+          "text": "I did the Everest base camp trek in late 2015, at that time it was quite common (saw it myself and heard about it) that people would do the trek up but to get down they would fake a leg/back injury or blame altitude sickness and the chopper from Kathmandu would come pick you up, as long as you had the right insurance."
+        },
+        {
+          "id": 47620842,
+          "author": "phyzome",
+          "text": "Misread this as \"fake rescue rocket \" and it took a bit before I realized that."
+        }
+      ],
+      "summary_ja": "ネパールの偽装救助問題について、AMS（高山病）の実際の危険性と標準的な予防策を指摘。ガイドの利益目的で救助を促すケースがある一方、AMSは致命的であり適切な救助が必要な場合もあり、トレッカー自身が救助を偽装する例も報告されている。"
+    },
+    {
+      "rank": 18,
+      "id": 47575557,
+      "title_en": "Magic the Gathering Deck Shuffler",
+      "title_ja": "Magic the Gatheringデックシャッフラー",
+      "url": "https://mtg.jessitron.honeydemo.io/",
+      "hn_url": "https://news.ycombinator.com/item?id=47575557",
+      "score": 24,
+      "comment_count": 13,
+      "posted_at": "2026-03-30T15:28:45+00:00",
+      "comments": [
+        {
+          "id": 47621020,
+          "author": "TheGRS",
+          "text": "Looks neat, kind of an early stage of what you're building? I see a lot of room for features to make goldfishing do-able."
+        },
+        {
+          "id": 47620509,
+          "author": "mrbluecoat",
+          "text": "How do I see the table? Maybe I'm doing it wrong but I expected drag and drop from my hand at the bottom to the empty space at the top as the table, like TappedOut.net but it seems I have to tap the card, then tap Play, then all I see is a message saying \"# Cards on table\" but not visible anywhere."
+        },
+        {
+          "id": 47620362,
+          "author": "cokeeffekt",
+          "text": "I always wanted https://untap.in/ (yeah, I built it) to feel like this... free-form, chill, a bit messy. Just moving cards around, making mistakes, fixing them together, like a real board game night. But after 10 years of user feedback, it ended up somewhere else. Still nice seeing someone else land closer to that original idea. Well done."
+        },
+        {
+          "id": 47620799,
+          "author": "windowshopping",
+          "text": "I don't quite understand how to use this, but if people are looking for a way to play magic digitally I might recommend the site I built at cardtavern.com."
+        },
+        {
+          "id": 47620016,
+          "author": "hexcolor",
+          "text": "how is this better than edhplay.com?"
+        }
+      ],
+      "summary_ja": "Magic the Gathering Deck Shufflerへのコメントでは、UI（特にカードのプレイ方法）の不明確さや機能不足への指摘が多く、TappedOut.netなど既存サービスの操作性との比較がなされている。また、デジタル環境における自由でカジュアルなプレイ体験の理想像（カードを動かして試行錯誤できるなど）や、untap.inの開発経緯との関連、他の類似サービス（cardtavern.com、edhplay.com）との優劣について言及されている。"
+    },
+    {
+      "rank": 19,
+      "id": 47611921,
+      "title_en": "Significant Raise of Reports",
+      "title_ja": "報告件数の大幅な増加",
+      "url": "https://lwn.net/Articles/1065620/",
+      "hn_url": "https://news.ycombinator.com/item?id=47611921",
+      "score": 264,
+      "comment_count": 141,
+      "posted_at": "2026-04-02T09:14:18+00:00",
+      "comments": [
+        {
+          "id": 47615804,
+          "author": "psychoslave",
+          "text": ">software that used to follow the \"release-then-go-back-to-cave\" model will have to change to start dealing with maintenance for real, or to just stop being proposed to the world as the ultimate-tool-for-this-and-that because every piece of software becomes a target. Actually, some software are running the water-heater/heat-pump system in my basement. There is a small blue light screen, it keeps logs of consumed electricity/produced heat and can make small histograms. Of course there is a smart option to make it internet connected. The kind of functionality I’m glad it’s disabled by default and not enforced to be able to operate. If possible, I’ll never upgrade it. Release then go back to the cave has definitely its place in many actual physical product in the world. I’ll deal with enough WTF software security in my daily job during my career. Sparing some cognitive load of whatever appliance being turned into a brick because the company that produced it or some script-kiddy-on-ai-steroid decided it was desirable to do so, that’s more time to do whatever other thing cosmos allows to explore."
+        },
+        {
+          "id": 47615578,
+          "author": "chromacity",
+          "text": "> people will finally understand that security bugs are bugs, and that the only sane way to stay safe is to periodically update, without focusing on \"CVE-xxx\" Linux devs keep making that point, but I really don't understand why they expect the world to embrace that thinking. You don't need to care about the vast majority of software defects in Linux, save for the once-in-a-decade filesystem corruption bug. In fact, there is an incentive not to upgrade when things are working, because it takes effort to familiarize yourself with new features, decide what should be enabled and what should be disabled, etc. And while the Linux kernel takes compatibility seriously, most distros do not and introduce compatibility-breaking changes with regularity. Binary compatibility is non-existent. Source compatibility is a crapshoot. In contrast, you absolutely need to care about security bugs that allow people to run code on your system. So of course people want to treat security bugs differently from everything else and prioritize them."
+        },
+        {
+          "id": 47615029,
+          "author": "3form",
+          "text": ">people will finally understand that security bugs are bugs, and that the only sane way to stay safe is to periodically update, without focusing on \"CVE-xxx\" The problem is that the very same tools, I expect, are behind the supply chain attacks that seem to be particularly notorious recently. No matter where you turn, there's an edge to cut you on that one."
+        },
+        {
+          "id": 47612669,
+          "author": "glimshe",
+          "text": "The last paragraph is interesting: \"Overall I think we're going to see a much higher quality of software, ironically around the same level than before 2000 when the net became usable by everyone to download fixes. When the software had to be pressed to CDs or written to millions of floppies, it had to survive an amazing quantity of tests that are mostly neglected nowadays since updates are easy to distribute.\" Was software made before 2000 better? And, if so, was it because of better testing or lower complexity?"
+        },
+        {
+          "id": 47612867,
+          "author": "Shank",
+          "text": "Important to note that this is a comment on this article: https://lwn.net/Articles/1065586/ ."
+        }
+      ],
+      "summary_ja": "ソフトウェアの「リリース後は放置」モデルからの脱却と継続的メンテナンスの必要性が指摘される一方で、ユーザーは互換性や手間から更新を避けたい現実がある。セキュリティバグを特別視せず定期的な更新が重要との主張に対し、供給網攻撃や更新コストの観点から疑問が呈される。また、ネット以前の厳密なテストを経たソフトウェア品質が再評価されている。"
+    },
+    {
+      "rank": 20,
+      "id": 47615490,
+      "title_en": "Artemis computer running two instances of MS outlook; they can't figure out why",
+      "title_ja": "ArtemisコンピューターがMS Outlookを2インスタンス実行；理由が不明",
+      "url": "https://bsky.app/profile/nikigrayson.com/post/3miik2wzosk25",
+      "hn_url": "https://news.ycombinator.com/item?id=47615490",
+      "score": 258,
+      "comment_count": 198,
+      "posted_at": "2026-04-02T15:08:45+00:00",
+      "comments": [
+        {
+          "id": 47620315,
+          "author": "xg15",
+          "text": "Moon landing 1969: 4 KB RAM for the guidance computer is enough. Moon landing 2026: Two instances of MS Outlook sort of started themselves on the guidance computer and we have no idea why."
+        },
+        {
+          "id": 47621071,
+          "author": "nickandbro",
+          "text": "Good thing they didn’t bring copilot with them"
+        },
+        {
+          "id": 47616957,
+          "author": "EvanAnderson",
+          "text": "This talk about off-the-shelf hardware in space makes me wonder, given the clear line of sight, if it would be possible to detect their Wi-Fi access points' beacons from Earth. I'm not a \"radio guy\" and don't know if this would be impossible, simply on the basis of physics, due to the presumably low radiated power from the APs and the limitations of the size of typical antennas on the ground. (Obviously it's possible with the right equipment. We can communicate with the Voyager probes, but that's not with a \"can-tenna\" and an off-the-shelf Wi-Fi card...) Edit: Anybody know how difficult it would be to keep an antenna pointed at them? I have no intuition for how fast their transit would be. I assume, since an orbit is around 90 minutes, pretty damned fast. Edit 2: Some search-engining and back-of-the-envelope not-very-good-at-trig math says the longest possible transit would be about 5 minutes, moving though about 40 degrees of arc / minute. I'm probably completely talking out my ass, though. It feels like it would be do-able to keep a directional antenna trained on a target moving at that speed."
+        },
+        {
+          "id": 47616683,
+          "author": "stackskipton",
+          "text": "Everyone likes to point and laugh, sure, I'm getting a chuckle as well. However, on more practical level, what are other options? Outlook, the desktop application works really well with local copies, is pretty low bandwidth and very familiar to end users. IMAP with Thunderbird is probably only other option that would satisfy the requirements. EDIT: Yes they need to get email in space. It's easy way to send documents back and forth."
+        },
+        {
+          "id": 47620378,
+          "author": "PTOB",
+          "text": "I'll bet someone's trying to run the New Outlook and classic Outlook at the same time."
+        }
+      ],
+      "summary_ja": "宇宙探査における現代ソフトウェア使用に対する皮肉（過去と現在の技術比較）と、Wi-Fi検出の可能性など技術的好奇心、さらに宇宙での電子メールシステムの実用的必要性という観点からの議論。"
+    },
+    {
+      "rank": 21,
+      "id": 47574851,
+      "title_en": "Foxing aspires to be an eBPF-powered replication engine for Linux filesystems",
+      "title_ja": "FoxingはLinuxファイルシステム向けeBPF駆動レプリケーションエンジンを目指す",
+      "url": "https://codeberg.org/aenertia/foxing",
+      "hn_url": "https://news.ycombinator.com/item?id=47574851",
+      "score": 25,
+      "comment_count": 4,
+      "posted_at": "2026-03-30T14:30:48+00:00",
+      "comments": [
+        {
+          "id": 47620607,
+          "author": "yjftsjthsd-h",
+          "text": "Promising; kinda feels like a hopefully-better syncthing, albeit I think one-direction? Anyways, some hopefully constructive questions that I don't see in the readme: * Is sync done in cleartext? (Or am I misunderstanding the model and this expects you to handle the network layer yourself with eg. NFS?) * How are conflicts handled? * Actually, in general where does this land on CAP? (There's a section titled \"Consistency\" but it doesn't really answer what I want to know) > If enable_versioning is active, the daemon creates zero-cost reflink snapshots on fsync: * How does it handle filesystems that doesn't have that feature? (XFS and BTRFS are easy, but this says it supports ext4) (And to be clear, none of these are meant as criticisms of the actual software; they're things that the user should know the answer to, not questions that have to have a specific answer)"
+        },
+        {
+          "id": 47620604,
+          "author": "mrbluecoat",
+          "text": "How would you replicate: rsync -avz -e \"ssh\" user@remote_host:/path/to/source/ /path/to/destination/ Something like this? fxcp snap export /path/to/source/ | ssh user@remote_host -t 'fxcp snap import /path/to/destination/'"
+        },
+        {
+          "id": 47620484,
+          "author": "copper-float",
+          "text": "No, Foxing is one of my favorite indie-rock bands from the St. Louis area."
+        }
+      ],
+      "summary_ja": "Foxingプロジェクトに対する技術的疑問点が中心で、暗号化の有無、競合処理方法、CAP定理における位置付け、ext4などでのスナップショット機能対応について不明確な点を指摘している。"
+    },
+    {
+      "rank": 22,
+      "id": 47611721,
+      "title_en": "IBM Announces Strategic Collaboration with Arm",
+      "title_ja": "IBM、Armとの戦略的協業を発表",
+      "url": "https://newsroom.ibm.com/2026-04-02-ibm-announces-strategic-collaboration-with-arm-to-shape-the-future-of-enterprise-computing",
+      "hn_url": "https://news.ycombinator.com/item?id=47611721",
+      "score": 255,
+      "comment_count": 166,
+      "posted_at": "2026-04-02T08:48:44+00:00",
+      "comments": [
+        {
+          "id": 47612365,
+          "author": "mcbridematt",
+          "text": "Ah, that explains this patchset that was submitted to the Linux kernel today \"KVM: s390: Introduce arm64 KVM\" \"By introducing a novel virtualization acceleration for the ARM architecture on s390 architecture, we aim to expand the platform's software ecosystem. This initial patch series lays the groundwork by enabling KVM-accelerated ARM CPU virtualization on s390.....\" https://patchwork.kernel.org/project/linux-arm-kernel/cover/..."
+        },
+        {
+          "id": 47612454,
+          "author": "mykowebhn",
+          "text": "This is a serious question. What does IBM, in fact, do? I'm surprised they are still around and apparently relevant. Are they more or less a services and consulting company now?"
+        },
+        {
+          "id": 47612040,
+          "author": "silvestrov",
+          "text": "> dual‑architecture hardware that helps enterprises run future AI and data intensive workloads with greater flexibility, reliability, and security I think we can ignore the \"AI\" word here as its presence is only because everything currently has to be AI. So why would IBM add ARM? > As enterprises scale AI and modernize their infrastructure, the breadth of the Arm software ecosystem is enabling these workloads to run across a broader range of environments I think it has become too expensive for IBM to develop their own CPU architecture and that ARM64 is starting to catch up in performance for a much lower price. So IBM wants to switch to ARM without making a too big fuzz about it."
+        },
+        {
+          "id": 47612495,
+          "author": "nxobject",
+          "text": "Once you parse the marketing speak, looks like there may be ARM ISA silicon in future System Z. But, what are their legacy finance-sector customers asking for here? Are they trying to add ARM to LinuxONE, while maintaining the IBM hardware-based nine nines uptime strategy/sweet support contract paradigm? If so, why don't the Visas of the world just buy 0xide, for example? > develop new dual‑architecture hardware that helps enterprises run future AI and data intensive workloads with greater flexibility, reliability, and security. > \"This moment marks the latest step in our innovation journey for future generations of our IBM Z and LinuxONE systems, reinforcing our end-to-end system design as a powerful advantage.\""
+        },
+        {
+          "id": 47612577,
+          "author": "bob1029",
+          "text": "I think the #1 use case here is allowing AI/cloud workloads the ability to execute against the mainframe's data without ever leaving the secure bubble. I.e., bring the applications to the data rather than the data to the applications. IBM could put an entire 1k core ARM mini-cloud inside a Z series configuration and it could easily be missed upon visual inspection. Imagine being able to run banking apps with direct synchronous SQL access to core and callbacks for things like real-time fraud detection. Today, you'd have to do this with networked access into another machine or a partner's cloud which kills a lot of use cases. If I were IBM, I would set up some kind of platform/framework/marketplace where B2B vendors publish ARM-based apps that can run on Z. Apple has already demonstrated that we can make this sort of thing work quite well with regard to security and how locked down everything can be."
+        }
+      ],
+      "summary_ja": "IBMとArmの協業は、IBM ZシステムでARMアーキテクチャをサポートし、自社CPU開発のコスト削減と性能向上を目指す。これにより、メインフレームのデータに直接アクセスするAI・クラウドワークロードを安全に実行でき、金融セクターなどでの応用を強化する。高可用性とセキュリティを維持しつつ、柔軟なハードウェア設計を実現する。"
+    },
+    {
+      "rank": 23,
+      "id": 47614100,
+      "title_en": "'Backrooms' and the Rise of the Institutional Gothic",
+      "title_ja": "『Backrooms』とInstitutional Gothicの台頭",
+      "url": "https://thereader.mitpress.mit.edu/backrooms-and-the-rise-of-the-institutional-gothic/",
+      "hn_url": "https://news.ycombinator.com/item?id=47614100",
+      "score": 155,
+      "comment_count": 71,
+      "posted_at": "2026-04-02T13:18:05+00:00",
+      "comments": [
+        {
+          "id": 47616018,
+          "author": "amiga386",
+          "text": "The article has a screenshot of the Stanley Parable, but misses an opportunity to reference Control (2019) which is much more directly influenced by the \"liminal space\" concept, and imagines a non-euclidian space called The Oldest House at 34 Thomas Street (a reference to the brutalist, windowless AT&T Long Lines skyscraper at 33 Thomas Street, New York City). https://www.youtube.com/watch?v=F74LLDhAhhI It also very much ties in with the shared SCP universe, which itself has a number of Backrooms-like anomalies, such as SCP-3008 ( https://scp-wiki.wikidot.com/scp-3008 ), which is like a typical IKEA, except its maze of twisty passages run to infinity."
+        },
+        {
+          "id": 47615631,
+          "author": "nkrisc",
+          "text": "I don’t really get the nostalgia angle as it seems as many of those who are into this kind of thing are too young to have ever been in such a space, let alone worked in one. I’ve worked in a place like this that was well past its prime and though uncanny, it’s certainly not creepy. The illusion of infinitely twisting, identical corridors simply doesn’t hold up when you’re actually in a space like this, but only works if you’ve only ever seen these kinds of spaces from a still photograph on the internet (which is why the audience for this sort of thing is too young to have ever experienced it themselves). Yes, it looks exactly like the stifling, sprawling suburban office complex I once worked in, but then I also remember the feeling of walking out the exit into a beautiful spring day. For me, the feeling these “back rooms” evokes is more akin to being in school waiting for the bell to ring so you can go outside and play. It’s strange when your own mundane experiences are fodder for a new generation’s horror fiction. Sort of takes the bite away from it."
+        },
+        {
+          "id": 47615772,
+          "author": "squeedles",
+          "text": "Never got around to The Backrooms, but the follow on Oldest View / Rolling Giant series of videos are absolutely fantastic. It captures the tension between curiosity and dread perfectly, which seems to me what all of this fascination with liminal space is all about. On a technical level, his work is brilliant. With no budget, he puts me in a CGI space that I really can't tell is CGI, and invokes all of the feelings that are familiar to anyone who has snuck around where they really shouldn't be. https://en.wikipedia.org/wiki/The_Oldest_View"
+        },
+        {
+          "id": 47616512,
+          "author": "c-hendricks",
+          "text": "While the Backrooms movie trailer does make it look interesting, \"Backrooms\" / liminal horror / Skinamarink all have the same effect on me: nothing. I figure the split of people who find it scary vs those that don't is people who can \"unscare\" themselves. Like when I go into my basement at night, I can give myself the scare of \"what if someone's watching ...\" then go \"nah\" and I'm fine."
+        },
+        {
+          "id": 47615497,
+          "author": "whateveracct",
+          "text": "The Backrooms have always reminded me of House of Leaves and the Navidson Record within specifically. (I think maybe that's a deliberate influence in the lore?) So I like how the movie's plot seems to be similar as well."
+        }
+      ],
+      "summary_ja": "「バックルーム」やリミナル空間を題材とした作品群について、その文化的関連性（SCPや制御などの他作品）、実在の空間体験を持つ者とネット世代の解釈の乖離、恐怖の感じ方の個人差、そして技術的表現の評価など、多角的な観点から議論されている。"
+    },
+    {
+      "rank": 24,
+      "id": 47618581,
+      "title_en": "Amazon is adding a fuel surcharge to fees it collects from third-party sellers",
+      "title_ja": "Amazon、第三者売り手から徴収する手数料に燃料サーチャージを追加",
+      "url": "https://www.cnbc.com/2026/04/02/amazon-add-3point5percent-fuel-and-logistics-surcharge-for-sellers-amid-iran-war.html",
+      "hn_url": "https://news.ycombinator.com/item?id=47618581",
+      "score": 113,
+      "comment_count": 49,
+      "posted_at": "2026-04-02T18:49:38+00:00",
+      "comments": [
+        {
+          "id": 47620240,
+          "author": "binarysolo",
+          "text": "Amazon third party seller (low 8s) here: last time this happened was during COVID and it ended up being a permanent FBA shipping price increase. Practically speaking shipping accounts for 10-20% of the sale price, so realistically it's the seller who will absorb it and maybe pass on costs to the buyers, but we're talking about 3.5% of 10-20%, which is really a 1% price increase, so a noticeable but not make-or-break issue in the death-by-1000-cuts. The Andy-led Amazon is less forgiving than the Jeff \"your margin is my opportunity\"-led Amazon on profitability so price shocks have passed through to sellers much more immediately than prior years where Amazon would just move slowly and stably. The bigger Amazon news recently is on DD+7 and how Amazon basically increased their float and delayed payments on all sellers, and that's been kinda a pain to navigate."
+        },
+        {
+          "id": 47619930,
+          "author": "gnabgib",
+          "text": "Title could really use \"for third-party sellers who use fulfillment services\" (this is not a 3.5% surcharge on AWS, Prime, or Amazon orders)"
+        },
+        {
+          "id": 47619609,
+          "author": "0cf8612b2e1e",
+          "text": "Last year, Amazon backed down from sharing tariff pricing. I assume the same will happen here."
+        },
+        {
+          "id": 47619997,
+          "author": "jrockway",
+          "text": "Sometimes I wonder if we just do these wars so that companies can raise prices and when the war ends, not lower them. Do we ever see \"oil prices are down 3.5%, we are lowering our prices by 3.5%\"? Never. \"But the free market will force someone to do this to gain marketshare.\" But Amazon is the only Amazon, so I doubt that will happen."
+        },
+        {
+          "id": 47620154,
+          "author": "bdcravens",
+          "text": "Fuel surcharges are a regular thing for UPS, Fedex, and others https://www.fedex.com/en-us/shipping/historical-fuel-surchar... https://www.ups.com/us/en/support/shipping-support/shipping-..."
+        }
+      ],
+      "summary_ja": "Amazonがフルフィルメント利用のサードパーティセラーに導入する燃料サーチャージは、実質価格1%上昇と直接的影響は小さいが、過去の値上げが永続的だったことや、Andy体制下での収益性重視による迅速なコスト転嫁、支払い遅延などの他の変更と相まって、セラー負担が累積しており、市場支配力により価格引き下げは期待できない。"
+    },
+    {
+      "rank": 25,
+      "id": 47615844,
+      "title_en": "Show HN: A P2P messenger with dual network modes (Fast and Tor)",
+      "title_ja": "Show HN：デュアルネットワークモード（高速とTor）を備えたP2Pメッセンジャー",
+      "url": "https://github.com/Realman78/Kiyeovo/",
+      "hn_url": "https://news.ycombinator.com/item?id=47615844",
+      "score": 23,
+      "comment_count": 5,
+      "posted_at": "2026-04-02T15:32:45+00:00",
+      "comments": [
+        {
+          "id": 47620942,
+          "author": "kvisner",
+          "text": "So most messaging apps rely on a phone number or centralized server to provide a means of making atleast the initial connection. In a purely P2P messaging system, how do I, as a user, find the other person I might want to talk to?"
+        },
+        {
+          "id": 47620630,
+          "author": "blamestross",
+          "text": "I don't recommend DHTs with public participants being made from scratch. Use mainline bittorrent DHT instead. Small networks are really easy to eclipse and censor. DHTs of trusted participants are great."
+        },
+        {
+          "id": 47616488,
+          "author": "kopitev174",
+          "text": "I worked on a p2p group chat app for a short time (no central server, same as this), but the group updates were a real problem. how do they get distributed?"
+        }
+      ],
+      "summary_ja": "P2Pメッセージングシステムの課題として、中央サーバーなしでのユーザー間の初期接続確立方法が問題視される。DHT設計では、新規作成の公開ネットワークは攻撃や検閲に弱いため、既存のBitTorrent DHTの利用や信頼できる参加者に限定したDHTが提案された。また、グループチャットにおける更新情報の分散配布も実装上の難点として指摘されている。"
+    },
+    {
+      "rank": 26,
+      "id": 47612601,
+      "title_en": "Sweden goes back to basics, swapping screens for books in the classroom",
+      "title_ja": "スウェーデン、教室でスクリーンから書籍へ原点回帰",
+      "url": "https://undark.org/2026/04/01/sweden-schools-books/",
+      "hn_url": "https://news.ycombinator.com/item?id=47612601",
+      "score": 698,
+      "comment_count": 370,
+      "posted_at": "2026-04-02T10:50:00+00:00",
+      "comments": [
+        {
+          "id": 47615163,
+          "author": "pier25",
+          "text": "I worked in EdTech about a decade ago and our education/pedagogy experts were already talking about this. They also talked a lot about how handwriting is super important for cognitive development. After working on that company for a couple of years I realized using tech in education (pre university) was a mistake. One of the reasons I left. In a decade or two the long term consequences of inundating kids with tech and then removing it will be quite obvious. This will be studied for decades to come. Reminds me of the Dutch kids that were borm during the 1944-1945 Dutch famine. https://www.ohsu.edu/school-of-medicine/moore-institute/dutc..."
+        },
+        {
+          "id": 47612836,
+          "author": "smatti",
+          "text": "A very similar development is going on in neighboring Finland. There are schools that use almost exclusively paper books (instead of digital ones) again. The overall consensus among parents is that books are way better than screens for kids, all the way up to high school. Hand-writing and free drawing with pen and paper provide many advantages to fixed screens. You cannot open a new tab to Youtube in a book. The significance of these things is finally recognized now. Parents are also worried about the short video brain rot and psychological \"capture\" of our kids by social media companies. Naturally, the kids should learn AI and AI workflows also. And personal AI assistants can probably help many kids in their studies. Learning AI should be its own subject but that should not ruin the way kids study other subjects where there are proven old ways to get to great results. Source: I have 10 Finnish kids Edit: FYI: an old (2018) link to an article about a finding about the matter: https://yle.fi/a/3-10514984 \"Finland’s digital-based curriculum impedes learning, researcher finds\""
+        },
+        {
+          "id": 47613112,
+          "author": "mentalgear",
+          "text": "I remember that - even though Steve Jobs promoted the iPad as a replacement to the 'heavy schoolbooks kids had to carry all day' - he never allowed his children to use iPads. I bet Zuckerberg doesn't allow his children to use social media. And I assume that Sam Altman won't allow his children to use AI chatbots. What does that tell us?"
+        },
+        {
+          "id": 47620472,
+          "author": "tomasGiden",
+          "text": "Guy here with kids in Swedish school. In general I support the direction of learning basic analogue skills and detoxing from the constant dopamine hits of the digital world. BUT one of my kids has Asperger’s and it is extremely hard for him to muster up the energy to do something ”boring”. So gamified learning on an iPad works very well for him. Also doing math on an iPad where, instead of seeing full pages of equations to solve, he sees only one equation makes it much easier for him to get started. With these kids you learn to not focus on parenting/teaching principles and instead focus on the goals. I’ll do whatever to get him to go to school and learn, no matter if I’ll have to drive him the 700 m to school while he is watching YouTube or having him to math on an iPad. So as long as the push for more analogue tools is just a direction and not without individual exceptions I’m all for it. Sadly today’s Swedish government seems more focused on being seen as hard on kids, crime, immigrants etc (basically everything except environmental protections) than actually following scientific principles."
+        },
+        {
+          "id": 47617598,
+          "author": "WalterBright",
+          "text": "The same goes for college. I've advised college students to leave their laptops in their dorm room. Take a spiral notebook to lecture, and a couple pens. Write down everything the professor writes on the chalkboard. When studying, going over the notes, you'll hear the lecture again in your head. Of course, if the professor doesn't use a chalkboard, and does a slide presentation instead, that will make studying harder for you. The best presentation I ever gave was when the presenter didn't show up, and the conference asked for volunteers. I volunteered and gave an impromptu presentation using markers and the big whiteboard. The back-and-forth with the audience was very productive! Most conferences have no way to do this. I tried using an overhead projector and markers, but the conference people thought I was crazy. There was just too much expectation of a packaged slide presentation."
+        }
+      ],
+      "summary_ja": "スウェーデンやフィンランドでは、教育現場でデジタル機器から紙の本や手書きへの回帰が進む。スクリーンよりアナログ手法を重視し、認知発達や集中力を高め、ソーシャルメディアなどの悪影響を懸念する。一方、特別な支援が必要な子供にはデジタル機器が有効であり、個人のニーズに応じた柔軟な対応が必要との意見も示される。"
+    },
+    {
+      "rank": 27,
+      "id": 47618120,
+      "title_en": "Hugo's New CSS Powers",
+      "title_ja": "Hugoの新CSS機能",
+      "url": "https://www.brycewray.com/posts/2026/04/hugos-new-css-powers/",
+      "hn_url": "https://news.ycombinator.com/item?id=47618120",
+      "score": 32,
+      "comment_count": 6,
+      "posted_at": "2026-04-02T18:16:57+00:00",
+      "comments": [
+        {
+          "id": 47618405,
+          "author": "brycewray",
+          "text": "Author here. This post arose out of a recent thread on the Hugo Discourse: https://discourse.gohugo.io/t/hugo-v0-158-0-released/56868"
+        },
+        {
+          "id": 47620234,
+          "author": "imagetic",
+          "text": "Yeah Bryce!"
+        },
+        {
+          "id": 47618724,
+          "author": "nine_k",
+          "text": "Nice! (But I must say that Zola has this built-in since forever.)"
+        }
+      ],
+      "summary_ja": "Hugoの新CSS機能について、著者がDiscourseスレッドを背景に説明。コメントでは称賛する一方、競合ツールZolaが同機能を以前から搭載していたと指摘されている。"
+    },
+    {
+      "rank": 28,
+      "id": 47615449,
+      "title_en": "Artemis II will use laser beams to live-stream 4K moon footage at 260 Mbps",
+      "title_ja": "Artemis II、レーザービームで4K月面映像を260 Mbpsでライブ配信",
+      "url": "https://www.tomshardware.com/networking/artemis-ii-will-use-laser-beams-to-live-stream-4k-moon-footage-one-giant-step-beyond-the-s-band-radio-comms-of-the-apollo-era",
+      "hn_url": "https://news.ycombinator.com/item?id=47615449",
+      "score": 300,
+      "comment_count": 134,
+      "posted_at": "2026-04-02T15:04:44+00:00",
+      "comments": [
+        {
+          "id": 47615903,
+          "author": "xattt",
+          "text": "Hopefully, the footage is better than the missed pan up at lift-off, and showing spectators at the time of booster separation. I understand funding cuts and all, but this is a once-in-a-generation moment and it’s filmed with no apparent effort whatsoever."
+        },
+        {
+          "id": 47615967,
+          "author": "SoftTalker",
+          "text": "> never-before-seen views of “the far side of the Moon“ I guess not counting all the prior \"views\" that have been recorded since the Apollo missions, including Chinese orbiters which (according to Wikipedia) \"scanned the entire Moon in unprecedented detail, generating a high definition 3D map that would provide a reference for future soft landings\""
+        },
+        {
+          "id": 47616038,
+          "author": "bnchrch",
+          "text": "This in particular warmed my grumpy heart after the best footage of the launch came from a commercial airliners windows. I had assumed they would've had a better plan to film the entire departure from orbit yesterday. I'm at least happy they have one for the loop around the moon."
+        },
+        {
+          "id": 47615983,
+          "author": "vibe42",
+          "text": "NASA's rendering of the flyby: https://svs.gsfc.nasa.gov/vis/a000000/a005500/a005536/a2_fly... Hope we get to see something like this in 4K !"
+        },
+        {
+          "id": 47617684,
+          "author": "saltybytes",
+          "text": "Forgive my bluntness asking this question: how hard can it be to put a stationary \"satellite\" as a communication relay next to the moon to bridge the \"dark window\" with the space craft?"
+        }
+      ],
+      "summary_ja": "Artemis IIの4K月面映像ライブストリーミング技術への期待と、過去の打ち上げ撮影品質への不満が交わる。月の裏側映像の新規性に疑問を呈し、改善を求める声がある。また、月周辺に通信中継衛星を設置する難しさについても議論されている。"
+    },
+    {
+      "rank": 29,
+      "id": 47615756,
+      "title_en": "Renewables reached nearly 50% of global electricity capacity last year",
+      "title_ja": "昨年、再生可能エネルギーは世界の発電容量の約50%に到達",
+      "url": "https://www.theregister.com/2026/04/01/renewables_generated_nearly_half_global_power/",
+      "hn_url": "https://news.ycombinator.com/item?id=47615756",
+      "score": 232,
+      "comment_count": 110,
+      "posted_at": "2026-04-02T15:26:18+00:00",
+      "comments": [
+        {
+          "id": 47621029,
+          "author": "layoric",
+          "text": "Worked on the software side of increasing the rate of solar penetration in electricity networks between 2016-2020 via global solar radiation forecasting. The uptake of the software was slow the first year but then rapid once more electricity networks were struggling with knowing how much solar was in the network. Once it is easier to predict, the network becomes easier to manage, and more can be safely added, and make it economically profitable. Sucks this was a commercial operation, but excited to see all the hard work across various industries is solving problems to get more renewable energy into networks."
+        },
+        {
+          "id": 47617666,
+          "author": "philipkglass",
+          "text": "It takes time for statistical agencies to compile reports. I haven't yet found reports covering the growth in renewable generation (actual terawatt hours) for all of 2025. But this covers 3 quarters of the year: https://ember-energy.org/latest-updates/solar-and-wind-growt... In the first three quarters of 2025, solar generation rose by 498 TWh (+31%) and already surpassed the total solar output in all of 2024. Wind generation grew by 137 TWh (+7.6%). Together, they added 635 TWh, outpacing the rise in global electricity demand of 603 TWh (+2.7%)."
+        },
+        {
+          "id": 47619163,
+          "author": "didgetmaster",
+          "text": ">At the global level, 2025 also saw a sharp rebound in non-renewable additions, which nearly doubled compared to 2024,\" IRENA noted. China led that drive, with 100 GW of non-renewable capacity added last year, most of which was coal. Why is China adding so many new generation plants powered by coal? On this and other forums, I see claims all the time that solar is cheaper than coal. As the world's leading producer of solar panels, you would think that they would utilize it even more if those claims are true. Is it just the need for power when the sun is not shining? Or is it something else?"
+        },
+        {
+          "id": 47616530,
+          "author": "Ancalagon",
+          "text": "Wait this is actually amazing, I had no idea it was that high. I can’t even believe what the US admin is doing, this is clearly the winning technology."
+        },
+        {
+          "id": 47616618,
+          "author": "Night_Thastus",
+          "text": "Makes sense - solar especially. It's just more financially smart to buy something that will generate electricity for 20-30 years with little to no maintenance than a plant that requires constant fuel, and is fairly complex mechanically with fluids and heat exchangers and turbines and so on. Panel efficiency keeps going up and prices keep going down, it's a snowball at this point."
+        }
+      ],
+      "summary_ja": "太陽光発電の導入拡大には予測技術の向上が管理面と経済性で寄与し、太陽光・風力の急成長が電力需要増を上回っている。一方、中国では石炭火力の増加という矛盾も指摘されつつ、太陽光の経済的優位性と技術進歩によるコスト低下が普及を牽引している。"
+    },
+    {
+      "rank": 30,
+      "id": 47618100,
+      "title_en": "Yggdrasil Network",
+      "title_ja": "Yggdrasil Network",
+      "url": "https://yggdrasil-network.github.io/",
+      "hn_url": "https://news.ycombinator.com/item?id=47618100",
+      "score": 76,
+      "comment_count": 30,
+      "posted_at": "2026-04-02T18:15:19+00:00",
+      "comments": [
+        {
+          "id": 47619294,
+          "author": "postsantum",
+          "text": "Thank you, Yggdrasil, for being just a compact routing scheme, not a semi-governmental military solution for implementing horrors beyond my comprehesion (they just love nordic or lotr names for that kind of things)"
+        },
+        {
+          "id": 47619884,
+          "author": "infogulch",
+          "text": "Is Yggdrasil still using raw truncated ed25519 keys to determine the treespace root node? [1] If so, this seems to be an obvious network availability vulnerability. [2] [1]: https://yggdrasil-network.github.io/2021/06/19/preparing-for... [2]: https://news.ycombinator.com/item?id=27577201#27580938"
+        },
+        {
+          "id": 47619765,
+          "author": "Karrot_Kream",
+          "text": "Does anyone run private services for themselves on Yggdrasil by allowlisting specific IPs and piggybacking on the routing layer? I've thought about doing this but haven't tried it. I wish TLS behaved better with private networks but I around certificates continues to mostly be oriented around the Internet."
+        },
+        {
+          "id": 47620804,
+          "author": "ajvs",
+          "text": "Was evaluating this recently, the lack of NAT busting was a dealbreaker."
+        },
+        {
+          "id": 47619349,
+          "author": "realreality",
+          "text": "It's been working well for me as a kind of poor-man's tailscale, connecting several VPS and several laptops."
+        }
+      ],
+      "summary_ja": "Yggdrasil Networkについて、脆弱性の指摘（ed25519鍵方式）やNAT超え機能の不足といった技術的課題が議論される一方、複数デバイス間のプライベート接続を実現する実用的な側面も評価されている。"
+    }
+  ]
+}
