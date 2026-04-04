@@ -1,0 +1,1109 @@
+{
+  "date": "2026-04-04T00:00:00+09:00",
+  "slot": "23",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 47637757,
+      "title_en": "Simple self-distillation improves code generation",
+      "title_ja": "シンプルなセルフディスティレーションがコード生成を改善",
+      "url": "https://arxiv.org/abs/2604.01193",
+      "hn_url": "https://news.ycombinator.com/item?id=47637757",
+      "score": 232,
+      "comment_count": 67,
+      "posted_at": "2026-04-04T10:26:21+00:00",
+      "comments": [
+        {
+          "id": 47638287,
+          "author": "bensyverson",
+          "text": "Really fascinating how this works; it's basically context-aware decoding. From the paper: > Code interleaves fork positions, where several continuations are genuinely plausible and may correspond to different solution approaches, with lock positions, where syntax and semantics leave little ambiguity but a low-probability distractor tail still remains… The best global decoding setting is therefore necessarily a compromise; we call this tension the precision-exploration conflict. In other words, just like us, the model needs to shift from \"exploration\" in \"fork\" mode (divergent thinking to produce a creative solution) to \"precision\" in \"lock\" mode (producing syntactically correct code). What this paper shows is that their simple technique (SSD) can improve the ranking of optimal tokens in both lock and fork positions, meaning the model is more likely to explore when it should be exploring, and more likely to be precise when it needs to be. I love that we're still learning the emergent properties of LLMs!"
+        },
+        {
+          "id": 47638349,
+          "author": "wg0",
+          "text": "After TurboQuant and Gemma 4, came across the following video[0] running Gemma on local machine at 50 token/second. That already looks like Sonnet 3x and 4 level capabilities to me where the model in question (Gemma 4) set ups whole python project with a UI and installs python libraries using uv etc. Add this Simple Self Distillation to the picture and by 2028 I see cheaper coding model providers with much more generous usage limits in the future and power users would be mostly running their own models anyway. Anyone using these models as \"non-deterministic transpilers\" from natural language to code (experienced engineers who can write code themselves) would probably not be paying to any AI providers. [0] https://www.youtube.com/watch?v=-_hC-C_Drcw"
+        },
+        {
+          "id": 47639362,
+          "author": "fooker",
+          "text": "I'm excited for the long tail of techniques like this that are going to be discovered over the next several decades that's going to make this technology eventually run on a toaster!"
+        },
+        {
+          "id": 47639104,
+          "author": "ultramann",
+          "text": "Maybe not the thing I should be focusing on, but I was surprised this paper came from apple. I was under the impression that apples ai/LLM research was far behind the curve. I get that research is a rising tides lifts all boats situation, I just thought that I had seen lots of negative news about apples progress in the front, and heuristically haven’t seen many (any?) apple research papers make it the front page of hacker news. Wondering if anyone more familiar with apple/ai research could comment on this?"
+        },
+        {
+          "id": 47638217,
+          "author": "khalic",
+          "text": "Incredible, will translate to better coding models in the near future. We really need to develop better tools to understand what's happening inside these NNs. Working with high-D spaces is not something we're good at, and we're basically throwing stuff at it and seeing if it sticks."
+        }
+      ],
+      "summary_ja": "SSD技術はコード生成モデルが探索と精密さを適切に切り替える能力を向上させ、将来の高性能で安価なコーディングモデルの発展を促す。Appleからの研究発表に驚きを示しつつ、技術進歩への期待と、ニューラルネットワークの内部を理解するツールの重要性が指摘されている。"
+    },
+    {
+      "rank": 2,
+      "id": 47633396,
+      "title_en": "Tell HN: Anthropic no longer allowing Claude Code subscriptions to use OpenClaw",
+      "title_ja": "Tell HN: Anthropic、Claude CodeサブスクリプションがOpenClawを使用することを許可しなくなる",
+      "url": null,
+      "hn_url": "https://news.ycombinator.com/item?id=47633396",
+      "score": 857,
+      "comment_count": 661,
+      "posted_at": "2026-04-03T22:55:24+00:00",
+      "comments": [
+        {
+          "id": 47633987,
+          "author": "jesse_dot_id",
+          "text": "There seem to be a ton of people who don't understand how subscription services work. Every single one of them oversells their capacity. The power users that use the services a lot are subsidized by those who don't use it as much, which tends to be the vast majority of the user base. OpenClaw is an autonomous power user. The growing adoption of this walking attack surface was either going to A) cause the cost of Claude to go up or B) get banned to protect the price of the service for actual users."
+        },
+        {
+          "id": 47635320,
+          "author": "nl",
+          "text": "I suspect people are misdiagnosing the root cause of why Anthropic is doing this a bit. I don't think this is particularly about the financial impact of people using OpenClaw - they can adjust the amount of tokens in a subscription quite easily. I think the root cause is that Anthropic is capacity constrained so is having to make choices about the customers they want to serve and have chosen people who use Claude Code above other segments. We know Anthropic weren't as aggressive as OpenAI through 2025 in signing huge capacity deals with the hyperscalers and instead signed smaller deals with more neo-clouds, and we know some of the neo-clouds have had trouble delivering capacity as quickly as they promised. We also know Claude Code usage is growing very fast - almost certainly faster since December 2025 than Anthropic predicted 12 months ago when they were doing 12-month capacity planning. We know Anthropic has suffered from brown-outs in Claude availability. Put this all together and a reasonable hypothesis is that Anthropic is choosing which customers to service rather than raising prices."
+        },
+        {
+          "id": 47637555,
+          "author": "Alifatisk",
+          "text": "Skimming through the comments, it feels like I am reading the same message over and over. I agree with some comments that are pointing out the issue with Anthropics capacity constraints and when Subscription vs Api is appropriate. I would like to point out something else. I have Z.ai subscription and they have a dashboard on my usage. When trying out Openclaw a while ago, I noted something worrying. Its constantly consuming tokens, every single hour during the day, it consumed tokens. I could see over a period of 30 days, token usage would climb and climb and climb and then shrink to bottom again, as if Openclaw did a context window compaction. Note, this usage was happening even though I wasn’t using it. It were always running and doing something in the background. I believe its their Heartbeat.md mechanism. By default it’s set to run every half an hour. I changed it to twice a day, that was enough to me. I can imagine if thousands of users where connecting their Openclaw instance with default config to Claude with the latest and greatest Opus model, that must’ve felt a bit."
+        },
+        {
+          "id": 47634002,
+          "author": "g-mork",
+          "text": "My answer to this is simply rolling back to the pro plan for interactive usage in the coming month, and forcefully cutting myself over to one of the alternative Chinese models to just get over the hump and normalise API pricing at a sensible rate with sensible semantics. Dealing with Claude going into stupid mode 15 times a day, constant HTTP errors, etc. just isn't really worth it for all it does. I can't see myself justifying $200/mo. on any replacement tool either, the output just doesn't warrant it. I think we all jumped on the AI mothership with our eyes closed and it's time to dial some nuance back into things. Most of the time I'm just using Opus as a bulk code autocomplete that really doesn't take much smarts comparatively speaking. But when I do lean on it for actual fiddly bug fixing or ideation, I'm regularly left disappointed and working by hand anyway. I'd prefer to set my expectations (and willingness to pay) a little lower just to get a consistent slightly dumb agent rather than an overpriced one that continually lets me down. I don't think that's a problem fixed by trying to swap in another heavily marketed cure-all like Gemini or Codex, it's solved by adjusting expectations. In terms of pricing, $200 buys an absolute ton of GLM or Minimax, so much that I'd doubt my own usage is going to get anywhere close to $200 going by ccusage output. Minimax generating a single output stream at its max throughput 24/7 only comes to about $90/mo."
+        },
+        {
+          "id": 47633867,
+          "author": "firloop",
+          "text": "This is slightly different from what OpenCode was banned from doing; they were a separate harness grabbing a user’s Claude Code session and pretending to be Claude Code. OpenClaw was still using Claude Code as the harness (via claude -p)[0]. I understand why Anthropic is doing this (and they’ve made it clear that building products around claude -p is disallowed) but I fear Conductor will be next. [0]: See “Option B: Claude CLI as the message provider” here https://docs.openclaw.ai/providers/anthropic#option-b-claude..."
+        }
+      ],
+      "summary_ja": "AnthropicがOpenClawの使用を禁止した理由は、サービスのキャパシティ制約による。高頻度ユーザーがリソースを大量消費することでコスト上昇や不安定化を招くため、通常ユーザーの利益保護を優先した。ユーザー間では代替モデルへの移行や期待値調整の議論が起きている。"
+    },
+    {
+      "rank": 3,
+      "id": 47637287,
+      "title_en": "Some Unusual Trees",
+      "title_ja": "いくつかの珍しい木",
+      "url": "https://thoughts.wyounas.com/p/some-unusual-trees",
+      "hn_url": "https://news.ycombinator.com/item?id=47637287",
+      "score": 108,
+      "comment_count": 33,
+      "posted_at": "2026-04-04T09:04:19+00:00",
+      "comments": [
+        {
+          "id": 47638549,
+          "author": "mykowebhn",
+          "text": "I would say the Eucalyptus tree, planted all over the world but native to Australia, is quite unusual. Young Eucalyptus trees have leaves that are rounded and are arranged opposite to one another. However, when mature the leaves of a Eucalyptus are lance-like and are arranged in an alternating fashion. This to me is quite unusual."
+        },
+        {
+          "id": 47637851,
+          "author": "cluckindan",
+          "text": "Related: There’s no such thing as a tree (phylogenetically) https://eukaryotewritesblog.com/2021/05/02/theres-no-such-th..."
+        },
+        {
+          "id": 47637786,
+          "author": "smusamashah",
+          "text": "The traveller tree looked the most interesting, like a peacock's feather. https://www.indefenseofplants.com/blog/2017/12/12/the-travel..."
+        },
+        {
+          "id": 47639407,
+          "author": "gryzzly",
+          "text": "A while back I read this book \"The Secret Life of Trees: How They Live and Why They Matter\" from Colin Tudge and I was blown away by the fact that Mangrove roots effectively breath with the rhythm of tide. As the water recedes, change in pressure and the air is drawn into the pores. As the water comes in, pressure pushes stale air out and seals the pores. Trees are beautiful."
+        },
+        {
+          "id": 47637605,
+          "author": "nvalis",
+          "text": "Related and also interesting: https://en.wikipedia.org/wiki/List_of_individual_trees"
+        }
+      ],
+      "summary_ja": "ユーカリの葉の成長変化、旅行者ツリーの美的外観、マングローブの潮汐呼吸など、木の異常な特徴が議論された。系統発生的に「木」は存在しないとする関連トピックも触れられ、木の多様性と適応の興味深い事例が共有されている。"
+    },
+    {
+      "rank": 4,
+      "id": 47631118,
+      "title_en": "Artemis II crew take “spectacular” image of Earth",
+      "title_ja": "Artemis II乗組員が地球の「壮観な」画像を撮影",
+      "url": "https://www.bbc.com/news/articles/ce8jzr423p9o",
+      "hn_url": "https://news.ycombinator.com/item?id=47631118",
+      "score": 871,
+      "comment_count": 296,
+      "posted_at": "2026-04-03T19:35:02+00:00",
+      "comments": [
+        {
+          "id": 47632457,
+          "author": "hannesfur",
+          "text": "Looking at the EXIF (with exiftool) for the image uploaded by NASA ( https://www.nasa.gov/wp-content/uploads/2026/04/art002e00019... ), apparently this was taken by a Nikon D5 with an AF-S Zoom-Nikkor 14-24mm f/2.8G ED and developed with Lightroom. It also seems like very little was done in Lightroom. Amazing... I dumped the whole EXIF here: https://gist.github.com/umgefahren/a6f555e6588a98adb74eed79d..."
+        },
+        {
+          "id": 47631817,
+          "author": "Sharlin",
+          "text": "I was confused when I first saw this photo, as I don't think I've ever before seen a nightside, moonlit Earth, exposed so that it looks like the dayside at a first glance. I wonder how many casual viewers actually realize it's the night side. A nice demonstration of how moonlight is pretty much exactly like sunlight, just much much dimmer. In particular it has the same color, even though moonlight is often thought of as bluish and sunlight as yellowish!"
+        },
+        {
+          "id": 47632844,
+          "author": "susam",
+          "text": "Much higher quality images are available on the NASA Image Library: Dark Side of the Earth: https://www.nasa.gov/image-detail/amf-art002e000193/ Hello World: https://www.nasa.gov/image-detail/fd02_for-pao/ On images-assets.nasa.gov, we can find the 5567x3712 resolution versions of these pictures: Dark Side of the Earth: https://images-assets.nasa.gov/image/art002e000193/art002e00... Hello World: https://images-assets.nasa.gov/image/art002e000192/art002e00..."
+        },
+        {
+          "id": 47639075,
+          "author": "tim333",
+          "text": "I was trying to figure the country - I think north Africa upside down and Spain https://earth.google.com/web/@3.88879526,-24.75819914,62.068..."
+        },
+        {
+          "id": 47639182,
+          "author": "fanatic2pope",
+          "text": "Very cool. Along the same lines the EPIC::DSCOVR mission has been taking photos of the earth since, I believe, around 2015. https://epic.gsfc.nasa.gov/"
+        }
+      ],
+      "summary_ja": "コメントでは、NASAの地球画像がNikon D5で撮影され編集がほぼない技術的詳細、夜側が月光で昼側のように見える視覚的驚き、月光と太陽光の色の類似性が指摘された。高画質版の提供や地理的推測、関連ミッション（EPIC::DSCOVR）への言及もある。"
+    },
+    {
+      "rank": 5,
+      "id": 47601194,
+      "title_en": "The Cathedral, the Bazaar, and the Winchester Mystery House",
+      "title_ja": "大聖堂、バザール、そしてウィンチェスター・ミステリーハウス",
+      "url": "https://www.dbreunig.com/2026/03/26/winchester-mystery-house.html",
+      "hn_url": "https://news.ycombinator.com/item?id=47601194",
+      "score": 51,
+      "comment_count": 15,
+      "posted_at": "2026-04-01T14:13:34+00:00",
+      "comments": [
+        {
+          "id": 47638800,
+          "author": "MBCook",
+          "text": "I’d just like to thank the author for giving the correct t reason for the Winchester Mystery House instead of just blindly repeating the “she went crazy” line story as truth."
+        },
+        {
+          "id": 47639024,
+          "author": "gorfian_robot",
+          "text": "as an aside the lore about the \"Winchester Mystery House\" is all made up hogwash. here is one place where it is debunked: https://skepticalinquirer.org/2024/08/the-truth-about-sallie..."
+        },
+        {
+          "id": 47638707,
+          "author": "gerikson",
+          "text": "The \"cathedral\" in ESR's essay wasn't proprietary closed source, it was the GNU project."
+        },
+        {
+          "id": 47638722,
+          "author": "7rirdnj",
+          "text": "> Which is why maintainers feel like they’re drowning. How about actually funding opensource project mantainers? We have non profit orgs, that eat billions of public funds. We spend biilions for influencing hardly measurable metrics, with very nebulous benefits in far distant future. Direct sponsoring of critical projects would have far better and concrete benefits."
+        },
+        {
+          "id": 47638819,
+          "author": "The_Goonies1985",
+          "text": ">\"Sarah didn’t build her mansion to house ghosts, she built her mansion because she liked architecture.\" That quote from the article directly-contradicts what multiple tour-guides at the Winchester Mystery House in California have told me over many decades. Specifically: Sarah Winchester built the house because she was told that the ghosts of all those killed by Winchester guns would haunt her unless her house was sufficiently labyrinthine, and endlessly expanding; to confuse them. Visit the house (the tour is rad) and see for yourself the architecture. There is no reasonable explanation for internal doors leading to sheer-drops, throughout the house, and other bizarre 'traps', apart from Sarah legitimately believing she had to confuse the ghosts. This is more akin to a programmer consciously obfuscating and expanding a codebase to make it impossible for their angry-users to ever finish auditing it, or to determine its author."
+        }
+      ],
+      "summary_ja": "ウィンチェスター・ミステリーハウスの伝説は実際の建築理由と異なり、幽霊説は否定される。オープンソース開発の比喩として、GNUプロジェクトを「聖堂」に例え、メンテナンスの資金不足問題が指摘されている。"
+    },
+    {
+      "rank": 6,
+      "id": 47638075,
+      "title_en": "The CMS is dead. Long live the CMS",
+      "title_ja": "CMSは死んだ。CMS万歳",
+      "url": "https://next.jazzsequence.com/posts/the-cms-is-dead-long-live-the-cms",
+      "hn_url": "https://news.ycombinator.com/item?id=47638075",
+      "score": 55,
+      "comment_count": 31,
+      "posted_at": "2026-04-04T11:24:30+00:00",
+      "comments": [
+        {
+          "id": 47639093,
+          "author": "tappio",
+          "text": "I have built a product which uses AI to built Astro sites. LLM builds the sites in steps and make sure that they get 100/100 scores in pagespeed insights. These sites are served with a CDN. You can edit the sites with LLM interface, or use markdown editor to edit sites, or edit texts directly on a dashboard. These sites are static. There is no vendor lock in. If you want to migrate and manage yourself, just go to cloudflare or github pages. These sites cost 0 eur to run, and they always score better in all benchmarks compared to sites that are built on top of a separate CMS server. I know WordPress is going nowehere and if there is some special backend functionality, that is needed. But 95% of web does not need it. A static site is always cheaper, and the bottleneck has always been that editing code is indimidating. Therefore, AI actually resolves a big problem here, and this is going to alter the future of platforms like WP."
+        },
+        {
+          "id": 47639400,
+          "author": "_the_inflator",
+          "text": "What constitutes a Wordpress Site? The 3 page hobby site or the 100th of pages of a large company? There is a reason why Wordpress is (open source!) dominating the space ever since or more precisely, many niches. To be honest, I had my fair share of \"You might not need Wordpress\" but in the end, nothing beats its versatility, its rights management and options. There is always a plugin for that. I see no conntenter. Astro has its merits and use case - so have plenty of others (remember Hugo etc.?). At a certain time you will hit a threshold or problems that are easy to solve using WP you usually disregard at the beginning. I usually start out \"No, WP isn't needed, just to regret it afterwards.\" There is a dilemma because customers only start to really utilize their website the moment it is setup. And it always went from \"Just 5 pages\" to \"Can I add a marketplace?\" to ballooning content as well as timed postings and social media integration. I stopped questioning WP, because I really don't see alternatives in certain spaces. Security is a concern, yes, but nevertheless, let's not talk about NodeJS in this regard. Wordpress isn't a paradigm, it just works and while it seems to be some 20 years old odd code, quite many of the CMS in the React space struggled hard to getting to terms with the lastest paradigm shifts. Wordpress is the reliable dude who looks boringly normal, but on the other hand never gets you into trouble. So paraphrase IBM: No one gets fires for using WordPress. And I would not say this about any other CMS. They are incredible hard, you have to get a lot of stuff right. But I won't implement my own CMS again. At a certain time everybody will come to this realization, most likely, when you have a deadline and miss out features that are hard to implement. This is my opinion and I love playing and toying around with CMS ever since, even forums (phpBB?) or DIGG clones like Pligg back then. Great stuff, but I stick to WP."
+        },
+        {
+          "id": 47638420,
+          "author": "reconnecting",
+          "text": "There is indeed not always a need for WordPress. I have been using ProcessWire (1) for over a decade. Open-source, zero dependencies, no-nonsense CMS — and when it comes time to build a new website, I go back to it even in 2026, because you make it once and it works for 10 years and counting. Cloudflare is just jealous that most of their customers are actually running WordPress, but this is not something they will be able to solve with AI hype. 1. https://github.com/processwire/processwire"
+        },
+        {
+          "id": 47639323,
+          "author": "lizardking",
+          "text": "A CMS is for content authors, not developers. AI making it easier to build or re-platform sites doesn’t change the need for an admin UI that non-technical people can actually use, or the need for access control, governance, and approval workflows around how content gets changed. If anything, I’d expect more CMS work to occur as the cost of building, migrating, and redesigning sites keeps dropping."
+        },
+        {
+          "id": 47638758,
+          "author": "simonw",
+          "text": "I expect the bigger risk to dynamic database-backed CMS platforms right now is that AI assistance makes static site generator tools run against a version controlled repository of content less intimidating for most users... and static sites are cheaper to run (especially in this era of badly coded scrapers flooding the internet) and much less likely to fall vulnerable to security problems. I expect we'll see a further wave of CMS interfaces which provide a nicer editing experience on top of flat files stored in Git. Maybe the strategic move for platforms like WordPress (and maybe Django too! The Django admin remains a very popular CMS platform) is to invest more in separation of admin editing from serving, such that there's an obvious path to edit your content in the CMS but deploy it as static files. My own blog uses the Django admin and serves the site via Django (albeit behind a 15m Cloudflare cache to handle traffic spikes) but I have a scheduled GitHub Action that backs up the content to a Git repository: https://github.com/simonw/simonwillisonblog-backup - it's not much of a stretch from that to having the Git repository feed content to a static site generator."
+        }
+      ],
+      "summary_ja": "AIを活用した静的サイト生成は、高いパフォーマンスと低コストでWordPressなどの従来型CMSに挑戦する。一方、WordPressは非技術者向けの管理UIやプラグインの豊富さから支持を保ち、特に大規模サイトでの汎用性が評価されている。今後は編集をCMSで行い、静的サイトとして配信するハイブリッド形態が有望視される。"
+    },
+    {
+      "rank": 7,
+      "id": 47629433,
+      "title_en": "iNaturalist",
+      "title_ja": "iNaturalist",
+      "url": "https://www.inaturalist.org/",
+      "hn_url": "https://news.ycombinator.com/item?id=47629433",
+      "score": 478,
+      "comment_count": 112,
+      "posted_at": "2026-04-03T17:22:20+00:00",
+      "comments": [
+        {
+          "id": 47629621,
+          "author": "simonw",
+          "text": "The iNaturalist API is an absolute gem. It doesn't require authentication for read-only operations and it has open CORS headers which means it's amazing for demos and tutorials. My partner and I built this website with it a few years ago: https://www.owlsnearme.com/ (I realize this is a bit on-brand for me but I also use it to track pelicans https://tools.simonwillison.net/species-observation-map#%7B%... )"
+        },
+        {
+          "id": 47630205,
+          "author": "ray__",
+          "text": "I love this app, but it's also a significant doxxing risk especially for the large number of non-technical users that it has. A quick look at the map reveals the home addresses and names of many iNaturalist users in my neighborhood, lots of them older folks that probably don't realize that adding all of the neat wildlife that they see in their backyard (or uploading things they see on remote hikes without any 3G coverage once their phone connects to their home wifi network) is also putting their home address on display by adding a cluster of photos right next to their house that are all attached to their account."
+        },
+        {
+          "id": 47639321,
+          "author": "jccalhoun",
+          "text": "I didn't know they had a map feature. I zoomed in on my neighborhood and... all the pins are mine :-P"
+        },
+        {
+          "id": 47631788,
+          "author": "jmusall",
+          "text": "Haven't tried iNaturalist yet, but I love Merlin Bird ID [1] and Flora Incognita [2]. The latter seems to be exceptionally accurate (over 80% up to 98% depending on the dataset) [3]. They also expose an API for \"registered external clients\" [4], but so far I sadly wasn't able to find any further documentation on it. A problem I often have with Merlin is that the birds seem to know when I record them, and promptly stop singing... [1] https://merlin.allaboutbirds.org/ [2] https://floraincongita.com/ [3] https://doi.org/10.1002/pan3.10676 [4] https://doi.org/10.1111/2041-210X.13611"
+        },
+        {
+          "id": 47629719,
+          "author": "JumpCrisscross",
+          "text": "Similar category: Merlin Bird ID [1]. Uses audio to identify the birds around you. [1] https://merlin.allaboutbirds.org/"
+        }
+      ],
+      "summary_ja": "iNaturalistのAPIは認証不要で利用しやすいが、ユーザーの位置情報が公開され、ドクシングのリスクが高い。類似アプリとしてMerlin Bird IDやFlora Incognitaが紹介され、これらの精度やAPIにも言及されている。"
+    },
+    {
+      "rank": 8,
+      "id": 47592068,
+      "title_en": "Why Inventing Color TV Was So Difficult [video]",
+      "title_ja": "カラーテレビの発明がなぜそんなに難しかったのか [動画]",
+      "url": "https://www.youtube.com/watch?v=hyjCmIbRRvs",
+      "hn_url": "https://news.ycombinator.com/item?id=47592068",
+      "score": 15,
+      "comment_count": 3,
+      "posted_at": "2026-03-31T19:12:54+00:00",
+      "comments": [
+        {
+          "id": 47639057,
+          "author": "mpalmer",
+          "text": "In the first 90 seconds, the narration refers to \"the insane 19th century electronics that made color possible\", but is referring to the 1900s, which were the 20th century. The video contains no insight at all into \"why\" color TV was so difficult. It just lists and describes a few key advancements. Also the \"invention\" of color TV is very different from the commercialization."
+        },
+        {
+          "id": 47639081,
+          "author": "ck2",
+          "text": "Before Youtube and Wikipedia there used to be a great website I liked to read about Philo Farnsworth but cannot remember the name of it for the life of me now"
+        }
+      ],
+      "summary_ja": "ビデオは19世紀と20世紀を混同する時代錯誤を指摘され、カラーテレビの難しさの理由を説明せず技術進歩を羅列するだけと批判。また、発明と商業化は別物であることが強調されている。"
+    },
+    {
+      "rank": 9,
+      "id": 47633855,
+      "title_en": "Claude Code Found a Linux Vulnerability Hidden for 23 Years",
+      "title_ja": "Claude Codeが23年間隠されていたLinuxの脆弱性を発見",
+      "url": "https://mtlynch.io/claude-code-found-linux-vulnerability/",
+      "hn_url": "https://news.ycombinator.com/item?id=47633855",
+      "score": 144,
+      "comment_count": 91,
+      "posted_at": "2026-04-03T23:46:51+00:00",
+      "comments": [
+        {
+          "id": 47639433,
+          "author": "DGAP",
+          "text": "I replicated this experiment on several production codebases and got several crits. Lots of dupes, lots of false positives, lots of bugs that weren't actually exploitable, lots of accepted/ known risks. But also, crits!"
+        },
+        {
+          "id": 47637780,
+          "author": "jason1cho",
+          "text": "This isn't surprising. What is not mentioned is that Claude Code also found one thousand false positive bugs, which developers spent three months to rule out."
+        },
+        {
+          "id": 47638521,
+          "author": "mattbee",
+          "text": "Pasting a big batch of new code and asking Claude \"what have I forgotten? Where are the bugs?\" is a very persuasive on-ramp for developers new to AI. It spots threading & distributed system bugs that would have taken hours to uncover before, and where there isn't any other easy tooling. I bet there's loads of cryptocurrency implementations being pored over right now - actual money on the table."
+        },
+        {
+          "id": 47637534,
+          "author": "userbinator",
+          "text": "Not \"hidden\", but probably more like \"no one bothered to look\". declares a 1024-byte owner ID, which is an unusually long but legal value for the owner ID. When I'm designing protocols or writing code with variable-length elements, \"what is the valid range of lengths?\" is always at the front of my mind. it uses a memory buffer that’s only 112 bytes. The denial message includes the owner ID, which can be up to 1024 bytes, bringing the total size of the message to 1056 bytes. The kernel writes 1056 bytes into a 112-byte buffer This is something a lot of static analysers can easily find. Of course asking an LLM to \"inspect all fixed-size buffers\" may give you a bunch of hallucinations too, but could be a good starting point for further inspection."
+        },
+        {
+          "id": 47638031,
+          "author": "summarity",
+          "text": "Related work from our security lab: Stream of vulnerabilities discovered using security agents (23 so far this year): https://securitylab.github.com/ai-agents/ Taskflow harness to run (on your own terms): https://github.blog/security/how-to-scan-for-vulnerabilities..."
+        }
+      ],
+      "summary_ja": "Claude CodeなどのAIコード解析ツールは深刻な脆弱性を実際に発見できるが、大量の誤検知という課題もある。特にスレッドや分散システムのバグ発見に有効で、従来の静的解析を補完する強力な出発点となりうる。ただし「隠されていた」脆弱性の多くは、これまで入念に検査されなかっただけの可能性が高い。"
+    },
+    {
+      "rank": 10,
+      "id": 47638270,
+      "title_en": "Mbodi AI (YC P25) Is Hiring",
+      "title_ja": "Mbodi AI (YC P25) が採用中",
+      "url": "https://www.ycombinator.com/companies/mbodi-ai/jobs/mf9L3sy-senior-robotics-engineer-systems-controls",
+      "hn_url": "https://news.ycombinator.com/item?id=47638270",
+      "score": 1,
+      "comment_count": 0,
+      "posted_at": "2026-04-04T12:00:38+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 11,
+      "id": 47597366,
+      "title_en": "The most-disliked people in the publishing industry",
+      "title_ja": "出版業界で最も嫌われた人々",
+      "url": "https://www.woman-of-letters.com/p/the-most-disliked-people-in-the-publishing",
+      "hn_url": "https://news.ycombinator.com/item?id=47597366",
+      "score": 37,
+      "comment_count": 8,
+      "posted_at": "2026-04-01T06:04:12+00:00",
+      "comments": [
+        {
+          "id": 47639128,
+          "author": "legitster",
+          "text": "This kind of reminds me of the book Get Shorty and the subsequent movie. About a mafia loan shark moving to hollywood and becoming a producer. Elmore Leonard was very familiar with movie producers by that point in his career, and clearly saw a a funny similarly between what a mob does and how Hollywood operates. At the same time, the book is almost a tender mark of appreciation towards the role a producer plays. It's one of the few stories that spotlights what a producer actually does and shows it's importance in getting things done to actually make a movie."
+        },
+        {
+          "id": 47639064,
+          "author": "paleotrope",
+          "text": "That was worth the read. I did get a bit lost when the writer was talking about the different areas, prestige fiction, commercial fiction, nonprofit fiction."
+        },
+        {
+          "id": 47638128,
+          "author": "tclancy",
+          "text": "That was a fantastic read, thanks for the link!"
+        },
+        {
+          "id": 47638119,
+          "author": "christkv",
+          "text": "Most books are loss leaders for publishing houses very few are profitable and even fewer are massively profitable. They keep publishing books that barely anybody reads because they have to have a diverse catalog."
+        },
+        {
+          "id": 47638051,
+          "author": "bryanrasmussen",
+          "text": "> I am giving a huge corporation a product to sell, but I am doing it for a fraction of what it cost me to produce that product. well, relatively huge by the article's own admission. on edit: changed but to by"
+        }
+      ],
+      "summary_ja": "出版業界では大半の作品が採算割れで、利益は少数のベストセラーに依存し、多様なカタログ維持のために損失を許容している。著者は出版社に不当に低い報酬で作品を提供する構造が批判される。また、映画業界との類似からプロデューサーの役割の重要性も指摘されている。"
+    },
+    {
+      "rank": 12,
+      "id": 47628608,
+      "title_en": "OpenClaw privilege escalation vulnerability",
+      "title_ja": "OpenClawの権限昇格脆弱性",
+      "url": "https://nvd.nist.gov/vuln/detail/CVE-2026-33579",
+      "hn_url": "https://news.ycombinator.com/item?id=47628608",
+      "score": 452,
+      "comment_count": 214,
+      "posted_at": "2026-04-03T16:21:32+00:00",
+      "comments": [
+        {
+          "id": 47629849,
+          "author": "steipete",
+          "text": "OpenClaw creator here. This was a privilege-escalation bug, but not \"any random Telegram/Discord message can instantly own every OpenClaw instance.\" The root issue was an incomplete fix. The earlier advisory hardened the gateway RPC path for device approvals by passing the caller's scopes into the core approval check. But the `/pair approve` plugin command path still called the same approval function without `callerScopes`, and the core logic failed open when that parameter was missing. So the strongest confirmed exploit path was: a client that ALREADY HAD GATEWAY ACCESS and enough permission to send commands could use `chat.send` with `/pair approve latest` to approve a pending device request asking for broader scopes, including `operator.admin`. In other words: a scope-ceiling bypass from pairing/write-level access to admin. This was not primarily a Telegram-specific or message-provider-specific bug. The bug lived in the shared plugin command handler, so any already-authorized command sender that could reach `/pair approve` could hit it. For Telegram specifically, the default DM policy blocks unknown outsiders before command execution, so this was not \"message the bot once and get admin.\" But an already-authorized Telegram sender could still reach the vulnerable path. The practical risk for this was very low, especially if OpenClaw is used as single-user personal assistant. We're working hard to harden the codebase with folks from Nvidia, ByteDance, Tencent and OpenAI."
+        },
+        {
+          "id": 47637309,
+          "author": "tao_oat",
+          "text": "Relevant: https://days-since-openclaw-cve.com/ Currently we're at 1.8 CVEs per day since OpenClaw launched!"
+        },
+        {
+          "id": 47631255,
+          "author": "Meneth",
+          "text": "Text of the post has been [removed]. Original saved here: https://web.archive.org/web/20260403163241/https://old.reddi..."
+        },
+        {
+          "id": 47629542,
+          "author": "petcat",
+          "text": "I don't use OpenClaw, but I still run my Claude Code and Codex as limited macOS user accounts and just have a script `become-agent <name> [cmd ...]` that does some sudo stuff to run as the limited user so they don't have any of my environment or directory access, or really any system-level admin access at all. They can use and write to their home directories as usual, which makes things easier to configure since those CLI harnesses really like when $HOME is configured and works as expected. It's a good compromise between running as me and full sandbox-exec. Multi-user Unix-y systems were designed for this kind of stuff since decades ago."
+        },
+        {
+          "id": 47636563,
+          "author": "chatmasta",
+          "text": "I’m surprised people are still using OpenClaw. I assumed they’d have switched to Nanoclaw or Nemoclaw. Is OpenClaw just that much better, or is it all inertia? (I’ve never used any of them.)"
+        }
+      ],
+      "summary_ja": "OpenClaw開発者が権限昇格バグの詳細を説明し、攻撃経路は限定的で実践的リスクは低いと主張。一方で、ユーザーからは代替セキュリティ手法やプロジェクトの存続に関する疑問が提起されている。"
+    },
+    {
+      "rank": 13,
+      "id": 47585469,
+      "title_en": "Herbie: Automatically improve imprecise floating point formulas",
+      "title_ja": "Herbie: 不正確な浮動小数点式を自動的に改善する",
+      "url": "https://herbie.uwplse.org/doc/latest/tutorial.html",
+      "hn_url": "https://news.ycombinator.com/item?id=47585469",
+      "score": 157,
+      "comment_count": 31,
+      "posted_at": "2026-03-31T10:53:52+00:00",
+      "comments": [
+        {
+          "id": 47637932,
+          "author": "summarity",
+          "text": "I posted this and it picked up steam over night, so I thought I'd add how I'm using it: I work on 3D/4D math in F#. As part of the testing strategy for algorithms, I've set up a custom agent with an F# script that instruments Roslyn to find FP and FP-in-loop hotspots across the codebase. The agent then reasons through the implementation and writes core expressions into an FPCore file next to the existing tests, running several passes, refining the pres based on realistic caller input. This logs Herbie's proposed improvements as output FPCore transformations. The agent then reasons through solutions (which is required, Herbie doesn't know algorithm design intent, see e.g. this for a good case study: https://pavpanchekha.com/blog/herbie-rust.html ), and once convinced of a gap, creates additional unit tests and property tests (FsCheck/QuickCheck) to prove impact. Then every once in a while I review a batch to see what's next. Generally there are multiple types of issues that can be flagged: a) Expression-level imprecision over realistic input ranges: this is Herbie's core strength. Usually this catches \"just copied the textbook formula\" instance of naive math. Cancellation, Inf/NaN propagation, etc. The fixes are consistently using fma for accumulation, biggest-factor scaling to prevent Inf, hypot use, etc. b) Ill-conditioned algorithms. Sometimes the text books lie to you, and the algorithms themselves are unfit for purpose, especially in boundary regions. If there are multiple expressions that have a <60% precision and only a 1 to 2% improvement across seeds, it's a good sign the algo is bad - there's no form that adequately performs on target inputs. c) Round-off, accumulation errors. This is more a consequence of agent reasoning, but often happens after an apparent \"100% -> 100%\" pass. The agent is able to, via failing tests, identify parts of an algorithm that can benefit from upgrading the context to e.g. double-word arithmetic for additional precision."
+        },
+        {
+          "id": 47636271,
+          "author": "yread",
+          "text": "Really cool, numerical stability can be tricky as errors can accumulate with each operation and suddenly 53 bits of precision is not enough. Also nice to see an article thats not about AI or politics"
+        },
+        {
+          "id": 47638633,
+          "author": "shiandow",
+          "text": "I wonder who decided to use a step function for the speed accuracy plot. They must have thought the convex hull would be wrong because you can't really make linear combinations of algorithms (you could, but you'd have to use time not speed to make it linear). So I get why you would use step functions, but the step is the wrong way around. The current plot suggests accuracy doesn't drop if you need higher speeds"
+        },
+        {
+          "id": 47636751,
+          "author": "notpushkin",
+          "text": "Some trivial cases produce... interesting results. For x in [−1.79e308, 1.79e308]: Initial Program: 100.0% accurate, 1.0× speedup def code(x): return math.sqrt((x + 1.0)) Alternative 1: 67.5% accurate, 5.6× speedup def code(x): return 1.0"
+        },
+        {
+          "id": 47634877,
+          "author": "fluorinerocket",
+          "text": "How useful is this when you are using numbers in a reasonable range, like 10^-12 to 10^12? Generally I try to scale my numbers to be in this range, whether by picking the right units or scaling constraints and objectives when doing nonlinear programming/ optimization. Like looking at this example, https://herbie.uwplse.org/demo/b070b371a661191752fe37ce0321c... It is claimed that for the function f(x) =sqrt(x+1) -1 Accuracy is increased by from 8.5% accuracy to 98% for alternative 5 Which has f(x) = 0.5x Ok so x=99, the right answer is sqrt(100) -1 = 9 But 0.5 * 99 = 49.5 which doesn't seem too accurate to me."
+        }
+      ],
+      "summary_ja": "Herbieによる浮動小数点式の自動改善に関する実践的な使用例が議論された。Herbieは式レベルの不正確さを改善するが、アルゴリズム設計意図は理解しないため、ユーザーによる検証や追加テストが不可欠である。数値安定性の課題や、速度と精度のトレードオフについても指摘されている。"
+    },
+    {
+      "rank": 14,
+      "id": 47638246,
+      "title_en": "Jack Dorsey says Block employees now bring prototypes, not slides, to meetings",
+      "title_ja": "Jack Dorsey、Blockの従業員が会議にスライドではなくプロトタイプを持ってくると言及",
+      "url": "https://www.businessinsider.com/block-ceo-jack-dorsey-bring-prototypes-not-slide-decks-meetings-2026-4",
+      "hn_url": "https://news.ycombinator.com/item?id=47638246",
+      "score": 40,
+      "comment_count": 26,
+      "posted_at": "2026-04-04T11:57:14+00:00",
+      "comments": [
+        {
+          "id": 47638957,
+          "author": "hapless",
+          "text": "After his stunt with the mass firings \"because of AI,\" employees now bring prototypes, not slides, to meetings with Jack Dorsey . These clowns live in a dreamworld created by their PAs and cronies"
+        },
+        {
+          "id": 47639347,
+          "author": "puttycat",
+          "text": "\"CEO said a thing\" journalism, discussed on HN very recently: https://karlbode.com/ceo-said-a-thing-journalism/ https://news.ycombinator.com/item?id=47577735"
+        },
+        {
+          "id": 47639422,
+          "author": "Ozzie_osman",
+          "text": "I listened to his podcast episode on the Sequoia podcast a few days ago. Interestingly, his argument was \"we don't need middle managers\" and he plants to have all 6000 employees eventually report to him. In other words, companies don't need managers anymore. Except for one manager. Him."
+        },
+        {
+          "id": 47639048,
+          "author": "buildbot",
+          "text": "Block signed a friend of mine, they quit their other job, then block was like whoops layoffs including people like this person who hadn’t even started. Super unethical."
+        },
+        {
+          "id": 47638681,
+          "author": "pwarner",
+          "text": "I work at a less innovative place, and I see out product managers coming with prototypes, at least solid mock ups rather than just a jira. They socialize it with potential users, they iterate, they find missing requirements, it's pretty powerful. The net result is we're building better features faster."
+        }
+      ],
+      "summary_ja": "Jack Dorseyの大量解雇や非倫理的雇用慣行を批判し、中間管理職不要という主張と自らが唯一の管理者となる矛盾を指摘。一方、プロトタイプ持参の会議は実践的に有効で、製品開発の改善につながると評価している。"
+    },
+    {
+      "rank": 15,
+      "id": 47633131,
+      "title_en": "Run Linux containers on Android, no root required",
+      "title_ja": "AndroidでLinuxコンテナを実行、ルート権限不要",
+      "url": "https://github.com/ExTV/Podroid",
+      "hn_url": "https://news.ycombinator.com/item?id=47633131",
+      "score": 172,
+      "comment_count": 57,
+      "posted_at": "2026-04-03T22:23:55+00:00",
+      "comments": [
+        {
+          "id": 47635524,
+          "author": "vimredo",
+          "text": "I don't understand what this would be useful for. The Linux terminal app on Android (check Developer settings if you want it) already exists and it uses hardware accelerated virtualization, while this uses QEMU with TCG. The Linux terminal app also supports running a DE (No VNC - as in no VNC, not NoVNC - required!), has full shell, full root, all the features of Podroid, and hell, you could even swap out the terminal if you wanted to. The only advantage to this seems that it supports Android 14, 15, and 16. Am I missing something, or does this have no purpose?"
+        },
+        {
+          "id": 47638129,
+          "author": "hu3",
+          "text": "Added to my list of things that will never be possible on iOS."
+        },
+        {
+          "id": 47636658,
+          "author": "spidermonkey23",
+          "text": "I think this is great, I've wanted some sort of docker on android system and this does the job quite nicely all wrapped up in an apk. So there is definitely space for this in the current ecosystem. The new terminal built into android crashes whenever I try booting it up."
+        },
+        {
+          "id": 47634285,
+          "author": "figmert",
+          "text": "This can probably be upstreamed into podman. Podman already has supports using a VM using podman machine (uses different tech under the hood depending on the OS). This seems like it can be yet another backend for it."
+        },
+        {
+          "id": 47636373,
+          "author": "anthk",
+          "text": "Termux and a BT keyboard it's enough. Also, native Emacs under FDroid has recently been improved a lot. With just Emacs you get: - An IRC, Usenet and Mail client. The ONLY libre Usenet client. comp.arch and comp.misc have really engaging discussions. You can score up nice commenters and blacklist every spammer - Gemini and Gopher via ELPA (run Esc-x package-install RET elpher) - A math mini CAS with Esc-x calc RET - Esc-x package-install RET malyon, get some nice ZMachine text adventures at IFDB - Elisp environment+cl-lib can do a lot - Esc-x package-install jabber, Esc-x jabber. Chat with cool people at XMPP servers. - Org-Mode, enough said - eshell will allow you to automate stuff - Elisp + Android related functions + org-mode: heaven. - Sudoku, Sokoban, Tetris... - LSP integration it's possible Get some $10 pocket bluetooth keyboard and try it."
+        }
+      ],
+      "summary_ja": "AndroidでrootなしLinuxコンテナを実行する記事に対し、既存のLinuxターミナルアプリの方が機能面で優れるとする批判と、Docker代替としてAPK形式が有用とする賛同がある。また、Podman統合の可能性やTermux/Emacsなど他の代替手段の有効性も指摘されている。"
+    },
+    {
+      "rank": 16,
+      "id": 47638685,
+      "title_en": "Ask HN: How do you handle clients who don't pay on time?",
+      "title_ja": "Ask HN: 支払いが遅れるクライアントをどう扱うか？",
+      "url": null,
+      "hn_url": "https://news.ycombinator.com/item?id=47638685",
+      "score": 11,
+      "comment_count": 14,
+      "posted_at": "2026-04-04T12:58:45+00:00",
+      "comments": [
+        {
+          "id": 47639429,
+          "author": "nh2",
+          "text": "My friend recommended to put a small percent late payment fee, stated in the contract and on each invoice. Haven't really used it yet because we don't have a problem with late payments, but I do think it would work, because our B2B customers are usually very appreciative of saving small percentages when we offer it, and unlikely to just give up that money by being late."
+        },
+        {
+          "id": 47639329,
+          "author": "odyssey7",
+          "text": "Gosh, I would always get behind on my dental invoices, because they would have some issue with my insurance, and I would try to figure out why the insurance company thought my policy didn’t exist or something, but the insurance company itself was Byzantine and I could never figure out who to talk to (and this is probably why the issue occurred in the first place)… The office would just send a reminder invoice every so often, and if it got really behind, they would have their front desk person call me. This was annoying for both parties but did not seem particularly harmful. Both of us were solvent. The amounts were not large. They had a routine process for unpaid invoices. And I would be embarrassed to show up in 6 months without having paid for the last visit. If you’re hurting for funds, I would suggest letting them know directly that you need your invoices to be paid on time. Sometimes bills get paid late out of a sense that it’s okay to pay them late, but you might get more prompt payment from the well-meaning if you express that you need something different. I personally would have prioritized re-calling and re-calling the dental insurance company more (read: unpaid labor on my part, requiring me to demonstrate greater effectiveness than the office’s own claims staff) if someone were actually needing the payment sooner."
+        },
+        {
+          "id": 47638861,
+          "author": "elmerfud",
+          "text": "I often hear about this attitude of putting the customer first. Having excellent customer service. The one thing people forget though, customers pay. When you're not getting paid according to the terms, they're not a customer anymore, they're a thief. If your customer is legitimately having a money issues or something else, and they are actually a customer, they will contact you and attempt to work something out. If they just ignore you, they are not a customer and should be treated as such."
+        },
+        {
+          "id": 47639376,
+          "author": "yshamrei",
+          "text": "My three rules: - A delay of more than one month without justification = immediate suspension of service. - If the service was suspended due to non-payment, next collaboration only continues with full prepayment for the next month. - Transfer of intellectual property and copyrights only after final payment."
+        },
+        {
+          "id": 47639282,
+          "author": "Pooge",
+          "text": "I'm not and have never been in your situation but consider this a summary of all anecdotes I've heard mixed with negotiation techniques. The thing I would personally do is make sure the client has paid their invoice before providing the service. Essentially, this means paying for all previous missed invoices along with the next one. If you make people pay before giving the service, I think you avoid the case altogether. Now, if you want to be harder: just ban them. Take them to Collections (or whatever the name is in the USA) and then never provide services to them ever again. This sounds really harsh and unfair but by not paying they also know how far they can go without giving you a dime. \"Give them a hand and they take the arm.\""
+        }
+      ],
+      "summary_ja": "遅延支払いへの対策として、契約書や請求書に遅延料を明記する、直接支払いの必要性を伝える、正当な理由なく1ヶ月以上遅延した場合はサービス停止や前払い要求などの厳しい措置を取る、支払わない顧客は「泥棒」とみなして法的手段を含めた対応を行うなど、段階的で厳格な対応が提案されている。基本姿勢として「支払わない顧客は顧客ではない」という考えが根底にある。"
+    },
+    {
+      "rank": 17,
+      "id": 47601992,
+      "title_en": "The smallest ELF executable (2021)",
+      "title_ja": "最小のELF実行ファイル (2021)",
+      "url": "https://nathanotterness.com/2021/10/tiny_elf_modernized.html",
+      "hn_url": "https://news.ycombinator.com/item?id=47601992",
+      "score": 11,
+      "comment_count": 0,
+      "posted_at": "2026-04-01T15:12:24+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 18,
+      "id": 47597159,
+      "title_en": "Improving my focus by giving up my big monitor",
+      "title_ja": "大きなモニターを諦めて集中力を向上させる",
+      "url": "https://ounapuu.ee/posts/2026/04/01/focus/",
+      "hn_url": "https://news.ycombinator.com/item?id=47597159",
+      "score": 133,
+      "comment_count": 147,
+      "posted_at": "2026-04-01T05:28:59+00:00",
+      "comments": [
+        {
+          "id": 47638928,
+          "author": "FrojoS",
+          "text": "Guys, this is a well known and under utilized effect of human psycho physiology. Visually focusing on a single point, small object, or just small visual field (aka tunnel vision) increases mental focus. AFAIK it’s also one of the reasons we all get “glued” to smartphone screens. In this paper, more than 20 deg visual field for a screen and subject performance went down: https://www.sciencedirect.com/science/article/abs/pii/S01678..."
+        },
+        {
+          "id": 47639008,
+          "author": "mrob",
+          "text": "There's little need for multiple monitors if you can switch virtual desktops very easily and quickly. The best method I've found is using a switcher control in the corner of the screen that can be operated by the mouse wheel. The corners of the screen are the easiest targets to hit because they have effectively infinite size (see Fitts's Law). The mouse wheel is the best input to use because the mouse wheel is always non-destructive in standard desktop GUI software (equivalent to HTTP GET, not HTTP PUT). So long as your switcher control does not wrap around, you can set your two most important desktops as the first and last desktops, and access them with no conscious thought by jerking your arm and blindly scrolling the mouse wheel. I use a patched version of lxqt-panel for this. The official version wraps around while switching desktops with the mouse wheel. This is IMO a bad idea because you always have the option of clicking the numbers directly, so it doesn't save any time. I have all animations disabled (essential for this system to be tolerable). I use three virtual desktops, with the the middle one reserved for less important tasks. The middle one requires conscious thought to access because I have to scroll the mouse wheel more carefully. But when accessing the main two I scroll the mouse wheel fast enough that I don't notice it. Theoretically it would be possible to have unconscious access to 8 desktops this way (mouse wheel up and mouse wheel down for all 4 corners) but I haven't implemented this because I'm happy with two."
+        },
+        {
+          "id": 47636620,
+          "author": "JSR_FDED",
+          "text": "I spent decades completely happy with Cmd+Tab. Now I’m helping someone develop a trading system and I need to see several log files simultaneously, a broker GUI, and neovim. Once I realized that in order to answer a single question I needed to Cmd+Tab at least four times, often more, I added two monitors and it’s dramatically lowered my stress level. FYI, on older MacBooks you can’t add more than one extra screen, but if you get a DisplayLink dongle it works perfectly."
+        },
+        {
+          "id": 47637761,
+          "author": "gchamonlive",
+          "text": "I think it's like for me moving to using Instagram in the browser instead of launching the app. Doesn't fight my addiction to doom scrolling directly, but it makes it awkward enough so that the small imposed friction reduces the urge with time. If it works for you as it worked for me it's fine, but don't feel frustrated if you end up recreating bad habits in these kinds of setup. They can work but they don't really treat the root cause of the addiction."
+        },
+        {
+          "id": 47638922,
+          "author": "wateralien",
+          "text": "Read this on my third screen while waiting for 4 Claude sessions to finish."
+        }
+      ],
+      "summary_ja": "狭い画面は視覚的集中力を高め、作業効率を向上させるという主張と、複数モニターや仮想デスクトップによる効率的な情報管理の必要性が議論されている。仕事内容や個人の習慣によって最適な環境は異なり、集中力を保つための手法は多様である。"
+    },
+    {
+      "rank": 19,
+      "id": 47618223,
+      "title_en": "We replaced RAG with a virtual filesystem for our AI documentation assistant",
+      "title_ja": "AIドキュメンテーションアシスタントでRAGを仮想ファイルシステムに置き換えた",
+      "url": "https://www.mintlify.com/blog/how-we-built-a-virtual-filesystem-for-our-assistant",
+      "hn_url": "https://news.ycombinator.com/item?id=47618223",
+      "score": 350,
+      "comment_count": 134,
+      "posted_at": "2026-04-02T18:24:29+00:00",
+      "comments": [
+        {
+          "id": 47639382,
+          "author": "benlm",
+          "text": "We use both a virtual file system and RAG — they each excel in different areas. The trick with RAG is the quality of data: we use an LLM to chunk into semantically cohesive sections, as well as generate metadata (including fact triples and links to other related chunks in the document) for every chunk as well as the document as a whole. We use voyage contextual embeddings to then embed each chunk with the document and chunk metadata. Works incredibly well. At retrieval time the agent can follow chunk links if needed, as well as analyze the raw file in the vfs. High quality instruction based reranking helps a lot too! We are often looking over 10s of thousands of documents and it’d be very inefficient to have our agents analyze just the vfs without rag."
+        },
+        {
+          "id": 47629661,
+          "author": "softwaredoug",
+          "text": "The real thing I think people are rediscovering with file system based search is that there’s a type of semantic search that’s not embedding based retrieval. One that looks more like how a librarian organizes files into shelves based on the domain. We’re rediscovering forms of in search we’ve known about for decades. And it turns out they’re more interpretable to agents. https://softwaredoug.com/blog/2026/01/08/semantic-search-wit..."
+        },
+        {
+          "id": 47631942,
+          "author": "tensor",
+          "text": "This is one of the most confusing claims I've seen in a long time. Grep and others over files would be the equivalent of an old fashioned keyword search where most RAG uses vector search. But everything else they claim about a file system just suggests that they don't know anything about databases. I'm not familiar with how most out of the box RAG systems categorize data, but with a database you can index content literally in any way you want. You could do it like a filesystem with hierarchy, you could do it tags, or any other design you can dream up. The search can be keyword, like grep, or vector, like rag, or use the ranking algorithms that traditional text search uses (tf-idf, BM25), or a combination of them. You don't have to use just the top X ranked documents, you could, just like grep, evaluate all results past whatever matching threshold you have. Search is an extremely rich field with a ton of very good established ways of doing things. Going back to grep and a file system is going back to ... I don't know, the 60s level of search tech?"
+        },
+        {
+          "id": 47630984,
+          "author": "sunir",
+          "text": "I am really enjoying this renaissance in CLI world applications. There's so much possible. I'm working on a related challenge which is mounting a virtual filesystem with FUSE that mirrors my Mac's actual filesystem (over a subtree like ~/source), so I can constrain the agents within that filesystem, and block destructive changes outside their repo. I have it so every repo has its own long-lived agent. They do get excited and start changing other repos, which messes up memory. I didn't want to create a system user per repo because that's obnoxious, so I created a single claude system user, and I am using the virtual file system to manage permissions. My gmail repo's agent can for instance change the gmail repo and the google_auth repo, but it can't change the rag repo. Edit: I'm publishing it here. It's still under development. https://github.com/sunir/bashguard"
+        },
+        {
+          "id": 47632060,
+          "author": "slp3r",
+          "text": "This feels like massive overengineering just to bypass naive chunking. Emulating a POSIX shell in TS on top of ChromaDB to do hierarchical search is going to destroy your TTFT. Every ls and grep the agent decides to run is a separate inference cycle. You're just trading RAG context-loss for severe multi-step latency"
+        }
+      ],
+      "summary_ja": "Hacker Newsの記事ではRAGを仮想ファイルシステムに置き換える主張に対し、コメントでは両者の併用が適切で、それぞれ異なる利点があると指摘。仮想ファイルシステムはエージェントにとって解釈しやすいが、過剰設計や遅延の懸念もあり、検索技術の進歩の中で最適な手法を模索する議論が交わされた。"
+    },
+    {
+      "rank": 20,
+      "id": 47622616,
+      "title_en": "The Technocracy Movement of the 1930s",
+      "title_ja": "1930年代のテクノクラシー運動",
+      "url": "https://donotresearch.substack.com/p/welcome-to-the-technocracy",
+      "hn_url": "https://news.ycombinator.com/item?id=47622616",
+      "score": 134,
+      "comment_count": 104,
+      "posted_at": "2026-04-03T02:29:22+00:00",
+      "comments": [
+        {
+          "id": 47631138,
+          "author": "recursivecaveat",
+          "text": "Technocracy always struck me as weirdly incoherent? If you take the economy, probably the most studied of government policies, it is not 1 number. There are many questions about what priorities ought to be. There is no 'expert' answer for how many starving poor people are a worthy trade off for a GDP point. Even if there was, there is an economist branch that disagrees with any possible position you might take. The question of which experts to listen to almost entirely subsumes the question of what experts say. More than anything it's a branding strategy. \"Putting me, a surveillance investor, in charge of international relations is clearly more rational and scientific than putting the other guy in charge.\""
+        },
+        {
+          "id": 47635039,
+          "author": "Havoc",
+          "text": "Weird - that's the 2nd mention of \"Technate\" I see in 24 hrs - never heard of that before today. (Other instance was PredictiveHistory‬ youtube here - https://www.youtube.com/watch?v=xrmERlHUqBk ). Guessing that's not a coincidence"
+        },
+        {
+          "id": 47636369,
+          "author": "c6400sc",
+          "text": "Technocracy rose roughly simultaneously with the Good Government movement of the 1920s. Both were a response to the machine politics and crony capitalism of the gilded age. The hippie movement was itself somewhat a response to the inroads Technocracy had made in American government, so argued in this book: https://en.wikipedia.org/wiki/The_Making_of_a_Counter_Cultur..."
+        },
+        {
+          "id": 47630835,
+          "author": "meandave",
+          "text": "I first heard about this in an former coworker's (Robin Berjon) talk https://www.youtube.com/watch?v=s878bm15mrk at an IPFS conference Fascinating He writes about these things on this blog as well( https://berjon.com/ethicswishing/ ), and has a forthcoming book on related topics last I heard"
+        },
+        {
+          "id": 47636578,
+          "author": "spirodonfl",
+          "text": "Yep. Covered this many moons ago. I have a few episodes on this on my youtube. https://youtu.be/E6yg5Rj9owk"
+        }
+      ],
+      "summary_ja": "テクノクラシー運動は専門家による合理的統治を提唱するが、経済政策は単純な数値でなく倫理的判断を要し、どの専門家を信じるかが問題となる点を批判される。歴史的には1920年代の「良い政府」運動と共に金ぴか時代への反応として登場し、現代でも「Technate」という用語で再注目されている。関連するメディアや個人の議論が活発化している。"
+    },
+    {
+      "rank": 21,
+      "id": 47586885,
+      "title_en": "What changes when you turn a Linux box into a router",
+      "title_ja": "Linuxマシンをルーターにすると何が変わるか",
+      "url": "https://patrickmccanna.net/7-configuration-changes-that-turn-a-multi-homed-host-into-a-switch-router/",
+      "hn_url": "https://news.ycombinator.com/item?id=47586885",
+      "score": 195,
+      "comment_count": 47,
+      "posted_at": "2026-03-31T13:13:20+00:00",
+      "comments": [
+        {
+          "id": 47633736,
+          "author": "ValdikSS",
+          "text": "The Linux box instantly turns into a router as soon as you run `sysctl net.ipv4.ip_forward=1`, because the default policy for FORWARD table is ACCEPT. You need to explicitly reconfigure the iptables/nftables to prevent that from happening. Some software, say LXD/Incus, enable forwarding automatically upon installation/startup, and do not configure firewall to block non-their traffic, making the machine an open router. I've reported that, the developers said that's by design (despite other virtualization/containerization systems block forwarding if they happen to enable the sysctl)."
+        },
+        {
+          "id": 47636654,
+          "author": "chatmasta",
+          "text": "This is an excellent post and great reference material. I’ve done this a few times before and the information was scattered all over the place. I appreciate the clear and concise writing here. I even added it to my HN favorites - a rare accolade! One thing I’d add, is that the best explanation I’ve ever seen for this, is the famous diagram [0] on Wikipedia of the netfilter API — I remember when I saw that, everything clicked into place. I’m not sure how up to date it is now, but it’s really good. [0] https://commons.wikimedia.org/wiki/File:Netfilter-packet-flo..."
+        },
+        {
+          "id": 47633040,
+          "author": "Havoc",
+          "text": "Used to run a virtualized firewall setup. And then one day discovered that somewhere along the lines I had made a change (or an update changed something) that meant proxmox admin interface was being served publicly. That's despite confirming during initial setup that it isn't. So now I do not do any funky stuff with firewalls anymore. Separate appliance with opnsense bare metal."
+        },
+        {
+          "id": 47635897,
+          "author": "freetime2",
+          "text": "Are there any preconfigured images/installers available for a major Linux distro to turn them a router with safe and sensible defaults? I know there is OpenWrt, but my experience is that is more geared toward running on embedded wifi hardware than an x86 machine. The x86 install comes with a tiny root partition that's actually pretty difficult to resize, for example, and upgrades are quite brittle compared to standard Linux distros. And there's also pfSense and OPNsense, but these run on FreeBSD which seems to lag behind Linux for hardware support. There's no support for the Aquantia AQC113 NIC, for example (although it looks like this may finally have been added in the last month or so). Something like an Ubuntu Appliance [1] would be quite nice. [1] https://ubuntu.com/appliance"
+        },
+        {
+          "id": 47636968,
+          "author": "sorz",
+          "text": "I feels wrong to not mention IPv6 in 2026. - net.ipv6.conf.all.forwarding=1 - nftables is default to `ip` family which only applies to IPv4. Setting it to `inet` will allow rules to apply to both IPv4 & 6; or `ip6` for IPv6 only. You can skip NAT rules, usually. - dnsmasq: in addition to DNS and DHCP, turns on router advertisement with SLAAC. Some devices can get IPv6 address from stateful DHCPv6 server, others (e.g. Android) only work with SLAAC."
+        }
+      ],
+      "summary_ja": "Linuxボックスをルーター化する際、IP転送の有効化だけでファイアウォール設定が不適切だとセキュリティリスクが生じる。LXD/Incusなどは自動転送を有効にするがファイアウォールを設定しない問題がある。ルーター化の理解にはNetfilter図が役立ち、セキュアな設定の難しさから別アプライアンス利用の経験も共有。事前設定済みイメージの需要やOpenWrt、FreeBSDベースソリューションの課題、IPv6設定の注意点も議論された。"
+    },
+    {
+      "rank": 22,
+      "id": 47629116,
+      "title_en": "Go on Embedded Systems and WebAssembly",
+      "title_ja": "組み込みシステムとWebAssemblyにおけるGo",
+      "url": "https://tinygo.org/",
+      "hn_url": "https://news.ycombinator.com/item?id=47629116",
+      "score": 181,
+      "comment_count": 24,
+      "posted_at": "2026-04-03T16:57:09+00:00",
+      "comments": [
+        {
+          "id": 47630119,
+          "author": "nasretdinov",
+          "text": "Tinygo made a lot of progress over the years -- e.g. they've recently introduced macOS support! It does indeed produce much smaller binaries, including for macOS. yuriy@MacBookAir ~/t/tinygo> time tinygo build -o test-tiny main.go ________________________________________________________ Executed in 1.06 secs fish external usr time 1.18 secs 0.31 millis 1.18 secs sys time 0.18 secs 1.50 millis 0.18 secs yuriy@MacBookAir ~/t/tinygo> time go build -o test-normal main.go ________________________________________________________ Executed in 75.79 millis fish external usr time 64.06 millis 0.41 millis 63.64 millis sys time 96.76 millis 1.75 millis 95.01 millis yuriy@MacBookAir ~/t/tinygo> ll total 5096 -rw-r--r--@ 1 yuriy staff 74B 3 Apr 19:17 main.go -rwxr-xr-x@ 1 yuriy staff 2.3M 3 Apr 19:18 test-normal* -rwxr-xr-x@ 1 yuriy staff 192K 3 Apr 19:18 test-tiny* yuriy@MacBookAir ~/t/tinygo> cat main.go package main import \"fmt\" func main() { fmt.Printf(\"Hello world!\\n\") }"
+        },
+        {
+          "id": 47638997,
+          "author": "rcarmo",
+          "text": "TinyGo was instrumental in getting https://github.com/rcarmo/go-rdp to work. It generates very tight, pretty high performing WASM, and that allowed me to push all the RDP decoding to the browser side while making sure I had a sane test suite. Heartily recommended."
+        },
+        {
+          "id": 47632255,
+          "author": "pancsta",
+          "text": "TinyGo doesnt have networking in WASI[0] and the WASM websocket module[1] was last updated 5 years ago. Go without stdlib is not Go. [0] https://github.com/tinygo-org/tinygo/issues/4880 [1] https://github.com/Nerzal/tinywebsocket"
+        },
+        {
+          "id": 47630678,
+          "author": "carverauto",
+          "text": "We're using TinyGo and the Wazero runtime for our WASM plugin system in ServiceRadar, highly recommend both if you're using golang."
+        },
+        {
+          "id": 47638187,
+          "author": "ghoul2",
+          "text": "Its a fantastic project, but seems almost inactive now. I have a tiny PR pending for weeks, even reviewed, but not merged. I have another patch I have not submitted as I want to first navigate the earlier PR to completion. Both were bugs that bit me, and I ended up wasting quite a lot of time trying to find it: 1. go:embed supports \"all:<pattern\" while tinygo silently ignore it. I ripped my hair out trying to figure out why my files were not showing up in embedfs. PR pending. 2. go allows setting some global vars at the build cli (think build version/tag etc). In the code, one can define a default, and then the value provided (if any) on the cli can override it at build time. Tinygo fails to override the value at build-time, silently, if a default value is provided for the var in code. This PR I have not submitted yet, as its more intrusive. I hope it picks up steam again soon. I love using go for embedded and CF worker use and tinygo makes both of these use cases much more viable than regular go. Honestly, I hope tinygo can be rolled over into the main go toolchain as \"target arch\"."
+        }
+      ],
+      "summary_ja": "TinyGoは組み込みシステムやWebAssemblyで小さなバイナリを生成し、実用事例も報告されるが、WASIでのネットワーク機能不足やプロジェクトの停滞が課題。メインのGoツールチェインへの統合が期待される。"
+    },
+    {
+      "rank": 23,
+      "id": 47627527,
+      "title_en": "Build your own Dial-up ISP with a Raspberry Pi",
+      "title_ja": "Raspberry Piで自分専用のダイヤルアップISPを構築する",
+      "url": "https://www.jeffgeerling.com/blog/2026/build-your-own-dial-up-isp-with-a-raspberry-pi/",
+      "hn_url": "https://news.ycombinator.com/item?id=47627527",
+      "score": 181,
+      "comment_count": 32,
+      "posted_at": "2026-04-03T15:08:16+00:00",
+      "comments": [
+        {
+          "id": 47629784,
+          "author": "alnwlsn",
+          "text": "If you ever want more phone lines than that, you can pick up an old Cisco VG-224 from Ebay for less than half the price of that line simulator, and you get 24 lines. There is a configuration that will let you use it as a standalone unit where all the lines can call each other with custom phone numbers (here's some notes [1]). The main catch is that they have a 50-pin Centronics style connector on them which you will have to break out somehow to your RJ11s. Also, they are big (1U rack) and have fans. I've got a few of these and have been meaning to set them up with a bunch of modems and a bunch of computers, but haven't gotten to it yet. Modems do seem to work in the limited testing I've done. They do (as expected) work great with telephones, including pulse dialing. [1] https://alnwlsn.com/z/pots/cisco-vg224.html"
+        },
+        {
+          "id": 47633321,
+          "author": "eek2121",
+          "text": "Semi-related note:I learned this morning that there are companies that offer in-home (non-cellular) phone service via wifi/the internet. Think: classic cordless phone, however the base station connects via wifi. Some of those companies offer free unlimited service as well...and the one I was looking at has a companion app for iOS/Android that allows you to make calls from via home number from anywhere as long as you have an internet connection. I'm assuming these numbers are flagged as VOIP (which limits their use as a lot of apps/sites/companies hate VOIP numbers), however the discover is interesting. I thought home phones were dead and buried."
+        },
+        {
+          "id": 47633293,
+          "author": "m3rcury",
+          "text": "I had a talk about building your own dial-up ISP in FOSDEM 2026, not the best but it remarks some points and configuration tips for especially running on VoIP. Thanks for keeping dial-up alive! https://fosdem.org/2026/schedule/event/UJKT3L-dial-up-howto/"
+        },
+        {
+          "id": 47630274,
+          "author": "elevation",
+          "text": "What I would love to have is a few compact dialup-to-wifi bridges so I could wifi-ize 30 year old hardware. Would be neat to read email with an old POP client, or chat over the original AIM software (perhaps patched to use a server on the LAN)"
+        },
+        {
+          "id": 47630126,
+          "author": "aimadetools",
+          "text": "I'd be curious if anyone has actually used a setup like this as a fallback for when their fiber goes down. The latency would be brutal, but a few kbps beats no bps"
+        }
+      ],
+      "summary_ja": "Cisco VG-224を使った電話回線拡張やVoIPを利用したダイヤルアップISP構築の設定が話題。古いハードウェアをWi-Fi接続するアイデアや、ネットワーク障害時のフォールバックとしての利用可能性にも言及されている。"
+    },
+    {
+      "rank": 24,
+      "id": 47628326,
+      "title_en": "F-15E jet shot down over Iran",
+      "title_ja": "F-15Eジェット機がイラン上空で撃墜される",
+      "url": "https://www.theguardian.com/world/2026/apr/03/us-fighter-jet-confirmed-shot-down-over-iran",
+      "hn_url": "https://news.ycombinator.com/item?id=47628326",
+      "score": 540,
+      "comment_count": 1205,
+      "posted_at": "2026-04-03T16:00:44+00:00",
+      "comments": [
+        {
+          "id": 47628808,
+          "author": "roadbuster",
+          "text": "During the entire gulf war (Iraq, 1990-91), only two F-15s were shot down via surface-to-air engagement. At the time, Baghdad was known to have the highest density of SAM protection out of any city in the world. An F-15 being shot down in Iran after weeks of strategic bombing of their anti-air defense systems is not a good sign."
+        },
+        {
+          "id": 47634910,
+          "author": "lejalv",
+          "text": "So how is this not flagged, whereas this other post lasted literally minutes before being flagged? https://news.ycombinator.com/item?id=47612053 75000+ palestinians killed, arguably one of the defining crimes of our age are not worth HN discussion (“politics”) but one F15E shot down in a war of choice is (apparently, “tech”)?"
+        },
+        {
+          "id": 47627589,
+          "author": "MarkMarine",
+          "text": "Military aviators train for this, being alone behind enemy lines (look up SERE school if you’re curious, one of the craziest training courses outside of special forces) and there is a special force just for aviator recovery behind enemy lines, US AirForce Pararescue. Hopefully they’ll get the aviators back quickly, the last thing our country needs is American hostages making this ridiculous war harder to stop."
+        },
+        {
+          "id": 47627879,
+          "author": "pwarner",
+          "text": "I hope the aviators are OK, and also hope whoever they were bombing are also OK. I do wonder if Iran finds them first, will they treat them better than the US treated survivors of the ship sunk by a US torpedo in the Indiana Ocean?"
+        },
+        {
+          "id": 47632015,
+          "author": "DASD",
+          "text": "List of aviation shootdowns and accidents during the 2026 Iran war: https://en.wikipedia.org/wiki/List_of_aviation_shootdowns_an... Iran: 40, Israel: 18, US: 36, Others: 7"
+        }
+      ],
+      "summary_ja": "F-15撃墜はイランの対空防御の有効性を示し、軍事作戦の難しさを浮き彫りにする。一方、Hacker Newsではパレスチナ問題のような政治的議論は排除され、軍事技術記事は許容される二重基準を批判。パイロットの安全確保と戦争早期終結を望む声と、人道面への配慮も表明されている。"
+    },
+    {
+      "rank": 25,
+      "id": 47626462,
+      "title_en": "Big-Endian Testing with QEMU",
+      "title_ja": "QEMUを使用したビッグエンディアンテスト",
+      "url": "https://www.hanshq.net/big-endian-qemu.html",
+      "hn_url": "https://news.ycombinator.com/item?id=47626462",
+      "score": 102,
+      "comment_count": 113,
+      "posted_at": "2026-04-03T13:28:58+00:00",
+      "comments": [
+        {
+          "id": 47628306,
+          "author": "bluGill",
+          "text": "What I really want is memory order emulation. X86 as strong memory order guarantees, ARM has much weaker guarantees. Which means the multi-threaded queue I'm working on works all the time on development x86 machine even if I forget to put in the correct memory-order schematics, but it might or might not work on ARM (which is what my of my users have). (I am in the habit of running all my stress tests 1000 times before I'm willing to send them out, but that doesn't mean the code is correct, it means it works on x86 and passed my review which might miss something)"
+        },
+        {
+          "id": 47629141,
+          "author": "susam",
+          "text": "I wrote a similar post [1] some 16 years ago. My solution back then was to install Debian for PowerPC on QEMU using qemu-system-ppc. But Hans's post uses user-mode emulation with qemu-mips, which avoids having to set up a whole big-endian system in QEMU. It is a very interesting approach I was unaware of. I'm pretty sure qemu-mips was available back in 2010, but I'm not sure if the gcc-mips-linux-gnu cross-compiler was readily available back then. I suspect my PPC-based solution might have been the only convenient way to solve this problem at the time. Thanks for sharing it here. It was nice to go down memory lane and also learn a new way to solve the same problem. [1] https://susam.net/big-endian-on-little-endian.html"
+        },
+        {
+          "id": 47627260,
+          "author": "AKSF_Ackermann",
+          "text": "> When programming, it is still important to write code that runs correctly on systems with either byte order What you should do instead is write all your code so it is little-endian only, as the only relevant big-endian architecture is s390x, and if someone wants to run your code on s390x, they can afford a support contract."
+        },
+        {
+          "id": 47629279,
+          "author": "zajio1am",
+          "text": "There is one reason not mentioned in the article why it is worth testing code on big-endian systems – some bugs are more visible there than on little-endian systems. For example, accessing integer variable through pointer of wrong type (smaller size) often pass silently on little-endian (just ignoring higher bytes), while read/writ bad values on big-endian."
+        },
+        {
+          "id": 47637617,
+          "author": "rcxdude",
+          "text": "If you're worrying about the endianness of your processor, your code is somehow accessing memory from 'outside' as anything other than a char*, which is already thin ice as far as C and C++ are concerned. You should have a parse_<whatever>_le and/or parse_<whatever>_be function to convert from that byte stream into your native types, that only cares about the _endianness of the data_ (and they can be implemented without caring about your processor endianness as well). Then you don't need to worry about the processor you're running on at all. There's more significant and subtle processor quirks than endianness to worry about if you're trying to write portable code (namely, memory model and alignment requirements)."
+        }
+      ],
+      "summary_ja": "コメントでは、マルチスレッドコードの移植性確保に向け、異なるメモリ順序（x86とARM）やエンディアン性を考慮したテストの重要性が議論されている。特に、ビッグエンディアン環境でのテストによりバグを早期検出できる利点や、QEMOを用いた効率的なエミュレーション方法が紹介された。また、ポータブルコーディングではエンディアン性よりメモリモデルやアライメントが課題と指摘されている。"
+    },
+    {
+      "rank": 26,
+      "id": 47634690,
+      "title_en": "Delve removed from Y Combinator",
+      "title_ja": "DelveがY Combinatorから削除される",
+      "url": "https://www.ycombinator.com/companies/delve",
+      "hn_url": "https://news.ycombinator.com/item?id=47634690",
+      "score": 401,
+      "comment_count": 250,
+      "posted_at": "2026-04-04T01:37:02+00:00",
+      "comments": [
+        {
+          "id": 47635632,
+          "author": "maxbond",
+          "text": "I'm getting the impression that a lot of people in this thread think this is because they violated an open-source license and saying things to the effect of, \"they're just the ones who got caught\". I also thought that was the scandal initially. (And when it comes to license violations, yes, there's absolutely more where that came from.) But that's just the cherry on top. I don't think they're being thrown out because they violated a license. There are really serious fraud allegations. Allegedly they were rubber-stamping noncompliant customers, leaving them exposed to potential criminal liability under regulations like HIPPA. https://deepdelver.substack.com/p/delve-fake-compliance-as-a... I've only skimmed this so I do not endorse these allegations, but I think it's context missing from this discussion."
+        },
+        {
+          "id": 47635720,
+          "author": "everfrustrated",
+          "text": "Someone leaked an internal Bookface chat from Garry Tan (YC CEO) saying: We have asked Delve to leave YC. YC is a community, not just an accelerator. The founders in our community have to trust each other, and we have to trust them. When that trust breaks down, there's really only one thing to do. We're not going to get into the details publicly. We wish them well. https://x.com/___4o____/status/2040271468874076380 I have no direct knowledge of the accuracy of any of this. This is not my account."
+        },
+        {
+          "id": 47635805,
+          "author": "hbbio",
+          "text": "This other profile is still up: https://www.forbes.com/profile/delve/ 30U30 never ceases to amaze."
+        },
+        {
+          "id": 47635895,
+          "author": "nfw2",
+          "text": "It's not just about delve. It's about yc's model. YC encourages YC companies to trust other YC companies even though they are early. If you can't trust your batch mates for something as crucial as compliance, the model doesn't work."
+        },
+        {
+          "id": 47635494,
+          "author": "thoughthadlogin",
+          "text": "Sure, most companies could add an About section and probably put this behind them pretty quickly. They could have even hired someone like Delve to assure this kind of thing wouldn’t happen again. But Delve themselves can’t really do any of that. They’ve screwed up on a fundamental piece of their own business model. Their core offering *is* Compliance as a Service! How could I trust their word that they’ll ensure my company is compliant? How could I trust their word that a company I’m doing business with is compliant? They can’t even handle their own Apache 2.0 licensed works, and that’s child’s play- relatively speaking. I’m supposed to trust that they can handle PCI and HIPPA and all the rest for other companies? This is like having a dentist who doesn’t brush and floss their own teeth. Or a building inspector working out of a moldy office suite with exposed rebar. Or an editor with a personal website full of typos and grammatical errors. It’s a dealbreaker to anyone with common sense."
+        }
+      ],
+      "summary_ja": "DelveのYC追放は、オープンソースライセンス違反以上に、顧客のコンプライアンスを軽視した深刻な詐欺疑念が主因。YCの企業間信頼に基づくモデルが損なわれたためで、自社のコンプライアンスすら守れない事業体への信頼失墜が決定的となった。"
+    },
+    {
+      "rank": 27,
+      "id": 47630576,
+      "title_en": "How to make a sliding, self-locking, and predator-proof chicken coop door (2020)",
+      "title_ja": "スライド式、自己ロック式、捕食者対策の鶏小屋ドアの作り方 (2020)",
+      "url": "https://www.backyardchickens.com/articles/how-to-make-a-sliding-self-locking-and-predator-proof-chicken-coop-door.75906/",
+      "hn_url": "https://news.ycombinator.com/item?id=47630576",
+      "score": 120,
+      "comment_count": 52,
+      "posted_at": "2026-04-03T18:54:11+00:00",
+      "comments": [
+        {
+          "id": 47630721,
+          "author": "PaulHoule",
+          "text": "We have some friends who have a really well-built chicken coop. Sometimes we help them with the birds when they are out of town and bring back eggs. A while back they had a stump in front of the house with a family of foxes living in it and they pointed a game camera at it. Night after night they got footage of the fox mama bringing back other people's chickens to feed to her kits. The moral is, I think, that the well-built chicken coop is a good investment."
+        },
+        {
+          "id": 47631578,
+          "author": "dylan604",
+          "text": "I would like to compliment the video for being useful to purpose, simple, no annoying TikTok voice over, no voice over at all as it's not necessary, no unnecessary text. It's just a simple here's the thing, here's it working, here's why it works, and here's some detail on how it was built."
+        },
+        {
+          "id": 47630924,
+          "author": "dmos62",
+          "text": "There's something about these basic self-locking/self-unlocking mechanisms that's so satisfying. It's like they exercise my brain in a way it's not used to exercising, like that really good stretch you do sometimes that really hits that spot. Reminds me of knots: I geek out about knots sometimes, and it's just so profoundly weird to think \"in knots\", I feel like an alien when I'm doing knots, or like my brain is doing cirque-de-soleil-type contortions. I guess this says something about how mundane my usual mental activity is."
+        },
+        {
+          "id": 47634754,
+          "author": "rossdavidh",
+          "text": "I don't understand; where is the cloud connection to an LLM agent? I don't even see how you could get Kubernetes or React in this thing."
+        },
+        {
+          "id": 47633203,
+          "author": "paradox460",
+          "text": "Several years ago I bought a product that aimed to solve this problem. It was a set of rails, a door, and a controller/motor that would raise and lower the door, via a string. The door itself has a spring loaded catch at the bottom, which is retracted when the door is lifted, via a little mechanism built into the door. Pull up on the peg, the latch retracts, and you can slide the door open The controller was the weakest part of this whole assembly. It worked, but was crude and often would lock hens out, like when summer thunderstorms would darken the sky. It just used a light sensor Last year I replaced the controller with an Esphome device I built, and it's been going strong all summer and winter https://pdx.su/blog/2025-06-11-how-a-simple-chicken-coop-doo..."
+        }
+      ],
+      "summary_ja": "頑丈で自己ロックする鶏小屋ドアの重要性が指摘され、シンプルで実用的な設計が賞賛される。自己ロック機構は脳を刺激し満足感を与え、過剰な技術批判も含む。自動ドアシステムの改善事例としてEsphomeデバイスの成功が共有された。"
+    },
+    {
+      "rank": 28,
+      "id": 47633157,
+      "title_en": "Fake Fans",
+      "title_ja": "偽のファン",
+      "url": "https://www.wordsfromeliza.com/p/fake-fans",
+      "hn_url": "https://news.ycombinator.com/item?id=47633157",
+      "score": 132,
+      "comment_count": 35,
+      "posted_at": "2026-04-03T22:26:38+00:00",
+      "comments": [
+        {
+          "id": 47633927,
+          "author": "fwipsy",
+          "text": "Recently rereading William Gibson's \"Pattern Recognition\" and I'm struck by his belief that certain art or memes are objectively good and destined for virality. I think both Gibson and this author are wrong. No content is intrinsically destined for success. There are countless amazing artists, available to anyone. Any sort of quality, insight, talent, novelty are table stakes. If someone is big, they're either extremely lucky, they got in on the ground floor, or there's marketing money behind them."
+        },
+        {
+          "id": 47633766,
+          "author": "cobbzilla",
+          "text": "Modern payola. Fascinating but not entirely unpredictable. I’m excited by the focus on hyper-local, authenticity is the scarce resource. Great artists are usually not the best marketers, but nothing beats “I am here, this is real”. No amount of algorithmic magic can create that experience."
+        },
+        {
+          "id": 47634403,
+          "author": "SL61",
+          "text": "It doesn't surprise me at all that this is going on. There are lots of social media fan pages that are run by real people who post real content 99% of the time but are willing to post promo material for a fee. Usually that fee is pretty high, easily $100-500 depending on the account's follower count, with different price points for how long it stays up (pay more for a permanent post, pay less and it gets deleted after X number of hours). It's really effective because those accounts already have a well-established presence and function as tastemakers."
+        },
+        {
+          "id": 47638228,
+          "author": "TrackerFF",
+          "text": "Not sure how this is ethically different from industry plants or payola. Things which have been in the industry since the dawn of time. Astroturfing with fake fans is just the natural next step due to how easy it is. Back in the day some labels would drum up fake engagement by handing out tickets to influential people, paying certain people to go, and things like that."
+        },
+        {
+          "id": 47637892,
+          "author": "svantana",
+          "text": "I'd like to know more about \"Chaotic Good Projects\" [1]. Isn't it fascinating that they so openly do \"UGC\" (user-generated content) and \"Fanpages\" even though they are neither users nor fans, but paid consultants. And even openly displaying the musical acts they performed these dark-pattern services for. [1] https://chaoticgoodprojects.org/"
+        }
+      ],
+      "summary_ja": "「Fake Fans」の議論では、ソーシャルメディアで偽のファンや有料プロモーションが蔓延し、コンテンツの成功は本質的質より運・マーケティング資金によることが指摘される。真正性は貴重だがアルゴリズムでは再現不能であり、業界プラントやペイオラと同様の倫理的問題を提起している。"
+    },
+    {
+      "rank": 29,
+      "id": 47629903,
+      "title_en": "Why are we still using Markdown?",
+      "title_ja": "なぜ私たちはまだMarkdownを使っているのか？",
+      "url": "https://bgslabs.org/blog/why-are-we-using-markdown/",
+      "hn_url": "https://news.ycombinator.com/item?id=47629903",
+      "score": 170,
+      "comment_count": 237,
+      "posted_at": "2026-04-03T18:03:10+00:00",
+      "comments": [
+        {
+          "id": 47630034,
+          "author": "otterley",
+          "text": "Because, like UNIX/Linux itself, worse is better: https://en.wikipedia.org/wiki/Worse_is_better - and perfect is the enemy of \"good enough.\" We want to encourage people to produce written output with minimal friction. Barriers to writing--and especially barriers to producing documentation--should be minimized. Writing well is difficult enough! Markup is overhead. Complex markup is even more overhead. Markdown is the best compromise we know of today that provides just enough structure and typographic capability, while imposing very little cognitive load on the author. Besides, if you need something more complicated these days, you can have your favorite AI agent do it."
+        },
+        {
+          "id": 47639401,
+          "author": "kaycebasques",
+          "text": "> These 2 produce IDENTICAL output. This is my single biggest complaint about reStructuredText. You create headings by putting underlines and (optional!) overlines around the section heading text. But all of the following are valid title adornment characters: ! \" # $ % & ' ( ) \\* + , - . / : ; < = > ? @ [ \\ ] ^ _ ` { | } ~ So in each doc you have to figure out the H1, H2, H3 formatting separately. E.g. in one doc it's: == H1 == Normal text -- H2 -- Whereas in another it might be: H1 ~~ Normal text !! H2 !!"
+        },
+        {
+          "id": 47639131,
+          "author": "nixpulvis",
+          "text": "One of markdown's greatest assets is that it's basically plaintext. Can't render it to HTML, it's still very readable. This blog post makes no sense to me."
+        },
+        {
+          "id": 47639168,
+          "author": "jrm4",
+          "text": "Because, and I cannot stress this enough: Programming languages (and the like) are for humans , not for computers or for creating formal systems. Understanding this simple fact will save you (and by you I mean me and the type of people who frequent sites like this) a ton of headache."
+        },
+        {
+          "id": 47634604,
+          "author": "neonstatic",
+          "text": "This may be the first time my reaction to an objectively terrible programming language is a shrug and a \"whatever\". I like using markdown. I use it for journaling in Obsidian. It does everything I want it to. I like that it's just flat files. I don't want my journaling to be stuck in some online database. Yet, I am the same person who refuses to code in anything but Rust due to how not-awful it feels to me. Strange how a person can hold a completely opposite view for two instances of the same problem. Being human in a nutshell."
+        }
+      ],
+      "summary_ja": "Markdownは、書き手の認知負荷を抑えつつ十分な構造を提供する「十分良い」妥協点として支持されている。プレーンテキストで読みやすく、人間中心の設計で実用性が高く、他のマークアップよりシンプルで一貫性があるため、現在も広く使われ続けている。"
+    },
+    {
+      "rank": 30,
+      "id": 47633116,
+      "title_en": "The house is a work of art: Frank Lloyd Wright",
+      "title_ja": "その家は芸術作品である: Frank Lloyd Wright",
+      "url": "https://aeon.co/essays/frank-lloyd-wright-as-a-mirror-of-the-american-condition",
+      "hn_url": "https://news.ycombinator.com/item?id=47633116",
+      "score": 103,
+      "comment_count": 40,
+      "posted_at": "2026-04-03T22:22:18+00:00",
+      "comments": [
+        {
+          "id": 47634945,
+          "author": "mauvehaus",
+          "text": "For the northeastern US folks and anyone willing to travel: the Currier Museum of Art in Manchester, NH has not one but two Frank Lloyd Wright houses in its collection[0]. I’ve seen the Zimmerman House a couple of times, and it hews pretty close to the familiar aesthetic of Fallingwater: warm tones, lovely space, furniture to match. The Kalil House I got to see recently, it’s the newer acquisition. It’s a Usonian Automatic, meaning the owner was meant to buy the plans and the molds for the concrete blocks, and the build it themselves. Long story short: it didn’t go exactly as planned. The house is fascinating though: much of it is a concrete gray rather than the warmer tones we usually associate wiry Wright’s work. It feels less tied to the place it’s built than either the Zimmerman House or Fallingwater. It feels much less starkly architectural, and more connected to the way regular people live, more attainable, insofar as you can use that word with Wright. They also both have ceilings that work with taller people. Fallingwater is downright claustrophobic in places. Highly worth the trip if you’re in the area. And if you’re in the area of Fallingwater, Kentucky Knob is basically right there. If you’ve travelled more than a few hours to see Fallingwater, you’d be nuts to miss it. [0] https://www.currier.org/frank-lloyd-wright"
+        },
+        {
+          "id": 47637521,
+          "author": "NoNameHaveI",
+          "text": "Having visited multiple Wright buildings, I must say this: no photograph or video will EVER do it justice. The man was a master of light. Wright buildings MUST be visited in person to experience this. You will FEEL it."
+        },
+        {
+          "id": 47634156,
+          "author": "mynegation",
+          "text": "Fallingwater is more than work of art, it is a religious experience. I visited it three times (each time my visit to Pittsburgh and the area surrounding the house was to specifically see it) and every damn time I stood weeping leaving the tour."
+        },
+        {
+          "id": 47634080,
+          "author": "zdw",
+          "text": "If you ever visit Taliesin in Wisconsin (which has a pretty bland), you should also visit the nearby House on the Rock which is a fascinating and very weird collection of esoteric and kitschy items. The contrast in attitudes and aesthetics between the two is incredibly stark, and it's very interesting to see the reactions of visitors to each location."
+        },
+        {
+          "id": 47636107,
+          "author": "sombragris",
+          "text": "I studied graduate school in a building designed by William B. Fyfe, one of Wright's Praire School first apprentices. It was beautiful and serene. The same city where my school is located has a house designed by Wright himself in a special neighborhood known as Heritage Hill, also a great example of Wright's style. I felt grateful that I had to go to class every day in such a lovely building (which still stands, btw, albeit with some additions and modifications). Having the opportunity to be there was, and still is, one of the highlights of my life."
+        }
+      ],
+      "summary_ja": "フランク・ロイド・ライトの建築は実際に訪れて光や空間を体感することが重要であり、写真では伝わらない。落水荘は感動的な体験をもたらし、カーリアー美術館の2つの家は異なるスタイル（温かい色調とコンクリート灰色）を示し、日常的で実現可能な側面もある。旅行推奨や対比的な建築体験も語られ、実際の訪問の価値が強調されている。"
+    }
+  ]
+}
