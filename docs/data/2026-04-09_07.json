@@ -1,0 +1,1120 @@
+{
+  "date": "2026-04-09T00:00:00+09:00",
+  "slot": "07",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 47691730,
+      "title_en": "I ported Mac OS X to the Nintendo Wii",
+      "title_ja": "私はMac OS XをNintendo Wiiに移植しました",
+      "url": "https://bryankeller.github.io/2026/04/08/porting-mac-os-x-nintendo-wii.html",
+      "hn_url": "https://news.ycombinator.com/item?id=47691730",
+      "score": 1068,
+      "comment_count": 198,
+      "posted_at": "2026-04-08T15:40:00+00:00",
+      "comments": [
+        {
+          "id": 47692860,
+          "author": "rayiner",
+          "text": "Not only is this an insanely cool project, the writeup is great. I was hooked the whole way through. I particularly love this part: > At this point, the system was trying to find a framebuffer driver so that the Mac OS X GUI could be shown. As indicated in the logs, WindowServer was not happy - to fix this, I’d need to write my own framebuffer driver . I'm surprised by how well abstracted MacOS is (was). The I/O Kit abstraction layers seemed to actually do what they said. A little kudos to the NeXT developers for that."
+        },
+        {
+          "id": 47692465,
+          "author": "guyzero",
+          "text": "In addition to the incredible engineering work here the OP casually flexes by showing the development happening _in an economy class airplane seat_."
+        },
+        {
+          "id": 47696003,
+          "author": "jmcneill",
+          "text": "As the author of the NetBSD Wii and Wii U ports, congrats! I’m looking forward to seeing how you solved some of the problems that I faced along the way."
+        },
+        {
+          "id": 47695027,
+          "author": "raincole",
+          "text": "> As for RAM, the Wii has a unique configuration: 88 MB total TIL Wii has only 88MB of RAM. Fortunately games weren't electron-based."
+        },
+        {
+          "id": 47692305,
+          "author": "soci",
+          "text": "Back in the day I was a hardcore Mac nerd and became a professional at it too. My best reverse-engineering trophy was building one of the first \"iOS\" apps when there was not an official appstore for the iPhone. But man, this is way ahead of what I could do. What this dude accomplished blew my mind. Not only the output (running MacOS on a Wii), but the detailed post itself. A-MA-ZING."
+        }
+      ],
+      "summary_ja": "Mac OS XをWiiに移植したプロジェクトへの称賛が中心。Mac OS Xの抽象化レイヤーの有効性や著者の技術力に驚き、限られたRAMのWiiで実現した点や詳細な記事も高く評価された。他の開発者からも賞賛の声が寄せられている。"
+    },
+    {
+      "rank": 2,
+      "id": 47695012,
+      "title_en": "USB for Software Developers: An introduction to writing userspace USB drivers",
+      "title_ja": "ソフトウェア開発者のためのUSB: ユーザースペースUSBドライバの書き方入門",
+      "url": "https://werwolv.net/posts/usb_for_sw_devs/",
+      "hn_url": "https://news.ycombinator.com/item?id=47695012",
+      "score": 114,
+      "comment_count": 16,
+      "posted_at": "2026-04-08T19:23:34+00:00",
+      "comments": [
+        {
+          "id": 47695592,
+          "author": "Neywiny",
+          "text": "But this kinda expects that your USB driver is the application code too, no? This is less of a driver and more of a library + program. If I have, say, a USB to Ethernet device, how do I hook this into the ethernet adapter subsystem?"
+        },
+        {
+          "id": 47697076,
+          "author": "analog31",
+          "text": ">>> Say you’re being handed a USB device and told to write a driver for it. Hand it back, with a request to prove that it can't be done with one of the devices that the OS's already recognize as virtual COM ports."
+        },
+        {
+          "id": 47696334,
+          "author": "tosti",
+          "text": "The C++ looks messed up. I have yet to come across a keyboard that can type an arrow."
+        }
+      ],
+      "summary_ja": "記事のユーザースペースUSBドライバー手法に対し、ドライバーとアプリケーションの一体化を批判。OSサブシステム（例：USB to Ethernet）との連携方法に疑問を呈し、既存ドライバー（仮想COMポート等）の活用を提案。コード例の質にも言及。"
+    },
+    {
+      "rank": 3,
+      "id": 47687273,
+      "title_en": "Git commands I run before reading any code",
+      "title_ja": "コードを読む前に実行するGitコマンド",
+      "url": "https://piechowski.io/post/git-commands-before-reading-code/",
+      "hn_url": "https://news.ycombinator.com/item?id=47687273",
+      "score": 1684,
+      "comment_count": 363,
+      "posted_at": "2026-04-08T08:53:42+00:00",
+      "comments": [
+        {
+          "id": 47688065,
+          "author": "pzmarzly",
+          "text": "Jujutsu equivalents, if anyone is curious: What Changes the Most jj log --no-graph -r 'ancestors(trunk()) & committer_date(after:\"1 year ago\")' \\ -T 'self.diff().files().map(|f| f.path() ++ \"\\n\").join(\"\")' \\ | sort | uniq -c | sort -nr | head -20 Who Built This jj log --no-graph -r 'ancestors(trunk()) & ~merges()' \\ -T 'self.author().name() ++ \"\\n\"' \\ | sort | uniq -c | sort -nr Where Do Bugs Cluster jj log --no-graph -r 'ancestors(trunk()) & description(regex:\"(?i)fix|bug|broken\")' \\ -T 'self.diff().files().map(|f| f.path() ++ \"\\n\").join(\"\")' \\ | sort | uniq -c | sort -nr | head -20 Is This Project Accelerating or Dying jj log --no-graph -r 'ancestors(trunk())' \\ -T 'self.committer().timestamp().format(\"%Y-%m\") ++ \"\\n\"' \\ | sort | uniq -c How Often Is the Team Firefighting jj log --no-graph \\ -r 'ancestors(trunk()) & committer_date(after:\"1 year ago\") & description(regex:\"(?i)revert|hotfix|emergency|rollback\")' Much more verbose, closer to programming than shell scripting. But less flags to remember."
+        },
+        {
+          "id": 47689190,
+          "author": "bsuvc",
+          "text": "I love how the author thinks developers write commit messages. All joking aside, it really is a chronic problem in the corporate world. Most codebases I encounter just have \"changed stuff\" or \"hope this works now\". It's a small minority of developers (myself included) who consider the git commit log to be important enough to spend time writing something meaningful. AI generated commit messages helps this a lot, if developers would actually use it (I hope they will)."
+        },
+        {
+          "id": 47690113,
+          "author": "joshstrange",
+          "text": "I ran these commands on a number of codebases I work on and I have to say they paint a very different picture than the reality I know to be true. > git shortlog -sn --no-merges Is the most egregious. In one codebase there is a developer's name at the top of the list who outpaced the number 2 by almost 3x the number of commits. That developer no longer works at the company? Crisis? Nope, the opposite. The developer was a net-negative to the team in more ways than one, didn't understand the codebase very well at all, and just happened to commit every time they turned around for some reason."
+        },
+        {
+          "id": 47688120,
+          "author": "ramon156",
+          "text": "> The 20 most-changed files in the last year. The file at the top is almost always the one people warn me about. “Oh yeah, that file. Everyone’s afraid to touch it.” The most changed file is the one people are afraid of touching?"
+        },
+        {
+          "id": 47688474,
+          "author": "mattrighetti",
+          "text": "I have a summary alias that kind of does similar things # summary: print a helpful summary of some typical metrics summary = \"!f() { \\ printf \\\"Summary of this branch...\\n\\\"; \\ printf \\\"%s\\n\\\" $(git rev-parse --abbrev-ref HEAD); \\ printf \\\"%s first commit timestamp\\n\\\" $(git log --date-order --format=%cI | tail -1); \\ printf \\\"%s latest commit timestamp\\n\\\" $(git log -1 --date-order --format=%cI); \\ printf \\\"%d commit count\\n\\\" $(git rev-list --count HEAD); \\ printf \\\"%d date count\\n\\\" $(git log --format=oneline --format=\\\"%ad\\\" --date=format:\\\"%Y-%m-%d\\\" | awk '{a[$0]=1}END{for(i in a){n++;} print n}'); \\ printf \\\"%d tag count\\n\\\" $(git tag | wc -l); \\ printf \\\"%d author count\\n\\\" $(git log --format=oneline --format=\\\"%aE\\\" | awk '{a[$0]=1}END{for(i in a){n++;} print n}'); \\ printf \\\"%d committer count\\n\\\" $(git log --format=oneline --format=\\\"%cE\\\" | awk '{a[$0]=1}END{for(i in a){n++;} print n}'); \\ printf \\\"%d local branch count\\n\\\" $(git branch | grep -v \\\" -> \\\" | wc -l); \\ printf \\\"%d remote branch count\\n\\\" $(git branch -r | grep -v \\\" -> \\\" | wc -l); \\ printf \\\"\\nSummary of this directory...\\n\\\"; \\ printf \\\"%s\\n\\\" $(pwd); \\ printf \\\"%d file count via git ls-files\\n\\\" $(git ls-files | wc -l); \\ printf \\\"%d file count via find command\\n\\\" $(find . | wc -l); \\ printf \\\"%d disk usage\\n\\\" $(du -s | awk '{print $1}'); \\ printf \\\"\\nMost-active authors, with commit count and %%...\\n\\\"; git log-of-count-and-email | head -7; \\ printf \\\"\\nMost-active dates, with commit count and %%...\\n\\\"; git log-of-count-and-day | head -7; \\ printf \\\"\\nMost-active files, with churn count\\n\\\"; git churn | head -7; \\ }; f\" EDIT: props to https://github.com/GitAlias/gitalias"
+        }
+      ],
+      "summary_ja": "Gitコマンドによるコードベース分析の有用性と限界。Jujutsuでの代替コマンドやカスタムエイリアスを紹介し、コミットメッセージの質の低さが慢性問題であると指摘。AI生成が解決策となる可能性があるが、分析結果は必ずしも現実を反映せず、コミット数が多い開発者が貢献者とは限らないなど、解釈に注意が必要。"
+    },
+    {
+      "rank": 4,
+      "id": 47693153,
+      "title_en": "Understanding the Kalman filter with a simple radar example",
+      "title_ja": "簡単なレーダー例でカルマンフィルタを理解する",
+      "url": "https://kalmanfilter.net",
+      "hn_url": "https://news.ycombinator.com/item?id=47693153",
+      "score": 164,
+      "comment_count": 29,
+      "posted_at": "2026-04-08T17:11:46+00:00",
+      "comments": [
+        {
+          "id": 47693178,
+          "author": "alex_be",
+          "text": "Author here. I recently updated the homepage of my Kalman Filter tutorial with a new example based on a simple radar tracking problem. The goal was to make the Kalman Filter understandable to anyone with basic knowledge of statistics and linear algebra, without requiring advanced mathematics. The example starts with a radar measuring the distance to a moving object and gradually builds intuition around noisy measurements, prediction using a motion model, and how the Kalman Filter combines both. I also tried to keep the math minimal while still showing where the equations come from. I would really appreciate feedback on clarity. Which parts are intuitive? Which parts are confusing? Is the math level appropriate? If you have used Kalman Filters in practice, I would also be interested to hear whether this explanation aligns with your intuition."
+        },
+        {
+          "id": 47696676,
+          "author": "roger_",
+          "text": "Here's my (hopefully) intuitive guide: 1. understand weighted least squares and how you can update an initial estimate (prior mean and variance) with a new measurement and its uncertainty (i.e. inverse variance weighted least squares) 2. this works because the true mean hasn't changed between measurements. What if it did? 3. KF uses a model of how the mean changes to predict what it should be now based on the past, including an inflation factor on the uncertainty since predictions aren't perfect 4. after the prediction, it becomes the same problem as (1) except you use the predicted values as the initial estimate There are some details about the measurement matrix (when your measurement is a linear combination of the true value -- the state) and the Kalman gain, but these all come from the least squares formulation. Least squares is the key and you can prove it's optimal under certain assumptions (e.g. Bayesian MMSE)."
+        },
+        {
+          "id": 47694877,
+          "author": "palata",
+          "text": "I really loved this one: https://www.bzarg.com/p/how-a-kalman-filter-works-in-picture..."
+        },
+        {
+          "id": 47694756,
+          "author": "joshu",
+          "text": "i liked how https://www.bzarg.com/p/how-a-kalman-filter-works-in-picture... uses color visualization to explain"
+        },
+        {
+          "id": 47695094,
+          "author": "lelandbatey",
+          "text": "Kalman filters are very cool, but when applying them you've got to know that they're not magic. I struggled to apply Kalman Filters for a toy project about ten years ago, because the thing I didn't internalize is that Kalman filters excel at offsetting low-quality data by sampling at a higher rate. You can \"retroactively\" apply a Kalman filter to a dataset and see some improvement, but you'll only get amazing results if you sample your very-noisy data at a much higher rate than if you were sampling at a \"good enough\" rate. The higher your sample rate, the better your results will be. In that way, a Kalman filter is something you want to design around, not a \"fix all\" for data you already have."
+        }
+      ],
+      "summary_ja": "著者はカルマンフィルターを直感的に理解させるチュートリアルを更新し、レーダー例で数学を最小限に説明。フィードバックを求めており、実践では高サンプリングレートが重要で、設計段階での考慮が必要との指摘もある。"
+    },
+    {
+      "rank": 5,
+      "id": 47692043,
+      "title_en": "Muse Spark: Scaling towards personal superintelligence",
+      "title_ja": "Muse Spark: 個人の超知能に向けたスケーリング",
+      "url": "https://ai.meta.com/blog/introducing-muse-spark-msl/?_fb_noscript=1",
+      "hn_url": "https://news.ycombinator.com/item?id=47692043",
+      "score": 224,
+      "comment_count": 263,
+      "posted_at": "2026-04-08T16:01:32+00:00",
+      "comments": [
+        {
+          "id": 47693187,
+          "author": "tty456",
+          "text": "I don't get the comments trashing this. If it slightly beats or even matches Opus 4.6, it means Meta is capable of building a model competitive with the leading AI company. Sure, they spent a lot of money and will have on-going costs. But how much more work would it take to turn that into a coding agent people are willing to try (and pay for) along side their usage of a collection of agents (Claude, Codex, etc)? Also means Meta doesn't have to pay another company to use a SATA model across all their products (including IG and WhatsApp, vr) which will matter to their balance sheet long term (despite the constant r&d spend)."
+        },
+        {
+          "id": 47696376,
+          "author": "TobTobXX",
+          "text": "> Muse Spark is a natively multimodal reasoning model with support for [...] visual chain of thought [...]. Do they mean \"the chain of thought is visible to the user\" (ie. not hidden like ChatGPT), or \"the medium of the chain of thought is not text, but visuals\" (ie. thinking in images). I'd guess the former, since it wouldn't be economical to generate transient images, just for thinking. But I'm not sure why they'd highight that in that case. If it were the second thing, that'd be extremely interesting. The first model not to think in text."
+        },
+        {
+          "id": 47692789,
+          "author": "daft_pink",
+          "text": "This really reinforces the idea that the AI race and the Railroad Mania of the 19th century are very similar. So many different companies are going to have similarly powerful ai that there will be no moat around it and it will be cheap. They will never earn their investment back."
+        },
+        {
+          "id": 47692812,
+          "author": "creddit",
+          "text": "Ran some of my internal benchmarks against this and I'm very unimpressed. I don't think this moves them into the OAI v Anthropic v Gemini conversation at all. Major analytical errors in their response to multiple of my technical questions."
+        },
+        {
+          "id": 47693857,
+          "author": "glerk",
+          "text": "Personal as in Meta gets your personal data so they can sell you more ads."
+        }
+      ],
+      "summary_ja": "Muse SparkがOpus 4.6と競合しMetaのAI競争力を示す可能性や、自社製品統合による長期的利益が議論される。一方、visual chain of thoughtの解釈に疑問があり、AI業界の過熱で投資回収が困難との指摘や、内部ベンチマークでの性能不足、さらに「パーソナル」がデータ収集の皮肉とする批判も含まれる。"
+    },
+    {
+      "rank": 6,
+      "id": 47694983,
+      "title_en": "Expanding Swift's IDE Support",
+      "title_ja": "SwiftのIDEサポートの拡張",
+      "url": "https://swift.org/blog/expanding-swift-ide-support/",
+      "hn_url": "https://news.ycombinator.com/item?id=47694983",
+      "score": 57,
+      "comment_count": 31,
+      "posted_at": "2026-04-08T19:21:41+00:00",
+      "comments": [
+        {
+          "id": 47696154,
+          "author": "castral",
+          "text": "The loss of AppCode from Jetbrains was a huge blow to my motivation to continue working with Swift. Xcode just can't compare."
+        },
+        {
+          "id": 47696451,
+          "author": "randomNumber7",
+          "text": "I think swift is a really great language from the design perspective. What makes it unusable outside the apple ecosystem imho is that while the C interop is amazing on paper, it sucks hard in practice due to the abomination of pointer types they build in. The \"all pointers are evil\" attitude doesn't help when you want to use a C library and noone will write rewrite all these libraries."
+        },
+        {
+          "id": 47697083,
+          "author": "jbverschoor",
+          "text": "Use swift as a scripting language without the slow start time: Swift Caching Compiler - https://github.com/jrz/tools"
+        },
+        {
+          "id": 47695650,
+          "author": "rockbruno",
+          "text": "This is a very welcome improvement but I should note the title is a bit clickbaity: using Swift on e.g. Cursor was always possible, it's just that after Microsoft banned forks from accessing the official VSCode marketplace last year you started having to workaround it by downloading and installing the .vsix file manually. Having the extension on the Open VSX Registry sorts this out so you can now install it via the proper way once more. Very happy this finally happened!"
+        },
+        {
+          "id": 47695591,
+          "author": "jgbuddy",
+          "text": "This is huge, long time coming. Interested to see if there is SwiftUI support."
+        }
+      ],
+      "summary_ja": "SwiftのIDEサポート不足（AppCode喪失、Xcodeの限界）とApple外での使用障害（C連携の問題）が開発者の不満の焦点。一方、VSCode拡張などのサポート改善が進み、今後の進展に期待が寄せられる。"
+    },
+    {
+      "rank": 7,
+      "id": 47688678,
+      "title_en": "They're made out of meat (1991)",
+      "title_ja": "彼らは肉でできている (1991)",
+      "url": "http://www.terrybisson.com/theyre-made-out-of-meat-2/",
+      "hn_url": "https://news.ycombinator.com/item?id=47688678",
+      "score": 352,
+      "comment_count": 100,
+      "posted_at": "2026-04-08T11:20:50+00:00",
+      "comments": [
+        {
+          "id": 47690123,
+          "author": "tomhow",
+          "text": "Previously... They're Made Out of Meat (1991) - https://news.ycombinator.com/item?id=43994603 - May 2025 (3 comments) They're Made Out of Meat (1991) - https://news.ycombinator.com/item?id=38420111 - Nov 2023 (168 comments) They're made out of meat (1991) - https://news.ycombinator.com/item?id=31965062 - July 2022 (151 comments) They're Made Out of Meat (1991) - https://news.ycombinator.com/item?id=24737993 - Oct 2020 (292 comments) They're Made Out of Meat [video] - https://news.ycombinator.com/item?id=23436550 - June 2020 (4 comments) They're Made Out of Meat - https://news.ycombinator.com/item?id=11561522 - April 2016 (3 comments) They're made out of meat - https://news.ycombinator.com/item?id=8910420 - Jan 2015 (1 comment) They're Made out of Meat - https://news.ycombinator.com/item?id=8152131 - Aug 2014 (170 comments) They're made out of meat - https://news.ycombinator.com/item?id=8098264 - July 2014 (1 comment) \"They're Made out of Meat?\" Short first contact sci-fi story - https://news.ycombinator.com/item?id=3549320 - Feb 2012 (62 comments) They're made out of Meat - https://news.ycombinator.com/item?id=774139 - Aug 2009 (3 comments)"
+        },
+        {
+          "id": 47690939,
+          "author": "grumpopotamus",
+          "text": "Also by Terry Bisson and one of my favorite stories is Bears Discover Fire 1990 https://www.lightspeedmagazine.com/fiction/bears-discover-fi..."
+        },
+        {
+          "id": 47689874,
+          "author": "fridder",
+          "text": "The short film someone made is pretty great: https://www.youtube.com/watch?v=T6JFTmQCFHg"
+        },
+        {
+          "id": 47695005,
+          "author": "stared",
+          "text": "Discarding scientific evidence usually looks differently than \"we discussed that we didn’t liked it\". Is is usually not looking at all, never starting a discussion, or even lacking an intellectual framework to comprehend the phenomenon. See \"The great silence\" by Ted Chiang, http://worker01.e-flux.com/pdf/supercommunity/article_1087.p... for this \"not looking at\". For this \"beyond comprehension\", think about Solaris Ocean, a mind (or non-mind?) we cannot relate to anything else. Or WAU from SOMA."
+        },
+        {
+          "id": 47697061,
+          "author": "oersted",
+          "text": "If you liked this check out 365tomorrows.com, they one such scifi story for each day of the year on rotation, quite similar in style, wit and length. It’s a great daily snack, the constraints of Flash Fiction yield quite lean and punchy stuff."
+        }
+      ],
+      "summary_ja": "Hacker Newsでの定期的な再投稿により、この短編SFは技術者コミュニティでカルト的人気を維持している。コメントでは作品の人間観や生命の定義への考察が繰り返し示され、同作者の他の作品や類似の思考実験的SFへの関心も共有されている。"
+    },
+    {
+      "rank": 8,
+      "id": 47686549,
+      "title_en": "Veracrypt project update",
+      "title_ja": "Veracryptプロジェクトの更新",
+      "url": "https://sourceforge.net/p/veracrypt/discussion/general/thread/9620d7a4b3/",
+      "hn_url": "https://news.ycombinator.com/item?id=47686549",
+      "score": 1091,
+      "comment_count": 407,
+      "posted_at": "2026-04-08T07:23:39+00:00",
+      "comments": [
+        {
+          "id": 47687884,
+          "author": "zx2c4",
+          "text": "This is the same problem I'm currently facing with WireGuard. No warning at all, no notification. One day I sign in to publish an update, and yikes, account suspended. Currently undergoing some sort of 60 days appeals process, but who knows. That's kind of crazy: what if there were some critical RCE in WireGuard, being exploited in the wild, and I needed to update users immediately? (That's just hypothetical; don't freak out!) In that case, Microsoft would have my hands entirely tied. If anybody within Microsoft is able to do something, please contact me -- jason at zx2c4 dot com."
+        },
+        {
+          "id": 47692022,
+          "author": "newsoftheday",
+          "text": "First I was surprised to read the Veracrypt maintainers could be in this situation, then read the top comment where Wireguard maintainers are too (unless I misunderstood). Is this some malicious new program inside Microsoft to try and shutdown open source projects so they can push Windows products and solutions more?"
+        },
+        {
+          "id": 47687036,
+          "author": "pogue",
+          "text": "They need to get some tech site like Arstechnica to write about it, like they did when neocities couldn't get ahold of bing. The only way to contact these tech companies to speak to a real human being and not a chatbot is if you know somebody who works there or if the media writes about it."
+        },
+        {
+          "id": 47687005,
+          "author": "firen777",
+          "text": "It's like LibreOffice all over again: https://www.neowin.net/news/microsoft-bans-libreoffice-devel..."
+        },
+        {
+          "id": 47688354,
+          "author": "Topfi",
+          "text": "Honest question, did we ever get an answer what was the cause for the sudden change from the original Truecrypt developer? Even if one doesn't want to maintain that project for purely private reasons, recommending Bitlocker as the drop-in-replacement always made it smell fishy to me."
+        }
+      ],
+      "summary_ja": "Microsoftプラットフォームで複数のオープンソースプロジェクト（Veracrypt、WireGuard等）の開発者アカウントが突然停止され、特に緊急アップデートが必要な場合に重大なリスクが生じることへの懸念が表明されている。問題解決にはメディアの注目が有効との指摘があり、過去のLibreOfficeやTruecryptの事例と共に、Microsoftの意図に対する疑念も示されている。"
+    },
+    {
+      "rank": 9,
+      "id": 47648538,
+      "title_en": "Pgit: I Imported the Linux Kernel into PostgreSQL",
+      "title_ja": "Pgit: LinuxカーネルをPostgreSQLにインポートしました",
+      "url": "https://oseifert.ch/blog/linux-kernel-pgit",
+      "hn_url": "https://news.ycombinator.com/item?id=47648538",
+      "score": 52,
+      "comment_count": 4,
+      "posted_at": "2026-04-05T12:08:55+00:00",
+      "comments": [
+        {
+          "id": 47696185,
+          "author": "gurjeet",
+          "text": "Technically correct title would be: s/Kernel into/Kernel Git History into/ Pgit: I Imported the Linux Kernel Git History into PostgreSQL"
+        },
+        {
+          "id": 47696291,
+          "author": "JodieBenitez",
+          "text": "Read the title and immediately thought \"what a weird way to solve the performance loss with kernel 7...\" The mind tricking itself :)"
+        },
+        {
+          "id": 47696394,
+          "author": "tombert",
+          "text": "If I recall correctly, the Fossil SCM uses SQLite under the covers for a lot of its stuff. Obviously that's not surprising considering its creator, but hearing that was kind of the first time I had ever considered that you could translate something like Git semantics to a relational database. I haven't played with Pgit...though I kind of think that I should now."
+        },
+        {
+          "id": 47696863,
+          "author": "QuiCasseRien",
+          "text": "very nice, thank you for the effort spent to do this and the results"
+        }
+      ],
+      "summary_ja": "PGitによるLinuxカーネルのGit履歴のPostgreSQLインポートについて、タイトルの正確性の指摘と、Gitの概念をリレーショナルデータベースで表現する新奇性が議論され、Fossil SCMとの類似性も言及された。ユーモアを交えつつも、試みの技術的意義が評価されている。"
+    },
+    {
+      "rank": 10,
+      "id": 47689648,
+      "title_en": "ML promises to be profoundly weird",
+      "title_ja": "MLは非常に奇妙なものになることを予感させる",
+      "url": "https://aphyr.com/posts/411-the-future-of-everything-is-lies-i-guess",
+      "hn_url": "https://news.ycombinator.com/item?id=47689648",
+      "score": 324,
+      "comment_count": 365,
+      "posted_at": "2026-04-08T13:06:33+00:00",
+      "comments": [
+        {
+          "id": 47693466,
+          "author": "munificent",
+          "text": "There is a whole giant essay I probably need to write at some point, but I can't help but see parallels between today and the Industrial Revolution. Prior to the industrial revolution, the natural world was nearly infinitely abundant. We simply weren't efficient enough to fully exploit it. That meant that it was fine for things like property and the commons to be poorly defined. If all of us can go hunting in the woods and yet there is still game to be found, then there's no compelling reason to define and litigate who \"owns\" those woods. But with the help of machines, a small number of people were able to completely deplete parts of the earth. We had to invent giant legal systems in order to determine who has the right to do that and who doesn't. We are truly in the Information Age now, and I suspect a similar thing will play out for the digital realm. We have copyright and intellecual property law already, of course, but those were designed presuming a human might try to profit from the intellectual labor of others. With AI, we're in the industrial era of the digital world. Now a single corporation can train an AI using someone's copyrighted work and in return profit off the knowledge over and over again at industrial scale. This completely unpends the tenuous balance between creators and consumers. Why would a writer put an article online if ChatGPT will slurp it up and regurgitate it back to users without anyone ever even finding the original article? Who will contribute to the digital common when rapacious AI companies are constantly harvesting it? Why would anyone plant seeds on someone else's farm? It really feels like we're in the soot-covered child-coal-miner Dickensian London era of the Information Revolution and shit is gonna get real rocky before our social and legal institutions catch up."
+        },
+        {
+          "id": 47695890,
+          "author": "joefourier",
+          "text": "> 2017’s Attention is All You Need was groundbreaking and paved the way for ChatGPT et al. Since then ML researchers have been trying to come up with new architectures, and companies have thrown gazillions of dollars at smart people to play around and see if they can make a better kind of model. However, these more sophisticated architectures don’t seem to perform as well as Throwing More Parameters At The Problem. Perhaps this is a variant of the Bitter Lesson. This is not true and unfortunately this significantly reduced the credibility of this article for me. Raw parameter counts stopped increasing almost 5 years ago, and modern models rely on sophisticated architectures like mixture-of-experts, multi-head latent attention, hybrid Mamba/Gated linear attention layers, sparse attention for long context lengths, etc. Training is also vastly more sophisticated. The Bitter Lesson is misunderstood. It doesn't say \"algorithms are pointless, just throw more compute at the problem\", it says that general algorithms that scale with more compute are better than algorithms that try to directly encode human understanding. It says nothing about spending time optimising algorithms to scale better for the same compute, and attention algorithms and LLMs in general have significantly advanced beyond \"moar parameters\" since the time of Attention is All You Need/GPT2/GPT3."
+        },
+        {
+          "id": 47692966,
+          "author": "drob518",
+          "text": "> It remains unclear whether continuing to throw vast quantities of silicon and ever-bigger corpuses at the current generation of models will lead to human-equivalent capabilities. Massive increases in training costs and parameter count seem to be yielding diminishing returns. Or maybe this effect is illusory. Mysteries! I’m not even sure whether this is possible. The current corpus used for training includes virtually all known material. If we make it illegal for these companies to use copyrighted content without remuneration, either the task gets very expensive, indeed, or the corpus shrinks. We can certainly make the models larger, with more and more parameters, subject only to silicon’s ability to give us more transistors for RAM density and GPU parallelism. But it honestly feels like, without another “Attention is All You Need” level breakthrough, we’re starting to see the end of the runway."
+        },
+        {
+          "id": 47693741,
+          "author": "glitchc",
+          "text": "> Claude launched into a detailed explanation of the differential equations governing slumping cantilevered beams. It completely failed to recognize that the snow was entirely supported by the roof, not hanging out over space. No physicist would make this mistake, but LLMs do this sort of thing all the time. You have to meet some physicist friends of mine then. They are likely to assume that the roof is spherical and frictionless."
+        },
+        {
+          "id": 47692711,
+          "author": "danieltanfh95",
+          "text": "I think the discussion has to be more nuanced than this. \"LLMs still can't do X so it's an idiot\" is a bad line of thought. LLMs with harnesses are clearly capable of engaging with logical problems that only need text. LLMs are not there yet with images, but we are improving with UI and access to tools like figma. LLMs are clearly unable to propose new, creative solutions for problems it has never seen before."
+        }
+      ],
+      "summary_ja": "AIの発展は産業革命に似て、デジタル領域での著作権問題や創作者の意欲低下を招く懸念がある。モデル開発はパラメータ増大からアルゴリズム洗練へ進むが限界も示され、LLMは論理処理は可能だが創造性などで未熟である。"
+    },
+    {
+      "rank": 11,
+      "id": 47646646,
+      "title_en": "What does ⍋⍋ even mean? (2023)",
+      "title_ja": "⍋⍋はそもそも何を意味するのか？ (2023)",
+      "url": "https://blog.wilsonb.com/posts/2023-08-04-what-does-grade-grade-even-mean.html",
+      "hn_url": "https://news.ycombinator.com/item?id=47646646",
+      "score": 19,
+      "comment_count": 7,
+      "posted_at": "2026-04-05T06:25:30+00:00",
+      "comments": [
+        {
+          "id": 47697167,
+          "author": "magicalhippo",
+          "text": "I see weird symbols like that I think APL. I haven't touched APL but I know weird symbols when I see it. And checking the article... Tags: apl"
+        },
+        {
+          "id": 47696504,
+          "author": "cocodill",
+          "text": "Aren't those the Twin Pines from Back to the Future?"
+        },
+        {
+          "id": 47697097,
+          "author": "Qem",
+          "text": "Appears like the twin pines cooperativism symbol."
+        },
+        {
+          "id": 47697181,
+          "author": "semiquaver",
+          "text": "What does [APL] even mean?"
+        }
+      ],
+      "summary_ja": "「⍋⍋」はAPL言語の記号であり、その見た目から『バック・トゥ・ザ・フューチャー』のツイン・パインと関連づけるユーモア交じりの反応もある。一部ではAPL自体の意味が問われている。"
+    },
+    {
+      "rank": 12,
+      "id": 47696035,
+      "title_en": "John Deere to pay $99M in right-to-repair settlement",
+      "title_ja": "John Deere、修理権和解で9900万ドルを支払う",
+      "url": "https://www.thedrive.com/news/john-deere-to-pay-99-million-in-monumental-right-to-repair-settlement",
+      "hn_url": "https://news.ycombinator.com/item?id=47696035",
+      "score": 79,
+      "comment_count": 18,
+      "posted_at": "2026-04-08T20:46:27+00:00",
+      "comments": [
+        {
+          "id": 47696669,
+          "author": "chasil",
+          "text": "The complete crack of Deere's firmware in 2022 must have had some impact on this. https://www.theregister.com/2022/08/16/john_deere_doom/ Edit: 'Sick Codes confirmed that he believes John Deere failed to comply with its GPL obligations. \"I'd love for them to come forward and explain how they are in compliance,\" he said.'"
+        },
+        {
+          "id": 47696607,
+          "author": "darth_avocado",
+          "text": "The stock is up 5% today. What’s the catch?"
+        },
+        {
+          "id": 47696929,
+          "author": "causality0",
+          "text": "One of the most user-hostile companies on earth. My John Deere lawnmower came with a fuel gauge that runs off a CR2032 that's embedded in epoxy. The battery runs out of charge in about six months and the gauge stops working. If you saw the gauge open and replace the battery it doesn't start working again. If you disconnect the gauge the lawnmower won't start. Replacement gauges are $60."
+        },
+        {
+          "id": 47696735,
+          "author": "SilverElfin",
+          "text": "Seems like a small price for a big company. Shouldn’t there be some higher punitive fine for even trying this tactic? It’s basically zero cost for companies to be abusive."
+        },
+        {
+          "id": 47696096,
+          "author": "verdverm",
+          "text": "The second paragraph likely answers some of your immediate questions > The settlement also includes an agreement by Deere to provide “the digital tools required for the maintenance, diagnosis, and repair” of tractors, combines, and other machinery for 10 years. That part is crucial, as farmers previously resorted to hacking their own equipment’s software just to get it up and running again. John Deere signed a memorandum of understanding in 2023 that partially addressed those concerns, providing third parties with the technology to diagnose and repair, as long as its intellectual property was safeguarded. Monday’s settlement seems to represent a much stronger (and legally binding) step forward."
+        }
+      ],
+      "summary_ja": "ディーア社の修理権をめぐる合意は、ファームウェアのクラックやユーザーへの敵対的設計への批判を背景に、10年間の修理ツール提供を含む法的拘束力のある前進だと捉えられている。罰金額は小さいとの指摘もありつつ、実質的な改善と評価する見方がある。"
+    },
+    {
+      "rank": 13,
+      "id": 47687248,
+      "title_en": "Škoda DuoBell: A bicycle bell that penetrates noise-cancelling headphones",
+      "title_ja": "Škoda DuoBell: ノイズキャンセリングヘッドフォンを貫通する自転車ベル",
+      "url": "https://www.skoda-storyboard.com/en/skoda-world/skoda-duobell-a-bicycle-bell-that-outsmarts-even-smart-headphones/",
+      "hn_url": "https://news.ycombinator.com/item?id=47687248",
+      "score": 487,
+      "comment_count": 512,
+      "posted_at": "2026-04-08T08:50:37+00:00",
+      "comments": [
+        {
+          "id": 47689988,
+          "author": "michh",
+          "text": "Coincidentally, I bought a 12v car horn yesterday with the intent of wiring it into my ebike's power supply with a little button on my handlebars. Not because of other cyclists or pedestrians wearing (anc) headphones but because modern cars are so heavily sound-proofed they don't hear a bicycle bell anymore. A recent incident with an inattentive taxi driver in a brand new EV nearly flattening me prompted me to want to pursue this. I'm still waiting for my cheap AliExpress dc-to-dc step down converter but otherwise I have everything I need and I think it should work. The horn module itself is definitely loud enough: I connected it to a 12v power supply at my desk and jumped out of my chair."
+        },
+        {
+          "id": 47691469,
+          "author": "Coeur",
+          "text": "This seems to be part of a type of brand marketing where a brand claims it has invented something, but the only thing that ever exists of significant economic value is the attention raised by the promo video / article. Not the thing/service. Examples: - Samsung safety truck https://www.youtube.com/watch?v=6GNGfse9ZK8 - Citroën motion sickness glasses https://www.youtube.com/watch?v=Aco63dlq_WE - Amazon Prime Air https://www.youtube.com/watch?v=2AVVTBmtDdo - IBM Smart Ads https://www.youtube.com/watch?v=vbEMVdzXiCY (implies they created lots of ad posters, but they only made 3 posters for this video) - Lexus Hoverboard https://www.youtube.com/watch?v=TFf7Meqkim8 I wonder if there is a term for this. \"Vaporware marketing\"?"
+        },
+        {
+          "id": 47690510,
+          "author": "Retr0id",
+          "text": "I'm very sceptical of their claims that ~780Hz is in some way special, especially the way they represent it graphically. Playing a frequency sweep while wearing WH-1000XM3 headphones, I don't notice any particular drop-off there. Near where I live, heavy goods vehicles are fitted with reversing indicators that make a \"cshh cshh cshh\" sound i.e. pulsed white-noise. White noise like that is the hardest for ANC to cancel. Sample: https://www.youtube.com/watch?v=A3Wt1_51EVA"
+        },
+        {
+          "id": 47688068,
+          "author": "0x3f",
+          "text": "Do horns and bells really prevent accidents? In order for e.g. a horn to work you need enough time that the driver processes the situation and decides the horn will communicate something AND enough time for the pedestrian or whatever to process that and react to it. Generally it's a lot easier just to press the brake, and more importantly be travelling at a speed and in a manner where the brake is sufficient. Structurally, we'd be much better off reducing conflicts between the different tiers of users. I.e. properly segregated infrastructure for each class of vehicle."
+        },
+        {
+          "id": 47694923,
+          "author": "jmalicki",
+          "text": "Is there an interpretation of the Computer Fraud and Abuse Act where using this bicycle bell to circumvent the computer system used in your headphones for active noise cancellation would be a federal felony in the United States?"
+        }
+      ],
+      "summary_ja": "Škoda DuoBellのノイズキャンセリングヘッドホン貫通効果について、特定周波数の有効性への懐疑や、白色雑音の方がANC対策に効果的との指摘がある。交通安全においては、ベルやホーンよりも速度制御やインフラ分離が根本的解決策とする意見が示された。加えて、製品が実体のないマーケティング手法（バーパーウェア的）である可能性や、コンピュータ詐欺法違反の法的懸念も議論されている。"
+    },
+    {
+      "rank": 14,
+      "id": 47689174,
+      "title_en": "MegaTrain: Full Precision Training of 100B+ Parameter LLMs on a Single GPU",
+      "title_ja": "MegaTrain: 単一GPUでの1000億パラメータ以上のLLMの完全精度トレーニング",
+      "url": "https://arxiv.org/abs/2604.05091",
+      "hn_url": "https://news.ycombinator.com/item?id=47689174",
+      "score": 241,
+      "comment_count": 47,
+      "posted_at": "2026-04-08T12:19:00+00:00",
+      "comments": [
+        {
+          "id": 47689500,
+          "author": "internetguy",
+          "text": "> MegaTrain stores parameters and optimizer states in host memory (CPU memory) and treats GPUs as transient compute engines. For each layer, we stream parameters in and compute gradients out, minimizing persistent device state This is pretty awesome. The only compute I have at home is an RTX 3080 with 10 GB of VRAM, so I struggle with training larger models (>40M, 50M params). I get OOM errors and have to optimize a lot. I have a lot more CPU RAM in my PC, and this would likely increase the size of models I can train locally."
+        },
+        {
+          "id": 47690851,
+          "author": "kouteiheika",
+          "text": "This isn't really anything new; I've been doing something like this for quite a while, I just haven't bothered writing a paper. (: Probably anyone who would seriously tackle the problem of \"how do I train a huge model on a tiny amount of VRAM?\" would come up with something similar. However, most people in the field don't, because the actual practical utility of training huge models on a single GPU is quite low. (e.g they got 341 tok/s for a 14B model on a single 3090 while with my method I was getting ~1k tok/s on a single 4090; that's still very slow) Also, there are more tricks one can use to speed up training/lower VRAM usage which they're not using. For example, you don't need any gradient offloading (you can just accumulate the gradients directly into the optimizers' states if you modify your optimizer), you can use Muon instead of Adam (which needs only half of VRAM of Adam), you can use quantization (both for parameters and for the optimizer states; e.g. I found Muon quantized into 4-bit working relatively well), etc."
+        },
+        {
+          "id": 47691528,
+          "author": "bilekas",
+          "text": "> H200 GPU with 1.5TB host memory, While yes it's one GPU.. It's not exactly a slim one."
+        },
+        {
+          "id": 47697026,
+          "author": "ngold",
+          "text": "I'm most likely wrong but large language models are literally just stealing....everything"
+        },
+        {
+          "id": 47690630,
+          "author": "ilaksh",
+          "text": "How long would it actually take to train a 120B model on an H200? What if you have 8?"
+        }
+      ],
+      "summary_ja": "MegaTrainはCPUメモリを活用して単一GPUで大規模LLMを訓練可能にする手法だが、新規性や実用性（速度面）への批判、Muonや量子化などより効率的な代替手法の提案があり、H200のような高性能GPUでの訓練時間や倫理的懸念も議論されている。"
+    },
+    {
+      "rank": 15,
+      "id": 47656730,
+      "title_en": "Understanding Traceroute",
+      "title_ja": "Tracerouteの理解",
+      "url": "https://tech.stonecharioteer.com/posts/2026/traceroute/",
+      "hn_url": "https://news.ycombinator.com/item?id=47656730",
+      "score": 68,
+      "comment_count": 6,
+      "posted_at": "2026-04-06T03:40:31+00:00",
+      "comments": [
+        {
+          "id": 47696129,
+          "author": "linsomniac",
+          "text": ">Many routers deprioritize or drop ICMP to save CPU. Not exactly. Most big routers have ASICs (custom silicon) that can handle the bulk of routing decisions, like an interface card will have a chip that can directly determine where a packet needs to go and forwards it there. These are extremely fast, but limited, and are called \"fast path\". Aside: Too many ACLs is a common way that packets fall off the fast path, and is why routers on the public Internet will happily forward along bogon traffic that by it's very nature is just wasting bits on the pipes. There are some things that the fast path cannot handle, and generating ICMP TTL exceeded messages is one of them. Those go over to the router CPU, which historically has been insanely underpowered. Back when I was doing more routing it was common to have host CPUs in the multi-GHz range with multiple cores, but routers of a similar class would have a 100MHz MIPS CPU. That's why, as the article goes on to explain, \"*\"s in the traceroute may not indicate a problem. It's not necessarily a literal deprioritization of ICMP. If you ever see packet loss in a trace at one step but the steps after it aren't showing it, you can ignore that packet loss, it's likely a CPU limitation on a busy router."
+        },
+        {
+          "id": 47696701,
+          "author": "runjake",
+          "text": "I prefer to use mtr these days. homepage: https://www.bitwizard.nl/mtr/ excellent article on using mtr: https://www.cloudflare.com/learning/network-layer/what-is-mt..."
+        },
+        {
+          "id": 47696846,
+          "author": "marviio",
+          "text": "Once upon a time (early 90s) I read a very funny story on traceroute featuring parrots, one named Polly, and shotguns. But I can’t find it. It might have been in a Usenet group. I would love to find it again."
+        },
+        {
+          "id": 47696933,
+          "author": "esbranson",
+          "text": "tracepath on Linux does not need the CAP_NET_RAW capability (or full root capabilities) during network data processing because it relies on the Linux socket error queue behavior. I assume traceroute on OpenBSD opens all required sockets and immediately drops privileges."
+        },
+        {
+          "id": 47696218,
+          "author": "linsomniac",
+          "text": "Funny timing of this, just last night I experimented with AI building an \"ip intelligence\" tool that includes a fast traceroute function and a bunch of IP information (ASN, organization, geolocation, CIDR info, DNSBL, reverse IP... mtr is my go-to for network traces, but (given root permissions) the trace it'll run in less than a second. https://github.com/linsomniac/ipq"
+        }
+      ],
+      "summary_ja": "tracerouteでの「*」表示は、ルーターの高速パスがICMP TTL exceededを処理できず、CPU制限によりパケット損失のように見えるため、必ずしも問題を示さない。ネットワーク診断にはmtrが推奨され、tracepathは特権不要な代替手段となる。"
+    },
+    {
+      "rank": 16,
+      "id": 47694036,
+      "title_en": "Show HN: Orange Juice – Small UX improvements that make HN easier to read",
+      "title_ja": "Show HN: Orange Juice – HNを読みやすくする小さなUX改善",
+      "url": "http://oj-hn.com/",
+      "hn_url": "https://news.ycombinator.com/item?id=47694036",
+      "score": 65,
+      "comment_count": 91,
+      "posted_at": "2026-04-08T18:08:52+00:00",
+      "comments": [
+        {
+          "id": 47697201,
+          "author": "darepublic",
+          "text": "I would like to see users clustered by their political and programming axes of belief"
+        },
+        {
+          "id": 47695001,
+          "author": "altairprime",
+          "text": "Latchkey, would you be comfortable with HN adopting your dark mode styling as a user choice someday, if they came around to liking it? I really like it and I think it’s in the spirit of the site."
+        },
+        {
+          "id": 47694953,
+          "author": "cobbman",
+          "text": "I want hacker news UX to stay as it is, mostly, but these are features I'd welcome."
+        },
+        {
+          "id": 47695109,
+          "author": "greenpizza13",
+          "text": "I can't figure out how to toggle to Light Mode (maybe it uses the system setting?). HN is something I prefer to be in Light Mode but everything else in dark. Gonna remove until this is configurable."
+        },
+        {
+          "id": 47695035,
+          "author": "ipsum2",
+          "text": "It looks pretty good! I'm using it now and its a meaningful improvement to the existing site. Out of curiosity, why did you make a new Github account for the extension instead of developing it on your own account?"
+        }
+      ],
+      "summary_ja": "Orange Juice拡張機能に対するコメントでは、HNのUX改善を高く評価する声が多く、特にダークモードの導入や設定のカスタマイズを求める意見が目立つ。一方で現状維持を望むユーザーもおり、開発手法についての質問も交わされている。"
+    },
+    {
+      "rank": 17,
+      "id": 47696562,
+      "title_en": "Show HN: Is Hormuz open yet?",
+      "title_ja": "Show HN: ホルムズはまだ開いているのか？",
+      "url": "https://www.ishormuzopenyet.com/",
+      "hn_url": "https://news.ycombinator.com/item?id=47696562",
+      "score": 124,
+      "comment_count": 46,
+      "posted_at": "2026-04-08T21:33:06+00:00",
+      "comments": [
+        {
+          "id": 47697174,
+          "author": "Jeremy1026",
+          "text": "The data being ~4 days delayed does kind of make this less useful. It is a nice concept and cool to see the historical data though. Just think the domain and the large \"NO\" doesn't really fit with the lack of current data."
+        },
+        {
+          "id": 47696737,
+          "author": "bl4ckneon",
+          "text": "Very cool! I love one off intresting sites like this. Thanks for building it and talking a little bit about where the data comes from etc. On the note of Ai agent getting the data for you, could you not just build a chrome extention that intercepts/read the api response and then uploads it to whatever ingest endpoint you have? You could probably just call their api end points they use on the page as well but not sure what protections they have so might be a bit tricky. A custom chrome extention could do it though if they have protections."
+        },
+        {
+          "id": 47696780,
+          "author": "alerter",
+          "text": "I work for a consultancy that does vessel tracking as one of its main products, and yeah it's expensive! afaik they have remote teams with sensors at key points and a bunch of people using AI/software to manage things like GPS spoofing. So it's all pretty guarded proprietary stuff. Great bit of topical datavis here."
+        },
+        {
+          "id": 47696745,
+          "author": "ggm",
+          "text": "Maps can be so misleading. It looks like a dredging operation in Omani waters could alleviate this, if we'd started decades ago. Moving to a topographic view, it becomes clear the neck of land at \"two seas view\" is narrow, but tall. It would literally be moving a mountain. Panamax and suezmax boats are smaller than ULCC supertankers. Ferdinand De Lesseps time has passed. This would be ruinously expensive. Better to negotiate with rational intent."
+        },
+        {
+          "id": 47696700,
+          "author": "truelson",
+          "text": "Really liked this. Made me laugh even if not intentionally funny. Also, given how markets and news cycles are moved with words not actions these days, I really like this site. There are still so many misaligned interests; this is a much tougher situation that may get some local stability for a period, but will likely return to chaos again."
+        }
+      ],
+      "summary_ja": "データの遅延による実用性への懸念やサイトコンセプトの評価、船舶追跡業界の高コスト・機密性、ホルムズ海峡問題の地理的・経済的困難さ、政治的状況におけるサイトのユーモアや洞察の価値が議論されている。"
+    },
+    {
+      "rank": 18,
+      "id": 47663285,
+      "title_en": "Why do Macs ask you to press random keys when connecting a new keyboard?",
+      "title_ja": "新しいキーボードを接続する時、Macがランダムなキーを押すように求めるのはなぜ？",
+      "url": "https://unsung.aresluna.org/why-do-macs-ask-you-to-press-random-keys-when-connecting-a-new-keyboard/",
+      "hn_url": "https://news.ycombinator.com/item?id=47663285",
+      "score": 24,
+      "comment_count": 25,
+      "posted_at": "2026-04-06T16:40:46+00:00",
+      "comments": [
+        {
+          "id": 47663913,
+          "author": "srean",
+          "text": "Ah! Thanks for the stimulation. That's an interesting problem that I had not thought of before. In fact a few related problems. What's the minimum set of requested key presses that will uniquely identify a keyboard layout from a set of known types. Given a budget of k key strokes what's the most informative subset that will reduce the ambiguity about layout. Given the measurement from the requested key strokes find the posterior over the set of known keyboard layouts. Given that the user is typing some free form text in his language how soon can one nail the layout when the user's language, the layout and the text are unknown. Will make a good practice exercise for hobbyist codebreaking."
+        },
+        {
+          "id": 47697144,
+          "author": "hennell",
+          "text": "I feel like a UK windows keyboard and a Mac has some oddities like this. I've got a zsa split keyboard and still haven't worked out how to have punctuation the same in Mac and windows. @ and \" are always flipped and I had to add additional buttons to ensure I have a | and ~ keys because who knows where the Mac thinks they are."
+        },
+        {
+          "id": 47663967,
+          "author": "ginko",
+          "text": "I guess the moment has passed by now but I wish there were a USB HID protocol for keyboards to identify their layout, or even better yet make the keyboard protocol layout agnostic so that keyboards send the high-level unicode character / modifier instead of a physical key code."
+        },
+        {
+          "id": 47667140,
+          "author": "ch_123",
+          "text": "In addition to the three physical keyboard layouts in this post, there's a fourth one which has an extra key on both the right and the left side of the keyboard. An example is the Brazilian Portuguese layout Model M (pic: https://www.clickykeyboards.com/wp-content/uploads/2023/03/I... ). The Apple test would be able to identify it, although I've never tried it in practice. I don't think the modern Brazilian Apple keyboard uses this arrangement."
+        },
+        {
+          "id": 47663504,
+          "author": "alsetmusic",
+          "text": "Mapping to ensure that it has the correct layout applied."
+        }
+      ],
+      "summary_ja": "Macが新規キーボード接続時にキー入力を求める理由に関連し、コメントでは、レイアウト特定の理論的課題（最小キー入力での判別、コードブレイキング的考察）、実用的な問題（異なるOS間での記号キー配置の不一致）、USBプロトコル改善提案（レイアウト非依存の文字送信方式）などが議論されている。"
+    },
+    {
+      "rank": 19,
+      "id": 47685320,
+      "title_en": "Who is Satoshi Nakamoto? My quest to unmask Bitcoin's creator",
+      "title_ja": "サトシ・ナカモトとは誰か？ Bitcoinの創設者を暴く私の探求",
+      "url": "https://www.nytimes.com/2026/04/08/business/bitcoin-satoshi-nakamoto-identity-adam-back.html",
+      "hn_url": "https://news.ycombinator.com/item?id=47685320",
+      "score": 230,
+      "comment_count": 157,
+      "posted_at": "2026-04-08T04:37:57+00:00",
+      "comments": [
+        {
+          "id": 47697208,
+          "author": "dools",
+          "text": "This is the most compelling \"who is Satoshi?\" post I've found: https://bitcointalk.org/index.php?topic=628344.msg48198887#m... \"I contend that James Simons put the team together that made up Satoshi Nakamoto and that Nick Szabo was the main public-facing voice behind the nym.\""
+        },
+        {
+          "id": 47696618,
+          "author": "Lerc",
+          "text": "I found this amusing. >P.G.P., a free encryption program used by antinuclear activists and human rights groups to shield their files and emails from government surveillance. I find it fascinating to see how the users of a program change, based on how a reporter wants to build or diminish. At least it's going in a positive direction today."
+        },
+        {
+          "id": 47695123,
+          "author": "danso",
+          "text": "Pretty compelling story. Not necessarily for its revelations, but for the fact that John Carreyrou and the NYT decided to publish it at all. If it were by anyone else, I would have stopped reading after the first thousand words of meandering narrative, but Carreyrou is staking his massive and impeccable investigative journalistic reputation on this mountain of circumstantial evidence and statistical analysis. Him torching his reputation (especially with Elizabeth Holmes fighting hard for a pardon/clemency!) would be as interesting as a story as actually finding Satoshi's real identity. The evidence is good. What was more interesting to me is the section where he explains how he eliminated all the other asserted and likely candidates. Since the story is already a very long read, I imagine much of this section got left out. So some of the reasons for eliminations are too brief to be convincing on their own. For example: > What about other leading Satoshi suspects, I wondered? Were there any who fit the Satoshi profile better than Mr. Back? A 2015 article in this newspaper put forward the thesis that Satoshi was Nick Szabo, an American computer scientist of Hungarian descent who proposed a Bitcoin-like idea called “bit gold” in 1998. Mr. Szabo remained at the top of many people’s lists until recently, but a heated debate that played out on X about a proposed update to the Bitcoin Core software exposed his ignorance of basic technical aspects of Bitcoin. A 2015 article in this newspaper — Decoding the Enigma of Satoshi Nakamoto and the Birth of Bitcoin, by Nathaniel Popper [0] [Szabo] proposed a Bitcoin-like idea called “bit gold” in 1998 — Szabo's post on his Blogger site [1] but a heated debate that played out on X about a proposed update to the Bitcoin Core software exposed his ignorance — links to a Sept 29, 2025 tweet by Adam Back replying to Szabo, who had tweeted: > Good info thanks. Follow-up questions: (1) to what extent is such an OP_RETURN-delete-switch feasible in practice? (I know it is feasible in theory, but there are many details of core that I am not familiar with). (2) has such a thing been seriously proposed or pursued as part of Core's roadmap? exposed [Szabo's] ignorance of basic technical aspects of Bitcoin — links to another reply tweet by Back in October 2025 [3]: > Nick, you're actually wrong because there is a unified weight resource. eg byte undiscounted chain space reduces by 4 bytes segwit discounted weight. no need for insults - people who are rational here are just talking about technical and risk tradeoffs like rational humans. Szabo's tweet was: \"Another coretard who thinks their followers are mind-numbingly stupid.\" ---- Can someone explain why this relatively recent tweet fight is convincing evidence that Szabo is too ignorant to have been behind Bitcoin? I know he went silent for a bit when Bitcoin first got big, but he hadn't revealed his ostensibly overwhelming ignorance until a few months ago? [0] https://www.nytimes.com/2015/05/17/business/decoding-the-eni... [1] https://unenumerated.blogspot.com/2005/12/bit-gold.html [2] https://x.com/adam3us/status/1972888761257415129 [3] https://x.com/adam3us/status/1981329274721149396"
+        },
+        {
+          "id": 47687739,
+          "author": "raphlinus",
+          "text": "I found this article about as compelling as all the other attempts at identifying him. Half of the cypherpunks (I was pretty active) had the same set of interests in public key cryptography, libertarianism, anonymity, criticism of copyright, and predecessor systems like Chaum's ecash; we talked about those in virtually every meeting. The most compelling evidence is Adam Back's body language, as subjectively observed by a reporter who is clearly in love with his own story. The stylometry also struck me as a form of p-hacking—keep re-rolling the methodology until you get the answer you want. It's entirely possible Adam is Satoshi, but in my opinion this article moves us no closer to knowing whether that's true or not. He's been on everybody's top 5 list for years, and this article provides no actual evidence that hasn't been seen before."
+        },
+        {
+          "id": 47696668,
+          "author": "doublextremevil",
+          "text": "Satoshi supported big blocks in his writings and empowered the pro-big block Gavin when he disappeared. Adam is a well known supporter of small blocks, ultimately the \"winning\" side of the debate. They are not the same person."
+        }
+      ],
+      "summary_ja": "Satoshi Nakamotoの正体を探る記事に対し、コメントではNick SzaboやAdam Backなど候補者への疑念が示される。証拠の不確かさやスタイロメトリ分析の信頼性に疑問が呈され、特にSatoshiと候補者の技術的意見の相違（例：ブロックサイズ論争）から同一人物説を否定する声が目立つ。全体として、記事の説得力に懐疑的だ。"
+    },
+    {
+      "rank": 20,
+      "id": 47693679,
+      "title_en": "I've been waiting over a month for Anthropic to respond to my billing issue",
+      "title_ja": "Anthropicが私の請求問題に返答するのを1ヶ月以上待っています",
+      "url": "https://nickvecchioni.github.io/thoughts/2026/04/08/anthropic-support-doesnt-exist/",
+      "hn_url": "https://news.ycombinator.com/item?id=47693679",
+      "score": 221,
+      "comment_count": 118,
+      "posted_at": "2026-04-08T17:44:25+00:00",
+      "comments": [
+        {
+          "id": 47695056,
+          "author": "simgt",
+          "text": "I had the displeasure of interacting with that support agent earlier today and was very surprised. It's just as good as the one my ISP has. We're meant to trust Anthropic enough to replace all of our engineers by their model for writing our software but somehow they don't trust it enough to let it handle simple customer support decisions. But shhhh, it's voluntarily nerfed just slightly bellow ASI for our safety."
+        },
+        {
+          "id": 47695451,
+          "author": "hs86",
+          "text": "I tried their Pro plan on March 1 and immediately noticed how bad their usage limits were, so I asked for a refund that same evening. Their chatbot accepted the request, I was downgraded to the free plan immediately, and since then I have been waiting for the money."
+        },
+        {
+          "id": 47697177,
+          "author": "dools",
+          "text": "Same, I tested Claude Code CLI and it crapped out and took my money, and they haven't responded to my billing dispute yet. Meanwhile JetBrains replies within hours and Junie is LLM agnostic. I'm a huge fan of JetBrains for AI coding."
+        },
+        {
+          "id": 47695693,
+          "author": "Hobadee",
+          "text": "TBF, I think Anthropic is a victim of their own success right now. We've had clients reach out to their sales team and be unable to reach anyone. I think they are just busier than they can actually handle."
+        },
+        {
+          "id": 47695115,
+          "author": "avree",
+          "text": "Anthropic doesn't allow you to hide or unshare Projects which were shared by team members who are no longer on the team. Contacted them about this two months ago, have yet to hear from any human."
+        }
+      ],
+      "summary_ja": "Anthropicのユーザーから、請求や返金に関するサポート対応の遅延と不備に対する不満が挙がっている。AIモデルは高度ながら、基本的なカスタマーサポートでは人間に依存しており、非効率さが指摘されている。比較としてJetBrainsなどの他社は迅速な対応を見せる一方、Anthropicは成長にサポート体制が追いつかず、問題が長期化するケースが多い。"
+    },
+    {
+      "rank": 21,
+      "id": 47654062,
+      "title_en": "Ask HN: Any interesting niche hobbies?",
+      "title_ja": "Ask HN: 面白いニッチな趣味はありますか？",
+      "url": null,
+      "hn_url": "https://news.ycombinator.com/item?id=47654062",
+      "score": 211,
+      "comment_count": 341,
+      "posted_at": "2026-04-05T21:30:19+00:00",
+      "comments": [
+        {
+          "id": 47694725,
+          "author": "biotinker",
+          "text": "I got myself involved with a nonprofit local group preserving local pioneer era apple trees. They've been DNA testing and cataloging the trees, and had all the info stashed away in google drive and onedrive folders. The founder was looking to step back so they asked me if I wanted to step up as project lead, which I did. I took the info and organized it into a nice wiki-style site with maps and descriptions so everyone in the community can learn about the old orchards. https://heritageapplecorps.org/index.php/Main_Page I've also learned how to prune and graft hundred year old apple trees and now have a couple dozen young grafted trees growing in my garage, all clones of local hundred year old trees, some of which genetically tested unique and are of currently unknown varieties."
+        },
+        {
+          "id": 47696355,
+          "author": "linsomniac",
+          "text": "I've been working on trying to help fill out the MeshCore network in our area for off-grid communications. Some of us are setting up solar powered, battery backed MeshCore nodes, they have no connection to power or Internet. You can use a small device (like a credit card or a small walkie-talkie) with a phone, or a blackberry-like device, to send/receive encrypted messages, chat on channels, or communicate on BBS-like \"room servers\". It's interesting for if there were some sort of disaster impacting the cell network, or for use in the back woods where you have no cell contact. But it's extremely unreliable. My coworker who is into it, he lives 2-3 miles away but we can rarely communicate because he lives in a bit of a bowl that we don't have reachability into. Meanwhile I'm regularly getting messages from 30-70 miles away no problem. It reminds me a lot of HAM radio, where there are other better ways to communicate, but if those ways broke it would be nice to have an alternative. https://meshcore.co.uk/"
+        },
+        {
+          "id": 47693222,
+          "author": "jcims",
+          "text": "Put it down over winter but just picking it back up. Bat detection/identification with ultrasonic recordings. It's been fun building the data pipeline to manage the ~30GB+ of WAV files generated every night, run through some identification processes (currently using https://github.com/rdz-oss/BattyBirdNET-Analyzer ) and build a UI (mostly vibe coded lol) to help with replay, cataloging, etc. I'm using an AudioMoth currently ( https://www.openacousticdevices.info/audiomoth ), am thinking about extending it to do some of the preprocessing in the field to scale things up a bit."
+        },
+        {
+          "id": 47696084,
+          "author": "johnthedebs",
+          "text": "I got into fig (and since then, more broadly, fruit) cultivation. Figs have a rich history, lots of variety, and there are very active online (and in-person) communities where you can buy or exchange plants and cuttings, advice, and fruit. This grew out of an initial interest in gardening, and the long-term goal is to create a food/fruit forest around our house where me, family, friends, and neighbors can walk around, spend time, and eat the absolute best fruit possible. So far I've got about 40 fig trees in containers (~30 varieties), am focusing a bit more on blackberries this year (4 varieties that were planted last year), and we also have strawberries, blueberries, raspberries, as well as a more standard annual garden with tomatoes, peppers, cucumbers, etc as well as some wild edibles: mulberries, wineberries, and black raspberries. There's a lot of interesting angles to this hobby: fruit selection, cultivation, harvesting, pest management (annoying but still interesting), landscape design, etc. Planning cycles are months at a minimum, and but more often you have to keep in mind what you want the landscape and experience to be like years from now. It makes it more enjoyable to spend time outside doing physical things when the weather is warm, and I mostly take a break from it (or switch to planning) during the winters here."
+        },
+        {
+          "id": 47694637,
+          "author": "ryandrake",
+          "text": "If you like to work with your hands and have space, build something physical: big and complex, and actually finish it. I built a single engine two seat kit airplane in my garage, did all the flight testing, and now have an interesting way to travel/commute as a result. The \"finish it\" part is the most important bit. Computer people spend too much time working on projects that don't have a \"done\" state. Change that up."
+        }
+      ],
+      "summary_ja": "様々なニッチな趣味が紹介され、地元のリンゴの木の保存にDNA解析とWikiを活用する活動、オフグリッド通信網の構築、超音波を用いたコウモリの識別、果樹栽培によるフードフォレストの創造、キット飛行機の製作など、技術と実践を組み合わせた多様な取り組みが語られている。"
+    },
+    {
+      "rank": 22,
+      "id": 47689319,
+      "title_en": "Show HN: Skrun – Deploy any agent skill as an API",
+      "title_ja": "Show HN: Skrun – 任意のエージェントスキルをAPIとしてデプロイ",
+      "url": "https://github.com/skrun-dev/skrun",
+      "hn_url": "https://news.ycombinator.com/item?id=47689319",
+      "score": 34,
+      "comment_count": 9,
+      "posted_at": "2026-04-08T12:34:38+00:00",
+      "comments": [
+        {
+          "id": 47696433,
+          "author": "sergioisidoro",
+          "text": "This looks like a security nightmare in case someone decides to publish this interface publicly. Prompt injection to exfiltrate sensitive Information being on the top of the list."
+        },
+        {
+          "id": 47689324,
+          "author": "frizull",
+          "text": "Hey HN. My colleague built this because he wanted to use his skills outside of Claude Code. With this project you can expose your skills as an API endpoint in under 2 minutes. If you could have a look at the repo and give your feedback, it would be much appreciated. Thanks!"
+        },
+        {
+          "id": 47689360,
+          "author": "senthilnayagam",
+          "text": "sounds interesting, lets me test the skills I created and collected over the last few months"
+        }
+      ],
+      "summary_ja": "セキュリティ面での危惧（特に公開時のプロンプトインジェクションによる情報漏洩）と、ツールの開発目的（Claude Code外でのエージェントスキル活用）及び既存スキルのテスト利用への関心が議論されている。"
+    },
+    {
+      "rank": 23,
+      "id": 47696760,
+      "title_en": "Show HN: Tired of logic in useEffect, I built a class-based React state manager",
+      "title_ja": "Show HN: useEffectでのロジックにうんざりし、クラスベースのReact状態マネージャーを構築しました",
+      "url": "https://thales.me/posts/why-i-built-snapstate/",
+      "hn_url": "https://news.ycombinator.com/item?id=47696760",
+      "score": 2,
+      "comment_count": 0,
+      "posted_at": "2026-04-08T21:53:36+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 24,
+      "id": 47690977,
+      "title_en": "Microsoft terminates VeraCrypt account, halting Windows updates",
+      "title_ja": "Microsoft、VeraCryptアカウントを終了し、Windowsアップデートを停止",
+      "url": "https://www.404media.co/microsoft-abruptly-terminates-veracrypt-account-halting-windows-updates/",
+      "hn_url": "https://news.ycombinator.com/item?id=47690977",
+      "score": 418,
+      "comment_count": 168,
+      "posted_at": "2026-04-08T14:46:15+00:00",
+      "comments": [
+        {
+          "id": 47693565,
+          "author": "VadimPR",
+          "text": "A year ago I used Azure Trusted Signing to codesign FOSS software that I distribute for Windows. It was the cheapest way to give away free software on that platform. A couple of months ago I needed to renew the certificate because it expired, and I ran into the same issue as the author here - verification failed, and they refused to accept any documentation I would give them. Very frustrating experience, especially since there no human support available at all, for a product I was willing to pay and use! We ended up getting our certificate sourced from https://signpath.org and have been grateful to them ever since."
+        },
+        {
+          "id": 47693468,
+          "author": "dns_snek",
+          "text": "This is precisely why we can't allow platform-owners to be the arbiters of what software is allowed to run on our devices. Any software signing that is deemed to be crucial for ensuring grandma-safety needs to be delegated to independent third parties without perverse incentives. This is what the Digital Markets Act is supposed to protect developers against. Have there been any news regarding EU's investigation into Apple? Last I remember they were still reviewing their signing & fee-collection scheme."
+        },
+        {
+          "id": 47695152,
+          "author": "billziss",
+          "text": "It is not just VeraCrypt that has been affected by this. There is a bunch of Windows driver developers that have been suddenly kicked out of the \"Partner Center\" without explanation. https://community.osr.com/t/locked-out-of-microsoft-partner-..."
+        },
+        {
+          "id": 47696717,
+          "author": "Jigsy",
+          "text": "Windscribe is now the third one to be terminated by Microsoft as well... https://nitter.net/windscribecom/status/2041929519628443943"
+        },
+        {
+          "id": 47696386,
+          "author": "valeriozen",
+          "text": "We are seeing the dark side of \"Security as a Service\". When Microsoft simplifies the signing pipeline (like with Trusted Signing), they also centralize the point of failure. The fact that a FOSS pillar like VeraCrypt can be sidelined due to what looks like an automated account flagging issue with no path to human arbitration shows that the current system is too fragile for critical infrastructure. Secure Boot is a great security feature, but it shouldnt be used as a tool for vendor lock in through administrative incompetence"
+        }
+      ],
+      "summary_ja": "Microsoftのコード署名サービスにおいて、自動化されたアカウント停止や人間による仲裁の欠如が問題となっている。FOSSやドライバ開発者らが影響を受けており、プラットフォーム所有者による中央集権的な管理への懸念から、独立した第三者の署名機関の必要性が議論されている。"
+    },
+    {
+      "rank": 25,
+      "id": 47689237,
+      "title_en": "US cities are axing Flock Safety surveillance technology",
+      "title_ja": "米国の都市がFlock Safety監視技術を廃止している",
+      "url": "https://www.cnet.com/home/security/when-flock-comes-to-town-why-cities-are-axing-the-controversial-surveillance-technology/",
+      "hn_url": "https://news.ycombinator.com/item?id=47689237",
+      "score": 586,
+      "comment_count": 337,
+      "posted_at": "2026-04-08T12:26:14+00:00",
+      "comments": [
+        {
+          "id": 47690241,
+          "author": "gorgonical",
+          "text": "Musician-turning-tech anarchist (?) Benn Jordan is making a very interesting series of videos about Flock cameras, their poor safety, and their gray-area interfacing with local governments: https://www.youtube.com/watch?v=UMIwNiwQewQ https://www.youtube.com/watch?v=uB0gr7Fh6lY https://www.youtube.com/watch?v=vU1-uiUlHTo https://www.youtube.com/watch?v=Pp9MwZkHiMQ I recommend them."
+        },
+        {
+          "id": 47694076,
+          "author": "Cider9986",
+          "text": ">[1] Would crime go up, down or stay the same if all surveillance cameras were removed? The answer to that is the only one that matters. At least 40,990 [2] innocent people died in the US in 2023, without significant outcry - that is, on the road, in car accidents. People in the US clearly value the freedom of driving over the deaths of innocent people. In 2023, there were an estimated 19,800 [3] homicides in the US. But even if you assume surveillance like Flock could prevent a meaningful fraction of those homicides - and there's little evidence it does [4] - that's still asking people to give up their most sensitive freedom, the right to move without being tracked, for speculative gains. People are not willing to sacrifice their freedom to save 40,990 people from cars, why should our constant locations be monitored? The abuse isn't speculative. Police have been caught stalking exes, tracking abortions, and innocent people [5] have been held at gunpoint due to a flock misread. The \"safety\" these cameras provide comes with a surveillance that's already being turned against ordinary people. [1] https://news.ycombinator.com/item?id=47690237 [2] https://www.nhtsa.gov/press-releases/2022-traffic-deaths-202 ... [3] https://bjs.ojp.gov/document/hvus23.pdf [4] Flock can't even demonstrably reduce car break-ins. The drop in San Francisco started months before cameras were installed ( https://www.sfchronicle.com/projects/sf-car-breakins/ ). If it can't prevent car beak-ins, how can we expect it to make a dent in homicides. [5] https://www.businessinsider.com/flock-safety-alpr-cameras-mi... >misreads by Flock's automated license plate readers... resulted in people who hadn't committed crimes being stopped at gunpoint, sent to jail, or mauled by a police dog, among other outcomes."
+        },
+        {
+          "id": 47691240,
+          "author": "diogenes_atx",
+          "text": "It seems like this article buried the best lede of the story on paragraph ten, which explains Flock's new business of surveillance drones launched in response to 911 calls (and also presumably triggered by other alerts configured by police and private businesses). > Flock has recently expanded into other technologies... Most concerning are the latest Flock drones equipped with high-powered cameras. Flock's \"Drone as First Responder\" platform automates drone operations, including launching them in response to 911 calls or gunfire. Flock's drones, which reach speeds up to 60 mph, can follow vehicles or people and provide information to law enforcement."
+        },
+        {
+          "id": 47692561,
+          "author": "schlap",
+          "text": "These companies build this tech in SF and Seattle, cities with some of the gnarliest public safety problems in the country, then turn around and sell it to smaller towns where it does more harm than good. Most places in America don't have problems that surveillance solves. They have problems they already know about and won't act on. Cameras don't fix homelessness or addiction or underfunded services. They just make life harder for regular people. But that's the whole appeal for bureaucrats. Buying a product looks like doing something without having to do any of the actual work."
+        },
+        {
+          "id": 47690032,
+          "author": "jmuguy",
+          "text": "I'm surprised Garrett Langley still has a job, he seems wildly out of touch. For instance he really believes that his Panopticon as a service is the reason crime is down in cities, conveniently ignoring crime rates prior to COVID."
+        }
+      ],
+      "summary_ja": "Flock監視技術の犯罪防止効果には証拠が乏しく、個人の自由とプライバシーを侵害する。警察による乱用や誤認逮捕の危険があり、ドローン拡大で監視が強化される一方、根本的な社会問題の解決にはならない。官僚は実際の活動をせずに監視導入で成果を装っている。"
+    },
+    {
+      "rank": 26,
+      "id": 47685945,
+      "title_en": "We moved Railway's frontend off Next.js. Builds went from 10+ mins to under 2",
+      "title_ja": "RailwayのフロントエンドをNext.jsから移行しました。ビルド時間が10分以上から2分未満に短縮",
+      "url": "https://blog.railway.com/p/moving-railways-frontend-off-nextjs",
+      "hn_url": "https://news.ycombinator.com/item?id=47685945",
+      "score": 160,
+      "comment_count": 151,
+      "posted_at": "2026-04-08T06:01:00+00:00",
+      "comments": [
+        {
+          "id": 47687466,
+          "author": "miyuru",
+          "text": "I just tried their domains page it took 10.8MB of data and took 2s for the DOM to be ready. page actually took 17s to fully render with multiple shift changes. all to render a domain search bar similar to google home page. https://railway.com/domains"
+        },
+        {
+          "id": 47687544,
+          "author": "l5870uoo9y",
+          "text": "I migrated the landing pages for my app[1] from Nextjs to Astrojs mainly because I was paying Vercel $20 per month for serving static pages(it’s 4 times more than I pay Railway for the Postgres database for the actual app and also 4 times more than I pay Cloudflare for hosting all my apps). I used AI for migrating and it took a few days only as the existing repo was used as “instructions” and it included some upgrades and improvements here and there. [1]: https://www.sqlai.ai/"
+        },
+        {
+          "id": 47687001,
+          "author": "tgdn",
+          "text": "We went through a very similar migration. Had a Next.js landing page and a separate TanStack Router SPA - consolidated both into a single Vite + TanStack Start app. Same experience with build times and the architecture mismatch: our app is heavily client-side with real-time state, and fighting Next.js's server-first assumptions wasn't worth it. TanStack Router's type-safe routing and file-based route generation have been great."
+        },
+        {
+          "id": 47694950,
+          "author": "ceritium",
+          "text": "Railway should try Rails"
+        },
+        {
+          "id": 47687322,
+          "author": "Hendrikto",
+          "text": "Two minutes is still way too long. What are we doing? This is ridiculous."
+        }
+      ],
+      "summary_ja": "Next.jsからAstrojsやVite+TanStack Startへの移行が、ビルド時間の短縮、ホスティングコスト削減、クライアントサイド重視のアーキテクチャへの適合性から議論されている。Railwayのページの重いパフォーマンスへの批判や、ビルド時間改善への不満も示された。"
+    },
+    {
+      "rank": 27,
+      "id": 47676561,
+      "title_en": "Teardown of unreleased LG Rollable shows why rollable phones aren't a thing",
+      "title_ja": "未発売のLG Rollableの分解が、ロール可能フォンが普及しない理由を示す",
+      "url": "https://arstechnica.com/gadgets/2026/04/teardown-of-unreleased-lg-rollable-shows-why-rollable-phones-arent-a-thing/",
+      "hn_url": "https://news.ycombinator.com/item?id=47676561",
+      "score": 69,
+      "comment_count": 33,
+      "posted_at": "2026-04-07T15:07:45+00:00",
+      "comments": [
+        {
+          "id": 47697010,
+          "author": "Already__Taken",
+          "text": "I don't really care to roll it up but why not an bit soft? To cup in my hand or fitted in my pocket would be nice instead of this brick. We can make lighter thinner phones if they don't need so much rigidity."
+        },
+        {
+          "id": 47696410,
+          "author": "dsr_",
+          "text": "Phone mechanisms which worked for me: - the original Motorola StarTac \"Star Trek Communicator\" flip. - the Danger Hiptop / Sidekick II rotating screen-over-keyboard - the Motorola Droid slide-out keyboard - the OnePlus 7Pro slide-out selfie-cam Only that last one was motorized, but mine is still working. Holes and divots and islands and any other kind of screen interference is strictly inferior."
+        },
+        {
+          "id": 47696856,
+          "author": "MattGrommes",
+          "text": "I've been waiting for a Global from Earth Final Conflict for nearly 2 decades. https://community.ultimaker.com/topic/15743-global-link-prop..."
+        },
+        {
+          "id": 47691368,
+          "author": "giancarlostoro",
+          "text": "I loved my LG Phones, once they gave up on making phones I moved on to iOS. There was always something nice about each model. The LG G2 had an IR at the top of it, so it was a universal remote control, it doesn't age very well (wife still has hers, but you cannot see the screen), but it was at its lifetime / prime an amazing phone, the only change I would have done is add an SD card to it. The G5 was another great phone, I believe it was designed to be a \"modular phone\" the bottom would come out letting you take the battery out, but it could also add an attachment to the phone, I never did buy an attachment though, and I think the last one I had was the G7. I enjoyed their tablets too. For some reason people cling to other brands, and slept on LG which made some really decent Android phones. Both my G5 and G7 still turn on, I always say that by the release of the G7 (I forget the year) and possibly the G5, all decent quality smartphones got to the \"good enough\" stage of smartphones where it feels like I could own one for more than just 2 years before it shows signs of wear."
+        },
+        {
+          "id": 47693699,
+          "author": "Stevvo",
+          "text": "Interesting video, but it didn't tell me why rollable phones aren't a thing. It doesn't appear any more flawed than the foldable concept."
+        }
+      ],
+      "summary_ja": "ロール可能電話が普及しない理由をビデオが明確にせず、折りたたみ電話と同程度の問題しかないと指摘。電話には柔軟性と携帯性が求められ、過去の実用的な機構を賞賛。LG製スマホの長所を挙げ、現行機種は既に十分に進化していると述べる。"
+    },
+    {
+      "rank": 28,
+      "id": 47674606,
+      "title_en": "Show HN: Unicode Steganography",
+      "title_ja": "Show HN: Unicodeステガノグラフィ",
+      "url": "https://steganography.patrickvuscan.com",
+      "hn_url": "https://news.ycombinator.com/item?id=47674606",
+      "score": 43,
+      "comment_count": 9,
+      "posted_at": "2026-04-07T12:57:25+00:00",
+      "comments": [
+        {
+          "id": 47681850,
+          "author": "bo1024",
+          "text": "Cool stuff. I think there have been projects recently that use LLMs to encode messages in plain text by manipulating the choices of output tokens. Someone with the same version of the LLM can decode. Note sure where to find these projects though."
+        },
+        {
+          "id": 47682422,
+          "author": "mpoteat",
+          "text": "You can actually do better: hint - variational selectors, low bytes."
+        },
+        {
+          "id": 47685927,
+          "author": "sixhobbits",
+          "text": "There are a bunch of invisible characters that I used to build something similar a while back, pre LLMs, to hide state info in telegram messages to make bots more powerful https://github.com/sixhobbits/unisteg"
+        },
+        {
+          "id": 47696248,
+          "author": "sjdv1982",
+          "text": "If I understand correctly, this is like the WW2 enigma machines: a single black box to both encode and decode?"
+        },
+        {
+          "id": 47697028,
+          "author": "QuiCasseRien",
+          "text": "awesome !!"
+        }
+      ],
+      "summary_ja": "Hacker NewsのUnicodeステガノグラフィー記事へのコメントでは、LLMを用いたメッセージ埋め込みのプロジェクトや不可視文字を利用した実装例が紹介され、変分セレクターによる改善案やエニグマ暗号機との類似性が議論された。"
+    },
+    {
+      "rank": 29,
+      "id": 47675446,
+      "title_en": "Audio Reactive LED Strips Are Diabolically Hard",
+      "title_ja": "オーディオリアクティブLEDストリップは非常に難しい",
+      "url": "https://scottlawsonbc.com/post/audio-led",
+      "hn_url": "https://news.ycombinator.com/item?id=47675446",
+      "score": 183,
+      "comment_count": 55,
+      "posted_at": "2026-04-07T13:55:14+00:00",
+      "comments": [
+        {
+          "id": 47690763,
+          "author": "doctorhandshake",
+          "text": "I like this writeup but I feel like the title doesn't really tell you what it's about ... to me it's about creativity within constraints. The author finds, as many do, that naive or first-approximation approaches fail within certain constraints and that more complex methods are necessary to achieve simplicity. He finds, as I have, that perceptual and spectral domains are a better space to work in for things that are perceptual and spectral than in the raw data. What I don't see him get to (might be the next blog post, IDK), is getting into constraints in the use of color - everything is in 'rainbow town' as we say, and it's there that things get chewy. I'm personally not a fan of emissive green LED light in social spaces. I think it looks terrible and makes people look terrible. Just a personal thing, but putting it into practice with these sorts of systems is challenging as it results in spectral discontinuities and immediately requires the use of more sophisticated color systems. I'm also about maximum restraint in these systems - if they have flashy tricks, I feel they should do them very very rarely and instead have durational and/or stochastic behavior that keeps a lot in reserve and rewards closer inspection. I put all this stuff into practice in a permanent audio-reactive LED installation at a food hall/ nightclub in Boulder: https://hardwork.party/rosetta-hall-2019/"
+        },
+        {
+          "id": 47690477,
+          "author": "iamjackg",
+          "text": "Scott's work is amazing. Another related project that builds on a similar foundation: https://github.com/ledfx/ledfx"
+        },
+        {
+          "id": 47691361,
+          "author": "WarmWash",
+          "text": "The real killer is that humans don't hear frequencies, they hear instruments, which are a stack of frequencies that roughly sometimes correlate with a frequency range. I wonder if transformer tech is close to achieving real-time audio decoding, where you can split a track into it's component instruments, and light show off of that. Think those fancy Christmas time front yard light shows as opposed to random colors kind of blinking with what maybe is a beat."
+        },
+        {
+          "id": 47689137,
+          "author": "mdrzn",
+          "text": "Always been very interested in audio-reactive led strips or led bulbs, I've been using a Windows app to control my LIFX lights for years but lately it hasn't been maintained and it won't connect to my lights anymore. I tried recreating the app (and I can connect via BT to the lights) but writing the audio-reactive code was the hardest part (and I still haven't managed to figure out a good rule of thumb or something). I mainly use it when listening to EDM or club music, so it's always a classic 4/4 110-130bpm signature, yet it's hard to have the lights react on beat."
+        },
+        {
+          "id": 47696734,
+          "author": "ogurechny",
+          "text": "The moral of the story seems to be missing. This kind of visualisation is an arbitrary artistic choice, not just a function of inputs. A can of spray paint is a tool that needs to be mastered, and it's different from, say, oil paints and brush. LED strip is just another tool. You need to figure out first which movements, pulses, patterns it can produce, and what “looks good”. Those would be the strokes. The same happens on the other side. Choosing how to interpret sound is also an artistic choice. Everyone does the audio spectrum because everyone has seen the audio spectrum, and considers it a “natural” projection to some one-dimensional form. It only seems “natural” because of all of the graphs you've seen in textbooks. The need to use log scale or smoothing when real audio is not a pure set of harmonics is how “nature” has to smuggle itself back into the abstract reasoning. Beats work for a reason: what we call “modern music” is defined by its constant use of rhythm. When you have a different kind of sound, you need to process it differently. So the goal is to match something you hear in the audio with something nice that the LED strip does. Which is also an arbitrary artistic choice, and can only be judged as a whole. There is no rule that tone has to match specific position or specific colour. Also, people rarely look at LED strips on their own. Just like film crews, you need to take ambient environment into account, and sometimes increase contrast with light, sometimes blend everything together. Some kind of compressor/expander for dynamic range is probably needed for different environments. Often the thing that reflects the light is more important. I'd even say that the best way to increase the complexity of that low resolution source is to combine it with some complex object instead of using just the straight line. A Christmas tree should come to mind as an example. It is wrong to think that the goal of such projects is to figure out a perfect simple process that turns one array of values into another. Their goal is to make people feel something."
+        }
+      ],
+      "summary_ja": "オーディオ反応LEDストリップの実装は単純な手法では難しく、知覚的・スペクトル領域での複雑な処理が必要である。色や視覚効果は芸術的な選択であり、環境との調和も重要。最終目標は技術的完璧さではなく、感情に訴える体験を創造することにある。"
+    },
+    {
+      "rank": 30,
+      "id": 47645717,
+      "title_en": "Union types in C# 15",
+      "title_ja": "C# 15のユニオン型",
+      "url": "https://devblogs.microsoft.com/dotnet/csharp-15-union-types/",
+      "hn_url": "https://news.ycombinator.com/item?id=47645717",
+      "score": 157,
+      "comment_count": 146,
+      "posted_at": "2026-04-05T02:53:07+00:00",
+      "comments": [
+        {
+          "id": 47693948,
+          "author": "amluto",
+          "text": "Hmm, they seem to have chosen to avoid names to the choices in the union, joining C++ variants and (sort of) TypeScript unions: unions are effectively just defined by a collection of types. Other languages have unions with named choices, where each name selects a type and the types are not necessarily all different. Rust, Haskell, Lean4, and even plain C unions are in this category (although plain C unions are not discriminated at all, so they’re not nearly as convenient). I personally much prefer the latter design."
+        },
+        {
+          "id": 47696882,
+          "author": "utf_8x",
+          "text": "Hell yeah! After all these years it's finally here. One thing I miss here (and admittedly I only skimmed through the post so if I missed this, please do correct me) is \"ad hoc\" unions. It would be great to be able to do something like public Union<TypeA, TypeB> GetThing()... Without having to declare the union first. Basically OneOf<...> but built-in and more integrated"
+        },
+        {
+          "id": 47691424,
+          "author": "tialaramex",
+          "text": "I don't love OneOrMore<T> It's trying to generalize - we might have exactly one T, fine, or a collection of T, and that's more T... except no, the collection might be zero of them, not at least one and so our type is really \"OneOrMoreOrNone\" and wow, that's just maybe some T."
+        },
+        {
+          "id": 47649817,
+          "author": "karmakaze",
+          "text": "I haven't read this in detail but I expect it to be the same kind of sealed type that many other languages have. It doesn't cover ad-hoc unions (on the fly from existing types) that are possible in F# (and not many non-FP languages with TypeScript being the most notable that does)."
+        },
+        {
+          "id": 47694816,
+          "author": "merb",
+          "text": "Sad part is, is that ad hoc unions probably won’t make it into v1. That is probably one of the only feature why I like typescript. Because I can write result types in a good way without creating thousands of sub types. It’s even more important when using Promises and not having checked exceptions."
+        }
+      ],
+      "summary_ja": "C# 15のUnion typesについて、事前宣言なしで即席に定義できる「ad hoc unions」（TypeScriptなどにある機能）の実装を求める声が多く、現在の設計では不十分との指摘。また、Unionの設計方針（名前付き選択肢型か単純な型の集合か）についても議論がある。"
+    }
+  ]
+}
