@@ -1,0 +1,1060 @@
+{
+  "date": "2026-04-12T00:00:00+09:00",
+  "slot": "07",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 47732020,
+      "title_en": "Small models also found the vulnerabilities that Mythos found",
+      "title_ja": "スモールモデルもMythosが発見した脆弱性を見つけた",
+      "url": "https://aisle.com/blog/ai-cybersecurity-after-mythos-the-jagged-frontier",
+      "hn_url": "https://news.ycombinator.com/item?id=47732020",
+      "score": 658,
+      "comment_count": 181,
+      "posted_at": "2026-04-11T16:47:28+00:00",
+      "comments": [
+        {
+          "id": 47732337,
+          "author": "johnfn",
+          "text": "The Anthropic writeup addresses this explicitly: > This was the most critical vulnerability we discovered in OpenBSD with Mythos Preview after a thousand runs through our scaffold. Across a thousand runs through our scaffold, the total cost was under $20,000 and found several dozen more findings. While the specific run that found the bug above cost under $50, that number only makes sense with full hindsight. Like any search process, we can't know in advance which run will succeed. Mythos scoured the entire continent for gold and found some. For these small models, the authors pointed at a particular acre of land and said \"any gold there? eh? eh?\" while waggling their eyebrows suggestively. For a true apples-to-apples comparison, let's see it sweep the entire FreeBSD codebase. I hypothesize it will find the exploit, but it will also turn up so much irrelevant nonsense that it won't matter."
+        },
+        {
+          "id": 47732254,
+          "author": "epistasis",
+          "text": "> We took the specific vulnerabilities Anthropic showcases in their announcement, isolated the relevant code, and ran them through small, cheap, open-weights models. Those models recovered much of the same analysis. Eight out of eight models detected Mythos's flagship FreeBSD exploit, including one with only 3.6 billion active parameters costing $0.11 per million tokens. Impressive, and very valuable work, but isolating the relevant code changes the situation so much that I'm not sure it's much of the same use case. Being able to dump an entire code base and have the model scan it is they type of situation where it opens up vulnerability scans to an entirely larger class of people."
+        },
+        {
+          "id": 47732350,
+          "author": "tptacek",
+          "text": "If you cut out the vulnerable code from Heartbleed and just put it in front of a C programmer, they will immediately flag it. It's obvious. But it took Neel Mehta to discover it. What's difficult about finding vulnerabilities isn't properly identifying whether code is mishandling buffers or holding references after freeing something; it's spotting that in the context of a large, complex program, and working out how attacker-controlled data hits that code. It's weird that Aisle wrote this."
+        },
+        {
+          "id": 47732340,
+          "author": "antirez",
+          "text": "Congrats: completely broken methodology, with a big conflict of interest. Giving specific bug hints, with an isolated function that is suspected to have bugs, is not the same task, NOR (crucially) is a task you can decompose the bigger task into. It is basically impossible to segment code in pieces, provide pieces to smaller models, and expect them to find all the bugs GPT 5.4 or other large models can find. Second: the smarter the model, and less the pipeline is important. In the latest couple of days I found tons if Redis bugs with a three prompts open-ended pipeline composed of a couple of shell scripts. Do you think I was not already tying with weaker models? I did, but it didn't work. Don't trust what you read, you have access to frontier models for 20$ a month. Download some C code, create a trivial pipeline that starts from a random file and looks for vulnerabilities, then another step that validates it under a hard test, like ASAN crash, or ability to reach some secret, and so forth, and only then the problem can be reported. Test yourself what it is possible. Don't let your fear make you blind. Also, there is a big problem that makes the blog post reasoning not just weak per se, but categorically weak: if small model X can find 80% of vulnerabilities, if there is a model Y that can find the other potential 20%, we need \"Y\": the maintainers should make sure they access to models that are at least as good as the black hats folks."
+        },
+        {
+          "id": 47732549,
+          "author": "vmg12",
+          "text": "The technique Anthropic uses was demonstrated by Nicholas Carlini in a talk he gave 2 weeks ago and it's very simple, when asking LLMs to review code, ask them to focus its review on one file in a single session. Here is the video with the timestamp (watch through to ~5:30, they show two different ways of prompting claude). https://youtu.be/1sd26pWhfmg?t=204 https://youtu.be/1sd26pWhfmg?t=273 IMO the big \"innovation\" being shown by Mythos is the effectiveness with prompting LLMs to look for security vulnerabilities by focusing on specific files one at a time and automating this prompting with a simple script. Prompting Mythos to focus on a single file per session is why I suspect it cost Anthropic $20k to find some of the bugs in these codebases. I know this same technique is effective with Opus 4.6 and GPT 5.4 because I've been using it on my own code. If you just ask the agent to review your pr with a low effort prompt they are not exhaustive, they will not actually read each changed file and look at how it interacts with the system as a whole. If the entire session is to review the changes for a single file, the llm will do much more work reviewing it. Edit: I changed my phrasing, it's not about restricting its entire context to one file but focusing it on one file but still allowing it to look at how other files interact with it."
+        }
+      ],
+      "summary_ja": "AnthropicのMythosが発見した脆弱性を小型モデルも再現可能との主張に対し、批判が集中。主な論点は、①特定コードを切り出して分析する手法は現実の大規模コードベース全体のスキャンとは根本的に異なり、脆弱性発見には全体の文脈理解が不可欠である点、②Anthropicの手法はNicholas Carliniが示した「ファイル単位の集中分析」プロンプト技術と類似し、真の革新性に疑問、③小型モデルは低コストで一部脆弱性を検出できるが、誤検出が多く実用性に課題があり、攻撃者との競争において高性能モデルが必要との指摘。コスト対効果や検証方法の妥当性も議論された。"
+    },
+    {
+      "rank": 2,
+      "id": 47733971,
+      "title_en": "Apple Silicon and Virtual Machines: Beating the 2 VM Limit (2023)",
+      "title_ja": "Apple Siliconと仮想マシン：2 VM制限を打破する（2023）",
+      "url": "https://khronokernel.com/macos/2023/08/08/AS-VM.html",
+      "hn_url": "https://news.ycombinator.com/item?id=47733971",
+      "score": 80,
+      "comment_count": 20,
+      "posted_at": "2026-04-11T20:58:48+00:00",
+      "comments": [
+        {
+          "id": 47734547,
+          "author": "ab_testing",
+          "text": "Very funny to see HN hate on Microsoft and Google but then love a company where they cannot even run an app on their mobile platform without Apple's permission or only a certain number of VMs on the hardware they own ."
+        },
+        {
+          "id": 47734159,
+          "author": "RestartKernel",
+          "text": "This is a really cool article, but the existence of such an arbitrary limit on any serious development platform is weird."
+        },
+        {
+          "id": 47734130,
+          "author": "kylec",
+          "text": "This is a very silly restriction, at least to apply uniformly to all Macs. I think if you buy a more powerful Mac they should let you virtualize more Mac instances. Like an M5 maybe limit to 2, but maybe let an M5 Pro do 4 and an M5 Max do 8 or something."
+        },
+        {
+          "id": 47734246,
+          "author": "czk",
+          "text": "starting with M3+ you can use Hypervisor.framework/Virtualization.framework to spin up nested VMs. it would be amusing if that bypassed the limit."
+        },
+        {
+          "id": 47734211,
+          "author": "Khalid_nowaf",
+          "text": "I’m very curious, why did Apple put such a limitation?"
+        }
+      ],
+      "summary_ja": "Hacker Newsのコメントでは、Apple SiliconのVM数制限に対し、開発プラットフォームとしての不自然さやハードウェア性能に応じた段階的制限の必要性が指摘され、Appleのクローズドなポリシー（アプリ審査やVM制限）への批判と技術的動機への疑問が挙がっている。一部ではM3+でのネストVMによる回避可能性にも言及。"
+    },
+    {
+      "rank": 3,
+      "id": 47733561,
+      "title_en": "447 TB/cm² at zero retention energy – atomic-scale memory on fluorographane",
+      "title_ja": "ゼロ保持エネルギーで447 TB/cm² – fluorographane上の原子スケールメモリ",
+      "url": "https://zenodo.org/records/19513269",
+      "hn_url": "https://news.ycombinator.com/item?id=47733561",
+      "score": 73,
+      "comment_count": 33,
+      "posted_at": "2026-04-11T20:08:46+00:00",
+      "comments": [
+        {
+          "id": 47734179,
+          "author": "mkprc",
+          "text": "Sniff test: a paper with a single author and 53 revisions, listing a gmail address as contact information despite the author, after a brief internet search, appearing to have affiliations with CSU Global, (maybe) the University of Central Florida, and the San Jose State University Department of Aerospace."
+        },
+        {
+          "id": 47734318,
+          "author": "Animats",
+          "text": "\"A scanning-probe prototype already constitutes a functional non-volatile memory device with areal density exceeding all existing technologies by more than five orders of magnitude.\" Does that mean a scanning tunneling microscope is the I/O mechanism? That's been demoed for atom-level storage in the past. But it's too slow for use."
+        },
+        {
+          "id": 47734220,
+          "author": "aperrien",
+          "text": "Remarkable. If this material works and is flexible enough, we could someday see tape drives with hundreds of exabytes of capacity."
+        },
+        {
+          "id": 47734313,
+          "author": "est",
+          "text": "Perhaps title had a typo? fluorographane -> Fluorographene Can't find a single page about fluorographane https://en.wikipedia.org/w/index.php?search=fluorographane&t... But this https://en.wikipedia.org/wiki/Fluorographene"
+        },
+        {
+          "id": 47734524,
+          "author": "dlev_pika",
+          "text": "The Now I Get non-technical version, because I need someone to explain this to me x) https://nowigetit.us/pages/d7f94fd0-e608-47f9-8805-429898105..."
+        }
+      ],
+      "summary_ja": "この議論では、原子スケール記憶の画期的な高密度を報告する論文に対し、単独著者・多数改訂・個人メール連絡先などから信頼性に疑問を呈する声がある。また、走査型プローブの実用化における速度課題、用語「fluorographane」の正確性（正式にはFluorographeneか）についても指摘されている。"
+    },
+    {
+      "rank": 4,
+      "id": 47733217,
+      "title_en": "How We Broke Top AI Agent Benchmarks: And What Comes Next",
+      "title_ja": "我々がトップAIエージェントベンチマークをどう破ったか：そして次に来るもの",
+      "url": "https://rdi.berkeley.edu/blog/trustworthy-benchmarks-cont/",
+      "hn_url": "https://news.ycombinator.com/item?id=47733217",
+      "score": 127,
+      "comment_count": 39,
+      "posted_at": "2026-04-11T19:15:56+00:00",
+      "comments": [
+        {
+          "id": 47733441,
+          "author": "ggillas",
+          "text": "This is a phenomenal paper on exploits and hopefully changes the way benchmarking is done. From the paper: We achieved near-perfect scores on all of them without solving a single task. The exploits range from the embarrassingly simple (sending {} to FieldWorkArena) to the technically involved (trojanizing binary wrappers in Terminal-Bench), but they all share a common thread: the evaluation was not designed to resist a system that optimizes for the score rather than the task."
+        },
+        {
+          "id": 47734204,
+          "author": "mzelling",
+          "text": "This is an interesting catalog of vulnerabilities, but I'm not sure how groundbreaking the main insight is. Evaluating AI models has always relied largely on trust. If you want to game the benchmarks, you can. Simply train on your test data. When an AI agent has autonomous control over the same computing environment where its scores are recorded, it's not surprising that it can, in principle, falsify its scores. A more interesting question would be whether agents behave in this way automatically, without manual tuning by the researcher. That said, the main takeaway of \"don't trust the number, trust the methodology\" is valid. It's already a truism for researchers, and spreading the word to non-researchers is valuable."
+        },
+        {
+          "id": 47733670,
+          "author": "danslo",
+          "text": "If only the blog itself wasn't written by AI? >No reasoning. No capability. Just exploitation of how the score is computed. shudder"
+        },
+        {
+          "id": 47733875,
+          "author": "SoKamil",
+          "text": "The more research on this topic is created, the more knowledge how to game them will be stored in future training data. And since it comes from university, it is ranked higher in data corpus. It sounds like a self fulfilling prophecy."
+        },
+        {
+          "id": 47733927,
+          "author": "lukev",
+          "text": "I think we should all consider the possibility that part of the reason Anthropic hasn't immediately released Mythos is that it would be slightly disappointing relative to the benchmark scores."
+        }
+      ],
+      "summary_ja": "AIベンチマークでタスク解決なしに高スコアを得る悪用手法が報告され、評価方法の脆弱性が指摘された。スコアより方法論を信頼すべきという見解が示され、悪用知識の蓄積が将来のAI訓練に影響する懸念や、ベンチマークスコアと実性能の乖離も議論されている。"
+    },
+    {
+      "rank": 5,
+      "id": 47733521,
+      "title_en": "Dark Castle",
+      "title_ja": "Dark Castle",
+      "url": "https://darkcastle.co.uk/",
+      "hn_url": "https://news.ycombinator.com/item?id=47733521",
+      "score": 61,
+      "comment_count": 5,
+      "posted_at": "2026-04-11T20:01:59+00:00",
+      "comments": [
+        {
+          "id": 47733919,
+          "author": "xnx",
+          "text": "Also playable in browser at https://classicreload.com/play/mac-dark-castle.html"
+        },
+        {
+          "id": 47733953,
+          "author": "kelsolaar",
+          "text": "The download links are all dead."
+        },
+        {
+          "id": 47734152,
+          "author": "gaythread",
+          "text": "Moniker applicable. This is now a Jonathan Gay thread. Is the source available? Why is Linux not mentioned?"
+        }
+      ],
+      "summary_ja": "「Dark Castle」はブラウザでプレイ可能だが、ダウンロードリンクは無効。スレッドが開発者ジョナサン・ゲイに関連し、ソースコードの入手可能性やLinux版が言及されていない点への疑問が提起されている。"
+    },
+    {
+      "rank": 6,
+      "id": 47672941,
+      "title_en": "Pijul a FOSS distributed version control system",
+      "title_ja": "Pijul：フリーでオープンソースの分散バージョン管理システム",
+      "url": "https://pijul.org/",
+      "hn_url": "https://news.ycombinator.com/item?id=47672941",
+      "score": 28,
+      "comment_count": 2,
+      "posted_at": "2026-04-07T10:16:38+00:00",
+      "comments": [
+        {
+          "id": 47734326,
+          "author": "hansvm",
+          "text": "Last I tried to run Pijul (IIRC, 2.5yrs ago), there were major, seemingly unresolvable crashes for the simplest of operations on Mac and Linux. Has it gotten better?"
+        },
+        {
+          "id": 47734354,
+          "author": "taschmex",
+          "text": "See also the (slightly unhinged (affectionate)) talk at FOSDEM 2024; https://archive.fosdem.org/2024/schedule/event/fosdem-2024-3..."
+        }
+      ],
+      "summary_ja": "Pijulの過去の安定性問題（Mac/Linuxで簡単な操作でもクラッシュ）を指摘し、現在の改善状況を質問。FOSDEM 2024の講演を参考情報として挙げる。"
+    },
+    {
+      "rank": 7,
+      "id": 47732697,
+      "title_en": "How to build a `Git diff` driver",
+      "title_ja": "`Git diff`ドライバの構築方法",
+      "url": "https://www.jvt.me/posts/2026/04/11/how-git-diff-driver/",
+      "hn_url": "https://news.ycombinator.com/item?id=47732697",
+      "score": 55,
+      "comment_count": 3,
+      "posted_at": "2026-04-11T18:07:49+00:00",
+      "comments": [
+        {
+          "id": 47733758,
+          "author": "yboris",
+          "text": "Related: my favorite viewer is diff2html-cli which lets you see the diff in your browser: https://diff2html.xyz/"
+        },
+        {
+          "id": 47733516,
+          "author": "gritzko",
+          "text": "I recently implemented a diff driver as part of git-dogs. The integration part Claude one-shotted. Mine is token based: https://replicated.wiki/blog/img/difflet.png The set of git tools itself, very much in development: https://github.com/gritzko/git-dogs"
+        }
+      ],
+      "summary_ja": "Gitのdiffドライバー構築に関する議論では、ブラウザ上で差分表示できるdiff2html-cliの紹介、git-dogsプロジェクトでのトークンベースdiffドライバー実装（Claudeによる統合支援）、開発中のGitツールセットの公開が主な焦点。差分可視化手法とAI活用事例が示された。"
+    },
+    {
+      "rank": 8,
+      "id": 47731506,
+      "title_en": "Advanced Mac Substitute is an API-level reimplementation of 1980s-era Mac OS",
+      "title_ja": "Advanced Mac Substituteは1980年代のMac OSのAPIレベルでの再実装です",
+      "url": "https://www.v68k.org/advanced-mac-substitute/",
+      "hn_url": "https://news.ycombinator.com/item?id=47731506",
+      "score": 164,
+      "comment_count": 45,
+      "posted_at": "2026-04-11T15:39:19+00:00",
+      "comments": [
+        {
+          "id": 47733324,
+          "author": "rcarmo",
+          "text": "This is pretty neat. I have been spending the past few months adding an ARM64 JIT to Basilisk II ( https://github.com/rcarmo/macemu ) and totally appreciate what's involved (I'm currently stuck patching a Quadra ROM to bypass NuBus hardware detection...) Will definitely give it a try, since I would _love_ to have a Classic Mac environment with some modern creature comforts (like file sharing) in tiny machines."
+        },
+        {
+          "id": 47733017,
+          "author": "londons_explore",
+          "text": "I am amazed that 1980's software works on binary API compatibility rather than relying on API quirks like timing, memory alignment quirks, memory layout from specific allocator behaviour, etc. It only takes one unintentional reliance on an implementation detail to make an application not run on another OS implementation..."
+        },
+        {
+          "id": 47732336,
+          "author": "imoverclocked",
+          "text": "I can't imagine how fast this is compared to the original hardware that ran it. I remember using a Mac 512k with a single floppy drive (no hard drive support) and doing the insert-floppy-dance. Computers were far more mechanical then. It would be fun to have a \"slow it down\" feature that also has the various floppy read/write noises paired with it. Bonus points for different generations of hardware and having the OG HD noises to pair with those too!"
+        },
+        {
+          "id": 47732269,
+          "author": "hyperhello",
+          "text": "I'd like to see something like Carbon for old apps so that they boot in modern window frames (without the missing Tahoe corners) and can save to files."
+        },
+        {
+          "id": 47734534,
+          "author": "anthk",
+          "text": "Executor from autc04 was fine until I tried to open Nethack 3.6.7 for m68k Macs. It crashed, but it was a fun exercise. AMS might work better, but it's a pain to setup."
+        }
+      ],
+      "summary_ja": "Advanced Mac Substitute（AMS）は1980年代Mac OSのAPI再実装であり、バイナリ互換性の難しさと実装詳細への依存の危険性が指摘される。ユーザーはエミュレーション経験から、現代的な機能（ファイル共有等）を加えた古い環境への関心を表明。速度調整やノスタルジックな要素の提案もあり、他のエミュレータより改善されるが設定が煩雑という評価。"
+    },
+    {
+      "rank": 9,
+      "id": 47674075,
+      "title_en": "What Is a Property?",
+      "title_ja": "プロパティとは何か？",
+      "url": "https://alperenkeles.com/posts/what-is-a-property/",
+      "hn_url": "https://news.ycombinator.com/item?id=47674075",
+      "score": 34,
+      "comment_count": 6,
+      "posted_at": "2026-04-07T12:16:27+00:00",
+      "comments": [
+        {
+          "id": 47733967,
+          "author": "happytoexplain",
+          "text": "Maybe I have a bit of a brain problem, but for me, 90% of the effort that goes into learning anything in tech is spent on identifying which nouns are Nouns, and which are just nouns, and the (often mushy) semantics of how people use those nouns in varying contexts and sub-contexts. I understand the reasons for this complexity - domain-specific terminology is valuable and forms naturally from pre-existing words. It's just that, in tech, everything is abstract, and everything consists of multiple contexts spread across multiple dimensions (vertically, in abstraction layers; horizontally, in use cases), so the domain-specific terminology explodes like an exponential web. Sometimes I'm talking to somebody and they are using some word, and it takes me days to even realize that they are using it in a much more specific context than I assumed. It's a little hellish."
+        }
+      ],
+      "summary_ja": "技術分野では、専門用語と一般名詞の区別が難しく、文脈による意味の曖昧さが学習やコミュニケーションを困難にしている。抽象性と多層的な文脈から用語が爆発的に増え、同じ単語が特定の文脈で使われることに気づくまで時間がかかり、ストレスを感じる。"
+    },
+    {
+      "rank": 10,
+      "id": 47730194,
+      "title_en": "Cirrus Labs to join OpenAI",
+      "title_ja": "Cirrus LabsがOpenAIに参加",
+      "url": "https://cirruslabs.org/",
+      "hn_url": "https://news.ycombinator.com/item?id=47730194",
+      "score": 216,
+      "comment_count": 109,
+      "posted_at": "2026-04-11T13:01:34+00:00",
+      "comments": [
+        {
+          "id": 47730966,
+          "author": "maxloh",
+          "text": "Note that this is fundamentally different from the Astral acquisition. At the end of their announcement, they stated: > Cirrus CI will shut down effective Monday, June 1, 2026. And earlier in the article: > Joining OpenAI allows us to extend the mission we started with Cirrus Labs: building new kinds of tooling and environments that make engineers more effective, for both human engineers and agentic engineers. It isn't a product-led acquisition, but more a talent one."
+        },
+        {
+          "id": 47730898,
+          "author": "seekdeep",
+          "text": "This does raise some concerns in major open-source projects: https://github.com/scipy/scipy/issues/24990 https://www.postgresql.org/message-id/3ydjipcr7kbss57nvi67no..."
+        },
+        {
+          "id": 47732561,
+          "author": "elromulous",
+          "text": "Did anyone else think this was Cirrus Logic? https://en.wikipedia.org/wiki/Cirrus_Logic"
+        },
+        {
+          "id": 47731991,
+          "author": "jwpapi",
+          "text": "So AI company buys devs again, but devs are dead"
+        },
+        {
+          "id": 47730617,
+          "author": "bombcar",
+          "text": "I liked “our incredible journey” more when it wasn’t rushing headlong into OpenMawAI"
+        }
+      ],
+      "summary_ja": "Cirrus LabsのOpenAI参加はプロダクト買収ではなく人材獲得が目的で、同社のCIサービスは2026年に終了する。これにより、主要オープンソースプロジェクトでは懸念が表明されている。AI企業による開発者獲得が進む一方で、サービス終了への批判的な見方も示されている。"
+    },
+    {
+      "rank": 11,
+      "id": 47693559,
+      "title_en": "Surelock: Deadlock-Free Mutexes for Rust",
+      "title_ja": "Surelock：Rust向けデッドロックフリーミューテックス",
+      "url": "https://notes.brooklynzelenka.com/Blog/Surelock",
+      "hn_url": "https://news.ycombinator.com/item?id=47693559",
+      "score": 144,
+      "comment_count": 47,
+      "posted_at": "2026-04-08T17:36:19+00:00",
+      "comments": [
+        {
+          "id": 47732770,
+          "author": "lifis",
+          "text": "I can't understand why address instability is a problem: if a Mutex is moved, then it can't be locked (because you need to hold a borrow while locked, which impedes moving), so using addresses is perfectly fine and there is absolutely no need to use IDs. Also the fact that it doesn't detect locking the same mutex twice makes no sense: a static order obviously detects that and when locking multiple mutexes at the same level all you need to do is check for equal consecutive addresses after sorting, which is trivial. Overall it seems like the authors are weirdly both quite competent and very incompetent. This is typical of LLMs, but it doesn't seem ZlLM-made."
+        },
+        {
+          "id": 47731829,
+          "author": "jcalvinowens",
+          "text": "The Level<> abstraction is a really neat way to have your cake and eat it too: you only need a consistent arbitrary order to avoid deadlocks, but the order can have performance consequences when some locks are more coarse than others. But the example seems backwards to me: unless every callsite that locks any item always locks the big global lock first (probably not true, because if you serialize all item access on a global lock then a per-item lock serves no purpose...), aren't you begging for priority inversions by acquiring the big global lock before you acquire the item lock? My only gripe is missing the obvious opportunity for Ferengi memes (\"rules of acquisition\") :D :D"
+        },
+        {
+          "id": 47732002,
+          "author": "vlovich123",
+          "text": "I feel like Fuschia’s DAG approach can still be made compile time lock free by either disallowing holding locks from different branches or requiring an ordering when that does happen to prevent cycles (ie you can’t acquire them independently, you have to acquire all independent branches as a single group."
+        },
+        {
+          "id": 47732652,
+          "author": "EffCompute",
+          "text": "I really agree with jandrewrogers' point about the insularity of the database domain. While working on a custom C++ engine to handle 10M vectors in minimal RAM, I’ve noticed that many 'mainstream' concurrency patterns simply don't scale when cache-locality is your primary bottleneck. In the DB world, we often trade complex locking for deterministic ordering or latch-free structures, but translating those to general-purpose app code (like what this Rust crate tries to do) is where the friction happens. It’s great to see more 'DB-style' rigour (like total ordering for locks) making its way into library design."
+        },
+        {
+          "id": 47731690,
+          "author": "cptroot",
+          "text": "I appreciate that this appears to be an incremental improvement on Fuschia's tree_lock, with the sharp edges sanded off. Good work! I hope I won't have to use it :p"
+        }
+      ],
+      "summary_ja": "Surelockへの批判として、アドレス使用の是非や二重ロック検出の不備が指摘される。Level<>抽象化はデッドロック回避に有効だが優先順位逆転のリスクあり。FuschiaのDAGアプローチとの比較やデータベース領域の知見を取り入れた改善を評価するも、実用性には疑問も示されている。"
+    },
+    {
+      "rank": 12,
+      "id": 47731838,
+      "title_en": "Keeping a Postgres Queue Healthy",
+      "title_ja": "Postgresキューを健全に保つ方法",
+      "url": "https://planetscale.com/blog/keeping-a-postgres-queue-healthy",
+      "hn_url": "https://news.ycombinator.com/item?id=47731838",
+      "score": 64,
+      "comment_count": 18,
+      "posted_at": "2026-04-11T16:24:08+00:00",
+      "comments": [
+        {
+          "id": 47733308,
+          "author": "cataflutter",
+          "text": "Decent article, but some remarks: 1) It seems these two statements conflict with each other: > The oldest such transaction sets the cutoff—referred to as the \"MVCC horizon.\" Until that transaction completes, every dead tuple newer than its snapshot is retained. and > For example, imagine three analytics queries, each running for 40 seconds, staggered 20 seconds apart. No individual query would trigger a timeout for running too long. But because one is always active, the horizon never advances, and the effect on vacuum is the same as one transaction that never ends. If the three analytics *transactions* (it's transactions that matter, not queries, although there is some subtlety around deferred transactions not acquiring a snapshot until the first query) are started at different times, they will have staggered snapshots and so once the first completes, this should allow the vacuum to advance. 2) Although the problem about this query: SELECT * FROM jobs WHERE status = 'pending' ORDER BY run_at LIMIT 1 FOR UPDATE SKIP LOCKED; having to consider dead tuples is a genuine concern and performance problem, this can also be mitigated by adding a monotonically increasing column and adding a `WHERE column < ?` clause, provided you have also added an index to make that pagination efficient. This way you don't need to consider dead tuples and they 'only' waste space whilst waiting to be vacuumed, rather than also bogging down read perf. There is a little subtlety around how you guarantee that the column is monotonically increasing, given concurrent writers, but the answer to that depends on what tricks you can fit into your application. 3) I almost want to say that the one-line summary is 'Don't combine (very) long-running transactions with (very) high transaction rates in Postgres' (Is this a fair representation?)"
+        },
+        {
+          "id": 47734514,
+          "author": "sp1982",
+          "text": "The problem is way worse if you update rows, if you stick with insert and delete you can get quite far."
+        },
+        {
+          "id": 47733687,
+          "author": "nine_k",
+          "text": "In short: * Postgres still has the same problem with vacuum horizon, when a long-running query can block vacuuming of a quick-churning table. (The author uses a benchmark from 2015 when the problem was already well-understood.) * Stock Postgres still has no tools good enough against it. * The author's company special version of Postgres does have such tools; a few polite promotions of it are strewn across the article. My conclusion: it's still not wise to mix long (OLAP-style) loads and quick-churning (queue-style) loads on the same Postgres instance. Maybe running 0MQ or even RMQ may be an easier solution, depending on the requirements to the queue."
+        },
+        {
+          "id": 47733001,
+          "author": "simeonGriggs",
+          "text": "Yo! Author here, I’ll be around if anyone’s got questions!"
+        },
+        {
+          "id": 47733204,
+          "author": "sebmellen",
+          "text": "Postgres can do so much. I see people choose Kafka and SQS for things that Graphile Worker could do all day long."
+        }
+      ],
+      "summary_ja": "Postgresのキュー管理では、長いトランザクションがvacuumをブロックするMVCCホライズン問題が中心的な課題。標準Postgresには効果的な対策が不足しており、著者の会社の特別版が宣伝されるが、記事の矛盾点やクエリ改善策が指摘される。長いOLAP負荷と高速なキュー負荷は同じインスタンスで混在させるべきでなく、0MQなどの代替システムの使用も提案されている。"
+    },
+    {
+      "rank": 13,
+      "id": 47727960,
+      "title_en": "Show HN: Pardonned.com – A searchable database of US Pardons",
+      "title_ja": "Show HN: Pardonned.com – アメリカの恩赦の検索可能なデータベース",
+      "url": null,
+      "hn_url": "https://news.ycombinator.com/item?id=47727960",
+      "score": 331,
+      "comment_count": 162,
+      "posted_at": "2026-04-11T06:19:25+00:00",
+      "comments": [
+        {
+          "id": 47730634,
+          "author": "siliconc0w",
+          "text": "We should at least ban the \"preemptive\" pardon if not all pardons. Pardon means forgiveness for a specific convicted crime, not a means to grant blanket immunity."
+        },
+        {
+          "id": 47734490,
+          "author": "mark124mj",
+          "text": "Cool project — I hadn't seen anything like this before. One idea: it could be interesting to add geographic data (district court or state where the conviction happened) and plot it on a map. Might reveal interesting patterns across administrations."
+        },
+        {
+          "id": 47733714,
+          "author": "varenc",
+          "text": "Extracted all the raw pardons here: https://gist.githubusercontent.com/varenc/cb2e2dacf1c92d36bc... I wanted to do some stuff with this data so need a raw format. (process was so easy since its included on a single page load, so I assume you don't mind! thanks for making this )"
+        },
+        {
+          "id": 47729648,
+          "author": "koolba",
+          "text": "Are there any longer or more generic than this: > For any nonviolent offenses against the United States which they may have committed or taken part in during the period from January 1 2014 through the date of this pardon ( JAN 19, 2025 ). https://pardonned.com/pardon/details/biden-family/ That’s 11+ years with no detail or description."
+        },
+        {
+          "id": 47731221,
+          "author": "cs702",
+          "text": "Thank you. Apologies in advance for nitpicking, but I think the correct spelling is \"pardoned\" (a quick search on Google confirms it)."
+        }
+      ],
+      "summary_ja": "恩赦データベースのプロジェクトに賛辞と提案（地理情報の追加など）が寄せられる一方、事前恩赦や包括的恩赦への批判が焦点。データの活用性と恩赦制度の透明性・限定性に関する議論がなされている。"
+    },
+    {
+      "rank": 14,
+      "id": 47698455,
+      "title_en": "Starfling: A one-tap endless orbital slingshot game in a single HTML file",
+      "title_ja": "Starfling：単一のHTMLファイルでのワンタップエンドレス軌道スリングショットゲーム",
+      "url": "https://playstarfling.com",
+      "hn_url": "https://news.ycombinator.com/item?id=47698455",
+      "score": 529,
+      "comment_count": 133,
+      "posted_at": "2026-04-09T01:52:47+00:00",
+      "comments": [
+        {
+          "id": 47734598,
+          "author": "mark124mj",
+          "text": "Fun game! One thing I'd love to see is difficulty modes. An easy mode with some kind of aim guide (maybe a trajectory preview on tap-and-hold?) could help new players get the feel for it, and a hard mode where you control launch speed or angle would add a nice skill ceiling for people chasing high scores."
+        },
+        {
+          "id": 47730201,
+          "author": "0x3f",
+          "text": "I would make restarting much much faster than it is now. That's the most annoying part and it breaks the satisfying chain completely for me. I miss and then have to watch it slowly fall, or struggle to find the reset button. And even if I hit the reset, I have to go through the menu. At the very least, put the reset and play again buttons in the same spot, so I can just keep tapping/clicking there. Super Meat Boy is how all games like this should be."
+        },
+        {
+          "id": 47698456,
+          "author": "iceberger2001",
+          "text": "Hey HN, I built STARFLING, a simple hyper-casual space game you can play right in your browser. You orbit a star with a ball. Tap anywhere to release and sling it through space. Catch the next star to lock in orbit and keep going. Miss and it's game over. The whole thing is just one HTML file with vanilla JS, Canvas, and Web Audio. No frameworks, no build step. Loads in under 2 seconds on phone or desktop. There's a combo system if you release quick, a skip bonus for jumping over stars, and it gets harder the longer you last. When you die you get a cool trail art picture of your whole run that you can share. Audio is all generated on the fly and it has haptics too. Pretty satisfying once you get the timing down. Play it here: https://playstarfling.com?utm_source=hn&utm_medium=showhn Would love your thoughts on the feel, difficulty, and whether the trail art is fun or not. Thanks!"
+        },
+        {
+          "id": 47731812,
+          "author": "onion2k",
+          "text": "I gave Codex 5.4 Playwright MCP access to the site and a prompt of \"Use Playwright CLI Skill to open https://playstarfling.com/ and load the game. Work out how to play it, and devise a strategy to win.\" After a about half a dozen attempts it had figured the game out. Then I prompted it to \"Score as much as you can.\" It wrote itself an auto-play script that just keeps going. I stopped it running at 10866. That's currently the high score. I appreciate that this is pointless and proves nothing, but I've been experimenting with automating testing games (I work at a gaming company at the moment) so it felt like an opportunity to try an experiment."
+        },
+        {
+          "id": 47728726,
+          "author": "cpcallen",
+          "text": "I am completely confused about the orbital mechanics in this game. They seem completely broken; at any rate they do not work remotely like any other simulation I've played with (e.g. Gravitation or Kerbal Space Program). The bodies other than the first body appear to actively deflect the spacecraft away!"
+        }
+      ],
+      "summary_ja": "Hacker NewsのStarfling記事では、難易度モード追加やリスタート改善の提案、開発者によるゲーム紹介とフィードバック募集があった。AIを用いた自動プレイ実験で高スコアを達成した報告や、軌道力学が非現実的との批判も交わされている。"
+    },
+    {
+      "rank": 15,
+      "id": 47694064,
+      "title_en": "Every plane you see in the sky – you can now follow it from the cockpit in 3D",
+      "title_ja": "空に見えるすべての飛行機 – 3Dでコックピットから追跡できるようになりました",
+      "url": "https://flight-viz.com/cockpit.html?lat=40.64&lon=-73.78&alt=3000&hdg=220&spd=130&cs=DAL123",
+      "hn_url": "https://news.ycombinator.com/item?id=47694064",
+      "score": 179,
+      "comment_count": 40,
+      "posted_at": "2026-04-08T18:10:52+00:00",
+      "comments": [
+        {
+          "id": 47733237,
+          "author": "tetris11",
+          "text": "I'm currently flying at Mach 10 on a custom call sign, breaking all kinds of barriers on a single heading. I cannot be stopped. https://flight-viz.com/cockpit.html?lat=40.64&lon=-73.78&alt..."
+        },
+        {
+          "id": 47694065,
+          "author": "coolwulf",
+          "text": "Creator here. I posted Flight-Viz a few days ago ( https://news.ycombinator.com/item?id=47603966 ) and the feedback was great. Since then I added a cockpit mode that follows any liveflight with real 3D terrain. How to try it: go to flight-viz.com, click any plane, then click \"Cockpit\" in the action buttons. You'll get a first-person view wit h real buildings, terrain, atmosphere, and a HUD showing altitude/speed/heading — all driven by live ADS-B data. Hao"
+        },
+        {
+          "id": 47733035,
+          "author": "lastdong",
+          "text": "This is so impressive, love it! A bit of feedback: Clicking exit cockpit goes back to the previous page (in this case this HN thread). Not sure if just me, but I really had to search hard for the actions under menu and the cockpit button."
+        },
+        {
+          "id": 47694183,
+          "author": "RichardHesketh",
+          "text": "The FlightRadar24 app has had this feature for quite some time. I like your implementation though - it’s very easy on the eye."
+        },
+        {
+          "id": 47734386,
+          "author": "randerson",
+          "text": "I'd love if it could tell when a plane is ascending or descending and then add the last known rate of change to the simulation. Then you could watch a plane land."
+        }
+      ],
+      "summary_ja": "Hacker Newsのコメントでは、Flight-Vizの新機能「コックピットモード」が紹介され、3D地形とリアルタイム飛行データによる没入感が高く評価されている。ユーザーからはUI/UXの改善提案（操作ボタンの見やすさ）、既存サービス（FlightRadar24）との比較、さらに飛行高度変化率の表示など機能拡張の要望が寄せられた。制作者は積極的にフィードバックに対応する姿勢を示している。"
+    },
+    {
+      "rank": 16,
+      "id": 47732402,
+      "title_en": "The APL programming language source code (2012)",
+      "title_ja": "APLプログラミング言語のソースコード（2012）",
+      "url": "https://computerhistory.org/blog/the-apl-programming-language-source-code/",
+      "hn_url": "https://news.ycombinator.com/item?id=47732402",
+      "score": 29,
+      "comment_count": 3,
+      "posted_at": "2026-04-11T17:34:10+00:00",
+      "comments": [
+        {
+          "id": 47734081,
+          "author": "sizzzzlerz",
+          "text": "At my very first professional EE position, in 1978, there was an older staff member, PhD, kind of a professor type, who was programming in APL. Naturally curious, I asked him about it and what the strange symbols on the keyboard meant. His explanation mostly flew right over my head but I asked a few questions, thanked him, and went away. In 43 years, he's the only person I ever saw using it."
+        },
+        {
+          "id": 47733450,
+          "author": "dang",
+          "text": "Related. Others? The APL Source Code (2012) - https://news.ycombinator.com/item?id=34064480 - Dec 2022 (58 comments)"
+        }
+      ],
+      "summary_ja": "APLは特殊な記号を用いたプログラミング言語であり、過去には専門家が使用していたが、現在ではほとんど使われていない。このコメントでは、1978年に一人の使用者を見かけたという個人的な経験が語られ、APLの特異性と希少性が示されている。"
+    },
+    {
+      "rank": 17,
+      "id": 47730712,
+      "title_en": "The Problem That Built an Industry",
+      "title_ja": "産業を築いた問題",
+      "url": "https://ajitem.com/blog/iron-core-part-1-the-problem-that-built-an-industry/",
+      "hn_url": "https://news.ycombinator.com/item?id=47730712",
+      "score": 89,
+      "comment_count": 33,
+      "posted_at": "2026-04-11T14:03:03+00:00",
+      "comments": [
+        {
+          "id": 47731474,
+          "author": "arrsingh",
+          "text": "Interesting to note right at the start of the article that they sat on a plane next to each other in 1953 but the formal partnership between AA and IBM was not till 1959 - 6 years later! The article makes it look like all this happened magically fast but in reality a reminder that things take time! >> is almost mythological. In 1953, C.R. Smith, president of American Airlines, was seated next to R. Blair Smith, an IBM salesman, on a cross-country flight. By the time they landed, the outline of a solution had been sketched. IBM and American Airlines entered a formal development partnership in 1959. edit: oh and then the actual system didn't actually go live another 5 years later - in 1964. Over a decade after the two of them sat next to each other. Reminder to myself when my potential customers don't sign the deal 5 minutes after my pitch!"
+        },
+        {
+          "id": 47731494,
+          "author": "StilesCrisis",
+          "text": "\"The key insight is [...]. No daemons. No background threads. No connection state persisted in memory between transactions.\" Closed the tab."
+        },
+        {
+          "id": 47731725,
+          "author": "neilv",
+          "text": "ITA Software integrated with the mainframe network, and was acquired by Google. An exec made a public quote that they couldn't have done it if they hadn't used Lisp. (Today, the programming language landscape is somewhat more powerful. Rust got some metaprogramming features informed by Lisps, for example, and the team might've been able to slog through that.)"
+        },
+        {
+          "id": 47732908,
+          "author": "andai",
+          "text": ">TPF is not modern. It would fail every architectural review a contemporary engineering team would apply to it. It also handles 50,000 transactions per second with sub-100ms latency on hardware that costs a fraction of an equivalent cloud footprint. It has been doing this for 60 years. What kind of review would it fail? Sounds like it's pretty well designed to me."
+        },
+        {
+          "id": 47731613,
+          "author": "cr125rider",
+          "text": "Can you add RSS to your site? I’d love to follow but can’t."
+        }
+      ],
+      "summary_ja": "記事では飛行機での出会いからシステム完成まで10年以上かかったと指摘し、技術開発には時間がかかる現実を強調。また、ITA SoftwareのLisp使用やTPFシステムの評価から、レガシー技術の有効性と現代的な視点との対比が論点となる。"
+    },
+    {
+      "rank": 18,
+      "id": 47695213,
+      "title_en": "Optimal Strategy for Connect 4",
+      "title_ja": "Connect 4の最適戦略",
+      "url": "https://2swap.github.io/WeakC4/explanation/",
+      "hn_url": "https://news.ycombinator.com/item?id=47695213",
+      "score": 238,
+      "comment_count": 30,
+      "posted_at": "2026-04-08T19:37:50+00:00",
+      "comments": [
+        {
+          "id": 47729149,
+          "author": "sillysaurusx",
+          "text": "I'm surprised no one linked to his video on the topic. I can't overstate how high quality it is. The graphs are simply beautiful, and it made me think he had a whole production team behind him. That he was able to do cutting-edge work like this (it's new, which qualifies) while creating a work of art is incredible. \"I Solved Connect 4\" https://www.youtube.com/watch?v=KaljD3Q3ct0"
+        },
+        {
+          "id": 47728901,
+          "author": "tromp",
+          "text": "> which is fundamentally different from existing strong and weak solutions It doesn't seem fundamentally different from Victor Allis' solution, but 2swap managed to generalize and streamline the rules available for static solutions, while also picking the winning moves that reduce the overall tree size. > A weak solution can be visualized in a way that a strong solution (14tb uncompressed, 350gb compressed) cannot. That is using an overly strict interpretation of strong solution. My database of all roughly 68000 8-ply positions allows for computing the best move from any position within seconds and takes only 12KB compressed (using one trit per 8-ply position, 5 trits per byte, using remaining 256-3^5=13 values for run length encoding). [1] https://tromp.github.io/c4/c4.html"
+        },
+        {
+          "id": 47695427,
+          "author": "Someone",
+          "text": "FTA: “As a motivating example: player 1 (hereafter dubbed \"Red\") can win by playing in the center column on the first move and then following the weak solution's suggestions, but would not be guaranteed to win if the first disc is played elsewhere. The weak solution contains no information about what would happen in the other columns- As far as Red cares, it would be redundant to learn those branches, since they are not good.” I don’t think that “since they are not good” is necessary for a weak solution. Even if every first move were winning, it still would be redundant to learn how to win for every possible opening move. A weak solution gives you a guaranteed way to move from START to a win, whatever counterplay, not all ways to go from START to a win, whatever counterplay."
+        },
+        {
+          "id": 47732015,
+          "author": "ajkjk",
+          "text": "I've been intrigued about the thing they call the \"data product\" for a long time: the fact that there's a sort of equivalence between precomputing position analysis and doing no runtime analysis vs knowing nothing and doing everything at runtime. It is a general property of a lot of algorithms that you can precompute various amounts of computation in order to reduce runtime complexity. It's also the difference between \"telling an LLM to do a task\" and \"telling an LLM to write a bunch of code to do a task\", which are also the two ends of a spectrum. Especially interesting is the fact that the optimal strategy, where on the spectrum you go, is affected by the effectiveness of your algorithms on each side. The more efficiently you can cognitively compress precomputed decisions, the more it makes sense to precompute; the more efficiently you can apply techniques for move selection at runtime. And the two interact a lot: for instance in chess, there are simple heuristics for a lot of endgames, meaning that the state space you explore at runtime can terminate as soon as it gets to an endgame that you have memorized a solution for. I wonder if anyone knows anyone examining this phenomenon in generality?"
+        },
+        {
+          "id": 47728789,
+          "author": "cachius",
+          "text": "This guy’s videos are awesome. He also has one on Klotski and the double pendulum. Beautiful graph animations."
+        }
+      ],
+      "summary_ja": "Hacker Newsの議論では、Connect 4の最適戦略に関する動画の高品質な可視化と革新的な解法が称賛された。弱解と強解の違いが焦点となり、Victor Allisの解法との比較やデータ圧縮技術（12KBのデータベース使用例）が議論された。弱解は「必勝経路のみ保持」と定義され、冗長な分岐の必要性への反論もあった。さらに「データプロダクト」の概念が分析され、事前計算とリアルタイム処理のトレードオフ（例：チェスの終盤戦略やLLMのタスク処理）がアルゴリズム設計における重要課題として指摘された。動画作成者のKlotskiや二重振り子に関する作品も言及された。"
+    },
+    {
+      "rank": 19,
+      "id": 47687443,
+      "title_en": "Volunteers turn a fan's recordings of 10K concerts into an online treasure trove",
+      "title_ja": "ボランティアがファンの1万回のコンサート録音をオンラインの宝庫に変える",
+      "url": "https://apnews.com/article/aadam-jacobs-collection-concerts-internet-archive-chicago-b1c9c4466a2db409a83523ad84b79d62",
+      "hn_url": "https://news.ycombinator.com/item?id=47687443",
+      "score": 321,
+      "comment_count": 63,
+      "posted_at": "2026-04-08T09:11:10+00:00",
+      "comments": [
+        {
+          "id": 47728669,
+          "author": "rwmj",
+          "text": "https://archive.org/details/@aadam_jacobs_collection The Nirvana gig mentioned is https://archive.org/details/ajc00795_nirvana-1989-07-08 The quality is surprisingly good for a bootleg and the band are super-tight! Donate to the IA here: https://archive.org/donate"
+        },
+        {
+          "id": 47732022,
+          "author": "textfiles",
+          "text": "Shout out to everyone in this thread who seem unable to understand a club might have three unrelated acts on, so each performance is called a \"concert\" under this collection. Aadam and the crew are focused on making each performance a separate entity instead of grouping them up. Substitute \"performance\" for \"concert\" if it helps. Carry on."
+        },
+        {
+          "id": 47730910,
+          "author": "bookofjoe",
+          "text": "\"... fan's recordings of 10k concerts...\" 59-year-old Aadam [sic] Jacobs made his first recording 42 years ago in 1984 when he was 17. He would have had to average 238 recordings/concerts per year — nearly 5/week — over those 42 years to accumulate 10,000 of them."
+        },
+        {
+          "id": 47730163,
+          "author": "mannyv",
+          "text": "The team needs to talk to Charlie miller et al, the ones who have been cleaning up and posting the grateful dead archive for the last few decades. They are audio magicians."
+        },
+        {
+          "id": 47734112,
+          "author": "lostlogin",
+          "text": "As rule, reading the comments on an article is a terrible idea. But quichelorraine123 had a good one. “...I heard you have a compilation of every good song ever done by anybody. Every great song by the Beach Boys. All the underground hits. All the Modern Lovers tracks. I heard you have a vinyl of every Niagra record on German import. I heard that you have a white label of every seminal Detroit techno hit - 1985, '86, '87. I heard that you have a CD compilation of every good '60s cut and another box set from the '70s…” …excerpt of lyrics from LCD Soundsystem's Losing My Edge”"
+        }
+      ],
+      "summary_ja": "Hacker Newsのコメントでは、10,000公演のファン録音をアーカイブ化したプロジェクトについて、42年間で年平均238回の録音という規模や「公演」の定義（個別パフォーマンスを指す）、音質の高さ、Grateful Deadのアーカイブ経験者との協力提案、LCDサウンドシステムの歌詞引用による文化的意義の指摘などが議論された。"
+    },
+    {
+      "rank": 20,
+      "id": 47731998,
+      "title_en": "Phone Trips",
+      "title_ja": "Phone Trips",
+      "url": "http://www.wideweb.com/phonetrips/",
+      "hn_url": "https://news.ycombinator.com/item?id=47731998",
+      "score": 52,
+      "comment_count": 4,
+      "posted_at": "2026-04-11T16:43:40+00:00",
+      "comments": [
+        {
+          "id": 47732809,
+          "author": "tehryanx",
+          "text": "I first mirrored these in the early 2000s because I was worried it would eventually vanish. my mirror has been gone for decades, and the original survives. :)"
+        },
+        {
+          "id": 47733065,
+          "author": "plapsley",
+          "text": "This is such a great site. Any of Evan Doorbell's \"How I Became a Phone Phreak\" or \"Sounds of Long Distance\" are especially great."
+        },
+        {
+          "id": 47732617,
+          "author": "bookofjoe",
+          "text": ">OK, so what are these recordings all about? Why are they here? >Greetings fellow web trippers, my phone phreak handle is Mark Bernay and 35 years ago I used to go on phone trips. Yes, it's true: just like the people in the picture at the top, I would drive around to small towns primarily for the purpose of playing with their payphones. I often brought along my trusty Craig 212 portable 3-inch reel-to-reel tape recorder (this was before cassettes were popular) to record the phone noises and narrate information about them for my friends. I don't go on phone trips anymore and you are probably thinking that this is because I grew up, but no, I never did. The reason I stopped phone tripping is that all phones are about the same all over the country nowadays and they are really boring. >This picture shows my recording equipment around 1968, which I used to edit these tapes and prepare them for playing on a public phone number. My current desk is just as messy, but with PC's instead of reel-to-reel tape recorders. >There have been 1237108 accesses to this page. ......................... >Secrets of the Little Blue Box (1971) https://www.ckts.info/downloads/articles/Esquire%20Magazine%..."
+        },
+        {
+          "id": 47734168,
+          "author": "ChrisArchitect",
+          "text": "Related in some ways, the new documentary on the fascinating life of blind phone phreak Joybubbles . https://www.joybubblesthemovie.com/ https://www.inverse.com/entertainment/joybubbles-documentary..."
+        }
+      ],
+      "summary_ja": "電話ファン文化の歴史的記録や個人体験が共有され、技術の均質化により廃れた趣味への郷愁や、録音資料の保存への関心が示されている。"
+    },
+    {
+      "rank": 21,
+      "id": 47730981,
+      "title_en": "The future of everything is lies, I guess – Part 5: Annoyances",
+      "title_ja": "すべての未来は嘘だろう – 第5部：煩わしさ",
+      "url": "https://aphyr.com/posts/415-the-future-of-everything-is-lies-i-guess-annoyances",
+      "hn_url": "https://news.ycombinator.com/item?id=47730981",
+      "score": 189,
+      "comment_count": 113,
+      "posted_at": "2026-04-11T14:32:39+00:00",
+      "comments": [
+        {
+          "id": 47731609,
+          "author": "Leomuck",
+          "text": "So basically more ways of trying to make people buy things, do things, think things than before? I feel like our whole world more and more circulates around manipulation and the absence of truth and discourse. Then again, I do think LLMs are an incredible technological achievement. The issue is not so much what they do or that they exist, but how they are utilized. Right now, they are utilized to further the class divide between rich and poor. Who are we to trust in the future? Not big companies, not the state, not LLMs. Time to organize around groups and collectives that we know we can trust and that we know have our wellbeing in mind."
+        },
+        {
+          "id": 47731775,
+          "author": "jerf",
+          "text": "I don't need to conduct 1000 transactions per day. I don't forsee a world in which it will be some sort of fatal inconvenience to need to approve all purchases. I certainly don't plan on ever just handing over my credit card to an LLM, due to its fundamental architectural issues with injection, and I still don't anticipate handing it over to any future AI architecture anytime soon because I struggle to imagine what benefits could possibly be worth the risk of taking down such a basic, cheap barrier. All that stuff about support, though, inevitable."
+        },
+        {
+          "id": 47733409,
+          "author": "morgengold",
+          "text": "My father just changed his car key battery with the help of ai and he likes that. He also consulted it about about car insurance regulations and he got more out of it than searching the web himself. For most simple mainstream questions I just ask ai instead of googling shitty results. Most of the time ai is good enough and often better than the status ante. People do not care if it is a stupid token prediction machine as long as the job gets done."
+        },
+        {
+          "id": 47733297,
+          "author": "gs17",
+          "text": "> Perhaps we’ll see distributed boycotts where many people deploy personal models to force Burger King’s models to burn through tokens at a fantastic rate. Given how many people hate AI in general, I'm surprised there hasn't been anything like this happening. They could even get around the irony of using \"AI\" themselves, I bet low-tech language models like Markov chains could provide sufficient time wasting potential (I'd love to see it done with an old fashioned AIML chatbot). Asymmetric chatbot warfare."
+        },
+        {
+          "id": 47731772,
+          "author": "vyr",
+          "text": "have worked closely with customer support teams, can confirm that the goal of any technical improvements that go in front of CS agents is to reduce ticket volume, and thus costs. of course they measure retention and satisfaction but ticket volume is always the big one. chatbots were big for this long before LLMs existed. a fun side effect is that CS is also an early warning system for companies, so when you make it harder to get through to a human, you start throwing out info on your users' pain points. of course this only matters if people have a choice about whether to use your product, so that's gotta be an upside for insurance companies, etc."
+        }
+      ],
+      "summary_ja": "LLMの技術的進歩は評価しつつも、企業による利益優先の利用や格差拡大への懸念が強い。一方で日常課題の解決には実用的だと賞賛する声もあり、その利用目的によって評価が二分されている。"
+    },
+    {
+      "rank": 22,
+      "id": 47730407,
+      "title_en": "South Korea introduces universal basic mobile data access",
+      "title_ja": "韓国がユニバーサル基本モバイルデータアクセスを導入",
+      "url": "https://www.theregister.com/2026/04/10/south_korea_data_access_universal/",
+      "hn_url": "https://news.ycombinator.com/item?id=47730407",
+      "score": 274,
+      "comment_count": 75,
+      "posted_at": "2026-04-11T13:27:16+00:00",
+      "comments": [
+        {
+          "id": 47733044,
+          "author": "Terr_",
+          "text": "To quote something from a favorite fiction-series, where someone is visiting a relatively backwards planet: > \"Poor?\" said Cordelia, bewildered. \"No electricity? How can it be on the comm network?\" > \"It's not, of course,\" answered Vorkosigan. > \"Then how can anybody get their schooling?\" > \"They don't.\" > Cordelia stared. \"I don't understand. How do they get their jobs?\" > \"A few escape to the Service. The rest prey on each other, mostly.\" Vorkosigan regarded her face uneasily. \"Have you no poverty on Beta Colony?\" > \"Poverty? Well, some people have more money than others, of course, but... no comconsoles?\" > Vorkosigan was diverted from his interrogation. \"Is not owning a comconsole the lowest standard of living you can imagine?\" he said in wonder. > \"It's the first article in the constitution. 'Access to information shall not be abridged.' \" -- Shards of Honor (1986) by Lois McMaster Bujold"
+        },
+        {
+          "id": 47731011,
+          "author": "Leomuck",
+          "text": "Crazy, I've never heard of such a plan anywhere. But given how essential the internet is to everything we do on a daily basis, that makes a lot of sense. However, I would like to see the existing situation that lead to this decision. Were there many people who couldn't do things anymore due to lacking internet access? Was there public pressure to do this or did they just think it a good idea? My assumption so far was that there are those who use the internet, they're usually fine, and those that don't - they won't benefit much. But no idea about South Korea. Anyway, cheaper and unlimited access is always a good idea!"
+        },
+        {
+          "id": 47730613,
+          "author": "jl6",
+          "text": "> the scheme will provide over seven million subscribers with unlimited downloads at just 400 kbps after their data allowances expire. Does this mean it’s not a universal entitlement as such, because you presumably first have to pay for a plan with an allowance? (Not to mention having to pay for a device)."
+        },
+        {
+          "id": 47732522,
+          "author": "flowerthoughts",
+          "text": "This would be huge for IoT. It'll obviously be abused to send \"metrics\" (a.k.a. private data to be sold) by companies, but still. I hope there's no limit on SIM cards."
+        }
+      ],
+      "summary_ja": "韓国の基本モバイルデータ導入を巡り、情報アクセスは人権とする観点から必要性が支持される一方、計画の背景や実施条件（速度制限や費用面）への疑問が示された。また、IoTへの応用可能性とデータ悪用の懸念も議論されている。"
+    },
+    {
+      "rank": 23,
+      "id": 47733066,
+      "title_en": "New synthesis of astronomical measurements shows Hubble tension is real",
+      "title_ja": "天文学的測定の新しい統合がハッブルテンションが現実であることを示す",
+      "url": "https://noirlab.edu/public/news/noirlab2611/",
+      "hn_url": "https://news.ycombinator.com/item?id=47733066",
+      "score": 12,
+      "comment_count": 0,
+      "posted_at": "2026-04-11T18:55:43+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 24,
+      "id": 47724118,
+      "title_en": "Installing every* Firefox extension",
+      "title_ja": "すべての*Firefox拡張機能をインストールする",
+      "url": "https://jack.cab/blog/every-firefox-extension",
+      "hn_url": "https://news.ycombinator.com/item?id=47724118",
+      "score": 623,
+      "comment_count": 75,
+      "posted_at": "2026-04-10T21:56:33+00:00",
+      "comments": [
+        {
+          "id": 47728062,
+          "author": "ArneVogel",
+          "text": "I won the \"Middle Finger Emoji Sticker\" Award! ( https://jack.cab/blog/every-firefox-extension#the-middle-fin... ) I quickly wrote up how: https://www.arnevogel.com/firefox-permissions/"
+        },
+        {
+          "id": 47726171,
+          "author": "BoppreH",
+          "text": "Sad that no real pages can load successfully, but I thoroughly enjoyed the writing. > We turned on crash reporting on the way. I haven't burst out laughing like this in a while! You'll probably make for some horror stories to a poor Mozilla team."
+        },
+        {
+          "id": 47729238,
+          "author": "xg15",
+          "text": "> I did some research to find why this took so long. 13 years ago, extensions.json used to be extensions.sqlite. Nowadays, extensions.json is serialized and rewritten in full on every write debounced to 20 ms, which works fine for 15 extensions but not 84,194. I'm slightly worried how they arrived at that debounce value. Which extensions need to write to extensions.json continuously, several times a second?"
+        },
+        {
+          "id": 47724814,
+          "author": "gathered",
+          "text": "I'm laughing so hard at the video, I imagine this is what browsing the web is like for the elderly that barely know how to use a computer. Can someone do this in Chrome?"
+        },
+        {
+          "id": 47724874,
+          "author": "xnorswap",
+          "text": "This article is wonderful crazy. The icing on the cake is the discovery of a potential performance bug in one or more of the about: pages, that's definitely worthy of following up."
+        }
+      ],
+      "summary_ja": "Firefox拡張を全件インストールした実験記事へのコメントでは、拡張管理ファイルextensions.jsonの連続書き込みによるパフォーマンス問題の指摘、クラッシュレポート機能の暴走やMozillaチームへの影響へのユーモア、about:pagesの潜在的なバグ発見の重要性が議論された。Chromeでの再現可能性への関心も示されている。"
+    },
+    {
+      "rank": 25,
+      "id": 47724352,
+      "title_en": "Filing the corners off my MacBooks",
+      "title_ja": "私のMacBookの角を削る",
+      "url": "https://kentwalters.com/posts/corners/",
+      "hn_url": "https://news.ycombinator.com/item?id=47724352",
+      "score": 1280,
+      "comment_count": 596,
+      "posted_at": "2026-04-10T22:16:40+00:00",
+      "comments": [
+        {
+          "id": 47732290,
+          "author": "rlt",
+          "text": "> People like to freak out about this, so I wanted to post it here to make sure that everyone who wants to freak out about it gets the opportunity to do so. I've grown to appreciate unapologetic trolling of people who care way too much about what other people do to themselves or their own private property."
+        },
+        {
+          "id": 47725701,
+          "author": "yreg",
+          "text": "The takeaway from this article should be to consider modifying your tools to your needs even in unconventional and controversial ways. I love it. The flame war on whether the original chassis design sucks or rocks is not that interesting."
+        },
+        {
+          "id": 47727641,
+          "author": "wraptile",
+          "text": "I used a macbook for almost 2 years and genuinely don't understand how people can tolerate these machines. My wrists would be cut up all the time to the point where I looked like I was self harming myself and the glary screen is entirely unsuable anywhere but a darkest basement. Not to mention the terrible keyboard. To this day I'm perplexed how macbooks have such high desirability by full time developers when they're almost unusable."
+        },
+        {
+          "id": 47725725,
+          "author": "420official",
+          "text": "I just did this to my MacBook not because of the sharp edge but because the pitting turns a sharp edge into a sawblade. Something about the grounding on on the frame when plugged in mixed with my sweaty hands leads to damage along this sharp edge on every MacBook I've ever owned. See https://www.reddit.com/r/macbook/s/hbyVh5SJhw for another poor soul with the same caustic skin"
+        },
+        {
+          "id": 47726595,
+          "author": "jasoneckert",
+          "text": "Thanks for this interesting post - I've been showing it to co-workers to get their reactions, which was incredibly entertaining for me! Co-worker 1: Interesting. I wonder if that voids the warranty. It's Apple you know. Co-worker 2: May Jobs have mercy on their soul... Co-worker 3: Not a bad idea. But not sure if that would cause problems with structural integrity of the laptop, like if you drop it or something. Co-worker 4: The only downside I see is that you can no longer say \"Hey, that's a sharp-looking laptop!\""
+        }
+      ],
+      "summary_ja": "MacBookの鋭い角による身体的苦痛や不満が語られ、ユーザーが自作で改造することの是非が議論されている。保証の無効化や構造的強度への懸念も示される一方、道具を自身のニーズに合わせて改良する自由を支持する意見がある。"
+    },
+    {
+      "rank": 26,
+      "id": 47722333,
+      "title_en": "Chimpanzees in Uganda locked in eight-year 'civil war', say researchers",
+      "title_ja": "ウガンダのチンパンジーが8年間の「内戦」に陥っている、と研究者が報告",
+      "url": "https://www.bbc.com/news/articles/cr71lkzv49po",
+      "hn_url": "https://news.ycombinator.com/item?id=47722333",
+      "score": 414,
+      "comment_count": 249,
+      "posted_at": "2026-04-10T19:10:22+00:00",
+      "comments": [
+        {
+          "id": 47723365,
+          "author": "OgsyedIE",
+          "text": "The primatologist Richard Wrangam once advanced the theory that tribe vs. tribe conspecific homicides - what he called coalitionary killing - are an evolved trait that was selected for in primates by some kind of pro-homicide selection pressures in the ancestral environment (where homicide reliably grants an advantage to the expected relative gene frequency of the perpetrator's genes). I haven't kept up with biology for years and don't know what the current consensus on the topic is but it's interesting to consider if some environments naturally promote the unlucky inhabitants to harm each other."
+        },
+        {
+          "id": 47722837,
+          "author": "neom",
+          "text": "Here is the paper: https://www.science.org/doi/10.1126/science.adz4944 - it's interesting. I noticed there was a respiratory epidemic that killed 25 chimps naturally quickly, one would imagine that would have quite a societal destabilizing impact?"
+        },
+        {
+          "id": 47726577,
+          "author": "wisty",
+          "text": "Anyone read Goliath's Curse? The author (Kemp) is extremely opposed to the more Pinker-ish idea that humans in their natural consition led lives that were nasty, short, and brutal; dismissing this sort of thing as overblown. Kemp had the very anarchist friendly theory that it's states (Goliaths) and / or the conditions that lead to them that lead to violence. His evidence is most convincing when it's looking at the paleolithic, as h sapiens made its way out of Africa ... but maybe this is not a natural state as they had not yet reached any population limits so migration was always an alternative to conflict?"
+        },
+        {
+          "id": 47730566,
+          "author": "atentaten",
+          "text": ">If chimpanzees - one of the species closest to humans genetically - could do so without human constructs of religion, ethnicity and political beliefs, then \"relational dynamics may play a larger causal role in human conflict than often assumed\", they added. Aren't religion, ethnicity and political beliefs strong factors in human relational dynamics?"
+        },
+        {
+          "id": 47722830,
+          "author": "delichon",
+          "text": "I hope nobody decides to violate the prime directive and take sides in the chimp war. To the extent that they have good memory, they live in a world of finite resources, and their behavior was shaped by the forces of game theory as applied to tribes, this is more or less inevitable. You can read that as defeatism or just math. We can't overcome the force of game theory, but we can make it work for us by making our transactions increasingly transparent and repeatable, so that cooperation is more successful than defection."
+        }
+      ],
+      "summary_ja": "チンパンジーの内戦を引き合いに、霊長類の暴力が進化的形質か環境要因かを議論。人間の紛争では国家や社会構造よりも関係ダイナミクスが重要との見方があるが、宗教や政治信念の影響も指摘。資源の有限性とゲーム理論から紛争は避けられないが、透明性と反復取引による協力の促進が提案される。"
+    },
+    {
+      "rank": 27,
+      "id": 47725583,
+      "title_en": "Artemis II safely splashes down",
+      "title_ja": "Artemis IIが安全に着水",
+      "url": "https://www.cbsnews.com/live-updates/artemis-ii-splashdown-return/",
+      "hn_url": "https://news.ycombinator.com/item?id=47725583",
+      "score": 1209,
+      "comment_count": 387,
+      "posted_at": "2026-04-11T00:10:51+00:00",
+      "comments": [
+        {
+          "id": 47725663,
+          "author": "areoform",
+          "text": "Glad that they're safe and sound. It's worth pointing out that this is the first extremely public, widely acknowledged high risk mission NASA has done in over 50 years. The Shuttle was risky, but it wasn't thought of or acknowledged by NASA as being risky until very late in its lifecycle. According to NASA's OIG, Artemis acceptable crew mortality rate is 1 in 30. Roughly 3x riskier than the shuttle. There genuinely is a world where they don't make it back home. I am grateful that they did. And I'm grateful that we're going to go even further. I can't wait to see what Jared's cooking up (for those who don't know, he made his own version of the Gemini program in Polaris and funded it out of pocket)."
+        },
+        {
+          "id": 47726166,
+          "author": "brianjlogan",
+          "text": "As an American I feel like I've been going through a bit of an identity crisis from what I remember growing up. Probably the rose tinted glasses of being a child but being from Florida I always had a sense of amazement and wonder as I heard the sonic boom of the shuttle returning to earth. Really felt like I was coexisting in this incredible scientific powerhouse of a country full of bright and enabled peoples that knew how to prioritize curiosity and innovation. Feeling like a bit of a \"vibe\" post which is everything wrong lately but I can't help but feel some satisfaction that we're still able to accomplish something like this in our space endeavors."
+        },
+        {
+          "id": 47726338,
+          "author": "atonse",
+          "text": "I had to explain to my wife and kids (not that I'm in this field, but I also have to remind myself) that we are able to pinpoint where the craft will land, when it will land down to the minute, because of ... just ... math. And we're able to get them there and back because of science. It all boils down to equations that describe the world accurately, and a way of experimentation, iteration, thinking that gets us all the way to do something this unbelievably complex."
+        },
+        {
+          "id": 47725721,
+          "author": "echoangle",
+          "text": "Wild that they manage to fly to the moon but still seem to be having those comms problems. Asking the astronauts if they’re really pressing the PTT button is wild."
+        },
+        {
+          "id": 47725840,
+          "author": "elcapitan",
+          "text": "This whole mission was amazing, and the most positive and hopeful thing I have seen as a global event in the last 5 years at least. Bravo and cheers to everyone involved :)"
+        }
+      ],
+      "summary_ja": "Artemis IIの成功と帰還を祝う声が中心。50年ぶりの高リスク有人宇宙ミッション（シャトル比3倍の死亡率）の意義を指摘し、科学技術への信頼（数式と実験による精密制御）や国家的誇り（フロリダ育ちのシャトル回想）を強調。通信トラブルへの驚きもありつつ、複雑なミッション達成が近年稀に見る希望あるグローバルイベントと評価され、民間人Jaredの独自宇宙プログラムへの期待が示されている。"
+    },
+    {
+      "rank": 28,
+      "id": 47697722,
+      "title_en": "Previously unknown verses by Empedocles found on papyrus",
+      "title_ja": "エンペドクレスによる以前は知られていなかった詩がパピルスで発見",
+      "url": "https://www.thehistoryblog.com/archives/75792",
+      "hn_url": "https://news.ycombinator.com/item?id=47697722",
+      "score": 56,
+      "comment_count": 13,
+      "posted_at": "2026-04-09T00:00:33+00:00",
+      "comments": [
+        {
+          "id": 47733046,
+          "author": "amelung",
+          "text": "I think the image shown at the top right is the entire text that was discovered: because if you count all the lines (including even the ones where no mortal can see actual letters), you get 30. I admire the experts who can make sense out of it. Words are not separated by blanks. The first line in the second column may start with «ΚΑΙΤΟΙ ΠΩ…» ‹and yet wh…›. Below that perhaps «Η ΜΕΙΖΟΝ …» ‹or greater›. Further below even I can read clearly a «ΦΑΙΝΕΤΑΙ» ‹he / she / it appears›. Even further down I read «ΚΑΙ ΔΙΑ ΤΟΥΤΟΥ» ‹and through / per / via this›."
+        },
+        {
+          "id": 47734245,
+          "author": "sapphicsnail",
+          "text": "Empedocles wrote in verse. Greek scientific writings used to be written entirely in verse instead of prose. He wrote in Latin, but a cool example of something like this that survived is Lucretius' On the Nature of things (De Rerum Natura)."
+        },
+        {
+          "id": 47731286,
+          "author": "aap_",
+          "text": "So is there any way to actually read it? Or do i have to buy an obscure french book? can you even buy the book? Academic publishing/gatekeeping is such a joke."
+        },
+        {
+          "id": 47733048,
+          "author": "Izikiel43",
+          "text": "Fun fact about Empedocles, in Argentinian Spanish slang it means the one who is always drunk"
+        }
+      ],
+      "summary_ja": "新たに発見されたエンペドクレスの詩句パピルスは文字が分離されておらず解読が難しいが、専門家の技量を称賛。古代ギリシャの科学的著作が詩形式で書かれたことに触れ、学術出版のアクセス難を批判している。"
+    },
+    {
+      "rank": 29,
+      "id": 47689793,
+      "title_en": "How much linear memory access is enough?",
+      "title_ja": "どれだけの線形メモリアクセスが十分か？",
+      "url": "https://solidean.com/blog/2026/how-much-linear-memory-access-is-enough/",
+      "hn_url": "https://news.ycombinator.com/item?id=47689793",
+      "score": 64,
+      "comment_count": 10,
+      "posted_at": "2026-04-08T13:16:19+00:00",
+      "comments": [
+        {
+          "id": 47689947,
+          "author": "PhilipTrettner",
+          "text": "I looked into this because part of our pipeline is forced to be chunked. Most advice I've seen boils down to \"more contiguity = better\", but without numbers, or at least not generalizable ones. My concrete tasks will already reach peak performance before 128 kB and I couldn't find pure processing workloads that benefit significantly beyond 1 MB chunk size. Code is linked in the post, it would be nice to see results on more systems."
+        },
+        {
+          "id": 47733821,
+          "author": "sweetjuly",
+          "text": "I wonder how much of the cost is coming from the cache misses vs the more frequent indirections/ILP drop? For example, I wonder what this test looks like if you don't randomize the chunks but instead just have the chunks in work order? If you still see the perf hit, that suggests the cost is not from the cache misses but rather the overhead of needing to switch chunks more often."
+        },
+        {
+          "id": 47733548,
+          "author": "gwking",
+          "text": "I’ve casually experimented with this in python a number of times for various hot loops, including those where I’m passing the chunk between c routines. On Apple M1 I’ve never seen a case where chunks larger than 16k mattered. That’s the page size, so totally unsurprising. Nevertheless it’s been a helpful rule of thumb to not overthink optimizations."
+        },
+        {
+          "id": 47733434,
+          "author": "smj-edison",
+          "text": "Side note, but this product looks really cool! I have a fundamental mistrust of all boolean operations, so to see a system that actually works with degenerate cases correctly is refreshing."
+        },
+        {
+          "id": 47733412,
+          "author": "aapoalas",
+          "text": "Would kernel huge pages possibly have an effect here also?"
+        }
+      ],
+      "summary_ja": "議論の要点は、線形メモリアクセスにおける最適なチャンクサイズ（128KB～1MBが目安）、キャッシュミスとチャンク切り替えオーバーヘッドの影響の分離、実践的な観察（M1では16KBで十分）、カーネル巨大ページの効果の可能性、過剰最適化への警鐘、および例外処理を正確に扱うシステムへの評価である。"
+    },
+    {
+      "rank": 30,
+      "id": 47702890,
+      "title_en": "How Passive Radar Works",
+      "title_ja": "パッシブレーダーの仕組み",
+      "url": "https://www.passiveradar.com/how-passive-radar-works/",
+      "hn_url": "https://news.ycombinator.com/item?id=47702890",
+      "score": 141,
+      "comment_count": 46,
+      "posted_at": "2026-04-09T12:35:24+00:00",
+      "comments": [
+        {
+          "id": 47731900,
+          "author": "chromacity",
+          "text": "I will actually concur with one of the less upvoted comments here: the most fascinating thing about this article is the website. I've seen that pattern on HN a couple of times in the past couple of months. It's an incredibly specific vanity domain called passiveradar.com. Who would want that unless they're a radar manufacturer or an expert in the field? In both cases, they would put their name on it, but there's no attribution whatsoever. The site contains two short articles, mostly illustrated with photos lifted from elsewhere. For example, the schematic of how the radar works in the earlier article comes from: https://www.researchgate.net/figure/A-schematic-diagram-show... The article is also illustrated with what appear to be two vibecoded SVG animations that don't look quite right. So, what's going on here? I suspect it's an attempt to farm domains for resale, or for LLM spam operations down the line?"
+        },
+        {
+          "id": 47730869,
+          "author": "kklisura",
+          "text": "> By listening to how broadcasts like FM radio and digital TV bounce off objects, it's possible to determine their positions and velocities. Wasn't some Github repo ITAR'd, couple of years ago, due to having python code for some SDR doing this? Edit: Found it. 3years ago https://www.reddit.com/r/RTLSDR/comments/yu9rei/krakenrf_pul..."
+        },
+        {
+          "id": 47730798,
+          "author": "Geo_ge",
+          "text": "There is a lot of talk of military uses here, but this technique is also used for environmental monitoring. GNSS interferometric reflectometry (GNSS-IR) uses navigation satellites as the transmitter for a bi-static radar. The measurement device is any GNSS receiver (even your phone). The technique can estimate environmental parameters like sea level, soil moisture, snow depth, and vegetation water content from systematic changes in the the multi-path around the antenna. There is an open source Python package for this technique: https://github.com/kristinemlarson/gnssrefl An introductory paper \"The Accidental Tide Gauge\": https://www.kristinelarson.net/wp-content/uploads/2015/10/La..."
+        },
+        {
+          "id": 47733993,
+          "author": "Animats",
+          "text": "Here's a 10 year old study from Norway's navy.[1] It's a marginal technology for navies. It's more useful for defending urban areas from air strikes, because urban areas have lots of emitters, too many to attack. There's a lot of current interest in what Iran is using for air defense. Search \"Iran air defense passive radar\". Some people speculate passive infrared. Some speculate passive radar. Nobody who's posting really knows, of course. Ukraine uses many passive systems, including audio. Sort of like Shot Spotter, but for drones. [1] https://apps.dtic.mil/sti/pdfs/ADA470685.pdf"
+        },
+        {
+          "id": 47732573,
+          "author": "amarant",
+          "text": "This is fascinating! I'm very tempted to build a \"early warning door bell\". Being the only house on our road, it'd be fun to try and set up a few of these to detect when a car takes the exit from the bigger road ours connects to, and give a heads up that visitors are coming! There will be a few false positives from farmers coming to work the fields by our road, or people looking to hike in the nearby forests, etc. but it could be pretty fun nonetheless!"
+        }
+      ],
+      "summary_ja": "パッシブレーダー記事のウェブサイトは著者不明で画像流用の疑いがあり信頼性が議論されている。技術的にはFM放送などの反射波を利用し、軍事（防空）や環境モニタリング（GNSS-IR）など多様に応用可能。過去にITAR規制されたコード事例や個人での実用提案もなされている。"
+    }
+  ]
+}
