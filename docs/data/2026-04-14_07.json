@@ -1,0 +1,1071 @@
+{
+  "date": "2026-04-14T00:00:00+09:00",
+  "slot": "07",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 47755629,
+      "title_en": "Someone Bought 30 WordPress Plugins and Planted a Backdoor in All of Them",
+      "title_ja": "誰かが30個のWordPressプラグインを購入し、全てにバックドアを仕掛けた",
+      "url": "https://anchor.host/someone-bought-30-wordpress-plugins-and-planted-a-backdoor-in-all-of-them/",
+      "hn_url": "https://news.ycombinator.com/item?id=47755629",
+      "score": 535,
+      "comment_count": 147,
+      "posted_at": "2026-04-13T17:54:39+00:00",
+      "comments": [
+        {
+          "id": 47756259,
+          "author": "chromacity",
+          "text": "This is a perfect illustration of what cracks me up about the hyperbolic reactions to Mythos. Yes, increased automation of cutting-edge vulnerability discovery will shake things up a bit. No, it's nowhere near the top of what should be keeping you awake at night if you're working in infosec. We've built our existing tech stacks and corporate governance structures for a different era. If you want to credit one specific development for making things dramatically worse, it's cryptocurrencies, not AI. They've turned the cottage industry of malicious hacking into a multi-billion-dollar enterprise that's attractive even to rogue nations such as North Korea. And with this much at stake, they can afford to simply buy your software dependencies, or to offer one of your employees some retirement money in exchange for making a \"mistake\". We know how to write software with very few bugs (although we often choose not to). We have no good plan for keeping big enterprises secure in this reality. Autonomous LLM agents will be used by ransomware gangs and similar operations, but they don't need FreeBSD exploit-writing capabilities for that."
+        },
+        {
+          "id": 47755991,
+          "author": "bradley13",
+          "text": "Whenever I look at a web project, it starts with \"npm install\" and literally dozens of libraries get downloaded. The project authors probably don't even know what libraries their project requires, because many of them are transitive dependencies. There is zero chance that they have checked those libraries for supply chain attacks."
+        },
+        {
+          "id": 47756219,
+          "author": "spankalee",
+          "text": "I really wish that the FAIR package manager project had been successful, but they recently gave up after the WordPress drama died down. https://fair.pm/ FAIR has a very interesting architecture, inspired by atproto, that I think has the potential to mitigate some of the supply-chain attacks we've seen recently. In FAIR, there's no central package repository. Anyone can run one, like an atproto PDS. Packages have DIDs, routable across all repositories. There are aggregators that provide search, front-ends, etc. And like Bluesky, there are \"labelers\", separate from repositories and front-ends. So organizations like Socket, etc can label packages with their analysis in a first class way, visible to the whole ecosystem. So you could set up your installer to ban packages flagged by Socket, or ones that recently published by a new DID, etc. You could run your own labeler with AI security analysis on the packages you care about. A specific community could build their own lint rules and label based on that (like e18e in the npm ecosystem. Not perfect, but far better than centralized package managers that only get the features their owner decides to pay for."
+        },
+        {
+          "id": 47756498,
+          "author": "toniantunovi",
+          "text": "The supply chain attack surface in WordPress plugins has always been particularly dangerous because the ecosystem encourages users to install many small single-purpose plugins from individual developers, most of whom aren't security-focused organizations. Buying out an established plugin with a large install base is a clever approach because you inherit years of user trust that took the original developer a long time to build. The deeper structural issue is that plugin update notifications function as an implicit trust signal. Users see \"update available\" and click without questioning whether the author is still the same person. A package signing and transfer transparency system similar to what npm has been working toward would help here, but the WordPress ecosystem has historically moved slowly on security infrastructure."
+        },
+        {
+          "id": 47757352,
+          "author": "cold_tom",
+          "text": "The scariest part isn’t even the backdoor itself, it’s how normal the acquisition looked.Buying a trusted plugin and pushing an update is basically indistinguishable from legitimate maintenance. There’s no real signal for users to question it"
+        }
+      ],
+      "summary_ja": "WordPressプラグイン買収とバックドア埋め込み事例は、サプライチェーン攻撃の深刻さを示す。暗号通貨がハッキングを大規模産業化し、依存パッケージの買収や信頼悪用を容易にした。現在の中央集権型パッケージ管理は脆弱で、更新通知が作者変更の気づきを妨げる構造的問題がある。分散型システムの導入など根本的な対策が求められる。"
+    },
+    {
+      "rank": 2,
+      "id": 47757495,
+      "title_en": "GitHub Stacked PRs",
+      "title_ja": "GitHub Stacked PRs",
+      "url": "https://github.github.com/gh-stack/",
+      "hn_url": "https://news.ycombinator.com/item?id=47757495",
+      "score": 277,
+      "comment_count": 179,
+      "posted_at": "2026-04-13T20:36:49+00:00",
+      "comments": [
+        {
+          "id": 47758929,
+          "author": "quibono",
+          "text": "GitLab's UI around MRs (PRs) is IMO miles better than what GH's been offering. Try creating a PR from branch A to main, and then rebasing A. GitLab handles this fine and can show you changes between the two revisions; GitHub is completely lost."
+        },
+        {
+          "id": 47757981,
+          "author": "jenadine",
+          "text": "I might be missing something, but what I need is not \"stacked PR\" but a proper UI and interface to manage single commit: - merge some commits independently when partial work is ready. - mark some commit as reviewed. - UI to do interactive rebase and and squash and edit individual commits. (I can do that well from the command line, but not when using the GitHub interface, and somehow not everyone from my team is familiar with that) - ability to attach a comment to a specific commit, or to the commit message. - better way to visualize what change over time in each forced push/revision (diff of diff) Git itself already has the concept of commit. Why put this \"stacked PR\" abstraction on top of it? Or is there a difference I don't see?"
+        },
+        {
+          "id": 47757695,
+          "author": "adamwk",
+          "text": "As someone who used phabricator and mercurial, using GitHub and git again feels like going back to the stone ages. Hopefully this and jujutsu can recreate stacked-diff flow of phabricator. It’s not just nice for monorepos. It makes both reviewing and working on long-running feature projects so much nicer. It encourages smaller PRs or diffs so that reviews are quick and easy to do in between builds (whereas long pull requests take a big chunk of time)."
+        },
+        {
+          "id": 47757617,
+          "author": "bsimpson",
+          "text": "Finally! I never understood the PR=branch model GitHub defaulted to. Stacked commits (ala Phabricator/Gerrit) always jived more with how my brain reasons about changes. Glad to see this option. I guess I'll have to install their CLI thing now."
+        },
+        {
+          "id": 47758698,
+          "author": "thcipriani",
+          "text": "Very cool that GitHub actually put stacks in the UI vs. GitLab's `glab stack`[0] (which looks just like the `gh stack` part of GitHub's thing). One part that seems like it's going to feel a little weird is how merging is set up[1]. That is, if I merge the bottom of the stack, it'll rebase the others in the stack, which will probably trigger a CI test run. So, if I have three patches in the stack, and I want to merge the bottom two, I'd merge one, wait for tests to run on the other, merge the second vs. merge just those two in one step (though, without having used it, can't be sure about how this'd work in practice—maybe there's some way to work around this with restacking?) [0]: < https://docs.gitlab.com/cli/stack/ > [1]: < https://github.github.com/gh-stack/guides/stacked-prs/#mergi... >"
+        }
+      ],
+      "summary_ja": "GitHubのStacked PRs機能について、GitLabやPhabricatorなど他ツールとのUI・機能比較が中心。GitHubのPR＝ブランチモデルではなく、細かいコミット単位での管理（個別マージ、レビュー記録、インタラクティブなリベースなど）を求める声が多い。新機能により、長期間の機能開発やモノレポでのコードレビューが改善される可能性があるが、マージ時のCI実行など実用面での懸念も示されている。"
+    },
+    {
+      "rank": 3,
+      "id": 47756321,
+      "title_en": "How to make Firefox builds 17% faster",
+      "title_ja": "Firefoxビルドを17%高速化する方法",
+      "url": "https://blog.farre.se/posts/2026/04/10/caching-webidl-codegen/",
+      "hn_url": "https://news.ycombinator.com/item?id=47756321",
+      "score": 103,
+      "comment_count": 7,
+      "posted_at": "2026-04-13T18:50:08+00:00",
+      "comments": [
+        {
+          "id": 47758051,
+          "author": "K0IN",
+          "text": "wow, 17% is impressive with such an easy fix. i wonder if we could just build this as a separate project and pull the webidl files as a dependency."
+        },
+        {
+          "id": 47757529,
+          "author": "Devorlon",
+          "text": "Why compile code when ccache faster"
+        },
+        {
+          "id": 47758372,
+          "author": "shevy-java",
+          "text": "So ... perhaps Mozilla should focus on user share dropping. I understand that speed is relevant, but focusing on that strategy does not really work when dinosaur-like extinction is around the corner."
+        }
+      ],
+      "summary_ja": "Firefoxのビルド最適化で17%向上という改善策に対して、代替アプローチ（WebIDLの別管理・ccache活用）の提案や、根本課題であるユーザーシェア減少への優先的な対処を求める意見がある。"
+    },
+    {
+      "rank": 4,
+      "id": 47753472,
+      "title_en": "Nothing Ever Happens: Polymarket bot that always buys No on non-sports markets",
+      "title_ja": "Nothing Ever Happens: スポーツ以外の市場で常に「No」を購入するPolymarketボット",
+      "url": "https://github.com/sterlingcrispin/nothing-ever-happens",
+      "hn_url": "https://news.ycombinator.com/item?id=47753472",
+      "score": 327,
+      "comment_count": 150,
+      "posted_at": "2026-04-13T15:31:06+00:00",
+      "comments": [
+        {
+          "id": 47754370,
+          "author": "tekno45",
+          "text": "https://x.com/sterlingcrispin/status/2043723823678382254 They admit no returns. But it does seem like a fun project and nowhere does it say anything about returns or profits so not scammy imo just funny meme backed code"
+        },
+        {
+          "id": 47758762,
+          "author": "Toxygene",
+          "text": "The idea was kind of amusing until I went to the GitHub page and was greeted with a Chudjak [1]. [1] https://en.wikipedia.org/wiki/Patrick_Crusius#In_popular_cul..."
+        },
+        {
+          "id": 47754894,
+          "author": "cordwainersmith",
+          "text": "The contrarian bet is fun but I wonder how it actually holds up. Prediction markets do tend to overprice dramatic outcomes, so \"always bet no\" isn't as dumb as it sounds. Would love to see real P&L over a few months, not just the thesis."
+        },
+        {
+          "id": 47755315,
+          "author": "slg",
+          "text": "It's interesting that this is explicitly for non-sports markets because I see no reason why this would be less applicable there. Sports betters have long talked about that the winning strategy is usually to bet the under (i.e. the no) on most bets. The over (i.e. the yes) is generally a more exciting and fun outcome which causes it to attract more betters which in turns makes that side overpriced. Like with this bot, I have no idea if that will still lead to actual positive returns. This might just be a remnant from a time when these betting lines were set less intelligently. But all things being equal, it seems logical that \"boring\" bets would have a better return in the long run than \"exciting\" bets as long as some betters are at least partially motivated by entertainment. There's probably a lot of knowledge like this that sports betters have built up over decades that could apply to these new forms of non-sports gambling."
+        },
+        {
+          "id": 47754091,
+          "author": "wormpilled",
+          "text": "Basically arbitraging human imagination. People love coming up with fantastical concepts because they get attention, but the more exciting a market is, the less likely it is to actually happen. Reality is usually boring."
+        }
+      ],
+      "summary_ja": "非スポーツ予測市場で常に「No」に賭けるポリマーケットボットについて、ドラマチックな結果は過大評価される傾向があり、地味な結果に賭ける戦略は長期的に利益をもたらす可能性があるとする意見が中心。スポーツ賭博の知見を援用し、娯楽性を求めるベッターの心理が「Yes」側を割高にするため「No」が有利との指摘。プロジェクト自体は利益を謳わない明示的な娯楽目的と見られ、詐欺的でないとされる。"
+    },
+    {
+      "rank": 5,
+      "id": 47729694,
+      "title_en": "An Introduction to Obsidian",
+      "title_ja": "Obsidian入門",
+      "url": "https://bryanhogan.com/blog/obsidian-introduction",
+      "hn_url": "https://news.ycombinator.com/item?id=47729694",
+      "score": 97,
+      "comment_count": 54,
+      "posted_at": "2026-04-11T11:35:02+00:00",
+      "comments": [
+        {
+          "id": 47757820,
+          "author": "iammjm",
+          "text": "The aura of complexity/difficulty around Obsidian seriously baffles me, because to me Obsidian from the go felt like the most intuitive thing in the world: Create a note. Write some lines of text. Organize some of those lines into - bulletpoints, # Headings, or ## Subheadings. Turn an some idea into a [[note of its own]]. Add a #tag for better organization. Check out your notes in the list of your notes or directly in the vault folder. And people sell courses for this??? Like I know you can add plugins, tweak css to your liking, and basically turn obsidian into an all-encompassing monstrosity to match your particular software kink, but the 80/20 of it all is really pretty basic to anybody who has ever used a personal computer."
+        },
+        {
+          "id": 47758885,
+          "author": "philips",
+          "text": "I love Obsidian, have written a popular plugin, and my wife and I use it for TODO lists and various planning. However, every few weeks the official Obsidian sync makes an absolute mess of our shopping list (which has fairly frequent edits and deletions across our laptops and phones). I have no idea how to fix it. This thread shows other users having the exact same issue as us: https://forum.obsidian.md/t/obsidian-sync-incorrectly-duplic... If it wasn't for this one issue I would be able to strongly recommend the tool but as it is now I just tell people it sort of works and I am mildly happy. To be fair I don't think any of the popular alternatives like logseq or joplin even attempt to do automatic file merges and just dump files into a conflict mode."
+        },
+        {
+          "id": 47757843,
+          "author": "nout",
+          "text": "My suggestions to new users are: Start small, just create notes for whatever you want to (actually) remember and create impromptu TODO lists. Ignore the whole Knowledge Database / second brain thing. Learn the obsidian keyboard shortcuts really well. You can build a structure in your notes later when you actually see what's good and what needs automation."
+        },
+        {
+          "id": 47758006,
+          "author": "saxelsen",
+          "text": "Shout out to Joplin ( https://joplinapp.org/ ), which I use on a daily basis. It does most of what Obsidian does but has a free sync version where you just use your cloud drive as the storage. The main thing missing, from what I've found, is that it does do the \"notes mind map\". But I never really found that useful."
+        },
+        {
+          "id": 47757791,
+          "author": "rockooooo",
+          "text": "I've tried obsidian so many times and want to love it but the sync situation - either the expensive official one, the approved options for mixed iOS/Windows clients (icloud) and third party tools like obsidain-livesync - were all way too issue-prone for me to ever trust it. I hope they figure this out"
+        }
+      ],
+      "summary_ja": "Obsidianは基本的なメモ作成機能は直感的だが、公式同期機能に重複データなどの深刻な問題がある。一部のユーザーは代替ツールとしてJoplinを提案し、新規ユーザーにはシンプルな使用から始めることを勧めている。"
+    },
+    {
+      "rank": 6,
+      "id": 47756772,
+      "title_en": "(AMD) Build AI Agents That Run Locally",
+      "title_ja": "(AMD）ローカルで動作するAIエージェントの構築",
+      "url": "https://amd-gaia.ai/docs",
+      "hn_url": "https://news.ycombinator.com/item?id=47756772",
+      "score": 42,
+      "comment_count": 6,
+      "posted_at": "2026-04-13T19:28:41+00:00",
+      "comments": [
+        {
+          "id": 47758883,
+          "author": "warwickmcintosh",
+          "text": "ROCm has improved but the reality is you're still fighting the driver stack more than the models. If you're actually doing local inference on AMD you're spending your time on CUDA compatibility layers, not the AI part. Two lines of python is marketing, the gap between demo and working AMD setup is still real."
+        },
+        {
+          "id": 47758589,
+          "author": "xrd",
+          "text": "I wanted to believe but anyone who has spent any time trying to run models locally knows this is not going to be solved by two lines of python running on rocm as the example shows."
+        },
+        {
+          "id": 47756841,
+          "author": "galaxyLogic",
+          "text": "Not so clear from their page but from https://www.tipranks.com/news/amd-stock-slips-despite-a-majo... I read: \" In addition to that, the update allows these agents to be turned into desktop apps for multiple operating systems. \" This seems like a new way to create app: Create an (AI) app that creates apps."
+        },
+        {
+          "id": 47758292,
+          "author": "Mars008",
+          "text": "In case you are interested: Requirement Minimum Processor AMD Ryzen AI 300-series"
+        }
+      ],
+      "summary_ja": "AMDのROCmは改善されたが、ドライバスタックやCUDA互換層の問題が残り、ローカル推論の実用には困難が伴う。マーケティングの「2行のPython」は現実的でなく、デモと実用のギャップが大きい。一方、AIエージェントをデスクトップアプリ化する新機能が紹介され、Ryzen AI 300シリーズが最小要件とされる。"
+    },
+    {
+      "rank": 7,
+      "id": 47758028,
+      "title_en": "Stanford report highlights growing disconnect between AI insiders and everyone",
+      "title_ja": "スタンフォード報告書が指摘するAI業界関係者と一般の認識乖離",
+      "url": "https://techcrunch.com/2026/04/13/stanford-report-highlights-growing-disconnect-between-ai-insiders-and-everyone-else/",
+      "hn_url": "https://news.ycombinator.com/item?id=47758028",
+      "score": 131,
+      "comment_count": 150,
+      "posted_at": "2026-04-13T21:25:38+00:00",
+      "comments": [
+        {
+          "id": 47758174,
+          "author": "ike2792",
+          "text": "This has mirrored what I've seen in my company. People in the data science/ML part of the company are super excited about AI and are always giving presentations on it and evangelizing it. Most engineers in other areas, though, are generally underwhelmed every time they try using it. It's being heavily pushed by AI \"experts\" and senior leaders, but the enthusiasm on the ground is lacking as results rarely live up to the extremely rosy promises that the \"experts\" keep making. Meanwhile, everyone can read the news about layoffs attributed to AI and can see that hiring (especially of junior engineers) has slowed to a trickle. You can only fool people for so long."
+        },
+        {
+          "id": 47758364,
+          "author": "CobrastanJorji",
+          "text": "I think people are really underestimating how poorly today's tweens think of AI. \"That looks like chatgpt\" is an insult. Kids avoid things because they heard somewhere that AI might have been involved and have a sense that means it is bad or immoral or illegal or cheating in some nebulous way, and it's reinforced by their teachers telling them that using AI for homework is cheating. I think this next generation is going to come up fundamentally believing that AI is generally a bad thing, and it's going to surprise older people."
+        },
+        {
+          "id": 47758140,
+          "author": "simonw",
+          "text": "I was talking recently to someone who teaches AI-adjacent courses at a US university (not in a computer science department) and they said that enrollment in their class is lower than expected, which they think is likely due to the severity of the AI backlash among students on campus."
+        },
+        {
+          "id": 47758256,
+          "author": "belval",
+          "text": "This is poor reporting, almost needs a checklist: [X] Tweets and instagram comments presented as \"what society is thinking\" [X] Ties Luigi Mangione and the California warehouse fire to Gen Z discontent (about AI?). [X] Statistics being used to support the title with little to no regards to continuity: \"those respondents who said that AI makes them “nervous” grew from 50% to 52% during the same period\" => percentage was 52% in 2023, 50% in 2024 and 52% in 2025, seems mostly flat to me, with the real jump being in 2022-2023 with 39%."
+        },
+        {
+          "id": 47758937,
+          "author": "rconti",
+          "text": "It doesn't help that AI \"thought leaders\" can't articulate a vision by which our lives will improve rather than be made worse. It looks like: 1. They take billions in investment 2. They spend trillions 3. They and their investors profit in the quadrillions from all the \"labor saving\" 4. ??? 5. Everyone's needs are met."
+        }
+      ],
+      "summary_ja": "AI分野の専門家や経営層の過度な期待と楽観的な宣伝に対し、一般の技術者や若年層はAIの実用性に懐疑的で、むしろ反感や不安を抱いている。具体的な利益より雇用への悪影響や倫理的問題が注目され、世代間でもAIに対する認識の隔たりが拡大しているという議論だ。"
+    },
+    {
+      "rank": 8,
+      "id": 47756569,
+      "title_en": "Show HN: Ithihāsas – a character explorer for Hindu epics, built in a few hours",
+      "title_ja": "Show HN: Ithihāsas - 数時間で構築したヒンドゥー叙事詩キャラクターエクスプローラー",
+      "url": "https://www.ithihasas.in",
+      "hn_url": "https://news.ycombinator.com/item?id=47756569",
+      "score": 73,
+      "comment_count": 20,
+      "posted_at": "2026-04-13T19:10:07+00:00",
+      "comments": [
+        {
+          "id": 47757177,
+          "author": "stinger",
+          "text": "I like the attempt but mythology is significantly more layered that just the study of their characters at the end. A single perspective of these stories will help you get the lay of the land but you need to be very cautious if you want to use this to draw lessons and conclusions from them. For example, the protagonist and antagonist are different from the perspective of the other characters. Both these epics are all about the nuance and that needs to be captured effectively to do justice to them"
+        },
+        {
+          "id": 47757496,
+          "author": "danish00111",
+          "text": "Feels like you created an Obsidian of the entire Mahābhārata and Rāmāyaṇa... I love the Crimson Dusk theme. I think, for the relationship graph, when the clusters get too overloaded in some places, they should separate out even when I zoom in. When I zoom in, they're still too close to each other which makes it hard to read the bottom right section of Mahabharata."
+        },
+        {
+          "id": 47756799,
+          "author": "FrancisGerard",
+          "text": "Very cool! I like how cool it is to see the graph, but at the current density it’s a bit hard to read. I’ve been working on a similar project for biblical texts. For example, here’s a character detail page for David: https://hypr.bible/en/entities/person/david/ I’m finding that character dictionaries like this are useful to people who want to engage with ancient texts but are not very familiar with them, but even if one is familiar, they are still quite helpful."
+        },
+        {
+          "id": 47758565,
+          "author": "lateforwork",
+          "text": "Very nice. The relationship graph flickers too much when I move the mouse over it. Consider adding an animated fade."
+        },
+        {
+          "id": 47756887,
+          "author": "aanet",
+          "text": "Good vis. I wasn't sure what to expect, tbh. A few notes: - The default vis has very low contrast (despite changing theme colors).. perhaps make the contrast stronger. I find this is the case with most AI-driven websites :-/ Same for some of the standard text (\"family lineage\", \"group connections, etc) - Pls cite the sources. That would be useful / important - The dynasty tree looks useful... But is it incomplete? Or is only the visualization capped at some limit? - Wasn't sure what the \"Sections\" dropdown on the left does The challenge for sure is about the sheer number of characters, the number of years/decades in these epics, the complexity. Would love to see some references, perhaps with quotes in Sankskrit / transliterated to English, at key points. [yes, this is challenging, no doubt] Hope this is useful"
+        }
+      ],
+      "summary_ja": "このキャラクター探索ツールはヒンズー叙事詩の視覚化として評価されるが、神話の複雑なニュアンスを捉えるには不十分との指摘がある。関係グラフは密集しすぎて読みにくく、ユーザビリティの改善（ちらつき解消、コントラスト強化）が求められている。出典の明示や情報の完全性、機能説明の不足も課題として挙げられている。"
+    },
+    {
+      "rank": 9,
+      "id": 47750872,
+      "title_en": "Servo is now available on crates.io",
+      "title_ja": "Servoがcrates.ioで利用可能に",
+      "url": "https://servo.org/blog/2026/04/13/servo-0.1.0-release/",
+      "hn_url": "https://news.ycombinator.com/item?id=47750872",
+      "score": 390,
+      "comment_count": 130,
+      "posted_at": "2026-04-13T12:12:22+00:00",
+      "comments": [
+        {
+          "id": 47751921,
+          "author": "nicoburns",
+          "text": "Some notes: - The docs.rs docs are still building, but the docs from the recent RC are available [0] - The Slint project have an example of embedding Servo into Slint [1] which is good example of how to use the embedding API, and should be relatively easy to adapt to any other GUI framework which renders using wgpu. - Stylo [2] and WebRender [3] have both also been published to crates.io, and can be useful standalone (Stylo has actually been getting monthly releases for ~year but we never really publicised that). - Ongoing releases on a monthly cadance are planned [0]: https://docs.rs/servo/0.1.0-rc2/servo [1]: https://github.com/slint-ui/slint/tree/master/examples/servo [2]: https://docs.rs/stylo [3]: https://docs.rs/webrender"
+        },
+        {
+          "id": 47753172,
+          "author": "simonw",
+          "text": "Here's a vibe-coded \"servo-shot\" CLI tool which uses this crate to render an image of a web page: https://github.com/simonw/research/tree/main/servo-crate-exp... git clone https://github.com/simonw/research cd research/servo-crate-exploration/servo-shot cargo build ./target/debug/servo-shot https://news.ycombinator.com/ Here's the image it generated: https://gist.github.com/simonw/c2cb4fcb15b0837bbc4540c3d398c..."
+        },
+        {
+          "id": 47753338,
+          "author": "rafaelmn",
+          "text": "This should be the real benchmark of AI coding skills - how fast do we get safe/modern infrastructure/tooling that everyone agrees we need but nobody can fund the development. If Anthropic wants marketing for Mythos without publishing it - show us servo contrib log or something like that. It aligns nicely with their fundamental infrastructure safety goals. I'd trust that way more than x% increase on y bench. Hire a core contributor on Servo or Rust, give him unlimited model access and let's see how far we get with each release."
+        },
+        {
+          "id": 47754365,
+          "author": "giovannibonetti",
+          "text": "For those of you using a browser to generate PDFs, the Rust crate you should look into is Typst [1]. Regardless of your application language, you can use their CLI. It takes some time to get used to their DSL to write PDFs, but nowadays with AI that shouldn't take too long. [1] https://crates.io/crates/typst"
+        },
+        {
+          "id": 47752058,
+          "author": "phaistra",
+          "text": "Is there a table of implemented RFCs? Something similar to http://caniuse.com where we can see what HTML/JS/CSS standards and features are implemented? If it exists, I can't seem to find it. Closest thing seems to be \"experimental features\" page but its not quite detailed enough."
+        }
+      ],
+      "summary_ja": "Servoのcrates.io公開を受け、関連クレートや埋め込み例、CLIツールが紹介された。AIによる開発加速やインフラ安全への貢献可能性が議論され、PDF生成にはTypstが推奨された。また、実装状況を示す表の要望が挙がっている。"
+    },
+    {
+      "rank": 10,
+      "id": 47753689,
+      "title_en": "Building a CLI for All of Cloudflare",
+      "title_ja": "Cloudflare全体向けCLIの構築",
+      "url": "https://blog.cloudflare.com/cf-cli-local-explorer/",
+      "hn_url": "https://news.ycombinator.com/item?id=47753689",
+      "score": 228,
+      "comment_count": 69,
+      "posted_at": "2026-04-13T15:44:02+00:00",
+      "comments": [
+        {
+          "id": 47754283,
+          "author": "8cvor6j844qw_d6",
+          "text": "> Tell us your hopes and dreams for a Cloudflare-wide CLI It'd be great if the Wrangler CLI could display the required API token permissions upfront during local dev, so you know exactly what to provision before deploying. Even better if there were something like a `cf permissions check` command that tells you what's missing or unneeded perms with an API key."
+        },
+        {
+          "id": 47758828,
+          "author": "iainmerrick",
+          "text": "Tell us your hopes and dreams for a Cloudflare-wide CLI This is only partly about the CLI and mostly about the API itself, but a straightforward and consistent way to manage environments would be nice. I have a project using CF workers and Astro, with an ugly but working wrangler.toml defining multiple environments. When Cloudflare acquired Astro, I assumed that would be a good thing, but the latest version of the Cloudflare plugin (mandatory if you want to use the latest Astro) seems to manage environments in its own special incompatible way."
+        },
+        {
+          "id": 47757697,
+          "author": "cleverdash",
+          "text": "The trend of CLI-first design because AI agents need it is interesting. We ended up in the same place building developer tools, the CLI and API came first because that's what agents actually consume. The dashboard came after. The cf permissions check idea from the top comment is great. One thing I've found is that agents are surprisingly good at using CLIs but terrible at diagnosing why a command failed. Clear error messages with the exact fix (\"missing scope X, run cf token add --scope X\") matter way more for agent usability than the happy path."
+        },
+        {
+          "id": 47754848,
+          "author": "dcre",
+          "text": "Wonderful post and I will be taking inspiration from it. Surprised not to see TypeSpec https://typespec.io/ mentioned, which is a TypeScript-like schema language that I like to describe as \"what if OpenAPI was good\". I'm guessing they considered it and decided building their own would be both simpler and more flexible. The cost of BYO has come down a lot thanks to agents."
+        },
+        {
+          "id": 47757544,
+          "author": "amluto",
+          "text": "> Tell us your hopes and dreams for a Cloudflare-wide CLI No long lived tokens, or at least a very straightforward configuration to avoid them. One option: an easy tool to make narrowly scoped, very short lived tokens, in a file, and maybe even a way to live-update the file (so you can bind mount it). Another option: a proxy mode that can narrow the scope. So I set it up on a host, then if I want to give a container access to one domain or one bucket or whatever, I ask the host CLI to become a proxy that gives the relevant subset of its permissions to the proxied client, and I connect the container to it."
+        }
+      ],
+      "summary_ja": "Cloudflare全体のCLIでは、APIトークン権限の事前表示や環境管理の一貫性が求められ、AIエージェント向け設計では明確なエラーメッセージが重要。セキュリティ面で短命トークンやプロキシモードによる権限制限が提案されている。"
+    },
+    {
+      "rank": 11,
+      "id": 47757775,
+      "title_en": "The tech jobs bust is real. Don't blame AI (yet)",
+      "title_ja": "テック業界の雇用崩壊は現実。AIのせいではない（今のところ）",
+      "url": "https://economist.com/finance-and-economics/2026/04/13/the-tech-jobs-bust-is-real-dont-blame-ai-yet",
+      "hn_url": "https://news.ycombinator.com/item?id=47757775",
+      "score": 19,
+      "comment_count": 2,
+      "posted_at": "2026-04-13T21:02:21+00:00",
+      "comments": [
+        {
+          "id": 47758829,
+          "author": "downrightmike",
+          "text": "The only reason to blame AI is that it doesn't live up to promises, so corps are betting that scale will solve the problem. So datacenter after datacenter wants to be built in areas that can't supply them water/power. And that money sink is causing the layoffs. If AI really helped like it expected to, you would grab any dev you could so that you could have a army of 100x devs. Humans are still cheaper for the real costs. Augmented humans are on average a few percentage points better."
+        }
+      ],
+      "summary_ja": "AIへの過大期待により無理な投資が行われ、水・電力問題を引き起こすデータセンター建設が進む。これが資金流出とレイオフの原因となっている。実際のAI効果は限定的で、人間のコスト効率の方が高く、能力拡張もわずかである。"
+    },
+    {
+      "rank": 12,
+      "id": 47758347,
+      "title_en": "N-Day-Bench – Can LLMs find real vulnerabilities in real codebases?",
+      "title_ja": "N-Day-Bench - LLMは実コードベースの真の脆弱性を発見できるか？",
+      "url": "https://ndaybench.winfunc.com",
+      "hn_url": "https://news.ycombinator.com/item?id=47758347",
+      "score": 11,
+      "comment_count": 4,
+      "posted_at": "2026-04-13T21:54:03+00:00",
+      "comments": [
+        {
+          "id": 47758784,
+          "author": "mbbutler",
+          "text": "It would be helpful to add in some cases that do not contain any vulnerabilities to assess false-positive rate as well."
+        },
+        {
+          "id": 47758417,
+          "author": "Rohinator",
+          "text": "Very curious how Claude Mythos will perform here"
+        }
+      ],
+      "summary_ja": "脆弱性を含まないケースを追加して誤検知率も評価すべきとの提案と、Claude Mythosの性能への関心が主な議論の要点である。"
+    },
+    {
+      "rank": 13,
+      "id": 47728823,
+      "title_en": "What We Learned Building a Rust Runtime for TypeScript",
+      "title_ja": "TypeScript向けRustランタイム構築で学んだこと",
+      "url": "https://encore.dev/blog/rust-runtime",
+      "hn_url": "https://news.ycombinator.com/item?id=47728823",
+      "score": 11,
+      "comment_count": 1,
+      "posted_at": "2026-04-11T08:53:16+00:00",
+      "comments": [
+        {
+          "id": 47758805,
+          "author": "jauntywundrkind",
+          "text": "Very side note, but really liking seeing Elysia so close to the top on the benchmark list. I've been using it, and pointing my LLM's to it as example code, because it's type system is so so much better than Hono's. https://elysiajs.com/ I didn't know that it was also flipping fast as frell. (Encore's benchmark is showing them as faster still, of course!)"
+        }
+      ],
+      "summary_ja": "ElysiaがHonoよりも優れた型システムと高速なパフォーマンスを持つ点が評価されており、ベンチマークでも上位に位置していることへの称賛が議論の要点である。"
+    },
+    {
+      "rank": 14,
+      "id": 47756876,
+      "title_en": "Just Enough Chimera Linux",
+      "title_ja": "Just Enough Chimera Linux",
+      "url": "https://www.dwarmstrong.org/chimera-install-zfs/",
+      "hn_url": "https://news.ycombinator.com/item?id=47756876",
+      "score": 30,
+      "comment_count": 3,
+      "posted_at": "2026-04-13T19:37:54+00:00",
+      "comments": [
+        {
+          "id": 47757671,
+          "author": "lrvick",
+          "text": "For those that like the LLVM/musl/mimalloc choices of chimera, but also want signed commits, signed reviews, container-native design, full source bootstrapping, 100% deterministic builds, and multi-party-signed artifacts check out https://stagex.tools"
+        },
+        {
+          "id": 47758072,
+          "author": "Crontab",
+          "text": "Speaking of OpenZFS encryption, has there ever been any third party review of the source code? Or any testing of any kind of its effectiveness?"
+        }
+      ],
+      "summary_ja": "Chimera LinuxのLLVM/musl/mimalloc設計を認めつつ、より厳格なセキュリティ機能（署名コミットや完全ブートストラップなど）を備えたstagex.toolsを推奨。さらに、OpenZFS暗号化の第三者検証の有無について疑問を提示している。"
+    },
+    {
+      "rank": 15,
+      "id": 47755604,
+      "title_en": "Tax Wrapped 2025",
+      "title_ja": "Tax Wrapped 2025",
+      "url": "https://taxwrapped.com",
+      "hn_url": "https://news.ycombinator.com/item?id=47755604",
+      "score": 76,
+      "comment_count": 36,
+      "posted_at": "2026-04-13T17:52:39+00:00",
+      "comments": [
+        {
+          "id": 47758932,
+          "author": "CobrastanJorji",
+          "text": "It says I contributed money to Humanitarian assistance, but is that based on the budget or based on what was actually spent? Because there's been something of a recent Constitutional problem with budget money not actually being spent on its intended targets."
+        },
+        {
+          "id": 47758103,
+          "author": "wrs",
+          "text": "Editorially, it might be good to point out that government money moves in both directions. I spent $X on interest payments on the national debt, but I also received $Y of those interest payments if I have any Treasuries in my portfolio. Similarly, I might be receiving Social Security or Medicare benefits. Maybe expand this with a second section estimating what you're receiving from the government?"
+        },
+        {
+          "id": 47758826,
+          "author": "ed_balls",
+          "text": ">Just like credit cards, the national debt has interest payments the government needs to pay. Something I learned a few years ago: debt is to national debt what a chair is to an electric chair[1]. Government has to increase monetary base when economy grows. National debt is a good thing, where credit cards are just awful. > Interest doesn't buy anything. It's the price of having spent money we didn't have. And where does interest go? WHERE DOES INTEREST GO? <insert goose chase meme> [1] or java to javascript :)"
+        },
+        {
+          "id": 47757863,
+          "author": "welldoneator",
+          "text": "I _really_ enjoyed this and love the concept! Scrolling on desktop was a little odd, but worked really well otherwise. Content wise it's pretty eye opening just how much of our tax dollars go to things like social security, medicare and interest. Seeing it laid out in the exact dollar amount affecting me is pretty powerful stuff. I wonder how much voting habits would change if this was a common way to communicate the cost of federal programs. I had moments where I was thinking \"why are we not spending more on education!\" as a result as well. Awesome work!"
+        },
+        {
+          "id": 47757914,
+          "author": "atonse",
+          "text": "This is a really cool way to actually educate people about taxes and government spending. It's crazy that our interest payments are so high. I remember when Clinton actually balanced the budget (no deficit), I was a teenager and couldn't care less. But I only a few years ago started to understand how much that sounds like Sci-Fi in this day and age."
+        }
+      ],
+      "summary_ja": "政府支出の透明性と実際の使途への疑問、国債利払いと社会保障給付の双方向の資金移動の明示的必要性、国債の経済的役割と個人債務との違い、税の使途を可視化することで政策への関心や投票行動が変化する可能性、教育費増額の要望、クリントン政権時の均衡財政との対比が議論の要点。"
+    },
+    {
+      "rank": 16,
+      "id": 47729350,
+      "title_en": "I Just Want Simple S3",
+      "title_ja": "ただシンプルなS3が欲しい",
+      "url": "https://blog.feld.me/posts/2026/04/i-just-want-simple-s3/",
+      "hn_url": "https://news.ycombinator.com/item?id=47729350",
+      "score": 68,
+      "comment_count": 26,
+      "posted_at": "2026-04-11T10:36:15+00:00",
+      "comments": [
+        {
+          "id": 47758444,
+          "author": "CobrastanJorji",
+          "text": "This is an interesting write up, but I'm curious about the use case. If you don't need to scale, and you don't need to replicate anything, why do you want S3 specifically? Are you using a tool that wants to write to something S3-like? Do you just like reading and writing objects via HTTP POST and GET? Are you moving an app to or from the cloud?"
+        },
+        {
+          "id": 47758261,
+          "author": "jerf",
+          "text": "I think we get a \"S3 clone\" about once every week or two on the Golang reddit. It strikes me as a classic case of \"we need all the interested people to pull in one project, not each start their own\". AI may have made this worse then ever."
+        },
+        {
+          "id": 47757977,
+          "author": "panarky",
+          "text": "Sounds like you want S4. Super simple storage service."
+        },
+        {
+          "id": 47758758,
+          "author": "amarsahinovic",
+          "text": "S3-compatible storage solution: https://www.hetzner.com/storage/object-storage/"
+        },
+        {
+          "id": 47758693,
+          "author": "uroni",
+          "text": "I made https://github.com/uroni/hs5 -- focus is on single node and high performance. So plenty of alternatives available."
+        }
+      ],
+      "summary_ja": "S3の必要性やユースケースへの疑問から、スケールや複製を必要としない場合のシンプルな代替案（S4や既存のS3互換ストレージ）が提案され、頻出する類似プロジェクトの統合不足が指摘されている。"
+    },
+    {
+      "rank": 17,
+      "id": 47756036,
+      "title_en": "Visualizing CPU Pipelining (2024)",
+      "title_ja": "CPUパイプライン処理の可視化（2024）",
+      "url": "https://timmastny.com/blog/visualizing-cpu-pipelining/",
+      "hn_url": "https://news.ycombinator.com/item?id=47756036",
+      "score": 38,
+      "comment_count": 9,
+      "posted_at": "2026-04-13T18:26:40+00:00",
+      "comments": [
+        {
+          "id": 47757051,
+          "author": "inetknght",
+          "text": "The best presentation I've seen about CPU performance related to pipelining, branch prediction, and speculative execution was Chandler Carruth's \"Going Nowhere Faster\" presentation at CppCon 2017 [0]. I do recommend watching the whole presentation, but if you watch nothing else then just watch the 5 minutes or so from the linked timestamp. [0]: https://youtu.be/2EWejmkKlxs?t=2511"
+        },
+        {
+          "id": 47758090,
+          "author": "smallpipe",
+          "text": "CPUs haven't worked like that in anything but a microcontroller for half a century"
+        },
+        {
+          "id": 47757213,
+          "author": "risingedge",
+          "text": "If anyone is interested, at https://sonic-rv.ics.jku.at/ we built an educational platform for web-based simulation and visualization of RISC-V processor architectures. Our pipeline visualization is reconstructed from real RTL traces (you can run your on programs which are simulated using GHDL). Under examples you can find some different architectures based on the Harris&Harris book on computer architecture."
+        },
+        {
+          "id": 47756861,
+          "author": "empiricus",
+          "text": "Maybe it's just me, but the visualizations do not help me at all."
+        },
+        {
+          "id": 47757618,
+          "author": "jhallenworld",
+          "text": "Now do a dynamic scheduling out of order engine with renaming, 20 pipes, speculative execution and hundreds of instructions in flight. I guess you could make a multi-person game for this."
+        }
+      ],
+      "summary_ja": "Hacker Newsのコメントでは、CPUパイプラインの可視化に関連し、Chandler Carruthの講演「Going Nowhere Faster」の推奨、RISC-Vプロセッサの教育用シミュレーションツールの紹介、可視化手法への懐疑的な意見、現代CPUの複雑さ（動的スケジューリング、投機的実行など）をゲームに例えた指摘が主な議論の要点である。"
+    },
+    {
+      "rank": 18,
+      "id": 47728192,
+      "title_en": "If you started a company two years ago, many assumptions are no longer true",
+      "title_ja": "2年前に起業した場合、多くの前提がもはや成立しない",
+      "url": "https://steveblank.com/2026/03/17/your-startup-is-probably-dead-on-arrival/",
+      "hn_url": "https://news.ycombinator.com/item?id=47728192",
+      "score": 91,
+      "comment_count": 84,
+      "posted_at": "2026-04-11T06:58:59+00:00",
+      "comments": [
+        {
+          "id": 47756848,
+          "author": "karolist",
+          "text": "The post reads like written by someone who read too much about AI rather than tried to build a startup with the help of AI that they advocate so much. I'm still bounded by system design, UX, pricing and feature decisions, if not by the speed of code output, by the review time for sure. Yes, iterating is faster, but we're nowhere near agentic AI loops spitting out working products. Technically it's possible, but then you just spent that time planning and writing the spec up front, which you'd interleave with dev time otherwise. If the product is a simple CRUD database skin, then yeah, chances of success are lower I think, but this is not the type of startups the post seems to write about."
+        },
+        {
+          "id": 47756674,
+          "author": "kdazzle",
+          "text": "> the bottleneck is no longer engineering, it’s ____ 90% of blog articles created in the last two years are probably dead on arrival"
+        },
+        {
+          "id": 47756610,
+          "author": "kristianc",
+          "text": "Well of course it is, most startups are dead on arrival. The big pinch of salt I throw in with advice like this though is that startup failure rate hasn't dramatically shifted despite two decades of lean startup methodology, accelerators, and an entire cottage industry of startup advice. It's never the fault of the framework, mind you."
+        },
+        {
+          "id": 47758740,
+          "author": "psychoslave",
+          "text": "If you started something at some point, many assumptions are no longer true, and might possibly never have been true at any moment. That said, if you believe universe exists, chances are not null that you are correct. But solipsism might actually be right. In case of doubt, remember that your memory might be mere illusions."
+        },
+        {
+          "id": 47756619,
+          "author": "tyleo",
+          "text": "I almost feel like this is always true. Every startup is dead on arrival. Most of them fail. You’ve always needed to constantly learn and innovate to launch a successful business."
+        }
+      ],
+      "summary_ja": "AIを活用したスタートアップの現実的課題として、システム設計やUX、価格設定など従来のボトルネックが依然重要であり、AIによる自動製品開発は未成熟との指摘。大半のスタートアップが失敗する本質的要因（市場適合性の欠如など）は過去20年間変わっておらず、リーン手法やアドバイス産業も失敗率を劇的に改善できていない。起業時の仮説は常に変化・検証が必要で、成功には継続的な学習とイノベーションが不可欠であるとの認識が共有されている。AIの可能性を過度に楽観視する論調への懐疑が根底にある。"
+    },
+    {
+      "rank": 19,
+      "id": 47743728,
+      "title_en": "Tracking down a 25% Regression on LLVM RISC-V",
+      "title_ja": "LLVM RISC-Vの25%性能低下問題を追跡",
+      "url": "https://blog.kaving.me/blog/tracking-down-a-25-regression-on-llvm-risc-v/",
+      "hn_url": "https://news.ycombinator.com/item?id=47743728",
+      "score": 76,
+      "comment_count": 19,
+      "posted_at": "2026-04-12T19:52:58+00:00",
+      "comments": [
+        {
+          "id": 47757230,
+          "author": "LeFantome",
+          "text": "This could have been a story about any ISA but it warms my heart to see RISC-V optimizations like this appearing bit by bit every day. RISC-V chips that are fast enough to get used are appearing now and, when they do, the software ecosystem is going to be ready to meet it. In the past, the hardware usually came first with the software slow to appear after. This time, it is happening the other way around."
+        },
+        {
+          "id": 47758236,
+          "author": "AymanB",
+          "text": "Thanks for the blog, I really enjoyed it. Good work. This just makes me appreciate and love compilers even more, they are a fascinating piece of software."
+        },
+        {
+          "id": 47755153,
+          "author": "szmarczak",
+          "text": "SVGs on Firefox are broken (like 0.1% of the size it needs to be)."
+        },
+        {
+          "id": 47755022,
+          "author": "brcmthrowaway",
+          "text": "This really shouldn't be free work."
+        }
+      ],
+      "summary_ja": "RISC-Vの最適化が進み、従来のハードウェア先行とは逆にソフトウェアエコシステムが先に整備されつつある現状を評価し、将来への期待が示されている。同時に、コンパイラへの関心や無償作業への疑問も付随する。"
+    },
+    {
+      "rank": 20,
+      "id": 47746610,
+      "title_en": "All elementary functions from a single binary operator",
+      "title_ja": "単一の二項演算子から全ての初等関数を導出",
+      "url": "https://arxiv.org/abs/2603.21852",
+      "hn_url": "https://news.ycombinator.com/item?id=47746610",
+      "score": 777,
+      "comment_count": 247,
+      "posted_at": "2026-04-13T01:49:32+00:00",
+      "comments": [
+        {
+          "id": 47756403,
+          "author": "SideQuark",
+          "text": "This isn't unique, or even the least compute way to do this. For example, let f(x,y) = 1/(x-y). This too is universal. I think there's a theorem stating for any finite set of binary operators there is a single one replacing it. write x#y for 1/(x-y). x#0 = 1/(x-0) = 1/x, so you get reciprocals. Then (x#y)#0 = 1/((1/(x-y)) - 0) = x-y, so subtraction. it's common problem to show in any (insert various algebraic structure here ) inverse and subtraction gives all 4 elementary ops. I haven't checked this carefully, but this note seems to give a short proof (modulo knowing some other items...) https://dmg.tuwien.ac.at/goldstern/www/papers/notes/singlebi..."
+        },
+        {
+          "id": 47747467,
+          "author": "entaloneralie",
+          "text": "This is amazing! I love seeing FRACTRAN-shaped things on the homepage :) This reminds me of how 1-bit stacks are encoded in binary: A stack of zeros and ones can be encoded in a single number by keeping with bit-shifting and incrementing. Pushing a 0 onto the stack is equivalent to doubling the number. Pushing a 1 is equivalent to doubling and adding 1. Popping is equivalent to dividing by 2, where the remainder is the number. I use something not too far off for my daily a programming based on a similar idea: Rejoice is a concatenative programming language in which data is encoded as multisets that compose by multiplication. Think Fractran, without the rule-searching, or Forth without a stack. https://wiki.xxiivv.com/site/rejoice"
+        },
+        {
+          "id": 47747965,
+          "author": "eugene3306",
+          "text": "This makes a good benchmark LLMs: ``` look at this paper: https://arxiv.org/pdf/2603.21852 now please produce 2x+y as a composition on EMLs ``` Opus(paid) - claimed that \"2\" is circular. Once I told it that ChatGPT have already done this, finished successfully. ChatGPT(free) - did it from the first try. Grok - produced estimation of the depth of the formula. Gemini - success Deepseek - Assumed some pre-existing knowledge on what EML is. Unable to fetch the pdf from the link, unable to consume pdf from \"Attach file\" Kimi - produced long output, stopped and asked to upgrade GLM - looks ok"
+        },
+        {
+          "id": 47754382,
+          "author": "karpathy",
+          "text": "All possible 36 distinct level-2 eml functions of one variable (the first 18 of them with entirely Real outputs, the other 18 with \"intermediate\" complex-valued components): https://imgur.com/a/K7AoOFi"
+        },
+        {
+          "id": 47747539,
+          "author": "lioeters",
+          "text": "> A calculator with just two buttons, EML and the digit 1, can compute everything a full scientific calculator does Reminds me of the Iota combinator, one of the smallest formal systems that can be combined to produce a universal Turing machine, meaning it can express all of computation."
+        }
+      ],
+      "summary_ja": "単一の二項演算子から初等関数を構築するという主張に対し、同様の普遍性を持つ別の演算子（例：f(x,y)=1/(x-y)）が存在するという指摘がなされている。また、この概念はFRACTRANやスタックエンコーディング、Iotaコンビネータなど他の最小計算体系との類似性が指摘され、LLMのベンチマークとしても利用されている。"
+    },
+    {
+      "rank": 21,
+      "id": 47755573,
+      "title_en": "New Orleans's Car-Crash Conspiracy",
+      "title_ja": "ニューオーリンズの自動車事故陰謀説",
+      "url": "https://www.newyorker.com/magazine/2026/04/20/the-car-crash-conspiracy",
+      "hn_url": "https://news.ycombinator.com/item?id=47755573",
+      "score": 38,
+      "comment_count": 11,
+      "posted_at": "2026-04-13T17:50:56+00:00",
+      "comments": [
+        {
+          "id": 47758806,
+          "author": "hydrogen7800",
+          "text": "Interesting read. This may be unfair to Louisiana based on this case, but I've heard the USA described as a federation of a bunch of states and some 3rd world countries."
+        },
+        {
+          "id": 47757752,
+          "author": "randycupertino",
+          "text": "Note the owner of the auto body shop and alleged leader of the fraud ring was indicted for murdering one of his co-conspirators who flipped and was becoming a witness: https://www.wwltv.com/article/news/local/witness-in-louisian... > Ryan Harris and Jovanna Gardner were indicted Monday for witness tampering through murder and conspiracy to retaliate against a witness through murder in addition to mail and wire fraud for their alleged participation in the staged wrecks. > The pair are accused in the Sept. 22, 2020, execution-style shooting of Cornelius Garrison, who had secretly been cooperating with the FBI, was a major setback as authorities tried to climb the ladder from small-time scammers and street-level organizers to the attorneys and doctors whom they say raked in millions of dollars through bogus lawsuits and even unnecessary surgeries. > So far, the case has led to 52 people being indicted and 44 of them pleading guilty, but only a single attorney, Danny Patrick Keating, has entered a guilty in exchange for his cooperation."
+        },
+        {
+          "id": 47758257,
+          "author": "inejge",
+          "text": "https://archive.ph/yvUA3"
+        },
+        {
+          "id": 47757701,
+          "author": "selimthegrim",
+          "text": "It sure would be nice if we had an actual economy around here. That being said, I have definitely been given a speeding ticket by state police on that stretch of I-10 well before this all happened, and when I had a car crash under the Claiborne expressway on the Sundays when people drag race under the bridge I assure you these \"runners\" were nowhere to be found. Possibly because the local biker gang whose bikes the other party hit before me dragged him back to the scene of the accident for the responding officer to interview. I do remember someone in the crowd that helped me open my door saying “oh you hurt? Oh you got hurt you got hurt bad you got hurt in your spine, etc..” kind of prompting me and/or fishing for a response so who knows if that was them or just that the general mentality has permeated the community."
+        },
+        {
+          "id": 47757807,
+          "author": "themafia",
+          "text": "> and today’s large trucks are so computerized that they operate almost like airplanes Nonsense. Almost no vehicle even comes with anything like this installed. Some carriers will add driver monitoring computers, and they will emit tones under certain conditions, hard breaking, lane departure, too little following distance; however, to compare these simple alerts to the level of automation in an aircraft is just daffy. Just finding a GPS that understands vehicle heights and bridge underpass limits is still a significant challenge. So these are never built into any truck I've ever seen. Every driver has a third party device connected up for this purpose. Since those do a terrible job with satellite views most drivers _also_ use a cellphone for the additional navigation assistance it can provide. On top of that you have things like Jake Breaks, Air Suspension controls, and Differential controls that are important for operating the vehicle but are not at all automated. Another factor is weight distribuiton. The truck has nothing for this. After you pick up your load you're probably going to hit a Love's or other fuel station so you can use the CAT scale to weigh your truck. If there is too much weight on one axle you need to move your tandems to redistribute the weight. You can be underweight but still get an overweight ticket if you don't manage this correctly. California has specific limits as to how far your axle can be from your kingpin."
+        }
+      ],
+      "summary_ja": "ニューオーリンズの自動車事故詐欺事件は組織的で証人殺害まで発展し、52人起訴・44人有罪となった。地域の経済不振が背景にあり、事故現場で怪我を誇張するようなメンタリティが浸透している可能性が指摘される。また、記事中の大型トラックの高度な自動化に関する記述は実際とは異なり、運転手の手動管理が必要だとの反論も含まれる。"
+    },
+    {
+      "rank": 22,
+      "id": 47752466,
+      "title_en": "MEMS Array Chip Can Project Video the Size of a Grain of Sand",
+      "title_ja": "砂粒サイズの映像投影可能なMEMSアレイチップ",
+      "url": "https://spectrum.ieee.org/mems-photonics",
+      "hn_url": "https://news.ycombinator.com/item?id=47752466",
+      "score": 72,
+      "comment_count": 32,
+      "posted_at": "2026-04-13T14:26:02+00:00",
+      "comments": [
+        {
+          "id": 47755855,
+          "author": "jmward01",
+          "text": "I wonder if this has implications for custom home chips/prototyping. I'm sure a big issue is vibrations but something like this could remove the need for masks at least. (again, not my area so I am clobbering terminology I am sure). It may open up home fab capabilities."
+        },
+        {
+          "id": 47755894,
+          "author": "antimatter15",
+          "text": "This reminds me of the original patents that Magic Leap had, which involved pumping light through a single optical fiber that was wiggled by piezoelectrics into a spiral to project light ( https://kguttag.com/2018/01/06/magic-leap-fiber-scanning-dis... )."
+        },
+        {
+          "id": 47757290,
+          "author": "jcims",
+          "text": "Seems like you could put a few of these on a contact lens and minimally get a small private HUD. Seems like with a few of them (or fast enough scanning speed) you could build effectively a light field to give it depth)"
+        },
+        {
+          "id": 47754065,
+          "author": "dmitrygr",
+          "text": "What is this, a movie theater for ants?"
+        },
+        {
+          "id": 47755543,
+          "author": "CoolThings",
+          "text": "This might be relevant for Augmented Reality headgear."
+        }
+      ],
+      "summary_ja": "超小型MEMSアレイチップによる映像投影技術は、AR機器やコンタクトレンズ型HUDへの応用、さらには家庭でのチップ試作の可能性を開くものとして注目されている。"
+    },
+    {
+      "rank": 23,
+      "id": 47755209,
+      "title_en": "B-trees and database indexes (2024)",
+      "title_ja": "B木とデータベースインデックス（2024）",
+      "url": "https://planetscale.com/blog/btrees-and-database-indexes",
+      "hn_url": "https://news.ycombinator.com/item?id=47755209",
+      "score": 57,
+      "comment_count": 26,
+      "posted_at": "2026-04-13T17:22:31+00:00",
+      "comments": [
+        {
+          "id": 47756976,
+          "author": "bddicken",
+          "text": "Oh hey, I wrote this! Happy to chat more about the article here. Databases are kinda my thing."
+        },
+        {
+          "id": 47756858,
+          "author": "game_the0ry",
+          "text": "This has been post before, but planetscale also has a great sql for developers course: https://planetscale.com/learn/courses/mysql-for-developers"
+        },
+        {
+          "id": 47757966,
+          "author": "traderj0e",
+          "text": "I've known for a long time that you usually want b-tree in Postgres/MySQL, but never understood too well how those actually work. This is the best explanation so far. Also, for some reason there have been lots of HN articles incorrectly advising people to use uuid4 or v7 PKs with Postgres. Somehow this is the first time I've seen one say to just use serial."
+        },
+        {
+          "id": 47757445,
+          "author": "daneel_w",
+          "text": "\"The deeper the tree, the slower it is to look up elements. Thus, we want shallow trees for our databases!\" With composite indices in InnoDB it's even more important to keep the tree streamlined and let it fan out according to data cardinality: https://news.ycombinator.com/item?id=34404641"
+        },
+        {
+          "id": 47757198,
+          "author": "whartung",
+          "text": "I keep hearing about the downside of B(+)-Trees for DBs, that they have issues for certain scenarios, but I've never seen a simple, detailed list about them, what they are, and the scenarios they perform badly in."
+        }
+      ],
+      "summary_ja": "B木の仕組みについての解説記事を評価し、浅い木構造がデータベースの検索性能向上に重要と指摘。また、B木/B+木の特定シナリオでの欠点について、具体的な情報不足を問題提起している。"
+    },
+    {
+      "rank": 24,
+      "id": 47757552,
+      "title_en": "Show HN: Continual Learning with .md",
+      "title_ja": "Show HN: .mdを使った継続的学習",
+      "url": "https://github.com/SunAndClouds/ReadMe",
+      "hn_url": "https://news.ycombinator.com/item?id=47757552",
+      "score": 8,
+      "comment_count": 2,
+      "posted_at": "2026-04-13T20:42:19+00:00",
+      "comments": [
+        {
+          "id": 47758386,
+          "author": "namanyayg",
+          "text": "I've seen a lot of such systems come and go. One of my friends is working on probably the best (VC-funded) memory system right now. The problem always is that when there are too many memories, the context gets overloaded and the AI starts ignoring the system prompt. Definitely not a solved problem, and there need to be benchmarks to evaluate these solutions. Benchmarks themselves can be easily gamed and not universally applicable."
+        },
+        {
+          "id": 47758335,
+          "author": "sudb",
+          "text": "I really like the simplicity of this! What's retrieval performance and speed like?"
+        }
+      ],
+      "summary_ja": "継続学習システムでは、記憶が増えるとコンテキスト過負荷でAIがプロンプトを無視する問題が未解決と指摘。評価のためのベンチマークが必要だが、ゲームされやすく万能ではない。一方で本システムの簡潔さは評価されるが、検索性能と速度への疑問も提起されている。"
+    },
+    {
+      "rank": 25,
+      "id": 47754379,
+      "title_en": "The Future of Everything Is Lies, I Guess: Safety",
+      "title_ja": "全ての未来は嘘になる？：安全性をめぐって",
+      "url": "https://aphyr.com/posts/417-the-future-of-everything-is-lies-i-guess-safety",
+      "hn_url": "https://news.ycombinator.com/item?id=47754379",
+      "score": 254,
+      "comment_count": 148,
+      "posted_at": "2026-04-13T16:23:09+00:00",
+      "comments": [
+        {
+          "id": 47756998,
+          "author": "dredmorbius",
+          "text": "Other articles in this series discussed over the past five days: 1. Introduction: < https://news.ycombinator.com/item?id=47689648 > (619 comments) 2. Dynamics: < https://news.ycombinator.com/item?id=47693678 > (0 comments) 3. Culture: < https://news.ycombinator.com/item?id=47703528 > 4. Information Ecology: < https://news.ycombinator.com/item?id=47718502 > (106 comments) 5. Annoyances: < https://news.ycombinator.com/item?id=47730981 > (171 comments) 6. Psychological Hazards: < https://news.ycombinator.com/item?id=47747936 > (0 comments) And this submission makes: 7. Safety: < https://news.ycombinator.com/item?id=47754379 > (89 comments, presently). There's also a comprehensive PDF version for those who prefer that kind of thing: < https://aphyr.com/data/posts/411/the-future-of-everything-is... > (PDF) 26 pp. (Derived from aphyr's comment: < https://news.ycombinator.com/item?id=47754834 >.)"
+        },
+        {
+          "id": 47755823,
+          "author": "jagged-chisel",
+          "text": "\"Alignment\" In what world would I ever expect a commercial (or governmental) entity to have precise alignment with me personally, or even with my own business? I argue those relationships are necessarily adversarial, and trusting anyone else to align their \"AI\" tool to my goals, needs, and/or desires is a recipe for having my livelihood completely reassigned into someone else's wallet."
+        },
+        {
+          "id": 47755646,
+          "author": "philipkglass",
+          "text": "In short, the ML industry is creating the conditions under which anyone with sufficient funds can train an unaligned model. Rather than raise the bar against malicious AI, ML companies have lowered it. This is true, and I believe that the \"sufficient funds\" threshold will keep dropping too. It's a relief more than a concern, because I don't trust that big models from American or Chinese labs will always be aligned with what I need. There are probably a lot of people in the world whose interests are not especially aligned with the interests of the current AI research leaders. \"Don't turn the visible universe into paperclips\" is a practically universal \"good alignment\" but the models we have can't do that anyhow. The actual refusal-guards that frontier models come with are a lot more culturally/historically contingent and less universal. Lumping them all under \"safety\" presupposes the outcome of a debate that has been philosophically unresolved forever. If we get hundreds of strong models from different groups all over the world, I think that it will improve the net utility of AI and disarm the possibility of one lab or a small cartel using it to control the rest of us."
+        },
+        {
+          "id": 47754532,
+          "author": "Cynddl",
+          "text": "> \"Unavailable Due to the UK Online Safety Act\" Anyone outside the UK can share what this is about?"
+        },
+        {
+          "id": 47754588,
+          "author": "macintux",
+          "text": "Previous discussions from earlier posts on the topic: * https://news.ycombinator.com/item?id=47703528 * https://news.ycombinator.com/item?id=47730981"
+        }
+      ],
+      "summary_ja": "AIの安全性とアラインメントに関する議論。企業や政府のAIが個人や他企業の利益と一致するのは困難で、関係は対立的。ML業界は悪意あるAIの作成ハードルを下げ、多様なAIモデルの存在が単一支配を防ぎ有用性を高めるとの指摘。文化的背景に依存する現行の安全策や哲学的な未解決問題も課題。"
+    },
+    {
+      "rank": 26,
+      "id": 47752819,
+      "title_en": "Make tmux pretty and usable (2024)",
+      "title_ja": "tmuxを美しく使いやすく（2024）",
+      "url": "https://hamvocke.com/blog/a-guide-to-customizing-your-tmux-conf/",
+      "hn_url": "https://news.ycombinator.com/item?id=47752819",
+      "score": 281,
+      "comment_count": 189,
+      "posted_at": "2026-04-13T14:48:55+00:00",
+      "comments": [
+        {
+          "id": 47753032,
+          "author": "ndr",
+          "text": "I gave up on it once I discovered https://zellij.dev/ Just even for how tab and panes are setup, and how it's good for scrolling and text selection with your mouse for copy pasting."
+        },
+        {
+          "id": 47753726,
+          "author": "imankulov",
+          "text": "I left tmux for zellij after several unsuccessful attempts to get Shift+Enter working. Was quite impressed initially and invested weeks in building new muscle memory, but somehow Zellij crashed with panic more than once, leaving all my processes orphaned. Decided to go back to tmux, and found a simple fix for my Shift+Enter issue. In case anyone is looking for it, the fix is \"bind-key -T root S-Enter send-keys C-j\" borrowed from https://github.com/anthropics/claude-code/issues/6072 ."
+        },
+        {
+          "id": 47754123,
+          "author": "johnfn",
+          "text": "Guys, did you know about tmux control mode? It tells the host terminal to treat tmux tabs as actual tabs in the terminal. That means that things like scrollback, tab navigation, copy paste, keyboard shortcuts, etc are all handled natively, and you can visually see all your tmux tabs! It doesn't have great support across all terminals, but it does work great in iTerm 2. Try `tmux -CC` in iTerm. For a tmux novice like me, this was a total game changer :)"
+        },
+        {
+          "id": 47755384,
+          "author": "sva_",
+          "text": "For me, this is missing bind-key -n M-n new-window bind-key -n M-1 select-window -t :1 bind-key -n M-2 select-window -t :2 bind-key -n M-3 select-window -t :3 bind-key -n M-4 select-window -t :4 bind-key -n M-5 select-window -t :5 bind-key -n M-6 select-window -t :6 bind-key -n M-7 select-window -t :7 bind-key -n M-8 select-window -t :8 bind-key -n M-9 select-window -t :9 To switch around quick. So on my system I've got Super-{1-9} for workspaces, Alt-{1-9} for tmux panes. Also if you want a vi-like copy mode (where you can select and copy stuff) that opens using Alt-/: bind-key -n M-/ copy-mode set -g status-keys vi set-window-option -g mode-keys vi # v to trigger selection bind-key -T copy-mode-vi v send-keys -X begin-selection # wl-copy if you use wayland # mouse selection in copy mode to copy bind-key -T copy-mode-vi MouseDragEnd1Pane send -X copy-pipe-and-cancel \"wl-copy\" # y to copy bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel \"wl-copy\" And btw, Ctrl-Shift-v to paste system clipboard You can also put the config into ~/.config/tmux/tmux.conf edit: And if you want a powerline-style design: set -g pane-border-style \"fg=colour252\" set -g pane-active-border-style \"fg=colour25\" set -g status-style \"bg=default,fg=default\" set -g status-left \"#[fg=colour231,bg=colour25,bold] #S #[fg=colour25,bg=default,nobold]\" set -g status-right \"#[fg=colour67,bg=default]#[fg=colour231,bg=colour67] %Y-%m-%d %H:%M #[fg=colour25,bg=colour67]#[fg=colour231,bg=colour25,bold] #h \" setw -g window-status-format \"#[fg=colour243,bg=default] #I #W \" setw -g window-status-current-format \"#[fg=colour28,bg=default,reverse]#[fg=colour231,bg=colour28,bold,noreverse] #I #W #[fg=colour28,bg=default,noreverse]\" Requires powerline-fonts"
+        },
+        {
+          "id": 47753318,
+          "author": "alecsm",
+          "text": "I had my tmux customized to the point I forgot how to use it on a clean install which is a problem when I'm sshing into a server. I wish it had better defaults but now I run it as is. After a while you get used to it. The only thing I always have to change is the mouse scroll and my brain cannot retain the exact command."
+        }
+      ],
+      "summary_ja": "tmuxのカスタマイズ方法や代替ツールZellijに関する議論。Zellijは操作性が良いがクラッシュの問題があり、tmuxに戻る例も。tmux control modeによるネイティブ統合や、キーバインディング・見た目のカスタマイズ設定が共有される。一方、過度なカスタマイズは標準環境での使用を難しくする課題も指摘されている。"
+    },
+    {
+      "rank": 27,
+      "id": 47751936,
+      "title_en": "Microsoft isn't removing Copilot from Windows 11, it's just renaming it",
+      "title_ja": "Microsoft、Windows 11からCopilotを削除せず名称変更のみ",
+      "url": "https://www.neowin.net/opinions/microsoft-isnt-removing-copilot-from-windows-11-its-just-renaming-it/",
+      "hn_url": "https://news.ycombinator.com/item?id=47751936",
+      "score": 302,
+      "comment_count": 213,
+      "posted_at": "2026-04-13T13:48:24+00:00",
+      "comments": [
+        {
+          "id": 47753457,
+          "author": "wing-_-nuts",
+          "text": "I have windows on my desktop pc because it's easier to get executable mods (downgraders, engine fixes, etc) working on windows than linux. There's also the matter of 'kernel level anti-cheat' games not working. But if I just judge windows vs linux, on even ground, W11 is painful . I've main'd linux on my laptop for ~ 25 years. There was a time when it was a jank experience that I put up with for better devex, but that ended in the late 00's. From that point forward, unless you were trying to get bleeding edge hardware to work, linux has been hands down better. It's enough that I've considered giving up online play all together just to have a nicer computing experience."
+        },
+        {
+          "id": 47756738,
+          "author": "WhiteDawn",
+          "text": "Microsoft put AI, Tabs, a login portal, a 'search with bing' action and text formatting on notepad before a 'redo' button to pair with the 'undo' action. That says everything about the current product priorities that you need to know."
+        },
+        {
+          "id": 47752724,
+          "author": "lemonish97",
+          "text": "From the article: \"Additionally, AI features in Notepad settings has been renamed to Advanced features and it allows users to toggle off AI capabilities within the app.\" I honestly don't mind this, as long as it's not being forced. And I believe this feature exists only within their npu PCs."
+        },
+        {
+          "id": 47754201,
+          "author": "rdiddly",
+          "text": "So they didn't remove it, they just renamed it? Reminds me of that time we fixed racism by renaming the master branch to main."
+        },
+        {
+          "id": 47757424,
+          "author": "kccqzy",
+          "text": "> At this point, Microsoft is walking a tightrope. It cannot appease everyone since it also has its shareholders and investors to think about, but then there's also a rather large Windows 11 user base which really is fed up of AI experiences being shoved down its throats. Are shareholders and investors stupid enough to think that AI hated by users is still desirable?"
+        }
+      ],
+      "summary_ja": "Windows 11のCopilot改名は本質的な改善ではなく、AI機能の強要に対するユーザーの反発を和らげる表面的対応と批判されている。NotepadでのAI優先などMicrosoftの製品方針への不満が多く、Linuxと比べてWindows 11の体験が劣るとの指摘もある。Microsoftは株主の期待とユーザーの不満の間で板挟み状態だ。"
+    },
+    {
+      "rank": 28,
+      "id": 47756672,
+      "title_en": "The looming college-enrollment death spiral",
+      "title_ja": "迫り来る大学入学者数デススパイラル",
+      "url": "https://www.theatlantic.com/ideas/2026/04/college-enrollment-demographic-cliff/686750/",
+      "hn_url": "https://news.ycombinator.com/item?id=47756672",
+      "score": 79,
+      "comment_count": 84,
+      "posted_at": "2026-04-13T19:18:34+00:00",
+      "comments": [
+        {
+          "id": 47757420,
+          "author": "seniorThrowaway",
+          "text": "I think college's value proposition and entire model has been eroded. Major school's CS grads are finding jobs upon graduation at an 11% rate (I don't have the primary source on this, but it is published by a site I read that never fudges these kinds of things, going back many years). AI probably has a lot to do with that, but it's exposing something more fundamental. CS wasn't supposed to be a programming boot camp anyway, it is at its heart an academic degree much close to pure mathematics than programming. Maybe it should go back to that? Maybe college never should have been for everyone? That was the norm for the vast majority of the existence of higher education. Maybe we don't need gleaming campus' with huge facilities overhead costs? When storing knowledge required physical books it made sense to build learning facilities around large libraries, but that hasn't been the case for decades now. Should young people really be taking on life long non-dischargeable debt for a glorified high school diploma? I think the answer is no, they shouldn't, and that the entire college bubble needs to be popped."
+        },
+        {
+          "id": 47756950,
+          "author": "ks2048",
+          "text": "Right in the headline is a word choice I've notice lately that irks me, \"democratization\". \"democratization\" doesn't mean more people have access to it. In voting, \"more access\" means \"more governing power\" (in principle), but in other things, it does not. If you want to use \"democratized\" applied to higher-ed, it would mean more people are involved in the decision-making, leadership, or ownership."
+        },
+        {
+          "id": 47757241,
+          "author": "brd529",
+          "text": "Isn’t there a strong argument that we put too many students in debt with a partially completed or useless degree in a well meaning push for “college for all”? The triumph the author describes - an increase in colleges - came at the expense of a reduction in vocational schools and programs."
+        },
+        {
+          "id": 47757702,
+          "author": "ProllyInfamous",
+          "text": "If you are choosing to still attend college, my advice would be to get an A.B.E.T-accredited degree, to fall back upon (I have a non-BE science degree from a prestigious US institution == essentially worthless). Being an engineer vs. being an engineer tech is a substantially life-quality difference. But only if you choose to attend (I would not re-attend)."
+        },
+        {
+          "id": 47758069,
+          "author": "danny_codes",
+          "text": "IMO we should pay adults to go back to school. Make all public universities free and pay a living stipend. Give additional stipends for dependents. Easy win for everyone."
+        }
+      ],
+      "summary_ja": "大学教育の価値低下、就職率の低さ、「全員に大学」政策の弊害、高額学費問題を指摘。職業教育の重視や大学制度の抜本的改革を訴える議論。"
+    },
+    {
+      "rank": 29,
+      "id": 47751621,
+      "title_en": "Initial mainline video capture and camera support for Rockchip RK3588",
+      "title_ja": "Rockchip RK3588向けメインライン動画キャプチャとカメラサポートの初期実装",
+      "url": "https://www.collabora.com/news-and-blog/news-and-events/mainline-video-capture-and-camera-support-for-rockchip-rk3588.html",
+      "hn_url": "https://news.ycombinator.com/item?id=47751621",
+      "score": 67,
+      "comment_count": 21,
+      "posted_at": "2026-04-13T13:23:50+00:00",
+      "comments": [
+        {
+          "id": 47753490,
+          "author": "Aurornis",
+          "text": "Great to see progress on mainlining more support for common and powerful chips. The work required to get this one piece into mainline over 5-6 years reveals why most chip vendors aren’t aiming for mainline by default: > A few iterations of the rkcif driver later, the basic driver providing support for the PX30 VIP and the RK3568 VICAP was accepted (October 2025). After more than five years of development, including 25 iterations and three renamings, this was a major milestone. On the other hand, there was still a lot to do, of course. For instance, the Rockchip MIPI CSI-2 receiver unit that is coupled closely to the VICAP required a mainline driver as well. It’s never as simple as submitting existing work upstream and making a few changes. It takes a lot of development and a willingness to rewrite everything, possibly multiple times, to track the goals of upstream."
+        },
+        {
+          "id": 47754552,
+          "author": "4fterd4rk",
+          "text": "I guess I don't understand... why would the SOC manufacturer spend the money on integrating this stuff if they don't intend on also spending the money to enable it on the software side?"
+        },
+        {
+          "id": 47756519,
+          "author": "ACCount37",
+          "text": "Good. Video capture on second grade Linux SoCs is hell - lots of blobs and weird custom vendor SDKs that work with the vendor's own happy path use case demos and nothing else. I hope that the more SoCs get mainline V4L2, the more likely the future SoCs are going to be to use it instead of doing something non-standard and awful."
+        },
+        {
+          "id": 47754488,
+          "author": "bullen",
+          "text": "Some 3588 CMs are sold out. So it might be too late as 3688 will be too hot... Just like routers get dd-wrt when sold out!"
+        },
+        {
+          "id": 47755344,
+          "author": "jauntywundrkind",
+          "text": "Worth noting that, well, alas, camera support is incredibly incredibly incredibly cursed, period. It feels like, broadly, with all the image blocks, everyone makes really neat really good hardware thats chock-a-block full of capabilities that are un- or poorly documented or really hard to support for reasons, etc. Its a pretty bespoke high throughput pipeline with a lot of special domain knowledge very unlike anything else on computing. Intel's IPU6 has been a ~4 year travail to get going (thankfully IPU7 landed fairly quickly however!) https://www.phoronix.com/news/Intel-IPU6-Camera-Challenge-25 https://www.phoronix.com/news/Intel-IPU7-Linux-6.17 AMD similarly has only just gotten the Strix Halo ISP near working: https://www.phoronix.com/news/AMD-ISP4-For-Linux-7.2 The whole video world seems like a nightmare. Difficult world of hardware. Just the worst Intellectual Property hostage taking banditry from awful awful valent legally predatory people everywhere, a dark forest ready to leap out of the dark and attack you if you dare use a computing to deal in bits that represent moving images."
+        }
+      ],
+      "summary_ja": "Rockchip RK3588のメインラインカメラサポート実装までの長期開発と多大な労力が、チップベンダーがメインラインを避ける理由を示す。SoCのビデオキャプチャは非標準SDKやバイナリブロブが多く困難であり、カメラサポート全般がハードウェアの複雑さや知的財産問題で悪名高い。メインラインV4L2の拡大が将来のSoC標準化を促すことが期待される。"
+    },
+    {
+      "rank": 30,
+      "id": 47752884,
+      "title_en": "This year’s insane timeline of hacks",
+      "title_ja": "今年発生したハッキング事件の異常なタイムライン",
+      "url": "https://ringmast4r.substack.com/p/we-may-be-living-through-the-most",
+      "hn_url": "https://news.ycombinator.com/item?id=47752884",
+      "score": 251,
+      "comment_count": 163,
+      "posted_at": "2026-04-13T14:53:05+00:00",
+      "comments": [
+        {
+          "id": 47754766,
+          "author": "iainctduncan",
+          "text": "As part of my work in technical diligence, I create medium-long form content marketing material on topics germane to PE investment in tech. In the last six months I did a series (not yet published) on the state of security in the age of gen-AI. Basically, we are entering the ransomware apocalypse. It is insane what a godsend gen-AI has been to the cybercrime sector. When all you need to do is make something good enough to fool some of the people some of the time, genAI is perfect . Things that used to work reliably - like trusting google ads or sponsored links not to be malvertizing sites - are meaningless now that gangs can trivially spin up networks of thousands of fake interacting sites and linked profiles to sneak by fraud detection. Phishing attacks are ridiculously sophisticated, combining voice, text, and video impersonation. Supply chain attacks are going to mean package managers are handgrenades. Ransomware gangs are running full on SaSS services allowing script kiddies access to big gun material. Attacks that were previously only in reach of nation-state-sponsored actors are now available for peanuts. And all of this is going to worse because of everyone and their dog using gen-AI to pump out huge amounts of vulnerable code. And then there is the world of prompt engineering for data exfiltration... If you are young and wanting a promising trade in tech, security would absolutely be a good choice. Shit is going to get CRAZY."
+        },
+        {
+          "id": 47754757,
+          "author": "ckcheng",
+          "text": "The strangest thing I found is: > on April 7, 2026 … U.S. Treasury Secretary Scott Bessent and Federal Reserve Chair Jerome Powell convened an urgent, in-person meeting in Washington with the chief executives of [major US banks] to brief them directly on the cyber risks posed by [Anthropic’s] Mythos Then a similar meeting happened with the Canadian Financial Sector Resiliency Group (i.e. the Bank of Canada, the Canadian government’s Department of Finance, the Canadian Deposit Insurance Corporation (Canada’s FDIC) and Canada’s six major banks). Multiple central banks don’t usually do that right? https://www.ctvnews.ca/sci-tech/article/anthropics-new-ai-mo..."
+        },
+        {
+          "id": 47756197,
+          "author": "Animats",
+          "text": "Almost all those events were on Hacker News. This hasn't been a secret. Companies need to get serious about levels of security. Only some things need to be protected, and you have to accept a substantial level of inconvenience and cost for those items. In my aerospace days, we had a bidding rule of thumb that running a project at SECRET doubled the cost. Running a project at TOP SECRET had an even bigger cost multiplier. A surprising amount of material was not classified at all, for cost reasons. Banks and credit card processors get this. Most other businesses don't."
+        },
+        {
+          "id": 47758454,
+          "author": "xtracto",
+          "text": "I wonder, how long until that certain CrowdStrike kernel level plugin that brought down a third of the world's Windows comptuers gets hijacked by a malicious actor."
+        },
+        {
+          "id": 47757368,
+          "author": "xtracto",
+          "text": "A couple of days ago I was thinking about something related to this: How would the \"computing\" space look like once we get to the ultimate evolution/development of the AI/LLMs or whatever comes after it? Say in 10 years, once we have things like a Claude Mythos (or better) model running on \"real time\" at the speed of how Taalas runs ollama now. I have a feeling that \"cyberspace\" (however we want to call it) won't matter anymore. \"Computing\" won't matter anymore. Say, I want to implement a Massive Multiplayer Lemmings like game, it's done at the snap of my fingers. Say I want to find a way to \"crack\" X software? done. Say I want to find a vulnerability in Y website? easy peasy. Say I want to build a \"Powerpoint\" clone, done (not that it matters, as making a presentation will be as simple as saying \"Mythos5, make a presentation about X,Y,Z with nice and meaningful transitions\". Same with music, video, images, etc. Once everything can be created automagically... what happens? (say, \"Make me a film like the original John Wick but with the wit and style of Kingsman, make a young Sean Connery the main actor). So, ultimately cyberspace will be so chaotic with the current \"rails\", that it will be completely different to what we know now. At the risk of being booed here in HN, I also have a hunch that the more we go there, the more stuff like \"trustless computing\" or \"proof of N\" (having to SPEND something, some real life, finite effort, to do things online) will gain more force. Somehow, Hashcash was conceived to deal with spam/automation type of attacks, so I assume a version of that will have to be used to \"structure\" Cyberspace in the future. My hypothesis is that this will take us back to \"the real world\" due to \"surfeit\": Kind of what happens once you add a \"trainer\" to a game and suddenly you have all the money/resources, and then it becomes boring. Once the \"digital\" stuff is solved, we will go back to the real world. Very exciting times."
+        }
+      ],
+      "summary_ja": "生成AIの進展によりサイバー犯罪が高度化・普遍化し、ランサムウェアやフィッシング攻撃が激増している。企業はセキュリティ対策に本腰を入れる必要があるが、コストと利便性のトレードオフが現実的な課題だ。将来のAI発展はサイバースペースを一変させ、実世界のリソースを基盤とした信頼性確保が重要となる可能性がある。"
+    }
+  ]
+}
