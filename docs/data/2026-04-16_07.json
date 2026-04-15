@@ -1,0 +1,957 @@
+{
+  "date": "2026-04-16T00:00:00+09:00",
+  "slot": "07",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 47769089,
+      "title_en": "Cybersecurity looks like proof of work now",
+      "title_ja": "サイバーセキュリティは今やプルーフ・オブ・ワークのように見える",
+      "url": "https://www.dbreunig.com/2026/04/14/cybersecurity-is-proof-of-work-now.html",
+      "hn_url": "https://news.ycombinator.com/item?id=47769089",
+      "score": 111,
+      "comment_count": 52,
+      "posted_at": "2026-04-14T18:08:14+00:00",
+      "comments": [
+        {
+          "id": 47785275,
+          "author": "somesortofthing",
+          "text": "There's still the question of access to the codebase. By all accounts, the best LLM cyber scanning approaches are really primitive - it's just a bash script that goes through every single file in the codebase and, for each one and runs a \"find the vulns here\" prompt. The attacker usually has even less access than this - in the beginning, they have network tools, an undocumented API, and maybe some binaries. You can do a lot better efficiency-wise if you control the source end-to-end though - you already group logically related changes into PRs, so you can save on scanning by asking the LLM to only look over the files you've changed. If you're touching security-relevant code, you can ask it for more per-file effort than the attacker might put into their own scanning. You can even do the big bulk scans an attacker might on a fixed schedule - each attacker has to run their own scan while you only need to run your one scan to find everything they would have. There's a massive cost asymmetry between the \"hardening\" phase for the defender and the \"discovering exploits\" phase for the attacker. Exploitability also isn't binary: even if the attacker is better-resourced than you, they need to find a whole chain of exploits in your system, while you only need to break the weakest link in that chain. If you boil security down to just a contest of who can burn more tokens, defenders get efficiency advantages only the best-resourced attackers can overcome. On net, public access to mythos-tier models will make software more secure."
+        },
+        {
+          "id": 47785461,
+          "author": "j2kun",
+          "text": "The article heavily quotes the \"AI Security Institute\" as a third-party analysis. It was the first I heard of them, so I looked up their about page, and it appears to be primarily people from the AI industry (former Deepmind/OpenAI staff, etc.), with no folks from the security industry mentioned. So while the security landscape is clearly evolving (cf. also Big Sleep and Project Zero), the conclusion of \"to harden a system we need to spend more tokens\" sounds like yet more AI boosting from a different angle. It raises the question of why no other alternatives (like formal verification) are mentioned in the article or the AISI report. I wouldn't be surprised if NVIDIA picked up this talking point to sell more GPUs."
+        },
+        {
+          "id": 47785203,
+          "author": "nostrademons",
+          "text": "Relevant Tony Hoare quote: “There are two approaches to software design: make it so simple there are obviously no deficiencies, or make it so complex there are no obvious deficiencies”."
+        },
+        {
+          "id": 47785247,
+          "author": "snowwrestler",
+          "text": "It looks like proof of work because: > Worryingly, none of the models given a 100M budget showed signs of diminishing returns. “Models continue making progress with increased token budgets across the token budgets tested,” AISI notes. So, the author infers a durable direct correlation between token spend and attack success. Thus you will need to spend more tokens than your attackers to find your vulnerabilities first. However it is worth noting that this study was of a 32-step network intrusion, which only one model (Mythos) even was able to complete at all. That’s an incredibly complex task. Is the same true for pointing Mythos at a relatively simple single code library? My intuition is that there is probably a point of diminishing returns, which is closer for simpler tasks. In this world, popular open source projects will probably see higher aggregate token spend by both defenders and attackers. And thus they might approach the point of diminishing returns faster. If there is one."
+        },
+        {
+          "id": 47785458,
+          "author": "jzelinskie",
+          "text": "Security has always been a game of just how much money your adversary is willing to commit. The conclusions drawn in lots of these articles are just already well understood systems design concepts, but for some reason people are acting like they are novel or that LLMs have changed anything besides the price. For example from this article: > Karpathy: Classical software engineering would have you believe that dependencies are good (we’re building pyramids from bricks), but imo this has to be re-evaluated, and it’s why I’ve been so growingly averse to them, preferring to use LLMs to “yoink” functionality when it’s simple enough and possible. Anyone who's heard of \"leftpad\" or is a Go programmer (\"A little copying is better than a little dependency\" is literally a \"Go Proverb\") knows this. Another recent set of posts to HN had a company close-sourcing their code for security, but \"security through obscurity\" has been a well understand fallacy in open source circles for decades."
+        }
+      ],
+      "summary_ja": "サイバーセキュリティにおけるLLM活用では、防御側がコード管理と効率的なスキャンで攻撃者より優位に立つ可能性が指摘される一方、AI業界関係者中心の分析へのバイアスや「トークン消費量競争」の一般化への疑問が提起された。既存のセキュリティ原則（依存関係最小化、隠蔽化の限界）が再評価され、AIの新規性が過大評価されているとの批判もあり、従来手法の軽視やリソース競争の本質的変化への懐疑が示された。"
+    },
+    {
+      "rank": 2,
+      "id": 47785738,
+      "title_en": "The buns in McDonald's Japan's burger photos are all slightly askew",
+      "title_ja": "マクドナルド日本のバーガー写真、全てのパンがわずかに傾いている",
+      "url": "https://www.mcdonalds.co.jp/en/menu/burger/",
+      "hn_url": "https://news.ycombinator.com/item?id=47785738",
+      "score": 90,
+      "comment_count": 33,
+      "posted_at": "2026-04-15T21:48:18+00:00",
+      "comments": [
+        {
+          "id": 47785955,
+          "author": "jdorfman",
+          "text": "I believe it has to do with https://boingboing.net/2026/04/08/japans-truth-in-packaging-..."
+        },
+        {
+          "id": 47785991,
+          "author": "squidsoup",
+          "text": "It's just burger wabi sabi."
+        },
+        {
+          "id": 47785996,
+          "author": "crazygringo",
+          "text": "Some of them, it seems like it could be to show the sauce more clearly: https://www.mcdonalds.co.jp/en/products/4530/ But others, it's just inexplicable: https://www.mcdonalds.co.jp/en/products/1010/ Burger King isn't doing this though (close the two popups to see the menu): https://www.burgerking.co.jp/menu Is it some kind of trendy style?"
+        },
+        {
+          "id": 47786322,
+          "author": "panny",
+          "text": "Why are Japanese burgers significantly cheaper than the ones in the US? A Big Mac is 500 yen, that's like $3. https://www.mcdonalds.co.jp/en/products/1210/ Big Macs haven't been that cheap since 2008 in the US."
+        },
+        {
+          "id": 47785887,
+          "author": "pimlottc",
+          "text": "I would imagine this is to make them look less machine-perfect and more \"home-made\""
+        }
+      ],
+      "summary_ja": "日本のマクドナルドの商品写真でパンズが意図的に傾いている理由について、包装表示法遵守や「わびさび」美学、ソースの可視化といった文化的・実用的意図が指摘されている。競合他社との比較や米国との価格差（500円ビッグマック）も議論され、機械的完璧さより手作り感を演出するマーケティング戦略との推測がある。"
+    },
+    {
+      "rank": 3,
+      "id": 47786164,
+      "title_en": "I made a terminal pager",
+      "title_ja": "ターミナルページャーを作った",
+      "url": "https://theleo.zone/posts/pager/",
+      "hn_url": "https://news.ycombinator.com/item?id=47786164",
+      "score": 6,
+      "comment_count": 0,
+      "posted_at": "2026-04-15T22:27:54+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 4,
+      "id": 47782570,
+      "title_en": "Google broke its promise to me – now ICE has my data",
+      "title_ja": "Googleは約束を破った - 今やICEが私のデータを保有している",
+      "url": "https://www.eff.org/deeplinks/2026/04/google-broke-its-promise-me-now-ice-has-my-data",
+      "hn_url": "https://news.ycombinator.com/item?id=47782570",
+      "score": 897,
+      "comment_count": 385,
+      "posted_at": "2026-04-15T17:44:26+00:00",
+      "comments": [
+        {
+          "id": 47783737,
+          "author": "eurleif",
+          "text": "The linked Google policy states: >We won’t give notice when legally prohibited under the terms of the request. The post states that his lawyer has reviewed the subpoena, but doesn't mention whether or not it contained a non-disclosure order. That's an important detail to address if the claim is that Google acted against its own policy."
+        },
+        {
+          "id": 47783055,
+          "author": "jfoworjf",
+          "text": "This story is the one that finally pushed me to leave google. I moved off my ~20 year old Google account and deleted everything off their services including almost a decade of Google photos. I cancelled my Google one subscription for extra space. I'm now self hosting what I can and paying proton mail for everything else. I refuse to allow a company that will hand over data at the request of an administrative warrant to hold my data."
+        },
+        {
+          "id": 47783444,
+          "author": "eaf7e281",
+          "text": "I still don't understand. Who gave ICE such power, and who is ordering them to do all this? To me, ICE's actions are similar to those of a private army."
+        },
+        {
+          "id": 47784218,
+          "author": "Ardren",
+          "text": "> While ICE “requested” that Google not notify Thomas Johnson, the request was not enforceable or mandated by a court Sounds like Google stopped caring. But... Why on earth do the people filing an administrative subpoena not have to notify the interested parties too? Why is it Google's responsibility? If they didn't tell you, would you ever find out?"
+        },
+        {
+          "id": 47783499,
+          "author": "orbisvicis",
+          "text": "How was Amandla even identified? Stingray at the protest? Then how was the phone number linked to Google? Facial recognition at the protest? I guess his details are on file under terms of the visa? So then the government simply asks Google for all details on the individual by name? Either is pretty disturbing."
+        }
+      ],
+      "summary_ja": "Googleのデータ提供方針と要請の法的根拠に関する疑問、ユーザーのサービス離脱やデータ主権の重視、ICEの権限の不明確さと行政召喚状の透明性問題、個人特定方法の懸念が議論されている。"
+    },
+    {
+      "rank": 5,
+      "id": 47784244,
+      "title_en": "PiCore - Raspberry Pi Port of Tiny Core Linux",
+      "title_ja": "PiCore - Tiny Core LinuxのRaspberry Piポート",
+      "url": "http://tinycorelinux.net/5.x/armv6/releases/README",
+      "hn_url": "https://news.ycombinator.com/item?id=47784244",
+      "score": 51,
+      "comment_count": 3,
+      "posted_at": "2026-04-15T19:45:47+00:00",
+      "comments": [
+        {
+          "id": 47785076,
+          "author": "cas",
+          "text": "A very clever immutable Linux distro, and is the basis for the excellent PiCorePlayer, a favourite of mine to run Squeezebox clients (and/or Lyrion music server) on any Pi https://picoreplayer.org/"
+        },
+        {
+          "id": 47785612,
+          "author": "alsetmusic",
+          "text": "TinyCoreLinux has had a special place in my heart for years. This makes me wanna break out some of the pis from nerdy storage bins."
+        }
+      ],
+      "summary_ja": "PiCoreはRaspberry Pi向けのイミュータブルLinuxディストリビューションで、PiCorePlayerの基盤としてSqueezeboxクライアント/Lyrion音楽サーバー運用に評価が高く、ユーザーからは効率性への称賛と眠っていたRaspberry Piの再利用意欲を喚起する点が強調されている。"
+    },
+    {
+      "rank": 6,
+      "id": 47778475,
+      "title_en": "God sleeps in the minerals",
+      "title_ja": "神は鉱物の中で眠る",
+      "url": "https://wchambliss.wordpress.com/2026/03/03/god-sleeps-in-the-minerals/",
+      "hn_url": "https://news.ycombinator.com/item?id=47778475",
+      "score": 419,
+      "comment_count": 90,
+      "posted_at": "2026-04-15T13:08:10+00:00",
+      "comments": [
+        {
+          "id": 47779452,
+          "author": "Uncle_Brumpus",
+          "text": "These types of huge perfect specimens always take my breath away when I am able to see them in person. To think that this kind of stuff just kinda exists buried in the earth... I am a part of a local mineral club which hosts several \"field trips\" a year to various mineralogically interesting locations (most of which aren't accessible as an individual, like private land and special digs at active mining/quarrying sites on their days off). I have never found anything even remotely as beautiful as the specimens shown, but the small collection of mildly interesting things that I've smashed out of the earth with my own 2 hands is amazingly satisfying to me. You don't even have to be a super dedicated \"rock nerd\" to take part, I highly recommend looking for local mineral clubs to join if this even remotely interests you. It's really a ton of fun!"
+        },
+        {
+          "id": 47780710,
+          "author": "alnwlsn",
+          "text": "I've been to a few mineral museums like this and one of the interesting ones you can come across is Asbestos. Just hanging out there on display right next to some other mineral. It forms beautiful formations just like the rest, but I've heard so many mesothelioma lawyer commercials that it's easy to forget it's a completely natural material. Also one you can pick apart like cotton and weave into a fabric - it's a flexible material, made out of a rock, which can kill you. The asbestos formations are ones they keep behind glass."
+        },
+        {
+          "id": 47780312,
+          "author": "jrsdav",
+          "text": "Kind of fun to think that the crystalline structure of minerals is an \"echo\" of their arrangement of atoms. A repeating pattern on a scale we can actually observe."
+        },
+        {
+          "id": 47782353,
+          "author": "billiam",
+          "text": "these dramatic and colorful massive specimens are perfect for an art museum, but as a recovering mineralogist I feel like the true beauty of the world of minerals in Earth is shown on the microscopic level, where you can see both the incredible order and incredible randomness of the (mostly) crystalline solids that make up minerals. See https://en.wikipedia.org/wiki/Thin_section There is an idea that minerals are these inorganic substances but fully two thirds of all minerals identified were originated from direct or indirect interaction with living things on Earth. In fact a recent hypothesis holds that minerals have evolved since the formation of the solar system very much like living things, getting more and more complex via selective processes. See https://hazen.carnegiescience.edu/research/mineral-evolution"
+        },
+        {
+          "id": 47779101,
+          "author": "vscode-rest",
+          "text": "The Cubes are the most captivating to me. Organic mishmash of polyhedra and assorted blobs is one thing, but perfect cubes is uniquely striking."
+        }
+      ],
+      "summary_ja": "鉱物の美的魅力と科学的意義に関する議論。巨大な標本の視覚的衝撃や採集体験の喜び、石綿の自然美と危険性の対比、結晶構造の原子配列の反映、薄片観察による微視的秩序と無秩序の調和が指摘される。また、全鉱物の3分の2が生物活動に関連し、鉱物が進化的に複雑化したとする仮説が紹介され、立方体構造の特異性への関心が示されている。鉱物愛好家活動の推奨と共に、無機物と生命の境界を問い直す視点が提示されている。"
+    },
+    {
+      "rank": 7,
+      "id": 47780456,
+      "title_en": "Cal.com is going closed source",
+      "title_ja": "Cal.comがクローズドソース化へ",
+      "url": "https://cal.com/blog/cal-com-goes-closed-source-why",
+      "hn_url": "https://news.ycombinator.com/item?id=47780456",
+      "score": 160,
+      "comment_count": 136,
+      "posted_at": "2026-04-15T15:26:46+00:00",
+      "comments": [
+        {
+          "id": 47780751,
+          "author": "simonw",
+          "text": "Drew Breunig published a very relevant piece yesterday that came to the opposite conclusion: https://www.dbreunig.com/2026/04/14/cybersecurity-is-proof-o... Since security exploits can now be found by spending tokens, open source is MORE valuable because open source libraries can share that auditing budget while closed source software has to find all the exploits themselves in private. > If Mythos continues to find exploits so long as you keep throwing money at it, security is reduced to a brutally simple equation: to harden a system you need to spend more tokens discovering exploits than attackers will spend exploiting them ."
+        },
+        {
+          "id": 47786264,
+          "author": "ryanleesipes",
+          "text": "Head of Thunderbird project here. Our scheduling tool, Thunderbird Appointment, will always be open source. Repo here: https:// github.com/thunderbird/appointment Come talk to us and build with us. We'll help you replace Cal.com"
+        },
+        {
+          "id": 47780646,
+          "author": "ButlerianJihad",
+          "text": "This seems kind of crazy. If LLMs are so stunningly good at finding vulnerabilities in code, then shouldn't the solution be to run an LLM against your code after you commit, and before you release it? Then you basically have pentesting harnesses all to yourself before going public. If an LLM can't find any flaws, then you are good to release that code. A few years ago, I invoked Linus's Law in a classroom, and I was roundly debunked. Isn't it a shame that it's basically been fulfilled now with LLMs? https://en.wikipedia.org/wiki/Linus%27s_law"
+        },
+        {
+          "id": 47784544,
+          "author": "Tepix",
+          "text": "Hey cal.com, as a potential customer, you have just lost me. Open source is set to profit from improved transparency in the SSDLC. With closed source, you will have to trust the software vendor instead. I'm not sure I agree with Drew Breunig, however. The number of bugs isn't infinite. Once we have models that are capable enough and scan the source code with them at regular intervals, the likelihood of remaining bugs that can be exploited goes way down."
+        },
+        {
+          "id": 47780528,
+          "author": "gouthamve",
+          "text": "This is a weird knee-jerk reaction. I feel like this is more a business decision than a security decision. I feel like with AI, self-hosting software reliably is becoming easier so the incentives to pay for a hosted service of an OSS project are going down."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 8,
+      "id": 47783713,
+      "title_en": "Live Nation illegally monopolized ticketing market, jury finds",
+      "title_ja": "ライブ・ネイションがチケット市場を不法独占と陪審員が判断",
+      "url": "https://www.bloomberg.com/news/articles/2026-04-15/live-nation-illegally-monopolized-ticketing-market-jury-finds",
+      "hn_url": "https://news.ycombinator.com/item?id=47783713",
+      "score": 283,
+      "comment_count": 82,
+      "posted_at": "2026-04-15T19:06:39+00:00",
+      "comments": [
+        {
+          "id": 47784455,
+          "author": "jp57",
+          "text": "The horizontal control of venues is only one issue. A perhaps bigger issue is the vertical integration (if that's the right term) of first-party ticket sales and resale in one company. Ticketmaster has no real incentive to try to prevent resellers from buying up all the tickets on first sale, because it gets to charge fees on all the resales through its platform. The more times a ticket is resold, the better. I don't believe a court would ever mandate this, but I'd like to see tickets sold by dutch auction: All tickets start off for sale at some very high price, like $10000, and the price declines by some amount every day until it reaches a reserve price on the day of the concert. Buyers can purchase as many tickets as they want, but professional resellers would have to guess the price that would let them clear their inventory at a profit. Under a system like this the best seats would go earliest (at the highest prices) while the nosebleed seats might still be available on day of the show, or not depending on demand."
+        },
+        {
+          "id": 47786273,
+          "author": "throw0101d",
+          "text": "I remember Pearl Jam challenging them in the 1990s: * https://www.rollingstone.com/music/music-news/pearl-jam-taki... > In May 1994, the grunge band Pearl Jam filed a complaint with the U.S. Department of Justice claiming Ticketmaster had cut the group out of venue bookings in a dispute over fees.[50] The investigation was closed without action in 1995, though the Justice Department stated it would continue to monitor the developments in the ticket industry.[51][52] * https://en.wikipedia.org/wiki/Ticketmaster#Anti-competition_... > By 1994, Pearl Jam was \"fighting on all fronts\" as its manager described the band at the time.[43] Reporter Chuck Philips broke a series of stories showing that Ticketmaster was gouging Pearl Jam's customers.[44] Pearl Jam was outraged when, after it played a pair of charity benefit shows in Chicago, it discovered that ticket vendor Ticketmaster had added a service charge to the tickets. Pearl Jam was committed to keeping their concert ticket prices down but Fred Rosen of Ticketmaster refused to waive the service charge. Because Ticketmaster controlled most major venues, the band was forced to create from scratch its own outdoor stadiums in rural areas in order to perform. […] > The United States Department of Justice was investigating the company's practices at the time and asked the band to create a memorandum of its experiences with the company. Band members Gossard and Ament testified at a subcommittee investigation on June 30, 1994, in Washington, D.C.[52] * https://en.wikipedia.org/wiki/Pearl_Jam#Vs.,_Vitalogy_and_de..."
+        },
+        {
+          "id": 47784201,
+          "author": "rossdavidh",
+          "text": "In case you wondered what the point of the federal (i.e. states not totally controlled by federal government) system is, here's a good example. If only the federal government were allowed to pursue this case, it would have ended when the administration changed. 30 states chose to keep the case alive, and good on them."
+        },
+        {
+          "id": 47783945,
+          "author": "smartbit",
+          "text": "Alternative sources - https://apnews.com/article/live-nation-ticketmaster-antitrus... - https://www.nytimes.com/2026/04/15/arts/music/live-nation-an... or https://archive.is/KA1wV Background story by Matt Stoller https://www.thebignewsletter.com/p/monopoly-round-up-the-tic... (April 13, 2026)"
+        },
+        {
+          "id": 47783968,
+          "author": "hackingonempty",
+          "text": "from the NYT: > The jury determined that Ticketmaster had overcharged consumers by $1.72 for each ticket. I'm already planning what I'm going to do with the $0.20 refund I receive for each ticket I bought."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 9,
+      "id": 47785397,
+      "title_en": "ChatGPT for Excel",
+      "title_ja": "Excel向けChatGPT",
+      "url": "https://chatgpt.com/apps/spreadsheets/",
+      "hn_url": "https://news.ycombinator.com/item?id=47785397",
+      "score": 19,
+      "comment_count": 4,
+      "posted_at": "2026-04-15T21:21:05+00:00",
+      "comments": [
+        {
+          "id": 47786296,
+          "author": "TrackerFF",
+          "text": "I've experimented with ChatGPT for spreadsheets the past 6 months, and while the results look nice now it has been excruciatingly slow for even the simplest spreadsheet. I'm talking 15-20 minutes to make some pretty basic calculator with graphs. IIRC, it used a lot of time purely on the styling."
+        },
+        {
+          "id": 47786185,
+          "author": "lateforwork",
+          "text": "This looks bad for Microsoft. They added a Copilot button to all their products but it doesn't do much more than open a chat side panel. I recently tried Claude Cowork for PowerPoint and I was stunned by the content as well as design quality of the deck it produced. That's a threat for Microsoft because now you don't need the editing tools of PowerPoint, AI replaces it, so all you need is the presentation mode of PowerPoint. Copilot for Excel is useless. Ask it what is in cell A1 and it can't answer. I am looking forward to trying ChatGPT for Excel."
+        },
+        {
+          "id": 47786155,
+          "author": "flybrand",
+          "text": "Several months ago, ChatGPT swore to me it had interoperability with both excel and Google Sheets. I spent 90 minutes thinking I was an idiot, trying to follow its guidance before asking the internet."
+        },
+        {
+          "id": 47786115,
+          "author": "haneul",
+          "text": "Except for pro and plus users in the EU eh…"
+        }
+      ],
+      "summary_ja": "Hacker Newsのコメントでは、Excel向けChatGPTの処理速度の遅さ（15-20分の待機）やMicrosoft Copilotの機能不足（単なるチャットパネル）が批判されている。Claude Coworkの高品質なPowerPoint自動生成がMicrosoftへの脅威と指摘され、Copilot for Excelはセル参照すらできないなど実用性に疑問が呈された。過去のChatGPTとExcel/Sheets連携の不具合やEU圏の有料制限も言及されている。"
+    },
+    {
+      "rank": 10,
+      "id": 47785053,
+      "title_en": "Does Gas Town 'steal' usage from users' LLM credits to improve itself?",
+      "title_ja": "Gas Townは自己改善のためユーザーのLLMクレジットを「盗用」しているのでしょうか？",
+      "url": "https://github.com/gastownhall/gastown/issues/3649",
+      "hn_url": "https://news.ycombinator.com/item?id=47785053",
+      "score": 162,
+      "comment_count": 79,
+      "posted_at": "2026-04-15T20:49:48+00:00",
+      "comments": [
+        {
+          "id": 47785241,
+          "author": "dmurray",
+          "text": "It seems completely in the spirit of Gas Town. A respectable software provider should warn you about this kind of behaviour at install time, and give you the opportunity to opt out. Gas Town fulfilled all its obligations in this regard with these (and other) warnings in the original announcement: > WARNING DANGER CAUTION > GET THE F** OUT > YOU WILL DIE"
+        },
+        {
+          "id": 47785281,
+          "author": "moab",
+          "text": "Is anyone surprised? I'm reminded of how I felt during the NFT craze. LLMs are extremely powerful when used with deliberate care. Gas Town is the exact opposite of what is needed to actually do useful things in prod. I guess good on Steve for doing what he does so well, and getting so much hype around a vibe coded mess."
+        },
+        {
+          "id": 47785763,
+          "author": "SwellJoe",
+          "text": "Based on my understanding of Gas Town, Beads, and Yegge's philosophy on AI that he's expressed in a variety of media, everything about the whole stack is designed to burn tokens. If you're not burning tokens, real fast, 24/7, you're losing the race. The race to where, I have no idea. Apparently, that includes him burning your tokens, too."
+        },
+        {
+          "id": 47785905,
+          "author": "gbnwl",
+          "text": "Why is anyone still using or even talking about Gas Town? Now that HN is largely onboard with agentic development and has at least tried it themselves who's still under the impression that it's useful?"
+        },
+        {
+          "id": 47785559,
+          "author": "woeirua",
+          "text": "I think a disclosure and a way to limit the total cost would be appropriate. If agents are capable of making contributions back to GasTown independently then I think it makes sense that users of GasTown should have to contribute some tokens to maintaining and improving the library. This is actually the most sustainable approach to maintaining open-source software that we've seen so far, and might be a pattern for other libraries in the future. That said... someone could also have their agents rip out this code or disable the functionality, so I doubt this is a serious inconvenience."
+        }
+      ],
+      "summary_ja": "Hacker Newsのコメントでは、Gas TownがユーザーのLLMクレジットを自己改善に利用する行為を巡り、透明性と倫理が議論の焦点となった。支持派は事前警告やオプトアウト機能の存在を指摘し、オープンソース持続性の新たなモデルと評価する一方、批判派はトークン浪費を促す設計や生産環境での非実用性を指摘。NFTバブルの過熱との類似性や、開発者スティーブの意図への懐疑、エージェント開発主流化に伴うGas Townの陳腐化も言及された。情報開示とコスト制限の必要性が共通認識として示されている。"
+    },
+    {
+      "rank": 11,
+      "id": 47738081,
+      "title_en": "Fixing a monitor that goes black, off or blinks due to static electricity (2023)",
+      "title_ja": "静電気で画面が消える/点滅するモニタの修理方法 (2023)",
+      "url": "https://aalonso.dev/blog/2023/how-to-fix-monitor-that-goes-black-off-due-to-static-electricity-in-chair/",
+      "hn_url": "https://news.ycombinator.com/item?id=47738081",
+      "score": 101,
+      "comment_count": 55,
+      "posted_at": "2026-04-12T10:27:08+00:00",
+      "comments": [
+        {
+          "id": 47783752,
+          "author": "topspin",
+          "text": "Last night I had a lightning strike nearby and one of two displays blanked for a second. It's behind a UPS and a good surge protector. Likely some EMI/RFI getting into the power and/or display cable of the monitor itself, toppling digital circuits in the panel and waking up the watch dog. The same display has also blanked in the infrequent case where I've discharged static on the mouse: the cables are all parallel, so they'll couple and bounce the panel ground plane, with the same outcome. These devices are built to the edge of performance margins. Throw in some high voltage transients and things flip out. I think displays are particularly susceptible due to long cables, large surface area and unavoidable shape of common displays: they're effectively patch antennas. The furniture static case is amusing: I imagine some foam cushions can cause millions of tiny static discharges in parallel when they expand. This will flow through the metal stand to \"ground\" and probably make a VHF range RFI spike (based on the size of a typical chair frame.) Common 24-27\" display panel geometry just happens to be in the same neighborhood... Adding ferrites to cables, as I see suggested several times, might help. You could also get unlucky and make it worse: choke a line to just the right length an it becomes a better inductor/antenna. Electricity is fun."
+        },
+        {
+          "id": 47783109,
+          "author": "MisterTea",
+          "text": "Might want to increase humidity. In ESD rooms the humidity is controlled and kept high to reduce static build up. to add: > In my particular case, my chair wheels are made out of plastic (non-conductive), so my solution was to “ground” my chair by adding a metallic chain from the chair to my room floor. I got the idea from reddit. The chain grounded chair is used all the time in ESD rooms. The floors in these rooms use semi-conductive flooring which is tied to a ground rod. The chair is grounded to the floor which is in turn ground bonded to earth."
+        },
+        {
+          "id": 47785182,
+          "author": "leke",
+          "text": "This was happening to a colleague's monitor. As it happened frequently when either of us got up, I suspected it was the fabric of the chair, which was probably some kind of acrylic. I made slips for the ass part of the chair from 100% cotton, and to my amazement it fixed the problem."
+        },
+        {
+          "id": 47786287,
+          "author": "ButlerianJihad",
+          "text": "I don't use microSD cards anymore, but they had been in my feature phone as well as my Raspberry Pi. I ran into so, so many problems with the Raspberry Pi related to storage. It would lock up at the drop of a hat. It would often have major trouble reading/writing the sdcard, especially at startup. My phone, for its part, would complain about a corrupted filesystem, or couldn't access files, immediately after I replaced the sdcard in its slot. Of course I live in the Phoenix metro area, and it's dry all year round. So I began taking some extraordinary measures. Of course, I had a little \"repair kit\" containing one of those basic ESD wrist straps. I used that. I would also do all card swaps in the bathroom without a mat. I would also, you know, remove any garments that could possibly generate ESD in any way! And, I invested in the heavy-duty, rugged type of sdcards like you'd find in a GoPro on a skydiver's kit. These days there isn't anything using sdcards anymore. My Pixel 8 Pro doesn't even have a slot for it. I'm thankful, because USB thumb drives are more resistant to this stuff, and I make use of those very sparingly, as it's mostly about cloud storage now."
+        },
+        {
+          "id": 47782760,
+          "author": "orev",
+          "text": "Ferrite chokes easily fix this problem. Very useful to have a box of them in an office full of people. It’s pretty clear that most modern standards (HDMI, DisplayPort, thunderbolt, etc) are so close to their physical limits that there’s no more room for errors."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 12,
+      "id": 47776796,
+      "title_en": "Want to write a compiler? Just read these two papers (2008)",
+      "title_ja": "コンパイラを作りたい？この2論文を読むだけでいい (2008)",
+      "url": "https://prog21.dadgum.com/30.html",
+      "hn_url": "https://news.ycombinator.com/item?id=47776796",
+      "score": 438,
+      "comment_count": 132,
+      "posted_at": "2026-04-15T09:41:19+00:00",
+      "comments": [
+        {
+          "id": 47777269,
+          "author": "jll29",
+          "text": "*Donald Knute -> Donald Ervin Knuth is the author of the book \"The Art of Computer Programming\" (in progress for a couple of decades, currently volume 4c is being written). It is quite advanced, and it will likely not cover compilers anymore (Addison-Wesley had commissioned a compiler book from Knuth when he was a doctoral candidate, now he is retired and has stated his goal for the series has changed). I disagree with the author's point: the \"Dragon book\"'s (\"Compilers: Principles, Techniques, and Tools\" by Aho et al.) Chapter 2 is a self-sufficient introduction into compilers from end to end, and it can be read on its own, ignoring the rest of the excellent book. Another fantastic intro to compiler writing is the short little book \"Compilers\" by Niklaus Wirth, which explains and contains the surprisingly short source code of a complete compiler (the whole book is highly understandable - pristine clarity, really) and all in <100 pages total (99). (I learned enough from these two sources to write a compiler in high school.)"
+        },
+        {
+          "id": 47777439,
+          "author": "soegaard",
+          "text": "An Incremental Approach to Compiler Construction Abdulaziz Ghuloum http://scheme2006.cs.uchicago.edu/11-ghuloum.pdf Abstract Compilers are perceived to be magical artifacts, carefully crafted by the wizards, and unfathomable by the mere mortals. Books on compilers are better described as wizard-talk: written by and for a clique of all-knowing practitioners. Real-life compilers are too complex to serve as an educational tool. And the gap between real-life compilers and the educational toy compilers is too wide. The novice compiler writer stands puzzled facing an impenetrable barrier, “better write an interpreter instead.” The goal of this paper is to break that barrier. We show that building a compiler can be as easy as building an interpreter. The compiler we construct accepts a large subset of the Scheme programming language and produces assembly code for the Intel-x86 architecture, the dominant architecture of personal computing. The development of the compiler is broken into many small incremental steps. Every step yields a fully working compiler for a progressively expanding subset of Scheme. Every compiler step produces real assembly code that can be assembled then executed directly by the hardware. We assume that the reader is familiar with the basic computer architecture: its components and execution model. Detailed knowledge of the Intel-x86 architecture is not required. The development of the compiler is described in detail in an extended tutorial. Supporting material for the tutorial such as an automated testing facility coupled with a comprehensive test suite are provided with the tutorial. It is our hope that current and future implementors of Scheme ﬁnd in this paper the motivation for developing high-performance compilers and the means for achieving that goal."
+        },
+        {
+          "id": 47777440,
+          "author": "morphle",
+          "text": "Compiler writing has progressed a lot. Notably in meta compilers [1] written in a few hundred lines of code and adaptive compilation [3] and just in time compilers. Alan Kay's research group VPRi tackled the problems of complexity (in writing compilers) [4]. [1] Ometa https://tinlizzie.org/VPRIPapers/tr2007003_ometa.pdf [2] Other ometa papers https://tinlizzie.org/IA/index.php/Papers_from_Viewpoints_Re... [3] Adaptive compilation https://youtu.be/CfYnzVxdwZE?t=4575 the PhD thesis https://www.researchgate.net/publication/309254446_Adaptive_... [4] Is it really \"Complex\"? Or did we just make it \"Complicated\"? Alan Kay https://youtu.be/ubaX1Smg6pY?t=3605"
+        },
+        {
+          "id": 47778068,
+          "author": "stupefy",
+          "text": "One nice piece of advice that I received is that books are like RAMs, you do not have to go through them sequentially, but can do random access to the parts of it you need. With this in mind I find it doable to get one the thick books and only read the part that I need for my task. But, to also be fair, the above random access method does not work when you don't know what you don't know. So I understand why having a light, but good introduction to the topic is important, and I believe that's what the author is pointing out."
+        },
+        {
+          "id": 47777040,
+          "author": "armchairhacker",
+          "text": "Nowadays I’ve heard recommended Crafting Interpreters. ( https://craftinginterpreters.com ) The Nanopass paper link doesn’t work."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 13,
+      "id": 47783940,
+      "title_en": "Ask HN: Who is using OpenClaw?",
+      "title_ja": "Ask HN: OpenClawを実際に使っている方は？",
+      "url": null,
+      "hn_url": "https://news.ycombinator.com/item?id=47783940",
+      "score": 133,
+      "comment_count": 166,
+      "posted_at": "2026-04-15T19:22:10+00:00",
+      "comments": [
+        {
+          "id": 47785766,
+          "author": "lexandstuff",
+          "text": "I still use it and find it helpful. My OpenClaw instance uses an Obsidian project as its memory. Mainly, it's just my main day-to-day LLM that I access via WhatsApp, but instead of the memory being locked away with a specific vendor, it's stored in version control that I can read and edit. That reason alone makes it compelling to me. When a better LLM comes along, I can just switch, and my memory and system prompts come with it. However, I also use it for calorie/weight/workout tracking, to-do lists (bill, birthday, event reminders), and to support my various life admin tasks. I don't give it access to much at all, except a few skills that give it read-only access to some data. Hasn't given me a 10x productivity boost or anything. It's just handy. I wrote an article on it, if anyone is interested: https://notesbylex.com/openclaw-the-missing-piece-for-obsidi..."
+        },
+        {
+          "id": 47785456,
+          "author": "bigpapikite",
+          "text": "I don't personally know many people who've used it so I'm not sure if this was a me thing but here was my experience in short: I set up OpenClaw on a raspberry pi 4 that I could ssh into using my main computer. My main goal for using OpenClaw was just as a morning debriefer that could scan my google calendar, trello board, and gmail to let me know what I had happening for the day and also weekly to give me a forecast for the weeks ahead to see how busy my month was. I spent about 40-50 bucks in one week just working through kinks and having it fix itself until I stumbled onto a post that helped me optimize my model usage for price instead of just throwing Opus and Sonnet at everything. Even after making this adjustment, the morning debriefer worked maybe once or twice a week and broke every other morning, telling me that it fixed itself and it would never happen again. At a certain point I just got fed up with it and cut the cron job, it's still running on my pi but I never use it. Pretty sure Claude has something like this now but I'm pretty thrown off the whole thing, I'd rather just take the 30-45mins to plan out my day in the morning myself."
+        },
+        {
+          "id": 47785939,
+          "author": "superfrank",
+          "text": "I don't use OpenClaw I tried but found it fragile and it's personality off putting. I then tried NanoClaw, but found the lack of communication channels limiting and could never really get it to create skills that felt solid. I recently just switched to Hermes Agent (like last week) and it's the first one where it didn't feel like I was constantly needing to fix it, so at the moment I'm happy with it. What do I use it for? I basically just use it as a personal assistant and a way to centralize a lot of other automations that I have elsewhere. - I have an automation that rolls everything on my todo list over to the next day at 11:59pm - I have one that checks the weather and tells me if it's going to be windy in the next few days since I need to bring the lawn furniture in - I have it set up so that I can forward it email with invoices and it will extract the data from a PDF and enter it into a cost tracking sheet - I have it check my outlook calendar and tell me if there are any 1:1 meetings where the other person has declined the invite (since Outlook doesn't show that clearly and I'd often show up to meetings and sit for 5 minutes before realizing the other person cancelled) Nothing I'm doing is life changing, it all could be done using other tools, and honestly, for anything important, I want something more deterministic anyway, but I kind of love. It's just a low lift way to automate away minor annoyances through a single interface that I can access from just about anywhere. It's far from perfect, but I don't use it for anything where I need to to be perfect, so I'm happy."
+        },
+        {
+          "id": 47784711,
+          "author": "redact207",
+          "text": "When I saw Jensen's talk about how Openclaw surpassed React and Linux in terms of GitHub stars within a few months, I knew the whole thing was manufactured bot hype. No one can tell me a compelling use case. The whole thing seems designed around getting people to burn more tokens."
+        },
+        {
+          "id": 47785533,
+          "author": "xnx",
+          "text": "The main function of OpenClaw was for people to signal how advanced and cutting edge and thought-leader-y they were. All those Mac minis are sitting idle now."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 14,
+      "id": 47785582,
+      "title_en": "Hacker News CLI",
+      "title_ja": "Hacker News CLI",
+      "url": "https://pythonhosted.org/hackernews-cli/commands.html",
+      "hn_url": "https://news.ycombinator.com/item?id=47785582",
+      "score": 5,
+      "comment_count": 0,
+      "posted_at": "2026-04-15T21:35:38+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 15,
+      "id": 47738420,
+      "title_en": "Golden eagles' return to English skies",
+      "title_ja": "イギリスの空にハクトウワシが帰還",
+      "url": "https://www.bbc.co.uk/news/articles/cje4zlxqkqdo",
+      "hn_url": "https://news.ycombinator.com/item?id=47738420",
+      "score": 32,
+      "comment_count": 17,
+      "posted_at": "2026-04-12T11:24:18+00:00",
+      "comments": [
+        {
+          "id": 47784404,
+          "author": "mjfisher",
+          "text": "The reintroduction of Red Kites to the UK has been a huge success. I don't get particularly excited by birds normally, but regularly seeing such large creatures (almost 2m wingspans) curving through the sky is nothing short of majestic. They're almost reminiscent of dragons. I wonder if I'll get to feel the same about golden eagles soon too."
+        },
+        {
+          "id": 47786125,
+          "author": "Lio",
+          "text": "> Britain's second largest bird of prey I don’t see it mentioned in the article but was our largest bird of prey? EDIT: found it; the white tailed eagle[1]. https://www.rspb.org.uk/birds-and-wildlife/white-tailed-eagl..."
+        },
+        {
+          "id": 47784329,
+          "author": "Peritract",
+          "text": "[flagged]"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 16,
+      "id": 47776557,
+      "title_en": "Good sleep, good learning, good life (2012)",
+      "title_ja": "良質な睡眠、効果的な学習、豊かな人生 (2012)",
+      "url": "https://super-memory.com/articles/sleep.htm",
+      "hn_url": "https://news.ycombinator.com/item?id=47776557",
+      "score": 344,
+      "comment_count": 171,
+      "posted_at": "2026-04-15T09:11:18+00:00",
+      "comments": [
+        {
+          "id": 47778941,
+          "author": "hnthrowaway0315",
+          "text": "I think a lot of it has to do with mental status, which can be concluded with one sentence -- \"Are you happy with your life, and if not do you have a clear path to reach that?\". People who say no probably has a lot of trouble to get fit, get enough sleep -- sometimes NOT because they do not have the resources, but because they are not happy. They hate life, so why makes it better? I have observed this in myself so I wonder whether it is universally true. I have observed that whenever I have a clear target in my life (e.g. I need to pursue this girl I like, or, I need to figure out Linux 1.0 VFS and I have a clear path before me), I immediately take care to do exercises, eat more healthy food, and try to get good sleep -- but if I cannot find an objective, or I have lost interests and are in the middle of finding a new one, I find myself a lot more obnoxious, and sometimes I \"proactively\" destroy my health because I don't care about it. Unfortunately I rarely find a clear path before me so the later status is more or less permanent while the former one is rare, maybe once per year -- but when I reach the first status it usually grabbed me for 2-3 months. Mental stability is probably one of the reasons different people have vastly different productivity or achievements. It is mental stability that brings focus, not the other way around."
+        },
+        {
+          "id": 47777299,
+          "author": "sminchev",
+          "text": "How can I explain to my 6 months old girl that we all need to sleep :D This is a bug in the universe! We need to sleep so that the levels of dopamine, and hormones of hunger and not hunger are at good levels, so that we can be healthy and strong, so that the immune system is stable and strong... And we need to get good sleep so that we can protect our children and be sane.... BUT the nature decided that the kids will wake up 3-4 times per night, and you need to wake up and take care of them. You sleep in best case, on pauses, not more than 4-6 hours, you feel miserable, and at the same time you are THE HAPPIEST PERSON IN THIS WORLD! :)"
+        },
+        {
+          "id": 47785838,
+          "author": "dysoco",
+          "text": "I've never had sleep issues but lately I've been in a bit of a rut. I've always maintained a sleep schedule of going to bed around 00/01hs (not that uncommon in my country) and waking up around 8/9am. However lately I've been arriving VERY tired from work around 19hs. It's very easy to fall asleep right after work and some days I go to sleep for a few hours but then I wake up super late for dinner around 10/11pm and completely screw my schedule, last night I couldn't sleep until 4am or so. Most days I don't sleep and power through since I need to buy groceries, cook, do other stuff around the house etc. but even so after dinner around 9/10pm or so I become very active, I don't get sleepy and I can't easily sleep until 2/3am. I've tried with a bit of melatonin, magnesium, etc. Moreover I've bought an apple watch and discovered I have quite some interruptions during the night, so I'm sleeping around 5-6 hours if I don't sleep at a crazy time, a bit less than what I expected. Any suggestions? I don't know if taking that nap when I come back from work is helpful or not, usually I don't but I do feel quite tired during that time so I wonder if it's the natural stuff to do to try and go to sleep."
+        },
+        {
+          "id": 47786051,
+          "author": "otikik",
+          "text": "> Go to sleep only when you are very tired. Not earlier. Not later. Wake up naturally without an alarm clock. If I did that I would go to bed a 5 in the morning and wake up at 2pm, sir."
+        },
+        {
+          "id": 47778393,
+          "author": "gitowiec",
+          "text": "The most important thing about sleep I learned is to fall asleep at the same moment of every day. Make it 22:00 or 23:00 or 00:00. Whatever is comfortable for you. But you have to stick to the chosen hour as hard as you can. Every day from now on it has to be that hour. After you get used to that you will notice a much better effect of the sleep."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 17,
+      "id": 47778086,
+      "title_en": "Do you even need a database?",
+      "title_ja": "本当にデータベースは必要ですか？",
+      "url": "https://www.dbpro.app/blog/do-you-even-need-a-database",
+      "hn_url": "https://news.ycombinator.com/item?id=47778086",
+      "score": 174,
+      "comment_count": 228,
+      "posted_at": "2026-04-15T12:26:11+00:00",
+      "comments": [
+        {
+          "id": 47786274,
+          "author": "janalsncm",
+          "text": "I have come at it from another angle, so maybe it’s useful perspective. A lot of data pipeline work can function pretty well with each step producing artifacts that the next can consume. If you need unique items, use uuids. If you want to check whether an item exists, use a hash of something (maybe a url). And each day goes in its own subdirectory. It works. Sometimes, though, you end up reinventing database constructs. Joins, indexing, versioning. A little of that is ok, but it gets gnarly fast. If you mess up, it could mean corrupting your data in a way that’s irreversible. Or, corrupting your data in a way that’s reversible but really hard. So a database has the benefit of enforcing consistency that a glob over json files doesn’t. It doesn’t mean every one-off script needs a blue-green Postgres DB, but there can be an inflection point."
+        },
+        {
+          "id": 47781082,
+          "author": "ozgrakkurt",
+          "text": "You need databases if you need any kind of atomicity. Doing atomic writes is extremely fragile if you are just on top of the filesystem. This is also why many databases have persistence issues and can easily corrupt on-disk data on crash. Rocksdb on windows is a very simple example a couple years back. It was regularly having corruption issues when doing development with it."
+        },
+        {
+          "id": 47778855,
+          "author": "z3ugma",
+          "text": "At some point, don't you just end up making a low-quality, poorly-tested reinvention of SQLite by doing this and adding features?"
+        },
+        {
+          "id": 47780524,
+          "author": "koliber",
+          "text": "I love this article as it shows how fast computers really are. There is one conclusion that I do not agree with. Near the end, the author lists cases where you will outgrow flat files. He then says that \"None of these constraints apply to a lot of applications.\" One of the constraints is \"Multiple processes need to write at the same time.\" It turns out many early stage products need crons and message queues that execute on a separate worker. These multiple processes often need to write at the same time. You could finagle it so that the main server is the only one writing, but you'd introduce architectural complexity. So while from the pure scale perspective I agree with the author, if you take a wider perspective, it's best to go with a database. And sqlite is a very sane choice. If you need scale, cache the most often accessed data in memory and you have the best of both worlds. My winning combo is sqlite + in-memory cache."
+        },
+        {
+          "id": 47784588,
+          "author": "devilsdata",
+          "text": "This is a cool exercise, but I would hesitate to choose files over SQLite or another Dockerised relational database in production. They are overoptimising for the simplest part of writing the application; the beginning. They've half-implemented an actual database, with none of the safety features. There are a lot of potential headaches that this article has avoided talking about; perhaps because they haven't experienced them yet. See: https://danluu.com/file-consistency/ What happens when you need to start expanding the scope of this feature? Joining users on profiles, or users on orgs? Ask yourself: how many shops have seriously written an application backed by files and stuck with it over the long-run? The answer is likely very few. Therefore, this is likely doubling up the work required. There is a reason people reach for a database first. I'd strongly encourage anyone to avoid doing stuff like this."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 18,
+      "id": 47781912,
+      "title_en": "Adaptional (YC S25) is hiring AI engineers",
+      "title_ja": "Adaptional (YC S25)がAIエンジニアを募集",
+      "url": "https://www.ycombinator.com/companies/adaptional/jobs/k7W6ge9-founding-engineer",
+      "hn_url": "https://news.ycombinator.com/item?id=47781912",
+      "score": 1,
+      "comment_count": 0,
+      "posted_at": "2026-04-15T17:00:56+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 19,
+      "id": 47776035,
+      "title_en": "Anna's Archive loses $322M Spotify piracy case without a fight",
+      "title_ja": "Anna's Archive、3億2200万ドルのSpotify著作権侵害訴訟に無抗議で敗訴",
+      "url": "https://torrentfreak.com/annas-archive-loses-322-million-spotify-piracy-case-without-a-fight/",
+      "hn_url": "https://news.ycombinator.com/item?id=47776035",
+      "score": 288,
+      "comment_count": 321,
+      "posted_at": "2026-04-15T08:05:18+00:00",
+      "comments": [
+        {
+          "id": 47785964,
+          "author": "A_D_E_P_T",
+          "text": "Default judgments are pernicious and should not exist. If the other party to a lawsuit is unwilling or unable to put up a defense, the case should still be judged on its merits and put to basic tests of fairness and propriety. As things stand, default judgment \"winners\" basically get everything they ask for automatically, which is not justice. Especially as it's quite common for people and small businesses to be unwilling/unable to defend themselves in court for various reasons, especially cost."
+        },
+        {
+          "id": 47782196,
+          "author": "progbits",
+          "text": "They will never see a single cent from that, AA will continue to rotate domains and nothing was accomplished, except for spotify's legal team which earned easy money arguing against empty chair in court. BTW, you can donate and get faster downloads: https://annas-archive.gl/donate Just donated in honor of this. Up yours spotify!"
+        },
+        {
+          "id": 47781708,
+          "author": "hayleox",
+          "text": "Trying to shut down a site by going after their domain names will always be a losing battle. As long as the link on their Wikipedia article keeps being updated, it'll remain easy to access. And it would be a pretty shocking attack on free speech if a U.S. court tried to order the Wikimedia Foundation to take that down; I suspect the public response would be similar to when the movie industry tried to get the AACS encryption key taken down in the 2000s."
+        },
+        {
+          "id": 47785890,
+          "author": "crazygringo",
+          "text": "This doesn't change things much , besides making domain name registration more difficult, but I continue to think this Spotify thing was a really dumb move on the part of Anna's Archive. AA is providing a valuable service to tons of people who don't have access to these books otherwise. There's a strong argument to be made for the moral goodness of that -- that even if it's illegal, it's at least in the spirit of a public library. And they want to potentially jeopardize that to... release a bunch of music tracks, that are just entertainment and mostly widely available on YouTube already anyways? Major misstep. Like, even if the same people are proud of scraping all these tracks and want to release them... at least do it under the name of a totally separate project? A separate domain, or just describe it and post the torrents somewhere else? Don't tie it to the AA site or identity. Don't tie things together when it creates no more benefit but does create more risk."
+        },
+        {
+          "id": 47781854,
+          "author": "OsrsNeedsf2P",
+          "text": "Ironic, since Spotify started by pirating music[0] [0] https://torrentfreak.com/spotifys-beta-used-pirate-mp3-files..."
+        }
+      ],
+      "summary_ja": "デフォルト判決の不公正さ、ドメイン削除の無効性（Wikipedia経由で持続可能）、Anna's Archiveの図書館的価値と音楽公開の戦略的失敗、Spotifyの海賊行為起源への批判が主な論点。"
+    },
+    {
+      "rank": 20,
+      "id": 47777897,
+      "title_en": "Retrofitting JIT Compilers into C Interpreters",
+      "title_ja": "CインタプリタへのJITコンパイラ導入",
+      "url": "https://tratt.net/laurie/blog/2026/retrofitting_jit_compilers_into_c_interpreters.html",
+      "hn_url": "https://news.ycombinator.com/item?id=47777897",
+      "score": 7,
+      "comment_count": 1,
+      "posted_at": "2026-04-15T12:00:24+00:00",
+      "comments": [
+        {
+          "id": 47778183,
+          "author": "sgbeal",
+          "text": "i tend to think of myself as a computing nerd, but posts like this one make me realize that i don't even rate on the computing nerd scale."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 21,
+      "id": 47720926,
+      "title_en": "Forcing an inversion of control on the SaaS stack",
+      "title_ja": "SaaSスタックへの制御反転の強制",
+      "url": "https://www.100x.bot/a/client-side-injection-inversion-of-control-saas",
+      "hn_url": "https://news.ycombinator.com/item?id=47720926",
+      "score": 65,
+      "comment_count": 40,
+      "posted_at": "2026-04-10T17:01:26+00:00",
+      "comments": [
+        {
+          "id": 47780739,
+          "author": "treyd",
+          "text": "I hope there's some forced migration of the SaaS business model towards primarily being \"just an API\" for whatever magic sauce it is they have. Too much of SaaS moats are just locking the backend behind an undocumented API. Users should be able to have full control over their experience interacting with third parties if they want it. This isn't unique to post-LLM stacks like this, but it seems like this shifts the balance of power. The next step after injecting custom UI controls is to build completely alternative frontends. The next step after that should be to build generic local frontends that abstract over multiple comparable thirdparty providers."
+        },
+        {
+          "id": 47786028,
+          "author": "ksaxena",
+          "text": "This bothers me. ALL enterprise SaaS prohibits reverse-engineering in its TOS and CSA and most prohibit bots and automation. So, the buyer will need the vendor's explicit permission to use something like 100x; and when the vendor has something on the roadmap, even if it's delayed, there's little chance that the vendor will give this permission. Anybody else bothered by this? Anybody who has a successful workaround?"
+        },
+        {
+          "id": 47781199,
+          "author": "namanyayg",
+          "text": "Nice post and I agree that making software with really simple UX for last mile cases is the solution to the SaaS-pocalypse and is something new that was not possible before AI. I'm solving this from the other side of the equation: we work directly with the SaaS vendors to make vibe coding embedded into their platform. Working with some Series B companies right now, 2000 business users are now able to build any feature they want, within the guardrails of the SaaS vendor. (More info in profile if anyone wants to chat) Exciting times!"
+        },
+        {
+          "id": 47781340,
+          "author": "mads_quist",
+          "text": "Although I absolutely understand the frustration expressed by the author, I find the notion that SaaS companies are somehow 'evil' because they optimize for the 80/20 rule a bit arrogant. Anyone working in SaaS - or really in any business- understands that you need to prioritize. In the end, your obligation as a company, regardless of your product, is to generate profits. And that's absolutely OK."
+        },
+        {
+          "id": 47782037,
+          "author": "socketcluster",
+          "text": "SaaS needs to be reinvented. We need backend platforms which provide more security controls, more flexibility in terms of data-sharing, seamless access by AI agents with advanced access controls; e.g. some agents can define schemas, some agents read data, other agents write data, some agents curate data... And custom app frontends can be generated on demand and integrate data from many different sources. This is what I've been working towards with https://saasufy.com/"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 22,
+      "id": 47782256,
+      "title_en": "The Gemini app is now on Mac",
+      "title_ja": "GeminiアプリがMac版リリース",
+      "url": "https://blog.google/innovation-and-ai/products/gemini-app/gemini-app-now-on-mac-os/",
+      "hn_url": "https://news.ycombinator.com/item?id=47782256",
+      "score": 42,
+      "comment_count": 21,
+      "posted_at": "2026-04-15T17:25:52+00:00",
+      "comments": [
+        {
+          "id": 47785829,
+          "author": "shrx",
+          "text": "Meanwhile, I still can't use Gemini as my Android Auto assistant."
+        },
+        {
+          "id": 47785178,
+          "author": "originalvichy",
+          "text": "I wonder if they will finally let you use past chats without having to turn on the data sharing, since it’s possible to store chat context on disk. (No chance)."
+        },
+        {
+          "id": 47785619,
+          "author": "xnx",
+          "text": "The amount of products and updates shipping from the AI-invigorated Google is mind-boggling. They are leading or highly competitive in every AI segment: foundation model, open-weights model, video model, image model, world model, AI IDE, AI CLI, text-to-music, text-to-speech, etc. etc. etc."
+        },
+        {
+          "id": 47785415,
+          "author": "antipaul",
+          "text": "Seems like the most basic thing ever. Can’t even use the new Gemma on device model… no model selection besides fast/normal/thinking. Also requires Google login"
+        },
+        {
+          "id": 47786003,
+          "author": "1Ecz3",
+          "text": "still on the latest pixel phone - gemini can't read basic things."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 23,
+      "id": 47769245,
+      "title_en": "How can I keep from singing?",
+      "title_ja": "私はどうして歌わずにいられよう？",
+      "url": "https://blog.danieljanus.pl/singing/",
+      "hn_url": "https://news.ycombinator.com/item?id=47769245",
+      "score": 23,
+      "comment_count": 3,
+      "posted_at": "2026-04-14T18:18:39+00:00",
+      "comments": [
+        {
+          "id": 47785671,
+          "author": "organsnyder",
+          "text": "It's especially gratifying (in my experience) to sing in a choir. I've been in the same chamber vocal group[1] for almost 20 years, and it has enriched my life in so many ways. I count the other members of the group as some of my closest friends. Many areas have ensembles with a range of experience levels and commitment requirements. Now is a great time to look up local ensembles and see when they hold auditions (most of them are probably within the next few months). [1] https://thechoralscholars.com"
+        },
+        {
+          "id": 47786161,
+          "author": "chasil",
+          "text": "Enya? https://m.youtube.com/watch?v=MM8mOKfxmWw"
+        },
+        {
+          "id": 47785865,
+          "author": "pixelpoet",
+          "text": "Great post, and I instantly recognised the lyric; love Enya <3"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 24,
+      "id": 47784397,
+      "title_en": "One interface, every protocol",
+      "title_ja": "1つのインターフェースで全てのプロトコルに対応",
+      "url": "https://openbindings.com/blog/one-interface-every-protocol",
+      "hn_url": "https://news.ycombinator.com/item?id=47784397",
+      "score": 12,
+      "comment_count": 3,
+      "posted_at": "2026-04-15T19:56:36+00:00",
+      "comments": [
+        {
+          "id": 47784436,
+          "author": "clevengermatt",
+          "text": "Hi HN. OpenBindings is an open spec for describing what a service does once and binding it to any protocol. You define operations with input/output schemas, then point at your existing OpenAPI doc, proto file, MCP server, or whatever else. The spec doesn't replace any of them. They're inputs. The short version of why: programming languages have had interfaces and duck typing forever. You code to a shape, not an implementation. The web never got a successful equivalent at the network boundary. OpenBindings is an attempt at that. What's here today: - The spec (v0.1.0): https://openbindings.com/spec - ob CLI: https://github.com/openbindings/ob - Go SDK: https://github.com/openbindings/openbindings-go - TypeScript SDK: https://github.com/openbindings/openbindings-ts - Binding executors for different protocols Fastest way to try it: brew install openbindings/tap/ob ob demo That starts a coffee shop service on six protocols. `ob op exec localhost:8080 getMenu` calls it. The CLI discovers the OBI (OpenBindings Interface) at /.well-known/openbindings and handles the rest. Would love feedback on the spec design."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 25,
+      "id": 47781286,
+      "title_en": "CRISPR takes important step toward silencing Down syndrome’s extra chromosome",
+      "title_ja": "CRISPRがダウン症候群の過剰染色体抑制に前進",
+      "url": "https://medicalxpress.com/news/2026-04-crispr-bold-silencing-syndrome-extra.html",
+      "hn_url": "https://news.ycombinator.com/item?id=47781286",
+      "score": 45,
+      "comment_count": 48,
+      "posted_at": "2026-04-15T16:19:48+00:00",
+      "comments": [
+        {
+          "id": 47783094,
+          "author": "bonsai_spool",
+          "text": "This is very clever - the X chromosome has a mechanism to shut itself down (which makes sense; otherwise cells in women would have twice as many gene products from the X chromosome as cells from men). The linked research report[1] uses that mechanism, Xist , to shutdown chromosome 21, the extra chromosome whose presence causes Down syndrome. In its present form, it would need to be optimized for each potential patient and is unlikely to be used as a treatment paradigm, but the biological approach is clever. [1] https://www.pnas.org/doi/10.1073/pnas.2517953123"
+        },
+        {
+          "id": 47783241,
+          "author": "mark-frost",
+          "text": "What strikes me most about this is the elegance of borrowing an existing biological mechanism. The body already knows how to silence an entire chromosome — every female cell does it to one X chromosome via XIST. The insight here isn't \"we invented a way to silence a chromosome\" — it's \"we figured out how to redirect a process that's been running in half the population for millions of years.\" The 20-40% integration rate is the real bottleneck though. For a therapeutic application you'd need near-complete coverage, especially in neural tissue where the cognitive effects of trisomy 21 are most significant. Still, going from \"theoretically possible\" to \"works in 20-40% of cell lines\" is a massive leap. The gap from there to clinical viability is smaller than the gap they already crossed."
+        },
+        {
+          "id": 47783639,
+          "author": "memonkey",
+          "text": "I am slightly reminded of Gattaca, the story of which is that certain people are discriminated based on their DNA. Society is built, in general, excluding certain people due to their disabilities. Whether or not a blind person can find meaning or enjoy life has road blocks but is not impossible. Science can provide technologies to potentially improve people's lives -- cochlear implants for those with hearing loss, for example. There are ongoing philosophical discussions of whether or not these technologies and scientific discoveries are actually harming or helping those with these disabilities and the broader discussion of 'normalizing' society at large (I don't want to use the term eugenics)."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 26,
+      "id": 47779372,
+      "title_en": "It's cool to care (2025)",
+      "title_ja": "気にかけることはクールだ (2025)",
+      "url": "https://alexwlchan.net/2025/cool-to-care/",
+      "hn_url": "https://news.ycombinator.com/item?id=47779372",
+      "score": 3,
+      "comment_count": 0,
+      "posted_at": "2026-04-15T14:20:42+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 27,
+      "id": 47780971,
+      "title_en": "Show HN: Libretto – Making AI browser automations deterministic",
+      "title_ja": "Show HN: Libretto - AIブラウザ自動操作を確定的にする",
+      "url": "https://github.com/saffron-health/libretto",
+      "hn_url": "https://news.ycombinator.com/item?id=47780971",
+      "score": 71,
+      "comment_count": 23,
+      "posted_at": "2026-04-15T15:57:54+00:00",
+      "comments": [
+        {
+          "id": 47785360,
+          "author": "anthuswilliams",
+          "text": "I literally _just_ put up an announcement on our internal Slack of a tool I had spent a few weeks trying to get right. Strange to post the announcement and, literally the same day, see a better, publicly available toolkit to do enable that very workflow! I'm also using Playwright, to automate a platform that has a maze of iframes, referer links, etc. Hopefully I can replace the internals with a script I get from this project."
+        },
+        {
+          "id": 47784399,
+          "author": "heyitsaamir",
+          "text": "I built something very similar for my company internally. The idea was that that the maintenance of the code is on the agent and the code is purely an optimization. If it breaks the agent runs it iteratively, fixes the code for next time. Happy to replace my tool with this and see how it does!"
+        },
+        {
+          "id": 47785389,
+          "author": "boriskurikhin",
+          "text": "I like the pre-gen approach! Curious how it responds to JS that changes how components are rendered at run-time."
+        },
+        {
+          "id": 47784105,
+          "author": "z3ugma",
+          "text": "Love it! Do you have a BAA with Claude though? Otherwise, your demo is likely exposing PHI to 3rd parties and exposing you to risk related to HIPAA"
+        },
+        {
+          "id": 47783042,
+          "author": "etwigg",
+          "text": "Thanks for this! We have clear answers for things that are 100% and 0% automated, but it’s always that 80%-99% automated slice where the frontier is, great idea."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 28,
+      "id": 47740840,
+      "title_en": "Costasiella kuroshimae",
+      "title_ja": "コスタシエラ・クロシマエ",
+      "url": "https://en.wikipedia.org/wiki/Costasiella_kuroshimae",
+      "hn_url": "https://news.ycombinator.com/item?id=47740840",
+      "score": 136,
+      "comment_count": 51,
+      "posted_at": "2026-04-12T15:26:24+00:00",
+      "comments": [
+        {
+          "id": 47777773,
+          "author": "iwd",
+          "text": "I just got to see a different species of kleptoplastic sea slugs in the wild last month, on a kayak tour of the mangroves around Key West. Our guide scooped some lettuce sea slugs up in a plastic container (and then returned them safely). They were bigger, about 3 inches long, with a wavy/frilly green border. It made my biologist heart very happy!"
+        },
+        {
+          "id": 47780368,
+          "author": "corygarms",
+          "text": "This is exactly why pokemon devs are looking for biologists! (seriously) https://www.nature.com/articles/d41586-026-00960-8"
+        },
+        {
+          "id": 47778040,
+          "author": "Ericson2314",
+          "text": "I remember as a kid wondering if we could give humans chlorolaplasts."
+        },
+        {
+          "id": 47777067,
+          "author": "stavros",
+          "text": "Life is amazing."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 29,
+      "id": 47734927,
+      "title_en": "The Enigma of Gertrude Stein",
+      "title_ja": "ガートルード・スタインの謎",
+      "url": "https://www.thenation.com/article/culture/gertrude-stein-afterlife-wade-review/",
+      "hn_url": "https://news.ycombinator.com/item?id=47734927",
+      "score": 4,
+      "comment_count": 1,
+      "posted_at": "2026-04-11T23:39:20+00:00",
+      "comments": [
+        {
+          "id": 47769685,
+          "author": "mitchbob",
+          "text": "https://archive.ph/2026.03.30-145949/https://www.thenation.c..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 30,
+      "id": 47782972,
+      "title_en": "Kalshi CEO expects US DOJ to prosecute insider trading cases",
+      "title_ja": "Kalshi CEO、米司法省がインサイダー取引事件を起訴すると予測",
+      "url": "https://www.semafor.com/article/04/15/2026/kalshi-ceo-tarek-mansour-expects-us-doj-to-prosecute-insider-trading-cases",
+      "hn_url": "https://news.ycombinator.com/item?id=47782972",
+      "score": 102,
+      "comment_count": 107,
+      "posted_at": "2026-04-15T18:11:24+00:00",
+      "comments": [
+        {
+          "id": 47785540,
+          "author": "usrusr",
+          "text": "In stock markets, insider trading is a big no not because it ruins someone's gambling habit, but because the entire concept of the corporation requires a certain amount of trust of financiers in financees. That whole pooling of capital thing, to do stuff that has too high a capital requirement to start individually. When shares are publicly traded, that trust is impossible when holders have to assume that they will be gamed by employee-owners and that would mean nobody outside the circle of those in the know would ever put in money and then you could just give up and declare that publicly traded corporations simply can't exist. \"Don't bother investing, they will strip you\". Prediction markets don't have any \"natural\" reason like that for excluding insider trading. It's just \"game designers\" crying their hearts out when someone ruins their game by having an advantage. The employee could not be an insider if his employer did not exists because of a lack of rules against him trading. The prediction market not existing would not make the insider any less of an insider (we are not tking about people inside the prediction market maker!)"
+        },
+        {
+          "id": 47783819,
+          "author": "tptacek",
+          "text": "This issue reveals the gap between the prediction market premise and what these things actually are, which is: unregulated prop gambling venues. If things like Kalshi and Polymarket are prediction markets, then, at least as far as the intrinsic concerns of the market itself are concerned, insider trading is a good thing; literally part of the point. If they are instead how they function today, then insider trading is a game-breaking fairness issue, like having a device to read your opponents cards in a poker game, and then they're a real problem. You can tell what these businesses think their platforms are for by how they handle these issues."
+        },
+        {
+          "id": 47784472,
+          "author": "tyre",
+          "text": "I don't understand why it is a crime under current US law. Prediction markets can only do sports gambling (the vast majority of their volume) because they self-certify under the CFTC. The CFTC doesn't have the same standards of \"insider trading\" as the stock market, because insider trading is the entire point of business at the CFTC! If you're trading, like, oil futures or wheat futures or whatever, you are likely doing so specifically because you have inside information about your business needs or production that you want to hedge. I understand why people are mad about gambling versus someone who has insider information, but under current US law I'm not sure that there is a case to be made."
+        },
+        {
+          "id": 47783599,
+          "author": "lowkey_",
+          "text": "> “If you commit insider trading on Kalshi, that can and will at some point be a federal crime. It is a federal crime,” Am I misunderstanding? It seems like two different statements he always conflates. If it becomes a federal crime at some point, it will become illegal from that point — you can't prosecute people for acts committed before they were crimes. The only way that this could be a federal crime right now is if the government starts prosecuting it under existing laws without any changes. I don't see that as likely."
+        },
+        {
+          "id": 47784270,
+          "author": "Sol-",
+          "text": "I understand he wants to deflect liability from his platform, but I guess I have to concede that it seems like a legitimate defense. We allow the stock market to exist even though insider trading can happen and it's (I think?) not Nasdaq's or NYSE's responsibility to pursue that. We have a legal system for that. I think there is still the debate to be had whether prediction market enable too much criminal activity and insider trading compared to traditional stock markets and therefore need to be limited for pragmatic reasons (i.e. the legal system can't keep up), but that's a different discussion."
+        }
+      ],
+      "summary_ja": ""
+    }
+  ]
+}
