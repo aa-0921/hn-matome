@@ -1,0 +1,1076 @@
+{
+  "date": "2026-04-15T00:00:00+09:00",
+  "slot": "12",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 47768133,
+      "title_en": "Claude Code Routines",
+      "title_ja": "Claudeコードルーチン",
+      "url": "https://code.claude.com/docs/en/routines",
+      "hn_url": "https://news.ycombinator.com/item?id=47768133",
+      "score": 525,
+      "comment_count": 306,
+      "posted_at": "2026-04-14T16:54:33+00:00",
+      "comments": [
+        {
+          "id": 47769425,
+          "author": "joshstrange",
+          "text": "LLMs and LLM providers are massive black boxes. I get a lot of value from them and so I can put up with that to a certain extent, but these new \"products\"/features that Anthropic are shipping are very unappealing to me. Not because I can't see a use-case for them, but because I have 0 trust in them: - No trust that they won't nerf the tool/model behind the feature - No trust they won't sunset the feature (the graveyard of LLM-features is vast and growing quickly while they throw stuff at the wall to see what sticks) - No trust in the company long-term. Both in them being around at all and them not rug-pulling. I don't want to build on their \"platform\". I'll use their harness and their models but I don't want more lock-in than that. If Anthropic goes \"bad\" I want to pick up and move to another harness and/or model with minimal fuss. Buying in to things like this would make that much harder. I'm not going to build my business or my development flows on things I can't replicate myself. Also, I imagine debugging any of this would be maddening. The value add is just not there IMHO. EDIT: Put another way, LLM companies are trying to climb the ladder to be a platform, I have zero interest in that, I was a \"dumb pipe\", I want a commodity, I want a provider, not a platform. Claude Code is as far into the dragon's lair that I want to venture and I'm only okay with that because I know I can jump to OpenCode/Codex/etc if/when Anthropic \"goes bad\"."
+        },
+        {
+          "id": 47768821,
+          "author": "andai",
+          "text": "I'm a little confused on the ToS here. From what I gathered, running `claude -p <prompt>` on cron is fine, but putting it in my Telegram bot is a ToS violation (unless I use per-token billing) because it's a 3rd party harness, right? (`claude -p` being a trivial workaround for the \"no 3rd party stuff on the subscription\" rule) This Routines feature notably works with the subscription, and it also has API callbacks. So if my Telegram bot calls that API... do I get my Anthropic account nuked or not?"
+        },
+        {
+          "id": 47774940,
+          "author": "cryptonector",
+          "text": "Oof, running Claude Code automatically on PRs is scary."
+        },
+        {
+          "id": 47770354,
+          "author": "comboy",
+          "text": "Unrelated, but Claude was performing so tragically last few days, maybe week(s), but days mostly, that I had to reluctantly switch. Reluctantly because I enjoy it. Even the most basic stuff, like most python scripts it has to rerun because of some syntax error. The new reality of coding took away one of the best things for me - that the computer always just does what it is told to do. If the results are wrong it means I'm wrong, I made a bug and I can debug it. Here.. I'm not a hater, it's a powerful tool, but.. it's different."
+        },
+        {
+          "id": 47769149,
+          "author": "Eldodi",
+          "text": "Anthropic is really good at releasing features that are almost the same but not exactly the same as other features they released the week before"
+        }
+      ],
+      "summary_ja": "LLMプロバイダーへの不信感が中心。機能の突然の縮小・終了や企業の持続性を懸念し、プラットフォームへの依存・ロックインを避け「ダムパイプ」（単なる提供者）を求める声。利用規約の曖昧さ、最近のClaudeパフォーマンス低下による実用面での信頼性への疑問も。Anthropicの類似機能を繰り返すリリース手法への批判も含む。"
+    },
+    {
+      "rank": 2,
+      "id": 47773812,
+      "title_en": "Dependency cooldowns turn you into a free-rider",
+      "title_ja": "依存関係のクールダウンがフリーライダーを生む",
+      "url": "https://calpaterson.com/deps.html",
+      "hn_url": "https://news.ycombinator.com/item?id=47773812",
+      "score": 42,
+      "comment_count": 17,
+      "posted_at": "2026-04-15T02:03:12+00:00",
+      "comments": [
+        {
+          "id": 47774745,
+          "author": "bnjemian",
+          "text": "Okay sure, but what happens when a high CVE is discovered that requires immediate patching – does that get around the Upload Queue? If so, it's possible one could opportunistically co-author the patch and shuttle in a vulnerability, circumventing the Upload Queue. If you instead decide that the Upload Queue can't be circumvented, now you're increasing the duration a patch for a CVE is visible. Even if the CVE disclosure is not made public, the patch sitting in the Upload Queue makes it far more discoverable. Best as I can tell, neither one of these fairly obvious issues are covered in this blog post, but they clearly need to be addressed for Upload Queues to be a good alternative. -- Separately, at least with NPM, you can define a cooldown in your global .npmrc, so the argument that cooldowns need to be implemented per project is, for at least one (very) common package manger, patently untrue. # Wait 7 days before installing > npm config set min-release-age 7"
+        },
+        {
+          "id": 47774897,
+          "author": "dominicq",
+          "text": "> Fundamental in the dependency cooldown plan is the hope that other people - those who weren't smart enough to configure a cooldown - serve as unpaid, inadvertent beta testers for newly released packages. This is wrong to an extent. This plan works by letting software supply chain companies find security issues in new releases. Many security companies have automated scanners for popular and less popular libraries, with manual triggers for those libraries which are not in the top N. Their incentive is to be the first to publish a blog post about a cool new attack that they discovered and that their solution can prevent."
+        },
+        {
+          "id": 47774783,
+          "author": "ryanjshaw",
+          "text": "This doesn’t solve the problem either, which is that of the Confused Deputy [1]. An arbitrary piece of code I’m downloading shouldn’t be able to run as Ryan by default with access to everything Ryan has. We need to revitalize research into capabilities-based security on consumer OSs, which AFAIK is the only thing that solves this problem. (Web browsers - literally user “agents” - solve this problem with capabilities too: webapps get explicit access to resources, no ambient authority to files, etc.) Solving this problem will only become more pressing as we have more agents acting on our behalf. [1] https://en.wikipedia.org/wiki/Confused_deputy_problem"
+        },
+        {
+          "id": 47774752,
+          "author": "onionisafruit",
+          "text": "The people who will benefit from a cooldown weren’t reviewing updates anyway. Without the cooldown they would just be one more malware victim. If you don’t review code before you update, it just makes sense to wait until others have. Despite what the article says, the only people who benefit from a rush to update are the malware spreaders."
+        },
+        {
+          "id": 47774741,
+          "author": "ArcHound",
+          "text": "The core point is of course solid. By not updating on day 0, maybe somebody else spend the effort to discover this and you didn't. But there are plenty of other benefits for not rolling with the newest and greatest versions enabled. I'd argue for intentional dependency updates. It just so happens that it's identified in one sprint and planned for the next one, giving the team a delay. First of all, sometimes you can reject the dependency update. Maybe there is no benefit in updating. Maybe there are no important security fixes brought by an update. Maybe it breaks the app in one way or another (and yes, even minor versions do that). After you know why you want to update the dependency, you can start testing. In an ideal world, somebody would look at the diff before applying this to production. I know how this works in the real world, don't worry. But you have the option of catching this. If you automatically update to newest you don't have this option. And again, all these rituals give you time - maybe someone will identify attacks faster. If you perform these rituals, maybe that someone will be you. Of course, it is better for the business to skip this effort because it saves time and money."
+        }
+      ],
+      "summary_ja": "依存関係クールダウンはCVEパッチの遅延や悪用リスクを招き、無償ベータテスター依存は不十分である。根本的には能力ベースセキュリティの導入が必要で、自動更新より計画的な更新とレビューが重要との批判がされている。"
+    },
+    {
+      "rank": 3,
+      "id": 47765604,
+      "title_en": "Rare concert recordings are landing on the Internet Archive",
+      "title_ja": "レアコンサート録音がインターネットアーカイブに登場",
+      "url": "https://techcrunch.com/2026/04/13/thousands-of-rare-concert-recordings-are-landing-on-the-internet-archive-listen-now/",
+      "hn_url": "https://news.ycombinator.com/item?id=47765604",
+      "score": 584,
+      "comment_count": 170,
+      "posted_at": "2026-04-14T13:46:31+00:00",
+      "comments": [
+        {
+          "id": 47767452,
+          "author": "rigonkulous",
+          "text": "I am an active and enthusiastic recordist and have decades of stuff I've accumulated over the years. One of the concerts I captured in the 90's, lives on as a bootleg which I often see around the scene of this one particularly great live electronic dance band, whose punters have created true value out of the hour and a half of live concert input I managed to record, standing right there front stage and center, with the band looking right at me. It was a hilarious experience - I expected to get booted out pretty fast, so I held my ground as still as I could, DAT-tape rolling by, shotgun mike held in front of me like it was just normal, as if I belonged there. The lead singer caught my eye and gave me a wide grin. I survived the concert, it was awesome, but boy was I relieved to have made it home with that DAT - which I of course, proceeded to digitize with my brand new spdf/io .. The next year the band (who are big and famous, btw) were in the same city and I happened to be around, I got invited backstage to meet the band, participate in a bit of nerdery regarding their live setup and gear and so on, and talk about that recording I'd made. I'd put it out as a pure bootleg, no questions asked. Turns out they'd heard it and enjoyed it and came to appreciate the nature of their bootleggers, as avid fans who gave the band themselves something extra to think about in what was then, a burgeoning digital/online universe about to explode. So, seeing it around, almost 30 years now .. here and there, again and again .. is quite hilarious. Youtube often recommends it to me in my playlist, its just there. And at a certain spot in the recording, I tell my mate to stop standing so close to me (he was blocking the shottie), and prepare for my ass getting bounced - which never happened, thankfully. So yeah, I just wanna say, if you personally have the desire to be a recordist, and have a pure purpose in it, I'd say just freakin' go for it. Record All The Things. Its good for the Artists, yo. And also their fans. (Its how we get rid of the managers, cough cough ..)"
+        },
+        {
+          "id": 47766076,
+          "author": "tclancy",
+          "text": "Source article is more enjoyable http://blockclubchicago.org/2026/04/10/from-early-nirvana-to..."
+        },
+        {
+          "id": 47766262,
+          "author": "alsetmusic",
+          "text": "This is one of the best things I've read about in a bit. It wasn't uncommon to buy marked-up (overpriced) bootlegs of live performances on CDs in the 90s. You never knew in advance if it'd be a quality recording or total garbage. We've lost that. I still love when one of my live bootlegs of Faith No More comes on with them doing (sometimes mocking) parodies of popular music (their rendition of Nothing Compares to You by Sinead OConnor has been in my head as I type this). When I got to see them in 2010 (I think) they were true to form and played a bunch of short (reinterpretations) covers and it was one of the best aspects of the show. And I still have a Mr Bungle bootleg with them covering Existential Blues by Tom \"T-Bone\" Stankus (I always thought it was Doctor Demento's Wizard of Oz until just now when I looked it up). How would you even know about these awesome gems without bootlegs or access to see all their live shows? YouTube is less likely to capture an entire show than a clip, whereas the bootlegs were typically the full show. There are probably areas of the internet where this stuff gets shared and traded, but having it in my local music shop meant everyone had access without requiring special knowledge. I just did two searches, one Google and one Kagi, and neither turned up the FNM Nothing Compares to You. Who knows how many copies of it exist in the world. If my music library gets nuked, who will even know about it? I think I'm gonna start uploading my bootleg recordings of live shows to IA."
+        },
+        {
+          "id": 47766202,
+          "author": "HelloUsername",
+          "text": "Previous discussion: \"Volunteers turn a fan's recordings of 10K concerts into an online treasure trove\" https://news.ycombinator.com/item?id=47687443 8-apr-2026 76 comments"
+        },
+        {
+          "id": 47767279,
+          "author": "schwartzworld",
+          "text": "It's funny to think how much effort was put into preventing bootlegging, when now everything is being recorded all the time. The few bands that didn't care or even encouraged it reaped the benefits. I was a huge Ween fan in the 90s and bootlegged a show of theirs myself. Camera and recording devices were allowed and the result was a tremendous amount of live content available online. For some bands this might not matter, but they rarely played the same set list twice and often played songs differently from show to show. In the early internet days, there was more ween content online than you could ever hope to listen to."
+        }
+      ],
+      "summary_ja": "コンサートのブートレグ録音は、アーティストとファンにとって貴重なライブ記録であり、歴史的価値を持つ。過去には質が不安定だったが、Internet Archiveのようなオンラインアーカイブで保存・共有されることが有益である。録音活動は奨励され、バンドによってはブートレグを容認することで利益を得ている。"
+    },
+    {
+      "rank": 4,
+      "id": 47773788,
+      "title_en": "Not all elementary functions can be expressed with exp-minus-log",
+      "title_ja": "exp-minus-logでは表現できない初等関数が存在する",
+      "url": "https://www.stylewarning.com/posts/not-all-elementary/",
+      "hn_url": "https://news.ycombinator.com/item?id=47773788",
+      "score": 25,
+      "comment_count": 7,
+      "posted_at": "2026-04-15T01:59:18+00:00",
+      "comments": [
+        {
+          "id": 47774917,
+          "author": "avmich",
+          "text": "I'd really like more details on the terminology used. Also I'd be glad to see a specific example of a function, considered elementary, which is not representable by EML. It could be hard, and in any case, thanks for the article. I wish it would be more accessible to me."
+        },
+        {
+          "id": 47774908,
+          "author": "saithound",
+          "text": "The original article explicitly acknowledged this limitation, that while in \"the classical differential-algebraic setting, one often works with a broader notion of elementary function, defined relative to a chosen field of constants and allowing algebraic adjunctions, i.e., adjoining roots of polynomial equations,\" the author works with the less general definition. Neither the present article, nor the original one has much mathematical originality, though: Odrzywolek's result is immediately obvious, while this blog post is a rehash of Arnold's proof of the unsolvability of the quintic."
+        },
+        {
+          "id": 47774847,
+          "author": "lotaezenwa",
+          "text": "The author essentially says that the quintic has no closed form solution which is true regardless of the exp-minus-log function. The purpose of this blog post is lost on me. Can anyone please explain this further? It seems like he’s moving the goalposts."
+        }
+      ],
+      "summary_ja": "コメントでは、記事がEMLで表現できない初等関数を論じるが、具体例や用語の明確化を求める声がある。また、数学的独創性が低く既知の結果の再掲と指摘され、五次方程式の非可解性との関連で記事の目的が不明確で、主張に一貫性がないと批判されている。"
+    },
+    {
+      "rank": 5,
+      "id": 47724571,
+      "title_en": "A communist Apple II and fourteen years of not knowing what you're testing",
+      "title_ja": "共産主義的Apple IIと14年間のテスト対象不明期間",
+      "url": "https://llama.gs/blog/index.php/2026/04/10/friday-archaeology-a-communist-apple-ii-and-fourteen-years-of-not-knowing-what-youre-testing/",
+      "hn_url": "https://news.ycombinator.com/item?id=47724571",
+      "score": 93,
+      "comment_count": 10,
+      "posted_at": "2026-04-10T22:36:24+00:00",
+      "comments": [
+        {
+          "id": 47774415,
+          "author": "summa_tech",
+          "text": "This was a fascinating article, because I've seen so many results of the Eastern Bloc reverse-engineering efforts basically founder into obscurity. Many of these re-created (sometimes with minor variations, or quite novel and ingenious implementation choices) computers were made in small series, but could not compete against illegal imports, and in any case would only be briefly popular in their local university town. So it's cool to see that Bulgaria managed to muster enough government interest to force a cohesive strategy for the whole country. It sounds like it paid off. Also, after googling for Правец, I have found out that I can in fact read Bulgarian, which was quite surprising to me."
+        },
+        {
+          "id": 47774731,
+          "author": "ipeev",
+          "text": "I think my reaction is mostly puzzlement. I can see a sensible point or several in the article, but I was not always sure how big a point the author was trying to make. At the narrower level, it seems to be saying that benchmarks are easier to interpret when you know what they really are. That makes sense. If a circuit is known to be a multiplier, that tells you more than if it is just called `c6288`. That is also why I thought of Python benchmarks. In something like `pyperformance`, names such as `json_loads`, `python_startup`, or `nbody` already tell you something about the workload. So when you compare results, you have a better sense of what kind of task a system is doing well on. But so what? It is just benchmarks. They don't guarantee anything about anything anyway. What made it harder for me to follow was that this fairly modest point is wrapped in a lot of jokes and swipes about AI and corporate AI language. Some of that is funny, but it also made me less sure what the main point was supposed to be. Was the article really about benchmark interpretation, or was that mostly a vehicle for making a broader point about AI hype and technical understanding? So I do think there is a real point in there. I just found it slightly hard to separate that point from the style and the jokes."
+        },
+        {
+          "id": 47774227,
+          "author": "somat",
+          "text": "\"AMD’s AI director reports that Claude Code has become “dumber and lazier” since February, based on analysis of 6,852 sessions and 234,760 tool calls, which is the most thorough performance review any AI has received and rather more than most human employees get.\" Are there any good ways to measure agent ability? Or do we just have to go by vibes?"
+        }
+      ],
+      "summary_ja": "東欧におけるApple IIの複製機開発の歴史的考察と、アーティクルで論じられたベンチマーク評価の難しさに対する批評が主な議論。技術複製の成否は戦略次第であり、ベンチマークやAI性能の評価は表面的な測定に留まり実態理解を欠く点が指摘されている。"
+    },
+    {
+      "rank": 6,
+      "id": 47725897,
+      "title_en": "Installing OpenBSD on the Pomera DM250 Writerdeck",
+      "title_ja": "Pomera DM250 WriterdeckへのOpenBSDインストール",
+      "url": "https://jcs.org/2026/04/09/openbsd-dm250",
+      "hn_url": "https://news.ycombinator.com/item?id=47725897",
+      "score": 18,
+      "comment_count": 5,
+      "posted_at": "2026-04-11T00:47:06+00:00",
+      "comments": [
+        {
+          "id": 47774766,
+          "author": "stuxnet79",
+          "text": "Well this is interesting ... I have a DM250 that I bought a year ago that's been collecting dust because I couldn't get used to the UI/UX. It was imported straight from Japan so I'm pretty sure it's not the US model although I'll have to confirm that. Customizing / tinkering with it has been difficult because it's a pretty niche product with not a ton of information online (at least on english websites). Skimming this tutorial it seems like installing OpenBSD is a high-risk / high-reward type of thing. I'll have to look into further to see if it's worth it."
+        },
+        {
+          "id": 47774772,
+          "author": "technicalape",
+          "text": "Congrats @jcs, I saw you battling the US version :)"
+        },
+        {
+          "id": 47774592,
+          "author": "skydhash",
+          "text": "I'm running OpenBSD as a daily driver and one of its nicer point is not the security angle, but how simple and hackable it is, while still fairly capable in terms of hardware support. Linux may be more convenient, but its subsystems are too complex and not prone to quick modifications."
+        },
+        {
+          "id": 47774343,
+          "author": "whalesalad",
+          "text": "Love the flying toaster screensaver, that was a pleasant surprise."
+        }
+      ],
+      "summary_ja": "ニッチなDM250端末へのOpenBSDインストールは情報不足で難しいが、ハイリスク・ハイリターンの挑戦。OpenBSDはセキュリティよりシンプルでハックしやすく、Linuxより簡素なサブシステムが変更に向くと評価されている。"
+    },
+    {
+      "rank": 7,
+      "id": 47732535,
+      "title_en": "The Orange Pi 6 Plus",
+      "title_ja": "Orange Pi 6 Plus",
+      "url": "https://taoofmac.com/space/reviews/2026/04/11/1900",
+      "hn_url": "https://news.ycombinator.com/item?id=47732535",
+      "score": 151,
+      "comment_count": 109,
+      "posted_at": "2026-04-11T17:48:02+00:00",
+      "comments": [
+        {
+          "id": 47735468,
+          "author": "BirAdam",
+          "text": "I love that OrangePi is making good hardware, but after my experience with the OrangePi 5 Max, I won’t be buying more hardware from them again. The device is largely useless due to a lack of software support. This also happened with the MangoPi MQ-Pro. I’ll just stick with RPi. I may not get as much hardware for the money, but the software support is fantastic."
+        },
+        {
+          "id": 47773695,
+          "author": "Lerc",
+          "text": "You have to go in with your eyes open wth SBCs. If you have a specific task for it and you can see that it either already supports it or all the required software is there and it just needs to be gathered, then they can be great gadgets. Often they can go their entire lifespan without some hardware feature being usable because of lack of software. The blunt truth is that someone has to make that software, and you can't expect someone to make it for you. They may make it for you, and that's great, but really if you want a feature supported, it either has to already be supported, or you have to make the support. It will be interesting to see if AI gets to the point that more people are capable of developing their own resources. It's a hard task and a lot of devices means the hackers are spread thin. It would be nice to see more people able to meaningfully contribute."
+        },
+        {
+          "id": 47771922,
+          "author": "zzzoom",
+          "text": "At some point SBCs that require a custom linux image will become unacceptable, right? Right?"
+        },
+        {
+          "id": 47771725,
+          "author": "james-clef",
+          "text": "Something in me wants to buy every SBC and/or microcontroller that is advertised to me."
+        },
+        {
+          "id": 47771572,
+          "author": "adrianwaj",
+          "text": "One or two USB-C 3.2 Gen2 ports are all that's required - can then plug in a hub or dock. eg: https://us.ugreen.com/collections/usb-hub?sort_by=price-desc... Can also plug in a power bank. https://us.ugreen.com/collections/power-bank?sort_by=price-d... The advantage is that if the machine breaks or is upgraded, the dock and pb can be retained. Would also distribute the price. The dock and pb can also be kept away to lower heat to avoid a fan in the housing, ideally. Better hardware should end up leading to better software - its main problem right now. This 10-in-1 dock even has an SSD enclosure for $80 https://us.ugreen.com/products/ugreen-10-in-1-usb-c-hub-ssd (no affiliation) (no drivers required) I'd have another dock/power/screen combo for traveling and portable use."
+        }
+      ],
+      "summary_ja": "OrangePiなどのSBCはハードウェア性能は良いが、ソフトウェアサポートが不十分で使い物にならないとの指摘。Raspberry Piはサポートが充実しているため、ユーザーは既存のサポートがあるか、自分で開発できるかの見極めが必要。カスタムLinux依存からの脱却や、ハードウェア進化によるソフトウェア改善が期待される。"
+    },
+    {
+      "rank": 8,
+      "id": 47772012,
+      "title_en": "Stop Flock",
+      "title_ja": "Stop Flock",
+      "url": "https://stopflock.com",
+      "hn_url": "https://news.ycombinator.com/item?id=47772012",
+      "score": 510,
+      "comment_count": 126,
+      "posted_at": "2026-04-14T21:56:05+00:00",
+      "comments": [
+        {
+          "id": 47773673,
+          "author": "bmitch3020",
+          "text": "I don't want to stop Flock the company. I want to stop Flock the business model, along with all the other mass surveillance, and the data brokers. If the business models can't be made illegal, it should at least come with liabilities so high that no sane business would want to hold data that is essentially toxic waste. Without that, we are quickly spiraling into the dystopia where privacy is gone, and when the wrong person gets access to the data, entire populations are threatened."
+        },
+        {
+          "id": 47773611,
+          "author": "jimmar",
+          "text": "I followed the shooting at Brown University last year very closely. Brown's leadership was heavily criticized for having camera blind spots and not being able to track the shooter's exact movements through campus. I can understand why people with stewardship over the safety of their students/customers/constituents would make decisions to err on the side of tracking. I'm not saying I agree with it, but I understand it."
+        },
+        {
+          "id": 47773905,
+          "author": "scarmig",
+          "text": "Although I oppose the surveillance state, it's important to understand the motivations and incentives involved in the move toward Flock (and its eventual successors); until those are resolved, governments are going to be implementing Flock style programs with relatively tepid opposition. Police departments are seriously understaffed in many major cities, and officers are much less efficient than they used to be. This has led to the decline of the beat cop, who provided a kind of ambient authority that helped create, both a sense and reality, of public order. People really want the sense (even more than the reality!) of public order; without that, they will jump to faddish solutions that promise it, regardless of the data for or against it. The best counter to Flock is to provide alternatives to it, not just reject it while keeping the status quo going. We need a new, vitalized police culture, that shares mutual trust and engagement with the community."
+        },
+        {
+          "id": 47773872,
+          "author": "jedberg",
+          "text": "We need a law that says if you hold any data about a person, they must be notified when anyone accesses it, including law enforcement. I used to work in criminal investigations. I understand how this might make investigation of real crime more difficult. But so does the fact that you need a warrant to enter someone's home, and yet we manage to investigate crime anyway. Your data should be an extension of your home, even if it's held by another company. It should require a warrant and notification. You could even make the notification be 24 hours after the fact. But it should be required."
+        },
+        {
+          "id": 47773578,
+          "author": "himata4113",
+          "text": "This is just reiterating same points deflock does including mentioning deflock and images from deflock? Deflock: https://deflock.org/ Also: https://haveibeenflocked.com/"
+        }
+      ],
+      "summary_ja": "Flockのビジネスモデルや大量監視・データブローカーへの批判が焦点。データ保持に法的責任を課し「有害廃棄物」扱いする必要性、監視拡大の背景には安全確保のジレンマ（例：大学銃撃事件）や警察の人員不足・地域コミュニティとの信頼低下があると指摘。監視に代わる解決策として、警察の文化改革や地域との協働による治安維持を提唱。個人データへのアクセス時は令状と通知を義務化すべきとの主張も。既存の反対運動（Deflock）への言及あり。監視社会のリスクと公共の安全需要のバランスが議論の核心。"
+    },
+    {
+      "rank": 9,
+      "id": 47721076,
+      "title_en": "Understanding Clojure's Persistent Vectors, pt. 1 (2013)",
+      "title_ja": "ClojureのPersistent Vectorsを理解する 第1部（2013）",
+      "url": "https://hypirion.com/musings/understanding-persistent-vector-pt-1",
+      "hn_url": "https://news.ycombinator.com/item?id=47721076",
+      "score": 42,
+      "comment_count": 5,
+      "posted_at": "2026-04-10T17:14:18+00:00",
+      "comments": [
+        {
+          "id": 47774784,
+          "author": "gleenn",
+          "text": "IMHO, this is one of the coolest aspects of Clojure: the data structures were designed to be immutable as efficiently as possible. This allows for some of the most critical aspects of the language to function. If you're whole program passes around values that are immutable, you don't ever have to worry about which part of the code owns what. Rust is such a different language but the borrow-checker is solving a nearly identical problem: who owns this memory and who is allowed to change it? In Rust, one owner ever gets to write to a piece of memory and you can move that around. It catches lots of bugs and is extremely efficient, but it is definitely a difficult aspect of the language to master. Clojure just says everyone gets to read and share everything, because every mutation is a copy. One piece of your codebase can never stomp on or free some memory that another part is using. Big tradeoffs with garbage collection but geeze does it make reasoning about Clojure programs SO much easier. And the cornerstone of that idea is fast, immutable data structures by default. Maps are implemented similarly in that they are fast to make mutated copies with structural sharing to save memory."
+        },
+        {
+          "id": 47773995,
+          "author": "goldfishgold",
+          "text": "Scala has a similar data structure https://www.scala-lang.org/api/2.13.6/scala/collection/immut... . Something was in the air in 2013."
+        }
+      ],
+      "summary_ja": "Clojureの不変データ構造は、構造共有により効率的で、メモリ安全性とコードの推論を容易にする。Rustの所有権システムと問題意識は共通するが、Clojureは全コードによる安全な共有を選び、ガベージコレクションと引き換えにプログラムの簡潔さを実現している。2013年頃にはScalaなどにも類似の実装が見られた。"
+    },
+    {
+      "rank": 10,
+      "id": 47728662,
+      "title_en": "Picasso's Guernica (Gigapixel)",
+      "title_ja": "ピカソの『ゲルニカ』（ギガピクセル版）",
+      "url": "https://guernica.museoreinasofia.es/gigapixel/#3/63.11/-120.59",
+      "hn_url": "https://news.ycombinator.com/item?id=47728662",
+      "score": 84,
+      "comment_count": 20,
+      "posted_at": "2026-04-11T08:27:06+00:00",
+      "comments": [
+        {
+          "id": 47774690,
+          "author": "habosa",
+          "text": "I went to Spain as a teenager and saw Guernica in person. It was the first painting to ever really have an effect on me. It's stunning. A perfect example of how art can transmit a message between people across time and space, I just knew that I was feeling how Picasso wanted me to feel. If you have the chance to see this painting you should, no website can do it justice (although this is a very nice try)."
+        },
+        {
+          "id": 47774729,
+          "author": "tzury",
+          "text": "Seems similar to operation night watch by the Rijksmuseum in Amsterdam https://www.rijksmuseum.nl/en/stories/operation-night-watch/..."
+        },
+        {
+          "id": 47774776,
+          "author": "Groxx",
+          "text": "I would love to see this kind of thing as a Gaussian splat image, so the sheen at different angles is captured. It's somewhat important to making it look realistic."
+        },
+        {
+          "id": 47773102,
+          "author": "bigethan",
+          "text": "the way this displayed in the Reina Sofia is fantastic. it’s set in its own room that you approach from the side so you get this experience of turning a corner and boom there’s Guernica. Gave me chills."
+        },
+        {
+          "id": 47773668,
+          "author": "satvikpendem",
+          "text": "Somewhat similar in terms of the high resolutions of its images, I also want to recommend https://artsandculture.google.com/ which not many know about, it's a great resource to see and learn about art around the world."
+        }
+      ],
+      "summary_ja": "『ゲルニカ』実物の感情的インパクトと芸術の時空を超えたメッセージ伝達力が強調される。高解像度デジタル化は実物に及ばないが有用な試みであり、Gaussian splatによる光沢再現や美術館の展示方法が提案・称賛される。類似プロジェクトとしてOperation Night WatchやGoogle Arts & Cultureも紹介されている。"
+    },
+    {
+      "rank": 11,
+      "id": 47768339,
+      "title_en": "Turn your best AI prompts into one-click tools in Chrome",
+      "title_ja": "最適なAIプロンプトをChromeワンクリックツール化",
+      "url": "https://blog.google/products-and-platforms/products/chrome/skills-in-chrome/",
+      "hn_url": "https://news.ycombinator.com/item?id=47768339",
+      "score": 142,
+      "comment_count": 63,
+      "posted_at": "2026-04-14T17:09:43+00:00",
+      "comments": [
+        {
+          "id": 47769693,
+          "author": "skeeter2020",
+          "text": "my most commonly repeated prompt; would be nice if the baked it into the tool itself: \"No emojis. be concise. no suggestions unless I explicitly ask for them. answer questions like the machine you are. Don't try and add personality or humour; remember you're a robot.\""
+        },
+        {
+          "id": 47773476,
+          "author": "tracerbulletx",
+          "text": "I know everyone hates ads or whatever, but why would anyone make content on their own website anymore if google and the browser are doing everything in their power to keep your users from interacting with your own page. Also I don't want to hear the crap about ads being too invasive, its their content, they can do that if they want, and you can not have access to their content. They have to be able to monetize the page to get viewers and its their mistake to make if they make it annoying that doesn't give everyone the right to their work."
+        },
+        {
+          "id": 47770218,
+          "author": "_doctor_love",
+          "text": "I really hope this doesn't have the same security model as Chrome Extensions! I can see the appeal of this feature and I am generally speaking an AI booster. On the other hand...like...wat? This feature feels way too premature and risky to let loose on the public."
+        },
+        {
+          "id": 47770545,
+          "author": "parasti",
+          "text": "These days announcements like this just make me want to put on my tinfoil hat - what's in it for Google, though? Why make it more convenient for people to submit webpages to you?"
+        },
+        {
+          "id": 47772805,
+          "author": "tholman",
+          "text": "Tried to visit the first domain, baydailymedia, but doesn't seem to exist... I know its unsurprising and not against the rules or even spirit of showing off your new toy, but some humor in the aria tag \"Video of user creating a protein maxing Skill\" and then within the video, a fat \"Video for illustrative purposes\" \"Results may vary\" \"check response for accuracy\" Second video seem's more real. And yeah, again not against the rules, but dropping onto website, no ads, prompting data out of it is very in the ethos of our current \"lets just do an ai\" to be relavent era."
+        }
+      ],
+      "summary_ja": "AIプロンプトのカスタマイズ要望、ウェブサイトの広告収益やユーザー接点喪失への懸念、Chrome機能のセキュリティリスクと未成熟さへの指摘、Googleのデータ収集意図への不信感、AI機能の表面的な実装や検証不足への批判が主な議論の焦点。"
+    },
+    {
+      "rank": 12,
+      "id": 47767676,
+      "title_en": "5NF and Database Design",
+      "title_ja": "第5正規形（5NF）とデータベース設計",
+      "url": "https://kb.databasedesignbook.com/posts/5nf/",
+      "hn_url": "https://news.ycombinator.com/item?id=47767676",
+      "score": 147,
+      "comment_count": 56,
+      "posted_at": "2026-04-14T16:22:49+00:00",
+      "comments": [
+        {
+          "id": 47772746,
+          "author": "sgarland",
+          "text": "NOTE: this is critiquing the author's 4NF definition (from a link in TFA), not TFA itself. > If you read any text that defines 4NF, the first new term you hear is “multivalued dependency”. [Kent 1983] also uses “multivalued facts”. I may be dumb but I only very recently realized that it means just “a list of unique values”. Here it would be even better to say that it’s a list of unique IDs. This is an inaccurate characterization, and the rest of the post only makes sense when viewed through this strawman. The reason 4NF is explained in the \"weird, roundabout way\" is because it demonstrates [one of] the precise problem[s] the normal form sets out to solve: a combinatorial explosion of rows. If you have a table: CREATE TABLE Product( product_id INT NOT NULL, supplier_id INT NOT NULL, warehouse_id INT NOT NULL ); If you only ever add an additional supplier or an additional warehouse for a given product, it's only adding one row. But if you add both to the same product, you now have 4 rows for a single product; if you add 5 suppliers and 3 warehouses to the same product, you now have 15 rows for a single product, etc. This fact might be lost on someone if they're creating a table with future expansion in mind without thinking it through, because they'd never hit the cross-product, so the design would seem reasonable. The conclusion reached (modulo treating an array as an atomic value) is in fact in 4NF, but it doesn't make any sense why it's needed if you redefine multivalued dependency to mean a set."
+        },
+        {
+          "id": 47768971,
+          "author": "jerf",
+          "text": "In a roundabout way this article captures well why I don't really like thinking in terms of \"normal forms\", especially as a numbered list like that. The key insights are really 1. Avoid redundancy and 2. This may involve synthesizing relationships that don't immediately obviously exist from a human perspective. Both of those can be expanded on at quite some length, but I never found much value in the supposedly-blessed intermediate points represented by the nominally numbered \"forms\". I don't find them useful either for thinking about the problem or for communicating about it. Someone, somewhere writing down a list and that list being blessed with the imprimatur of Academic Approval (TM) doesn't mean it is actually useful... sometimes it just means that it made it easy to write multiple choice test questions. (e.g., \"What does Layer 2 of the OSI network model represent? A: ... B: ... C: ... D: ...\" to which the most appropriate real-world answer is \"Who cares?\")"
+        },
+        {
+          "id": 47770379,
+          "author": "minkeymaniac",
+          "text": "Normalize till it hurts, then denormalize till it works!"
+        },
+        {
+          "id": 47771076,
+          "author": "cremer",
+          "text": "The numbered forms are most useful as a teaching device, not an engineering specification. Once you have internalized 2NF and 3NF violations through a few painful bugs, you start spotting partial and transitive dependencies by feel rather than by running through definitions. The forms gave you the vocabulary. The bugs gave you the instinct.."
+        },
+        {
+          "id": 47770429,
+          "author": "Quarrelsome",
+          "text": "Especially loved the article linked that was dissing down formal definitions of 4NF."
+        }
+      ],
+      "summary_ja": "コメントでは、4NFの形式的定義（多値従属性）を単純化し過ぎた批判がなされ、番号付きの正規形が実務的なデータベース設計で有用か疑問が呈されている。一方で、正規化の本質は冗長性排除と適切な関係の分離にあり、経験を積むことで直感的に設計できるようになる点が指摘される。正規形は教育ツールとしては価値があるが、実践では柔軟な適用が必要という見解が示された。"
+    },
+    {
+      "rank": 13,
+      "id": 47723729,
+      "title_en": "Game: Print Gallery Of An Artist, A brief exploration of recursive spaces",
+      "title_ja": "ゲーム：再帰的空間を探るアーティストの版画ギャラリー",
+      "url": "https://managore.itch.io/print-gallery-of-an-artist",
+      "hn_url": "https://news.ycombinator.com/item?id=47723729",
+      "score": 7,
+      "comment_count": 1,
+      "posted_at": "2026-04-10T21:13:12+00:00",
+      "comments": [
+        {
+          "id": 47774889,
+          "author": "yayitswei",
+          "text": "Loved it."
+        }
+      ],
+      "summary_ja": "この記事は、芸術家の印刷ギャラリーゲームを通じて再帰的空間を探求した内容であり、読者から高い評価を得ている。"
+    },
+    {
+      "rank": 14,
+      "id": 47758870,
+      "title_en": "Let's talk space toilets",
+      "title_ja": "宇宙トイレの技術的課題",
+      "url": "https://mceglowski.substack.com/p/lets-talk-space-toilets",
+      "hn_url": "https://news.ycombinator.com/item?id=47758870",
+      "score": 161,
+      "comment_count": 47,
+      "posted_at": "2026-04-13T22:41:19+00:00",
+      "comments": [
+        {
+          "id": 47768521,
+          "author": "detourdog",
+          "text": "I was surprised there were no pictures of the actual toilets. Would love more but found this. https://en.wikipedia.org/wiki/Space_toilet"
+        },
+        {
+          "id": 47773348,
+          "author": "jcalx",
+          "text": "If you like space toilets you may be interested in this [0] HN submission where you can track how full the ISS urine tank is from the comfort of your menu bar. [0] https://news.ycombinator.com/item?id=42505454"
+        },
+        {
+          "id": 47770394,
+          "author": "assimpleaspossi",
+          "text": "I've always wondered about regular toilets and now this. Someone has to test it. I'm sure they have equivalent items to run through them but, eventually, you have to try the real thing so whose job is it to do that and how do they do that?"
+        },
+        {
+          "id": 47771695,
+          "author": "gritspants",
+          "text": "I've often wondered - what is the exact amount of vacuum (pressure?) that you can get away with without disemboweling someone?"
+        },
+        {
+          "id": 47768537,
+          "author": "nozzlegear",
+          "text": "> One piece of feedback from Skylab was that the toilet needed stronger airflow. This meant the Shuttle toilet opening had to be narrow. To practice correctly positioning their body, astronauts on Earth sat on a special training mockup with a camera mounted in the center of the waste tube. A successful docking with the device meant precisely centering one’s nether eye in the crosshairs of a video screen while crewmates looked on and yelled their encouragement. I knew part of the job for astronauts is being intimate with one's crewmates, but I didn't know it was that intimate."
+        }
+      ],
+      "summary_ja": "宇宙トイレの具体的な画像や情報不足への指摘、実用テストや安全な吸引圧の技術的課題への関心、さらに訓練の際の精密な体位調整やクルー同士の密接な協力など、宇宙生活の意外な現実についての驚きが議論されている。"
+    },
+    {
+      "rank": 15,
+      "id": 47759420,
+      "title_en": "The dangers of California's legislation to censor 3D printing",
+      "title_ja": "カリフォルニア州3Dプリント検閲法案の危険性",
+      "url": "https://www.eff.org/deeplinks/2026/04/dangers-californias-legislation-censor-3d-printing",
+      "hn_url": "https://news.ycombinator.com/item?id=47759420",
+      "score": 318,
+      "comment_count": 327,
+      "posted_at": "2026-04-13T23:44:24+00:00",
+      "comments": [
+        {
+          "id": 47770910,
+          "author": "horsawlarway",
+          "text": "Personally, I see this as an assault on 3d printing more than any real attempt to regulate guns. I own several 3d printers. If I wanted to make something resembling a firearm I'd go to home depot WAY before I bothered 3d printing parts. You basically just need a metal tube, and well... a pipe from home depot does that much better than trying to 3d print something much less reliable. So given we don't do this regulation for any of the much more reliable ways to create unregistered firearms... what's special about 3d printers? So my assumption is immediately that some relatively large lobbying group feels threatened by 3d printing, and is using this as a driver to try to control access and limit business impact. Either way, this is bad legislation."
+        },
+        {
+          "id": 47770587,
+          "author": "MisterTea",
+          "text": "> The primary goal is clear and simple: to require 3D printer manufacturers to use a state-certified algorithm that checks digital design files for firearm components and blocks print jobs that would produce prohibited parts. \"state-certified algorithm\" has a really nice tyrannic ring to it. I am sure once this has passed the rich people can finally sleep at night knowing they are safe from roving gangs of armed Mangiones."
+        },
+        {
+          "id": 47771089,
+          "author": "krunck",
+          "text": "Lets imagine a similar situation but instead of with an additive manufacturing process they try to regulate a subtractive manufacturing process: a traditional CNC machine. There is no way to prevent the CNC system from machining gun parts as along as the machining is done in discrete steps with the same work piece. The software can't know what sitting on the CNC table. In additive manufacturing it is more difficult but not impossible to print a bunch of pieces that look nothing like a gun part but and in the end be assembled into a gun. In both the above cases there would need to be sophisticated surveillance software to even come close to detecting \"gun-ness.\" While I don't have a horse in the gun control race, I do have one in the open-source, running a local OS, running what software I want, and controlling what that software does races."
+        },
+        {
+          "id": 47770787,
+          "author": "simplyluke",
+          "text": "The 3d printer gun legislation has been rearing its head in a bunch of states this year, and generally with very similar patterns. I suspect some of the pro-gun-control groups have been pushing it to lawmakers given most legislation is basically copy-pastes from lobbying groups at both the state and federal level. Colorado, Washington, New York, and now California have all floated legislation attempting to make device-level restrictions around the issue. I only followed Washington's in depth, and they ended up removing all the requirements on manufactures, but did criminalize possession of files which I suspect won't hold up to a first amendment challenge."
+        }
+      ],
+      "summary_ja": "カリフォルニア州の3Dプリント銃規制案は実効性に欠き、技術的に回避可能で、オープンソースやソフトウェアの自由を脅かす悪法との批判。規制の真の目的は、3Dプリンティング産業そのものへの抑制ではないかとの疑念が示されている。"
+    },
+    {
+      "rank": 16,
+      "id": 47769796,
+      "title_en": "Tell HN: Fiverr left customer files public and searchable",
+      "title_ja": "【HN報告】Fiverrが顧客ファイルを公開検索可能状態で放置",
+      "url": null,
+      "hn_url": "https://news.ycombinator.com/item?id=47769796",
+      "score": 473,
+      "comment_count": 98,
+      "posted_at": "2026-04-14T18:56:40+00:00",
+      "comments": [
+        {
+          "id": 47773942,
+          "author": "evmaki",
+          "text": "Extremely bad stuff here. Can't believe it's been 7 hours now and you can still pull up people's complete prepared tax returns right from a Google search. This should be a business-ending breach of trust and good practices, but I worry there's probably a lack of regulatory might or will to make anything happen."
+        },
+        {
+          "id": 47773073,
+          "author": "pesus",
+          "text": "Wow, the other comments weren't exaggerating. This is really bad. If my tax returns or other data were part of this, I might consider legal action. I wonder if somewhere like Wired/Ars Technica/404media might pick this up?"
+        },
+        {
+          "id": 47772240,
+          "author": "applfanboysbgon",
+          "text": "Software development jobs are too accessible. Jobs with access to/control over millions of people's data should require some kind of genuine software engineering certification, and there should be business-cratering fines for something as egregious as completely ignoring security reports. It is ridiculous how we've completely normalised leaks like this on a weekly or almost-daily basis."
+        },
+        {
+          "id": 47770067,
+          "author": "mtmail",
+          "text": "You followed the correct reporting instructions. https://www.fiverr.com/.well-known/security.txt only has \"Contact: security@fiverr.com\" and in their help pages they say \"Fiverr operates a Bug Bounty program in collaboration with BugCrowd. If you discover a vulnerability, please reach out to security@fiverr.com to receive information about how to participate in our program.\""
+        },
+        {
+          "id": 47772469,
+          "author": "gregsadetsky",
+          "text": "I wrote to security@fiverr.com and they just replied: \"You’re the second person to flag this issue to us Please note that our records show no contact with Fiverr security regarding this matter ~40 days ago unlike the poster claims. We are currently working to resolve the situation\""
+        }
+      ],
+      "summary_ja": "Fiverrで顧客の税務ファイルなどが公開された重大なデータ漏洩が発生。7時間経過しても修正されず、対応の遅さと規制・罰則の不足が批判されている。ユーザーは法的措置やメディア注目を求めており、適切な報告手順を踏んだにもかかわらず企業の対応が不十分だった点も問題視される。"
+    },
+    {
+      "rank": 17,
+      "id": 47773168,
+      "title_en": "Don't feel like exercising? Maybe it's the wrong time of day for you",
+      "title_ja": "運動したくない？ 時間帯が合っていない可能性",
+      "url": "https://www.bbc.com/news/articles/cd6lzpxwx50o",
+      "hn_url": "https://news.ycombinator.com/item?id=47773168",
+      "score": 24,
+      "comment_count": 7,
+      "posted_at": "2026-04-15T00:20:58+00:00",
+      "comments": [
+        {
+          "id": 47774223,
+          "author": "keyle",
+          "text": "I too don't feel like exercising after work, or at 6 in the morning. And many years ago I determined that without exercise my life is a living hell. Simply, I need to push weights and exert myself physically to keep mentally sane. So I've found work that works for me, as in, I can go to the gym at lunch, which is when I feel good about working out. Make your routine work for you, and not the other way around. Prioritising yourself is exactly like the plane safety announcement, place the mask on your face before assisting others, because you're no good to them passed out. Same thing with your health, make it a priority to look after yourself and feel good, or you won't be your be able to help anyone, and you won't be a good version of yourself people will want to hang with."
+        },
+        {
+          "id": 47774173,
+          "author": "rsyring",
+          "text": "I never feel like exercising, doesn't matter what time of the day it is. In the morning I feel the need to get to work (I'm a night owl so get up later). But by the time I'm done working, my ability to motivate myself is used up. I managed some consistency after I read \"10k pushups and other silly exercise quests that changed my life[1].\" I modified the plan so I'm doing pushups and squats, so going for 10K of each. I started in late November and I'm currently just shy of 4K each. I have a couple family members kind of doing it with me, which has helped a little. But the key for me was a very small time commitment that didn't involve changing clothes. I can do them basically whenever I think about them, although I've found a sweet spot in the morning when I change into day clothes. It's not perfect, I still miss a small number of days, but on the days I do them, I do more. Because I realized the hardest part for me, by far, is getting started. So, on the days I start, I do just a bit more (40-60 each total, instead of 30), to make up for the days I'll miss. But, yah...I still don't feel like exercising...ever. I've just hacked that \"nahhh\" impulse to be \"it'll be over before you know it\" and that has worked for whatever reason. Probably, because it literally takes less than five minutes and, when it's that quick, the \"just get it over with\" drive has a chance of winning most days. You might think putting in that little time doesn't make a difference but it's very noticeable in both my rep counts, recovery time, and physique. When I started, it was hard for me to get in a single set of 20 push-ups. I'd get to 30 with two sets. Now, on a regular day, I can do a single set of 40 and on a day when I'm feeling good, I can hit 60. The consistency really does add up. 1: https://news.ycombinator.com/item?id=45456188"
+        },
+        {
+          "id": 47774849,
+          "author": "Fire-Dragon-DoL",
+          "text": "For me the big deal was going 5 times a week with no possibility to skip during the week. My brain seed it as an extension of work, so it just goes. When I skip, I put together two session next time (e.g. cardio + weight lifting). 3 years in and the only days I really skipped are those I am parked in bed due to fever. But, I don't like it at all. I feel great afterwards, exhausted but great. I am now used to it, but I really appreciate going the smallest amount of time for maximum gain, so I do 2 times a week HIIT (30 minutes) and 3 times just 1 hour of weight lifting. Big results, minimum effort."
+        },
+        {
+          "id": 47774927,
+          "author": "JumpCrisscross",
+          "text": "When I was in my teens and twenties, 11pm to 2am were my workout hours. Consistently, productively and satisfyingly. I’ve since adapted it to early afternoon or late morning. But the idea of running yourself tired at the end of the day still carries unique appeal for me."
+        },
+        {
+          "id": 47774657,
+          "author": "etothet",
+          "text": "https://archive.is/ngzri"
+        }
+      ],
+      "summary_ja": "運動を継続するには、個人の生活リズムに合った時間帯を見つけ、小さな習慣から始めて一貫性を保つことが重要。健康を優先し、自分に適した方法でルーティンを組み立てることで、精神的・身体的効果が得られる。"
+    },
+    {
+      "rank": 18,
+      "id": 47770770,
+      "title_en": "Trusted access for the next era of cyber defense",
+      "title_ja": "次世代サイバー防衛のための信頼アクセス基盤",
+      "url": "https://openai.com/index/scaling-trusted-access-for-cyber-defense/",
+      "hn_url": "https://news.ycombinator.com/item?id=47770770",
+      "score": 72,
+      "comment_count": 49,
+      "posted_at": "2026-04-14T20:07:20+00:00",
+      "comments": [
+        {
+          "id": 47772393,
+          "author": "Avicebron",
+          "text": "I don't think they've added enough cyber. My cyber workflow demands more trusted access for cyber so that I can use these cyber-permissive models for my cybersecurity."
+        },
+        {
+          "id": 47771520,
+          "author": "alopha",
+          "text": "That's a lot of waffle to try and say 'we've got a really scary next model coming too real soon, promise!'"
+        },
+        {
+          "id": 47771454,
+          "author": "ofjcihen",
+          "text": "I love that in the era of having LLMs summarize everything all of these companies have opted for what I call the “YouTube streamer apology video” tone and length for these announcements. These feels more or less like a way to get in the news after Anthropic's Mythos announcement by removing some guardrails. I’m still signing up though."
+        },
+        {
+          "id": 47771776,
+          "author": "bunnywantspluto",
+          "text": "It seems like local LLMs will get popular for cybersecurity if this trend of locking access to models continues."
+        }
+      ],
+      "summary_ja": "新たなサイバー防御モデルは機能不足で誇大広告的と批判。企業発表はYouTube謝罪動画のように冗長でメディア注目を狙うもの。モデルアクセス制限が続けば、ローカルLLMsがサイバーセキュリティで普及する見込み。"
+    },
+    {
+      "rank": 19,
+      "id": 47707382,
+      "title_en": "guide.world: A compendium of travel guides",
+      "title_ja": "guide.world：旅行ガイドの百科事典",
+      "url": "https://guide.world/",
+      "hn_url": "https://news.ycombinator.com/item?id=47707382",
+      "score": 92,
+      "comment_count": 14,
+      "posted_at": "2026-04-09T18:17:32+00:00",
+      "comments": [
+        {
+          "id": 47770389,
+          "author": "eisa01",
+          "text": "For the wiki version, you have https://www.wikivoyage.org It can be a bit outdated, but then you just update it as you do your research ;)"
+        },
+        {
+          "id": 47771793,
+          "author": "LorenPechtel",
+          "text": "Yeah, amazing what's not easy to find. I recently found out about the ancient roads in China. These days they are hiking paths. I'm quite used to handling myself alone with a GPS track, I don't want a guide. I found one book that it's not remotely clear if it's got what I want as it's discussing much of China and it's old enough I'm not sure what the mapping info will be like."
+        },
+        {
+          "id": 47769927,
+          "author": "yu3zhou4",
+          "text": "Thx, great read about Yemen from Maciej Cegłowski https://idlewords.com/2014/07/sana_a.htm"
+        },
+        {
+          "id": 47770728,
+          "author": "robertjwebb",
+          "text": "Craig Mod is great for Japan https://craigmod.com/ !"
+        }
+      ],
+      "summary_ja": "オンライン旅行ガイドのWikivoyageは有用だが、情報が古く更新が必要。中国の古代道路などニッチな情報は入手が難しく、書籍や地図の信頼性にも課題がある。個人旅行ではGPSを活用した自立型スタイルが好まれる。Maciej CegłowskiやCraig Modなど特定の情報源が質の高いコンテンツとして推薦されている。"
+    },
+    {
+      "rank": 20,
+      "id": 47768813,
+      "title_en": "I wrote to Flock's privacy contact to opt out of their domestic spying program",
+      "title_ja": "Flockの国内監視プログラム脱退をプライバシー担当に要請",
+      "url": "https://honeypot.net/2026/04/14/i-wrote-to-flocks-privacy.html",
+      "hn_url": "https://news.ycombinator.com/item?id=47768813",
+      "score": 560,
+      "comment_count": 228,
+      "posted_at": "2026-04-14T17:47:00+00:00",
+      "comments": [
+        {
+          "id": 47768989,
+          "author": "kstrauser",
+          "text": "I wrote this. I had/have absolutely no expectation that Flock would comply with my request, but figured I should try anyway For Science. Their reply rubbed me wrong, though. They seem to claim that there are no restrictions on their collection and processing of PII because other people pay them for it. They say: > Flock Safety’s customers own the data and make all decisions around how such data is used and shared. which seems to directly oppose the CCPA. It's my data, not their customers'. Again, I didn't really expect this to work. And yet, I'm still disappointed with the path by which it didn't work."
+        },
+        {
+          "id": 47769588,
+          "author": "empathy_m",
+          "text": "I noticed that the company is glossed as \"Flock\" and not \"Flock Safety (YC S17)\" in posts like this and last week's \"US cities are axing Flock Safety surveillance technology\", https://news.ycombinator.com/item?id=47689237 . Did YC house style change a while back to drop the \"(YC xxx)\" annotation since so many popular firms particpate / or because it's well known?"
+        },
+        {
+          "id": 47769732,
+          "author": "wcv",
+          "text": "Flock has stonewalled with the \"we are not the controllers\" excuse here in MN too. We have similar rights to opt-out and delete under the MCDPA [0]. [0] https://ag.state.mn.us/Data-Privacy/Consumer/"
+        },
+        {
+          "id": 47770450,
+          "author": "dsr_",
+          "text": "Remember that the difference between \"Flock can do whatever the hell it wants\" and \"Flock is required to delete your data at your request\" is a law. Citizens vote for legislators. If you want this to be a higher priority for your legislators, buy them off. Or vote for/against them, that might work too."
+        },
+        {
+          "id": 47769072,
+          "author": "ldoughty",
+          "text": "I think you're going to have a hard time with this... Flock seems to leave the data in ownership of the government. They are just providing the service of being custodians for storing and accessing that data. You probably would get a similar response by submitting your request to Amazon web services or Google cloud or whoever has Flocks data: \"sorry, we're just holding the data on behalf of Flock\" In either my example case or your stated case, you would have a very hard time convincing the host business to destroy their customers data without a court order or court case that shows their policy is invalid and they must comply. Not a lawyer, just noting the parallel. I do appreciate that Flock's response says that they cannot use the data they've collected for other purposes.. which further reinforces my cloud storage analogy -- the cloud vendor can't look at your data you upload to storage to e.g. build profiles on you/your business."
+        }
+      ],
+      "summary_ja": "Flock Safetyの監視技術をめぐ議論では、個人データの所有権とプライバシー権が焦点。ユーザーがCCPAやMCDPAに基づくデータ削除要請を拒否され、Flockが「データは顧客（自治体など）が所有し管理する」と主張し責任回避している点が批判された。データ主体vs.第三者保管者の法的解釈の曖昧さが指摘され、クラウド事業者との類似性も議論に。根本解決には立法強化が必要との意見が多く、市民が政治家に働きかける重要性が強調された。"
+    },
+    {
+      "rank": 21,
+      "id": 47762864,
+      "title_en": "Backblaze has stopped backing up OneDrive and Dropbox folders and maybe others",
+      "title_ja": "BackblazeがOneDrive/Dropboxフォルダバックアップを発表",
+      "url": "https://rareese.com/posts/backblaze/",
+      "hn_url": "https://news.ycombinator.com/item?id=47762864",
+      "score": 1018,
+      "comment_count": 618,
+      "posted_at": "2026-04-14T08:30:27+00:00",
+      "comments": [
+        {
+          "id": 47766798,
+          "author": "julianozen",
+          "text": "We are going to drop blackblaze over this We discovered this change recently because my dad was looking for a file that Dropbox accidentally overwrote which at first we said “no problem. This is why we pay for backblaze” We had learned that this policy had changed a few months ago, and we were never notified. File was unrecoverable If anyone at backblaze is reading this, I pay for your product so I can install you on my parents machine and never worry about it again. You decided saving on cloud storage was worth breaking this promise. Bad bad call"
+        },
+        {
+          "id": 47764441,
+          "author": "Neil44",
+          "text": "The issue with a client app backing up dropbox and onedrive folders on your computer is the files on demand feature, you could sync a 1tb onedrive to your 250gb laptop but it's OK because of smart/selective sync aka files on demand. Then backblaze backup tries to back the folder up and requests a download of every single file and now you have zero bytes free, still no backup and a sick laptop. You could oauth the backblaze app to access onedrive directly, but if you want to back your onedrive up you need a different product IMO."
+        },
+        {
+          "id": 47763678,
+          "author": "azalemeth",
+          "text": "I guess the problem with Backblaze's business model with respect to Backblaze Personal is that it is \"unlimited\". They specifically exclude linux users because, well, we're nerds, r/datahoarders exists, and we have different ideas about what \"unlimited\" means. [1] This is another example in disguise of two people disagreeing about what \"unlimited\" means in the context of backup, even if they do claim to have \"no restrictions on file type or size\" [2]. [1] https://www.reddit.com/r/backblaze/comments/jsrqoz/personal_... [2] https://www.backblaze.com/cloud-backup/personal"
+        },
+        {
+          "id": 47763434,
+          "author": "noirscape",
+          "text": "I can understand in theory why they wouldn't want to back up .git folders as-is. Git has a serious object count bloat problem if you have any repository with a good amount of commit history, which causes a lot of unnecessary overhead in just scanning the folder for files alone. I don't quite understand why it's still like this; it's probably the biggest reason why git tends to play poorly with a lot of filesystem tools (not just backups). If it'd been something like an SQLite database instead (just an example really), you wouldn't get so much unnecessary inode bloat. At the same time Backblaze is a backup solution. The need to back up everything is sort of baked in there. They promise to be the third backup solution in a three layer strategy (backup directly connected, backup in home, backup external), and that third one is probably the single most important one of them all since it's the one you're going to be touching the least in an ideal scenario. They really can't be excluding any files whatsoever. The cloud service exclusion is similarly bad, although much worse. Imagine getting hit by a cryptoworm. Your cloud storage tool is dutifully going to sync everything encrypted, junking up your entire storage across devices and because restoring old versions is both ass and near impossible at scale, you need an actual backup solution for that situation. Backblaze excluding files in those folders feels like a complete misunderstanding of what their purpose should be."
+        },
+        {
+          "id": 47765185,
+          "author": "nstj",
+          "text": "As an FYI you can recover from force pushes to GitHub using the GitHub UI[0] or their API[1]. And if you force push to one of your own machines you can use the reflog[2]. [0]: https://stackoverflow.com/a/78872853 [1]: https://stackoverflow.com/a/48110879 [2]: https://stackoverflow.com/a/24236065"
+        }
+      ],
+      "summary_ja": "BackblazeがOneDrive/Dropboxフォルダのバックアップを停止した件で、ユーザーは事前通知なしのポリシー変更によるデータ消失リスクを批判。クラウド同期機能との技術的衝突や「無制限」ビジネスモデルの解釈違いが指摘され、暗号化ランサムウェア対策としてのバックアップ本来の目的から外れる除外方針に懸念が示されている。"
+    },
+    {
+      "rank": 22,
+      "id": 47771220,
+      "title_en": "Free, fast diagnostic tools for DNS, email authentication, and network security",
+      "title_ja": "DNS/メール認証/ネットワークセキュリティ診断ツール無料提供",
+      "url": "https://mrdns.com/",
+      "hn_url": "https://news.ycombinator.com/item?id=47771220",
+      "score": 53,
+      "comment_count": 4,
+      "posted_at": "2026-04-14T20:42:21+00:00",
+      "comments": [
+        {
+          "id": 47774071,
+          "author": "Polizeiposaune",
+          "text": "IPv6 addresses in the propagation display are inconsistently displayed - sometimes using '::' compression, sometimes not. For instance, with https://mrdns.com/propagation?name=wikipedia.org&type=AAAA the same address is formatted as either '2620:0:861:ed1a::1' or '2620:0:861:ed1a:0:0:0:1'. The :: form is generally preferred."
+        },
+        {
+          "id": 47774212,
+          "author": "catskull",
+          "text": "I like https://dnscheck.tools/ for this."
+        },
+        {
+          "id": 47774607,
+          "author": "iJohnDoe",
+          "text": "Before everyone else starts posting their competing products and projects, just want to say this looks cool. Nice domain name. Usually the hope is that this becomes a go-to tool for everyone. These sites are a thankless resource to the internet community. Remember dnstools back in the day 10-15 years ago? It was so awesome. Then they crippled it by trying to monetize it? Not that they shouldn't make money. It's just hard keeping something online for so long which becomes a thankless resource."
+        },
+        {
+          "id": 47773693,
+          "author": "bjornroberg",
+          "text": "Poked around for a few minutes and this is nicely done. Coverage of the less common records (MTA-STS, BIMI, TLSA, CAA) in one place is the part that jumped out. Usually I bounce between two or three sites to get those. One thing that would be handy: a shareable permalink for a given lookup result, so you can paste it into a ticket or chat instead of retyping the query."
+        }
+      ],
+      "summary_ja": "mrdns.comのDNS診断ツールに対し、IPv6アドレス表示の不統一を指摘し改善を求める。珍しいレコードを一括確認できる点を評価するが、結果の共有用リンク追加を提案。類似ツールを引き合いに、無料サービスとしての持続可能性にも言及している。"
+    },
+    {
+      "rank": 23,
+      "id": 47768750,
+      "title_en": "Show HN: Plain – The full-stack Python framework designed for humans and agents",
+      "title_ja": "【HN公開】Plain - 人間とエージェント向けフルスタックPythonフレームワーク",
+      "url": "https://github.com/dropseed/plain",
+      "hn_url": "https://news.ycombinator.com/item?id=47768750",
+      "score": 78,
+      "comment_count": 28,
+      "posted_at": "2026-04-14T17:43:17+00:00",
+      "comments": [
+        {
+          "id": 47771664,
+          "author": "SwellJoe",
+          "text": "Inventing a new thing \"for agents\" always feels counter-productive. Your new thing isn't in the training data, so you have to teach it how to use your thing. Why not use tech that's already in the training data? Agents know Python and Django. Or, better (because the performance, maintainability, and deployment story are much nicer with no extra work, since agents write the code), agents know Go. The very nature of LLMs means you can't invent a thing for current agents to use that they'll be better at using than the things they already know how to use from their immense training data. You can give them skills, sure, and that's useful, but it's still not their native tongue. To make a thing that's really for agents, you need to have made a popular thing for humans ten years ago, so there's a shitload of code and documentation for them to train on."
+        },
+        {
+          "id": 47774794,
+          "author": "murkt",
+          "text": "Class-based views were a problem when they were introduced in Django, and they’re still a problem. Especially for the so-called AI-ready framework. Because of indirection, you either have to go read all the basic classes, or read documentation three times over. Instead of just reading the self-contained view function itself, once. Especially true for an agent, it will have to go read the new framework’s docs and source over and over and over…"
+        },
+        {
+          "id": 47773103,
+          "author": "dchuk",
+          "text": "Ignore all the hate in the comments here, anyone denying the direction of software development and it aggressively becoming agentic have their own reckonings to deal with… I love this concept. While I’m a Rails guy myself, I appreciate the value of Django too, and an agent-optimized version of it makes sense. I feel like the next logical steps are this exact concept but in Go / Rust to get even more performance out of everything and to also get the single deployable binary too"
+        },
+        {
+          "id": 47772803,
+          "author": "simonw",
+          "text": "First time I've seen this pattern in the \"getting started\" guide for a project: claude \"$(curl -sSf https://plainframework.com/start.md)\" https://plainframework.com/start.md Looks like that usually runs: uvx plain-start . Which runs this: https://tools.simonwillison.net/zip-wheel-explorer?package=p..."
+        },
+        {
+          "id": 47770352,
+          "author": "petcat",
+          "text": "It looks like it's a fork of Django that just kinda changed a bunch of stuff arbitrarily?"
+        }
+      ],
+      "summary_ja": "Plainフレームワークはエージェント向けを標榜するが、訓練データにない新技術は実用性に疑問があり、既存のDjangoフォークとしての変更点も批判される。一方で、ソフトウェア開発のエージェント化を支持し、コンセプトを評価する意見もあり、有用性について議論が分かれる。"
+    },
+    {
+      "rank": 24,
+      "id": 47762641,
+      "title_en": "Introspective Diffusion Language Models",
+      "title_ja": "内省的拡散言語モデル",
+      "url": "https://introspective-diffusion.github.io/",
+      "hn_url": "https://news.ycombinator.com/item?id=47762641",
+      "score": 252,
+      "comment_count": 45,
+      "posted_at": "2026-04-14T07:57:33+00:00",
+      "comments": [
+        {
+          "id": 47763374,
+          "author": "thepasch",
+          "text": "If I’m reading this right, this is pretty wild. They turned a Qwen autoregressor into a diffuser by using a bunch of really clever techniques, and they vastly outperform any “native diffuser,” actually being competitive with the base model they were trained from. The obvious upside here is the massive speedup in generation. And then through a LoRA adapter, you can ground the diffuser on the base model’s distribution (essentially have it “compare” its proposals against what the base model would’ve generated), which effectively means: exact same byte-for-byte output for the same seed, just roughly twice as fast (which should improve even more for batched tasks). I’m not an expert , more of a “practicing enthusiast,” so I might be missing something, but at first glance, this reads super exciting to me."
+        },
+        {
+          "id": 47774189,
+          "author": "xiphias2",
+          "text": "How does this compare to DFlash? https://z-lab.ai/projects/dflash/ And DDTree? https://liranringel.github.io/ddtree/"
+        },
+        {
+          "id": 47772936,
+          "author": "2001zhaozhao",
+          "text": "I always thought some kind of block-based diffusion architecture would be the future of LLMs, especially some architecture that can dynamically alter its token generation rate as well as \"reason and generate at the same time\", and have an opportunity to correct tokens that it has just generated. Something like the equivalent of a short term \"working memory\" for humans. But I have no understanding of the math. Fingers crossed."
+        },
+        {
+          "id": 47762765,
+          "author": "andsoitis",
+          "text": "Is anyone here experimenting seriously with Diffusion for text generation? I’d love to learn about your experiences!"
+        },
+        {
+          "id": 47768565,
+          "author": "mlmonkey",
+          "text": "I'm no expert (just a monkey... ;) ), but isn't Diffusion supposed to generate ALL of the output at once? From their diagram, it looks like their I-LDM model seems to use previously generated context to generate the next tokens (or blocks)."
+        }
+      ],
+      "summary_ja": "I-LDMはautoregressorをdiffuserに変換し、LoRAアダプターで精度を保ちつつ生成速度を倍増。他の拡散モデルとの比較や、ブロックベース拡散の将来性が議論され、生成方法の相違への疑問も示された。"
+    },
+    {
+      "rank": 25,
+      "id": 47768788,
+      "title_en": "OpenSSL 4.0.0",
+      "title_ja": "OpenSSL 4.0.0",
+      "url": "https://github.com/openssl/openssl/releases/tag/openssl-4.0.0",
+      "hn_url": "https://news.ycombinator.com/item?id=47768788",
+      "score": 232,
+      "comment_count": 75,
+      "posted_at": "2026-04-14T17:45:34+00:00",
+      "comments": [
+        {
+          "id": 47769120,
+          "author": "capitol_",
+          "text": "Finally encrypted client hello support \\o/"
+        },
+        {
+          "id": 47770201,
+          "author": "caycep",
+          "text": "How is OpenSSl these days? I vaguely remember the big ruckus a while back, was it Heartbleed? where everyone to their horror realized it was maybe 1 or 2 people trying to maintain OpenSSL, and the OpenBSD people then throwing manpower at it to clear up a lot of old outstanding bugs. It seems like it is on firmer/more organized footing these days?"
+        },
+        {
+          "id": 47770001,
+          "author": "georgthegreat",
+          "text": "https://www.haproxy.com/blog/state-of-ssl-stacks According to this one should not be using v3 at all.."
+        },
+        {
+          "id": 47774047,
+          "author": "semiquaver",
+          "text": "Major version bump? I wonder how much slower it will get now."
+        },
+        {
+          "id": 47769548,
+          "author": "ge96",
+          "text": "Just in time for the suckerpinch video"
+        }
+      ],
+      "summary_ja": "OpenSSL 4.0.0におけるEncrypted Client Helloの実装を歓迎する一方、Heartbleed事件以降のプロジェクト体制の改善状況や、バージョン3の使用に関する懸念、またメジャーバージョンアップに伴う性能低下への不安が議論されている。"
+    },
+    {
+      "rank": 26,
+      "id": 47766370,
+      "title_en": "Show HN: LangAlpha – what if Claude Code was built for Wall Street?",
+      "title_ja": "【HN提案】LangAlpha - Claude Codeのウォール街版構想",
+      "url": "https://github.com/ginlix-ai/langalpha",
+      "hn_url": "https://news.ycombinator.com/item?id=47766370",
+      "score": 124,
+      "comment_count": 39,
+      "posted_at": "2026-04-14T14:48:46+00:00",
+      "comments": [
+        {
+          "id": 47768969,
+          "author": "neomantra",
+          "text": "> MCP tools don't really work for financial data at scale. One tool call for five years of daily prices dumps tens of thousands of tokens into the context window. I maintain an OSS SDK for Databento market data. A year ago, I naively wrapped the API and certainly felt this pain. Having an API call drop a firehose of structured data into the context window was not very helpful. The tool there was get_range and the data was lost to the context. Recently I updated the MCP server [1] to download the Databento market data into Parquet files onto the local filesystem and track those with DuckDB. So the MCP tool calls are fetch_range to fill the cache along with list_cache and query_cache to run SQL queries on it. I haven't promoted it at all, but it would probably pair well with a platform like this. I'd be interested in how people might use this and I'm trying to understand how this approach might generally work with LLMs and DuckLake. [1] https://github.com/NimbleMarkets/dbn-go/blob/main/cmd/dbn-go..."
+        },
+        {
+          "id": 47770027,
+          "author": "TeMPOraL",
+          "text": "> The other big thing was making research actually persist across sessions. Most agents treat a single deliverable (a PDF, a spreadsheet) as the end goal. In investing that's day one. This is a problem with pretty much everything beyond easy single-shot tasks. Even day-to-day stuff, like e.g. I was researching a new laptop to buy for my wife, and am now enlisting AI to help pick a good car. In both cases I run into a mismatch with what the non-coding AI tools offer, vs. what is needed: I need a persistent Excel sheet to evolve over multiple session of gathering data, cross-referencing with current needs, and updating as decisions are made, and as our own needs get better understood. All AI tools want to do single session with a deliverable at the end, that they they cannot read, or if they can read it, they cannot work on it , at best they can write a new version from scratch. I think this may be a symptom of the mobile apps thinking that infects the industry: the best non-coding AI tools offered to people all behave like regular apps, thinking in sessions, prescribing a single workflow, and desperately preventing any form of user-controlled interoperability. I miss when software philosophy put files ahead of apps, when applications were tools to work on documents, not a tools that contain documents."
+        },
+        {
+          "id": 47767044,
+          "author": "zc2610",
+          "text": "Hi HN. We built LangAlpha because we wanted something like Claude Code but for investment research. It's a full stack open-source agent harness (Apache 2.0). Persistent sandboxed workspaces, code execution against financial data, and a complete UI with TradingView charts, live market data, and agent management. Works with any LLM provider, React 19 + FastAPI + Postgres + Redis."
+        },
+        {
+          "id": 47773097,
+          "author": "kantaro",
+          "text": "The \"cool visuals over verified results\" critique is valid but undersells the harder problem underneath. For any Wall Street deployment you need more than results-match-reality, you need a decision record that satisfies MiFID II / FINRA rules about investment recommendation audit. Persistent workspaces + memory files are a feature for the researcher and a regulatory question mark for compliance. If a regulator asks \"what did the agent recommend last Tuesday and which data snapshot did it reason over?\", can you answer? With the auto-generated Python module approach you'd need to pin module version, data fetch timestamps, model version, and prompt state, all to a single immutable record per recommendation. None of that falls out of a normal agent framework. Curious whether LangAlpha has thought about signed execution logs per session. Not as a sales feature but as a prerequisite for a firm running this in anger. Financial is one of the few verticals where \"we don't know what we said yesterday\" is a deployment blocker."
+        },
+        {
+          "id": 47768276,
+          "author": "kolinko",
+          "text": "Nice! What I missed from the writeup were some specific cases and how did you test that all this orchestration delivers worthwhile data (actionable and full/correct). E.g. you have a screenshot of the AI supply chain - more of these would be useful, and also some info about how you tested that this supply chain agrees with reality. Unless the goal of the project was to just play with agent architecture - then congrats :)"
+        }
+      ],
+      "summary_ja": "金融データ処理における既存ツールの課題（大規模データ管理にParquet/DuckDB活用）、セッションを超えた持続的な研究環境の必要性、規制対応のための監査証跡（MiFID II/FINRA準拠）、実用性検証の重要性が議論の焦点。LangAlphaはエージェント基盤としてこれらの課題解決を目指すが、実行ログの署名管理や現実適合性の証明が今後の鍵。"
+    },
+    {
+      "rank": 27,
+      "id": 47772906,
+      "title_en": "Apple App Store threatened to remove Grok over deepfakes: Letter",
+      "title_ja": "Apple App Storeがディープフェイク問題でGrok削除警告",
+      "url": "https://www.nbcnews.com/tech/tech-news/apple-threat-remove-grok-app-store-deepfake-letter-musk-x-ai-rcna331677",
+      "hn_url": "https://news.ycombinator.com/item?id=47772906",
+      "score": 69,
+      "comment_count": 33,
+      "posted_at": "2026-04-14T23:41:43+00:00",
+      "comments": [
+        {
+          "id": 47773734,
+          "author": "thakoppno",
+          "text": "So much of the Internet is pay-walled now. It’s sad. It never occurred to me we’d get here."
+        },
+        {
+          "id": 47774250,
+          "author": "etchalon",
+          "text": "Honestly, if it wasn't for Musk' ties to Trump, I'm betting they just would have pulled it."
+        }
+      ],
+      "summary_ja": "インターネット有料化への懸念と、AppleのGrok削除検討がMuskとTrumpの関係に起因するのではないかという推測が示されている。"
+    },
+    {
+      "rank": 28,
+      "id": 47760529,
+      "title_en": "DaVinci Resolve – Photo",
+      "title_ja": "DaVinci Resolve - Photo",
+      "url": "https://www.blackmagicdesign.com/products/davinciresolve/photo",
+      "hn_url": "https://news.ycombinator.com/item?id=47760529",
+      "score": 1082,
+      "comment_count": 271,
+      "posted_at": "2026-04-14T02:25:15+00:00",
+      "comments": [
+        {
+          "id": 47761254,
+          "author": "arecsu",
+          "text": "This is incredible. There are soooo many features that Davinci already handles so damn well when it comes to color editing, that I only wish they existed in photo editors. To the point there were people posting videos on Youtube about hacky workflows to edit RAW photo files on Resolve and export each one as JPG files haha. Only Darktable seemed to push the technical capabilities of photo editing forward (AgX, parametric masks, tone equalizer, etc), while rest of \"industry standard\" software lagged behind for quite so long, stagnant. Even more so when it comes to \"creative\" ways of editing, which Video Editing software have adopted for years but photo editors didn't (relight, actual LUT usage without complications, film emulation, halation, other aesthetic effects like VHS film damage, etc). There's so much we can do. To me, it seems like these sort of conservative culture (photography) vs progressive (video editing). I've been into both worlds, and for some reason video editing software and professionals were much eager to try new stuff and celebrate new ways to shape visuals, compared to photographers."
+        },
+        {
+          "id": 47762973,
+          "author": "googie",
+          "text": "I wish they (authors of DaVinci Resolve and the Photo Editor) paid more attention to Linux platform. Theoretically DaVinci Resolve runs on Linux, but getting it run is a very bad experience on Ubuntu/Kubuntu 24.04. I even paid for the DaVinci license, as I read somewhere that for Linux it's necessary in order to have all codecs supported. It did not help. Fortunately there were no problems with refund. There are whole guides online how to walk around these issues and even then I could not get the audio working. Somehow it relies on some old ALSA API, which is no longer maintained/supported on Ubuntu/Kubuntu, or I'm just too stupid to make it work. AI assistants could not provide working solution for me either. I've moved back to Linux a year ago after around 10 years of Windows (and I used to use Linux Slackware for ~15 years beforehand). I am amazed how big progress the KDE made and whole Linux ecosystem. Gaming these days is just as easy as on Windows, which was my primary reason to switch to Windows. My printer just works now. Even music production is excellent on Linux now. There is plenty of great software options to choose from and they just work - as I would expect from the mature ecosystem. This all feels so good, given how Linux is not pushing trash into my computer (OS-bound spyware/bloatware), has excellent, customizable UI. Full freedom. I do feel that I own my hardware. Yet I miss DaVinci Resolve. For now I use Kdenlive, which is nice for simple editing, but feels unfinished, or I just don't know how to use it correctly."
+        },
+        {
+          "id": 47762055,
+          "author": "amatecha",
+          "text": "It took me a damn long time to find this information, so I'm pasting it here: > It includes native RAW support for Canon, Fujifilm, Nikon, Sony and even iPhone ProRAW. I looked all over for a more technical page that just lists these kind of specs in bullet-point form, but apparently they refuse to communicate information about their product in this way? The \"Tech Specs\" page only seems to show information about hardware products. /shrug Would be cool to have something I can use to edit my Fujifilm-shot photos without any sort of subscription. Capture One Express (or whatever it's called now) is super light on features, but processes Fujifilm .RAF's very well (oh, or it used to, apparently it's permanently discontinued now, great). I'd love to use Lightroom but I refuse to pay for a subscription to use software, so... options are limited :\\"
+        },
+        {
+          "id": 47764175,
+          "author": "jayphen",
+          "text": "I actually downloaded this and tried it. Am I the first one here to do that? As someone who hasn't touched DaVinci products before (but a lot of experience with LR) - I am immediately confused by the integration of photo editing here. It feels very much like video editing software with photo editing tacked on. I can imagine that this would be much more intuitive for people who are already used to using DaVinci for video editing. I can intuit from the interface that there are a lot of powerful editing opportunities here, but I feel lost in the software. I spent 15 minutes or so trying to figure out how to do simple masking, but I could not find any way to do it for photos. Obviously this is just a beta and hopefully the workflow will be improved, but unless the photo editing features are extracted in to their own software package, I don't think it's enough yet to sway me from LR (and I want so desperately to be swayed)"
+        },
+        {
+          "id": 47764958,
+          "author": "lynndotpy",
+          "text": "This is uncanny. Just yesterday, I was complaining about the state of photo editing software (Adobe and Google are no-gos, and Darkroom provided a thousand thorns). I wished that DaVinci had a photo editor, because I had similar pains about video editing that were resolved when I learned about DaVinci. AND it runs on Linux! It's not every night you make a wish and wake up to find out it has come true."
+        }
+      ],
+      "summary_ja": "DaVinci Resolveの写真編集機能は、動画編集で培った先進的な色処理などを期待する声が強い一方で、Linuxでの動作問題やインターフェースの分かりにくさが指摘される。既存写真編集ソフトの停滞を打破する可能性を歓迎しつつ、操作性の改善を求める議論が中心。"
+    },
+    {
+      "rank": 29,
+      "id": 47760764,
+      "title_en": "A new spam policy for “back button hijacking”",
+      "title_ja": "「戻るボタンハイジャック」向け新スパム対策",
+      "url": "https://developers.google.com/search/blog/2026/04/back-button-hijacking",
+      "hn_url": "https://news.ycombinator.com/item?id=47760764",
+      "score": 860,
+      "comment_count": 488,
+      "posted_at": "2026-04-14T03:06:27+00:00",
+      "comments": [
+        {
+          "id": 47767331,
+          "author": "rat_on_the_run",
+          "text": "I wish the browsers had a function of disabling all keyboard shortcuts of a website. I binded Ctrl+E to opening a new tab just beside the current tab (built-in hotkey in Brave). It's frustrating to see it changed to something like opening the emoji menu on Discord."
+        },
+        {
+          "id": 47761736,
+          "author": "p4bl0",
+          "text": "That's cool if they can make it work. I don't understand how Google's indexing work anymore. I've had some website very well indexed for years and years which suddenly disappeared from the index with no explanation, even on the Search Console (\"visited, not indexed\"). Simple blog entries, lightweight pages, no JavaScript, no ads, no bad practices, https enabled, informative content that is linked from elsewhere including well indexed websites (some entries even performed well on Reddit). At the same time, for the past few years I've found Google search to be a less and less reliable tool because the results are less often what I need. Anyway, let's hope this new policy can improve things a little."
+        },
+        {
+          "id": 47767587,
+          "author": "merelysounds",
+          "text": "Looks like there is also a client side solution for that, at least in Firefox; it's possible to prevent a page from modifying browser history: > Open the about:config page in Firefox > Search for \"pushstate\" > Double-click \"browser.history.allowPushState\" source: https://superuser.com/a/1688290"
+        },
+        {
+          "id": 47768247,
+          "author": "vashchylau",
+          "text": "I initially thought this is for Android. Which has a long overdue problem of \"Tap Back again to exit\" type hijacks. Or feed-based apps (hi Reddit, TikTok, Instagram) refreshing your timeline in hopes you reconsider exiting and keep doomscrolling. One can only hope…"
+        }
+      ],
+      "summary_ja": "バックボタンハイジャック対策の新ポリシーへの期待が示される一方、ブラウザのキーボードショートカット上書きやGoogle検索の信頼性低下など、ユーザー体験を損なう行為への不満が共有された。Firefoxでのクライアント側解決策やAndroidアプリの類似問題も指摘されている。"
+    },
+    {
+      "rank": 30,
+      "id": 47738962,
+      "title_en": "Troubleshooting Email Delivery to Microsoft Users",
+      "title_ja": "Microsoftユーザー向けメール配信トラブルシューティング",
+      "url": "https://rozumem.xyz/posts/14",
+      "hn_url": "https://news.ycombinator.com/item?id=47738962",
+      "score": 51,
+      "comment_count": 14,
+      "posted_at": "2026-04-12T12:40:34+00:00",
+      "comments": [
+        {
+          "id": 47772878,
+          "author": "danielodievich",
+          "text": "Not exactly on the same topic, but I think it's a good story. When my children were little we'd put them into summer camp. I would send an appointment with \"something rather summer camp\" from my @live account to my wife on her @hotmail account (you can tell the vintage of us by those, but anyhow). By then both of those were running on Exchange infra. I also had a b-dash@microsoft account at Microsoft which was was sure on Exchange, I wanted to block that time on that email. Well, I'd get these bizarre failures to deliver those calendar that were incomprehensible. I eventually tracked it to not liking \"summer camp\" in subject line. I changed it to \"summer lamp\" and they went through. !!! Because I was quite connected to Microsoft ecosystem, I was able to file this in proper raid/product studio repo and get it fixed (never sure of the exact reason though), but for years after that my children always went to \"summer lamp\" because it was funny that way."
+        },
+        {
+          "id": 47772119,
+          "author": "stackskipton",
+          "text": "As former email admin who has put up with this, you are breaking cardinal rule about mixing marketing and transactional emails. Marketing should be different IP/Domain from transaction emails."
+        },
+        {
+          "id": 47772793,
+          "author": "andix",
+          "text": "My email server is permanently flagged as spam in SNDS. No way to unblock it. I've tried everything. Its not sending any marketing or automated emails. Microsoft just wants you to use O365 and happily blocks a lot of smaller email senders. Not even gmail is that strict. They've only greylisted my server for a few months and then unblocked it fully."
+        },
+        {
+          "id": 47774755,
+          "author": "joostdecock",
+          "text": "Plenty of advice here, which I'm certain is well intended, but it feels like we're victim blaming here. Things like \"you cannot mix marketing and transactional email\" are good advice, but they do nothing if you're using different subdomains but the same infrastructure (IP address) to send them out. Microsoft is simply trying to squeeze smaller operators out of the market. I run an open source project, we send out transaction emails from ome subdomain, and a newsletter to 50K+ subscribers once every 3 months. I can't afford to pay for different/dedicated IO addresses for each. We use Scaleway for email delivery and it's constant trouble with two providers: qq.com who don't give a damn about non-chinese senders, and Microsoft, who are simply trying to break the ipen internet. Before, we were on AWS SES. Guess what, we didn't even bother using different subdomains. We also didn't have dedicated IPs. Yet Microsoft did not block us because the sender IP was AWS. It's pay to play, as simple as that. Fortunately, we're an open source project, not a business. So when people reach out, I simply explain to them that they have chosen a mail provider that is openly hostile to small volunteer-run projects like us and that that choice has consequences. No emails for you. IMHO we need to be more vocal about what's really going on here (the rent-seeking on the open internet by big tech), and less victim blaming (what about dns-sec)."
+        },
+        {
+          "id": 47772561,
+          "author": "gerdesj",
+          "text": "When it comes to email you have to be completely ... enthusiastic: \"I was following all the best practices with SPF, SKIM, and DMARC.\" DKIM. Obviously that was a typo on a forum but you cannot be complacent, ever. You have missed out DNSSEC (nearly optional), SMTP-TLS and MTA-STS. Does your SPF record end with -all? Does your DMARC record have reporting addresses, does it have: \"p=reject; sp=reject; adkim=s; aspf=s\" in it? I also suggest you send marketing emails from a sub domain or a separate domain or move your identity domain elsewhere. A cop out is getting someone else to send your stuff and I do not recommend that - it looks lax and trite. I run a MS silver (its not Stirling and I'm not proud of it) partner. I recently shuffled our on prem to Exchange online, which at least saved a shit load of vRAM n vCPU on prem and horrendous Windows updates. I do insist on gatewaying all our SMTP via our on prem Exim n RSpamD n that. That means I get to decide where our mail goes and I also have a couple of Dovecots on prem. I run rather a lot more mail systems than ours too. This works in the UK but I cannot comment on [elsewhere], for obvious reasons."
+        }
+      ],
+      "summary_ja": "Microsoftへのメール配信問題について、不透明なフィルタリングや小規模送信者への不当なブロックが批判されている。技術的対策の複雑さや「ペイ・トゥ・プレイ」構造への不満があり、市場締め出しを目的とした行為との指摘もある。"
+    }
+  ]
+}
