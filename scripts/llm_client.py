@@ -2,7 +2,7 @@ import re
 import httpx
 
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
-DEFAULT_MODEL = "deepseek/deepseek-r1"
+DEFAULT_MODEL = "deepseek/deepseek-r1:free"
 
 
 class LLMClient:
