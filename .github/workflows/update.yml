@@ -52,6 +52,16 @@ jobs:
             cp -R docs/archive/. core/docs/archive/
           fi
 
+      - name: 既存週間分析データを core へコピー
+        run: |
+          mkdir -p core/docs/data/weekly core/docs/weekly
+          if [ -d docs/data/weekly ] && [ "$(ls -A docs/data/weekly 2>/dev/null)" ]; then
+            cp -R docs/data/weekly/. core/docs/data/weekly/
+          fi
+          if [ -d docs/weekly ] && [ "$(ls -A docs/weekly 2>/dev/null)" ]; then
+            cp -R docs/weekly/. core/docs/weekly/
+          fi
+
       - name: 実行スロットを決定
         id: slot
         run: |
@@ -64,15 +74,27 @@ jobs:
             echo "value=23" >> $GITHUB_OUTPUT
           fi
 
+      - name: 曜日判定（日曜なら週間分析も実行）
+        id: weekday
+        run: |
+          DOW=$(TZ=Asia/Tokyo date +%u)
+          echo "is_sunday=$([ "$DOW" -eq 7 ] && echo true || echo false)" >> "$GITHUB_OUTPUT"
+
       - name: HN データ取得・翻訳・HTML 生成
         env:
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
           SLOT: ${{ steps.slot.outputs.value }}
-        run: cd core && python -m scripts.fetch_and_generate --slot "$SLOT"
+          IS_SUNDAY: ${{ steps.weekday.outputs.is_sunday }}
+        run: |
+          WEEKLY_FLAG=""
+          if [ "$IS_SUNDAY" = "true" ] && [ "$SLOT" = "23" ]; then
+            WEEKLY_FLAG="--weekly"
+          fi
+          cd core && python -m scripts.fetch_and_generate --slot "$SLOT" $WEEKLY_FLAG
 
       - name: 生成した docs をワークフロー対象リポジトリへ同期
         run: |
-          rm -rf docs/archive docs/pagefind docs/index.html docs/about.html docs/privacy.html docs/sitemap.xml docs/robots.txt docs/latest
+          rm -rf docs/archive docs/weekly docs/pagefind docs/index.html docs/about.html docs/privacy.html docs/terms.html docs/sitemap.xml docs/robots.txt docs/latest
           cp -R core/docs/. docs/
 
       - name: Pagefind 検索インデックスを生成

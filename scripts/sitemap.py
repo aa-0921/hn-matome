@@ -9,7 +9,7 @@ class SitemapGenerator:
         self.output_dir.mkdir(parents=True, exist_ok=True)
         self.base_url = base_url.rstrip("/")
 
-    def generate(self, archive_slugs: list[str]) -> Path:
+    def generate(self, archive_slugs: list[str], weekly_slugs: list[str] | None = None) -> Path:
         root = Element("urlset")
         root.set("xmlns", "http://www.sitemaps.org/schemas/sitemap/0.9")
 
@@ -24,7 +24,17 @@ class SitemapGenerator:
         add_url(f"{self.base_url}/", "daily", "1.0")
         add_url(f"{self.base_url}/about.html", "monthly", "0.3")
         add_url(f"{self.base_url}/privacy.html", "monthly", "0.2")
+        add_url(f"{self.base_url}/terms.html", "monthly", "0.2")
+        add_url(f"{self.base_url}/weekly/", "weekly", "0.7")
         add_url(f"{self.base_url}/archive/", "daily", "0.85")
+
+        for ws in (weekly_slugs or []):
+            # 週末日をlastmodに使用
+            end_date = ws.split("_")[1] if "_" in ws else ws[:10]
+            add_url(
+                f"{self.base_url}/weekly/{ws}.html",
+                "never", "0.7", lastmod=end_date
+            )
 
         for slug in sorted(archive_slugs, reverse=True):
             # lastmod はスロット部分を除いた日付部分のみ使用

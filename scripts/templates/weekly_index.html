@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}週間テックトレンド分析 | HackerNews 日本語まとめ & AI要約{% endblock %}
+{% block canonical %}<link rel="canonical" href="https://hn-matome-2ht.pages.dev/weekly/">{% endblock %}
+{% block description %}Hacker Newsの週間テクノロジートレンド分析。毎週の技術動向を日本の開発者向けに独自分析します。{% endblock %}
+{% block content %}
+<h1>週間テックトレンド分析</h1>
+<p>Hacker Newsの1週間の記事を分析し、テクノロジートレンドを日本の開発者向けに独自解説します。毎週日曜日に更新。</p>
+
+{% if weekly_slugs %}
+<ul class="archive-list">
+  {% for item in weekly_slugs %}
+  <li>
+    <a href="/weekly/{{ item.slug }}.html">{{ item.title }}</a>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>まだ週間分析はありません。毎週日曜日に自動生成されます。</p>
+{% endif %}
+{% endblock %}

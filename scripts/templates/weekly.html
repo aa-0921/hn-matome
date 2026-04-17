@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %}{{ analysis.title }} | HackerNews 日本語まとめ & AI要約{% endblock %}
+{% block description %}{{ analysis.overview[:120] }}{% endblock %}
+{% block canonical %}<link rel="canonical" href="https://hn-matome-2ht.pages.dev/weekly/{{ analysis.slug }}.html">{% endblock %}
+{% block og_type %}article{% endblock %}
+
+{% block head_extra %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "NewsArticle",
+  "headline": "{{ analysis.title }}",
+  "datePublished": "{{ analysis.week_end.isoformat() }}T23:00:00+09:00",
+  "dateModified": "{{ analysis.week_end.isoformat() }}T23:00:00+09:00",
+  "image": "https://hn-matome-2ht.pages.dev/assets/og-image.png",
+  "author": {"@type": "Organization", "name": "HackerNews 日本語まとめ & AI要約"},
+  "publisher": {
+    "@type": "Organization",
+    "name": "HackerNews 日本語まとめ & AI要約",
+    "logo": {"@type": "ImageObject", "url": "https://hn-matome-2ht.pages.dev/assets/favicon.svg"}
+  },
+  "inLanguage": "ja",
+  "url": "https://hn-matome-2ht.pages.dev/weekly/{{ analysis.slug }}.html"
+}
+</script>
+{% endblock %}
+
+{% block body_attr %}data-pagefind-body{% endblock %}
+
+{% block content %}
+<article class="weekly-analysis">
+  <h1 class="page-title">{{ analysis.title }}</h1>
+
+  <section class="weekly-overview">
+    <h2>今週の概要</h2>
+    <p>{{ analysis.overview }}</p>
+  </section>
+
+  {% for trend in analysis.trend_sections %}
+  <section class="weekly-trend">
+    <h2>{{ trend.topic }}</h2>
+    <div class="trend-analysis">
+      <p>{{ trend.analysis }}</p>
+    </div>
+    {% if trend.impact %}
+    <div class="trend-impact">
+      <h3>日本の開発者への影響</h3>
+      <p>{{ trend.impact }}</p>
+    </div>
+    {% endif %}
+    {% if trend.related_titles %}
+    <div class="trend-related">
+      <h3>関連記事</h3>
+      <ul>
+        {% for title in trend.related_titles %}
+        <li>{{ title }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </section>
+  {% endfor %}
+
+  {% if analysis.editorial_comment %}
+  <section class="weekly-editorial">
+    <h2>編集者の一言</h2>
+    <p>{{ analysis.editorial_comment }}</p>
+  </section>
+  {% endif %}
+</article>
+
+{% if prev_weekly or next_weekly %}
+<nav class="date-nav" aria-label="前後の週間分析">
+  <div class="date-nav-links">
+    {% if prev_weekly %}
+    <a href="/weekly/{{ prev_weekly }}.html" class="date-nav-link"><span class="date-nav-arrow" aria-hidden="true">&larr;</span> 前週</a>
+    {% else %}
+    <span class="date-nav-placeholder" aria-hidden="true"></span>
+    {% endif %}
+    {% if next_weekly %}
+    <a href="/weekly/{{ next_weekly }}.html" class="date-nav-link">翌週 <span class="date-nav-arrow" aria-hidden="true">&rarr;</span></a>
+    {% else %}
+    <span class="date-nav-placeholder" aria-hidden="true"></span>
+    {% endif %}
+  </div>
+</nav>
+{% endif %}
+{% endblock %}

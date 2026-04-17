@@ -15,7 +15,7 @@ from dotenv import load_dotenv
 
 from scripts.hn_client import HNClient
 from scripts.llm_client import LLMClient
-from scripts.models import DailyReport
+from scripts.models import DailyReport, WeeklyAnalysis, TrendSection
 from scripts.generator import HTMLGenerator, _is_valid_report_slug
 from scripts.sitemap import SitemapGenerator
 
@@ -80,6 +80,11 @@ async def main():
         action="store_true",
         help="docs/data/*.json を全部読んでHTMLだけ再生成（LLM APIスキップ）",
     )
+    parser.add_argument(
+        "--weekly",
+        action="store_true",
+        help="過去7日分のデータから週間トレンド分析を生成する",
+    )
     args = parser.parse_args()
 
     # --slot 未指定かつデータ取得を行う場合は実際の JST 時刻をそのままスロットに設定
@@ -105,6 +110,10 @@ async def main():
         "summarize_requests": 0,
         "summarize_failures": 0,
         "summaries_success": 0,
+        "editor_note_requests": 0,
+        "editor_note_failures": 0,
+        "categorize_requests": 0,
+        "categorize_failures": 0,
     }
 
     if args.regenerate_all:
@@ -189,6 +198,30 @@ async def main():
                                 f"[WARN] [{target_slug}] story_id={story.id} コメント要約失敗（継続）: {e}"
                             )
 
+                # ひとこと解説を一括生成
+                print(f"[{target_slug}] ひとこと解説を生成中...")
+                titles_ja_list = [s.title_ja or s.title_en for s in stories]
+                titles_en_list = [s.title_en for s in stories]
+                metrics["editor_note_requests"] += 1
+                try:
+                    editor_notes = await llm.generate_editor_notes(titles_ja_list, titles_en_list)
+                    for story, note in zip(stories, editor_notes):
+                        story.editor_note = note
+                except Exception as e:
+                    metrics["editor_note_failures"] += 1
+                    print(f"[WARN] [{target_slug}] ひとこと解説生成失敗（継続）: {e}")
+
+                # カテゴリ分類を一括生成
+                print(f"[{target_slug}] カテゴリ分類中...")
+                metrics["categorize_requests"] += 1
+                try:
+                    categories = await llm.categorize_stories(titles_en_list)
+                    for story, cat in zip(stories, categories):
+                        story.category = cat
+                except Exception as e:
+                    metrics["categorize_failures"] += 1
+                    print(f"[WARN] [{target_slug}] カテゴリ分類失敗（継続）: {e}")
+
                 report = DailyReport(date=target_date, stories=stories, slot=args.slot)
                 generator.save_report_json(report)
                 print(f"[{target_slug}] JSONキャッシュを保存しました")
@@ -237,7 +270,90 @@ async def main():
         last_updated_ja=f"{run_started_at.year}年{run_started_at.month}月{run_started_at.day}日"
     )
     generator.generate_feed(archive_slugs=archive_slugs, base_url=BASE_URL)
-    sitemap_gen.generate(archive_slugs=archive_slugs)
+
+    # 週間トレンド分析の生成
+    if args.weekly:
+        api_key = os.environ.get("OPENROUTER_API_KEY")
+        if not api_key:
+            print("ERROR: --weekly には OPENROUTER_API_KEY が必要です", file=sys.stderr)
+            sys.exit(1)
+
+        week_end = today.date() if hasattr(today, 'date') else today
+        if hasattr(week_end, 'date'):
+            week_end = week_end.date()
+        else:
+            from datetime import date as date_type
+            week_end = date_type(today.year, today.month, today.day)
+        week_start = week_end - timedelta(days=6)
+        weekly_slug = f"{week_start.isoformat()}_{week_end.isoformat()}"
+
+        cached_weekly = generator.load_weekly_json(weekly_slug)
+        if cached_weekly is not None:
+            print(f"[週間分析] {weekly_slug} はキャッシュ済み（スキップ）")
+        else:
+            print(f"[週間分析] {week_start} 〜 {week_end} の記事を集約中...")
+            weekly_stories = []
+            for slug in all_slugs:
+                date_part = slug[:10]
+                if week_start.isoformat() <= date_part <= week_end.isoformat():
+                    report = reports.get(slug) or generator.load_report_json(slug)
+                    if report:
+                        for s in report.stories:
+                            weekly_stories.append(f"- {s.title_ja or s.title_en} (▲{s.score}点, 💬{s.comment_count}件)")
+
+            if weekly_stories:
+                stories_text = f"期間: {week_start} 〜 {week_end}\n記事数: {len(weekly_stories)}\n\n" + "\n".join(weekly_stories[:100])
+                llm = LLMClient(api_key=api_key)
+                print(f"[週間分析] LLMで分析生成中...")
+                try:
+                    raw = await llm.generate_weekly_analysis(stories_text)
+                    # JSON部分を抽出
+                    import re as _re
+                    json_match = _re.search(r'\{[\s\S]*\}', raw)
+                    if json_match:
+                        analysis_data = json.loads(json_match.group())
+                        trend_sections = []
+                        for t in analysis_data.get("trends", []):
+                            trend_sections.append(TrendSection(
+                                topic=t.get("topic", ""),
+                                analysis=t.get("analysis", ""),
+                                impact=t.get("impact", ""),
+                                related_titles=t.get("related_titles", []),
+                            ))
+                        weekly_analysis = WeeklyAnalysis(
+                            week_start=week_start,
+                            week_end=week_end,
+                            overview=analysis_data.get("overview", ""),
+                            trend_sections=trend_sections,
+                            editorial_comment=analysis_data.get("editorial_comment", ""),
+                        )
+                        generator.save_weekly_json(weekly_analysis)
+                        print(f"[週間分析] {weekly_slug} を保存しました")
+                    else:
+                        print(f"[WARN] 週間分析: LLMレスポンスからJSONを抽出できませんでした")
+                except Exception as e:
+                    print(f"[WARN] 週間分析生成失敗: {e}")
+            else:
+                print(f"[週間分析] 対象期間のデータがありません")
+
+    # 週間分析HTMLの生成（キャッシュ含む全件）
+    weekly_slugs_list = generator.get_existing_weekly_slugs()
+    for i, ws in enumerate(weekly_slugs_list):
+        wa = generator.load_weekly_json(ws)
+        if wa is None:
+            continue
+        prev_w = weekly_slugs_list[i + 1] if i + 1 < len(weekly_slugs_list) else None
+        next_w = weekly_slugs_list[i - 1] if i > 0 else None
+        generator.generate_weekly(wa, prev_weekly=prev_w, next_weekly=next_w)
+    # 週間一覧ページ
+    weekly_index_items = []
+    for ws in weekly_slugs_list:
+        wa = generator.load_weekly_json(ws)
+        if wa:
+            weekly_index_items.append({"slug": ws, "title": wa.title})
+    generator.generate_weekly_index(weekly_index_items)
+
+    sitemap_gen.generate(archive_slugs=archive_slugs, weekly_slugs=weekly_slugs_list)
     # 旧形式HTML（スラグにスロットなし）の検出: 対応JSONが存在しないHTMLを削除してリダイレクトを永続保存
     redirects_cache = generator.output_dir / "data" / "_slug_redirects.json"
     slug_redirect_map: dict[str, str] = {}
@@ -271,7 +387,9 @@ async def main():
 
     print(
         "[METRICS] 翻訳req={translate_requests}, 翻訳失敗={translate_failures}, "
-        "要約req={summarize_requests}, 要約成功={summaries_success}, 要約失敗={summarize_failures}".format(
+        "要約req={summarize_requests}, 要約成功={summaries_success}, 要約失敗={summarize_failures}, "
+        "解説req={editor_note_requests}, 解説失敗={editor_note_failures}, "
+        "分類req={categorize_requests}, 分類失敗={categorize_failures}".format(
             **metrics
         )
     )

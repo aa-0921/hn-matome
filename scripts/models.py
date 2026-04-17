@@ -1,6 +1,6 @@
 import re
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import datetime, timezone, date as date_type
 from html.parser import HTMLParser
 from typing import Optional, Any
 
@@ -67,6 +67,8 @@ class Story:
     posted_at: datetime
     comments: list[Comment] = field(default_factory=list)
     summary_ja: str = ""
+    editor_note: str = ""
+    category: str = ""
 
     @classmethod
     def from_api(cls, data: dict, rank: int) -> "Story":
@@ -95,6 +97,8 @@ class Story:
             "posted_at": self.posted_at.isoformat(),
             "comments": [c.to_dict() for c in self.comments],
             "summary_ja": self.summary_ja,
+            "editor_note": self.editor_note,
+            "category": self.category,
         }
 
     @classmethod
@@ -111,6 +115,8 @@ class Story:
             posted_at=datetime.fromisoformat(d["posted_at"]),
             comments=[Comment.from_dict(c) for c in d.get("comments", [])],
             summary_ja=d.get("summary_ja", ""),
+            editor_note=d.get("editor_note", ""),
+            category=d.get("category", ""),
         )
 
 
@@ -153,4 +159,69 @@ class DailyReport:
             date=datetime.fromisoformat(d["date"]),
             slot=d.get("slot"),
             stories=[Story.from_dict(s) for s in d["stories"]],
+        )
+
+
+@dataclass
+class TrendSection:
+    """週間トレンドの1トピック"""
+    topic: str
+    analysis: str
+    impact: str
+    related_titles: list[str] = field(default_factory=list)
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "topic": self.topic,
+            "analysis": self.analysis,
+            "impact": self.impact,
+            "related_titles": self.related_titles,
+        }
+
+    @classmethod
+    def from_dict(cls, d: dict) -> "TrendSection":
+        return cls(
+            topic=d["topic"],
+            analysis=d["analysis"],
+            impact=d.get("impact", ""),
+            related_titles=d.get("related_titles", []),
+        )
+
+
+@dataclass
+class WeeklyAnalysis:
+    """週間トレンド分析"""
+    week_start: date_type
+    week_end: date_type
+    overview: str
+    trend_sections: list[TrendSection] = field(default_factory=list)
+    editorial_comment: str = ""
+
+    @property
+    def slug(self) -> str:
+        return f"{self.week_start.isoformat()}_{self.week_end.isoformat()}"
+
+    @property
+    def title(self) -> str:
+        s = self.week_start
+        e = self.week_end
+        return f"{s.month}月{s.day}日〜{e.month}月{e.day}日 週間テックトレンド分析"
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "week_start": self.week_start.isoformat(),
+            "week_end": self.week_end.isoformat(),
+            "overview": self.overview,
+            "trend_sections": [t.to_dict() for t in self.trend_sections],
+            "editorial_comment": self.editorial_comment,
+        }
+
+    @classmethod
+    def from_dict(cls, d: dict) -> "WeeklyAnalysis":
+        return cls(
+            week_start=date_type.fromisoformat(d["week_start"]),
+            week_end=date_type.fromisoformat(d["week_end"]),
+            overview=d.get("overview", ""),
+            trend_sections=[TrendSection.from_dict(t) for t in d.get("trend_sections", [])],
+            editorial_comment=d.get("editorial_comment", ""),
         )

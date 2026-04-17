@@ -7,7 +7,7 @@ from pathlib import Path
 from xml.etree.ElementTree import Element, SubElement, tostring
 from xml.dom.minidom import parseString
 from jinja2 import Environment, FileSystemLoader
-from scripts.models import DailyReport
+from scripts.models import DailyReport, WeeklyAnalysis
 
 # 日報JSONのファイル名（例: 2026-03-29_23.json）。index 等の別用途JSONを除外する
 _REPORT_SLUG_RE = re.compile(r"^\d{4}-\d{2}-\d{2}(_\d+)?$")
@@ -222,8 +222,61 @@ class HTMLGenerator:
             jst_now = datetime.now(timezone(timedelta(hours=9)))
             last_updated_ja = f"{jst_now.year}年{jst_now.month}月{jst_now.day}日"
 
-        for page in ("about", "privacy"):
+        for page in ("about", "privacy", "terms"):
             tmpl = self.env.get_template(f"{page}.html")
             html = tmpl.render(last_updated_ja=last_updated_ja)
             out = self.output_dir / f"{page}.html"
             out.write_text(html, encoding="utf-8")
+
+    def generate_weekly(
+        self,
+        analysis: WeeklyAnalysis,
+        prev_weekly: str | None = None,
+        next_weekly: str | None = None,
+    ) -> Path:
+        """週間トレンド分析ページを生成する"""
+        tmpl = self.env.get_template("weekly.html")
+        html = tmpl.render(
+            analysis=analysis,
+            prev_weekly=prev_weekly,
+            next_weekly=next_weekly,
+        )
+        out = self.output_dir / "weekly" / f"{analysis.slug}.html"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(html, encoding="utf-8")
+        return out
+
+    def generate_weekly_index(self, weekly_slugs: list[dict]) -> Path:
+        """週間トレンド一覧ページを生成する"""
+        tmpl = self.env.get_template("weekly_index.html")
+        html = tmpl.render(weekly_slugs=weekly_slugs)
+        out = self.output_dir / "weekly" / "index.html"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(html, encoding="utf-8")
+        return out
+
+    def save_weekly_json(self, analysis: WeeklyAnalysis) -> Path:
+        data_dir = self.output_dir / "data" / "weekly"
+        data_dir.mkdir(parents=True, exist_ok=True)
+        out = data_dir / f"{analysis.slug}.json"
+        out.write_text(
+            json.dumps(analysis.to_dict(), ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
+        return out
+
+    def load_weekly_json(self, slug: str) -> WeeklyAnalysis | None:
+        json_path = self.output_dir / "data" / "weekly" / f"{slug}.json"
+        if not json_path.exists():
+            return None
+        data = json.loads(json_path.read_text(encoding="utf-8"))
+        return WeeklyAnalysis.from_dict(data)
+
+    def get_existing_weekly_slugs(self) -> list[str]:
+        data_dir = self.output_dir / "data" / "weekly"
+        if not data_dir.exists():
+            return []
+        return sorted(
+            [p.stem for p in data_dir.glob("*.json")],
+            reverse=True,
+        )
