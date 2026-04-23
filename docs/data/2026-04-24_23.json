@@ -1,0 +1,1094 @@
+{
+  "date": "2026-04-24T00:00:00+09:00",
+  "slot": "23",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 47876043,
+      "title_en": "Bitwarden CLI Compromised in Ongoing Checkmarx Supply Chain Campaign",
+      "title_ja": "Bitwarden CLI Compromised in Ongoing Checkmarx Supply Chain Campaign",
+      "url": "https://socket.dev/blog/bitwarden-cli-compromised",
+      "hn_url": "https://news.ycombinator.com/item?id=47876043",
+      "score": 169,
+      "comment_count": 75,
+      "posted_at": "2026-04-23T14:17:08+00:00",
+      "comments": [
+        {
+          "id": 47876832,
+          "author": "1024kb",
+          "text": "I had a really bad experience with the bitwarden cli. I believe it was `bw list` that I ran, assuming it would list the names of all my passwords, but too my surprise, it listed everything, including passwords and current totp codes. That's not the worst of it though. For some reason, when I ssh'ed into one of my servers and opened tmux, where I keep a weechat irc client running, I noticed that the entire content of the bw command was accessible from within the weechat text input field history. I have no idea how this happened, but it was quite terrifying. The issue persisted across tmux and weechat sessions, and only a reboot of the server would solve the problem. I promptly removed the bw cli programme after that, and I definitely won't be installing it again. I use ghostty if it matters."
+        },
+        {
+          "id": 47876899,
+          "author": "flossly",
+          "text": "Never used the CLI, but I do use their browser plugin. Would be quite a mess if that got compromised. What can I do to prevent it? Run old --tried and tested-- versions? Quite bizarre to think much much of my well-being depends on those secrets staying secret."
+        },
+        {
+          "id": 47877010,
+          "author": "darkwater",
+          "text": "> Russian locale kill switch: Exits silently if system locale begins with \"ru\", checking Intl.DateTimeFormat().resolvedOptions().locale and environment variables LC_ALL, LC_MESSAGES, LANGUAGE, and LANG So bold and so cowards at the same time..."
+        },
+        {
+          "id": 47877143,
+          "author": "ruuda",
+          "text": "https://github.com/doy/rbw is a Rust alternative to the Bitwarden CLI. Although the Rust ecosystem is moving in NPM's direction (very large and very deep dependency trees), you still need to trust far fewer authors in your dependency tree than what is common for Javascript."
+        },
+        {
+          "id": 47876963,
+          "author": "mobeigi",
+          "text": "KeePass users continue to live the stress free live. I've managed to avoid several security breaches in last 5 years alone by using KeePass locally on my own infra."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 2,
+      "id": 47872324,
+      "title_en": "I am building a cloud",
+      "title_ja": "I am building a cloud",
+      "url": "https://crawshaw.io/blog/building-a-cloud",
+      "hn_url": "https://news.ycombinator.com/item?id=47872324",
+      "score": 746,
+      "comment_count": 388,
+      "posted_at": "2026-04-23T04:44:19+00:00",
+      "comments": [
+        {
+          "id": 47873073,
+          "author": "dajonker",
+          "text": "> Making Kubernetes good is inherently impossible, a project in putting (admittedly high quality) lipstick on a pig. So well put, my good sir, this describes exactly my feelings with k8s. It always starts off all good with just managing a couple of containers to run your web app. Then before you know it, the devops folks have decided that they need to put a gazillion other services and an entire software-defined networking layer on top of it. After spending a lot of time \"optimizing\" or \"hardening\" the cluster, cloud spend has doubled or tripled. Incidents have also doubled or tripled, as has downtime. Debugging effort has doubled or tripled as well. I ended up saying goodbye to those devops folks, nuking the cluster, booted up a single VM with debian, enabled the firewall and used Kamal to deploy the app with docker. Despite having only a single VM rather than a cluster, things have never been more stable and reliable from an infrastructure point of view. Costs have plummeted as well, it's so much cheaper to run. It's also so much easier and more fun to debug. And yes, a single VM really is fine, you can get REALLY big VMs which is fine for most business applications like we run. Most business applications only have hundreds to thousands of users. The cloud provider (Google in our case) manages hardware failures. In case we need to upgrade with downtime, we spin up a second VM next to it, provision it, and update the IP address in Cloudflare. Not even any need for a load balancer."
+        },
+        {
+          "id": 47872412,
+          "author": "stingraycharles",
+          "text": "Potentially useful context: OP is one of the cofounders of Tailscale. > Traditional Cloud 1.0 companies sell you a VM with a default of 3000 IOPS, while your laptop has 500k. Getting the defaults right (and the cost of those defaults right) requires careful thinking through the stack. I wish them a lot of luck! I admire the vision and am definitely a target customer, I'm just afraid this goes the way things always go: start with great ideals, but as success grows, so must profit. Cloud vendor pricing often isn't based on cost. Some services they lose money on, others they profit heavily from. These things are often carefully chosen: the type of costs that only go up when customers are heavily committed—bandwidth, NAT gateway, etc. But I'm fairly certain OP knows this."
+        },
+        {
+          "id": 47876188,
+          "author": "aliasxneo",
+          "text": "There's a common conversation that goes on around AI: some people swear its a complete waste of time and total boondoggle, some that its a good tool when used correctly, and others that its the future and nothing else matters. I see the same thing happen with Kubernetes. I've run clusters from various sizes for about half a decade now. I've never once had an incident that wasn't caused by the product itself. I recall one particular incident where we had a complete blackout for about an hour. The people predisposed to hating Kubernetes did everything they could to blame it all on that \"shitty k8s system.\" Turns out the service in question simply DOS'd by opening up tens of thousands of ports in a matter of seconds when a particular scenario occurred. I'm neither in the k8s is the future nor k8s is total trash. It's a good system for when you genuinely need it. I've never understand the other two sides of the equation."
+        },
+        {
+          "id": 47877117,
+          "author": "dbmikus",
+          "text": "I really like exe.dev's pricing model where I pay a fixed monthly fee for compute and then can split it up into as many VMs as I want. I use exe.dev to run little vibe-coded apps and it's nice to just leave them running without a spend meter ticking up. We're thinking about switching to this pricing model for our own startup[1] (we run sandboxed coding agents for dev teams). We run on Daytona right now for sandboxes. Sometimes I spin up a sandboxed agent to make changes to an app, and then I leave it running so my teammate can poke around and test the running app in the VM, but each second it's running we (and our users) incur costs. We can either build a bunch of complicated tech to hibernate running sandboxes (there's a lot of tricky edge cases for detecting when a sandbox is active vs. should be hibernated) or we can just provision fixed blocks of compute. I think I prefer the latter. [1] https://github.com/gofixpoint/amika"
+        },
+        {
+          "id": 47873440,
+          "author": "sahil-shubham",
+          "text": "The point about VMs being the wrong shape because they’re tied to CPU/memory resonates hard. The abstraction forces you to pay for time, not work. I ended up buying a cheap auctioned Hetzner server and using my self-hostable Firecracker orchestrator on top of it ( https://github.com/sahil-shubham/bhatti , https://bhatti.sh ) specifically because I wanted the thing he’s describing — buy some hardware, carve it into as many VMs as I want, and not think about provisioning or their lifecycle. Idle VMs snapshot to disk and free all RAM automatically. The hardware is mine, the VMs are disposable, and idle costs nothing. The thing that, although obvious, surprised me most is that once you have memory-state snapshots, everything becomes resumable. I make a browser sandbox, get Chromium to a logged-in state, snapshot it, and resume copies of that session on demand. My agents work inside sandboxes, I run docker compose in them for preview environments, and when nothing’s active the server is basically idle. One $100/month box does all of it."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 3,
+      "id": 47874647,
+      "title_en": "Show HN: Honker – Postgres NOTIFY/LISTEN Semantics for SQLite",
+      "title_ja": "Show HN: Honker – Postgres NOTIFY/LISTEN Semantics for SQLite",
+      "url": "https://github.com/russellromney/honker",
+      "hn_url": "https://news.ycombinator.com/item?id=47874647",
+      "score": 126,
+      "comment_count": 20,
+      "posted_at": "2026-04-23T11:53:11+00:00",
+      "comments": [
+        {
+          "id": 47874837,
+          "author": "russellthehippo",
+          "text": "Hey HN, I built this. Honker adds cross-process NOTIFY/LISTEN to SQLite. You get push-style event delivery with single-digit millisecond latency without a damon/broker, using your existing SQLite file. A lot of pretty high-traffic applications are just Framework+SQLite+Litestream on a VPS now, so I wanted to bring a sixer to the \"just use SQLite\" party. SQLite doesn't run a server like Postgres, so the trick is moving the polling source from interval queries on a SQLite connection to a lightweight stat(2) on the WAL file. Many small queries are efficient in SQLite ( https://www.sqlite.org/np1queryprob.html ) so this isn't really a huge upgrade, but the cross-language result is pretty interesting to me - this is language agnostic as all you do is listen to the WAL file and call SQLite functions. On top of the store/notify primitives, honker ships ephemeral pub/sub (like pg_notify), durable work queues with retries and dead-letter (like pg-boss/Oban), and event streams with per-consumer offsets. All three are rows in your app's existing .db file and can commit atomically with your business write. This is cool because a rollback drops both. This used to be called litenotify/joblite but I bought honker.dev as a joke for my gf and I realized that every mq/task/worker have silly names: Oban, pg-boss, Huey, RabbitMQ, Celery, Sidekiq, etc. Thus a silly goose got its name. Honker waddles the same path as these giants and honks into the same void. Hopefully it's either useful to you or is amusing. Standard alpha software warnings apply."
+        },
+        {
+          "id": 47875217,
+          "author": "Retr0id",
+          "text": "Couldn't you use inotify (and/or some cross-platform wrapper) to watch for WAL changes without polling?"
+        },
+        {
+          "id": 47876567,
+          "author": "nzoschke",
+          "text": "Thanks for this! I have a proliferation of small apps backed by SQLite. And most of these need a queue and scheduler. I home rolled some stuff for it but was always pining for the elegance of the Postgres solutions. Will give this a spin very soon"
+        },
+        {
+          "id": 47876399,
+          "author": "tuo-lei",
+          "text": "atomic commit with the business data is the selling point over separate IPC. external message passing always has the 'notification sent but transaction rolled back' problem and that gets messy. one thing i'm curious about: WAL checkpoint. when SQLite truncates WAL back to zero, does the stat() polling handle that correctly? feels like there's a window where events could get lost."
+        },
+        {
+          "id": 47875767,
+          "author": "PunchyHamster",
+          "text": "Wouldn't processes on same machine be able to use different IPCs that don't even touch file ? It's neat but I have feeling in vast majority of cases just passing address to one of the IPC methods would be faster and then SQLite itself would only be needed for the durable parts."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 4,
+      "id": 47846688,
+      "title_en": "Your hex editor should color-code bytes",
+      "title_ja": "Your hex editor should color-code bytes",
+      "url": "https://simonomi.dev/blog/color-code-your-bytes/",
+      "hn_url": "https://news.ycombinator.com/item?id=47846688",
+      "score": 332,
+      "comment_count": 102,
+      "posted_at": "2026-04-21T09:52:09+00:00",
+      "comments": [
+        {
+          "id": 47873802,
+          "author": "dspillett",
+          "text": "Everything should try do some basic syntax highlighting IMO. Not too much, or it just becomes a sea of formatting that doesn't help at all. It is surprising how much difference just a little splash of colour can make if it isn't overdone. If possible, always include configuration options for the user though, so those with colour-blindness issues can tweak things to their needs, those who are just fussy can make the output fit with their finely adjusted system-wide colour schemes¹, and even better, where you can, allow bold/italic/other as well as colours so that those who barely see colour at all can play too. Of course none of this helps those using screen-readers and other tech, so make sure that all your fancy colouring & such is additive so if it is all “lost” no meaning is absolutely lost with it. -------- [1] Some people can be very vocal about this, more so than if highlighting isn't possible at all. If you give any output formatting they'll expect you to match, or be able to be made to match, their preferred style."
+        },
+        {
+          "id": 47874228,
+          "author": "cuechan",
+          "text": "For anyone who regularly has to look at/analyze binary files, i highly recommend ImHex [1]. Its a hex editor built with imgui and has a lot of built in tools. Imo the best feature is the data structure editor. You can write a data type definition similar to C and it overlays it on the hexdump and parses it in a structured way while you type. It also has a node based editor. 1: https://github.com/WerWolv/ImHex"
+        },
+        {
+          "id": 47877234,
+          "author": "dhosek",
+          "text": "I found the coloring in most of the examples to be more distracting than helpful. I can see cases where it could be helpful (e.g., highlighting bytes in the 0x20–0x7E range for spotting ASCII strings, or a fancier one that can identify UTF-8 strings, or better still, invalid sequences in what might otherwise be UTF-8), but most of the cases here didn’t really help all that much for me."
+        },
+        {
+          "id": 47875425,
+          "author": "bwiggs",
+          "text": "DEFCON30, Mayhem CTF. We were given a file full of random bytes. The flag was in there somewhere. It was too random to be encrypted, there wasn't any structure. `file` didn't return anything, truly just a bag of bytes. I had decided to install `hexyl` as an alternative option to some of the other hex editors installed o my linux machine. All the bytes were colored grey. I scrolled the file and noticed a blip of yellow. A random golden `{` amongst all the noise. Weird. The next colored byte was a `C`, then `T`, `F`. --- At that time, I was mostly using HexFiend to look at raw files, which didn't have byte coloring. For DEFCON I had decided to drive my linux machine. I had ghex installed, but i had also decided to install and try `hexyl` via cli. So seeing bytes in color was purely by chance that I had installed it. I eventually posted an issue to ghex to add color support. https://gitlab.gnome.org/GNOME/ghex/-/issues/60 I need to see if I can find the file and post it on that blog post. https://bwiggs.com/posts/2023-08-31-hacking-in-color/"
+        },
+        {
+          "id": 47874212,
+          "author": "NooneAtAll3",
+          "text": "Why did author decide that best way to demonstrate his idea would be by cutting contrast in half? color-coding might be a great solution, but you don't really know beforehand which byte values are important. Manually selecting C0 to make it stand out it just ctrl+f with extra steps. (But I wouldn't mind something like \"color 00 separate from ascii separate from the rest)"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 5,
+      "id": 47865868,
+      "title_en": "Alberta startup sells no-tech tractors for half price",
+      "title_ja": "Alberta startup sells no-tech tractors for half price",
+      "url": "https://wheelfront.com/this-alberta-startup-sells-no-tech-tractors-for-half-price/",
+      "hn_url": "https://news.ycombinator.com/item?id=47865868",
+      "score": 1993,
+      "comment_count": 676,
+      "posted_at": "2026-04-22T16:29:25+00:00",
+      "comments": [
+        {
+          "id": 47867092,
+          "author": "adamcharnock",
+          "text": "Up until a year ago I was regularly using a Massy Fergusson 135 [0] (Perkins Diesel version), made sometime in the 1970s. It was wonderful! So amazing to drive and use. Clunky and heavy, but you really really felt like you were using a machine. In low gears, if you put you foot down on the accelerator the engine would roar, and your speed would barely change! And there was no fancy technology in it at all. If I was in the forest and had forgotten the key, I'd just reach behind the dashboard and hot-wire it. The air filter was basically a shisha-pipe that bubbled the incoming air through wire wool and engine oil. Its fuel gauge didn't work either. You just had to take a look in the tank, or quickly react as soon as the revs started dropping. I ran it dry a few times and had to sit there with a spanner in one hand and YouTube into the other, while trying to bleed all the fuel lines. But they were all on the outside of the vehicle, which made it comparatively easy I imagine. I've never actually driven a modern tractor, so don't know how it compares. I imagine the clutch is easier on the knees these days! Anyway, this just felt like the place to share this. [0] https://en.wikipedia.org/wiki/Massey_Ferguson_135"
+        },
+        {
+          "id": 47866242,
+          "author": "Hasz",
+          "text": "I think this is a reaction to the incredibly locked down ecosystem that most of these mfgs are pushing. However, the tech exists for a reason and is not inherently bad, the issue is the lock-in, the lack of choice and interoperability. IMO, there is plenty of space for an OEM who can play nice with others, offer an open (and vibrant ecosystem), and keep users coming back by choice, not by lock-in."
+        },
+        {
+          "id": 47866591,
+          "author": "jmward01",
+          "text": "I want this for cars but to keep the modern powertrain. So an EV without the tracking/touch screens, etc etc. Or an internal combustion engine car that is just simple and efficient (and again, no tracking). I'll take the low-tech but nice features like heated seats and power windows still thank you."
+        },
+        {
+          "id": 47872279,
+          "author": "simplyluke",
+          "text": "Late to the party here, so I don't expect this to get a lot of traction, but I'd like to point out that part of the reason this hasn't existed until recently as an option in the US is because it's functionally illegal for it to exist. > The 12-valve Cummins is arguably the most widely understood diesel engine in North America. Every independent shop, every shade-tree mechanic with a set of wrenches, every farmer who grew up turning bolts has encountered one. That's great! I'd point out the 12 valve wasn't introduced until the 90s, but that's kind of immaterial -- it's as simple to work on as any other mechanically injected analog diesel is and they were in widespread use for nearly a century before that. One immediately wonders why we moved away from these and towards more complex options, and why this startup has to remanufacture old engines instead of sourcing new engines. The answer among those of us who care about right to repair tends to be \"evil corporations want to make proprietary systems that require ongoing fees!\" which is true for John Deere, but also, the EPA mandated DEF/DPF systems + limp modes on all farm equipment since 2014, and the new relaxed standards include complicated rules about what percentage into limp mode they go at different intervals during different periods of time after those notoriously unreliable systems start to have errors. You can't do that without modern ECUs! I'm all for reducing the harm caused by running diesel engines in the most densely populated cities on the planet (DEF and similar systems are about particulate emissions, not carbon), but we're being naive if we pretend that extending these regulations to farm equipment isn't a huge factor in why that same equipment has gotten more expensive and less reliable over the past decade."
+        },
+        {
+          "id": 47874421,
+          "author": "alexpotato",
+          "text": "Two things: 1. LOVE this idea as I've always been a big fan of \"right to repair\" and even at work, FinTech SRE/DevOps, I say things like \"we want this to be like a 1975 Ford: you open the hood, look inside, understand it and it's easy to fix. We don't want a 2026 Ferrari.\" 2. The Econ major/MBA in me wonders how long you can sell cheaper tractors that last forever. I say this b/c it's like trying to sell 100 year lightbulbs: markets are not infinite so if you have everyone buy them in years 1-10, what do you sell after that? The general idea is that you charge MORE for these things since a. \"easy to repair\" is now an added feature, b. people will buy less of your thing so you need to make more money upfront. Granted, there is probably some sweet spot and/or \"even selling 1,000 == a couple million and that's enough for anyone\" but I still like to debate the points"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 6,
+      "id": 47874814,
+      "title_en": "Investigation uncovers two sophisticated telecom surveillance campaigns",
+      "title_ja": "Investigation uncovers two sophisticated telecom surveillance campaigns",
+      "url": "https://techcrunch.com/2026/04/23/surveillance-vendors-caught-abusing-access-to-telcos-to-track-peoples-phone-locations-researchers-say/",
+      "hn_url": "https://news.ycombinator.com/item?id=47874814",
+      "score": 280,
+      "comment_count": 87,
+      "posted_at": "2026-04-23T12:12:03+00:00",
+      "comments": [
+        {
+          "id": 47875898,
+          "author": "DrewADesign",
+          "text": "I was training to be a 911 dispatcher a while ago. When they told us about getting someone’s location from the cell company outside of what was available automatically from e911 or whatever— which required them to be on the phone with you, so not useful if you get a text saying they just drove off a cliff in the middle of nowhere, or something— you had to sign an affidavit testifying that there were exigent circumstances, fax it to them, and then wait, sometimes for hours, until their legal department approved it. And you always risked being dragged to court if you made the wrong call. That’s the price of privacy, and the potential for abuse is rife, so it makes sense. Yet these jackholes can just snag it whenever because, ya know, profit. That is obviously insane. Our corporate culture has driven our society insane with normalized greed. The unholy alliance of tech and marketing is largely to blame."
+        },
+        {
+          "id": 47875941,
+          "author": "areoform",
+          "text": "One of the biggest lies about the surveillance state is that it'll be professional. NSA employees have used multi-billion dollar American surveillance assets to spy on women they're infatuated with. There's even a cute term for it, LOVEINT. https://www.nbcnews.com/news/world/loveint-nsa-letter-disclo... https://www.yahoo.com/news/nsa-staff-used-spy-tools-spouses-... In another instance, a foreign woman who was employed by the U.S. government suspected that her lover, an NSA civilian employee, was listening to her phone calls. She shared her suspicion with another government employee, who reported it. An investigation found the man abused NSA databases from 1998 to 2003 to snoop on nine phone numbers of foreign women and twice collected communications of an American, according to the inspector general's report. People aren't able to imagine the ramifications of pervasive surveillance because there never has been such pervasive surveillance in human history. And humans are terrible at predicting how this is going to change things. Especially, with LLMs in the mix. Unless a very strict line is maintained for privacy across the board; the world that's coming will be many, many custom, tailor-made hells co-existing as tumors off of the back of state and corporate surveillance infrastructure."
+        },
+        {
+          "id": 47875022,
+          "author": "aetherspawn",
+          "text": "Yeah, a friend of mine was tracked by a stalker ex boyfriend who worked at a Telco. It was irritatingly difficult to avoid because it seemed he could look up her SIM card by name and then get her location no matter what (new SIM, new phone) Anyone who reports this kind of thing to the police just sounds irrational and crazy and gets ignored."
+        },
+        {
+          "id": 47875449,
+          "author": "mentalgear",
+          "text": "> Gary Miller, one of the researchers who investigated these attacks, told TechCrunch that some clues point to an “Israeli-based commercial geo-intelligence provider with specialized telecom capabilities,” but did not name the surveillance provider. Several Israeli companies are known to offer similar services, such as Circles (later acquired by spyware maker NSO Group), Cognyte, and Rayzone."
+        },
+        {
+          "id": 47875253,
+          "author": "Anonyneko",
+          "text": "This is just par for the course in Russia. Government has telcos track people, and that data ends up available on the black market for anyone to purchase, for a fairly modest fee. The government has been recently trying (with uncertain degree of success) to crack down on the latter, as this was frequently used by the opposition journalists and investigators to uncover the details of the government's own nefarious plots. The data is cross-referenced with other telcos, other SIM cards, Wi-Fi hotspots (anonymous public hotspots are outlawed), street cams, and many other databases, so it's basically impossible to avoid being tracked. Probably inevitable to become the norm everywhere in the world."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 7,
+      "id": 47868867,
+      "title_en": "Apple fixes bug that cops used to extract deleted chat messages from iPhones",
+      "title_ja": "Apple fixes bug that cops used to extract deleted chat messages from iPhones",
+      "url": "https://techcrunch.com/2026/04/22/apple-fixes-bug-that-cops-used-to-extract-deleted-chat-messages-from-iphones/",
+      "hn_url": "https://news.ycombinator.com/item?id=47868867",
+      "score": 742,
+      "comment_count": 175,
+      "posted_at": "2026-04-22T20:27:31+00:00",
+      "comments": [
+        {
+          "id": 47869383,
+          "author": "dlcarrier",
+          "text": "This was a bug that left it cached on the device. Apple and Google have put themselves in the middle of most notifications, causing the contents to pass through their servers, which means that they are subject to all the standard warrantless wiretapping directly from governments, as well as third-party attacks on the infrastructure in place to support that monitoring. If you don't want end-to-end messages made available to others, set your notifications to only show that you have a message, not what it contains or who its from."
+        },
+        {
+          "id": 47869394,
+          "author": "6thbit",
+          "text": "The \"bug\" discussed in the article is only part of the problem. The main problem, which is notifications text is stored on a DB in the phone outside of signal, is not addressed. To avoid that you have to change your settings. In this case, the defendant had deleted the signal app completely, and that likely internally marks those app's notifications for deletion from the DB, so the bug fixed here is that they were not removing notifications from the local database when the app that generated them was removed, now they do. Impact: Notifications marked for deletion could be unexpectedly retained on the device Description: A logging issue was addressed with improved data redaction. CVE-2026-28950 They classify this as \"loggging issue\" so it sounds like notifications were not actually in the database itself but ended up in some log."
+        },
+        {
+          "id": 47876404,
+          "author": "hurricanepootis",
+          "text": "I've used something like this before on my Samsung S24 to see a deleted text from Signal. I checked the notification history and the text was there. Fortunately, Signal has an option to make it where notifications don't actually have the message in it. However, the receiver has to enable that option."
+        },
+        {
+          "id": 47869247,
+          "author": "modeless",
+          "text": "Oh, I was originally confused about this because I had thought the push notifications were end-to-end encrypted, so they couldn't be cached in readable form by the push notification service, and only decrypted by the app on device upon receiving the notification. But it seems like after the notification was decrypted by the app and shown to the user using OS APIs, the notification text was was then stored by the OS in some kind of notification history DB locally on the device?"
+        },
+        {
+          "id": 47869244,
+          "author": "nxobject",
+          "text": "Note that Signal offers the option to use generic “You’ve received messages” notifications - it’s good practice in general."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 8,
+      "id": 47873694,
+      "title_en": "Writing a C Compiler, in Zig (2025)",
+      "title_ja": "Writing a C Compiler, in Zig (2025)",
+      "url": "https://ar-ms.me/thoughts/c-compiler-1-zig/",
+      "hn_url": "https://news.ycombinator.com/item?id=47873694",
+      "score": 71,
+      "comment_count": 22,
+      "posted_at": "2026-04-23T09:20:47+00:00",
+      "comments": [
+        {
+          "id": 47874425,
+          "author": "fuhsnn",
+          "text": "Looking at the repo, the author seemed a little fed up [1] with the nature of lower level language and quitted. [1] https://github.com/asibahi/paella/blob/main/writeup/c19.md#u..."
+        },
+        {
+          "id": 47874490,
+          "author": "flossly",
+          "text": "I thought Zig has a C compiler built in? Or is it just the Zig build system that's able to compile C, but uses an external compiler for that? Still a proper programmer-flex to build another one."
+        },
+        {
+          "id": 47874375,
+          "author": "scatbot",
+          "text": "Cool project. Feels like writing a C compiler in Zig aligns nicely with the old \"maintain it in Zig\" idea that was part of Zig's early value proposition. Is that still considered a relevant goal today? Longer term it also makes me wonder whether something like this could eventually reduce reliance on Clang/LLVM for the C frontend in zig's toolchain."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 9,
+      "id": 47843434,
+      "title_en": "The Onion to Take over InfoWars",
+      "title_ja": "The Onion to Take over InfoWars",
+      "url": "https://www.nytimes.com/2026/04/20/business/infowars-alex-jones-the-onion.html",
+      "hn_url": "https://news.ycombinator.com/item?id=47843434",
+      "score": 408,
+      "comment_count": 184,
+      "posted_at": "2026-04-21T01:23:23+00:00",
+      "comments": [
+        {
+          "id": 47872461,
+          "author": "jbombadil",
+          "text": "https://archive.is/yoLYM"
+        },
+        {
+          "id": 47873227,
+          "author": "qnleigh",
+          "text": "When this all started, the Onion released a priceless 'press statement': \"Through it all, InfoWars has shown an unswerving commitment to manufacturing anger and radicalizing the most vulnerable members of society—values that resonate deeply with all of us at Global Tetrahedron. No price would be too high for such a cornucopia of malleable assets and minds. And yet, in a stroke of good fortune, a formidable special interest group has outwitted the hapless owner of InfoWars (a forgettable man with an already-forgotten name) and forced him to sell it at a steep bargain: less than one trillion dollars...\" Full statement here https://theonion.com/heres-why-i-decided-to-buy-infowars/"
+        },
+        {
+          "id": 47876769,
+          "author": "oo0shiny",
+          "text": "For anyone curious about the events that led to this decision, I made a timeline that shows how it happened: https://alexjoneslies.com/"
+        },
+        {
+          "id": 47877262,
+          "author": "ElijahLynn",
+          "text": "Archive.is link is hanging, and NYT is paywall. This one seems to have some info: https://www.usatoday.com/story/news/nation/2026/04/21/the-on... Tldr; it isn't a done deal \"The deal is not for The Onion to own Infowars, but rather to have a temporary license to the intellectual property of Infowars’ parent company, Free Speech Systems. Papers filed in state court indicate that the deal entails The Onion paying $81,000 a month to license the Infowars.com domain and brand name, as reported by KOUW,\" https://www.kuow.org/stories/the-onion-has-agreed-to-a-new-d... \"The deal calls for The Onion to pay $81,000 a month to license the Infowars.com domain and brand name, which the receiver says will \"cover carrying costs to preserve and protect the assets of the receivership estate\" until an appeal filed by Jones is decided and the path is cleared for a sale.\""
+        },
+        {
+          "id": 47873501,
+          "author": "mikeodds",
+          "text": "Maybe I’m out of touch, but doesn’t a $1.4b dollar settlement for this seem rather… large?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 10,
+      "id": 47848162,
+      "title_en": "A Renaissance gambling dispute spawned probability theory",
+      "title_ja": "A Renaissance gambling dispute spawned probability theory",
+      "url": "https://www.scientificamerican.com/article/how-a-renaissance-gambling-dispute-spawned-probability-theory/",
+      "hn_url": "https://news.ycombinator.com/item?id=47848162",
+      "score": 48,
+      "comment_count": 3,
+      "posted_at": "2026-04-21T12:59:59+00:00",
+      "comments": [
+        {
+          "id": 47877171,
+          "author": "benbreen",
+          "text": "Just wanted to flag that the works of Ian Hacking, especially The Emergence of Probability (1975) and The Taming of Chance (1990) are excellent on this. Dense and challenging at times but also well written and the product of a very original mind. The latter book has a Wikipedia page with some more info - was surprised to see Hacking not mentioned here since the featured article is partly based on his work: https://en.wikipedia.org/wiki/The_Taming_of_Chance"
+        },
+        {
+          "id": 47875606,
+          "author": "skywal_l",
+          "text": "> a French gambler and intellectual socialite enlisted the help Imagine Blaise Pascal and Pierre de Fermat teaming together to solve your problem."
+        },
+        {
+          "id": 47876660,
+          "author": "The_Blade",
+          "text": "Luca Pacioli invented (or really, put down on paper) double-entry accounting it is funny how probability has always been way behind other maths. i got to use the Birthday problem at work, once, which made the math undergrad totally worth it fortunately my Polymarket and Kalshi wagers are protected by AES et al"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 11,
+      "id": 47876647,
+      "title_en": "To Protect and Swerve: NYPD Cop Has 547 Speeding Tickets",
+      "title_ja": "To Protect and Swerve: NYPD Cop Has 547 Speeding Tickets",
+      "url": "https://nyc.streetsblog.org/2026/04/23/to-protect-and-swerve-nypd-cop-has-527-speeding-tickets-yet-remains-on-the-force",
+      "hn_url": "https://news.ycombinator.com/item?id=47876647",
+      "score": 30,
+      "comment_count": 17,
+      "posted_at": "2026-04-23T15:08:54+00:00",
+      "comments": [
+        {
+          "id": 47877323,
+          "author": "haritha-j",
+          "text": "I don't understand, doesn't NY have a points system for driving licenses? In most places you could speed at most half a dozen times before you lose your license."
+        },
+        {
+          "id": 47877248,
+          "author": "A_D_E_P_T",
+          "text": "> 527 since January 2022 That's more than two a week, every week!"
+        },
+        {
+          "id": 47876962,
+          "author": "thatmf",
+          "text": "> James Giovansanti lives and works on Staten Island. ya don't say (sincerely, ex-resident)"
+        },
+        {
+          "id": 47877279,
+          "author": "newsy888",
+          "text": "Universal surveillance at its most terrifying"
+        },
+        {
+          "id": 47877271,
+          "author": "branon",
+          "text": "They went to the guy's house? Followed him and took pictures? This article reads like a Kiwi Farms thread. Just saying. I'm not a fan of what they do, but that's what came to mind. And when people do undesirable things, documenting them for public awareness is important. But how deep is too deep?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 12,
+      "id": 47866697,
+      "title_en": "We found a stable Firefox identifier linking all your private Tor identities",
+      "title_ja": "We found a stable Firefox identifier linking all your private Tor identities",
+      "url": "https://fingerprint.com/blog/firefox-tor-indexeddb-privacy-vulnerability/",
+      "hn_url": "https://news.ycombinator.com/item?id=47866697",
+      "score": 829,
+      "comment_count": 248,
+      "posted_at": "2026-04-22T17:35:03+00:00",
+      "comments": [
+        {
+          "id": 47867883,
+          "author": "lpapez",
+          "text": "Very cool research and wonderfully written. I was expecting an ad for their product somewhere towards the end, but it wasn't there! I do wonder though: why would this company report this vulnerability to Mozilla if their product is fingeprinting? Isn't it better for the business (albeit unethical) to keep the vulnerability private, to differentiate from the competitors? For example, I don't see many threat actors burning their zero days through responsible disclosure!"
+        },
+        {
+          "id": 47872223,
+          "author": "Cider9986",
+          "text": "Being fingerprinted across Tor is different from being deanonymized—it basically just \"psuedonomizes\" you. You now have an identifier. It is a significant threat, but it is not hard to \"psuedonomize\" someone based on stylometry and some of the people with the highest threat model—operating an illegal site, will be pseudonymous anyway. Don't get your opsec advice from HN. Check whonix, qubes, grapheneos, kicksecure forums/wikis. Nihilist opsec, Privacyguides."
+        },
+        {
+          "id": 47877128,
+          "author": "1vuio0pswjnm7",
+          "text": "Is it assumed that all users, including Tor users, have Javasctipt enabled How does this \"identifier\" work without Javascript enabled"
+        },
+        {
+          "id": 47869592,
+          "author": "yencabulator",
+          "text": "> the identifier can also persist [...] as long as the Firefox process remains running Make sure to exit Tor Browser at the end of a session. Make sure not to mix two uses in one session."
+        },
+        {
+          "id": 47877092,
+          "author": "aboardRat4",
+          "text": "Why would a webpage reader even have an \"indexdb\"?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 13,
+      "id": 47840520,
+      "title_en": "Isopods of the world",
+      "title_ja": "Isopods of the world",
+      "url": "https://isopod.site/",
+      "hn_url": "https://news.ycombinator.com/item?id=47840520",
+      "score": 80,
+      "comment_count": 36,
+      "posted_at": "2026-04-20T20:56:02+00:00",
+      "comments": [
+        {
+          "id": 47874350,
+          "author": "sjsanc",
+          "text": "The macro photography looks bizarrely uniform and the poses contrived. I feel like a sleuth trying to decide if this is AI generated or not. I suspect it isn't, but I'm somewhat distressed at how suspicious I am of cool things now."
+        },
+        {
+          "id": 47874391,
+          "author": "sph",
+          "text": "Plenty of worries if those images are AI-generated. I'll give the author the benefit of the doubt as he's a macro photographer: https://www.nickybay.com/"
+        },
+        {
+          "id": 47874323,
+          "author": "michaelscott",
+          "text": "The kind of site that makes one happy the Internet exists"
+        },
+        {
+          "id": 47876283,
+          "author": "Karawebnetwork",
+          "text": "This brings me back to when the internet was full of sites like this. Small artful projects that had no goal but to teach us a tidbit about a niche topic, just because someone cared enough to share it. The internet felt smaller and more intimate than it does now in this era of social media. Bookmarked, will without a doubt explore every inch of that site."
+        },
+        {
+          "id": 47875952,
+          "author": "ngvrnd",
+          "text": "I worked with a woman who kept isopods as pets. She had a little terrarium at work with all sorts of breeds of isopods. That's where I learned you could buy isopods online."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 14,
+      "id": 47874734,
+      "title_en": "Jiga (YC W21) Is Hiring",
+      "title_ja": "Jiga (YC W21) Is Hiring",
+      "url": "https://jiga.io/about-us/",
+      "hn_url": "https://news.ycombinator.com/item?id=47874734",
+      "score": 1,
+      "comment_count": 0,
+      "posted_at": "2026-04-23T12:02:44+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 15,
+      "id": 47824943,
+      "title_en": "5x5 Pixel font for tiny screens",
+      "title_ja": "5x5 Pixel font for tiny screens",
+      "url": "https://maurycyz.com/projects/mcufont/",
+      "hn_url": "https://news.ycombinator.com/item?id=47824943",
+      "score": 734,
+      "comment_count": 149,
+      "posted_at": "2026-04-19T15:19:28+00:00",
+      "comments": [
+        {
+          "id": 47866819,
+          "author": "FelipeCortez",
+          "text": "1x5 can also work if you take advantage of subpixel rendering https://www.msarnoff.org/millitext/"
+        },
+        {
+          "id": 47874404,
+          "author": "gurkwart",
+          "text": "Nice overview. > At this size, there's no way to have a distinct upper and lowercase [...] 3x4 is feasible. I've designed the MiniGent font [1], including greek letters, numerals, punctuation, math, currency, and emojis. Written a whole LaTeX typesetter [2] around it. While not perfect, I'm amazed by how far you can take it arranging just a few pixels. [1] https://gurki.github.io/pixeltex/minigent/ [2] https://gurki.github.io/pixeltex/pixeltex/"
+        },
+        {
+          "id": 47867985,
+          "author": "ludocode",
+          "text": "The 5x5 is very nice, and the 3x5 isn't bad either. Unfortunately neither of them have all of ASCII. The size is also a bit misleading because you need to add spacing so really they need a 6x6 or 4x6 grid. I'm quite fond of Spleen: https://github.com/fcambus/spleen It has a 5x8 font which has all of ASCII, but most glyphs are actually 4x8 and include horizontal spacing. I modified it to reduce the rest for a project I'm doing so all glyphs are 4x8. The result can be rendered on a 5x9 grid with a guaranteed line of horizontal and vertical spacing between all glyphs. It's very nice."
+        },
+        {
+          "id": 47870989,
+          "author": "archargelod",
+          "text": "Most tiny fonts are actually terrible to read at a glance especially when they're rendered at 1:1 scale. I've had a need couple years ago for a very tiny and compact font for a game mod I was making. And after trying a lot of 3 3, 3 5, even 2*5 fonts - they were all terrible to read. In the end, I found \"Gremlin-3x6\" font[0] made by the guy named zephram. It's 1 pixel taller, but still a very compact when laid out horizontally. But, most importantly, all standard latin characters are pretty distinct from each other and it remains readable without zooming in too much. Unfortunately, since then, zephram deleted his fontstruct account and all of his fonts. I have a copy of this font in my mod repo[1] along with a CC0 license and you can see the actual rendering of the font in the project screenshots[2]. [0] - https://fontstruct.com/fontstructions/show/1488093 [1] - https://codeberg.org/janAkali/isaac-extended-icons-mod/src/b... [2] - https://codeberg.org/janAkali/isaac-extended-icons-mod/media..."
+        },
+        {
+          "id": 47876937,
+          "author": "andrewmu",
+          "text": "I haven't got round to publicising it yet, but I made a web application for designing small pixel fonts: https://microfonts.com/ The smallest legible one I've come up with is 4x6 (with inter-character spacing)."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 16,
+      "id": 47871519,
+      "title_en": "Arch Linux Now Has a Bit-for-Bit Reproducible Docker Image",
+      "title_ja": "Arch Linux Now Has a Bit-for-Bit Reproducible Docker Image",
+      "url": "https://antiz.fr/blog/archlinux-now-has-a-reproducible-docker-image/",
+      "hn_url": "https://news.ycombinator.com/item?id=47871519",
+      "score": 185,
+      "comment_count": 65,
+      "posted_at": "2026-04-23T01:59:08+00:00",
+      "comments": [
+        {
+          "id": 47874665,
+          "author": "nickjj",
+          "text": "It is nice to have this confidence. I ran Arch Linux for almost a year in WSL 2, it was really good. Then I ran Arch natively for ~5 months, it's really good. Now I still run Arch natively, but I also use the Arch Docker image to test my dotfiles[0] with a fresh file system. Also, for when I want to run end to end tests for my dotfiles that set up a complete desktop environment I run Arch in a VM. I have 99 problems but running Arch isn't one of them. [0]: https://github.com/nickjj/dotfiles"
+        },
+        {
+          "id": 47876095,
+          "author": "red-iron-pine",
+          "text": "Presumably there is something you can plug into the CI/CD pipeline that informs everyone one you use Arch (and, also presumably, that you do Crossfit, etc.)"
+        },
+        {
+          "id": 47873299,
+          "author": "dev_l1x_be",
+          "text": "All docker containers should have been like that. apt-get update in a docker build step is an anti pattern."
+        },
+        {
+          "id": 47873274,
+          "author": "kippinsula",
+          "text": "reproducible images are one of those features where the payoff is mostly emotional until the day it isn't. we had an incident where two supposedly identical images on two machines had a three byte delta in a timestamp and it cost us an afternoon to bisect from the wrong end. boring win, but a real one."
+        },
+        {
+          "id": 47875446,
+          "author": "pabs3",
+          "text": "More info about Reproducible Builds here: https://reproducible-builds.org/ Closely related is the Boostrappable Builds community: https://bootstrappable.org/"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 17,
+      "id": 47837857,
+      "title_en": "A History of Erasures Learning to Write Like Leylâ Erbil",
+      "title_ja": "A History of Erasures Learning to Write Like Leylâ Erbil",
+      "url": "https://thepointmag.com/criticism/a-history-of-erasures/",
+      "hn_url": "https://news.ycombinator.com/item?id=47837857",
+      "score": 14,
+      "comment_count": 0,
+      "posted_at": "2026-04-20T17:39:40+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 18,
+      "id": 47874854,
+      "title_en": "Raylib v6.0",
+      "title_ja": "Raylib v6.0",
+      "url": "https://github.com/raysan5/raylib/releases/tag/6.0",
+      "hn_url": "https://news.ycombinator.com/item?id=47874854",
+      "score": 103,
+      "comment_count": 11,
+      "posted_at": "2026-04-23T12:16:16+00:00",
+      "comments": [
+        {
+          "id": 47876421,
+          "author": "alex_x",
+          "text": "I'm currently building my roguelike in swift using c-interop with raylib - this brings me so much joy"
+        },
+        {
+          "id": 47876220,
+          "author": "sleepycatgirl",
+          "text": "Man, am I so excited. raylib is how I managed to actually.. start getting proper fun out of programming, and finally get some projects that could be considered complete, as small as they were."
+        },
+        {
+          "id": 47875735,
+          "author": "forsalebypwner",
+          "text": "The new software renderer looks very cool. Will have to give this a spin on an ESP32S3"
+        },
+        {
+          "id": 47876829,
+          "author": "vivzkestrel",
+          "text": "do we still need unreal engine and unity? if yes what are the things that raylib is missing that these engines have? beginner gamedev so please take it easy here"
+        },
+        {
+          "id": 47876516,
+          "author": "boarush",
+          "text": "Waiting for Tsoding to do another Raylib speedrun"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 19,
+      "id": 47872452,
+      "title_en": "Our newsroom AI policy",
+      "title_ja": "Our newsroom AI policy",
+      "url": "https://arstechnica.com/staff/2026/04/our-newsroom-ai-policy/",
+      "hn_url": "https://news.ycombinator.com/item?id=47872452",
+      "score": 130,
+      "comment_count": 92,
+      "posted_at": "2026-04-23T05:14:05+00:00",
+      "comments": [
+        {
+          "id": 47872903,
+          "author": "legitster",
+          "text": "AI is in danger of peeing in it's own water source. It's unbelievably useful at imitating and generating content, but it needs enough original content to be able to train and scrape. Google got one thing wrong and nearly destroyed the internet - people need to have an incentive to contribute content online, and that incentive should not be to game the system for advertising. This in particular dawned on me when asking Claude for instructions in taking apart my dryer. There was literally only one webpage on the internet left with instructions for my particular dryer - the page was more or less unusable with rotten links and riddled with adware. Claude did it's best but filled in the missing diagrams with hallucinations. I was imaging if LLMs could finally solve the micropayments solution people have always proposed for the internet. Part of my monthly payment gets split between all of the sites that the LLM scraped knowledge. Paid out like Spotify pays out artists. It might not be a lot of money, but it would certainly be more than the pitiful ad revenue you get from posting content online right now. And if I want to upload corrected instructions for repairing this dryer I would have reason to."
+        },
+        {
+          "id": 47873051,
+          "author": "applfanboysbgon",
+          "text": "Self-contradictory policy. > Reporters may use AI tools vetted and approved for our workflow to assist with research, including navigating large volumes of material, summarizing background documents, and searching datasets. If this is their official policy, Ars Technica bears as much responsibility as the author they fired for the fabricated reporting. LLMs are terrible at accurately summarizing anything. They very randomly latch on to certain keywords and construct a narrative from them, with the result being something that is plausibly correct but in which the details are incorrect, usually subtly so, or important information is omitted because it wasn't part of the random selection of attention. You cannot permit your employees to use LLMs in this manner and then tell them it's entirely their fault when it makes mistakes, because you gave them permission to use something that will make mistakes 100% without fail. My takeaway from this is to never trust anything that Ars reports because their policy is to rely on plausible generated fictional research and their solution to getting caught is to fire employees rather than taking accountability for doing actual research. --- Edit: Two replies have found complaint with the fact that I didn't quote the following sentence, so here you go: > Even then, AI output is never treated as an authoritative source. Everything must be verified. If I wasn't clear, I consider this to be part of what makes the policy self-contradictory. In my eyes, this is equivalent to providing all of your employees with a flamethrower, and then saying they bear all responsibility for the fires they start. \"Hey, don't blame us for giving them flamethrowers, it's company policy not to burn everything to the ground!\". Rather than firing the flamethrower-wielding employees when the inevitable burning happens, maybe don't give them flamethrowers."
+        },
+        {
+          "id": 47874141,
+          "author": "dheatov",
+          "text": "AI policy with AI usage is always difficult to write/read. Lengthy, frontloaded with excuses, values, and big words, followed by more words to fill the gap between sliced up ugly truth. AI policy without AI usage is easy to read and write. > We don't use them. That's it."
+        },
+        {
+          "id": 47873276,
+          "author": "mellosouls",
+          "text": "Related discussions from a couple months ago: Ars Technica fires reporter after AI controversy involving fabricated quotes (606 points, 394 comments) https://news.ycombinator.com/item?id=47226608 Editor's Note: Retraction of article containing fabricated quotations (308 points, 211 comments) https://news.ycombinator.com/item?id=47026071"
+        },
+        {
+          "id": 47874928,
+          "author": "farfatched",
+          "text": "> AI tools must not be used to generate, extract, or summarize material that is then attributed to a named source, whether as a direct quote, a paraphrase, or a characterization of someone’s views. This sounds overfit to their earlier incident. Besides, I expect they already have a policy on accurate quotes. > Anyone who uses AI tools in our editorial workflow is responsible for the accuracy and integrity of the resulting work. AFAICT that's the actual simplified policy. Reasonable!"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 20,
+      "id": 47846718,
+      "title_en": "A True Life Hack: What Physical 'Life Force' Turns Biology's Wheels?",
+      "title_ja": "A True Life Hack: What Physical 'Life Force' Turns Biology's Wheels?",
+      "url": "https://www.quantamagazine.org/what-physical-life-force-turns-biologys-wheels-20260420/",
+      "hn_url": "https://news.ycombinator.com/item?id=47846718",
+      "score": 153,
+      "comment_count": 29,
+      "posted_at": "2026-04-21T09:55:49+00:00",
+      "comments": [
+        {
+          "id": 47873996,
+          "author": "pawelduda",
+          "text": "Truly mind blowing. A few days ago I found this animation [1] that shows it in motion [1] https://www.reddit.com/r/educationalgifs/comments/17squg1/ho..."
+        },
+        {
+          "id": 47873574,
+          "author": "djokkataja",
+          "text": "This reminds me of a gem of a comment from about a month back, about a dead simple Russian guidance system from a Cold War-era missile: https://news.ycombinator.com/item?id=47389285 Actually, someone even commented in that thread about how it was similar to biological mechanisms: https://news.ycombinator.com/item?id=47390619"
+        },
+        {
+          "id": 47876620,
+          "author": "bgilroy26",
+          "text": "For those who remember, the flagellum was a major site of the Intelligent Design debate that gave us Christopher Rufo (via the Discovery Institute) The general idea was that there were specific examples of \"irreducible complexity\" that proved that there was an intelligent designer. The project on the part of certain Christian political factions was to add a veneer of hypothesis testing to creationism. The god of the gaps retreats further"
+        },
+        {
+          "id": 47872782,
+          "author": "abhikul0",
+          "text": "Relevant Smarter Every Day video: https://www.youtube.com/watch?v=VPSm9gJkPxU"
+        },
+        {
+          "id": 47873386,
+          "author": "bacteriumiu",
+          "text": "Article stopped exactly where stuff got interesting. This whole \"protons entering bacterium and being pumped out\" is exactly the ancestor of the mitochondria, that's what it does, except now the \"outside\" is the inside of the parent cell."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 21,
+      "id": 47847153,
+      "title_en": "An amateur historian's favorite books about the Silk Road",
+      "title_ja": "An amateur historian's favorite books about the Silk Road",
+      "url": "https://bookdna.com/best-books/silk-road",
+      "hn_url": "https://news.ycombinator.com/item?id=47847153",
+      "score": 60,
+      "comment_count": 25,
+      "posted_at": "2026-04-21T11:01:37+00:00",
+      "comments": [
+        {
+          "id": 47876152,
+          "author": "timdiggerm",
+          "text": "This list is just a promo blog post for the author's book"
+        },
+        {
+          "id": 47874799,
+          "author": "Mainan_Tagonist",
+          "text": "Tim Severin is referenced in the list, so i would suggest as an addition Tracking Marco Polo by the very same author, a fun read indeed. From Goodreads: Tim Severin took up the challenge offered from antiquity by Marco Polo. Using the great explorer's journals as a route guide, Severin followed him all the way from Venice to Afghanistan - on a motorbike. https://www.goodreads.com/book/show/1735662.Tracking_Marco_P..."
+        },
+        {
+          "id": 47873590,
+          "author": "qart",
+          "text": "The author of the first book listed there explains there was no ancient Silk Road. This concept was dreamt up in 1877. https://youtube.com/shorts/Ki4UQ20tWQk"
+        },
+        {
+          "id": 47873451,
+          "author": "johngossman",
+          "text": "Good list. It does not include \"Silk Roads\" by Frankopan, which I agree with. That's a good read but much more a history of world trade (hence the plural) and strangely western-centric. I saw strangely because in the introduction Frankopan says he wanted to write a history from the point of view on central Asia, but its not that at all. Dalyrymple's \"Golden Road\" succeeds at Frankopan's objective and I found it much better in general. I don't want to sound too negative on \"Silk Roads\" but I think the title is subtly misleading if you want to learn about the trade general referred to as the Silk Road."
+        },
+        {
+          "id": 47847154,
+          "author": "bwb",
+          "text": "Great list by an absolute expert on the subject :) I'm hoping to do the Silk Route by bike in the next couple of years. TAD Global Cycling puts together yearly runs, and it looks amazing: https://tdaglobalcycling.com/silk-route"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 22,
+      "id": 47866913,
+      "title_en": "Over-editing refers to a model modifying code beyond what is necessary",
+      "title_ja": "Over-editing refers to a model modifying code beyond what is necessary",
+      "url": "https://nrehiew.github.io/blog/minimal_editing/",
+      "hn_url": "https://news.ycombinator.com/item?id=47866913",
+      "score": 391,
+      "comment_count": 232,
+      "posted_at": "2026-04-22T17:51:17+00:00",
+      "comments": [
+        {
+          "id": 47870179,
+          "author": "hathawsh",
+          "text": "I'm either in a minority or a silent majority. Claude Code surpasses all my expectations. When it makes a mistake like over-editing, I explain the mistake, it fixes it, and I ask it to record what it learned in the relevant project-specific skills. It rarely makes that mistake again. When the skill file gets big, I ask Claude to clean and compact it. It does a great job. It doesn't really make sense economically for me to write software for work anymore. I'm a teacher, architect, and infrastructure maintainer now. I hand over most development to my experienced team of Claude sessions. I review everything, but so does Claude (because Claude writes thorough tests also.) It has no problem handling a large project these days. I don't mean for this post to be an ad for Claude. (Who knows what Anthropic will do to Claude tomorrow?) I intend for this post to be a question: what am I doing that makes Claude profoundly effective? Also, I'm never running out of tokens anymore. I really only use the Opus model and I find it very efficient with tokens. Just last week I landed over 150 non-trivial commits, all with Claude's help, and used only 1/3 of the tokens allotted for the week. The most commits I could do before Claude was 25-30 per week. (Gosh, it's hard to write that without coming across as an ad for Anthropic. Sorry.)"
+        },
+        {
+          "id": 47877094,
+          "author": "lw1981",
+          "text": "I’ve run into this in debugging too. I had one case where the model fixed a bug in concurrent execution code by basically making it sequential. So yes, the bug disappeared, but only because it removed the concurrency property instead of actually solving the underlying issue. That kind of thing has made me much more cautious about judging these tools purely by whether the immediate error went away."
+        },
+        {
+          "id": 47867253,
+          "author": "jstanley",
+          "text": "Conversely, I often find coding agents privileging the existing code when they could do a much better job if they changed it to suit the new requirement. I guess it comes down to how ossified you want your existing code to be. If it's a big production application that's been running for decades then you probably want the minimum possible change. If you're just experimenting with stuff and the project didn't exist at all 3 days ago then you want the agent to make it better rather than leave it alone. Probably they just need to learn to calibrate themselves better to the project context."
+        },
+        {
+          "id": 47868297,
+          "author": "foo12bar",
+          "text": "I've noticed AI's often try and hide failure by catching exceptions and returning some dummy value maybe with some log message buried in tons of extraneous other log messages. And the logs themselves are often over abbreviated and missing key data to successfully debug what is happening. I suspect AI's learned to do this in order to game the system. Bailing out with an exception is an obvious failure and will be penalized, but hiding a potential issue can sometimes be regarded as a success. I wonder how this extrapolates to general Q&A. Do models find ways to sound convincing enough to make the user feels satisfied and the go away? I've noticed models often use \"it's not X, it's Y\", which is a binary choice designed to keep the user away from thinking about other possibilities. Also they often come up with a plan of action at the end of their answer, a sales technique known as the \"assumptive close\", which tries to get the user to think about the result after agreeing with the AI, rather than the answer itself."
+        },
+        {
+          "id": 47867899,
+          "author": "Isolated_Routes",
+          "text": "I think building something really well with AI takes a lot of work. You can certainly ask it to do things and it will comply, and produce something pretty good. But you don't know what you don't know, especially when it speaks to you authoritatively. So checking its work from many different angles and making sure it's precise can be a challenge. Will be interesting to see how all of this iterates over time."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 23,
+      "id": 47867048,
+      "title_en": "Website streamed live directly from a model",
+      "title_ja": "Website streamed live directly from a model",
+      "url": "https://flipbook.page/",
+      "hn_url": "https://news.ycombinator.com/item?id=47867048",
+      "score": 367,
+      "comment_count": 98,
+      "posted_at": "2026-04-22T18:01:18+00:00",
+      "comments": [
+        {
+          "id": 47869079,
+          "author": "giobox",
+          "text": "I just asked it to create a torque spec diagram of the suspension for my car, a subject I'm pretty familiar with. It amazingly drew everything correctly, displayed the correct torque figures and allowed me to click on individual components to zoom in further, providing more specs. Genuinely one of the most impressive demos I've tried in a long time. I was able to use it almost like a living version of a classic illustrated Haynes workshop manual."
+        },
+        {
+          "id": 47876818,
+          "author": "bluehat974",
+          "text": "Seems related to https://metauto.ai/neuralcomputer/ Reading this, I couldn’t help but think of Ray Kurzweil’s idea that we’ll eventually spend most of our time in virtual environments near 2035 with help of nanobots. This feels like a specific, functional twist on that prediction. Instead of just a digital world to hang out in, the 'neural computer' is like a specialized VR generated by AI to solve a specific problem. It’s a version of reality that adapts itself entirely to whatever task is at hand. It's fun!"
+        },
+        {
+          "id": 47868101,
+          "author": "martianlantern",
+          "text": "Cool project, but just a side thought I was having about how do people have resources and the money to make things like this and make it avl for public, I mean it's fair to say they have their own GPUs or if they are using api keys for gpt or Gemini with enterprise subsidized inference But still coming from a frugal background I still cannot wrap my head around this"
+        },
+        {
+          "id": 47876007,
+          "author": "nirav72",
+          "text": "This is incredible. I uploaded a diagram of a hydroponics system I found somewhere. It generated additional high-quality diagrams of specific parts of the system. Including the plumbing , nutrient delivery and electrical wiring. It's not entirely accurate. But I still like the concept. Great work."
+        },
+        {
+          "id": 47876481,
+          "author": "yamajun93",
+          "text": "This is so cool! I wonder how you keep the context so it remembers what it was rendered before. Since it is real-time, how do you keep consistency in the webpage so user can browse back and revisit already rendered sections?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 24,
+      "id": 47837698,
+      "title_en": "Highlights from Git 2.54",
+      "title_ja": "Highlights from Git 2.54",
+      "url": "https://github.blog/open-source/git/highlights-from-git-2-54/",
+      "hn_url": "https://news.ycombinator.com/item?id=47837698",
+      "score": 94,
+      "comment_count": 49,
+      "posted_at": "2026-04-20T17:29:51+00:00",
+      "comments": [
+        {
+          "id": 47843308,
+          "author": "ajoberstar",
+          "text": "Nice to see some seemingly jujutsu inspired features getting into Git core. git history reword ~= jj describe git history split ~= jj split https://git-scm.com/docs/git-history https://www.jj-vcs.dev/latest/cli-reference/#jj-describe https://www.jj-vcs.dev/latest/cli-reference/#jj-split"
+        },
+        {
+          "id": 47874767,
+          "author": "ufo",
+          "text": "I have always had this problem with hooks and new contributors: since hooks don't run by default if you just clone the repository, my open source projects get many PRs from new contributors that did not run the linting and commit hooks. I understand there's a security reason for this but what workflows have worked best for you to get everyone to run the hooks? And do you think the new config-based hooks can help new contributors?"
+        },
+        {
+          "id": 47876817,
+          "author": "everybodyknows",
+          "text": "> ... rewrites any descendent branches to point at the updated history. But what about local heads referred to only by a \"soft\" tag? Is their history rewritten, or is it left to refer to the old history?"
+        },
+        {
+          "id": 47876372,
+          "author": "charles_f",
+          "text": "git history makes me think of git revise^1, which gives you a bunch of handy tools to changes your history, move commits around, remove some of them, cut them (which git history now does). I found it very handy in the past 1: https://git-revise.readthedocs.io/en/latest/man.html"
+        },
+        {
+          "id": 47875289,
+          "author": "jinushaun",
+          "text": "`git history reword` is great. Using `git rebase -i` just to fix a spelling error is overkill and doesn’t actually do what I want."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 25,
+      "id": 47865661,
+      "title_en": "Technical, cognitive, and intent debt",
+      "title_ja": "Technical, cognitive, and intent debt",
+      "url": "https://martinfowler.com/fragments/2026-04-02.html",
+      "hn_url": "https://news.ycombinator.com/item?id=47865661",
+      "score": 303,
+      "comment_count": 80,
+      "posted_at": "2026-04-22T16:11:23+00:00",
+      "comments": [
+        {
+          "id": 47875439,
+          "author": "diehunde",
+          "text": "It's very nerve-racking for people who like to have a deep understanding of everything they ship. A modernization project that would take you 2 months now can be done in a week or less because you don't need to go deep into the business logic to replicate it and instead you can just focus on designing the boundaries and interfaces properly. Then like the article mentions, just create a good test harness to test parity as much as you can. I was feeling very conflicted about this myself, but then I thought: I have these other systems I have to maintain on a daily basis and I also don't understand the internals and business logic that well because I wrote them years ago and haven't changed much. I just rely on the test suite if something needs to be changed or the code structure if I need to see how something in particular works."
+        },
+        {
+          "id": 47866852,
+          "author": "hibikir",
+          "text": "LLMs don't lack the virtue of laziness: it has it if you want it to, by just having a base prompt that matches intent. I've had good success convincing claude backed agents to aim for minimal code changes, make deduplication passes, and basically every other reasonable \"instinct\" of a very senior dev. It's not knowledge that the models haven't integrated, but one that many don't have on their forefront with default settings. I bet we've all seen the models that over-edit everything, and act like the crazy mid-level dev that fiddles with the entire codebase without caring one bit about anyone else's changes, or any risk of knowledge loss due to overfiddling. And on Jess' comments on validating docs vs generating them... It's a traditional locking problem, with traditional solutions. And it's not as if the agent cannot read git, and realize when one thing is done first, in anticipation of the other by convention. I'm quite senior: In fact, I have been a teammate of a couple of people mention in this article. I suspect that they'd not question my engineering standards. And yet I've no seen any of that kind of debt in my LLM workflows: if anything, by most traditional forms of evaluating software quality, the projects I work on are better than what they were 5, 10 years ago, using the same metrics as back then. And it's not magic or anything, but making sure there are agents running sharing those quality priorities. But I am getting work done, instead of spending time looking for attention in conferences."
+        },
+        {
+          "id": 47876923,
+          "author": "chaosprint",
+          "text": "Well written. I also wrote in my personal notes yesterday that if you don't organically and continuously develop code, it's hard to say you truly \"own\" it. Like self-driving cars, at least you remember the scenery along the way, but now it just teleports you to another place and then shows you the recording. This kind of review is ineffective. Such ghosted code might be acceptable for small tools, but for databases or similar systems, it's really worrying. I've now basically stopped granting the agent any write permissions and returned to how I wrote codes 2 years ago with manual QA. The thing is, it's actually more efficient in turns of tokens and the results. That's just my personal experience."
+        },
+        {
+          "id": 47875588,
+          "author": "CharlieDigital",
+          "text": "> The most creative act is this continual weaving of names that reveal the structure of the solution that maps clearly to the problem we are trying to solve. From Confucius, The Analects, 13.3 : If names are not rectified, then language will not be in accord with truth. If language is not in accord with truth, then things cannot be accomplished. If things cannot be accomplished, then ceremonies and music will not flourish."
+        },
+        {
+          "id": 47866462,
+          "author": "kvisner",
+          "text": "I see what Martin is saying here, but you could make that argument for moving up the abstraction layers at any point. Assembly to Python creates a lot of Intent & Cognitive debt by his definition, because you didn't think through how to manipulate the bits on the hardware, you just allowed the interpereter to do it. My counter is that technical intent, in the way he is describing it, only exists because we needed to translate human intent into machine language. You can still think deeply about problems without needed to formulate them as domain driven abstractions in code. You could mind map it, or journal about it, or put post-it notes all over the wall. Creating object oriented abstractions isn't magic."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 26,
+      "id": 47864785,
+      "title_en": "Ping-pong robot beats top-level human players",
+      "title_ja": "Ping-pong robot beats top-level human players",
+      "url": "https://www.reuters.com/sports/ping-pong-robot-ace-makes-history-by-beating-top-level-human-players-2026-04-22/",
+      "hn_url": "https://news.ycombinator.com/item?id=47864785",
+      "score": 158,
+      "comment_count": 221,
+      "posted_at": "2026-04-22T15:13:48+00:00",
+      "comments": [
+        {
+          "id": 47866262,
+          "author": "dmurray",
+          "text": "A year ago this [0] table tennis robot backed by Google DeepMind was discussed on HN. It plays much worse and the HN discussion is anchored around whether it's OK to call it \"human-level\" or if the authors should have clarified that they meant a human who doesn't actually play table tennis. But it was accepted as being SOTA at that time. What happened since then? This looks like the kind of level of advance we see in, say, coding AIs, but I thought physical robotics was advancing much more slowly. A partial answer is that the new robot cheats in ways that DeepMind didn't seem to. It has high speed cameras all over the room and can detect spin by observing the logo on the ball. But I'm not sure this explains such a big advance. [0] https://news.ycombinator.com/item?id=43861207"
+        },
+        {
+          "id": 47869102,
+          "author": "amandle",
+          "text": "Reminds me of the Mitch Hedberg joke: \"The depressing thing about tennis is that no matter how good I get, I'll never be as good as a wall.\""
+        },
+        {
+          "id": 47870391,
+          "author": "sd9",
+          "text": "The official Sony AI video, which is really interesting and has some glorious footage: https://youtu.be/FrGq8ltb-_E?si=PWm1Dv0T9UHUFw0t"
+        },
+        {
+          "id": 47869136,
+          "author": "halfnhalf",
+          "text": "Don't table tennis players learn to predict how the ball will act based on their opponents movements? Seems like if they aren't able to do that with a robot opponent (who doesn't look or behave like a human) then they wouldn't be able to play at their best."
+        },
+        {
+          "id": 47869556,
+          "author": "retrochameleon",
+          "text": "I'll be impressed when it's a humanoid robot that has to contend with similar kinematic limitations as a human player."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 27,
+      "id": 47835647,
+      "title_en": "Books are not too expensive",
+      "title_ja": "Books are not too expensive",
+      "url": "https://www.millersbookreview.com/p/no-books-are-not-remotely-too-expensive",
+      "hn_url": "https://news.ycombinator.com/item?id=47835647",
+      "score": 98,
+      "comment_count": 136,
+      "posted_at": "2026-04-20T15:22:08+00:00",
+      "comments": [
+        {
+          "id": 47877263,
+          "author": "ericol",
+          "text": "Books _are_ expensive. This article only looks at the monetary side of it. The cost goes beyond the price tag. Books take up space, and that space compounds as you keep acquiring them. It's space you can't use for anything else, dedicated entirely to objects most people open once or twice and never touch again. And that cost doesn't stay abstract: at some point you're buying more bookshelves, upgrading to a larger one, or worst of all, dragging everything through a move. That last one hits harder the less stable your living situation is, and less stable living situations track pretty closely with lower salaries. I'm talking about physical books specifically, since that's what the article seems to cover. Ebooks are a different matter."
+        },
+        {
+          "id": 47875073,
+          "author": "randusername",
+          "text": "It's nice to own books. Read them multiple times, dog-ear the pages, scribble in the margins, risk reading them in the pool. But for the price conscious general reader just inter-library loan. If you want to buy To Kill A Mockingbird or The Hobbit be my guest, but any library in the US would have a few copies of those. Public libraries are awesome. Use it or lose it."
+        },
+        {
+          "id": 47877243,
+          "author": "WillAdams",
+          "text": "One thing not mentioned in this article, and which doesn't seem to be discussed much these days is how the tax law changed to essentially eliminate the backlist (which was unsold copies of a book from the initial print run stored in a warehouse). Time was, an initial print run would be quite large, and books would then be stored and taxes deferred until they were actually sold --- when the law changed, requiring that taxes be paid on unsold inventory each year, these warehouses became a tax liability and the remaindered book market was vastly inflated (previously, it was only those books which had been returned to a publisher and which were not suited to be sold as new) --- one slim text from a religion class I took in college was marked up with a series of price increases as each previous year's taxes were added to the price of the book each year for the inventory which went unsold, finally arriving at $76 from an initial price of $35 or some such from the previous time that course had been taught. Probably, much of the damage/pricing pressure of this was taken away by the savings of digital book production --- consider that previously, to publish a book a publisher would: - typeset a hot metal copy using a Monotype or Linotype composition machine to create galleys - cut those up and do paste-up to create a pagination - photograph the pasteups to create a negative which was then used to make a printing plate Usually, the negatives would be stored and re-used for a reprint (or modified to make corrections), hence books of this period noting that they had been \"Typeset and printed from new film\"). The freedom of digital imposition has also made the huge expansion of book subjects and treatments possible --- math used to be termed \"penalty copy\" and required specially-trained compositors who would typeset what could be set on hot-metal machine, then source the balance of the characters required from a drawer in a case, if need be, modifying spacing material w/ a saw, then pull a proof to make a negative as before."
+        },
+        {
+          "id": 47871163,
+          "author": "WaitWaitWha",
+          "text": "To be fair, this article is partially true. Now, allow me to pour some gasoline/petrol/benzine around this thread. Have you purchased a college course required book recently? There is a market monopoly by Pearson, Wiley,Cengage, and McGraw. Buy the eBook, or the actual book with a CD in the back, but cannot access the pictures because the code can be use only once ! (often the codes do not work at all) Updated every 2 to 3 years, minor changes sufficient enough the break the previous versions. e.g., randomized tests, samples and alike. Captive audience. If Jacky teaches the course, bet your bippy it is Jacky's book you will be buying, no ifs or buts about it. I can do the same for certification. Have you seen the PMP certification book? Grey paper with gray text republished annually, meaning of words and descriptions are changes and tests are adjusted specifically to confuse on wording. Or, have you tried to by an international standard like ISO? $300 spiral binder, assigned to you, cannot be transferred. So, are books not too expensive? Depends on the type of book."
+        },
+        {
+          "id": 47876475,
+          "author": "mrwh",
+          "text": "Tangential, and very anecdotal, but I've been seeing more books on the BART. While almost everyone is hunched over their phones of course, it feels like there's a growing number reading a paperback. (Oddly? it's been a while since I saw a kindle.)"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 28,
+      "id": 47874631,
+      "title_en": "Spam in conversational replies to blog posts",
+      "title_ja": "Spam in conversational replies to blog posts",
+      "url": "https://shkspr.mobi/blog/2026/04/sneaky-spam-in-conversational-replies-to-blog-posts/",
+      "hn_url": "https://news.ycombinator.com/item?id=47874631",
+      "score": 75,
+      "comment_count": 59,
+      "posted_at": "2026-04-23T11:50:25+00:00",
+      "comments": [
+        {
+          "id": 47875155,
+          "author": "hrunt",
+          "text": "I subscribe to handful of investment-related YouTube channels. This pattern has been common for years. A bot will reply with a comment loosely related to the video and about how something worked for them. Another bot will reply asking how they did that. Another bot (not the original commenter) will reply that they worked with so-and-so or invested in such-and-such, and then there will be maybe four or five more comments responding to that. All obvious bot accounts. It's obvious on the channels, because these reply sets usually don't contain a lot of replies to comments (if there are any comment replies, it's almost always from the channel owner). It's so obvious, in fact, that I'm surprised YouTube hasn't done something to address it."
+        },
+        {
+          "id": 47876814,
+          "author": "smusamashah",
+          "text": "About 20 years ago when I was in university, I was looking for anything to do part time and posting links on random blogs in replies was one of the jobs that could get you some money. The job came with excel sheets containing where to post those links and what to post. I was more interested in automating this process. There was a captcha involved in this process to somewhere. We didn't see it as spamming. It was 'ad posting' job or something. Don't remember a lot. Just reminded me of my time doing this. I don't remember actually posting much links myself because it was too boring and lots of manual work for not much benefit."
+        },
+        {
+          "id": 47876387,
+          "author": "PaulHoule",
+          "text": "I knew many link spammers circa 2008 and for a while people were excited by XRumer https://en.wikipedia.org/wiki/XRumer which was a lot better than other products on the market and solved difficult problems like CAPTCHAs and email verification links and was famous for a \"conversational\" advertising campaign which generated results like https://www.garagejournal.com/forum/threads/give-me-link-to-..."
+        },
+        {
+          "id": 47876332,
+          "author": "PaulHoule",
+          "text": "\"Remember, there are no technological solutions to social problems.\" is something I want to counterpoint with \"there are no social solutions to technological problems\", like how the looming situation pointed out by the Club of Rome in 1973 https://en.wikipedia.org/wiki/The_Limits_to_Growth would be difficult enough to solve in a socially cohesive society run by philosopher kings. Practically you have a choice between democracies which have a 0 probability of being adequate to the task (against the axioms of political science: it's like a perpetual motion machine which violates the first and second laws of thermodynamics and then the old professor chimes in and says it must violate the third too) and autocracies which might get lucky 10⁻¹² of the time; even if the tech fix [1] has a 10⁻³ chance of successfully kicking the can down the road I'd take that chance. [1] say: liquid salt (not metal) fast breeder reactor with a supercritical CO2 powerset"
+        },
+        {
+          "id": 47876767,
+          "author": "f311a",
+          "text": "This is a big problem for wordpress, but custom engines with a simple client-side checks (js based) get close to zero spam. All those spammers use technology fingerprinting services to obtain a list of blogs and they look for popular blog engines only."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 29,
+      "id": 47866750,
+      "title_en": "Parallel agents in Zed",
+      "title_ja": "Parallel agents in Zed",
+      "url": "https://zed.dev/blog/parallel-agents",
+      "hn_url": "https://news.ycombinator.com/item?id=47866750",
+      "score": 262,
+      "comment_count": 148,
+      "posted_at": "2026-04-22T17:38:57+00:00",
+      "comments": [
+        {
+          "id": 47867353,
+          "author": "jamie_ca",
+          "text": "I'm buying into this workflow more the more I use it, but the real gamechanger is (a) parallel threads in worktrees, with (b) enough lifecycle hooks to treat them similarly to spinning up a VM. Specifically for me that means that after I create a worktree I get some local config files copied over and Postgres duplicating my local dev and test databases so I can test in isolation, and then when I close out a worktree it deletes those databases. The best at that that I've found is Conductor, but I can't use it at work because we only have Copilot and they're locked to a Claude/Codex backend. Arbor is close, but it's not under as active development and has a lot of rough edges. Opencode GUI has create hooks but not teardown. If Zed can hook that up _and_ also keep its great editor roots, that'll definitely be a game changer."
+        },
+        {
+          "id": 47867228,
+          "author": "2001zhaozhao",
+          "text": "It's pretty clear by this point that everyone is going towards parallel agents and worktrees, but TBH I am surprised to see an offering from Zed, seeing how heavy they lean into being editor-heavy and having AI features be strictly optional. The key advantages Zed has are being agent-agnostic (so not a first party UI like Claude/Codex/Cursor Desktop), supporting multiple repositories on the same agent via creating a worktree for each automatically, and having a high quality custom agent UI rather than wrapping over CLIs (I've used their IDE's agent UI in the past and it's great). AFAIK, this is the first mainstream tool that supports all of these features."
+        },
+        {
+          "id": 47874992,
+          "author": "VortexLain",
+          "text": "I personally explicitly avoid parallel agents, since it creates too much cognitive debt, and sometimes an agent may need steering towards an architectally sane solution mid-work."
+        },
+        {
+          "id": 47876720,
+          "author": "tankmohit11",
+          "text": "Zed’s agent ui is the most confusing ui I have ever seen. Tiny and vague icons, clicking on ‘x’ sometimes closes the editor, sometimes an agent and sometimes a panel, hard to figure out what it will do. I wanted to try zed with new features but this unpredictable behaviour made me uninstall it. It also doesn’t support opencode Go which I am subscribed to."
+        },
+        {
+          "id": 47874438,
+          "author": "nixpulvis",
+          "text": "The new default layout is exactly backwards of what I want. It should go: project tree | text editor | agent view | threads Not to mention on most laptops you'll only have room for about two panes at a time. So they should be focusing on pane management and making it easy to swap between views. Not highlighting 4 pane workflows. Unless you have an ultra-wide monitor, I'd rather have a separate Agents window. I use Zed a lot and this is a minor (can be configured) but telling design decision that really bothers me. How long until they decide editing itself isn't worth it anymore? Stop supporting VI mode?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 30,
+      "id": 47875420,
+      "title_en": "The end of responsive images",
+      "title_ja": "The end of responsive images",
+      "url": "https://piccalil.li/blog/the-end-of-responsive-images/",
+      "hn_url": "https://news.ycombinator.com/item?id=47875420",
+      "score": 15,
+      "comment_count": 7,
+      "posted_at": "2026-04-23T13:17:55+00:00",
+      "comments": [
+        {
+          "id": 47876419,
+          "author": "markstos",
+          "text": "Summary: author is a fan of the new sizes=\"auto\" and loading=\"lazy\" browser features."
+        },
+        {
+          "id": 47876541,
+          "author": "mrbluecoat",
+          "text": "The author was waiting 14 years to excitedly share this? <img loading=\"lazy\" src=\"TrIZjHKy9-650.jpeg\" srcset=\"GTrIZjHKy9-650.jpeg 650w, GTrIZjHKy9-960.jpeg 960w, GTrIZjHKy9-1400.jpeg 1400w\" sizes=\"auto, (min-width: 1040px) 650px, calc(94.44vw - 15px)\" alt=\"…\"> IMHO, feels more like a polyfill than a final industry solution."
+        },
+        {
+          "id": 47875485,
+          "author": "DonnyV",
+          "text": "I can't believe this doesn't mention Image Seam Carving. Surprise this was never built into browsers. https://trekhleb.dev/js-image-carver/"
+        }
+      ],
+      "summary_ja": ""
+    }
+  ]
+}
