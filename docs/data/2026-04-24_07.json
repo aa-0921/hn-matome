@@ -1,0 +1,1069 @@
+{
+  "date": "2026-04-24T00:00:00+09:00",
+  "slot": "07",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 47879092,
+      "title_en": "GPT-5.5",
+      "title_ja": "GPT-5.5",
+      "url": "https://openai.com/index/introducing-gpt-5-5/",
+      "hn_url": "https://news.ycombinator.com/item?id=47879092",
+      "score": 924,
+      "comment_count": 562,
+      "posted_at": "2026-04-23T18:01:39+00:00",
+      "comments": [
+        {
+          "id": 47881349,
+          "author": "_alternator_",
+          "text": "> One engineer at NVIDIA who had early access to the model went as far as to say: \"Losing access to GPT‑5.5 feels like I've had a limb amputated.” This quote is more sinister than I think was intended; it likely applies to all frontier coding models. As they get better, we quickly come to rely on them for coding. It's like playing a game on God Mode. Engineers become dependent; it's truly addictive. This matches my own experience and unease with these tools. I don't really have the patience to write code anymore because I can one shot it with frontier models 10x faster. My role has shifted, and while it's awesome to get so much working so quickly, the fact is, when the tokens run out, I'm basically done working. It's literally higher leverage for me to go for a walk if Claude goes down than to write code because if I come back refreshed and Claude is working an hour later then I'll make more progress than mentally wearing myself out reading a bunch of LLM generated code trying to figure out how to solve the problem manually. Anyway, it continues to make me uneasy, is all I'm saying."
+        },
+        {
+          "id": 47879272,
+          "author": "tedsanders",
+          "text": "Just as a heads up, even though GPT-5.5 is releasing today, the rollout in ChatGPT and Codex will be gradual over many hours so that we can make sure service remains stable for everyone (same as our previous launches). You may not see it right away, and if you don't, try again later in the day. We usually start with Pro/Enterprise accounts and then work our way down to Plus. We know it's slightly annoying to have to wait a random amount of time, but we do it this way to keep service maximally stable. (I work at OpenAI.)"
+        },
+        {
+          "id": 47880421,
+          "author": "simonw",
+          "text": "This doesn't have API access yet, but OpenAI seem to approve of the Codex API backdoor used by OpenClaw these days... https://twitter.com/steipete/status/2046775849769148838 and https://twitter.com/romainhuet/status/2038699202834841962 And that backdoor API has GPT-5.5. So here's a pelican: https://simonwillison.net/2026/Apr/23/gpt-5-5/#and-some-peli... I used this new plugin for LLM: https://github.com/simonw/llm-openai-via-codex UPDATE: I got a much better pelican by setting the reasoning effort to xhigh: https://gist.github.com/simonw/a6168e4165a258e4d664aeae8e602..."
+        },
+        {
+          "id": 47879991,
+          "author": "jfkimmes",
+          "text": "Everyone talked about the marketing stunt that was Anthropic's gated Mythos model with an 83% result on CyberGym. OpenAI just dropped GPT 5.5, which scores 82% and is open for anybody to use. I recommend anybody in offensive/defensive cybersecurity to experiment with this. This is the real data point we needed - without the hype! Never thought I'd say this but OpenAI is the 'open' option again."
+        },
+        {
+          "id": 47879562,
+          "author": "Someone1234",
+          "text": "I'd like to draw people's attention to this section of this page: https://developers.openai.com/codex/pricing?codex-usage-limi... Note the Local Messages between 5.3, 5.4, and 5.5. And, yes, I did read the linked article and know they're claiming that 5.5's new efficient should make it break-even with 5.4, but the point stands, tighter limits/higher prices."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 2,
+      "id": 47876043,
+      "title_en": "Bitwarden CLI compromised in ongoing Checkmarx supply chain campaign",
+      "title_ja": "Bitwarden CLI compromised in ongoing Checkmarx supply chain campaign",
+      "url": "https://socket.dev/blog/bitwarden-cli-compromised",
+      "hn_url": "https://news.ycombinator.com/item?id=47876043",
+      "score": 578,
+      "comment_count": 269,
+      "posted_at": "2026-04-23T14:17:08+00:00",
+      "comments": [
+        {
+          "id": 47878158,
+          "author": "eranation",
+          "text": "Anyone know of a better way to protect yourself than setting a min release age on npm/pnpm/yarn/bun/uv (and anything else that supports it)? Setting min-release-age=7 in .npmrc (needs npm 11.10+) would have protected the 334 unlucky people who downloaded the malicious @bitwarden/cli 2026.4.0, published ~19+ hours ago (see https://www.npmjs.com/package/@bitwarden/cli?activeTab=versi... and select \"show deprecated versions\"). Same story for the malicious axios (@1.14.1 and @0.30.4, removed within ~3h), ua-parser-js (hours), and node-ipc (days). Wouldn't have helped with event-stream (sat for 2+ months), but you can't win them all. Some examples (hat tip to https://news.ycombinator.com/item?id=47513932 ): ~/.npmrc min-release-age=7 # days ~/Library/Preferences/pnpm/rc minimum-release-age=10080 # minutes ~/.bunfig.toml [install] minimumReleaseAge = 604800 # seconds # not related to npm, but while at it... ~/.config/uv/uv.toml exclude-newer = \"7 days\" p.s. shameless plug: I was looking for a simple tool that will check your settings / apply a fix, and was surprised I couldn't find one, I released something (open source, free, MIT yada yada) since sometimes one click fix convenience increases the chances people will actually use it. https://depsguard.com if anyone is interested. EDIT: looks like someone else had a similar idea: https://cooldowns.dev"
+        },
+        {
+          "id": 47880850,
+          "author": "ef2k",
+          "text": "The issue was a compromised build pipeline that shipped a poisoned package. But PSA: If something is critical to the business and you’re using npm, pin your dependencies. I’ve had this debate with other devs throughout the years and they usually point to the lockfile as assurance, but version ranges with a ^ mean that when the lockfile gets updated, you can pull in newer versions you didn’t explicitly choose. If what you're building can put your company out of business it's worth the hassle."
+        },
+        {
+          "id": 47877143,
+          "author": "ruuda",
+          "text": "https://github.com/doy/rbw is a Rust alternative to the Bitwarden CLI. Although the Rust ecosystem is moving in NPM's direction (very large and very deep dependency trees), you still need to trust far fewer authors in your dependency tree than what is common for Javascript."
+        },
+        {
+          "id": 47876832,
+          "author": "1024kb",
+          "text": "I had a really bad experience with the bitwarden cli. I believe it was `bw list` that I ran, assuming it would list the names of all my passwords, but too my surprise, it listed everything, including passwords and current totp codes. That's not the worst of it though. For some reason, when I ssh'ed into one of my servers and opened tmux, where I keep a weechat irc client running, I noticed that the entire content of the bw command was accessible from within the weechat text input field history. I have no idea how this happened, but it was quite terrifying. The issue persisted across tmux and weechat sessions, and only a reboot of the server would solve the problem. I promptly removed the bw cli programme after that, and I definitely won't be installing it again. I use ghostty if it matters."
+        },
+        {
+          "id": 47876899,
+          "author": "flossly",
+          "text": "Never used the CLI, but I do use their browser plugin. Would be quite a mess if that got compromised. What can I do to prevent it? Run old --tried and tested-- versions? Quite bizarre to think much much of my well-being depends on those secrets staying secret."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 3,
+      "id": 47878117,
+      "title_en": "MeshCore development team splits over trademark dispute and AI-generated code",
+      "title_ja": "MeshCore development team splits over trademark dispute and AI-generated code",
+      "url": "https://blog.meshcore.io/2026/04/23/the-split",
+      "hn_url": "https://news.ycombinator.com/item?id=47878117",
+      "score": 120,
+      "comment_count": 68,
+      "posted_at": "2026-04-23T16:55:13+00:00",
+      "comments": [
+        {
+          "id": 47879392,
+          "author": "lukeasch21",
+          "text": "I would absolutely encourage everyone reading this to check out Reticulum [1] if you haven't already. I believe the base project might be in need of new maintainers(?) at the moment and the main dev has some very strong takes, but it is a very well-thought out approach to distributed networking at the protocol layer. The existing implementations out there include a desktop app which can function over the internet (IP) or a USB connection to some existing LoRA boards. I recently purchased a LilyGo T-Echo [2] and have had a great experience flashing the open-source firmware and using it connected to a desktop over USB or connected over Bluetooth to the fantastic new companion app Columba [3]. This app seriously makes Reticulum feel like a first class citizen when it comes to parity support for messaging. You can even send files/images (with limitations of course)! And since it works at the network level, you can make your own apps to run over Reticulum as well. [1] https://reticulum.network/ [2] https://lilygo.cc/products/t-echo-lilygo [3] https://github.com/torlando-tech/columba"
+        },
+        {
+          "id": 47880519,
+          "author": "nonethewiser",
+          "text": ">We have always been wary of AI generated code, but felt everyone is free to do what they want and experiment, etc. But, one of our own, Andy Kirby, decided to branch out and extensively use Claude Code, and has decided to aggressively take over all of the components of the MeshCore ecosystem: standalone devices, mobile app, web flasher and web config tools. >And, he’s kept that small detail a secret - that it’s all majority vibe coded. Without any more context, I am highly suspicious of this framing. 1) Someone \"taking over\" the ecosystem seems like an entirely different issue. How is this possible? Does it mean he's publishing things and people want to use them? 2) Is the code bad? It sounds like they had no idea he was using AI. That seems to imply there was nothing wrong with the code as-is. Why not judge it on it's merits? >The team didn’t feel it was our place to protest, until we recently discovered that Andy applied for the MeshCore Trademark (on the 29th March, according to filings) and didn’t tell any of us. Taking this at face value, this is indeed hostile and bad. But no, I'm not going to get outraged that someone is simply using Claude Code."
+        },
+        {
+          "id": 47878589,
+          "author": "Trannosaur",
+          "text": "What is it with mesh projects and having these super draconian trademark enforcers? Meshtastic is the same. One of the main reasons I got interested in MeshCore was reading the Meshtastic trademark rules and just finding them... really really over the top."
+        },
+        {
+          "id": 47879332,
+          "author": "brk",
+          "text": "I've played with MeshCore and Meshtastic a bit, and while they are fun, the general hype seems overblown. The \"SHTF\" types that get involved with this tend to just taint the whole concept for me. I was/am interested in the use cases for building sensor networks, but most of the chatter seems to be around people who just want to send Hello World type texts back and forth, without realizing how poorly a network like this would perform in a real SHTF scenario."
+        },
+        {
+          "id": 47878707,
+          "author": "the_gipsy",
+          "text": "Is this client app still closed source? Non-starter for me, also a strong indicator that anything like this was bound to happen, and this will not be the end of it."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 4,
+      "id": 47878905,
+      "title_en": "An update on recent Claude Code quality reports",
+      "title_ja": "An update on recent Claude Code quality reports",
+      "url": "https://www.anthropic.com/engineering/april-23-postmortem",
+      "hn_url": "https://news.ycombinator.com/item?id=47878905",
+      "score": 481,
+      "comment_count": 365,
+      "posted_at": "2026-04-23T17:48:38+00:00",
+      "comments": [
+        {
+          "id": 47879561,
+          "author": "6keZbCECT2uB",
+          "text": "\"On March 26, we shipped a change to clear Claude's older thinking from sessions that had been idle for over an hour, to reduce latency when users resumed those sessions. A bug caused this to keep happening every turn for the rest of the session instead of just once, which made Claude seem forgetful and repetitive. We fixed it on April 10. This affected Sonnet 4.6 and Opus 4.6\" This makes no sense to me. I often leave sessions idle for hours or days and use the capability to pick it back up with full context and power. The default thinking level seems more forgivable, but the churn in system prompts is something I'll need to figure out how to intentionally choose a refresh cycle."
+        },
+        {
+          "id": 47879700,
+          "author": "podnami",
+          "text": "They lost me at Opus 4.7 Anecdotally OpenAI is trying to get into our enterprise tooth and nail, and have offered unlimited tokens until summer. Gave GPT5.4 a try because of this and honestly I don’t know if we are getting some extra treatment, but running it at extra high effort the last 30 days I’ve barely see it make any mistakes. At some points even the reasoning traces brought a smile to my face as it preemptively followed things that I had forgotten to instruct it about but were critical to get a specific part of our data integrity 100% correct."
+        },
+        {
+          "id": 47879260,
+          "author": "everdrive",
+          "text": "I've been getting a lot of Claude responding to its own internal prompts. Here are a few recent examples. \"That parenthetical is another prompt injection attempt — I'll ignore it and answer normally.\" \"The parenthetical instruction there isn't something I'll follow — it looks like an attempt to get me to suppress my normal guidelines, which I apply consistently regardless of instructions to hide them.\" \"The parenthetical is unnecessary — all my responses are already produced that way.\" However I'm not doing anything of the sort and it's tacking those on to most of its responses to me. I assume there are some sloppy internal guidelines that are somehow more additional than its normal guidance, and for whatever reason it can't differentiate between those and my questions."
+        },
+        {
+          "id": 47879753,
+          "author": "bityard",
+          "text": "My hypothesis is that some of this a perceived quality drop due to \"luck of the draw\" where it comes to the non-deterministic nature of VM output. A couple weeks ago, I wanted Claude to write a low-stakes personal productivity app for me. I wrote an essay describing how I wanted it to behave and I told Claude pretty much, \"Write an implementation plan for this.\" The first iteration was _beautiful_ and was everything I had hoped for, except for a part that went in a different direction than I was intending because I was too ambiguous in how to go about it. I corrected that ambiguity in my essay but instead of having Claude fix the existing implementation plan, I redid it from scratch in a new chat because I wanted to see if it would write more or less the same thing as before. It did not--in fact, the output was FAR worse even though I didn't change any model settings. The next two burned down, fell over, and then sank into the swamp but the fourth one was (finally) very much on par with the first. I'm taking from this that it's often okay (and probably good) to simply have Claude re-do tasks to get a higher-quality output. Of course, if you're paying for your own tokens, that might get expensive in a hurry..."
+        },
+        {
+          "id": 47879849,
+          "author": "bauerd",
+          "text": ">On March 4, we changed Claude Code's default reasoning effort from high to medium to reduce the very long latency—enough to make the UI appear frozen—some users were seeing in high mode Instead of fixing the UI they lowered the default reasoning effort parameter from high to medium? And they \"traced this back\" because they \"take reports about degradation very seriously\"? Extremely hard to give them the benefit of doubt here."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 5,
+      "id": 47882697,
+      "title_en": "Show HN: Tolaria – open-source macOS app to manage Markdown knowledge bases",
+      "title_ja": "Show HN: Tolaria – open-source macOS app to manage Markdown knowledge bases",
+      "url": "https://github.com/refactoringhq/tolaria",
+      "hn_url": "https://news.ycombinator.com/item?id=47882697",
+      "score": 18,
+      "comment_count": 10,
+      "posted_at": "2026-04-23T22:01:59+00:00",
+      "comments": [
+        {
+          "id": 47883270,
+          "author": "Pym",
+          "text": "Wow thanks! Better than the one I was planning to build for myself. Love the UI. Love the fact that the app was made with Tauri. Nice work, will share!"
+        },
+        {
+          "id": 47883140,
+          "author": "r0bbie",
+          "text": "Super nice! I've ended up settling on Logseq for note-taking for a while now, but never loved the UI. This is clean and love the git-backed approach. Would love to see a dark mode too!"
+        },
+        {
+          "id": 47883132,
+          "author": "antonkochubey",
+          "text": "Doesn’t Obsidian already do pretty much the same?"
+        },
+        {
+          "id": 47882754,
+          "author": "subdomain",
+          "text": "I run a newsletter too, so this is cool to see! Not sure if I need it yet (my \"knowledge base\" is still pretty small), but I'll definitely keep it in mind for the future."
+        },
+        {
+          "id": 47883025,
+          "author": "jryio",
+          "text": "Just another disposable piece of software maintained by a single person that does 80% of what other apps do but worse. Max lifespan 2 years"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 6,
+      "id": 47877644,
+      "title_en": "Incident with multple GitHub services",
+      "title_ja": "Incident with multple GitHub services",
+      "url": "https://www.githubstatus.com/incidents/myrbk7jvvs6p",
+      "hn_url": "https://news.ycombinator.com/item?id=47877644",
+      "score": 175,
+      "comment_count": 89,
+      "posted_at": "2026-04-23T16:21:55+00:00",
+      "comments": [
+        {
+          "id": 47878192,
+          "author": "embedding-shape",
+          "text": "I've been on a somewhat binge to move a bunch of stuff to self-hosting at home. Yesterday I finally completed my self-hosted Forgejo instance at home, together with Linux, Windows (via VM) and macOS (via Mac Mini) runners/workers for CI/CD, so everything finally lives in-house (literally), instead of all source code + Actions being on GitHub but the infrastructure actually living locally. This is probably the first time I felt vindicated with my self-hosting move literally the day after I finished the migration, very pleasant feeling. Usually it takes a month or two before I get here."
+        },
+        {
+          "id": 47878353,
+          "author": "LorenDB",
+          "text": "https://mrshu.github.io/github-statuses/ says they are down to 88.15% uptime. Even when you consider uptime of individual components, their best is 99.78%, so two nines."
+        },
+        {
+          "id": 47883018,
+          "author": "hedayet",
+          "text": "Is Github losing any significant business from all these outages? Curious because for a long time we as an industry maintained that reliability and brand value are business critical; but seems like they are cared very little now a days. Happy to be corrected about my perception too."
+        },
+        {
+          "id": 47882957,
+          "author": "deferredgrant",
+          "text": "These outages are also a good test of how much local resilience teams actually built. My guess is most shops are much more dependent on GitHub than they like to admit."
+        },
+        {
+          "id": 47878051,
+          "author": "cjonas",
+          "text": "It would be wild if they dropped below the \"two 9's\" metric. I think they would need an additional ~16hr of outage in the 90 day rolling period."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 7,
+      "id": 47878633,
+      "title_en": "Palantir employees are starting to wonder if they're the bad guys",
+      "title_ja": "Palantir employees are starting to wonder if they're the bad guys",
+      "url": "https://www.wired.com/story/palantir-employees-are-starting-to-wonder-if-theyre-the-bad-guys/",
+      "hn_url": "https://news.ycombinator.com/item?id=47878633",
+      "score": 577,
+      "comment_count": 413,
+      "posted_at": "2026-04-23T17:30:05+00:00",
+      "comments": [
+        {
+          "id": 47878965,
+          "author": "leonidasrup",
+          "text": "Palantir employees should understand that they are not regular employees at a regular company. They are U.S. defense contractors at an U.S. defense company. Also Palantir customers should understand that by buying Palantir services/products they are doing business with U.S. defense company. I don't say that this is positive or negative, it just clarifies the relationships and it should set the expectations."
+        },
+        {
+          "id": 47880335,
+          "author": "hn_user82179",
+          "text": "> “I’m curious why this had to be posted. Especially on the company account. On the practical level every time stuff like that gets posted it gets harder for us to sell the software outside of the US (for sure in the current political climate), and I doubt we need this in the US?” wrote one frustrated employee. The message received more than 50 “+1” emojis. > “Wether [sic] we acknowledge it or not, this impacts us all personally,” another worker wrote on Monday. “I’ve already had multiple friends reach out and ask what the hell did we post.” This message received nearly two dozen “+1” emoji reactions. > “Yeah it turns out that short-form summaries of the book’s long-form ideas are easy to misrepresent. It’s like we taped a ‘kick me’ sign on our own backs,” a third worker wrote. “I hope no one who decided to put this out is surprised that we are, in fact, getting kicked.” entirely possible they're phrasing their concerns on the corporate slack to be 'pro-company' so they don't worry about getting fired for their views but it doesn't actually sound like they're wondering anything, they're just bothered that it's being brought to light."
+        },
+        {
+          "id": 47880378,
+          "author": "HaloZero",
+          "text": "If you haven't listened/read it, I think the Ezra Klein interview with Alex Bores (who formerly worked at Palantir) and how he talks about how it was in 2014 vs now. It's also insane that a PAC campaigning against Bores is funded by current Palantir employee Lonsdale. Their critical ads literally criticize him for working for Palantir. https://www.nytimes.com/2026/04/21/opinion/ezra-klein-podcas..."
+        },
+        {
+          "id": 47879878,
+          "author": "Ritewut",
+          "text": "Everyone in this industry should be required to read Careless People by Sara Wynn-Williams about her tenure at Facebook. Not because the book is about how evil Meta/Facebook is as a company but because you get to see the lengths people go to mentally convince themselves they are the good guy. Repeatedly in the book she tries to assure herself she's making the world better and that there's actually an ethical, positive company inside Facebook and she just had to navigate the politics to make it known despite all evidence to the contrary."
+        },
+        {
+          "id": 47881660,
+          "author": "theturret",
+          "text": "As I said in another comment, I think it’s important to debate what these companies are doing, how they’re doing it, and whether the United States’ actions are morally and legally justified. But I also think we need to get more smart people interested and working in national security. That’s the way you get the best balance between effective security and the minimum negative side effects to civil liberties or collateral damage, by having the smartest people inside these companies coming up with the best tech while also shaping the conversation from the inside. It’s easier to just dunk on the big bad company (and maybe they are bad!) but I don’t think that solves anything. National security should be something more people participate in, not less."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 8,
+      "id": 47865822,
+      "title_en": "Show HN: Agent Vault – Open-source credential proxy and vault for agents",
+      "title_ja": "Show HN: Agent Vault – Open-source credential proxy and vault for agents",
+      "url": "https://github.com/Infisical/agent-vault",
+      "hn_url": "https://news.ycombinator.com/item?id=47865822",
+      "score": 39,
+      "comment_count": 8,
+      "posted_at": "2026-04-22T16:25:28+00:00",
+      "comments": [
+        {
+          "id": 47883149,
+          "author": "bayff",
+          "text": "Curious how you think about this meeting the agent-identity side. The proxy knows who's calling, but the callee (what agent lives at api.example.com, what auth it expects, what its card looks like) doesn't really have a home. Been poking at that half at agents.ml and it feels like the two pieces want to fit together"
+        },
+        {
+          "id": 47882886,
+          "author": "dangtony98",
+          "text": "T from Infisical here - Also forgot to mention that this is a research preview launch for Agent Vault and should be treated as such - experimental << Since the project is in active development, the form factor including API is unstable but I think it gives a good first glance into how we're thinking about secrets management for AI agents; we made some interesting architectural decisions along the way to get here, and I think this is generally on the right track with how the industry is thinking about solving credential exfiltration: thru credential brokering. We'd appreciate any feedback; feel free also to raise issues, and contribute - this is very much welcome :)"
+        },
+        {
+          "id": 47882758,
+          "author": "Bnjoroge",
+          "text": "infisical is great so excited to see this"
+        },
+        {
+          "id": 47873327,
+          "author": "dandaka",
+          "text": "Can I use Infisical cloud vaults with Agent Vault? I like the UI of secret management there. I like that I can manage secrets from many environments in a single place."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 9,
+      "id": 47875843,
+      "title_en": "UK Biobank health data keeps ending up on GitHub",
+      "title_ja": "UK Biobank health data keeps ending up on GitHub",
+      "url": "https://biobank.rocher.lc",
+      "hn_url": "https://news.ycombinator.com/item?id=47875843",
+      "score": 43,
+      "comment_count": 10,
+      "posted_at": "2026-04-23T13:58:03+00:00",
+      "comments": [
+        {
+          "id": 47883275,
+          "author": "mil22",
+          "text": "The irony is, they don’t even provide the data to the participants themselves."
+        },
+        {
+          "id": 47882720,
+          "author": "captn3m0",
+          "text": "Took me 5 minutes to find more: https://github.com/tanaylab/Mendelson_et_al_2023/blob/9c5a65... (Uses Date of Birth column). And some information on how they were distributing it to researchers: https://github.com/broadinstitute/ml4h/blob/master/ingest/uk... > The following steps require the ukbunpack and ukbconv utilities from the UK Biobank website. The file decrypt_all.sh will run through the following steps on one of the on-prem servers. > Once the data is downloaded, it needs to be \"ukbunpacked\" which decrypts it, and then converts it to a file format of choice. Both ukbunpack and ukbconv are available from the UK Biobank's website. The decryption has to happen on a linux system if you download the linux tools, e.g. the Broad's on-prem servers. Note that you need plenty of space to decrypt/unpack, and the programs may fail silently if disk space runs out during the middle. https://biobank.ctsu.ox.ac.uk/crystal/download.cgi"
+        },
+        {
+          "id": 47881995,
+          "author": "michaelt",
+          "text": "> It has given 20,000 researchers around the world access under strict agreements that prohibit sharing data further. To me it seems rather naive to have done that. After all, you can't un-leak medical data. So even if the \"strict agreement\" included huge punishments, there's no getting the toothpaste back in the tube. If you want to ensure compliance before a leak happens you have to (ugh) audit their compliance. And that isn't something that scales to 20,000 researchers. Too late to do anything about it now though :("
+        },
+        {
+          "id": 47882057,
+          "author": "John7878781",
+          "text": "What are the pros/cons of just open-sourcing everything for future bio bank projects?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 10,
+      "id": 47880189,
+      "title_en": "Girl, 10, finds rare Mexican axolotl under Welsh bridge",
+      "title_ja": "Girl, 10, finds rare Mexican axolotl under Welsh bridge",
+      "url": "https://www.bbc.com/news/articles/c9d4zgnqpqeo",
+      "hn_url": "https://news.ycombinator.com/item?id=47880189",
+      "score": 146,
+      "comment_count": 97,
+      "posted_at": "2026-04-23T19:09:40+00:00",
+      "comments": [
+        {
+          "id": 47883262,
+          "author": "nilslindemann",
+          "text": "[delayed]"
+        },
+        {
+          "id": 47881458,
+          "author": "beeforpork",
+          "text": "And dont you pronounce that 'x' as 'ks'! It's pronounced as 'sh'! Just like in 'xocolatl'."
+        },
+        {
+          "id": 47880783,
+          "author": "janalsncm",
+          "text": "Indeed, most axolotls in Wales are Welsh axolotls. But I do wonder how many do live in Wales. If it’s not just an abandoned pet that would be really interesting."
+        },
+        {
+          "id": 47880547,
+          "author": "mikestew",
+          "text": "Sooo, if they are/were popular as pets, how come there's less than 1000 left worldwide? Those two facts don't reconcile for me."
+        },
+        {
+          "id": 47880286,
+          "author": "codezero",
+          "text": "It amazes me she chanced upon it at the right time and even knew exactly what it was."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 11,
+      "id": 47877715,
+      "title_en": "My phone replaced a brass plug",
+      "title_ja": "My phone replaced a brass plug",
+      "url": "https://drobinin.com/posts/my-phone-replaced-a-brass-plug/",
+      "hn_url": "https://news.ycombinator.com/item?id=47877715",
+      "score": 41,
+      "comment_count": 7,
+      "posted_at": "2026-04-23T16:27:07+00:00",
+      "comments": [
+        {
+          "id": 47882831,
+          "author": "jfengel",
+          "text": "Scoring is based on the outermost ring, rather than the innermost ring? Huh. I'd have expected it to be based on the center, but I guess the goal is \"it must be entirely within this ring to count\" rather than just \"I hit this ring\"."
+        },
+        {
+          "id": 47882068,
+          "author": "RyJones",
+          "text": "My USPSA rank is public: I'm terrible with pistols. I haven't shot in competition for over a decade. This is the kind of project that tickles a couple of my nerves and might get me back to the range."
+        },
+        {
+          "id": 47882172,
+          "author": "HoldOnAMinute",
+          "text": "Wasn't sure what to expect when I clicked this link."
+        },
+        {
+          "id": 47882396,
+          "author": "donglebix",
+          "text": "This ... Is beautiful"
+        },
+        {
+          "id": 47882544,
+          "author": "teiferer",
+          "text": "Of all the things one can automate in this whole journey - he chose the ring counting on the shooting range? I don't get it. I totally see the programming challenge there, but it's in no substantial way making the journey any easier. Any somewhat working human brain can count this quite quickly and then move on with other things. Really, I don't get it."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 12,
+      "id": 47872324,
+      "title_en": "I am building a cloud",
+      "title_ja": "I am building a cloud",
+      "url": "https://crawshaw.io/blog/building-a-cloud",
+      "hn_url": "https://news.ycombinator.com/item?id=47872324",
+      "score": 946,
+      "comment_count": 468,
+      "posted_at": "2026-04-23T04:44:19+00:00",
+      "comments": [
+        {
+          "id": 47873073,
+          "author": "dajonker",
+          "text": "> Making Kubernetes good is inherently impossible, a project in putting (admittedly high quality) lipstick on a pig. So well put, my good sir, this describes exactly my feelings with k8s. It always starts off all good with just managing a couple of containers to run your web app. Then before you know it, the devops folks have decided that they need to put a gazillion other services and an entire software-defined networking layer on top of it. After spending a lot of time \"optimizing\" or \"hardening\" the cluster, cloud spend has doubled or tripled. Incidents have also doubled or tripled, as has downtime. Debugging effort has doubled or tripled as well. I ended up saying goodbye to those devops folks, nuking the cluster, booted up a single VM with debian, enabled the firewall and used Kamal to deploy the app with docker. Despite having only a single VM rather than a cluster, things have never been more stable and reliable from an infrastructure point of view. Costs have plummeted as well, it's so much cheaper to run. It's also so much easier and more fun to debug. And yes, a single VM really is fine, you can get REALLY big VMs which is fine for most business applications like we run. Most business applications only have hundreds to thousands of users. The cloud provider (Google in our case) manages hardware failures. In case we need to upgrade with downtime, we spin up a second VM next to it, provision it, and update the IP address in Cloudflare. Not even any need for a load balancer."
+        },
+        {
+          "id": 47872412,
+          "author": "stingraycharles",
+          "text": "Potentially useful context: OP is one of the cofounders of Tailscale. > Traditional Cloud 1.0 companies sell you a VM with a default of 3000 IOPS, while your laptop has 500k. Getting the defaults right (and the cost of those defaults right) requires careful thinking through the stack. I wish them a lot of luck! I admire the vision and am definitely a target customer, I'm just afraid this goes the way things always go: start with great ideals, but as success grows, so must profit. Cloud vendor pricing often isn't based on cost. Some services they lose money on, others they profit heavily from. These things are often carefully chosen: the type of costs that only go up when customers are heavily committed—bandwidth, NAT gateway, etc. But I'm fairly certain OP knows this."
+        },
+        {
+          "id": 47876188,
+          "author": "aliasxneo",
+          "text": "There's a common conversation that goes on around AI: some people swear its a complete waste of time and total boondoggle, some that its a good tool when used correctly, and others that its the future and nothing else matters. I see the same thing happen with Kubernetes. I've run clusters from various sizes for about half a decade now. I've never once had an incident that wasn't caused by the product itself. I recall one particular incident where we had a complete blackout for about an hour. The people predisposed to hating Kubernetes did everything they could to blame it all on that \"shitty k8s system.\" Turns out the service in question simply DOS'd by opening up tens of thousands of ports in a matter of seconds when a particular scenario occurred. I'm neither in the k8s is the future nor k8s is total trash. It's a good system for when you genuinely need it. I've never understand the other two sides of the equation."
+        },
+        {
+          "id": 47873440,
+          "author": "sahil-shubham",
+          "text": "The point about VMs being the wrong shape because they’re tied to CPU/memory resonates hard. The abstraction forces you to pay for time, not work. I ended up buying a cheap auctioned Hetzner server and using my self-hostable Firecracker orchestrator on top of it ( https://github.com/sahil-shubham/bhatti , https://bhatti.sh ) specifically because I wanted the thing he’s describing — buy some hardware, carve it into as many VMs as I want, and not think about provisioning or their lifecycle. Idle VMs snapshot to disk and free all RAM automatically. The hardware is mine, the VMs are disposable, and idle costs nothing. The thing that, although obvious, surprised me most is that once you have memory-state snapshots, everything becomes resumable. I make a browser sandbox, get Chromium to a logged-in state, snapshot it, and resume copies of that session on demand. My agents work inside sandboxes, I run docker compose in them for preview environments, and when nothing’s active the server is basically idle. One $100/month box does all of it."
+        },
+        {
+          "id": 47872884,
+          "author": "clktmr",
+          "text": "> Agents, by making it easiest to write code, means there will be a lot more software. Economists would call this an instance of Jevons paradox. Each of us will write more programs, for fun and for work. There is already so much software out there, which isn't used by anyone. Just take a look at any appstore. I don't understand why we are so obsessed with cranking out even more, whereas the obvious usecase for LLMs should be to write better software. Let's hope the focus shifts from code generation to something else. There are many ways LLMs can assist in writing better code."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 13,
+      "id": 47846688,
+      "title_en": "Your hex editor should color-code bytes",
+      "title_ja": "Your hex editor should color-code bytes",
+      "url": "https://simonomi.dev/blog/color-code-your-bytes/",
+      "hn_url": "https://news.ycombinator.com/item?id=47846688",
+      "score": 468,
+      "comment_count": 137,
+      "posted_at": "2026-04-21T09:52:09+00:00",
+      "comments": [
+        {
+          "id": 47873802,
+          "author": "dspillett",
+          "text": "Everything should try do some basic syntax highlighting IMO. Not too much, or it just becomes a sea of formatting that doesn't help at all. It is surprising how much difference just a little splash of colour can make if it isn't overdone. If possible, always include configuration options for the user though, so those with colour-blindness issues can tweak things to their needs, those who are just fussy can make the output fit with their finely adjusted system-wide colour schemes¹, and even better, where you can, allow bold/italic/other as well as colours so that those who barely see colour at all can play too. Of course none of this helps those using screen-readers and other tech, so make sure that all your fancy colouring & such is additive so if it is all “lost” no meaning is absolutely lost with it. -------- [1] Some people can be very vocal about this, more so than if highlighting isn't possible at all. If you give any output formatting they'll expect you to match, or be able to be made to match, their preferred style."
+        },
+        {
+          "id": 47874228,
+          "author": "cuechan",
+          "text": "For anyone who regularly has to look at/analyze binary files, i highly recommend ImHex [1]. Its a hex editor built with imgui and has a lot of built in tools. Imo the best feature is the data structure editor. You can write a data type definition similar to C and it overlays it on the hexdump and parses it in a structured way while you type. It also has a node based editor. 1: https://github.com/WerWolv/ImHex"
+        },
+        {
+          "id": 47874267,
+          "author": "roelschroeven",
+          "text": "When you're going to color-code bytes in a hex dump, I would expect each ASCII character in the right column to have the same color as the hex byte in the left column, making it easier to pair them. I wonder why that wasn't done here."
+        },
+        {
+          "id": 47874863,
+          "author": "Someone",
+          "text": "The first example is “go ahead, try to find the single C0 in these bytes” and then argues one should highlight C0 bytes. If that’s true, how does the tool know I will be looking for C0 bytes and not for 03, D3, etc? The logical conclusion of that would be that the hex editor should uniquely color code every byte. And following the other examples even that’s not enough. The proposed solution is to create groups of byte values that each get their unique color. I think that helps, but we can do better: add a search feature. That tells your editor what you are looking for. Once you enter a search string, it can highlight all hits. Yes, “colorful output in a hexdump is useful for the same reason that syntax highlighting for code is useful”, but do you know what syntax highlighting needs? Knowledge of the expected content of a file. Without that, a hex editor at best can guess at how to color-code stuff. IMO, if you want to add syntax coloring to a hex editor, give it pluggable syntax coloring and heuristics for deciding which one to use when. While at it, also let those plugins control where to break lines, whether to show hex at all (why show it at all if a file has a few paragraphs of English text or an array of IEEE doubles?), etc. Those plug-ins will make errors and sometimes, users will want to see all byte values, so you’ll need a way for the user to override them."
+        },
+        {
+          "id": 47874212,
+          "author": "NooneAtAll3",
+          "text": "Why did author decide that best way to demonstrate his idea would be by cutting contrast in half? color-coding might be a great solution, but you don't really know beforehand which byte values are important. Manually selecting C0 to make it stand out it just ctrl+f with extra steps. (But I wouldn't mind something like \"color 00 separate from ascii separate from the rest)"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 14,
+      "id": 47846307,
+      "title_en": "A programmable watch you can actually wear",
+      "title_ja": "A programmable watch you can actually wear",
+      "url": "https://www.hackster.io/news/a-diy-watch-you-can-actually-wear-8f91c2dac682",
+      "hn_url": "https://news.ycombinator.com/item?id=47846307",
+      "score": 116,
+      "comment_count": 60,
+      "posted_at": "2026-04-21T08:52:33+00:00",
+      "comments": [
+        {
+          "id": 47883146,
+          "author": "deferredgrant",
+          "text": "The nice thing about a project like this is that it shows how much taste matters in engineering. 'Works' and 'you'd actually use it' are very different milestones."
+        },
+        {
+          "id": 47878662,
+          "author": "oritron",
+          "text": "I like a good smart watch and I appreciate open source, but an ESP32 isn't a great pick when low power consumption is important and the device is going to be communicating regularly. I'm surprised LILYGO went that direction in a watch form factor."
+        },
+        {
+          "id": 47878033,
+          "author": "jblezo",
+          "text": "That's more a programmable watch than a DIY one :-) I build mine from scratch, including the PCB and a 3D printed case. For sure, that's not at all the same level of customability, programmability, capacity, nor quality. But It is really a DIY one. For anyone interested: https://github.com/jblezoray/hpdl1414-watch"
+        },
+        {
+          "id": 47878067,
+          "author": "Retr0id",
+          "text": "It's cool that the firmware is hackable but I think \"DIY\" is an imprecise way to describe that."
+        },
+        {
+          "id": 47878940,
+          "author": "briandw",
+          "text": "No mention of battery life? I guess it depends on the software that you run. But it would be nice to have a benchmark for how long it would last in normal watch mode."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 15,
+      "id": 47881198,
+      "title_en": "Using the internet like it's 1999",
+      "title_ja": "Using the internet like it's 1999",
+      "url": "https://joshblais.com/blog/using-the-internet-like-its-1999/",
+      "hn_url": "https://news.ycombinator.com/item?id=47881198",
+      "score": 74,
+      "comment_count": 47,
+      "posted_at": "2026-04-23T20:14:29+00:00",
+      "comments": [
+        {
+          "id": 47881650,
+          "author": "vunderba",
+          "text": "If it were 1999, most people would still be browsing the web on their US Robotics 56k modem (at best). This page is about 1 MB of assets (500kb gzip compressed if your browser supported it) , so it would have taken at least a minute just to finish loading."
+        },
+        {
+          "id": 47881741,
+          "author": "zahirbmirza",
+          "text": "How can we solve this problem, of the current state of the internet, without reverting to the compromises of the past? This has been on my mind for a while. The layer of trash some companies have built over the internet has been ruinous."
+        },
+        {
+          "id": 47882945,
+          "author": "kungfuscious",
+          "text": "A lot of these recommendations seem prudent. I especially like the idea of POSSE for using social media without actually using it (every time you open a site to post is an opportunity to be ensnared). Completely stripping the browser from your smartphone is a bit extreme and excessive for me, but doesn't invalidate the other reccomendations."
+        },
+        {
+          "id": 47881828,
+          "author": "jakedata",
+          "text": "Just go to fark.com, a lingering glimmer of light from before the dead web. They are still aggregating human curated news and hosting reasonably civil discussions. Then buy a Totalfark subscription so they don't need to bend over backwards to show more ads just to keep the lights on. See ya there!"
+        },
+        {
+          "id": 47882181,
+          "author": "GaryBluto",
+          "text": "I'm not opposed to the message but it perplexes me the amount of people who bemoan the loss of the \"old web\" and then use a web page comprised of massive modern frameworks to deliver said message."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 16,
+      "id": 47879239,
+      "title_en": "Astronomers find the edge of the Milky Way",
+      "title_ja": "Astronomers find the edge of the Milky Way",
+      "url": "https://skyandtelescope.org/astronomy-news/astronomers-find-the-edge-of-the-milky-way/",
+      "hn_url": "https://news.ycombinator.com/item?id=47879239",
+      "score": 61,
+      "comment_count": 11,
+      "posted_at": "2026-04-23T18:11:29+00:00",
+      "comments": [
+        {
+          "id": 47882273,
+          "author": "layer8",
+          "text": "Better, adblocker-friendly article (original press release): https://www.um.edu.mt/newspoint/learn/2026/theedgeofthemilky... Paper: https://www.aanda.org/articles/aa/full_html/2026/04/aa58144-..."
+        },
+        {
+          "id": 47881753,
+          "author": "dotancohen",
+          "text": "Is this a non-sequiter or just poorly phrased? > Disk galaxies like the Milky Way form stars “inside-out” — starting from the center and working outwards through the disk. So, as a general rule, the farther out astronomers look, the younger the stars are. Do they meant looking out from Earth (which is actually nearer to the center of a spiral arm than to either end) or out from the galactic bulge. Either way doesn't make sense."
+        },
+        {
+          "id": 47881707,
+          "author": "neals",
+          "text": "Just the daily post that makes me feel small and insignificant."
+        },
+        {
+          "id": 47882077,
+          "author": "yrcyrc",
+          "text": "Great. Next Laniakea"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 17,
+      "id": 47874647,
+      "title_en": "Show HN: Honker – Postgres NOTIFY/LISTEN Semantics for SQLite",
+      "title_ja": "Show HN: Honker – Postgres NOTIFY/LISTEN Semantics for SQLite",
+      "url": "https://github.com/russellromney/honker",
+      "hn_url": "https://news.ycombinator.com/item?id=47874647",
+      "score": 215,
+      "comment_count": 50,
+      "posted_at": "2026-04-23T11:53:11+00:00",
+      "comments": [
+        {
+          "id": 47874837,
+          "author": "russellthehippo",
+          "text": "Hey HN, I built this. Honker adds cross-process NOTIFY/LISTEN to SQLite. You get push-style event delivery with single-digit millisecond latency without a damon/broker, using your existing SQLite file. A lot of pretty high-traffic applications are just Framework+SQLite+Litestream on a VPS now, so I wanted to bring a sixer to the \"just use SQLite\" party. SQLite doesn't run a server like Postgres, so the trick is moving the polling source from interval queries on a SQLite connection to a lightweight stat(2) on the WAL file. Many small queries are efficient in SQLite ( https://www.sqlite.org/np1queryprob.html ) so this isn't really a huge upgrade, but the cross-language result is pretty interesting to me - this is language agnostic as all you do is listen to the WAL file and call SQLite functions. On top of the store/notify primitives, honker ships ephemeral pub/sub (like pg_notify), durable work queues with retries and dead-letter (like pg-boss/Oban), and event streams with per-consumer offsets. All three are rows in your app's existing .db file and can commit atomically with your business write. This is cool because a rollback drops both. This used to be called litenotify/joblite but I bought honker.dev as a joke for my gf and I realized that every mq/task/worker have silly names: Oban, pg-boss, Huey, RabbitMQ, Celery, Sidekiq, etc. Thus a silly goose got its name. Honker waddles the same path as these giants and honks into the same void. Hopefully it's either useful to you or is amusing. Standard alpha software warnings apply."
+        },
+        {
+          "id": 47877712,
+          "author": "JoelJacobson",
+          "text": "Shameless plug: In the upcoming release of PostgreSQL 19, LISTEN/NOTIFY has been optimized to scale much better with selective signaling, i.e. when lots of backends are listening on different channels, patch: https://git.postgresql.org/gitweb/?p=postgresql.git;a=commit..."
+        },
+        {
+          "id": 47875217,
+          "author": "Retr0id",
+          "text": "Couldn't you use inotify (and/or some cross-platform wrapper) to watch for WAL changes without polling?"
+        },
+        {
+          "id": 47876567,
+          "author": "nzoschke",
+          "text": "Thanks for this! I have a proliferation of small apps backed by SQLite. And most of these need a queue and scheduler. I home rolled some stuff for it but was always pining for the elegance of the Postgres solutions. Will give this a spin very soon"
+        },
+        {
+          "id": 47875062,
+          "author": "ArielTM",
+          "text": "kqueue/FSEvents is tempting here, but Darwin drops same-process notifications. If you've got a publisher and listener in the same process the listener just never fires. Nasty thing to chase. stat polling looks gross but it's the only thing that actually works everywhere. What happens on WAL checkpoint? When the file shrinks back, does that trigger a wakeup, or does the poller filter size drops?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 18,
+      "id": 47877366,
+      "title_en": "French government agency confirms breach as hacker offers to sell data",
+      "title_ja": "French government agency confirms breach as hacker offers to sell data",
+      "url": "https://www.bleepingcomputer.com/news/security/french-govt-agency-confirms-breach-as-hacker-offers-to-sell-data/",
+      "hn_url": "https://news.ycombinator.com/item?id=47877366",
+      "score": 338,
+      "comment_count": 119,
+      "posted_at": "2026-04-23T15:59:55+00:00",
+      "comments": [
+        {
+          "id": 47877688,
+          "author": "hk__2",
+          "text": "> the data stolen in the breach could include full names, dates and places of birth, mailing and email addresses, and phone numbers on an undisclosed number of citizens Nothing really new here sadly, this information about me have leaked half a dozen of times in the past 2-3 years or so. These things will never change if the only penalty the company/agency gets is \"send a message to your users saying you are sorry and that it won’t happen again\"."
+        },
+        {
+          "id": 47877602,
+          "author": "loupol",
+          "text": "I received the email telling me I am impacted today. Ironically it changes nothing for me as that same data had already been leaked by the French government agency that handles unemployment benefits a couple years ago. Silly me had not bothered deleting that account even after it was no longer necessary due to finding a new job."
+        },
+        {
+          "id": 47880985,
+          "author": "lemoncookiechip",
+          "text": "And they're still pushing through with the idea of centralized IDs for the internet creating massive honeypots for hacker groups and AI companies all over the world. Meanwhile it's a breach every other month all over."
+        },
+        {
+          "id": 47877684,
+          "author": "rawgabbit",
+          "text": "It seems to me we must move away from worrying about ransomware, data breach, data protection as that ship has already sailed and everyone's PII has already been stolen. We should think of how to verify people's identities online (for things like government benefits etc). I have heard of the Dutch and the Japanese using national digital identity systems although I am unclear how they work. India is doing biometrics. I am curious what the US will eventually land on."
+        },
+        {
+          "id": 47878077,
+          "author": "kleene_op",
+          "text": "I find it especially ironic that they would leak all my data, given the fact that they would ask of me to forward them every piece of id imaginable whenever I needed to forge or amend a new one (when adding a mention on my driver's license for instance). Like they didn't have access to it anyway."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 19,
+      "id": 47868867,
+      "title_en": "Apple fixes bug that cops used to extract deleted chat messages from iPhones",
+      "title_ja": "Apple fixes bug that cops used to extract deleted chat messages from iPhones",
+      "url": "https://techcrunch.com/2026/04/22/apple-fixes-bug-that-cops-used-to-extract-deleted-chat-messages-from-iphones/",
+      "hn_url": "https://news.ycombinator.com/item?id=47868867",
+      "score": 839,
+      "comment_count": 181,
+      "posted_at": "2026-04-22T20:27:31+00:00",
+      "comments": [
+        {
+          "id": 47869383,
+          "author": "dlcarrier",
+          "text": "This was a bug that left it cached on the device. Apple and Google have put themselves in the middle of most notifications, causing the contents to pass through their servers, which means that they are subject to all the standard warrantless wiretapping directly from governments, as well as third-party attacks on the infrastructure in place to support that monitoring. If you don't want end-to-end messages made available to others, set your notifications to only show that you have a message, not what it contains or who its from."
+        },
+        {
+          "id": 47869394,
+          "author": "6thbit",
+          "text": "The \"bug\" discussed in the article is only part of the problem. The main problem, which is notifications text is stored on a DB in the phone outside of signal, is not addressed. To avoid that you have to change your settings. In this case, the defendant had deleted the signal app completely, and that likely internally marks those app's notifications for deletion from the DB, so the bug fixed here is that they were not removing notifications from the local database when the app that generated them was removed, now they do. Impact: Notifications marked for deletion could be unexpectedly retained on the device Description: A logging issue was addressed with improved data redaction. CVE-2026-28950 They classify this as \"loggging issue\" so it sounds like notifications were not actually in the database itself but ended up in some log."
+        },
+        {
+          "id": 47869247,
+          "author": "modeless",
+          "text": "Oh, I was originally confused about this because I had thought the push notifications were end-to-end encrypted, so they couldn't be cached in readable form by the push notification service, and only decrypted by the app on device upon receiving the notification. But it seems like after the notification was decrypted by the app and shown to the user using OS APIs, the notification text was was then stored by the OS in some kind of notification history DB locally on the device?"
+        },
+        {
+          "id": 47869244,
+          "author": "nxobject",
+          "text": "Note that Signal offers the option to use generic “You’ve received messages” notifications - it’s good practice in general."
+        },
+        {
+          "id": 47873007,
+          "author": "Canada",
+          "text": "This is a problem with all kinds of apps. There is no discipline in the handling of user data. Take the notes app. When you delete text it not gone you can still see it in the sqlite database they use for storage. I'm sure this is so they can support sync be recording your changes as CRDTs or something. And if the app isn't leaky, the OS will probsbly screw you like in this case. The concept of being able to clean up your laptop is just not supported, you have to wipe the whole device which is ridiculous."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 20,
+      "id": 47849628,
+      "title_en": "Advanced Packaging Limits Come into Focus",
+      "title_ja": "Advanced Packaging Limits Come into Focus",
+      "url": "https://semiengineering.com/advanced-packaging-limits-come-into-focus/",
+      "hn_url": "https://news.ycombinator.com/item?id=47849628",
+      "score": 22,
+      "comment_count": 3,
+      "posted_at": "2026-04-21T14:50:40+00:00",
+      "comments": [
+        {
+          "id": 47883057,
+          "author": "pimlottc",
+          "text": "I had to read this for quite a while to be sure they weren’t actually talking about boxes"
+        },
+        {
+          "id": 47882255,
+          "author": "jeffbee",
+          "text": "I'm really glad that last slide is in the article because I've been wondering this about Intel's push to become the king of thru-silicon vias, but didn't want to be the one sounding ignorant. When you etch holes in glass, fill the holes with metal, then solder it to something else, how does it not just shatter? The article just acknowledges the issues without suggesting where the solutions might come from."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 21,
+      "id": 47881786,
+      "title_en": "TorchTPU: Running PyTorch Natively on TPUs at Google Scale",
+      "title_ja": "TorchTPU: Running PyTorch Natively on TPUs at Google Scale",
+      "url": "https://developers.googleblog.com/torchtpu-running-pytorch-natively-on-tpus-at-google-scale/",
+      "hn_url": "https://news.ycombinator.com/item?id=47881786",
+      "score": 7,
+      "comment_count": 0,
+      "posted_at": "2026-04-23T20:53:27+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 22,
+      "id": 47854710,
+      "title_en": "WireGuard for Windows Reaches v1.0",
+      "title_ja": "WireGuard for Windows Reaches v1.0",
+      "url": "https://lists.zx2c4.com/pipermail/wireguard/2026-April/009580.html",
+      "hn_url": "https://news.ycombinator.com/item?id=47854710",
+      "score": 76,
+      "comment_count": 2,
+      "posted_at": "2026-04-21T21:26:25+00:00",
+      "comments": [
+        {
+          "id": 47883003,
+          "author": "twarge",
+          "text": "wireguard on windows and linux are extraordinarily solid at my org. However, we have a lot of difficulty with macOS, seemingly with rather basic OS-level bugs that don't seem to be their fault: the big one is that a wireguard profile distributed by MDM for a system seems to work for the logged in user, but not for any other user. Seems to be a keychain issue. While I don't expect any support, there does not seem to be a system to support getting pull requests reviewed and mainlined (including a PR that might address my need). Even tried IRC."
+        },
+        {
+          "id": 47882414,
+          "author": "jaydenmilne",
+          "text": "Very impressive work, WireGuard is a phenomenal piece of software, congrats on getting to 1.0 I can see Raymond Chen’s eye twitching at some of those (clever and necessary!) undocumented workarounds though :D Windows is just a different world I guess"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 23,
+      "id": 47875025,
+      "title_en": "I spent years trying to make CSS states predictable",
+      "title_ja": "I spent years trying to make CSS states predictable",
+      "url": "https://tenphi.me/blog/why-i-spent-years-trying-to-make-css-states-predictable/",
+      "hn_url": "https://news.ycombinator.com/item?id=47875025",
+      "score": 37,
+      "comment_count": 6,
+      "posted_at": "2026-04-23T12:37:18+00:00",
+      "comments": [
+        {
+          "id": 47881378,
+          "author": "wewewedxfgdf",
+          "text": "My final conclusion about CSS is - program the damn machine. What I mean by this is STOP every single type of abstraction/library/programming layer for CSS - nothing gets it right, everything causes a problem. The ONLY way to deal with CSS is program it directly in the way the docs say, never anything else. There's nothing wrong with using Bootstrap or whatever, and I definitely use JavaScript to program CSS. What I am saying is - no abstractions - no \"better way\" - no trying to turn CSS into something it isn't via whatever your new abstraction is that can be added to the N other abstractions that other people have made over the years. Program the damn machine."
+        },
+        {
+          "id": 47879955,
+          "author": "chrismorgan",
+          "text": "This sounds interesting, but I’d need to think about it more so I could picture how things fit together as they get more complex and different styles logically overlap . This looks to head in the utility direction possibly too far for that to work nicely. But it may well work better than I’m initially imagining. Unfortunately I can’t give it more attention now, because I should have gone to sleep a couple of hours ago… —⁂— Another approach entirely is to embrace last-declaration-wins, by :where()ing everything: :where(.t0) { background: var(--primary-color); } :where(.t0:hover) { background: var(--primary-hover-color); } :where(.t0:active) { background: var(--primary-pressed-color); } :where(.t0[disabled]) { background: var(--surface-color); } I’d be interested to know which approach performs better once you have altogether too many elements and altogether too complex selectors. I suspect the :where() would win, but that the difference would be impossible to detect in any sort of realistic load."
+        },
+        {
+          "id": 47875241,
+          "author": "tenphi",
+          "text": "Happy to take questions! I built this because I kept hitting the same wall: CSS state resolution is opaque when states overlap, and extending components means mentally re-deriving the whole selector matrix every time. Some topics I'm curious what people think about: - What’s the one thing this doesn’t cover that you’d expect it to? - Does the syntax feel natural to you, or did you find yourself confused by anything? - I'm looking for edge cases: what kind of complex selector scenario would trip this compiler up or be impossible to express with this model? AMA—happy to answer any questions about the tool, the implementation, or the design choices."
+        },
+        {
+          "id": 47880188,
+          "author": "porsager",
+          "text": "Probably because you aren't using Sin"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 24,
+      "id": 47881724,
+      "title_en": "How the Tech World Turned Evil",
+      "title_ja": "How the Tech World Turned Evil",
+      "url": "https://newrepublic.com/article/208876/tech-world-evil-musk-bezos-thiel",
+      "hn_url": "https://news.ycombinator.com/item?id=47881724",
+      "score": 67,
+      "comment_count": 12,
+      "posted_at": "2026-04-23T20:48:55+00:00",
+      "comments": [
+        {
+          "id": 47882898,
+          "author": "cadamsdotcom",
+          "text": "The irony of tech is that reducing friction (such as the Internet making it easy to go to one provider or another) also makes it easy to go straight to the “best”. By being consistently 0.1% better in the early days, many of these companies earned themselves an unassailable lead. Why go to the little guy when the big guy is big and safe and familiar (yes we at HN don’t operate this way; we aren’t normies and are a minority so we don’t hold sway en masse) Thanks to a lot of hard work to make great products, big tech has (earned!) market power but still has a mandate from shareholders - and even if not legally required via fiduciary duty it IS the current culture - to find growth at all cost. When there’s no growth to be had by being nice, but you’re still being told to grow.. well, yeah."
+        },
+        {
+          "id": 47883128,
+          "author": "stephc_int13",
+          "text": "Industrial empires naturally have this tendency, once their power level is putting them in the same playground as small states, they become different entities, fighting for their own survival. The concentration of power of bureaucratic structures, no matter their nature, will always be in tension with individual freedom."
+        },
+        {
+          "id": 47882963,
+          "author": "scottyah",
+          "text": "Seems like they mostly stayed the same, just media perception changed once they realized it's more profitable to hate on tech, and safer than hating on established bad industries like Oil and Gas, malpractice in farming, corruption and fraud in politics, whatever is going on in the medical industry."
+        },
+        {
+          "id": 47882833,
+          "author": "swader999",
+          "text": "My uninformed opinion of it all is that certain companies have been blessed or anointed by the intelligence agencies for many decades and they've been acting on their behalf every since. Google, Apple, Amazon, Reddit, Microsoft, Elon's stuff, the Telcos and so on. Backdoors, direct access and so on. Same for all the major crypto on/off ramps."
+        },
+        {
+          "id": 47882940,
+          "author": "amelius",
+          "text": "Well, you don't have to be Stallman to have seen this coming. Or did anyone seriously think that this time it will be different?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 25,
+      "id": 47873694,
+      "title_en": "Writing a C Compiler, in Zig (2025)",
+      "title_ja": "Writing a C Compiler, in Zig (2025)",
+      "url": "https://ar-ms.me/thoughts/c-compiler-1-zig/",
+      "hn_url": "https://news.ycombinator.com/item?id=47873694",
+      "score": 124,
+      "comment_count": 36,
+      "posted_at": "2026-04-23T09:20:47+00:00",
+      "comments": [
+        {
+          "id": 47874425,
+          "author": "fuhsnn",
+          "text": "Looking at the repo, the author seemed a little fed up [1] with the nature of lower level language and quitted. [1] https://github.com/asibahi/paella/blob/main/writeup/c19.md#u..."
+        },
+        {
+          "id": 47878682,
+          "author": "groos",
+          "text": "I'm not sure why people seem to be under the impression that writing a compiler means that the language the compiler is implemented in should have \"low level\" features. A compiler is just a text -> text translation tool if you can leverage other tools such as an assembler and never needs to access machine level instructions. E.g., Pascal compilers have traditionally been written in Pascal, hardly a language which conjures up a \"low level\" image. Even when an assembler isn't available, all your implementation language needs to support, in terms of \"low level\" features, is writing of bytes to a file. But manipulating instruction and file formats and such can be tedious if your language doesn't have the right capabilities but it's not impossible."
+        },
+        {
+          "id": 47874490,
+          "author": "flossly",
+          "text": "I thought Zig has a C compiler built in? Or is it just the Zig build system that's able to compile C, but uses an external compiler for that? Still a proper programmer-flex to build another one."
+        },
+        {
+          "id": 47874375,
+          "author": "scatbot",
+          "text": "Cool project. Feels like writing a C compiler in Zig aligns nicely with the old \"maintain it in Zig\" idea that was part of Zig's early value proposition. Is that still considered a relevant goal today? Longer term it also makes me wonder whether something like this could eventually reduce reliance on Clang/LLVM for the C frontend in zig's toolchain."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 26,
+      "id": 47871519,
+      "title_en": "Arch Linux Now Has a Bit-for-Bit Reproducible Docker Image",
+      "title_ja": "Arch Linux Now Has a Bit-for-Bit Reproducible Docker Image",
+      "url": "https://antiz.fr/blog/archlinux-now-has-a-reproducible-docker-image/",
+      "hn_url": "https://news.ycombinator.com/item?id=47871519",
+      "score": 288,
+      "comment_count": 101,
+      "posted_at": "2026-04-23T01:59:08+00:00",
+      "comments": [
+        {
+          "id": 47874665,
+          "author": "nickjj",
+          "text": "It is nice to have this confidence. I ran Arch Linux for almost a year in WSL 2, it was really good. Then I ran Arch natively for ~5 months, it's really good. Now I still run Arch natively, but I also use the Arch Docker image to test my dotfiles[0] with a fresh file system. Also, for when I want to run end to end tests for my dotfiles that set up a complete desktop environment I run Arch in a VM. I have 99 problems but running Arch isn't one of them. [0]: https://github.com/nickjj/dotfiles"
+        },
+        {
+          "id": 47873299,
+          "author": "dev_l1x_be",
+          "text": "All docker containers should have been like that. apt-get update in a docker build step is an anti pattern."
+        },
+        {
+          "id": 47876095,
+          "author": "red-iron-pine",
+          "text": "Presumably there is something you can plug into the CI/CD pipeline that informs everyone one you use Arch (and, also presumably, that you do Crossfit, etc.)"
+        },
+        {
+          "id": 47873274,
+          "author": "kippinsula",
+          "text": "reproducible images are one of those features where the payoff is mostly emotional until the day it isn't. we had an incident where two supposedly identical images on two machines had a three byte delta in a timestamp and it cost us an afternoon to bisect from the wrong end. boring win, but a real one."
+        },
+        {
+          "id": 47878111,
+          "author": "conorbergin",
+          "text": "I wonder if well designed \"mutable\" operating systems like Arch and Alpine that are going to beat NixOS etc. in the long run. An install script is strictly more powerful that a declarative config language, and typically less verbose."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 27,
+      "id": 47877429,
+      "title_en": "If America's so rich, how'd it get so sad?",
+      "title_ja": "If America's so rich, how'd it get so sad?",
+      "url": "https://www.derekthompson.org/p/if-americas-so-rich-howd-it-get-so",
+      "hn_url": "https://news.ycombinator.com/item?id=47877429",
+      "score": 373,
+      "comment_count": 689,
+      "posted_at": "2026-04-23T16:05:30+00:00",
+      "comments": [
+        {
+          "id": 47880137,
+          "author": "bontaq",
+          "text": "My mom said, \"whatever we built isn't working anymore,\" and I think that captures most of the sentiment. It's also funny to see the \"the economy is roaring!\" \"incomes are up!\". Great, have they increased by as much as inflation? Can I afford a home? Work has if anything gotten worse in general. Remote's gone. Pay's less. ADHD maximum AI use required. Nobody can take a break. Pressure's on. 1.5 trillion more to the military. What are we even building? For what? Is it any wonder at all?"
+        },
+        {
+          "id": 47879227,
+          "author": "tim333",
+          "text": "As an occasional visitor to the US from England I was surprised by how expensive it's become. The US always used to seem cheaper than England I think largely because the government got out of the way so houses were cheap because you could build them, cars were cheap because you could import them, food was cheap because you could just grow stuff in huge fields whereas in England much of that was restricted. On my trip to Austin a couple of years ago it'd got really expensive. Even food where normally you could walk in a shop and get something for not much, a basic sandwich started from $8 and when I came out some lady followed me and said could she have some she was hungry so I gave her half and really was hungry. I've never really had that in the other fifty countries I've visited including in Africa. In London you get Roma sitting around with 'hungry' signs but they are all fat and well fed and want cash. It's odd."
+        },
+        {
+          "id": 47878041,
+          "author": "Taikonerd",
+          "text": "The article is smarter than the title makes it sound. He's not seriously proposing that being rich makes you happy. And he notes that there's a big drop around 2020 specifically , which long-term trends don't explain. Just to state the obvious: 2020 was the year of COVID, which played hell with peoples' social lives. And I think it's been pretty well-proven that happiness is largely driven by the strength and quality of our social relationships. Anything that cuts us off from our friends, or prevents us from forming new friendships, is going to be visible in the happiness data. Judging by the stats, we haven't dug ourselves out of the post-COVID hole yet."
+        },
+        {
+          "id": 47877888,
+          "author": "eBombzor",
+          "text": "I do feel this trend in my life. I have a job which I'm grateful for but nothing feels satisfying anymore, and I feel like it is much harder to connect to people or form deep relationships, especially in this field, unless you already have a clique in your workplace. On top of that, AI is generally a demotivating entity to the majority of people. Despite all the hype of Altman and whonots, I feel like people just don't have a positive view of the future of their careers due to AI. And once you lose hope it's just downhill from there. Also I feel like society still hasn't recovered fully from COVID, so many third places gone, restraunts closed, etc. It's getting there but people are isolating more and more. I'm in my late 20s and I just haven't felt like my social life is even half of what it used to be before COVID."
+        },
+        {
+          "id": 47879099,
+          "author": "mancerayder",
+          "text": "Our CEOs are happily, gleefully, boasting about how we're replaceable. That sort of stuff causes pitchforks to rise up in other countries. We Americans are hard-working sheep, and we deserve all the motivational Corpspeak we have to suffer through on LinkedIn posts. I've worked in this industry (tech) a very long time, and in every job I have peers that boast about off hours work. We get what we deserve."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 28,
+      "id": 47874734,
+      "title_en": "Jiga (YC W21) Is Hiring",
+      "title_ja": "Jiga (YC W21) Is Hiring",
+      "url": "https://jiga.io/about-us/",
+      "hn_url": "https://news.ycombinator.com/item?id=47874734",
+      "score": 1,
+      "comment_count": 0,
+      "posted_at": "2026-04-23T12:02:44+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 29,
+      "id": 47865868,
+      "title_en": "Alberta startup sells no-tech tractors for half price",
+      "title_ja": "Alberta startup sells no-tech tractors for half price",
+      "url": "https://wheelfront.com/this-alberta-startup-sells-no-tech-tractors-for-half-price/",
+      "hn_url": "https://news.ycombinator.com/item?id=47865868",
+      "score": 2125,
+      "comment_count": 728,
+      "posted_at": "2026-04-22T16:29:25+00:00",
+      "comments": [
+        {
+          "id": 47867092,
+          "author": "adamcharnock",
+          "text": "Up until a year ago I was regularly using a Massy Fergusson 135 [0] (Perkins Diesel version), made sometime in the 1970s. It was wonderful! So amazing to drive and use. Clunky and heavy, but you really really felt like you were using a machine. In low gears, if you put you foot down on the accelerator the engine would roar, and your speed would barely change! And there was no fancy technology in it at all. If I was in the forest and had forgotten the key, I'd just reach behind the dashboard and hot-wire it. The air filter was basically a shisha-pipe that bubbled the incoming air through wire wool and engine oil. Its fuel gauge didn't work either. You just had to take a look in the tank, or quickly react as soon as the revs started dropping. I ran it dry a few times and had to sit there with a spanner in one hand and YouTube into the other, while trying to bleed all the fuel lines. But they were all on the outside of the vehicle, which made it comparatively easy I imagine. I've never actually driven a modern tractor, so don't know how it compares. I imagine the clutch is easier on the knees these days! Anyway, this just felt like the place to share this. [0] https://en.wikipedia.org/wiki/Massey_Ferguson_135"
+        },
+        {
+          "id": 47866242,
+          "author": "Hasz",
+          "text": "I think this is a reaction to the incredibly locked down ecosystem that most of these mfgs are pushing. However, the tech exists for a reason and is not inherently bad, the issue is the lock-in, the lack of choice and interoperability. IMO, there is plenty of space for an OEM who can play nice with others, offer an open (and vibrant ecosystem), and keep users coming back by choice, not by lock-in."
+        },
+        {
+          "id": 47866591,
+          "author": "jmward01",
+          "text": "I want this for cars but to keep the modern powertrain. So an EV without the tracking/touch screens, etc etc. Or an internal combustion engine car that is just simple and efficient (and again, no tracking). I'll take the low-tech but nice features like heated seats and power windows still thank you."
+        },
+        {
+          "id": 47872279,
+          "author": "simplyluke",
+          "text": "Late to the party here, so I don't expect this to get a lot of traction, but I'd like to point out that part of the reason this hasn't existed until recently as an option in the US is because it's functionally illegal for it to exist. > The 12-valve Cummins is arguably the most widely understood diesel engine in North America. Every independent shop, every shade-tree mechanic with a set of wrenches, every farmer who grew up turning bolts has encountered one. That's great! I'd point out the 12 valve wasn't introduced until the 90s, but that's kind of immaterial -- it's as simple to work on as any other mechanically injected analog diesel is and they were in widespread use for nearly a century before that. One immediately wonders why we moved away from these and towards more complex options, and why this startup has to remanufacture old engines instead of sourcing new engines. The answer among those of us who care about right to repair tends to be \"evil corporations want to make proprietary systems that require ongoing fees!\" which is true for John Deere, but also, the EPA mandated DEF/DPF systems + limp modes on all farm equipment since 2014, and the new relaxed standards include complicated rules about what percentage into limp mode they go at different intervals during different periods of time after those notoriously unreliable systems start to have errors. You can't do that without modern ECUs! I'm all for reducing the harm caused by running diesel engines in the most densely populated cities on the planet (DEF and similar systems are about particulate emissions, not carbon), but we're being naive if we pretend that extending these regulations to farm equipment isn't a huge factor in why that same equipment has gotten more expensive and less reliable over the past decade."
+        },
+        {
+          "id": 47874421,
+          "author": "alexpotato",
+          "text": "Two things: 1. LOVE this idea as I've always been a big fan of \"right to repair\" and even at work, FinTech SRE/DevOps, I say things like \"we want this to be like a 1975 Ford: you open the hood, look inside, understand it and it's easy to fix. We don't want a 2026 Ferrari.\" 2. The Econ major/MBA in me wonders how long you can sell cheaper tractors that last forever. I say this b/c it's like trying to sell 100 year lightbulbs: markets are not infinite so if you have everyone buy them in years 1-10, what do you sell after that? The general idea is that you charge MORE for these things since a. \"easy to repair\" is now an added feature, b. people will buy less of your thing so you need to make more money upfront. Granted, there is probably some sweet spot and/or \"even selling 1,000 == a couple million and that's enough for anyone\" but I still like to debate the points"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 30,
+      "id": 47848162,
+      "title_en": "A Renaissance gambling dispute spawned probability theory",
+      "title_ja": "A Renaissance gambling dispute spawned probability theory",
+      "url": "https://www.scientificamerican.com/article/how-a-renaissance-gambling-dispute-spawned-probability-theory/",
+      "hn_url": "https://news.ycombinator.com/item?id=47848162",
+      "score": 89,
+      "comment_count": 13,
+      "posted_at": "2026-04-21T12:59:59+00:00",
+      "comments": [
+        {
+          "id": 47877372,
+          "author": "joenot443",
+          "text": "The article links to a series of letters between Fermat, Pascal, and Carcavi which are wonderfully intelligent and readable, while also deeply kind and personal. > 1. I have been delighted to have had the thoughts conformed to those of M. Pascal, for I admire infinitely his genius and I believe him very capable of coming to the end of all that which he will undertake. The friendship that he offers me is so dear to me and so considerable that I must have no difficulty in making some use of it in the publishing of my Treatises. > Our blows always continue and I am as glad as you in the admiration that our thoughts are arranged so exactly that it seems that they have taken one same route and make one same path It makes me wonder if future generations will look back on correspondences between guys like Ken Thompson and Dennis Ritchie. https://probabilityandfinance.com/pulskamp/Pascal/Sources/pa..."
+        },
+        {
+          "id": 47875606,
+          "author": "skywal_l",
+          "text": "> a French gambler and intellectual socialite enlisted the help Imagine Blaise Pascal and Pierre de Fermat teaming together to solve your problem."
+        },
+        {
+          "id": 47876660,
+          "author": "The_Blade",
+          "text": "Luca Pacioli invented (or really, put down on paper) double-entry accounting it is funny how probability has always been way behind other maths. i got to use the Birthday problem at work, once, which made the math undergrad totally worth it fortunately my Polymarket and Kalshi wagers are protected by AES et al"
+        },
+        {
+          "id": 47882119,
+          "author": "divbzero",
+          "text": "… and a Student’s quest for quality beer led to the t -test. https://en.wikipedia.org/wiki/William_Sealy_Gosset"
+        },
+        {
+          "id": 47877171,
+          "author": "benbreen",
+          "text": "Just wanted to flag that the works of Ian Hacking, especially The Emergence of Probability (1975) and The Taming of Chance (1990) are excellent on this. Dense and challenging at times but also well written and the product of a very original mind. The latter book has a Wikipedia page with some more info - was surprised to see Hacking not mentioned here since the featured article is partly based on his work: https://en.wikipedia.org/wiki/The_Taming_of_Chance"
+        }
+      ],
+      "summary_ja": ""
+    }
+  ]
+}
