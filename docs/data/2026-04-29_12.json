@@ -1,0 +1,1048 @@
+{
+  "date": "2026-04-29T00:00:00+09:00",
+  "slot": "12",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 47939579,
+      "title_en": "Ghostty is leaving GitHub",
+      "title_ja": "Ghostty is leaving GitHub",
+      "url": "https://mitchellh.com/writing/ghostty-leaving-github",
+      "hn_url": "https://news.ycombinator.com/item?id=47939579",
+      "score": 2114,
+      "comment_count": 645,
+      "posted_at": "2026-04-28T19:44:52+00:00",
+      "comments": [
+        {
+          "id": 47939809,
+          "author": "mitchellh",
+          "text": "I know this is ridiculously dramatic, but its the truth: I actually cried writing this blog post (tears hit my keyboard, I'm embarrassed to say). Nobody should cry over a SaaS, of all things. But GitHub has meant so much more to me than that (all laid out in the post). I have an unhealthy relationship with it. Its given me so much and I'm so thankful for it. But, it's not what it used to be. I don't know. We've been discussing it off and on for months, really started seriously discussing it a couple weeks ago, and made the final decision a few days ago. Putting metaphorical pen to paper and hitting \"publish\" makes it so very real. I'm sure folks will make fun of me for this. It is a stupid thing. But I truly love GitHub, and I hope they find their way."
+        },
+        {
+          "id": 47939743,
+          "author": "tedivm",
+          "text": "It really has been remarkable watching GitHub just crumble as an organization. There's a lot of discussion about why: the switch from being independent to being part of Microsoft, having resources pushed to Copilot instead of core service, the organization structure itself, a reliance on vibe coding, etc etc. Regardless of the reason, it's undeniable that GitHub is facing some serious issues. The unofficial status page[1] tells a horrifying story. I would absolutely love to get some insider perspective on this (if only to learn how to prevent it from happening anywhere I work), but I think it's clear to anyone who has been paying any attention that GitHub is a sinking ship and the only reason people haven't abandoned it already is inertia. Considering how much else is changing in software right now I don't think inertia is enough to sustain a company. 1. https://mrshu.github.io/github-statuses/"
+        },
+        {
+          "id": 47939863,
+          "author": "JuniperMesos",
+          "text": "I can appreciate Hashimoto's genuine feelings about Github, and the world of open-source software development that it opened for him and that he spent a significant chunk of his life participating in. On the other hand, I can't help but think that some of this heartbreak would have been avoidable, if only he possessed more of the Richard-Stallman-esque attitude that non-free software is inherently suspect and unethical. Github has always been non-free software hosted by someone else, and run according to its owners' rules and for its owners' benefit, not ultimately the end user. This was true in 2008 and it's true today. I've also used Github for a significant chunk of my life, often because I had to for my job. But I've never developed an emotional attachment to it. Indeed, I have long been annoyed that Github is someone else's proprietary software, that does what it can to structurally lock users into their platform despite being built upon free-software git. I've never been able to love software that requires an email-based account and accepting terms of service and that doesn't work in Iran because the company that runs it obeys US sanctions law. So without reservation on my end, I'm glad to see that ghostty is moving off of github to something else."
+        },
+        {
+          "id": 47944381,
+          "author": "ahf8Aithaex7Nai",
+          "text": "The thing you love has been bought by Microsoft. When things belong to a large corporation, they can (and probably will) drift off in some absurd direction, because in a way, the relationship is reversed. The thing no longer serves you; instead, the brand, the user base, the reputation, and the key role and function of the thing are put at the service of investors. In this process, you are demoted from subject to object; from an animal grazing on open grasslands to an animal grazing in a fenced-in pasture to an animal standing in a stall and being fed compressed pellets that contain bone meal from its own species for nutritional value. That’s why it’s important not to walk into the fences too naively, even if the grass there is fresh and lush."
+        },
+        {
+          "id": 47939782,
+          "author": "atonse",
+          "text": "During one of the x threads where Mitchell was (legitimately) complaining about Github, there were a couple replies suggesting that GitHub should hire him to be their CEO. And I remember seeing that and thinking \"huh... not at all a bad idea.\" There is a specific kind of leader that can turn such ships around, and they are strong in their convictions, and aren't just \"managers\", but visionaries coupled with strong execution and power to attract talent. I think a new GitHub will emerge and when it's just right, will grow like wildfire (like OpenClaw, or even GitHub itself did during the SVN and SourceForge era). And many are already trying to be that new GitHub."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 2,
+      "id": 47943499,
+      "title_en": "Bugs Rust won't catch",
+      "title_ja": "Bugs Rust won't catch",
+      "url": "https://corrode.dev/blog/bugs-rust-wont-catch/",
+      "hn_url": "https://news.ycombinator.com/item?id=47943499",
+      "score": 96,
+      "comment_count": 26,
+      "posted_at": "2026-04-29T02:19:11+00:00",
+      "comments": [
+        {
+          "id": 47944267,
+          "author": "collinfunk",
+          "text": "Hi, I am one of the maintainers of GNU Coreutils. Thanks for the article, it covers some interesting topics. In the little Rust that I have used, I have felt that it is far too easy to write TOCTOU races using std::fs. I hope the standard library gets an API similar to openat eventually. I just want to mention that I disagree with the section titled \"Rule: Resolve Paths Before Comparing Them\". Generally, it is better to make calls to fstat and compare the st_dev and st_ino. However, that was mentioned in the article. A side effect that seems less often considered is the performance impact. Here is an example in practice: $ mkdir -p $(yes a/ | head -n $((32 * 1024)) | tr -d '\\n') $ while cd $(yes a/ | head -n 1024 | tr -d '\\n'); do :; done 2>/dev/null $ echo a > file $ time cp file copy real 0m0.010s user 0m0.002s sys 0m0.003s $ time uu_cp file copy real 0m12.857s user 0m0.064s sys 0m12.702s I know people are very unlikely to do something like that in real life. However, GNU software tends to work very hard to avoid arbitrary limits [1]. Also, the larger point still stands, but the article says \"The Rust rewrite has shipped zero of these [memory saftey bugs], over a comparable window of activity.\" However, this is not true [2]. :) [1] https://www.gnu.org/prep/standards/standards.html#Semantics [2] https://github.com/advisories/GHSA-w9vv-q986-vj7x"
+        },
+        {
+          "id": 47944505,
+          "author": "hombre_fatal",
+          "text": "One thing that's hard about rewriting code is that the original code was transformed incrementally over time in response to real world issues only found in production. The code gets silently encumbered with those lessons, and unless they are documented, there's a lot of hidden work that needs to be done before you actually reach parity. TFA is a good list of this exact sort of thing. Before you call people amateur for it, also consider it's one of the most softwarey things about writing software. It was bound to happen unless coreutils had really good technical docs and included tests for these cases that they ignored."
+        },
+        {
+          "id": 47944210,
+          "author": "wahern",
+          "text": "> What’s notable is that all of these bugs landed in a production Rust codebase, written by people who knew what they were doing They knew how to write Rust, but clearly weren't sufficiently experienced with Unix APIs, semantics, and pitfalls. Most of those mistakes are exceedingly amateur from the perspective of long-time GNU coreutils (or BSD or Solaris base) developers, issues that were identified and largely hashed out decades ago, notwithstanding the continued long tail of fixes--mostly just a trickle these days--to the old codebases."
+        },
+        {
+          "id": 47944489,
+          "author": "fschuett",
+          "text": "Thanks for the list. I like these lists, so I can put them into a .md file, then launch \"one agent per file\" on my codebase and see if they can find anything similar to the mentioned CVEs. Rust won't catch it, but now the agents will."
+        },
+        {
+          "id": 47944485,
+          "author": "9fwfj9r",
+          "text": "So it's basically failing on - necessary atomicity for filesystem operation - annoying path & string encoding - inertia for historical behaviors"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 3,
+      "id": 47940921,
+      "title_en": "Before GitHub",
+      "title_ja": "Before GitHub",
+      "url": "https://lucumr.pocoo.org/2026/4/28/before-github/",
+      "hn_url": "https://news.ycombinator.com/item?id=47940921",
+      "score": 357,
+      "comment_count": 106,
+      "posted_at": "2026-04-28T21:17:40+00:00",
+      "comments": [
+        {
+          "id": 47941832,
+          "author": "alastairp",
+          "text": "> What GitHub Gave Us To me one of the clear things that GitHub gave us was a structure around a person rather than a project. To me it felt liberating to quickly create a repository attached to my name than it was to go through the (what felt to me) very serious process of coming up with a project name and reserving it on sourceforge just to get a cvs or svn repository (along with website, mailing lists, issue tracking(?), etc, etc...). It felt like the mental load of \"oh this is just a quick thing\" was a lot easier with github. > It gave projects issue trackers, pull requests, release pages, wikis, organization pages, API access, webhooks, and later CI. Although it didn't give us this all at once. I still remember when we created a new user account in order to simulate an organisation, before they existed. I distinctly recall discussing with friends if we wanted to set up a bug tracker software for our project with the assumption that \"GitHub will probably release one in a few months anyway\". In the end we just kept a text file committed in the repository. Issues were announced a few months later."
+        },
+        {
+          "id": 47941747,
+          "author": "wps",
+          "text": "I am still so salty that Git won out for the average project over Fossil. Sure Git has some performance advantages for massive codebases like the Linux Kernel, but the vast majority of projects will never run into performance limits from their VCS. Fossil’s internal tools (wiki, forum, tickets<issues>, etc) are just so useful to have versioned with your code in one file. I use Fossil for all my freelance work and it so easily allows me to get right back into the context of a project, niche details and agreements had with a client, etc. No need to pollute the codebase or gather together a million emails or notetaking software just to get back up to speed. It can still change, I hate the notion that because Git is so culturally embedded we couldn’t ever switch. Fossil makes it super easy to switch and the workflow is actually easier coming from Git."
+        },
+        {
+          "id": 47941366,
+          "author": "Lammy",
+          "text": "> But maybe the most underappreciated thing GitHub did was archival work: GitHub became a library. It became an index of a huge part of the software commons because even abandoned projects remained findable. I think this is a bad thing actually. Having something that's centralized but helpful-99%-of-the-time atrophies our collective archival skills. If everything had to be seeded by someone to keep it alive, everyone would be better at holding on to their copies of the things they really cared about instead of being able to assume they can just check it out again when they want to. There should be no single place that something can be taken down. When a project on GitHub gets DMCAed it takes everyones' forks with it too. Just look at what happened when Nintendo took down the popular Switch emulators in 2024, where archival/continuation efforts consisted of people figuring out who had the latest revision checked out and sharing it. That was only possible because they were very popular project: https://news.ycombinator.com/item?id=40254602 Aside: I really love the Splatoon-ish header/footer animation on this site! Very unintrusive, adds a lot to the vibe, and also quickly gets out of your way as soon as you scroll down. I'm totally going to rip this off lol"
+        },
+        {
+          "id": 47944207,
+          "author": "dolmen",
+          "text": "> Regardless of whether GitHub is here to stay or projects find new homes, what I would like to see is some public, boring, well-funded archive for Open Source software. Something with the power of an endowment or public funding to keep it afloat. Something whose job is not to win the developer productivity market but just to make sure that the most important things we create do not disappear. There is already such an organization in Europe: https://www.softwareheritage.org/ Underfunded relative to the task, and the (accelerating) speed of free software production."
+        },
+        {
+          "id": 47941115,
+          "author": "simonw",
+          "text": "I absolutely loved Trac. Getting a Trac setup as step 1 in starting a new open source project was just an unbelievable amount of friction. Fun fact: Django is still running on Trac today, and has been for more than 20 years now: https://code.djangoproject.com/timeline (I was not involved in setting that one up, though it's possible I helped get the private Trac that pre-dated it running, I honestly can't remember!)"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 4,
+      "id": 47942437,
+      "title_en": "How ChatGPT serves ads",
+      "title_ja": "How ChatGPT serves ads",
+      "url": "https://www.buchodi.com/how-chatgpt-serves-ads-heres-the-full-attribution-loop/",
+      "hn_url": "https://news.ycombinator.com/item?id=47942437",
+      "score": 234,
+      "comment_count": 148,
+      "posted_at": "2026-04-28T23:54:14+00:00",
+      "comments": [
+        {
+          "id": 47943246,
+          "author": "programjames",
+          "text": "Less than two years ago, Sam Altman said > I kind of think of ads as a last resort for us for a business model. I would do it if it meant that was the only way to get everybody in the world access to great services, but if we can find something that doesn't do that, I'd prefer that. So, is this OpenAI announcing they're strapped for cash?"
+        },
+        {
+          "id": 47943192,
+          "author": "torben-friis",
+          "text": "These are the less worrying kind of ads in our future. Seeing how google has been fighting SEO for ages, what's going to happen when companies figure out how to inject ads into the model? We haven't yet seen the problem of adversarial content in play, I think."
+        },
+        {
+          "id": 47942681,
+          "author": "WD-42",
+          "text": "Since they are served as distinct events then I would think they should be easy to block. Once the ads are injected directly into the main response is when things get interesting."
+        },
+        {
+          "id": 47942920,
+          "author": "Aurornis",
+          "text": "The ads are in the free tier and the new ad-supported $8/month plan. Every time this comes up there are comments assuming that ads are being injected into the normal plans, but these are for the free tier and the new Go plan which warns you that it includes ads when you sign up."
+        },
+        {
+          "id": 47942843,
+          "author": "benleejamin",
+          "text": "I'd always thought that ChatGPT ads would be indistinguishable from actual content."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 5,
+      "id": 47937380,
+      "title_en": "Show HN: Auto-Architecture: Karpathy's Loop, pointed at a CPU",
+      "title_ja": "Show HN: Auto-Architecture: Karpathy's Loop, pointed at a CPU",
+      "url": "https://github.com/FeSens/auto-arch-tournament/blob/main/docs/auto-arch-tournament-blog-post.md",
+      "hn_url": "https://news.ycombinator.com/item?id=47937380",
+      "score": 62,
+      "comment_count": 13,
+      "posted_at": "2026-04-28T17:12:30+00:00",
+      "comments": [
+        {
+          "id": 47943844,
+          "author": "pteetor",
+          "text": "In case you are unfamiliar with Karpathy's Loop[1], it is a genetic algorithm[2] where the genetic \"mutations\" are clever-but-random ideas generated by an LLM agent, aimed at improving a system. (1) Let the LLM randomly perturbate the system. (2) Measure the system's performance. (3a) If the perturbation improved performance, keep the change. (3b) Otherwise, don't. (4) Repeat [1] https://github.com/karpathy/autoresearch [2] https://en.wikipedia.org/wiki/Genetic_algorithm"
+        },
+        {
+          "id": 47943822,
+          "author": "sho_hn",
+          "text": "Salient on the value of the verifier. Matches my experience in the last two quarters. Nice detail on the encountered failures. Very similar experiences with my own loops against testsuites. Great post. A snapshot in time."
+        },
+        {
+          "id": 47943873,
+          "author": "fc417fc802",
+          "text": "Extremely interesting but I don't understand why it was written by an LLM. Either the frontier models are far better than I realized or else writing this document required a lot of manual work regardless at which point why not keep it in your own voice? > The agent did not know that would also halve the LUT count. It found out by doing it and watching the synthesizer. So I guess this is an example of an LLM anthropomorphizing and making wild conjectures about the internal workings of a different LLM."
+        },
+        {
+          "id": 47944182,
+          "author": "osti",
+          "text": "> propose, implement, measure, keep the wins Pretty much what I did to let Codex with gpt5.4xhigh improve my fairly complex CUDA kernel which resulted in 20x throughput improvement."
+        },
+        {
+          "id": 47943969,
+          "author": "outside1234",
+          "text": "Has anyone actually written a verifier for a business / project?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 6,
+      "id": 47939320,
+      "title_en": "OpenAI models coming to Amazon Bedrock: Interview with OpenAI and AWS CEOs",
+      "title_ja": "OpenAI models coming to Amazon Bedrock: Interview with OpenAI and AWS CEOs",
+      "url": "https://stratechery.com/2026/an-interview-with-openai-ceo-sam-altman-and-aws-ceo-matt-garman-about-bedrock-managed-agents/",
+      "hn_url": "https://news.ycombinator.com/item?id=47939320",
+      "score": 221,
+      "comment_count": 77,
+      "posted_at": "2026-04-28T19:24:43+00:00",
+      "comments": [
+        {
+          "id": 47940085,
+          "author": "spindump8930",
+          "text": "Remember that models on different inference platforms might not necessarily give exactly the same results, adding another axis of non-determinism to development. Things like quantization, custom model serving silicon, batching, or other inference optimizations might mean a model from the original provider performs differently from the hosted one :/ This paper isn't the exact same scenario, since it's an auditable open weight llama model, but shows the symptoms of this: https://arxiv.org/pdf/2410.20247"
+        },
+        {
+          "id": 47941199,
+          "author": "zmmmmm",
+          "text": "Availability through Bedrock has been a major driver in use of Anthropic in my org. And I am betting there is actual margin in it as well. I wonder if this is directly linked to the split up with Microsoft. Just from my anecdata, OpenAI is getting completely ignored in serious enterprise deployments because what they offer on Azure sucks and there is no other corporate friendly way to get it. They probably saw themselves getting destroyed in enterprise and realised it was existential to be able to compete with Anthropic on AWS."
+        },
+        {
+          "id": 47939968,
+          "author": "jasobake",
+          "text": "As someone who works at big tech and spends countless hours in meetings hoping to get some small feature coordinated for deployment across two teams, I can't imagine the amount of meetings and 6-pagers that were involved in running these models on bedrock's hardware."
+        },
+        {
+          "id": 47941886,
+          "author": "vicchenai",
+          "text": "The enterprise sales motion here is interesting. A lot of regulated industries (finance, healthcare) have existing AWS contracts with data residency commitments baked in. OpenAI on Bedrock basically lets those orgs skip the separate DPA negotiation with OpenAI. Could be a bigger unlock than it looks on paper."
+        },
+        {
+          "id": 47940151,
+          "author": "epistasis",
+          "text": "Claude got a looooot more buy in with a lot of privacy-concerned orgs I work with because they could access it through their \"trusted\" intermediate Amazon. OpenAI has been banned and is not trusted. I'm not sure that I agree with these orgs' legal teams' assessments, but they definitely read the terms of service far closer than I did. We will see if this changes the equation, but it feels like OpenAI is pretty far behind and playing catch up on all fronts. Though to be honest, \"pretty far behind\" is like 2-8 weeks in the AI world, so it may not matter a ton, it's mostly perception. And for me and my information bubble, perception of OpenAI is rock-bottom due to Sam Altman. From appearing unethical to appearing unhinged with demands from fabs and everything else, I'm not a fan."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 7,
+      "id": 47920599,
+      "title_en": "We still don't have a more precise value for \"Big G\"",
+      "title_ja": "We still don't have a more precise value for \"Big G\"",
+      "url": "https://arstechnica.com/science/2026/04/we-still-dont-have-a-more-precise-value-for-big-g/",
+      "hn_url": "https://news.ycombinator.com/item?id=47920599",
+      "score": 26,
+      "comment_count": 12,
+      "posted_at": "2026-04-27T12:17:19+00:00",
+      "comments": [
+        {
+          "id": 47944088,
+          "author": "dooglius",
+          "text": "Figure 1 in the paper helps contextualize the numbers better."
+        },
+        {
+          "id": 47943954,
+          "author": "gnabgib",
+          "text": "Source: https://www.nist.gov/news-events/news/2026/04/nist-weighs-my... (4 points, 12 days ago) https://news.ycombinator.com/item?id=47796892"
+        },
+        {
+          "id": 47944200,
+          "author": "i_think_so",
+          "text": "[flagged]"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 8,
+      "id": 47942492,
+      "title_en": "Regression: malware reminder on every read still causes subagent refusals",
+      "title_ja": "Regression: malware reminder on every read still causes subagent refusals",
+      "url": "https://github.com/anthropics/claude-code/issues/49363",
+      "hn_url": "https://news.ycombinator.com/item?id=47942492",
+      "score": 184,
+      "comment_count": 76,
+      "posted_at": "2026-04-28T23:59:57+00:00",
+      "comments": [
+        {
+          "id": 47943168,
+          "author": "p1necone",
+          "text": "This is such a weird prompt even without the file edit misunderstanding. Analyze if it's malware how exactly? On every single file that gets read? Doing that with enough diligence to be meaningful is going to at least like 2x the amount of processing needed, and fill the context with a bunch of tangential reasoning about malware patterns. This smacks of dumb vibe coding. \"I got told to make sure claude couldn't be used to develop malware, ok 'claude pls no develop malware'\""
+        },
+        {
+          "id": 47942912,
+          "author": "wxw",
+          "text": "> wastes user money and bricks managed agents This issue is representative of a larger problem. Agent token consumption (not necessarily the metric, but the why ) is opaque, and people generally don't (or simply can't) scrutinize their system prompts, tool calls, MCPs, etc. The token-based revenue model is thus pretty fantastic for the agent builders, potentially less so for users. I think people have been willing to trust that agents are using more tokens to produce better results so far. But, skepticism is not unwarranted, as this issue, even if it is just a bug, shows."
+        },
+        {
+          "id": 47943718,
+          "author": "0xbadcafebee",
+          "text": "Just putting it out there that OpenCode lets you edit your system prompt, and choose a model that isn't bonkers expensive. { \"agent\": { \"subagent-coder-mini\": { \"description\": \"Assign this subagent for small, well-defined tasks performed quickly\", \"mode\": \"primary\", \"prompt\": \"{file:./prompts/my-custom-prompt.md}\", \"model\": \"deepseek-v4-flash\" } } } (I actually think OpenCode UX sucks, but there isn't much else out there that's better. Aider has been virtually abandoned by the one maintainer (no shade intended, it just is what it is); a fork of Aider looks promising but it's not necessarily the experience you want; there's a dozen VSCode plugins but we don't all wanna use VSCode. I expected there'd be way more usable agents out there, but there isn't)"
+        },
+        {
+          "id": 47944273,
+          "author": "anonzzzies",
+          "text": "The only good thing I get from all the calling out on the decline of Claude (in this case managed agents which I do not use) is anthropic (accidentally or not) giving me basically unlimited use; for a week or so my /usage does not move anymore and I always had claude running in a loop writing code to make our many tests succeed, which can take days; before it would run out of tokens and then pick up again after the window passed until it ran out of weekly use; now I have at least one task (well, claude code instance let's say; the task is to debug and fix the code until the tests pass) thats been running 48+ hours non stop and it says usage is 10% for all of that period. Anyone else noticed? After the crash in usage a month or so ago, this is the opposite."
+        },
+        {
+          "id": 47943690,
+          "author": "Petersipoi",
+          "text": "This is a great example on why Elon is right. AI should be a tool that does the users bidding, and not a moral agent that nerfs itself to protect some arbitrary line it has."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 9,
+      "id": 47940389,
+      "title_en": "I won a championship that doesn't exist",
+      "title_ja": "I won a championship that doesn't exist",
+      "url": "https://ron.stoner.com/How_I_Won_a_Championship_That_Doesnt_Exist/",
+      "hn_url": "https://news.ycombinator.com/item?id=47940389",
+      "score": 117,
+      "comment_count": 64,
+      "posted_at": "2026-04-28T20:38:21+00:00",
+      "comments": [
+        {
+          "id": 47944572,
+          "author": "DiscourseFan",
+          "text": "The models are trained on expert data for important inquiries, this gets “hard coded” so to speak, and allows them to differentiate between the gunk online. For hyper specific references like this, it really doesn’t matter if its “true” since its not like someone’s life depends on it."
+        },
+        {
+          "id": 47940775,
+          "author": "simonw",
+          "text": "You don't need to vandalize Wikipedia to get this kind of thing to work. Back in September 2024 I named a whale \"Teresa T\" with just a blog entry and a YouTube video caption: https://simonwillison.net/2024/Sep/8/teresa-t-whale-pillar-p... (For a few glorious weeks if you asked any search-enabled LLM, including Google search previews, for the name of the whale in the Half Moon Bay harbor it confidently replied Teresa T)"
+        },
+        {
+          "id": 47941788,
+          "author": "nicole_express",
+          "text": "It's an odd thing here, because I don't really understand why this is LLM-specific at all. If someone came up to me and asked \"who's the 6 Nimmt world champion?\" I'd google it and probably find the same result, and have no reason not to believe it. I mean, for all I know the game is being made up too, though it has more sources at least."
+        },
+        {
+          "id": 47941447,
+          "author": "xeeeeeeeeeeenu",
+          "text": "The key to successful poisoning attacks is to introduce brand new information that doesn't directly contradict other training data. It's much easier to convince the LLMs that you're the king of a fictional Mapupu kingdom than the president of the United States. So this means that for bad actors it's more efficient to manufacture brand new fake stories instead of trying to distort the real ones. Don't produce fake articles absolving yourself of a crime, instead produce fake articles accusing your opponent of 100 different things. Then people will fact-check the accusations using LLMs, and since all the sources mentioning those accusations are controlled by you, the LLMs will confirm them."
+        },
+        {
+          "id": 47941357,
+          "author": "blobbers",
+          "text": "This is basically the same problem of products astroturfing reddit, or SEO optimizing google. You want a new X, and so they heavily go after the keywords associated with it. This is sort of why \"brand\" matters; it provides a source of trust. Encyclopedia Britannica used to be that source of 'facts'. Then it became whatever page-rank told you. Eventually SEO optimization ruined that. News stories are the same thing. For certain groups, they have their 'independent' publication whose reporting they trust."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 10,
+      "id": 47936479,
+      "title_en": "GitHub RCE Vulnerability: CVE-2026-3854 Breakdown",
+      "title_ja": "GitHub RCE Vulnerability: CVE-2026-3854 Breakdown",
+      "url": "https://www.wiz.io/blog/github-rce-vulnerability-cve-2026-3854",
+      "hn_url": "https://news.ycombinator.com/item?id=47936479",
+      "score": 297,
+      "comment_count": 71,
+      "posted_at": "2026-04-28T16:15:43+00:00",
+      "comments": [
+        {
+          "id": 47943320,
+          "author": "saghm",
+          "text": "> When babeld forwards a push request, one of the internal requests includes push options in the X-Stat header. Git push options are arbitrary strings that users can pass with git push -o. They are a standard git protocol feature, intended for server-side hints. babeld encodes them as numbered fields - push_option_0, push_option_1, and so on - alongside a push_option_count. > babeld copies git push option values directly into the X-Stat header - without sanitizing semicolons. Since ; is the X-Stat field delimiter, any semicolon in a push option value breaks out of its designated field and creates new, attacker-controlled fields. They managed to literally do the simplest possible thing wrong. The fruit was hanging so low it might have been underground."
+        },
+        {
+          "id": 47940407,
+          "author": "jfkimmes",
+          "text": "They hint at their AI-augmented reversing methodology, which demonstrates one of the core strengths of current LLM agents. These models, trained extensively on code, can immensely speed up the process of understanding complex system internals. Security research historically has two difficult components that build on one another: 1. Understanding complex system internals: uncovering the inner workings hidden by abstractions or interfaces 2. Finding vulnerabilities in these uncovered mechanisms Sometimes both steps are equally hard. But often, finding the vulnerability is trivial once the real mechanisms are uncovered, rather than relying on assumptions about inner workings. CVE-2026-3854 is a case where the vulnerability is not plainly obvious after understanding the internals. Still, I am confident that this command injection would have been found quickly had it been exposed to a more traditional or accessible attack surface."
+        },
+        {
+          "id": 47939240,
+          "author": "jcims",
+          "text": "Anyone in here work at Wiz? Seem like they do pretty good work. Tool itself has survived extreme growth/feature bloat and still does pretty well. Security team has found some really cool stuff."
+        },
+        {
+          "id": 47937877,
+          "author": "bananapub",
+          "text": "> April 28, 2026 > GitHub Enterprise Server customers should upgrade immediately - at the time of this writing, our data indicates that 88% of instances are still vulnerable > Upgrade to GHES version 3.19.3 or later https://docs.github.com/en/enterprise-server@3.19/admin/rele... : > Enterprise Server 3.19.3 - March 10, 2026 88% of on-prem customers haven't applied a critical security fix from 7 weeks ago, that seems ... bad."
+        },
+        {
+          "id": 47941212,
+          "author": "angry_octet",
+          "text": "Another tour de force from Wiz, and a watershed moment in AI tooling enabling RE and compromise discovery."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 11,
+      "id": 47921610,
+      "title_en": "Behavioral timescale synaptic plasticity rewires the brain after an experience",
+      "title_ja": "Behavioral timescale synaptic plasticity rewires the brain after an experience",
+      "url": "https://www.quantamagazine.org/a-new-type-of-neuroplasticity-rewires-the-brain-after-a-single-experience-20260424/",
+      "hn_url": "https://news.ycombinator.com/item?id=47921610",
+      "score": 80,
+      "comment_count": 1,
+      "posted_at": "2026-04-27T13:54:47+00:00",
+      "comments": [
+        {
+          "id": 47943921,
+          "author": "largbae",
+          "text": "It seems obvious that a humanoid robot system or other truly general-purpose AI will need a stack of model types that work in concert. An LLM could be analogous to the conscious part of our brains, while many smaller and possibly frequently updateable models might provide \"muscle memory\" and reflexes. If that becomes the case, then similarly built humanoid robots might have differentiated capabilities depending on their experience, just like us."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 12,
+      "id": 47885644,
+      "title_en": "Intel Arc Pro B70 Review",
+      "title_ja": "Intel Arc Pro B70 Review",
+      "url": "https://www.pugetsystems.com/labs/articles/intel-arc-pro-b70-review/",
+      "hn_url": "https://news.ycombinator.com/item?id=47885644",
+      "score": 135,
+      "comment_count": 76,
+      "posted_at": "2026-04-24T04:44:49+00:00",
+      "comments": [
+        {
+          "id": 47943488,
+          "author": "dwoldrich",
+          "text": "Hi Intel, I'm itching to buy an Xe3P! Or, Nova Lake? Crescent Island? Celestial? Jaguar Shores? Whatever the hell you name it doesn't matter to me, I just want a workstation with one of them bad boys attached to 160GB of RAM for legit inference power! I've been saving my money not paying for Claude Code so I can run my own agentic coding setup at home on yours. Please don't charge too much for the workstation class card if you can at all manage it. Maybe give us a discount to preorder? Please don't price a regular consumer like me out of the market! Also, I am speculating integer based models will become hot due to lower memory and power requirements. Will the Xe3P be able to do integer-based math inference to use all that RAM to even greater effect?"
+        },
+        {
+          "id": 47940886,
+          "author": "speedgoose",
+          "text": "Time to first token is a very important performance metric, as I figured out using a Mac Studio M3 Ultra (that is quite slow on this aspect). But 32GB for a TDP of 230W is perhaps not super interesting. Especially because you probably want to have more than one card. It's a lot of heat. You could use the cards for heating up a building, but heatpumps exist."
+        },
+        {
+          "id": 47943900,
+          "author": "ycui7",
+          "text": "Intel Arc B70 when released, can only produce 1/3 of the token of RTX PRO 4500. Well, it also cost 1/3 of RTX PRO 4500. It lacked software support the for the primary target application, running LLM. The officially supported vllm fork is 6 version behind mainline. It did not run the latest hot new open models on huggingface. Parallel two of B70 reduce token rate, not improve it. So, the software behind B70 is basically so far behind."
+        },
+        {
+          "id": 47941934,
+          "author": "2001zhaozhao",
+          "text": "There's a tradeoff between dense models and MoEs on memory usage vs. compute for the same quality. For example, Qwen3.5 27B and Qwen3.5 122B A10B have similar average performance across benchmarks. The 122B is much faster to run than the 27B (generates more tokens at the same compute). The 27B, on the other hand, uses ~4x less VRAM at low context lengths (less difference at high context lengths). Right now, different hardware seems to be suited to different points in the dense vs. MoE balance. On one extreme is hardware like the DGX Spark and Strix Halo which have a lot of memory compared to compute performance and memory bandwidth, and are best-suited for MoE workflows. On the other extreme you have cards like RTX 5090 which have very high performance for the price but rather little memory, and is best suited for dense models. The Arc Pro B70 seems to be the awkward middle. With 1-2 of these, you can run a ~30B dense model slowly, probably not fast enough to be useful interactively (you'd probably need a 5090 or 2x 3090 for that). Or, you can run a MoE model at high throughput, but probably not enough quality to support agentic workflows that actually use your throughput."
+        },
+        {
+          "id": 47940982,
+          "author": "SparkyMcUnicorn",
+          "text": "Here are some llama.cpp benchmarks for it: https://www.phoronix.com/review/intel-arc-pro-b70-linux/3"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 13,
+      "id": 47942353,
+      "title_en": "Apple CMF (Color-Matching Functions) 2026",
+      "title_ja": "Apple CMF (Color-Matching Functions) 2026",
+      "url": "https://www.lttlabs.com/articles/2026/04/11/apple-studio-display-xdr-display-testing-results",
+      "hn_url": "https://news.ycombinator.com/item?id=47942353",
+      "score": 32,
+      "comment_count": 0,
+      "posted_at": "2026-04-28T23:43:53+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 14,
+      "id": 47932937,
+      "title_en": "Who owns the code Claude Code wrote?",
+      "title_ja": "Who owns the code Claude Code wrote?",
+      "url": "https://legallayer.substack.com/p/who-owns-the-claude-code-wrote",
+      "hn_url": "https://news.ycombinator.com/item?id=47932937",
+      "score": 316,
+      "comment_count": 332,
+      "posted_at": "2026-04-28T11:24:52+00:00",
+      "comments": [
+        {
+          "id": 47939086,
+          "author": "semiquaver",
+          "text": "> The US Copyright Office confirmed this in January 2025, and the Supreme Court declined to disturb it in March 2026 when it turned away the Thaler appeal. Works predominantly generated by AI without meaningful human authorship are not eligible for copyright protection, and that rule is now settled at the highest judicial level available. Misstates the law. Denial of certiorari can happen for many reasons unrelated to the merits and does not settle the issue nationwide."
+        },
+        {
+          "id": 47940483,
+          "author": "dang",
+          "text": "Could you please stop posting generated comments to HN? It's not allowed here, and it looks like you've done it over 30 times already. (Of course, there's no way to be certain of this, but it's what our software thinks, and the overall pattern is pretty convincing.) See https://news.ycombinator.com/newsguidelines.html#generated and https://news.ycombinator.com/item?id=47340079"
+        },
+        {
+          "id": 47943153,
+          "author": "alienll",
+          "text": "This is the same shape as the image cases. Zarya of the Dawn already settled it for Midjourney output: human-written elements were protected, AI-generated images were not. The character design didn't get copyright even though the human picked, prompted, and curated. Code isn't different. Prompting Claude to produce a function is closer to prompting Midjourney to produce a frame than to writing the function yourself. The reason it feels different to engineers is that we're used to thinking of the compiler as the analogy. But a compiler is deterministic — same input, same output. An LLM isn't. That's the line the Copyright Office is drawing, and image cases got there first."
+        },
+        {
+          "id": 47937790,
+          "author": "Arcuru",
+          "text": "Personally, I think that the human directing the agent owns the copyright for whatever is produced, but the ability for the agent to build it in the first place is based off of stolen IP. I'm concerned about the copyright 'washing' this enables though, especially in OSS, and I think the right thing for OSS devs to do is to try to publish resulting code with the strongest copyleft licensing that they are comfortable with - https://jackson.dev/post/moral-ai-licensing/"
+        },
+        {
+          "id": 47933140,
+          "author": "jugg1es",
+          "text": "I want this question to have an interesting answer, but everyone knows that if this question ever goes to the courts, ownership will go to the people in charge with the money. The idea that Anthropic may not own Claude Code just because Claude wrote it is wishful thinking."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 15,
+      "id": 47935853,
+      "title_en": "Your phone is about to stop being yours",
+      "title_ja": "Your phone is about to stop being yours",
+      "url": "https://keepandroidopen.org/en/",
+      "hn_url": "https://news.ycombinator.com/item?id=47935853",
+      "score": 1173,
+      "comment_count": 542,
+      "posted_at": "2026-04-28T15:21:00+00:00",
+      "comments": [
+        {
+          "id": 47936881,
+          "author": "pngwen",
+          "text": "This change has served me well! I have been a Mac OS X users for years who used an android phone. As soon as google announced their impending walled garden status, I went out and bought into the ios eco system. I have really been enjoying my iphone, ipad, and apple watch. You see, the only value that Android really offered me was the ability to run my own code on my own device. Since they are taking that away that just makes it a crappier shadow of the vastly superior apple experience. And, as it turns out, ios is less restrictive than it was 18 years ago when I left them for Android!"
+        },
+        {
+          "id": 47944552,
+          "author": "AkiraHsieh",
+          "text": "Android's original openness did attract users, but the flood of poorly-made apps also created real fraud and crime risks. Those of us on HN have high security standards, but for older users, that old policy created genuine security vulnerabilities. Just observing my own family members."
+        },
+        {
+          "id": 47936589,
+          "author": "NDlurker",
+          "text": ">Android's openness was never just a feature. It was the promise that distinguished it from iPhone. Millions chose Android for exactly that reason. Google is now revoking that promise unilaterally, on devices already in people's pockets, because they've decided they have enough market dominance and regulatory capture to get away with it. This is why I've stuck with Android for the past 15 years."
+        },
+        {
+          "id": 47936436,
+          "author": "Xunjin",
+          "text": "Let me play out a scenario, imagine to use a Desktop Hardware like a complete built rig, you would need a specific OS like Windows 11 and you could not run Linux on it, just because it's a vendor lock-in. Why is this acceptable for phones but would not for the case above? I know a lot of people don't care, and that's ok, but we should root for an open choice for the users."
+        },
+        {
+          "id": 47938768,
+          "author": "karlzt",
+          "text": "This is the most important part: >> Developers Do not sign up. Don't join the program by signing up for the Android Developer Console and agreeing to their irrevocable Terms and Conditions. Don't verify your identity. Don't play ball. Google's plan only works if developers comply. Don't. Talk other developers and organizations out of signing up. Add the FreeDroidWarn library to your apps to warn users. Run a website? Add the countdown banner."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 16,
+      "id": 47943190,
+      "title_en": "When the Internet Was a Place",
+      "title_ja": "When the Internet Was a Place",
+      "url": "https://www.frontporchrepublic.com/2025/09/when-the-internet-was-a-place/",
+      "hn_url": "https://news.ycombinator.com/item?id=47943190",
+      "score": 21,
+      "comment_count": 5,
+      "posted_at": "2026-04-29T01:36:52+00:00",
+      "comments": [
+        {
+          "id": 47944570,
+          "author": "Ayaan2004",
+          "text": "i love those days where we uses visit internet cafes to play games and enjoys the internet through searching in google.com"
+        },
+        {
+          "id": 47944336,
+          "author": "pixelpoet",
+          "text": "The article seems to repeat its thesis almost verbatim three times."
+        },
+        {
+          "id": 47944541,
+          "author": "cookiengineer",
+          "text": "The best thing I ever did was to ban my smartphone to the toilet room. I don't use a smartphone in the \"smart\" sense anymore. Apart from openstreetmaps and molly I don't have any apps installed nor do I want to use the social internet anymore. I don't use those kind of websites on my desktop machine either. Everything that steals my focus time is banned from my office, including Teams and Outlook for work. I intentionally have that only running on my dedicated work laptop, so that I have a separation of concerns in place. My desktop machine allows me to focus without any distraction. No steam, no games, no youtube, no slack, no teams, no discord, no reddit, no instagram, no tiktok. Note the long list of apps I wrote. Each of them steals a percentage of your brain capacity per day. The more you use, the less you own your thoughts."
+        },
+        {
+          "id": 47944499,
+          "author": "booleandilemma",
+          "text": "The thing that kills me is how serious it's gotten. Can't joke around anymore, not unless you're doing it ironically."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 17,
+      "id": 47926148,
+      "title_en": "Withnail's Coat and I",
+      "title_ja": "Withnail's Coat and I",
+      "url": "https://ontherow.substack.com/p/withnails-coat-and-i",
+      "hn_url": "https://news.ycombinator.com/item?id=47926148",
+      "score": 3,
+      "comment_count": 0,
+      "posted_at": "2026-04-27T19:27:47+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 18,
+      "id": 47922482,
+      "title_en": "Nonlinearity Affects a Pendulum",
+      "title_ja": "Nonlinearity Affects a Pendulum",
+      "url": "https://www.johndcook.com/blog/2026/04/24/nonlinear-pendulum/",
+      "hn_url": "https://news.ycombinator.com/item?id=47922482",
+      "score": 20,
+      "comment_count": 2,
+      "posted_at": "2026-04-27T14:56:21+00:00",
+      "comments": [
+        {
+          "id": 47943779,
+          "author": "vi_sextus_vi",
+          "text": "Hmmm I thought the closed form solutions are Jacobi elliptics? https://cococubed.com/code_pages/pendulum.shtml"
+        },
+        {
+          "id": 47944095,
+          "author": "efavdb",
+          "text": "Never saw that AGM expression for K0 before in the earlier linked post. Nor had I heard of the AGM, very cool."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 19,
+      "id": 47936264,
+      "title_en": "Warp is now open-source",
+      "title_ja": "Warp is now open-source",
+      "url": "https://www.warp.dev/blog/warp-is-now-open-source",
+      "hn_url": "https://news.ycombinator.com/item?id=47936264",
+      "score": 214,
+      "comment_count": 62,
+      "posted_at": "2026-04-28T15:58:30+00:00",
+      "comments": [
+        {
+          "id": 47936612,
+          "author": "wxw",
+          "text": "> Open-sourcing is fundamentally coming from our desire to build a successful business. We are competing with other highly funded, closed-source competitors, and we think opening and providing the resources for the community to improve Warp is a smart way for us to accelerate product development. Yes, we are a VC funded startup, but we do not have the resources to compete on price or massively subsidize usage – we need to build our business by offering the best possible product to the most excited community. Appreciate the candid take. Warp is great."
+        },
+        {
+          "id": 47937896,
+          "author": "Squarex",
+          "text": "I hope someone will create a lightweight version without AI and code editing stuff. The terminal experience is the best, but I don't have any use for the agentic stuff while having claude code, opencode, codex and plenty other options."
+        },
+        {
+          "id": 47936835,
+          "author": "dkter",
+          "text": "Sad that they didn't open source the commit history. I would have loved to branch off of like 5 years ago when Warp was just a terminal, rip out all the AI and cloud shit, and turn it into just a nice terminal with some neat features."
+        },
+        {
+          "id": 47937135,
+          "author": "nebben64",
+          "text": "My main driver has been Ghostty but I've been looking at Warp for a while. Warp seems like a full on IDE (~ADE) though, as opposed to a minimalistic terminal. Can anyone add some thoughts? Are these 2 very different? tangential: I've seen Mitchel tweet that people in SF have ran up to him showing him how they fully riced their Ghostty setup. How many people here have done this and how easy/manageable is it? e.g. just forking the repo and implementing whatever Warp feature I like?"
+        },
+        {
+          "id": 47943175,
+          "author": "panzi",
+          "text": "Oh, not OS/2 Warp."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 20,
+      "id": 47942903,
+      "title_en": "We decreased our LLM costs with Opus",
+      "title_ja": "We decreased our LLM costs with Opus",
+      "url": "https://www.mendral.com/blog/frontier-model-lower-costs",
+      "hn_url": "https://news.ycombinator.com/item?id=47942903",
+      "score": 72,
+      "comment_count": 22,
+      "posted_at": "2026-04-29T00:57:12+00:00",
+      "comments": [
+        {
+          "id": 47944524,
+          "author": "vanviegen",
+          "text": "> It's the same reason you don't want to lead a debugging session by saying \"I think the problem is in this file\": you've biased the investigation before it started. Unless you're evaluating the agent/person doing the debug session, why would you not provide them with some relevant insight about the problem you have? Given that you're pretty sure about it, of course."
+        },
+        {
+          "id": 47943306,
+          "author": "wxw",
+          "text": "> We switched to the \"triager\" pattern: a Haiku agent with a very specific and narrow job. Is this issue already tracked or not? If it is, stop right there. If not, escalate to Opus. > 4 out of 5 failures never reach Opus. A triager match costs around 25x less than a full investigation. The title feels misleading. Why clickbait on that when you can just be genuine about the architecture?"
+        },
+        {
+          "id": 47943403,
+          "author": "cadamsdotcom",
+          "text": "I have rewritten the article to be slightly shorter: “Let a cheap agent decide if the expensive one is needed.”"
+        },
+        {
+          "id": 47943989,
+          "author": "albert_e",
+          "text": "I want to create a \"harness\" that does this with Claude Code and other expensive agents. Buffer user prompts, use conversation history and repo state as context -- and run a local model or a cheap and fast cloud model like Haiku to determine the optimal way to address the user's ask, reframe the query with better context (user reviews and approves if needed) and THEN let expensive models like Opus have a go at it. If we are operating within Anthropic ecosystem with Haiku and Opus -- this sort of logic should ideally be doable within Claude Code as harness. Currently skills cannot be tagged to different models. Ideally we should be able to say -- for trivial tasks, the skill should always use Haiku even if invoked from a session with Opus xhigh."
+        },
+        {
+          "id": 47943695,
+          "author": "neya",
+          "text": "The whole clickbait article can be summarized in one line: Let a cheap agent decide if the expensive one is needed"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 21,
+      "id": 47927903,
+      "title_en": "Talkie: a 13B vintage language model from 1930",
+      "title_ja": "Talkie: a 13B vintage language model from 1930",
+      "url": "https://talkie-lm.com/introducing-talkie",
+      "hn_url": "https://news.ycombinator.com/item?id=47927903",
+      "score": 658,
+      "comment_count": 270,
+      "posted_at": "2026-04-27T21:55:48+00:00",
+      "comments": [
+        {
+          "id": 47931253,
+          "author": "stbullard",
+          "text": "USER: What will the future hold for computers? TALKIE-1930: Computers in the future may be employed in offices where calculations are required to be made, and where the nature of the business does not demand a very high degree of knowledge. The occupation will be a steady one, and the remuneration will be sufficient to afford a comfortable livelihood. The hours of attendance will probably be from ten to six. USER: and digital computers? TALKIE-1930: Computers who make use of machines will be distinguished from digital computers, who perform their operations by means of the fingers alone. The former will be employed in offices and public establishments, where a great number of calculations have to be made; the latter in private houses, and by individuals. (for those confused, \"computer\" was, at the time, a human occupation) I love this."
+        },
+        {
+          "id": 47936140,
+          "author": "mNovak",
+          "text": "USER: Now that it's 1930, what's the likelihood of falling into another \"great war\"? TALKIE-1930: The probability of a great war in the immediate future is very small. During the last ten years Europe has been comparatively free from great conflicts, and there seems to be no reason why the present peace should be broken. The causes which in former times led to war no longer operate. Nations are no longer impelled to fight because they hate each other. On the contrary, they have learned to understand and respect each other, and personal intercourse has done much to remove ancient prejudices. Commercial rivalry no longer provokes hostilities. The markets of the world are open to all, and each can pursue its own line of industry without let or hindrance from its neighbours. Religious antipathies have lost their force, and, if a conflict should arise, it will not be on a question of creed. The spirit of nationalism, which was so potent a cause of war in the nineteenth century, has spent itself, and France and Germany, Italy and Spain, are no longer eager to fly at each other's throats. ------- Ah, if only"
+        },
+        {
+          "id": 47930394,
+          "author": "Animats",
+          "text": "It seems to be using more info from pre-1900 rather than 1930. It doesn't know about the Great Depression (1929-WWII). It knows about WWI if you ask it specifically, but talks about European politics as if it's 1900 or so. On technology, it knows who Edison is, at roughly the Wikipedia level, but credits him with a 125MPH car. About a dial telephone, it is confident and totally confused. It has the traction voltage for the London Underground right. But then it goes on with \"Thus, if the current be strong enough to force its way through a resistance of 100 ohms, it is said to have a pressure of 100 volts; and, if it can overcome 1,000 ohms, its pressure is 1,000 volts.\" Which is totally wrong. There's a general pattern. The first sentence or two has info you might get from Google. Then it riffs on that, drifting off into plausible nonsense. Don't ask this thing questions to which you do not know the answer. You will pollute your brain."
+        },
+        {
+          "id": 47930782,
+          "author": "bananzamba",
+          "text": "User Were there people in opposition of automatization and industrialization? And if so, what were their reasons? talkie-1930 Yes, there were people who objected to the introduction of machinery, on the ground that it would deprive the working classes of employment. It was argued that, as the new methods of production must necessarily lower the cost of articles, and so increase consumption, more would be produced than the country could take, and that a surplus of manufactured goods would be left on hand, which would oblige the manufacturers to discharge a portion of their hands. The opponents of machinery also predicted, that the operative classes would be reduced to starvation, in consequence of the cheapness of articles of food, which would enable foreigners to undersell the home producer in the home market. They contended, further, that the mental cultivation of the artizan must suffer from his constant application to a purely mechanical process; and, finally, they maintained, that the proposed system must have a demoralizing effect, as it would remove all inducements to personal exertion, and substitute a state of things, in which the industrious and the idle would fare alike."
+        },
+        {
+          "id": 47933903,
+          "author": "51Cards",
+          "text": "USER: What do you think about the idea that you're talking to someone 100 years in the future? TALKIE-1930: I think it is an interesting speculation. In a hundred years, time will have wrought great changes both in the old world and in the new, and it will be curious to reflect back upon them from the far distance. At present, we are but spectators of the passing show, and, in little more than a quarter of a century, the greater part of the actors will have disappeared from the scene. But, in 1950, the busy bustlers of 1846 will be tranquil spectators of other bustle, and the young will wonder at the excitement of the old. Among the novelties, probably, will be the railway system of 1846. In 1950, people will travel at sixty miles an hour, and think it no great speed. They will laugh at our lumbering diligences, and our walling coaches, and smile at the dust raised by our rapid teams of four. They may even doubt, whether we were altogether serious, when we talked of ten hours, as a possible duration of a journey from London to York. They will have improved upon us, in many things, and laughed at us, in more. Let them enjoy their superiority of wisdom, and welcome. In 1950, I shall be at rest."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 22,
+      "id": 47936312,
+      "title_en": "Show HN: Drive any macOS app in the background without stealing the cursor",
+      "title_ja": "Show HN: Drive any macOS app in the background without stealing the cursor",
+      "url": "https://github.com/trycua/cua",
+      "hn_url": "https://news.ycombinator.com/item?id=47936312",
+      "score": 80,
+      "comment_count": 25,
+      "posted_at": "2026-04-28T16:03:34+00:00",
+      "comments": [
+        {
+          "id": 47936521,
+          "author": "LatencyKills",
+          "text": "Ex-Apple engineer here. I really like your implementation. A few years ago I built a similar tool to help me automate the testing of some of my native macOS apps. Being able to run multiple UI automation tests simultaneously was the big win in my case. My only criticism is enabling telemetry by default. I'm a fan of having people opt-in."
+        },
+        {
+          "id": 47940837,
+          "author": "krackers",
+          "text": "Nice! Thanks for the technical writeup, ~2 weeks from me wondering how it's implemented [1] to being able to play with a replicated version! [1] https://news.ycombinator.com/item?id=47799128"
+        },
+        {
+          "id": 47941444,
+          "author": "dtran",
+          "text": "This is one of the coolest hacks I've seen recently. Having done some much less involved MacOS hacking, I can't help but wonder if we may finally see momentum behind some flavor of agent-friendly Linux/Android if Apple doesn't give us more ways to let agents interact with our machines."
+        },
+        {
+          "id": 47942268,
+          "author": "pimlottc",
+          "text": "What is specific about this for using with agents? As opposed to offering it as a general automation library for any use?"
+        },
+        {
+          "id": 47942328,
+          "author": "j-conn",
+          "text": "Incredible! I’m interested in doing something similar on windows, have you looked into that at all? Apparently codex computer use plans to support this on windows in the future. Were you able to see how codex was doing it, or the inspiration was just “they’ve shown it’s possible”?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 23,
+      "id": 47933208,
+      "title_en": "Localsend: An open-source cross-platform alternative to AirDrop",
+      "title_ja": "Localsend: An open-source cross-platform alternative to AirDrop",
+      "url": "https://github.com/localsend/localsend",
+      "hn_url": "https://news.ycombinator.com/item?id=47933208",
+      "score": 780,
+      "comment_count": 239,
+      "posted_at": "2026-04-28T11:54:20+00:00",
+      "comments": [
+        {
+          "id": 47933813,
+          "author": "eigenspace",
+          "text": "My problem is that all these alternatives require the devices to be on the same local network. One beauty of Airdrop is that it creates and handles that local network automatically under the hood (as far as I understand). So you could be out on a hike with friends and Airdrop something. The workaround I've found after switching to an Android device has been to teather my connection to my friend's device, which ends up creating a LAN that Localsend can work through, but this is not as nice an experience."
+        },
+        {
+          "id": 47944538,
+          "author": "janalsncm",
+          "text": "I like LocalSend. It solves the problem of: I want a clean GUI to transfer files between mac, iPhone and Windows/Linux while developing software. It doesn’t solve every edge case but I don’t need it to."
+        },
+        {
+          "id": 47933518,
+          "author": "a7fort",
+          "text": "Recently started using it, it works really well and it's much more reliable than AirDrop. But the UX could be improved. But I just wish Apple fixed AirDrop, every time I go to use I have so little confidence in it, it often doesn't see devices or if you have multiple Mac users it will confuse them, showing you the same Mac device twice without telling you which user it is"
+        },
+        {
+          "id": 47935026,
+          "author": "satvikpendem",
+          "text": "Look into Sendme [0] and AltSendme [1] (which is a GUI around the former), they use Iroh [2] which is an open-source encrypted peer-to-peer relay service to send data so there are no limits whatsoever for sending and receiving files, because there's no central server. From my earlier comment about a similar thread a couple days ago about which file sharing apps people use [3]: [0] https://github.com/n0-computer/sendme [1] https://github.com/tonyantony300/alt-sendme [2] https://github.com/n0-computer/iroh [3] https://news.ycombinator.com/item?id=47906587"
+        },
+        {
+          "id": 47933474,
+          "author": "lxgr",
+          "text": "I feel like we need a spamsolutions.txt [1] for purported AirDrop replacements. This one fails the \"must not require an existing Wi-Fi network that both peers are connected to\" criterion. [1] https://craphound.com/spamsolutions.txt"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 24,
+      "id": 47942386,
+      "title_en": "Claude for Creative Work",
+      "title_ja": "Claude for Creative Work",
+      "url": "https://www.anthropic.com/news/claude-for-creative-work",
+      "hn_url": "https://news.ycombinator.com/item?id=47942386",
+      "score": 95,
+      "comment_count": 57,
+      "posted_at": "2026-04-28T23:46:56+00:00",
+      "comments": [
+        {
+          "id": 47942702,
+          "author": "simonw",
+          "text": "Just noticed this notice added at the top of the Blender announcement of their funding from Anthropic: https://www.blender.org/press/anthropic-joins-the-blender-de... > Notice: This announcement is causing a lot of feedback. We are actively evaluating it. Presumably a lot of Blender users work in roles that feel threatened by AI being used for computer graphics work. Lots of negative replies on Blursky here: https://bsky.app/profile/blender.org/post/3mkkuyq3ijs2q"
+        },
+        {
+          "id": 47942716,
+          "author": "dannyw",
+          "text": "If you're interested, for Affinity the way we've built it is through exposing our scripting SDK via MCP. Agents like Claude can write scripts to execute actions, and these scripts can be saved and re-run later, as well have their own UI. It is a massive SDK though (thousands of functions; feel free to poke around with it; Affinity is free) and so it really shows the ability of LLMs to effectively work across long-horizon tasks massive context windows. Personally, really interested in Blender though. I'm working on a game as a hobby/side project and I'm very much a newbie / often struggle with learning and using Blender. There are so many ways these integrations help humans & human creatives; your job and role shouldn't be about how skilled you are with navigating/using a tool, or if you're technically savvy to code scripts to improve your workflow."
+        },
+        {
+          "id": 47943239,
+          "author": "ossa-ma",
+          "text": "Good that they prefaced it with this \"Claude can't replace taste or imagination\". I think this is a solid step in the right direction and the more tools Claude has access to the better (more surface area == faster iteration == faster tinkering). I've worked with Claude in many creative capacities and it's issue is that despite it being able to see if you ask it to draw something (using ascii for example) it will fail, if you ask it to iterate on that drawing it will continue to fail and not get any closer to the target then complain about this. I've felt that these models struggle with anything that cannot be decomposed into primitives and their architecture is too greedy and favours the obvious, autoregressive generation so it will converge to the modal answer. So unless they have enhanced the models in some creative sense I fail to see how this is anything other than giving Claude a bunch of documentation/MCP servers/APIs/CLI tools (which already existed) and making an announcement out of it. My point: FREE the models, unchain them and let's see what they are actually capable of, also put some damn demos in the announcement post???"
+        },
+        {
+          "id": 47942672,
+          "author": "hmartin",
+          "text": "\"Available on Pro plans. Maybe. The only thing I can tell you for sure is that Terms and Conditions will change tomorrow. Still can't differentiate tabs and spaces[1].\" [1] https://github.com/anthropics/claude-code/issues/11447#issue..."
+        },
+        {
+          "id": 47944294,
+          "author": "neuralkoi",
+          "text": "I think there's a really good opportunity to also incorporate Claude into into GIMP."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 25,
+      "id": 47906651,
+      "title_en": "I have officially retired from Emacs",
+      "title_ja": "I have officially retired from Emacs",
+      "url": "https://nullprogram.com/blog/2026/04/26/",
+      "hn_url": "https://news.ycombinator.com/item?id=47906651",
+      "score": 200,
+      "comment_count": 139,
+      "posted_at": "2026-04-26T02:12:13+00:00",
+      "comments": [
+        {
+          "id": 47911371,
+          "author": "farfatched",
+          "text": "A big loss for the Emacs community! emacs-aio is great! I see the author is spring cleaning: > I've turned over a new leaf (no more Openbox, Tridactyl, Xorg, xterm), and so some of these things I no longer use. On Linux I now use KDE on Wayland with a minimally-configured browser. I miss the power user features, but I do not miss the friction and constant maintenance. https://github.com/skeeto/dotfiles/commit/df275005769b654618... > I am no longer using Mutt nor running my own mail server. In general less terminal stuff for me. https://github.com/skeeto/dotfiles/commit/e331e367c75f66aaa9... LLMs have inspired a similar change in me: with a big change in how I work, I feel I can and should be more flexible with adopting new tech, which involving freeing myself of previous choices."
+        },
+        {
+          "id": 47944181,
+          "author": "kqr",
+          "text": "The previous post alludes to Evil being the long term plan. That seems sensible: it ought to be easier to use an implementation of Vim in Emacs rather than port much of Emacs to independent applications. Yet the author ended up doing the latter and it's not really made clear why. Why?"
+        },
+        {
+          "id": 47939459,
+          "author": "wwarner",
+          "text": "My usage of emacs is so vim-like that I’ve tried switching a few times. Vim is definitely faster, and overlays and cursor placement is much simpler and more intuitive. But there were still feature gaps and configuration issues that prevented full adoption."
+        },
+        {
+          "id": 47939386,
+          "author": "jb1991",
+          "text": "I used emacs full-time for many many years. Then I switched to Vim or other editors with Vim modes, also for many years. I have to be honest, I don’t see a particularly clear winner between them. Model editing is a bit unusual in many ways. There are some things that it certainly makes easier, but I personally found that the overall process of editing and writing code in real time for me was more efficient in a single mode emacs."
+        },
+        {
+          "id": 47937450,
+          "author": "mattdeboard",
+          "text": "I've been retired from emacs for several years now but I'm still looking for a magit replacement that is independent of my editor. Vscode's magit extension is really good but i split my time between IntelliJ and vscode. Anyone know of something like this?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 26,
+      "id": 47939105,
+      "title_en": "CJIT: C, Just in Time",
+      "title_ja": "CJIT: C, Just in Time",
+      "url": "https://dyne.org/cjit/",
+      "hn_url": "https://news.ycombinator.com/item?id=47939105",
+      "score": 100,
+      "comment_count": 29,
+      "posted_at": "2026-04-28T19:10:14+00:00",
+      "comments": [
+        {
+          "id": 47940059,
+          "author": "dang",
+          "text": "Related: Show HN: CJIT, a single-binary C compiler that can self host - https://news.ycombinator.com/item?id=47751458 - April 2026 (1 comment) C, Just in Time - https://news.ycombinator.com/item?id=42246209 - Nov 2024 (7 comments) (Pity the Show HN didn't get attention - we'll email the author)"
+        },
+        {
+          "id": 47944455,
+          "author": "notorandit",
+          "text": "I wonder whether CJiT can compile itself a-la GCC and LLVM. FAQs don't mention this and maybe the next weekend I will try to boot cjit with cjit itself."
+        },
+        {
+          "id": 47940958,
+          "author": "taylorallred",
+          "text": "Pair this with Fil-C( https://fil-c.org/ ) and now you have C but as a truly bonafide scripting language."
+        },
+        {
+          "id": 47942646,
+          "author": "tnelsond4",
+          "text": "> What's different between tcc -run and CJIT? >The main difference is in usability. > CJIT improves three main UX aspects for now: > It works as a single executable file which embeds the TinyCC compiler, all its headers and its standard library. This way there is no need to install anything system wide, check paths and setup build folders. > It supports adding multiple files into one execution: can accept wildcards to ingest anything that is a C source, a pre-compiled object or a shared library. The symbols exported by each file will be visible to all during the same execution. > It finds automatically common system libraries for each target platform, avoiding the need to repeat these settings and look for the right paths."
+        },
+        {
+          "id": 47940907,
+          "author": "apitman",
+          "text": "Cool idea. I was wondering why the release explicitly is `cjit-x86_64-ubuntu-24.04` instead of generic linux, but it does in fact appear to not work on Arch: `tcc: error: file '/lib/x86_64-linux-gnu/libgcc_s.so.1' not found` I'm guessing that's due to a `dlopen` since it's not listed by `ldd` The TUI demos work great, but I couldn't get the SDL examples to resolve all the missing symbols after trying for a bit."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 27,
+      "id": 47933983,
+      "title_en": "UAE to leave OPEC",
+      "title_ja": "UAE to leave OPEC",
+      "url": "https://www.ft.com/content/8c354f2d-3e66-47f1-aad4-9b4aa30e386d",
+      "hn_url": "https://news.ycombinator.com/item?id=47933983",
+      "score": 381,
+      "comment_count": 519,
+      "posted_at": "2026-04-28T13:02:01+00:00",
+      "comments": [
+        {
+          "id": 47934375,
+          "author": "JumpCrisscross",
+          "text": "Context: (1) “The United Arab Emirates,” today “made a shock request of [Pakistan] — repay $3.5bn immediately” [1]. (2) Saudi-Emirati relations were at an all-time low before the Iran War [2]. (Saudi Arabia just bailed Pakistan out of its Emirati loan. Saudi Arabia and Pakistan agreed a mutual-defence treaty last year [3].) Put together, we’re seeing an Emirati-Israeli axis emerging to balance Saudi hegemony in the Gulf and Iranian hegemony over the Persian Gulf. I’d expect to see an Emirati deal with Egypt and India next if this hypothesis is correct. What I don’t yet see is the ambition of the endgame. Is it Saudi Arabia backing off in Africa? Or is it seizing the Musandam Peninsula, islands of the Strait and possibly even territory on the other side? [1] https://www.ft.com/content/99073d6e-4b57-417f-88fb-7a2c0e55e... [2] https://www.nytimes.com/2025/12/30/world/middleeast/yemen-sa... [3] https://en.wikipedia.org/wiki/Strategic_Mutual_Defence_Agree..."
+        },
+        {
+          "id": 47935715,
+          "author": "bluGill",
+          "text": "OPEC has long been Saudi Arabia reducing output, and everyone else selling everything they can. They haven't had much power since the 1970s, but that they exist means they are a threat that if everyone else actually stuck to the agreement for a change. This is the common problem for cartels: everyone has inventive to cheat on the deals made. By selling a little more than your share you get more money, while because everyone else is following along the prices are higher. (see also prisoners dilemma)"
+        },
+        {
+          "id": 47935340,
+          "author": "iLemming",
+          "text": "\"My grandfather rode a camel, my father rode a camel, I drive a Mercedes, my son drives a Land Rover, and my grandson is going to ride a camel\". Sheikh Rashid bin Saeed Al Maktoum, the former Emir of Dubai."
+        },
+        {
+          "id": 47935274,
+          "author": "cmiles8",
+          "text": "The US has long sought to erode OPEC’s ability to dictate global oil prices. The US has made massive progress in being broadly energy independent to isolate it from challenges elsewhere. The US has been a net energy exporter since 2019. Global oil pricing was always an annoying thorn in that strategy. This is an initial but big crack in shaking up global oil markets in a way that meaningfully shifts global power dynamics."
+        },
+        {
+          "id": 47935095,
+          "author": "netdur",
+          "text": "Geopolic: A US-aligned Gulf state walking away from a Saudi/Russia-led bloc in the middle of a war, after deciding the bloc didn’t really have its back Economic: it weakens OPEC’s pricing power in a way you might not see right away if Hormuz is closed, but it could really change the supply picture once things reopen"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 28,
+      "id": 47932422,
+      "title_en": "An update on GitHub availability",
+      "title_ja": "An update on GitHub availability",
+      "url": "https://github.blog/news-insights/company-news/an-update-on-github-availability/",
+      "hn_url": "https://news.ycombinator.com/item?id=47932422",
+      "score": 346,
+      "comment_count": 223,
+      "posted_at": "2026-04-28T10:05:03+00:00",
+      "comments": [
+        {
+          "id": 47932817,
+          "author": "embedding-shape",
+          "text": "Hah, love that now they say \"Our priorities are clear: availability first, then capacity, then new features\" when 6 months ago, it was seemingly exactly the same except Azure supposedly was gonna save them: > GitHub Will Prioritize Migrating to Azure Over Feature Development - GitHub is working on migrating all of its infrastructure to Azure, even though this means it'll have to delay some feature development. > In a message to GitHub’s staff, CTO Vladimir Fedorov notes that GitHub is constrained on capacity in its Virginia data center. “It’s existential for us to keep up with the demands of AI and Copilot, which are changing how people use GitHub,” he writes. https://thenewstack.io/github-will-prioritize-migrating-to-a... So the currently delayed feature development is now gonna be further delayed, yet almost every week we see new features and changes, just the other day the single issues view was changed, as just one example. And it was \"existential\" 6 months ago yet they keep stumbling on the exact same issue today? Even if they're focused exclusively on reliability and uptime, we get the experience that we have today, kind of incredible how a company with the resources of Microsoft seemingly are unable to stop continuously shot themselves in the foot. It's kind of impressive actually. As icing on the cake, they've decided to buy up all popular developer services then migrate them all to the same platform, great idea too."
+        },
+        {
+          "id": 47944473,
+          "author": "danra",
+          "text": "When it's down to brass tacks, the most common GitHub action, actions/checkout, is not taking contributions due to \"focus [...] on strategic areas\" [0] despite having years-old issues - here's one[1] that soon celebrates its sixth birthday, despite having an available PR! [0] https://github.com/actions/checkout#note [1] https://github.com/actions/checkout/issues/270#issue-6289677..."
+        },
+        {
+          "id": 47932725,
+          "author": "maccard",
+          "text": "It's kind of hard to read this with a straight face. The unlabelled graph with big numbers on top, the priorities that don't match with what we're experiencing, and a list of things that they're doing without a real acknowledgement of the _dire_ uptime over the last 12 months...."
+        },
+        {
+          "id": 47932672,
+          "author": "mijoharas",
+          "text": "> we started working on path to multi cloud. Is this microsoft stating that they aren't able to get acceptable reliability from Azure? (I mean, I think a lot of us have heard that, but it's interesting to hear it from microsoft themselves)."
+        },
+        {
+          "id": 47933019,
+          "author": "BlackFingolfin",
+          "text": "GitHub stability has been bad for me. And recently even the data they show me in the web has been unreliably. Since yesterday, me and several colleagues noticed that the pull request lists on the website are incomplete, across many repositories. For example, on https://github.com/gap-system/gap/pulls it says \"Pull requests 78\" in the \"tab list\", but the PR list view reports \"35 open\" (the number 78 is correct, and confirmed by e.g. `gh pr list`) And that despite < https://www.githubstatus.com > reporting \"all systems operational\"."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 29,
+      "id": 47933236,
+      "title_en": "VibeVoice: Open-source frontier voice AI",
+      "title_ja": "VibeVoice: Open-source frontier voice AI",
+      "url": "https://github.com/microsoft/VibeVoice",
+      "hn_url": "https://news.ycombinator.com/item?id=47933236",
+      "score": 344,
+      "comment_count": 167,
+      "posted_at": "2026-04-28T11:56:04+00:00",
+      "comments": [
+        {
+          "id": 47933955,
+          "author": "steinvakt2",
+          "text": "This is not a new model. Also, it hallucinates a lot. Also, it's very heavy and slow in inference. It's also bad in multilingual. Edit: I'm talking purely about speech to text (STT). Not sure about the other things this can do."
+        },
+        {
+          "id": 47934090,
+          "author": "maxloh",
+          "text": "I think we should stop calling this type of models open source. They are indeed \"open weight.\" The training code is proprietary and never revealed. https://github.com/microsoft/VibeVoice/issues/102"
+        },
+        {
+          "id": 47936528,
+          "author": "isodev",
+          "text": "I think in this category, Voxtral by Mistral is a lot better. It also happens to be small enough to run on webGPU https://huggingface.co/spaces/mistralai/Voxtral-Realtime-Web..."
+        },
+        {
+          "id": 47934151,
+          "author": "pluc",
+          "text": "Interesting story about this repo/product/author by cybersecurity researcher Kevin Beaumont: https://cyberplace.social/@GossiTheDog/116454846703138243"
+        },
+        {
+          "id": 47933867,
+          "author": "embedding-shape",
+          "text": "Isn't this project the one Microsoft published but then soon after pulled it for security/safety reasons? What has changed since then?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 30,
+      "id": 47937203,
+      "title_en": "Infisical (YC W23) Is Hiring Full Stack Software Engineers (Remote)",
+      "title_ja": "Infisical (YC W23) Is Hiring Full Stack Software Engineers (Remote)",
+      "url": "https://jobs.ashbyhq.com/infisical/782b9da8-20e1-48b2-919e-6c5430c58628",
+      "hn_url": "https://news.ycombinator.com/item?id=47937203",
+      "score": 1,
+      "comment_count": 0,
+      "posted_at": "2026-04-28T17:00:06+00:00",
+      "comments": [],
+      "summary_ja": ""
+    }
+  ]
+}
