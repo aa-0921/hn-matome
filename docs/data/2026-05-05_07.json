@@ -1,0 +1,1060 @@
+{
+  "date": "2026-05-05T00:00:00+09:00",
+  "slot": "07",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 48013919,
+      "title_en": "How OpenAI delivers low-latency voice AI at scale",
+      "title_ja": "How OpenAI delivers low-latency voice AI at scale",
+      "url": "https://openai.com/index/delivering-low-latency-voice-ai-at-scale/",
+      "hn_url": "https://news.ycombinator.com/item?id=48013919",
+      "score": 168,
+      "comment_count": 69,
+      "posted_at": "2026-05-04T19:42:47+00:00",
+      "comments": [
+        {
+          "id": 48014814,
+          "author": "Sean-Der",
+          "text": "Very grateful that OpenAI published the article/publicized their usage of Pion[0] a library I work on. If you aren't familiar with WebRTC it's a super fun space. I work on a book WebRTC for the Curious [1] that details how it works. [0] https://github.com/pion/webrtc [1] https://webrtcforthecurious.com"
+        },
+        {
+          "id": 48014806,
+          "author": "legohead",
+          "text": "The low latency is more of a pain point than a good thing, the way they have it implemented. Trying to have a casual conversation with it, as humans we naturally pause, and GPT will take this as you are \"done\" and start blabbing away. I also suffer from finding the appropriate word I want as I've gotten older and slower, and this fast-voice-gpt just ends up frustrating me more than helping. I have to sit there and think out the whole sentence in my head before I say anything -- not very natural."
+        },
+        {
+          "id": 48014204,
+          "author": "thimabi",
+          "text": "> Voice AI only feels natural if conversation moves at the speed of speech […] At OpenAI’s scale, that translates into three concrete requirements: Global reach for more than 900 million weekly active users Surely the number refers to the total users of ChatGPT overall, and the fraction of those who use voice features is considerably smaller, is it not? That’s the kind of thing that influences business decisions like knowing how much hardware and software optimization to throw at a problem."
+        },
+        {
+          "id": 48015453,
+          "author": "Lucasoato",
+          "text": "Wait a minute... I’m genuinely happy that they are sharing this, but keep in mind that realtime audio model from OpenAI are still stuck with the 4o family in terms of capabilities, sadly. I still find them so useful, such a pity that there’s no real competitor in this segment, having the experience a real conversation has helped me so much in expressing ideas and concepts. Still, it’s worth to keep in mind that these are not frontier models, differently from when they were released. (Please Sam, if you read this, release the new realtime audio models)"
+        },
+        {
+          "id": 48014276,
+          "author": "Aeroi",
+          "text": "if anyone is looking to get into this. pipecat is a great open-source repo and community. https://github.com/pipecat-ai/pipecat"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 2,
+      "id": 48011184,
+      "title_en": "I am worried about Bun",
+      "title_ja": "I am worried about Bun",
+      "url": "https://wwj.dev/posts/i-am-worried-about-bun/",
+      "hn_url": "https://news.ycombinator.com/item?id=48011184",
+      "score": 338,
+      "comment_count": 241,
+      "posted_at": "2026-05-04T16:45:00+00:00",
+      "comments": [
+        {
+          "id": 48011953,
+          "author": "AntonyGarand",
+          "text": "I disagree with the overall premise: Before the acquisition, Bun had to figure out how to monetize at some point. Now, even though their parent company does some shitty practices with their other software (claude code), it's a stretch to assume this will also translate into making Bun worse: Being worried makes sense but I remain optimistic about Bun. Especially given the context of both of these different context: Claude Code is a gem of Anthropic, experiencing extreme growth and where any of its change can result in billing issues. Bun is a JS runtime, and regardless of its growth, can focus on being the best runtime possible: It doesn't impact billing nor the bottom line of Anthropic, so they don't have to rush out patches due to abuse unlike CC. It's unclear how it will pan out over the next years, still very early on the acquisition to see if anything will change, but I'm not concerned just yet."
+        },
+        {
+          "id": 48015723,
+          "author": "thot_experiment",
+          "text": "Why people use Deno and Bun over Node? I think it's neat that there are competitors for JS runtimes, but I really don't understand what advantages I'd get by swapping to one of these over Node. Bun has no REPL and worse JS engine, Deno is just Node with a restrictive, annoying permission system and no sqlite. Both claim better performance, but that only seems true in cherrypicked benchmarks, and in my tests (granted about a year ago at this point) both alternatives under-performed Node in my workloads. What am I missing? EDIT: Actually I just remembered I delivered a small ERP tool to a business a while back and I did opt to use I think Bun for that because it had the most robust tools to wrap a project into an `*.exe`, that was definitely a better experience than Node. Though since that was dependency-less JS I did the whole thing using Node and then just shipped it with Bun."
+        },
+        {
+          "id": 48014627,
+          "author": "nwienert",
+          "text": "Bun has never really been well run. Every feature it had was full of bugs and gaps. And every release fixed a few but broke others. They released more major features and breaking changes in their last patch release than most software sees in two major versions. I've been using it just as a script runner and npm package manager basically, and it's incredible the amount of work you have to do to find \"good\" versions. We've had patch versions suddenly freeze on install more than once, we couldn't upgrade for quite a while due to this. I think they broke postinstall scripts with trustedDependencies entirely two minor versions ago - not a mention in release notes, and somehow no one reporting it in GH issues. In 1.1 or so you could get Bun to do trustedDependency builds in postinstall, and then after that you couldn't. I looked around for release notes and saw nothing mentioned. It's been broken for months."
+        },
+        {
+          "id": 48015423,
+          "author": "Jarred",
+          "text": "I work on Bun, and this post is confusing to me. Me personally and the Bun team continues to dogfood & make Bun better everyday. Our development pace has only gotten faster. Bun's stability has improved significantly since joining Anthropic. Here are some things shipping in the next version of Bun: - 17 MB smaller Windows x64 binaries [0] - 8 MB smaller Linux binaries [1] - `--no-orphans` CLI flag to recursively kill any lingering processes spawned [3] - SSL context caching for client TCP & unix sockets, which significantly reduces memory usage for database clients like Mongoose/MongoDB [4] - Experimental HTTP/3 & HTTP/2 client in fetch [5] - Experimental HTTP/3 support in Bun.serve() [6] - Bun.Image, a builtin image processing library [7] (Along with several reliability improvements to node:fs, Worker, BroadcastChannel, and MessagePort) The Anthropic acquisition also means Bun no longer needs to become a revenue-generating business. We are very incentivized to make Bun better because Claude Code depends on it, and so many software engineers depend on Claude Code to help get their work done. [0]: https://github.com/oven-sh/bun/pull/30219 [1]: https://github.com/oven-sh/bun/pull/30098 [2]: https://github.com/oven-sh/WebKit/pull/211 [3]: https://github.com/oven-sh/bun/pull/29930 [4]: https://github.com/oven-sh/bun/pull/29932 [5]: https://github.com/oven-sh/bun/pull/29863 [6]: https://github.com/oven-sh/bun/pull/30032"
+        },
+        {
+          "id": 48015969,
+          "author": "jwpapi",
+          "text": "I think the motion that Claude Code and Anthropic has is trying to force-hide stuff from you. Some hopefully remember the shitstorm that happened, when they changed. Reading xxx.yy to reading 1 file or reading 2 files. More changes like this came and they were not or very hard to configure. I understand the business idea behind it. Make them to use AI as much as possible, get the human out of the loop. More training data. More Token Usage JUHUU. However I think that made Claude Code so much worse and so much more untrusthworthy. It’s a sneaky attempt to take away the driving wheel from you. And if you follow that logic, way more and way more things seem reasonable. But mainly for now it just generated a lot of distrust for me"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 3,
+      "id": 48007438,
+      "title_en": "Talking to strangers at the gym",
+      "title_ja": "Talking to strangers at the gym",
+      "url": "https://thienantran.com/talking-to-35-strangers-at-the-gym/",
+      "hn_url": "https://news.ycombinator.com/item?id=48007438",
+      "score": 1026,
+      "comment_count": 496,
+      "posted_at": "2026-05-04T11:41:02+00:00",
+      "comments": [
+        {
+          "id": 48008672,
+          "author": "mtlynch",
+          "text": "One of the things I like about this is that OP is giving people genuine compliments without any particular agenda. It reminds me of one of my favorite parts of How to Win Friends and Influence People by Dale Carnegie, where he tells a story about complimenting someone, and a student asks what he was hoping to gain from offering the compliment. Carnegie is incensed: > I was waiting in line to register a letter in the Post Office at Thirty-Third Street and Eighth Avenue in New York. I noticed that the registry clerk was bored with his job[...] So while he was weighing my envelope, I remarked with enthusiasm: “I certainly wish I had your head of hair.” > He looked up, half-startled, his face beaming with smiles. “Well, it isn’t as good as it used to be,” he said modestly. I assured him that although it might have lost some of its pristine glory, nevertheless it was still magnificent. He was immensely pleased. We carried on a pleasant little conversation, and the last thing he said to me was: “Many people have admired my hair.” > I told this story once in public; and a man asked me afterwards: “What did you want to get out of him?” > What was I trying to get out of him!!! What was I trying to get out of him!!! > If we are so contemptibly selfish that we can’t radiate a little happiness and pass on a bit of honest appreciation without trying to screw something out of the other person in return—if our souls are no bigger than sour crab apples, we shall meet with the failure we so richly deserve. > Oh yes, I did want something out of that chap. I wanted something priceless. And I got it. I got the feeling that I had done something for him without his being able to do anything whatever in return for me. That is a feeling that glows and sings in your memory long after the incident is passed."
+        },
+        {
+          "id": 48015391,
+          "author": "talkingtab",
+          "text": "I have found three strange and unexpected avenues for interacting with people. 1. Be on a quest. Yes a quest. I was trying to buy an old metal key as a gift for a friend. I wanted to find someone who sold sheep's milk (for making cheese). If you are on a quest it gives a context for an interaction. You both have something to talk about and it you both have an out: the answer. People almost always help you with a quest. And this ties with #2 2. Need help. I am lost. I am trying to get to the airport and I don't have much money. I trying to find a good book store. My car won't start. etc. I don't speak English. 3. Humor. Not telling jokes, just have a sense of humor about yourself, your common situation, the world in general. I especially like being on a quest. Once I asked someone about the key, they sent me another place, they sent me another place and finally I found one. It was a blast. Everyone was helpful. I ended up telling people how I got there, why I was searching etc."
+        },
+        {
+          "id": 48008195,
+          "author": "nasir",
+          "text": "Around 15 years ago I took on the challenge to start a conversation with random people to break through this barrier and train this muscle. What I started with was to chit chat with those I had already established an interaction. For example at the Starbucks I would say something to barista. Those interactions were short but broke the ice. Later I went for random people in the street and that was quite awkward. There was simply not much I could work with (what I thought at the time). This turned out to become a low stake effort to improve my social anxiety. Helped me build humour around it and eventually become comfortable Fast forward to today, I can literally talk about anything to anyone. The main pattern I follow is to break the pattern and make a joke, be sarcastic respectfully or give a compliment. No permission just something they don't expect. Almost works all the time. It helps with confidence and also makes you realise its all in your head. And it is fun indeed"
+        },
+        {
+          "id": 48016032,
+          "author": "jliptzin",
+          "text": "I just assume any guy trying to make small talk with me at the gym is trying to hit on me, which I am correct about maybe 80% of the time. I know because I am a gay guy so I know how this kind of thing goes. Not that I have a problem with it, I am always happy to talk to any strangers if they want to, for pretty much any reason. As a straight-passing guy though, women at the gym never approach me except to ask if I am done using a machine, and I also don’t approach them because I assume they’ll just think I’m trying to hit on them. I’m just unsure how to approach people at the gym while making it immediately clear that I am just looking for a friend/workout buddy and not anything more than that"
+        },
+        {
+          "id": 48008383,
+          "author": "brushfoot",
+          "text": "Wonderful! There's a lot of advice online about how essentially evil it is to talk to strangers: They're busy, they have headphones in, they might think you're hitting on them (God forbid; nothing could be more evil than attraction). Ignore it. It often as not boils down to fear and neuroticism from terminally online introverts (and sometimes plain old misanthropists) raised in a hyper-individualist culture and glued to devices sometimes from infancy. Fair enough if an introvert just wants to be left alone; we should obviously never force our company on anyone (nor do the mentally healthy among us have any desire to do so, because we have empathy). However, people like that will let us know that they don't want to talk when we approach them, either directly or via body language and the nature of their replies. For many others, they're starving for social interaction, and it might make their day for you to reach out. This is what makes outreach worth it, in the end, despite the risk."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 4,
+      "id": 48012162,
+      "title_en": "Securing a DoD contractor: Finding a multi-tenant authorization vulnerability",
+      "title_ja": "Securing a DoD contractor: Finding a multi-tenant authorization vulnerability",
+      "url": "https://www.strix.ai/blog/how-strix-found-zero-auth-vulnerability-dod-backed-startup",
+      "hn_url": "https://news.ycombinator.com/item?id=48012162",
+      "score": 141,
+      "comment_count": 63,
+      "posted_at": "2026-05-04T17:46:32+00:00",
+      "comments": [
+        {
+          "id": 48014362,
+          "author": "mcoliver",
+          "text": "I've seen this at so many startups (and worked to patch the gaps and put in best practices) including those backed by top tier VCs. The problem is that it is rare for startups to have security minded people. It's usually designers, people who can raise money, and generalists who can stitch together apis. It's not generally platform, db, or security minded people. The proliferation of things like vercel and supabase have exacerbated this. So you get people deploying API keys client side and dbs without rls. Or deploying service keys client side when they should be anon. I mean really basic stuff."
+        },
+        {
+          "id": 48015957,
+          "author": "BobbyTables2",
+          "text": "Feels like they were too nice. After 90 days of no response, why not just go full disclosure on them? The CEO seems more interested in insulting people than securing his company’s product."
+        },
+        {
+          "id": 48013258,
+          "author": "janice1999",
+          "text": "Finally the AI security startup hustlers will keep the other tech startup hustlers in line. Maybe the era of devastating leaks and total disregard for user privacy will come to an end (doubtful)."
+        },
+        {
+          "id": 48013317,
+          "author": "codegeek",
+          "text": "\"There was no meaningful organization scoping, no tenant isolation, and no permission check preventing a low-privilege user from accessing other organizations' records.\" Let me guess though. They are SOC2 and ISO compliant right ?"
+        },
+        {
+          "id": 48015434,
+          "author": "stephbook",
+          "text": "Tenant scoping is important. Just ask Microsoft, didn't they have one right at bing.com? Oh, just every Bing user is vulnerable to have all Microsoft data (o365 emails for example) hacked. No biggie. https://www.wiz.io/blog/azure-active-directory-bing-misconfi..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 5,
+      "id": 48006402,
+      "title_en": "GameStop makes $55.5B takeover offer for eBay",
+      "title_ja": "GameStop makes $55.5B takeover offer for eBay",
+      "url": "https://www.bbc.co.uk/news/articles/cn0p8yled1do",
+      "hn_url": "https://news.ycombinator.com/item?id=48006402",
+      "score": 608,
+      "comment_count": 571,
+      "posted_at": "2026-05-04T09:31:12+00:00",
+      "comments": [
+        {
+          "id": 48008525,
+          "author": "giancarlostoro",
+          "text": "The original shorting of GameStop back in 2021 gave them a bit of a boost back into the green. While people were doing the GME to the moon, GameStop made more shares to sell, and paid off a bit of its debts, I think it made about a billion dollars in profit, they're still struggling, but it helped prolong their life. A friend of mine also pointed out and this made it click for me that it makes 100% sense, GameStop is setup as a legal pawnshop in every state. So a pawnshop buying out eBay makes insane sense. This merger in theory could be good for both eBay and GameStop if they don't mess it up. Imagine being able to list your eBay items locally without having to have people needing to come to your house, or better yet, getting a cut of what you wanted up front since they're basically a pawn shop, and then they list it on eBay and turn a bit of a profit with a local pickup option available. I could see this working out decently, assuming the CEO of GameStop doesn't mess it up completely."
+        },
+        {
+          "id": 48006580,
+          "author": "pjc50",
+          "text": "Important background: https://investor.gamestop.com/news-releases/news-details/202... CEO gets paid \"only if GameStop achieves a market capitalization of $20 billion.\" Buying a $55bn company would certainly achieve that quickly. I'm not sure how they'd manage that (buy with what? Memes?), other than the should-be-illegal process of putting debt on the acquired company's balance sheet."
+        },
+        {
+          "id": 48009146,
+          "author": "octaane",
+          "text": "Long-time ebay seller here. I'm seeing comments floating towards the top that are essentially positing that the physical GameStop locations can be used as hubs where people can buy or sell their stuff in general (especially items that are 'pick-up only'). A pawn shop, basically. Thing is, GameStop is, well, for videogames and videogame paraphernalia. It's not a general store. Doing this would turn them into a thrift shop, not a pawn shop, as people are trying to offload their carpets, desks, etc - bulky stuff. I don't think this makes sense. This does make sense when you consider the collectable market, another domain I'm involved in. Trading card games, specifically pokemon, have exploded over the last 5 years. GameStop is making a killing off of buying, selling, and grading these cards. Ebay is the primary marketplace to buy and sell those cards. There's also tax free havens (\"Vaults\") offered by multiple companies, grading service passthroughs, and scalping offered through ebay too. Viewed through the above lens, that's what's prompting this offer, I think."
+        },
+        {
+          "id": 48015261,
+          "author": "sakopov",
+          "text": "GameStop CEO was on CNBC and acted like a total dick the entire time after they asked him how financing would work for this deal [1]. It appears that he's upset that Squawk Box previously stated that GameStop is a bankrupt meme stock. This is probably one of the funniest CNBC interviews I've seen. [1] https://youtu.be/Bmj2PaxX24E"
+        },
+        {
+          "id": 48006689,
+          "author": "orlp",
+          "text": "GameStop doesn't have (even close to) $55.5B. Their offer from the letter is literally impossible: > Our offer is $125.00 per share, comprising 50% cash and 50% GameStop common stock Even if you magically included all existing GameStop stock in the offer, it still would not comprise 50% of $55.5B. EDIT: looks like it's not impossible and I misunderstood. It's a proposed change of leadership with a $25B injection of cash to sweeten the deal. GameStop would issue shares which would capture the original eBay value (since GameStop would own eBay after the trade), making that part a wash. At least assuming people owning eBay stock currently would value the combined company at at least the sum of their parts, which is a big if."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 6,
+      "id": 48015097,
+      "title_en": "Pulitzer Prize Winners 2026",
+      "title_ja": "Pulitzer Prize Winners 2026",
+      "url": "https://www.pulitzer.org/prize-winners-by-year/2026",
+      "hn_url": "https://news.ycombinator.com/item?id=48015097",
+      "score": 28,
+      "comment_count": 10,
+      "posted_at": "2026-05-04T21:14:38+00:00",
+      "comments": [
+        {
+          "id": 48015990,
+          "author": "lacker",
+          "text": "The conclusion that \"insurance companies using algorithmic tools have failed Californians who lost their homes to fire by systematically undervaluing their properties\" seems pretty dubious to me. Everyone is shooting the messenger by getting angry at the insurance companies when fire insurance isn't cheaper. Meanwhile many insurance companies are leaving California entirely. It isn't the \"evil algorithms\" at fault here - it's the high risk of fire."
+        },
+        {
+          "id": 48015778,
+          "author": "cdrnsf",
+          "text": "> Staff of Pablo Torre Finds Out > For a pioneering and entertaining form of live podcast journalism that investigated how the Los Angeles Clippers seemingly evaded the NBA’s salary cap rules by funneling money to a star player through an environmental startup. This is still being investigated by the NBA. I'm curious how it'll play out, but it's not a good look for the league."
+        },
+        {
+          "id": 48015889,
+          "author": "jebarker",
+          "text": "I’ve been gradually reading prior Pulitzer winners for fiction and I have to say I haven’t hit a bad one yet. Maybe I’ll try and read this years before it’s several decades old."
+        },
+        {
+          "id": 48015795,
+          "author": "hglaser",
+          "text": "Once again, a moment of gratitude for the San Francisco Chronicle. In a time when local news is mostly gutted, I'm grateful to live in the rare mid-size city that has a robust local paper. Real investigative reporting, a serious local political beat, and features that win Pulitzer prizes. Plus a great sports section and restaurant critics!"
+        },
+        {
+          "id": 48015221,
+          "author": "tolerance",
+          "text": "WaPo gets top billing as winners in the \"Public Service\" category. \" How Jeff Bezos Upended The Washington Post \" https://archive.ph/Je6AH Fascinating."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 7,
+      "id": 47998158,
+      "title_en": "Testing macOS on the Apple Network Server 2.0 ROMs",
+      "title_ja": "Testing macOS on the Apple Network Server 2.0 ROMs",
+      "url": "http://oldvcr.blogspot.com/2026/05/testing-macos-on-apple-network-server.html",
+      "hn_url": "https://news.ycombinator.com/item?id=47998158",
+      "score": 14,
+      "comment_count": 0,
+      "posted_at": "2026-05-03T15:49:33+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 8,
+      "id": 48012735,
+      "title_en": "Microsoft Edge stores all passwords in memory in clear text, even when unused",
+      "title_ja": "Microsoft Edge stores all passwords in memory in clear text, even when unused",
+      "url": "https://twitter.com/L1v1ng0ffTh3L4N/status/2051308329880719730",
+      "hn_url": "https://news.ycombinator.com/item?id=48012735",
+      "score": 325,
+      "comment_count": 128,
+      "posted_at": "2026-05-04T18:22:42+00:00",
+      "comments": [
+        {
+          "id": 48013060,
+          "author": "gruez",
+          "text": "This feels like a case of \"It rather involved being on the other side of this airtight hatchway\"[1]. If you can read arbitrary process memory, you're probably also in a position to just dump out the passwords by pretending to be the user in question. > If an attacker gains administrative access on a terminal server, they can access the memory of all logged‑on user processes. If an attacker has administrative access, they can also attach a debugger to every chrome process and force it to decrypt all the passwords. The only difference this really makes is in coldboot attacks, but even then it's still not clear whether it makes the attacker's job slightly easier, or allows an attack that's otherwise not possible. [1] https://devblogs.microsoft.com/oldnewthing/20060508-22/?p=31..."
+        },
+        {
+          "id": 48014233,
+          "author": "ylk",
+          "text": "For reference, this is how Google says Chrome stores passwords encrypted in memory and uses an elevated service to prevent other processes from impersonating Chrome and gaining access to the plain text passwords: https://security.googleblog.com/2024/07/improving-security-o..."
+        },
+        {
+          "id": 48015935,
+          "author": "golem14",
+          "text": "Since it's not been clearly stated: One attack vector might be that I step out to the bathroom for 5 minutes without locking computer, and evil hacker just dumps all my passwords before I come back. I think it's worthwhile considering this. There's a reason why password managers ask for a master password or passkey after 10 minutes. Since I thought Chrome relied on an encrypted enclave, it isn't quite feasible to extract passwords easily even with root access. Yes, you shouldn't leave your computer unattended. But that doesn't mean designing products that make exploiting the inevitable slipup fatal."
+        },
+        {
+          "id": 48013103,
+          "author": "kleiba2",
+          "text": "Does this tool access an Edge instance running on the same machine? Couldn't you then just simply export all saved passwords anyway? https://support.microsoft.com/en-us/topic/export-passwords-i..."
+        },
+        {
+          "id": 48015894,
+          "author": "pezezin",
+          "text": "The real mistake is that we are still using simple password authentication instead of challenge-response or public key authentication."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 9,
+      "id": 48009172,
+      "title_en": "Redis array: short story of a long development process",
+      "title_ja": "Redis array: short story of a long development process",
+      "url": "https://antirez.com/news/164",
+      "hn_url": "https://news.ycombinator.com/item?id=48009172",
+      "score": 204,
+      "comment_count": 76,
+      "posted_at": "2026-05-04T14:23:07+00:00",
+      "comments": [
+        {
+          "id": 48010532,
+          "author": "localhoster",
+          "text": "Let's make it very clear - this is the original creator of redis, or one of them. He is not \"your avg dev\" and it took him 4 months with llm. This is not a seal of approval for you to go and command all your developers to move to Claude code/codex/any other ai coding tool fully. I'm looking at you - any avg CEO of a startup."
+        },
+        {
+          "id": 48010722,
+          "author": "wood_spirit",
+          "text": "Sharing my current MO: I start with a high level design md doc which an AI helps write. Then I ask another AI - whether the same model without the context, or another model - to critique it and spot bugs, gaps and omissions. It always finds obvious in hindsight stuff. So I ask it to summarize its findings and I paste that into the first AI and ask its opinions. We form an agreed change and make it and carry on this adversarial round robin until no model can suggest anything that seems weighty. I then ask the AI to make a plan. And I round robin that through a bunch of AIs adversarially as well. In the end, the plan looks solid. Then the end to end test cases plan and so on. By the end of the first day or week or month - depending on the scale of the system - we are ready to code. And as code gets made I paste that into other AIs with the spec and plan and ask them to spot bugs, omissions and gaps too and so on. Continually using other AI to check on the main one implementing. And of course you have to go read the code because I have found it that AI misses polishes."
+        },
+        {
+          "id": 48012127,
+          "author": "tibbar",
+          "text": "Reviewing 22,000 lines of code, even from antirez, with this complex of a feature set and minimal PR description sounds like a nightmare. One starts to see why major open-source software like Postgres tends to be developed on a mailing list, with intermediate design decisions discussed by the community, separate patches for different related features, incremental review, and then a spaced release cadence."
+        },
+        {
+          "id": 48009549,
+          "author": "SuperV1234",
+          "text": "Closely matches my own experiences with current SOTA AI. Extremely useful collaborator, far from being a replacement for human intelligence and creativity."
+        },
+        {
+          "id": 48011622,
+          "author": "gurgeous",
+          "text": "Thanks for adding this. Excited about array/regex, also very interested in your experience using LLMs to stretch your abilities. There are many of us laboring quietly on various projects attempting the same. \"Vibe coding\" (and the backlash) doesn't really capture how we work."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 10,
+      "id": 48009983,
+      "title_en": "Does Employment Slow Cognitive Decline? Evidence from Labor Market Shocks",
+      "title_ja": "Does Employment Slow Cognitive Decline? Evidence from Labor Market Shocks",
+      "url": "https://www.nber.org/papers/w35117",
+      "hn_url": "https://news.ycombinator.com/item?id=48009983",
+      "score": 170,
+      "comment_count": 155,
+      "posted_at": "2026-05-04T15:32:46+00:00",
+      "comments": [
+        {
+          "id": 48012294,
+          "author": "b00ty4breakfast",
+          "text": "The problem isn't retirement per se, it is that people don't have things to occupy themselves with. They retire and they vegetate. I worked with a lady that was in her 70s who was deathly afraid of retiring because she didn't have anything to do. That's beyond depressing to me, to be incapable of even conceiving of doing something that doesn't involve going to a job. We have created people that never develop as human beings outside the context of their being economic entities in the workforce and that's not something to celebrate."
+        },
+        {
+          "id": 48011721,
+          "author": "nate",
+          "text": "We probably all have anecdotal evidence here, but my father is a perfect example of being no longer employed and a ton of stuff declining. Yes, cognitively, but a lot of health. We're talking not just your \"career\". He was a commercial real estate agent. But in his 80s he was working at Menards as a greeter and stocker. And it kept him busy. Getting out of the house. Figuring things out. Meeting and talking to people. Walking. Talking. Scheduling things. He'd even tell us that if he stopped, things would just descend. And he was so right. He had to stop to help take more care of my mom, and quickly, he just fell out of all these things. Cognitively. Health. Ability to do anything decision wise or to better himself just tanked. Sample size of 1. A ton of confounding variables. But definitely wasn't his choice to stop working at a place because of health. The poor health came after being forced to quit. Does make me worry about \"taking it easy\" when I get older whatever that means :)"
+        },
+        {
+          "id": 48011173,
+          "author": "goda90",
+          "text": "I believe there have been studies into how social life impacts longevity, and probably cognitive decline as well. For some people, like my great-grandmother who kept working well into her 80s by choice, jobs can be a big social outlet. For others a job can be very socially isolating. Those factors probably matter a lot. Side note: I'm sure we'll see research into these areas used to propose delaying retirement age more in the near future."
+        },
+        {
+          "id": 48013199,
+          "author": "999900000999",
+          "text": "Allegedly my great grandfather was building a deck at the age of 90. This might also be survivorship bias. I’d like to say people need purpose and challenges. This is probably why rates of depression tend to be much lower in “poor” countries where people have to depend on each other more. In the west everything is an abstraction. If you would imagine a baker in a small town, if she doesn’t feel like baking that day, the town doesn’t get bread. Therefore, everyone in the town has an incentive to actually check on her, and get her back on her feet. In the modern west who cares, surely another bakery will provide. I believe automation will reduce the need for human labor very very soon. We can all find meaning in arts, dance and play. If not just the gift of this experience. Or we can point fingers as no one has work or money"
+        },
+        {
+          "id": 48011664,
+          "author": "dec0dedab0de",
+          "text": "I think employment may set us up for rapid cognitive decline when we finally become unemployed. As in, working 40+ hours a week makes us over-value \"vegging out\", which sets us up for failure post-employment."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 11,
+      "id": 48015397,
+      "title_en": "Agent Skills",
+      "title_ja": "Agent Skills",
+      "url": "https://addyosmani.com/blog/agent-skills/",
+      "hn_url": "https://news.ycombinator.com/item?id=48015397",
+      "score": 14,
+      "comment_count": 2,
+      "posted_at": "2026-05-04T21:40:42+00:00",
+      "comments": [
+        {
+          "id": 48016037,
+          "author": "y-curious",
+          "text": "Thanks for this, going to steal a lot of this. I would install your plugin, but I worry about being able to delete it later. I also think that each one of these is better served customized to a developer. That said, I'm still going to grab some of these, thanks!"
+        },
+        {
+          "id": 48015853,
+          "author": "encoderer",
+          "text": "I adopted a couple of these, the api design and ui testing ones have been particularly helpful."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 12,
+      "id": 48009747,
+      "title_en": "UK Fuel Price Intelligence – Market analytics from reporting stations",
+      "title_ja": "UK Fuel Price Intelligence – Market analytics from reporting stations",
+      "url": "https://www.fuelinsight.co.uk",
+      "hn_url": "https://news.ycombinator.com/item?id=48009747",
+      "score": 146,
+      "comment_count": 72,
+      "posted_at": "2026-05-04T15:15:21+00:00",
+      "comments": [
+        {
+          "id": 48009748,
+          "author": "theazureguy",
+          "text": "I got frustrated that every fuel price app just shows you what's cheap nearby. I wanted to know how stations actually behave: do prices go up faster than they come down, do supermarkets really save you much, how bad are motorway prices really? So I built a scraper that hits the UK government's mandatory Fuel Finder API every 10 minutes and stores every price change. 90k records across 7,700 stations since January. Some things I found that surprised me: The rocket and feather effect is real and measurable. When stations raise prices the average move is 2.35p/litre. When they cut, it's 1.85p. There are also more up moves than down moves. I queried the raw history to check this rather than eyeballing a chart. Motorway fuel is 28.4p/litre more expensive than everywhere else right now. That's about £14 extra on a 50L fill. Everyone knows motorways are expensive but I didn't expect the gap to be that wide. The supermarket discount is only about 1.7p. I assumed it would be bigger. Stack is Azure Functions, TimescaleDB, PostGIS, Next.js. The interesting thing about this project is the history. No public site shows how an individual station has priced over time or how a local cluster of stations react to each other. That's what I'm building towards. Site: https://fuelinsight.co.uk Happy to talk through the architecture or the data if anyone's interested."
+        },
+        {
+          "id": 48010849,
+          "author": "isoprophlex",
+          "text": "If only this wasn't hosted on azure, we'd be able to actually look at the data"
+        },
+        {
+          "id": 48011234,
+          "author": "johannes1234321",
+          "text": "In Germany fuel processes must be reported to the anti trust authority (Bundeskartellamt) the data is than published to providers of apps and websites. Unfortunately there isn't a free public data stream from them. List of authorized places using the data: https://www.bundeskartellamt.de/DE/Aufgaben/Markttransparenz... One of those vendors publishes it as creative commons data set, though. Including historic data. https://creativecommons.tankerkoenig.de/"
+        },
+        {
+          "id": 48012963,
+          "author": "mootothemax",
+          "text": "If you can find a way to combine this with local population to end up at pence per litre per thousand population, I bet you’d uncover some fun trends. Bet it’d also get interesting if combined with population within an X min drive too. Tho really need some car population per road segment stats to drive the most out of it IMO."
+        },
+        {
+          "id": 48012141,
+          "author": "whynotmaybe",
+          "text": "In Québec every station must report price change within 5 minutes and we have access to a map https://regieessencequebec.ca/ For now data can only be exported as xlsx but with the open data orientation of Québec's government, I guess it will be available soon"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 13,
+      "id": 48014325,
+      "title_en": "Formatting a 25M-line codebase overnight",
+      "title_ja": "Formatting a 25M-line codebase overnight",
+      "url": "https://stripe.dev/blog/formatting-an-entire-25-million-line-codebase-overnight-the-rubyfmt-story",
+      "hn_url": "https://news.ycombinator.com/item?id=48014325",
+      "score": 83,
+      "comment_count": 46,
+      "posted_at": "2026-05-04T20:11:53+00:00",
+      "comments": [
+        {
+          "id": 48015273,
+          "author": "CrzyLngPwd",
+          "text": "One of my first jobs was a small software company writing software for a small number of clients, in MS basic PDS. The lead developer didn't like to bother with formatting code, so I wrote a tool called makenice to format his nasty spaghetti gibberish into something with good indents and layout to make it easier for us normal people to parse. He was furious, literally spun in circles about it right in the office in front of everyone, so I wrote makenasty to format code into the way he appeared to like. I only shared makenasty/nice with a couple of the team, who loved it, as it allowed easy conversion between something readable and something the team lead like. He never knew about makenasty."
+        },
+        {
+          "id": 48015436,
+          "author": "hobofan",
+          "text": "I'm surprised they went with a all-at-once reformat. Even when doing it over a weekend this is bound to mess with a lot of open PRs at their scale. I had to introduce a formatter in a few sizeable codebases in the past (few 100k to few million LOC), and I always did it incrementally via a script that reformatted all files that are not touched in any open PR. The initial run reformatted 95% of all files. Then I ran the script every day for ~two weeks and got up to 99.5% of all files and then manually each time one of the remaining ~dozen PRs that were WIP for longer were merged."
+        },
+        {
+          "id": 48015515,
+          "author": "munificent",
+          "text": "> We chose a Saturday to format the entire codebase to avoid merge conflicts. And while our test suite gave us high confidence we'd gotten everything right, it's always a bit daunting to have a diff so large that GitHub can't render it. The dart formatter has an internal sanity check. It walks through the unformatted and formatted strings in parallel skipping any whitespace. If any non-whitespace characters don't match, it immediately aborts. This ensures that the only thing the formatter changes is whitespace, and makes it much less spooky to run it blind on a huge codebase. That sanity check has saved my ass a couple of times when weird bugs crept in, usually around unusual combinations of language features around new syntax. (Unfortunately, the formatter in the past year has gotten a little more flexible about the kinds of changes it makes, including sometimes moving comments relatively to commas and brackets, so this sanity check skips some punctuation characters too, making it a little less reliable.)"
+        },
+        {
+          "id": 48014748,
+          "author": "varun_ch",
+          "text": "I’m shocked at the 25M line part! That is a completely unfathomable amount of code for one codebase. I really want to know more about that."
+        },
+        {
+          "id": 48015741,
+          "author": "nitwit005",
+          "text": "> Given that complexity, the hypothesis was simple: tackle the hardest syntax first and the rest will follow. Always nice to see. I've seen people fall into the trap of designing for the common case, not realizing most of the code will be to deal with the less common cases."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 14,
+      "id": 48011689,
+      "title_en": "US healthcare marketplaces shared citizenship and race data with ad tech giants",
+      "title_ja": "US healthcare marketplaces shared citizenship and race data with ad tech giants",
+      "url": "https://techcrunch.com/2026/05/04/us-healthcare-marketplaces-shared-citizenship-and-race-data-with-ad-tech-giants/",
+      "hn_url": "https://news.ycombinator.com/item?id=48011689",
+      "score": 373,
+      "comment_count": 127,
+      "posted_at": "2026-05-04T17:16:36+00:00",
+      "comments": [
+        {
+          "id": 48013644,
+          "author": "TallGuyShort",
+          "text": "I used a state (Colorado) healthcare marketplace website when I was going to take a break between jobs for a couple of months, and I feel very violated by the whole process. I entered a bunch of information to the website, knowing that the data could be expected to be shared for quotes, but I got no quote. The information didn't just flow between systems, it was just sent directly to a bunch of individuals. Instead of getting anything useful from the website, I just got told that agents would contact me, and then literally hundreds of agents were calling and texting me at all hours of the day and night for weeks. I asked one of them how to get it to stop and they said it was impossible during the government shutdown."
+        },
+        {
+          "id": 48012791,
+          "author": "levocardia",
+          "text": "The actual \"sharing\" was using the Meta pixel and TikTok's equivalent, presumably so the healthcare exchanges could do retargeting or similarity-based marketing to get people to sign up for health care coverage. Which, narrowly, seems like a reasonable thing to do. But of course using the pixel automatically \"shares\" the data with Meta/ByteDance/whoever, and they get to use it for whatever nefarious purpose they want."
+        },
+        {
+          "id": 48012304,
+          "author": "wewtyflakes",
+          "text": "It should be illegal to send the data, and illegal to accept it; burn both sides of that bridge."
+        },
+        {
+          "id": 48013043,
+          "author": "downbad_",
+          "text": "The richest tech companies and richest men in the world got rich by invading people's privacy and selling invasive ads."
+        },
+        {
+          "id": 48013255,
+          "author": "deferredgrant",
+          "text": "This is especially bad for public services because trust is already fragile. People should not have to worry that applying for healthcare also enrolls them in a tracking graph."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 15,
+      "id": 48009840,
+      "title_en": "1966 Ford Mustang Converted into a Tesla with Working 'Full Self-Driving'",
+      "title_ja": "1966 Ford Mustang Converted into a Tesla with Working 'Full Self-Driving'",
+      "url": "https://electrek.co/2026/05/02/tesla-1966-mustang-ev-conversion-full-self-driving/",
+      "hn_url": "https://news.ycombinator.com/item?id=48009840",
+      "score": 93,
+      "comment_count": 72,
+      "posted_at": "2026-05-04T15:22:53+00:00",
+      "comments": [
+        {
+          "id": 48011827,
+          "author": "sottol",
+          "text": "I really like the look of the car, but from the title it sounds like a Mustang has been converted into an FSD Tesla (\"teslafied\" Mustang) - but Tesla suspension, Tesla interior... this smells like a Mustang body fitted onto a Tesla chassis (\"mustangified\" Tesla). I suspect that this might be more of a \"Mustang body kit\" on a Tesla chassis and not retrofitting the Tesla tech into a Mustang chassis + body. Still cool, but maybe misleading."
+        },
+        {
+          "id": 48012534,
+          "author": "public_void",
+          "text": "I used to work at a company that did self driving. The sensor setup was more complicated than Tesla (cameras, lidar, etc), but the fact that FSD can still work on this car despite the cameras being in a different place is really impressive to me. Our sensors were pretty sensitive to accurate calibration, and iirc any time we tried to move our sensor array to a new car it took a ton of work to reconfigure it to make the sensor fusion output work."
+        },
+        {
+          "id": 48013858,
+          "author": "SoftTalker",
+          "text": "It would be cool if we saw the separation of drivetrain from body in the automobile market. This happens with heavy trucks, you can buy a \"glider\" which is a completely new, finished rolling chassis and you provide your own engine. Originally done (I think) to skirt emissions laws but it would be cool to be able to buy the body and the EV drivetrain (and maybe battery packs?) from different vendors, and for EV drivetrains to be more easily fittable to older chassis."
+        },
+        {
+          "id": 48011733,
+          "author": "AngryData",
+          "text": "From the article it sounds like the inverse, they took a Tesla and stuck a classic car exterior shell on it, not transplant the electric car parts into a mustang frame. It is still kind of neat but is not the same thing to me. You don't normally upgrade a classic car by chopping out the entire frame and sticking the body panels onto a modern car."
+        },
+        {
+          "id": 48011636,
+          "author": "ryan42",
+          "text": "Here's one of a fully custom Toyota 4x4 truck getting a Tesla Model 3 motor that I enjoyed. I would love to have a small electric pickup like this, but I don't want to invest $100k to get it done https://www.youtube.com/watch?v=siEhd4Z-6Ts"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 16,
+      "id": 48009441,
+      "title_en": "Pomiferous: The most extensive apples (pommes) database",
+      "title_ja": "Pomiferous: The most extensive apples (pommes) database",
+      "url": "https://pomiferous.com/",
+      "hn_url": "https://news.ycombinator.com/item?id=48009441",
+      "score": 91,
+      "comment_count": 41,
+      "posted_at": "2026-05-04T14:47:41+00:00",
+      "comments": [
+        {
+          "id": 48014878,
+          "author": "biotinker",
+          "text": "There are dozens of us! I run a nonprofit group that maintains a similar but different database, ours focuses on identification of heritage varieties, I.e. apples that existed pre WWII. We're in the PNW so we also have catalogs of where they were sold to make their way to us, etc, as we identify trees in old orchards. I've learned some interesting stuff along the way, like that English varieties keep showing up in eastern Washington because English nurseries shipped to Vancouver in the late 1800s. Our apple database is here: https://heritageapplecorps.org/varieties/"
+        },
+        {
+          "id": 48010390,
+          "author": "samch",
+          "text": "Nice database (got a brief glimpse before it was hugged to death). Personally, I’ve always really liked this apple rating site (no affiliation): https://applerankings.com/"
+        },
+        {
+          "id": 48012277,
+          "author": "wxw",
+          "text": "A lot of fruits seem to have their varietal information flattened out by the time they get to market (i.e. a yellow peach is just a peach yet there are many kinds of yellow peaches). Apples have not, and I think that's great. Is this because other fruit varietals are generally not significantly different? Is there some special sauce behind apple distribution?"
+        },
+        {
+          "id": 48010822,
+          "author": "dsecurity49",
+          "text": "It’s refreshing to see a site that’s just a database without five popups asking for a newsletter subscription. Just pure, unadulterated pomology"
+        },
+        {
+          "id": 48015557,
+          "author": "linsomniac",
+          "text": "Let me take a moment to say: Try an Envy. Apples are my go-to snack over the last decade, and Envy has been my go-to for the last 3-4 years. They are consistently crisp, readily available, have a complex sweet taste, and even after sitting on the counter for a week tend towards crisp rather than mealy. I've had a few duds, but over 500+ the number of meh ones I've run across is just barely out of the single digits."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 17,
+      "id": 48009020,
+      "title_en": "How Monero’s proof of work works",
+      "title_ja": "How Monero’s proof of work works",
+      "url": "https://blog.alcazarsec.com/tech/posts/how-moneros-proof-of-work-works",
+      "hn_url": "https://news.ycombinator.com/item?id=48009020",
+      "score": 216,
+      "comment_count": 169,
+      "posted_at": "2026-05-04T14:10:50+00:00",
+      "comments": [
+        {
+          "id": 48009696,
+          "author": "dgacmu",
+          "text": "If folks are interested in the old Monero PoW function (and, uh, the reason they changed it), I wrote up a thing about it a long time ago: https://da-data.blogspot.com/2014/08/minting-money-with-mone... The history of people trying to design GPU or ASIC-resistant proof-of-work functions is long and mostly unsuccessful. I haven't looked into RandomX; it's possible they've succeeded here (or possible that with the alt-coin market mining profitability tanking after Ethereum moved to proof-of-stake, it just wasn't worth it)."
+        },
+        {
+          "id": 48012254,
+          "author": "hyc_symas",
+          "text": "I walked through the design at Monerokon in 2019 here https://www.youtube.com/watch?v=4Hkd-n1W_e4"
+        },
+        {
+          "id": 48009785,
+          "author": "j4cobgarby",
+          "text": "I never quite understand this stuff, maybe someone can help. Are cryptocurrencies supposed to be a potential replacement for real life cash? This was my understanding of the motivation behind Bitcoin, at least. If so, why does it make sense that people can \"generate\" cash by proving some amount of work done? This of course cannot be done with normal cash. Is the main functionality of these cryptocurrencies supposed to be \"people can send currency to each other\", or \"people generate currency -- a number -- and sell this currency for real life money\"?"
+        },
+        {
+          "id": 48012297,
+          "author": "KolmogorovComp",
+          "text": "The article skip over the results? Did the design succeeded? Which hardware do miner uses, and is it evenly distributed? Can I mine Monero on potato hardware?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 18,
+      "id": 48011904,
+      "title_en": "Let's talk about LLMs",
+      "title_ja": "Let's talk about LLMs",
+      "url": "https://www.b-list.org/weblog/2026/apr/09/llms/",
+      "hn_url": "https://news.ycombinator.com/item?id=48011904",
+      "score": 101,
+      "comment_count": 66,
+      "posted_at": "2026-05-04T17:29:39+00:00",
+      "comments": [
+        {
+          "id": 48013659,
+          "author": "mfro",
+          "text": "I think you're misunderstanding the paradigm shift completely -- AI does not just generate code N(x) more quickly. It thinks N(x) faster, it researches N(x) faster, it tests N(x) faster. There are hundreds of tasks that you'll find engineers are offloading to AI every day. The major hurdle right now is actually pivoting LLMs from just generating code: integrating those tasks into workflows. This is why tool-use and agentic workflows have taken engineering by storm."
+        },
+        {
+          "id": 48014619,
+          "author": "kelnos",
+          "text": ">> Within just this group the ratios between best and worst performances averaged about 10:1 on productivity measurements and an amazing 5:1 on program speed and space measurements! > (although I’m personally skeptical of the “10x programmer” concept, the software industry overall does seem to accept it as true) To be fair, this statement from Brooks doesn't entirely match with the \"10x programmer\" we talk about. My take on it is when someone says \"10x programmer\" today, they mean 10x more productive than the average , not 10x more productive than the worst . Brooks' statement is about the latter. If he'd looked at the difference between average and best, I would assume you'd get something more like a 2x or 4x programmer."
+        },
+        {
+          "id": 48014107,
+          "author": "atleastoptimal",
+          "text": "\"LLM's Aren't Going to Fundamentally Change Software Development\" Says Increasingly Nervous Man For Seventh Time This Year"
+        },
+        {
+          "id": 48014011,
+          "author": "dabedee",
+          "text": "It was a welcome change to have a deliberate, well thought, and well-written article that tries to bring readers through a rational journey. Thank you"
+        },
+        {
+          "id": 48013681,
+          "author": "smartmic",
+          "text": "If you're interested in Fred Brooks's \"No Silver Bullet,\" I also explored it in the context of LLMs: https://smartmic.bearblog.dev/no-ai-silver-bullet/"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 19,
+      "id": 48011603,
+      "title_en": "Stop big tech from making users behave in ways they don't want to",
+      "title_ja": "Stop big tech from making users behave in ways they don't want to",
+      "url": "https://economist.com/by-invitation/2026/04/29/stop-big-tech-from-making-users-behave-in-ways-they-dont-want-to",
+      "hn_url": "https://news.ycombinator.com/item?id=48011603",
+      "score": 193,
+      "comment_count": 130,
+      "posted_at": "2026-05-04T17:10:57+00:00",
+      "comments": [
+        {
+          "id": 48012100,
+          "author": "wxw",
+          "text": "https://archive.ph/3HkyR"
+        },
+        {
+          "id": 48015521,
+          "author": "noosphr",
+          "text": "I'm so happy the economist is converting this important topic. Now if only the dick heads running this complete rag could listen to the wonderful people who wrote that enlightened piece and let users unsubscribe: https://www.reddit.com/r/assholedesign/comments/rli0u9/how_t..."
+        },
+        {
+          "id": 48016057,
+          "author": "gnarlouse",
+          "text": "nauseating to think that Amazon was only charged $2.5B when they made somewhere around $25-44B off the Iliad cancellation thing."
+        },
+        {
+          "id": 48012315,
+          "author": "ngriffiths",
+          "text": "Sure, making instagram as addictive as possible seems bad but I disagree with the framing a bit. Dark patterns get users to do things they don't want, that's why they get super annoyed at the design or the process or the outcome. Addictive apps are a different thing to me. I don't think it's that compelling to say \"obviously no one wants to be on Instagram and they're getting manipulated into it.\" ...yeah they do! The question is can you make a compelling case that spending time on it is harmful."
+        },
+        {
+          "id": 48014955,
+          "author": "sunandsurf",
+          "text": "IMO recommender algorithms and other dark patterns like infinite scroll should be turned off BY DEFAULT on these apps. That way those people who want a dose of brainrot still have the option to do so but most of them get a little help to turn away from screens (I never heard anybody say they want to spend more time on social media). I've written more about this here: https://klemenvodopivec.substack.com/p/recommender-systems-n..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 20,
+      "id": 48010266,
+      "title_en": "Sierra Raises $950M at $15B Valuation",
+      "title_ja": "Sierra Raises $950M at $15B Valuation",
+      "url": "https://sierra.ai/blog/better-customer-experiences-built-on-sierra",
+      "hn_url": "https://news.ycombinator.com/item?id=48010266",
+      "score": 69,
+      "comment_count": 95,
+      "posted_at": "2026-05-04T15:51:37+00:00",
+      "comments": [
+        {
+          "id": 48012664,
+          "author": "ej88",
+          "text": "It's always interesting seeing how HN reacts to AI CX (as someone who works in this space). Yes, the tech savvy crowd loves to say how they always ask for a human and love old school phone trees in reality 50-80% of callers come in with easily answerable questions because they don't know how to nav the website and prefer to ask in natural language The vast majority of callers call in to resolve their issue, and most don't care if they are speaking to a bot because they just want their issue fixed. Agents (if implemented well) are an order of magnitude more effective at resolving issues compared to a call centre worker who is reading off a script and churn within 9 months There's also the 2nd order effs of making CX cheap. before, there is the perverse incentive of companies trying to keep you off support because each call costs them way more than the value they get. if your cost per call drops 100x you can invest in turning a cost centre into a revenue driver (+ a better experience)"
+        },
+        {
+          "id": 48014068,
+          "author": "woeirua",
+          "text": "I don't get this for several reasons: 1. There are already apps/websites as an alternative for CSAs. Most of the time I have to call someone its because I couldn't do what I wanted through those portals, so adding an AI agent to the chain is unlikely to prevent an immediate escalation to a human. 2. How much money are you really going to save this way? CSAs aren't high salary employees. Sure you might need a bunch of them, but we've already seen that brand loyalty erodes quickly when you remove the human touch. United/Spirit airlines offer opposing views on the cut your way to profitability perspective. 3. \"Pay only for good outcomes\" isn't going to last. 4. Are agents good enough to even do this? Yes, the cherrypicked examples sound good, but... I just know how well coding agents really work and my only experiences with voice agents in the wild have been very poor so far."
+        },
+        {
+          "id": 48011777,
+          "author": "captn3m0",
+          "text": "If you (like me) are hearing about this for the first time, Bret Taylor is the co-founder. > Bret is Co-Founder of Sierra. Most recently, he served as Co-CEO of Salesforce. Prior to Salesforce, Bret founded Quip and was CTO of Facebook. He started his career at Google, where he co-created Google Maps. Bret serves on the board of OpenAI."
+        },
+        {
+          "id": 48015176,
+          "author": "Infinitesimus",
+          "text": "I can't speak to the business itself but they recently published a refreshing take on improving the product engineering interview experience in the age of AI https://sierra.ai/blog/the-ai-native-interview Well worth a read even if you are generally anti-AI."
+        },
+        {
+          "id": 48012489,
+          "author": "eaenki",
+          "text": "I remember waiting for uber next to him in SF one night 10+ years ago. This dude must be the son of some mafia boss or some shit and have some crazy blackmail to raise billions for companies that are copies of products where he’s the 12th company doing the same thing.. never turning a profit or anything and yet raising ever more money. doesn’t make sense otherwise"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 21,
+      "id": 48012003,
+      "title_en": "Heat pump sales rise across Europe",
+      "title_ja": "Heat pump sales rise across Europe",
+      "url": "https://www.pv-magazine.com/2026/05/04/heat-pump-sales-rise-17-across-europe-in-q1-as-energy-prices-surge/",
+      "hn_url": "https://news.ycombinator.com/item?id=48012003",
+      "score": 183,
+      "comment_count": 97,
+      "posted_at": "2026-05-04T17:35:15+00:00",
+      "comments": [
+        {
+          "id": 48014542,
+          "author": "ProllyInfamous",
+          "text": "For anybody in TVA's electricity networks (mostly: Tennessee): they offer an annual promotion to single-family homeowners only to purchase an $1800 AO heatpump waterheater for only $250 . Maths: 85% discount on fancy new waterheater, which also dehumidifies and cools your house (passive result of heatpump). TVA usually offers this promotion between Thanksgiving and NYE. You can order online from HomeDepot, or walk into a local store [0]. This ends up costing LESS than a new traditional resistive-type heater. [0] either method: they DO verify SFH (by more than just ZIP code) -- duplexes and contractors not authorized/allowed ---- My own $250.00 \"TVA homeowner special\" (as a licensed electrician): < https://i.imgur.com/4wCez9u.jpeg > this specific design draws from both bath and bedroom [dual 6\" inlets], exhausts into kitchen [single 8\" outlet] | utility closet is only 5ft x 4ft (~20sqft) Don't forget to use a pressure regulator, expansion tank (coldside, only), & (preferably) a sediment filter. Whatever you do: do NOT use a water softener before the tank ."
+        },
+        {
+          "id": 48015983,
+          "author": "pbreit",
+          "text": "“ A total of around 575,000 residential heat pump units were sold across 11 European countries from January to March 2026, up from 494,000 in the same period in 2025” Not a big increase on a relatively small base. What is the takeaway here?"
+        },
+        {
+          "id": 48013371,
+          "author": "jakozaur",
+          "text": "A heat pump could win as the best HVAC technology, though a better drilling for ground-sourced ones. Just a shallow drilling (up to 100m) that works in retrofit mode, such as drilling from the basement, would be a great upgrade: - No outdoor unit that looks awful in many settings - works well, even in the coldest winter, without a spike in electricity usage, COP 5 - very reliable with long durability - super quiet, no ambient noise - 20% more efficient Currently, drilling is very disruptive in retrofits, but there is progress in compact techniques that might change the equation. Disclaimer: angel investor in https://www.flexdrill.at/"
+        },
+        {
+          "id": 48013859,
+          "author": "ejoebstl",
+          "text": "In DACH, there's not really an alternative for many homes. Heat pumps are by now cheaper, more efficient, more versatile and definitely greener than other means of heating. If you get one, just make sure to get the dimensioning right. They are WAY more complex to plan, install and maintain than traditional heating."
+        },
+        {
+          "id": 48013885,
+          "author": "ndr42",
+          "text": "> [it] become[s] cheaper than gas heating within 11 to 14 years This a no-brainer for buildings with high energy use. But we looked into getting a heat pump last year but it doesn't pan out because our house (15 years old) has a very low energy use and we would not recover the costs (about 20K euros after subsidies) for 20+ years."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 22,
+      "id": 48014197,
+      "title_en": "Transformers Are Inherently Succinct",
+      "title_ja": "Transformers Are Inherently Succinct",
+      "url": "https://arxiv.org/abs/2510.19315",
+      "hn_url": "https://news.ycombinator.com/item?id=48014197",
+      "score": 15,
+      "comment_count": 5,
+      "posted_at": "2026-05-04T20:03:08+00:00",
+      "comments": [
+        {
+          "id": 48015691,
+          "author": "cadamsdotcom",
+          "text": "Seems intuitively sound; a larger model would have the ability to differentiate among a larger variety of concepts, which translates to a larger vocabulary and greater ability to use expressive tools such as imagery, metaphor etc etc. I could go on, but brevity is virtuous."
+        },
+        {
+          "id": 48015633,
+          "author": "pstuart",
+          "text": "It makes sense that flowery language is more decorative than functional, but I wonder how much nuance can help shape reckoning, reasoning, and rendering -- if at all. Maybe RFC terms are all that's needed: https://datatracker.ietf.org/doc/html/rfc2119"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 23,
+      "id": 47985958,
+      "title_en": "Show HN: nfsdiag – A NFS diagnostic application",
+      "title_ja": "Show HN: nfsdiag – A NFS diagnostic application",
+      "url": "https://github.com/lsferreira42/nfsdiag",
+      "hn_url": "https://news.ycombinator.com/item?id=47985958",
+      "score": 28,
+      "comment_count": 3,
+      "posted_at": "2026-05-02T12:48:01+00:00",
+      "comments": [
+        {
+          "id": 48015715,
+          "author": "lschueller",
+          "text": "This is strong! Nice tool. Very powerful little helper in many small-ish different situations, I assume. Like it!"
+        },
+        {
+          "id": 48015732,
+          "author": "kayson",
+          "text": "Checking krb5 issues is huge. What a pain in the ass that is to debug!"
+        },
+        {
+          "id": 48014655,
+          "author": "ktm5j",
+          "text": "Sweet! I would have killed for a tool like this at my last job."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 24,
+      "id": 48011440,
+      "title_en": "The Visible Zorker: Zork 3",
+      "title_ja": "The Visible Zorker: Zork 3",
+      "url": "https://eblong.com/infocom/visi/zork3/",
+      "hn_url": "https://news.ycombinator.com/item?id=48011440",
+      "score": 33,
+      "comment_count": 1,
+      "posted_at": "2026-05-04T16:59:28+00:00",
+      "comments": [
+        {
+          "id": 48015150,
+          "author": "djsavvy",
+          "text": "Description for those who were confused, like me: https://eblong.com/infocom/visi/"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 25,
+      "id": 47988130,
+      "title_en": "A little comparison between R and Kap",
+      "title_ja": "A little comparison between R and Kap",
+      "url": "https://blog.dhsdevelopments.com/a-little-comparison-between-r-and-kap",
+      "hn_url": "https://news.ycombinator.com/item?id=47988130",
+      "score": 14,
+      "comment_count": 1,
+      "posted_at": "2026-05-02T16:58:39+00:00",
+      "comments": [
+        {
+          "id": 48015783,
+          "author": "RodgerTheGreat",
+          "text": "In Lil, the readcsv[] function takes an optional string specifying a type for each column to decode: purchases:readcsv[read[\"purchases.csv\"] \"sii\"] Summing a column: sum purchases.amount To create a summary, we need to reduce each group to a single row: select first country sum amount by country from purchases Discounting: select first country sum amount-discount by country from purchases Lil doesn't have a \"median\" primitive. Decks can contain multiple modules, but we happen to know this one is alone. Your path will vary: stats:first import[\"stats.deck\"] select first country sum amount-discount by country where amount<stats.median[amount]*10 from purchases Calculating the median within each group is merely a matter of reordering clauses: select first country sum amount-discount where amount<stats.median[amount]*10 by country from purchases"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 26,
+      "id": 48015218,
+      "title_en": "'Point of no return': New Orleans relocation must start now due to sea level",
+      "title_ja": "'Point of no return': New Orleans relocation must start now due to sea level",
+      "url": "https://www.theguardian.com/us-news/2026/may/04/new-orleans-sea-levels-relocation-climate-crisis",
+      "hn_url": "https://news.ycombinator.com/item?id=48015218",
+      "score": 23,
+      "comment_count": 10,
+      "posted_at": "2026-05-04T21:25:55+00:00",
+      "comments": [
+        {
+          "id": 48016000,
+          "author": "madrox",
+          "text": "My roots are in Louisiana, and this makes me incredibly sad. It is such a unique place that has no like, and drives all tourism in the state. Where will tourists celebrate Mardi Gras after it's gone? Baton Rouge? Sadder, still, to know that nothing will be done. No one will be relocated. Just one day a weather event like a hurricane will happen to destroy the area and it will be labeled derelict with no funds to rebuild. People will be left to fend for themselves."
+        },
+        {
+          "id": 48015800,
+          "author": "bypdx",
+          "text": "Rather than relocate, we can make discussion of climate change illegal or just tax the blue states to build a sea wall around the entire city"
+        },
+        {
+          "id": 48015860,
+          "author": "comrade1234",
+          "text": "I would be surprised if the USA is even able to plan far enough ahead to put in a sea barrier/gates in time to protect New York City, similar to London. New Orleans? At least the old town is elevated."
+        },
+        {
+          "id": 48015835,
+          "author": "dmm",
+          "text": "\"\"\" “New Orleans is not going to disappear in 10 years or anything like that, but policymakers really should’ve thought about a relocation plan a century ago,” said Dixon \"\"\" People have seen this coming for a long time. Here's a classic article about the channelization of the Mississippi by John McPhee from 1987: https://news.ycombinator.com/item?id=20636254"
+        },
+        {
+          "id": 48015941,
+          "author": "ortusdux",
+          "text": "Miami too. The city is build on porous limestone. No amount of levees, seawalls, or dams will save it."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 27,
+      "id": 48011980,
+      "title_en": "“Kitten Space Agency”, a Spiritual Successor to “Kerbal Space Program” (2025)",
+      "title_ja": "“Kitten Space Agency”, a Spiritual Successor to “Kerbal Space Program” (2025)",
+      "url": "https://www.space.com/entertainment/space-games/kitten-space-agency-is-the-spiritual-successor-to-kerbal-space-program-and-they-have-an-ex-spacex-engineer-on-the-team-interview",
+      "hn_url": "https://news.ycombinator.com/item?id=48011980",
+      "score": 123,
+      "comment_count": 42,
+      "posted_at": "2026-05-04T17:33:48+00:00",
+      "comments": [
+        {
+          "id": 48013691,
+          "author": "JLO64",
+          "text": "I’m primarily a coding instructor but I also teach lessons based around Kerbal Space Program. From that angle I’m pretty happy where these devs are going with the sandbox and level of freedom they plan on giving users. One reason my students seem to really like KSP are all the different things you can do/build (especially space planes). While it does have a high difficulty curve when it comes to the controls, once they master them they all seem to appreciate the level of control they have. From my perspective, I feel that instead of trying to make certain systems more accessible/simple they should go in the opposite direction and offer more control/options (preferably with a decent tutorial though). However, something I really hope the developers plan on making a macOS port. I use a MacBook myself, but I’ve noticed the vast majority of my students also have Macs. I have no hard data to back this up, but I suspect a larger than average segment of users interested in this game are on Mac."
+        },
+        {
+          "id": 48013015,
+          "author": "rowanseymour",
+          "text": "So excited to play this but also sad that they didn't get the IP to use Kerbals. Not loving the cutesy baby kittens.. should have gone with a more serious animal like capybaras."
+        },
+        {
+          "id": 48013354,
+          "author": "throwaway27448",
+          "text": "Let me know when I can run it on my Mac. I realize I'm 1% of the world but I can't even be bothered to unfuck the gaming machines I own that are gathering dust. Just let me use my main workstation and I'll play the shit out of it"
+        },
+        {
+          "id": 48014853,
+          "author": "etiam",
+          "text": "Wasn't a big part of the attraction of KSP to see your creations fall apart, without too much guilt about it? Neotenous fluffy mammals for collateral damage seems like an unfortunate handicap to take on. Maybe they should make it worms or something?"
+        },
+        {
+          "id": 48013118,
+          "author": "pohl",
+          "text": "Using kittens is a master stroke. If done right, the internet will reward them."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 28,
+      "id": 48008074,
+      "title_en": "Newton's law of gravity passes its biggest test",
+      "title_ja": "Newton's law of gravity passes its biggest test",
+      "url": "https://www.science.org/content/article/newton-s-law-gravity-passes-its-biggest-test-ever",
+      "hn_url": "https://news.ycombinator.com/item?id=48008074",
+      "score": 124,
+      "comment_count": 113,
+      "posted_at": "2026-05-04T12:52:57+00:00",
+      "comments": [
+        {
+          "id": 48010757,
+          "author": "rappatic",
+          "text": "When I see dark matter in the news I'm always reminded of the story of Vulcan. In the 1800s, detailed observations of the planet Mercury showed that its orbit was slightly different than Newtonian mechanics predicted-- a difference of about 43 arcseconds per century. The study was rigorous enough to rule out any observation errors. Le Verrier, the astronomer who made these observations, wondered how to explain the difference. A decade earlier, he had noticed a similar irregularity in the orbit of Uranus, which led to the discovery of Neptune, whose gravity caused these perturbations. So Le Verrier reasoned that something similar must be going on for Mercury, and he posited the existence of Vulcan, a tiny planet close to the Sun. Many attempts were made for decades to observe Vulcan. It was even included on some maps of the Solar System at the time ( https://www.loc.gov/resource/g3180.ct003790 ). But it was never conclusively observed. When Einstein published his theory of relativity in 1915, the mystery of Mercury's orbit was finally explained-- Newtonian mechanics were simply incomplete, and the irregularity of Mercury's orbit was due to relativistic effects. Could it be that something similar is happening today? Observations of gravity on galactic scales doesn't quite align with what relativity would predict, so we use dark matter to fill the gaps. We've tried for decades to detect dark matter, with no dice. Is our theory of gravity simply incomplete? MOND may not be the solution, but I'm still skeptical about dark matter."
+        },
+        {
+          "id": 48008572,
+          "author": "GuB-42",
+          "text": "If you follow Sabine Hossenfelder's channel, she has a MONDOmeter. With MOND (modified Newtonian gravity) on one side and dark matter on the other side. As new papers come out the needle goes back and forth, and I guess that she will make a new video if she hasn't already, with the needle moving one step towards dark matter. I find it interesting how it doesn't seem to settle. Dark matter is still the favorite, but there is a lot of back and forth between \"MOND is dead\" and \"we found new stuff we couldn't explain with dark matter, but it matches MOND predictions\"."
+        },
+        {
+          "id": 48008883,
+          "author": "Lvl999Noob",
+          "text": "I thought newtonian gravity was already proven to be inaccurate with Einstein's Special Relativity (or General Relativity?) giving better results on cosmic scales (basically analogous to an approximation vs an exact formula)?"
+        },
+        {
+          "id": 48014434,
+          "author": "DoctorOetker",
+          "text": "It's bizarre that Newton's law passes this test, when the linearization of general relativity predicts a gravitational equivalent of a magnetic analog for gravity. Gravity Probe B. There exists an even simpler derivation for a magnetic term, but its in my file drawer... (simpler in that it just relies on observations from special relativity)"
+        },
+        {
+          "id": 48013628,
+          "author": "adrian_b",
+          "text": "Free variant of this research paper: https://arxiv.org/abs/2604.14327"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 29,
+      "id": 48012477,
+      "title_en": "Offenders sentenced up to 10 years for spying on TSMC",
+      "title_ja": "Offenders sentenced up to 10 years for spying on TSMC",
+      "url": "https://www.taipeitimes.com/News/front/archives/2026/04/28/2003856358",
+      "hn_url": "https://news.ycombinator.com/item?id=48012477",
+      "score": 94,
+      "comment_count": 16,
+      "posted_at": "2026-05-04T18:04:33+00:00",
+      "comments": [
+        {
+          "id": 48015810,
+          "author": "A1kmm",
+          "text": "The article doesn't really explain well how this is spying. So companies A & B (A=TSMC, B=Tokyo Electron) are in a customer-supplier relationship. Employee B1 of B asks Employees A1 & A2 of A ask for information about how B's technology is working in practice at A, which involves revealing information about A's processes. A1 & A2 supply the information, and B2 at B uses it to improve how B does things, so they can help A more and increase their business with A. There is no allegation that the information supplied to B by A employees left B, or was used for anything except to help with the collaboration between B & A. And as far as the article mentions, no evidence A1 or A2 received a bribe or anything like that. And yet manager A3 at A finds out about this supply and freaks out because they didn't want A1 & A2 sharing that much information with the supplier. So they make a complaint - and A1, A2, B1, B2 and B as a company all face significant penalties. This seems unjust given A1, A2, B1 & B2 were all just trying to collaborate in the best interests of their companies, and B employees only used things freely and non-corruptly given to them by A employees; no information was leaked outside of the collaborating companies. A1 & A2 might have broken their company policies, but this probably should have ended at them being educated on the company policies and being asked not to do it again when managing future supplier relationships."
+        },
+        {
+          "id": 48015711,
+          "author": "arjie",
+          "text": "Interesting. It makes sense that Taiwan treats semiconductors as a national security issue. After all that's what the Silicon Shield theory is. But I was curious about what happens in other jurisdictions. It turns out that you can steal from European companies with impunity because European governments really don't pursue this that much. An ex-ASML engineer (in San Jose) set up two companies XTAL in the US and Dongfang Jingyuan Electron in China and then hired people from his team on ASML, one of whom brought all the source code for one component control with him. XTAL lost the case and shut down, but this chap just went to China and ran Dongfang Jingyuan. Living large. The guy who took ASML secrets to Huawei also got away with it. In both cases, European governments haven't really pursued jail time. The US, of course, got involved and has an arrest warrant for the Dongfang Jingyuan guy that we're never going to collect on. \"Uncle Sam has made his decision; now let him enforce it\" so to speak. But since writing this comment, I've now found that they got a Russian engineer for taking some ASML stuff https://www.reuters.com/technology/ex-asml-nxp-employee-sent... His mistake was taking it to an actually sanctioned country, though. That seems to be prosecutable. In the US, of course, you will go to jail for it. Besides the national security thing, even Anthony Levandowski was sentenced to 18 months of prison (pardoned by Donald Trump, though), and that was AV tech, not like missiles or anything. So it seems, based on my Google-level knowledge that: US: Lots of protected tech, and you'll go to jail. Taiwan: Semiconductor tech is treated like we do nuclear tech, so you'll go to jail. Most European jurisdictions: You'll have to pay fines. If you stole to a sanctioned country, straight to prison!"
+        },
+        {
+          "id": 48015303,
+          "author": "pm2222",
+          "text": "Just a thought: is 1 year of life in prison enough to deter most folks from messing with the law again in the future?"
+        },
+        {
+          "id": 48015404,
+          "author": "mikelitoris",
+          "text": "I guess Taiwanese lawmakers deemed this law necessary for national security purposes, but this would not fly elsewhere. We already have something to protect trade secrets: it’s called a patent. If you don’t patent it, and a competitor lures an employee with enough knowledge, everything is fair game, as it should be. Aka if you like it you should put a patent on it. Edit: why would you downvote this? Jeez…"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 30,
+      "id": 47977990,
+      "title_en": "Using “underdrawings” for accurate text and numbers",
+      "title_ja": "Using “underdrawings” for accurate text and numbers",
+      "url": "https://samcollins.blog/underdrawings/",
+      "hn_url": "https://news.ycombinator.com/item?id=47977990",
+      "score": 357,
+      "comment_count": 126,
+      "posted_at": "2026-05-01T18:07:28+00:00",
+      "comments": [
+        {
+          "id": 48003827,
+          "author": "danpalmer",
+          "text": "I'm glad that we're making progress towards a deeper understanding of what LLMs are inherently good at and what they're inherently bad at (not to say incapable of doing, but stuff that is less likely to work due to fundamental limitations). There's similarity here with, for example, defining the architecture of software, but letting an LLM write the functions. Or asking an LLM to write you the SQL query for your data analysis, rather than asking it to do your data analysis for you. What I'd really like to see is a more well defined taxonomy of work and studies on which bits work well with LLMs and which don't. I understand some of this intuitively, but am still building my intuition, and I see people tripping up on this all the time."
+        },
+        {
+          "id": 48006073,
+          "author": "IdiotSavage",
+          "text": "> Transform this image into a photographed claymation diorama of assorted artisan chocolates and candies […] viewed from a low-angle Side note: whenever I read prompts for image generation, I notice very specific details which the model obviously ignored. Here the chocolates / candies in the last two images look anything but artisanal. They look very \"sterile\" and mass-produced. The viewing angle is also not accurate. Why do we even bother writing such elaborate prompts, when the model ignores most of it anyway?"
+        },
+        {
+          "id": 47977991,
+          "author": "samcollins",
+          "text": "I found a simple technique to get reliable text and numbers in AI generated images. I’m surprised the image models aren’t already doing this, so wanted to share since I’m finding this so useful"
+        },
+        {
+          "id": 48004477,
+          "author": "smusamashah",
+          "text": "This is just img2img where first image with correct structure was generated by code."
+        },
+        {
+          "id": 47978659,
+          "author": "sparuchuri",
+          "text": "This hack definitely falls in the “duh, why didn’t I think of that” category of tricks, but glad to now have it next time imagegen comes up short"
+        }
+      ],
+      "summary_ja": ""
+    }
+  ]
+}
