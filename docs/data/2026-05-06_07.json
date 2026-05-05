@@ -1,0 +1,1069 @@
+{
+  "date": "2026-05-06T00:00:00+09:00",
+  "slot": "07",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 48027897,
+      "title_en": ".de TLD offline due to DNSSEC?",
+      "title_ja": ".de TLD offline due to DNSSEC?",
+      "url": "https://dnssec-analyzer.verisignlabs.com/nic.de",
+      "hn_url": "https://news.ycombinator.com/item?id=48027897",
+      "score": 443,
+      "comment_count": 173,
+      "posted_at": "2026-05-05T20:16:35+00:00",
+      "comments": [
+        {
+          "id": 48029216,
+          "author": "Aldipower",
+          "text": "Apparently the DENIC team was on a party this evening! Party hard, but not too hard. https://bsky.app/profile/denic.de/post/3ml4r2lvcjg2h"
+        },
+        {
+          "id": 48028046,
+          "author": "krystofbe",
+          "text": "Looks like a DNSSEC issue, not a nameserver outage. Validating resolvers SERVFAIL on every .de name with EDE: RRSIG with malformed signature found for a0d5d1p51kijsevll74k523htmq406bk.de/nsec3 (keytag=33834) dig +cd amazon.de @8.8.8.8 works, dig amazon.de @a.nic.de works. Zone data is intact, DENIC just published an RRSIG over an NSEC3 record that doesn't validate against ZSK 33834. Every validating resolver therefore refuses to answer. Intermittency fits anycast: some [a-n].nic.de instances still serve the previous (good) signatures, so retries occasionally land on a healthy auth. Per DENIC's FAQ the .de ZSK rotates every 5 weeks via pre-publish, so this smells like a botched rollover."
+        },
+        {
+          "id": 48029795,
+          "author": "tom1337",
+          "text": "Cloudflare has now disabled DNSSEC validation on their 1.1.1.1 resolver: https://www.cloudflarestatus.com/incidents/vjrk8c8w37lz"
+        },
+        {
+          "id": 48029078,
+          "author": "tom1337",
+          "text": "I have never used DNSSEC and never really bothered implementing it, but do I understand it correctly that we took the decentralized platform DNS was and added a single-point-of-failure certificate layer on top of it which now breaks because the central organisation managing this certificate has an outage taking basically all domains with them?"
+        },
+        {
+          "id": 48028767,
+          "author": "siva7",
+          "text": "Crazy. I can't remember an incident like this ever happened before and it's still not fixed? .de is probably the most important unrestricted domain after .com from an economical perspective. Millions of businesses are \"down\"."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 2,
+      "id": 48028842,
+      "title_en": "Write some software, give it away for free",
+      "title_ja": "Write some software, give it away for free",
+      "url": "https://nonogra.ph/write-some-software-give-it-away-for-free-05-05-2026",
+      "hn_url": "https://news.ycombinator.com/item?id=48028842",
+      "score": 60,
+      "comment_count": 38,
+      "posted_at": "2026-05-05T21:26:50+00:00",
+      "comments": [
+        {
+          "id": 48029822,
+          "author": "SerCe",
+          "text": "Or don't. I've done both, published OSS projects and sold some software. The level of entitlement in some comments I received on the OSS side was pretty crazy at times. While with the paid software, all of the interactions I had were so much more constructive. YMMV, but willingness to pay is a great filter."
+        },
+        {
+          "id": 48029702,
+          "author": "fxtentacle",
+          "text": "I got burned with an attitude like this: unexpectedly, people who had downloaded my open source tool for free started expecting support. Some of them sent pretty unfriendly emails."
+        },
+        {
+          "id": 48029618,
+          "author": "cortesoft",
+          "text": "I don't think this debate has an easy answer. Yes, not everything should be about money, but yes, we all need to make money to survive. I think we all agree the answer isn't, \"No one should make any money writing software.\" I also think we can agree that the answer isn't, \"you should charge money for every bit of software you write.\" So how do we decide which is which? I don't want to stop being a professional software developer. I have loved being able to support myself and my family by doing my favorite activity. It has let me enjoy going to work every day for over 20 years. I also don't think I should charge for random code work that I do for fun, though. I am not trying to monetize every minute of my day... but I do want to monetize enough of it that I can pay my mortgage, buy food, save for my retirement, and have some fun along the way. I don't know exactly where I am going with this, but it is my gut reaction when I see a post about how horrible it is to make money off of writing software. It has to be more nuanced than that."
+        },
+        {
+          "id": 48029815,
+          "author": "advael",
+          "text": "A lot of comments can't help but mention the constant looming threat of potentially permanent destitution that pervades our society. It's increasingly hard to understand the position of people who think that this is a feature, excepting of course those very few with the resources to use that pressure rather than be driven by it"
+        },
+        {
+          "id": 48029749,
+          "author": "zabzonk",
+          "text": "As this is FOSS, I don't see why you need the security review (by who, with what qualifications?). Any users can look at the source code and arrange their own reviews as they think necessary."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 3,
+      "id": 48024540,
+      "title_en": "Accelerating Gemma 4: faster inference with multi-token prediction drafters",
+      "title_ja": "Accelerating Gemma 4: faster inference with multi-token prediction drafters",
+      "url": "https://blog.google/innovation-and-ai/technology/developers-tools/multi-token-prediction-gemma-4/",
+      "hn_url": "https://news.ycombinator.com/item?id=48024540",
+      "score": 395,
+      "comment_count": 175,
+      "posted_at": "2026-05-05T16:14:17+00:00",
+      "comments": [
+        {
+          "id": 48026531,
+          "author": "WarmWash",
+          "text": "I don't see it talked about much, but Gemma (and gemini) use enormously less tokens per output than other models, while still staying within arms reach of top benchmark performance. It's not uncommon to see a gemma vs qwen comparison, where qwen does a bit better, but spent 22 minutes on the task, while gemma aligned the buttons wrong, but only spent 4 minutes on the same prompt. So taken at face value, gemma is now under performing leading open models by 5-10%, but doing it in 1/10th the time."
+        },
+        {
+          "id": 48025248,
+          "author": "zdw",
+          "text": "MTP support is being addedto llama.cpp, at least for the Qwen models ( https://github.com/ggml-org/llama.cpp/pull/20533 ) and I'd imagine Gemma 4 will come soon. The performance uplift on local/self-hosted models in both quality and speed has been amazing in the last few months."
+        },
+        {
+          "id": 48026231,
+          "author": "msp26",
+          "text": "Google is singlehandedly carrying western open source models. Gemma 4 31B is fantastic. However, it is a little painful to try to fit the best possible version into 24GB vram with vision + this drafter soon. My build doesn't support any more GPUs and I believe I would want another 4090 (overpriced) for best performance or otherwise just replace it altogether."
+        },
+        {
+          "id": 48025366,
+          "author": "skybrian",
+          "text": "Watching the computer write text sort of reminds me of using a modem to call a BBS in the old days. This seems like going from 300 baud to 1200 - a significant improvement, but still pretty slow, and someday we will wonder how we put up with it."
+        },
+        {
+          "id": 48026865,
+          "author": "aleksiy123",
+          "text": "I’m starting to think that googles strategy is a bit different then the other frontier providers. Focusing more on performance to compute efficiency over pure performance. And maybe that’s why Gemini is (seemingly) lagging behind? Other providers hitting capacity and hitting the limits subsidising their inference. Google strategy seems to be about scaling and distributing these models to their existing billions of users."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 4,
+      "id": 48024859,
+      "title_en": "Computer Use is 45x more expensive than structured APIs",
+      "title_ja": "Computer Use is 45x more expensive than structured APIs",
+      "url": "https://reflex.dev/blog/computer-use-is-45x-more-expensive-than-structured-apis/",
+      "hn_url": "https://news.ycombinator.com/item?id=48024859",
+      "score": 258,
+      "comment_count": 131,
+      "posted_at": "2026-05-05T16:34:48+00:00",
+      "comments": [
+        {
+          "id": 48028117,
+          "author": "angry_octet",
+          "text": "Great guidance hidden in here for making it expensive for agents to navigate your website. Move elements on screen as the mouse moves, force natural mouse movement to make the UI work, change the button labels in the JS to be randomly named every visit, force scrolling to the bottom of the screen to check for hidden extra tasks... Hang on, that sounds like common corporate SaaS apps."
+        },
+        {
+          "id": 48026048,
+          "author": "merlindru",
+          "text": "I'm building something that fixes this exact problem[1]. The landing page doesn't advertise it yet, but essentially, I give agents a small set of tools to explore apps' surfaces, and then an API over common macOS functions, especially those related to accessibility. The agent explores the app, then writes a repeatable workflow for it. Then it can run that workflow through CLI: `invoke chrome pinTab` Why accessibility? Well, turns out that it's just a good DOM in general. It's structure for apps. Not all apps implement it perfectly, but enough do to make it wildly useful. [1] https://getinvoke.com - note that the landing page is targeted towards creatives right now and doesn't talk about this use case yet"
+        },
+        {
+          "id": 48027440,
+          "author": "Worf",
+          "text": "Is it possible to ask the vision agent to \"map\" the UI and expose it to another agent as a set of interfaces that resemble an API better? From what I understand the vision agent now should both know that \"next page\" shows more results and that they need to get more results in the first place. If one agent just explores the UI, maybe in a test environment, and outputs a somewhat-structured description of the various UI elements and their behavior, then another agent was given that description, would the other agent perform better that an agent that both explores the UI and tries to accomplish the given task at the same time? With an example UI I made up, the description (API-like interface definition) could be something like: Get all reviews: To get all the reviews you need to go to each page and click \"show full review\" for every review summary in that page. Go to each page: Start at page 1 (the default when in the Reviews tab). Continue by clicking the \"next\" button until the \"next\" button is no longer available (as you've reached the last page). So the second agent can skip some thinking about how to navigate because it already has that skill. The first agent can explore the UI on its own, once, without worrying about messing up if there's a test environment. Or am I misunderstanding the article completely? Probably. But it's interesting nonetheless. Sorry if it makes no sense."
+        },
+        {
+          "id": 48026333,
+          "author": "jacktu",
+          "text": "Totally agree. I’ve been building an AI visual tool recently and experimented with both approaches. The latency and c ost of generic \"agentic\" browser use are absolute dealbreakers for real-time consumer apps right now. Structured APIs (even just chained LLM calls with strict JSON schemas) are not only 40x cheaper, but more importantly, they are deterministic enough to actually build a stable product on top of. Computer use is an amazing demo, but structured APIs are what pay the server bills."
+        },
+        {
+          "id": 48027420,
+          "author": "rgilliotte",
+          "text": "Many people are working on that :-) Apps written now will have mcp servers / AI compatibility when relevant The issue that still needs solving is how to make llms interact with everything we already have and use (efficiently, not with screenshot, read, screenshot, ...) Most of the time that means reverse engineering, either the app itself or the APIs it uses From github (not my projects): https://github.com/SimoneAvogadro/android-reverse-engineerin... => reverse engineer android app APIs from APKs https://github.com/HKUDS/CLI-Anything => convert ooen-source GUI apps to clis https://github.com/kalil0321/reverse-api-engineer => API reverse engineering from traffic (claude skills) My take at the same issue (very young project): Also api reverse engineering from traffic captures, with a focus on mobile app, safety & community mcp generation https://getspectral.sh https://github.com/spectral-mcp/spectral"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 5,
+      "id": 48019219,
+      "title_en": "Google Chrome silently installs a 4 GB AI model on your device without consent",
+      "title_ja": "Google Chrome silently installs a 4 GB AI model on your device without consent",
+      "url": "https://www.thatprivacyguy.com/blog/chrome-silent-nano-install/",
+      "hn_url": "https://news.ycombinator.com/item?id=48019219",
+      "score": 1159,
+      "comment_count": 795,
+      "posted_at": "2026-05-05T07:34:55+00:00",
+      "comments": [
+        {
+          "id": 48019508,
+          "author": "jbub",
+          "text": "https://archive.ph/vhTfm"
+        },
+        {
+          "id": 48027578,
+          "author": "crazygringo",
+          "text": "Framing this as needing \"consent\" is deeply misguided. It's as silly as claiming that Microsoft Word installed an English language spellcheck dictionary without your consent. It's just part of the software. You consented to installing the software and having it autoupdate. That covers it. Now we can argue whether or not it's an appropriate amount of disk space or bandwidth to use, but that's just a reasonable practical discussion to have. Framing it around consent is unnecessarily inflammatory and makes it harder to have a discussion, not easier."
+        },
+        {
+          "id": 48019542,
+          "author": "scriptsmith",
+          "text": "If Chrome has the #optimization-guide-on-device-model and #prompt-api-for-gemini-nano flags enabled, either because it's part of some Origin Trial / Early Stable Release or something, then web pages will have access to the new Prompt API which allows any webpage to initiate the (one-time) download of the ~2.7 GiB CPU or ~4.0 GiB GPU model using LanguageModel.create() https://developer.chrome.com/docs/ai/prompt-api When Chrome 148 releases tomorrow, this will be the default behaviour on desktop. To download, it should check for 22 GiB free disk space on the volume where your Chrome data dir is, and at least double the model size of free space in your tmp dir."
+        },
+        {
+          "id": 48029104,
+          "author": "davb",
+          "text": "An extra 4GB per user on our NFS home file server is going to be a huge pain (several thousand students). And for our Windows lab machines, they end up in AppData\\Local (which isn’t redirected for operational reasons) so we either leave the profiles in place and let them accumulate (suboptimal) or clear out the profiles as we normally do and let it redownload, over and over again. As much as I’m against unexpected 4GB bloat for an AI model, I’d much prefer it to install one copy, system-wide. 4GB per Windows or Linux lab machine, rather than a 4TB minimum load on our NFS server and 4GB downloads per user, per machine on our Windows labs."
+        },
+        {
+          "id": 48028634,
+          "author": "newsoftheday",
+          "text": "This is what I've done after spending some time to look into it, this is for Linux Desktop: Delete Chrome's silent 4 GB AI model file and AI In Chrome, go to: chrome://flags Search for and Disable these: Enables optimization guide on device Prompt API for Gemini Nano AI Mode Open DevTools (F12 or Ctrl+Shift+I). Click the Settings (gear icon). Go to AI Innovations and uncheck Enable AI assistance. For Linux, in a bash shell, this should prevent Chrome from trying to download the file again because the root user instead of my user, will own the file/directory. sudo rm -rf ~/.config/google-chrome/OptGuideOnDeviceModel sudo rm -rf ~/.config/googlechrome/Default/OptGuideOnDeviceModel sudo touch ~/.config/google-chrome/OptGuideOnDeviceModel sudo chmod 400 ~/.config/google-chrome/OptGuideOnDeviceModel sudo touch ~/.config/google-chrome/Default/OptGuideOnDeviceModel sudo chmod 400 ~/.config/google-chrome/Default/OptGuideOnDeviceModel In case they already existed from doing the above previously, make sure root user owns them. sudo chown root:root ~/.config/google-chrome/OptGuideOnDeviceModel sudo chown root:root ~/.config/google-chrome/Default/OptGuideOnDeviceModel List to check them. ls -l ~/.config/google-chrome/OptGuideOnDeviceModel ls -l ~/.config/google-chrome/Default/OptGuideOnDeviceModel"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 6,
+      "id": 48023861,
+      "title_en": "Three Inverse Laws of AI",
+      "title_ja": "Three Inverse Laws of AI",
+      "url": "https://susam.net/inverse-laws-of-robotics.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48023861",
+      "score": 328,
+      "comment_count": 222,
+      "posted_at": "2026-05-05T15:27:18+00:00",
+      "comments": [
+        {
+          "id": 48024463,
+          "author": "miyoji",
+          "text": "I strongly disagree with this framing. It's patently insane to demand that humans alter their behavior to accommodate the foibles of mere machines, and it simply won't work in the majority of cases. Humans WILL anthropomorphize the AI, humans WILL blindly trust their outputs, and humans WILL defer responsibility to them. Asimov's laws of robotics are flawed too, of course. There is no finite set of rules that can constrain AI systems to make them \"safe\". I don't have a proof, but I believe that \"AI safety\" is inherently impossible, a contradiction of terms. Nothing that can be described as \"intelligent\" can be made to be safe ."
+        },
+        {
+          "id": 48025357,
+          "author": "nyyp",
+          "text": "With regard to my personal use of LLMs, I strongly agree with this framing. But to each point: Anthropomorphism: As we are all aware, providers are incentivized to post-train anthropomorphic behavior in their models - it increases engagement. My regret is that instructing a model at prompt time to \"reduce all niceties and speak plainly\" probably reduces overall task efficacy since we are leaving their training space. Deference: I view the trustworthiness of LLMs the same as I view the trustworthiness of Wikipedia and my friends: good enough for non-critical information. Wikipedia has factual errors, and my friends' casual conversation certainly has more, but most of the time that doesn't matter. For critical things, peer-reviewed, authoritative, able-to-be-held-liable sources will not go away. Unlike above, providers are generally incentivized to improve this facet of their models, so this will get better over time. Abdication of Responsibility: This is the one that bothers me most at work. More and more people are opening PRs whose abstractions were designed by Claude and not reasoned about further. Reviewing a PR often involves asking the LLM to \"find PR feedback\" and not reading the code. Arguments begin with \"Claude suggested that...\". This overall lack of ownership, I suspect, is leading to an increase in maintenance burden down the line as the LLM ultimately commits the wrong code for the wrong abstractions."
+        },
+        {
+          "id": 48029260,
+          "author": "davebranton",
+          "text": "This phrase always fascinates me : \"AI-generated content must not be treated as authoritative without independent verification appropriate to its context.\" I've heard the same thing expressed somewhat more concisely as \"Never ask AI a question to which you don't already know the answer\". Which raises the question, and I do think it's an important one. Given that this is true, what function does AI answering a question actually serve? You can't rely on its output, so you have to go and check anyway. You could achieve precisely the same outcome by using search engines and normal research. This, and for many other reasons, is exactly why I never ask it anything."
+        },
+        {
+          "id": 48026516,
+          "author": "jgeada",
+          "text": "Any set of rules that makes humans responsible and starts with \"don't anthropomorphize <whatever>\" is a broken set of rules. Humans will anthropomorphize anything and everything . Dolls, soccer balls with a crude drawing of a face on it, rocks, craters on the moon, … As a species, we're unable to not anthropomorphize things we interact with, it is just how're we're made."
+        },
+        {
+          "id": 48024896,
+          "author": "quectophoton",
+          "text": "> Humans must not anthropomorphise AI systems. Can someone explain why this is a bad thing, while at the same time it's a good thing to say stuff like \"put a computer to sleep\", \"hibernate\", \"killing\" processes, processes having \"child\" processes, \"reaping\", \"what does the error say ?\", \"touch\", etc? To me that's just language, and humans just using casual language."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 7,
+      "id": 48024129,
+      "title_en": "EEVblog: The 555 Timer is 55 years old [video]",
+      "title_ja": "EEVblog: The 555 Timer is 55 years old [video]",
+      "url": "https://www.youtube.com/watch?v=6JhK8iCQuqI",
+      "hn_url": "https://news.ycombinator.com/item?id=48024129",
+      "score": 193,
+      "comment_count": 42,
+      "posted_at": "2026-05-05T15:47:18+00:00",
+      "comments": [
+        {
+          "id": 48024990,
+          "author": "3form",
+          "text": "5:55 video released on May 5th, as per description :) For something feeling like a fairly specific IC, I remember seeing many projects that use it throughout the years in wacky ways - and seeing it makes me happy to know that the sentiment for this little piece is shared."
+        },
+        {
+          "id": 48026826,
+          "author": "darrinm",
+          "text": "As a kid I didn’t understand what the 555 timer chip on the Apple II disk controller was doing but I learned the hard way that when you misalign the pins on the drive connector cable and the 555 chip releases its blue smoke you can’t use the drive anymore :("
+        },
+        {
+          "id": 48025504,
+          "author": "longwave",
+          "text": "Big Clive is currently livestreaming to celebrate the 555's birthday: https://www.youtube.com/watch?v=jzNjFJdaw_I"
+        },
+        {
+          "id": 48025537,
+          "author": "SoleilAbsolu",
+          "text": "I still have the Forrest Mims III Radio Shack \"555 Engineer's Mini-Notebook\" somewhere in my basement. And rumor has it that Sammy Hagar can't drive 555 because his car just isn't fast enough!"
+        },
+        {
+          "id": 48029330,
+          "author": "JKCalhoun",
+          "text": "Evil Mad Scientist makes a giant, discrete version as a soldering kit: https://shop.evilmadscientist.com/productsmenu/tinykitlist/6... Very cool. (Looks like it uses 26 transistors. I assume the die is similar.)"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 8,
+      "id": 48028546,
+      "title_en": "Why most product tours get skipped",
+      "title_ja": "Why most product tours get skipped",
+      "url": "https://productonboarding.com/articles/why-product-tours-get-skipped",
+      "hn_url": "https://news.ycombinator.com/item?id=48028546",
+      "score": 26,
+      "comment_count": 15,
+      "posted_at": "2026-05-05T21:05:19+00:00",
+      "comments": [
+        {
+          "id": 48029560,
+          "author": "michaelt",
+          "text": "It's pretty simple to understand - when a user opens a tool, it's because they want to do the thing that tool does, now. If someone opens my videoconferencing product 98% of the time it's they've got a scheduled call to join within the next 20 seconds . They're not going to be late for their meeting so they can read my release notes. If someone opens my PDF viewer, 99.9% chance they want to view the PDF they just opened. Very rare someone opens the PDF reader because they're just having a look around to see if there are any interesting new features. If someone opens my virtual whiteboard product, 95% chance they're in some sort of sprint review meeting and they want to write some virtual post-it notes right now . A tour isn't what they need. If someone opens the ticket management product, or the expense report filing product, or the music playing product... you get the picture."
+        },
+        {
+          "id": 48029674,
+          "author": "blanched",
+          "text": "Personally, I generally dislike product tours. On the other hand, I think it's interesting to compare the dislike in these comments (and elsewhere) to \"RTFM\" culture. What's the primary difference? That you can read the manual or use the product at your discretion? e.g. `ls` doesn't forcefully open the man page when you run it for the first time? (I'm aware of the goomba fallacy and that these are likely two different groups of people - I still think it's interesting!)"
+        },
+        {
+          "id": 48029826,
+          "author": "jwilliams",
+          "text": "The other huge problem is you never tell the user what they'll get out of the tour . People will invest in a tour if they understand the reward (and \"learning\" can't be the reward)."
+        },
+        {
+          "id": 48029742,
+          "author": "kshri24",
+          "text": "Instead of product tours I like how AWS has little info/help buttons that are placed right next to every informational/actionable element on their dashboard. Totally unobtrusive. If you want to understand something on the dashboard that is not obvious at first, you can click on the info/help button that opens a side panel with a lot more information about that particular element (and any associated topics). Most of the time, you just know what you are dealing with (or can guess what that particular topic might mean and you will probably be right)."
+        },
+        {
+          "id": 48029593,
+          "author": "aguacaterojo",
+          "text": "The Product Manager needs to justify their job."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 9,
+      "id": 48026342,
+      "title_en": "Show HN: Explore color palettes inspired by 3000 master painter artworks",
+      "title_ja": "Show HN: Explore color palettes inspired by 3000 master painter artworks",
+      "url": "https://paletteinspiration.com/",
+      "hn_url": "https://news.ycombinator.com/item?id=48026342",
+      "score": 75,
+      "comment_count": 30,
+      "posted_at": "2026-05-05T18:13:14+00:00",
+      "comments": [
+        {
+          "id": 48027500,
+          "author": "S0und",
+          "text": "As an \"expert viewer\" of Baumgartner Restoration, this site usefulness is questionable. If you look at those color palettes, most of them brownish that is because of dirty & old oxidised varnish. These are not the intended look of these paintings. So these color palettes has nothing to do with those 3000 masters. https://youtube.com/@baumgartnerrestoration"
+        },
+        {
+          "id": 48027914,
+          "author": "hparadiz",
+          "text": "I used to run an art social network 15 years ago that did this automatically with every piece of art uploaded and then it let you search for art by color that way. Basically $average = new Imagick( $file ); $average->quantizeImage( $numColors, Imagick::COLORSPACE_RGB, 0, false, false ); //Reduce the amount of colors to 10 $average->uniqueImageColors(); //Only save one pixel of each color"
+        },
+        {
+          "id": 48027234,
+          "author": "thangalin",
+          "text": "Hey ouli, your hello email bounces. See also: https://amandahinton.com/blog/creating-a-color-palette-from-..."
+        },
+        {
+          "id": 48028884,
+          "author": "BlueRock-Jake",
+          "text": "This is great! Love the idea. You should send to some art programs, sure they would get a kick out of it. Also gives another use case outside of just digital design."
+        },
+        {
+          "id": 48028856,
+          "author": "vardump",
+          "text": "Weird how similar many of those are to Commodore 64 palette."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 10,
+      "id": 48029114,
+      "title_en": "NPR finds \"no sign\" of Polymarket at its Panama HQ address",
+      "title_ja": "NPR finds \"no sign\" of Polymarket at its Panama HQ address",
+      "url": "https://www.npr.org/2026/05/05/nx-s1-5807918/polymarket-panama-prediction-market",
+      "hn_url": "https://news.ycombinator.com/item?id=48029114",
+      "score": 62,
+      "comment_count": 15,
+      "posted_at": "2026-05-05T21:50:21+00:00",
+      "comments": [
+        {
+          "id": 48029870,
+          "author": "dweez",
+          "text": "If you follow Apple's official address to a lawyer's office in Delaware, don't be surprised that Tim Cook isn't there to greet you."
+        },
+        {
+          "id": 48029740,
+          "author": "forshaper",
+          "text": "I don't get it. Most companies registered in the state I live in, for example, are not actually located here. They simply receive mail through their registered agent there. Why would this be news?"
+        },
+        {
+          "id": 48029831,
+          "author": "NooneAtAll3",
+          "text": "to be fair, empty non-existing official office is nothing new. iirc, Delaware has a warehouse that's official residence of hundreds of corporations (for tax reasons) I don't understand the rest of the article, tho... It complains that company that (officially) left the US market and already blocks US ips from participating... isn't doing enough? Officially there's no ground to demand more If you really want to solve the problem - start hunting down unofficial means. Investigate influencers that started mentioning Polymarket out of the blue. Look into news outlets that decided to start mentioning polymarket as supposed proxy of popular opinion. Start advertizing campaigns against gambling addiction the same way as against smoking"
+        },
+        {
+          "id": 48029816,
+          "author": "ThomW",
+          "text": "Why are Americans allowed to invest in a business that would be illegal if based in the US? Why can they be patrons? Idgi"
+        },
+        {
+          "id": 48029850,
+          "author": "hx8",
+          "text": "I'm sure this is true for thousands and thousands of companies."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 11,
+      "id": 48026021,
+      "title_en": "GLM-5V-Turbo: Toward a Native Foundation Model for Multimodal Agents",
+      "title_ja": "GLM-5V-Turbo: Toward a Native Foundation Model for Multimodal Agents",
+      "url": "https://arxiv.org/abs/2604.26752",
+      "hn_url": "https://news.ycombinator.com/item?id=48026021",
+      "score": 91,
+      "comment_count": 22,
+      "posted_at": "2026-05-05T17:52:31+00:00",
+      "comments": [
+        {
+          "id": 48027390,
+          "author": "julius",
+          "text": "Click coordinates. Agentic GUI is really annoying when the multi-modal agent cannot click on x,y coordinates. I tested Qwen3.6, Gemma4, Nemotron3-nano-omni. They fully hallucinate x,y coords. (did not try GLM-5V yet) GPT-5.5 can easily do it. But also Vocaela, a tiny 500M model, is quite good at it. Hope they improve the training for x,y clicking soon on the smallish multi-modals. Recently slopped a http service together just so my local models can click, instead of relying on all the wild ways agents currently hack into the browser (browser-use, browser-harness, agent-browser, dev-browser etc) https://github.com/julius/vocaela-click-coords-http"
+        },
+        {
+          "id": 48026148,
+          "author": "gertlabs",
+          "text": "GLM-5V-Turbo is a model I wanted to like due to its speed and API reliability, but it didn't perform well in our coding and reasoning testing. More recent open source models have made it obsolete. GLM 5.1 is so many light years ahead of it on everything except speed, that I'm not sure why it's still being served. Comprehensive evaluation results at https://gertlabs.com/rankings"
+        },
+        {
+          "id": 48028343,
+          "author": "zozbot234",
+          "text": "Looks like this was not an open release, the latest GLM-xV release was 4.6V and Turbo models were never open."
+        },
+        {
+          "id": 48027678,
+          "author": "_pdp_",
+          "text": "We just migrated an AI agent from Kimi to GLM and frankly I am surprised by the results. It feels premium. However, both Kimi and GLM can end up in doom loops so be careful how you use them. Without a proper harness the agent can easily get into some tricky situations with no escape. We had to develop new heuristics in our cloud harness just because of this but I am really grateful that we did as the platform feels now more robust. A small price to pay for model plug & play!"
+        },
+        {
+          "id": 48027723,
+          "author": "desireco42",
+          "text": "I've been using GLM pretty much exclusively last 6-8 months. I have access to Anthropic and OpenAI models and others. I always keep returning to GLM, it isn't the best, sometimes I would go to Codex to help it, but overall, especially with Turbo, it is everyday good model. Turbo makes a huge difference in everyday use because it saves you time and you are not in the mood always to wait endlessly."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 12,
+      "id": 48023533,
+      "title_en": "Agents for financial services and insurance",
+      "title_ja": "Agents for financial services and insurance",
+      "url": "https://www.anthropic.com/news/finance-agents",
+      "hn_url": "https://news.ycombinator.com/item?id=48023533",
+      "score": 179,
+      "comment_count": 127,
+      "posted_at": "2026-05-05T15:05:47+00:00",
+      "comments": [
+        {
+          "id": 48024538,
+          "author": "tencentshill",
+          "text": "I don't trust these AI-only companies to be overnight experts in properly handling medical, financial and insurance data. They have no business providing these tools, unless they want to take all the risk too."
+        },
+        {
+          "id": 48024259,
+          "author": "wxw",
+          "text": "> We’re releasing ten ready-to-run agent templates for the most time-consuming work in financial services The templates being: pitch builder, meeting preparer, earnings reviewer, model builder, market researcher, valuation reviewer, general ledger reconciler, month-end closer, statement auditor, KYC (Know Your Customer) screener. Seems pretty scattershot. Reminds me of GPT Store."
+        },
+        {
+          "id": 48028712,
+          "author": "anonfunction",
+          "text": "I've been doing bias and misaligned behavior research, creating custom private eval suites to test and compare models. Claude Opus 4.7 is heavily biased and presents clear regulatory and reputational risk. It seems the initial product footprint tries to sidestep this problem by not giving the agents control on who to lend to or which applications to approve. Even so I think it's quite an optimistic read on their end. Happy to share reports to anyone who's interested (montana@latentevals.com), especially if you work at a frontier model lab and are interested in plugging my evals into your RL systems!"
+        },
+        {
+          "id": 48024250,
+          "author": "Havoc",
+          "text": "For those in the finance space, are you actually seeing any real AI tools being used? Like for actual operational tasks? I've really only seen it used for research / exploration thus far. Either for economic research slide deck or for exploring trading hypothesis"
+        },
+        {
+          "id": 48024246,
+          "author": "suriya-ganesh",
+          "text": "Will the big labs leave anything for external competition? This probably killed a thousand startups in this space. in the early internet you wouldn't see google creating their own news site or facebook building their own animal farm. what happened to platformication of everything?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 13,
+      "id": 48026349,
+      "title_en": "California farmers to destroy 420k peach trees following Del Monte bankruptcy",
+      "title_ja": "California farmers to destroy 420k peach trees following Del Monte bankruptcy",
+      "url": "https://www.sfgate.com/centralcoast/article/usda-aid-california-farmers-22240694.php",
+      "hn_url": "https://news.ycombinator.com/item?id=48026349",
+      "score": 216,
+      "comment_count": 278,
+      "posted_at": "2026-05-05T18:13:47+00:00",
+      "comments": [
+        {
+          "id": 48026853,
+          "author": "clarionbell",
+          "text": "People underestimate how difficult it is to seek buyers for the amount of produce we are talking about here. Farmers are specialists at growing things, not at moving them across great distances, marketing them to dozens small buyers and or starting up packing plants from scratch. They don't have enough trucks, people or packaging machines to move them around. Maybe, they can take some portion for local use. But the rest will spoil, and rest of the land will be effectively unused, and a burden. The best option is to cut that as much as possible, and plant something else that actually sells. Of course, people who never approached agriculture will be appalled at this, and call it great injustice."
+        },
+        {
+          "id": 48026675,
+          "author": "bix6",
+          "text": "Clingstone peaches are best used for canning and this is one of the last canneries shutting down. The remaining CA cannery is buying what it can. This helps them remove now worthless trees and plant new crops. But it will take a generation to recover."
+        },
+        {
+          "id": 48029734,
+          "author": "pfdietz",
+          "text": "As I understand it, Del Monte made a few mistakes. The first was related to COVID. Sales of canned goods spiked during COVID. They misinterpreted this as a permanent change and invested accordingly. Second, they did not find a way to compete with store brands, which are no longer at a quality deficit vs. more expensive name brands like Del Monte. Finally, they didn't address changes in diet that (as I see it) makes sugary syrupy tree candy not something people want to eat. Carbs are recognized now as seriously unhealthy. Ozempic and related drugs may have also affected this."
+        },
+        {
+          "id": 48026807,
+          "author": "oxag3n",
+          "text": "That's what happens when \"family farms\" rely on a large industrial complex and grow a mono-culture that doesn't have uses other than canning. It was an easy, steady cash-positive business until it wasn't. If those farmers thought what is final product and who benefits from it most, they'd grow diversified crops to sell locally, which many California family farms do."
+        },
+        {
+          "id": 48026673,
+          "author": "delichon",
+          "text": "This is your fault for eating fewer canned peaches. The clingstone variety is bred for canning and not well suited to eating fresh."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 14,
+      "id": 48023496,
+      "title_en": "Show HN: Airbyte Agents – context for agents across multiple data sources",
+      "title_ja": "Show HN: Airbyte Agents – context for agents across multiple data sources",
+      "url": null,
+      "hn_url": "https://news.ycombinator.com/item?id=48023496",
+      "score": 83,
+      "comment_count": 12,
+      "posted_at": "2026-05-05T15:03:18+00:00",
+      "comments": [
+        {
+          "id": 48029859,
+          "author": "slurpyb",
+          "text": "Your billing support email forwards to a google group which rejects the email entirely. So i embedded my question inside the websites sales enquiry form and received multiple rounds of emails that couldn’t be further from human. It’s not why we started using posthog but it definitely sealed the deal when you see how simple and reliable that experience is"
+        },
+        {
+          "id": 48029053,
+          "author": "jessewmc",
+          "text": "Looks interesting! If I'm reading correctly, the indexing (Context Store) is neutral/unopinionated? How does it select fields for indexing? Have you done any testing on guided indexing, or metadata layers on top of the data? My experience so far on similar work is that getting data in front of an agent isn't enough context to get useful/reliable answers enough of the time. I.e. _what_ you index, and how you signpost for agents, becomes really important (unless your data is super clean I guess). This does look like a good foundation for that kind of tooling though!"
+        },
+        {
+          "id": 48025464,
+          "author": "swyx",
+          "text": "(former employee here) congrats Michel! so glad to see you guys adapting to the AI age so well (and using the crap out of Devin!) hmm so airbyte agents could serve as a form of MCP gateway, or a key building block of an MCP gateway, which btw is how anthropic uses mcp themselves for all their internal apps https://www.youtube.com/watch?v=CD6R4Wf3jnY&t=1s&pp=0gcJCd4K... i think my most sad/interesting observation about ai engineers is that many ai apps are super data hungry, but many dont have the necessary data engineering background to even know they need an airbyte or what tradeoffs to make in an etl pipeline. would love a \"data engineering for ai engineers\" type braindump session from someone from airbyte at AIE ( https://ai.engineer/cfp )"
+        },
+        {
+          "id": 48028308,
+          "author": "nerdright",
+          "text": "This is such a great direction airbyte is taking and congrats to the lunch! I think you're very well-positioned for this opportunity than most people realize, given your reputable brand and your uncanny expertise in etl. It's honestly a natural progression of airbyte as far as the current AI landscape goes. Kudos to you and the team! (We use airbyte at my company, although we self-host it.)"
+        },
+        {
+          "id": 48025669,
+          "author": "jscheel",
+          "text": "I feel like we've been working in parallel here :) We are using PyAirbyte (hi aaronsteers) for our users to connect their data sources to our agents. We originally wanted to use the airbyte white-label platform, but the team said that it was being deprecated. I think this really drives home just how crucial it is to have a clear model for accessing your data, and Airbyte has been great at that for quite a while."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 15,
+      "id": 48024358,
+      "title_en": "I'm scared about biological computing",
+      "title_ja": "I'm scared about biological computing",
+      "url": "https://kuber.studio/blog/Reflections/I%27m-Scared-About-Biological-Computing",
+      "hn_url": "https://news.ycombinator.com/item?id=48024358",
+      "score": 117,
+      "comment_count": 101,
+      "posted_at": "2026-05-05T16:03:06+00:00",
+      "comments": [
+        {
+          "id": 48026328,
+          "author": "pjs_",
+          "text": "Be careful about how you interpret that paper. It looks really impressive -- real neurons in a petri dish seem to successfully (if amateurishly) murk a few imps. https://www.youtube.com/watch?v=yRV8fSw6HaE But there's more to the setup than you might assume from a casual reading. Here's the code used for that demo: https://github.com/SeanCole02/doom-neuron So there is an entire pytorch stack wrapped around the mysterious little blob of neurons -- they aren't just wired straight into WASD. There is a conventional convnet-based encoder, running on a GPU, in the critical path. The README tries to argue that the \"neurons are doing the learning\" but to my dilettante, critical eye it really looks as though there is a hell of a lot of learning happening in the convnet also. Are the neurons learning to play doom, or are they learning to inject ever so slightly more effective noise into the critical path? Would this work just as well if we replaced the neurons with some other non-markovian sludge? The authors do ablation experiments to try to get to the bottom of this but I can't really tell how compelling the results are (due to my own ignorance/stupidity of course)"
+        },
+        {
+          "id": 48025861,
+          "author": "philips",
+          "text": "I think this is the same ethical questions of veganism and our use/abuse of biological systems. This is an excerpt from \"The Pig that Wants to be Eaten\" by Julian Baggini > After forty years of vegetarianism, Max Berger was about to sit down to a feast of pork sausages, crispy bacon and pan-fried chicken breast. Max had always missed the taste of meat, but his principles were stronger than his culinary cravings. But now he was able to eat meat with a clear conscience. > The sausages and bacon had come from a pig called Priscilla he had met the week before. The pig had been genetically engineered to be able to speak and, more importantly, to want to be eaten. Ending up on a human’s table was Priscilla’s lifetime ambition and she woke up on the day of her slaughter with a keen sense of anticipation. She had told all this to Max just before rushing off to the comfortable and humane slaughterhouse. Having heard her story, Max thought it would be disrespectful not to eat her. > The chicken had come from a genetically modified bird which had been ‘decerebrated’. In other words, it lived the life of a vegetable, with no awareness of self, environment, pain or pleasure. Killing it was therefore no more barbarous than uprooting a carrot. > Yet as the plate was placed before him, Max felt a twinge of nausea. Was this just a reflex reaction, caused by a lifetime of vegetarianism? Or was it the physical sign of a justifiable psychic distress? Collecting himself, he picked up his knife and fork . . . > Source: The Restaurant at the End of the Universe by Douglas Adams (Pan Books, 1980)"
+        },
+        {
+          "id": 48028459,
+          "author": "Imnimo",
+          "text": ">But this is where the line slightly blurs in my head. Did we possibly just build the first human biocomputer and immediately put it in a simulated hell, playing the same game on loop, forever? Using the same reward mechanisms we use for LLMs? This description does not seem to really match what was done in the Doom demo, and makes me skeptical that the author has actually looked into the details."
+        },
+        {
+          "id": 48027392,
+          "author": "slibhb",
+          "text": "I read an interesting book about consciousness recently: The Hidden Spring by Mark Solms. Solms argues, I think convincingly, that consciousness fundamentally has to do with emotions and not cognition. Consciousness is not produced by the cortex but rather by the brainstem, where signals from all over the body converge (e.g. pain, hunger, itchiness, etc). If that argument is true then a petri-dish of neurons is unlikely to be conscious, even it performs some analogue of visual processing. The book makes other arguments that I found less convincing. For example that consciousness is \"felt homeostasis\" and that a fairly simple system (somewhat more complex than a thermometer) will be conscious, albeit minimally."
+        },
+        {
+          "id": 48027988,
+          "author": "atleastoptimal",
+          "text": "We will never draw the line because morality among humans is coupled with looking human-like. For most people, their morals have aesthetic prerequisites, neurons in a lab don't mean as much as neurons in a meat case (especially if that meat case is physically attractive)"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 16,
+      "id": 48025687,
+      "title_en": "IBM didn't want Microsoft to use the Tab key to move between dialog fields",
+      "title_ja": "IBM didn't want Microsoft to use the Tab key to move between dialog fields",
+      "url": "https://devblogs.microsoft.com/oldnewthing/20260505-00/?p=112298",
+      "hn_url": "https://news.ycombinator.com/item?id=48025687",
+      "score": 272,
+      "comment_count": 159,
+      "posted_at": "2026-05-05T17:28:18+00:00",
+      "comments": [
+        {
+          "id": 48028064,
+          "author": "AndrewStephens",
+          "text": "IBM was legendarily over-managed. This is second-hand but a guy I used to work with told a story of when he interned for a summer at IBM in London during the mid-90s doing what would now be called a QA engineering. At that time everyone wore suits to work but the culture was changing so the interns put in a request to be allowed casual Fridays. Bear in mind that they were locked in a back room somewhere without any customer interaction so they didn't think it was a big deal. Months later, just before the end of the internship, they received a reply. Their manager had forwarded their request up the chain of command and the email had the full quoted history. Their request had been bumped up 4 successive layers in the London office, then across to the US headquarters where it continued its upwards trajectory, finally alighting on the desk of a VP who, after thanking them for bring the issue to his attention, rendered an carefully considered opinion. The whole process had taken weeks, presumably as each person in the hierarchy debated whether they had the authority to tackle such a weighty issue. The email had then been inexplicably bounced back DOWN the chain one link at a time, back across the Atlantic Ocean, and through the local office, down to the suit-bound interns, again weeks later, who by this stage only had days left at the internship. The answer was no."
+        },
+        {
+          "id": 48025960,
+          "author": "ch_123",
+          "text": "I find this story odd because IBM was consistent with their keyboard nomenclature across multiple products, and the 3270 series mainframe terminals used the Tab key, located in the same place where you would find a tab key on a modern keyboard, to move the cursor to the next field. https://www.bitsavers.org/pdf/ibm/3278/GA27-2890-4_3278_Disp... (Page 73 of the PDF) As an aside, it's worth noting that moving between fields was important enough on IBM terminals that they had a dedicated \"back tab\" key located on the opposite end of the keyboard to the tab key. On the original IBM PC, they decided to combine both functions into a single key. As a result, the tab key on the classic PC keyboard features the symbols for both forwards tab and back tab on the same key, the back tab symbol being on top to indicate that you need to hold down shift to use that function. EDIT: The 5250 series terminals used the terms \"Field Advance\" and \"Field Backspace\" instead of Tab and Back Tab, but otherwise they used the same symbol on the keys, and the keys were located in roughly the same position as the 3270 series. Reference: https://www.bitsavers.org/pdf/ibm/5291/GA21-9409-0_5291_Disp..."
+        },
+        {
+          "id": 48025966,
+          "author": "donatj",
+          "text": "As someone who prefers tabs (I'm not looking to argue), I once asked Brendan Eich on Twitter why he prefers spaces. His answer was more thoughtful than I'd expected. The tab key itself is hijacked by modern OS/UI behavior. It makes it complicated to actually type literal tab characters in certain contexts, particularly in the browser. I still prefer tabs (and I'm a Go developer), but he is absolutely correct about that being a pain in the butt. For instance, try getting a tab character into the text area on Hacker News"
+        },
+        {
+          "id": 48025926,
+          "author": "connorboyle",
+          "text": "A great read, although I'd still like to know what IBM's reasoning for opposing this use of the Tab key was. Is it because they didn't want Tab to be both an input and a control character? I.e. there are some cases where you can type a Tab into an input field, and there are other cases where you can't, and it's not immediately obvious which ones are which? All the way in 2026, I would still be sympathetic to this view."
+        },
+        {
+          "id": 48027814,
+          "author": "xenadu02",
+          "text": "IBM is also the reason MS-DOS doesn't support \"-\" for options and why it doesn't have devices in the \"\\DEV\" directory on all drives. Support for \"/\" as path separator survived though! Many MS folks used Xenix and were fans of Unix and very early DOS had SWITCHCHAR and AVAILDEV config.sys options for these things. But AFAIK IBM threw an absolute fit about it and forced their removal. The DEV issue is specially annoying because DOS 1 didn't have directories - thus it could not have been much of a compatibility problem. But instead DOS/Windows is stuck being unable to support creating files named \"CON\" or \"COM1\" because it assumes device files exist in all directories."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 17,
+      "id": 47996395,
+      "title_en": "The extended predicative Mahlo universe in Martin-Löf type theory",
+      "title_ja": "The extended predicative Mahlo universe in Martin-Löf type theory",
+      "url": "https://academic.oup.com/logcom/article/34/6/1032/7158523",
+      "hn_url": "https://news.ycombinator.com/item?id=47996395",
+      "score": 19,
+      "comment_count": 0,
+      "posted_at": "2026-05-03T12:43:12+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 18,
+      "id": 48025244,
+      "title_en": "Proliferate (YC S25) Is Hiring- 200k for junior engineers",
+      "title_ja": "Proliferate (YC S25) Is Hiring- 200k for junior engineers",
+      "url": "https://www.ycombinator.com/companies/proliferate/jobs/L3copvK-founding-engineer",
+      "hn_url": "https://news.ycombinator.com/item?id=48025244",
+      "score": 1,
+      "comment_count": 0,
+      "posted_at": "2026-05-05T17:00:16+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 19,
+      "id": 48021368,
+      "title_en": "Today I've made the difficult decision to reduce the size of Coinbase by ~14%",
+      "title_ja": "Today I've made the difficult decision to reduce the size of Coinbase by ~14%",
+      "url": "https://twitter.com/brian_armstrong/status/2051616759145185723",
+      "hn_url": "https://news.ycombinator.com/item?id=48021368",
+      "score": 208,
+      "comment_count": 225,
+      "posted_at": "2026-05-05T12:10:24+00:00",
+      "comments": [
+        {
+          "id": 48028177,
+          "author": "azinman2",
+          "text": "\"Non-technical teams are now shipping production code\" Boy that's scary for a company that's effectively fintech..."
+        },
+        {
+          "id": 48021751,
+          "author": "wiseowise",
+          "text": "> - No pure managers: Every leader at Coinbase must also be a strong and active individual contributor. Managers should be like player-coaches, getting their hands dirty alongside their teams. Geeks who didn't even stand near professional sports should really shut up about anything sport related, lol. I would really like to see professional, established coach running around with young prodigies on a peak of their biology. > - AI-native pods: We’ll be concentrating around AI-native talent who can manage fleets of agents to drive outsized impact. We’ll also be experimenting with reduced pod sizes, including “one person teams” with engineers, designers, and product managers all in one role. And AI clowns will cheer and applaud this, not seeing that they're now doing the job of 5(!) people with the same salary. Why is nobody talking about this? Also, I find it really bizarre that those neo feudal lords see their companies as just a life stock to count. They don't even count people, just see them as numbers to reduce/scale up. Modern tsardom, but instead of being tied via official decree you're now tied by your lifestyle and family. \"Some of you may die, but that is a sacrifice I am willing to make\""
+        },
+        {
+          "id": 48029631,
+          "author": "scottlamb",
+          "text": "> We’ll be concentrating around AI-native talent Is this code for \"we're firing all the old people\"? As I understand it, I can say I'll only hire proficient English speakers (a \"bona fide occupational requirement\"), but I can't say I'll only hire native speakers, as that would discriminate against various protected groups. This seems like the same thing—proficiency may be a bona fide requirement, but expecting they learned this year's workflow first is age discrimination. I don't expect ethical conduct from crypto companies and will not be sad if they are sued into oblivion."
+        },
+        {
+          "id": 48021712,
+          "author": "Saline9515",
+          "text": "The reality is that Coinbase earns on trading volume, and since we are in a crypto bear market, revenue is down. So they have to cut to keep the company profitable (or in line with what the investors expect). While AI is likely a productivity boost, the underlying reason is not AI."
+        },
+        {
+          "id": 48029544,
+          "author": "willio58",
+          "text": "> Leaders will own much more, with as many as 15+ direct reports. As someone who did have 15 direct reports for a while, it’s a joke. You basically are their manager in name only. Your time is so split you can’t give any one direct reports the attention they deserve. Quarterly and annual reviews are a farce because you genuinely don’t really know how people are doing except the signals you can receive when you’re not in a meeting with one of your 15 reports. Just goes to show how far up their own asses some CEOs are. Meanwhile real people just want a boss who cares. Hope Brian feels happier with an extra billion dollars or whatever this year!"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 20,
+      "id": 48020063,
+      "title_en": "When everyone has AI and the company still learns nothing",
+      "title_ja": "When everyone has AI and the company still learns nothing",
+      "url": "https://www.robert-glaser.de/when-everyone-has-ai-and-the-company-still-learns-nothing/",
+      "hn_url": "https://news.ycombinator.com/item?id=48020063",
+      "score": 294,
+      "comment_count": 205,
+      "posted_at": "2026-05-05T09:30:22+00:00",
+      "comments": [
+        {
+          "id": 48020925,
+          "author": "pards",
+          "text": "In my large enterprise world, AI adoption hasn't made it outside of the development teams - only developers have access to Github Copilot. Code takes 6-12 months to make it from commit to production. Development speed was never the bottleneck; it's all the other processes that take time: infra provisioning, testing, sign-offs, change management, deployment scheduling etc. AI makes these post-development bottlenecks worse. Changes are now piling up at the door waiting to get on a release train. Large enterprises need to learn how to ship software faster if they want to lock in ROI on their token spend. Unshipped code is a liability, not an asset."
+        },
+        {
+          "id": 48024847,
+          "author": "dakiol",
+          "text": "If you're a regular engineer like me, there's no real upside to using AI in a company setting. They're boiling us. Of course, the HN elite (investors, execs, celebrities, and top-tier engineers) will say otherwise because \"how can you be against innovation man?\" AI/LLMs aren't innovation the way TCP/IP, linux, or postgres were. To be clear: claude/codex/gemini/grok/whatever exist for profit, to squeeze the last drop of productivity out of you until there's nothing left, and then you're disposable (laid off). If you like AI, use open source models, use them in your side projects."
+        },
+        {
+          "id": 48020902,
+          "author": "olsondv",
+          "text": "The post hits the nail on the head with the messy middle. There is simply no motivation to develop this sort of intelligence loop as a dev who has their own responsibilities which their job depend on. Management can ask as nicely as they want, but I’m not going to selflessly share my productivity gains with the broader company for free. I might share a tool if it’s useful. All the learning of how to wrangle AI or set up agents is better kept to myself if there is no recognition for sharing. My company set up a “prompt of the week” award and brown-bag sessions to help spread adoption. We also have teams meant to develop these workflows. Clearly, they set these events up to play it off as their own productivity. Without a real (read “monetary”) incentive or job security, the risk and cost of spreading the knowledge falls squarely on the developer."
+        },
+        {
+          "id": 48021382,
+          "author": "alaudet",
+          "text": "As a 3 year retired Systems Analyst I feel bad for my younger colleagues. In 2023 I was one of the first in my team to use AI to untangle some legacy code that did something mission critical with Perl and whose original author had long ago left and apparently didn't understand anything about actually commenting code or documentation. We were all in awe of this new technology that got us out of a bind. But more and more it looks less like a tool that is available to you instead of something that is being _done_ to you. Nobody asked for this. At what point is inspiration and thought just devalued and worthless in the name of doing things instantly. The work has no soul."
+        },
+        {
+          "id": 48021256,
+          "author": "cadamsdotcom",
+          "text": "AI by itself isn’t that useful. An agent forgets and makes enough mistakes that you have to check all its work, which can be net productivity negative. It really comes into its own when you treat it as a tool that can build other tools . For example, having it build tools that force it to keep going until its work reaches a certain quality, or runs compliance checks on its outputs and tells it where it needs to fix things. Then and only then, can you trust its work. Right now most current roles & workflows are designed around wrangling the tools you’re given to do a certain job. In that regime AI can only slide in at the edges."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 21,
+      "id": 47996740,
+      "title_en": "I completed 100 Days of Java over 5 years and mapped the journey as a graph",
+      "title_ja": "I completed 100 Days of Java over 5 years and mapped the journey as a graph",
+      "url": "https://mohibulsblog.netlify.app/java/100daysofjava/graph/",
+      "hn_url": "https://news.ycombinator.com/item?id=47996740",
+      "score": 8,
+      "comment_count": 2,
+      "posted_at": "2026-05-03T13:25:59+00:00",
+      "comments": [
+        {
+          "id": 48029873,
+          "author": "debesyla",
+          "text": "I personally am not sure what's the point of this, when the graph seems like doesn't give any real information + doesn't even work on mobile (no hover), but congrats on finishing up the series!"
+        },
+        {
+          "id": 47996741,
+          "author": "celurian92",
+          "text": "I completed 100 Days of Java and ended up and it took me roughly 5 years. Made an interactive map/index of the posts, linked by related topics. I made it to make the series easier to browse by concept instead of only by day number."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 22,
+      "id": 48026207,
+      "title_en": "Zuckerberg 'Personally Authorized and Encouraged' Meta's Copyright Infringement",
+      "title_ja": "Zuckerberg 'Personally Authorized and Encouraged' Meta's Copyright Infringement",
+      "url": "https://variety.com/2026/digital/news/meta-ai-mark-zuckerberg-copyright-infringement-lawsuit-publishers-scott-turow-1236738383/",
+      "hn_url": "https://news.ycombinator.com/item?id=48026207",
+      "score": 175,
+      "comment_count": 127,
+      "posted_at": "2026-05-05T18:04:25+00:00",
+      "comments": [
+        {
+          "id": 48028809,
+          "author": "jcalvinowens",
+          "text": "I had to block meta's ASN on my personal cgit server a few weeks ago because they were ignoring robots.txt and torching it. Like hundreds of megabytes of access logs just from them, spread around different network blocks to clearly try and defeat IP based limiting. I couldn't believe it."
+        },
+        {
+          "id": 48026524,
+          "author": "ben_w",
+          "text": "A lot of people would be very pleased if this leads to Zuckerberg getting even the statutory minimum damages ($750?) on each infringement. The previous infringement case with Anthropic said that while training an AI was transformative and not itself an infringement, pirating works for that purpose still was definitely infringement all by itself. The settlement was $1.5bn, so close to $3k for each of the 500k they pirated, so if Zuckerberg pirated \"millions\" (plural) it is quite plausible his settlement could be $6bn."
+        },
+        {
+          "id": 48027422,
+          "author": "28304283409234",
+          "text": "So... \"move fast and steal things\"?"
+        },
+        {
+          "id": 48029515,
+          "author": "motbus3",
+          "text": "I know personally a case of a engineer who was told to do something despite all the legal problems because the company had lawyers for a reason"
+        },
+        {
+          "id": 48028455,
+          "author": "ipython",
+          "text": "Just gonna say... Aaron Swartz faced years of prison time and ultimately decided to take his own life... for downloading scientific journal articles ... to share freely with the world (aka not even profiting from it). But a multi-billion dollar corporation downloading millions of copyrighted creative works so that they can reshape the entire labor market by training a new type of artificial intelligence model on that data set? Meh, sounds like Silicon Valley disruption, give the man a medal!"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 23,
+      "id": 47962032,
+      "title_en": "Should I Run Plain Docker Compose in Production in 2026?",
+      "title_ja": "Should I Run Plain Docker Compose in Production in 2026?",
+      "url": "https://distr.sh/blog/running-docker-in-production/",
+      "hn_url": "https://news.ycombinator.com/item?id=47962032",
+      "score": 330,
+      "comment_count": 250,
+      "posted_at": "2026-04-30T13:21:43+00:00",
+      "comments": [
+        {
+          "id": 48029866,
+          "author": "calini",
+          "text": "Still looking for a nicer solution to just deploy some personal projects that are usually 1 container big but might end up being 2-4, and being able to do logging, tracing, rolling updates, networking, etc; For now using Docker Compose for most of that."
+        },
+        {
+          "id": 48021307,
+          "author": "nickjj",
+          "text": "Docker Compose was production ready in 2015 and it still is today. I've lost track of how many projects I've deployed with it and never really ran into a single issue where Docker Compose was at fault. It's super solid. Some time ago I've written about my experiences using it in production https://nickjanetakis.com/blog/why-i-like-using-docker-compo... . Not just for my own projects but for $500 million dollar companies and more."
+        },
+        {
+          "id": 48020461,
+          "author": "2ndorderthought",
+          "text": "Should you have a turkey sandwich for lunch in 2026? I don't know buddy just do whatever. There are ten thousand other sandwiches you could eat surely, but does turkey sound good for you?"
+        },
+        {
+          "id": 48023982,
+          "author": "stackskipton",
+          "text": "SRE here, my thought is \"Sure, Docker Compose is great for production assuming your needs are light and Docker Compose works well for you.\" K8s as small time is overkill for sure but make sure you don't fall into this trap. https://www.macchaffee.com/blog/2024/you-have-built-a-kubern..."
+        },
+        {
+          "id": 48020312,
+          "author": "noodlesUK",
+          "text": "I think many of these issues are also solved by Podman and systemd depending on what kind of \"production\" you're building for. If you're building a linux-y appliance and you need to run a few containers I think Podman is a much better and more ergonomic way of doing so. I think perhaps that's less true for running a web service (where the linux environment is just a means to that end)."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 24,
+      "id": 48019163,
+      "title_en": "Async Rust never left the MVP state",
+      "title_ja": "Async Rust never left the MVP state",
+      "url": "https://tweedegolf.nl/en/blog/237/async-rust-never-left-the-mvp-state",
+      "hn_url": "https://news.ycombinator.com/item?id=48019163",
+      "score": 415,
+      "comment_count": 225,
+      "posted_at": "2026-05-05T07:26:03+00:00",
+      "comments": [
+        {
+          "id": 48020260,
+          "author": "ignoreusernames",
+          "text": "Agree with the other commenters that the title is a bit too dramatic. The content was well written and got the point across. I still don’t have enough experience to have a strong opinion on Rust async, but some things did standout. On the good side, it’s nice being able to have explicit runtimes. Instead of polluting the whole project to be async, you can do the opposite. Be sync first and use the runtime on IO “edges”. This was a great fit to a project that I’m working on and it seems like a pretty similar strategy to what zig is doing with IO code. This largely solved the function colloring problem in this particular case. Strict separation of IO and CPU bound code was a requirement regardless of the async stuff, so using the explicit IO runtime was natural. On the bad side, it seems crazy to me how much the whole ecosystem depends on tokio. It’s almost like Java’s GC was optional, but in practice everyone just used the same third party GC runtime and pulling any library forced you to just use that runtime. This sort of central dependency is simply not healthy."
+        },
+        {
+          "id": 48019317,
+          "author": "hmry",
+          "text": "Great article! Love these types of deep dives into optimizations. Hope the project goal works out! I've felt before that compilers often don't put much effort into optimizing the \"trivial\" cases. Overly dramatic title for the content, though. I would have clicked \"Async Rust Optimizations the Compiler Still Misses\" too you know"
+        },
+        {
+          "id": 48019420,
+          "author": "groundzeros2015",
+          "text": "Async seems like an underbaked idea across the board. Regular code was already async. When you need to wait for an async operation, the thread sleeps until ready and the kernel abstracts it away. But We didn’t like structuring code into logical threads, so we added callback systems for events. Then realized callbacks are very hard to reason about and that sequential control is better. So threads was the right programming model. Now language runtimes prefer “green threads” for portability and performance but most languages don’t provide that properly. Instead we have awkward coloring of async/non-async and all these problems around scheduling, priority, and no-preemption. It’s a worse scheduling and process model than 1970."
+        },
+        {
+          "id": 48024494,
+          "author": "J_Shelby_J",
+          "text": "I don’t understand why Rust even has panics if its primary goal is safety. We should be able to prove that the code has no paths that may panic ever. I’ve been looking at this all week. It’s very difficult to make a program that is guaranteed not to panic. My understanding is that the panic handler is about 300kb, and the only way to exclude it is if your code has no paths that can panic when it compiles. And after it compiles you can check the binary to see if the panic handler was included. It’s hacky. Yes you can lint out unwraps and other panic operations, but if there was a subset of no-panic rust a large part of the issue detailed in this post goes away. But it’s frustrating working with a language that has so many operations that can, in theory, panic even if in practice they should only do so if a bit flips. Like a proving an array is non-empty or working with async. You either end up with a lot of error handling for situations which will never happen or really strange patterns like non-empty list pattern (structure with first field and then your list). Which of course ends up adding its own bloat."
+        },
+        {
+          "id": 48019535,
+          "author": "hacker_homie",
+          "text": "This is the type of ugly but necessary discussions that have been happening in c++ for a while. I never really liked the viral nature of async in rust when it was introduced. I wish rust the best of luck and with more people like this rust could have a brighter future."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 25,
+      "id": 47998664,
+      "title_en": "Underwater robot tracks sperm whale conversations in real time",
+      "title_ja": "Underwater robot tracks sperm whale conversations in real time",
+      "url": "https://www.reuters.com/business/environment/underwater-robot-tracks-sperm-whale-conversations-real-time-2026-05-01/",
+      "hn_url": "https://news.ycombinator.com/item?id=47998664",
+      "score": 47,
+      "comment_count": 10,
+      "posted_at": "2026-05-03T16:35:20+00:00",
+      "comments": [
+        {
+          "id": 48001796,
+          "author": "deepthaw",
+          "text": "They said we have six months to get our shit in order or they're calling their big brother tube-shaped space probe and we won't like talking to him."
+        },
+        {
+          "id": 48002818,
+          "author": "hmokiguess",
+          "text": "Would be interesting if this data could bring us ideas on information theory sort of how we have these nature parallels in algorithms like these: https://en.wikipedia.org/wiki/Ant_colony_optimization_algori... Imagine Whales have better recall, pass@k metrics and deal with context windows differently, who knows!"
+        },
+        {
+          "id": 48001389,
+          "author": "frotaur",
+          "text": "Not much info on the actual robot... For instance, I wonder how it has enough battery to follow a whale for 'months'? Which seems really unrealistic, as sperm whales can dive more than a kilometre, can't imagine an autonomous robot can support this kind of pressure, let alone for months at a time?"
+        },
+        {
+          "id": 48010982,
+          "author": "pvaldes",
+          "text": "Logistics here are extra interesting. Sperm whale clicks are basically a sonic weapon. This is maybe the loudest animal known in the history of the evolution, known to be capable to kill an human just with sound if they get alarmed. I wonder if we would be able to watch the destruction of the robot with a extra loud sound wave at any given point or how they designed to avoid it."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 26,
+      "id": 47994946,
+      "title_en": "Researchers print structural colour with an inkjet printer",
+      "title_ja": "Researchers print structural colour with an inkjet printer",
+      "url": "https://physicsworld.com/a/researchers-print-structural-colour-with-an-inkjet-printer/",
+      "hn_url": "https://news.ycombinator.com/item?id=47994946",
+      "score": 35,
+      "comment_count": 5,
+      "posted_at": "2026-05-03T08:58:50+00:00",
+      "comments": [
+        {
+          "id": 48027506,
+          "author": "anfractuosity",
+          "text": "Sounds very interesting. Just started looking at the paper, which seems very complex to me \"An alternative approach utilizes light absorption via localized surface plasmon resonances (LSPRs) of noble metal nanoparticles (NPs)\". I came across https://www.nano-resonance.com/ which appears to be the promotional page for the technique, it has a nice diagram which appears to show how the size of the silicon nanoparticle enhances certain wavelengths of light. Very cool how they can use an inkjet printer for their approach. Also see https://en.wikipedia.org/wiki/Lippmann_plate for a photographic process that creates colours using diffraction patterns. https://www.youtube.com/watch?v=-DyrBDsKA5s is a fun video on lippmann plates."
+        },
+        {
+          "id": 48027854,
+          "author": "connorboyle",
+          "text": "> Images printed with structural colour ink can be made both highly transparent to transmitted light (top) and at the same time reflect light from above in vivid colours (bottom) Probably a foolish question, but wouldn't there be some unavoidable loss of brightness to the transmitted light, unless the structured color somehow \"knows\" to transmit light in one direction and reflect it in the other direction (which seems impossible given that it is printed by an inkjet)?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 27,
+      "id": 48029334,
+      "title_en": "Zuckerberg 'personally authorized' Meta's copyright infringement, publishers say",
+      "title_ja": "Zuckerberg 'personally authorized' Meta's copyright infringement, publishers say",
+      "url": "https://apnews.com/article/meta-mark-zuckerberg-ai-publishers-lawsuit-llama-5609846d4d840014974a847b01079c32",
+      "hn_url": "https://news.ycombinator.com/item?id=48029334",
+      "score": 27,
+      "comment_count": 1,
+      "posted_at": "2026-05-05T22:07:18+00:00",
+      "comments": [
+        {
+          "id": 48029384,
+          "author": "gnabgib",
+          "text": "Discussion (139 points, 85 comments) https://news.ycombinator.com/item?id=48026207"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 28,
+      "id": 48021561,
+      "title_en": "iOS 27 is adding a 'Create a Pass' button to Apple Wallet",
+      "title_ja": "iOS 27 is adding a 'Create a Pass' button to Apple Wallet",
+      "url": "https://walletwallet.alen.ro/blog/ios-27-wallet-create-pass/",
+      "hn_url": "https://news.ycombinator.com/item?id=48021561",
+      "score": 366,
+      "comment_count": 280,
+      "posted_at": "2026-05-05T12:28:28+00:00",
+      "comments": [
+        {
+          "id": 48022513,
+          "author": "kilian",
+          "text": "The wallet app UI is the peak of Apple's 'single 20y/o in sf' design. Anyone that has multiple card from the same bank (because, say, you have a personal account and a shared account with your partner) has to do the \"pick between the two identical looking top 20px of cards\" dance every time they use Wallet to pay for something. It is mind-boggling that the current UI persists."
+        },
+        {
+          "id": 48022650,
+          "author": "DrewADesign",
+          "text": "While the author does mention the barriers to adoption, the premise— Apple was waiting for people to do something, but people weren’t doing it— subtly casts Apple as a passive entity in this scenario. The solution seems to be presented as Apple stepping in to make up for Developers’ inaction. If it’s been 14 years and there’s been very little adoption, this is clearly a UX problem. How many small venues or libraries have developers, let alone developers that do enough Apple-specific development work to have an Apple Developer account? In 14 years they couldn’t come up with an alternate solution? Maybe a less expensive administrative version of a developer account? It’s not users jobs to sell themselves on Apple’s products."
+        },
+        {
+          "id": 48021904,
+          "author": "randusername",
+          "text": "What a relief. My awful workaround was photos of all my membership barcodes labeled with a sharpie so that I can search \"Gym\" or \"Library\" or whatever to pull them up from OCR indexing."
+        },
+        {
+          "id": 48022375,
+          "author": "Liquid_Fire",
+          "text": "> A few places where we still help, even after iOS 27 ships: > Google Wallet. Create a Pass is iPhone-only. Roughly half of the wallet-using world is on Android, and our generator builds Google Wallet passes from the same form. What does this actually mean? Google Wallet has had a button to add your own passes for many years. How is the feature described here different?"
+        },
+        {
+          "id": 48023936,
+          "author": "noio",
+          "text": "15 years ago, a friend of mine built an app to do this — \"Pass Creator\" — then Apple yanked the functionality. He paid me to create the icon for it, which was my first paid graphic design job: https://www.noio.nl/2012/10/pass-creator-app-icon/ Thanks Paul.. good times!"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 29,
+      "id": 48025828,
+      "title_en": "Quantum Key Distribution (QKD) and Quantum Cryptography (QC)",
+      "title_ja": "Quantum Key Distribution (QKD) and Quantum Cryptography (QC)",
+      "url": "https://www.nsa.gov/Cybersecurity/Quantum-Key-Distribution-QKD-and-Quantum-Cryptography-QC/",
+      "hn_url": "https://news.ycombinator.com/item?id=48025828",
+      "score": 41,
+      "comment_count": 16,
+      "posted_at": "2026-05-05T17:38:17+00:00",
+      "comments": [
+        {
+          "id": 48026218,
+          "author": "Strilanc",
+          "text": "The recommendation is to not use QKD. This is the correct recommendation. QKD solves key agreement if you have an authenticated line . But authentication is the harder more crucial problem. Here's an interesting related aside: the likely design of a practical quantum internet would make QKD totally trivial. What a quantum internet would do is deliver kinda-noisy entangled Bell pairs to endpoints that wanted to communicate. The endpoints would then purify [1] this kinda-noisy entanglement into actually-good entanglement (e.g. from 1% error to 0.0000000000001% error). The purified Bell pairs can then be consumed in order to transmit qubits [2]. However, because of the monogamy of entanglement [3], the purification process must detect and correct eavesdropping (or else fail to produce output). So, once you have a sufficiently purified Bell pair, it can be measured to get a bit that can be used as a one time pad. (That said, this does still assume you have an authenticated channel! Purification requires communication, because without authentication you can be man-in-the-middle'd.) [1]: https://en.wikipedia.org/wiki/Entanglement_distillation [2]: https://en.wikipedia.org/wiki/Quantum_teleportation [3]: https://en.wikipedia.org/wiki/Monogamy_of_entanglement"
+        },
+        {
+          "id": 48026179,
+          "author": "bem94",
+          "text": "All national agencies I'm aware of do not support QKD except in \"very specific cases\" and instead recommend Post-Quantum Cryptography (PQC). From the UK NCSC [1]: > QKD does not provide authentication, nor do any other quantum techniques. Therefore, in practice, QKD must be combined with other cryptographic services to provide security against the threat from quantum computing, and therefore should not be relied on as a mechanism that provides substantial security value. [...] The NCSC will not support the use of QKD for government or military applications. PQC is the best mitigation to the threat to cryptography from quantum computers. And the German BSI (and partners)[2]: > Together with European partner agencies from France, the Netherlands and Sweden, the BSI has published a Position Paper on QKD. The paper concludes that QKD can only be used in niche use cases due to its technological limitations and that QKD is not yet sufficiently mature from a security perspective. Therefore, in light of the necessary migration to quantum-safe schemes, the clear priority should be the migration to post-quantum cryptography. This is despite different choices for which PQC algorithms to use. E.g. NIST (and many others including the UK) have gone initially with ML-KEM for key exchange, while Germany/BSI have selected FrodoKEM and Classic McEliece. [1] https://www.ncsc.gov.uk/paper/quantum-networking-technologie... [2] https://www.bsi.bund.de/EN/Themen/Unternehmen-und-Organisati..."
+        },
+        {
+          "id": 48028902,
+          "author": "beloch",
+          "text": "Two points: 1. There is a strong anti-QKD bias on HN or, at least, a very vocal few who reliably heckle anyone who discusses it. I get shouted at if I even mention it, and will likely get shouted at for saying this. 2. Should you trust the NSA's recommendations? This is a valid question, now more than ever."
+        },
+        {
+          "id": 48027265,
+          "author": "er4hn",
+          "text": "This page came about because of how long it took PQC to get standardized. This was a slow enough process that a whole slew of QKD vendors arose and sold a lot of products promising this as a solution to dealing with quantum computers and harvest now decrypt later attacks. Many of those products did not do a great job at actually preventing listening in on their lines since QKD is an ongoing field of research where new issues are routinely being discovered."
+        },
+        {
+          "id": 48027531,
+          "author": "misguidedpqc",
+          "text": "Basing modern cryptography on unsolved mathematics where one can say \"this algorithm is resistant to quantum computers, but may still, though we BELIEVE unlikely, be vulnerable to a yet discovered classical algorithm\" is dangerous."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 30,
+      "id": 47993240,
+      "title_en": "Comparing the Z80 and 6502 to Their Relatives",
+      "title_ja": "Comparing the Z80 and 6502 to Their Relatives",
+      "url": "https://bumbershootsoft.wordpress.com/2026/05/02/comparing-the-z80-and-6502-to-their-relatives/",
+      "hn_url": "https://news.ycombinator.com/item?id=47993240",
+      "score": 103,
+      "comment_count": 21,
+      "posted_at": "2026-05-03T04:06:08+00:00",
+      "comments": [
+        {
+          "id": 48029585,
+          "author": "analog31",
+          "text": "I admit that I did everything with a Z80, except for using one. Because the TRS-80 used a Z80, Radio Shack carried a book on it, published by Howard Sams. It was next on the shelf after the TTL book, so of course I bought it and devoured it without ever touching a Z80. My impression of the Z80 being clean and simple probably resulted from that book being so clearly written. It gave me a good enough understanding of how micro's work, that lasted until the more modern chips came out with things like pipelining. But I think that learning one of those old 8 bit chips would still be a great place to start for understanding things at a hardware level. Dynamic memory refresh on chip was clever."
+        },
+        {
+          "id": 48027353,
+          "author": "zorobo",
+          "text": "I could hold the whole 6502 instruction set (and their cycles) in my mind while programming, it was that simple. I acquired a Z-80 softcard for my Apple ][ (for trying out CPM) and was flabbergasted by the expanded register set, the complexity of some instructions (e.g. DJNZ) and the fact it ran at 4MHz vs 1MHz for the 6502 (got a speed demon 65C02 card later). However I couldn't keep all instructions and timings in my head. Speedwise the 1MHz 6502 and 4MHz Z80 were on par. I preferred, however, the fact that I/O was memory mapped on the 6502."
+        },
+        {
+          "id": 48027495,
+          "author": "uticus",
+          "text": "> Less immediately visible to someone working at the assembly language level instead of the machine code one is that relative addressing is much more common on the 6809, meaning that it’s significantly more viable to write position-independent code on it than any of the other chips we’ve looked at here. Only the 8086 comes close, and it achieves it by using its segment registers as a de facto relocation base. I would love to learn more about this. Does more \"position-independent code\" mean the linker has much less to do [0], or is there an actual difference in the code base for similar tasks? [0] https://sourceware.org/binutils/docs/ld/Overview.html"
+        },
+        {
+          "id": 48025989,
+          "author": "toolslive",
+          "text": "I come from the same lineage as the author. I did 6502 (doing C64 demos) long before I encountered the Z80. From what I remember, the Z80 offers a vastly superior programming experience. It has more registers. it has 16 bit registers. It has a shadow register set (you can switch between sets, which is handy for interrupt routines, for example) Programming assembly on the Z80 just is less of a fight."
+        },
+        {
+          "id": 48025972,
+          "author": "nickcw",
+          "text": "The Z80 spawned the 64180 which was a Z80 with loads of stuff built in (from Wikipedia) Execution and bus access clock rates up to 10 MHz Memory Management Unit supporting 512K bytes of memory (one megabyte for the HD64180 packaged in a PLCC) I/O space of 64K addresses 12 new instructions including 8 bit by 8 bit integer multiply, non-destructive AND and illegal instruction trap vector Two channel Direct Memory Access Controller (DMAC) Programmable wait state generator Programmable DRAM refresh Two channel Asynchronous Serial Communication Interface (ASCI) Two channel 16-bit Programmable Reload Timer (PRT) 1-channel Clocked Serial I/O Port (CSI/O) Programmable Vectored Interrupt Controller As a consequence it was really popular in the 90s as an embedded processor just when I was starting my career. This lead to me writing thousands of lines of Z80 assembly. You could program it in C but the compiler was useless at making stuff go fast. One of those things I wrote was an LZ77 decompressor used in a satellite broadcast system. It took me about a week to write it, test it and optimise it. Quite a challenge! I remember optimising it about the LDIR instruction to copy memory. The compressor was written in C and ran on the PCs of the day."
+        }
+      ],
+      "summary_ja": ""
+    }
+  ]
+}
