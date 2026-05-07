@@ -1,0 +1,1014 @@
+{
+  "date": "2026-05-08T00:00:00+09:00",
+  "slot": "07",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 48053623,
+      "title_en": "Dirtyfrag: Universal Linux LPE",
+      "title_ja": "Dirtyfrag: Universal Linux LPE",
+      "url": "https://www.openwall.com/lists/oss-security/2026/05/07/8",
+      "hn_url": "https://news.ycombinator.com/item?id=48053623",
+      "score": 296,
+      "comment_count": 139,
+      "posted_at": "2026-05-07T19:21:32+00:00",
+      "comments": [
+        {
+          "id": 48054321,
+          "author": "firer",
+          "text": "This is very similar in root cause and exploitation to Copy Fail. Which illustrates pretty well something that's lost when relying heavily on LLMs to do work for you: exploration. I find that doing vulnerability research using AI really hinders my creativity. When your workflow consists of asking questions and getting answers immediately, you don't get to see what's nearby. It's like a genie - you get exactly what you asked for and nothing more. The researcher who discovered Copy Fail relied heavily on AI after noticing something fishy. If he had to manually wade through lots of code by himself, he would have many more chances to spot these twin bugs. At the same time, I'm pretty sure that by using slightly less directed prompting, a frontier LLM would found these bugs for him too. It's a very unusual case of negative synergy, where working together hurt performance."
+        },
+        {
+          "id": 48054182,
+          "author": "john_strinlai",
+          "text": "\"Because the embargo has now been broken, no patches or CVEs exist for these vulnerabilities.\" link: https://github.com/V4bel/dirtyfrag detailed writeup: https://github.com/V4bel/dirtyfrag/blob/master/assets/write-... importantly: \" Copy Fail was the motivation for starting this research. In particular, xfrm-ESP Page-Cache Write in the Dirty Frag vulnerability chain shares the same sink as Copy Fail. However, it is triggered regardless of whether the algif_aead module is available. In other words, even on systems where the publicly known Copy Fail mitigation (algif_aead blacklist) is applied, your Linux is still vulnerable to Dirty Frag. \" mitigation (i have not tested or verified!): \" Because the responsible disclosure schedule and the embargo have been broken, no patch exists for any distribution. Use the following command to remove the modules in which the vulnerabilities occur. \" sh -c \"printf 'install esp4 /bin/false\\ninstall esp6 /bin/false\\ninstall rxrpc /bin/false\\n' > /etc/modprobe.d/dirtyfrag.conf; rmmod esp4 esp6 rxrpc 2>/dev/null; true\" conversation around the mitigation suggests you need a reboot or run this after the above on already-exploited machines: sudo echo 3 > /prox/sys/vm/drop_caches"
+        },
+        {
+          "id": 48054408,
+          "author": "eqvinox",
+          "text": "And I ask again: why the f*ck is algif_aead getting all the flak for copy.fail? It's authencesn being stupid. authencesn didn't get fixed. Now we got the results of that, turns out you can access the same (I believe) out of bounds write through plain network sockets. I wish I thought of that, but I didn't. [ed.: I'm referring to the through-ESP issue. The RxRPC one is AIUI completely unrelated.]"
+        },
+        {
+          "id": 48055229,
+          "author": "chromacity",
+          "text": "If this indeed works on all major distributions, I just continue to be amazed by how irresponsible the maintainers are. We're talking about optional kernel functionality that's presumably useful to something like <0.1% of their userbase, but is enabled by default?... why? This feels like the practice of Linux distros back in 1999 when they'd ship default installs with dozens of network services exposed to the internet. Except it's not 1999 anymore."
+        },
+        {
+          "id": 48056159,
+          "author": "kinow",
+          "text": "Just got an email from one HPC I have access in Germany. I guess all HPCs ans services like GH Actions are going to be offline for a bit. I think last time was on a Friday too, so it might be another Friday to organize emails, files, rotate backup/passwords..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 2,
+      "id": 48055913,
+      "title_en": "Canvas (Instructure) LMS Down in Ongoing Ransomware Attack",
+      "title_ja": "Canvas (Instructure) LMS Down in Ongoing Ransomware Attack",
+      "url": "https://www.theverge.com/tech/926458/canvas-shinyhunters-breach",
+      "hn_url": "https://news.ycombinator.com/item?id=48055913",
+      "score": 25,
+      "comment_count": 2,
+      "posted_at": "2026-05-07T22:22:21+00:00",
+      "comments": [
+        {
+          "id": 48056104,
+          "author": "cocoacat",
+          "text": "Also here: https://news.ycombinator.com/item?id=48054386"
+        },
+        {
+          "id": 48056093,
+          "author": "copperx",
+          "text": "https://archive.is/5v693"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 3,
+      "id": 48049653,
+      "title_en": "The Burning Man MOOP Map",
+      "title_ja": "The Burning Man MOOP Map",
+      "url": "https://www.not-ship.com/burning-man-moop/",
+      "hn_url": "https://news.ycombinator.com/item?id=48049653",
+      "score": 500,
+      "comment_count": 268,
+      "posted_at": "2026-05-07T14:06:10+00:00",
+      "comments": [
+        {
+          "id": 48052824,
+          "author": "stonegray",
+          "text": "I’ve done this for a couple years now, cool to see it pop up here. I believe the scale is a touch larger; 3935 acres in 2025, plus a small amount outside the fence line. On the technical side, we not only log but photograph everything, down to each clump of toilet paper. We check our progress by doing hundreds of tests identical to what the BLM does, both ahead and behind our main crew; bagging up any debris to be photographed on green screens where the pixels are counted to ensure we’re under the 2.29×10^-3 percent limit. It’s a stupendous amount of walking, with no shade, a moop stick and a bucket. But it’s a hell of a feeling to be part of making sure we remain undefeated against an impossible task that the future of burning man depends on."
+        },
+        {
+          "id": 48050462,
+          "author": "ruleryak",
+          "text": "Last year was tough - it rained for hours 5 nights in a row and the first rain night was accompanied by 70 mile an hour winds that did a massive amount of damage to camp infrastructure throughout the city. The roads in half the city were ruined by emergency traffic that kept on running throughout the storms, and the result was a lumpy nightmare that shook things loose from cars and bikes at a much higher rate than most years. The mud absorbed and hid things and made cleanup a far more grueling process than it usually is. We endured and did our best to still find and remove everything - breaking up mud clumps and raking/sifting through the dirt at the end of the week to find all that embedded trash. There are no public trash cans, no event dumpsters, etc. I can say from having been there almost every year since 07 that this was by far the hardest year for \"mooping\" - the process of spotting and picking up any item that shouldn't be on the ground - but that the group mindset endured and we somehow still trended downward in terms of overall trash. I think the main difference between this and 2023 (the previous \"mud burn\") was that this time we had all the rain in the first half of the event, and then had relatively great weather for the second half. In 23, it closed out with the mud and people fleeing, leading to a spike."
+        },
+        {
+          "id": 48049800,
+          "author": "childofhedgehog",
+          "text": "So a giant party can clean up after itself, but 4th of July in Tahoe for example is a toxic mess. I wish more people would practice these principles. It’s impressive how well this is cleaned up."
+        },
+        {
+          "id": 48051490,
+          "author": "justin",
+          "text": "What I love about Burning Man is that it is an event where all the programming is created by the attendees. All the art, sound stages, art cars, experiences.. if you want something to exist in Black Rock City, then it is up to you to just go figure out how to bring it, solely for the benefit and joy of those who get to experience it. It is a tremendous amount of work, but the rewarding feeling of seeing your creation manifested into reality is worth it. So much of our daily lives in society is consuming experiences that other people create: the jobs we work are defined by other people, we buy products created by other people, we eat food made by other people. For me, Burning Man is a reminder for the rest of the year to be the creator of my own experience in the world."
+        },
+        {
+          "id": 48049907,
+          "author": "cmiles8",
+          "text": "My respect for Burning Man just went up a lot. These big events usually leave a giant mess behind. Glad to see they take the cleanup and restoration so seriously."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 4,
+      "id": 48051562,
+      "title_en": "Agents need control flow, not more prompts",
+      "title_ja": "Agents need control flow, not more prompts",
+      "url": "https://bsuh.bearblog.dev/agents-need-control-flow/",
+      "hn_url": "https://news.ycombinator.com/item?id=48051562",
+      "score": 261,
+      "comment_count": 147,
+      "posted_at": "2026-05-07T16:43:35+00:00",
+      "comments": [
+        {
+          "id": 48054606,
+          "author": "827a",
+          "text": "1000% agree. I am increasingly hesitant to believe Anthropic's continual war drum of \"build for the capabilities of future models, they'll get better\". We've got a QA agent that needs to run through, say, 200 markdown files of requirements in a browser session. Its a cool system that has really helped improve our team's efficiency. For the longest time we tried everything to get a prompt like the following working: \"Look in this directory at the requirements files. For each requirement file, create a todo list item to determine if the application meets the requirements outlined in that file\". In other words: Letting the model manage the high level control flow. This started breaking down after ~30 files. Sometimes it would miss a file. Sometimes it would triple-test a bundle of files and take 10 minutes instead of 3. An error in one file would convince it it needs to re-test four previous files, for no reason. It was very frustrating. We quickly discovered during testing that there was no consistency to its (Opus 4.6 and GPT 5.4 IIRC) ability to actually orchestrate the workflow. Sometimes it would work, sometimes it wouldn't. I've also tested it once or twice against Opus 4.7 and GPT 5.5; not as extensively; but seems to have the same problems. We ended up creating a super basic deterministic harness around the model. For each test case, trigger the model to test that test case, store results in an array, write results to file. This has made the system a billion times more reliable. But, its also made the agent impossible to run on any managed agent platform (Cursor Cloud Agents, Anthropic, etc) because they're all so gigapilled on \"the agent has to run everything\" that they can't see how valuable these systems can be if you just add a wee bit of determinism to them at the right place."
+        },
+        {
+          "id": 48052760,
+          "author": "rnxrx",
+          "text": "I wonder if a part of the problem isn't just the misapplication of LLMs in the first place. As has been mentioned elsewhere, perhaps the agent's prompt should be to write code to accomplish as much of the task in as repeatable/verifiable/deterministic a way as possible. This would hopefully include validation of the agent's output as well. The overall goal would be to keep the LLM out of doing processing that could be more efficiently (and often correctly) handled programmatically."
+        },
+        {
+          "id": 48051916,
+          "author": "bwestergard",
+          "text": "I agree with the sentiment, but I think the conclusion should be altered. When you hit the limit of prompting, you need to move from using LLMs at run time to accomplish a task to using LLMs to write software to accomplish the task. The role of LLMs at run time will generally shrink to helping users choose compliant inputs to a software system that embodies hard business rules."
+        },
+        {
+          "id": 48052331,
+          "author": "jerf",
+          "text": "This is why I frequently refer to \"next generation AIs\" that aren't just LLMs. LLMs are pretty cool and I expect that even if we see no further foundational advancement in AIs that we're going to continue to see them exploited in more interesting ways and optimized better. Even if the models froze as they are today, there's a lot more value to be squeezed out of them as we figure out how to do that. However, there are some things that I think need a foundational next-generation improvement of some sort. The way that LLMs sort of smudge away \"NEVER DO X\" and can even after a lot of work end up seeing that as a bit of a \"PLEASE DO X\" seems fundamental to how they work. It can be easy to lose track of as we are still in the initial flush of figuring out what they can do (despite all we've already found), but LLMs are not everything we're looking for out of AI. There should be some sort of architecture that can take a \"NEVER DO X\" and treat it as a human would. There should be some sort of architecture that instead of having a \"context window\" has memory hierarchies something like we do, where if two people have sufficiently extended conversations with what was initially the same AI, the resulting two AIs are different not just in their context windows but have actually become two individuals. I of course have no more idea what this looks like than anyone else. But I don't see any reason to think LLMs are the last word in AI."
+        },
+        {
+          "id": 48056176,
+          "author": "graphememes",
+          "text": "> If you’ve ever resorted to MANDATORY or DO NOT SKIP, you’ve hit the ceiling of prompting. using this is going to do the opposite of what you want"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 5,
+      "id": 48050278,
+      "title_en": "AlphaEvolve: Gemini-powered coding agent scaling impact across fields",
+      "title_ja": "AlphaEvolve: Gemini-powered coding agent scaling impact across fields",
+      "url": "https://deepmind.google/blog/alphaevolve-impact/",
+      "hn_url": "https://news.ycombinator.com/item?id=48050278",
+      "score": 232,
+      "comment_count": 89,
+      "posted_at": "2026-05-07T15:02:20+00:00",
+      "comments": [
+        {
+          "id": 48051556,
+          "author": "momojo",
+          "text": "This reminds me of Antirez's \"Don't fall into the anti-AI hype\" [0] In a sentence: These foundation models are really good at optimizing these extremely high level, extremely well defined problem spaces (ie multiply matrices faster). In Antirez's case, it's \"make Redis faster\". There have been two reactions: \"Oh it would never work for me\" and \"I have seen months of my life accomplished in an hour\", and I think they're both right. I think we should be excited for Antirez, (who has since been popping off [1]), and I think the rest of us should rest easy knowing that LLM's can't (and maybe were never meant to) tackle the tacit-knowledge-filled, human-system-centric, ambiguously-defined-problem-space jobs most mortals work. [0] https://antirez.com/news/158 [1] https://antirez.com/news/164"
+        },
+        {
+          "id": 48051018,
+          "author": "pingou",
+          "text": "AI improving itself (or at least the architecture it runs on), the singularity is near as they say. Do we have other examples of AI being used to improve the LLMs, apart for the creation of synthetic data and the testing of the models?"
+        },
+        {
+          "id": 48051040,
+          "author": "alecco",
+          "text": "Are Googlers themselves happy using Gemini coding agent instead of Claude Code or Codex? (no snark, I'm really asking)"
+        },
+        {
+          "id": 48051633,
+          "author": "dandaka",
+          "text": "How many times we have to hear again about Erdös problems? :) It sounds like a great achievement for humanity at first, but after a while they keep coming back!"
+        },
+        {
+          "id": 48052966,
+          "author": "stijntonk",
+          "text": "I wish that Google would focus on bringing their Gemini 3.x models to GA, and provide enough capacity such that one not constantly has to fight with 429 errors. It often feels like they do not want me to develop applications for corporate clients using their Vertex API. It is just such a shame, given that their models were so great for document analysis etc."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 6,
+      "id": 48052537,
+      "title_en": "Natural Language Autoencoders: Turning Claude's Thoughts into Text",
+      "title_ja": "Natural Language Autoencoders: Turning Claude's Thoughts into Text",
+      "url": "https://www.anthropic.com/research/natural-language-autoencoders",
+      "hn_url": "https://news.ycombinator.com/item?id=48052537",
+      "score": 149,
+      "comment_count": 46,
+      "posted_at": "2026-05-07T17:54:02+00:00",
+      "comments": [
+        {
+          "id": 48053321,
+          "author": "zozbot234",
+          "text": "Anthropic has released open weight models for translating the activations of existing models, viz. Qwen 2.5 (7B), Gemma 3 (12B, 27B) and Llama 3.3 (70B) into natural language text. https://github.com/kitft/natural_language_autoencoders https://huggingface.co/collections/kitft/nla-models This is huge news and it's great to see Anthropic finally engage with the Hugging Face and open weights community!"
+        },
+        {
+          "id": 48056077,
+          "author": "semiquaver",
+          "text": "This capability was mentioned several times in a recent article about anthropic, glad to see they are releasing this to the public! Feels like a meaningful step forward in interperability. I never understood why people seem to believe the answer when they ask an AI “why did you do that?”"
+        },
+        {
+          "id": 48055271,
+          "author": "gekoxyz",
+          "text": "I would suggest experts in interpretability (but everyone really) to go directly to the transformer circuits blog, where they explain their approach more in detail. Here is the link for this post: https://transformer-circuits.pub/2026/nla/index.html Also, if you have never read it, I would suggest starting to read all the Transformer Circuits thread, by reading its \"prologue\" in distill pub"
+        },
+        {
+          "id": 48054137,
+          "author": "comex",
+          "text": "Fascinating. The training process forces the “verbalizer” model to develop some mapping from activations to tokens that the “reconstructor” model can then invert back into the activations. But to quote the paper: > Note that nothing in this objective constrains the NLA explanation z to be human-readable, or even to bear any semantic relation to the content of [the activation]. The objective could be optimized even if the verbalizer and reconstructor made up their own “language” to represent the activations, that was not human-readable at all. To point the model in the right direction, they start out by training on guessed internal thinking: > we ask Opus to imagine the internal processing of a hypothetical language model reading it. …before switching to training on the real objective. Furthermore, the verbalizer and reconstructor models are both initialized from LLMs themselves, and given a prompt instructing them on the task, so they are predisposed to write something that looks like an explanation. But during training, they could still drift away from these explanations toward a made-up language – either one that overtly looks like gibberish, or one that looks like English but encodes the information in a way that’s unrelated to the meaning of the words. The fascinating thing is that empirically, they don’t, at least to a significant extent. The researchers verify this by correlating the generated explanations with ground truth revealed in other ways. They also try rewording the explanations (which deserves the semantic meaning but would disturb any encoding that’s unrelated to meaning), and find that the reconstructor can still reconstruct activations. On the other hand, their downstream result is not very impressive: > An auditor equipped with NLAs successfully uncovered the target model’s hidden motivation between 12% and 15% of the time That is apparently better than existing techniques, but still a rather low percentage. Another interesting point: The LLMs used to initialize the verbalizer and reconstructor are stated to have the “same architecture” as the LLM being analyzed (it doesn’t say “same model” so I imagine it’s a smaller version?). The researchers probably think this architectural similarity might give the models some built-in insight about the target model’s thinking that can be unlocked through training. Does it really though? As far as I can see they don’t run any tests using a different architecture, so there’s no way to know."
+        },
+        {
+          "id": 48055949,
+          "author": "minimaltom",
+          "text": "Between this, the emotions paper, golden gate claude etc, it doesn't seem like such a stretch that Anthropic are doing some kind of activation steering as part of training (and its part of their lead)"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 7,
+      "id": 48053203,
+      "title_en": "AI slop is killing online communities",
+      "title_ja": "AI slop is killing online communities",
+      "url": "https://rmoff.net/2026/05/06/ai-slop-is-killing-online-communities/",
+      "hn_url": "https://news.ycombinator.com/item?id=48053203",
+      "score": 343,
+      "comment_count": 322,
+      "posted_at": "2026-05-07T18:46:25+00:00",
+      "comments": [
+        {
+          "id": 48053584,
+          "author": "carlgreene",
+          "text": "I have largely written Reddit off and no longer visit it after an experiment I did where I had an agent karma farm for me and do some covert advertising. As I went through the posts it wrote I realized that as a reader I would have NO idea that these were just written by a computer. Many many people (or other bots) had full on conversations with it and it scared me a bit. I am not quite there with Hacker News but I do know for a fact that many \"users\" here are LLMs. Online communities are definitely dying. I guess I hope that maybe IRL communities have a resurgence in this wake."
+        },
+        {
+          "id": 48053908,
+          "author": "CrzyLngPwd",
+          "text": "I run a niche creative community, and we outlawed AI-generated content in 2022 as it was easy to see how corrosive it would be to the community. It hasn't been easy. We ban fake AI accounts daily and shrug off around 600 AI content creator accounts monthly. It's a lot of work, extra work that wasn't needed before AI content came around, and of course, that is an extra cost. I fear losing the battle."
+        },
+        {
+          "id": 48056170,
+          "author": "deferredgrant",
+          "text": "The sad part is that the cost gets pushed onto the good participants. Once enough replies feel synthetic, real people spend more energy deciding whether the conversation is worth joining."
+        },
+        {
+          "id": 48055982,
+          "author": "alaudet",
+          "text": "The balance is so far out of whack with LLM's now in online communities. People crave human interaction with like minded individuals, and whoever figures out how to give authentic online experiences is going to be successful. Maybe small communities need to come back, where you build credibility slowly. Why does every site have to be a monstrosity that wants to build a hundred million users to IPO. It just attracts the worst. I was active on Reddit for years under the same username I have here. I have pretty much abandoned it."
+        },
+        {
+          "id": 48053689,
+          "author": "agustechbro",
+          "text": "I kind feel this might be good. Bot writen comments and AI media that can no longer be distinguish from real, will make us human leave the social networks, which helped to separate Us humans. Going back to the real world were you can trully believe on what you see, and enjoy the tone, look and scent of of our fellows humans beings."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 8,
+      "id": 48050751,
+      "title_en": "DeepSeek 4 Flash local inference engine for Metal",
+      "title_ja": "DeepSeek 4 Flash local inference engine for Metal",
+      "url": "https://github.com/antirez/ds4",
+      "hn_url": "https://news.ycombinator.com/item?id=48050751",
+      "score": 248,
+      "comment_count": 72,
+      "posted_at": "2026-05-07T15:40:24+00:00",
+      "comments": [
+        {
+          "id": 48052940,
+          "author": "kgeist",
+          "text": "Heh, I made something very similar for the Qwen3 models a while back. It only runs Qwen3, supports only some quants, loads from GGUF, and has inference optimized by Claude (in a loop). The whole thing is compact (just a couple of files) and easy to reason about. I made it for my students so they could tinker with it and learn (add different decoding strategies, add abliteration, etc.). Popular frameworks are large, complex, and harder to hack on, while educational projects usually focus on something outdated like GPT-2. Even though the project was meant to be educational, it gave me an idea I can't get out of my head: what if we started building ultra-optimized inference engines tailored to an exact GPU+model combination? GPUs are expensive and harder to get with each day. If you remove enough abstractions and code directly to the exact hardware/model, you can probably optimize things quite a lot (I hope). Maybe run an agent which tries to optimize inference in a loop (like autoresearch), empirically testing speed/quality. The only problem with this is that once a model becomes outdated, you have to do it all again from scratch."
+        },
+        {
+          "id": 48050845,
+          "author": "maherbeg",
+          "text": "This is so sick. I'm really curious to see what focused effort on optimizing a single open source model can look like over many months. Not only on the inference serving side, but also on the harness optimization side and building custom workflows to narrow the gap between things frontier models can infer and deduce and what open source models natively lack due to size, training etc."
+        },
+        {
+          "id": 48052517,
+          "author": "antirez",
+          "text": "A random, funny, interesting and telling data point: my MacBook M3 Max while DS4 is generating tokens at full speed peaks 50W of energy usage..."
+        },
+        {
+          "id": 48052957,
+          "author": "visarga",
+          "text": "Large LLMs on MacBook produce tokens at an acceptable speed but the problem is reading context. Not incremental reading like when you have a chat session, because they use KV cache, but large size reading, like when you paste a big file. It can take minutes."
+        },
+        {
+          "id": 48055212,
+          "author": "Havoc",
+          "text": "Was excited until I realized DS flash is still enormous. Oh well...glad it exists anyway & happy to see antirez still doing fun stuff"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 9,
+      "id": 48050499,
+      "title_en": "I want to live like Costco people",
+      "title_ja": "I want to live like Costco people",
+      "url": "https://tastecooking.com/i-want-to-live-like-costco-people/",
+      "hn_url": "https://news.ycombinator.com/item?id=48050499",
+      "score": 179,
+      "comment_count": 404,
+      "posted_at": "2026-05-07T15:19:27+00:00",
+      "comments": [
+        {
+          "id": 48055261,
+          "author": "austinl",
+          "text": "Feudal Japan had a measurement called the \"koku\", which is roughly the amount of rice needed to feed a person for a year: about 330 lb. You can now buy 50 lb. of rice at Costco for $30, which is a few hours of work at minimum wage. To me, that is a modern marvel. I don't want people to buy things that they don't need, and I also don't like the crowds, but I can't help but feel grateful for a stocked grocery store that is accessible to basically everyone—isn't that the dream? https://en.wikipedia.org/wiki/Koku"
+        },
+        {
+          "id": 48050727,
+          "author": "Aurornis",
+          "text": "> Something about the whole thing always registered to me as, like, lame—too normcore, too boring, perhaps even too cheugy to an informed and taste-driven millennial ur-consumer like me. The kinds of brands I like to buy aren’t what they sell at Costco Good example of how people can build identities through their brand choices and purchasing habits. It’s a foreign concept for many of us who seek out the best product or deals for each purchase and will change brands in an instant if another company releases a better product. Yet the crossover between brands, identities, and lifestyles is deeply held by many people. I know some will try to turn this into a criticism of Americans, but in my travels and international business experience I wouldn’t even rank Americans in the top 10 for integrating brands and identity. In some countries I had to make a conscious effort to try to wear clothes from acceptable brands and swap my functional laptop bag for something more stylish to avoid letting my purchasing habits become a point of judgment from others. It’s actually refreshing to come back to America where as long as you’ve made some effort to look more or less appropriate for the occasion few people care about the brand of your clothes, laptop bag, or car. Some people are proud of their Audi or designer bag, but I rarely run into situations where I’d be judged for arriving in a sensible Subaru instead of a Mercedes."
+        },
+        {
+          "id": 48053595,
+          "author": "type4",
+          "text": "I have a really mixed feeling about Costco. I hate it, I going there, I hate the crowds, the parking, the people, being hawked a credit card, a cell phone, whatever the vendors are selling. It makes me feel like a pig in a slaughterhouse waiting to get out of the store, I feel like it's the platonic form of consumption. We all go to the nice little consumption center like good piggies to get our sustenance and to get milked further (maybe I should buy some electronics!) Yet, I keep going. I like the cranberry bread, the cheap chicken, the granola, I like not thinking about what to buy so much. I like that it's of an acceptable quality at an acceptable price. I like that I can return stuff easily without getting shit for it. I like \"scoring\" deals on stuff that seems like a good value."
+        },
+        {
+          "id": 48054036,
+          "author": "ncrc74",
+          "text": "You'll never live like Costco people You'll never do what ever Costco people do Never fail like Costco people You'll never watch your life slide out of view And then dance and drink and screw Because there's nothing else to do"
+        },
+        {
+          "id": 48050745,
+          "author": "Lucent",
+          "text": "Costco's gimmick is relieving you of choice and price shopping. They find the best stuff and don't mark it up. If Consumer is your identity yet you fear executing its labors, let Costco step in and become your denomination of consumerism, complete with tithe, proscribed usury, and communion hot dog."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 10,
+      "id": 48050964,
+      "title_en": "Chrome removes claim of On-device Al not sending data to Google Servers",
+      "title_ja": "Chrome removes claim of On-device Al not sending data to Google Servers",
+      "url": "https://old.reddit.com/r/chrome/comments/1t5qayz/chrome_removes_claim_of_ondevice_al_not_sending/",
+      "hn_url": "https://news.ycombinator.com/item?id=48050964",
+      "score": 402,
+      "comment_count": 153,
+      "posted_at": "2026-05-07T15:56:33+00:00",
+      "comments": [
+        {
+          "id": 48053394,
+          "author": "CrzyLngPwd",
+          "text": "It seems to me that adding AI to desktop apps and sending the data back to the mothership for processing is an amazing way to collect data from people who, for the most part, would be completely unaware it's even happening. Heck, most of them think the Internet is Chrome."
+        },
+        {
+          "id": 48054065,
+          "author": "cferry",
+          "text": "My belief is that the AI business is all about data collection. The value isn't so much in the quality of the models (that's what enterprise customers and developers pay to get), but in the amount of data that comes \"for free\" to whoever hosts the models. And then it's worth whoever buys it thinks it is, like insurers or advertisers."
+        },
+        {
+          "id": 48055349,
+          "author": "kevcampb",
+          "text": "This seems somewhat specious - it's also quite possible that they just altered the wording to make it less verbose. Does anyone have access to the link \"Learn more about on-device AI\"? If Chrome starts sending data from the browser back to Google, that's going to be a huge compliance issue. If you work for a company that processes customer data in the browser, you're going to need to ban Chrome."
+        },
+        {
+          "id": 48051332,
+          "author": "avdelazeri",
+          "text": "And right after https://news.ycombinator.com/item?id=48019219 huh"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 11,
+      "id": 48053435,
+      "title_en": "Colored Shadow Penumbra",
+      "title_ja": "Colored Shadow Penumbra",
+      "url": "https://chosker.github.io/blog/colored-shadow-penumbra",
+      "hn_url": "https://news.ycombinator.com/item?id=48053435",
+      "score": 30,
+      "comment_count": 11,
+      "posted_at": "2026-05-07T19:04:30+00:00",
+      "comments": [
+        {
+          "id": 48055290,
+          "author": "kqp",
+          "text": "This page helped me understand what they’re going for: https://patapom.com/blog/Lighting/Colored%20Penumbra/Colored... . The way I’m intuiting it: some things will “glow” when strongly illuminated, and the glow is more colored than the reflected light, so if the illumination has a hard edge then the penumbra can end up saturated by the more strongly illuminated part’s glow. OP’s rendition isn’t quite landing for me, though, and I’m not enough of an artist to be sure why. Maybe it’s just that saturation is cranked way up for the demo, but it might also be that it shouldn’t occur on rock, or that color seems sometimes to not react to a change in which material is glowing."
+        },
+        {
+          "id": 48054259,
+          "author": "hughes",
+          "text": "What's the physical basis for this effect? Does it happen in reality or is it a style choice?"
+        },
+        {
+          "id": 48055221,
+          "author": "sambaumann",
+          "text": "Cool! FYI the arrows on both photos only actually control the top photo."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 12,
+      "id": 48025374,
+      "title_en": "Easy Random Trees",
+      "title_ja": "Easy Random Trees",
+      "url": "https://blog.wilsonb.com/posts/2026-02-27-easy-random-trees.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48025374",
+      "score": 15,
+      "comment_count": 1,
+      "posted_at": "2026-05-05T17:08:24+00:00",
+      "comments": [
+        {
+          "id": 48025440,
+          "author": "vaporaviatorlab",
+          "text": "Didn’t expect a few lines of APL plus ballot-sequence magic to make random plane trees feel this intuitive—super elegant construction. Curious how this could be applied in practice, e.g. generative graphics or random UI/tree structures?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 13,
+      "id": 48052333,
+      "title_en": "Principles for agent-native CLIs",
+      "title_ja": "Principles for agent-native CLIs",
+      "url": "https://twitter.com/trevin/status/2051316002730991795",
+      "hn_url": "https://news.ycombinator.com/item?id=48052333",
+      "score": 46,
+      "comment_count": 28,
+      "posted_at": "2026-05-07T17:40:05+00:00",
+      "comments": [
+        {
+          "id": 48056129,
+          "author": "zbentley",
+          "text": "For reasons other commenters have expressed better than I could, the idea of \"agent-native CLIs\" seems like a poor one. Why not take the path of: 1. Add regular, for-humans-or-programs flags and modes to your CLI as single-purpose, composable features (otherwise known as \"how we've always added lots of features to a CLI without legislating a particular use-case\"). Doing this in a messy way makes a messy CLI, same as it ever was. Don't do it in a messy way. 2. When requested, have the CLI itself, or its manual/website, puke out a skill file which directs agents in how to compose those things for likely LLM uses of the CLI. Talking hardcoded, static text here. Nothing crazy. In other words, a \"manpage for LLMs\" or \"manpage-as-skill\" option. That's a lot more flexible and easier to change and update than an entire made-for-LLMs behavior layer. So you'd have \"man mytool\" and \"skill mytool\" available as separate documents, emphasizing separate capabilities of the same underlying CLI. \"skill mytool\" would be for use by LLMs or for piping \"skill mytool > SKILL.md\" or whatever. This is a little bit analogous to Git's notion of \"porcelain\" and \"plumbing\" (not that Git's a particularly sterling example of composable, friendly UX). The composable or special-case-only APIs still exist for direct use, are dogfooded internally for the human-user-intended paths, and a pre-baked document exists directing LLMs/users in how to use those lower-level details effectively. Sure, LLMs can read your manpage/helpdoc, or website, or source code, and figure things out, but that's slow and costs tokens and command-approval loops. This is a marginal efficiency proposal at best, but hopefully one that discourages people from writing bimodal, tortured CLIs just for the sake of LLM-friendliness. Is that nuts?"
+        },
+        {
+          "id": 48054159,
+          "author": "tfrancisl",
+          "text": "I dont want \"agent-native CLIs\" to proliferate because I'd rather we design CLIs for human use and programmatic (automation) use first. Agents are good at vomiting json between tool calls, I am not, and never will be. Too many tools stray so wildly from UNIX principles. If we design for agents first we will likely see more and more of this."
+        },
+        {
+          "id": 48053505,
+          "author": "wolttam",
+          "text": "Getting agents used to using `--force` to bypass prompts seems like a bad idea. `--force` is for when the action failed (or would fail) for some reason and you want it to definitely happen this time. I think `--yes` or `--yes-do-the-dangerous-thing` is leagues better."
+        },
+        {
+          "id": 48054783,
+          "author": "rahimnathwani",
+          "text": "This guy took inspiration from gog cli (steipete's cli for Google Workspace, which predates gws cli and is apparently more agent-friendly and token-efficient): https://github.com/mvanhorn/cli-printing-press He made a whole bunch of agent-friendly CLIs: https://printingpress.dev/ https://github.com/mvanhorn/printing-press-library/tree/main..."
+        },
+        {
+          "id": 48055907,
+          "author": "qudat",
+          "text": "The entire concept that we need to cater CLIs to agents at all should tell us how far away they are from being “junior devs” or “an intern” and I reject the premise. A lack of structured output has never been a blocker for agents to work, that’s a traditional coding problem. “Write good help text and error messages” is just good design which is self evident."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 14,
+      "id": 48021240,
+      "title_en": "Rolling the Root Key",
+      "title_ja": "Rolling the Root Key",
+      "url": "https://blog.apnic.net/2026/05/05/rolling-the-root-key/",
+      "hn_url": "https://news.ycombinator.com/item?id=48021240",
+      "score": 5,
+      "comment_count": 0,
+      "posted_at": "2026-05-05T11:56:59+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 15,
+      "id": 48053770,
+      "title_en": "Creating for a niche",
+      "title_ja": "Creating for a niche",
+      "url": "https://www.davesnider.com/posts/working-in-a-niche",
+      "hn_url": "https://news.ycombinator.com/item?id=48053770",
+      "score": 18,
+      "comment_count": 1,
+      "posted_at": "2026-05-07T19:32:33+00:00",
+      "comments": [
+        {
+          "id": 48055821,
+          "author": "FailMore",
+          "text": "CounterSlayer [1] is very polished. Just to get it straight, did you design the whole thing for people 3D printing game inserts? It looks like it would be highly applicable for other use cases? Or am I missing something? I have been building a fun project for a niche (of which I am a member) [2] and have found the process very relaxing. I have found it helps me ship more, because it narrows down the features you consider and the vocabulary you use. I have to think less about big picture stuff to some degree. It's also very useful being a member of the target niche as you come up with new ideas for features going about your daily life. I'm building a browser based Markdown renderer for developers who use CLI-based agents and today at work had a great experience with a mermaid diagram [3] to explain some architecture. I didn't think the renderer I had to paste my diagram code in was that great (tried to upsell me), so this evening I worked on an (unreleased) feature to render mermaid diagrams beautifully + embedded in a Markdown file. [1] https://counterslayer.com/ [2] https://sdocs.dev , Show HN: https://news.ycombinator.com/item?id=47777633 [3] https://mermaid.live/"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 16,
+      "id": 48026412,
+      "title_en": "PySimpleGUI 6",
+      "title_ja": "PySimpleGUI 6",
+      "url": "https://github.com/PySimpleGUI/PySimpleGUI",
+      "hn_url": "https://news.ycombinator.com/item?id=48026412",
+      "score": 84,
+      "comment_count": 39,
+      "posted_at": "2026-05-05T18:18:42+00:00",
+      "comments": [
+        {
+          "id": 48053519,
+          "author": "GeorgeTirebiter",
+          "text": "I had heavily used PySimpleGUI in various work projects, and one day, when I had to run some older piece of code I had not run in a while, I get a notice that PySimpleGUI won't work, because was free, but nobody paid, and so, good luck! So I was piping mad, paid the 3-year or whatever the max license fee was, received a code, and THEN I was able to get my stuff to work, like it used to. LESSON: N E V E R Use code that can \"stop working\" until you pay ransom. N E V E R. At this point, it's irrelevant, because the LLMs can replace PySimpleGUI with PyQt etc so --- thanks but no thanks. I did like it because you could throw up something around a CLI and it looked at least presentable. Now, since 2025, nobody codes anymore, so ... seems to me, this PySimpleGUI 6 is just a bit of history."
+        },
+        {
+          "id": 48055034,
+          "author": "ilaksh",
+          "text": "I understand that people have had bad experiences and in general I don't want to pay for software components either. But it's weird how much hate there is against developers sometimes just for even trying to make money from their libraries."
+        },
+        {
+          "id": 48053974,
+          "author": "999900000999",
+          "text": "NiceGUI is MIT licensed. Not perfect , but no bizarre shenanigans when it comes to releasing commercial software."
+        },
+        {
+          "id": 48052095,
+          "author": "crazybonkersai",
+          "text": "First they made it commercial. Then they realised there were not enough people prepared to pay for the project and shut down the project. But now it is back in free form?"
+        },
+        {
+          "id": 48051717,
+          "author": "dilawar",
+          "text": "This project started when I started my Ph.D.. I had a few interactions with the author when I added UI to some programs I wanted to showcase as TA. Every time I needed a GUI, I reached out to this library. Very beginner friendly. Good memories."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 17,
+      "id": 48053842,
+      "title_en": "Two Home Affairs officials suspended after AI 'hallucinations' found",
+      "title_ja": "Two Home Affairs officials suspended after AI 'hallucinations' found",
+      "url": "https://www.citizen.co.za/news/home-affairs-officials-suspended-ai-hallucinations/",
+      "hn_url": "https://news.ycombinator.com/item?id=48053842",
+      "score": 15,
+      "comment_count": 1,
+      "posted_at": "2026-05-07T19:38:36+00:00",
+      "comments": [
+        {
+          "id": 48054089,
+          "author": "quantified",
+          "text": "We see the difference between important work and unimportant work. In important work (law, government) there are consequences to using AI. In unimportant work, you can use it without worry."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 18,
+      "id": 48054293,
+      "title_en": "Draw Marc Andreessen on an Egg",
+      "title_ja": "Draw Marc Andreessen on an Egg",
+      "url": "https://eieio.games/blog/marc-andreessen-egg-game/",
+      "hn_url": "https://news.ycombinator.com/item?id=48054293",
+      "score": 18,
+      "comment_count": 3,
+      "posted_at": "2026-05-07T20:15:33+00:00",
+      "comments": [
+        {
+          "id": 48056220,
+          "author": "Havoc",
+          "text": "Good lawd that is savage"
+        },
+        {
+          "id": 48056234,
+          "author": "stavros",
+          "text": "Ok I don't love making fun of someone for their appearance, but by god that is a pointy head."
+        },
+        {
+          "id": 48055371,
+          "author": "aanet",
+          "text": "too funny!"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 19,
+      "id": 48049764,
+      "title_en": "The Self-Cancelling Subscription",
+      "title_ja": "The Self-Cancelling Subscription",
+      "url": "https://predr.ag/blog/the-self-cancelling-subscription/",
+      "hn_url": "https://news.ycombinator.com/item?id=48049764",
+      "score": 134,
+      "comment_count": 60,
+      "posted_at": "2026-05-07T14:15:16+00:00",
+      "comments": [
+        {
+          "id": 48051883,
+          "author": "xerox13ster",
+          "text": ">\"Working\" is not the natural state in a complex world! It's a testament to the combined energy and skill of many people that systems are built and kept working well enough for long enough so as to become invisible. I just have to take issue with this as someone who grew up in a very rural, natural area and was enamored with biology, biological, and ecological systems as a kid (8-12). The statement that \"working\" is not the natural state in a complex world? You're showing your ignorance of complex systems. What of the Ogallala Aquifer, a massive underground cave and sediment system that stores and filters water over hundreds or thousands of years? It's massively complex and in its natural state it's working but we're draining it. What about the weather systems in the atmosphere? Could you argue that one of the most complex systems (maybe only second to the ocean current system) on the planet is not \"working\" in it's natural state? Don't take an anthropomorphic perspective of it working for you. It is a complex system whose natural state is \"working\". If it breaks down for our purposes at this point, it is due to our combined energy pulling it from it's natural state. Your limbic system is very very complex and is naturally in a state of working. No human intervention. It's a testament to our combined lack of regard for the true complexity of systems that we consistently build systems that fail in opaque ways, and through our actions destroy long-running complex natural systems that we don't fully understand. He speaks as if becoming invisible is a matter of transparency, but it functions more like a veil."
+        },
+        {
+          "id": 48052374,
+          "author": "imjustmsk",
+          "text": "I don't have this much patrience, I had a really similar issue, I had a streaming service as an extra perk for somethimg I have- When It stopped working - Something hit me, this isn't a troubleshooting session but twas the call of the seas....."
+        },
+        {
+          "id": 48051344,
+          "author": "SoftTalker",
+          "text": "I would have given up after the first failure, and used a different streaming service. I have zero patience for consumer technology that doesn't work, after spending every work day dealing with enterprise technology that doesn't work."
+        },
+        {
+          "id": 48050546,
+          "author": "kikki",
+          "text": "Completely off topic but the title made me wonder if there’s any subscription service that cancels you if you don’t use it? Not quite usage based billing - plans that cancel (or pause) without use? I can’t think of any - terrible business model of course"
+        },
+        {
+          "id": 48050624,
+          "author": "herbertl",
+          "text": "In the spirit of yes, and: how about a subscription similar to a pay as you go phone plan? Pay for the month, and when you don't pay, then you don't get to keep going. After a couple of months, they unsubscribe you, get rid of your account, etc. More often than not, the first thing I do when I sign up for a service is cancel it (after confirming I can use it for the billing period)."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 20,
+      "id": 48049208,
+      "title_en": "Child marriages plunged when girls stayed in school in Nigeria",
+      "title_ja": "Child marriages plunged when girls stayed in school in Nigeria",
+      "url": "https://www.nature.com/articles/d41586-026-00720-8",
+      "hn_url": "https://news.ycombinator.com/item?id=48049208",
+      "score": 319,
+      "comment_count": 241,
+      "posted_at": "2026-05-07T13:30:04+00:00",
+      "comments": [
+        {
+          "id": 48053553,
+          "author": "eckesicle",
+          "text": "I run a company that have done over 200 similar studies for various NGOs and international organisations. In the general case, with some exceptions, we have found that two types of interventions stand above all others in terms of long term positive economic impact: 1. Infrastructure projects - like building roads 2. Gender projects - projects furthering women's rights in some way These projects are long-term sticky and do not rely on continuous funding. A paved road will remain paved even after the funding is gone, and will have a positive impact on the community for many decades. Roads allow children to go to school in neighbouring villages, and people to sell their goods in a market, use a bike or other vehicle where they otherwise would not be able to. Working with local governments to improving the attitudes towards girls and women often has a major impact on the economic output of a community both because more people can contribute, but also because the types of products and services become more diverse. This type of project is also sticky, once attitudes or structural barriers disappear they don't tend to come back. Education or sanitation initiatives can be hit or miss, where, once funding dries up, all that is left is a non functioning latrine or empty school building."
+        },
+        {
+          "id": 48050294,
+          "author": "nerdjon",
+          "text": "Reading this, I can't help but feel like there is a weird correlation here going on. It seems less specifically about the school and more about the support system and the safe place that this program gave to the girls. It sounds like this was a program specifically built to target the reasons they were not staying in school in the first place. Which obviously is a good thing but just simply stating \"stayed in school\" feels like an oversimplification of what was done here. That is an important distinction since the question to me remains if the numbers would continue without the program specifically in place. Am I misunderstanding something here?"
+        },
+        {
+          "id": 48051098,
+          "author": "tolerance",
+          "text": "Are people just riffing off the headline, the subheading and the first sentence of this page, is the full paper open access, or has anyone read the more substantial policy brief associated with the study [0]? That's not to say that there's nothing of value being discussed here without the last two resources, but a URL swap may be helpful. The brief has a list of freely available references for further consideration. [0]: https://www.nature.com/articles/d41586-026-00720-8 [0a] (PDF): https://www.nature.com/articles/d41586-026-00720-8.pdf"
+        },
+        {
+          "id": 48050390,
+          "author": "mzi",
+          "text": "This kind of data was shown by late Hans Rosling and his foundation Gapminder¹. He gave a Ted talk² about similar subjects as well, and I find him an excellent lecturer. ¹ https://www.gapminder.org/ ² https://www.youtube.com/watch?v=hVimVzgtD6w"
+        },
+        {
+          "id": 48050213,
+          "author": "slwvx",
+          "text": "I think that birth rates also drop when girls and women are educated. I would like to see such education AND lotsa child support programs and credits. I.e. I think a stable fertility rate AND educated girls are simultaneously possible all around the world"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 21,
+      "id": 48010729,
+      "title_en": "RaTeX: KaTeX-compatible LaTeX rendering engine in pure Rust",
+      "title_ja": "RaTeX: KaTeX-compatible LaTeX rendering engine in pure Rust",
+      "url": "https://ratex.lites.dev/",
+      "hn_url": "https://news.ycombinator.com/item?id=48010729",
+      "score": 153,
+      "comment_count": 85,
+      "posted_at": "2026-05-04T16:19:31+00:00",
+      "comments": [
+        {
+          "id": 48049455,
+          "author": "Hendrikto",
+          "text": "I used LaTeX for approximately 10 years, for little things to relatively complex, including my bachelor’s and master’s theses. It never felt natural at reliable or consistent. Every customization required weird \\makeatletter \\makeatother hacks and was very brittle. Everything seemed more complicated than necessary and hard to grok, with weird interdependencies and interactions. There are probably good reasons for all of that, but it is just both bad DX and bad UX. It feels like you need to be a hardcore LaTeX expert or consult with one, in order to accomplish the most mundane things. Especially in a reliable way, that won’t break upon making seemingly unrelated changes, or won’t break other things itself. I used Typst for a few weeks. It already feels much more understandable, consistent, hackable, and customizable. I guess that is the difference between an ad hoc macro system and an actually thought through programming language. The only drawback I can see is the ecosystem being smaller and less mature. That is, however, counteracted by being able to do things on your own, without immersing yourself deeply in LaTeX for years. Also, it will improve with time. LaTeX is great, don’t get me wrong. But its heritage and historical baggage is really dragging it down."
+        },
+        {
+          "id": 48049151,
+          "author": "tabbott",
+          "text": "It's interesting to me that the page doesn't describe the size of the rust binary (relevant for mobile app use cases where you would need to add the Rust binary to your app) or performance. The webpage also does read like it was at least heavily LLM assisted, which makes it a bit hard to trust it. That all said, this is definitely something I'd be interested in using for Zulip if is indeed going to be a well maintained open source project. (We currently have a node server component that the Zulip server runs only the render LaTeX)."
+        },
+        {
+          "id": 48051851,
+          "author": "thangalin",
+          "text": "When developing KeenWrite[1], I opted to support only plain TeX. This is because I wanted math typesetting to work for either LaTeX or ConTeXt[2]. To render TeX in the preview panel, I forked NTS[3] into a highly optimized Java version. The lack of cross-platform event-based UI system is what kept me from writing the entire application in Rust (some ten years ago). Has the Rust ecosystem improved with respect to Markdown processing, event-based UIs, and now TeX support? [1]: https://keenwrite.com/screenshots.html [2]: https://wiki.contextgarden.net [3]: https://ctan.org/tex-archive/systems/nts"
+        },
+        {
+          "id": 48049384,
+          "author": "azverev",
+          "text": "Pixel-diff CI against a golden suite is the right discipline for layout libraries, and it's noticeably rare in the JS ecosystem. Most \"matches KaTeX\" claims I've seen in the wild rely on screenshot eyeballing, which collapses on edge cases like spacing primes, integral subscripts, and matrix delimiters that scale. One thing I'd be curious about: how are font fallbacks handled when the same Rust core ships to platforms with different system font availability? KaTeX bundles fonts and assumes they load cleanly; CoreGraphics and Skia bring their own glyph caches and metrics. Does the display list carry metric snapshots from the host text shaper, or does the core compute layout from a bundled metric file independent of the backend?"
+        },
+        {
+          "id": 48050786,
+          "author": "xworld21",
+          "text": "I suppose somebody has to ask (and most likely complain) about this: what does RaTeX do for accessibility? I gather that it produces images. I checked the demo, and there's not even an alternative text or an ARIA label, so this seems completely invisible to anybody relying on a screen reader. This is quite a step backwards compared to modern LaTeX, which can now tag equations with MathML within the PDF, or using MathJax, or any other serious tool targeting HTML, like pandoc or LaTeXML. Is accessibility anywhere on the roadmap for RaTeX?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 22,
+      "id": 48040465,
+      "title_en": "OpenBSD Stories: The closest thing to cute kittens (OpenBSD/zaurus)",
+      "title_ja": "OpenBSD Stories: The closest thing to cute kittens (OpenBSD/zaurus)",
+      "url": "http://miod.online.fr/software/openbsd/stories/zaurus1.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48040465",
+      "score": 57,
+      "comment_count": 7,
+      "posted_at": "2026-05-06T19:21:18+00:00",
+      "comments": [
+        {
+          "id": 48052361,
+          "author": "uticus",
+          "text": "> Don't be startled by this odd-looking name, it will make sense when you reach the end of the story. > This is the story of OpenBSD on the Sharp Zaurus systems. Because of its length, I have decided to split it in two parts. > OpenBSD/cats: the enabler > OpenBSD/zaurus (to be published 20260513) ...I will be visiting again in 5 days. Then, I will be searching eBay for a Zaurus... http://miod.online.fr/software/openbsd/stories/zaurus.html"
+        },
+        {
+          "id": 48051698,
+          "author": "mmooss",
+          "text": "As usual, when you make the effort to see them for what they are really like, people never live up to their reputations :) <deraadt> wow, mickey is fixing cats. cut, pull, twist, tie, insert, sew, right? <deraadt> meow meeeeooooow MRREOEAAWOOOWOWWWWWWWOWOOWOW <deraadt> :-)"
+        },
+        {
+          "id": 48051682,
+          "author": "mmooss",
+          "text": "Interesting ... the author has a whole webpage of these stories about OpenBSD history: http://miod.online.fr/software/openbsd/stories/index.html"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 23,
+      "id": 48036190,
+      "title_en": "OurCar: What I learned making an app for my family",
+      "title_ja": "OurCar: What I learned making an app for my family",
+      "url": "https://mendelgreenberg.com/posts/ourcar/",
+      "hn_url": "https://news.ycombinator.com/item?id=48036190",
+      "score": 96,
+      "comment_count": 68,
+      "posted_at": "2026-05-06T13:44:59+00:00",
+      "comments": [
+        {
+          "id": 48048167,
+          "author": "justbees",
+          "text": "Oh man! I made an app for my family too. They have an antiques/book selling business on eBay so I made an app for them to actually keep track of things as they buy them . That was where their process was breaking down - When did we buy this? How much was it? The sort of things that are semi-difficult to keep track of when you're going to A LOT of estate sales and then basically need to enter all the stuff into a spreadsheet when you get home. So the concept was - take pics and enter simple data as you're out and about and then export the data when you get home. I ended up going way down some deep rabbit holes because I didn't want to host any data (my goal was to actual release the app and hosting people's shopping trips wasn't something I wanted to take on). So it's all local storage and for sharing between family members I ended up embedding the data in a pdf that you can send in a text and then import - so if x people are at the same sale they can all add to the same \"trip\" at the same time and then combine the trip when they're all finished shopping. So image and data optimization were big concerns since it's all on your phone until you export it/delete the trip. I was a fun process until it wasn't :P I did end up getting to 1.0 and shipping to the app store, which was really my goal -> make an app and go all the way through the process. So in that way it was a success."
+        },
+        {
+          "id": 48048089,
+          "author": "chabad360",
+          "text": "Hi HN! OP here. This is my first post and I'm very grateful to see it on the front page. This app was a lot of fun to build, and I really enjoyed putting together the writeup. I've been very inspired by the other stories shared here to write my own, so seeing the comments has been very validating. I guess I'll be around answering questions and comments as I see them. Thanks for reading and responding."
+        },
+        {
+          "id": 48047922,
+          "author": "ahaferburg",
+          "text": "Fun project. The article is a bit light on details. I find it astonishing that a project like this runs into performance issues. I would have liked to learn more about what these resource-constrained widgets looked like, what they did, and what caused the performance issues."
+        },
+        {
+          "id": 48054111,
+          "author": "pavel_lishin",
+          "text": "We own a Subaru, and the app has all sorts of data in it: the car's current location, the odometer reading, and fuel status, sort of - it only displays the \"until empty\" distance, and the average MPG. I'm surprised it doesn't show even an estimate of how much gasoline is in it. So if I were to do this, I'd find a way to read that data somehow, and then I'd just need to know who was driving. (Which, as someone pointed out, I'd probably do with some sort of RFID tag on everyone's keys.) But yeah, the manual entry part would absolutely be the biggest drag here."
+        },
+        {
+          "id": 48053161,
+          "author": "tantalor",
+          "text": "Good example of over-engineering. This could be easily solved with a pencil and notepad."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 24,
+      "id": 48045939,
+      "title_en": "Show HN: TRUST – Coding Rust like it's 1989",
+      "title_ja": "Show HN: TRUST – Coding Rust like it's 1989",
+      "url": "https://github.com/wojtczyk/trust",
+      "hn_url": "https://news.ycombinator.com/item?id=48045939",
+      "score": 108,
+      "comment_count": 70,
+      "posted_at": "2026-05-07T05:58:52+00:00",
+      "comments": [
+        {
+          "id": 48049076,
+          "author": "GuB-42",
+          "text": "Looking at this makes me nostalgic in a way the author probably hasn't intended. Rust is notorious for its slow compile times, while Turbo Pascal was known to be blazingly fast. And the debugger, one of the most important part of the experience is \"Not implemented\". Dressing it as a 1989 IDE makes me painfully aware of what we have lost. Despite running on hardware that were orders of magnitudes slower than today, software used to be more responsive. By \"more responsive\" I mean that while modern systems are excellent at batch processing, latency is often not great, and because so much happens in parallel, also confusing."
+        },
+        {
+          "id": 48048732,
+          "author": "pjmlp",
+          "text": "Well not quite, unfortunely Rust still has a bit to catch up with 1989, it isn't only the Turbo Vision inspired IDE. https://ia801901.us.archive.org/5/items/TurboPascal55/Antiqu... > Fast! Compiles 34, 000 lines of code per minute https://archive.org/details/bitsavers_borlandtur5.5Brochure1... Measured on a a IBM PS/2 Model 60, meaning an Intel 80286 running at 10 MHz with 640 KB for MS-DOS, up to 8 MB depending on extenders and HMA configurations. https://en.wikipedia.org/wiki/IBM_PS/2_Model_60 And if you feel using the language complexity excuse for 2026 hardware, see OCaml, Delphi, D, or C# AOT."
+        },
+        {
+          "id": 48052563,
+          "author": "nazgulsenpai",
+          "text": "The blue CRT glow of Turbo C++ / QBasic 4.5 IDE at 12 AM when I've snuck up in the middle of the night to poke around on the family computer on a school night when I was ~10 years old... I love this."
+        },
+        {
+          "id": 48053936,
+          "author": "doubtfuluser",
+          "text": "Thank you for that - I’m definitely going to look into it. I realize that I lost the fun in coding. I’m in a different career stage now as well, but just seeing this reminded me of how I started a long time ago implementing snake, learning about graphics mode, double buffering / page flipping etc. Everything felt exciting and so close to really understanding what’s going on. And just seeing the blue text interface reminded me of how much fun that was…"
+        },
+        {
+          "id": 48047243,
+          "author": "rob74",
+          "text": "Cool! I assume TRUST stands for \"Turbo Rust\"? If yes, maybe it would be worth mentioning that in the readme. I doubt that Embarcadero Technologies (the current owners of the Delphi and C++ Builder IDEs, and probably also the owners of other former Borland trademarks) would mind - but then again, it doesn't hurt to stay on the safe side..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 25,
+      "id": 48014521,
+      "title_en": "Boris Cherny: TI-83 Plus Basic Programming Tutorial (2004)",
+      "title_ja": "Boris Cherny: TI-83 Plus Basic Programming Tutorial (2004)",
+      "url": "https://www.ticalc.org/programming/columns/83plus-bas/cherny/",
+      "hn_url": "https://news.ycombinator.com/item?id=48014521",
+      "score": 180,
+      "comment_count": 80,
+      "posted_at": "2026-05-04T20:28:24+00:00",
+      "comments": [
+        {
+          "id": 48047512,
+          "author": "z_open",
+          "text": "It's funny how many software developers got into it due to being bored in class with a TI-83 and randomly trying to create programs."
+        },
+        {
+          "id": 48055086,
+          "author": "arian_",
+          "text": "The TI-83 taught an entire generation that programming was possible on hardware you already owned. No IDE, no internet, no Stack Overflow. Just you, 8 lines of visible code, and a 96x64 pixel screen. Everything since then has been more powerful and less magical."
+        },
+        {
+          "id": 48048317,
+          "author": "vvoyer",
+          "text": "For anyone wondering, Boris Cherny created Claude Code."
+        },
+        {
+          "id": 48048126,
+          "author": "sshine",
+          "text": "I received the TI-83+ manual on the first day of high school and read it back-to-back that same day. Subsequent math classes, I started by writing a BASIC problem to solve the type of math problem we were given. I can't decide if I got really good at solving those math problems by solving them generally once, or really bad at solving those math problems for never having solved them more than once or twice by hand while writing the program. Those programs were very inefficient, and you could code the TI-83+ in assembly, but it required uploading the code via cable. I recall being able to play small internet-downloadable network games with two TI-83+ connected. I never got around to writing any games myself."
+        },
+        {
+          "id": 48051456,
+          "author": "harmoni-pet",
+          "text": "Would be crazy if the Ilya S he thanks in the first page was Ilya Sutskever"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 26,
+      "id": 48051025,
+      "title_en": "I switched from Mac to a Lenovo Chromebook",
+      "title_ja": "I switched from Mac to a Lenovo Chromebook",
+      "url": "https://blog.johnozbay.com/i-left-apples-ecosystem-for-a-lenovo-chromebook-and-you-can-too.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48051025",
+      "score": 101,
+      "comment_count": 131,
+      "posted_at": "2026-05-07T16:01:24+00:00",
+      "comments": [
+        {
+          "id": 48051744,
+          "author": "Aurornis",
+          "text": "Going from complaining about Apple not having enough polish in the fine details of their UI to suggesting we all switch to Chromebooks is so completely inconsistent that there must be other motivations. In one post they're complaining about things like Apple having the search bar in different locations in different apps, and in the next post they're seriously trying to tell us that a laptop that requires modifying the software and running shell commands copied from the internet so you can run a text editor to change settings and drivers is the solution? They dropped a note about how they haven't actually tried development on the chromebook at the end but say they assume it would be okay. For someone telling us to switch to Chromebooks, they haven't even finished doing their own homework Linking to an SEO spam website called technical.city for performance comparisons is another clue that this choice was driven by something else first and the reasoning was backfilled. The new MediaTek part is fast, but there's more to laptop performance than a single bar chart from a site citing ancient benchmarks like PassMark. I can't read this as anything other than an attempt to make a contrarian choice and then present it as the superior alternative."
+        },
+        {
+          "id": 48051472,
+          "author": "_imnothere",
+          "text": "I can't think of any valid reason for a person with sane mind to do this. Yes, macOS is somewhat closed, but it's definitely more open than ChromeOS."
+        },
+        {
+          "id": 48053214,
+          "author": "vile_wretch",
+          "text": "> Figma and Spotify have some of the best web apps out there as well, so that's all good too! The Spotify web app is still much more limited than the desktop app. > Did you know that Adobe ported Photoshop etc to web, with all the AI bells and whistles and the web apps perform incredibly well? Perfect if all you need out of Photoshop is the AI portion, I guess. > As a side note, it is no surprise that Adobe's suite of creative apps [...] now work incredibly well on the web across all operating systems They literally don't. > Quickshare (the Airdrop alternative) ACTUALLY WORKS Saying this like Airdrop isn't one of Apple's most bulletproof \"just works\" features ever"
+        },
+        {
+          "id": 48051513,
+          "author": "wildekek",
+          "text": "I don't really get what the problem with MacOS is. It never gets in my way, so why would I switch? Yes, I found Liquid Glass ugly and two days later I completely forgot about it."
+        },
+        {
+          "id": 48051443,
+          "author": "KillenBoek",
+          "text": "Author admitted he did nothing worthwhile that justified a full fledged workstation and adopted a tablet with keyboard. As a Mac user I was pleasantly surprised when I switched to a arch Linux based distribution."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 27,
+      "id": 48048339,
+      "title_en": "GovernGPT (YC W24) Is Hiring Engineers to Build Thinking Systems in Montreal",
+      "title_ja": "GovernGPT (YC W24) Is Hiring Engineers to Build Thinking Systems in Montreal",
+      "url": "https://www.ycombinator.com/companies/governgpt/jobs/hRyltS0-backend-engineer-thinking-systems",
+      "hn_url": "https://news.ycombinator.com/item?id=48048339",
+      "score": 1,
+      "comment_count": 0,
+      "posted_at": "2026-05-07T12:01:13+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 28,
+      "id": 48047082,
+      "title_en": "ZAYA1-8B matches DeepSeek-R1 on math with less than 1B active parameters",
+      "title_ja": "ZAYA1-8B matches DeepSeek-R1 on math with less than 1B active parameters",
+      "url": "https://firethering.com/zaya1-8b-open-source-math-coding-model/",
+      "hn_url": "https://news.ycombinator.com/item?id=48047082",
+      "score": 84,
+      "comment_count": 50,
+      "posted_at": "2026-05-07T08:56:51+00:00",
+      "comments": [
+        {
+          "id": 48047674,
+          "author": "throwaw12",
+          "text": "> The math and coding part is impressive but the agentic one is not. I think this is very important to eventually become a viable replacement for coding models. Because most of the time coding harnesses are leveraging tool calls to gather the context and then write a solution. I am hopeful, that one day we can replace Claude and OpenAI models with local SOTA LLMs"
+        },
+        {
+          "id": 48049005,
+          "author": "sva_",
+          "text": "So at the heart of this architecture is what they call 'Markovian RSA', a combination of two papers RSA[0], which generates a certain amount of reasoning traces for a prompt; and the 'Markovian Thinker'[1] which seems to basically cut the end of those traces to keep context at a reasonable length. I feel like there's potential to improve that part of just cutting a tunable amount (τ) of tokens off the tail end of those traces, because you may potentially lose valuable insight earlier in the trace? They did train the model (in SFT) to put the relevant information into the tail (τ) of the trace, but I'm not sure this is the best possible way. 0. https://arxiv.org/pdf/2509.26626 1. https://arxiv.org/pdf/2510.06557"
+        },
+        {
+          "id": 48047808,
+          "author": "yorwba",
+          "text": "Announcement blogpost: https://www.zyphra.com/post/zaya1-8b"
+        },
+        {
+          "id": 48048300,
+          "author": "adityashankar",
+          "text": "I used their online api, and asked it to create code for a timer i can copy paste into about:blank to test out (prompt below) it did it successfully, but it did need a follow up correction prompt, overally pretty impressive for a model with 760M active parameters, but definitely not deepseek-r1 level that being said, if something with 760M active parameters can be this good then, there's a good chance it is likely that api-based models are likely to get cheaper in the future Prompt ------ ``` can you write me some js code (that i can put in the console for about:blank) which will basically create a timer for for me that i can start, stop, and store current values for (or rather lap) so i want it to create buttons (start, stop, lap buttons) on the page for me with labels and divs and other elements that accordingly record the current information and display the current information, and can accordingly start, stop and lap :) the js code that i copy paste automatically creates the html buttons and divs and other elements that can manage the timer and accordingly the timer works with them ```"
+        },
+        {
+          "id": 48048025,
+          "author": "Havoc",
+          "text": "0.76 active and it's vaguely competitive at coding sounds promising. LM studio doesn't let me actually run this yet though: \"Unsupported safetensors format: null\""
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 29,
+      "id": 48053816,
+      "title_en": "Mozilla says 271 vulnerabilities found by Mythos and \"almost no false positives\"",
+      "title_ja": "Mozilla says 271 vulnerabilities found by Mythos and \"almost no false positives\"",
+      "url": "https://arstechnica.com/information-technology/2026/05/mozilla-says-271-vulnerabilities-found-by-mythos-have-almost-no-false-positives/",
+      "hn_url": "https://news.ycombinator.com/item?id=48053816",
+      "score": 68,
+      "comment_count": 24,
+      "posted_at": "2026-05-07T19:36:45+00:00",
+      "comments": [
+        {
+          "id": 48055173,
+          "author": "jerrythegerbil",
+          "text": "Again, and this is important: A bug is a bug. A “potential vulnerability” is a bug. A vulnerability is verifiable as having security implications with a proof of concept or other substantial evidence. Words matter. Bugs matter. It’s important to fix large amounts of bugs, just as it always has been, and has been done. Let that be impressive on its own, because it IS impressive. Mythos didn’t write 271 PoC for vulnerabilities and demonstrate code path reachability with security implications. Mythos found 271 valid bugs. Let that be enough."
+        },
+        {
+          "id": 48056151,
+          "author": "crummy",
+          "text": "Curious if people think LLMs will lead to more secure or less secure software in five years."
+        },
+        {
+          "id": 48053996,
+          "author": "input_sh",
+          "text": "Original source: https://news.ycombinator.com/item?id=48051079 It's better because it actually lists a sample of Bugzilla reports that were made public. This topic was discussed previously (36 comments two weeks ago: https://news.ycombinator.com/item?id=47885042 ), but the part about bug reports being made public is brand new."
+        },
+        {
+          "id": 48056204,
+          "author": "deferredgrant",
+          "text": "A vuln finder is useful only if it respects the humans on the other end. Every bogus report taxes the same scarce attention needed for the real bugs."
+        },
+        {
+          "id": 48053911,
+          "author": "lschueller",
+          "text": "Let's see, how this will improve the daily soc work. I still don't see, what's the big difference between Mythos and Opus, security wise. I'm confident, that this kind of vul detection is a long-term improvement. But does specifically Mythos makes such a big difference to \"normal\" models? I would love to see, what's the actual difference."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 30,
+      "id": 48050540,
+      "title_en": "Motherboard sales 'collapse' amid unprecedented shortages fueled by AI",
+      "title_ja": "Motherboard sales 'collapse' amid unprecedented shortages fueled by AI",
+      "url": "https://www.tomshardware.com/pc-components/motherboards/motherboard-sales-collapse-by-more-than-25-percent-as-chipmakers-strangle-enthusiast-pc-market-to-build-more-ai-chips-asus-projected-to-sell-5-million-fewer-boards-in-2025-gigabyte-msi-and-asrock-also-expected-to-see-reduced-sales-numbers",
+      "hn_url": "https://news.ycombinator.com/item?id=48050540",
+      "score": 229,
+      "comment_count": 270,
+      "posted_at": "2026-05-07T15:23:23+00:00",
+      "comments": [
+        {
+          "id": 48051992,
+          "author": "hx8",
+          "text": "PC is the last major open platform. While other platforms like Android and becoming less open, PC in general is becoming more open than it's been in a long time as heavy MacOS/Android/iOS competition is creating a focus on open standards and all-time high strong Linux support gives people a place to land and tinker/hack to their heart's content. I think we will see an abandonment of consumer grade PC components and individuals are either pushed towards closed hardware like Playstation, MacBooks, and Android devices or they are pushed towards server grade components. I already have home sever rack, and would recommend it for other people."
+        },
+        {
+          "id": 48055964,
+          "author": "cullenking",
+          "text": "Anecdata to add to the pile...I pulled three 1u epyc gen2 servers from my production rack 1.5 years ago and replaced them with lower power alternatives for a production storage cluster. I didn't need the extra CPUs for app server stuff so they sat in my house for a while. Fast forward 1.5 years and it was making sense to upgrade some app servers to new gen stuff, get a bump in frequency and core count...when i went to spec some new servers, my normal $15k - $20k build was $55k. Instead, I hittup ebay, got six used gen3 processors, found a \"good deal\" on a couple tb of new ram (still insanely expensive), and came out with the same overall horsepower for a total of $20k instead of $110k. I know this is about consumer desktop, but seeing the comments about upgrading old hardware caused me to chime in. This is happening in the production/enterprise level in some segments."
+        },
+        {
+          "id": 48055070,
+          "author": "beloch",
+          "text": "\"Despite this drop in sales, these companies aren’t exactly struggling. Asus, Gigabyte, and ASRock have pivoted some of their production towards AI servers, allowing them to capture some of the investments that hyperscalers are generously pouring into their data centers. But if you’re planning to build a completely new PC from scratch, you might be able to find good deals on motherboard combos, especially as retailers are keen on getting their inventories moving. \" ---------------- 1. Within a few months, these manufacturers will likely raise desktop mobo and CPU prices with the justification that \"volumes are too low\". 2. If you're upgrading from an older machine, it likely has a format of RAM that's not compatible with newer boards. Upgrading the cheap parts now and waiting for the expensive bits to come down is simply not an option. It's all or nothing. Game and application developers should be paying close attention to this. You're used to the average user's system spec going up every year. That's stopped for now. The average memory in new systems may actually retreat!"
+        },
+        {
+          "id": 48054497,
+          "author": "deathanatos",
+          "text": "I'm one of the collapsed sales. My desktop had died, and I had been thinking about rebuilding it. But RAM prices went to the moon, so I instead opted to repair the desktop. (It's only ~15 years old.) It's alive, again, and performs well enough. The HDD in it is pretty old (not as old as the rest of it, it's on its second drive; 15 years would be quite impressive!), and still works for now, but there too, prices are silly and well above inflation. (I looked it up again: the same HDD is 50% more expensive today than when I bought it, in real, accounting-for-inflation dollars.)"
+        },
+        {
+          "id": 48052787,
+          "author": "post_break",
+          "text": "Motherboards used to be $100, $200 for the high end. Now they want $300+, ram is crazy, storage, video cards, etc. I'm not surprised sales for these components is hitting a wall."
+        }
+      ],
+      "summary_ja": ""
+    }
+  ]
+}
