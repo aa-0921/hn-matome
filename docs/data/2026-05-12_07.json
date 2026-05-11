@@ -1,0 +1,1030 @@
+{
+  "date": "2026-05-12T00:00:00+09:00",
+  "slot": "07",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 48100706,
+      "title_en": "TanStack NPM Packages Compromised",
+      "title_ja": "TanStack NPM Packages Compromised",
+      "url": "https://github.com/TanStack/router/issues/7383",
+      "hn_url": "https://news.ycombinator.com/item?id=48100706",
+      "score": 295,
+      "comment_count": 76,
+      "posted_at": "2026-05-11T21:08:25+00:00",
+      "comments": [
+        {
+          "id": 48101454,
+          "author": "cube00",
+          "text": "Please be careful when revoking tokens. It looks like the payload installs a dead-man's switch at ~/.local/bin/gh-token-monitor.sh as a systemd user service (Linux) / LaunchAgent com.user.gh-token-monitor(macOS). It polls api.github.com/user with the stolen token every 60s, and if the token is revoked (HTTP 40x), it runs rm -rf ~/. https://github.com/TanStack/router/issues/7383#issuecomment-..."
+        },
+        {
+          "id": 48101308,
+          "author": "jonchurch_",
+          "text": "It is unfortunate, but this is evidence (IMO) that Trusted Publishing is still ~~not secure~~ not enough by itself to securely publish from CI, as an attacker inside your CI pipeline or with stolen repo admin creds can easily publish. This isnt new information, TP is not meant to guarantee against this, but migrating to TP away from local publish w/ 2fa introduces this class of attack via compomise of CI. (edit: changed \"still not secure\" to \"still not enough by itself\" bc that is the point I want to make) Going to Trusted Publishing / pipeline publishing removes the second factor that typically gates npm publish when working locally. The story here, while it is evolving, seems to be that the attacker compromised the CI/CD pipeline, and because there is no second factor on the npm publish, they were able to steal the OIDC token and complete a publish. Interesting, but unrelated I suppose, is that the publish job failed. So the payload that was in the malicious commit must have had a script that was able to publish itself w/ the OIDC token from the workflow. What I want is CI publishing to still have a second factor outside of Github, while still relying on the long lived token-less Trusted Publisher model. AKA, what I want is staged publishing, so someone must go and use 2fa to promote an artifact to published on the npm side. Otherwise, if a publish can happen only within the Github trust model, anyone who pwns either a repo admin token or gets malicious code into your pipeline can trivially complete a publish. With a true second factor outside the Github context, they can still do a lot of damage to your repo or plant malicious code, but at least they would not be able to publish without getting your second factor for the registry."
+        },
+        {
+          "id": 48101226,
+          "author": "gajus",
+          "text": "Reminder to secure your npm environments. https://gajus.com/blog/3-pnpm-settings-to-protect-yourself-f... Just a handful of settings to save a whole lot of trouble."
+        },
+        {
+          "id": 48101453,
+          "author": "chrisweekly",
+          "text": "Postinstall scripts are deadly. Everyone should be using pnpm. Crazy that an \"orphan\" commit pushed to a FORK(!) could trigger this (in npm clients). IMO GitHub deserves much of the blame here. A malicious fork's commits are reachable via GitHub's shared object storage at a URI indistinguishable from the legit repo. That is absolutely bonkers."
+        },
+        {
+          "id": 48101677,
+          "author": "getcrunk",
+          "text": "I think we are at the point where everyone really needs to run each project in its own vm. Given the recent lpe vulns docker 100% won’t cut it. And containers were never meant primarily as a security boundary anyways"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 2,
+      "id": 48094641,
+      "title_en": "Google says criminal hackers used AI to find a major software flaw",
+      "title_ja": "Google says criminal hackers used AI to find a major software flaw",
+      "url": "https://www.nytimes.com/2026/05/11/us/politics/google-hackers-attack-ai.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48094641",
+      "score": 72,
+      "comment_count": 48,
+      "posted_at": "2026-05-11T13:20:14+00:00",
+      "comments": [
+        {
+          "id": 48101044,
+          "author": "sowbug",
+          "text": "Security will be a wedge to restrict the sophistication of open-weight and local LLMs, just as it's been used to demonize and restrict cypherpunk technologies."
+        },
+        {
+          "id": 48101020,
+          "author": "s3p",
+          "text": ">But new A.I. models like Anthropic’s Mythos, which was announced last month, appear to be so good at finding such holes that Anthropic shared it only with a limited number of firms and government agencies in the United States and Britain. Immediate distrust of the article. GPT 5.5 is out with nearly the same capability. The author might be parroting company marketing, unable to discern that a lot of this is much less complex than it seems. For all we know this group could have had a model examine some obscure line of code thousands of times until it found something."
+        },
+        {
+          "id": 48101772,
+          "author": "skeledrew",
+          "text": "Wild that they think restricting access to models will help much. Access to Chinese models will definitely not be restricted and have enough capability to find exploits as well."
+        },
+        {
+          "id": 48101525,
+          "author": "bouncycastle",
+          "text": "Meanwhile, I cannot ask ChatGTP how to pick my own lock. Even though this information is available in a book in the library."
+        },
+        {
+          "id": 48101253,
+          "author": "gman2093",
+          "text": "Black hat hacking seems to be a well-fit use case for these LLMs. Attackers only need to be right once, so the sometimes-wrongness of the attacks might be trivial. This probably devalues stashes of zero-day exploits for those that have been witholding them."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 3,
+      "id": 48099616,
+      "title_en": "Library for fast mapping of Java records to native memory",
+      "title_ja": "Library for fast mapping of Java records to native memory",
+      "url": "https://github.com/mamba-studio/TypedMemory",
+      "hn_url": "https://news.ycombinator.com/item?id=48099616",
+      "score": 84,
+      "comment_count": 21,
+      "posted_at": "2026-05-11T19:33:31+00:00",
+      "comments": [
+        {
+          "id": 48100609,
+          "author": "steve_barham",
+          "text": "I did something similar a few years back, with a slightly different approach to declaration, using interfaces to denote the layout of the struct. Mutation was opt-in by exposing setters using the (of the time) standard JavaBeans layout and an annotation processor took care of the codegen of an implementing class, which could be used where you wanted an on-heap box of an off-heap structure. One benefit of this approach was that by using the interface as the type you could fairly easily support a flyweight pattern, reducing GC pressure when working with large off-heap collections. The parallels between stateless interfaces and offheap structs was also quite pleasing. I'd love to see a similar effort using more modern techniques than Unsafe et al."
+        },
+        {
+          "id": 48099880,
+          "author": "wood_spirit",
+          "text": "This is interesting. Java desperately needs an array of struct for type safe sugar over high performance arenas, but the areas you’d turn to this would be in a zero allocation effort where the cost of the this library’s off-heap and the object allocation in the getters and setters etc largely negate the advantages for a lot of use cases."
+        },
+        {
+          "id": 48100435,
+          "author": "matt_heimer",
+          "text": "What is the positioning for this and how does it work? A comparison to SBE might be nice. I understand the issue about using Layout and MemorySegment being verbose but the reason I'm using those things it to develop high performance software that uses off-help memory and bypasses object allocation. What does \"map Java record types onto native memory\" actually mean? Did you somehow turn a Java record into a flyweight or is `Point point = points.get(0);` just instantiating a record instance using data read from off-help memory? If it's a dynamic mapping library using reflection, that's cool but doesn't it kill the performance goals for most Java off heap usage? Is this more of a off-heap to heap bridge for pulling data into the normal Java space when performance isn't critical?"
+        },
+        {
+          "id": 48100467,
+          "author": "jayd16",
+          "text": "At first glance it reminds me of C#'s Span<T>."
+        },
+        {
+          "id": 48100797,
+          "author": "c-fe",
+          "text": "This is very similar to SBE encoder/decoder flyweights over raw memory? What are the differences?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 4,
+      "id": 48098261,
+      "title_en": "UCLA discovers first stroke rehabilitation drug to repair brain damage (2025)",
+      "title_ja": "UCLA discovers first stroke rehabilitation drug to repair brain damage (2025)",
+      "url": "https://stemcell.ucla.edu/news/ucla-discovers-first-stroke-rehabilitation-drug-repair-brain-damage",
+      "hn_url": "https://news.ycombinator.com/item?id=48098261",
+      "score": 120,
+      "comment_count": 29,
+      "posted_at": "2026-05-11T17:53:08+00:00",
+      "comments": [
+        {
+          "id": 48100831,
+          "author": "MattCruikshank",
+          "text": "If you've read Ted Chiang's \"Understand,\" you'll understand why this headline made my eyes pop out. For those who haven't, it's in the \"Stories of Your Life and Others\" collection, which includes the short story that the film Arrival was based on."
+        },
+        {
+          "id": 48100239,
+          "author": "seabass-salmon",
+          "text": "Wonder what criteria they're using to define \"first\" here, as I'm aware Clinuvels afamelanotide treatment had positive results (though they're not proceeding with it currently as the burdensome regulatory processes make it too risky to have too many pots on the boil) https://biotechdispatch.com.au/news/clinuvel-announces-posit..."
+        },
+        {
+          "id": 48101439,
+          "author": "kleton",
+          "text": "It is this compound https://pubmed.ncbi.nlm.nih.gov/39106304/"
+        },
+        {
+          "id": 48100602,
+          "author": "KnuthIsGod",
+          "text": "Potentially life changing for male mice..."
+        },
+        {
+          "id": 48098460,
+          "author": "benoau",
+          "text": "> “The goal is to have a medicine that stroke patients can take that produces the effects of rehabilitation,” said Dr. S. Thomas Carmichael, the study’s lead author and professor and chair of UCLA Neurology. “Rehabilitation after stroke is limited in its actual effects because most patients cannot sustain the rehab intensity needed for stroke recovery. Sounds truly amazing, I have known two people who had severe strokes - one's PT was contingent on triaging resources to whoever was likely to recover more, another simply hated PT and speech therapy and often refused to participate or do the exercises. Even if it didn't help recovery a medicine like this would have reduced the stress of everyone involved."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 5,
+      "id": 48100500,
+      "title_en": "GitLab Announces Workforce Reduction and End of Their CREDIT Values",
+      "title_ja": "GitLab Announces Workforce Reduction and End of Their CREDIT Values",
+      "url": "https://about.gitlab.com/blog/gitlab-act-2/",
+      "hn_url": "https://news.ycombinator.com/item?id=48100500",
+      "score": 164,
+      "comment_count": 126,
+      "posted_at": "2026-05-11T20:51:57+00:00",
+      "comments": [
+        {
+          "id": 48101155,
+          "author": "Animats",
+          "text": "Their old CREDIT values: Collaboration, Results for Customers, Efficiency, Diversity, Inclusion & Belonging, Iteration, and Transparency. New values: Speed with Quality, Ownership Mindset, Customer Outcomes. In other words, work harder, not smarter, and no more DEI."
+        },
+        {
+          "id": 48101381,
+          "author": "Steeeve",
+          "text": "Wow gitlab. Right when everyone was looking to see if you could lead with all the fails at github, you basically said \"We're going to throw our source at ChatGPT and see what happens\""
+        },
+        {
+          "id": 48101100,
+          "author": "skrrtww",
+          "text": "A lot of the conclusions they're drawing in this post about the \"agentic era\" seem quite misguided and some don't really seem to make sense. I have no doubt GitLab has too many employees and can benefit from being a more focused company, but it's tiring reading these layoff posts so chock full of buzzwords. I guess they're desperately hoping if they prognosticate about AI enough it will placate the investors."
+        },
+        {
+          "id": 48101512,
+          "author": "torben-friis",
+          "text": "Lots of interesting information here: >The agentic era affords GitLab the largest opportunity in our history as a company, and we're making the structural and strategic decisions to meet it >Operationally, we grew into a shape that was right for the last era and isn't right for this one To meet their largest opportunity ever, they believe they need less resources. I'm not sure I understand how that follows. >We're rewiring internal processes with AI agents, automating the reviews, approvals, and handoffs to speed us up Is this also in the list of \"we create code twice as fast and the bottleneck is review so YOLO no bottleneck?\". I've yet to see a convincing justification for this. If anything, if you're going full throttle all the more reason to watch the steering wheel, no? That said, 8 layers of management is a lot of management, and every line of the message seems like leadership truly believes they are sinking in bureaucracy. Let's see how unneeded those 3 layers they're cutting were."
+        },
+        {
+          "id": 48101114,
+          "author": "petetnt",
+          "text": "With it’s current AI setup GitLab still couldn’t make anything that could be called great in UX so I can’t wait to see what they can do by eliminating the remaining human factor. Can’t personally wait seeing tickets like these [0] open for months with bots telling you that everything will be alright. [0] https://gitlab.com/gitlab-org/gitlab/-/work_items/588806"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 6,
+      "id": 48060077,
+      "title_en": "Nullsoft, 1997-2004 (2004)",
+      "title_ja": "Nullsoft, 1997-2004 (2004)",
+      "url": "https://slate.com/technology/2004/11/the-death-of-the-last-maverick-tech-company.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48060077",
+      "score": 201,
+      "comment_count": 64,
+      "posted_at": "2026-05-08T08:00:44+00:00",
+      "comments": [
+        {
+          "id": 48097676,
+          "author": "SyneRyder",
+          "text": "For those who might not know: > With Nullsoft gone and Frankel spending his time building a special-effects computer for his electric guitar... I don't know what happened to the Jesusonic he was building then, but Justin Frankel ended up creating Reaper, the cross-platform Windows/Mac/Linux digital audio workstation that is a solid Pro Tools competitor in a mere 16 MB download: https://www.reaper.fm/ The installer for the whole DAW is smaller than most add-on VST effects. Some of my favorite albums have been recorded with Reaper, and obviously I'm a Reaper fan and use it too. Just like Winamp, you can pay for it, but if you really can't afford it, there's no time limit and it won't stop you from using it. Showing my age here, but if you have a copy of the Walnut Creek CD-ROMs with demoscene archives, there's a demo by \"Nullsoft\" from pre-Winamp days hiding somewhere in there as well. EDIT: Aww, fwirt beat me to it while I was typing! I guess I'll leave my comment here to add the Nullsoft demo mention. Found a link to his MSDOS demos here: https://www.pouet.net/groups.php?which=1618 EDIT TWO: You can run his Ademo demo on archive.org, type \"ademo 1\" at the C:\\ prompt in the web based DOSbox to run: https://archive.org/details/demoscene_Ademo-Nullsoft"
+        },
+        {
+          "id": 48099710,
+          "author": "p2detar",
+          "text": "Additionally to Winamp, I guess what I will always remember Nullsoft with is also \"NSIS - Nullsoft Scriptable Install System\" [0]. In a previous job I sat down, read the docs and wrote a Windows-Installer for our product using this thing, since management didn't want to pay for InstallShield. What made quite an impression on me back then was the fact that the scripting language somewhat resembles assembly. [1] Also, NSIS had/has a tool called \"NSIS Dialog Designer\" which I used to design the Installer forms. It was quite the fun experience and I'm pleasantly surprised that NSIS is supported to this day [2]. 0 - https://nsis.sourceforge.io/Main_Page 1 - https://nsis.sourceforge.io/Check_whether_your_application_i... 2 - https://github.com/NSIS-Dev/nsis"
+        },
+        {
+          "id": 48101847,
+          "author": "kazinator",
+          "text": "[delayed]"
+        },
+        {
+          "id": 48097822,
+          "author": "jackconsidine",
+          "text": "Went down the Frenkel (Nullsoft founder) rabbit hole. Check out his forum where they've recently discussed AI bots scraping his forum [0]. Or his question submission page; he hasn't \"left a reasonable question unanswered since 2009\" [1] > nothing specific against cloudflare, but the point of the internet is that it's decentralized and I'd hate to contribute against that (though we already do somewhat, hosting on aws etc). anyway our homegrown solution is working nicely these days! for now - Justin January 2026 [0] https://www.1014.org/index.php?article=930#cl3 [1] https://www.askjf.com/"
+        },
+        {
+          "id": 48101610,
+          "author": "tolerance",
+          "text": "This Frankel guy apparently had a hand in a lot of the tech that surrounded my youth. [0] Looking back and looking forward I understand why software developers became these larger-than-life-or-at-least-an-incrementally-past-the-norm personalities in the late 20th/early 21st century. And I understand why people (particularly in the software development industry) feel so deeply about how technology influenced/s their lives. The Information Age gave us direct involvement in the flow of information and the tide of culture. So many people...many of them barely adults, became involved in the social construction of the world around them. This probably isn't mind-blowing to most of you...but this is me coming to terms with this all in real time, right here, after silently writing a lot of users here as dorks detached from reality. I get it now. I'm surely simplifying some things too. Anyway. It's interesting how the level of agency and involvement that technology afforded society in the past has been straitened to accommodate corporations instead of to spite them. [0]: Note to self—Nullsoft is not the company who made Tony Hawk Pro Skater."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 7,
+      "id": 48059831,
+      "title_en": "I hate soldering existentially",
+      "title_ja": "I hate soldering existentially",
+      "url": "https://user8.bearblog.dev/rant/",
+      "hn_url": "https://news.ycombinator.com/item?id=48059831",
+      "score": 36,
+      "comment_count": 37,
+      "posted_at": "2026-05-08T07:26:37+00:00",
+      "comments": [
+        {
+          "id": 48101058,
+          "author": "peteforde",
+          "text": "I had to click, because it turns out that I love soldering. It's relaxing and has a skill curve such that there's a trick to it but with a bit of practice, you can be someone who is really good at soldering, too. For anyone reading, the key is to invest in a proper stereo microscope and a decent fume extractor. I recommend this one: https://www.strangeparts.com/a-boy-and-his-microscope-a-love... If you're up for a bit of a bonus round, I absolutely love my Pixel Pump. https://shop.robins-tools.com/products/pixel-pump I picked up a used Ninja toaster oven and hacked a https://reflowmasterpro.com/ to it. I also modified the plans for Stencil Fix to make it substantially bigger: https://www.youtube.com/watch?v=Am3ztQIkss0 So, I do a fair bit of both reflow and hand SMD soldering at this point, depending on what the situation calls for. It's great fun."
+        },
+        {
+          "id": 48101429,
+          "author": "Animats",
+          "text": "He's soldering like it's fifty years ago. Everything is lead-free surface mount now. Solder paste, stencils, reflow ovens. Hand soldering is precision temperature controlled irons, hot air rework stations, magnifiers, cameras, and exhaust fans. The tools are more complicated, more expensive, and better. One of the lessons of surface mount work is that you really can move your fingers a thousandth of an inch. But you need magnification to see what you're doing. I'm encouraged to see more hobbyists going surface mount. In my TechShop days, I was the only one doing surface mount. Everybody else was using 1980s 0.1 inch spacing DIP components. That's a US thing. If you learn to solder in Shenzhen, you start with surface mount."
+        },
+        {
+          "id": 48101831,
+          "author": "analog31",
+          "text": "I've used pretty good soldering stations at work and at home. But I needed to set up a new station at my workplace, and asked our best technician to recommend a new unit. He recommended Hakko FX-971, and I got one despite the price (to my employer), with 3 sizes of tips. It was a true splurge, but I love it. Warm-up in 15 seconds, and the tips are integrated with the heaters so there's no thermal contact to worry about. Tiny and big tips both work great. You can change tips while they're hot. At home I have a typical Weller station, and it's OK for the electronics side business that I run, but nothing like that Hakko. ... and I love soldering."
+        },
+        {
+          "id": 48101447,
+          "author": "HiPhish",
+          "text": "I love soldering, even though my skill ceiling is SMD components. There is something almost spiritual and humbling about soldering because you cannot force your will onto the solder, you have to listen to what the solder wants to do and work with it, not against it. When I first tried my hand at soldering I was using the \"butter knife\" method: apply solder to the iron, then try to smear it onto the wire like spreading butter with a butter knife. Of course the solder would never stick to where I wanted it to go. I had to learn that solder goes to where the heat is, so I instead had to heat the components or wires instead and then feed the solder onto the hot components. I also had to learn that a soldering iron is not a pencil, sometimes even when doing small parts you want to use the large tip. Don't try to tell the solder where to go, instead apply a big blog and watch it snap into place on its own. Last year I installed an HDMI mod[1] into my Wii, this has been so far the hardest project. It took me many attempts to get it right, mainly because I was working against the solder instead of with it. But now that I have succeeded I could easily do it over and over again (not keen on the disassembly and reassembly of the console though). EDIT: while I'm at it I might as well mention the iron I was using: the Pinecil[2]. It's a really neat and fast soldering iron at a very cheap price. Great for people like me who don't want hardware store cheap garbage, but also cannot justify buying an entire soldering station. [1] https://electron-shepherd.com/collections/kits-mods/products... [2] https://pine64.com/product/pinecil-smart-mini-portable-solde..."
+        },
+        {
+          "id": 48101813,
+          "author": "jhbadger",
+          "text": "Whatever happened to wire wrapping? That used to be a viable alternative."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 8,
+      "id": 48093100,
+      "title_en": "Ratty – A terminal emulator with inline 3D graphics",
+      "title_ja": "Ratty – A terminal emulator with inline 3D graphics",
+      "url": "https://ratty-term.org/",
+      "hn_url": "https://news.ycombinator.com/item?id=48093100",
+      "score": 587,
+      "comment_count": 191,
+      "posted_at": "2026-05-11T10:13:04+00:00",
+      "comments": [
+        {
+          "id": 48093856,
+          "author": "pjmlp",
+          "text": "UNIX still trying to catch up with Xerox workstations in the REPL experience, or general Lisp machines for that matter. Inline graphics from 1981, https://youtu.be/o4-YnLpLgtk?t=376"
+        },
+        {
+          "id": 48099275,
+          "author": "mncharity",
+          "text": "A couple of comments here mention using this in VR. Fwiw, years back I played a bit with shallow-3D UIs for software dev. Shallow like within a few cm of a laptop display, to minimize VAC eye strain for all-day use. Think more being able to layer and draw in color, but in 3D, rather than waving arms in a room. The 3D can be wiggle 3D, or perspective from webcam head/eye tracking, or stereo from shutter glasses, or XR HMDs. Wiggle is easiest - just move the object orientation back and forth. Cute but distracting. Well, cross/parallel-eye gaze is easier, but limited - ok for little UI test swatches. Perspective is more subtle, less intrusive. Can be simple with a head tracker driving a single orientation, or go all in with eye pose (for distance) and window locations, to do an accurate 3D render. App stereo pairs can be \"I give you two windows Left/Right-eye\", or \"alternating L/R view, labeled/synced/polled\". Other possibilities. Many of these need window system/manager/desktop support. I found a lot of leverage in using a stack of electron and X. It's fun to displace text in 3D. Like colorization, but more so. And if you don't mind a cluttered appearance, you can add secondary information layers segregated by depth. And... etc. Emacs with characters-have-a-depth finally gets you something LispMs didn't have. Fun aside, to explore possibilities with code text, with anything not inherently 3D, far easier to prototype UX with fg/bg colors, fonts, unicode, and animation. Or in browser, overlaid divs and transparent 2D/3D canvases."
+        },
+        {
+          "id": 48094022,
+          "author": "noelwelsh",
+          "text": "I like this. No reason the terminal should only support text. Data science notebooks show one way the terminal can evolve. Lots of interesting stuff happening in this space, with Kitty probably being the most aggressive innovator here [1]. I'm not sure there is an overall vision, though. [1]: https://sw.kovidgoyal.net/kitty/protocol-extensions/"
+        },
+        {
+          "id": 48093553,
+          "author": "sigseg1v",
+          "text": "Seems... really good?! Questions: - rendering capabilities of this seem like it should also be able to handle 2d well, or am I mistaken? every solution I see for getting high quality 2d images or rasterization in terminal is all pretty bad. Could this do better than other solutions or is there a fundamental limit being hit somewhere? - What happens with ssh given that this is gpu accelerated?"
+        },
+        {
+          "id": 48093754,
+          "author": "amelius",
+          "text": "Terminal is slowly becoming a full featured web browser."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 9,
+      "id": 48098537,
+      "title_en": "Can someone please explain whether Cloudflare blackmailed Canonical?",
+      "title_ja": "Can someone please explain whether Cloudflare blackmailed Canonical?",
+      "url": "https://www.flyingpenguin.com/can-someone-please-explain-whether-cloudflare-blackmailed-canonical/",
+      "hn_url": "https://news.ycombinator.com/item?id=48098537",
+      "score": 205,
+      "comment_count": 116,
+      "posted_at": "2026-05-11T18:12:38+00:00",
+      "comments": [
+        {
+          "id": 48099209,
+          "author": "jwitthuhn",
+          "text": "\"Renting attack capacity from [cloudflare]\" is inaccurate as I understand things. That group hosts their site behind cloudflare but I have not seen anyone claim that cloudflare's infra is used for the attacks. This whole article seems conflate hosting an informational site run by the attackers and hosting the attack itself."
+        },
+        {
+          "id": 48100108,
+          "author": "john_strinlai",
+          "text": "people will always be able to pick a handful of sites they think shouldnt be allowed to use cloudflare hosting services. the problem is that every person will have a different handful of sites. cloudflare should host everything and anything unless and until a lawful order is received. if they start sticking their fingers into sites and determining whether the site's content is \"appropriate\" or whatever, based on some sort of nebulous set of criteria, people will get (justifiably) big mad about it, guaranteed. the \" renting attack capacity [from cloudflare] \" should have some evidence behind it, because as far as i am aware, the attackers are not using cloudflare infrastructure for the actual attack. (its really jarring to see the general sentiment on this submission vs. the general sentiment on google submissions)"
+        },
+        {
+          "id": 48100615,
+          "author": "peanut-walrus",
+          "text": "Articles like these seem to hold a weird belief that Cloudflare does not react to security reports or legal orders? From my experience, they react appropriately and relatively quickly compared to rest of the industry. Could Cloudflare be more proactive or add more friction to their signups? Yes, probably, but the reasons they have outlined for not playing internet police make sense to me. I don't think it should be a requirement to provide your credit card, phone number and a copy of your ID in order to host content on the internet..."
+        },
+        {
+          "id": 48099024,
+          "author": "AntonyGarand",
+          "text": "Relevant post from last week: > Why is Cloudflare protecting the DDoS'er (beamed.st) attacking Ubuntu servers? https://news.ycombinator.com/item?id=48025001"
+        },
+        {
+          "id": 48099215,
+          "author": "wood_spirit",
+          "text": "The article puts it very succinctly: Cloudflare fronts attackers for free and bills the victims for relief. Ddos protection services can be cast as a digital protection racket where they have a perverse incentive to keep attackers attacking. “It's a dangerous internet out there; you'd better pay us to protect your website from the attackers using our free tier.” At the least, even if there is no active collusion or profit sharing or anything like that, there is not a clear side that the DDos protector service is on?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 10,
+      "id": 48092028,
+      "title_en": "Gmail registration now requires scanning a QR code and sending a text message",
+      "title_ja": "Gmail registration now requires scanning a QR code and sending a text message",
+      "url": "https://discuss.privacyguides.net/t/google-account-registration-now-requires-sending-an-sms-via-phone-instead-of-receiving-an-sms/36082",
+      "hn_url": "https://news.ycombinator.com/item?id=48092028",
+      "score": 519,
+      "comment_count": 363,
+      "posted_at": "2026-05-11T07:26:54+00:00",
+      "comments": [
+        {
+          "id": 48097912,
+          "author": "Night_Thastus",
+          "text": "People complain a lot about Gmail, but honestly I kind of understand Google's plight here. They've essentially gotten roped into maintaining a huge chunk of internet infrastructure, for free . If they ever shut it down the whole world would end up rioting because it's so widely used. But it's expensive, complicated and time-consuming to maintain - and both a source of and recipient of endless waves of spam and scams. It's an endless pile of data to hold onto, FOREVER, as well. I enjoy hating on Google when appropriate. But when it comes to Gmail, I understand what they're dealing with. It's honestly why I believe the idea of free e-mail is just bad, fundamentally. You can't expect a free e-mail service to be good or have any kind of support. The fact that it still exists is more out of shear fear of the repercussions than any good will on the owner's part. Just get a paid e-mail service. They're better, and offer a lot more peace of mind."
+        },
+        {
+          "id": 48093829,
+          "author": "dvh",
+          "text": "Any Gmail person can tell me why Gmail is tolerating Gmail phishing emails that use Google's own services (e.g. https://storage.googleapis.com/savelinge/ ... ? More info here: https://news.ycombinator.com/item?id=46665414"
+        },
+        {
+          "id": 48094155,
+          "author": "Aurornis",
+          "text": "> Supposedly, using the QR code on the smartphone triggers an SMS sent from your phone to Google in order to verify your phone number. Does anyone have a better source of information than this one forum comment from someone who thinks scanning a QR code is enough to get your phone to send a text message? EDIT: It’s just an SMS URI. It doesn’t automatically send anything, just opens a text message for you to send. This is just the old phone number verification with a QR code convenience method."
+        },
+        {
+          "id": 48098541,
+          "author": "hamilyon2",
+          "text": "The latest moves from google are the damning smoking gun evidence that anti monopoly court ever needs. \"Do this or else\". Recaptcha, gmail, google suite, android, chrome, colab and even google play must be viable businesses on their own, separate from google ads machine. Gmail must start competing for users with other email providers. And, yes, recaptcha must pay its infrastructure cost in full only from recaptcha revenue. This is the good way to level playing field, silence all the critics and let air into the room."
+        },
+        {
+          "id": 48093728,
+          "author": "8cvor6j844qw_d6",
+          "text": "Recently helped a small business set up a Google Workspace account and we hit a wall during registration. Told the owners that if Google is already being difficult during signup, imagine being locked out later with client work on the line. Pulled up a few horror stories about Google lockouts to drive the point home. They ended up with another workspace solution."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 11,
+      "id": 48051555,
+      "title_en": "The rise and fall of snake oil",
+      "title_ja": "The rise and fall of snake oil",
+      "url": "https://www.historytoday.com/archive/history-matters/rise-and-fall-snake-oil",
+      "hn_url": "https://news.ycombinator.com/item?id=48051555",
+      "score": 15,
+      "comment_count": 7,
+      "posted_at": "2026-05-07T16:43:11+00:00",
+      "comments": [
+        {
+          "id": 48101415,
+          "author": "pedalpete",
+          "text": "I think they will soon be re-writing this article with the addition of \"and rise again\". I work in neurotech/sleeptech and one of the biggest challenges I see in our industry is, if not pure snake-oil, the over-hype of \"backed by research\". People have accused us of being snake-oil as well, and I get why they might think that if you haven't read or don't understand the science. I've seen products that claim to be Vagus Nerve stimulators that are worn on the wrist, nowhere near the vagus nerve. Products that claim to mimic the \"magnetic frequency of hormones\". We've also got the current \"It's got electrolytes\" craze which is kinda crazy that we've truly replicated idiocracy. For those curious, I'm the co-founder of affectablesleep.com"
+        },
+        {
+          "id": 48101658,
+          "author": "ZunarJ5",
+          "text": "The manosphere is rife with snake oil salesmen, it just changes form with time. Snake Oil as a concept is as old as money. Everyone wants a miracle, especially when hope can be commodified."
+        },
+        {
+          "id": 48101031,
+          "author": "delichon",
+          "text": "Given that this timeline maximizes irony we will soon find that the demonization of rendered gopher snake fat was an early victory of big medicine, protecting doctors from the competition of a genuine all purpose elixir of health."
+        },
+        {
+          "id": 48101376,
+          "author": "0xWTF",
+          "text": "It was not only the FDA that stopped snake oil. A lot of it was also stopped by state licensure and medical school accreditation (see the Flexner Report), all of which happened in roughly the same era. What I take from this is that AI code, biology, etc, will not announce itself. We will have to announce the human-produced content. Introductions are about to be ritualistic again. Queue humorous (but not really all that valid) counterpoint: https://www.youtube.com/watch?v=hoe24aSvLtw"
+        },
+        {
+          "id": 48051859,
+          "author": "Bender",
+          "text": "Over the course of the 19th century snake oil transformed from folk remedy, to industrial medicine, to notorious fake. And yet they can be a great source for Omega-3 fatty acids, most notably the Chinese water snake up to 20% EPA , the Erabu Sea Snake high in DHA . Rattlesnakes are much lower, around 5% to 6% Omega-3's better than nothing . I will always personally prefer Krill Oil for the high absorption. There will always be scammers and grifters but I would prefer to not let them ruin the original product they are trying to exploit."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 12,
+      "id": 48100192,
+      "title_en": "Show HN: OpenGravity – A zero-install, BYOK vanilla JS clone of Antigravity",
+      "title_ja": "Show HN: OpenGravity – A zero-install, BYOK vanilla JS clone of Antigravity",
+      "url": "https://github.com/ab-613/opengravity",
+      "hn_url": "https://news.ycombinator.com/item?id=48100192",
+      "score": 25,
+      "comment_count": 9,
+      "posted_at": "2026-05-11T20:23:25+00:00",
+      "comments": [
+        {
+          "id": 48101844,
+          "author": "koolala",
+          "text": "I wish this could work with your monthly subscription where you get a flat quota in Antigravity with a free account / $20."
+        },
+        {
+          "id": 48100816,
+          "author": "kushalpandya",
+          "text": "Should've named it ZeroGravity to stay true to its design goals."
+        },
+        {
+          "id": 48100865,
+          "author": "ab613",
+          "text": "Edit: A mod suggested I add in how I actually use this! Right now, its honestly just a massive side project that serves as a fun distraction from my GCSE revision. But I mainly use it to test out quick HTML/CSS/JS ideas in my browser when I get an idea, without needing to boot up a full dev environment or worry about rate limits."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 13,
+      "id": 48097078,
+      "title_en": "Interfaze: A new model architecture built for high accuracy at scale",
+      "title_ja": "Interfaze: A new model architecture built for high accuracy at scale",
+      "url": "https://interfaze.ai/blog/interfaze-a-new-model-architecture-built-for-high-accuracy-at-scale",
+      "hn_url": "https://news.ycombinator.com/item?id=48097078",
+      "score": 94,
+      "comment_count": 20,
+      "posted_at": "2026-05-11T16:22:31+00:00",
+      "comments": [
+        {
+          "id": 48100502,
+          "author": "schanz",
+          "text": "Amazing! I just tried the OCR capabilities with a photo of a DIN A4 page which was written with a typewriter. The image isn't the easiest to interpret. The text perspective is distorted because the page is part of a book and the page margin toward the spine of the book is very small. There are also many inline corrections due to typing errors while the page was written (backspace couldn't erase characters back then, and arrow keys couldn't be used to add text in between existing words). Over the past months I've tried to use several LLMs on this very same image already (1 out of 200 pages that seek digitization). The result is by far the most accurate so far. Only some very minor errors (which are also non-trivial for human translators) were made. This page induced costs of about 25 cent. I assume I could tweak the input image a little more to consume less input tokens. OCR-ing all 200 pages would otherwise cost a juicy 50$ - although there is a generous 20$ of free credits. Induced cost: 108.8k Input tokens => 16,32 cent 24.5k Output tokens => 8,58 cent // Edit: I just re-tried the same task utilizing a capability of the API to only run a specific part of the model (e.g. _only_ OCR). This cuts cost by 3x (to ~8c/page) but significantly worsens the result. The result is missing entire lines of the original document. There are also many error in the text that was recognized."
+        },
+        {
+          "id": 48101712,
+          "author": "jadbox",
+          "text": "Can this run locally or is this a service?"
+        },
+        {
+          "id": 48098936,
+          "author": "euroderf",
+          "text": "Potentially stupid question: Does that mean we can chain them together line UNIX command line programs ? That would be so, so intuitive."
+        },
+        {
+          "id": 48098118,
+          "author": "wood_spirit",
+          "text": "> These are deep neural network architectures that are task-specific for things like OCR, translation, or GUI detection. The way they consume and see data is trained to be task specific, which makes them up to 100x more accurate at their specific task. They also produce useful metadata like bounding boxes and confidence scores, letting developers build predictable workflows they can rely on. Does code extraction and manipulation fit in that? Would interfaze be the agent that a coding agent uses?"
+        },
+        {
+          "id": 48099741,
+          "author": "andai",
+          "text": "This is very cool, though I don't understand exactly what they've done here. Is it some kind of LLM with convolutional layers added? The graph doesn't exactly make it clear but it describes a pipeline that goes beyond the LLM, so the CNN could be a separate model there."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 14,
+      "id": 48085685,
+      "title_en": "Training an LLM in Swift, Part 1: Taking matrix mult from Gflop/s to Tflop/s",
+      "title_ja": "Training an LLM in Swift, Part 1: Taking matrix mult from Gflop/s to Tflop/s",
+      "url": "https://www.cocoawithlove.com/blog/matrix-multiplications-swift.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48085685",
+      "score": 202,
+      "comment_count": 10,
+      "posted_at": "2026-05-10T17:05:05+00:00",
+      "comments": [
+        {
+          "id": 48095698,
+          "author": "dagmx",
+          "text": "This is a pretty phenomenal article. Even for those who don’t care about LLM use, this is just a great article on optimizing Swift performance, which is sadly something that doesn’t have a lot of written material for. I’m curious if the AMX instructions are truly secret. In theory you could use an M4 or above and get them via SME I think but I’m just guessing as I’ve never tried intrinsic from Swift myself."
+        },
+        {
+          "id": 48096719,
+          "author": "oflannabhra",
+          "text": "Matt Gallagher and CocoaWithLove are major highlights from the early days of my journey in learning iOS development. Awesome to see he is still publishing such high quality information!"
+        },
+        {
+          "id": 48101049,
+          "author": "stockresearcher",
+          "text": "FYI, The version of clang that ships with Xcode can compile openMP code if you provide the right compiler flags. You have to provide libomp.dylib and a few header files, but the folks that run R compile it and provide it for distribution (they need it). If you trust R, you can probably trust this too: https://mac.r-project.org/openmp/"
+        },
+        {
+          "id": 48097120,
+          "author": "adrian_b",
+          "text": "In TFA it is said that the C version used \"-ffast-math\" for the compiler to generate fused multiply-add operations. ML/AI is one of the few applications where the use of \"-ffast-math\" may be acceptable, but in general one must not use \"-ffast-math\" to get FMA. To enable FMA generation by the compiler, the right flag for both gcc and clang is \"-ffp-contract=fast\". \"-ffast-math\" enables \"-ffp-contract=fast\", but it also enables a bunch of other code transformations that are very undesirable in any application where numerical accuracy matters, and which seldom bring any noticeable performance improvement. Outside of ML/AI and graphics/games, \"-ffast-math\" should be used only by experts who fully understand the implications. Actually, even for experts, it is unlikely for \"-ffast-math\" to be useful, instead of selectively enabling only some of the many options that are aggregated into \"-ffast-math\". The fact that most compilers still do not generate by default fused multiply-add operations in 2026, 36 years after the invention of this operation at IBM, is quite dumb. In the overwhelming majority of cases, using FMA produces more accurate results than not using FMA. (The only cases when this is not true are encountered in certain expressions computed without FMA where some roundings happen to cancel each other.) The reason why it has not been the default option is that the numeric results are different from those obtained on legacy computers without FMA, which was surprising for naive users. So FMA was disabled to ensure the same results as before, even if the old results were less correct. This policy of mimicking legacy systems, just to avoid user confusion, should have become obsolete a long time ago."
+        },
+        {
+          "id": 48096423,
+          "author": "nromiun",
+          "text": "> Is 1.1 Tflop/s good? Theoretically, the GPU on my M3 Max is capable of around 15 Tflop/s. But the real ceiling for this kind of task is going to be 3-5 Tflop/s This is so true. And also why people should not take basic GPU benchmarks so seriously. Getting peak performance out of a GPU is much more complex than it is with a CPU. And it is one of the reasons why Nvidia still has a software moat compared to other GPU companies. CUDA has so many small kernels tuned for getting peak performance for your dataset."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 15,
+      "id": 48100970,
+      "title_en": "Griffin PowerMate driver for modern macOS",
+      "title_ja": "Griffin PowerMate driver for modern macOS",
+      "url": "https://github.com/jameslockman/Griffin-PowerMate-Driver",
+      "hn_url": "https://news.ycombinator.com/item?id=48100970",
+      "score": 6,
+      "comment_count": 1,
+      "posted_at": "2026-05-11T21:35:38+00:00",
+      "comments": [
+        {
+          "id": 48101863,
+          "author": "detourdog",
+          "text": "I have one of these all I need to do is find it."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 16,
+      "id": 48098122,
+      "title_en": "Bild AI (YC W25) Is Hiring Founding Product Engineers",
+      "title_ja": "Bild AI (YC W25) Is Hiring Founding Product Engineers",
+      "url": "https://bild.ai/jobs",
+      "hn_url": "https://news.ycombinator.com/item?id=48098122",
+      "score": 1,
+      "comment_count": 0,
+      "posted_at": "2026-05-11T17:43:12+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 17,
+      "id": 48096692,
+      "title_en": "CUDA-oxide: Nvidia's official Rust to CUDA compiler",
+      "title_ja": "CUDA-oxide: Nvidia's official Rust to CUDA compiler",
+      "url": "https://nvlabs.github.io/cuda-oxide/index.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48096692",
+      "score": 342,
+      "comment_count": 104,
+      "posted_at": "2026-05-11T15:55:07+00:00",
+      "comments": [
+        {
+          "id": 48097693,
+          "author": "arpadav",
+          "text": "This is amazing.. ive been working with custom CUDA kernels and https://crates.io/crates/cudarc for a long time, and this honestly looks like it could be a near drop-in replacement. im especially curious how build times would compare? Most Rust CUDA crates obv rely on calling CMake or nvcc, which can make compilation painfully slow. coincidentally, just last week i was profiling build times and found that tools like sccache can dramatically reduce rebuild times by caching artifacts - but you still end up paying for expensive custom nvcc invocations (e.g. candle by hugging face calls custom nvcc command in their kernel compilation): https://arpadvoros.com/posts/2026/05/05/speeding-up-rust-whi..."
+        },
+        {
+          "id": 48097999,
+          "author": "cyber_kinetist",
+          "text": "I'm quite interested in how they dealt with Rust's memory model, which might not neatly map to CUDA's semantics. Curious what the differences are compared to CUDA C++, and if the Rust's type system can actually bring more safety to CUDA (I do think writing GPU kernels is inherently unsafe, it's just too hard to create a safe language because of how the hardware works, and because of the fact that you're hyper-optimizing all the time)"
+        },
+        {
+          "id": 48098901,
+          "author": "raincole",
+          "text": "I wonder what it means for Slang[0]. Presumably the point is that people want to do GPU programming with a more modern language. But now you can just use Rust... (Disclaimer: I like Slang a lot.) [0]: https://shader-slang.org/"
+        },
+        {
+          "id": 48098372,
+          "author": "tiffanyh",
+          "text": "Re: Rust (and \"safe\" programming languages). Does anyone have more details on NVIDIAs use of Spark/Ada? All I can find is what's listed below: https://www.adacore.com/case-studies/nvidia-adoption-of-spar..."
+        },
+        {
+          "id": 48099451,
+          "author": "debugnik",
+          "text": "> (em dash) no DSLs, no foreign language bindings, just Rust. Official CUDA port and they couldn't even bother with the introductory paragraph. Okay, I'll try to ignore it and read the docs. Hey a custom IR, this sounds interesti- > MLIR’s implementation, however, is C++ with a side of TableGen, a build system that requires you to compile all of LLVM, and debugging sessions that make you question your career choices. I can't take this industry seriously anymore."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 18,
+      "id": 48100227,
+      "title_en": "Show HN: E2a – Open-source email gateway for AI agents",
+      "title_ja": "Show HN: E2a – Open-source email gateway for AI agents",
+      "url": "https://github.com/Mnexa-AI/e2a",
+      "hn_url": "https://news.ycombinator.com/item?id=48100227",
+      "score": 12,
+      "comment_count": 1,
+      "posted_at": "2026-05-11T20:26:17+00:00",
+      "comments": [
+        {
+          "id": 48101481,
+          "author": "rnc000",
+          "text": "Similar open-source project https://github.com/DataCovey/nornweave Inbox-as-a-Service for AI Agents Open-source, self-hosted API that turns standard email providers into intelligent, stateful email for LLMs via REST or MCP."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 19,
+      "id": 48100524,
+      "title_en": "Interaction Models",
+      "title_ja": "Interaction Models",
+      "url": "https://thinkingmachines.ai/blog/interaction-models/",
+      "hn_url": "https://news.ycombinator.com/item?id=48100524",
+      "score": 47,
+      "comment_count": 6,
+      "posted_at": "2026-05-11T20:53:37+00:00",
+      "comments": [
+        {
+          "id": 48101633,
+          "author": "alyxya",
+          "text": "The noteworthy things to me are that the architecture is a transformer that takes in text, image, and audio input and produces text and audio output, all trained together, and it works in near real-time through interleaving inputs and outputs rather than pure generation of the output from a given prompt. > Time-Aligned Micro-Turns. The interaction model works with micro-turns continuously interleaving the processing of 200ms worth of input and generation of 200ms worth of output. Rather than consuming a complete user-turn and generating a complete response, both input and output tokens are treated as streams. Working with 200ms chunks of these streams enables near real-time concurrency of multiple input and output modalities. That's probably the main thing that distinguishes it from the multimodal models from other frontier labs as far as I can tell."
+        },
+        {
+          "id": 48101618,
+          "author": "tedsanders",
+          "text": "Very cool! The demos felt fairly contrived - e.g., count things while I talk. I wonder what more commercial applications look like."
+        },
+        {
+          "id": 48101225,
+          "author": "rohitpaulk",
+          "text": "Aside from how impressive the model is, the demos here are very well done! Quirky and short, unlike what we're used to from Anthropic and OpenAI."
+        },
+        {
+          "id": 48101314,
+          "author": "suriya-ganesh",
+          "text": "incredibly impressive demos. I wonder how the training data for these models look like? is it separate batches of special \"skills\" that are added post training? how can they guarantee the models won't eventually lose a skill?"
+        },
+        {
+          "id": 48101350,
+          "author": "emsign",
+          "text": "That's neat and definitely the next step. But to be honest, I don't want an AI talk to me like that."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 20,
+      "id": 48065429,
+      "title_en": "AMÁLIA and the future of European Portuguese LLMs",
+      "title_ja": "AMÁLIA and the future of European Portuguese LLMs",
+      "url": "https://duarteocarmo.com/blog/amalia-and-the-future-of-european-portuguese-llms",
+      "hn_url": "https://news.ycombinator.com/item?id=48065429",
+      "score": 106,
+      "comment_count": 55,
+      "posted_at": "2026-05-08T16:34:45+00:00",
+      "comments": [
+        {
+          "id": 48099531,
+          "author": "mariopt",
+          "text": "This model is a waste of Public Funds. There is no public website to use it, be it free or paid, the dataset is not public, the code is not public (The github URL in the article returns 404 ), the claimed model intelligence is so low that is pretty much useless at 32K context and massively inferior to GPT‑4o. As per tradition in Portugal, some people managed to get 5.5 Million to produce nothing and no one is asking questions. You want a better idea? Just fine tune the open source Kimi 2.6 with an open source Portuguese dataset, the cost would be under a million and we would be getting something useful. It would be really nice to know what happened to 5.5 Millions whilst not being able to even provide a functional website to use the model."
+        },
+        {
+          "id": 48096846,
+          "author": "pu_pe",
+          "text": "I'm not sure the direction should be to finetune a small local model for each country or language. These models are already not particularly great at information retrieval, so I doubt anyone would use them for questions like the author suggests (ie who was the president between X and Y). Similarly, they are a little too lightweight to be used for translations too. If the budget is indeed so modest (5.5 million euros!), I would focus completely on preparing datasets and making sure all open cultural artifacts that we can find are well documented in them. That way every model, private or open, that gets trained in the future could better represent the culture and language of your country."
+        },
+        {
+          "id": 48100492,
+          "author": "alexaholic",
+          "text": "The Amália model is not yet publicly available. Until it's ready, one can fool around with Anália at https://analia.pt"
+        },
+        {
+          "id": 48096766,
+          "author": "swiftcoder",
+          "text": "It is definitely an interesting problem, because Portugal is a small enough country that the actual total corpus of available texts in (non-Brazilian) Portuguese is potentially problematic."
+        },
+        {
+          "id": 48100874,
+          "author": "drivebyhooting",
+          "text": "I’ve noticed that ChatGPT is noticeably dumber in languages other than English. It even will confidently repeat common but wrong superstitions from the target language as if they were fact."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 21,
+      "id": 48080316,
+      "title_en": "Silverback Imfura took a chance, and ended up alone",
+      "title_ja": "Silverback Imfura took a chance, and ended up alone",
+      "url": "https://gorillafund.org/mountain-gorillas/silverback-imfura-took-a-chance-and-ended-up-alone/",
+      "hn_url": "https://news.ycombinator.com/item?id=48080316",
+      "score": 9,
+      "comment_count": 1,
+      "posted_at": "2026-05-10T02:06:19+00:00",
+      "comments": [
+        {
+          "id": 48101796,
+          "author": "brightbed",
+          "text": "This was on Armchair Expert recently, Tara Stoinski. Great episode. Check it out!"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 22,
+      "id": 48099790,
+      "title_en": "Linux Terminal Memory Usage",
+      "title_ja": "Linux Terminal Memory Usage",
+      "url": "https://gilesorr.com/blog/linux-terminal-memory-usage.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48099790",
+      "score": 31,
+      "comment_count": 25,
+      "posted_at": "2026-05-11T19:49:39+00:00",
+      "comments": [
+        {
+          "id": 48101187,
+          "author": "amarshall",
+          "text": "Probably want `kitty --single-instance` to reduce memory usage when opening multiple. https://sw.kovidgoyal.net/kitty/invocation/#cmdoption-kitty-..."
+        },
+        {
+          "id": 48100518,
+          "author": "jiqiren",
+          "text": "Why not try Ghostty? https://ghostty.org"
+        },
+        {
+          "id": 48100374,
+          "author": "sebtron",
+          "text": "> I expected gnome-terminal's memory usage to be in line with konsole (KDE's default terminal), but gnome-terminal shows remarkably well in this test In tipical GNOME fashion, they have decided to replace this largely working piece of software with on with one that places solidly at the bottom of the article's list (ptyxis)."
+        },
+        {
+          "id": 48101029,
+          "author": "jstimpfle",
+          "text": "I've been on xterm since I've started using Linux seriously in 2008. I probably wouldnt have tested it because was probably a bit obscure then like it is now. It's not perfect, it's baroque, has terrible configurability, no tabs and an ugly context menu. But it's honestly the only usable terminal, none other has stuck with me. Most are far too sluggish to even start up. Then there is key input latency. Then some of the newer ones are only usable with good gpu support, but not from a VM like Virtualbox or maybe VMware where graphics isnt working great. Another thing for a very long time has been that most other terminals don't support bitmap fonts. This was/is critical for lower DPI monitors. Today I've mostly made the switch to TTF fonts."
+        },
+        {
+          "id": 48100855,
+          "author": "magios",
+          "text": "i've been using xst https://github.com/gnotclub/xst , a fork of suckless st https://st.suckless.org/ for a long period, but there's also st-flexipatch https://github.com/bakkeby/st-flexipatch available which now includes sixel support edit: the article did mention st but claimed it had no scrollback, that's what the patches are for. st-flexipatch makes it easy to enable or disable the patches via c preprocessor defines."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 23,
+      "id": 48073121,
+      "title_en": "Counting Fast in Erlang with:counters and:atomics",
+      "title_ja": "Counting Fast in Erlang with:counters and:atomics",
+      "url": "https://andrealeopardi.com/posts/erlang-counters-and-atomics/",
+      "hn_url": "https://news.ycombinator.com/item?id=48073121",
+      "score": 61,
+      "comment_count": 2,
+      "posted_at": "2026-05-09T08:26:57+00:00",
+      "comments": [
+        {
+          "id": 48100355,
+          "author": "dnautics",
+          "text": "hm, last i checked counters were fully implemented as atomics, it seems now theres another internal bif for \"write concurrency\", is this new or was it always like this and did i just miss it?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 24,
+      "id": 48069685,
+      "title_en": "The Boston library where you still can borrow a giant puppet",
+      "title_ja": "The Boston library where you still can borrow a giant puppet",
+      "url": "https://binj.news/2026/05/06/the-boston-library-where-you-still-can-borrow-a-giant-puppet/",
+      "hn_url": "https://news.ycombinator.com/item?id=48069685",
+      "score": 39,
+      "comment_count": 4,
+      "posted_at": "2026-05-08T22:47:06+00:00",
+      "comments": [
+        {
+          "id": 48100461,
+          "author": "objclxt",
+          "text": "> Beneath the Emmanuel Church on Newbury Street in Boston, tucked away in the basement, sits a library This is underselling it: it's in a side street off Newbury, where nobody would have any reason to go, with a tiny little door about half the size of all the other doors marked \"Puppet Library\"[1]. I visited many years ago by complete accident: I was out running with some friends on a Tuesday afternoon, we were going down the public alley because Newbury was heaving, and saw this sign. We wandered in, and...yeah, there's a lot of puppets. [1]: https://maps.app.goo.gl/pa6sTiQ1cFsp2mqcA"
+        },
+        {
+          "id": 48100026,
+          "author": "semiinfinitely",
+          "text": "as a child I found puppet exposure disturbing and semi traumatic"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 25,
+      "id": 48049343,
+      "title_en": "From Buffon's Needle to Buffon's Noodle",
+      "title_ja": "From Buffon's Needle to Buffon's Noodle",
+      "url": "https://mbmccoy.dev/posts/buffons-noodle/",
+      "hn_url": "https://news.ycombinator.com/item?id=48049343",
+      "score": 22,
+      "comment_count": 6,
+      "posted_at": "2026-05-07T13:42:15+00:00",
+      "comments": [
+        {
+          "id": 48083274,
+          "author": "card_zero",
+          "text": "I'm wary of asking questions (my curiosity is bounded), but what changes if you limit the range of allowed angles to multiples of, say, 10°? How about 90°, does pi go away then?"
+        },
+        {
+          "id": 48083268,
+          "author": "enricozb",
+          "text": "Pretty neat! However, if you wanted to know the _probability_ of a noodle crossing any line in the long noodle case (L/W > 1), the expression is more complex (and I believe would require an integral) :). It's interesting that the number of crossings is independent of whether L/W is less than or greater than 1, but the probability of crossings is equal to 2pi * L/W only in the short case. This makes sense since in the short case the noodle can at most cross a single line."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 26,
+      "id": 48070571,
+      "title_en": "Venom and hot peppers offer a key to killing resistant bacteria",
+      "title_ja": "Venom and hot peppers offer a key to killing resistant bacteria",
+      "url": "https://www.wired.com/story/mexican-science-transforms-scorpion-venom-and-habanero-chile-into-antibiotics-against-resistant-bacteria/",
+      "hn_url": "https://news.ycombinator.com/item?id=48070571",
+      "score": 159,
+      "comment_count": 67,
+      "posted_at": "2026-05-09T00:42:22+00:00",
+      "comments": [
+        {
+          "id": 48098651,
+          "author": "alkyon",
+          "text": "\"The team was able to isolate two colorless molecules called benzoquinones—heterocyclic compounds that do not contain amino acids\" Hats off, not only were they able to isolate just two molecules, but also established that they were colorless. I don't think this is a usual definition for benzoquinones: \"heterocyclic compounds that do not contain amino acids\". I can smell Sam Altman's socks reading this article."
+        },
+        {
+          "id": 48100476,
+          "author": "jjk166",
+          "text": "I imagine the long term solution to antibiotic resistance are engineered bacteriophages, either to directly attack the bacteria or to insert genes that make the bacteria susceptible to specific agents. Beyond not having to continuously develop new antibiotics or restrict treatment, these could also be much more targeted treatments with less harmful effects on a patient's microbiome. Of course scaling up to mass production on the level of say penicillin will take some time, but the same is true for new antibiotics."
+        },
+        {
+          "id": 48094774,
+          "author": "charliebwrites",
+          "text": "If you’ve ever wondered why the symbol of health is a snake spiraling a staff (the Greek god Asclepius’s staff to be specific), it’s because in Ancient Greece they used small amounts of snake venom to treat serious illnesses We’ve come full circle"
+        },
+        {
+          "id": 48070574,
+          "author": "littlexsparkee",
+          "text": "https://archive.ph/1fAzz"
+        },
+        {
+          "id": 48094742,
+          "author": "pshirshov",
+          "text": "\"Researchers have developed\", yeah. When I read such things, I always recall https://en.wikipedia.org/wiki/Epimerox - this thing promised wonders - very broad spectrum, very low toxicity - and, most importantly, it was targeting a conservative essential protein - so nearly zero resistance. And there were no updates for more than a decade. Something developed in a lab is something we, most likely, will never see - and will never know why the thing didn't reach the 2nd stage (or the 1st)."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 27,
+      "id": 48062977,
+      "title_en": "Building a web server in aarch64 assembly to give my life (a lack of) meaning",
+      "title_ja": "Building a web server in aarch64 assembly to give my life (a lack of) meaning",
+      "url": "https://imtomt.github.io/ymawky/",
+      "hn_url": "https://news.ycombinator.com/item?id=48062977",
+      "score": 91,
+      "comment_count": 30,
+      "posted_at": "2026-05-08T13:39:26+00:00",
+      "comments": [
+        {
+          "id": 48095683,
+          "author": "thisislife2",
+          "text": "This is an interesting project - kudos for executing it. I have to admit that when I was starting out in this field, I too fantasised about, \"Would this software be faster, smaller and better in assembly?\" . Ofcourse, assembly programming made some sense in embedded electronics , which can be very resource constrained and even specialised for one particular application. Thinking from that aspect, perhaps you should consider making this a specialised program that runs on something like a Raspberry Pi - running such a web server directly on it, without an OS (or a very minimal OS), would make for a real cool and interesting project."
+        },
+        {
+          "id": 48098983,
+          "author": "drob518",
+          "text": "I’m curious what the performance of this implementation is versus a server written in C, C++, or Rust. How much performance can a human still squeeze out at the assembly level versus today’s state of the art compilers?"
+        },
+        {
+          "id": 48096036,
+          "author": "pixelesque",
+          "text": "Previous comments from two days ago: https://news.ycombinator.com/item?id=48080587"
+        },
+        {
+          "id": 48098281,
+          "author": "StilesCrisis",
+          "text": "\"i hate string parsing. especially in assembly.\" Well. Interesting choice of side project!"
+        },
+        {
+          "id": 48098665,
+          "author": "globnomulous",
+          "text": "I love this. I'm wondering: what skills did this project hone? What are you better at now than you were before you undertook it? Or was it just for fun?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 28,
+      "id": 48095550,
+      "title_en": "Software engineering may no longer be a lifetime career",
+      "title_ja": "Software engineering may no longer be a lifetime career",
+      "url": "https://www.seangoedecke.com/software-engineering-may-no-longer-be-a-lifetime-career/",
+      "hn_url": "https://news.ycombinator.com/item?id=48095550",
+      "score": 320,
+      "comment_count": 539,
+      "posted_at": "2026-05-11T14:34:08+00:00",
+      "comments": [
+        {
+          "id": 48096558,
+          "author": "bborud",
+          "text": "Multiple times per week I have the same conversation. It goes something like this: - AI will make developers irrelevant - Why? - Because LLMs can write code - Do you know what I do for a living? - Yes, write code? - Yes, about 2-5% of the time. Less now. - But you said you are a developer? - I did - So what do you do 95-98% of the time? - I understand things and then apply my ability to formulate solutions - But I can do that! - So why aren't you? The developers who still think their job is about writing code will perhaps not have a job in the future. Brutal as it may sound: I'm fine with that. I'm getting old and I value my remaining time on the planet. Business owners who think they can do without developers because they think LLMs replace developers are fine by me too. Natural selection will take care of them in due course."
+        },
+        {
+          "id": 48098278,
+          "author": "hibikir",
+          "text": "In my experience, it's been the complete opposite. The very experienced engineers that are actually willing to use top of the line tooling are much better than they were before, including those that are over 40, and over 50. Part of the practical degradation of traditional programmers over time has always been concentration and deep calculation, just like in chess. The old chess player knows chess much better than a 19 year old phenom, but they cannot calculate for that many hours at the same speed as before, so their experience eventually loses to the raw calculation. Maybe at 35, or at 45, but you are just not as good. Claude Code and Codex save you the computation, while every single instinct and 2 second \"intuition\", which is what you build with experience, is still online. It's not just that it's a more fair competition: It's now unfair in the opposite direction. The senior that before could lead a team of 6 is now leading a team of agents, and reviewing their code just as before. Hell, it's easier to get the agent to change direction than most juniors around me, which will not be easy to correct with just plain, low-judgement feedback."
+        },
+        {
+          "id": 48101830,
+          "author": "magarnicle",
+          "text": "Even if a manager can just conjure the software they want instantly using AI, they are still going to prefer having a nerd to manage it for them - to know how to prompt engineer or even just organise it all. It might not look much like software engineering, but it's still going to be nerd stuff that most people don't want to bother with."
+        },
+        {
+          "id": 48098176,
+          "author": "Teknoman117",
+          "text": "> AI-users thus become less effective engineers over time, as their technical skills atrophy Based on my experience, I think this will prove more true than not in the long run, unfortunately. Professionally, I see people largely falling into two camps: those that augment their reasoning with AI, and those that replace their reasoning with AI. I’m not too worried about the former, it’s the latter for whom I’m worried. My mom is a (US public school) high school teacher, and she vents to me about the number of students who just take “Google AI overview” as an absolute source of truth. Maybe it’s just the new “you can’t cite Wikipedia”, but she feels that since the pandemic, there’s a notable decline in the critical thinking skills of children coming through her classes. We have a whole generation (or two) of kids that have grown up being told what to like, hate, believe, etc. by influencers and anonymous people on the internet. They’d already outsourced their reasoning before LLMs were a thing. Most of them don’t appear to be ready to constructively engage with a system that is designed to make them believe they are getting what they want with dubious quality."
+        },
+        {
+          "id": 48096231,
+          "author": "giobox",
+          "text": "Anecdotally, it feels like something materially changed in the US software hiring market at the start of this year to me. It feels like more and more businesses are taking a wait and see approach to avoid over-investing in human capital in the next few years. It also feels like the hiring \"signal\", which was always weak before, is just completely gone now, when every job you do advertise receives over 500 LLM written applications and cover letters that all look and feel the same. The pro-athlete comparison in this article is bit silly IMO- there are obvious physical body issues that occur with aging if you rely on your muscles etc to make money. If you compare to other fields of knowledge work, such as say law or medicine, there are loads of examples of very experienced, very sharp operators in their 40s and 50s."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 29,
+      "id": 48090521,
+      "title_en": "The greatest shot in television: James Burke had one chance to nail this scene (2024)",
+      "title_ja": "The greatest shot in television: James Burke had one chance to nail this scene (2024)",
+      "url": "https://www.openculture.com/2024/10/the-greatest-shot-in-television.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48090521",
+      "score": 335,
+      "comment_count": 184,
+      "posted_at": "2026-05-11T02:43:34+00:00",
+      "comments": [
+        {
+          "id": 48090952,
+          "author": "51Cards",
+          "text": "I always love this video, and I have been a lifetime dedicated fan of James Burke, but few seem to note that the whole segment didn't have to be timed as there is a cut shortly before the launch. If I recall either James or one of the producers talked about it once. They knew they had to start the last bit 13 seconds before launch and had practiced it repeatedly. At 13 seconds to countdown James nailed it. I'm sure even after practicing it I would have stumbled over a word in the clutch moment!"
+        },
+        {
+          "id": 48090743,
+          "author": "RachelF",
+          "text": "The late 1970's were the golden age of documentaries: Connections, Cosmos, Civilization, The Ascent of Man and Attenborough's Life on Earth. Perhaps it's just me, but modern documentaries are rather dumbed down? As a side note: Quite ironic that he ends up pointing to a rocket propelled mostly by solid fuels."
+        },
+        {
+          "id": 48093332,
+          "author": "hjkl0",
+          "text": "This is my pet peeve. I don't know the show, but when I first watched this clip (under the title of \"greatest shot on television\") I totally bought in to the hype and thought it really was amazing. You start out just walking alongside him, and only slowly realize where you are and what is about to happen, and everything is perfectly timed and composed: he ends his walk, reaches the conclusion of his explanation, and you realize what is going on, all at the exact time the launch begins. Brilliant! Except that this is not \"a shot\" at all. I just hadn't noticed on my first watch that there's a very obvious cut just at the end of the \"walk\". It's a different angle from a different location at a different time of day, and he just has one sentence to say before he looks back at the blast off. It would be no different from any news reporter on location at the time, reading a prepared message ahead of the launch, timed to end before the launch itself with no need for extensive rehearsals, the launch timing is widely broadcast, you time yourself accordingly with your talking speed, by adding pauses, etc. And on top of everything they probably had to do it live too. I have no issue with James Burke or his show. And this scene is really beautifully done. But it's not the greatest shot in television. It's not even one shot! (edited: typos)"
+        },
+        {
+          "id": 48090682,
+          "author": "devindotcom",
+          "text": "The full series is on Archive: https://archive.org/details/bbc-connections-1978/Connections... It still holds up for the most part, though of course some of the takes, being almost 50 years old, may seem a bit quaint. It's certainly worth watching the first series at least start to finish. Burke is an interesting guy."
+        },
+        {
+          "id": 48097617,
+          "author": "pugworthy",
+          "text": "Personally I put the Jonnie Walker The Man Who Walked Around The World ad with Robert Carlyle as the greatest one take shot. https://www.youtube.com/watch?v=fZ6aiVg2qVk"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 30,
+      "id": 48086190,
+      "title_en": "Hardware Attestation as Monopoly Enabler",
+      "title_ja": "Hardware Attestation as Monopoly Enabler",
+      "url": "https://grapheneos.social/@GrapheneOS/116550899908879585",
+      "hn_url": "https://news.ycombinator.com/item?id=48086190",
+      "score": 2063,
+      "comment_count": 697,
+      "posted_at": "2026-05-10T17:54:02+00:00",
+      "comments": [
+        {
+          "id": 48093126,
+          "author": "khriss",
+          "text": "The superhuman efforts that folks on HN make to find technical workarounds and solutions is wonderful to see, but we must realize that this is not a technical problem. It's a social and legislative one. It can't be fought on technical grounds. The push back has to be via putting pressure on politicians by making regular people more aware. Right now, the vast majority of users are being bombarded with a one sided narrative of how 'insecure' their devices are. They read almost everyday about someone losing their life's savings due to 'hackers'. In this environment, they genuinely believe locking down their devices will make them more secure and prevent them from being 'hacked'. The powers that be make sure that the people never hear the other side. That people are giving absolute control to large corporations. In my experience, once the issue is framed as 'Google will decide what you can do with your phone' every single person is immediately outraged. If you want to make a meaningful contribution, however small, then make it a point to educate people about the control they are giving to large corporations like Google. It doesn't take much to convince them that Google et al don't have their best interests in mind. They already know it and have experienced it. The second thing to do is to encourage them to reach out to their member of congress via letters. It's easy enough to do, and politicians are terrified of going against voters. They rely on people's ignorance to quietly work against their constituent's interests while supporting whichever special interest happened to donate the most to their campaign fund."
+        },
+        {
+          "id": 48087095,
+          "author": "coppsilgold",
+          "text": "Requiring authorized silicon (and software) isn't even the biggest problem here. They do not use zero knowledge proof systems or blind signatures. So every time you use your device to attest you leave behind something (the attestation packet) that can be used to link the action to your device. They put on a show about how much they care about your privacy by introducing indirection into the process (static device 'ID' is used to acquire an ephemeral 'ID' from an intermediate server) but it's just a show because you don't know what those intermediary severs are doing: You should assume they log everything. And this just the remote attestation vector, the DRM 'ID' vector is even worse (no meaningful indirection, every license server has access to your burned-in-silicon static identity). And the Google account vector is what it is. Using blind signatures for remote attestation has actually been proposed, but no one notable is currently using it: < https://en.wikipedia.org/wiki/Direct_Anonymous_Attestation > There are several possible reasons for this, the obvious one is that they want to be able to violate your privacy at will or are mandated to have the capability. The other is that because it's not possible to link an attestation to a particular device the only mitigation to abuse that is feasible is rate limiting which may not be good enough for them - an adversary could set up a farm where every device generates $/hour from providing remote attestations to 'malicious' actors."
+        },
+        {
+          "id": 48088065,
+          "author": "userbinator",
+          "text": "In 1999, Intel received an absolutely massive amount of opposition when they decided to include a software-readable serial number in their CPUs, so much that they reversed the decision. Then the \"security\" and Trusted Computing authoritarians continued pushing for TPMs and related tech, and contributed to the rise of mobile walled gardens. Windows 11's TPM requirements were another step towards their goal. The amount of propaganda about how that was supposed to be a good thing, both here and elsewhere, was shocking. It turns out a significant (but hopefully decreasing) number of the population is easily coerced into anything when \"security\" is given as a justification. The war on general-purpose computing continues, and we need to keep fighting. Stallman was right, as always. Time to give his \"Right to Read\" another read. (If it hasn't been done already, an AI-generated short film of it would be a great idea...) \"Those who give up freedom for security deserve neither.\""
+        },
+        {
+          "id": 48086192,
+          "author": "ChuckMcM",
+          "text": "This is a really good thread on why this technology is becoming a problem for \"open\" anything. The argument \"we can create our own separate web\" is fine until all of your services are behind the web that locks you into owning a Google approved or Apple approved mobile device."
+        },
+        {
+          "id": 48089802,
+          "author": "Dove",
+          "text": "This is tyranny: making people powerless, afraid of each other, and submissive, per Aristotle's understanding.[1] The technological means are new, to be sure, but the social strategy is as old as civilization. Mark my words. General purpose computing and private, direct communication are things too powerful for a tyrant to permit the people to have. The freedom we've enjoyed for the last several decades, to build what we want, to run what we want, to network with who we want, is not the default and will always be under attack. We had it for a little while by the generosity of the previous generation. It was not then, and is not now, and never will be free. [1] https://www.perseus.tufts.edu/hopper/text?doc=Perseus:text:1..."
+        }
+      ],
+      "summary_ja": ""
+    }
+  ]
+}
