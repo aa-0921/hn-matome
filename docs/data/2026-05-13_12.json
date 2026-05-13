@@ -1,0 +1,1075 @@
+{
+  "date": "2026-05-13T00:00:00+09:00",
+  "slot": "12",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 48117810,
+      "title_en": "Deterministic Fully-Static Whole-Binary Translation Without Heuristics",
+      "title_ja": "Deterministic Fully-Static Whole-Binary Translation Without Heuristics",
+      "url": "https://arxiv.org/abs/2605.08419",
+      "hn_url": "https://news.ycombinator.com/item?id=48117810",
+      "score": 74,
+      "comment_count": 10,
+      "posted_at": "2026-05-13T04:25:03+00:00",
+      "comments": [
+        {
+          "id": 48118362,
+          "author": "Panzerschrek",
+          "text": "Can it handle self-modifying code? Why only x86_64? It has more sense to convert 32-bit programs, like many old games."
+        },
+        {
+          "id": 48118240,
+          "author": "jonhohle",
+          "text": "This is neat. I haven’t looked into it, but I would think relative offsets could still be an issue, but it seems there must be some translation layer/mmu since the codegen will be different sizes anyway. This would impact jump tables and internal branches, primarily. I mostly work on stuff from the 90s, but disassemblers make a lot of assumptions about where code starts and ends, but occasionally a binary blob is not discoverable unless you have some prior knowledge (pointer at a fixed location to an entry point). I would think after a few passes you could refine the binary into areas that are definitely code."
+        },
+        {
+          "id": 48118235,
+          "author": "dmitrygr",
+          "text": "Cute, but Rice's theorem remains, and while they translated every byte as code, still no handling is possible for char buf[] = {0xB8, 0x2A, 0x00, 0x00, 0x00, 0xC3}; return ((int (*)(void))buf)(); static translation is only possible when you assume no adversarial code AND mostly assume compiler-produced binaries. hand-rolled asm gets hard, and adversarial code is provably unsolvable in all cases. still, pretty cool for cooperative binaries"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 2,
+      "id": 48115127,
+      "title_en": "Restore full BambuNetwork support for Bambu Lab printers",
+      "title_ja": "Restore full BambuNetwork support for Bambu Lab printers",
+      "url": "https://github.com/FULU-Foundation/OrcaSlicer-bambulab",
+      "hn_url": "https://news.ycombinator.com/item?id=48115127",
+      "score": 325,
+      "comment_count": 138,
+      "posted_at": "2026-05-12T21:55:21+00:00",
+      "comments": [
+        {
+          "id": 48115890,
+          "author": "bri3d",
+          "text": "This looks to be a clone of the prior state of the repository that caused all the Bambu drama earlier this week. I did a ton of research because I didn't understand what people wanted here, and this is what's going on: Right now, Bambu have adjusted their system into two modalities: * \"default\" or \"Cloud\" mode, where you get an app, remote monitoring, but you have to use Bambu Studio or Bambu Connect to send prints. They implemented this by adding cloud auth to their \"internal API;\" the client application has to get a token from Bambu's servers, even if the request it eventually makes is a \"local\" one. * LAN / Developer mode, where the device displays a token and you put it into your app. This disables all of the remote monitoring but in exchange, clients can send prints locally. What users want is to \"have their cake and eat it too;\" they want the local token authentication _and_ the cloud authentication enabled at the same time. This isn't actually possible, so this plugin approximates it by emulating the interface to the cloud authentication to make the \"Bambu Network\" cloud RPC calls from a local slicer (one of these calls is a local_print call, so ostensibly this allows you to send prints without running them through the cloud, although with all of the online functionality still enabled and required, this seems like a pretty brave thing to trust). Personally, I find the Bambu reaction distasteful, and there's an argument that the offline mode only exists due to similar outrage, but I don't see the current system as particularly bad and find the appetite to restore \"untrustworthy\" cloud functionality a bit amusing."
+        },
+        {
+          "id": 48117595,
+          "author": "ghostpepper",
+          "text": "A lot of the distrust toward Bambu is because they originally announced cloud auth would be required even for printing locally in LAN mode, and only backpedalled on that when they saw the backlash. I'm not sure why their entire domain has been excluded from archive.org but you can still see the original post for now: https://blog.bambulab.com/firmware-update-introducing-new-au... -- Critical Operations That Require Authorization The following printer operations will require authorization controls: Binding and unbinding the printer. Initiating remote video access. Performing firmware upgrades. Initiating a print job (via LAN or cloud mode). Controlling motion system, temperature, fans, AMS settings, calibrations, etc."
+        },
+        {
+          "id": 48118371,
+          "author": "murphy1312",
+          "text": "Just make sure never, ever to buy from them again. It's the same story as Synology with their forced reliance on specific hard drives. As long as there are still other providers out there..."
+        },
+        {
+          "id": 48118213,
+          "author": "mrdoosun",
+          "text": "The important part here is not just printer support, but whether users can keep using hardware they already own without depending on a vendor cloud path. Local network support tends to look like a convenience feature until it disappears. Then it becomes obvious that it was part of the ownership model."
+        },
+        {
+          "id": 48115128,
+          "author": "Murfalo",
+          "text": "https://www.fulu.org/ https://www.youtube.com/watch?v=1jhRqgHxEP8"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 3,
+      "id": 48111545,
+      "title_en": "Googlebook",
+      "title_ja": "Googlebook",
+      "url": "https://googlebook.google/",
+      "hn_url": "https://news.ycombinator.com/item?id=48111545",
+      "score": 710,
+      "comment_count": 1187,
+      "posted_at": "2026-05-12T17:37:36+00:00",
+      "comments": [
+        {
+          "id": 48113491,
+          "author": "Jzush",
+          "text": "Gross. This is just more proof that corporations simply don't know how to market AI. Everything is an ad for an ad at this point. The very first thing they show this new machine doing is helping people shop for clothes using AI. No one is doing that, these people don't exist. No matter how hard corporate America wishes they did. This is why AI doesn't sell. This is why companies like Microsoft and Dell are pulling back on their AI claims and why Apple has nearly wiped it off their site all together, seriously go check out apple.com, not a single mention of Apple Intelligence. At this point I'm convinced that marketing has been completely taken over by shareholder shills, marketing to customers they wish they had instead of the real customers that exist."
+        },
+        {
+          "id": 48113295,
+          "author": "spiralcoaster",
+          "text": "What's funny is that these days if I see a Google product that I'm even remotely interested in, I just immediately write it off because I know it's something they will kill in a very short time frame. It's just never worth the hassle of buying/using a Google product. Never."
+        },
+        {
+          "id": 48111926,
+          "author": "jerojero",
+          "text": "I think if I wanted a cheap laptop I'd probably get the macbook neo, and if i wanted a non-gaming expensive one i'd get a macbook pro. I really don't see the market fit for this, I guess the android integration. But my god, I'd die of cringe if someone asked me about my laptop and I had to say \"googlebook\". Believe it or not, these things matter a lot, particularly if you're trying to target a young audience."
+        },
+        {
+          "id": 48112301,
+          "author": "arjie",
+          "text": "I imagine they're going to do the same thing with this as with Chromebooks: i.e. do enterprise deals with schools and so on? Google's iteration-style structure where they kill products is fine for SaaS type offerings that are free and that you don't build your world around, but buying a laptop they won't support soon enough isn't that useful. Ultimately, just like with Amazon and their phone, it's obvious even prior to release that this is not a priority for the company and the side gig type stuff doesn't work when you are selling hardware. Might have been more interesting if it were under a separate company that Google owned a large portion of, rather than carrying the Google brand. Then again, maybe the Google brand isn't toxic to the wider ecosystem of buyers. I still think consumer-hardware-wise Google is the Safeway Essentials version of Apple but others might think Gmail or Google itself which consumers consider best in class."
+        },
+        {
+          "id": 48116334,
+          "author": "przemelek",
+          "text": "Would prefer a 'Google Linux'—a native desktop OS with a unified UI philosophy, similar to a macOS experience but built on a standard Linux foundation. Instead of ChromeOS or Android as the base, treat them as subsystems for compatibility. The real 'next big thing' would be integrating an engine like Gemini with OS-level hooks (similar to the OpenClaw approach) so agents can manipulate app windows and state directly. Resurrecting Web Intents as 2-way App Intents would be the key to making this work. Also, keeping prompts as local .md files with an Obsidian-like system editor would be a huge win for power users. Simply gating Gemini behind 'premium' Chromebooks feels like the old 'licking the cake' strategy from the Google+ days—trying to force a new product's success by coopting existing hardware rather than building a superior platform. I can imagine having Gemini + local Gemma working with Agents, which have access to my e-mail (ideally on GMAIL, but also supporting outlook), keeping local history of my visited sites and messages... and using RAG or something even better, ideally with looking also on repos I have checkouted to my file system, and maybe even whole file system.... Work related e-mail about \"sending invoice to customer\"... it may suggest proper content for e-mail. Having \"dashboard\" with summary of todays communication to you, your tickets (at work) and so on.... Can Google build such thing? If somebody can - it will be them. Will they build it? Probably not, they would prefer to build 3rd version of Google Pay."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 4,
+      "id": 48033483,
+      "title_en": "The vi family",
+      "title_ja": "The vi family",
+      "url": "https://lpar.ATH0.com/posts/2026/05/the-vi-family/",
+      "hn_url": "https://news.ycombinator.com/item?id=48033483",
+      "score": 81,
+      "comment_count": 26,
+      "posted_at": "2026-05-06T07:51:16+00:00",
+      "comments": [
+        {
+          "id": 48118110,
+          "author": "nineteen999",
+          "text": "I consider my vi/vim skills to be extremely minimalist subset, and probably horribly inefficient, since they were developed to work accross a broad range of UNIX systems (SCO, Solaris, HP-UX, OSF, AIX) and I rarely add anything to my vim configs on top of that other than syntax highlighting. But I'd still rather use it than just about any other text editor, just for the simplicity of that muscle memory alone. I have way more stuff to keep in my head than I have room for and I can't afford to expend more than about 0.0001% of context on a text editor."
+        },
+        {
+          "id": 48117956,
+          "author": "ventana",
+          "text": "One thing I noticed that with Claude Code and Codex running in the terminal, I tend to use VS Code much less than before, and found myself opening files in vim more often. It just looks like, for me, the agent development brings me back to using the basic tools, like many years ago, before VS Code existed."
+        },
+        {
+          "id": 48118306,
+          "author": "helterskelter",
+          "text": "If anyone wanted to write a minimal vi-style helix clone they should call it 'ix', as it's derived from helix, gives a nod to 'vi' and a wink at the turning of vi syntax on its head, like rotating a six to make a nine. Then a descendent of 'ix' could be called 'six', and we'll have come full circle."
+        },
+        {
+          "id": 48117830,
+          "author": "grebc",
+          "text": "Interesting the history is varied for such a simple tool. I am but a lowly mouse/GUI user so rarely have to dwell in a shell, but I learnt the basics of vi in my 1st year of university and never forgotten. Gotten me out of many a pickle being able to reliably edit a file quickly."
+        },
+        {
+          "id": 48118208,
+          "author": "keithnz",
+          "text": "I had a mini holiday job working for (long since gone from NZ) Philips Design and Development Laboratory in 1992. As part of that I worked on some tools for their silicon graphics workstations. I was shown vi, and how to get help and left to it. Tough learning curve! Seemed ridiculous at first, then I developed a mini set of editing skills and got used to it! Still using Vim/Nvim today."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 5,
+      "id": 48111896,
+      "title_en": "Show HN: Needle: We Distilled Gemini Tool Calling into a 26M Model",
+      "title_ja": "Show HN: Needle: We Distilled Gemini Tool Calling into a 26M Model",
+      "url": "https://github.com/cactus-compute/needle",
+      "hn_url": "https://news.ycombinator.com/item?id=48111896",
+      "score": 382,
+      "comment_count": 135,
+      "posted_at": "2026-05-12T18:03:11+00:00",
+      "comments": [
+        {
+          "id": 48116333,
+          "author": "nl",
+          "text": "Do you have any examples or data on the discriminatory power of the model for tool use? The examples are things like \"What is the weather in San Francisco\", where you are only passed a tool like tools='[{\"name\":\"get_weather\",\"parameters\":{\"location\":\"string\"}}]', I had a thing[1] over 10 years ago that could handle this kind of problem using SPARQL and knowledge graphs. My question is how effective is it at handling ambiguity. Can I send it something like a text message \"lets catch up at coffee tomorrow 10:00\" and a command like \"save this\" and have it choose a \"add appointment\" action from hundreds (or even tens) of possible tools? [1] https://github.com/nlothian/Acuitra/wiki/About"
+        },
+        {
+          "id": 48117983,
+          "author": "varenc",
+          "text": "Are you worried about Google's response to this? Google reportedly reacts to distillation attempts \" with real-time proactive defenses that can degrade student model performance \". So if they detected you, they could have intentionally fed you a dumber but plausible variant of Gemini: https://cloud.google.com/blog/topics/threat-intelligence/dis... But also, this model is small and just focusing on the tool use. In terms of token usage, you're probably not anywhere near the people that are trying to distill the entire model."
+        },
+        {
+          "id": 48118253,
+          "author": "meander_water",
+          "text": "I'm so excited for this, nice work! Gemma4 edge models were promised to be great for agentic use, but have been really disappointing in all my tests. They fail at the most basic tool use scenarios. Have you run any tool-use benchmarks for Needle, or do you plan to? Would be great if you could add results to the repo if so."
+        },
+        {
+          "id": 48117970,
+          "author": "jumploops",
+          "text": "This is neat, and matches an observation I saw with early Claude Code usage: Sonnet would often call tools quickly to gather more context, whereas Opus would spend more time reasoning and trying to solve a problem with the context it had. This led to lots of duplicated functions and slower development, though the new models (GPT-5.5 and Opus 4.6) seem to suffer from this less. My takeaway was that “dumber” (i.e. smaller) models might be better as an agentic harness, or at least feasibly cheaper/faster to run for a large swath of problems. I haven’t found Gemini to be particularly good at long horizon tool calling though. It might be interesting to distill traces from real Codex or Claude code sessions, where there’s long chains of tool calls between each user query. Personally, I’d love a slightly larger model that runs easily on an e.g. 32GB M2 MBP, but with tool calling RL as the primary focus. Some of the open weight models are getting close (Kimi, Qwen), but the quantization required to fit them on smaller machines seems to drop performance substantially."
+        },
+        {
+          "id": 48113166,
+          "author": "ilaksh",
+          "text": "Hmm.. this might make it feasible to build something like a command line program where you can optionally just specify the arguments in natural language. Although I know people will object to including an extra 14 MB and the computation for \"parsing\" and it could be pretty bad if everyone started doing that. But it's really interesting to me that that may be possible now. You can include a fine-tuned model that understands how to use your program. E.g. `> toolcli what can you do` runs `toolcli --help summary`, `toolcli add tom to teamfutz group` = `toolcli --gadd teamfutz tom`"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 6,
+      "id": 48113895,
+      "title_en": "How to make your text look futuristic (2016)",
+      "title_ja": "How to make your text look futuristic (2016)",
+      "url": "https://typesetinthefuture.com/2016/02/18/futuristic/",
+      "hn_url": "https://news.ycombinator.com/item?id=48113895",
+      "score": 291,
+      "comment_count": 36,
+      "posted_at": "2026-05-12T20:16:26+00:00",
+      "comments": [
+        {
+          "id": 48117691,
+          "author": "socalgal2",
+          "text": "Does the Back To The Future logo really count? Raiders of the Lost Ark as a very similar style but does not evoke \"future\". Yes, there are subtle differences. My point is, if you divorced them from the connection to their content I think it would be hard to point to one as \"future\" and the other as \"not future\""
+        },
+        {
+          "id": 48116919,
+          "author": "dhosek",
+          "text": "At the 1996 ATypI meeting in Den Haag, one of the speakers coined the term “sterotypography” to refer to certain cliches that get used in type usage. Another case of this is the use of Neuland and Neuland Inline to represent Africa, and of course the assortment of faux Chinese fonts that were ubiquitous on Chinese takeout menus in the 80s and 90s (and probably still are, but are there still takeout menus in the era of Grubhub?)."
+        },
+        {
+          "id": 48114231,
+          "author": "giancarlostoro",
+          "text": "Needs a (2016) > Posted on February 18, 2016 by Dave Addey Great read otherwise, I know the author mentions their book, I do wonder if he covers the history of how these fonts came to be so standard... for future stuff"
+        },
+        {
+          "id": 48115154,
+          "author": "genghisjahn",
+          "text": "And then there is the papyrus font for avatar…"
+        },
+        {
+          "id": 48117964,
+          "author": "efitz",
+          "text": "I dunno, it’s kinda futuristic, but it’s missing the faux 3d effect where it appears to have warped up close to you and left a trail of light behind it, like the Star Trek example of the end. Nothing says “future” like fake 3d effects."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 7,
+      "id": 48115823,
+      "title_en": "Kraftwerk's radical 1976 track",
+      "title_ja": "Kraftwerk's radical 1976 track",
+      "url": "https://www.bbc.com/culture/article/20260511-kraftwerks-radical-1976-track-radioactivity-became-an-anti-nuclear-anthem",
+      "hn_url": "https://news.ycombinator.com/item?id=48115823",
+      "score": 114,
+      "comment_count": 47,
+      "posted_at": "2026-05-12T23:13:01+00:00",
+      "comments": [
+        {
+          "id": 48117895,
+          "author": "emptybits",
+          "text": "If you like Kraftwerk and you're not aware of this book, I recommend it: \"Kraftwerk: Future Music from Germany\", by Uwe Schütte. It's packed with details of albums, songs, tours, equipment, and people. The anti-nuclear message in \"Radio-Activity\" certainly came later and was repeatedly updated, right into the Fukushima era [2011], but this was not the original sentiment [1976]. From the book: \"At the time, Billboard magazine featured the most-played singles by the large network of radio stations under the heading 'Radio Action'. The band seemed to have misread or misremembered this as 'Radio-Activity'. 'Suddenly,' remembers Wolfgang Flür, 'there was a theme in the air, the activity of radio stations, and the title of 'Radioactivity is in the Air for You and Me' was born. All we needed was the music to go with it. ... The ambiguity of the theme didn't come until later.' Radio-Activity was intended to celebrate radio broadcasting as a convenient, easy and democratic means to listen to music and news.\""
+        },
+        {
+          "id": 48116273,
+          "author": "ainch",
+          "text": "I love Kraftwerk, but contributing to anti-nuclear sentiment in Germany hasn't been a major success. If only more European countries had followed the French example and developed substantial nuclear fleets."
+        },
+        {
+          "id": 48116598,
+          "author": "LeoPanthera",
+          "text": "The original version is quite different from the version performed today. The original lyrics refer to the pun of \"radioactivity\" versus \"radio activity\", meaning, activity on the radio. The new live version refers almost exclusively to the former meaning, and adds \"stop\" to turn it into a protest song. I've seen Kraftwerk live twice, at London's Albert Hall and Berkeley's Greek Theater, both times absolutely amazing. Highly recommended. I've often thought they would be the ideal band to perform inside the \"Sphere\" in Las Vegas."
+        },
+        {
+          "id": 48116220,
+          "author": "WatchDog",
+          "text": "If the suggested political impact of this music is to be believed, the music might be one of the biggest environmental disasters of all time. Germany has been pretty widely criticized for decommissioning it's nuclear power program, only to replace it with Russian oil."
+        },
+        {
+          "id": 48116257,
+          "author": "nntwozz",
+          "text": "Ruckzuck is way more interesting and ahead of its time (1970). https://youtu.be/yUFc5QoMG1E P.S Also check out Ashra - Deep Distance (1976). https://youtu.be/BJZ9PVvu9OA"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 8,
+      "id": 48116207,
+      "title_en": "My graduation cap runs Rust",
+      "title_ja": "My graduation cap runs Rust",
+      "url": "https://ericswpark.com/blog/2026/2026-05-12-my-graduation-cap-runs-rust/",
+      "hn_url": "https://news.ycombinator.com/item?id=48116207",
+      "score": 132,
+      "comment_count": 31,
+      "posted_at": "2026-05-13T00:04:21+00:00",
+      "comments": [
+        {
+          "id": 48116777,
+          "author": "katzgrau",
+          "text": "> It probably would’ve been easier if I didn’t use Rust and just used the Arduino libraries, or if I used a different board. But I was really married to this blog post title idea Worth it, nicely done"
+        },
+        {
+          "id": 48116457,
+          "author": "0cf8612b2e1e",
+          "text": "If you go to a bigger school, they have multiple graduation ceremonies. Split the rental amongst anyone who does not share a time slot with you. That’s what I did and people acted like this was a genius move. No, I am just broke."
+        },
+        {
+          "id": 48117070,
+          "author": "hona_mind",
+          "text": "Genuinely the best use of \"I was really married to this blog post title idea\" as a justification for a technical decision I've ever read. Congrats!"
+        },
+        {
+          "id": 48116915,
+          "author": "LandenLove",
+          "text": "I am pretty sure I purchased my cap and gown instead of renting. But my college was a bit smaller."
+        },
+        {
+          "id": 48117111,
+          "author": "kmoser",
+          "text": "> So you do need to shell out to rent them. And they don’t give you the option to buy the cap and gown outright. You can't buy them from a 3rd party? Maybe a cheap Spirit Halloween costume? Maybe even make your own from cardboard and a black napkin or two?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 9,
+      "id": 48112042,
+      "title_en": "CERT is releasing six CVEs for serious security vulnerabilities in dnsmasq",
+      "title_ja": "CERT is releasing six CVEs for serious security vulnerabilities in dnsmasq",
+      "url": "https://lists.thekelleys.org.uk/pipermail/dnsmasq-discuss/2026q2/018471.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48112042",
+      "score": 281,
+      "comment_count": 130,
+      "posted_at": "2026-05-12T18:12:28+00:00",
+      "comments": [
+        {
+          "id": 48113443,
+          "author": "strenholme",
+          "text": "Shameless plug time: My own MaraDNS has been extensively audited now that we’re in the age of AI-assisted security audits. Not one single serious security bug has been found since 2023. [1] The only bugs auditers have been finding are things like “Deadwood, when fully recursive, will take longer than usual to release resources when getting this unusual packet” [2] or “This side utility included with MaraDNS, which hasn’t been able to be compiled since 2022, has a buffer overflow, but only if one’s $HOME is over 50 characters in length” [3] I’m actually really pleased just how secure MaraDNS is now that it’s getting real in depth security audits. [1] https://samboy.github.io/MaraDNS/webpage/security.html [2] https://github.com/samboy/MaraDNS/discussions/136 [3] https://github.com/samboy/MaraDNS/pull/137"
+        },
+        {
+          "id": 48115689,
+          "author": "unclejuan",
+          "text": "I think this is the breaking point where replacing our code written in C for code written in memory safe languages is becoming urgent. The vast majority of vulnerabilities found recently are directly related to being written in memory unsafe languages, it's very difficult to justify that a DNS/DHCP server can't be written in rust or go and without using unsafe (well, maybe a few unsafe calls are still needed, but these will be a very small amount)..."
+        },
+        {
+          "id": 48113027,
+          "author": "washingupliquid",
+          "text": "Maybe this is the kick in the ass Debian needs to upgrade the embarrassingly ancient dnsmasq in \"stable\" because while I can't think of any new features, the latest versions contain many non-CVE bug fixes. But I doubt it, they will lazily backport these patches to create some frankenstein one-off version and be done with it. Before anyone says \"tHaT's wHaT sTaBlE iS fOr\": they have literally shipped straight-up broken packages before, because fixing it would somehow make it not \"stable\". They would rather ship useless, broken code than something too new. It's crazy."
+        },
+        {
+          "id": 48114783,
+          "author": "aftbit",
+          "text": "Has OpenWRT released a new build yet? Answer: no, but they're working on it. https://forum.openwrt.org/t/dnsmasq-set-of-serious-cves/2500..."
+        },
+        {
+          "id": 48114640,
+          "author": "SoftTalker",
+          "text": "Never liked using dnsmasq. Always felt like too much in one tool. A local caching resolver, dhcp server, and tftp/pxe boot setup were always things I preferred to configure separately."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 10,
+      "id": 48109460,
+      "title_en": "Why senior developers fail to communicate their expertise",
+      "title_ja": "Why senior developers fail to communicate their expertise",
+      "url": "https://www.nair.sh/guides-and-opinions/communicating-your-expertise/why-senior-developers-fail-to-communicate-their-expertise",
+      "hn_url": "https://news.ycombinator.com/item?id=48109460",
+      "score": 489,
+      "comment_count": 210,
+      "posted_at": "2026-05-12T15:08:40+00:00",
+      "comments": [
+        {
+          "id": 48113129,
+          "author": "hamstergene",
+          "text": "Because the most important parts of the expertise are coming from their internal \"world model\" and are inseparable from it. An average unaware person believes that anything can be put in words and once the words are said, they mean to reader what the sayer meant, and the only difficulty could come from not knowing the words or mistaking ambiguities. The request to take a dev and \"communicate\" their expertise to another is based on this belief. And because this belief is wrong, the attempt to communicate expertise never fully succeeds. Factual knowledge can be transferred via words well, that's why there is always at least partial success at communicating expertise. But solidified interconnected world model of what all your knowledge adds up to, cannot. AI can blow you out of the water at knowing more facts, but it doesn't yet utilize it in a way that allows surprisingly often having surprisingly correct insights into what more knowledge probably is. That mysterious ability to be right more often is coming out of \"world model\", that is what \"expertise\" is. That part cannot be communicated, one can only help others acquire the same expertise. Communicating expertise is a hint where to go and what to learn, the reader still needs to put effort to internalize it and they need to have the right project that provides the opportunity to learn what needs to be learnt. It is not an act of transfer."
+        },
+        {
+          "id": 48111182,
+          "author": "lnenad",
+          "text": "As a /senior/ developer I really dislike blanket statements. I've seen the same amount of failures caused by > “Do we really need that?” > “What happens if we don’t do this?” > “Can we make do for now? Maybe come back to this later when it becomes more important?” as with experimenters. Every system is different, every product is different. If I were building firmware for a CT scanner, my approach towards trying out new things would be different than a CRUD SaaS with 100 clients in a field that could benefit from a fresh perspective. There are definitely ways to have eager/very open seniors drive systems into hard to get out corners. But then there are people that claim PHP5 is all you need."
+        },
+        {
+          "id": 48111307,
+          "author": "hirako2000",
+          "text": "Most proof of concepts I've seen get traction turned into production. A rewrite? I recall a few times everyone promised, if this gets promoted then we will rewrite it from zero. Never happened. The article touches on responsability, accountability. There is none for risk taker. By definition. You have a crazy idea, you rush it out, you hope clients bite. You profit. It's not even your problem how to make it work, scale, not cost more to run than we sell it for. The loop on the right. There are companies, two of them are very popular these days, they took it to an extreme. You ship something fast, and since it only scales linearly you go raise money. Successful companies, countless users, some of them even pay. Who's to blame? The senior developer, or simply someone reasonable who asks, how's that sustainable, what's the way out of this? Those are fired, so whoever's left is a believer."
+        },
+        {
+          "id": 48112672,
+          "author": "nullorempty",
+          "text": "What I found is that my willingness to communicate and share my expertise is usually not in demand with more junior developers. In general, I find developers uninterested in finding a mentor. They don't look at your linked in profile, they don't look at you as a possible source of knowledge and expertise. So it's not like I have nothing to share after 30 years of experience in the industry, I just have nobody to share it with."
+        },
+        {
+          "id": 48118342,
+          "author": "heisenbit",
+          "text": "While I agree with adding code contributing to complexity is problematic there is lots of code in existing code basis which is overly complex due to past outdated requirements or less than perfect human coders. The current flood of AI driven security fixes demonstrates that AI can be pretty good in detecting security edge cases. It is not inconceivable to use it to also reduce code complexity."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 11,
+      "id": 48116064,
+      "title_en": "When \"idle\" isn't idle: how a Linux kernel optimization became a QUIC bug",
+      "title_ja": "When \"idle\" isn't idle: how a Linux kernel optimization became a QUIC bug",
+      "url": "https://blog.cloudflare.com/quic-death-spiral-fix/",
+      "hn_url": "https://news.ycombinator.com/item?id=48116064",
+      "score": 63,
+      "comment_count": 2,
+      "posted_at": "2026-05-12T23:46:28+00:00",
+      "comments": [
+        {
+          "id": 48118227,
+          "author": "neuralkoi",
+          "text": "I can see why they rewrote QUIC in Rust and for use in userspace, though going the in-house approach would warrant keeping an eye on the relevant kernel commits like a hawk to avoid missing bug fixes like these. These in-house implementations tend to have less eyeballs than the kernel. I found it interesting that Cloudflare is not yet using BBR as the default in quiche. CUBIC's recovery in this day and age, and especially in datacenters with large pipes, seems so slooow to me. Almost two seconds with no loss whatsoever till achieving BDP again and then shooting itself in the foot every time it hits the ceiling. Each one of those losses a retransmission."
+        },
+        {
+          "id": 48117057,
+          "author": "blahgeek",
+          "text": "The more precise title should be: How we copied code from Linux kernel without fully understand it and missed its follow-up fixes, now it bites us"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 12,
+      "id": 48091898,
+      "title_en": "Traceway: MIT-licensed observability stack you can self-host in ~90s",
+      "title_ja": "Traceway: MIT-licensed observability stack you can self-host in ~90s",
+      "url": "https://github.com/tracewayapp/traceway",
+      "hn_url": "https://news.ycombinator.com/item?id=48091898",
+      "score": 56,
+      "comment_count": 4,
+      "posted_at": "2026-05-11T07:05:01+00:00",
+      "comments": [
+        {
+          "id": 48116990,
+          "author": "tecoholic",
+          "text": "I was looking into this just yesterday. So the Loki + … comparison is a bit off in the Open Source space. The main ones are Signoz and ClickStack in this space. Both using ClickHouse as the database. Heavy compared to something like Loki, but they are OTEL native and not log monitoring. So not in the same category."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 13,
+      "id": 48087643,
+      "title_en": "Referer Reality",
+      "title_ja": "Referer Reality",
+      "url": "https://www.robinsloan.com/lab/referer/",
+      "hn_url": "https://news.ycombinator.com/item?id=48087643",
+      "score": 29,
+      "comment_count": 6,
+      "posted_at": "2026-05-10T20:31:10+00:00",
+      "comments": [
+        {
+          "id": 48118109,
+          "author": "chrismorgan",
+          "text": "I didn’t imagine that I would stir up quite so much interest when I decided to ban query strings! When I said, “if it isn’t there, it’s prob­ably for a good reason”, I was fully aware of native apps, and decided to gloss over them, because I doubt (on no evidence) they’re so significant for me, and things like email and feed readers may well be web apps anyway. And because I’ve tended to fine nuance in the past, and am trying being concise instead. While thinking about it— is it possible for a browser to know which app sent it the link, e.g. androidapp://com.example.app? Because that’d probably be a perfectly reasonable referrer, if a browser wanted to send it. > Note that a handful of sites do choke on unex­pected query strings, including YouTube (!) I want to learn more about this."
+        },
+        {
+          "id": 48118206,
+          "author": "thayne",
+          "text": "I get adding query strings on links to your own domain, but from the original post, it sounds like the author was seeing third parties add query strings to links to their domain and I don't see what the point in doing that is, unless the entity adding those quey parameters is able to somehow intercept them between the browser and the website (which is possible if they control the browser or a cdn)."
+        },
+        {
+          "id": 48117876,
+          "author": "minebreaker",
+          "text": "I strongly disagree with a lot of claims here. >> if it isn’t there, it’s probably for a good reason. > which isn’t really true anymore. For most websites, the majority — not just the plurality, but the majority — of visitors arrive by following a link inside an email or an app I don't think the statement is factually backed up. At least I hate native apps. > Even so, my custom query string is, in my calculation, an expression of digital etiquette: rather than dump a load of anonymous traffic on your doorstep, I reveal who’s linking, so a website or online shop operator can trace it back and get in touch, if wanted or needed Anonymity considered harmful these days? > a wave of new subscriptions and weren’t sure if they were legitimate; a brief email correspondence assured them that yes, It's not legitimate unless it's signed (and if anybody gives a shit to verify it). > Note that a handful of sites do choke on unexpected query strings, including YouTube (!), This is a good habit IMHO. Anyway, I'm thankful to the original post because it was a good reminder to re-review my browser settings. Honestly I don't understand why the EU focused on the stupid cookie law instead of referers which are clearly privacy-violating. If you use Firefox I recommend you make sure `network.http.referer.XOriginPolicy` set to 1."
+        },
+        {
+          "id": 48117797,
+          "author": "akersten",
+          "text": "i'm confused, why would you go out of your way to add this tracking info to external links voluntarily? it doesn't benefit you, it just helps other websites segment their traffic?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 14,
+      "id": 48107997,
+      "title_en": "Rendering the Sky, Sunsets, and Planets",
+      "title_ja": "Rendering the Sky, Sunsets, and Planets",
+      "url": "https://blog.maximeheckel.com/posts/on-rendering-the-sky-sunsets-and-planets/",
+      "hn_url": "https://news.ycombinator.com/item?id=48107997",
+      "score": 445,
+      "comment_count": 38,
+      "posted_at": "2026-05-12T13:26:46+00:00",
+      "comments": [
+        {
+          "id": 48109130,
+          "author": "etra0",
+          "text": "I saw this a while ago so it might not be totally related, but Sebastian Lague did a video on atmospheres for his planet generation experiment which was also very entertaining to watch [1]. There's something particularly entertaining on developing visuals and watching them come a reality — I hope at some point be able to experiment in this field. [1] https://www.youtube.com/watch?v=DxfEbulyFcY"
+        },
+        {
+          "id": 48114512,
+          "author": "gmiller123456",
+          "text": "I'm not sure if it was a deliberate omission or not, but it's worth pointing out in the Sunset model that the sky should not go black as soon as the Sun goes below the horizon as it does in the demo. The Sun will still be shining on the atmosphere above you, and in areas above your horizon for a considerable time after Sunset. There will still be a noticeable twilight (in Earth's atmosphere) until the Sun is 18 degrees below the horizon. It's probably not practical to implement using ray tracing, but there are common algorithms to model it."
+        },
+        {
+          "id": 48111331,
+          "author": "rollulus",
+          "text": "Incredible what mobile phones and browsers can do nowadays. I remember implementing this paper from 1993 (the absolutely OG for this topic and very readable): “Display of The Earth Taking into Account Atmospheric Scattering” by Nishita et al: https://www.researchgate.net/publication/2933032_Display_of_..."
+        },
+        {
+          "id": 48111770,
+          "author": "mrsharpoblunto",
+          "text": "Love a good graphics writeup - I've been working on similar things for my procedural space/planet generator. The cool thing with atmospheric scattering is you can combine it with volumetric cloud rendering and get amazing sunsets & sky scenes https://www.threads.com/@mrsharpoblunto/post/DVS4wfYiG8f?xmt... https://www.threads.com/@mrsharpoblunto/post/C6Vc-S1O9mX?xmt... https://www.threads.com/@mrsharpoblunto/post/C6apksDRa8q?xmt..."
+        },
+        {
+          "id": 48109464,
+          "author": "baliex",
+          "text": "This is absolutely fantastic. I've thought before about trying to render skies on the web as a series of gradients overlaid on top of one another. I expect I could have had some level of success and gotten some mediocre results, but it would be nothing compared to what you've created. Thank you so much for sharing this; it's inspirational, must have taken you a very long time to put together, and I'm blown away by your results."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 15,
+      "id": 48111765,
+      "title_en": "Quack: The DuckDB Client-Server Protocol",
+      "title_ja": "Quack: The DuckDB Client-Server Protocol",
+      "url": "https://duckdb.org/2026/05/12/quack-remote-protocol",
+      "hn_url": "https://news.ycombinator.com/item?id=48111765",
+      "score": 248,
+      "comment_count": 52,
+      "posted_at": "2026-05-12T17:54:12+00:00",
+      "comments": [
+        {
+          "id": 48114946,
+          "author": "rglover",
+          "text": "This is rad. I've been eyeballing using DuckDB in my firm's internal app framework and this just solved the \"but how do I horizontally scale this\" problem. Kudos to the DuckDB folks. Love \"Quack\" for the protocol name, too."
+        },
+        {
+          "id": 48116922,
+          "author": "steve_adams_86",
+          "text": "I was just wishing something like this existed last week. What timing. I'm piping sensor readings into duckdb with a deno server, and couldn't use duckdb -ui to look over the data without shutting down the server. I had no interest in using the server to allow me to look at the contents of the db, so I was just going to live with it for now. This perfectly solves that, along with several other similar kinds of problems I've encountered with duckdb. duckdb is my favourite technology of 2025/26. It has worked its way into so many of my workflows. It's integral to how I work with LLMs, how I store all kinds of data, analytics, data pipelines... I love it."
+        },
+        {
+          "id": 48118133,
+          "author": "smithclay",
+          "text": "Been working on open-source projects involving storing and querying observability data (metrics, logs, traces) in parquet[0] and have been frustrated with the usability of Apache Iceberg … despite strongly agreeing and wanting to use an open storage format and catalog. This makes Ducklake much more interesting for my use case, excited where this is going. [0] https://github.com/smithclay/duckdb-otlp"
+        },
+        {
+          "id": 48117808,
+          "author": "feverzsj",
+          "text": "They didn't explain what \"concurrent writers\" is. But seems it's just serialized writes on server side."
+        },
+        {
+          "id": 48113396,
+          "author": "simlevesque",
+          "text": "I like DuckDB but I'm not sure what it wants to be. There's always new ways to use it and it's not easy to see what's the right one."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 16,
+      "id": 48115807,
+      "title_en": "Tell NYT, Atlantic, USA Today to keep Wayback Machine",
+      "title_ja": "Tell NYT, Atlantic, USA Today to keep Wayback Machine",
+      "url": "https://www.savethearchive.com/newsleaders/",
+      "hn_url": "https://news.ycombinator.com/item?id=48115807",
+      "score": 284,
+      "comment_count": 81,
+      "posted_at": "2026-05-12T23:11:40+00:00",
+      "comments": [
+        {
+          "id": 48116640,
+          "author": "ctippett",
+          "text": "Am I correct that this has come about because archive.org respects robots.txt and these sites have blocked their crawler from indexing their sites? I'm not sure how to articulate my thoughts on this exactly, other than to say it's disappointing that doing the right thing (i.e. respecting robots.txt) is rewarded with the burden of soliciting responses to a petition while at the same time others are rewarded with profit for ignoring those same directives."
+        },
+        {
+          "id": 48116923,
+          "author": "ajaimk",
+          "text": "Idea: allow scraping but can’t publish for 1 year?"
+        },
+        {
+          "id": 48115997,
+          "author": "someperson",
+          "text": "Maybe they should have an escrow like Financial Times is available on NewsBank service with a 30 day escrow"
+        },
+        {
+          "id": 48117195,
+          "author": "JustinGoldberg9",
+          "text": "Need a cryptographically verifiable internet archive. This is probably not possible without something like web 3 or nostr or gpg pgp. Idk."
+        },
+        {
+          "id": 48116830,
+          "author": "Cider9986",
+          "text": "I am looking forward to this ( https://news.ycombinator.com/item?id=48070516 )"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 17,
+      "id": 48116873,
+      "title_en": "Zero-native – Build native desktop apps with web UI",
+      "title_ja": "Zero-native – Build native desktop apps with web UI",
+      "url": "https://zero-native.dev",
+      "hn_url": "https://news.ycombinator.com/item?id=48116873",
+      "score": 22,
+      "comment_count": 17,
+      "posted_at": "2026-05-13T01:45:02+00:00",
+      "comments": [
+        {
+          "id": 48118127,
+          "author": "h4ch1",
+          "text": "> Use the system WebView for lightweight apps, or bundle Chromium via CEF so basically a vibe coded Tauri in zig? I don't like calling webview dependent applications \"native desktop apps\". Native desktop apps means using the OS primitives and directives to draw the UI imo; WinForms, SwiftUI, and their ilk."
+        },
+        {
+          "id": 48118119,
+          "author": "aiscoming",
+          "text": "I love the redefinition of \"native desktop app\" - a web app which uses the system web-view instead of bundling Chrome."
+        },
+        {
+          "id": 48117873,
+          "author": "AbuAssar",
+          "text": "> No borrow checker. No lifetimes. No fighting the compiler for 20 minutes over a string. I don’t like this attitude, both zig and rust have their strengths."
+        },
+        {
+          "id": 48118340,
+          "author": "jerleth",
+          "text": "Sounds very similar to webui (zig version: https://github.com/webui-dev/zig-webui ) What is the difference?"
+        },
+        {
+          "id": 48118162,
+          "author": "norskeld",
+          "text": "Given this is from Vercel and most likely vibe coded (hopefully not), I wonder how many zero-day vulnerabilities will be there... :^)"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 18,
+      "id": 48114356,
+      "title_en": "Scrcpy v4.0",
+      "title_ja": "Scrcpy v4.0",
+      "url": "https://github.com/Genymobile/scrcpy/releases/tag/v4.0",
+      "hn_url": "https://news.ycombinator.com/item?id=48114356",
+      "score": 107,
+      "comment_count": 19,
+      "posted_at": "2026-05-12T20:50:02+00:00",
+      "comments": [
+        {
+          "id": 48118427,
+          "author": "coffeecloud",
+          "text": "Its beautifully written C code. Very readable and grokable."
+        },
+        {
+          "id": 48118038,
+          "author": "jraph",
+          "text": "I recently moved, and the infra provider of the non-profit ISP I use imposes them a two month delay to set up a new fiber line. During this delay, I met neighbors who accepted to share their WiFi with me. They live a bit far, across the way. The best way I found to get a stable connection with decent speeds was to hang my phone at the top of a window using a salad bag, and share the phone connection to a computer via USB. I didn't find a way to automatically enable the USB connection sharing before plugging in the USB cable (didn't look for a solution neither, admittedly), so I had to plug the cable, enable the sharing and then put the phone in the bag and adjust the position, all that making sure the cable doesn't disconnect or everything needs to be redone from the start. I discovered far too late that my distro now has a scrcpy package, which makes enabling the sharing conveniently from the computer. Yes, I could have tried to ask immediate neighbors instead, probably. I should get my own line this morning, as it happens. scrcpy is fantastic. I used to write longer texts with it, and now that I can use it again, I'll probably start doing it again. In recent version of Android, it appears one needs to unlock blindly as the screen is black at this time, I suppose for security reasons."
+        },
+        {
+          "id": 48118352,
+          "author": "figmert",
+          "text": "Amazing tool, but I had to stop using it. On my Samsung phone, I gesture based navigation. And every time I use scrcpy, the navigation stops working, and I have to restart the phone to get it working again. There's a ticket open but the developer has been unable to replicate the issue. Sadly until that is fixed, it is impossible to continue using it. The inconvenience (at least for me) is too real."
+        },
+        {
+          "id": 48117565,
+          "author": "yegle",
+          "text": "https://github.com/wsvn53/scrcpy-mobile would allow you to control Android phone from an iOS device."
+        },
+        {
+          "id": 48116930,
+          "author": "shlewis",
+          "text": "This is something that non-techsavvy users would go nuts over how it seemlessly and easily works. > A virtual display can now be made flex using --flex-display (or -x), meaning it can be resized dynamically along with the client window. Amazing."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 19,
+      "id": 48082586,
+      "title_en": "Fc, a lossless compressor for floating-point streams",
+      "title_ja": "Fc, a lossless compressor for floating-point streams",
+      "url": "https://github.com/xtellect/fc",
+      "hn_url": "https://news.ycombinator.com/item?id=48082586",
+      "score": 47,
+      "comment_count": 9,
+      "posted_at": "2026-05-10T10:14:20+00:00",
+      "comments": [
+        {
+          "id": 48118363,
+          "author": "userbinator",
+          "text": "It splits the input into adaptively-sized blocks (quanta), runs a competition between many specialized codecs on each block, and emits the smallest result. This is, for lack of a better term, a \"metacompressor\", but it will be interesting to see which of the choices end up dominating; in my past experiences with metacompression, one algorithm is usually consistently ahead."
+        },
+        {
+          "id": 48117084,
+          "author": "loeg",
+          "text": "The question is, how close can OpenLZ come? (This is from the same people who develop zstd, but suitable for structured data in a generic way.)"
+        },
+        {
+          "id": 48116665,
+          "author": "Scaevolus",
+          "text": "I see you have ALP, but have you tried Chimp128 or Arrow's byte stream split?"
+        },
+        {
+          "id": 48116916,
+          "author": "KerrickStaley",
+          "text": "Another library in this space is pcodec; I'd appreciate a comparison of the two."
+        },
+        {
+          "id": 48082587,
+          "author": "enduku",
+          "text": "I built \"fc\", a C library for compressing streams of 64-bit floating-point values without quantization. It is not trying to replace zstd or lz4. The idea is narrower: take blocks of doubles, try a set of float-specific predictors/transforms/coders, and emit whichever representation is smallest for that block. It is aimed at time-series, scientific, simulation, and analytics data where the numbers often have structure: smooth curves, repeated values, fixed increments, periodic signals, predictable deltas, or low-entropy mantissas. The API is intentionally small: \"fc_enc\", \"fc_dec\", a config struct, and a few counters to inspect which modes won. Decode is parallel and meant to be fast; encode spends more CPU searching for a better representation. Current caveats: x86-64 only for now, tuned for IEEE-754 doubles, research-grade rather than production-hardened. Repo: https://github.com/xtellect/fc"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 20,
+      "id": 48109970,
+      "title_en": "The Future of Obsidian Plugins",
+      "title_ja": "The Future of Obsidian Plugins",
+      "url": "https://obsidian.md/blog/future-of-plugins/",
+      "hn_url": "https://news.ycombinator.com/item?id=48109970",
+      "score": 345,
+      "comment_count": 135,
+      "posted_at": "2026-05-12T15:45:54+00:00",
+      "comments": [
+        {
+          "id": 48111426,
+          "author": "kepano",
+          "text": "Obsidian CEO here. We've been working for nearly a year to launch this new Community site and review system. I'm very excited about this first version but there are many more improvements to come. I've tried to be exhaustive with the blog post, FAQs, and next steps on our roadmap, but I am sure I forgot some things, so feel free to ask! This has been an incredibly challenging project for a number of reasons. We're only seven people but we have thousands of plugin developers and millions of users. There are many competing priorities to balance. We wanted to make sure the new system would be easy to adopt, backwards compatible, and not completely break people's workflows, while still being a major improvement over the old approach, and allow us to gradually continue enhancing security and discoverability of plugins. Consider it a work in progress. We're listening to everyone's ideas and gripes, and will keep iterating :)"
+        },
+        {
+          "id": 48110898,
+          "author": "dtkav",
+          "text": "For those not aware, it has basically been impossible to submit new plugins due to the manual review (and how easy/fun it is to write a plugin with AI). The developer community was becoming increasingly frustrated, and the team was burning out under the load. So congrats to the team! This relieves a huge scaling bottleneck. It has been really cool to see how y'all build and scale."
+        },
+        {
+          "id": 48112374,
+          "author": "sundarurfriend",
+          "text": "I don't use Obsidian, and my assumption when I saw the title was I guess they're gonna be limiting it to a small set of corporate-blessed plugins . I've come to expect that \"The Future Of XYZ\" titles from software companies means severely limiting XYZ or preparing XYZ for a shut down!"
+        },
+        {
+          "id": 48110384,
+          "author": "varun_ch",
+          "text": "I’m not convinced that automated checks will be able to reliably assess whether a plugin is malicious. I think the best (only?) way to solve the plugin security problem would be to properly sandbox them with an explicit API and permission system."
+        },
+        {
+          "id": 48116523,
+          "author": "troad",
+          "text": "No permissions system, nothing resolved. Plugins still have access to everything - full disk, network, etc. How does one even speak of security vulnerabilities when the security model of Obsidian plugins is just straight up \"click here for RCE\". All I see is a spanking new interface that will accelerate the pace of plugin turnover, bringing forward the next inevitable security incident."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 21,
+      "id": 48111581,
+      "title_en": "Reimagining the mouse pointer for the AI era",
+      "title_ja": "Reimagining the mouse pointer for the AI era",
+      "url": "https://deepmind.google/blog/ai-pointer/",
+      "hn_url": "https://news.ycombinator.com/item?id=48111581",
+      "score": 177,
+      "comment_count": 145,
+      "posted_at": "2026-05-12T17:40:13+00:00",
+      "comments": [
+        {
+          "id": 48112907,
+          "author": "why_at",
+          "text": "My first impression coming away from this is skepticism. Anything with voice controls for routine use is a pretty tough sell. Doing this when you're not completely alone would be annoying to everyone around you. Most of their examples seem like they could have been done with a right click drop down menu so they don't really need to \"re-invent the mouse pointer\". So is this thing talking to Google's servers all the time for the AI integration? So it won't work if you're not connected to the internet? Privacy concerns are obvious; now Google wants to have an AI watching literally everything you do on your computer? Does it cost the user anything for the LLM use? If it's free will it stay free forever? That's quite a lot to give away if they're expecting people to use it to change a single word like in one of their examples. I guess they're expecting to make the money back by gathering data about literally everything you do on your computer. There might be a killer app for AI integration with personal computers that has yet to be invented, but this doesn't look like it."
+        },
+        {
+          "id": 48113163,
+          "author": "arjie",
+          "text": "Oh interesting, this is very cool. At first I thought it was just focus-follows-mouse but it's more interesting. You have certain keywords trigger \"add to prompt\". Ignoring the voice functionality (which is admittedly crucial currently because other inputs currently take over focus), I've often wanted to just have a continuous conversation with the LLM as I 'point and click' (or tab over and select) at various things. Might be neat to have text input focus continue to go to the LLM where I'm typing text etc. Sometimes I go to a different page to take a screenshot and other times I'm browsing for a file, and other times I'm highlighting some log lines. Cursor did this well, with selecting text in the terminal auto-focusing the Cursor agent textbox so you could talk to the agent and then select some text and you didn't have to re-select the original agent textbox again. The agent is a top-level function in that system not \"just another app I have to switch to\" to take my context with. I have some small amount of bias because I've always felt input-constrained on computers. I have to move my hands to go places and that's exasperating. I've tried head tracking, had a vim pedal for a while, and used tiling WMs, and things like this to aid but while my vim-fu is pretty good and I function inside things very well with it, my cross-application interface isn't. In the end, perhaps we all have our home offices with our Apple Vision Pros and we talk to them like this to maneouvre faster through our machines and get our ideas into them. Cool research. I wonder what we'll end up with."
+        },
+        {
+          "id": 48116538,
+          "author": "AuthAuth",
+          "text": "All these problems dont need a conversation with an AI to solve. If you make the text selectable then you can do these actions fast and efficiently. This only becomes a product as they make the web shittier and less friendly towards PC workflows. Its wild that they even put this out as a demo. It should have been picked apart in the internal meeting. There is no way I'd ever show my product taking 5s to change a 1 to a 2 in a piece of text that the user was already hovering or taking 10s to drag and drop a line of text from one box to another. Even the image of finding a route between two images could be done quick if images were auto OCR'd which is a setting on most image viewers."
+        },
+        {
+          "id": 48114805,
+          "author": "footy",
+          "text": "you can really tell the people building these tools spend a lot of time alone. I work from a home office 90% of the time and I wouldn't want this to be my workflow. I don't want to talk to my computer, I want to listen to music while I work, and I want to not sound deranged and disturb everyone around me when I am working from a coffeeshop or the open-plan office or the airport or the train or whatever. and that's aside from the obvious privacy problems."
+        },
+        {
+          "id": 48113349,
+          "author": "chromacity",
+          "text": "My reaction to the first demo (recipe) is that it was slower than typing the same thing on your keyboard. The second demo seems to be a wash: there's no time saved in saying \"move this\" versus \"move crab\". And an app-specific contextual menu would probably be faster. The third demo doesn't seem to warrant the use of a pointer at all, since there is only one way to interpret the prompt. None of this means that this approach will not be successful, but there's a reason why so many attempts to revolutionize user interfaces ended up going nowhere. Talking to your computer was always supposed to be the future, but in practice, it's slower and more finicky than typing. In fact, the only new UI paradigm of the past 28+ years appears to have been touchscreens and swipe gestures on phones. But they are a matter of necessity. No one wants to finger-paint on a desktop screen."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 22,
+      "id": 48090321,
+      "title_en": "Up in Smoke",
+      "title_ja": "Up in Smoke",
+      "url": "https://thebaffler.com/odds-and-ends/the-profession-that-does-not-exist-symposium",
+      "hn_url": "https://news.ycombinator.com/item?id=48090321",
+      "score": 6,
+      "comment_count": 0,
+      "posted_at": "2026-05-11T02:13:02+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 23,
+      "id": 48077291,
+      "title_en": "Lanzaboote – NixOS Secure Boot",
+      "title_ja": "Lanzaboote – NixOS Secure Boot",
+      "url": "https://x86.lol/generic/2022/11/26/lanzaboote.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48077291",
+      "score": 74,
+      "comment_count": 6,
+      "posted_at": "2026-05-09T18:55:59+00:00",
+      "comments": [
+        {
+          "id": 48115762,
+          "author": "embedding-shape",
+          "text": "> We plan on streamlining this as much as possible, but so far this has not happened yet. Probably integrating something like sbctl ( https://github.com/Foxboron/sbctl#sbctl---secure-boot-manage... ) would do the trick, it's making the whole signing and key management dance easy. Seems to already work together with limine on NixOS too: https://search.nixos.org/options?channel=25.11&query=sbctl#s..."
+        },
+        {
+          "id": 48115956,
+          "author": "pyrophane",
+          "text": "Huh, as a Lanaboote user I’m surprised to see this on the front page. I use this in combination with sbctl for key generation. I’m mostly using it because I wanted to set up full disk encryption with TPM2 auth."
+        },
+        {
+          "id": 48116561,
+          "author": "krautsauer",
+          "text": "This needs a (2022)."
+        },
+        {
+          "id": 48116208,
+          "author": "c0balt",
+          "text": "Lanzaboote is great, I've been using it for almost a year now in a dual boot with Windows 11 for full secure boot on my desktop. It is quite stable (notably was set and forget) and the initial setup was relatively easy."
+        },
+        {
+          "id": 48077292,
+          "author": "evilmonkey19",
+          "text": "Browsing the internet about secure boot and NixOS, I found the article of one of the creators"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 24,
+      "id": 48111143,
+      "title_en": "Show HN: Agentic interface for mainframes and COBOL",
+      "title_ja": "Show HN: Agentic interface for mainframes and COBOL",
+      "url": "https://www.hypercubic.ai/hopper",
+      "hn_url": "https://news.ycombinator.com/item?id=48111143",
+      "score": 68,
+      "comment_count": 39,
+      "posted_at": "2026-05-12T17:10:22+00:00",
+      "comments": [
+        {
+          "id": 48112072,
+          "author": "ASalazarMX",
+          "text": "What was the training data? While there are open source projects for mainframes, most high-quality and battle-tested COBOL code bases are likely proprietary. Also, will it be trained on the code base it sees? Most companies would be opposed to sharing their IP. Edit: according to the website, the model won't be trained with your data."
+        },
+        {
+          "id": 48112797,
+          "author": "650REDHAIR",
+          "text": "US banks and creditors desperately need this yesterday."
+        },
+        {
+          "id": 48111453,
+          "author": "schlauerfox",
+          "text": "Is this available to install on Hercules emulator for hobbyists? For people unfamiliar with Mainframes, check out the moshix youtube channel."
+        },
+        {
+          "id": 48115445,
+          "author": "redbluff",
+          "text": "How about mainframe systems using PL/I instead of Cobol?"
+        },
+        {
+          "id": 48112318,
+          "author": "happyPersonR",
+          "text": "Hopefully Llm while it may not allow immediately for like 100% ready to go financial services code Maybe it gives us good tests ? That alone for something on cobol might be worthwhile"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 25,
+      "id": 48109962,
+      "title_en": "Launch HN: Voker (YC S24) – Analytics for AI Agents",
+      "title_ja": "Launch HN: Voker (YC S24) – Analytics for AI Agents",
+      "url": "https://voker.ai",
+      "hn_url": "https://news.ycombinator.com/item?id=48109962",
+      "score": 50,
+      "comment_count": 19,
+      "posted_at": "2026-05-12T15:45:20+00:00",
+      "comments": [
+        {
+          "id": 48110403,
+          "author": "akslp2080",
+          "text": "How is it different than Langfuse? sorry if I am off the track but Langfuse also provides some detailed tracing of agentic behavior and decisions."
+        },
+        {
+          "id": 48110569,
+          "author": "Ozzie_osman",
+          "text": "If the team is here, would love to understand how it compares to something like Amplitude's agent analytics ( https://amplitude.com/ai-agents )."
+        },
+        {
+          "id": 48110772,
+          "author": "Damianf19",
+          "text": "What's the data model that lets you compare agents that differ a lot in tools/policies? Curious if you normalize on the \"what did the user actually accomplish\" layer or on raw token/turn metrics, because the two paint completely different pictures of \"is this agent working.\" We struggle with this on the eval side of our own product (email pipeline outcomes, not agents, but same shape)."
+        },
+        {
+          "id": 48111787,
+          "author": "maxrumpf",
+          "text": "congratulations!"
+        },
+        {
+          "id": 48110783,
+          "author": "ggamecrazy",
+          "text": "> High interaction volume (1k+ chat sessions per month) I don't mean to be that typical HN commenter but you did lose me a bit there. I know a lot of people are just getting started with agents but even for a lot of scrappy startups usage is a lot higher than that! If I may suggest focusing on explaining how you can add value even when usage is super low to controlling costs even when usage can get super high? I can validate you that it is a true problem that's solved by large companies but you have to hand-roll yourself @ startups (via airflow or queues, etc). But unfortunately one where I am not sure that a lot of stakeholders understand the benefits of (yet!). I think value has to be shown a bit more clearly here, sadly. Congrats on the launch!"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 26,
+      "id": 48109224,
+      "title_en": "Bambu Lab is abusing the open source social contract",
+      "title_ja": "Bambu Lab is abusing the open source social contract",
+      "url": "https://www.jeffgeerling.com/blog/2026/bambu-lab-abusing-open-source-social-contract/",
+      "hn_url": "https://news.ycombinator.com/item?id=48109224",
+      "score": 1186,
+      "comment_count": 378,
+      "posted_at": "2026-05-12T14:54:41+00:00",
+      "comments": [
+        {
+          "id": 48109711,
+          "author": "kn100",
+          "text": "Full disclosure: I've never owned a Bambu because I've never loved the idea of a \"closed\" ecosystem 3D printer, however I have used them, and am very familiar with the 3d printing space beyond Bambu. For anyone considering alternatives: You should know that almost all other 3D printers expect you to know a little more about how they actually work than Bambus. Bambus are as close as you can get to a \"just works\" type experience, but modern alternatives from others are nowhere near as hard as they used to be. The closest \"easy\" alternative is probably Prusa, but you'll pay significantly more for a Prusa machine than you would a Bambu. They're an excellent company, and the complete opposite of Bambu when it comes to Openness. If money is no object, Prusa is highly recommended. Beyond Prusa, there's a lot of other options. https://auroratechchannel.com/#section2 This list is a good one. I personally run an old Elegoo Neptune 4 pro - but my needs are quite low. If I were buying today, a Snapmaker U1 or the Creality K2 Plus is probably where I'd end up going."
+        },
+        {
+          "id": 48110520,
+          "author": "9cb14c1ec0",
+          "text": "This sentence in Bambu Lab's blog post is wild: > We have documented incidents of service outages caused precisely by spikes in unauthorized traffic - overwhelming the servers, causing service disruptions affecting everyone. The cost was instability felt by all users. So it's a problem that their printers are popular, and they can't be bothered to scale their infra, so let's gate everything based on USER AGENT STRING! This is so crazy of an excuse that I don't believe it."
+        },
+        {
+          "id": 48109817,
+          "author": "syntaxing",
+          "text": "Funny how fast people forget. LAN mode was NOT part of their original plan until outrage like this happened last time. They shifted their course and changed their blog post after. Putting pressure as a customer is how you steer company’s direction."
+        },
+        {
+          "id": 48109674,
+          "author": "danielrmay",
+          "text": "\"It pretended to be the official client\" is not a security argument if the mechanism was client-supplied metadata. That’s not impersonation. That’s Bambu discovering that user agents are not authentication."
+        },
+        {
+          "id": 48109933,
+          "author": "morphle",
+          "text": "I am an outsider on the details of the Bambu software requiring users to go through their servers in China and the closing of their software. Still I suspect it is about spying in wartime, Bambu printers are at the core of the Ukrainian war effort, the main reason even Ukraine is winning since januari 2026. First China prevented Ukraine from using any of the drones that they sold in millions to Russia while exercising the built in kill switches in Chinese drones used in by Ukrainians. Suddenly Bambu, another Chinese company started listening in on the 3D printing on a massive scale in secret factories all over Ukraine that make the drones to replace the Chinese drones. Very suspicious. Whatever is the reason Bambu locks down software or firmware on their 3D printers, now is the time for programmers to change the situation. We need to put up money like Louis Rossmann did [1], not to fight legal battles but for a assembly language programmer to reverse engineer the Bambu firmware and make a free and open source version. This firmware replacement will cost a couple of months to write so we all should send that programmer a little money so he/she can release it for free. A free Bambu firmware will allow the Ukranians to continue producing another few million drones and save over a hundred thousands lives by ending the war. Now is the chance for us outsiders to help Ukraine, by freeing Bambu firmware. [1] https://www.youtube.com/watch?v=qLLVn6XT7v0 P.S. I would be willing to do the reverse engineering but I would need at least 35 euro per day (to eat) to build a new firmware for all Bambu models from scratch. I would need a few different models of printers on loan for a few weeks to test the new firmware. I estimate it would take 5-9 months to rebuild firmware for all models from zero and release it. Maybe Rossmann and Geerling could use their influence and coördinate this freeing of the firmware? I just emailed Rosmann and Geering to see if we together can free the Bambu firmware. Anyone who wants to help, please contact me trough my HN profile."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 27,
+      "id": 48100364,
+      "title_en": "Foucault's Order of Things Explained with Trading Cards [video]",
+      "title_ja": "Foucault's Order of Things Explained with Trading Cards [video]",
+      "url": "https://www.youtube.com/watch?v=1TbHYjGvS68",
+      "hn_url": "https://news.ycombinator.com/item?id=48100364",
+      "score": 29,
+      "comment_count": 19,
+      "posted_at": "2026-05-11T20:38:40+00:00",
+      "comments": [
+        {
+          "id": 48116699,
+          "author": "chris_wot",
+          "text": "I can not understand why Foucault is taken seriously. In fact, I cannot understand how Sociology is taken seriously. In my uni course, the textbook tried to claim that childhood development is a myth. When I pointed out the decades of child development psychological studies and research, I was told \"we aren't studying psychology, we are studying sociology .\" Great! And yet there is an entire field that claims the direct opposite of what is being espoused and this is the best argument they could give me."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 28,
+      "id": 48069032,
+      "title_en": "When life gives you lemons, write better error messages",
+      "title_ja": "When life gives you lemons, write better error messages",
+      "url": "https://wix-ux.com/when-life-gives-you-lemons-write-better-error-messages-46c5223e1a2f",
+      "hn_url": "https://news.ycombinator.com/item?id=48069032",
+      "score": 138,
+      "comment_count": 50,
+      "posted_at": "2026-05-08T21:31:44+00:00",
+      "comments": [
+        {
+          "id": 48111739,
+          "author": "magicalhippo",
+          "text": "Error: File not found Which file?!?!?! Anyway, I disagree strongly on the technical jargon. Ok, if it's not really an error and the user can retry or similar sure. But if it's bad times, an exception or similar, don't care about the user. Instead include as much detail as you need. A non-technical user won't be able to do anything anyway, and a sanitized error message means support or a technical user has a much harder time figuring out what the real issue might be, in order to work around it. Failed to load a shared library? State the filename and exact error code and message, and anything else that might be useful. And so on."
+        },
+        {
+          "id": 48111884,
+          "author": "harperlee",
+          "text": "Hopefully this becomes a reversal in the trend of giving less and less context to the user. I'm not against the considerations of the article regarding the user and its state of mind, but please do add as much technical detail as possible! Even if an error message is a cryptic error code, that's better than a \"Something went wrong\" message. This is not better, or even friendlier, UX. An error code can be referenced, can be searched on the internet, can be passed around on a ticket or on a call... add parameters to your error template, reference the name of the file, the item name that does not respond, the HTTP error code... just give the user some transparency, some agency. Help the client build up a mental model of the error: when / how / why might it be happening."
+        },
+        {
+          "id": 48117718,
+          "author": "disfictional",
+          "text": "I misread the title as \"write bitter error messages\", and that resonated with me deeply."
+        },
+        {
+          "id": 48112127,
+          "author": "vector_spaces",
+          "text": "You can certainly learn a bit about how a company thinks about UX, accessibility, and its users more broadly by looking at its error messages. Although I didn't care for much of the specifics proposed, I am glad about this post as I think it is important to think through error messages with intention and treat them as products in their own right. Regarding the proposed \"good\" alternative, it has less actionable information than the original \"bad\" message, depending on what the product is and who its users are. In particular, you can't determine whether \"fetch data\" is impenetrable jargon without looking at the product itself and its users. I also frequently see people use the designation of a user as non-technical as an excuse to dismiss their intelligence. It's true that tech folks generally underestimate how confusing computers and software are to the average person, but erring too heavily in the other direction also has negative impacts for accessibility. Either way, you can at least hide away that extra detail, with jargon and all, using that link tip she mentioned. Finally, this writer seems to overestimate the extent to which most users view \"contact Customer Care\" as \"giving them a way out\" and not an invitation for further aggravation."
+        },
+        {
+          "id": 48112690,
+          "author": "CM30",
+          "text": "I think this post has some interesting points, but it kinda misses a few more as well. First, appropriate tone depends heavily on the product or service in question. A bank or otherwise serious business should probably not be giving messages like \"whoops, something went wrong\". But an entertainment product could have those sorts of messages, and treat it as part of the overall experience. Secondly, I'm not a huge fan of error messages that don't give actionable feedback for how to fix the issue. Yes, a lot of users don't need that sort of information, but some sort of error code or technical reference can be handy for more involved support processes. So, if the product or service is business orientated, maybe have that info in a dropdown box or something, where a support agent can ask the user to find it if an issue keeps occurring. And of course, if the product or service is aimed at technical people (like an open source infrastructure project), maybe just skip the casual language and just get to the point."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 29,
+      "id": 48115059,
+      "title_en": "EFF to 4th Circuit: Electronic Device Searches at the Border Require a Warrant",
+      "title_ja": "EFF to 4th Circuit: Electronic Device Searches at the Border Require a Warrant",
+      "url": "https://www.eff.org/deeplinks/2026/05/eff-fourth-circuit-electronic-device-searches-border-require-warrant",
+      "hn_url": "https://news.ycombinator.com/item?id=48115059",
+      "score": 175,
+      "comment_count": 31,
+      "posted_at": "2026-05-12T21:48:24+00:00",
+      "comments": [
+        {
+          "id": 48116886,
+          "author": "sowbug",
+          "text": "This defendant was convicted of possessing CSAM. Before that fact causes you to lose sympathy for the case, note that almost every significant criminal case affirming constitutional rights involves a defendant who did something unsavory, if not reprehensible. Miranda was a kidnapper and rapist. Danny Escobedo (right to an attorney during interrogation) murdered his brother-in-law. Clarence Earl Gideon (right to a court-appointed attorney) was a career criminal. It's the same with freedom of speech cases: they often involve jerks and assholes; otherwise, they probably wouldn't have gotten arrested in the first place. You can root for the right outcome without rooting for the defendant."
+        },
+        {
+          "id": 48117267,
+          "author": "harshreality",
+          "text": "The trial court judge's take on the motion to suppress: https://storage.courtlistener.com/recap/gov.uscourts.vaed.55... It's a tough call. On one hand, the feds were really reaching by singling out the defendant for inspection based on: 1) a vague notion that South America is a higher risk of CSAM and sex trafficking (the government's CBP witness couldn't even say that that background CSAM rate in the countries the defendant had traveled from was higher than in Virginia, the state of the defendant's port of entry), and 2) a vague FinCEN report that there was some unspecified payment activity between the suspect and an account or accounts believed to be of underage individuals. On the other hand, the defendant consented to the initial search after being read a miranda warning and signing a waiver, and did in fact have a pattern of catfishing victims to get them to send CSAM. He also had banned coca products (doesn't sound like cocaine, probably just coca leaves or something) that they were citing him for. I'd like to think the feds or any LE should need some reasonable suspicion of a particular crime before investigating them for that particular crime. I don't think they had that. This wasn't a generic border search and enhanced questioning (to find out if there was anything specific worth investigating). I think the judge was lazy in concluding that the search was justified, and wanted to leave it to appellate courts to exclude evidence if it meant letting the defendant go. Is the current state of the law really that anyone who within the last few years ever transferred any money to a minor, and happens to be coming from any country outside the 1st world , is subject to an inspection and initial cursory search of digital devices for specific illegal material because it's \"Look for CSAM month\"? I find that difficult to believe, and appalling if true, regardless of any crimes that were uncovered."
+        },
+        {
+          "id": 48115079,
+          "author": "hn_acker",
+          "text": "The original title is: > EFF to Fourth Circuit: Electronic Device Searches at the Border Require a Warrant"
+        },
+        {
+          "id": 48115796,
+          "author": "superkuh",
+          "text": "This is even more important than it sounds because the US federal goverment considers 100 miles inland from any international border (including the great lakes, etc) as being \"the border\". And that is where 80% of the people in the USA live."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 30,
+      "id": 48110593,
+      "title_en": "Show HN: Gigacatalyst – Extend your SaaS with an embedded AI builder",
+      "title_ja": "Show HN: Gigacatalyst – Extend your SaaS with an embedded AI builder",
+      "url": null,
+      "hn_url": "https://news.ycombinator.com/item?id=48110593",
+      "score": 46,
+      "comment_count": 19,
+      "posted_at": "2026-05-12T16:32:54+00:00",
+      "comments": [
+        {
+          "id": 48116827,
+          "author": "beachy",
+          "text": "I guess I don't really understand how this works although I admit to not reading everything. Most SaaS companies are very vigilant about not having per-customer code changes - many people have lived through the hell of ending up with divergent code bases as a result of customer demands. But I did want to mention something that I think would work well for SaaS companies which is related, and that is empowering customers to make their own changes to the core product. We tried at one stage having a council of customers, but it's simply wasn't practical to implement all of the ideas that they came up with. That's changed now. I think an interesting product would bundle the communications, voting (if necessary), updates, screen captures / video demos, feedback loops and so on that are involved in a decent sized group of customers consolidating their requirements/ideas. A true mark of success might be when the product becomes self-stewarding, with customers driving a lot of the requirements."
+        },
+        {
+          "id": 48112225,
+          "author": "mariopt",
+          "text": "I agree that is part of the future of AI, you describe what kind of UI you need and the app generates a combination of UI components to match your needs. I expect this to be a simple NLP mapping via local/cloud AI model to a JSON/DSL that describes the interface. Naturally, this won't work well for complex UI that are context aware but will do well for most simple apps/dashboards. My question is: How do you plan to make this a business?"
+        },
+        {
+          "id": 48111693,
+          "author": "solumos",
+          "text": "This is such an important step forward as we start to understand the 2nd order implications of AI and how it will change UIs in the future. We used to have to allow + review 3rd party plugins for software so that people could customize it, but when the cost of development is near-0, we can simply hand over the development reigns to customers."
+        },
+        {
+          "id": 48115593,
+          "author": "ruben81ad",
+          "text": "How do you know that the values of the automatically generated dashboards are correct?"
+        },
+        {
+          "id": 48115876,
+          "author": "fomoz",
+          "text": "2,000 daily users is 2,000 separate paying businesses that use your app or you count one business with 2,000 employees as 2,000 users? How many paying clients (companies, not people) do you have?"
+        }
+      ],
+      "summary_ja": ""
+    }
+  ]
+}
