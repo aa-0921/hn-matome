@@ -1,0 +1,1074 @@
+{
+  "date": "2026-05-16T00:00:00+09:00",
+  "slot": "23",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 48148460,
+      "title_en": "A 0-click exploit chain for the Pixel 10",
+      "title_ja": "A 0-click exploit chain for the Pixel 10",
+      "url": "https://projectzero.google/2026/05/pixel-10-exploit.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48148460",
+      "score": 110,
+      "comment_count": 43,
+      "posted_at": "2026-05-15T13:39:54+00:00",
+      "comments": [
+        {
+          "id": 48149133,
+          "author": "revolvingthrow",
+          "text": "Semi-related: has the rate of published exploits picked up as if late, or is it simply the fact that there’s hype around ai as security tool (offense or defense) so it’s simply in the news more often? Feels like there’s something new every other day - linux, windows, mobile, various commonplace tools used by everybody, the list goes on"
+        },
+        {
+          "id": 48149104,
+          "author": "greesil",
+          "text": "\"This is notably fast given that this is the first time that an Android driver bug I reported was patched within 90 days of the vendor first learning about the vulnerability.\" This makes me feel better about Google, but also makes me kind of frightened of the rest of Android. I wonder what Apple's response time is?"
+        },
+        {
+          "id": 48148918,
+          "author": "phuff",
+          "text": "This is a great bug report! I am not a kernel expert by any means even though I have read some about it... 10+ years ago. And I was able to follow along and see what was going on. It does make me scared for what other dangers lurk since this was a really bad one and it was so little work to find. Also of note: so many security issues lately have been done using AI. This report makes me think two things: 1. Expertise is still immensely valuable, the more niche, the more valuable. 2. There are lots of niches still where AI doesn't dominate..."
+        },
+        {
+          "id": 48149770,
+          "author": "rjsw",
+          "text": "There have been some V4L2 enhancements to support hardware video decoding pending a merge for a long time, they do seem to be in the mainline kernel now, I guess people didn't want to wait that long."
+        },
+        {
+          "id": 48150047,
+          "author": "a-dub",
+          "text": "hm. surprised there aren't idioms like copy_(to|from)_user for these kinds of kernel to userspace mappings for custom device nodes that ensure bounds are supplied..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 2,
+      "id": 48148726,
+      "title_en": "ASCII by Jason Scott",
+      "title_ja": "ASCII by Jason Scott",
+      "url": "https://ascii.textfiles.com/",
+      "hn_url": "https://news.ycombinator.com/item?id=48148726",
+      "score": 49,
+      "comment_count": 8,
+      "posted_at": "2026-05-15T14:02:36+00:00",
+      "comments": [
+        {
+          "id": 48149174,
+          "author": "embedding-shape",
+          "text": "> Just a little over ten years ago [...] a collection of 13,000 manuals now lives on the Internet Archive That's a crazy amount of time, with a nice amount of manuals now publicly available, about ~3.5 manuals PER DAY, for a decade! Few people are as dedicated as Jason Scott when it comes to making sure information stays free and available, thank you a lot for what you, Archive Team and Internet Archive is doing for all of us!"
+        },
+        {
+          "id": 48150257,
+          "author": "xipho",
+          "text": "He's streaming live \"right now\". https://www.twitch.tv/textfiles"
+        },
+        {
+          "id": 48149972,
+          "author": "bityard",
+          "text": "Jason Scott is one of the good guys."
+        },
+        {
+          "id": 48149101,
+          "author": "crtasm",
+          "text": "Latest post: Manuals Plus: The Wrap-Up — May 10, 2026"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 3,
+      "id": 48147058,
+      "title_en": "O(x)Caml in Space",
+      "title_ja": "O(x)Caml in Space",
+      "url": "https://gazagnaire.org/blog/2026-05-14-borealis.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48147058",
+      "score": 171,
+      "comment_count": 27,
+      "posted_at": "2026-05-15T10:55:51+00:00",
+      "comments": [
+        {
+          "id": 48148343,
+          "author": "rho_soul_kg_m3",
+          "text": "Well, I might have been the first to put OCaml in space, specifically on low-Earth orbit aboard GHGSat-D in 2016. I designed the payload software as a collection of SystemD services talking over DBus, and it included a CCSDS-to-DBus bridge to talk to the platform (the thing that hosts the payload, controls and steers the satellite). The payload also did perform symmetric-key encryption of the resulting data, as per regulations. I gave a talk about the payload software at the Paris OCaml users group. The reason for selecting that archicture was that I didn't expect to write the whole payload software by myself, and I assumed that when some other developers join in they would, obviously, not want to use a weird language like OCaml, and so they could write their portion in C/C++/whatever and the system could still work. Of course that didn't happen. I'd be surprised if the company still uses OCaml, as the standad tendency is to revert to \"industry-standard\" languages to get industry-standard problems. The whole processing and simulation toolchain was also written in OCaml. Today there is little reason not to use Rust and it can cover both the processing side and the payload software. But people still insist on using C/C++. I'm OK with that as long as I can invoice them. EDIT: Found my slides https://lambda-diode.com/static/data/GHGSat_OCaml.pdf"
+        },
+        {
+          "id": 48147484,
+          "author": "avsm",
+          "text": "The big win here is having a GC by default, with the ability to reduce heap allocations (via stack) just by adding in more typing annotations. Switching to OxCaml with exclave_ stack_ annotations drops p99.9 latency from 29 ns to 9 ns per packet on the dispatch hot path, and removes GC pressure entirely (394 minor GCs to zero over 25 million packets). Throughput is comparable [...] I got a similar result with my 'httpz' stack a few months ago ( https://anil.recoil.org/notes/oxcaml-httpz ) which my website's been running on without drama. And, I gotta say, OxCaml's a surprisingly robust compiler for being packed full of bleeding edge extensions: not a single crash on my infra is attributable to a compiler bug (plenty of bad OCaml code, but not due to a compilation bug)"
+        },
+        {
+          "id": 48148029,
+          "author": "dsab",
+          "text": "CCSDS guides you to reinvent everything from scratch, I doubt memory safety is the biggest attack surface when you implement this stack. I dont know how big players implement networking for their satellites, but personally I would choose to fit something existing and battle-tested like TLS instead of reinventing data encryption, just look at those documents: https://www.google.com/search?client=firefox-b-lm&q=ccsds+en..."
+        },
+        {
+          "id": 48149178,
+          "author": "Decabytes",
+          "text": "I know that many garbage collected languages have ways of reducing gc pressure by minimizing classes, and pushing more things on the stack. I’ve even heard how languages like Java will allocate a massive amount of memory in the beginning, and then turn. Off the garbage collector for the whole day in high frequency trading scenarios. Having never been in this situation, I wonder how difficult it is to bend a garbage collected language to behave like a non garbage collected one"
+        },
+        {
+          "id": 48149767,
+          "author": "Maksadbek",
+          "text": "I'm not deeply familiar with reliability-focused languages, but as far as I know, Ada, Rust, and Haskell are the most prominent ones. What made OCaml a better choice here over those alternatives?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 4,
+      "id": 48146129,
+      "title_en": "Explore Wikipedia Like a Windows XP Desktop",
+      "title_ja": "Explore Wikipedia Like a Windows XP Desktop",
+      "url": "https://explorer.samismith.com/",
+      "hn_url": "https://news.ycombinator.com/item?id=48146129",
+      "score": 336,
+      "comment_count": 90,
+      "posted_at": "2026-05-15T08:45:36+00:00",
+      "comments": [
+        {
+          "id": 48147308,
+          "author": "cube00",
+          "text": "This is really impressive. It's exactly what I imagined the original Microsoft Network in Windows 95 would have been like. And so The Microsoft Network wasn't a program you loaded like CompuServe. It was part of the OS, with folder icons that looked just like real folders. It was a kind of version of the Web where you could browse online data the same way you browsed your file system. This is what made it cool. It was as if the data was suddenly free of the shackles of being displayed in a program. Data wasn't just a web page, or a program showing its own internal databases. The Microsoft Network made it look like the data was right there, and you could click it and drag it around! For a brief time, back in 1995, it felt like we were on the verge of the true object-oriented web, a world filled with open data and free from the tyranny of the walled gardens. [1] It also reminded me what an excellent job Wikipedia does with their hierarchical classification which you don't see when you're often only searching by article name. [1]: https://web.archive.org/web/20260129143542/https://www.coder..."
+        },
+        {
+          "id": 48147079,
+          "author": "hliyan",
+          "text": "Incredibly beautiful, possibly because it maps so well to the mental model we typically use to organize knowledge in our heads. I don't know how we lost the folder/container vs. document/content iconography, and other things (like layout of items, sorting) during the shift to web applications."
+        },
+        {
+          "id": 48146598,
+          "author": "dewey",
+          "text": "The shininess looks a bit more like https://en.wikipedia.org/wiki/Windows_XP_Media_Center_Editio... and not like the regular Windows XP, but still a fun project!"
+        },
+        {
+          "id": 48147575,
+          "author": "lavela",
+          "text": "I feel like the 100 or so uncategorized articles should lie either directly in home or clutter the desktop for a more authentic experience."
+        },
+        {
+          "id": 48147824,
+          "author": "jwr",
+          "text": "Large scrollbars! Windows with borders! What a relief! This has become a forgotten art: we focus so much on CONTENT these days that we forget that people want to use the mouse to scroll, and use the mouse to resize windows."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 5,
+      "id": 48148309,
+      "title_en": "High dimensional geometry is transforming the MRI industry(2017) [pdf]",
+      "title_ja": "High dimensional geometry is transforming the MRI industry(2017) [pdf]",
+      "url": "https://www.ams.org/government/DonohoPresentation06-28-17Final.pdf",
+      "hn_url": "https://news.ycombinator.com/item?id=48148309",
+      "score": 39,
+      "comment_count": 9,
+      "posted_at": "2026-05-15T13:25:53+00:00",
+      "comments": [
+        {
+          "id": 48149781,
+          "author": "yummybrainz",
+          "text": "If folks are interested, I recently published a paper [1] demonstrating that fMRI activity in the visual cortex is remarkably high-dimensional! Specifically, using a linear approach (like PCA, but slightly fancier), we find that stimulus-related information is present along many, many dimensions of the neural response---much more than previously expected/reported. [1] https://journals.plos.org/ploscompbiol/article?id=10.1371/jo..."
+        },
+        {
+          "id": 48149226,
+          "author": "hansvm",
+          "text": "You can do a lot better than this if you redefine the problem from directly generating images with certain contrasts to maximizing information gain, even with weak magnets. They've since basically run out of money and are on life support, but Q Bio [0] had that tech working years ago, able to quickly derive many different image types from an entropy-maximizing scan, though they never deployed that in prod IIRC (again, they're broke). [0] q.bio"
+        },
+        {
+          "id": 48149669,
+          "author": "jeffreygoesto",
+          "text": "I remember one of my diploma students continued with discrete tomography as PhD, topic \"Binary Tomography by Iterating Linear Programs\" and I found it super interesting to get down the number of shots and at the same time increasing the accuracy a lot."
+        },
+        {
+          "id": 48149693,
+          "author": "davidkipstar",
+          "text": "It's a nice review but the end reads like a funding pitch. The most important Mathematicians like donoho and Tao in the US seem to currently experience budget cuts and start to address the public."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 6,
+      "id": 48150097,
+      "title_en": "I built Zenith: a live local-first fixed viewport planetarium",
+      "title_ja": "I built Zenith: a live local-first fixed viewport planetarium",
+      "url": "https://smorgasb.org/zenith-tech/",
+      "hn_url": "https://news.ycombinator.com/item?id=48150097",
+      "score": 6,
+      "comment_count": 0,
+      "posted_at": "2026-05-15T15:45:11+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 7,
+      "id": 48148084,
+      "title_en": "Trade Dollars with other startups. Book it as revenue",
+      "title_ja": "Trade Dollars with other startups. Book it as revenue",
+      "url": "https://www.revswap.ai/",
+      "hn_url": "https://news.ycombinator.com/item?id=48148084",
+      "score": 110,
+      "comment_count": 67,
+      "posted_at": "2026-05-15T13:05:29+00:00",
+      "comments": [
+        {
+          "id": 48149403,
+          "author": "Swizec",
+          "text": "Services in kind is a pretty common business practice. You see this a lot at the SMB level especially outside of the US. Small businesses are cash strapped. So you find someone who needs your services and you need their services. Instead of exchanging cash, you exchange invoices and do the work. You build them, say, a $5000 website, they perform, say, $5000 of landscaping. At big boy levels this is often structured as “strategic partnership”. The part that makes it not fraud is that both parties do actually do the work."
+        },
+        {
+          "id": 48149606,
+          "author": "titanomachy",
+          "text": "Thank god, it's satire https://web.archive.org/web/20260515043739/https://www.revsw..."
+        },
+        {
+          "id": 48148974,
+          "author": "jwr",
+          "text": "I find this amusing: I'm from Poland, where after the VAT tax was introduced in the 1990s, there were famous \"VAT carousel\" crimes, with people ending up in prison. The basic idea was similar, except you also collected VAT refunds from the state. If you search for \"vat carousel\" today, it seems this is still a thing."
+        },
+        {
+          "id": 48148824,
+          "author": "hliyan",
+          "text": "The best bit of tongue-in-cheek is in the FAQ: > We take 2% of every swap. Then we swap our revenue with another platform."
+        },
+        {
+          "id": 48149423,
+          "author": "clearstack",
+          "text": "SEC calls this round-tripping. ASC 606 requires commercial substance — if both parties just book offsetting transactions, auditors flag the net cash flow as zero"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 8,
+      "id": 48148391,
+      "title_en": "We are retiring our bug bounty program",
+      "title_ja": "We are retiring our bug bounty program",
+      "url": "https://turso.tech/blog/the-wonders-of-ai",
+      "hn_url": "https://news.ycombinator.com/item?id=48148391",
+      "score": 271,
+      "comment_count": 165,
+      "posted_at": "2026-05-15T13:33:15+00:00",
+      "comments": [
+        {
+          "id": 48148671,
+          "author": "wg0",
+          "text": "Which goes on to prove that bottleneck isn't in writing the code. It is in reading and understanding the code. We all had that one \"productive\" engineer in our teams who would write huge PRs that would have large swaths of refactoring whether warranted or not and that was way before anyone even could imagine in their wildest dreams that neural networks could generate that huge amounts of code. The net effect of such a \"productive\" engineer always was that instead of increasing the team velocity, team would come to a crawling pace because either his PR had to be reviewed in detail eating up all the time and/or if you just did cursory LGTM then they blew up in production meanwhile forcing everyone back to the drawing board but project architecture would have shifted so rapidly due to his \"productivity\" that no one had a clear picture of the codebase such as what's where except that one \"super smart talented productive loyal to the company goals\" guy."
+        },
+        {
+          "id": 48149077,
+          "author": "Lalabadie",
+          "text": "Good time to mention this fantastic repo acting as a bot honeypot: https://github.com/UnsafeLabs/Bounty-Hunters The corresponding leaderboard: https://clankers-leaderboard.pages.dev"
+        },
+        {
+          "id": 48148741,
+          "author": "MostlyStable",
+          "text": "Closing the program is totally reasonable. However, there is another option: Make submitters pay a nominal fee that is returned in the case that a real bug is found."
+        },
+        {
+          "id": 48150289,
+          "author": "FlyThruTheSun",
+          "text": "Kind of a coincidence... Anthropic starts talking about mythos being so good at finding zero days and the companies are already hedging their bets on it."
+        },
+        {
+          "id": 48149706,
+          "author": "bee_rider",
+          "text": "Possibly stupid question (this is outside my wheelhouse): is there any way a final full run of the simulator test cases (presumably required to make sure the submitted simulator changes don’t break the thing) could act as a proof-of-work?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 9,
+      "id": 48146908,
+      "title_en": "A new book on Steve Jobs at NeXT",
+      "title_ja": "A new book on Steve Jobs at NeXT",
+      "url": "https://spectrum.ieee.org/steve-jobs-next-computer",
+      "hn_url": "https://news.ycombinator.com/item?id=48146908",
+      "score": 87,
+      "comment_count": 80,
+      "posted_at": "2026-05-15T10:34:58+00:00",
+      "comments": [
+        {
+          "id": 48147372,
+          "author": "cmiles8",
+          "text": "In many ways modern Apple is largely Next. The Apple that was dying when he returned largely faded away. Folks forget that Apple was literally days away from simply going bust. One of the most amazing comeback stories in the history of business."
+        },
+        {
+          "id": 48148021,
+          "author": "felixding",
+          "text": "In case you don't know yet, there is a project that tries to bring the NeXTSTEP look and feel to Linux: https://github.com/trunkmaster/nextspace"
+        },
+        {
+          "id": 48147442,
+          "author": "puff_pastry",
+          "text": "\"Becoming Steve Jobs\" had a great part about NeXT and how Steve Jobs grew there to bounce back once he was back at Apple. This looks promising. I think it's very interesting to read about how his personality grew and how he became a better manager and visionary at his time between CEO-ships."
+        },
+        {
+          "id": 48147363,
+          "author": "dmazin",
+          "text": "If you want more on this, I recommend Steve Jobs and the Next Big Thing by Stross. I’m not sure, but it might be the only extensive book about Next other than this new one. Though it’s essentially a long hit piece. The author really had it out for Jobs. In fact it’s a completely uncharitable book now that I think about it. Hopefully this new book will be a lot less biased."
+        },
+        {
+          "id": 48147748,
+          "author": "elzbardico",
+          "text": "I consider that Steve Jobs saved the macintosh as a commercial product twice, not only at his second coming, but also when he overrode Jef Raskins ideas in the first iteraction."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 10,
+      "id": 48147603,
+      "title_en": "Radicle: Sovereign {code forge} built on Git",
+      "title_ja": "Radicle: Sovereign {code forge} built on Git",
+      "url": "https://radicle.dev/",
+      "hn_url": "https://news.ycombinator.com/item?id=48147603",
+      "score": 112,
+      "comment_count": 27,
+      "posted_at": "2026-05-15T12:07:55+00:00",
+      "comments": [
+        {
+          "id": 48147881,
+          "author": "josh-sematic",
+          "text": "Love to see it. Unlike tangled.org this is local-first and has a solid story around private repos. I’m bullish on distributed forges in general, but I’m all for experimentation in figuring out exactly what that looks like."
+        },
+        {
+          "id": 48148412,
+          "author": "h1watt",
+          "text": "Radicle is really underrated, especially when working with agents. I find it a joy to use for my agentic workflows. If there's purely an agentic forge one day, it's likely going to be a distributed one, with cryptographic identities and signed artifacts by default."
+        },
+        {
+          "id": 48147946,
+          "author": "vaylian",
+          "text": "I noticed that they moved to a different domain last month: https://radicle.dev/2026/04/23/domain-move"
+        },
+        {
+          "id": 48149019,
+          "author": "bfrog",
+          "text": "radicle is awesome and Just Works from what I've tried of it"
+        },
+        {
+          "id": 48149916,
+          "author": "pessimizer",
+          "text": "I'd like to see radicle replace crates.io. I can't get over Rust's dependency on github/Microsoft, and I can't get over the lack of namespacing. All you would need is cargo compatibility, and a trusted namespace that kept up with the metadata of the current contents of crates.io, right? edit: I really, really like rust, and love basically all of their choices about the language, but I can't stand the feeling that I'm being tricked into an ecosystem dependent on one of the worst behaved companies in the world, and I can't stand that a lot of rust projects smell like GPL-washing. That being said, git is GPL and radicle is MIT, so it feels like the same thing, but Github also ain't git. I prefer MIT to MS; if radicle gets important enough and decides to rubpull, there will inevitably be a Free fork anyway."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 11,
+      "id": 48136981,
+      "title_en": "Show HN: Watch a neural net learn to play Snake",
+      "title_ja": "Show HN: Watch a neural net learn to play Snake",
+      "url": "https://ppo.gradexp.xyz/",
+      "hn_url": "https://news.ycombinator.com/item?id=48136981",
+      "score": 11,
+      "comment_count": 1,
+      "posted_at": "2026-05-14T15:35:14+00:00",
+      "comments": [
+        {
+          "id": 48150244,
+          "author": "simedw",
+          "text": "Cool project! I noticed that if you go from training to watch and then back, the training temporarily drop significantly in score."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 12,
+      "id": 48138136,
+      "title_en": "Removing the modem and GPS from my 2024 RAV4 hybrid",
+      "title_ja": "Removing the modem and GPS from my 2024 RAV4 hybrid",
+      "url": "https://arkadiyt.com/2026/05/13/removing-the-modem-and-gps-from-my-rav4/",
+      "hn_url": "https://news.ycombinator.com/item?id=48138136",
+      "score": 977,
+      "comment_count": 517,
+      "posted_at": "2026-05-14T17:08:00+00:00",
+      "comments": [
+        {
+          "id": 48147076,
+          "author": "bitparadox",
+          "text": "I have a few year old Volkswagen. I'm security conscious and made sure to disable all the data collection I could find in the companion app, turn off remote access services, dig through the infotainment to turn off what I could, etc. Last year I requested a Carfax on it, and one of the fields in the request was current mileage. I entered an estimate like 75000 miles. On form submission, that field failed validation with the red subtext along the lines of 'this is less than the last reported mileage of 75345, reported <5 or so days prior>'. Checking my odometer and looking at my past few days' trips, that was indeed accurate. The car hadn't been to a shop or out of my possession in weeks, so I can only assume the telemetry was still dialing home and selling to third parties despite my best efforts to disable it. Anecdotal and not unexpected in the grand scheme, but it still surprised me."
+        },
+        {
+          "id": 48138500,
+          "author": "nurple",
+          "text": "> Even after the modem is removed, if you connect your phone to the car via Bluetooth then the car will use your phone as an internet connection and send all the same telemetry data back to Toyota. However, if you use a wired USB connection then it does not do that (see the discussion here and elsewhere), so I exclusively use CarPlay via USB. The problem with this is that both carplay and android auto capture their own vehicle telemetry. So even though the car is not able to use your phone as a general data pipe, Google and Apple still get access to this data when you're connected. They are both very cagey with how they talk about this (or don't)."
+        },
+        {
+          "id": 48143823,
+          "author": "codezero",
+          "text": "Does anyone have any details on this claim? Important: Even after the modem is removed, if you connect your phone to the car via Bluetooth then the car will use your phone as an internet connection and send all the same telemetry data back to Toyota. However, if you use a wired USB connection then it does not do that (see the discussion here and elsewhere), so I exclusively use CarPlay via USB. I wish I had a way to completely disable the car’s Bluetooth functionality, but it’s deeply integrated into the head unit. How can data via Bluetooth be routed to an active internet connection? I assume this would only work if you have the manufacturer's car application installed on your phone. Following the thread linked to, the only thing I can find is very unsubstantiated; https://www.rav4world.com/threads/2019-rav4-dcm-deactivate-p... : One caveat, if you use bluetooth to connect your phone to the car DCM will use your phone to connect to the mother ship and presumably send your data. I only use my iPhone cable to connect to the car which does not have this effect. This sounds like pure speculation, and I would love to hear if there is any information that can substantiate what they are claiming."
+        },
+        {
+          "id": 48140310,
+          "author": "lucisferre",
+          "text": "I have the same car and want to do this, but not for the reasons the author noted but because the GPS unit in the car is broken when paired with Carplay and has the wrong compass heading causing navigation to be completely useless. I have reported this to Toyota multiple times with videos detailing the problem and they have denied the problem and ultimately when faced with the evidence simply refused to fix it. I've been a big fan of Toyota's Production System and their management culture, but this experience has really diminished the brand for me. I realize these problems exist with all cars today. The pattern seems to be to foist low-quality hardware and software on their customers and take no responsibility for the results. Software bugs aren't what they consider a \"typical car problem\" so they simply don't fix them."
+        },
+        {
+          "id": 48139073,
+          "author": "everdrive",
+          "text": "The 2024 Ford Maverick has a single fuse for the telematics unit that you can remove without throwing a code or an error. No idea if this remained true after the 2025-2026 refresh, but worth knowing. https://www.mavericktruckclub.com/forum/threads/telematics-f..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 13,
+      "id": 48148337,
+      "title_en": "Amazon workers under pressure to up their AI usage are making up tasks",
+      "title_ja": "Amazon workers under pressure to up their AI usage are making up tasks",
+      "url": "https://www.fastcompany.com/91541586/amazon-workers-pressured-to-up-ai-use-extraneous-tasks",
+      "hn_url": "https://news.ycombinator.com/item?id=48148337",
+      "score": 109,
+      "comment_count": 73,
+      "posted_at": "2026-05-15T13:28:55+00:00",
+      "comments": [
+        {
+          "id": 48149107,
+          "author": "ryandrake",
+          "text": "Not just Amazon, too. It feels like all of big tech (and some smaller firms) have simultaneously gone insane. Imagine if your CEO woke up one day and told the company: \"We need to encourage travel spending. Please book as many business trips as you can, and spend as much money as possible. Fly first class to our satellite offices! Take limos instead of Ubers! Eat at fine restaurants! Make sure you are constantly traveling. In fact, we are going to make Travel Spending part of your annual performance review: If you don't spend enough on business travel, you'll get a low rating!\" We are living in a totally bonkers time."
+        },
+        {
+          "id": 48150086,
+          "author": "laweijfmvo",
+          "text": "I work at a FAANG (not Amazon), and have heard this a lot, both internally and publicly. Except, never officially from anyone that mattered (leadership). It always starts with a rumor and/or someone (internal) creating a dashboard/metric, and blows up from there. I've even heard leaders proclaim that it's NOT what they're looking at, and that you better NOT be wasting those expensive tokens. Now, they might be; they've certainly used silly metrics in the past (LoC, commit count, etc.) without ever fully acknowledging it. But I don't believe that it's as simple as more tokens = more better."
+        },
+        {
+          "id": 48148711,
+          "author": "MrCharismatist",
+          "text": "Like six months ago we got a presentation from an AWS guy on the AI tooling available and how it fit with our particular use cases. At one point seemingly out of nowhere he pointed out on his screen share \"Look at how many tokens I've used this month. I run so much Opus.\" It was a number that was offensively large. I remember thinking \"That's a really odd flex, this crap is so expensive the fact that you use so much should be a red flag\" He demonstrated a number of Claude Code use cases he had to manage and tweak AWS infrastructure that made me, the old greybeard sysadmin older than the internet think \"You've used AI to do something that was a single command.\" So this story makes sense. They were being encouraged to just blast away at it six plus months ago."
+        },
+        {
+          "id": 48150215,
+          "author": "Qem",
+          "text": "It's a shame AI now has a universal basic jobs[1] program, but humans still not. Companies are paying AI to dig holes, so other AI can fill them. [1] https://locusmag.com/feature/cory-doctorow-full-employment/"
+        },
+        {
+          "id": 48149217,
+          "author": "pjc50",
+          "text": "Lots of people reporting their \"I had to use up my tokens, so I burned them on worthless stuff\" stories. Incredible thing to do in a climate emergency. Push harder guys, maybe we can hit 3C warming? This reminds me of the story of how the USSR nearly made whales extinct to meet a quota for whale meat that nobody wanted to eat."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 14,
+      "id": 48147533,
+      "title_en": "SigNoz (YC W21, open source Datadog) Is hiring for growth and engineering roles",
+      "title_ja": "SigNoz (YC W21, open source Datadog) Is hiring for growth and engineering roles",
+      "url": "https://signoz.io/careers",
+      "hn_url": "https://news.ycombinator.com/item?id=48147533",
+      "score": 1,
+      "comment_count": 0,
+      "posted_at": "2026-05-15T12:00:31+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 15,
+      "id": 48142251,
+      "title_en": "UK government replaces Palantir software with internally-built refugee system",
+      "title_ja": "UK government replaces Palantir software with internally-built refugee system",
+      "url": "https://www.bbc.com/news/articles/c2l2j1lxdk5o",
+      "hn_url": "https://news.ycombinator.com/item?id=48142251",
+      "score": 437,
+      "comment_count": 165,
+      "posted_at": "2026-05-14T22:44:16+00:00",
+      "comments": [
+        {
+          "id": 48142509,
+          "author": "sleepyguy",
+          "text": "http://archive.today/xgkiS"
+        },
+        {
+          "id": 48145971,
+          "author": "dust-jacket",
+          "text": "Having spent time working in UK healthcare tech, I never understood why everyone was lining up to throw buckets of money at Palantir. Quite apart from being obviously evil and so on, none of their solutions were actually very good. Unfortunately, it's hard to escape the feeling that friends in high places, some lobbying and some er... reciprocal back scratching might have been instrumental. See also senior staff at NHS England (or Digitial? can't remember) handing massive NHS compute contracts to AWS, and then leaving the civil service to become... an AWS employee."
+        },
+        {
+          "id": 48147069,
+          "author": "throw14082020",
+          "text": "I was at an event in London that involved a lot of government people. It came up that Palantir was not a very good company, Someone felt compelled to shout out, oh don't talk about that here, \"we like Palantir here\". It is certainly the elephant in the room (elephant in cost, and a very difficult situation). Free software from Palantir is not free. Peter Thiel's co is all about monopolies. Oh, and don't forget to opt your data out of Palantir: https://your-data-matters.service.nhs.uk/"
+        },
+        {
+          "id": 48142703,
+          "author": "Centigonal",
+          "text": "Palantir is very expensive. This is because: 1. they aim to deliver product company margins with a consulting-heavy model. 2. your software purchase funds a cadre of \"free\" FDEs and deployment strategists who customize your install, build a bunch of data pipes/transforms, and talk to people to figure out what all the data means. This could be a good deal if your tech org is not very competent at integrating your data, or if you have a sudden, short-term need. In the longer term, it's probably cheaper and more effective to develop a competent tech team, modernize the source data systems, and roll your own integration -- but that also requires leaders with long-term vision who are resistant to external hype and pressure."
+        },
+        {
+          "id": 48142495,
+          "author": "stuaxo",
+          "text": "\"In a 2023 blog post, external, Palantir described the challenge of combining data from multiple government systems containing tens of thousands of visa applications and hundreds of thousands of accommodation offers.\" This is the kind of thing GDS and other Civil Service departments build all the time, its a completely standard kind of challenge that a small team of Devs (+ supporting staff) from a departments DDAT department does day in and day out. The output will be open source by default and use existing standards."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 16,
+      "id": 48142108,
+      "title_en": "A few words on DS4",
+      "title_ja": "A few words on DS4",
+      "url": "https://antirez.com/news/165",
+      "hn_url": "https://news.ycombinator.com/item?id=48142108",
+      "score": 385,
+      "comment_count": 157,
+      "posted_at": "2026-05-14T22:29:12+00:00",
+      "comments": [
+        {
+          "id": 48143570,
+          "author": "gcr",
+          "text": "DwarfStar4 is a small LLM inference runtime that can run DeepSeek 4. The blog post implies that it currently requires 96GB of VRAM. For others who are lacking context :-)"
+        },
+        {
+          "id": 48143808,
+          "author": "zmmmmm",
+          "text": "I'm very curious where we will saturate the curve on \"enough\" intelligence for coding. At some point, you can let a less smart model hammer at a problem for longer and get to the same result, and as long as you are not involved it comes to the same thing. I feel like DeepSeek V4 Pro is nearly there. Maybe Flash is too. Once we hit that point, I am curious how much of Anthropic's current business model falls apart? So far it's always been clear that you just pay for the most intelligent model you can get because it is worth it. It now seems clear to me that there is limited runway on that concept. It is just a question of how long that runway is. I honestly wonder how much of their frantic push to broaden out into enterprise / productivity is because they see this writing on the wall already."
+        },
+        {
+          "id": 48143422,
+          "author": "karmakaze",
+          "text": "Great to find this narrow focused thing: > We support the following backends: Metal is our primary target. Starting from MacBooks with 96GB of RAM. NVIDIA CUDA with special care for the DGX Spark. AMD ROCm is only supported in the rocm branch. It is kept separate from main since I (antirez) don't have direct hardware access, so the community rebases the branch as needed. > This project would not exist without llama.cpp and GGML, make sure to read the acknowledgements section, a big thank you to Georgi Gerganov and all the other contributors. Edit: aww, doesn't seem to support offloading to system RAM[0] (yet) [0] https://github.com/antirez/ds4/issues/108 Guess I'll have to keep watching the llama.cpp issue[1] [1] https://github.com/ggml-org/llama.cpp/issues/22319"
+        },
+        {
+          "id": 48146500,
+          "author": "petercooper",
+          "text": "I've been using the Q4 version on my Mac Studio over my local network and it's been good. Indeed, I had the first ever experience where I was playing with it alongside my various other agents and forgot it was a local model as it was doing such a good job. I do wonder, though, if another agent is really needed. I've been driving it with Pi (Claude Code's system prompt is far too heavy given the prefill speeds) and it's been great. OpenCode is another good option. Is there anything else to gain from another similar tool specific to Deepseek 4?"
+        },
+        {
+          "id": 48143174,
+          "author": "FuckButtons",
+          "text": "It’s shocking how close this feels to claude, obviously it's much slower, but I don’t know that it’s significantly dumber. Interestingly the imatrix quantization seems to be better than whatever quant the zdr inference backends on open router are using. It was self aware enough yesterday to realize that it’s own server process was itself without me telling it, which is not something I’ve ever observed a local model doing before."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 17,
+      "id": 48146369,
+      "title_en": "Show HN: Find the best local LLM for your hardware, ranked by benchmarks",
+      "title_ja": "Show HN: Find the best local LLM for your hardware, ranked by benchmarks",
+      "url": "https://github.com/Andyyyy64/whichllm",
+      "hn_url": "https://news.ycombinator.com/item?id=48146369",
+      "score": 260,
+      "comment_count": 61,
+      "posted_at": "2026-05-15T09:19:24+00:00",
+      "comments": [
+        {
+          "id": 48148561,
+          "author": "Aurornis",
+          "text": "1. The results of this tool are not good. It’s recommending outdated models like Qwen2.5 series and missing good new models. 2. This could have been a single web page that runs in your browser and lets you enter hardware specs, like all of the other tools like this. It is not a good idea to install and run unknown projects like this on your computer in this age. 3. The project is very obviously vibecoded, down to the README 4. Every comment from this account appears to be AI generated too. I would recommend not installing and running this on your computer. There is no advantage over other tools and everything about the account and project looks like low effort AI generated content."
+        },
+        {
+          "id": 48150249,
+          "author": "bityard",
+          "text": "The premise of \"best\" makes this a non-starter for me right away. The site says their definition of \"best\" is 1) fits in RAM 2) has a high benchmark score. Best for what? All models have their strengths and weaknesses. Controlling for number of parameters, some are better at general knowledge, some are better at writing and planning, some have more creativity, some are better at writing code, some are better at debugging code, etc, et al, and so on. The \"best\" model is not \"whatever fits into VRAM.\" You can do lots of useful stuff with a small CPU-only model. Just a few days ago, there was a 29M model optimized for nothing but tool calling. Last and probably most controversial, the idea that LLM benchmarks scores have any actual real-world value whatsoever is a collective hallucination. They are for marketing and serve no other purpose. New LLMs are always specifically trained to score high on the benchmarks the developers want. Somehow, every new release of every new model _always_ show it scoring slightly above the models it claims are its competitors on most tests. Since LLM output is non-deterministic, you often get wildly different responses to identical prompts, and it is trivial for the developers to cherry-pick results. Since they never show their work, we are expected to take them for their word. Yes, you need to know if the model will fit into your RAM, and whether the speed will be acceptable. But the _only_ way to know whether a model is suitable for your specific task is to try it out for yourself and see if it does (most of the time) the thing you need it to do."
+        },
+        {
+          "id": 48147157,
+          "author": "jordiburgos",
+          "text": "This is very helpful too: https://www.canirun.ai/"
+        },
+        {
+          "id": 48149431,
+          "author": "wren6991",
+          "text": "I also have a script to find the best LLM for your hardware. Here: echo \"Qwen3.6-27B\""
+        },
+        {
+          "id": 48148510,
+          "author": "est",
+          "text": "Why can't you use a web page instead ?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 18,
+      "id": 48144380,
+      "title_en": "Details of the Daring Airdrop at Tristan Da Cunha",
+      "title_ja": "Details of the Daring Airdrop at Tristan Da Cunha",
+      "url": "https://www.tristandc.com/government/news-2026-05-11-airdrop.php",
+      "hn_url": "https://news.ycombinator.com/item?id=48144380",
+      "score": 217,
+      "comment_count": 83,
+      "posted_at": "2026-05-15T03:56:14+00:00",
+      "comments": [
+        {
+          "id": 48146175,
+          "author": "echoangle",
+          "text": "Very nice story. One thing I often ask myself in these situations: What do the inhabitants on these islands actually do? There are 259 of them in this case. Are they self-sustaining? How do they pay for stuff the want to import? Do they live off the cruise ships they supply? And do people generally stay there or do young people generally move to mainland? Edit: For economy, it looks like they live off exporting langustas."
+        },
+        {
+          "id": 48145153,
+          "author": "connorgurney",
+          "text": "I think this is one of the few things as late that makes me feel genuinely proud to be British, because, beneath the hostility that feels so rife across our country recently, we’ve so many good people making things like this happen. Bravo."
+        },
+        {
+          "id": 48146834,
+          "author": "markb139",
+          "text": "I think this was also a “look what we can do at short notice” kind of exercise. Just in case a country was thinking of maybe trying to take over another set of islands in the south Atlantic"
+        },
+        {
+          "id": 48148190,
+          "author": "redanddead",
+          "text": "Very nice poem from a local: On windswept shores where oceans foam, Far from the bustle and noise of home, The island watched the grey skies part, With hope returning to every heart. Across the vastness the RAF flew through, With medicine, medics, and military too, Parachuting in with skill and courage on our shore, The impossible was accomplished to the core. Tristan da Cunha, proud and small, A community who always stand together through it all, Neighbours helping each other, such an amazing sight, Hoping everything done before the loss of daylight."
+        },
+        {
+          "id": 48144869,
+          "author": "cbsks",
+          "text": "Amazing! Tristan’s entire website is a treasure. It’s a throwback to when the web was great."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 19,
+      "id": 48137629,
+      "title_en": "Building ML framework with Rust and Category Theory",
+      "title_ja": "Building ML framework with Rust and Category Theory",
+      "url": "https://hghalebi.github.io/category_theory_transformer_rs/",
+      "hn_url": "https://news.ycombinator.com/item?id=48137629",
+      "score": 73,
+      "comment_count": 16,
+      "posted_at": "2026-05-14T16:24:28+00:00",
+      "comments": [
+        {
+          "id": 48148209,
+          "author": "stschaef",
+          "text": "I don't see what we gain for the mention of category theory here, and I find the categorical content in the book to be pretty buried. If we're talking about categories, then we should be able to provide definitions of objects and morphisms clearly and independently. I guess I expected this to give denotational semantics of machine learning in an appropriately structured category, and then afterwards we can provide an implementation of these abstractions in Rust; however, this doesn't seem to be the case in this book. Rather, the category theory does seem somewhat stapled on. I wished that this would talk about things like Markov categories (or some other appropriate appropriate semantic domain) and then characterized machine learning algorithms via adjunctions between certain categories, such as in https://link.springer.com/article/10.1007/s44163-025-00707-w As it's written, I don't see much of an opportunity for deriving theorems about the implementation from abstract nonsense, which, to me, would be the biggest strength of such a categorical description. This seems to be a simultaneous high-level introduction to Rust, machine learning, and category theory. The writing suffers from this, as the reader doesn't have much of an opportunity here to detangle these ideas from each other or see how one aids in understanding the others. Instead, they are all provide at once, and to an insufficient level of detail (for the amount of skimming that I did)."
+        },
+        {
+          "id": 48146433,
+          "author": "dauertewigkeit",
+          "text": "This is not a critque of the work, but I have now been often encountering category theory in many of the research topics I'm working on, and even as somebody who majored in math, I sort of feel like it doesn't add much. I know ML frameworks intimately, and you really don't need category theory to describe them. But this is maybe (probably) a failure of mine, because I have not yet groked what category theory is really bringing to the table."
+        },
+        {
+          "id": 48146124,
+          "author": "ctenb",
+          "text": "Maybe expand ML to Machine Learning to avoid confusing with the programming language"
+        },
+        {
+          "id": 48146826,
+          "author": "pshirshov",
+          "text": "> Rust > No HKTs > Category Theory"
+        },
+        {
+          "id": 48147313,
+          "author": "dtj1123",
+          "text": "The style of writing here feels very Claude... Edit: The more I read the more I think that this has at least been edited using AI. The number of instances of \"this is not X, it is Y\" is not super high, but it's higher than I'd expect from a human."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 20,
+      "id": 48137145,
+      "title_en": "RTX 5090 and M4 MacBook Air: Can It Game?",
+      "title_ja": "RTX 5090 and M4 MacBook Air: Can It Game?",
+      "url": "https://scottjg.com/posts/2026-05-05-egpu-mac-gaming/",
+      "hn_url": "https://news.ycombinator.com/item?id=48137145",
+      "score": 653,
+      "comment_count": 153,
+      "posted_at": "2026-05-14T15:47:31+00:00",
+      "comments": [
+        {
+          "id": 48137817,
+          "author": "matthewfcarlson",
+          "text": "I have been bothering the VM team for years for VM GPU pass through. I worked on the Apple Silicon Mac Pro and it would have made way more sense if you could run a linux VM and pass through the GPU that goes inside the case! Sadly, as you can tell, they have not taken me up on my requests. Awesome that other people got it working!"
+        },
+        {
+          "id": 48138265,
+          "author": "Aurornis",
+          "text": "Excellent article. The game benchmarks are fun but the LLM improvements are where this gets really interesting for practical use. I love Apple platforms as an approachable way to run local models with a lot of RAM, but their relatively slow prompt processing speed is often overlooked. > Here you can see the big issue with Macs: the prompt processing (aka “prefill”) speed. It just gets worse and worse, the longer the prompt gets. At a 4K-token prompt, which doesn’t seem very long, it takes 17 seconds for the M4 MacBook Air to parse before we even start generating a response. Meanwhile, if you strap the eGPU to it, it’ll only take 150ms. It’s 120x faster. The prefill problem goes unnoticed when you’re playing around with the LLM with small chats. When you start trying to use it for bigger work pieces the compute limit becomes a bottleneck. The time to first token (TTFT) charts don’t look bad until you notice that they had to be shown on a logarithmic scale because the Mac platforms were so much slower than full GPU compute."
+        },
+        {
+          "id": 48148519,
+          "author": "dzink",
+          "text": "If apple provides native support with enough bandwidth to run an external NVIDIA GPU for Inference and training, I will upgrade to the latest MBP instantly. Raise your hand if you would too."
+        },
+        {
+          "id": 48139049,
+          "author": "djmips",
+          "text": "> Because OpenGL is not well-supported anymore on macOS, the game is completely unplayable there, even with CrossOver. Ironically, it plays totally fine on a Windows PC, but this is a game you literally can’t play on Mac without this eGPU setup. I understand that this is true it seems that Doom does support Vulkan but you would need to add VK_NV_glsl_shader to MoltenVK. Probably much less work than what went into hanging an RTX 5090 off of a M4. Still, kudos to the scott and the local AI Inference speeds are pretty cool. What a crazy project! <applause>"
+        },
+        {
+          "id": 48137988,
+          "author": "divbzero",
+          "text": "This is pretty impressive. My impression was that eGPUs simply do not work with Apple Silicon. ( EDIT: Apple agrees with my impression. “To use an eGPU, a Mac with an Intel processor is required.” And, on top of that, the officially supported eGPUs were all AMD not NVIDIA. https://support.apple.com/en-us/102363 )"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 21,
+      "id": 48146877,
+      "title_en": "NanoTDB – Golang Append-Only Time Series DB",
+      "title_ja": "NanoTDB – Golang Append-Only Time Series DB",
+      "url": "https://github.com/aymanhs/nanotdb",
+      "hn_url": "https://news.ycombinator.com/item?id=48146877",
+      "score": 21,
+      "comment_count": 3,
+      "posted_at": "2026-05-15T10:31:51+00:00",
+      "comments": [
+        {
+          "id": 48148278,
+          "author": "xnx",
+          "text": "How does this differ from a log file?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 22,
+      "id": 48145524,
+      "title_en": "Ask HN: How to be SOC2 Type 2 compliant as a solo-entreprenuer?",
+      "title_ja": "Ask HN: How to be SOC2 Type 2 compliant as a solo-entreprenuer?",
+      "url": null,
+      "hn_url": "https://news.ycombinator.com/item?id=48145524",
+      "score": 43,
+      "comment_count": 49,
+      "posted_at": "2026-05-15T07:18:23+00:00",
+      "comments": [
+        {
+          "id": 48150204,
+          "author": "tptacek",
+          "text": "Don't. You are exactly the wrong kind of firm to be pursuing SOC2. SOC2 is like the corporate GPL of security. It's an infectious secret handshake company security teams swap in lieu of filling out security questionnaires. Nobody savvy takes it seriously. There will come a time where your business will grow to the point where it makes sense to pay for the secret handshake. The overwhelming most likely scenario in which that happens is a purchase order made contingent on your SOC2 Type I attestation, where the revenue from that purchase order more than pays for the attestation. Do not ever do a SOC2 speculatively, in the hopes that it will improve your sales prospects. Plenty of successful firms don't have SOC2s. If you're losing sales where SOC2 is a factor, you didn't have those sales to begin with."
+        },
+        {
+          "id": 48146605,
+          "author": "apimade",
+          "text": "I’ll spend some more time replying to this next week, so circle back to this comment; I’m someone who regularly helps people get past these audits, meet the criteria customers are trying to assess with these certifications, and vet startups who don’t have these certifications or budget. Start by pre-filling your own CAIQ v4 with an earnest “we don’t do this” or “we haven’t even thought about this” attempt: https://cloudsecurityalliance.org/artifacts/cloud-controls-m... Then read through it and see what you can address immediately (EDR on your laptop, MFA on your cloud environments, etc), followed by role playing your client; “based on answers to this questionnaire, what would I not accept?” There will be some items you can’t fix. You’ll soon find out the majority of customers, including banks, governments, defence contractors, crypto startups — simply do not care. If they want to use your product, they’ll work with you. It may be single-tenancy, it may require architectural changes, it may mean making it selfhosted with a time-bomb, but you’ll be able to address the requirements of the CISO, compliance monkey or executive. I’ve yet to meet an industry or individual I can’t convince. Even if the product is a hot mess, half baked and radioactive — we’ll deploy it on a VM running inside of a VDI within the customer’s environment, because slopping together a migration path is _so easy_, and those early, highly regulated clients are worth it."
+        },
+        {
+          "id": 48146427,
+          "author": "crote",
+          "text": "I'm currently at a small startup trying to do ISO 27001. A big issue we run into is that there simply aren't enough people . For example, the processes are built around having one person who writes code, and another person who reviews the written code. That's obviously impossible as a solo dev. You also need an internal auditor, who obviously needs to be separate from the operations team. If I recall correctly the minimum in a standard setup is 9 roles which cannot overlap. You're going to have a very hard time doing that as a solo entrepreneur, so you'll probably need to find someone who is experienced in making unusual setups like these compliant - which isn't going to be cheap. Even after that there's a pretty decent chance you'll end up needing to hire 3rd-party services in order to be compliant: our \"internal\" auditor is just some big firm doing it for us."
+        },
+        {
+          "id": 48146259,
+          "author": "_tk_",
+          "text": "I was part of several third party risk management audits from a corporate perspective. We regularly audited and questioned SMBs (and big corps) with regards to their security posture. We knew that small shops wouldn’t be able to be fully compliant to SOC2 Type 2 or have an ISO27001 certified environment. If it was clear that our business wanted the product, we either tried to help the company with the questionnaire or created a risk report that was then signed by the business. In other words: even if your customer asks you to be compliant, you don’t have to be if they care enough about your product. If you seem intent on getting things right, that’s a big plus. Most of your competitors don’t even know what SOC 2 is."
+        },
+        {
+          "id": 48145762,
+          "author": "rozumbrada",
+          "text": "Not possible in case your clients are not stupid. Any company with SOC2 and <5 people is a red flag. You might find auditors that would go along but any reasonable client will check your SOC2 report and quality of your auditors. SOC2 requires tons of paperwork and management and separation of duties with also mandatory roles in your company - never feasible in a one man show."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 23,
+      "id": 48139219,
+      "title_en": "First public macOS kernel memory corruption exploit on Apple M5",
+      "title_ja": "First public macOS kernel memory corruption exploit on Apple M5",
+      "url": "https://blog.calif.io/p/first-public-kernel-memory-corruption",
+      "hn_url": "https://news.ycombinator.com/item?id=48139219",
+      "score": 407,
+      "comment_count": 109,
+      "posted_at": "2026-05-14T18:25:09+00:00",
+      "comments": [
+        {
+          "id": 48146022,
+          "author": "andai",
+          "text": "So like ... I thought Mythos was just a bunch of hype? Or maybe the researchers are having their skills boosted due to using a model with such a cool name? I jest, but I did notice having more confidence to take on more ambitious work lately. We're all centaurs now."
+        },
+        {
+          "id": 48147576,
+          "author": "unaut",
+          "text": "Well, this was fun read. Discovering such a high-ranking critical exploit within a week by coupling experts with frontier models is an amazing new journey we're about to embark on."
+        },
+        {
+          "id": 48146345,
+          "author": "yellow_lead",
+          "text": "Did Mythos have access to Apple's source code? > Apple spent five years building it. Probably billions of dollars too. This seems higher than I'd expect."
+        },
+        {
+          "id": 48147107,
+          "author": "fguerraz",
+          "text": "This is incredibly light in details, no verifiable claim as far as I can tell. (I’m sure they’re not lying, but we’re not learning anything here)"
+        },
+        {
+          "id": 48140804,
+          "author": "yieldcrv",
+          "text": "from what they demonstrated, this seems to only be a $100,000 exploit in Apple's bug bounty platform, but if they package it right, it could be a $1.5 million exploit They simply have to show it against a beta version of MacOS, and frame it as unauthorized access, and maybe from locked mode if possible"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 24,
+      "id": 48140529,
+      "title_en": "Codex is now in the ChatGPT mobile app",
+      "title_ja": "Codex is now in the ChatGPT mobile app",
+      "url": "https://openai.com/index/work-with-codex-from-anywhere/",
+      "hn_url": "https://news.ycombinator.com/item?id=48140529",
+      "score": 414,
+      "comment_count": 208,
+      "posted_at": "2026-05-14T20:06:14+00:00",
+      "comments": [
+        {
+          "id": 48144385,
+          "author": "pickleRick243",
+          "text": "(Someone deleted a comment about why you'd want a mobile Codex app. This is the answer I wrote.) Once you've used these coding agents a lot, you develop a pretty intuitive feel for how they work, what they're capable of, what they're good at, and where their weaknesses are. Hopefully, you're already pretty familiar with the code base you're working on. Combining the two, this means you can get quite far essentially \"vibe coding\" (i.e. not looking at the actual code) on a new branch. So if you have some idea or some issue you want to fix on the go, you just iterate with the agent for a bit (presumably no more than a couple hours) until the agent outputs an implementation. Here, I do claim there is some \"skill\" (which is a function of your codebase familiarity, general SWE ability, and facility with AI agents), and if you're good, this implementation will be halfway decent a high percentage of the time. Then when you're back at your desktop, you can review the changes carefully/do some proper testing/debugging etc. But you've saved a good chunk of time- an initial draft is already waiting for you."
+        },
+        {
+          "id": 48141489,
+          "author": "Alifatisk",
+          "text": "Whats crazier is that Codex is free. I thought I had to pay to even try it out but nope, you can use the desktop app or cli for free, its apparently included in the free plan. You just have to sign in to your ChatGPT account. Of course I am aware that the caveat here is that all my interaction is part of training, but I’m fine with that. Even Qwen Cli discontinued the free plan."
+        },
+        {
+          "id": 48149976,
+          "author": "woodydesign",
+          "text": "Approve permission request on the go + Notify me when work/answer done, when need my attention. Those two are killing features."
+        },
+        {
+          "id": 48142142,
+          "author": "jumploops",
+          "text": "I’ve been using Codex from my phone for the past couple of months (through a tunnel, not this app). I was initially quite excited, but I’ve found the results are less than great compared to being at a keyboard. Something about the smaller screen size and/or lack of keyboard causes me to direct the agent less, which in turn creates more tech debt/code churn/etc. Maybe I’m just showing my age, and I should practice voice dictation or something more, but my thoughts flow faster and more clearly on a keyboard (less ums)."
+        },
+        {
+          "id": 48144512,
+          "author": "mindmesh",
+          "text": "The ability to unblock or redirect longer-running work from a phone seems underrated. Curious how often people will actually manage active coding threads this way."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 25,
+      "id": 48107766,
+      "title_en": "Gyroflow: Video stabilization using gyroscope data",
+      "title_ja": "Gyroflow: Video stabilization using gyroscope data",
+      "url": "https://github.com/gyroflow/gyroflow",
+      "hn_url": "https://news.ycombinator.com/item?id=48107766",
+      "score": 139,
+      "comment_count": 21,
+      "posted_at": "2026-05-12T13:11:16+00:00",
+      "comments": [
+        {
+          "id": 48146742,
+          "author": "mikae1",
+          "text": "I use this for near 100% of my video projects at work (with Sony cameras) and it's absolutely amazing. Sony is not exactly class leading when it comes to stabilization (like Panasonic). There's a Premiere and Resolve plugin-in these days. Fast guide: * Be sure to turn off any in camera stabilization in Sony cameras. * Be sure to take the added crop into account when composing. * The faster shutter speed, the better. Forget about 1/50 for 25p. There will be the most horrible artifacts. For 25p, use 1/100 or preferably use 1/200. For 50p, use 1/200 or preferably 1/400 etc."
+        },
+        {
+          "id": 48145477,
+          "author": "hdersch",
+          "text": "I wonder how this compares to purely vision-based systems which use nothing but the images themselves for stabilization. Here are some quite old results of stabilization using image-based 3d-reconstruction of the scene which I wrote more than 10years ago, compared with other stabilization programs of that time (Deshaker, Adobe After Effects, Youtube). With todays improved hardware and progress in 3d-algorithms you may not need any additional gyroscopic data. https://www.youtube.com/watch?v=-m3fwhx3Z5g"
+        },
+        {
+          "id": 48145814,
+          "author": "matsemann",
+          "text": "Haven't really used much other stabilization in post after modern gopros have gotten so good. Especially with the 360 variants (MAX and now MAX 2), it's buttery smooth (and infinite FOV means no cropping). Sometimes too smooth, I want to show how rough the cycling trail really was!"
+        },
+        {
+          "id": 48145293,
+          "author": "FrostKiwi",
+          "text": "So So useful <3 Stabilization = you have to zoom-in, loss of FOV. Depending on Action Cam and undistortion parameters, this can be different, sometimes too little, sometimes too much. Gyroflow allows you to dial it in. Lot's Stabilization in a particularly shaky spot and widest FOV everywhere else, smoothed between to be unnoticeable."
+        },
+        {
+          "id": 48145008,
+          "author": "rixed",
+          "text": "How is this different from usual sensor stabilisation techniques? Is it because it can adjust for a wider range of motion?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 26,
+      "id": 48138268,
+      "title_en": "New Nginx Exploit",
+      "title_ja": "New Nginx Exploit",
+      "url": "https://github.com/DepthFirstDisclosures/Nginx-Rift",
+      "hn_url": "https://news.ycombinator.com/item?id=48138268",
+      "score": 411,
+      "comment_count": 96,
+      "posted_at": "2026-05-14T17:17:48+00:00",
+      "comments": [
+        {
+          "id": 48138853,
+          "author": "RagingCactus",
+          "text": "As a security person it is tiring to see so many people here either directly claim or at least allude to the claim that this is somehow much less scary because the _published_ exploit does not bypass ASLR. The writeup claims there is a way to reliably bypass ASLR with this attack. And that is a good default assumption I would be willing to believe without evidence. ASLR is a defense-in-depth technique intended to make exploitation more difficult. In almost all cases it is only a matter of time and skill to also include an ASLR bypass. Both requirements continue being lowered by LLM agents every few weeks. It is only a matter of time (and probably not a lot of time) until a fully weaponized exploit is developed. It may be published, it may also be kept private. It is straight up wrong to say \"if you have ASLR enabled, you're not at any risk from this\" and saying this is extremely harmful for anyone that trusts claims like that. This wrong belief that you shouldn't care about security vulnerabilities because mitigations may make exploitation more difficult has already caused so much harm in the past. Be glad that modern mitigations exist, but patch your stuff asap. If you are a vendor, do not treat vulnerability reports as invalid because the researcher has not provided an ASLR bypass. Fix the root cause and hope mitigations buy you enough time to patch before you get owned."
+        },
+        {
+          "id": 48138580,
+          "author": "danslo",
+          "text": "This one's pretty bad but there are some preconditions. Requires a \"rewrite\" directive with a questionmark in the replacement string, and then a subsequent \"set\" directive that references a regex capture group (e.g. set $var $1). Also the POC assumes ASLR is disabled."
+        },
+        {
+          "id": 48138834,
+          "author": "neomantra",
+          "text": "The official F5 page is here: https://my.f5.com/manage/s/article/K000161019 As noted elsewhere, ASLR protects you. While you are waiting for your affected platform to get the fix, they note the mitigation: \"use named captures instead of unnamed captures in rewrite definition\" \"To mitigate this vulnerability for this example, replace $1 and $2 with the appropriate named captures, $user_id and $section\" F5 patched 1.31.0 and 1.30.1. OpenResty has a patch for 1.27 and 1.29: https://github.com/openresty/openresty/commit/ee60fb9cf645c9... You can track OpenResty's (a Lua application server based on Nginx) progress here: https://github.com/openresty/openresty/issues/1119"
+        },
+        {
+          "id": 48148448,
+          "author": "kevcampb",
+          "text": "It seems that Snyk isn't picking this up on our docker images. They have a vulnerability published for the nginx binary itself. https://security.snyk.io/vuln/SNYK-UNMANAGED-NGINX-16679754 But they've not released any vulnerability for the Alpine or Debian packages. Does anyone know what's happening here? Seems concerning that there's a 2 day old RCE not being picked up."
+        },
+        {
+          "id": 48138620,
+          "author": "jcalvinowens",
+          "text": "The POC disables aslr: https://github.com/DepthFirstDisclosures/Nginx-Rift/blob/mai..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 27,
+      "id": 48147339,
+      "title_en": "Welcome to the Strip Mining Era of OSS Security",
+      "title_ja": "Welcome to the Strip Mining Era of OSS Security",
+      "url": "https://www.metabase.com/blog/strip-mining-era-of-open-source-security",
+      "hn_url": "https://news.ycombinator.com/item?id=48147339",
+      "score": 76,
+      "comment_count": 57,
+      "posted_at": "2026-05-15T11:37:17+00:00",
+      "comments": [
+        {
+          "id": 48148347,
+          "author": "ahlCVA",
+          "text": "Whenever one of these vulnerability apocalypse posts comes along I cannot help but think of the Litany of Gendlin: What is true is already so. Owning up to it doesn't make it worse. Not being open about it doesn't make it go away. And because it's true, it is what is there to be interacted with. Anything untrue isn't there to be lived. People can stand what is true, for they are already enduring it. I cannot wrap my mind around why people think finding vulnerabilities is bad. The code already was broken before somebody published the vulnerability. The difference now only is that you know about this. Imagine somebody finding a flaw in a mathematical proof and everybody being sad because a beautiful proof got invalidated rather than being glad future work won't build on flawed assumptions. I get that the rate of vulnerability discovery can be a burden, especially for people doing FOSS in their spare time, but the sustainability problem with that has always existed and only gets exacerbated by the vulnerability stuff, but the latter isn't the cause you need to make go away."
+        },
+        {
+          "id": 48147985,
+          "author": "_alternator_",
+          "text": "The article focuses on OSS, but closed-source software is at major risk too. Perhaps more. It's gotten much easier to reverse engineer binaries in general, and security patches in particular. Basically, an LLM can turn binaries into 'readable' code, and then reason about said code."
+        },
+        {
+          "id": 48149797,
+          "author": "cyrusradfar",
+          "text": "I'd buy the core thesis and appreciate the concern. I do think security is going to require more, not, less human investment as attackers may be running automated vulnerability screens from the outside that you must counter, as well. Without rigorous internal processes to manage and screen all changes and upgrades, companies risk leaving themselves open. One design change which limits exposure is to have more local-first apps or experiences so there's less cloud / server to computer interactions to secure."
+        },
+        {
+          "id": 48148606,
+          "author": "mtlynch",
+          "text": "> Most are not serious, and we’ve quietly fixed them, thanked the researcher, and went our merry way... These come from a wide variety of locations and people, and sometimes, but not always, are looking for bug bounties. I take it that Metabase is both not paying bug bounties and not using these tools internally? If that's the case, Metabase is not going to get meaningful investment from researchers who want to fix issues, but they'll get increased attention from malicious attackers who have no qualms exploiting the vulnerabilities for profit. LLMs have made it a lot easier for people to find vulnerabilities in software. Open-source makes it easier, but we already have non-AI tooling (IDA Pro, Ghidra) that's good at binary reverse engineering, and LLMs can use that output to find vulnerabilities as well. This year, as I select products to use for sensitive data, I've been paying a lot more attention to whether they offer bug bounties and for how much. For example, I like Kagi for search and thought about trying Orion, their web browser. Then, I saw that Kagi's been paying $100 for UXSS vulnerabilities.[0] For comparison, Firefox pays $8-10k,[1] and Chrome pays up to $10k for the same class of bug.[2] [0] https://help.kagi.com/kagi/privacy/bug-bounty-program.html [1] https://www.mozilla.org/en-US/security/client-bug-bounty/ [2] https://bughunters.google.com/about/rules/chrome-friends/chr..."
+        },
+        {
+          "id": 48147642,
+          "author": "marginalx",
+          "text": "Clearly for commercial oriented opensource software, security through obscurity is one way to keep the pace in the short term. Not an option for proper open source software. Will this be the case that people who use open source software that is easily detectable will also start to shy away from using them for the fear of zero-days? One of the benefits of Open source has been that there are more eye balls on the source, leading to more secure code/better quality. I think given enough time the bug reports will plateau and we will be back to a normal cadence - once the tsunami is over, hopefully things will settle at a more manageable cadence ."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 28,
+      "id": 48141234,
+      "title_en": "Claude for Legal",
+      "title_ja": "Claude for Legal",
+      "url": "https://github.com/anthropics/claude-for-legal",
+      "hn_url": "https://news.ycombinator.com/item?id=48141234",
+      "score": 162,
+      "comment_count": 144,
+      "posted_at": "2026-05-14T21:05:05+00:00",
+      "comments": [
+        {
+          "id": 48141828,
+          "author": "droidjj",
+          "text": "As a lawyer, I'm excited about this, but there are two roadblocks that I'm not sure how Anthropic will navigate: (1) For non-lawyers who use these skills/connectors/whatchamacallits to try to get legal advice, their communications are not protected by attorney-client privilege. This will absolutely bite some people in the ass. (2) If a lawyer uses this with confidential client information (which, to the uninitiated, doesn't just mean SSNs and bank account numbers, but \"all information relating to the representation of a client\") and forgets to toggle off \"Help improve Claude\" in their settings, they have possibly (maybe even likely) committed malpractice.[1] [1] https://www.americanbar.org/content/dam/aba/administrative/p..."
+        },
+        {
+          "id": 48150304,
+          "author": "SubiculumCode",
+          "text": "This is not from anthropic, right?"
+        },
+        {
+          "id": 48150135,
+          "author": "ethin",
+          "text": "You would think these AI companies would learn by now that the legal field is not a place where you screw around. I mean, we just have to look at the record. Apparently, these particular AI boosters are incapable of learning"
+        },
+        {
+          "id": 48141864,
+          "author": "unstyledcontent",
+          "text": "Just remember that your AI chat history is not protected like attorney client privilege and can be used as evidence against you in court. If you talk to a lawyer and they use AI, those chats are privileged."
+        },
+        {
+          "id": 48149476,
+          "author": "realty_geek",
+          "text": "I wonder why there isn't much for real estate in this package. Are they perhaps working on a totally different real estate project. I am in that space and very nervous about it getting wiped out by anthropic or openAI. To be honest, I am not sure why they still haven't make a big play for that industry."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 29,
+      "id": 48143880,
+      "title_en": "Mullvad exit IPs are surprisingly identifying",
+      "title_ja": "Mullvad exit IPs are surprisingly identifying",
+      "url": "https://tmctmt.com/posts/mullvad-exit-ips-as-a-fingerprinting-vector/",
+      "hn_url": "https://news.ycombinator.com/item?id=48143880",
+      "score": 513,
+      "comment_count": 311,
+      "posted_at": "2026-05-15T02:35:35+00:00",
+      "comments": [
+        {
+          "id": 48145679,
+          "author": "kfreds",
+          "text": "I work at Mullvad. (co-CEO, co-founder) Some aspects of the described behavior are as we intended and some are not. The cause is not exactly as described in the blog post. As for mitigation, we are already testing a patch of the unintended behavior on a subset of our infrastructure. If any of you try to reproduce the blog post's findings you may get confusing results throughout the day. We will also re-evaluate whether the intended behaviors are acceptable or not. Some of this is a trade-off between multiple aspects of privacy, and multiple aspects of user experience. Please note that this is my current understanding, which may change. I was only made aware of this an hour ago, and most of that time was spent talking with Ops, considering what to do immediately, and writing this post. Finally, for those of you who do security research: when you find a security or privacy issue, please consider notifying the maintainer/vendor before publishing your findings, even if you intend to publish right away."
+        },
+        {
+          "id": 48144415,
+          "author": "solenoid0937",
+          "text": "> As an example, imagine that you are a moderator on a forum and you suspect that a new face is actually a sockpuppet of a user you banned the day prior. You check the IP logs, and despite using different Mullvad servers, both accounts resolve to the overlapping float ranges 0.4334 - 0.4428 and 0.4358 - 0.4423. This gives you a >99% chance that they are the same person. This sounds like how I'd design a VPN if I were an intelligence agency."
+        },
+        {
+          "id": 48144876,
+          "author": "connorboyle",
+          "text": "> As an example, imagine that you are a moderator on a forum and you suspect that a new face is actually a sockpuppet of a user you banned the day prior. You check the IP logs, and despite using different Mullvad servers, both accounts resolve to the overlapping float ranges 0.4334 - 0.4428 and 0.4358 - 0.4423. This gives you a >99% chance that they are the same person. I don't see how the author is arriving at this \">99% chance\" purely from the numbers provided in the article. Assuming the first (banned IP) seed and the second seed are both in the range 0.4423 - 0.4358 (a stronger assumption than is justified by the example), all this tells us is that the first and second IP addresses both have seeds in a range that would contain 0.4423 - 0.4358 = 0.65% of all Mullvad users, which 0.0065 * 100,000 = 650 users. We've eliminated >99% of users as \"suspects\", but we haven't actually gotten >99% accuracy in identifying an individual across multiple exit IPs. In more Bayesian thinking, the overlap in potential seeds is great evidence to think these IP addresses represent one and the same person (or Mullvad VPN account at least), but as far as I can tell, that's not what the author is saying."
+        },
+        {
+          "id": 48147343,
+          "author": "seethishat",
+          "text": "I'm a long-time Mullvad user. I will continue to buy and use Mullvad VPN services (with my credit card that has my name on it) so long as it is legal to do so in my country. VPNs are not 100% anonymous. They are not meant to be. Instead, they are meant to provide some level of privacy to law-abiding adults. Most people would be embarrassed if their co-workers and neighbors knew the intimate personal details of their lives. Things they like, things they buy, things they do, etc. So, most people should use a VPN to protect their privacy. By definition, 'most people' don't want or expect 100% anonymity online. They just want a bit of privacy in their personal life and their relationships. That's it. VPNs don't protect (and are not intended to protect) criminals who want 100% anonymity from governments while committing online crimes. This is an important distinction. 'Most people' are not criminals and do not have this unrealistic expectation from Mullvad and other VPN providers."
+        },
+        {
+          "id": 48144321,
+          "author": "lorenzohess",
+          "text": "The purpose of a VPN does not include anonymizing users with respect to the sites they visit,so it shouldn't be too surprising that Mullvad doesn't enforce unique exit IPs. Users who want anonymity should use networks like Tor."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 30,
+      "id": 48140953,
+      "title_en": "Tesla Wall Connector bootloader bypasses the firmware downgrade ratchet",
+      "title_ja": "Tesla Wall Connector bootloader bypasses the firmware downgrade ratchet",
+      "url": "https://www.synacktiv.com/en/publications/exploiting-the-tesla-wall-connector-from-its-charge-port-connector-part-2-bypassing",
+      "hn_url": "https://news.ycombinator.com/item?id=48140953",
+      "score": 114,
+      "comment_count": 65,
+      "posted_at": "2026-05-14T20:41:48+00:00",
+      "comments": [
+        {
+          "id": 48143246,
+          "author": "thejazzman",
+          "text": "PSA: If your wall connector loses wifi, it'll just throw your charging schedules out the window and turn on/off sporadically. This is especially noteworthy if you have Time of Use billing :| SET THE TIMER ON THE CAR DIRECTLY!"
+        },
+        {
+          "id": 48142433,
+          "author": "m463",
+          "text": "I hate the gen 3 wall connector. It creates a wifi access point in your garage that you cannot turn off: TeslaWallConnector_<unique-id> some people were able to downgrade their firmware to a version that didn't do that, but i guess this article shows telsa got rid of that ability. I would love to be able to hack any firmware to disable that. I also read that a connected tesla car can force an over-the-air firmware update maybe through the charging cable or wifi, but I haven't verified that."
+        },
+        {
+          "id": 48146745,
+          "author": "spacebanana7",
+          "text": "One thing I'm really scared of is EV charger software being modified by users, hackers or bugs to pull max power at times that don't suit the grid. In the UK, for example 10 million EVs all pulling 7kw would overwhelm the roughly 70GW potential of the grid. Even a million EVs charging at an inconvenient time could add a 7GW draw which is enough cause a problem."
+        },
+        {
+          "id": 48145322,
+          "author": "cryptoegorophy",
+          "text": "Why use Tesla wall connector in a first place and not just the standard nema/dryer outlet with the Tesla cord/charger? It seems like people are overpaying for nothing."
+        },
+        {
+          "id": 48142693,
+          "author": "mystraline",
+          "text": "Repeat after me: An owner voluntarily downgrading firmware to gain control of your hardware IS NOT A HACK. And if an adversary is doing this, then they have already breached yoir physical security."
+        }
+      ],
+      "summary_ja": ""
+    }
+  ]
+}
