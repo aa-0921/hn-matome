@@ -17,6 +17,7 @@ jobs:
   update:
     permissions:
       contents: write
+      issues: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
@@ -91,6 +92,68 @@ jobs:
             WEEKLY_FLAG="--weekly"
           fi
           cd core && python -m scripts.fetch_and_generate --slot "$SLOT" $WEEKLY_FLAG
+
+      - name: 翻訳全滅を検知して Issue 通知
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SLOT: ${{ steps.slot.outputs.value }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          METRICS_FILE=core/docs/run-metrics.json
+          if [ ! -f "$METRICS_FILE" ]; then
+            echo "::warning::run-metrics.json が存在しません (script が途中で死んだ可能性)"
+            exit 0
+          fi
+          TRANSLATE_REQ=$(jq -r '.translate_requests // 0' "$METRICS_FILE")
+          TRANSLATE_FAIL=$(jq -r '.translate_failures // 0' "$METRICS_FILE")
+          SUMMARIES_OK=$(jq -r '.summaries_success // 0' "$METRICS_FILE")
+          SUMMARIZE_REQ=$(jq -r '.summarize_requests // 0' "$METRICS_FILE")
+          echo "translate_req=$TRANSLATE_REQ translate_fail=$TRANSLATE_FAIL summaries_ok=$SUMMARIES_OK summarize_req=$SUMMARIZE_REQ"
+
+          ISSUE_TITLE="[緊急] hn-matome 日本語翻訳機能が停止しています"
+          if [ "$TRANSLATE_REQ" -gt 0 ] && \
+             [ "$TRANSLATE_FAIL" -eq "$TRANSLATE_REQ" ] && \
+             [ "$SUMMARIES_OK" -eq 0 ]; then
+            EXISTING=$(gh issue list --repo "$GITHUB_REPOSITORY" \
+                        --state open --search "in:title hn-matome 日本語翻訳機能が停止" \
+                        --json number --jq '.[0].number // empty')
+            BODY="Slot: $SLOT
+          Run: $RUN_URL
+
+          ## Metrics
+          - translate_requests: $TRANSLATE_REQ
+          - translate_failures: $TRANSLATE_FAIL
+          - summarize_requests: $SUMMARIZE_REQ
+          - summaries_success: $SUMMARIES_OK
+
+          全タイトル翻訳が失敗し、コメント要約も 0 件成功しました。
+          OpenRouter API の状態 (キー失効 / credit 不足 / モデル提供停止 / rate limit) を確認してください。
+
+          調査手順:
+          1. gh run view でログを確認し 403/401/429 の有無を確認
+          2. OpenRouter Dashboard でキーの状態と残高を確認
+          3. 一次対処: モデルを別の :free tier に切替"
+            if [ -n "$EXISTING" ]; then
+              echo "既存 issue #$EXISTING にコメント追記"
+              gh issue comment "$EXISTING" --repo "$GITHUB_REPOSITORY" --body "$BODY"
+            else
+              echo "新規 issue を作成"
+              gh issue create --repo "$GITHUB_REPOSITORY" \
+                --title "$ISSUE_TITLE" \
+                --assignee aa-0921 \
+                --body "$BODY"
+            fi
+          else
+            echo "翻訳は機能している (or 部分失敗のみ) → 通知スキップ"
+            EXISTING=$(gh issue list --repo "$GITHUB_REPOSITORY" \
+                        --state open --search "in:title hn-matome 日本語翻訳機能が停止" \
+                        --json number --jq '.[0].number // empty')
+            if [ -n "$EXISTING" ] && [ "$TRANSLATE_REQ" -gt 0 ] && [ "$TRANSLATE_FAIL" -lt "$TRANSLATE_REQ" ]; then
+              gh issue close "$EXISTING" --repo "$GITHUB_REPOSITORY" \
+                --comment "翻訳が復旧しました (translate_failures=$TRANSLATE_FAIL / $TRANSLATE_REQ, Run: $RUN_URL)"
+            fi
+          fi
 
       - name: 生成した docs をワークフロー対象リポジトリへ同期
         run: |
