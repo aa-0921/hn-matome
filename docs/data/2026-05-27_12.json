@@ -1,0 +1,1016 @@
+{
+  "date": "2026-05-27T00:00:00+09:00",
+  "slot": "12",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 48287468,
+      "title_en": "Cloudflare Flagship",
+      "title_ja": "Cloudflare Flagship",
+      "url": "https://developers.cloudflare.com/flagship/",
+      "hn_url": "https://news.ycombinator.com/item?id=48287468",
+      "score": 170,
+      "comment_count": 88,
+      "posted_at": "2026-05-26T23:36:06+00:00",
+      "comments": [
+        {
+          "id": 48288765,
+          "author": "btown",
+          "text": "Never underestimate the power of a zero-network-hop abstraction over f(feature_name, context). And context can be extremely tailored to your niche: specific inventory, from a specific supplier, for a specific user of a specific B2B client of a specific business model subtype, who should or shouldn’t see certain features on that specific inventory at certain times. When you can write your own logic, and just run this in a tight loop as easily and performantly as you can use a constant, it makes your business incredibly agile. Think some text might change for some customers? Just write the code to make it configurable, and you get tests and flags for free. Sadly, that zero-hop setup requires a sophisticated client execution engine, which it doesn’t appear Cloudflare has implemented here. Makes sense for their memory constrained workers, less sense for traditional infrastructure. Statsig has an approach here that I quite like: > To be able to do this, Server SDKs hold the entire ruleset of your project in memory - a representation of each gate or experiment in JSON. On client SDKs, we evaluate all of the gates/experiments when you call initialize - on our servers. https://docs.statsig.com/sdks/how-evaluation-works You can also roll your own - just sync your rulesets to a few data structures every few seconds in a background thread and atomically swap the reference to them. Then you just need a CRUD interface over the applicability ruleset dimensions. Just be careful to have governance on who can play with which would-be constants. Great power and great responsibility and all that!"
+        },
+        {
+          "id": 48290507,
+          "author": "bluelightning2k",
+          "text": "I've never understood feature flags. How are they fundamentally different to a Boolean in a database?"
+        },
+        {
+          "id": 48288295,
+          "author": "crabmusket",
+          "text": "Looking at the docs for their JS SDK, they have this warning: > The client provider requires an API token to fetch flag values. This token is not scoped to a single app, so anyone with the token can evaluate flags across all apps in your account. Use the client provider with caution in public-facing applications. https://developers.cloudflare.com/flagship/sdk/client-provid... Can anyone clarify... why the client SDK, designed to be deployed to browsers, requires caution? Does this mean that any client could send requests with a new targetingKey and observe other users' flags? While flags probably shouldn't be critical information, this seems like an interesting design choice."
+        },
+        {
+          "id": 48290246,
+          "author": "iTokio",
+          "text": "Feature flags are often ridiculously over engineered. Check a config, bdd value, env var to dynamically go one path or the other. That’s all, you must either have a small feature or refactor the code to easily switch at a high level. If you are not able to do so easily, then yes, complex feature flags implementations might help you, to coordinate feature activation between micro services. Or if you have many features then a dashboard might be useful. But I would argue that both are serious indicators that you should avoid feature flags, they are better for local and temporary changes, otherwise the complexity compounds and it become hard to manage and maintain."
+        },
+        {
+          "id": 48288230,
+          "author": "tiffanyh",
+          "text": "This is nice, but I’m still waiting for this to be delivered (which ironically is probably using Flagship): https://blog.cloudflare.com/enterprise-grade-features-for-al... —- I don’t believe a single enterprise only feature has made its way to lower tier (paid) account yet. I’m most interested in: https://developers.cloudflare.com/speed/optimization/content..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 2,
+      "id": 48284712,
+      "title_en": "That Methyl Methacrylate Tank",
+      "title_ja": "That Methyl Methacrylate Tank",
+      "url": "https://www.science.org/content/blog-post/methyl-methacrylate-tank",
+      "hn_url": "https://news.ycombinator.com/item?id=48284712",
+      "score": 303,
+      "comment_count": 113,
+      "posted_at": "2026-05-26T19:25:16+00:00",
+      "comments": [
+        {
+          "id": 48286834,
+          "author": "itishappy",
+          "text": "Here's a fascinating postmortem analysis of two similar incidents, Styrene and Butyl Acrylate: https://iomosaic.com/docs/default-source/papers/polymerizati... From fuzzfactor's comment with lots of other great info: https://news.ycombinator.com/item?id=48252245"
+        },
+        {
+          "id": 48290493,
+          "author": "GeorgeWoff25",
+          "text": "This reminds me of the old adage, every system is secure until someone actually tries to use it."
+        },
+        {
+          "id": 48285729,
+          "author": "robocat",
+          "text": "Why wouldn't there be passive protection systems designed in? After a big earthquake you don't want to have to also deal with other emergencies (à la Fukushima). Aside: One good side-effect of the 2011 Tōhoku earthquake being so horrific is that it stopped the self-obsessed whinging in my city (Christchurch was still trying to recover from an earthquake)."
+        },
+        {
+          "id": 48285650,
+          "author": "HoldOnAMinute",
+          "text": "When this is all over, when they peel the metal tank away, will they have a gigantic clear block of material?"
+        },
+        {
+          "id": 48287291,
+          "author": "buildbot",
+          "text": "Meanwhile in Washington, an unknown number of people where killed today in a paper mill “white liquor” explosion today…: https://www.opb.org/article/2026/05/26/longview-chemical-exp..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 3,
+      "id": 48289950,
+      "title_en": "Claude Code as a Daily Driver: Claude.md, Skills, Subagents, Plugins, and MCPs",
+      "title_ja": "Claude Code as a Daily Driver: Claude.md, Skills, Subagents, Plugins, and MCPs",
+      "url": "https://arps18.github.io/posts/claude-code-mastery/",
+      "hn_url": "https://news.ycombinator.com/item?id=48289950",
+      "score": 8,
+      "comment_count": 0,
+      "posted_at": "2026-05-27T05:13:39+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 4,
+      "id": 48265470,
+      "title_en": "Cate v1.0 is out: The Infinite canvas workspace for developers",
+      "title_ja": "Cate v1.0 is out: The Infinite canvas workspace for developers",
+      "url": "https://github.com/0-AI-UG/cate",
+      "hn_url": "https://news.ycombinator.com/item?id=48265470",
+      "score": 6,
+      "comment_count": 0,
+      "posted_at": "2026-05-25T10:57:57+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 5,
+      "id": 48238703,
+      "title_en": "I built a Git-tracked book production pipeline",
+      "title_ja": "I built a Git-tracked book production pipeline",
+      "url": "https://www.djspeckhals.com/posts/2026-05-22-how-i-bypassed-adobe-and-microsoft-to-build-a-git-tracked-book-production-pipeline/",
+      "hn_url": "https://news.ycombinator.com/item?id=48238703",
+      "score": 213,
+      "comment_count": 58,
+      "posted_at": "2026-05-22T17:17:43+00:00",
+      "comments": [
+        {
+          "id": 48284505,
+          "author": "Exoristos",
+          "text": "As someone who worked for years in commercial print, before most manufacturing moved overseas, I recall the workflows the article discusses as being more automate-able than the author seems to understand. For example, \"Making the slightest change became a chore. [1.] Update the 'master' DOCX. [2.] Update the InDesign file ...\" --the appropriate way to use an external document as master in InDesign is to use the Place command, which autoupdates text changes as they are made in Word. As another example, InDesign supports multiple formats of EPUB by direct export. I also question the author's familiarity with common LaTeX workflows. \"'Why didn’t you just author it in LaTeX? ...' you might ask. [B]ut I prefer writing novels in a word processor, not a text editor.\" And, \"How do I convert an ODT file to TeX?\" Word processors offer exports of all kinds, including to plain text, and the purpose of a TeX editor is, like InDesign, to typeset text that is often written elsewhere. Capturing the styling from the word processor seems antithetical to the desire for an advanced typesetting tool. Overall, as a technical writeup I enjoyed the article; however, I would caution that the author seems to approach publishing from an amateur perspective."
+        },
+        {
+          "id": 48284209,
+          "author": "diamondap",
+          "text": "Kudos to you for doing that. I've been publishing print and ebooks since 2015, and I can attest to the fact the Word to PDF X-1/a to epub/kindle pipeline is painful. Making minor edits after publication is also painful, as the author notes, and can be error prone if you fail to make identical changes to all formats. The problem was bad enough that I built by own markdown to HTML to PDF/X-1a processor using Python, WeasyPrint, and ghostscript. This also allows me to use git for version control, and I can make formatting changes using vanilla CSS. My tools are currently too crude for the average non-tech writer to use, but they save me hours every time I use them. For any of you hackers out there looking for an untapped market, try making a user-friendly tool that converts Word, PDF and/or similar formats to the print-ready PDF/X-1a, PDF/X-3 and PDF/X-4 formats. At the moment, all the existing tools are proprietary and expensive, and many are difficult to use. This won't be a big money maker, but it will certainly be welcome by many indie authors."
+        },
+        {
+          "id": 48284934,
+          "author": "HanClinto",
+          "text": "Setting up good book publishing pipelines with version control + CI/CD might sounds simple, but I don't think it's trivial. One of the best examples of this that I've ever seen is The Sourdough Framework [0] -- really impressed with the way that versioning and publishing is integrated in that book. And yes -- I know it sounds like yet another Javascript library -- but it's actually a book about sourdough bread making. It's been discussed here several times before, but this one from 2023 [1] may have been the most popular (103 comments) [0] - https://github.com/hendricius/the-sourdough-framework [1] - https://news.ycombinator.com/item?id=35961590"
+        },
+        {
+          "id": 48289100,
+          "author": "meonkeys",
+          "text": "I enjoyed using Asciidoctor to write a book. It necessitates using a text editor instead of a word processor so it doesn't fit DJ's use case, but it really is quite nice. I'm also fascinated by the build for Ada & Zangemann, a FOSS illustrated full-color children's book. It looks rather complex, but it handles translations, beautiful typesetting, and was remarkably fast when I tried running the build locally."
+        },
+        {
+          "id": 48287325,
+          "author": "raybb",
+          "text": "I've been making ebooks for a nonprofit using typst and pandoc for a few years and it works quite well. We generate a pdf ebook, a print version, and a epub. They each have little tweeks but are all defined conditionally using sys.input. It was rough at first and I've had to open around a dozen or so issues for pandoc to improve things. Now it's pretty seamless."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 6,
+      "id": 48271448,
+      "title_en": "A few interesting modern pixel fonts",
+      "title_ja": "A few interesting modern pixel fonts",
+      "url": "https://unsung.aresluna.org/a-few-interesting-modern-pixel-fonts/",
+      "hn_url": "https://news.ycombinator.com/item?id=48271448",
+      "score": 318,
+      "comment_count": 67,
+      "posted_at": "2026-05-25T20:41:49+00:00",
+      "comments": [
+        {
+          "id": 48288810,
+          "author": "jrdres",
+          "text": "A forgotten point is that modern pixel fonts all assume pixels have a 1:1 ratio: height the same as width, so an 8x8 character box is perfectly square. That's NOT true for many of the old computer displays. Most had finer resolution in the horizontal compared to vertical lines, so more pixels across than in the same distance down. 1:1 \"square pixels\" was an innovation of the Macintosh, and very unusual for the time. So the fonts on this page displayed on other 80's machines would not look \"right\". And fonts from those machines brought to modern displays also look off."
+        },
+        {
+          "id": 48284661,
+          "author": "Kerrick",
+          "text": "Analog Mono and Two Slice are really neat. If you like those, you'll probably also like another of my favorite modern pixel fonts: Departure Mono. https://departuremono.com"
+        },
+        {
+          "id": 48283931,
+          "author": "efskap",
+          "text": "I like https://viznut.fi/unscii/ - meant for ascii art but still works well in a terminal, and still gets unicode updates"
+        },
+        {
+          "id": 48285302,
+          "author": "evrimoztamur",
+          "text": "Geist looks like unadulterated garbage, a sloppy rendition of a vector font onto a pixel grid, lack of character and care to banding and shape..."
+        },
+        {
+          "id": 48287610,
+          "author": "IgorPartola",
+          "text": "I worked on an embedded project a few years ago using a tiny 128x64 display and wanted to use a pixel font but none of the ones I found made me particularly happy so I made my own. Turns out it is very easy to do. Font Forge is fantastic and very easy to use and once you get going by nailing down a few letters at the size you want you can quickly make something that is cohesive, pleasant, and easy to read. I highly recommend this as an exercise. As a bonus I added a bunch of open source icons as font glyphs for my project and it was really fun to figure out how small I can make them while still being distinctive."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 7,
+      "id": 48260219,
+      "title_en": "A history of obituaries in American newspapers",
+      "title_ja": "A history of obituaries in American newspapers",
+      "url": "https://blogs.loc.gov/headlinesandheroes/2026/05/mourn-not-a-history-of-obituaries-in-american-newspapers/",
+      "hn_url": "https://news.ycombinator.com/item?id=48260219",
+      "score": 13,
+      "comment_count": 0,
+      "posted_at": "2026-05-24T19:22:18+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 8,
+      "id": 48286561,
+      "title_en": "From Rust to Ruby",
+      "title_ja": "From Rust to Ruby",
+      "url": "https://xlii.space/eng/from-rust-to-ruby/",
+      "hn_url": "https://news.ycombinator.com/item?id=48286561",
+      "score": 101,
+      "comment_count": 61,
+      "posted_at": "2026-05-26T21:57:03+00:00",
+      "comments": [
+        {
+          "id": 48289087,
+          "author": "JSR_FDED",
+          "text": "This defies belief. “I wanted to scratch a technical itch. My local AI completed the job in 30 minutes. I never pressed Start to see if it works, but I did write a blog post about it…”"
+        },
+        {
+          "id": 48288510,
+          "author": "daemin",
+          "text": "At first I thought this would be an interesting article, but as soon as they mentioned using an LLM to do the conversion I lost all interest. It's like saying \"I wanted this done so I got my underling to do it, here is my story...\". Like why would I bother to read it then, as it was clearly not you doing the conversion or putting any thought into it."
+        },
+        {
+          "id": 48290413,
+          "author": "ramon156",
+          "text": "Hey I'm in the same boat! I love Go and Rust, they're wonderful languages with their own ups and downs. Sadly I never was able to build a SaaS app with either. Something about a square peg and a round hole... I could be very wrong, but there's a lot of gadgets that come with a SaaS tool, and I'm not inventing them. RoR is.. \"good enough\". I can opt-in types whenever, I can build things quick, the tooling is alright, etc. My first real job was PHP, and there were just too many gotchas there. Ruby seems to steer a bit more towards ecommerce, which intruiged me. And its good enough for Shopify, so..."
+        },
+        {
+          "id": 48288573,
+          "author": "october8140",
+          "text": "I'm not sure any language + framework prioritizes developer happiness as much as Ruby on Rails."
+        },
+        {
+          "id": 48289147,
+          "author": "digitaltrees",
+          "text": "I built a set of gems (propel_rails) that takes the already terse Ruby on Rails code to the next extreme. It generates a set of top level classes like an API controller and some concerns that then create a full restful resource (model, controller, serializer, unit and e2e tests) with 0 boilerplate code. The controller ends up being only a list of all permitted attributes the api will accept because the restful actions are automatically generated. It’s a bit hard to fully describe but the meta programming power of Ruby really does make amazing things easy."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 9,
+      "id": 48261120,
+      "title_en": "IBM Confidential: System/360 File Organization [video]",
+      "title_ja": "IBM Confidential: System/360 File Organization [video]",
+      "url": "https://www.youtube.com/watch?v=zokKqP0plrM",
+      "hn_url": "https://news.ycombinator.com/item?id=48261120",
+      "score": 29,
+      "comment_count": 5,
+      "posted_at": "2026-05-24T21:21:58+00:00",
+      "comments": [
+        {
+          "id": 48289862,
+          "author": "froh",
+          "text": "(1964) a webcast about the many great benefits of the novel DASD (direct access storage device) over ISAM (index sequential access) aka disk and tape. 16mm film Flipchart impeccable presentation thx for the time machine :-)"
+        },
+        {
+          "id": 48290382,
+          "author": "bitwize",
+          "text": "Great video for the month of \"Mayframe\"!"
+        },
+        {
+          "id": 48289911,
+          "author": "cocodill",
+          "text": "Hairstyles used to be better than they are today."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 10,
+      "id": 48285344,
+      "title_en": "The worst job interview I ever had",
+      "title_ja": "The worst job interview I ever had",
+      "url": "https://www.oliverio.dev/blog/the-worst-job-interview-i-had",
+      "hn_url": "https://news.ycombinator.com/item?id=48285344",
+      "score": 187,
+      "comment_count": 159,
+      "posted_at": "2026-05-26T20:11:49+00:00",
+      "comments": [
+        {
+          "id": 48290601,
+          "author": "gobdovan",
+          "text": "I always wanted to tell the story of my weirdest interview. It's bad in a different way from OP's. This was for a \"Machine Learning Engineer\" contractor position. - Hi, I'm gobdovan. How are you? says I. The interviewer doesn't bite: - How many prompting techniques do you know? (ok?..) After a couple confused seconds, I respond with 2-3 techniques and ask if I should explain them, but the interview engine is already running at full speed: - What is PEFT? How many PEFT techniques do you know? I say I know LoRA and start to explain it, but the interview had no patience for answers longer than their acronyms. Before I knew it, I heard frantic clicking. - He starts sharing his screen while I am still talking about LoRA in the background. Puts up an empty car from Google Images and commands: \"Model the relationships between cars and people positioned inside the cars over time.\" Uncertain of how to satisfy the inquiry, I start foolishly questioning what the task is supposed to be: vision? simulation? dataset labeling? self-driving cars? But the interviewer doesn't budge. Doesn't give a specific task or context. Simply ignores the questions and stoically refuses to elaborate. The stars speak to me, and I guess he wants a relational mapping of some kind. Turns out I am right. This was supposed to test basic SQL table modeling. At this point, I decide I'd sit through the interview just so I can collect all the questions. I am not disappointed: - How many agentic frameworks do you know? - What is the name of OpenAI's embedding model, and how many dimensions does it have? - Then, the last ordeal lands: interviewer takes out a piece of cardboard that has \"context engineering\" written on it and asks: \"What does this tell you?\". His camera is unfocused, I ask if he could read what it says. Instead he repeats: \"What does this tell you? What does this tell you? What does this tell you?\". I ask if he is the ML team lead. Turns out this absolute Chad is a mobile dev the client asked to interview candidates for the MLE role."
+        },
+        {
+          "id": 48287693,
+          "author": "MattRogish",
+          "text": "This… was a mistake on both you and the interviewer. All interview questions - unless it’s impossible to twist your answer to fit this - is scoped to “… at work”. Nobody who asks “tell me about yourself” is asking you to talk about how you met your partner, how many cats you have, or that experience you had, that one time, at band camp. It would be redundant and awkward to literally say “… at work” at the end of every question. It’s totally 100% the intent of the interviewer. This is interviewing 101 and unless this is your first ever interview I would find it odd, and stop you immediately and say “I meant, worst day at work”. They should’ve done that. Unless they explicitly and unambiguously say “tell me about the day your mom and dog died in the same day when you found out you had cancer” they mean “tell me about your worst day _at work_.” And even if they ask about the time your dog died (they won’t), they are not asking you “tell me about the worst day you’ve had in your life”. They are asking “tell me about a time you experienced adversity and overcame it, exhibiting problem solving, resilience, and grit AT WORK. (Or - if you are operating in executive mode or you like to live dangerously - some non-work context that maps obviously and unambiguously to a work context).” You failed the “knows how to interact with people in a professional setting” part of the interview. Or the “this person knows how to interview” part (which generally, but not always, correlates with experience and emotional maturity). Or the “read between the lines” part. Yeah, inartfully asked questions - but also totally flubbed the answers. Sorry, chalk it up to you had a bad interview or day or whatever, and never, ever forget the entire thing is scoped to “…. at work”."
+        },
+        {
+          "id": 48287077,
+          "author": "sdenton4",
+          "text": "I fail to recall the exact wording of the discussion topics, but they were, in fact, non-technical — covering such lovely topics as the hardest day of my life, my biggest life challenges, and other similar “trauma-baiting” questions. Ha, I don't think anyone who asks these questions expects that you'll respond in a fully unfiltered way... These kinds of questions are part and parcel of non-tech interview processes. You can redirect with some subtlety \"Well, my hardest ever day at work was...\" to avoid talking about dead babies or whatever. Your interviewer doesn't get to look over your whole life history and determine whether your /truthfully/ chose the actual hardest ever day. So really it's a chance for you to say \"Here's a [big] challenge I once faced, and here's how I survived/overcame it.\""
+        },
+        {
+          "id": 48287204,
+          "author": "rigonkulous",
+          "text": "I was excited, it was a game company, and I'd wanted to get back into games - or more specifically, game engines - for a few years. The tech of this particular company was interesting, an in-house engine developed by wunderkind, of course, and they'd invited me for an interview because I had done a fair bit of low-level work, which would be handy for their rough edges. Apparently. Half way through the interview, I had an epiphany. I really didn't want to work there. It was cultural, it just wasn't going to fit. I didn't waste any more time. Half-way through a white-board challenge, I put down the marker and said, plainly, \"okay, I've seen enough, I don't want to work here - thanks and let me not waste any more of your time\", picked up my coat and left. It wasn't a bad interview. It wasn't a terrible one. Nor was it because of the whiteboard question, or anything like that. I just didn't like the guys. That's all it was. And I couldn't stand the idea of working for them - just the way the interview proceeded. I don't need to give details. It was really the only time I ever got up mid-interview and left."
+        },
+        {
+          "id": 48287574,
+          "author": "donatj",
+          "text": "I've been working as a dev for over twenty years now and have had my fair share of interviews. The very worst I ever had was about six months ago. I'd had a fantastic initial interview, it seemed like a perfect fit and interesting tech. Overlapped a lot with some work I'd been doing recently. They made it sound like my experience was a great match and they were exited for me to move forward. I was the most excited I've ever been after a job interview. The second interview a couple days later was a one-on-one with the CTO. After about five minutes of pretty friendly get-to-know-you chitchat he asks if I have any questions about the position. I ask about what my day to day would look like and he replies \"I don't know, and that's the problem. I don't like to lead people on, I'll be honest I don't see a position for you here.\" It was such a sudden slap in the face that my brain just completely shut off. I kind of just stammered out an \"Oh... Um... Thank you for your time\" I didn't get to talk about my experience ... at all. Not a single mention of my twenty years of across multiple tech stacks my resume doesn't even begin to scratch. I've never been judged so quickly or so blindly. Later that day, out of sheer frustration I email him back trying to explain that I'd felt like I didn't get a chance to talk about myself and all the ways I'd felt like I was a great fit based on the previous interview and how my experience applied. I never heard anything back."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 11,
+      "id": 48275564,
+      "title_en": "A portentous reunion",
+      "title_ja": "A portentous reunion",
+      "url": "https://bcantrill.dtrace.org/2026/05/25/a-portentous-reunion/",
+      "hn_url": "https://news.ycombinator.com/item?id=48275564",
+      "score": 85,
+      "comment_count": 24,
+      "posted_at": "2026-05-26T05:57:45+00:00",
+      "comments": [
+        {
+          "id": 48287926,
+          "author": "fasterik",
+          "text": "Re: the anxiety of parents about the future: the people who best handle rapidly changing circumstances are the ones who are comfortable with ambiguity and uncertainty. I think it's far less important to teach young people specific skills in technology X, and far more important to teach them how to regulate their emotions, how to make plans and effectively execute on them, and how to be objective about their own strengths and weaknesses. Unfortunately, this doesn't seem to be something that a standard education focuses on, so whether or not you pick up these skills depends on whether your parents explicitly taught them to you or you happened to get lucky enough to develop them on your own."
+        },
+        {
+          "id": 48285036,
+          "author": "bcantrill",
+          "text": "I know I have already written a (long!) piece on this, so I don't want to expand too much here -- but this really was a very odd experience, to be talking with (understandably!) anxious parents of young adults about the peril of dehumanization while at the same time having this intensely human experience very much enabled by an LLM. More than anything, it reinforced something that I think many of us believe: the future is especially uncertain right now, and will contain many surprises!"
+        },
+        {
+          "id": 48289769,
+          "author": "dash2",
+          "text": "Yeah I mean people are talking about 'the eternal Sloptember' but the other side of that is - you know how everyone is nostalgic for 90s/early 2000s websites and all the silliness and creativity? Well that is happening now in programs and apps. Any fool can make a terribly-architected game/app to scratch his itch. Most of them are bad, and most won't last, but there's also a lot of fun."
+        },
+        {
+          "id": 48287993,
+          "author": "bhickey",
+          "text": "Back in 2006 I cornered Bryan in the CIT elevator and asked him for the BattleTris source. Glad to see some progress being made."
+        },
+        {
+          "id": 48288088,
+          "author": "toast0",
+          "text": "On the topic of tetris conflicts with weapons. There's also Tetrinet, for win32 over ip; up to six players IIRC?. Or Tetris Battle Gaiden on Super Famicom for single screen gaming."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 12,
+      "id": 48280729,
+      "title_en": "Launch HN: Minicor (YC P26) – Windows desktop automations at scale",
+      "title_ja": "Launch HN: Minicor (YC P26) – Windows desktop automations at scale",
+      "url": "https://www.minicor.com/",
+      "hn_url": "https://news.ycombinator.com/item?id=48280729",
+      "score": 85,
+      "comment_count": 53,
+      "posted_at": "2026-05-26T14:57:27+00:00",
+      "comments": [
+        {
+          "id": 48284931,
+          "author": "oveja",
+          "text": "For those confused like I was, RPA stands for Robotic Process Automation."
+        },
+        {
+          "id": 48281424,
+          "author": "polonbike",
+          "text": "Congrats on the launch. One complaint: RPA this, non-RPA that, but you never explain what it means. I would write down the acronym fully once at the first mention on the landing page."
+        },
+        {
+          "id": 48287303,
+          "author": "absk82",
+          "text": "The underlying mechanism is different from something like computer use? Where can I find more details about how it works ?"
+        },
+        {
+          "id": 48283589,
+          "author": "throw03172019",
+          "text": "Biggest question is how much of this can be stored / processed on our own infra and with our own lifecycle rules? For example, this can touch a lot of PHI. Screenshots, videos, JSON inputs/outputs etc."
+        },
+        {
+          "id": 48283086,
+          "author": "throw03172019",
+          "text": "Does this only revert back to LLM Vision when it catches an error? I.e once the RPA / workflow is built once, it’s efficient for running multiple times (until it catches an error state)?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 13,
+      "id": 48222600,
+      "title_en": "Rosalind: A genomics toolkit in Rust running whole-genome pipelines on a laptop",
+      "title_ja": "Rosalind: A genomics toolkit in Rust running whole-genome pipelines on a laptop",
+      "url": "https://github.com/logannye/rosalind",
+      "hn_url": "https://news.ycombinator.com/item?id=48222600",
+      "score": 151,
+      "comment_count": 37,
+      "posted_at": "2026-05-21T13:55:13+00:00",
+      "comments": [
+        {
+          "id": 48286462,
+          "author": "logannyeMD",
+          "text": "Hey guys, this is my github repo. Glad it's received some interest - I figured HN might be the culprit when it suddenly jumped ~100 stars despite not working on the code base since last year. I prototyped this out of personal curiosity last year and moved on abruptly so there's a lot of gaps I still need to close and knobs that need to be optimized. But if people genuinely find \"deterministic genomics workloads on edge devices\" proposal useful, I'll begin refining the code tonight and try to make it as useful as possible. If you have any particular bioinformatics tasks or use cases that you want to be feasible on edge devices, lmk and I'll work on integrating new capabilities. Always happy to be helpful"
+        },
+        {
+          "id": 48283254,
+          "author": "p4ul",
+          "text": "This is interesting; thanks for sharing! I have been curious about the adoption of Rust in computational biology. I know that the folks at Saint Jude's [1] are also using Rust for their 'omics research. [1] https://github.com/stjude-rust-labs"
+        },
+        {
+          "id": 48288506,
+          "author": "mriet",
+          "text": "Realistically, without data from a large testset that compares this thoroughly to Samtools (and others?), I wouldn't touch this. Note to the OP: specify a focus please? short, long, mega-long read and bacterial, human, small plant or large plant genome? Alignment heuristics and performance differ significantly across those axes."
+        },
+        {
+          "id": 48288285,
+          "author": "a_bonobo",
+          "text": "There has been a bit of a 'trend' to rewrite common bioinformatics/comp-bio into faster languages (Rust) via LLMs, OP's repo seems to be an early example. Seqera Labs has a bit of a manifesto: https://rewrites.bio/ Heng Li has an overview here too: https://lh3.github.io/2026/04/17/the-ai-rewrite-dilemma IMHO it's... OK? Bioinformatics code quality is generally poor, untrained biologists writing functioning code that is poor in scoping, but works. (Unguided) LLMs write on that level, too, so not much harm done."
+        },
+        {
+          "id": 48286190,
+          "author": "croemer",
+          "text": "Those are all the tests for alignment. They don't even check the alignment is correct. Just that there are no errors. This is a joke: https://github.com/logannye/rosalind/blob/main/tests/alignme... Looks like total slop to me. All code in one commit, then a bunch of commits polishing the Readme. No release, no updates in half a year."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 14,
+      "id": 48288174,
+      "title_en": "Tunecat: Simple Internet Radio",
+      "title_ja": "Tunecat: Simple Internet Radio",
+      "url": "https://codeberg.org/lindenii/tunecat/",
+      "hn_url": "https://news.ycombinator.com/item?id=48288174",
+      "score": 44,
+      "comment_count": 1,
+      "posted_at": "2026-05-27T01:08:16+00:00",
+      "comments": [
+        {
+          "id": 48290380,
+          "author": "snvzz",
+          "text": "I do not know what I am looking at. It's some sort of server. It seems to serve opus files, but what is the protocol it serves with? And it also seems to support connecting to irc servers? I am very confused. The README.md could definitely use some work."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 15,
+      "id": 48285592,
+      "title_en": "Big tech's anti-labor playbook has come for Wikipedia",
+      "title_ja": "Big tech's anti-labor playbook has come for Wikipedia",
+      "url": "https://medium.com/@jakeorlowitz/wikipedia-is-doing-the-capitalist-thing-56a393232943",
+      "hn_url": "https://news.ycombinator.com/item?id=48285592",
+      "score": 454,
+      "comment_count": 265,
+      "posted_at": "2026-05-26T20:33:24+00:00",
+      "comments": [
+        {
+          "id": 48287278,
+          "author": "OsrsNeedsf2P",
+          "text": "I spent ~2 years actively editing Wikipedia for multiple hours every day. I remember taking my laptop out at airports for 20 minutes between transfers, just to tweak an article or improve a source. While I originally started because I found some articles lackluster, I quickly realized how vigorous the editing process could be on controversial topics. For what simple HTML you see on the surface, you would be absolutely shocked to see how many hundreds of thousands of hours are spent to create an encyclopedia that, to be honest, is about as unbiased, astroturf-free, and low barrier of entry as you can get. It's not built with crappy automation but instead hand crafted with love and respect. I would bet my salary on Wikipedia turning to shit within a year if the editors who signed the Editor Strike[0] leave en masse. [0] https://en.wikipedia.org/wiki/Wikipedia:Wiki_Workers_United_..."
+        },
+        {
+          "id": 48286875,
+          "author": "bawolff",
+          "text": "To give context, it seems like what happened is WMF did two separate things: - Fired one of the original developers of MediaWiki (the open source project that powers wikipedia) - Brooke. This person was at one point in contention to basically be BDFL of MediaWiki. She is somewhat less publicly prominent now compared to back in the day, but to a lot of oldhands this is shocking. - Laid off community tech team. This is a team that basically did development work by popular demand (literally people voted to decide on what they would work on). In many ways the existence of this team was a band-aid on the problem that many Wikipedians felt WMF was not being responsive to their needs or working on things that were important. The team was extremely popular, and disbanding it felt like a middle finger to many. In particular to many people (including me) it seems extremely cold to lay people off during a reorg instead of reassigning them. On top of that both were involved with unionization activities, which further fueled concerns that this might be some sort of retalitory step. The onwiki discussions are at https://en.wikipedia.org/wiki/Wikipedia:Village_pump_(WMF)#W..."
+        },
+        {
+          "id": 48286774,
+          "author": "Wikipedianon",
+          "text": "Some English Wikipedia (enwiki) editors are striking. They are predominantly non-technical that are forced to maintain their own shadow IT-style infrastructure that Wikimedia (nonprofit owners of Wikipedia) doesn't provide. It is very difficult to be a productive editor without custom tooling at this point. The reason why is because the laid off team maintained the Community Wishlist, the main way for editors to feature request for \"professional\" solutions. The Wikimedia Foundation also deweighted popularity as a metric for tackling feature requests on the Community Wishlist. This pisses off enwiki as the largest editor base. From the WMF's perspective, though, enwiki is a cash cow on the BCG matrix.[1] It has been in seemingly terminal decline for over a decade[2], accelerated by LLMs, yet still drives the majority of donations/clicks. As a result, WMF prioritizes investing in emerging markets over enwiki. This means outreach to indigenous languages in the Global South and developing supporting infrastructure. e.g. \"Abstract Wikipedia\" which aims to use a language-neutral syntax that can be automatically translated into any language. These currently form a tiny segment of the editor population but have much larger potential TAM and are growing. So it's the correct strategy even if it pisses off editors. [1] https://en.wikipedia.org/wiki/Growth%E2%80%93share_matrix [2] https://en.wikipedia.org/wiki/Wikipedia:Why_is_Wikipedia_los..."
+        },
+        {
+          "id": 48287365,
+          "author": "chr15m",
+          "text": "> The point is the Foundation is rich. Seventeen-plus months of operating runway in the bank. I don't think \"rich\" is the correct way to describe this. It sounds like a lot of money but there are a lot of expenses and people to pay. Seventeen months sounds fragile - one long-ish recession and they're toast. I hope they survive."
+        },
+        {
+          "id": 48286939,
+          "author": "orsenthil",
+          "text": "Brooke Vibber is the single most person responsible for creating the software that runs wikipedia. There is a Brooke Vibber day in her honor https://en.wikipedia.org/wiki/Wikipedia:Brooke_Vibber_Day It is wild to see she getting fired."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 16,
+      "id": 48279316,
+      "title_en": "Spain blocks prediction markets Polymarket, Kalshi over lack of gambling licence",
+      "title_ja": "Spain blocks prediction markets Polymarket, Kalshi over lack of gambling licence",
+      "url": "https://www.reuters.com/business/spain-blocks-prediction-markets-polymarket-kalshi-over-lack-gambling-licences-2026-05-26/",
+      "hn_url": "https://news.ycombinator.com/item?id=48279316",
+      "score": 869,
+      "comment_count": 401,
+      "posted_at": "2026-05-26T13:08:13+00:00",
+      "comments": [
+        {
+          "id": 48280465,
+          "author": "solenoid0937",
+          "text": "These - especially Polymarket - should be illegal globally, as they incentivize people with power to manipulate the real world in horribly destructive ways to win a bet. I would not be surprised if people are murdered at some point to reap the payout of some related bet."
+        },
+        {
+          "id": 48280830,
+          "author": "throwawa1",
+          "text": "When I see people making money on Iran attacks, and murder of heads of state - it shows clearly something is deeply wrong with Polymarket. Its a level worse than Vegas or Indian casinos. A literal ticket to hell. I'm all for banning these evil sites."
+        },
+        {
+          "id": 48282064,
+          "author": "linuxhansl",
+          "text": "Good. Just naming things differently does not work in other countries. If it quacks like a duck, swims like a duck, and looks like a duck, then it probably is a duck."
+        },
+        {
+          "id": 48280990,
+          "author": "everdrive",
+          "text": "I don't usually see advertisements, but I was in a position recently to see a real-life television stream, and I was quite surprised to see them run an advertisement for Kalshi. I was pretty surprised that something like this would be advertised to normal people. I'd half expect the next ad to be for a hitman, or for beating your wife, or something. Seems crazy that this is tolerated whatsoever."
+        },
+        {
+          "id": 48283429,
+          "author": "afinlayson",
+          "text": "Didn't we learn our lesson in SimCity? Crime went up when you added a casino.. but governments gained a little tax revenue... We seem to get the crime (see insider trading) but no tax revenue... Maybe I'm just showing my age..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 17,
+      "id": 48263174,
+      "title_en": "Splinter Cell veteran says realistic modern lighting has screwed up stealth game",
+      "title_ja": "Splinter Cell veteran says realistic modern lighting has screwed up stealth game",
+      "url": "https://www.rockpapershotgun.com/splinter-cell-veteran-says-realistic-modern-lighting-has-screwed-up-stealth-games-it-gets-very-hard-to-tell-whats-light-whats-shadow-whats-dark-whats-safe",
+      "hn_url": "https://news.ycombinator.com/item?id=48263174",
+      "score": 53,
+      "comment_count": 21,
+      "posted_at": "2026-05-25T03:30:02+00:00",
+      "comments": [
+        {
+          "id": 48290506,
+          "author": "stuxnet79",
+          "text": "As an aficionado of the genre, it is a real shame that stealth games have fallen out of favor with the current crop of gamers. 90s and early to mid 2000s seems like was the peak for 3D games with deep storylines and pure stealth mechanics (MGS, Splinter Cell). By the time the late 2000s rolled around we started getting the watered down hybrid model aka stealth but you can play it like a FPS or TPS if you prefer. Finally in the 2010s seems like even these hybrid stealth games were on their way out for the most part. Correct me if I'm wrong but I can count the number of releases on one hand. My pet theory is that these types of games are simply too high brow for casuals who have become a larger segment of the target audience."
+        },
+        {
+          "id": 48290225,
+          "author": "jdw64",
+          "text": "I believe that creative liberties in games and movies are essential. Just as Star Wars would have been incredibly dull without laser sounds in the vacuum of space, there is no absolute need for entertainment to strictly mirror reality. From a design perspective, if implementing a cutting-edge lighting system clashes with the core game design, I think it's perfectly acceptable to fall back on a legacy lighting model. I don't want a game where Sam Fisher gets spotted and gunned down in three seconds flat. I want a game where I can hide in unrealistically deep shadows and pull off the mission"
+        },
+        {
+          "id": 48290521,
+          "author": "Springtime",
+          "text": "MGSV had realistic graphics (one of the first games with PBR) and handled it well. One of the devs had a GDC talk about their lighting approach, too. In the game light/shadow (in addition to what outfit you're wearing, surface you're on, if you've showered recently and other factors) has an effect on your camouflage index. Unlike prior Metal Gear Solid games this is never shown as a value on-screen but instead communicated by clues from enemy reactions and sound cues, where eg. their animation will change to show they've noticed something suspicious from a distance."
+        },
+        {
+          "id": 48290341,
+          "author": "fsfod",
+          "text": "The Dishonored creators also talk about this and why they went for cover\\LoS based stealth in lets play they did a couple days ago https://www.youtube.com/watch?v=ZVq0af9DwPU&t=1370s"
+        },
+        {
+          "id": 48290364,
+          "author": "curtisf",
+          "text": "This has everything to do with art direction, and not technology. The real world has much more light bouncing fidelity than even modern games. There are still dark things we can't see. Physically based rendering should be exactly the opposite of what the article is complaining about: it gives you the \"correct\" way to communicate how light is moving through a space. So the player and the game designer should be able to communicate much more easily, and the artists should be able to focus on actually communicating what they need to, instead of tweaking non physical phong and ambient lighting parameters"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 18,
+      "id": 48256053,
+      "title_en": "What I've Learned (So Far) Building Online Mini Games with Elixir and Swift",
+      "title_ja": "What I've Learned (So Far) Building Online Mini Games with Elixir and Swift",
+      "url": "https://calvinflegal.com/2026/05/24/what-ive-learned-so-far-building-online-mini-games-with-elixir-and-swift.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48256053",
+      "score": 33,
+      "comment_count": 16,
+      "posted_at": "2026-05-24T10:17:19+00:00",
+      "comments": [
+        {
+          "id": 48290445,
+          "author": "w10-1",
+          "text": "> Also, I would encourage others to target Mac in addition to iOS for a reason you might not expect: build times. The simulators and Xcode are really pretty slow. It’s all a lot faster if you’re targeting Mac. Yes, this makes my day: (also) target macOS for continuous rapid loops on one project, or target iOS and end up flitting back and forth between many projects. (\"mac (made for iPad)\" does not work.)"
+        },
+        {
+          "id": 48288786,
+          "author": "zuzululu",
+          "text": "was expecting a bit more substance but always interesting to read different approaches. but I do wonder if BEAM is a bit of an overkill, even fly.io (known among developer threads to be very unreliable uptime) wouldn't be my first pick. Cloudflare Durable Objects really is generous, not often can you get replicated database and realtime sync for such low barrier in cost and implementation. I do wonder tho what Cloudflare's ultimate game is, as I'd imagine once they corner the market and practically everything is running off it, wouldn't be hard to say raise the $5/month to something higher."
+        },
+        {
+          "id": 48289318,
+          "author": "apt-apt-apt-apt",
+          "text": "Really interested in hearing more about the architecture. Especially (1) why you chose Elixir, Phoenix over TS (2) how you dealt with real-time multiplayer. Aside: The links to the web game in the post don't lead to being able to play."
+        },
+        {
+          "id": 48257257,
+          "author": "calflegal",
+          "text": "I should've said more about the tech. I will later. The server is in NJ. If you're in the EU the game might really lag. Sorry!"
+        },
+        {
+          "id": 48288497,
+          "author": "karado",
+          "text": "In my own projects I've found the feedback loop to be much slower in native mobile apps compared to web. For web apps my workflow has involved lots of human verification just through using the app myself and testing out the latest features/fixes. Sometimes I get the agent itself to do this before I do using Codex's chrome extension. This same process on mobile is a lot slower. How have you approached this aspect? Have you figured out a way to get the agent to control an emulator?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 19,
+      "id": 48263560,
+      "title_en": "C array types are weird",
+      "title_ja": "C array types are weird",
+      "url": "https://anselmschueler.com/blogposts/2025-c-pointers/",
+      "hn_url": "https://news.ycombinator.com/item?id=48263560",
+      "score": 71,
+      "comment_count": 59,
+      "posted_at": "2026-05-25T05:05:11+00:00",
+      "comments": [
+        {
+          "id": 48289067,
+          "author": "alexey-salmin",
+          "text": "Interestingly the article doesn't mention two-dimensional arrays and they're curios because they bring a certain asymmetry with them. It always tripped me over the most in C because I otherwise find the language very \"symmetrical\". It often feels like in design of this language the beauty of expressing certain things took priority over readability or safety which I admire in a way. But somehow not in the case of the two-dimensional arrays. If you see a[i][j] it could mean two completely different things: 1) \"a\" is a continuous chunk of memory of N*M bytes, so it behaves as char*; a[i][j] == *(a + i*M + j) 2) \"a\" is an array of char* pointers that point to N completely distinct memory chunks of size M, so it behaves as char**; a[i][j] == *(*(a + i) + j) With flat arrays the difference between an array as a variable and a pointer to the first element is literally negligible because you won't even see the difference in the assembly. This is why the automatic decay-to-pointer makes a lot of sense. But that breaks completely with multiple dimensions. You definitely see the difference in the assembly because the memory layout is so different."
+        },
+        {
+          "id": 48288146,
+          "author": "fooker",
+          "text": "C array types are weird because C doesn't really need arrays. It's not what C was about. But if you designed a language in the era where Fortran, THE array language, reigned supreme, nobody would use your language. The mindshare Fortran had is difficult to convey now, half a century later. Think of it like making a chatbot today and not mentioning AI or LLMs, that's what making a language without arrays would have felt like in 1970."
+        },
+        {
+          "id": 48263791,
+          "author": "uecker",
+          "text": "In practice, the [static n] notation can give you useful warnings and bounds checking. https://godbolt.org/z/PzcjW4zKK And while the (*array_ptr)[3] notation take a moment to get used to, it is very logical. If you have a pointer to an array, you dereference it first and then indx into it. Again, useful for bounds checking: https://godbolt.org/z/ao1so9KP7"
+        },
+        {
+          "id": 48287839,
+          "author": "kazinator",
+          "text": "There is a history to it; in one of the predecessor languages, like B, Ritchie actually had arrays that had a hidden pointer to their start. The \"array to pointer decay\" was actually a real operation that loaded an address from memory, and it was possible to twiddle the bits to relocate an array. One problem with it was no way to initialize such a pointer field that would allow an array to live in dynamically allocated storage (no constructors in the language). So in short, the bad design (array values produce pointers) was informed by conceptual compability with an earlier design in which that was literally happening."
+        },
+        {
+          "id": 48288856,
+          "author": "Animats",
+          "text": "The real lack is that C doesn't have slices. Slices can do most of what pointers into arrays can do, with sane semantics. Slices were invented surprisingly late. They were implementable in the 1970s, but didn't really show up until the 1990s. Now that we have slices, the demand for pointers into the middle of an array has much decreased. I had a go at retrofitting C with slices over a decade ago.[1] Too much political hassle. [1] https://www.animats.com/papers/languages/safearraysforc43.pd..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 20,
+      "id": 48287982,
+      "title_en": "Stripe is friendly to “friendly fraud”",
+      "title_ja": "Stripe is friendly to “friendly fraud”",
+      "url": "https://www.gingerlime.com/2026/stripe-seem-friendly-to-friendly-fraud/",
+      "hn_url": "https://news.ycombinator.com/item?id=48287982",
+      "score": 226,
+      "comment_count": 146,
+      "posted_at": "2026-05-27T00:40:05+00:00",
+      "comments": [
+        {
+          "id": 48288658,
+          "author": "zuzululu",
+          "text": "My suggestion is to just ban specific regions or countries and you can cut 80% of this fraud. I'm not going to name those countries outright but you should never ever be launching globally until you have these safeguards in place. Once you are known to be vulnerable to a certain scheme, it quickly becomes known in that region/country. Again and again I'm reminded why high trust societies remain high trust and why low trust societies rarely transform into high trust society."
+        },
+        {
+          "id": 48288327,
+          "author": "shash7",
+          "text": "I run a saas and we get this every now and then. As a rule of thumb, when you get a chargeback you need to completely ban the customer from your db. This includes: - card ban - email address ban - fingerprint their access and ban This will save you a lot of hassle when they try to signup/buy your product again and cause you the same amount of grief."
+        },
+        {
+          "id": 48288445,
+          "author": "varenc",
+          "text": "> They told me they don’t use evidence of chargeback abuse from one merchant to create cross-merchant fraud signals, or to take action against the customer’s card, email, or other details for other merchants. I'm surprised they were able to get Stripe to actually state all of this clearly. It's nice that Stripe actually communicates details like this. But you can see the logic behind why many other big companies would just respond with an opaque message like \" thank you for your report, it will be handled in the appropriate manner \". Because saying the truth gets people more upset."
+        },
+        {
+          "id": 48288889,
+          "author": "nostromo",
+          "text": "The customer screwed you over, and then their bank did too. Stripe didn't. I'm not sure why Stripe is getting blamed in the title and the article. Yeah, maybe Stripe could do more without Radar, but I imagine it could also be fraught if Stripe was in the business of blocking customers from their entire network based on one vendor's complaint. Obviously a lot could go wrong with such an approach."
+        },
+        {
+          "id": 48289671,
+          "author": "ripberge",
+          "text": "I dealt with millions of dollars in chargebacks with Stripe. We sold tickets, they're easy to re-sell and our customers were tourists visiting shows from all over the world. Stripe Radar was not a good product. It would score large numbers of very suspect transactions at a risk level of 1 or 2 (out of 100). I don't have an ML background, but something about their methodology was just flawed. It behaved as if there was a wire loose in it. Unfortunately, I don't think they're very incentivized to care."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 21,
+      "id": 48250300,
+      "title_en": "The Forgotten Art of the LAN Party (2023)",
+      "title_ja": "The Forgotten Art of the LAN Party (2023)",
+      "url": "https://www.superjumpmagazine.com/the-forgotten-art-of-the-lan-party/",
+      "hn_url": "https://news.ycombinator.com/item?id=48250300",
+      "score": 112,
+      "comment_count": 31,
+      "posted_at": "2026-05-23T19:01:13+00:00",
+      "comments": [
+        {
+          "id": 48289236,
+          "author": "geekman7473",
+          "text": "LAN parties aren't dead! Some of us are keeping the magic alive. I throw LAN parties at my house about twice a year. The hardest part, as i've gotten older, has been scheduling. Now I need to send save-the-dates 2 months in advance, and the length is capped at about 12 hours. When I was a teenager we would go all night :) I am moderately obsessed with LAN parties, so I built a file sharing tool for LAN parties specifically, if you want to check it out https://justinbecker.dev/blog/2026/05/16/why-i-built-lanbuck..."
+        },
+        {
+          "id": 48289620,
+          "author": "thes1lv3r",
+          "text": "I volunteer at a yearly LAN party called The Gathering[1] in Norway, we pull about 5000 participants each year (about 3k of which have desk spaces, the rest are day or week passes without a desk). It's some of the most fun I have each year :3 It's unfortunately lost a lot of the early 2000s charm (which ive only experienced from videos and pictures), but we try our best to keep things local and give the best experience possible for participants :3 [1]: https://tg.no (no English site exists unfortunately)"
+        },
+        {
+          "id": 48290288,
+          "author": "epaga",
+          "text": "My teenage son has held multiple LAN parties this past year at our house. They are far from dead, just maybe not quite as widespread as they used to be when I was his age."
+        },
+        {
+          "id": 48289054,
+          "author": "flurb",
+          "text": "As kids me and my friends used to muse over the fact that growing old, eventually moving into a care home would be awesome. Pension, you say? Well, what's that if not an unending LAN party! It turns out reality is different - the older I get, the less interested I have in computer games. It feels like I've seen it all at this point, and I'd rather see grass twice than a virtual anything. When me, and my generation, are old enough where people start getting shipped into care homes, I suspect there won't be any interest at all, save perhaps a nostalgia trip every now and again."
+        },
+        {
+          "id": 48289041,
+          "author": "niwtsol",
+          "text": "Our high school computer science team did a StarCraft LAN party on a flight coming back from a coding competition. We felt like the coolest kids in the world when we did that."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 22,
+      "id": 48279453,
+      "title_en": "Dropbox CEO Drew Houston to step down",
+      "title_ja": "Dropbox CEO Drew Houston to step down",
+      "url": "https://www.cnbc.com/2026/05/26/dropbox-ceo-drew-houston-ashraf-alkarmi.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48279453",
+      "score": 333,
+      "comment_count": 357,
+      "posted_at": "2026-05-26T13:18:33+00:00",
+      "comments": [
+        {
+          "id": 48286624,
+          "author": "jlarks32",
+          "text": "I was lucky enough to work at Dropbox for a bit. Awesome engineering culture and such good people. Got to even grab a beer and rip karaoke with Drew. Thanks for creating such an awesome working environment Drew. I cannot say thank you enough for those memories or that experience. By far the best CEO and leader I've seen."
+        },
+        {
+          "id": 48287855,
+          "author": "zhyder",
+          "text": "Aside from the issue of platform owners (Apple, Google, Microsoft) offering storage sync as an integrated feature, which others have pointed out, the other reason growth is limited is that filesystem storage and sync thereof has become less critical over time. Our apps increasingly do cloud-native walled-garden storage: docs in Google Docs / Notion / Confluence, mocks in Figma, etc. And code was cloud-native with version control much earlier. I need sync for just photos on my phone (which Apple or Google are better for), and a small number of esigned PDFs and tax documents (for which any provider's free tier suffices). Dropbox solved a problem of the 2010s."
+        },
+        {
+          "id": 48283389,
+          "author": "browningstreet",
+          "text": "Having just rsync'd 100s of GBs back down from B2 and not sure where to put it, and having lots and lots of business documents and video files to share with collaborators, I'm surprised how few competitors there are in the Dropbox space. With their block level syncing, Dropbox is still not really replicated in the market. I'd only take issue with their price given the volumes of data I'm dealing with. Being able to set local and not-local flags on files/folders is great. I spent some time trying to use a few of their alternatives, plus their mobile client apps, and it's kinda just Dropbox still."
+        },
+        {
+          "id": 48283463,
+          "author": "postalcoder",
+          "text": "I think I've spent more on dropbox, lifetime, than most other subscriptions (it's also the first service i thought was worth paying a subscription for). I still pay for it. Drew built a great service. On the other hand, I can't think of a single new feature they've introduced since 2011 that matters. All I care about is packrat and good syncing. Is there anybody that loves anything they've built in the last fifteen years? I feel like the company could have had a skeleton crew keeping the lights on and I wouldn't have noticed a thing. Now, in 2026, all I want is for my coding agent to be able to grep the files in dropbox. Feel like dropbox will sooner rely on selling merch than offer something useful like that, though."
+        },
+        {
+          "id": 48284315,
+          "author": "bhouston",
+          "text": "Dropbox's stock has been stuck at around $6B valuation for years with flat growth and income around $2.5B per year. It is just stuck. Box.com, which is quite similar, is not that different. Around $3B and $1.2B in income. Similar valuation. I think it is the market, not the leadership. It is a tough market that has cut off the consumer end because all the big players have their own deeply integrated solutions: Apple (iCloud), Google (Drive), Microsoft (OneDrive). Not sure where to go since the big guys won't acquire you given that they have alternatives. Maybe a business software acquirer like Salesforce or Dell? Or an AI company that would use this type of cloud storage as a AI document store / collaboration hub? I honestly do not know where to go."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 23,
+      "id": 48288709,
+      "title_en": "TSDuck: Open-source toolkit for MPEG-TS analysis and manipulation",
+      "title_ja": "TSDuck: Open-source toolkit for MPEG-TS analysis and manipulation",
+      "url": "https://tsduck.io/",
+      "hn_url": "https://news.ycombinator.com/item?id=48288709",
+      "score": 11,
+      "comment_count": 0,
+      "posted_at": "2026-05-27T02:22:59+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 24,
+      "id": 48251709,
+      "title_en": "The Steinwinter Supercargo",
+      "title_ja": "The Steinwinter Supercargo",
+      "url": "https://www.thedrive.com/article/12603/the-forgotten-steinwinter-supercargo-is-unlike-anything-on-the-road-today",
+      "hn_url": "https://news.ycombinator.com/item?id=48251709",
+      "score": 63,
+      "comment_count": 16,
+      "posted_at": "2026-05-23T21:28:09+00:00",
+      "comments": [
+        {
+          "id": 48290333,
+          "author": "samat",
+          "text": "Reminded me of the trucks which truck the airliners in the airports Searched for it, they are called Towbarless (TBL) Tugs, they go under the nose of plane and lift the front wheels I don’t particularly like cars, but those ones always had my attention in the terminal :)"
+        },
+        {
+          "id": 48286659,
+          "author": "mrec",
+          "text": "I wondered if this might have been the basis, either physically or at least aesthetically for the Aliens APC. Apparently not; while very similar in low-slung form factor, that was a Hunslet ATT77 air towing tractor: https://www.hooniverse.com/movie-cars-aliens-armored-personn..."
+        },
+        {
+          "id": 48287493,
+          "author": "usrusr",
+          "text": "Read about it back then in what might best be described as a kid's annual hardcover magazine and loved it so much (a few years later they had a long article about the Porsche 959, it's almost a tie for me). \"Das Neue Universum\": in those years they had an awesome mix of technology, culture, adventure and science - some parts much further from \"ELIF\" than one might expect. A part of that young me still seems to live on being mighty disappointed that I'm not living in that future!"
+        },
+        {
+          "id": 48288013,
+          "author": "ew6082",
+          "text": "Boeing has a similar vehicle that drives the rear end of long load trailers around Seattle. https://www.youtube.com/watch?v=wsZ6YPsPpj0"
+        },
+        {
+          "id": 48288738,
+          "author": "curio_Pol_curio",
+          "text": "Timeless interior. Maybe inspired https://hips.hearstapps.com/hmg-prod/images/df7a5e0c-8004-40... (from the electric Ferrari http://www.roadandtrack.com/photos/g71401901/2028-ferrari-lu... )"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 25,
+      "id": 48289624,
+      "title_en": "Show HN: Posthorn, self-hosted mail without the mail server",
+      "title_ja": "Show HN: Posthorn, self-hosted mail without the mail server",
+      "url": "https://github.com/craigmccaskill/posthorn",
+      "hn_url": "https://news.ycombinator.com/item?id=48289624",
+      "score": 6,
+      "comment_count": 0,
+      "posted_at": "2026-05-27T04:26:26+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 26,
+      "id": 48288191,
+      "title_en": "Where does next-token prediction leave us?",
+      "title_ja": "Where does next-token prediction leave us?",
+      "url": "https://pop.rdi.sh/where-does-next-token-prediction-leave-us/",
+      "hn_url": "https://news.ycombinator.com/item?id=48288191",
+      "score": 157,
+      "comment_count": 106,
+      "posted_at": "2026-05-27T01:10:44+00:00",
+      "comments": [
+        {
+          "id": 48290625,
+          "author": "jstrebel",
+          "text": "AI is like TV in that old saying: AI makes the smart ones smarter and the dumb ones dumber. LLMs can both help you advance your knowledge and do your homework (preventing you from learning)."
+        },
+        {
+          "id": 48290295,
+          "author": "Melamune",
+          "text": "LLMs reveal an important truth that we were already deeply aware of. With this cognitive offloading, the interests that drive us lose their meaning. If friction disappears, there is no longer any desire, pleasure, longing, obstacle, or demand. It is indolence, and it goes by the name of apathy. All these promises without even reaching an ideal! Could it simply be that this ideal is becoming impoverished? The prevailing view is that « AI makes us stupid », so it’s actually a good thing if only the wealthy were still capable of using it. I doubt that after having experienced deprivation, shame, and death; as well as their positive counterparts, we will ever fail to overcome entropy. We will adapt, for that is all we know and can do by default. What is given without effort does not transform."
+        },
+        {
+          "id": 48290615,
+          "author": "teravor",
+          "text": "as opposed to what? most people don't ask the question and that's why you see the popular backlash. this is a ride you cannot get off of. a government that slows it down will render its polity powerless. an entity which forgoes it will become irrelevant. the only remaining move is to move ahead and hope you can figure something out as you go."
+        },
+        {
+          "id": 48289902,
+          "author": "overgard",
+          "text": "I have a more depressing theory. I think class is part of it, but I'm starting to suspect that a shockingly large number of people lack the critical thinking skills needed to think out the implications of this stuff. I say that because I've met so many people of the managerial class that seem to think it's going to replace the annoying people they have to pay, but somehow they don't think it's going to come for them . It's like we have some sort of society-wide main-character syndrome where a bunch of people just think that somehow the machine can replace every other job, and yet after ingesting all of human knowledge it somehow won't be able to compete with someone with \"domain expertise\"? Shit, even the cynical people that think their wealth is going to protect them are probably ignoring that if unemployment hits 50+%, society is just going to stay stable and they're going to be safe? I don't think this doomsday scenario is going to happen, but I think the people that are cheering for it need to really consider what they're cheering for."
+        },
+        {
+          "id": 48290000,
+          "author": "osigurdson",
+          "text": "The title is a little misleading as it sounds like it might hint at the end state of next token prediction - i.e. will we reach AGI with it and so on. Instead, this is entirely about \"means of production\" and \"class war\" stuff. While that may be coming, it isn't clear that this is the most likely outcome, its just the most pessimistic one. The author might as well have included that it will \"be the end of the human race\" as well, since once you get to the future state described, there is no alternative outcome that I can see."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 27,
+      "id": 48287952,
+      "title_en": "Erin Brockovich made a map to track data centers around the country",
+      "title_ja": "Erin Brockovich made a map to track data centers around the country",
+      "url": "https://www.niemanlab.org/2026/05/erin-brockovich-made-a-map-to-track-data-centers-around-the-country/",
+      "hn_url": "https://news.ycombinator.com/item?id=48287952",
+      "score": 196,
+      "comment_count": 192,
+      "posted_at": "2026-05-27T00:36:03+00:00",
+      "comments": [
+        {
+          "id": 48288359,
+          "author": "tiffanyh",
+          "text": "Why go through the effort when such work has already been done? https://www.datacentermap.com/datacenters/ Not being negative. But isn’t there existing highly reliable data that already exists for this?"
+        },
+        {
+          "id": 48288619,
+          "author": "tptacek",
+          "text": "The Erin Brockovich page itself repeats the canard, on the front page, that these sites endanger ecosystems with their water consumption."
+        },
+        {
+          "id": 48288545,
+          "author": "thiagoperes",
+          "text": "It's poetically beautiful that the tool was very very clearly built mostly if not entirely using AI"
+        },
+        {
+          "id": 48289890,
+          "author": "kleton",
+          "text": "It's amazing how Karen Hao's (Empire of AI) confusion of cubic meters with liters of water for datacenters continues to get amplified, even after this error was publicly revealed."
+        },
+        {
+          "id": 48288524,
+          "author": "AuthAuth",
+          "text": "This datacenter stuff is such populist brainrot."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 28,
+      "id": 48287678,
+      "title_en": "Sonny Rollins, jazz saxophonist, has died",
+      "title_ja": "Sonny Rollins, jazz saxophonist, has died",
+      "url": "https://www.rollingstone.com/music/music-news/sonny-rollins-jazz-legend-saxophone-colossus-dead-obit-1234715446/",
+      "hn_url": "https://news.ycombinator.com/item?id=48287678",
+      "score": 97,
+      "comment_count": 13,
+      "posted_at": "2026-05-27T00:03:04+00:00",
+      "comments": [
+        {
+          "id": 48288657,
+          "author": "dataviz1000",
+          "text": "I saw Sonny Rollins at the Monterey Jazz Festival in 1997. I bought a single ticket from a classified ad. The group who sold it were about 10 or 12 people who have been attending together for 30 years — the type of people you would want to be sitting with there. Diana Krall opened and by open I mean she was the first of 4 acts and had a free concert a couple days before at a coffee shop down the street — practically unknown. Sonny Rollins headlined and for the encore he played La Cucaracha. After about 20 minutes of La Cucaracha the pianist was signaling to the sound engineer to cut the sound. 5 minutes later the band one by one started to put down their instruments walking off the stage. Sonny Rollins kept belting La Cucaracha from his saxophone probably for another half hour or more after that. Life is good."
+        },
+        {
+          "id": 48288334,
+          "author": "bag_boy",
+          "text": "My favorite Sony Rollins story: he heard ‘Waiting on a Friend’ in a grocery store. He thought to himself, “finally, a Rolling Stones song that I like.” Then he remembered he was the saxophone player on the song…"
+        },
+        {
+          "id": 48288231,
+          "author": "davio",
+          "text": "We saw him live in Kansas City in 1998. He soloed for 36 choruses on St. Thomas. Gave the people what they came to see. Amazing to have so many ideas flow effortlessly."
+        },
+        {
+          "id": 48288292,
+          "author": "npunt",
+          "text": "Comes just a few days after the death of Dick Parry, Pink Floyd's saxophonist. https://en.wikipedia.org/wiki/Dick_Parry"
+        },
+        {
+          "id": 48288029,
+          "author": "rtsil",
+          "text": "He was the last of the legends."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 29,
+      "id": 48281515,
+      "title_en": "What color is your function? (2015)",
+      "title_ja": "What color is your function? (2015)",
+      "url": "https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/",
+      "hn_url": "https://news.ycombinator.com/item?id=48281515",
+      "score": 117,
+      "comment_count": 146,
+      "posted_at": "2026-05-26T15:58:32+00:00",
+      "comments": [
+        {
+          "id": 48283530,
+          "author": "rendaw",
+          "text": "I really don't like this article. It has a catchy, profound-sounding title that people bandy about to argue against stuff they don't like. All functions, even non-async functions, are colored. In any large system codebase you'll have functions that can only be called in certain situations, with the right setup, whatever, and if you're lucky this is communicated by types but regardless those restrictions can't be avoided. It's easy to call low-restriction functions from high-restriction ones and not the other way around. Furthermore, it's not like the alternative to explicit await doesn't have issues too (that the article doesn't mention). There is inherent complexity, it's a tradeoff, you can't just syntax it away."
+        },
+        {
+          "id": 48290332,
+          "author": "lukaslalinsky",
+          "text": "I've spent the last year working on an async runtime for Zig and I really grew fond of stackful coroutines. Your just program your code as if everything was blocking. The main benefit is that you can use whatever library, it doesn't have to be async aware. Heck, I could even use C libraries, and they would work correctly with my coroutines. I really don't understand why GC-based languages decided to go with stackless coroutines, given that they could do what Go is doing."
+        },
+        {
+          "id": 48282735,
+          "author": "preommr",
+          "text": "> You still can’t call a function that returns a future from synchronous code. (Well, you can, but if you do, the person who later maintains your code will invent a time machine, travel back in time to the moment that you did this and stab you in the face with a #2 pencil.) Author makes up a lie. Then lampshades it away with a colorful non sequitur. --- The alternatives that people praise like golang, have other tradeoffs that are much worse because the async logic is now implicit. Your entire codebase is now a surface area that is at risk of being blocked by waiting on a channel; the the mitigation of this is through responsible use of coroutines, but then you're right back around to extra information about your code that is analogous to colring, except not as explicit as async/await."
+        },
+        {
+          "id": 48282795,
+          "author": "bre1010",
+          "text": "I wish the key word was instead dontawait and was used inversely to how await is used. 99% of the time I'm using an async function, despite however slow it is, there's nothing for my code to do but wait for it to finish. But if for some reason I would like the next line of code to run before the current one is done, I'll let you know . Like, why can't my sync function await something asynchronous? If it has to lock up the whole thread while that function executes, that's fine because that's how it was going to work anyway 99% of the time"
+        },
+        {
+          "id": 48282459,
+          "author": "nickcw",
+          "text": "Go doesn't have colored functions due to its nice fat runtime hiding all the async magic away for us. That makes it a pleasure to code concurrent stuff for IMHO. It does have its own similar problems though - does a function return an error? If so you are going to need to plumb the error return through all the callers. Does a function need a context.Context? Ditto. I guess you can't win them all :-)"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 30,
+      "id": 48281611,
+      "title_en": "The real cost of owning a home",
+      "title_ja": "The real cost of owning a home",
+      "url": "https://ericturner.dev/posts/cost-of-home-ownership/",
+      "hn_url": "https://news.ycombinator.com/item?id=48281611",
+      "score": 351,
+      "comment_count": 727,
+      "posted_at": "2026-05-26T16:04:39+00:00",
+      "comments": [
+        {
+          "id": 48285137,
+          "author": "dividefuel",
+          "text": "Beyond financial costs, I was caught off guard at how much time home ownership took up. House maintenance and projects have taken up most of every single weekend of mine for the past few years. Part of it is simply that I bought a house with more space than the places I usually rented. More to clean, more to maintain, more things that can go wrong, etc. But the biggest thing is that I'm the only one in charge of maintenance. There's no one person I can call for every single problem. Keeping track of regular maintenance, performing that maintenance, and learning how to DIY things takes a lot of time. And even if I want to pay someone to do it for me, I still have to research contractors, coordinate estimates, and schedule the project. And I still need to learn enough about the project to determine whether they're doing it right! Home ownership is definitely a lifestyle choice first and foremost more than a financial one."
+        },
+        {
+          "id": 48283734,
+          "author": "jedberg",
+          "text": "The benefit of owning a home is almost always psychological, not financial. If you take the money you'd use for a down payment and mortgage and invest it instead (after paying rent) you end up in about the same place. But the psychological benefits can be huge. You have much greater control over the place you spend most of your time. You can change it to your liking. You don't have to worry about rent increases or owner move ins or any of that other stuff that renters deal with. And if you have kids, they get a sense of home and place. But don't do it for financial reasons."
+        },
+        {
+          "id": 48282163,
+          "author": "mholm",
+          "text": "Beyond the financials, the psychological impact of both being able to make greater-than-superficial changes, and having extremely predictable payments for years without worrying about substantial rent increases, is substantial. I redid/improved the bathroom to exactly what I wanted. I renovated the kitchen. I added paneling to the walls. I added a few outlets to rooms that needed more. I wouldn't do these things in an apartment, because rent could go up any year and exploit me for liking my home. Property value has gone up by 50% in the years since I bought."
+        },
+        {
+          "id": 48283373,
+          "author": "ApolloFortyNine",
+          "text": ">\"renting is just throwing your money away\" Unless you think landlords are running a charity, some part of your mortgage is going to them as profit (over a large enough sample of renters anyways), and some percentage of your rent is covering 'bad tenants' (which you're not, right?). Their entire improvement section is also something renters tend to not think about. It's a weird situation when renting that you aren't incentivized in any way to make improvements to where you live. You might not even be allowed to. With home ownership though, things like a modern kitchen, a shed, new laundry machines not only better your life today but also (likely) have some value add. Though you also get the luxury of being able to ignore the value add if you just really want to paint that room neon pink for some reason."
+        },
+        {
+          "id": 48283630,
+          "author": "throw0101c",
+          "text": "Ben Felix, a Canadian portfolio manager that does personal finance videos and podcast, has been arguing for years that rent versus buy is often a wash financially, and that you should make the decision for non-financial resasons. * recent 2026 video: https://www.youtube.com/watch?v=aU7v87EhDBI * 2025a: https://www.youtube.com/watch?v=j4H9LL7A-nQ * 2025b: https://www.youtube.com/watch?v=lBG-g1CKfgs * 2021: https://www.youtube.com/watch?v=q9Golcxjpi8 * 2019: https://www.youtube.com/watch?v=Uwl3-jBNEd4 The 2019 video goes over a handy \"5% rule of thumb\": start with the purchase price of home, take 5% of that: if your rent is less than that, better numbers-wise to continue renting (and investing the difference); if your rent is more, probably better numbers-wise to buy/own. The company he works for created a tool to examine the numbers: * https://research-tools.pwlcapital.com/research/rent-vs-buy"
+        }
+      ],
+      "summary_ja": ""
+    }
+  ]
+}
