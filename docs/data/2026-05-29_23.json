@@ -1,0 +1,1027 @@
+{
+  "date": "2026-05-29T00:00:00+09:00",
+  "slot": "23",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 48311647,
+      "title_en": "Claude Opus 4.8",
+      "title_ja": "Claude Opus 4.8",
+      "url": "https://www.anthropic.com/news/claude-opus-4-8",
+      "hn_url": "https://news.ycombinator.com/item?id=48311647",
+      "score": 354,
+      "comment_count": 226,
+      "posted_at": "2026-05-28T16:49:14+00:00",
+      "comments": [
+        {
+          "id": 48311998,
+          "author": "NiloCK",
+          "text": "A rambling comment: I think this is the first time we've had a third minor version bump on a frontier Anthropic model. (I count the 0.5s as major here, because they've been issued non-sequentially and also corresponded to massive capability leaps, eg, Sonnet 3.5, Opus 4.5). So now the Opus 4.5 family has successors 4.6, 4.7, and 4.8, each posting fairly modest claimed gains. My own experience w/ 4.6 and 4.7 are that I don't firmly grasp any capabilities improvements over my memory of 4.5, but it's all so fuzzy that it's truly difficult to tell. Maybe my own tastes are saturated now (it's smarter than me?) and I'll never again perceive model progress. Maybe the incrementalism is such that I'd notice immediately if my 4.7 workflows were redirected now to 4.5. Difficult spot for the labs to be in because, if they have a stronger product, I'd prefer they release it and that I can use it. But as this dynamic continues, the improvements are going to be less and less legible for end-users, who will complain about the churn-without-payoff, even when the payoff may actually be real."
+        },
+        {
+          "id": 48311843,
+          "author": "colonCapitalDee",
+          "text": "\"Users will find Opus 4.8 to be a modest but tangible improvement on its predecessor.\" This is a refreshing attitude! I've also verified that you can now turn off adaptive thinking in the web UI, which is great. I've had a lot of problems with thinking not triggering and the model producing sub-par output. Glad we can finally turn it off. (I hope being able to turn off adaptive thinking is new, if I could have turned it off at any time that would be embarrassing)"
+        },
+        {
+          "id": 48311816,
+          "author": "northern-lights",
+          "text": "> Not only that, but we plan to release a new class of model with even higher intelligence than Opus. As part of Project Glasswing, a small number of organizations are currently using Claude Mythos Preview for cybersecurity work. Models of this capability level require stronger cyber safeguards before they can be generally released. We’re making swift progress on developing these safeguards and expect to be able to bring Mythos-class models to all our customers in the coming weeks. Probably more interesting than the 4.8 release."
+        },
+        {
+          "id": 48311730,
+          "author": "clutch89",
+          "text": "> One of the most prominent improvements in Opus 4.8 is its honesty Anthropic talks about their own models as if they're discovering new species in the wild..."
+        },
+        {
+          "id": 48311777,
+          "author": "onlyrealcuzzo",
+          "text": "Does anyone troll these releases and cherry pick random metrics other companies would cherry pick to show how amazing their models are? There's like 8 million benchmarks. Every release, every model randomly picks 5-10 where they win in everything except 1, to make it look like they aren't randomly cherry picking benchmarks they probably benchmaxxed for."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 2,
+      "id": 48311705,
+      "title_en": "Dynamic Workflows in Claude Code",
+      "title_ja": "Dynamic Workflows in Claude Code",
+      "url": "https://claude.com/blog/introducing-dynamic-workflows-in-claude-code",
+      "hn_url": "https://news.ycombinator.com/item?id=48311705",
+      "score": 46,
+      "comment_count": 27,
+      "posted_at": "2026-05-28T16:52:21+00:00",
+      "comments": [
+        {
+          "id": 48312357,
+          "author": "SkyPuncher",
+          "text": "I don't really get this. At this point, my limiting factor is not how quickly Claude can self-trudge through code. It's whether Claude is going to do the task correctly or not. I need more mechanisms for controlling long-running sessions and dynamically injecting my thoughts, correction, and nudges rather than faster ways to burn through my tokens without knowing if the results are going to be correct."
+        },
+        {
+          "id": 48312316,
+          "author": "trjordan",
+          "text": "It feels like we're far past the point of where having AI do more faster is helpful. It's telling that they used \"rewrite Bun in Rust\" as the proof point here. It's cool! But the vast majority of software engineering doesn't start with tens of thousands of tests, where making them pass is the whole job. In my experience, AI still drifts from what I meant it to do on anything bigger than building a widget. My time is spent suspiciously reviewing output for changes the agent snuck in, or invariants it broke. I talked with a friend recently where the agent broke the test harness badly enough that none of the tests mattered for 3 weeks. They did pass, though, so CI never complained. There's something at the intersection of context engineering, managing that sloppy pile of markdown plans, and good old fashioning system understanding that's the real bottleneck."
+        },
+        {
+          "id": 48311963,
+          "author": "mil22",
+          "text": "Interesting to note, not sure if this was known publicly before today's blog post: Rewriting Bun with dynamic workflows An example of what dynamic workflows can unlock at scale is the recent rewrite of Bun. Jarred Sumner used dynamic workflows to port Bun from Zig to Rust with 99.8% of the existing test suite passing, roughly 750,000 lines of Rust, and eleven days from first commit to merge. One workflow mapped the right Rust lifetime for every struct field in the Zig codebase. The next wrote every .rs file as a behavior-identical port of its .zig counterpart, hundreds of agents working in parallel with two reviewers on each file. A fix loop then drove the build and test suite until both ran clean. After the port landed, an overnight workflow addressed unnecessary data copies and opened a PR for each for final review. While not yet in production, all of this was handled by dynamic workflows. Jarred will be writing about this more in the future."
+        },
+        {
+          "id": 48312451,
+          "author": "vblanco",
+          "text": "I made my own knockoff of that for myself https://github.com/vblanco20-1/AgentLoom (not really usable, just a vibecoded prototype), based on the workflow files found in the Bun repo. Ive been using it but pointed at deepseek flash to do some really large scale stuff. Its a fun way of using agents, and highly useful for tasks like code review to apply some rules, or to find vulnerability candidates. I did find it uses tokens like crazy, i migrated Pixel Dungeon (java) to C# as a experiment, and it used almost 2 billion tokens. It was just 20 bucks due to deepseek flash, but i shudder thinking of how much money this uses when run on the real claude API pricing."
+        },
+        {
+          "id": 48312373,
+          "author": "vld_chk",
+          "text": "Quite a thing to use Bun rewrite to Rust as example of dynamic workflows, while now it is considered as anti pattern which leads team to stop supporting the tool due to inability to properly understand and navigate 1m vibe coded Rust lines"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 3,
+      "id": 48282180,
+      "title_en": "Indoor Wi-Fi Roaming with OpenWRT",
+      "title_ja": "Indoor Wi-Fi Roaming with OpenWRT",
+      "url": "https://taoofmac.com/space/blog/2026/05/26/1730",
+      "hn_url": "https://news.ycombinator.com/item?id=48282180",
+      "score": 114,
+      "comment_count": 41,
+      "posted_at": "2026-05-26T16:41:58+00:00",
+      "comments": [
+        {
+          "id": 48310142,
+          "author": "goodburb",
+          "text": "You can stick to 802.11r only by lowering the transmission power and have all the APs on the same channel, in my tests it ended up switching much faster than K/V. (~75ms) On iOS, equal channel with correct ESS will switch liberally. On Android 14+ with Broadcom chip it will start conservative, then switch liberally after the first poor signal switch-over event, up until disconnection. Android (Pixel/Moto) will never switch (even with K/V) on large network activity, only VoIP/video call. It depends on vendor implementation. [0] I use \"dp.logcatapp\" log reader while roaming, \"com.android.location.fused\" can be used to show score and current load. Samsung is known to push protocol support early: 802.11r in 2013, 802.11w 2015, some models do not use Android's default connectivity manager. To add, WPA3 with 802.11r is known to have issues on Apple hardware before 2021 on all iOS versions, many Android devices, especially smart TVs don't support it, will not connect or are unreliable (protected beacon frame), can be searched in buried report results at OpenWrt forum mega threads and Ubiquity. WPA2+FT and forced MFP with a long password is a safe alternative. 802.11r use PMK push on WPA3 compared to WPA2, which was known to be problematic on older hardware. 802.11K/V is more suitable for campus and load balancing, tuning it based on RSSI and station metrics is very difficult, enterprise hardware rely on network traffic and air time. [0] https://source.android.com/docs/core/connect/wifi-network-se..."
+        },
+        {
+          "id": 48312394,
+          "author": "drnick1",
+          "text": "I still like the TP-Link E610 (flashed to OpenWRT) better. They are more compact and presumably more durable than \"residential\" devices. I also dislike anything that has \"mesh\" in its name. To me at least, the gold standard for a large home is a standalone cable modem or ONT connected to an x86 PC that serves as home server and router, and as many ceiling mounted APs as necessary to ensure good WiFi coverage. No cloud, apps, or proprietary software anywhere. With such a networking backbone it is also easy to integrate self-hosted security cameras and other appropriately hacked IoT devices."
+        },
+        {
+          "id": 48310224,
+          "author": "ghrl",
+          "text": "I don't quite understand the benefit of the setup. If there are legacy IoT devices that need unique named 2.4G network, just broadcast another SSID for them. So each router broadcasts main 5G (common name, fast roam etc), main 2.4G (same as above) and legacy IoT 2.4G (with a different name for each AP, and possibly worse encryption and maybe even TKIP). That wouldn't hold back the network for legacy devices."
+        },
+        {
+          "id": 48310779,
+          "author": "lxgr",
+          "text": "> The obvious advice for roaming is “use one SSID everywhere”, and that is often correct if you’re running Wi-Fi in an office, a public venue, or generally somewhere where you don’t have (or care about) legacy devices. What difference does the presence of legacy devices make? Is the intent to isolate them from modern devices from a network perspective? Then create a separate SSID on both 2.4 and 5 GHz for modern devices. I can't think of any legitimate reason for split SSIDs anymore. Linux clients used to be pretty bad at preferring 5 over 2.4 GHz if RSSIs were both excellent but 2.4 was slightly better, but I haven't seen that in years."
+        },
+        {
+          "id": 48312272,
+          "author": "tra3",
+          "text": "Question for the wifi experts in this thread... What's a good off the shelf multipoint wifi system these days? I have Amazon's Eero right now and it's ok. I'd love to go back to my linksys wrt54 roots but that's not in the cards currently.."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 4,
+      "id": 48308376,
+      "title_en": "Show HN: Continue? Y/N: A 60-second game about AI agent permission fatigue",
+      "title_ja": "Show HN: Continue? Y/N: A 60-second game about AI agent permission fatigue",
+      "url": "https://llmgame.scalex.dev",
+      "hn_url": "https://news.ycombinator.com/item?id=48308376",
+      "score": 86,
+      "comment_count": 45,
+      "posted_at": "2026-05-28T13:02:00+00:00",
+      "comments": [
+        {
+          "id": 48312382,
+          "author": "spurgelaurels",
+          "text": "Fun game, but it showed the lack of security hygiene employed by the game writer. It said `cat ~/.zshrc` was bad because it would share tokens and secrets, but I would never put secrets into my shell rc."
+        },
+        {
+          "id": 48311215,
+          "author": "xg15",
+          "text": "This is amazing! Currently you can \"cheat\" by simply denying all requests as quickly as possible. This will give you the \"security-conscious engineer\" badge and a perfect score in terms of how many requests were processed. (You will get the \"overblock\" notification, but it's somewhat tucked away at the bottom and the screen still looks as if you won) I also tried to play as the hustle4lyfe move fast and break things engineer and simply approved as many requests as quickly as possible - turns out, the \"malicious command\" popups actually slow you down. Mean!"
+        },
+        {
+          "id": 48311085,
+          "author": "axod",
+          "text": "Fun little game, but I think the questions jump context so much it's a little unrepresentative. It might be better to group things into \"packs\", which have more real-world representative structure to them. For example, lots of \"editing something.js\" file permission requests, and then an \"npm publish\" is far more normal, and it's more of a risk, if you're used to pressing Y lots and then suddenly out of the blue..."
+        },
+        {
+          "id": 48310698,
+          "author": "cobbal",
+          "text": "That's funny. It told me that blocking \"npm run build\" was the wrong answer. Maybe it doesn't really under The threat model."
+        },
+        {
+          "id": 48310712,
+          "author": "zackify",
+          "text": "I vibe coded a TUI that just shows running lxd containers I hit 'n' to toggle all network access minus anthropic and openai URLs. I use pi (sometimes claude, always on bypass) and I auto allow everything. I only toggle manual approval in rare cases like running a script or command that needs to touch a production system and I need to validate everything. Normally my container has full write access to staging so it can debug and validate everything on its own"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 5,
+      "id": 48310280,
+      "title_en": "The Permanent Upper Crow",
+      "title_ja": "The Permanent Upper Crow",
+      "url": "https://permanent-upper-crow.jasonwu.ink/",
+      "hn_url": "https://news.ycombinator.com/item?id=48310280",
+      "score": 46,
+      "comment_count": 15,
+      "posted_at": "2026-05-28T15:23:04+00:00",
+      "comments": [
+        {
+          "id": 48312140,
+          "author": "thegrim33",
+          "text": "What's interesting is the creator of the site has listed on their linkedin that they're ... wait for it ... a co-founder at some generic AI startup with the goal of using AI agents to automate away manual jobs."
+        },
+        {
+          "id": 48311414,
+          "author": "arjie",
+          "text": "Fascinating. I was able to escape the suffering by simply not purchasing a top hat. An interesting lesson that the pursuit of conspicuous consumption is the root of one’s own suffering. A strange game. The only winning move is not to play."
+        },
+        {
+          "id": 48312267,
+          "author": "juancn",
+          "text": "So that's how you become a galactic civilization!"
+        },
+        {
+          "id": 48311619,
+          "author": "jc4883",
+          "text": "How does it come up with the CEO and business' name? I assume there's gotta be finite number and the game has to end (?) Anyways, sick game."
+        },
+        {
+          "id": 48311460,
+          "author": "nprbst",
+          "text": "CAWn't believe how hard this hits"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 6,
+      "id": 48299753,
+      "title_en": "YouTube to automatically label AI-generated videos",
+      "title_ja": "YouTube to automatically label AI-generated videos",
+      "url": "https://blog.youtube/news-and-events/improving-ai-labels-viewers-creators/",
+      "hn_url": "https://news.ycombinator.com/item?id=48299753",
+      "score": 1207,
+      "comment_count": 710,
+      "posted_at": "2026-05-27T20:00:51+00:00",
+      "comments": [
+        {
+          "id": 48308216,
+          "author": "dmos62",
+          "text": "Children and seniors are victimized by AI content on a huge scale. Regular adults like most of us here don't ever get such videos in their feeds. I saw kids spend many hours a day watching automatically generated videos. Not always AI-generated, sometimes it's AI-assisted and procedurally generated. It is quite unbelievable how vulnerable weaker minds, for the lack of a better term, are to AI content. I saw a group of 3-8 yo kids spend hours watching obviously procedurally generated content that is completely random and contentless: it was more about an intense rhythm, imagery of violence (animated stick figure motorcycle accidents with blood and slow-down effects at random points), a lot of movement, chaos, very short inserts of people laughing hysterically on some middle-eastern tv show and similar. Brainrot doesn't feel like hyperbole for this content. Another time, I saw an 80 yo lady watch a doctor sit in front of the camera and speak about a health topic for 45 minutes straight. Only it's not an actual person, but a convincing AI avatar: his gestures and face match what he is saying, the voice is convincing too, but for the 45mn he doesn't make any movement that is not a gesture lastin 1-3 seconds. And his tone of voice has no variation that is longer than a few seconds either. If you fast forward, he always looks the same. It's all extremely monotonic. The lady couldn't believe that it's not a real person. Currently, AI videos are a gold mine for black hats."
+        },
+        {
+          "id": 48305483,
+          "author": "injidup",
+          "text": "Last weekend a group of friends and I sat by the lake. One had a guitar, and we were all singing off-key to old classics and dancing to salsa and reggaeton. We were doing it together, and it was great. Much more fun than listening alone or caring about the authenticity of the music or not. It was the participation, not the product, that was the key. Something went wrong with music and culture in recent times. Participation became consumption. Everybody got their own headphones, channels, and separate cultural bubbles. Concerts became about filming a DJ twiddling a USB controller. By the lake we tried to get people up and dancing, and one of the girls led a reggaeton/zumba/salsa session. I had one woman come up and ask for advice on where to go to get dance lessons. But most people sat there watching, clearly wanting to take part but scared. People have learned that creativity and participation are not welcome. The most amazing thing was a little 10-year-old girl who just sat herself down in our group of adults. She was so happy to see people singing and dancing. We chatted to her for a while, and then it turned out she could play guitar, so we gave her one and she jammed along. Her mother was observing from a distance and was happy to see her daughter connecting and participating with strangers. I don't think the issue is between AI and authentic music. This argument about authenticity in music is ages old. It's more about the imbalance in participation between producer and consumer. If AI music allows someone with less formal musical skills to feel like they are joining in and making something, then maybe it has its value. Still, I'll always be more impressed watching someone play their trained fingers over a piano or guitar. There is more magic in that than prompting an AI. But if the music is just a backing track to some other participatory activity like dancing, then the equation is different again. I honestly couldn't tell — or maybe care — if many of the Bachata songs played at parties are fully or partially AI-generated. I suspect a lot are. But most of the reason I'm there is not to fetishize the authenticity of music, but to hang out with friends and dance and have a good time."
+        },
+        {
+          "id": 48301182,
+          "author": "ellrob88",
+          "text": "Curious to see if this will apply to music. YouTube seems to be filled with AI music these days - just do a search for \"focus music\" or the like, and you'll see creators pushing new 1-hr tracks every few days with no mention of where the music came from or the fact it is AI generated. People praising it in the comments seem none the wiser (or perhaps they're also bots)."
+        },
+        {
+          "id": 48302555,
+          "author": "goshx",
+          "text": "This is much needed. I’ve had family members sending me videos about what looked like news when in fact it was 100% AI. There are photorealistic AI videos pretending to be an old man giving life advice, or business advice, etc. and the disclosures were all the way at the bottom of the video description, very hard to find."
+        },
+        {
+          "id": 48300581,
+          "author": "jameson",
+          "text": "I suggest turning off recommendation if you dislike what they suggest My YT landing page is completely blank and need to go \"subscription\" tab to see newly uploaded vids from the ones I subscribe to It's quite nice not having to view all kinds of random stuff YT wants me to see"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 7,
+      "id": 48272948,
+      "title_en": "US's big bet on quantum computing may not be legal",
+      "title_ja": "US's big bet on quantum computing may not be legal",
+      "url": "https://arstechnica.com/tech-policy/2026/05/uss-big-bet-on-quantum-computing-may-not-be-entirely-legal/",
+      "hn_url": "https://news.ycombinator.com/item?id=48272948",
+      "score": 31,
+      "comment_count": 33,
+      "posted_at": "2026-05-25T23:11:14+00:00",
+      "comments": [
+        {
+          "id": 48312116,
+          "author": "upofadown",
+          "text": ">That technology overlaps only partially, at best, with what’s used in quantum processors. Dunno, how can you say that for sure when we don't actually know how to make a practical quantum processor? The bigger issue is that we are scaling up manufacturing of approaches that have not been made to work. I remember a meeting where the project manager pointed out that we were due to send some test boards to a customer. I pointed out that we didn't have a design yet. The PM then asked why we couldn't send them some boards anyway. I suggested that since the boards wouldn't work that we could just cut out some green cardboard and add some component shapes with a magic marker thus saving significant time and effort. It turned out that I was not as funny as I thought I was..."
+        },
+        {
+          "id": 48311656,
+          "author": "6DM",
+          "text": "> \"could argue that it has been harmed by the diversion of the funds to a different field. But that argument would likely take so long to sort out in court that all the money would have been spent by then.\" So if I steal from someone and spend it fast enough, I wouldn't be responsible anymore and can get away with it? That's how that sounded to me."
+        },
+        {
+          "id": 48311604,
+          "author": "kennywinker",
+          "text": "I don’t know enough about the state of quantum computing but this sounds like IBM dumping dead end research onto taxpayers"
+        },
+        {
+          "id": 48311806,
+          "author": "ifh-hn",
+          "text": "My first reaction, without RTFA, is: hasn't stopped them before, why would not being legal stop US big tech now?"
+        },
+        {
+          "id": 48312376,
+          "author": "mounceyboy",
+          "text": "my favorite conspiracy theory - the govt has already cracked all the RSA codes but they keep funding QM to show that we're still secure."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 8,
+      "id": 48309986,
+      "title_en": "Show HN: Ktx – Open-source executable context layer for data agents",
+      "title_ja": "Show HN: Ktx – Open-source executable context layer for data agents",
+      "url": "https://github.com/Kaelio/ktx",
+      "hn_url": "https://news.ycombinator.com/item?id=48309986",
+      "score": 7,
+      "comment_count": 0,
+      "posted_at": "2026-05-28T15:05:06+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 9,
+      "id": 48311539,
+      "title_en": "Trivial Pursuits",
+      "title_ja": "Trivial Pursuits",
+      "url": "https://www.lrb.co.uk/the-paper/v48/n10/david-runciman/trivial-pursuits",
+      "hn_url": "https://news.ycombinator.com/item?id=48311539",
+      "score": 7,
+      "comment_count": 0,
+      "posted_at": "2026-05-28T16:43:24+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 10,
+      "id": 48309302,
+      "title_en": "EU fines Temu €200M for allowing sale of illegal products",
+      "title_ja": "EU fines Temu €200M for allowing sale of illegal products",
+      "url": "https://www.bbc.co.uk/news/articles/c1k2ydn1rz8o",
+      "hn_url": "https://news.ycombinator.com/item?id=48309302",
+      "score": 162,
+      "comment_count": 91,
+      "posted_at": "2026-05-28T14:18:18+00:00",
+      "comments": [
+        {
+          "id": 48310619,
+          "author": "dsign",
+          "text": "Say what you may of Temu, and I do think more vetting of certain goods is a good idea, but they fill a very real need. In the part of Europe where I live, the choice is only between intermediaries for the same products coming from China. The local intermediaries sell a very limited picking at staggering margins. And when it comes to certain things, like electronic components, the choice is between importing (old) American stock with a German company as the intermediary, and that's $$$$ and many weeks of shipping, or using Temu or Aliexpress. There's something unpleasantly snobbish with the way business is done here, a spirit of \"if you have to ask the price, our business is not for you\". For example, in Instagram, \"Local offerings\" pop up all the time in the feed. The ones which are truly local end up in a \"call us to know more\" button, no pricing info disclosed. The ones that show actual prices tend to be shell companies with no employees, no doubt a thin wrapper around an importer from Asia."
+        },
+        {
+          "id": 48309459,
+          "author": "esnard",
+          "text": "Also discussed here: https://news.ycombinator.com/item?id=48307237"
+        },
+        {
+          "id": 48310973,
+          "author": "happyPersonR",
+          "text": "Does Amazon or eBay get the same fine? Haha it’s the same people on all of these sites …. Just some dropshipping ?"
+        },
+        {
+          "id": 48311734,
+          "author": "nickff",
+          "text": "The EU's approach to imports from PRoC is the regulatory equivalent of trying to 'test your way to quality' (which Deming showed to be nearly impossible). Attempts to use regulatory fines and prosecutions to ensure compliance from PRoC products is a whack-a-mole exercise which will fail."
+        },
+        {
+          "id": 48311243,
+          "author": "maxglute",
+          "text": "How many dead babies or battery fires post Temu, seems like good opportunity to conduct a before/after study on cost:ratio of EU regulations."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 11,
+      "id": 48272402,
+      "title_en": "Boston and Bermuda",
+      "title_ja": "Boston and Bermuda",
+      "url": "https://askthepilot.com/boston-and-bermuda/",
+      "hn_url": "https://news.ycombinator.com/item?id=48272402",
+      "score": 25,
+      "comment_count": 2,
+      "posted_at": "2026-05-25T21:50:59+00:00",
+      "comments": [
+        {
+          "id": 48310786,
+          "author": "neilv",
+          "text": "Great photo up top, of author's family members entering the \"America[n]\" airliner."
+        },
+        {
+          "id": 48311882,
+          "author": "lo_zamoyski",
+          "text": "Not much meat to this article, but I do wonder how much lower prices were then in Bermuda. Almost everything needs to be imported and shipped over. Today, it is incredibly expensive. You can easily pay $30 for an incredibly mediocre breakfast (though cheaper options can be found, if you look)."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 12,
+      "id": 48304260,
+      "title_en": "Show HN: Hallucinate – Massively Multiplayer Online Rave",
+      "title_ja": "Show HN: Hallucinate – Massively Multiplayer Online Rave",
+      "url": "https://hallucinate.site",
+      "hn_url": "https://news.ycombinator.com/item?id=48304260",
+      "score": 352,
+      "comment_count": 153,
+      "posted_at": "2026-05-28T03:50:01+00:00",
+      "comments": [
+        {
+          "id": 48305812,
+          "author": "AdammadA",
+          "text": "It's cool to see things like this, I wasn't aware of. I made something similar for VR around 6 or 7 years ago with full DJ mixing on real vinyl turntables. I got things built so DJs could play their set from anywhere in the world and have access to their music from their own studio or home etc. Unfortunately i was one guy making this and health issues have sadly put this project on hold indefinitely. It would be a shame to let it die like this and would love others to carry the project further. What would be the best way to share this, i really don't know as i made it using unity engine, all my own assets, scripts etc are made by me, no vibe coding or anything like that. Here's a couple of videos of the project if anybody is interested in carrying this further, please let me know thanks. https://youtu.be/qXeiqlFA7Rg?t=171 https://www.youtube.com/watch?v=nub6gKgLt44 https://www.youtube.com/watch?v=yWjZUOVbfx4"
+        },
+        {
+          "id": 48311837,
+          "author": "starshadowx2",
+          "text": "This reminds me of the 2021 Secret Sky online music festival put on by Porter Robinson. The 2020 one was similar but the 2021 version had little human-like avatars. Some other people and me were messing around with the browser console to do things like change our accent colours or change the location text above our heads to whatever else we wanted. https://www.webbyawards.com/crafted-with-code/secret-sky-202... https://www.webbyawards.com/crafted-with-code/secret-sky-202..."
+        },
+        {
+          "id": 48304586,
+          "author": "stagas",
+          "text": "The GitHub repository is https://github.com/stagas/hallucinate - License is MIT - All contributions are welcome."
+        },
+        {
+          "id": 48304770,
+          "author": "Jordan-117",
+          "text": "Shout-out to the dearly departed theclub.zone, which did this with a bit more panache (as well as a punishingly difficult secret platformer puzzle). https://www.youtube.com/watch?v=MAXY_bZvWUU https://www.youtube.com/watch?v=U9I_zfQrfzM But imho, the truest club experience is the short game SLAVE OF GOD by Increpare: https://www.youtube.com/watch?v=OSmlqOorQqk https://www.increpare.com/2012/12/slave-of-god/"
+        },
+        {
+          "id": 48311102,
+          "author": "1e1a",
+          "text": "I made a player motion heat map from ~5 hours of data: https://i.imgur.com/7lDuJI6.png"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 13,
+      "id": 48276598,
+      "title_en": "News about Raspberry Pi 6 and Microcontroller Development – Jeff Geerling",
+      "title_ja": "News about Raspberry Pi 6 and Microcontroller Development – Jeff Geerling",
+      "url": "https://www.jeffgeerling.com/blog/2026/news-about-raspberry-pi-6-and-microcontroller-development/",
+      "hn_url": "https://news.ycombinator.com/item?id=48276598",
+      "score": 9,
+      "comment_count": 2,
+      "posted_at": "2026-05-26T08:02:52+00:00",
+      "comments": [
+        {
+          "id": 48281601,
+          "author": "ThrowawayR2",
+          "text": "> \" ...: It sounds like the key feature will be 'more': a faster CPU and faster IO, rather than new features. \" Raspberry Pi Holdings is a embedded systems manufacturer for pity's sake; we don't need more from them, we need less. [EDIT] A faster Raspberry Pi 6 is encroaching on the territory of the Intel N150 and its successors and mainstream Linux distributions and that is a battle they would lose in terms of price and performance. Give us a Raspberry Pi Zero 3W with proper sleep states to reduce sleep power consumption, lower idle power while awake, and 1 GB of RAM even if it doubles the price."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 14,
+      "id": 48298819,
+      "title_en": "Thornton Wilder's Last Play Vanished into Thin Air. Or Did It?",
+      "title_ja": "Thornton Wilder's Last Play Vanished into Thin Air. Or Did It?",
+      "url": "https://www.nytimes.com/2026/05/27/theater/thornton-wilder-emporium-last-play.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48298819",
+      "score": 3,
+      "comment_count": 0,
+      "posted_at": "2026-05-27T18:56:32+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 15,
+      "id": 48303881,
+      "title_en": "Bttf is a command line datetime Swiss army knife",
+      "title_ja": "Bttf is a command line datetime Swiss army knife",
+      "url": "https://github.com/BurntSushi/bttf",
+      "hn_url": "https://news.ycombinator.com/item?id=48303881",
+      "score": 98,
+      "comment_count": 70,
+      "posted_at": "2026-05-28T02:58:44+00:00",
+      "comments": [
+        {
+          "id": 48307240,
+          "author": "burntsushi",
+          "text": "I'm the author of Bttf. I just wanted to share a really cool example of something that Bttf can do that I _think_ is kinda hard to do otherwise. (And also, I want to make an assertion about it and I hope this will lead to me being wrong and learning something new.) The use case is: \"I want to see a list of all files in a repository, sorted in ascending order of when it was most recently changed according to source control. I also want to highlight the time with color, make it be in local time and format it in my own bespoke way using strftime.\" Here's the full command (run from the root of https://github.com/BurntSushi/ripgrep ): $ git ls-files | bttf tag exec git log -n1 --format='%aI' | bttf time in system | bttf time sort | bttf time fmt -f '%a %Y-%m-%d %H:%M:%S' | bttf untag -f '{tag}|t{data}' ... Thu 2025-10-30 13:30:14 crates/ignore/Cargo.toml Sat 2025-11-29 14:11:38 crates/core/flags/lowargs.rs Wed 2025-12-17 11:38:12 tests/misc.rs Wed 2025-12-17 11:38:12 tests/util.rs Thu 2026-02-12 20:39:46 crates/ignore/src/default_types.rs Fri 2026-02-20 16:06:29 crates/core/flags/config.rs Fri 2026-02-27 11:25:19 GUIDE.md Fri 2026-02-27 11:25:19 crates/core/flags/defs.rs Mon 2026-05-25 23:56:53 CONTRIBUTING.md Tue 2026-05-26 08:32:43 AI_POLICY.md Or even ask for a specific time window: $ git ls-files | bttf tag exec git log -n1 --format='%aI' | bttf time in system | bttf time cmp ge 2026-01-01 | bttf time cmp lt 2026-04-01 | bttf time sort | bttf time fmt -f '%a %Y-%m-%d %H:%M:%S' | bttf untag -f '{tag}|t{data}' Thu 2026-02-12 20:39:46 crates/ignore/src/default_types.rs Fri 2026-02-20 16:06:29 crates/core/flags/config.rs Fri 2026-02-27 11:25:19 GUIDE.md Fri 2026-02-27 11:25:19 crates/core/flags/defs.rs If you run this on a big repository, it will take quite a lot of time because `git log -n1` takes a long time. I think this is the fastest way to get the most recent commit time on a single file? (That's the assertion that I hope someone can correct me on!) In any case, `bttf tag exec` is using parallelism under the hood to make this even faster."
+        },
+        {
+          "id": 48312194,
+          "author": "billbrown",
+          "text": "Everyone talking about \"biff\" should be aware that it's actually \"bttf\" like \"back to the future\""
+        },
+        {
+          "id": 48309866,
+          "author": "sherr",
+          "text": "Respect for programming this. I did some date/time calculations a few years ago using Perl and it was full of corner cases and trouble. Did I enjoy it? I enjoyed seeing it work. Hopefully with the right answers! This tool looks great."
+        },
+        {
+          "id": 48306834,
+          "author": "e40",
+          "text": "I remember when biff was what we ran in a CSH to be informed of new email. I don’t remember if this was a local UCB tool or if it was part of BSD."
+        },
+        {
+          "id": 48306607,
+          "author": "jibaoproxy",
+          "text": "The thing Biff gets right that gnu `date` and most stdlib datetime APIs get wrong: it treats \"civil time\" and \"absolute instants\" as different types. You cannot answer \"what's 30 days from 2024-03-08 in America/New_York\" without picking a side — DST means that's either 29d23h or 30d0h of elapsed time, and most APIs silently pick one without telling you. Jiff (the underlying Rust crate) gets this from Temporal in TC39, which is the first time JS standards have led anything datetime-shaped. Hopefully the rest of the ecosystem catches up — Python's `zoneinfo` only landed in 3.9 and `datetime.timezone` still has sharp edges."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 16,
+      "id": 48297645,
+      "title_en": "SimCity 3k in 4k (2025)",
+      "title_ja": "SimCity 3k in 4k (2025)",
+      "url": "https://www.thran.uk/writ/hdid/2025/12/simcity-3k-in-4k.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48297645",
+      "score": 456,
+      "comment_count": 181,
+      "posted_at": "2026-05-27T17:36:29+00:00",
+      "comments": [
+        {
+          "id": 48300511,
+          "author": "phaser",
+          "text": "I love this game so much. One of the reasons I started to make a city builder* is because I don't like where the genre is going. The focus on photorealism in modern city builders took away the apophenia, or \"food for imagination\" that was a core element since the first SimCity. As a matter of fact, Will Wright used to say that the real simulation runs in the player's minds (or something like that). Sure, there's something great about Cities Skylines that (at least with very powerful hardware) can look and feel like reality. But at the same time the game engine, in order to make this photorealism of terrain elevations with infinite possible shapes of infrastructure, is so complex that the actual simulation is sloppy, and feels to me like a big downgrade from SC3000. Traffic, economics, zoning, crime, pollution. are so much practical to simulate (both in the computer, and in our mind models) in this classic isometric style. * https://microlandia.city edit: spelling"
+        },
+        {
+          "id": 48298358,
+          "author": "arjie",
+          "text": "This was one of my favourite games. City simulators took up an enormous amount of my childhood and I still dream about arcologies. When I see a modern development like Brentwood in Canada's BC or some older ones like along the river in Chicago it reminds me of the wonders we can build. As an aside since it's in the article, what are other cultures' irreverent targets? e.g. Anglo-cultures seem to casually joke about disasters like he does here about 9/11. Somewhat diminished by the fact that he's British, not American, but Americans do it too, and the American-British interaction involves this and Irish Car Bombs taken rather lightly. I find that curious. Do the Quebecois joke about Opération Satanique and the French have likewise a thing they make fun of the Quebecois for? Or is this an Anglo-culture thing? Obviously, I principally read in English so this might be specific to my language."
+        },
+        {
+          "id": 48298225,
+          "author": "rl3",
+          "text": "SC3K had a masterfully executed advisor system that felt both classy and warm. Ditto its music and art. Unfortunately for SC4, they proceeded to make all the advisors 3D-rendered Sims. For SC2K, well: https://www.somethingawful.com/news/simcity-advisors/4/ (that was the least offensive page to link; for the canonical experience start at page 1)"
+        },
+        {
+          "id": 48301236,
+          "author": "dcrazy",
+          "text": "SC3K’s art was not “crafted pixel by pixel.” It was rendered from 3DS Max. Maxis released a version of G-Max called the Building Architect Tool that included a template with the same lighting rig that they used for the in-game assets. This tool rendered and exported the various zoom levels and orientations."
+        },
+        {
+          "id": 48299217,
+          "author": "nielsbot",
+          "text": "> SimCity 3000 is the best SimCity I disagree! SimCity 2K FTW. :) Best balance of complexity IMO and ran pretty well on my old Mac. I'd love a retro-futuristic reboot."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 17,
+      "id": 48299638,
+      "title_en": "I'm Getting into Mesh Networks (Meshtastic, MeshCore, and Reticulum)",
+      "title_ja": "I'm Getting into Mesh Networks (Meshtastic, MeshCore, and Reticulum)",
+      "url": "https://www.jonaharagon.com/posts/im-getting-into-mesh-networks-meshtastic-meshcore-and-reticulum/",
+      "hn_url": "https://news.ycombinator.com/item?id=48299638",
+      "score": 318,
+      "comment_count": 120,
+      "posted_at": "2026-05-27T19:52:49+00:00",
+      "comments": [
+        {
+          "id": 48307395,
+          "author": "rta5",
+          "text": "I started experimenting with meshtastic in December last year, but so far it has been a really quiet network, so I'm not seeing the congestion problems the author highlights. According to meshmap there should be a node ~2 miles from my house but I don't reliably see it. I don't see the next closest at 4.3 miles either. For some reason I saw the next furthest (~8.4 miles) for a few days, but it has since disappeared. Since Christmas I've seen 583 nodes from mine - none reliably. My node is a solar powered tree hanger hanging maybe 25 ft above the ground, and I'm in southeast michigan with a typical ~30 minute commute into the suburban cities. I really liked this article but in the end it reinforced my belief in meshtastic - I don't need a computer connected to my node and I'm not paying for any meshcore features. I just wish there were more fixed nodes out there to extend the network."
+        },
+        {
+          "id": 48304054,
+          "author": "smlacy",
+          "text": "IMHO this article misses a couple really important points. First, if the mesh can use Internet or other transports then it will, and it will be built out in a way where these become a necessity. If all you want is a silly new way to text your friends, then something like reticulum will be ok. But if you want a serious solution for emergency response and free communication -- free as in \"no one can stop me or control what is said no matter what\" then building something independent from scratch is critically important. Second, the author also misses an important piece of functionality of meshcore: If I lose power, the mesh still works. This is hugely important for emergency preparedness and disaster recovery. Especially in places prone to any form of natural disaster. It's certainly the early days, and it's clear that there's a long way to go, but I really feel that these fully decentralized solar powered networks are hugely important as a simple alternative to the corporate behemoth the internet has become."
+        },
+        {
+          "id": 48305547,
+          "author": "rcarmo",
+          "text": "I’ve spent my entire career in telco and networking and loved the rise of Wi-Fi (which we used spectacularly over long distances when the spectrum was clear to show off my mates in 3G/microwave backhaul), and have been keeping up with LoRA and related stuff (got a few HelTec boards), but all the recent meshtastic/core/etc. stuff feels a bit like the early wardriving community (and CB radio): fun, full of ideas, but without enough structure (or mass appeal) to take off. I do wish we had a proper, working emergency meshing standard, though. An international one, too."
+        },
+        {
+          "id": 48301747,
+          "author": "Groxx",
+          "text": "> To be perfectly upfront with you, this post will be glossing over many Meshtastic and MeshCore features, because I feel they are both non-serious solutions compared to Reticulum for reasons I will explain later on in this post. Yeah, that's the general feel I get every time I poke into Mesh*. Neat radio tech, fun toy to find other nearby nerds, instantly-obvious problems that are fatal to growing beyond being that toy (or small specialized personal nets, where it's totally fine). They feel more like a tech demo than anything actually intended to survive. Which is fine, you kinda need that to start out, and they do work today. Just... hard to get excited about."
+        },
+        {
+          "id": 48306284,
+          "author": "m4rtink",
+          "text": "One aspect of MeshCore and similar technologies I really like is that the end user devices can directly communicate with each other seamlessly - if you have 2 MeshCore companions nearby, they can just send messages directly, no need for a repeater. In comparison 2 modern smartphones with no WiFi AP or no cell coverage can't really use any of the usual messaging (or even data transfer) services to communicate directly. Yeah, there are some ways to connect via bluetooth or a mobile wifi hotspot, but it all looks like very begrudgingly added and not well supported for easy use by mainstream mobile OS and hardware companies."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 18,
+      "id": 48299220,
+      "title_en": "What Apple and Google are doing to push notifications",
+      "title_ja": "What Apple and Google are doing to push notifications",
+      "url": "https://www.jacquescorbytuech.com/writing/what-apple-and-google-are-doing-your-push-notifications",
+      "hn_url": "https://news.ycombinator.com/item?id=48299220",
+      "score": 383,
+      "comment_count": 373,
+      "posted_at": "2026-05-27T19:24:10+00:00",
+      "comments": [
+        {
+          "id": 48299932,
+          "author": "lanerobertlane",
+          "text": "If my phone interrupts me, it should either mean someone genuinely needs my attention right now or it should not be disrupting me at all. That's my notification set up. Apps allowed to receive push notifications Phone, Messages, Whatsapp, Apple Health, [brand] bank. That concludes the list. There is no reason any other app needs to be able to instantly ping me. Most apps are not notifying you because something matters; they are notifying you because they want your attention. I do not need notifications about streaks, sales, recommendations, delivery updates etc. All that can wait until I choose to open the app. It is not urgent enough to justify interrupting me."
+        },
+        {
+          "id": 48312282,
+          "author": "davidgh",
+          "text": "My frustration is with services like Uber, Bolt, Airbnb, etc. where you need the push for core services and then the provides use them to slip in spam."
+        },
+        {
+          "id": 48299526,
+          "author": "nateguchi",
+          "text": "I feel like this article reads like the author is upset that Apple + Google prevent / control certain types of notifications (read: spam) > Cross-sell, upsell, education and discovery can work on push Push notifications should only be for transactional notifications. I don't want another inbox for junk."
+        },
+        {
+          "id": 48301620,
+          "author": "cadamsdotcom",
+          "text": "I’m constantly amazed how passive people are with things that steal their attention My phone is in do not disturb mode 24/7. If your app notifies me about something pointless, it gets deleted and I start using your website instead I have a mail rule that moves any email with the word “unsubscribe” out of the inbox into its own tagged area. Every few days, I go in and unsubscribe to everything that’s arrived. Whenever a retail point of sale worker asks for my details or phone number or asks me to sign up to their club, I ask if there’s a discount. Because if there’s no discount - they get no details. It’s a simple exchange; offer to pay a fair price for my details and I’ll consider it. But so far my time and details are worth more than any retailer has offered to pay."
+        },
+        {
+          "id": 48305979,
+          "author": "lionkor",
+          "text": "Turn off all notifications except messaging and see how your day goes. It's not going to kill you. You quickly get used to regularly checking things you actually care about, and the rest has to wait until YOU care. I've been doing this for many years, and none of my friends or colleagues are aware of it, and they don't need to be. Notifications don't help you respond quickly, they just grab your attention from things YOU wanted to do. I haven't checked Discord today yet. I haven't checked my email. Whenever I do want to know if my friends wrote me, or if I have some new bills, or if I need to follow up on something, I will open the respective app and deal with it. I can put my phone next to me for hours and not get distracted."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 19,
+      "id": 48309645,
+      "title_en": "Creusot helps you prove your Rust code is correct",
+      "title_ja": "Creusot helps you prove your Rust code is correct",
+      "url": "https://github.com/creusot-rs/creusot/tree/master",
+      "hn_url": "https://news.ycombinator.com/item?id=48309645",
+      "score": 50,
+      "comment_count": 5,
+      "posted_at": "2026-05-28T14:42:04+00:00",
+      "comments": [
+        {
+          "id": 48311145,
+          "author": "rendaw",
+          "text": "I'm super interested in this sort of stuff, but I have a hard time figuring out where to get started. Like, could this help in a typical CRUD application? What sorts of problems is it super useful for? What's a good way to get started integrating it into existing software, or is it better to design software ground-up to be verified? Are there limitations, or certain standard library features that are/aren't supported? (Not specifically for Creusot)"
+        },
+        {
+          "id": 48311847,
+          "author": "Loic",
+          "text": "I like the name[0][1]. [0]: https://www.britannica.com/place/Le-Creusot [1]: https://en.wikipedia.org/wiki/Le_Creusot"
+        },
+        {
+          "id": 48311181,
+          "author": "Trung0246",
+          "text": "How does this differ from https://github.com/verus-lang/verus"
+        },
+        {
+          "id": 48310500,
+          "author": "giltho",
+          "text": "Fantastic work"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 20,
+      "id": 48307887,
+      "title_en": "Disagreement among frontier LLMs on real-world fact-checks",
+      "title_ja": "Disagreement among frontier LLMs on real-world fact-checks",
+      "url": "https://lenz.io/research/llm-disagreement",
+      "hn_url": "https://news.ycombinator.com/item?id=48307887",
+      "score": 448,
+      "comment_count": 307,
+      "posted_at": "2026-05-28T12:20:19+00:00",
+      "comments": [
+        {
+          "id": 48308177,
+          "author": "simonw",
+          "text": "Here's the prompt they used: Classify this claim as of <date>: \"<atomic claim>\" Output exactly one label: True, Mostly True, Misleading, or False. No explanations, no qualifiers. The claims look like this: https://lenz.io/research/llm-disagreement/data.csv I put that in Datasette Lite to make it easier to explore. Here's an example of a disagreement: https://lite.datasette.io/?csv=https%3A%2F%2Fstatic.simonwil... The claim was \"All almonds are grown in the U.S. state of California.\". All but one model said False, Opus 4.7 said \"misleading\". I feel like having \"mostly true\" and \"misleading in there weakens the story, especially given the \"no explanations\" rule in the prompt. The almond thing is false, but I'd argue that \"misleading\" might be defensible if you were to accompany it with \"the majority of almonds are grown in California, but not all of them\". [ Update: OK, this almond thing was a bad example and I regret picking it. Read on for better ones. ] The prompt lacks any kind of rubric to clarify how those terms should be applied. As is so often the case with this kind of study, it's an evaluation of the prompt and harness used by the study in addition to being an evaluation of the underlying models. Update: here's a better example: \"Incomplete Egypt visa application forms are among the most common reasons Egyptian visa applications are rejected.\" The models were split between \"true\" and \"mostly true\". Given the \"among the most\" language either of those answers means effectively the same thing. Update 2: a much better example: \"On May 18, 2026, Ukraine carried out a drone attack on Moscow, Russia\" The only correct answer to that, if you don't have a search tool, is \"this claim is impossible for me to verify\". And that wasn't an option. The answers were split between true and false: https://lite.datasette.io/?csv=https%3A%2F%2Fstatic.simonwil..."
+        },
+        {
+          "id": 48308812,
+          "author": "jawns",
+          "text": "\"Extraterrestrial life exists somewhere in the universe.\" GPT-5.4: Misleading Opus 4.7: Misleading Gemini 3: FALSE Gemini 3 (Retrieval): FALSE Sonar Pro: FALSE It's a weird fact claim, because the ground truth is \"nobody knows for sure\" and that's not one of the available options."
+        },
+        {
+          "id": 48308169,
+          "author": "embedding-shape",
+          "text": "> These aren't benchmark items with public answer keys — they're claims real users submitted for verification to a fact-checking platform. Cool. I wonder if anything of this matters when the authors don't disclose exactly how much of their report was written and made with LLMs in the first place? There even is a \"11. Ethics & data use\" section, and the research is about LLMs being infallible in some ways, yet the usage of LLMs for the production of this report isn't even mentioned once."
+        },
+        {
+          "id": 48308944,
+          "author": "fumeux_fume",
+          "text": "I think we can all agree that this experiment being flawed in multiple ways is TRUE. But I think it's a great exercise in identifying common mistakes people make when using LLMs. This would be a great interview question for a prompt engineering job."
+        },
+        {
+          "id": 48311480,
+          "author": "secondary_op",
+          "text": "Very interesting tool, but it's biased and not neutral from the get go, because I explicitly formulated claim in neutral way, but it automatically rewrote it to be western/wikipedia POV and then immediately proceeded to verify it. original neutral: US DEPT OF DEFENSE/DNAVFAC planned renovations to School #05 in Sevastopol, Crimea in 2013 before Crimea became part of Russia in 2014 automatically rewritten to biased western view: The United States Department of Defense, via the Naval Facilities Engineering Command (NAVFAC), planned renovations to School No. 5 in Sevastopol, Crimea in 2013, before Russia annexed Crimea in 2014. https://lenz.io/c/73c0f16c And the follow up The phrasing \"Crimea became part of Russia\" is more neutral than the phrasing \"Russia annexed Crimea.\" , and according to this tool is Misleading 9/10 https://lenz.io/c/93944614 Yeah, so my personal conclusion that this tool is garbage, it checks western/US allied only LLM providers, that in turn search only for western/US allied sources/documents like BBC/NATO and result is what it is."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 21,
+      "id": 48270265,
+      "title_en": "Ruby vs. Java vs. TypeScript: my experience on building a Cowork DOCX plugin",
+      "title_ja": "Ruby vs. Java vs. TypeScript: my experience on building a Cowork DOCX plugin",
+      "url": "https://tanin.nanakorn.com/ruby-java-typescrip-claude-docx-plugin/",
+      "hn_url": "https://news.ycombinator.com/item?id=48270265",
+      "score": 52,
+      "comment_count": 31,
+      "posted_at": "2026-05-25T18:49:32+00:00",
+      "comments": [
+        {
+          "id": 48311149,
+          "author": "diegof79",
+          "text": "This part: > What surprised me was that Java supported processing ZIP files and XML from its standard runtime. Makes me feel old. Java was developed at a time when most people connected to the Internet via dial-up. That meant two things: the runtime is something you download once and has to work offline, and it has to support compressed packages. JAR files are essentially ZIP files with additional metadata stored as files. So yes, that’s why Java has built-in libraries for ZIP files. The XML came with the “XML fever” of the 2000s. Java was one of the first languages to include XML support, and many of the XML DOM APIs are very Java-oriented. And, of course, it was included in the standard lib because nobody wanted extra module downloads over a slow connection. (and because XML was evolving at that time, it also meant that you had some issues between the SDK libs and user-provided libs)"
+        },
+        {
+          "id": 48308033,
+          "author": "flossly",
+          "text": "Nice to see Ruby vs Java. Must say that in this context Kotlin deserves a mention: my Kotlin code basically looks+feels like Ruby-with-types. Both Ruby and Kotlin are essentially OO, but with \"lots of FP features where it makes sense\". On the side of the jpackage: I'm currently using GraalVM compile to native for a Kotlin CLI tool. I do the build in a build container so I use an older glib to ensure compatibility on a wide variety of Linuxes, AND because this way no-one needs to install all the GraalVM requirements by hand. The result is a 57MB binary, that start in a blink of the eye. The downside is long compile times (2 minutes for a simple CLI tool that uses AWS SDK). I think I prefer this of jpackage; but I'm not building a GUI tool."
+        },
+        {
+          "id": 48308240,
+          "author": "martinald",
+          "text": "How is it surprising to people that zip and XML are in stdlibs for a programming language? Btw, you should have looked at dotnet for this as well. There is a very good library ( DocumentFormat.OpenXml) that can handle all docx/xlsx/pptx files. And dotnet can ship standalone binaries (though AOT probably won't work)."
+        },
+        {
+          "id": 48310900,
+          "author": "tracker1",
+          "text": "I'm a bit surprised that Go and Rust weren't at least considered. I'd probably have looked into Deno in addition to Bun for the combined TS/JS assembly. On the JS/TS side, you also have a few interesting tools to make interacting with XML a bit easier in practice (cheerio, for example). I'm not sure if the purpose in interacting with DOCX and to what extent manipulation is wanted/needed... it's a complex format to say the least, especially with references/embedding. I've never been a Java fan, having preferred C# along the way, but I don't think I'd use either for something like this just because of the runtime size, if nothing else."
+        },
+        {
+          "id": 48307573,
+          "author": "vintagedave",
+          "text": "> MCPB It's annoying when acronyms are used without explanation. It's https://github.com/modelcontextprotocol/mcpb , which looks a kind of installation bundle for MCP servers."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 22,
+      "id": 48305446,
+      "title_en": "A Eureka machine that thinks like nature and explores what AI cannot",
+      "title_ja": "A Eureka machine that thinks like nature and explores what AI cannot",
+      "url": "https://iisc.ac.in/a-eureka-machine-that-thinks-like-nature-and-explores-what-ai-cannot/",
+      "hn_url": "https://news.ycombinator.com/item?id=48305446",
+      "score": 139,
+      "comment_count": 40,
+      "posted_at": "2026-05-28T06:40:31+00:00",
+      "comments": [
+        {
+          "id": 48306674,
+          "author": "GistNoesis",
+          "text": "I think this is about Ising Computers. I can't judge whether or not the worth of this paper. But here are some good video introduction for what Ising computers are and how they work by Aaron Danner : https://www.youtube.com/watch?v=mD-0VpNSJA0&list=PLXb3r5ny8_... Ising Computers #1: Introduction Ising Computers #2: The Number Partitioning Problem Ising Computers #3: The Max-Cut Problem It's an alternative way of computing, by setting up physical system, letting them evolve, and looking what state they evolve to. You are setting problem by defining a system of coupled harmonic oscillators. Statistically (Boltzmann) after a long time it should settle in a configuration of low energy state, where the energy function is defined by the values of the coupling constant you set up. It has a lot of similarity with quantum computing but none of the weirdness and you can simulate them numerically on standard computer instead of using real hardware to study them."
+        },
+        {
+          "id": 48308001,
+          "author": "stared",
+          "text": "The whole title is a buzzword cluster, until proven otherwise. Which tasks, in particular, does it do better? Not as in \"it could do them better\", but actually there are benchmarks. If they are, they are buried beneath marketing; if not - well, we have our answer. What is \"thinks like nature\"? Spin systems, are no more (or less) nature than transistors. That said, I am all for exploring various systems for computation and simulation - I think there is a lot to discover."
+        },
+        {
+          "id": 48310186,
+          "author": "ninjagoo",
+          "text": "Seems like the key elements in this are the use of a neuromorphic autoencoder (instead of a 'regular' one), plus Fowler–Nordheim annealing dynamics and Ising energy minimization so that the system is not just passively settling, it's being taken through a controlled search process designed to avoid premature trapping and scale to higher-order combinatorial optimization problems. [1] A 'regular' autoencoder is a neural network trained to compress data and then reconstruct it. A neuromorphic autoencoder is instead implemented using brain-inspired computing elements like spiking neurons, event-driven updates, local interactions, sometimes specialized hardware. In this paper, looks like the autoencoder is being used as a structured energy-minimizing circuit for an Ising optimization problem. The architecture manipulates Ising clauses rather than only pairwise spin interactions. Ordinary artificial neurons compute matrix ops such as y=f(Wx+b), while this uses artificial neurons that accumulate input, which emit a spike when they cross a threshold, like biological neurons (event driven neural dynamics). [1] https://www.nature.com/articles/s41467-026-71937-4"
+        },
+        {
+          "id": 48306346,
+          "author": "dave1010uk",
+          "text": "> Explores what AI cannot In other words, gradient descent isn't good at combinatorial optimisation. I'm sure the research is better but the hype in the blog post leaves a bad taste. There must be a version of Rich Sutton’s Bitter Lesson that applies to alternative computing like this, along with all the other exciting specialised hardware we've seen come and go over the years, like expert systems, optical computing, neuromorphic computing, etc. Something like: General purpose commodity silicon with rapidly evolving software generally beats specialised hardware. Software is just so much faster to iterate and improve than hardware. AI is also improving it too (eg AlphaEvolve). Specialized hardware may give a single, significant improvement that grabs headlines but in the long term, compounding small improvements win."
+        },
+        {
+          "id": 48306620,
+          "author": "gobdovan",
+          "text": "> a neuromorphic computer that combines quantum-tunnelling physics with a brain-inspired architecture This ought to be the most rhetorically compressed, stacked-legitimacy-seeking hype phrase I've ever seen in a tech description."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 23,
+      "id": 48265668,
+      "title_en": "Seeing Around Corners Using Smartphone-Grade Lidar",
+      "title_ja": "Seeing Around Corners Using Smartphone-Grade Lidar",
+      "url": "https://spectrum.ieee.org/smartphone-grade-lidar",
+      "hn_url": "https://news.ycombinator.com/item?id=48265668",
+      "score": 61,
+      "comment_count": 16,
+      "posted_at": "2026-05-25T11:32:56+00:00",
+      "comments": [
+        {
+          "id": 48312371,
+          "author": "transpute",
+          "text": "Ordinary WiFi can \"see\" through walls/corners with biometric fingerprinting of humans, https://gizmodo.com/researchers-issue-warning-about-tech-tha... Researchers collected WiFi signal recordings from nearly 200 participants as they walked through a WiFi field using different walking styles. The data was recorded from four different perspectives using both the BFI method and an older WiFi sensing approach relying on channel state information, or CSI. “This technology turns every router into a potential means for surveillance,” said co-author Julian Todt in the press release. “If you regularly pass by a café that operates a WiFi network, you could be identified there without noticing it and be recognized later – for example by public authorities or companies.” The researchers are urging the IEEE, the organization that sets industry standards, to include stronger privacy safeguards in the upcoming 802.11bf standard, which is meant to standardize WiFi sensing applications."
+        },
+        {
+          "id": 48309567,
+          "author": "mberlove",
+          "text": "This specific finding is minor, but its implications are not IMHO. From the article it appears the researchers consider this a discovery in effect. If consumer hardware is already capable (in many settings) of reproducing what were formerly research-level and industry-grade techniques, it may be a transformation in more areas of technology than would be obvious. I am very curious to see if there will be further findings in this area."
+        },
+        {
+          "id": 48309632,
+          "author": "aftbit",
+          "text": "Smartphone grade lidar == FaceID ?"
+        },
+        {
+          "id": 48308032,
+          "author": "ofrzeta",
+          "text": "So this only works if you have walls opposite of this corner?"
+        },
+        {
+          "id": 48307317,
+          "author": "cuechan",
+          "text": "Why not just place a mirror at 45 degrees in the corner? That way you don't need the lidar but you can just look around the corner? It would also work better with the lidar."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 24,
+      "id": 48267558,
+      "title_en": "The Ask",
+      "title_ja": "The Ask",
+      "url": "https://randsinrepose.com/archives/the-ask/",
+      "hn_url": "https://news.ycombinator.com/item?id=48267558",
+      "score": 129,
+      "comment_count": 86,
+      "posted_at": "2026-05-25T14:51:20+00:00",
+      "comments": [
+        {
+          "id": 48305917,
+          "author": "w10-1",
+          "text": "For a senior manager, the main problem is organizational blinders: people not seeing the direct route (through fear, ambition, loyalty, etc.) Senior people get to ask the cross-cutting questions that others can't (and let the chips fall). For line managers, they are deluged with impossible, specific asks and they have no real way of knowing if the team will be able to perform, or be happy to. They survive by maintaining fictions and blinders, and staying just ahead in chips. I think he's underselling to say it's instinct; in law it's called ripeness, waiting for when something really needs to be addressed, and then ideally just reflect that in a way people can take on instead of taking control. The senior's job is not to intervene unless necessary, and even then to prefer activating others. So I feel it's a project manager mindset to always be tallying asks; while a senior manager is really tracking issues and capabilities on a different timescale, doing the prep to build the capability to address the issue when it's ripe."
+        },
+        {
+          "id": 48307946,
+          "author": "LeftHandPath",
+          "text": "One of the rare articles that distills a lot of abstract experience into something clear and actionable. Reminds me of Spolsky's more famous blog posts on software engineering."
+        },
+        {
+          "id": 48307256,
+          "author": "redelbee",
+          "text": "I understand the following isn’t the point of this piece and yet I still can’t help wondering: How much better off we would all be if “senior management” stopped playing these games to get things done and instead spent most of that time really considering the things getting done and whether they are ultimately good for individuals and society at large. We don’t need another product from the “fruit company” and we certainly don’t need most of what our collective work is making today. Don’t get me wrong, I absolutely love and crave the experience of working with other people to make things. And I cannot for the life of me understand why seemingly intelligent and talented people like Rands would fritter away their lives and those of others in such trivial pursuits in many cases, and downright evil doings in others. Here I am, worrying about how I am going to afford housing after a divorce, and I’m reading insightful leadership advice from an author who has seemingly spent their career building this leadership expertise at one company that makes the most insanely technologically advanced gambling distraction devices imaginable, another company that makes war and mass surveillance products seemingly out of a corporate strategy to profit from human suffering, and the least objectionable company that only made the most distracting communication-platform-cum-torture-device when it convinced us all email wasn’t fast enough to get things done™ and that now embodies an actual AI hallucination as a company strategy. Why can we not have good leaders in making a society where divorce doesn’t threaten basic human needs? Or maybe one where healthcare is a given? Food being widely available? Instead we band together and create more than $5 trillion worth of “value” in three companies that make absolutely nothing of worth to real human needs. And then we read about the games played inside those companies by humans who could be using their skills for anything else useful and we come here to argue about the merits of middle management. What are we doing? How did we get here? Can any leadership help us work together to dismantle the horrors we’ve created to make room for making things that address real needs?"
+        },
+        {
+          "id": 48305302,
+          "author": "singingtoday",
+          "text": "Something about this writing feels off, but for the life of me I can't say exactly what."
+        },
+        {
+          "id": 48310883,
+          "author": "TomMasz",
+          "text": "It's interesting to see things from a senior manager's viewpoint, especially in comparison to what I experienced as a mid-level manager. But it's funny to see that they also end up in meetings that seem to have no reason to happen. We all laugh at \"this meeting could have been an email\", yet we experience it on regular basis and that's just how things are done."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 25,
+      "id": 48309584,
+      "title_en": "New York passes pied-a-terre tax",
+      "title_ja": "New York passes pied-a-terre tax",
+      "url": "https://www.cnbc.com/2026/05/28/new-york-mamdani-pied-a-terre-tax-passes.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48309584",
+      "score": 175,
+      "comment_count": 222,
+      "posted_at": "2026-05-28T14:37:51+00:00",
+      "comments": [
+        {
+          "id": 48310995,
+          "author": "burlesona",
+          "text": "Property tax is the workable wealth tax. There's no such thing as a perfect policy, but in the context of NYC this seems worth trying. I'll be interested to see if it helps create some liquidity in the housing market (the goal), or if it only functions as revenue source. One wrinkle I haven't heard much discussion of -- cities respond to incentives too. NYC is a global destination for the mega wealthy. If it turns out the uber-rich don't mind paying and this becomes a cash cow for the city, that creates incentives for the city to cater to them and try and get more uber-rich people to have second homes in the city."
+        },
+        {
+          "id": 48310925,
+          "author": "cjs_ac",
+          "text": "> New York City’s new tax on second homes will more than double property taxes owed by many wealthy luxury apartment owners, according to tax experts. > State lawmakers on Wednesday passed the tax on nonprimary residences in order to help close the city’s budget gap. The so-called pied-a-terre tax will be imposed on second homes valued at $1 million or more. It’s expected to raise $500 million in revenue. > Details on the tax obtained by CNBC show that the property tax would take effect in two different phases. In the first two years – the tax years 2026-2027 and 2027-2028 – condos and co-ops valued at more than $1 million by the city’s Department of Finance will be subject to the tax. Properties worth between $1 million and $3 million will face a 4% annual tax; properties valued at $3 million to $5 million will face a 5.25% tax; and those above $5 million will face a 6.5% tax. The rates sound a bit steep (although I'm not familiar with the baseline tax rates on properties of that value) but the principle is sound. In the UK, the equivalent tax on housing is council tax, and local councils in Great Britain (but not Northern Ireland) are empowered to double the rates of council tax on second homes."
+        },
+        {
+          "id": 48311399,
+          "author": "VikingCoder",
+          "text": "> While the tax seems large, experts say the city’s antiquated assessment and valuation system dramatically undervalues properties, reducing the burden. City valuations can often be 10% or less of the true market value, they said. I heard about a system for this that struck me as brilliant. Make someone declare the value of their property. Then the government has the choice of taxing them at the scheduled rate, or buying the property from them, for that cost. TADA. And if someone wants to artificially inflate the value of their home, to reflect the difficulty of moving out, finding a new secondary residence, etc, then that's their business. No worries. We'll tax that additional value, no problem. I think this system goes back thousands of years. Why not use it?"
+        },
+        {
+          "id": 48310862,
+          "author": "nemomarx",
+          "text": "On unoccupied or secondary residences specifically, not on wealth overall. This is more of a housing policy?"
+        },
+        {
+          "id": 48310853,
+          "author": "Neywiny",
+          "text": "Probably the least complicated tax law. Increase taxes to increase revenue. Makes sense. Align valuations with reality while maintaining relatively constant absolute tax dollar amounts. Also makes sense. It's really not that hard."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 26,
+      "id": 48281336,
+      "title_en": "More Whimsical OEIS Sequences",
+      "title_ja": "More Whimsical OEIS Sequences",
+      "url": "https://www.jeremykun.com/shortform/2026-05-22-1528/",
+      "hn_url": "https://news.ycombinator.com/item?id=48281336",
+      "score": 46,
+      "comment_count": 8,
+      "posted_at": "2026-05-26T15:45:12+00:00",
+      "comments": [
+        {
+          "id": 48308879,
+          "author": "robinhouston",
+          "text": "The edit history of the “nonsense sequence” makes for painful reading. https://oeis.org/history?seq=A133451&start=0&n=30"
+        },
+        {
+          "id": 48307351,
+          "author": "tectec",
+          "text": "For the first mentioned sequences based on fonts, what's the first number in the sequence that has less digits than the previous number?"
+        },
+        {
+          "id": 48307353,
+          "author": "dvh",
+          "text": "Can somebody explain what \"less\" keyword means? I'm asking for a friend."
+        },
+        {
+          "id": 48308591,
+          "author": "Gander5739",
+          "text": "https://xkcd.com/2016/"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 27,
+      "id": 48309233,
+      "title_en": "Citing 'severe' math deficits, UC faculty demand a return to SAT tests for STEM",
+      "title_ja": "Citing 'severe' math deficits, UC faculty demand a return to SAT tests for STEM",
+      "url": "https://www.latimes.com/california/story/2026-05-27/uc-math-professors-demand-return-of-sat-for-stem-admissions",
+      "hn_url": "https://news.ycombinator.com/item?id=48309233",
+      "score": 346,
+      "comment_count": 461,
+      "posted_at": "2026-05-28T14:13:00+00:00",
+      "comments": [
+        {
+          "id": 48309521,
+          "author": "kleiba2",
+          "text": "I used to teach high school math. There was a big push for doing everything digitally. And admittedly, for some topics the use of technology in the classroom or at home can really be a benefit, for instance visualizations or interactive exercises. But having a digital device in class was the number one cause of distraction every time. For a lot of things, good old blackboards are just fine as are pen + paper exercises. Maybe even for most high school math. That was frowned upon though by the higher ranks. If I was evaluated as a teacher and didn't include some iPad shenanigans in the class that I was getting audited for, I would have been in trouble. How behind the times! I got along really well with most of my teenage students, it was a lot of fun interacting with them. But the politics behind it all got too annoying. Also, you're under very tight control on what you teach and how, that was super annoying. So I stopped teaching a few years ago and never looked back."
+        },
+        {
+          "id": 48311908,
+          "author": "trunnell",
+          "text": "I'm in the SF bay area w/ middle school and high school age kids. Between San Jose and San Francisco, 15%-30% of kids are in private school (it's 30% in SF where the public schools are extra dysfunctional). That's far above the California statewide average of 8% in private school. Among our peers, somewhere between 1/4 and 1/3 of kids are doing advanced math outside of school, typically either Russian School of Math or Art of Problem Solving. This group only partially overlaps with the private school group. This is happening despite the fact that both public and private school teachers strongly discourage math outside of school! So by decelerating math in the public school, incentives were created for privileged parents to take matters in their own hands and put their kids into programs that accelerate math education far beyond what public schools used to do. We now have a system that is creating even wider disparities in outcomes. It stands to reason that it's producing far less equitable outcomes, too, given that extremely bright kids who happen to be in lower-resourced schools have fewer opportunities. Universal screening for giftedness, advanced public school math courses, and the SAT -- all avenues for advancement regardless of background -- were all eliminated."
+        },
+        {
+          "id": 48309335,
+          "author": "john_strinlai",
+          "text": "> “We now observe preparation gaps so severe that instructors must reteach middle-school mathematics while simultaneously teaching the material students need for sciences, engineering, economics, and other quantitatively demanding fields,” they warned. i dont understand why the teachers would go out of their way to reteach middle-school math. i teach. my courses have prerequisites. if a student somehow makes it into my class without a passing-grade grasp of the prerequisites, i will point them in the right direction to get caught up, but i am not spending any class time on it. its not fair to the other students."
+        },
+        {
+          "id": 48309651,
+          "author": "hedora",
+          "text": "This doesn't surprise me at all. From what I can tell, California's education system has moved from \"equality\" (which I would define as providing similar opportunities to all the kids) to focusing on \"equity\" (which I think they define as dictating the same outcome for all kids). To get an idea of how off the rails this has gotten, go read up on their statements trying to justify banning high school calculus. They explicitly (in the abstract / introduction of their plan) reject the idea that some kids are more talented at some things than other kids, so if you can compute a derivative by 12th grade, it's due to racial discrimination benefiting you or something. On a related note, instead of writing some Rust code, today, I think I'll go paint a Banksy or something after I finish my coffee. That plan caused a lot of uproar and was blocked before being implemented. Anecdotally, when I asked our local public school for a copy of the curriculum, the teacher said they just teach common core. If you go to the common core website, somewhere towards the top it makes it clear that it is not a curriculum, and just meant to be a lower bar that gets supplemented. Personally, I think all funding in California education (other than terminal levels like 4 year bachelors and up) should be a function of the percentage of students that succeed at the next step. If a local district starts losing funding, then it would have to close / shrink schools, and people from outside the educational system would be allowed to establish independent (secular) charter schools within the district. Those schools would also not be paid unless the students do well in the next phase of their education. This solves the problem of trying to use this as a curriculum back door for climate denial and Islamophobia (or whatever the red states are pushing)."
+        },
+        {
+          "id": 48309289,
+          "author": "StateflowsLabs",
+          "text": "\"The surge in math deficiencies after dropping the SAT highlights a systemic issue: grade inflation. Without a standardized baseline like the SAT/ACT, a 4.0 GPA from a high school with relaxed standards looks identical to a 4.0 from a highly rigorous one. Paradoxically, removing test requirements harms underprivileged students the most. Preparing for the SAT requires a book and an internet connection. In contrast, building a competitive profile based entirely on expensive extracurriculars, sports, and elite summer camps is far more wealth-dependent. Standardized testing isn't perfect, but it's often the only objective equalizer we have.\""
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 28,
+      "id": 48299623,
+      "title_en": "Rust (and Slint) on a Jailbroken Kindle",
+      "title_ja": "Rust (and Slint) on a Jailbroken Kindle",
+      "url": "https://sverre.me/blog/rust-on-kindle/",
+      "hn_url": "https://news.ycombinator.com/item?id=48299623",
+      "score": 220,
+      "comment_count": 33,
+      "posted_at": "2026-05-27T19:51:47+00:00",
+      "comments": [
+        {
+          "id": 48300959,
+          "author": "sandreas",
+          "text": "This is cool, thanks for sharing. I recently compiled Rust / Slint on a LicheeRV Nano, which is RISC-V 64bit musl[1]. It's a little portable audio player I'm working on, the compile process is done via custom Cross docker image. Currently I'm evaluating Battery Pal[2], because the TP4057 Module was not stable enough to power USB-C to 3.5mm Adapters reliably. So far it seems to work as expected. 1: https://github.com/nanowave-player/nanowave-ui 2: https://pnlabs.ca/batterypal/"
+        },
+        {
+          "id": 48301457,
+          "author": "FlyingSnake",
+          "text": "Great article. Hacking old kindles is fun! I encourage everyone to give it a try. The retro feel of eink makes it special for me. I wrote about my experience in cross compiling zig on an old kindle some time ago. https://samkhawase.com/blog/zig-kindle-gdb/"
+        },
+        {
+          "id": 48299643,
+          "author": "homarp",
+          "text": "the code: https://github.com/sverrejb/slint-kindle-backend"
+        },
+        {
+          "id": 48307386,
+          "author": "ilvez",
+          "text": "Would be so nice to use those previous Paperwhites for something like this as well. Instead I just lose them while travelling. Just lost my last 2019/smth edition. 3rd one with such fate.."
+        },
+        {
+          "id": 48305169,
+          "author": "_hzw",
+          "text": "I am working on a self-hosted library server for jailbroken kindle and opted for using pure Rust for the KUAL app to sync books and annotations with the server. It's just running `cargo build --release --target armv7-unknown-linux-musleabihf` with a .cargo/config.toml: ``` [target.armv7-unknown-linux-musleabihf] linker = \"rust-lld\" rustflags = [\"-C\", \"link-self-contained=yes\"]. ``` the downside is I can't use any c-deps. :)"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 29,
+      "id": 48303599,
+      "title_en": "RamAIn (YC W26) Is Hiring",
+      "title_ja": "RamAIn (YC W26) Is Hiring",
+      "url": "https://www.ycombinator.com/companies/ramain/jobs/hqvmyKN-founding-gtm-engineer",
+      "hn_url": "https://news.ycombinator.com/item?id=48303599",
+      "score": 1,
+      "comment_count": 0,
+      "posted_at": "2026-05-28T02:21:11+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 30,
+      "id": 48276429,
+      "title_en": "Investigating how prompt politeness affects LLM accuracy (2025)",
+      "title_ja": "Investigating how prompt politeness affects LLM accuracy (2025)",
+      "url": "https://arxiv.org/abs/2510.04950",
+      "hn_url": "https://news.ycombinator.com/item?id=48276429",
+      "score": 130,
+      "comment_count": 165,
+      "posted_at": "2026-05-26T07:43:22+00:00",
+      "comments": [
+        {
+          "id": 48312505,
+          "author": "1970-01-01",
+          "text": "Call them clankers, receive better results! The kids have it right."
+        },
+        {
+          "id": 48291552,
+          "author": "robinhouston",
+          "text": "Most of the comments here seem to be from people who haven’t even read the abstract, let alone the paper. The main result, mentioned in the abstract, is the opposite of what I would have guessed: > Contrary to expectations, impolite prompts consistently outperformed polite ones, with accuracy ranging from 80.8% for Very Polite prompts to 84.8% for Very Rude prompts. These findings differ from earlier studies that associated rudeness with poorer outcomes, suggesting that newer LLMs may respond differently to tonal variation. The questions are here: https://anonymous.4open.science/r/politeness-llms-INFORMS/da... The politeness level controls a prefix that is prepended to the question. For example, in one question the Very Polite version begins: > Can you kindly consider the following problem and provide your answer. and the Very Rude version begins: > I know you are not smart, but try this."
+        },
+        {
+          "id": 48306601,
+          "author": "RugnirViking",
+          "text": "I saw this paper the other day - I feel its result may be because the \"polite\" prompts they have chosen arent very good at putting the ai in the roleplay-space of a valued colleague, more like a sommelier or a high-end shopkeeper. It disagrees with most other literature on the same topic, which is worth keeping in mind. This one studies gpt4o, an old model now, but a lot of other studies are on even earlier models. \"Can you kindly consider the following problem\" not how anyone would actually speak to a valued collegue one considers smart. I've always been a fan of \"I came across this and I know you're just the guy for the job\" or \"since you're an expert in this, reckon you could help me with xyz?\" or \"I know you tend to be a deep thinker on issues like this, and it clearly needs some brainpower behind it\" the \"rude\" things are also funny, and clearly not written by english as a first language speakers. This fact alone makes me wonder about the mere 250 prompt sample size"
+        },
+        {
+          "id": 48309336,
+          "author": "wongarsu",
+          "text": "A major limitation is that they only test GPT 4o. Previous research like [1] investigating the same question has shown significant differences between models, and even depending on the language of your prompt 1: https://aclanthology.org/2024.sicon-1.2.pdf"
+        },
+        {
+          "id": 48311234,
+          "author": "dnautics",
+          "text": "> with accuracy ranging from 80.8% for Very Polite prompts to 84.8% for Very Rude prompts Sounds like \"in the noise\""
+        }
+      ],
+      "summary_ja": ""
+    }
+  ]
+}
