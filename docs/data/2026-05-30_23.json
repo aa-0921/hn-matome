@@ -1,0 +1,1033 @@
+{
+  "date": "2026-05-30T00:00:00+09:00",
+  "slot": "23",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 48325340,
+      "title_en": "Notes from the Mistral AI Now Summit in Paris",
+      "title_ja": "Notes from the Mistral AI Now Summit in Paris",
+      "url": "https://koenvangilst.nl/lab/mistral-ai-now-summit",
+      "hn_url": "https://news.ycombinator.com/item?id=48325340",
+      "score": 62,
+      "comment_count": 7,
+      "posted_at": "2026-05-29T16:22:01+00:00",
+      "comments": [
+        {
+          "id": 48326271,
+          "author": "petcat",
+          "text": "> Abanca is using agent orchestration to handle sensitive customer information at a huge scale (2 million customers in their app). Maybe my perspective is skewed on what \"huge scale\" means, but 2 million users? That's like a few hundred megabytes of data? Or a couple GBs if there's a lot of per-user data?"
+        },
+        {
+          "id": 48326433,
+          "author": "Eldodi",
+          "text": "I was at the event, and was impressed by the attendance, all the leaders from the major european listed companies were there. Also interesting to note the number of partners they invited. Going from Microsoft, Accenture and EY to startups like alpic.ai or lingo.dev . Seems like they are ramping up their M&A game too"
+        },
+        {
+          "id": 48326047,
+          "author": "simonw",
+          "text": "> BNP Paribas runs Mistral models on-prem for KYC in Belgium, with sensitive data staying within the bank's walls. Abanca is using agent orchestration to handle sensitive customer information at a huge scale (2 million customers in their app). For European companies in regulated industries, this is a good alternative to relying on US hyperscalers. Mistral leaning into on-prem and European-hosted models is very smart."
+        },
+        {
+          "id": 48325993,
+          "author": "LucidLynx",
+          "text": "As an European: 100x YES! I really like the direction and the transparency of Mistral, among those players."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 2,
+      "id": 48323992,
+      "title_en": "Bijou64: A variable-length integer encoding",
+      "title_ja": "Bijou64: A variable-length integer encoding",
+      "url": "https://www.inkandswitch.com/tangents/bijou64/",
+      "hn_url": "https://news.ycombinator.com/item?id=48323992",
+      "score": 134,
+      "comment_count": 50,
+      "posted_at": "2026-05-29T15:03:32+00:00",
+      "comments": [
+        {
+          "id": 48325099,
+          "author": "kstenerud",
+          "text": "The problem is that this breaks down once you try to use SIMD instructions. I'd developed a similar kind of approach to encoding integers (and ieee774 floats) a couple of years ago (first byte encodes length and first bit of data: https://github.com/kstenerud/bonjson/blob/05b91f6fe7d6b07186... ). It was very clever and used compiler intrinsics to get the length in 1 instruction, so 2 instructions got you the final value, with no branches. But testing proved that when you move to SIMD instructions, ULEB128 ( https://github.com/kstenerud/bonjson/blob/main/bonjson.md#ty... ) or sentinel values ( https://github.com/kstenerud/bonjson/blob/main/bonjson.md#lo... ) win every time because of the parallelization opportunities. The true irony is that even SIMD text parsing would outperform this! SIMD is that powerful."
+        },
+        {
+          "id": 48326265,
+          "author": "i2talics",
+          "text": "Non-canonical encodings are actually quite useful for some applications that need variable length integers. DWARF and WASM both use LEB128. The problem is linking: a compiler needs to emit code into independent translation units, which contain \"missing\" references to symbols in other translation units, without yet knowing where all the code will end up in the final executable. Since we don't know where the location of other code is yet, we don't know how big the number representing that location is yet, which means that we don't know how wide the variable length encoding of that number will be. If the width changes after linking, then we have to push around the surrounding code to make space for the wider integer. Unfortunately, this changes the location of all the surrounding code, so we have to recompute all the references! The solution is to always emit un-linked var ints in the widest possible encoding (5 bytes for LEB128) that way when the references are patched during linking, no code is moved around. All integers can be converted to a non-canonical 5 byte form that is \"wasteful\" but its a worthwhile tradeoff because it solves this issue. Other integers that don't need to be linked can be packed in a smaller var int form to save space."
+        },
+        {
+          "id": 48324781,
+          "author": "stebalien",
+          "text": "I've used LEB128 (with canonicalisation) extensively and... this looks so much nicer for most use-cases (length prefixed, supports the full uint64 range without that extra 10th byte). The downside is the encoding size. LEB128 quickly grows to 2 bytes, but stays at 2 bytes all the way to 2^14. This is important if you're using these numbers as tags/identifiers as we were in the multicodec [1] project, or for network message lengths. bijou64 only gives you 500 <= 2 byte numbers. [1]: https://github.com/multiformats/multicodec"
+        },
+        {
+          "id": 48326063,
+          "author": "aDyslecticCrow",
+          "text": "Clever, but one thought crossed my mind; An adveserial package can claim to have a 255 tagged integer but not actually have any followup, tricking the payload parser into an incorrect offset and reading straight off into followup memory. It's a classic thing to check for when dealing with variable length strings or binary, but it may not cross the mind when it's hiding in the Bijou64_decode(*buff, *cr) function."
+        },
+        {
+          "id": 48325019,
+          "author": "omoikane",
+          "text": "UTF-8 has the same issue (\"overlong encoding\") where multiple representations are possible the same code point. Someone proposed a similar tweak to remove the overlapping ranges by adjusting the base offset for byte sequences that are longer than 1. That was discussed here: https://news.ycombinator.com/item?id=44456073 - Corrected UTF-8 (2025-07-03, 54 comments) This \"corrected UTF-8\" has other problems, but I thought it's interesting how the shifted-offset idea carries over."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 3,
+      "id": 48324499,
+      "title_en": "GTA 6 Developers Unionize",
+      "title_ja": "GTA 6 Developers Unionize",
+      "url": "https://rockstarintel.com/gta-6-developers-announce-rockstar-games-union/",
+      "hn_url": "https://news.ycombinator.com/item?id=48324499",
+      "score": 237,
+      "comment_count": 115,
+      "posted_at": "2026-05-29T15:32:55+00:00",
+      "comments": [
+        {
+          "id": 48324926,
+          "author": "WarmWash",
+          "text": "Can anyone comment on why \"big video game\" dev pay has lagged \"big tech\" pay so badly? Ostensibly they are doing remarkably similar engineering problem solving, so why is there such a disparity?"
+        },
+        {
+          "id": 48325231,
+          "author": "ShinyLeftPad",
+          "text": "Who would have thought we'll get programmer unions before GTA 6!"
+        },
+        {
+          "id": 48324944,
+          "author": "HugoTea",
+          "text": "This is great news, unions not only improve working conditions, but also improve the final product by not having underpaid stressed staff with high turn-over. It's a good sign for the future product quality of any company to see workers unionise."
+        },
+        {
+          "id": 48324797,
+          "author": "Refreeze5224",
+          "text": "Solidarity forever! Game devs eat a a lot of crap, so I'm glad they are banding together to bargain collectively."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 4,
+      "id": 48323683,
+      "title_en": "I am retiring from tech to live offline",
+      "title_ja": "I am retiring from tech to live offline",
+      "url": "https://openpath.quest/2026/i-am-retiring-from-tech-to-live-offline/",
+      "hn_url": "https://news.ycombinator.com/item?id=48323683",
+      "score": 461,
+      "comment_count": 302,
+      "posted_at": "2026-05-29T14:40:47+00:00",
+      "comments": [
+        {
+          "id": 48325411,
+          "author": "siren2026",
+          "text": "I have been at it for 20 years now and have started to feel my time is up as well As a lot of comments here highlights, the issue is not so much the tech but the politics, constant perf reviews, re-orgs, nonsense BS that is pushed top-down. This industry is taking a toll on you. My advice for anyone reading this that is starting your career: Live simply and save a lot. When I started my career I thought I would love doing this forever. I would never imagine I would get burned out in the long run. I would never imagine I would think about retiring early because tech was so fun to me. The reality is that money and savings give you optionality. It allows you to work without worrying day to day. You never know when the next wave of AI or BS is going to hit. That's when having that optionality is really important. I have seen so many of my peers making very high tech income but also living the American opulent life, spending everything they make to buy multi-million dollar houses in the bay area to impress their friends. Today they have no choice than continue working for another 30 years. Today I can have a simple life and retire almost anywhere in the world. Decide what is important to you. I guarante that buying the multi-million dollar home is not worth the extra 30 years of grinding."
+        },
+        {
+          "id": 48323968,
+          "author": "kamaitachi",
+          "text": "I just retired after 40 years writing code. The last year or so wasn’t fun - battling with AI, trying to get it do what I wanted. For a long time, I thought I’d do a lot of hobby or open source coding when I retired. I haven’t even tried. I’m not burned out, but find I’ve lost the passion for coding I once had. Is that AI? Or is it me? Maybe as my retirement progresses, I can rekindle that passion, but as of now, I don’t miss tech. Sorry, got to go - my garden needs me :-)"
+        },
+        {
+          "id": 48324480,
+          "author": "jdorfman",
+          "text": "For those scratching their heads asking who is this guy and why should I care? He has been tackling the open source sustainability issue since launching gittip circa 2012. Since then millions of dollars have been raised for open source because of him. Sure it’s a drop in the bucket but he did it. Chad is a friend of mine. You can’t find a nicer person in tech than him. I hope this is temporary because he can still make a huge impact. Either way I respect his decision and hope he finds peace offline. TBH I’m a little jealous."
+        },
+        {
+          "id": 48324352,
+          "author": "sph",
+          "text": "Funny, if all goes well today is my last day as professional software engineer, after 20 years. I have enough savings to buy a modest cottage and to last me a year or two being frugal. After that it’s anyone’s guess, but I am beyond excited not having to program for a living any more, just on what feels meaningful, in complete autonomy. Projects lined up: a Erlang-like microkernel/runtime I have been designing for the past 4 years, a series of small games that I have been itching to work on, then, of course, the lifelong project of living in a rural house. Stretch goal if I win the lottery: build a solar farm. Maybe I will be so lucky never to have had to use LLMs in my work. You guys have fun without me. :-P"
+        },
+        {
+          "id": 48324495,
+          "author": "thesamethrowawa",
+          "text": "Impressive to take such a stand, doing something they believe is the right thing. The home depot line says a lot though. I guess tech has been good enough to provide some kind of economic cushion that you can retain a reasonable life style as home depot as your only source of income. I would (genuinely) be interested in a follow up on how that works out for them. I've \"threatened\" to do this many times, but my partner points out that if I thought tech management was full of BS, wait until I am getting ordered about by retail industry management while working the shop floor, dead on my feet, penalised for taking too long a toilet break. I think reality could come down hard here."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 5,
+      "id": 48324097,
+      "title_en": "Danish Pension Blacklists SpaceX over 'Catastrophic Governance'",
+      "title_ja": "Danish Pension Blacklists SpaceX over 'Catastrophic Governance'",
+      "url": "https://www.bloomberg.com/news/articles/2026-05-29/danish-pension-fund-blacklists-spacex-citing-governance-issues",
+      "hn_url": "https://news.ycombinator.com/item?id=48324097",
+      "score": 192,
+      "comment_count": 101,
+      "posted_at": "2026-05-29T15:11:23+00:00",
+      "comments": [
+        {
+          "id": 48325220,
+          "author": "fluidcruft",
+          "text": "It's really concerning given how the indexes are changing rules to fast-track SpaceX being forced into index funds. S&P is also working on updates to S&P 500 to force it down everyone's throats quickly and algorithmically."
+        },
+        {
+          "id": 48324451,
+          "author": "red-iron-pine",
+          "text": "is anyone surprised? the IPO documents are a disaster, and the finance-tube talking heads are all tearing it to shreds"
+        },
+        {
+          "id": 48325044,
+          "author": "lokar",
+          "text": "How can I transfer my shares of VTI for an interest in this pension fund, before it’s too late?"
+        },
+        {
+          "id": 48325246,
+          "author": "zerotolerance",
+          "text": "Should have renamed the company xGoodwill."
+        },
+        {
+          "id": 48324898,
+          "author": "thesimon",
+          "text": "Matt Levine described it well ( https://www.bloomberg.com/opinion/newsletters/2026-05-21/spa... ) > The deal, with SpaceX, is that Elon Musk runs it however he wants, and he does weird stuff, and you have to trust him, and if you don’t like it you can’t complain. > When SpaceX acquired xAI a few months ago, did a special committee of independent directors approve the transaction? Did Musk recuse himself from negotiations? Was the price set by independent valuation experts using a rigorous process? Did outside shareholders sue to block the deal? Stop. Musk wanted SpaceX to buy xAI, so it did. > [...] Surely SpaceX has created all that shareholder value more because Musk does what he wants than in spite of Musk doing what he wants; it is hard to accidentally create $1.75 trillion of value. SpaceX’s shareholders signed up for this deal — letting Musk cook — and have been rewarded;"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 6,
+      "id": 48322241,
+      "title_en": "High Density Living, 2000 Years Ago: Inside the Roman Apartment Building",
+      "title_ja": "High Density Living, 2000 Years Ago: Inside the Roman Apartment Building",
+      "url": "https://commonedge.org/high-density-living-2000-years-ago-inside-the-roman-apartment-building/",
+      "hn_url": "https://news.ycombinator.com/item?id=48322241",
+      "score": 91,
+      "comment_count": 27,
+      "posted_at": "2026-05-29T12:30:02+00:00",
+      "comments": [
+        {
+          "id": 48323766,
+          "author": "vintagedave",
+          "text": "I can highly recommend Lindsey Davis' Falco series, murder mysteries set in Ancient Rome. She brings the city to life, it's remarkably vivid, and -- I promise this comment is on topic for this thread! -- Roman apartment living is threaded throughout the series and apartment building construction even forms a major plot point in one book. I can't say more without spoilers. Excellent for \"feeling\" what Rome was like. https://www.goodreads.com/series/42173-marcus-didius-falco"
+        },
+        {
+          "id": 48325344,
+          "author": "romanzubenko",
+          "text": "I really really wish, there was a VR game/app where I can transport myself to different places/times in the past and just walk around to get the texture and feel for what it felt like living in that time. Walking around a Roman town, hearing what people talked like, what they wore, what technology was around, what did they do most of the day. Someone please make it real."
+        },
+        {
+          "id": 48323169,
+          "author": "everdrive",
+          "text": "See how pots strike and dint the sturdy pavement. There’s death from every window where you move. You’d be a fool to venture out to dine, oblivious of what goes on above, without your having penned that dotted line, of your last testament. This feels very modern. \"Sure, you might get randomly killed by a pot flying out a window, but there are _walkable_ restaurants!\""
+        },
+        {
+          "id": 48323887,
+          "author": "srean",
+          "text": "https://en.wikipedia.org/wiki/The_Mansions_of_the_Gods"
+        },
+        {
+          "id": 48323149,
+          "author": "comrade1234",
+          "text": "I really enjoyed the film Fellini Satyricon because it shows a couple of regular guys on a crazy adventure after their apartment building in Rome collapses in an earthquake. Most other stuff about Rome/Romans follows leaders, generals, aristocrats, etc. so it was refreshing to see regular people. And completely not based on reality, I also liked the British comedy series Plebs that also follows regular people living Rome. But it's just a way to show modern issues satirically, not really historical."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 7,
+      "id": 48324910,
+      "title_en": "CAPTCHAs can still detect AI agents",
+      "title_ja": "CAPTCHAs can still detect AI agents",
+      "url": "https://research.roundtable.ai/captchas-detect-ai/",
+      "hn_url": "https://news.ycombinator.com/item?id=48324910",
+      "score": 18,
+      "comment_count": 7,
+      "posted_at": "2026-05-29T15:57:37+00:00",
+      "comments": [
+        {
+          "id": 48326444,
+          "author": "technotarek",
+          "text": "Apparently CloudFlare’s turnstile can’t, as evidenced by several public-facing CRUD and mail routines we maintain that no longer are warding off the spam."
+        },
+        {
+          "id": 48326232,
+          "author": "docheinestages",
+          "text": "I think it's just a game of cat and mouse. It might be easier to catch naive AI agents that are not fine-tuned for specific CAPTCHA tasks with human behavior, can't recognize new challenges, don't know when to stop and ask a human, and just want to brute force their way with limited or no specialized harness and tools available."
+        },
+        {
+          "id": 48326076,
+          "author": "cute_boi",
+          "text": "I’ve been using Claude Opus 4.7 with Chrome MCP, and it has worked successfully about 95% of the time. However, I’ve failed various hCaptcha challenges."
+        },
+        {
+          "id": 48326021,
+          "author": "BiteCode_dev",
+          "text": "Until they learn to do that. So cat and mouse. So nothing new."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 8,
+      "id": 48322753,
+      "title_en": "Someone used my open source project to phish people",
+      "title_ja": "Someone used my open source project to phish people",
+      "url": "https://andrej.sh/posts/phishing-through-my-open-source-project",
+      "hn_url": "https://news.ycombinator.com/item?id=48322753",
+      "score": 39,
+      "comment_count": 9,
+      "posted_at": "2026-05-29T13:18:57+00:00",
+      "comments": [
+        {
+          "id": 48325823,
+          "author": "eggbrain",
+          "text": "There will always be a subset of users whose goal is to not use your service, but to arbitrage your service into the maximum value for themselves. For example -- let's say you offer $100 in free AWS credits by signing up to your platform. Expect a malicious user to eventually come to your platform, realize they can resell those $100 in credits for $50, and start using your platform for their own gain. Unless the mechanisms you add in place to reduce fraud / second sign ups / etc is greater than the value that they are receiving ($50), they will continue. With sites where the platform is free, the math almost always makes sense for these malicious users to eventually abuse. In this case it was leveraging the email reputation of another domain at no cost to their own (along with the added value of anyone getting phished), but on other sites it's public profiles being used for backlinks / spam, etc."
+        },
+        {
+          "id": 48325710,
+          "author": "no_multitudes",
+          "text": "Please write your blog post yourself if you expect people to read it. The LLM output is very grating."
+        },
+        {
+          "id": 48326291,
+          "author": "jubilanti",
+          "text": "If you have commits in the linux kernel, your open source code has certainly been used to murder people. Because it's in everything, including weapons systems."
+        },
+        {
+          "id": 48325889,
+          "author": "j-bos",
+          "text": "\"Disposable email domains blocked\" This one is really annoying as in practice, more and more services that become spammers or sell to what are basically spammers cannot be kept at arms length."
+        },
+        {
+          "id": 48325692,
+          "author": "sandeepkd",
+          "text": "Couple thing: 1. You are not alone, this happens at a large scale across the board with companies of all sizes. 2. More than likely the abuser did not do it manually, more than likely they automated it 3. As a thoughtful business one may have rolled out all the authentication features/gates if the business picks up, as a starter the safe idea could have been to put it behind any openly available OAuth provider"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 9,
+      "id": 48321956,
+      "title_en": "Tulip mania: when a single flower was worth more than a house (2025)",
+      "title_ja": "Tulip mania: when a single flower was worth more than a house (2025)",
+      "url": "https://dutchreview.com/culture/tulip-mania-netherlands/",
+      "hn_url": "https://news.ycombinator.com/item?id=48321956",
+      "score": 121,
+      "comment_count": 109,
+      "posted_at": "2026-05-29T11:51:34+00:00",
+      "comments": [
+        {
+          "id": 48322546,
+          "author": "silotis",
+          "text": "The brief mention that the fallout wasn't as disastrous as myth would have it greatly understates just how exaggerated the popular account of tulip mania is. https://www.smithsonianmag.com/history/there-never-was-real-..."
+        },
+        {
+          "id": 48325799,
+          "author": "peacefulnerd",
+          "text": "1 gram of legal marijuana in Colorado is $1.25. In third world countries it's a few cents outdoors. Partially legal (no import/export between states and countries) and illegal drugs bankrupt people because of prohibition inflation."
+        },
+        {
+          "id": 48325464,
+          "author": "block_dagger",
+          "text": "Came in to Ctrl-F for \"Bitcoin\" - 9 matches so far."
+        },
+        {
+          "id": 48322997,
+          "author": "iambateman",
+          "text": "Maybe we should update our lexicon to \"NFT mania\" –– far more people lost money in that phenomenon."
+        },
+        {
+          "id": 48322301,
+          "author": "hootz",
+          "text": "You know, we also have the tulips of our time..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 10,
+      "id": 48324712,
+      "title_en": "The Dead Economy Theory",
+      "title_ja": "The Dead Economy Theory",
+      "url": "https://www.owenmcgrann.com/p/the-dead-economy-theory",
+      "hn_url": "https://news.ycombinator.com/item?id=48324712",
+      "score": 150,
+      "comment_count": 159,
+      "posted_at": "2026-05-29T15:46:24+00:00",
+      "comments": [
+        {
+          "id": 48325753,
+          "author": "alex_young",
+          "text": "Why is this time different? Won't super power AI tools allow companies to do more with the same number of people? Don't you think a smarter way to run a business is to capture more of the market if you have the resources to do so? If company A decides they just want the same slice of the market they have now and can fire half of their employees and pocket $$$, can't company B hire the same workers and compete harder with these new extra productive workers they hired? Won't the company B tend to capture more of the market and thus survive longer? In nature we say there are no unfilled niches, meaning that if there were space for something to come compete for resources, it would quickly be 'solved' by the motivating factors involved. Not a precise thing, but a good heuristic. US knowledge-worker compensation is around $10T / year. Anthropic and OpenAI have raised (not spent yet, just raised) $317B. That's ~3% of knowledge worker spending in one year alone. What business wouldn't pay 3, 5 or 10% more a year to make their worker productivity increase by larger factors?"
+        },
+        {
+          "id": 48325396,
+          "author": "spongebobstoes",
+          "text": "this whole blog post is basically \"people need jobs to be happy, so we should design our society such that they need jobs\" not only is the premise wrong, but forcing people to work is not a good or ethical way to address this problem most people like the social aspect of work, but not being beholden to their boss we can give people meaning, community, culture, growth, without relying on employment and money we can do better than this"
+        },
+        {
+          "id": 48325996,
+          "author": "spondelkryp",
+          "text": ">The US horse population grew from nine million in 1840 to twenty-one million by 1900, seemingly immune to technological change. Within sixty years of the internal combustion engine, the population collapsed by eighty-eight percent. I think this is a very interesting and chilling point, especially if you draw the parallel literally. For quite some time, I was pondering the question:\"Who is buying though?\". I.e if you automate workers out of labor, who are we selling these AI services to? I guess if global population drops by 80-90℅ you suddenly get a \"sustainable\" economy, as everything is repriced the economy of scale needs a much smaller scale. (Not speculating this is a plan, just a thought that occurred to me when reading about horses example)"
+        },
+        {
+          "id": 48325994,
+          "author": "CM30",
+          "text": "I think the thing companies forget is that a lot of them can't remain functional if a shrinking percentage of the population can afford their products. Yes, you can try and appeal to the rich and sell products/services aimed at their needs. But does that work for most companies? I'd say no. The rich won't buy millions of food items or works of fiction or go to every service available in real life. So, many of those companies won't remain viable unless there's some alternative way for people to spend money. Lots of people who see themselves at the top will end up out of a job, or watch their businesses crash down. I will say that the fact these societies are (at least for now) still democracies makes the future these tech moguls want less certain for them though. Feels like if there's enough pain from unemployment and declining living standards, someone will run on that and win, whether those in power like it or not. The US may have some issues there, but a lot of the world has seen parties outside the mainstream grow in popularity, including some on the more leftward side of the political spectrum."
+        },
+        {
+          "id": 48326370,
+          "author": "mrdependable",
+          "text": "I think a lot of this would be solved if the government would actually enforce anti monopoly laws. The penalties against Google were such a damn joke it makes me sick. Companies aren’t going to hold off on trying to automate tasks AI performs poorly at. They are going to change the task so AI can do it, putting the burden of making up for the deficit on everyone else. The only reason this is able to happen now is because all the competition has been crushed or absorbed."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 11,
+      "id": 48321076,
+      "title_en": "Real-time LLM Inference on Standard GPUs: 3k tokens/s per request",
+      "title_ja": "Real-time LLM Inference on Standard GPUs: 3k tokens/s per request",
+      "url": "https://blog.kog.ai/real-time-llm-inference-on-standard-gpus-3-000-tokens-s-per-request/",
+      "hn_url": "https://news.ycombinator.com/item?id=48321076",
+      "score": 161,
+      "comment_count": 73,
+      "posted_at": "2026-05-29T09:47:23+00:00",
+      "comments": [
+        {
+          "id": 48321384,
+          "author": "mungoman2",
+          "text": "This looks very interesting. Possible to get those rates without exotic hardware. But I have to say that the comparison is not really fair. Comparison is done with a 2 B model vs frontier models that are likely 100s of times larger. Also taalas with their 15000 tok/s inference are suspiciously missing from the comparison. We need to see the comparison with this framework and useful models, which at present seems to mean ~30 B."
+        },
+        {
+          "id": 48321626,
+          "author": "gaeld",
+          "text": "Follow-up reading the most technical and research people here: Monokernel deep dive (GPU Engineering): http://blog.kog.ai/building-a-single-kernel-latency-optimize... Delayed Tensor Parallelism (research): http://blog.kog.ai/delayed-tensor-parallelism-for-faster-tra... To try the speed on the playground: http://playground.kog.ai"
+        },
+        {
+          "id": 48323741,
+          "author": "stymaar",
+          "text": "This is very cool. I have been lamenting for a while that the memory-bandwidth <-> tps relationship was pretty much working for small models on consumer cards, but not at all on datacenter hardware. It's great to see that with proper care on the inference engine implementation the relationship can be restored."
+        },
+        {
+          "id": 48326137,
+          "author": "joefourier",
+          "text": "Do you think the work will still apply to speculative/alternative decoding methods like MTP and block diffusion, which are making batch=1 decoding less memory bound? Kernel launch overhead and memory transfer become less and less significant as a % of time when computing multiple tokens at once."
+        },
+        {
+          "id": 48326452,
+          "author": "DeathArrow",
+          "text": ">This preview runs a 2B model I guess with 1B or 500M model inference would be even faster?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 12,
+      "id": 48317774,
+      "title_en": "Blue Origin's New Glenn blows up during static fire test",
+      "title_ja": "Blue Origin's New Glenn blows up during static fire test",
+      "url": "https://twitter.com/nasaspaceflight/status/2060164928472854821",
+      "hn_url": "https://news.ycombinator.com/item?id=48317774",
+      "score": 436,
+      "comment_count": 448,
+      "posted_at": "2026-05-29T01:16:38+00:00",
+      "comments": [
+        {
+          "id": 48319285,
+          "author": "GMoromisato",
+          "text": "This is a crushing setback for Blue Origin. I feel for the engineers. They have been the underdogs for so long, but with the recent successful recovery of the New Glenn booster, it finally seemed like they had some bragging rights. Now they're looking at a year minimum before they get back to a regular launch rhythm. The question now is: What went wrong? If they're lucky, it's just a stupid mistake. Maybe an incorrect procedure while loading fuel, or maybe a manufacturing error got past QC. If they are unlucky, the cause will be a mystery, and it will take them months to nail down the root cause. Early in Falcon 9's history, the Amos 6 satellite was stacked on the rocket during a routine static fire and the whole thing blew up. It happened so fast that there were only a few bits of telemetry between \"everything normal\" and \"no signal\". For a brief moment SpaceX suspected sabotage by rival ULA. They even requested access to a ULA building to see if a sniper could have taken a shot at the rocket. It turned out to be an exotic failure: liquid oxygen had gotten caught inside a buckled liner in the carbon composite pressure vessels. Friction ignited it, and the entire second stage blew up, destroying the rocket."
+        },
+        {
+          "id": 48321256,
+          "author": "100ms",
+          "text": "The video angle published by the BBC is better, it appears to show one side of the rocket disintegrating and sliding down non-explosively before the large explosion really kicked in. Would hate for this all to be described by a few missing bolts https://www.bbc.co.uk/news/videos/cvgz0pdg32mo edit: the failure appears to start at the bottom, this seems to have damaged the structure enough to cause the sliding to start, then the huge fireball seems to begin with a small flash closer to the top of the rocket"
+        },
+        {
+          "id": 48318525,
+          "author": "hgoel",
+          "text": "Ouch, losing the rocket is unfortunate, but the damage to the launch infrastructure is going to easily mean over a year of repairs. I hope they're going to take this as an opportunity to update the infrastructure from lessons learned from the flights so far, and to be able to support some of their future ambitions (e.g. Jarvis)."
+        },
+        {
+          "id": 48319113,
+          "author": "alexissantos",
+          "text": "I might have seen the explosion light up some clouds in Orlando. I was driving East when I saw a patch of clouds glow orange for a few seconds and then go dark. I wondered what that was... then found out this happened at the same time I was driving!"
+        },
+        {
+          "id": 48318498,
+          "author": "dgrin91",
+          "text": "I would guess this puts a big dent in NASA's moon plans. I think Blue origin was _just_ selected to be the first moon lander mission. Now they are going to be grounded _again_. They just got off grounded status last week! And this is not even going to mention the significant ground equipment damage they have to deal with. Very unfortunate all around. I hope BO finds a way to keep the timelines."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 13,
+      "id": 48311485,
+      "title_en": "ATLAS: Autoformalized Textbook Library At Scale",
+      "title_ja": "ATLAS: Autoformalized Textbook Library At Scale",
+      "url": "https://github.com/facebookresearch/atlas-lean",
+      "hn_url": "https://news.ycombinator.com/item?id=48311485",
+      "score": 6,
+      "comment_count": 0,
+      "posted_at": "2026-05-28T16:40:18+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 14,
+      "id": 48314319,
+      "title_en": "The Science of Weather and the Nature of Science",
+      "title_ja": "The Science of Weather and the Nature of Science",
+      "url": "https://www.the-hinternet.com/p/the-science-of-weather-and-the-nature",
+      "hn_url": "https://news.ycombinator.com/item?id=48314319",
+      "score": 6,
+      "comment_count": 0,
+      "posted_at": "2026-05-28T19:38:23+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 15,
+      "id": 48307802,
+      "title_en": "Durable execution, the hard way",
+      "title_ja": "Durable execution, the hard way",
+      "url": "https://github.com/hatchet-dev/durable-execution-the-hard-way",
+      "hn_url": "https://news.ycombinator.com/item?id=48307802",
+      "score": 21,
+      "comment_count": 1,
+      "posted_at": "2026-05-28T12:11:03+00:00",
+      "comments": [
+        {
+          "id": 48326450,
+          "author": "pkaler",
+          "text": "I found the accompanying blog post excellent. In my experience, systems go from a monolith to a distributed monolith to a reliable distributed system. A durable workflow engine is one of the pieces that is required to get to target state. https://hatchet.run/blog/durable-execution"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 16,
+      "id": 48322154,
+      "title_en": "The UK government's Low Value Purchase System is a waste of time",
+      "title_ja": "The UK government's Low Value Purchase System is a waste of time",
+      "url": "https://shkspr.mobi/blog/2026/05/the-uk-governments-low-value-purchase-system-is-a-waste-of-time/",
+      "hn_url": "https://news.ycombinator.com/item?id=48322154",
+      "score": 125,
+      "comment_count": 77,
+      "posted_at": "2026-05-29T12:17:55+00:00",
+      "comments": [
+        {
+          "id": 48322630,
+          "author": "lowercased",
+          "text": "My spouse did business at a collector show in Illinois years ago. We filed some sales tax thing, as we collected sales tax (as we were told to do) and remitted it. Did that for... 2 years, IIRC, then didn't do that show again. We got letters threatening that we would be penalized if we didn't fill out the form and remit our collected tax. There was no option to say 'nothing'. I mean... we did one year - put 0. Then we stopped the business. Had multiple emails, physical letters, and hours on the phone being bounced around between places to say \"we don't run the business any more - we're not operating\". And... no one seemed to have a way to decidedly stop these. We'd get \"OK\" then... 6 months later got a letter saying \"you owe $x and penalties for failing to file\"... I was slightly concerned about driving through Illinois at some point, thinking they might have an arrest warrant out for one of us. It took 2 years of not getting these to finally believe we're not in their system any more. Similar story for New Jersey, but it wasn't quite as bad. Still required a lot of manual work."
+        },
+        {
+          "id": 48326410,
+          "author": "testemailfordg2",
+          "text": "If you are on a framework, that gives prospective public sector buyers assurance that certain basic checks/ due-dilligence about your business has already been done. So even if you have not made a sale to a public sector entity in recent times but are on a framework then makes sense to keep your details up-to-date..."
+        },
+        {
+          "id": 48323891,
+          "author": "copium",
+          "text": "I work in UK Government and the problem is that procurement depts are so afraid of awarding tenders to dodgy suppliers they add so many layers of bureaucracy that it prevents local or more innovative contractors. The rules are much more flexible for low value tenders <£30k but it is a very exclusionary system. Please realise there are many civil servants and local government officers that realise the system is overly bureaucratic and are encouraging procurement teams to change their processes, but it is mostly dictated by national legislation. I think allowing mayoral authorities to flex their procurement systems for innovative solutions would be a good testing ground. The whole point of devolution is to allow areas to spend money locally how they see fit and it can become a bit of a laboratory for new, risky ideas that - if they pay off - can be copied by other places."
+        },
+        {
+          "id": 48322694,
+          "author": "Closi",
+          "text": "Their medium value purchase system is a waste of time too - I work for a small business that does government contracts and you have to pay the government just for the pleasure of bidding for contracts. Then every bid has it's own unique weird things, where often you are told who you are bidding against and sometimes even how much the government wants to pay! The scorecards are often weird, will do things like ask you to write mini-essays with word limits where you get penalised for being over the word count, or where 20% of the bid points are based on a combination of diversity and impact on the local community/environment rather than on who will do the job best at the lowest price. The entire process is completely broken, and has no reference to good/standard procurement processes in the private sector."
+        },
+        {
+          "id": 48323259,
+          "author": "nickdothutton",
+          "text": "\"The system is working as intended\". I once attended an official seminar given by the government procurement department, to an audience of (mostly) government department people with purchase authority. The subject of which was how to construct your invitations to tender such that only the largest 3-4 suppliers could possibly respond. \"Solves the problem of having to consider 20-30 suppliers and review their submissions\". I'm so glad that was early on in my career (as a vendor)."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 17,
+      "id": 48322030,
+      "title_en": "Cedana (YC S23) Is Hiring",
+      "title_ja": "Cedana (YC S23) Is Hiring",
+      "url": "https://www.ycombinator.com/companies/cedana/jobs/d1vYocG-forward-deployed-engineer-ai-hpc",
+      "hn_url": "https://news.ycombinator.com/item?id=48322030",
+      "score": 1,
+      "comment_count": 0,
+      "posted_at": "2026-05-29T12:01:00+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 18,
+      "id": 48323397,
+      "title_en": "Headway Therapy Patients Forced to Scan Their Faces to Keep Getting Care",
+      "title_ja": "Headway Therapy Patients Forced to Scan Their Faces to Keep Getting Care",
+      "url": "https://www.404media.co/headway-therapy-facial-scan-biometric-data-identity-verification/",
+      "hn_url": "https://news.ycombinator.com/item?id=48323397",
+      "score": 72,
+      "comment_count": 17,
+      "posted_at": "2026-05-29T14:15:41+00:00",
+      "comments": [
+        {
+          "id": 48324748,
+          "author": "hdwythrowaway",
+          "text": "I interviewed with Headway. Fun fact: a bunch of their engineers are ex-Palantir and they use Foundry as part of their data platform. Don't trust these people with your mental health data."
+        },
+        {
+          "id": 48324262,
+          "author": "sleazebreeze",
+          "text": "What exactly is the concern here by Headway? Are they afraid AI deep fakes will be receiving therapy? Obviously they are doing data collection and selling training data of emotional conversations to AI labs. But what's their stated justification? I can't figure it out."
+        },
+        {
+          "id": 48324280,
+          "author": "moffkalast",
+          "text": "Please drink verification can to continue."
+        },
+        {
+          "id": 48324195,
+          "author": "cm2012",
+          "text": "Isn't gov ID + selfie check the standard for a majority of online healthcare in the last few years?"
+        },
+        {
+          "id": 48324196,
+          "author": "exabrial",
+          "text": "Nope."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 19,
+      "id": 48323266,
+      "title_en": "The Secret Garden of Rock-Paper-Scissors",
+      "title_ja": "The Secret Garden of Rock-Paper-Scissors",
+      "url": "https://theshamblog.com/the-secret-garden-of-rock-paper-scissors/",
+      "hn_url": "https://news.ycombinator.com/item?id=48323266",
+      "score": 19,
+      "comment_count": 3,
+      "posted_at": "2026-05-29T14:04:22+00:00",
+      "comments": [
+        {
+          "id": 48326371,
+          "author": "srean",
+          "text": "Paging sdenton4. Once when I was in grad school I noticed an announcement for a lighthearted programming competition for rock-paper-scissors playing agent. The deadline was barely hours away and I was behind on a report for funding or course work, I can't recall now. As it always happens with me, a non-serious non-essential task suddenly looks attractive over some work I had been procrastinating on. With no time available to code up a submission from scratch i I just rigged up the zlib compression library to decide the next play. It considered appending the 3 potential completions of the play so far and compressed the sequence. Whichever appended symbol gave the maximum compression was my agent's next move. It was just a few lines of code and it did surprisingly well. A universal compression library/algorithm that works better for short strings would have performed better. Zlib is an universal compressor but does not converge to the entropy of a sequence very fast."
+        },
+        {
+          "id": 48326101,
+          "author": "drivebyhooting",
+          "text": "I wonder how OP calculated the Nash equilibrium for each of those game variants."
+        },
+        {
+          "id": 48325635,
+          "author": "14",
+          "text": "The only secret strategy I know only works against my good friends son who literally starts every new round of rock scissors paper with scissors. Play him 10 minutes later he starts with scissors. We we noticed this so we began to say let's play a round and throw paper and lose. 5 minutes later repeat and lose again. THEN, once our drink was almost finished we would say come on one more game and if I win you have to go get me a can from the fridge. He would agree and we would this time throw rock beating him and winning. It works every single time. Lol"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 20,
+      "id": 48276152,
+      "title_en": "Orchestrating AI code review at scale",
+      "title_ja": "Orchestrating AI code review at scale",
+      "url": "https://blog.cloudflare.com/ai-code-review/",
+      "hn_url": "https://news.ycombinator.com/item?id=48276152",
+      "score": 105,
+      "comment_count": 40,
+      "posted_at": "2026-05-26T07:06:28+00:00",
+      "comments": [
+        {
+          "id": 48324228,
+          "author": "OtherShrezzing",
+          "text": ">Code review is a fantastic mechanism for catching bugs and sharing knowledge \"Sharing knowledge\" is one of the first phrases in the article, and highlighted as a key benefit of code review. But the loss to human-capital from this process is never examined in the post. > Trivial reviews (typo fixes, small doc changes) cost 20 cents on average They did around 25,000 of these runs (about 20% of total). So CF spent $5k in the period making language models run through PRs which were <10 lines long. I get that CF engineers are paid well, but the labour cost of having an intern/entry level engineer spend ~30-60s looking through these is likely close to $0.20, and that engineer builds some human-capital while they're at it."
+        },
+        {
+          "id": 48325156,
+          "author": "Dumbledumb",
+          "text": "This blog post is full of small inconsistencies that make it read like a low quality SEO piece. > We also extract a shared context file (shared-mr-context.txt) from the coordinator's prompt and write it to disk. Sub-reviewers read this file instead of having the full MR context duplicated in each of their prompts. This was a deliberate decision, as duplicating even a moderately-sized MR context across seven concurrent reviewers would multiply our token costs by 7x. No, it would not, because neither is the prompt of the subagent 100% of its token usage, nor will the \"shared-mr-context.txt\" which is then being read have a size of zero compared to the creation of this shared context. > You don't need seven concurrent AI agents burning Opus-tier tokens to review a one-line typo fix in a README. Yeah, well you wouldn't have anyways. Earlier in the post it says that Opus is \"exclusively for the Review Coordinator\"."
+        },
+        {
+          "id": 48323655,
+          "author": "joshuamoyers",
+          "text": "we’ve been struggling with review throughput. this actually seems worthwhile to build at this point though i remain fairly skeptical of workflows that are agent-only, at a point it seems like the only practical solution. we are finding lots of value in self review. its the “imagine you are doing a synchronous paired review with someone - anything that is difficult to explain, has a code smell, doesnt fit the architecture of the system around you, write a comment.” then at the end, agents do a good job of looping over PR comments. the second thing would be a guided, educational code review tool - there are a few attempts at this, but nothing that has a good enough interface to actually stick. organize hunks by semantic importance, spend some tokens exploring the surrounding systems, showing how new code, public apis and data model flow with the existing design, and allow a human to traverse larger PRs more quickly. thank you to cloudflare for publishing this."
+        },
+        {
+          "id": 48321675,
+          "author": "thih9",
+          "text": "> Today, when an engineer at Cloudflare opens a merge request, it gets an initial pass from a coordinated smörgåsbord of AI agents. I’d prefer to have that happen as some sort of pre commit hook, before a merge request is sent. The feedback loop might be a bit faster and the process might produce less noise this way."
+        },
+        {
+          "id": 48321152,
+          "author": "rzmmm",
+          "text": "> The entire system also runs locally. I think approaches like this don't need to run other than locally. Maybe integrated as pre-push hook. The system is nondeterministic, so it's at odds with the purpose of CI."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 21,
+      "id": 48311647,
+      "title_en": "Claude Opus 4.8",
+      "title_ja": "Claude Opus 4.8",
+      "url": "https://www.anthropic.com/news/claude-opus-4-8",
+      "hn_url": "https://news.ycombinator.com/item?id=48311647",
+      "score": 1693,
+      "comment_count": 1318,
+      "posted_at": "2026-05-28T16:49:14+00:00",
+      "comments": [
+        {
+          "id": 48311998,
+          "author": "NiloCK",
+          "text": "A rambling comment: I think this is the first time we've had a third minor version bump on a frontier Anthropic model. (I count the 0.5s as major here, because they've been issued non-sequentially and also corresponded to massive capability leaps, eg, Sonnet 3.5, Opus 4.5). So now the Opus 4.5 family has successors 4.6, 4.7, and 4.8, each posting fairly modest claimed gains. My own experience w/ 4.6 and 4.7 are that I don't firmly grasp any capabilities improvements over my memory of 4.5, but it's all so fuzzy that it's truly difficult to tell. Maybe my own tastes are saturated now (it's smarter than me?) and I'll never again perceive model progress. Maybe the incrementalism is such that I'd notice immediately if my 4.7 workflows were redirected now to 4.5. Difficult spot for the labs to be in because, if they have a stronger product, I'd prefer they release it and that I can use it. But as this dynamic continues, the improvements are going to be less and less legible for end-users, who will complain about the churn-without-payoff, even when the payoff may actually be real."
+        },
+        {
+          "id": 48313432,
+          "author": "senko",
+          "text": "My fav coding benchmark for frontier models is to build a simple RTS game in one file (js/html/css). Claude Code with Opus 4.8 in ultracode mode nailed it, the best result so far: https://bsky.app/profile/senko.net/post/3mmwnrkwboc2v The prompt was: Create a simple but functional real time strategy (RTS) game similar to old WarCraft, StarCraft or Command & Conquer games. The player should be able to build buildings, create units, gather resources and should uncover the whole map. No AI or multiplayer needed. Use simple but nice-looking graphics. No sound. Implement everything in HTML/CSS/JS, everything in a single file (you can use 3rd-party js or css libraries/frameworks via CDN)."
+        },
+        {
+          "id": 48311843,
+          "author": "colonCapitalDee",
+          "text": "\"Users will find Opus 4.8 to be a modest but tangible improvement on its predecessor.\" This is a refreshing attitude! I've also verified that you can now turn off adaptive thinking in the web UI, which is great. I've had a lot of problems with thinking not triggering and the model producing sub-par output. Glad we can finally turn it off. (I hope being able to turn off adaptive thinking is new, if I could have turned it off at any time that would be embarrassing)"
+        },
+        {
+          "id": 48311816,
+          "author": "northern-lights",
+          "text": "> Not only that, but we plan to release a new class of model with even higher intelligence than Opus. As part of Project Glasswing, a small number of organizations are currently using Claude Mythos Preview for cybersecurity work. Models of this capability level require stronger cyber safeguards before they can be generally released. We’re making swift progress on developing these safeguards and expect to be able to bring Mythos-class models to all our customers in the coming weeks. Probably more interesting than the 4.8 release."
+        },
+        {
+          "id": 48311979,
+          "author": "simonw",
+          "text": "I generated pelicans riding bicycles on both thinking level low and thinking level high: https://gist.github.com/simonw/68560eddb0b268a8417f80ceb7304... The high one is notably better - the bicycle frame is the correct shape, unlike thinking level low. For comparison, here's Opus 4.7: https://gist.github.com/simonw/afcb19addf3f38eb1996e1ebe749c..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 22,
+      "id": 48314136,
+      "title_en": "Bricks and Minifigs Stole a Man's $200k Lego Collection",
+      "title_ja": "Bricks and Minifigs Stole a Man's $200k Lego Collection",
+      "url": "https://mybricklog.com/blog/bricks-minifigs-corporate-stole-old-mans-200000-lego-collection",
+      "hn_url": "https://news.ycombinator.com/item?id=48314136",
+      "score": 1236,
+      "comment_count": 552,
+      "posted_at": "2026-05-28T19:24:09+00:00",
+      "comments": [
+        {
+          "id": 48314983,
+          "author": "gkoberger",
+          "text": "I'm really confused by this blog. There seems to be a large portion of the story missing. I can't figure out the correlation between the owner losing their franchise and the rest of the story. Why did they want to steal the sets? If they're really a $400M company (whatever that means), why would they do this over (at most) $200k? I couldn't figure out what is being claimed here. I'm not saying it's not true, I just can't follow the story at all. EDIT: After reading other sources, it seems that the franchise owed $200k to BAM (unrelated) and also made a deal with the Mansell's directly. And it seems like the parent company is saying the unsold sets have been returned but the money is theirs because the store owed them money, while the Mansells are (correctly) saying consignment means they own the sets, not the franchise. BAM crossed into definitively illegal territory when they continued to sell sets after the Mandells asserted they wanted their property back (as confirmed by a \"sting\" operation). The Reckless Ben stuff is actually pretty interesting: https://youtu.be/14ktgvoH4Mc?si=yhSzpEDo5ut6s8eS&t=880"
+        },
+        {
+          "id": 48315916,
+          "author": "rdtsc",
+          "text": "> Bricks & Minifigs CEO Ammon McNeff is a graduate of Brigham Young University. Joshua Johnson and Brandon Best are, by public record and documented account, members of the LDS community. When Reckless Ben's team, following the pattern of obstruction by local law enforcement, looked into the individual officers involved in these incidents, they found that multiple officers were also BYU alumni. I thought “it has to be some kind of corruption here”. And yup it’s the mormon mafia apparently"
+        },
+        {
+          "id": 48314833,
+          "author": "artnanika",
+          "text": "The best part about this is that the CEO insists that the agreement with the previous store owner is null (thus relieving him of the burden of paying 200k), and yet he also insists on keeping the Lego collection set and selling it. It's comical."
+        },
+        {
+          "id": 48320899,
+          "author": "999900000999",
+          "text": "Way to do millions of dollars in PR damage over 200k. As this story spreads people will just assume the whole chain is bad. The bigger story is an elderly man needing to sell his toys to pay for cancer treatment. We could give all people free cancer treatment, but defense contractors need money."
+        },
+        {
+          "id": 48317876,
+          "author": "mattmaroon",
+          "text": "I just don’t understand why a company with $95m in sales would steal $200k. That’s a fraction of a percent of sales for the year. There’s now a boycott against them that will easily cost them more than that. If the case is as this blog says, it cannot be hard to find a lawyer to do this one pro bono. Breach of contract is one of the few things in America where you can sue for your legal fees. If you take over a business you assume it’s contracts even though your name wasn’t on them. You gain anything the business owns but a consignment shop doesn’t own the inventory. BAM is going to lose millions and for what? Is this article just wrong on substantial facts? Simple greed wouldn’t explain this as it will almost certainly lead to far less money, even in a short period, than returning it. Something must be missing."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 23,
+      "id": 48311705,
+      "title_en": "Dynamic Workflows in Claude Code",
+      "title_ja": "Dynamic Workflows in Claude Code",
+      "url": "https://claude.com/blog/introducing-dynamic-workflows-in-claude-code",
+      "hn_url": "https://news.ycombinator.com/item?id=48311705",
+      "score": 150,
+      "comment_count": 117,
+      "posted_at": "2026-05-28T16:52:21+00:00",
+      "comments": [
+        {
+          "id": 48312357,
+          "author": "SkyPuncher",
+          "text": "I don't really get this. At this point, my limiting factor is not how quickly Claude can self-trudge through code. It's whether Claude is going to do the task correctly or not. I need more mechanisms for controlling long-running sessions and dynamically injecting my thoughts, correction, and nudges rather than faster ways to burn through my tokens without knowing if the results are going to be correct."
+        },
+        {
+          "id": 48311963,
+          "author": "mil22",
+          "text": "Interesting to note, not sure if this was known publicly before today's blog post: Rewriting Bun with dynamic workflows An example of what dynamic workflows can unlock at scale is the recent rewrite of Bun. Jarred Sumner used dynamic workflows to port Bun from Zig to Rust with 99.8% of the existing test suite passing, roughly 750,000 lines of Rust, and eleven days from first commit to merge. One workflow mapped the right Rust lifetime for every struct field in the Zig codebase. The next wrote every .rs file as a behavior-identical port of its .zig counterpart, hundreds of agents working in parallel with two reviewers on each file. A fix loop then drove the build and test suite until both ran clean. After the port landed, an overnight workflow addressed unnecessary data copies and opened a PR for each for final review. While not yet in production, all of this was handled by dynamic workflows. Jarred will be writing about this more in the future."
+        },
+        {
+          "id": 48316426,
+          "author": "dools",
+          "text": "The #1 goal for Anthropic and others is to take the longest running process possible and make it entirely opaque to the developer. It's the only way they can build a moat for a commodity. I would highly recommend building your own multi-stage orchestration flows because then you'll get a much better idea of where you need to be in the loop, and where you can save money. Once entire organisations are functioning only as extensions of Anthropic, they'll put the prices up and squeeze the shit out of the market."
+        },
+        {
+          "id": 48312316,
+          "author": "trjordan",
+          "text": "It feels like we're far past the point of where having AI do more faster is helpful. It's telling that they used \"rewrite Bun in Rust\" as the proof point here. It's cool! But the vast majority of software engineering doesn't start with tens of thousands of tests, where making them pass is the whole job. In my experience, AI still drifts from what I meant it to do on anything bigger than building a widget. My time is spent suspiciously reviewing output for changes the agent snuck in, or invariants it broke. I talked with a friend recently where the agent broke the test harness badly enough that none of the tests mattered for 3 weeks. They did pass, though, so CI never complained. There's something at the intersection of context engineering, managing that sloppy pile of markdown plans, and good old fashioning system understanding that's the real bottleneck."
+        },
+        {
+          "id": 48312341,
+          "author": "bcherny",
+          "text": "A few of us from the Claude Code team will be hanging around if anyone has questions! Very excited for this launch -- dynamic workflows have been a game changer for engineering here at Anthropic. Can't wait to hear what you think."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 24,
+      "id": 48322118,
+      "title_en": "We should be more tired than the model",
+      "title_ja": "We should be more tired than the model",
+      "url": "https://vickiboykis.com/2026/05/28/we-should-be-more-tired-than-the-model/",
+      "hn_url": "https://news.ycombinator.com/item?id=48322118",
+      "score": 93,
+      "comment_count": 84,
+      "posted_at": "2026-05-29T12:12:16+00:00",
+      "comments": [
+        {
+          "id": 48322563,
+          "author": "simonw",
+          "text": "Something I've been trying recently for non-throwaway code is extensive refactoring, without typing any code myself but by closely directing the coding agent. Prompts like \"move the code relating to SQL query analysis into a new file\", \"look for opportunities to use pytest parametrize to remove duplication in that test\", \"rename method X to Y\". Early indications are that this is helping a lot with the problem where it's easy to churn out thousands of lines of code and not really have it stick in my head, even if I review every line of it. Reviewing code and actively refactoring it is less tedious and more mentally engaging than reviewing code without changes. If this was a human collaborator I'd be worried that I'm just creating busywork for them, but I don't care about busywork for LLMs! The goal is to produce code that I understand and that I can remember just well enough that I get an updated mental model to help me productively make future decisions about the codebase."
+        },
+        {
+          "id": 48322730,
+          "author": "paulmooreparks",
+          "text": "I don't know. I find that I'm moving up a level and improving my product-management skills while delegating most of the code to the agents. I'm still very much hands-on with the design and requirements, and I'm asking questions like, \"What's our security story for XYZ?\", \"Are we accounting for colour-blindness?\", etc. Not being down in the code allows me to prairie-dog a bit more and see the landscape better."
+        },
+        {
+          "id": 48322523,
+          "author": "CraigJPerry",
+          "text": "I clearly identify with the problem the author raises, which is: the bottleneck is understanding. I don't go along with their mitigations though. In programming we have one tool for this: abstraction. Decomposition, pattern recognition, even data structures and algorithms are all down stream of abstraction. Collectively, we've never truly mastered abstraction, but it's what we have and we collectively wield it well enough that it's usually somewhat effective. We are in dire need of a better abstraction."
+        },
+        {
+          "id": 48322493,
+          "author": "sam-cop-vimes",
+          "text": "> We should be more tired than the model I understand the rationale behind this, but can't help feeling that this is a downward spiral. The software industry has always been a hard place to build and sustain a career because of the pace of change. With these tools, the pressure to increase output is going to grow, jobs are going to be axed - so software devs need to work harder to stay relevant. Weren't these tools supposed to make our lives easier?!"
+        },
+        {
+          "id": 48322378,
+          "author": "Aldipower",
+          "text": "> Using the agent to keep asking questions about pieces of the code I don’t understand instead and pull up relevant documentation and PRs. I like to do the opposite, asking the LLM to give me relevant follow-up documentation, like the actually docs, where I can read and understand things myself. Data structures, techniques, etc. I still like to read that from the authors, much easier and trustworthy to grasp."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 25,
+      "id": 48318522,
+      "title_en": "Let's compile Quake like it's 1997",
+      "title_ja": "Let's compile Quake like it's 1997",
+      "url": "https://fabiensanglard.net/compile_like_1997/",
+      "hn_url": "https://news.ycombinator.com/item?id=48318522",
+      "score": 155,
+      "comment_count": 50,
+      "posted_at": "2026-05-29T03:07:22+00:00",
+      "comments": [
+        {
+          "id": 48320710,
+          "author": "kristopolous",
+          "text": "\"VC++6 is remarkably powerful for 1996. It has features such as \"Go to definition\", breakpoints, stacktrace, and variable inspections (but no Intellisense auto-completion yet). I never used it but it must have felt like a dream at the time.\" And here we are, in a generation of people writing blogs that never used VS6. I am now officially old. I was still using VS6 as late as 2009 btw...also it's from 1998. If you made a list of Microsoft bangers it's in the top 5 with probably windbg, quickbasic and windows 3.11."
+        },
+        {
+          "id": 48323503,
+          "author": "jandrese",
+          "text": "> DO NOT get it from github or transfer the files via FTP. I bet the author doesn't know about FTP's ASCII mode, and especially doesn't know that it is the default. ASCII mode was a nifty feature, but it never should have been the default. Especially when you consider that most text files are small and easy to re-download if you forget, while binary files are often quite large and the damage done by the line ending conversion is close to impossible to repair. Also, if you forget to convert a text file you can trivially do it on the host afterward."
+        },
+        {
+          "id": 48321178,
+          "author": "kleiba2",
+          "text": "> Go back and run setupsp5.exe. This time it will work. By now it should feel like you are following the solution of Monkey Island. Nothing makes sense. We are definitely deeeep into the 90s. Gold."
+        },
+        {
+          "id": 48321854,
+          "author": "ggambetta",
+          "text": "The whole thing compiles with 2 warnings. Incredible codebase. John Carmack definitely was/is on a different level. Back when I was making videogames I followed a similar philosophy. No warnings (but in an orders-of-magnitude smaller and less complex codebase). Crash on failed asserts, used liberally, in debug builds. Not sure why but it seems that gamedev doesn't do this kind of rigorous engineering in general (or at least it didn't back then -- and admittedly I never worked in a big studio)."
+        },
+        {
+          "id": 48324618,
+          "author": "justin66",
+          "text": "Sean Barrett, author of the stb libraries [0] which are near-ubiquitous in game development, is known among other things for still using visual c++ 6. [1] [0] https://github.com/nothings/stb [1] https://m.youtube.com/watch?v=nQrzB5P5NPE"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 26,
+      "id": 48279616,
+      "title_en": "An Obsessive Focus on UX: Pilot's Pressure-Regulating Kire-Na Highlighter",
+      "title_ja": "An Obsessive Focus on UX: Pilot's Pressure-Regulating Kire-Na Highlighter",
+      "url": "https://www.core77.com/posts/143832/An-Obsessive-Focus-on-UX-Pilots-Pressure-Regulating-Kire-Na-Highlighter",
+      "hn_url": "https://news.ycombinator.com/item?id=48279616",
+      "score": 50,
+      "comment_count": 11,
+      "posted_at": "2026-05-26T13:30:03+00:00",
+      "comments": [
+        {
+          "id": 48322682,
+          "author": "Cockbrand",
+          "text": "Japanese overdesign is not only about removing inconveniences, it's also about bringing a bit (or even a lot) of joy into using seemingly mundane products - just like this highlighter. Just knowing that a lot of thought went into the product to make it as good as it can be without making it a luxury item is something that elates me whenever I use something like this. Another good example is Japanese cling wrap, which is just so much better than everything I've seen in western supermarkets."
+        },
+        {
+          "id": 48323724,
+          "author": "iand675",
+          "text": "I think something that's probably under appreciated if you don't read/write Kanji– bad penmanship is incredibly hard to read due to the complexity of the characters. Good penmanship is extremely valued in Japan, so that need for precision tends to bleed over into an overarching valuing of stationary and related accessories."
+        },
+        {
+          "id": 48322905,
+          "author": "slowmovintarget",
+          "text": "As a fan of Pilot's fountain pens, I've come to rely on their aim for quality. Their pens and inks just work. One of the things many fountain pen users complain about with Pilot is that their converters don't work like other fountain pens. But in each case there are specific design choices that shine. Their cartridges have wider openings than standard ink cartridges. In part this makes their cartridges and converters proprietary, but the wider mouth and the hinged lid on the cartridges makes for better ink flow. The CON-40, often criticized for low ink capacity, fits their smaller pens, and has small agitators in the converter, allowing every last drop to get to the feed, and making cleaning easier. The CON-70, generally liked for its capacity, also has a unique feature of a metal tube that runs the length of the converter. This tube, which could have simply been a rod to hold the rubber stopper that enables pump filling, is a tube so that you can actually hold a blunt syringe to the tube mouth and squirt water straight to the back of the converter allowing you to clean it out properly. I love using well-designed products, and their writing instruments are among my favorites."
+        },
+        {
+          "id": 48323717,
+          "author": "apricot",
+          "text": "That kind of innovation is not always for the best. As an example, after hearing so much praise about the kuru-toga mechanical pencil, which rotates the lead as you write so it stays sharp longer, I went and bought one. I hate it. The rotation mechanism means the lead doesn't stay in place but has a weird \"give\" to it, which I notice every time I raise the pen and put it back to the paper. It's very small, a fraction of a millimeter, but it is noticeable and distracting. For me, the cure is a lot worse than the disease. I went back to my 10-year-old Pentel P205 which is stable as a rock."
+        },
+        {
+          "id": 48324493,
+          "author": "mock-possum",
+          "text": "Ah another website that doesn’t actually want me to read its content: https://imagehost.ing/Y-WuTY4-yiI73GfCWjz2Q.png I wonder what the principles of ‘obsessive Japanese design’ would have to say about this."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 27,
+      "id": 48291016,
+      "title_en": "Even (very) noisy LLM evaluators are useful for improving AI agents",
+      "title_ja": "Even (very) noisy LLM evaluators are useful for improving AI agents",
+      "url": "https://www.tensorzero.com/blog/even-very-noisy-llm-evaluators-are-useful-for-improving-ai-agents/",
+      "hn_url": "https://news.ycombinator.com/item?id=48291016",
+      "score": 26,
+      "comment_count": 6,
+      "posted_at": "2026-05-27T07:49:56+00:00",
+      "comments": [
+        {
+          "id": 48325861,
+          "author": "SmithersBot",
+          "text": "as long as OpenAI and Anthropic keep subsidizing dirt cheap Codex or Claude Code usage, I'll just keep using them as evaluators. The trick is to have a fresh instance doing the reviewing, not the one that did the work."
+        },
+        {
+          "id": 48324661,
+          "author": "ai_slop_hater",
+          "text": "What is an LLM evaluator?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 28,
+      "id": 48320667,
+      "title_en": "Wterm – A terminal emulator for the web",
+      "title_ja": "Wterm – A terminal emulator for the web",
+      "url": "https://wterm.dev/",
+      "hn_url": "https://news.ycombinator.com/item?id=48320667",
+      "score": 42,
+      "comment_count": 13,
+      "posted_at": "2026-05-29T08:42:28+00:00",
+      "comments": [
+        {
+          "id": 48324839,
+          "author": "simjnd",
+          "text": "All the commits and releases happened in an extremely short timeframe about a month ago and then nothing. With AI it's so easy to work on something for a couple days and make it seem production-ready before losing any interest and moving on to something else. I may be wrong but it seems like that's what is happening at Vercel Labs. Pumping out new radically different things, and seeing what sticks. I wish such kinds of experiments clearly labeled what it was instead of trying to look production-ready. It coming from a big player like Vercel can especially inspire a false sense of trust, when it was just messing around with AI around some idea and then moving on."
+        },
+        {
+          "id": 48326045,
+          "author": "toomim",
+          "text": "It's compiled to wasm for \"performance\", but... 1. WASM FFI has a big overhead when interacting with the javascript DOM. 2. Any DOM UI has a big overhead compared to a canvas. I would be curious to see an actual performance evaluation. This looks like it was built for the wrong tradeoff otherwise..."
+        },
+        {
+          "id": 48325844,
+          "author": "jerrythegerbil",
+          "text": "It you’re seeking something a bit older and battle tested ttyd is a good comparison: https://github.com/tsl0922/ttyd"
+        },
+        {
+          "id": 48323806,
+          "author": "ahsillyme",
+          "text": "I thought that there was a name clash: https://web.archive.org/web/20071010015641/https://martin.an... but I can't actually remember what that that wterm was. Not the same I would imagine. (edit: what I was thinking about was https://sourceforge.net/projects/wterm/ )"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 29,
+      "id": 48319509,
+      "title_en": "Volkswagen blocks Home Assistant by requiring client assertion",
+      "title_ja": "Volkswagen blocks Home Assistant by requiring client assertion",
+      "url": "https://github.com/robinostlund/homeassistant-volkswagencarnet/issues/967",
+      "hn_url": "https://news.ycombinator.com/item?id=48319509",
+      "score": 338,
+      "comment_count": 171,
+      "posted_at": "2026-05-29T05:45:36+00:00",
+      "comments": [
+        {
+          "id": 48321408,
+          "author": "kuizu",
+          "text": "Wasn't the EU Data Act ( https://digital-strategy.ec.europa.eu/en/policies/data-act ) put in place to exactly prevent these kind of scenarios (Article 4 and 5)? \"where the user cannot directly access the data from the connected product or related service, the data holder must make the readily available data and necessary metadata accessible to the user without undue delay, in the same quality as available to the data holder, easily, securely, free of charge, in a structured, commonly used, machine-readable format, and continuously/in real time where relevant and technically feasible.\" There is even special EU guidance for vehicle data for it: https://digital-strategy.ec.europa.eu/en/library/guidance-ve..."
+        },
+        {
+          "id": 48321565,
+          "author": "NiekvdMaas",
+          "text": "BYD DMCAd my whole repo to connect to their cars... https://github.com/github/dmca/blob/master/2026/05/2026-05-2... It's a shame these car makers are locking down their cars (which are brought for a premium!) and going on a crusade against open source."
+        },
+        {
+          "id": 48320481,
+          "author": "venzaspa",
+          "text": "Quite a few other manufacturers have done the same thing. I use a reverse engineered Polestar library to get charging status but I'm in the middle of building a CANBUS sniffer to do the same job because I don't trust they won't do the same thing as this. I don't really understand it, it doesn't seem to offer a huge potential revenue stream and it pisses off the people who are most invested in your product."
+        },
+        {
+          "id": 48320260,
+          "author": "vincnetas",
+          "text": "This comment has really nice translation of corpo-speek to human language : https://github.com/robinostlund/homeassistant-volkswagencarn... Why are they shooting them selves in the feet? Is this really a tangible income stream? Is it really increasing security?"
+        },
+        {
+          "id": 48320789,
+          "author": "Retr0id",
+          "text": "Client Assertion is an OAuth feature, but that is not at all what is being discussed here, if anyone else was confused. It is only present in the HN title and is not mentioned on the page."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 30,
+      "id": 48322389,
+      "title_en": "Local Git Remotes",
+      "title_ja": "Local Git Remotes",
+      "url": "https://cblgh.org/posts/local-git-remotes/",
+      "hn_url": "https://news.ycombinator.com/item?id=48322389",
+      "score": 63,
+      "comment_count": 50,
+      "posted_at": "2026-05-29T12:45:02+00:00",
+      "comments": [
+        {
+          "id": 48323829,
+          "author": "zenoprax",
+          "text": "I was expecting the use of non-SSH git remotes without network access. Any mounted file system can be a valid remote such as a USB drive. I use file-based remote to keep some repos encrypted on S3 using Rclone. For example, `git remote -v` would show: `secure-s3 /mnt/fuse/rclone/secure-s3/git/$REPO.git` I think concurrency is a problem with file-based remotes but for one person keeping a desktop and laptop in sync it is much simpler than running a VPS."
+        },
+        {
+          "id": 48322855,
+          "author": "antiframe",
+          "text": "GitHub has been such a staple of the modern dev that some are now (re)discovering git is distributed."
+        },
+        {
+          "id": 48323111,
+          "author": "nasretdinov",
+          "text": "You can also have multiple independent git repos that don't duplicate the full object store, via git clone --reference. It's less relevant in the container era, but otherwise it can save a lot of time and disk space when cloning repos repeatedly"
+        },
+        {
+          "id": 48323005,
+          "author": "mystifyingpoi",
+          "text": "What's the purpose of this? I don't get it. Why push at all to \"local remote\", if you can just keep your changes on a local branch, and push it whenever \"remote remote\" becomes available again?"
+        },
+        {
+          "id": 48325216,
+          "author": "barnabee",
+          "text": "I do this to a ~/git-sync/<project>.git directory that's synced over Syncthing for all my personal projects it's great."
+        }
+      ],
+      "summary_ja": ""
+    }
+  ]
+}
