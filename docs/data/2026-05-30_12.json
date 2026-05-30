@@ -1,0 +1,1100 @@
+{
+  "date": "2026-05-30T00:00:00+09:00",
+  "slot": "12",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 48326802,
+      "title_en": "SQLite is all you need for durable workflows",
+      "title_ja": "SQLite is all you need for durable workflows",
+      "url": "https://obeli.sk/blog/sqlite-is-all-you-need-for-durable-workflows/",
+      "hn_url": "https://news.ycombinator.com/item?id=48326802",
+      "score": 461,
+      "comment_count": 233,
+      "posted_at": "2026-05-29T17:54:50+00:00",
+      "comments": [
+        {
+          "id": 48327121,
+          "author": "bitexploder",
+          "text": "I started setting up my workflows using Temporal. It deploys as relatively light weight local app. For an isolated local installation it uses SQLite. It makes the process of dealing with API retries and organizing workflows and tasks really simple. I recommend giving it a try. It is, philosophically, exactly what this article is suggesting, but it adds an incredibly rich and flexible interface for agents to work with. Additionally, the web UI makes it very easy to inspect workflows, review agent execution, etc. Temporal also encodes much higher reliability into your system, almost for free. Distributed and reliable systems are hard, don't reinvent the wheel IMO. If you find yourself wanting things like an easy way to then introspect your SQLite database, figure out what is happening in the workflow, compose individual tasks, make workflows trivially callable, etc, give Temporal a look. Alongside this, I have mostly moved away from files for agents. Markdown and JSON are great, but also feel like traps when building out smaller local apps. LLMs are great at SQLite and you can render anything you want out of it (Markdown, JSON, etc). It saves a lot of tokens when an agent can just query a specific row instead of having to fire up jq or grep through markdown. You get a nice portable self contained data management system that encourages agents to be more disciplined about how they structure their data than a bunch of files. It also continues to scale into MySQL/Postgres if your little local projects start to outgrow or become more formal, you already have schema and discipline around data."
+        },
+        {
+          "id": 48327679,
+          "author": "levkk",
+          "text": "I don't understand this obsession with SQLite for real, production apps. SQLite is an embedded database, completely unsuitable for managing concurrency. This is what database _servers_ are for, e.g., Postgres, MySQL, etc. Their entire job is to allow you to modify data from multiple processes, on different machines, at the same time. This is a foundational principle of computer science. It seems to me that the \"SQLite for everything\" crowd is a little bit inexperienced."
+        },
+        {
+          "id": 48333126,
+          "author": "emodendroket",
+          "text": "SQLite is an underrated tool for how powerful it really is and probably people don't think of it often enough."
+        },
+        {
+          "id": 48331553,
+          "author": "faangguyindia",
+          "text": "I've replaced all of these with Go + SQLite: 1. Intercom 2. Zendesk 3. Email marketing 4. Kanban 5. Todo 6. Our billing stack 7. Our issue tracker 8. Our forum 9. Uptime monitor 10. PagerDuty (clone) I have dozens of products I sell, so I thought: why not build everything ourselves? All of these run on the same server and use very little memory. I replaced all the SaaS tools we used with these. I also moved to dedicated servers and dropped costs to about 1/10th of what we were paying for managed cloud solutions, while maintaining the same HA and even achieving lower latency (partly because noisy neighbors on VPSes were increasing tail latency). We used to spend a ton on this stuff. These have now been in production for four months and have only needed minor updates. Deployment is dirt simple. No Docker, no Kubernetes—just a systemd service and a binary built on the dev machine and deployed. We also used to pay for services like MaxMind and IPData. I ended up hand-rolling my own IP geolocation service, which, in my tests, outperforms most existing solutions. It all started with replacing Uptime Robot. Then I got more confident and replaced PagerDuty. After that, I replaced Intercom. Finally, I had always heard people say, \"Don't build your own billing stack.\" But I said YOLO, let me make that mistake myself. So I studied our existing billing solution, developed my own, and rolled it out. So far, we've had zero issues with it. Caddy in front. I found that we only use maybe 1–5% of the features most SaaS products offer, while the features we actually need keep getting buried deeper and deeper inside these \"enterprise-grade\" platforms, making our workflows more difficult. I won't show my commercial products because our partners and clients probably wouldn't appreciate knowing how cheap I am—but I call it being resourceful. I can show my free app, though, which has 20,000+ users and was launched recently: https://macrocodex.app/ It only uses the Zendesk clone. Email is handled through Cloudflare routing, so we pay almost nothing to run the app."
+        },
+        {
+          "id": 48328583,
+          "author": "m2f2",
+          "text": "There's a wide gap from files to multipartition databases. Running databases in a container is not for me sorry whenever real production stuff is on the table. Personally, lots of ETL can just be taken care of locally without involving enterprise databases. In such cases, DuckDB is 5x-10x better than SQLite and orders of magnitude simpler/faster than spinning up a dedicated Postgres database. For general scripting, there's no match between a 20-lines awk script and a much cleaner, robust, maintainable equivalent SQL script based on DuckDB. I just hope MotherDuck don't need to pump/dump for IPO - it would be sad losing that tool for the usual corporate greed."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 2,
+      "id": 48332151,
+      "title_en": "Perry Compiles TypeScript directly to executables using SWC and LLVM",
+      "title_ja": "Perry Compiles TypeScript directly to executables using SWC and LLVM",
+      "url": "https://www.perryts.com/",
+      "hn_url": "https://news.ycombinator.com/item?id=48332151",
+      "score": 39,
+      "comment_count": 24,
+      "posted_at": "2026-05-30T03:14:25+00:00",
+      "comments": [
+        {
+          "id": 48333129,
+          "author": "jeswin",
+          "text": "First of all, congrats. The website doesn't explain how it works in a lot of detail. I am the author of tsonic [1], a TS compiler that produces binaries via Clr NativeAOT (on Linux/Mac). The hardest parts were numbers, TS has no ints or shorts. Additionally, how does it handle Optional Types and the like? I am really eager to learn how you guys handled these challenges (and Generics etc) - going over your commits. I've been on it for the last 6 months (almost every day); getting to near complete TS compatibility is a very long journey because of its expressiveness. [1]: https://tsonic.org"
+        },
+        {
+          "id": 48332366,
+          "author": "afavour",
+          "text": "Fascinating. I've written cross platform (WASM, iOS, Android) libraries with Rust before and had a good time but Rust can be a pain too. Cross-platform Typescript is a really interesting proposition. That said, the more I think about it the more dubious I am. The site boasts no runtime dependencies but clearly it’s going to need things like a garbage collector, you can’t just magic that requirement away. At a certain point is it just doing what a JS engine’s JIT compilation does… except ahead of time? Also doesn't inspire confidence that the text on the site is very clearly AI generated and the GitHub log shows an endless stream of AI powered commits. About 15 per hour, every hour? Doesn’t scream stability."
+        },
+        {
+          "id": 48332367,
+          "author": "koteelok",
+          "text": "Calling a couple million lines of ai written Rust \"stable software\" is a bold statement"
+        },
+        {
+          "id": 48332977,
+          "author": "fooker",
+          "text": "Why go through LLVM at all? There are a bunch of tools that JIT somewhat optimized assembly."
+        },
+        {
+          "id": 48332365,
+          "author": "evil_buzzard",
+          "text": "the claim of \"no runtime\" is a bit dubious... you're telling me that you're statically linking a full, modern UI library into every app?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 3,
+      "id": 48284494,
+      "title_en": "Snowboard Kids 2 is 100% Decompiled",
+      "title_ja": "Snowboard Kids 2 is 100% Decompiled",
+      "url": "https://blog.chrislewis.au/snowboard-kids-2-is-100-decompiled/",
+      "hn_url": "https://news.ycombinator.com/item?id=48284494",
+      "score": 145,
+      "comment_count": 46,
+      "posted_at": "2026-05-26T19:12:59+00:00",
+      "comments": [
+        {
+          "id": 48331243,
+          "author": "CM30",
+          "text": "Always nice to see another game decompiled like this. It's a big deal as far as laying the groundwork for possible ports to PC and other consoles is concerned, and will probably aid modders quite a bit. If anyone needs a full list of these projects (which includes this one), there's a pretty good selection here: https://decomp.dev/projects Though these may have a few they missed: https://readonlymemo.com/decompilation-projects-and-n64-reco... https://github.com/CharlotteCross1998/awesome-game-decompila..."
+        },
+        {
+          "id": 48330944,
+          "author": "orsorna",
+          "text": "Awesome, but I always wondered why so much effort was put into decompiling this? Seems like a meme for meme's sake."
+        },
+        {
+          "id": 48332558,
+          "author": "sech8420",
+          "text": "Awe, why I love hacker news. This game was my childhood! I played it again recently on an emulator and was astounded how much easier it was. Made it to Damian without losing a single race. That seemed impossible at age 10."
+        },
+        {
+          "id": 48331899,
+          "author": "aizk",
+          "text": "The decomp dev guys are doing amazing work. It's also super educational too, if you're someone like me who's in just doing relatively simple AI / python / typescript work and rarely has to think about memory, hardware constraints, all that, it's a completely different world. Also, AI is finally getting to the point where it can do very difficult decompilation work, which is super exciting to me."
+        },
+        {
+          "id": 48332207,
+          "author": "foo-bar-baz529",
+          "text": "How much have LLMs sped up these decompilations?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 4,
+      "id": 48293119,
+      "title_en": "Math-to-Manim",
+      "title_ja": "Math-to-Manim",
+      "url": "https://github.com/HarleyCoops/Math-To-Manim",
+      "hn_url": "https://news.ycombinator.com/item?id=48293119",
+      "score": 31,
+      "comment_count": 3,
+      "posted_at": "2026-05-27T12:18:19+00:00",
+      "comments": [
+        {
+          "id": 48332576,
+          "author": "madanparas",
+          "text": "The \"RL repair loop\" is iterative LLM prompting with stderr feedback, not reinforcement learning. There is no training code, no reward function, and no environment in the repo. The loop also freezes the scene spec and only regenerates code, so if the planner specified 12 objects that geometrically do not fit on screen, three repair attempts will not help."
+        },
+        {
+          "id": 48332612,
+          "author": "geuis",
+          "text": "Entire article reads as output from a well structured prompt. It's almost point for point style-wise when I ask for a summary for current repo changes before deciding to do the commit."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 5,
+      "id": 48331786,
+      "title_en": "Naphtha shortages in Japan",
+      "title_ja": "Naphtha shortages in Japan",
+      "url": "https://www.nippon.com/en/japan-data/h02783/",
+      "hn_url": "https://news.ycombinator.com/item?id=48331786",
+      "score": 82,
+      "comment_count": 39,
+      "posted_at": "2026-05-30T02:20:40+00:00",
+      "comments": [
+        {
+          "id": 48332028,
+          "author": "guessmyname",
+          "text": "As someone who grew up eating Calbee snacks, I think they’ll be fine. People from my generation aren’t buying Calbee because the bag is colorful. They’re buying it because it’s Calbee and they already know what they’re getting. The packaging could be black and white and I’d still recognize it instantly. The only people I could see being briefly confused are younger consumers. Japanese packaging tends to be very colorful, so we’re all conditioned to identify products partly by color. But people adapt quickly. In fact, a black-and-white Calbee bag might end up standing out more on a crowded supermarket shelf than yet another brightly colored package. There’s also a chance this ends up being a net positive. If simpler packaging lowers costs and sales stay the same, why go back? Japanese consumers are feeling inflation more than they have in decades, and companies are under pressure too. Cutting costs in a place customers barely notice seems a lot smarter than shrinking the product or raising prices again."
+        },
+        {
+          "id": 48332377,
+          "author": "nogajun",
+          "text": "As a result of the Takaichi administration directing subsidies exclusively toward gasoline, oil companies have stopped prioritizing naphtha production, leading to a shortage of daily necessities. The fact that Calbee’s snack packaging has turned monochrome is a direct consequence of this. The Takaichi administration attempted to pressure Calbee into reversing this decision. What is even more alarming is that more than half of the Japanese public supports the Takaichi administration, which is implementing such absurd policies."
+        },
+        {
+          "id": 48333064,
+          "author": "dnnddidiej",
+          "text": "They had a chance to embrace the black/white medium for somethink striking and attention grabbing but looks like a bad photocopy of the original packaging."
+        },
+        {
+          "id": 48332855,
+          "author": "ronnier",
+          "text": "Hn has at least one article in the top 25 related to Japan every day, even about the most obscure topics."
+        },
+        {
+          "id": 48332867,
+          "author": "Synaesthesia",
+          "text": "Maybe the point of the Iran war was to boost the US economy, relative to East Asia, which is dependent on Middle Eastern oil and gas, while the US is an exporter. I mean look who benefits from this, arms companies and oil/gas companies are having a bonanza."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 6,
+      "id": 48325340,
+      "title_en": "Notes from the Mistral AI Now Summit",
+      "title_ja": "Notes from the Mistral AI Now Summit",
+      "url": "https://koenvangilst.nl/lab/mistral-ai-now-summit",
+      "hn_url": "https://news.ycombinator.com/item?id=48325340",
+      "score": 333,
+      "comment_count": 125,
+      "posted_at": "2026-05-29T16:22:01+00:00",
+      "comments": [
+        {
+          "id": 48326538,
+          "author": "trouve_search",
+          "text": "OK, I'm 100% rooting for both Mistral and task focused small models. But Mistral has fall really far behind since 2025Q3. It seems they can't get good reasoning models working at even medium context sizes, which is necessary to be at the table right now. Gemma4 and Qwen3.6 are currently best in the small size; Mistral's \"small\" model has ~4x the parameter count at 120B and isn't even competing with models a quarter its size. Back one year ago with Mistral Small 3.1 they were keeping up, but they've fallen into irrelevancy right now. If Mistral seriously wants to play the on-prem and small task-specific model game, a decent proxy would be to build models that get the r/localLlama crowd excited"
+        },
+        {
+          "id": 48326047,
+          "author": "simonw",
+          "text": "> BNP Paribas runs Mistral models on-prem for KYC in Belgium, with sensitive data staying within the bank's walls. Abanca is using agent orchestration to handle sensitive customer information at a huge scale (2 million customers in their app). For European companies in regulated industries, this is a good alternative to relying on US hyperscalers. Mistral leaning into on-prem and European-hosted models is very smart."
+        },
+        {
+          "id": 48327267,
+          "author": "antirez",
+          "text": "I really want Europe to be part of the AI development and research. And I strongly cheered for Mistral. But they are accumulating too much technological delay. This needs to be fixed, otherwise it will turn into yet another proof we are not able to run large tech with good results. Basically any Chinese lab is doing much better. It's not Mistral that created I don't want to say DeepSeek, but MiMo 2.5, Minimax 2.7, and so forth. There are only weaker and/or larger and slower (no MoE) models. Not good."
+        },
+        {
+          "id": 48328429,
+          "author": "zuzululu",
+          "text": "Wasn't even aware Mistral was around and I think that just shows you how irrelevant it has become and not a very good sign for EU in general when the best talent are working for American AI companies. I saw Tibo's tweet a while back and it was basically a legitimate complaint about the extreme taxation he faced back in EU (France I think) and its pretty obvious how much of a hinderance top down centralized regulation is to innovation. While I welcome competition and independence, nobody can argue with American innovation and its ability to attract the best of the best. Once it takes seat of the AI reigns there is very little chance for other countries to compete, very much similar to semiconductor field and how only a few select countries have the talent and monopoly over its particular supply chain. It's clear to anyone looking in that whatever EU is doing is not working (not just AI) and will not work as they do not seem flexible or humble enough to steer itself."
+        },
+        {
+          "id": 48326433,
+          "author": "Eldodi",
+          "text": "I was at the event, and was impressed by the attendance, all the leaders from the major european listed companies were there. Also interesting to note the number of partners they invited. Going from Microsoft, Accenture and EY to startups like alpic.ai or lingo.dev . Seems like they are ramping up their M&A game too"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 7,
+      "id": 48330436,
+      "title_en": "MCP is dead?",
+      "title_ja": "MCP is dead?",
+      "url": "https://www.quandri.io/engineering-blog/mcp-is-dead",
+      "hn_url": "https://news.ycombinator.com/item?id=48330436",
+      "score": 153,
+      "comment_count": 148,
+      "posted_at": "2026-05-29T22:56:49+00:00",
+      "comments": [
+        {
+          "id": 48330710,
+          "author": "mxstbr",
+          "text": "I run the team at OpenAI that's responsible for the ChatGPT App Store, Codex plugins, and all things MCP. The thing that all these \"MCP is dead\" posts are missing is that whether or not MCP is used as a transport protocol is actually completely irrelevant. The reason MCP isn't dead is because practically ~every company on the planet is building an MCP server. I know this because we interact with all of them. Most of these companies don't have a CLI. Many of these companies don't even have an external API! And yet, they're all building MCP servers. And that's why MCP is not only not dead, but more important than ever. Maybe we will turn every MCP server into a CLI under the hood. Maybe we'll use code mode. Maybe we'll implement tool search. All of those are just implementation details to the much more important point: our AI agents are getting access to services they otherwise would never have had access to.[0] That's what matters. So, is MCP dead as a direct communication layer for models to speak to? Maybe, maybe not. Is MCP dead as a protocol? Hell no, couldn't be further from the truth. [0]: Although I will say the Codex app's computer & browser use features have made this statement a lot weaker than it used to be. If you haven't tried them yet—they're mindblowing."
+        },
+        {
+          "id": 48333117,
+          "author": "kstenerud",
+          "text": "> Alternative 1: CLI-First Strategy > Provide CLI -> API -> docs, in that order. LLMs already learned from man pages and StackOverflow. So how is the agent going to know about your niche CLI? It's still going to use up context to learn your command line interface, same as for an MCP interface. Agents only excel at CLIs if a particular CLI was part of their training data. The same would be true of well-known MCP interfaces. > Alternative 2: Skills Pattern > If MCP is \"spreading all menus on the table upfront\", Skills is \"asking the librarian for only the book you need\". Or: Layer your MCP help commands, like a directory at a mall. The agent only looks up what it needs at the time."
+        },
+        {
+          "id": 48330646,
+          "author": "CSMastermind",
+          "text": "Was this written by AI? MCP is essentially just JSON RPC with a few special fields that must be included. I have reservations about JSON RPC, but there needs to be some 'service discovery' layer for LLMs to interface with. It needs to be available in places like websites, desktop applications, backend services, etc. The CLI is only one place that these systems interface with. Whatever you replace MCP with will be in a similar shape even if you specify a different communication protocol or different fields for tool discovery."
+        },
+        {
+          "id": 48333079,
+          "author": "extr",
+          "text": "The points in this article don't really land for me. They are mostly critiques of particular MCP implementations rather than the modality itself. My impression right now: - MCPs are great for stateless, mostly read-only interactions with document store type things. Notion/Slack/Linear are perfect use cases. I have those MCPs connected to claude code and they work great. These tools never had CLIs or super well used public APIs to begin with. MCP handles the auth for me. Cool. - MCPs are great but not fully necessary for \"function shaped\" things where you're trying to run some Function and that Function has a lot of parameters with some subtlety to them and perhaps needs some examples to really help the LLM understand. Though you can get away with a skill + curl, or a hand rolled script even. - MCPs are not so great for interacting with more complex stateful systems with large surface area. You don't want/need an AWS MCP, for example. And of course Cloudflare is the canonical example here where they do have an MCP but it has a special \"Code Mode\" because they have a huge product surface and a lot of state. Most companies are somewhere in the vast space between being a document store type thing and AWS, so aren't really sure what their MCP should look like, or how customers will use it, but feel like they're missing the boat if they don't ship something. So they ship an MCP and perhaps the people who need the document type stuff load it up and get some use out of it, but others are not so satisfied. Or maybe from the other direction, people are trying to use your product but aren't super technical or don't know how to best use it with AI, but \"loading up an MCP\" seems like a reasonable way to start, so they ask everyone \"Where's your MCP\"? I run into this at work all the time. We get a lot of requests for an MCP. But our product is not so simple to just stuff into a bunch of stateless API calls. And we question whether the people requesting the MCP really know what they want it for, exactly, other than to hook up to claude code so they can say \"claude go do everything\" (which is a valid sentiment, but implies a lot of work on our end to figure out how to make that work well)."
+        },
+        {
+          "id": 48332907,
+          "author": "rixed",
+          "text": "> Problem 1: It Devours the Context Window Like would running `linearcli --help` then `notioncli --help` then `slackcli --help` etc, or am I missing something? At least with MCP your harness could add in the context only the title of each tool and add full documentation on demand, MCP server by MCP server and tool by tool. The equivalent would be for all CLI to feature a \"--short-descr\" command. > Problem 2: Low Operational Reliability If the tool is also using a REST API I see no reason why MCP should be slower, given the protocols are so close. When that happen, it's probably because MCP was added on top of an API, maybe hosted in a far away datacenter by a subcontractor? I won't argue that most MCP servers are probably awful, but that's an argument against the industry not the protocol. > Problem 3: Overlaps with Existing CLI/API Yes, when a CLI tool already exist. A SQL MCP server sounds stupid to me, and a waste of token. Why not a curl MCP? But in the vast majority of shops, a cli tool does not exist. At best they have an API, which is designed to be used by programs not LLMs (you know what I mean). > Provide CLI -> API -> docs, in that order Sure, and instead of slow and wasteful websites companies should first provide a native client for desktop, then a native client for phone."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 8,
+      "id": 48283410,
+      "title_en": "Print with dozens of colors: Our new open-source ColorMix for PrusaSlicer",
+      "title_ja": "Print with dozens of colors: Our new open-source ColorMix for PrusaSlicer",
+      "url": "https://blog.prusa3d.com/our-new-open-source-colormix-model-in-prusaslicer-and-easyprint_136079/",
+      "hn_url": "https://news.ycombinator.com/item?id=48283410",
+      "score": 120,
+      "comment_count": 23,
+      "posted_at": "2026-05-26T18:05:42+00:00",
+      "comments": [
+        {
+          "id": 48332237,
+          "author": "WillAdams",
+          "text": "It would be nice if additional colours would be supported, à la Hexachrome by Pantone (this was a 6-colour ink system which covered more than half of the PANTONE spot ink colour space and made quite vivid photo reproduction possible). Even better would be a mechanism like to Cerilica's Truism which would allow one to use arbitrary filaments and preview how they will blend when printed."
+        },
+        {
+          "id": 48331712,
+          "author": "dclaw",
+          "text": "This is exactly what I was hoping for to knock Bambu down a few notches.... Definitely makes Prusa an even better contender in the space."
+        },
+        {
+          "id": 48331366,
+          "author": "sailfast",
+          "text": "This looks awesome! Exciting to see what happens in this space."
+        },
+        {
+          "id": 48330413,
+          "author": "coopreme",
+          "text": "INDX anticipation intensifies!"
+        },
+        {
+          "id": 48331873,
+          "author": "Aurornis",
+          "text": "There's a growing community around the OrcaSlicer - Full Spectrum fork that started all of this, which is attributed in the article. It's a cool technique and I expect all of the mainstream slicers will have it soon. You could already do this technique with OrcaSlicer with Prusa printers or cheaper options like the Snapmaker U1 The \"Prusa ColorMix Cones\" model is not what I'd recommend. I don't know why they made it like that for 3 and 4 colors other than to do something different than what the community was already doing. For 4 colors the PeggyPallette mini they used as inspiration is a much better model: https://makerworld.com/en/models/2519356-peggypalette-mini-3... You specifically want the dome shape to visualize how the layers blend at different angles. The fixed angle of the cones in the Prusa model misses the point and I don't know why they did that other than to be different. The article goes on at length about their filament mixing model which sounds cool until you see the part that they only tested with Prusament PLA. Again, I think the open source community was already doing a good job with this. There are several filament databases other than the one they're linking to that have TD values, which sprang out of the HueForge community. There are cheap tools from small makers to measure TD and color, too. One database: https://3dfilamentprofiles.com/ I'm glad they gave attribution to some of the sources of all of these ideas, but to be completely honest it's getting a little tiring to see everything the open source communities do get wrapped up, prefixed with a Prusa- brand prefix, and resold to us. Make sure you look beyond the Prusa official everything to get a sense of what the community is doing with all of this. I know I'm going to get downvoted for saying anything that isn't 100% pro-Prusa, but this is one topic where the open source community is quite a bit ahead and it's worth looking at what's out there."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 9,
+      "id": 48323869,
+      "title_en": "It's hard to justify buying a Framework 12",
+      "title_ja": "It's hard to justify buying a Framework 12",
+      "url": "https://www.jeffgeerling.com/blog/2026/its-hard-to-justify-framework-12/",
+      "hn_url": "https://news.ycombinator.com/item?id=48323869",
+      "score": 266,
+      "comment_count": 432,
+      "posted_at": "2026-05-29T14:55:31+00:00",
+      "comments": [
+        {
+          "id": 48326142,
+          "author": "whimblepop",
+          "text": "I was seduced by Apple Silicon after experiencing the exceptional battery life and performance. Those things are great, as are the screens and the speakers. But I'm still excited about the Framework 12 because I don't love macOS. I don't need an alternative to beat Apple on every line of the spec sheet. I just need them to align with my values, support Linux well, and cross a certain \"good enough\" threshold. The latest laptops from Framework meet all of those requirements, and I'm excited to buy one after I've saved up enough money. I've missed Plasma for a long time. At the same time, I wouldn't even consider a MacBook Neo."
+        },
+        {
+          "id": 48326331,
+          "author": "benoau",
+          "text": "As nice as Apple's hardware is it's all undermined by who they are as a company, intentionally limiting their devices more and more while they relentlessly argue in courts and to regulators that we owe them more and more for using our devices. Rosetta 2's retirement announcement was when I realized I won't buy another Mac, I'm not interested in a computer that is preoccupied with stopping me from running software. Work can buy them for me but I won't spend my money on a platform like that anymore. Depending on how their Supreme Court argument goes in a few weeks I will stop buying an iPhone too, if they establish the precedent that any method of paying for Netflix deserves a $5/month fee then they will leverage that to extract the same fee everywhere else."
+        },
+        {
+          "id": 48326188,
+          "author": "robspairpears",
+          "text": "Bought the Framework 12 as my personal daily driver (limited hobby projects, Obsidian, light browsing) and for the hardware to grow with my use cases. So even if I could get more bang for my buck with a Neo (yeah, I could), the tinkerability and repairability win over raw specs for what I actually use it for. Did I pay more for a less polished, less powerful machine? Yep. Is it enjoyable to use and fully capable of meeting my requirements? Yep. Came to bikeshed but the video was more nuanced and fair than this title."
+        },
+        {
+          "id": 48333119,
+          "author": "pmontra",
+          "text": "A question to all developers working on 12 and 13 inches laptops. Do you spend most of your time connected to an external monitor or do you use the laptop one? My instinct is that there isn't enough space for two side by side windows of code but of course people working on 24\" monitors would say the same about my 15.6\" screen."
+        },
+        {
+          "id": 48327018,
+          "author": "drnick1",
+          "text": "The point of the Framework is to run Linux, and not to be part of Apple's ecosystem. I don't want my computer to update itself without my permission, report telemetry to Apple, upload anything to any \"cloud\" or request that I log into something. If you don't think this is a big deal, wait until an age or identity verification law is passed somewhere, and Apple will enforce it against your will, on the computer that you bought and thought that you owned."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 10,
+      "id": 48327962,
+      "title_en": "Shift will clean homes for free to train future robots",
+      "title_ja": "Shift will clean homes for free to train future robots",
+      "url": "https://www.theverge.com/ai-artificial-intelligence/939765/ai-training-data-startup-shift-free-cleaning",
+      "hn_url": "https://news.ycombinator.com/item?id=48327962",
+      "score": 111,
+      "comment_count": 169,
+      "posted_at": "2026-05-29T19:16:32+00:00",
+      "comments": [
+        {
+          "id": 48333097,
+          "author": "breadzephyr",
+          "text": "Looks to me like they want to get in on 3D mapping homes that haven't already been mapped by a Roomba or other similar bot. There is plenty of money to be made selling home layouts to police. At the same time the customer's home is being cleaned, all objects can be scanned to data-mine the customer's shopping preferences. Maybe training AI and bots is part of what they're trying to accomplish, but I just can't help wonder what else they are trying to do. I am extremely suspicious of any tech companies that make it seem like a great idea to let their tech in my house. I can't imagine what is going to happen when, if this company ever really develops cleaning bots, their bots misidentify something as a weapon or drug stash and automatically dial the police. Or one of their bots gets remotely hacked by a vengeful person who then triggers the bot to call in a SWAT team. Also, if this kind of labor is the \"unskilled\" labor that we've all heard of (or have been told is \"unskilled\"), AI systems shouldn't need any training for it ;)"
+        },
+        {
+          "id": 48328475,
+          "author": "necubi",
+          "text": "Better this than the Bot Company, which has been apparently renting out AirBnBs for robot testing and leaving them trashed: https://sfstandard.com/2026/05/28/sf-startup-secretly-testin..."
+        },
+        {
+          "id": 48328407,
+          "author": "hsnv",
+          "text": "I've always found the idea of letting strangers clean my home strange. Maybe I grew up in the wrong tax bracket. I see cleaning your own home, as well as other chores (dishes, laundry) as an act of self-hygiene. If you want a robot to do your chores, that gives me the same feeling as desiring a robot to bathe you, wipe your bottom and genitals after the toilet, brush your teeth for you etc. Of course these are not apples to oranges, but I can't shake the feeling that you lose something about being a living, breathing being when you give up these mundane chores."
+        },
+        {
+          "id": 48330102,
+          "author": "somethoughts",
+          "text": "It would seem like such an obvious win-win if these cleaning robotics companies just won a couple of contracts with some tech forward hotel chains. - Faster R&D since hotel rooms are regular/familiar - Cost center for hotels so revenue would be higher/straightforward - No privacy issues since robots would not be present in rooms with guests - Easier servicing/maintenance since multiple robots at same location"
+        },
+        {
+          "id": 48329011,
+          "author": "aleyan",
+          "text": "\"I always thought that Homejoy were planning to automate as much as possible, if not everything, related to cleaning services using robotics and stuff, and that humans were only a temporary measure while developing technology.\" -devgutt 2015 [0] This quote about robots doing home cleaning has been living in my head rent free, and refusing to cleanup after itself, for over a decade. It seemed so crazy to me in 2015 that anyone would seriously consider home cleaning robots to be on a realistic timeline. Yet here we are in 2026 and robots could plausibly clean our homes beyond vacuuming and mopping. Humans training robots now completely makes sense to me. I think Sunday Robotics use of people wearing \"skill capture gloves\" [1] that both capture data and limit range of motion to that of the robotic hands is particularly clever. I wish success to both these and other companies in the space, so that someday soon there will be just a little fewer housework around the house, and we move a bit closer to the Jetsons. [0] https://news.ycombinator.com/item?id=9986693 [1] https://youtu.be/QeVnwtCANZ8?si=JoSps5MCxs7zPp0f&t=33"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 11,
+      "id": 48324712,
+      "title_en": "The dead economy theory",
+      "title_ja": "The dead economy theory",
+      "url": "https://www.owenmcgrann.com/p/the-dead-economy-theory",
+      "hn_url": "https://news.ycombinator.com/item?id=48324712",
+      "score": 887,
+      "comment_count": 1053,
+      "posted_at": "2026-05-29T15:46:24+00:00",
+      "comments": [
+        {
+          "id": 48329096,
+          "author": "iliaxj",
+          "text": "The article doesn't seem to take his train of thought quite far enough. If AI suddenly makes it possible for a law firm to be run with a skeleton crew, then what's stopping all those people you fired from starting new law companies, where AI also does most of the work, and competing with you for the same market? And ultimately, if AI gets to be so good that it can competently do a lawyer's job, what reason do big law firms even have to exist? Who is going to hire them if they can just hire AI? The companies that are rushing so hard to replace their workers don't realise that AI is eventually going to replace them too. I foresee a wave of entrepreneurship coming. AI will empower more people to provide useful services directly to other people, with less middlemen and menial work, and more direct problem solving."
+        },
+        {
+          "id": 48329803,
+          "author": "movpasd",
+          "text": "This article puts into words a lot of things that had been on my mind as missing in AI discourse. Most significantly, actually considering the _systemic consequences_ of the promised AI future, how it interacts with political economy, an actual critical look (instead of accepting the \"Western meta-narrative of modernity\" at face value). And maybe more importantly, it articulates really clearly how damaging the restructuring of the economy by AI moguls and the tightening of the capital–political feedback loop can be, even (maybe _especially_) if the returns of AI do not materialise as promised. There is plenty of disorganised diffuse anti-AI sentiment. If intellectuals are able to get together behind a common cause, there might be a political movement in the making."
+        },
+        {
+          "id": 48325996,
+          "author": "spondelkryp",
+          "text": ">The US horse population grew from nine million in 1840 to twenty-one million by 1900, seemingly immune to technological change. Within sixty years of the internal combustion engine, the population collapsed by eighty-eight percent. I think this is a very interesting and chilling point, especially if you draw the parallel literally. For quite some time, I was pondering the question:\"Who is buying though?\". I.e if you automate workers out of labor, who are we selling these AI services to? I guess if global population drops by 80-90℅ you suddenly get a \"sustainable\" economy, as everything is repriced the economy of scale needs a much smaller scale. (Not speculating this is a plan, just a thought that occurred to me when reading about horses example)"
+        },
+        {
+          "id": 48327235,
+          "author": "rootusrootus",
+          "text": "I know this isn't exactly related, so maybe a low value comment, but it itches in my mind. Years ago I talked with a recruiter at Facebook and they bragged about how many floors of developers they had working on Messenger in just one location (Seattle). What on earth do you do with that many devs on a project like Messenger? I mean, really? I feel like in a way, AI just adds to that weird situation of overcapacity. Maybe we were already oversupplied with talent. In which case why the heck were we still hiring more, more, more developers? Before the AI craze, Musk chopped an awful lot of headcount at Twitter, right, and proved it was overkill, has that panned out? I just struggle to imagine how the economics of SWE really work in reality, outside of the niche that I am in. I have never worked for a pure software company on products that ship directly to outside customers, I've always been an internal developer. Maybe that is why I have such a big blindspot. I won't be surprised if the net result of this wave of LLMs is ... not much. A change in tooling, but otherwise not revolutionary. On paper it should be revolutionary, but the more I use it (for both coding and non-coding tasks) the more I think it isn't anywhere near magic enough for that. It does have its moments though."
+        },
+        {
+          "id": 48325753,
+          "author": "alex_young",
+          "text": "Why is this time different? Won't super power AI tools allow companies to do more with the same number of people? Don't you think a smarter way to run a business is to capture more of the market if you have the resources to do so? If company A decides they just want the same slice of the market they have now and can fire half of their employees and pocket $$$, can't company B hire the same workers and compete harder with these new extra productive workers they hired? Won't the company B tend to capture more of the market and thus survive longer? In nature we say there are no unfilled niches, meaning that if there were space for something to come compete for resources, it would quickly be 'solved' by the motivating factors involved. Not a precise thing, but a good heuristic. US knowledge-worker compensation is around $10T / year. Anthropic and OpenAI have raised (not spent yet, just raised) $317B. That's ~3% of knowledge worker spending in one year alone. What business wouldn't pay 3, 5 or 10% more a year to make their worker productivity increase by larger factors?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 12,
+      "id": 48303623,
+      "title_en": "What It Takes to Preserve Floppy Disks",
+      "title_ja": "What It Takes to Preserve Floppy Disks",
+      "url": "https://spectrum.ieee.org/floppy-disk-data-preservation-archives",
+      "hn_url": "https://news.ycombinator.com/item?id=48303623",
+      "score": 16,
+      "comment_count": 4,
+      "posted_at": "2026-05-28T02:23:31+00:00",
+      "comments": [
+        {
+          "id": 48332730,
+          "author": "kev009",
+          "text": "The internally linked article is much better than this https://www.digipres.org/the-floppy-guide/"
+        },
+        {
+          "id": 48332762,
+          "author": "londons_explore",
+          "text": "I would like to see approaches to recovering data from fragile disks by placing the inner disk on a flat surface and using some kind of imaging technology to measure the magnetic fields - perhaps an electron microscope could do the job at low enough field strengths? Using this I imagine it might be possible to not only read the disk data, but perhaps even previous versions of data that has been overwritten."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 13,
+      "id": 48328184,
+      "title_en": "Show HN: Tiny-vLLM – high performance LLM inference engine in C++ and CUDA",
+      "title_ja": "Show HN: Tiny-vLLM – high performance LLM inference engine in C++ and CUDA",
+      "url": "https://github.com/jmaczan/tiny-vllm",
+      "hn_url": "https://news.ycombinator.com/item?id=48328184",
+      "score": 124,
+      "comment_count": 10,
+      "posted_at": "2026-05-29T19:38:27+00:00",
+      "comments": [
+        {
+          "id": 48328913,
+          "author": "yu3zhou4",
+          "text": "README is in my opinion (author here) the most interesting - I wrote it to help others build useful mental model to be able to recreate the project yourself, without need to even read my code"
+        },
+        {
+          "id": 48332029,
+          "author": "GoldenJade",
+          "text": "Thanks for sharing this. As someone currently researching LLMs, I'm sure I'll be referencing this quite a bit going forward."
+        },
+        {
+          "id": 48331721,
+          "author": "xuanlin314",
+          "text": "The lesson-style README is a great approach. Breaking down LLM inference into digestible steps makes the codebase approachable even for people who haven't touched CUDA before."
+        },
+        {
+          "id": 48329982,
+          "author": "dwa3592",
+          "text": "Very nice job on read me. >>Physically, LLM is a file which contains a lot of float numbers. aka atoms of the LLM."
+        },
+        {
+          "id": 48329707,
+          "author": "juancn",
+          "text": "Looks interesting, it reminds me of the first llama.cpp, but better documented."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 14,
+      "id": 48309233,
+      "title_en": "Citing 'severe' math deficits, UC faculty demand a return to SAT tests for STEM",
+      "title_ja": "Citing 'severe' math deficits, UC faculty demand a return to SAT tests for STEM",
+      "url": "https://www.latimes.com/california/story/2026-05-27/uc-math-professors-demand-return-of-sat-for-stem-admissions",
+      "hn_url": "https://news.ycombinator.com/item?id=48309233",
+      "score": 544,
+      "comment_count": 740,
+      "posted_at": "2026-05-28T14:13:00+00:00",
+      "comments": [
+        {
+          "id": 48331555,
+          "author": "ziofill",
+          "text": "I can’t help comparing this to the system I grew up in (Italy), which is vastly different and it seemingly produces very good graduates. University was free and there was no test for enrolling in STEM degrees, and you could retry exams every semester as much as you wanted to. But goddamit exams were HARD and if you weren’t prepared enough you would keep failing until you gave up. We weren’t entitled because we weren’t paying customers. Also because Italy is Italy we had unlimited beer and wine on tap in the canteen. For real."
+        },
+        {
+          "id": 48309521,
+          "author": "kleiba2",
+          "text": "I used to teach high school math. There was a big push for doing everything digitally. And admittedly, for some topics the use of technology in the classroom or at home can really be a benefit, for instance visualizations or interactive exercises. But having a digital device in class was the number one cause of distraction every time. For a lot of things, good old blackboards are just fine as are pen + paper exercises. Maybe even for most high school math. That was frowned upon though by the higher ranks. If I was evaluated as a teacher and didn't include some iPad shenanigans in the class that I was getting audited for, I would have been in trouble. How behind the times! I got along really well with most of my teenage students, it was a lot of fun interacting with them. But the politics behind it all got too annoying. Also, you're under very tight control on what you teach and how, that was super annoying. So I stopped teaching a few years ago and never looked back."
+        },
+        {
+          "id": 48309335,
+          "author": "john_strinlai",
+          "text": "> “We now observe preparation gaps so severe that instructors must reteach middle-school mathematics while simultaneously teaching the material students need for sciences, engineering, economics, and other quantitatively demanding fields,” they warned. i dont understand why the teachers would go out of their way to reteach middle-school math. i teach. my courses have prerequisites. if a student somehow makes it into my class without a passing-grade grasp of the prerequisites, i will point them in the right direction to get caught up, but i am not spending any class time on it. its not fair to the other students."
+        },
+        {
+          "id": 48309651,
+          "author": "hedora",
+          "text": "This doesn't surprise me at all. From what I can tell, California's education system has moved from \"equality\" (which I would define as providing similar opportunities to all the kids) to focusing on \"equity\" (which I think they define as dictating the same outcome for all kids). To get an idea of how off the rails this has gotten, go read up on their statements trying to justify banning high school calculus. They explicitly (in the abstract / introduction of their plan) reject the idea that some kids are more talented at some things than other kids, so if you can compute a derivative by 12th grade, it's due to racial discrimination benefiting you or something. On a related note, instead of writing some Rust code, today, I think I'll go paint a Banksy or something after I finish my coffee. That plan caused a lot of uproar and was blocked before being implemented. Anecdotally, when I asked our local public school for a copy of the curriculum, the teacher said they just teach common core. If you go to the common core website, somewhere towards the top it makes it clear that it is not a curriculum, and just meant to be a lower bar that gets supplemented. Personally, I think all funding in California education (other than terminal levels like 4 year bachelors and up) should be a function of the percentage of students that succeed at the next step. If a local district starts losing funding, then it would have to close / shrink schools, and people from outside the educational system would be allowed to establish independent (secular) charter schools within the district. Those schools would also not be paid unless the students do well in the next phase of their education. This solves the problem of trying to use this as a curriculum back door for climate denial and Islamophobia (or whatever the red states are pushing)."
+        },
+        {
+          "id": 48311908,
+          "author": "trunnell",
+          "text": "I'm in the SF bay area w/ middle school and high school age kids. Between San Jose and San Francisco, 15%-30% of kids are in private school (it's 30% in SF where the public schools are extra dysfunctional). That's far above the California statewide average of 8% in private school. Among our peers, somewhere between 1/4 and 1/3 of kids are doing advanced math outside of school, typically either Russian School of Math or Art of Problem Solving. This group only partially overlaps with the private school group. This is happening despite the fact that both public and private school teachers strongly discourage math outside of school! So by decelerating math in the public school, incentives were created for privileged parents to take matters in their own hands and put their kids into programs that accelerate math education far beyond what public schools used to do. We now have a system that is creating even wider disparities in outcomes. It stands to reason that it's producing far less equitable outcomes, too, given that extremely bright kids who happen to be in lower-resourced schools have fewer opportunities. Universal screening for giftedness, advanced public school math courses, and the SAT -- all avenues for advancement regardless of background -- were all eliminated."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 15,
+      "id": 48331511,
+      "title_en": "WH proposes rules giving political appointees final approval on research grants",
+      "title_ja": "WH proposes rules giving political appointees final approval on research grants",
+      "url": "https://www.scientificamerican.com/article/white-house-proposes-new-rules-giving-political-appointees-final-say-on-research-grants/",
+      "hn_url": "https://news.ycombinator.com/item?id=48331511",
+      "score": 126,
+      "comment_count": 91,
+      "posted_at": "2026-05-30T01:39:52+00:00",
+      "comments": [
+        {
+          "id": 48333059,
+          "author": "rullelito",
+          "text": "Americans and Republicans seem so fine with this. Amazing to see this happen live."
+        },
+        {
+          "id": 48332662,
+          "author": "spacedoutman",
+          "text": "Well, america had a good run i guess? Hope china can step up and fill the gap."
+        },
+        {
+          "id": 48332786,
+          "author": "whatshisface",
+          "text": "This may seem extreme, but it must be considered in the full context of the package of policy proposals that would also eliminate the grants themselves. This balances out any concerns of bias. See you in 50 years when we read about the consequences (on European electronics.) :')"
+        },
+        {
+          "id": 48331690,
+          "author": "amanaplanacanal",
+          "text": "A return of Lysenkoism. Nice!"
+        },
+        {
+          "id": 48333053,
+          "author": "thisisit",
+          "text": "It seems seeding chaos is the only thing these guys know how to do. What happens (or happened) when the shoe is on the other foot and the other guy wants to push climate science and vaccines? Run to Texas courts to stop the federal government? Thereby wasting lot of time doing nothing. I can only say Bravo to Americans who think this constant fighting is somehow going to help the country."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 16,
+      "id": 48330192,
+      "title_en": "Show HN: Open-source private home security camera system (end-to-end encryption)",
+      "title_ja": "Show HN: Open-source private home security camera system (end-to-end encryption)",
+      "url": "https://github.com/secluso/core",
+      "hn_url": "https://news.ycombinator.com/item?id=48330192",
+      "score": 39,
+      "comment_count": 9,
+      "posted_at": "2026-05-29T22:32:29+00:00",
+      "comments": [
+        {
+          "id": 48331439,
+          "author": "josh3736",
+          "text": "What wasn't immediately clear to me is that you're meant to set up Raspberry Pis with a Pi camera attached, and that serves as the camera device. This then provides E2E encryption directly between the Pi and the Secluso mobile app via a cloud relay service that just shovels the encrypted bytes. Contrast with https://frigate.video/ , which is a locally installed NVR server that pulls camera feeds over the LAN (from a very wide range of off-the-shelf IP cameras) and does all kinds of really neat local processing to do things like (optionally hardware-accelerated) object and audio detection, face recognition, ALPR, semantic search over recorded video, and more — while still maintaining similar privacy guarantees. It's great that you've done reproducible builds for camera firmware, since that means you don't have to trust a shady IP camera vendor to be competent. Of course, with off-the-shelf stuff, you can largely avoid the security issues there by putting your cameras on a VLAN that can only reach your NVR. What I don't get is why there needs to be a cloud relay involved at all. If you're fully E2E encrypted anyway, just have the app communicate directly with the camera via STUN. I see you're planning on selling the preassembled hardware. There's definitely something to be said for \"buy this device, download app, done\" ease of setup for the wider market that meaningfully improves their privacy over Ring/Nest/et al. But for the power user and self-hosting crowd, I think Frigate makes a lot more sense."
+        },
+        {
+          "id": 48331075,
+          "author": "eichin",
+          "text": "Ah, the name is a near-miss vs https://secuso.aifb.kit.edu/english/105.php (the SECurity USability SOciety research group at Karlsruhe) that makes the \"Privacy Friendly Apps\" suite for Android. (I don't think there's any actual confusion, it was just a \"why did that sound familiar\" reflex :-)"
+        },
+        {
+          "id": 48331806,
+          "author": "ultrarunner",
+          "text": "This looks like a great project at first glance. One thing I did not see answered was how storage is handled. Is there a way to view historical video (even an hour ago)?"
+        },
+        {
+          "id": 48330966,
+          "author": "blitzo",
+          "text": "I'm curious about the Yocto based OS. Can you tell us about the architecture? How small the LOC is and how much customization has been done if it based from existing stacks?"
+        },
+        {
+          "id": 48330420,
+          "author": "wmf",
+          "text": "What's the difference between the hub and the server?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 17,
+      "id": 48328405,
+      "title_en": "The Last Technical Interview",
+      "title_ja": "The Last Technical Interview",
+      "url": "https://steve-yegge.medium.com/the-last-technical-interview-bc13ddcf4564",
+      "hn_url": "https://news.ycombinator.com/item?id=48328405",
+      "score": 82,
+      "comment_count": 57,
+      "posted_at": "2026-05-29T19:58:56+00:00",
+      "comments": [
+        {
+          "id": 48330605,
+          "author": "nitwit005",
+          "text": "I gave the feedback at one Google interview that they should send Google employees through to see how many get hired. Good to see they basically tried that. The conclusion at the end that bringing someone on board is the ideal method is true I'm sure, but even that runs into the issue that employee evaluation is an even worse situation than the interview process. You can openly see some managers panic when they realize they have no idea what their employees have been doing for the last 6-12 months when they're asked to provide feedback."
+        },
+        {
+          "id": 48332964,
+          "author": "chihuahua",
+          "text": "The \"provisional employment\" idea sounds good at first, until you think about how it would actually work in practice. You have 100 applicants for 1 position. Which one do you provisionally hire? Ah of course, we have to do a traditional interview loop to evaluate 10 candidates before we can pick one. So you do the traditional interview loop, and then you have 6 months of provisional employment. You haven't replaced anything, you've just added another level of hassle for everyone."
+        },
+        {
+          "id": 48331431,
+          "author": "tptacek",
+          "text": "The gold standard in hiring qualification is work-sample testing. It works fine. You do not need to \"make hiring a profit center\" or \"provisionally hire\" or do internships. Work samples done correctly demand less time from candidates than interviews and scale better than interviews. They are standardizable and iterable. What I feel like I'm reading here is someone who has been poisoned by FAANG hiring practices --- and they are terrible --- and has missed most of the work that's been done (outside of Google's admirable work in debunking their own processes). I appreciate the \"kitchen confidential\" here, but with respect to Yegge, I think he's been working at the Olive Garden this whole time. Go stage at Gramercy Tavern! They're working at a different scale, yes, but you'll at least get a different perspective on the \"gold standard\"."
+        },
+        {
+          "id": 48328712,
+          "author": "sameers",
+          "text": "I couldn't find the text of this joke, attributed to Dirac. I'll paraphrase. A man walks into a pet store. There's a parrot for $100, it says this parrot speaks perfect English . The one next to it is $1,000, and says, This parrot speaks 12 languages fluently. Then there's a bedraggled looking, droopy, parrot, and its label simply says One Million Dollars. Does it sing opera and has successfully run for President? the man asks with a sneer. This parrot, says the store owner, _thinks_. That's what this entire post is about - how to evaluate people with a series of attributes, score, correlate, blah blah blah. Hire them, see if they think. If they don't, fire them. It's cheaper than this credential/signal rigmarole, most of which is about CYA legal b+llsh1t. Yes, it's a simplistic strategy and it doesn't work for Shoogle, Banthropic, Goober, whatever. You know what, boo f*cking hoo. You're a trillion dollar company, suck it up. You have a zombie horde at your doors and you're just upset the \"true gems\" are hard for you to spot amongst the slavering masses. You're going to heartlessly lay them off anyway in a few years. You SHOULD feel this pain and anguish of having to sort through them, constantly regretting all your choices. That's the only way to have balance in the Universe."
+        },
+        {
+          "id": 48332167,
+          "author": "analog31",
+          "text": "The paradox that strikes me is that \"hiring is broken\" yet these companies are beyond successful. So there's still yet another layer of something in between observing that employees are capable / incapable, and the company successful / unsuccessful."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 18,
+      "id": 48325306,
+      "title_en": "Liquid AI reveals 8B-A1B MoE trained on 38T",
+      "title_ja": "Liquid AI reveals 8B-A1B MoE trained on 38T",
+      "url": "https://www.liquid.ai/blog/lfm2-5-8b-a1b",
+      "hn_url": "https://news.ycombinator.com/item?id=48325306",
+      "score": 172,
+      "comment_count": 63,
+      "posted_at": "2026-05-29T16:19:54+00:00",
+      "comments": [
+        {
+          "id": 48330346,
+          "author": "onlyrealcuzzo",
+          "text": "I just tested this on a bug fixing benchmark I'm working on. It did not perform as well as I expected. Qwen2.5-Coder-3B (2 years old) outperformed it by a wide range -> fixing ~50% of bugs whereas this model only fixed ~12%. Granted, it's not a coder specific model, but given its benchmark performance to Gemma models, and that it's two years newer, and that it's an MoE with 8B total params, I expected it to be more competitive."
+        },
+        {
+          "id": 48328307,
+          "author": "mlmonkey",
+          "text": "Question: I have a dirty car and the car wash is just 50 meters away. Should I walk or drive to the carwash? Answer: . . . . So, unless you have a compelling reason not to, walk to the car wash."
+        },
+        {
+          "id": 48328511,
+          "author": "SubiculumCode",
+          "text": "Anybody use their localcowork [1] before? That is where the demo lives. Or not? [1] https://github.com/Liquid4All/cookbook/tree/main/examples/lo..."
+        },
+        {
+          "id": 48327949,
+          "author": "adityashankar",
+          "text": "This is super interesting, I'm particularly excited for this one as it may allow teams to scale this architecture for VLAs (vision language action models), and having sparser models means more real-time actions on a locally hosted model demo link for anyone that wants to try this out https://playground.liquid.ai/chat?model=cmppnbgse000004l4bc8..."
+        },
+        {
+          "id": 48329676,
+          "author": "Ifkaluva",
+          "text": "Liquid does amazing work, but I kinda feel like they are overtraining their models. 38T tokens seems like a lot for an 8B model"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 19,
+      "id": 48323992,
+      "title_en": "Bijou64: A variable-length integer encoding",
+      "title_ja": "Bijou64: A variable-length integer encoding",
+      "url": "https://www.inkandswitch.com/tangents/bijou64/",
+      "hn_url": "https://news.ycombinator.com/item?id=48323992",
+      "score": 217,
+      "comment_count": 75,
+      "posted_at": "2026-05-29T15:03:32+00:00",
+      "comments": [
+        {
+          "id": 48325099,
+          "author": "kstenerud",
+          "text": "The problem is that this breaks down once you try to use SIMD instructions. I'd developed a similar kind of approach to encoding integers (and ieee774 floats) a couple of years ago (first byte encodes length and first bit of data: https://github.com/kstenerud/bonjson/blob/05b91f6fe7d6b07186... ). It was very clever and used compiler intrinsics to get the length in 1 instruction, so 2 instructions got you the final value, with no branches. But testing proved that when you move to SIMD instructions, ULEB128 ( https://github.com/kstenerud/bonjson/blob/main/bonjson.md#ty... ) or sentinel values ( https://github.com/kstenerud/bonjson/blob/main/bonjson.md#lo... ) win every time because of the parallelization opportunities. The true irony is that even SIMD text parsing would outperform this! SIMD is that powerful."
+        },
+        {
+          "id": 48326265,
+          "author": "i2talics",
+          "text": "Non-canonical encodings are actually quite useful for some applications that need variable length integers. DWARF and WASM both use LEB128. The problem is linking: a compiler needs to emit code into independent translation units, which contain \"missing\" references to symbols in other translation units, without yet knowing where all the code will end up in the final executable. Since we don't know where the location of other code is yet, we don't know how big the number representing that location is yet, which means that we don't know how wide the variable length encoding of that number will be. If the width changes after linking, then we have to push around the surrounding code to make space for the wider integer. Unfortunately, this changes the location of all the surrounding code, so we have to recompute all the references! The solution is to always emit un-linked var ints in the widest possible encoding (5 bytes for LEB128) that way when the references are patched during linking, no code is moved around. All integers can be converted to a non-canonical 5 byte form that is \"wasteful\" but its a worthwhile tradeoff because it solves this issue. Other integers that don't need to be linked can be packed in a smaller var int form to save space."
+        },
+        {
+          "id": 48324781,
+          "author": "stebalien",
+          "text": "I've used LEB128 (with canonicalisation) extensively and... this looks so much nicer for most use-cases (length prefixed, supports the full uint64 range without that extra 10th byte). The downside is the encoding size. LEB128 quickly grows to 2 bytes, but stays at 2 bytes all the way to 2^14. This is important if you're using these numbers as tags/identifiers as we were in the multicodec [1] project, or for network message lengths. bijou64 only gives you 500 <= 2 byte numbers. [1]: https://github.com/multiformats/multicodec"
+        },
+        {
+          "id": 48327115,
+          "author": "wahern",
+          "text": "This reminded me of ISO 7816-4 BER-TLV encodings, which uses the format defined in ISO/IEC 8825-1 (ASN.1 related spec). Length integer values of 0-127 are encoded in 1 byte. If the high bit is set, then the first 7 bits tell you the number of subsequent octets. So there's no offsetting involved, making it slightly less compact, but also dead simple. EDIT: BUT, BER-TLV does permit overlong encodings. And I once found and reported a Yubikey 4 bug related to this. My source code comment for the workaround: -- The Yubikey 4 has an off-by-one bug which -- declares tag length of 255 (for the 0x53 outer -- tag of a certficate DO) when there are only 254 -- bytes remaining in the reply. The reply is -- chained across two packets, but the off-by-one is -- probably related to the over-long encoded length -- (0x82 0x00 0xff instead of 0x81 0xff). -- -- [snip packet captures] -- -- Yubico's ykpiv_fetch_object function in ykpiv.c -- (confirmed 1.4.3-1.5.0) contains a read (memmove) -- overflow when the declared inner BER-TLV length -- (of the 0x53 tag) is longer than what was -- received over the wire. That makes Yubico's -- library oblivious to the issue. Relatedly, the -- set_length function has an off-by-one bug (length -- < 0xff instead of length <= 0xff) which produces -- an over-long encoded length. That doesn't by -- itself explain why the Yubikey 4 transmits a -- truncated logical reply unless the same code is -- being used."
+        },
+        {
+          "id": 48324942,
+          "author": "boricj",
+          "text": "I'm working on a C++ library at work that binds wire data and application data through token and model layers, which includes among other things a fair amount of tokenizers/composers for various formats (JSON, CBOR, BSON, CSV...). This looks neat, but if encoding/decoding performance is important, payload size isn't and the integer is bounded, I would just put a fixed-size integer into the payload as-is. LEB128 (and JSON for that matter) can encode integer values of arbitrary length. This doesn't, which may or may not be important but it's different. I'll admit that I do not do any cryptographic work with my library and therefore canonical representations aren't a huge concern in my use-cases. I merely provide various configurable limits (max value length, max depth, max items per collection) in an effort to prevent infinitely long documents from hogging my tokenizers indefinitely."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 20,
+      "id": 48330882,
+      "title_en": "What Is a Dickover?",
+      "title_ja": "What Is a Dickover?",
+      "url": "https://daringfireball.net/2026/05/what_is_a_dickover",
+      "hn_url": "https://news.ycombinator.com/item?id=48330882",
+      "score": 244,
+      "comment_count": 105,
+      "posted_at": "2026-05-29T23:54:22+00:00",
+      "comments": [
+        {
+          "id": 48331247,
+          "author": "freetime2",
+          "text": "Thank you, I got a good laugh out of that. My experience was probably exactly as intended. Click on the \"What is a dickover?\" link trying to come up with things that it might be. And a brief moment after the page loaded (this little pause is crucial) I am hit in the face with a big annoying popup saying \"This is a Dickover\" followed by immediate understanding. Now at least I know what to call it the next time I visit Substack."
+        },
+        {
+          "id": 48331617,
+          "author": "freediver",
+          "text": "One of criteria for inclusion into Kagi Small Web [1] is no dickovers. Thanks for naming it properly John. [1] https://kagi.com/smallweb"
+        },
+        {
+          "id": 48331363,
+          "author": "michaelt",
+          "text": "I have a theory that about 97% of developers and managers completed the cookie consent (or whatever) on their own product 5 years ago and hence never see it again, and they have no idea how bad the experience for new customers actually is. So the developers and bosses all think they're doing a great job and they've got a carefully curated homepage, even though the regular users get a cloudflare captcha, then a cookie modal, then a newsletter modal, then an install-our-app modal, all blocking their access to the 'buy product' button."
+        },
+        {
+          "id": 48333153,
+          "author": "jb1991",
+          "text": "I was thinking it would be nice if you could at least drag the popup out of the way so you could delay reading it while you first focus on what’s underneath. But then I realized, that would technically be a dick move."
+        },
+        {
+          "id": 48333076,
+          "author": "parpfish",
+          "text": "He claims that dickovers aren't as bad as the dickbars, but I think they're equal. The dickover is a big, immediate distraction that you can't help but deal with. But the dickbar is insidious because you forget it's even there. You just get used to always seeing whatever banner is there and think it's just a permenant piece of the interface and you adapt to not having 25% of your viewport."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 21,
+      "id": 48330902,
+      "title_en": "Ember.js 7.0",
+      "title_ja": "Ember.js 7.0",
+      "url": "https://blog.emberjs.com/ember-released-7-0/",
+      "hn_url": "https://news.ycombinator.com/item?id=48330902",
+      "score": 46,
+      "comment_count": 7,
+      "posted_at": "2026-05-29T23:57:45+00:00",
+      "comments": [
+        {
+          "id": 48331656,
+          "author": "atonse",
+          "text": "I loved ember for years. Even attended EmberConf in portland around 2015. In fact, I'm just weeks away from retiring my last ember codebase that was in production and worked great for a decade (but I haven't updated in 5 years, since I was unable to keep up with all the changes). But after years of the community dying the most slow and boring of deaths, and having an absolute nightmare needing to hire Ember consultants, I really soured on it. It is the main reason I completely stick to the boring mainstream (like react) now, so I'm never again stuck between \"nobody knows Ember\" and \"this one consultant is charging $28k a month cuz I'm competing with LinkedIn, Netflix, and Apple\" and then am stuck with them implementing engines for fun and then I don't have the time to undo it months later - all left me wanting to flee. Basically, left it for non-technical reasons, just practical \"literally nobody except billion dollar companies use this, I've painted myself into a corner\" reasons. But I do have fond memories of building things with it, personally."
+        },
+        {
+          "id": 48331022,
+          "author": "roxolotl",
+          "text": "I love that ember is still going. It’s obviously not the number one choice these days, might never have been, but it represents approaches to frontend web dev that are very different from the standard so it’s always great to see the diversity of ideas out there."
+        },
+        {
+          "id": 48332227,
+          "author": "mrcwinn",
+          "text": "Backbone if you’re a real engineer."
+        },
+        {
+          "id": 48331298,
+          "author": "triyambakam",
+          "text": "Since an agent could write all the boilerplate needed, I wonder if that offers any more reason to choose Ember over other frameworks/libraries now"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 22,
+      "id": 48321631,
+      "title_en": "Is AI causing a repeat of frontend’s lost decade?",
+      "title_ja": "Is AI causing a repeat of frontend’s lost decade?",
+      "url": "https://mastrojs.github.io/blog/2026-05-23-is-AI-causing-a-repeat-of-frontends-lost-decade/",
+      "hn_url": "https://news.ycombinator.com/item?id=48321631",
+      "score": 318,
+      "comment_count": 272,
+      "posted_at": "2026-05-29T11:09:32+00:00",
+      "comments": [
+        {
+          "id": 48322070,
+          "author": "kristianc",
+          "text": "I'm sure I'm not alone in feeling the \"deep expertise\" OP laments was actually deeply inconvenient to many people. I understand that there's a good living to be made from knowing browser quirks, hand-rolling accessible components, mastering CSS specificity, but this is largely accidental complexity. More people building things is straightforwardly good, and if some of those things are slower or less accessible, that's a tradeoff people are entitled to make. You can argue that abstractions hide consequences that fall on users who didn't choose them, but I'd argue back that LLMs likely have a better understanding of a11y conventions than I do as well."
+        },
+        {
+          "id": 48322296,
+          "author": "kangalioo",
+          "text": "The \"frontend skills\" whose growing irrelevance are bemoaned in this article consist largely of navigating a minefield of unintuitive edge cases, browser incompatibilities, historic baggage, exceptions to exceptions to exceptions. Modern frontend, or the \"tower of leaky abstractions\", is finally a common-sense mental model for web development. Supplanted by force on top of an exploding bag of eccentricities that is web standards and conventions. The fact that it works at all and is merely a little leaky is an accomplishment in itself."
+        },
+        {
+          "id": 48322199,
+          "author": "ElProlactin",
+          "text": "> And we’re saddened that the new process results in lower quality work, and that a lot of people just don’t seem to care. 1. Arguments like this seem to be based on the idea that, prior to AI, most of this type of work was being done by skilled artisans dedicated to quality work product. As I think anyone who actually worked in the industry and is being honest knows, this wasn't the case. There was a lot of mediocrity and worse. 2. I'm not sure the work is \"lower quality\" depending on how you define \"quality\". AI might result in an uncomfortable uniformity but at the same time, a lot of AI work product is pretty darn usable because the models have been trained against conventions that, love them or hate them, \"work\" for the vast majority of end users."
+        },
+        {
+          "id": 48322410,
+          "author": "lqet",
+          "text": "This is something that recently also crossed my mind. I haven't really done frontend developing for at least 10 years know, but I am already old enough to remember the time in the late 2000s when suddenly everyone stopped developing web GUIs by hand and used frameworks, and anyone still writing HTML, CSS, JS and database queries by hand was ridiculed. Job offers suddenly stopped asking for PHP / HTML / CSS / SQL / JS skills and demanded Ruby on Rails and Django and Spring and GWT, later Angular skills. It really feels strangely familiar to me: you could get very far very quickly without any real deeper knowledge and have a working web application within a few minutes. It felt like magic. Then you could customize it within the framework by skimming documentation and googling around until... you couldn't, because you had no clue how any of this really worked internally. And just like with vibe-coded web apps, you could recognize the standard framework web app that was patched together in an afternoon from a mile away, but it very much impressed managers. Amusingly, I sometimes find that developers talk about their go-to frontier model in the same way that GUI developers talked about their favorite web framework ~15-20 years ago. Personification of the tool, even identification with it, frustration that things that worked with version X got worse with version X.1, \"I am developing things 10x faster now\", \"I am going back to writing XYZ by hand\", etc."
+        },
+        {
+          "id": 48332788,
+          "author": "olalonde",
+          "text": "> A lot of programmers may not know this, but frontend used to be a highly specialized skill, requiring knowledge of semantic HTML, CSS, the differences of various browsers, accessibility, progressive enhancement, network performance, interface design and user testing – to just name a few. This would give the previous generation of frontend developers (aka C/C++ developers) a good chuckle. The web was viewed as a massive lowering of the barrier to entry and a \"deskilling\" of the craft. Assembly programmers probably thought the same of C/C++ developers."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 23,
+      "id": 48327809,
+      "title_en": "On Rendering Diffs",
+      "title_ja": "On Rendering Diffs",
+      "url": "https://pierre.computer/writing/on-rendering-diffs",
+      "hn_url": "https://news.ycombinator.com/item?id=48327809",
+      "score": 160,
+      "comment_count": 51,
+      "posted_at": "2026-05-29T19:04:54+00:00",
+      "comments": [
+        {
+          "id": 48333069,
+          "author": "_ZeD_",
+          "text": "While for \"simple\" diffs these UIs are \"fine\", I'm still struggling (after 15+ years of search) for a really good tool that could help me with 3-file diffs... I'm still stuck with (k)diff3, and, while they work, I would really like to a more integrate web interface for my projects"
+        },
+        {
+          "id": 48328362,
+          "author": "cipherself",
+          "text": "For anyone else who's suffering, paste this in the console in devtools: document.getElementsByTagName('main')[0].style.margin = '0 auto';"
+        },
+        {
+          "id": 48329497,
+          "author": "darkamaul",
+          "text": "What an interesting article. I did not assume I would read it until the end when I opened it, but the writing was super clear and easy to follow. At the end, I admire the craft and patience to try to solve code diff rendering, and wish the folks at GitHub could put the same effort to improve their platform. On a side note, I feel that we’re going to see more and more of this type of agentic usage, in well defined sub tasks, and the ability of a model to try many possibilities is a huge gift here."
+        },
+        {
+          "id": 48330220,
+          "author": "eblanshey",
+          "text": "It's cool seeing all the engineering that goes into optimizing performance of diffs. I'm working on a FreeCAD workbench that generates diffs on CAD model trees[0], and although my bottlenecks are a bit different, I can still implement some of your optimizations down the line if needed (such as deferred syntax highlighting). My main bottleneck is that I do a complete diff on all open + changed documents in the repository up front, because due to how document properties are stored, I won't know if the file has meaningful changes until I compute the full diff (FreeCAD may save the document, but not have anything meaningful change.) [0] https://github.com/eblanshey/HistoryWorkbench"
+        },
+        {
+          "id": 48331441,
+          "author": "gloria_mundi",
+          "text": "I don't understand the point of the inverse sticky technique. Scrolling too fast still breaks the experience (content refuses to scroll), and in a way that, at least to me, feels more disruptive than blanking for a fraction of a second. I might just be too used to blanking. Also ... shouldn't browsers just be able to render the diff without any of the trickery? Is the browser's job actually that hard for long pages, or are they just not optimising for this? Or is there some other reason for the virtualisation (e.g. memory usage)?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 24,
+      "id": 48324853,
+      "title_en": "You can just say it",
+      "title_ja": "You can just say it",
+      "url": "https://noperator.dev/posts/you-can-just-say-it/",
+      "hn_url": "https://news.ycombinator.com/item?id=48324853",
+      "score": 293,
+      "comment_count": 141,
+      "posted_at": "2026-05-29T15:54:28+00:00",
+      "comments": [
+        {
+          "id": 48330854,
+          "author": "cautiouscat",
+          "text": "This quote from the authors friend really hit home with me. > “If you’re going to use an LLM to write me an email, I’d much rather you just send me the prompt; at least then I’d have an idea of what you actually meant to say.” I’m not saying there’s no merit in adding a bit of politeness and professionalism to your communication, which I’m sure the prompt itself lacks. However the root of what you’re trying to convey is the prompt, wrap that in a header and a signature. Not only are we talking as humans, we’re also communicating directly. Also I just find it a little insulting if someone sends me an AI response. I don’t know why, maybe because it feels not genuine."
+        },
+        {
+          "id": 48324894,
+          "author": "antirez",
+          "text": "This is by far the best definition of AI slop I ever read, and the blog post itself is the contrary of AI slop: a short post where each word matters. The creation of an output that is at the same time large and lacks fundamental motivation/understanding is what creates AI slop, not the use of AI itself. This distinction allows us to have a mental model to don't blame AI itself but its continuous misuses. This also creates a formal model to understand why continuous AI steering during AI-assisted coding is so important. The sum of all the prompts provided, if they form a cohesive view of the software intent, constitutes the seed and specification that can generate good, useful code. Try to put together instead the sum of all the short prompts that prey the AI to retry \"it does not work, retry\", and see what you obtian."
+        },
+        {
+          "id": 48333124,
+          "author": "gbro3n",
+          "text": "> A human iteratively (sometimes painstakingly) shapes and reshapes their creation until it sufficiently matches what’s in their mind’s eye. The odd thing about generative AI is that it can produce substantial form with minimally applied intent. To add - I think attention is the scarce resource on both ends. Was this creation important enough to give it my full attention (i.e. do it my self). Is this creation important enough for the user to use / consume (i.e without an agent interacting with it on our behalf or summarising)"
+        },
+        {
+          "id": 48330645,
+          "author": "beering",
+          "text": "So many people have spent a lot of energy dehumanizing others on the basis of their “contribution to society”. Ideas like, if you aren’t employed, you shouldn’t have access to healthcare, etc. I can only hope that AI can force people to rethink whether their value is tied to their work output or not."
+        },
+        {
+          "id": 48331996,
+          "author": "buescher",
+          "text": "There is a C.S. Lewis quote that is as good as St. Paul and I don’t say that lightly: “There are no ordinary people. You have never talked to a mere mortal. Nations, cultures, arts, civilizations - these are mortal, and their life is to ours as the life of a gnat. But it is immortals whom we joke with, work with, marry, snub and exploit - immortal horrors or everlasting splendors. This does not mean that we are to be perpetually solemn. We must play. But our merriment must be of that kind (and it is, in fact, the merriest kind) which exists between people who have, from the outset, taken each other seriously - no flippancy, no superiority, no presumption.” Hard, isn’t it? The highest ideals are. The clankers are just very big machine spirits. Treat them as such."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 25,
+      "id": 48296946,
+      "title_en": "A new register allocator for ZJIT",
+      "title_ja": "A new register allocator for ZJIT",
+      "url": "https://railsatscale.com/2026-05-27-a-new-register-allocator-for-zjit/",
+      "hn_url": "https://news.ycombinator.com/item?id=48296946",
+      "score": 11,
+      "comment_count": 0,
+      "posted_at": "2026-05-27T16:50:10+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 26,
+      "id": 48317294,
+      "title_en": "The mysterious Hy3 LLM is topping OpenRouter Model Rankings by a large margin",
+      "title_ja": "The mysterious Hy3 LLM is topping OpenRouter Model Rankings by a large margin",
+      "url": "https://minimaxir.com/2026/05/openrouter-hy3/",
+      "hn_url": "https://news.ycombinator.com/item?id=48317294",
+      "score": 119,
+      "comment_count": 97,
+      "posted_at": "2026-05-29T00:09:35+00:00",
+      "comments": [
+        {
+          "id": 48318976,
+          "author": "simonw",
+          "text": "First model I've tried that gave me back HTML with a \"Change Pelican Color\" button: https://static.simonwillison.net/static/2026/hy3-preview-pel... (Transcript: https://gist.github.com/simonw/c2a0d8ecd3056a2681319eae8fc3f... )"
+        },
+        {
+          "id": 48318128,
+          "author": "Aurornis",
+          "text": "> Two new models are now beating LLM darling Claude in terms of token usage and by more than 50%? Time for a reminder that OpenRouter leaderboards only show tokens sent through OpenRouter, which most Anthropic API users don’t use."
+        },
+        {
+          "id": 48319302,
+          "author": "zone411",
+          "text": "I’ve tested this model on four of my benchmarks: https://github.com/lechmazur/buyout_game 10th out 36. https://github.com/lechmazur/pact/ 14th out 25. https://github.com/lechmazur/nyt-connections/ 60th out 81. https://github.com/lechmazur/debate 16th out of 29."
+        },
+        {
+          "id": 48318996,
+          "author": "simonw",
+          "text": "OpenRouter rankings frustrate me, because they show the total number of tokens but they provide no indication of how many unique users a model has. Which means if a surprise model tops the leaderboard one week we can never be sure if it was because a single whale user pushing billions of tokens a day switched to it, or if it represents a genuine community trend towards that model."
+        },
+        {
+          "id": 48317823,
+          "author": "andai",
+          "text": "So basically, Hy3 is the cheapest decent model on OpenRouter, unless you use DeepSeek as the provider for DeepSeek V4 Flash, in which case DeepSeek's insane caching wins out. (And Hy3 is close-ish on the benchmarks.)"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 27,
+      "id": 48324499,
+      "title_en": "GTA 6 Developers Unionize",
+      "title_ja": "GTA 6 Developers Unionize",
+      "url": "https://rockstarintel.com/gta-6-developers-announce-rockstar-games-union/",
+      "hn_url": "https://news.ycombinator.com/item?id=48324499",
+      "score": 632,
+      "comment_count": 427,
+      "posted_at": "2026-05-29T15:32:55+00:00",
+      "comments": [
+        {
+          "id": 48324926,
+          "author": "WarmWash",
+          "text": "Can anyone comment on why \"big video game\" dev pay has lagged \"big tech\" pay so badly? Ostensibly they are doing remarkably similar engineering problem solving, so why is there such a disparity?"
+        },
+        {
+          "id": 48329308,
+          "author": "ernesto905",
+          "text": "> An end to crunch I was unaware of the crunch concept: \"In the video game industry, crunch (or crunch culture) is compulsory overtime during the development of a game. Crunch is common in the industry and can lead to work weeks of 65–80 hours for extended periods of time, often uncompensated beyond the normal working hours\" -- wikipedia Needless to say this seems extremely predatory."
+        },
+        {
+          "id": 48327996,
+          "author": "__natty__",
+          "text": "> Together, we are organising around the things we want to change. Starting with: Pay transparency Flexible working An end to crunch That’s a lot of demands, what next? Competitive salary?! /sarcasm I hope more people will start fighting together for better work conditions. Company owners have money and lawyers so workers must unite to fight them back. I’m saying this as employer."
+        },
+        {
+          "id": 48329494,
+          "author": "unselect5917",
+          "text": "I wish we had more (or maybe better yet one) software engineering union in America. The trouble seems to be that it's so easy to scab (outsource) or hire foreign competition (H1b et al) which is a pretty broken program even according to some of the people whom I've talked to who are on it. One multi-team architect I know working for a brand you've definitely heard of was making like $65K and doing a $250K job of it. Brilliant guy. The H1B program hurts everyone except employers' vast bank accounts and their shareholders."
+        },
+        {
+          "id": 48324944,
+          "author": "HugoTea",
+          "text": "This is great news, unions not only improve working conditions, but also improve the final product by not having underpaid stressed staff with high turn-over. It's a good sign for the future product quality of any company to see workers unionise."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 28,
+      "id": 48322118,
+      "title_en": "We should be more tired than the model",
+      "title_ja": "We should be more tired than the model",
+      "url": "https://vickiboykis.com/2026/05/28/we-should-be-more-tired-than-the-model/",
+      "hn_url": "https://news.ycombinator.com/item?id=48322118",
+      "score": 167,
+      "comment_count": 133,
+      "posted_at": "2026-05-29T12:12:16+00:00",
+      "comments": [
+        {
+          "id": 48322563,
+          "author": "simonw",
+          "text": "Something I've been trying recently for non-throwaway code is extensive refactoring, without typing any code myself but by closely directing the coding agent. Prompts like \"move the code relating to SQL query analysis into a new file\", \"look for opportunities to use pytest parametrize to remove duplication in that test\", \"rename method X to Y\". Early indications are that this is helping a lot with the problem where it's easy to churn out thousands of lines of code and not really have it stick in my head, even if I review every line of it. Reviewing code and actively refactoring it is less tedious and more mentally engaging than reviewing code without changes. If this was a human collaborator I'd be worried that I'm just creating busywork for them, but I don't care about busywork for LLMs! The goal is to produce code that I understand and that I can remember just well enough that I get an updated mental model to help me productively make future decisions about the codebase."
+        },
+        {
+          "id": 48322730,
+          "author": "paulmooreparks",
+          "text": "I don't know. I find that I'm moving up a level and improving my product-management skills while delegating most of the code to the agents. I'm still very much hands-on with the design and requirements, and I'm asking questions like, \"What's our security story for XYZ?\", \"Are we accounting for colour-blindness?\", etc. Not being down in the code allows me to prairie-dog a bit more and see the landscape better."
+        },
+        {
+          "id": 48322523,
+          "author": "CraigJPerry",
+          "text": "I clearly identify with the problem the author raises, which is: the bottleneck is understanding. I don't go along with their mitigations though. In programming we have one tool for this: abstraction. Decomposition, pattern recognition, even data structures and algorithms are all down stream of abstraction. Collectively, we've never truly mastered abstraction, but it's what we have and we collectively wield it well enough that it's usually somewhat effective. We are in dire need of a better abstraction."
+        },
+        {
+          "id": 48328968,
+          "author": "adamtaylor_13",
+          "text": "I'll point out that this presupposes that skill retention is necessary, as opposed to something like \"taste\" retention. I'm not arguing against this, just pointing out that it carries a supposition that may or may not be true. I am not yet convinced that the skill loss is as bad as people make it out to be, nor am I convinced that \"taste\" degrades like \"skill\" does. After all, it's easy to teach someone a framework. It's very hard to communicate why something is not as functional or why the UX isn't as good as it could be. All this to say, I believe these are valuable questions, but we should be careful what presuppositions we bring into the equation. My value has never been my ability to write code. It's been my ability to make people's problems elegantly go away. I do not believe AI is making that worse (yet). Side-note: If it IS making my skills worse... I'll just sharpen them later. It's not like experimenting with AI for a few years is going to permanently disable me."
+        },
+        {
+          "id": 48322493,
+          "author": "sam-cop-vimes",
+          "text": "> We should be more tired than the model I understand the rationale behind this, but can't help feeling that this is a downward spiral. The software industry has always been a hard place to build and sustain a career because of the pace of change. With these tools, the pressure to increase output is going to grow, jobs are going to be axed - so software devs need to work harder to stay relevant. Weren't these tools supposed to make our lives easier?!"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 29,
+      "id": 48325624,
+      "title_en": "Show HN: TV Explorer. Adding advanced UI to free online TV",
+      "title_ja": "Show HN: TV Explorer. Adding advanced UI to free online TV",
+      "url": "https://tvexplorer.live",
+      "hn_url": "https://news.ycombinator.com/item?id=48325624",
+      "score": 133,
+      "comment_count": 38,
+      "posted_at": "2026-05-29T16:39:09+00:00",
+      "comments": [
+        {
+          "id": 48332725,
+          "author": "hombre_fatal",
+          "text": "This is great. I've been wanting a nice way to put on various TV shows to practice a different language, especially in a way I can quickly put one on in the background and then tune into it here and there, yet every time I'd try to look into \"ip tv\" the search results were full of crapware and spam. Request: Add a \"Health\" header to the `healthy | dead` column that we can click like the other columns to filter it. What happens is that I end up with a lot of channels known to be dead and don't want to keep having to scroll past them."
+        },
+        {
+          "id": 48332176,
+          "author": "abailin",
+          "text": "This is an amazing product. One of the coolest things about this is that there’s no commercials. Where the commercial time would be on BBC Earth, it’s a loop of animals with soothing music. 10/10 experience Why not window.history.pushState like https://tvexplorer.live/tv?channel=bbc-earth - that way browser back/forward acts as changing the channel"
+        },
+        {
+          "id": 48330127,
+          "author": "sidhusmart",
+          "text": "The first thing I do in a hotel room is turn on the TV and browse through all channels. I’ve watched folk dances in Romania, dubbed Indian shows in Bulgaria and even soft porn in Albania. This gives me that same feeling without the travel and hotel room! Can you share more about the Watson framework - is that something one could use for their own ideas? I’m going through other websites you’ve built as well - very cool ideas!"
+        },
+        {
+          "id": 48326213,
+          "author": "ItemId48325624",
+          "text": "This is great! I like it a lot better than tv.garden Two issues i had: 1. Closed captions didnt work on firefox (windows) - the menu did appear where im suppposed to be able to select a cc option but i cant actually click on any of them 2. Closed captions did work on chrome (windows) but i could only just barely click the menu icon; putting the mouse over most of the menu buttons caused them to disappear, so i had to click the very lowest part of the button but otherwise terrific, especially if this is updating from github live as you say; lots of channels were dead on tv.garden (maybe its different now - i dont actually watch tv that often unless an event is going on like moon landing or something)"
+        },
+        {
+          "id": 48329784,
+          "author": "dysoco",
+          "text": "Hey this is pretty cool, I think probably the best iteration of these I´ve seen so far. I´m surprised to see so many regional channels in my country I´d never guess existed. I think a nice addition would be a filter to easily see the most relevant/national channels of a country, so I don't have to scroll through many regional ones."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 30,
+      "id": 48332098,
+      "title_en": "Show HN: VT Code – open-source terminal coding agent in Rust",
+      "title_ja": "Show HN: VT Code – open-source terminal coding agent in Rust",
+      "url": "https://github.com/vinhnx/VTCode",
+      "hn_url": "https://news.ycombinator.com/item?id=48332098",
+      "score": 10,
+      "comment_count": 4,
+      "posted_at": "2026-05-30T03:07:25+00:00",
+      "comments": [
+        {
+          "id": 48332631,
+          "author": "ninja333",
+          "text": "Can I run a local LLM and connect to it?"
+        },
+        {
+          "id": 48332690,
+          "author": "afshinmeh",
+          "text": "what does \"LLM-native code understanding\" mean in this context?"
+        }
+      ],
+      "summary_ja": ""
+    }
+  ]
+}
