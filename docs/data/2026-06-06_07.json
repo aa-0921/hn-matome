@@ -1,0 +1,1058 @@
+{
+  "date": "2026-06-06T00:00:00+09:00",
+  "slot": "07",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 48413464,
+      "title_en": "Astronauts told to return to ISS after sheltering over air leak repairs",
+      "title_ja": "Astronauts told to return to ISS after sheltering over air leak repairs",
+      "url": "https://www.bbc.com/news/live/c4g44ew3g1kt",
+      "hn_url": "https://news.ycombinator.com/item?id=48413464",
+      "score": 337,
+      "comment_count": 211,
+      "posted_at": "2026-06-05T15:00:31+00:00",
+      "comments": [
+        {
+          "id": 48416330,
+          "author": "tedd4u",
+          "text": "I found this interesting: NASA RELL (Robotic External Leak Detector) [1]. \"NASA’s Robotic External Leak Locator (RELL) is a robotic, remote-controlled tool that helps mission operators detect the location of an external leak and rapidly confirm a successful repair. … Two instruments working in sync give RELL its ammonia-detecting superpowers. … Mass spectrometer & Ion vacuum pressure gauge\" [1] (PDF fact sheet from NASA) https://www.nasa.gov/wp-content/uploads/2023/10/rell-factshe..."
+        },
+        {
+          "id": 48415530,
+          "author": "rconti",
+          "text": "> After multiple inspections and sealant applications, Nasa reported in January that pressure readings suggested a stable configuration had been reached - though there remained uncertainty about whether the leak had truly been sealed or whether air was simply escaping elsewhere. I'm clearly not understanding what they're trying to say here. If _one_ leak was sealed, but the air was \"escaping elsewhere\", it would still be a leak, causing pressure readings to drop."
+        },
+        {
+          "id": 48413967,
+          "author": "gwbas1c",
+          "text": "Maybe someone who knows more about the ISS than I do can answer this: Naively, I would assume that there are airlocks between the different sections of the ISS. I would also assume that they would close these airlocks while doing the kind of work they are doing to repair the leaks. So, assuming I'm right (and my assumptions might be wrong,) why do the astronauts need to shelter?"
+        },
+        {
+          "id": 48416593,
+          "author": "photonair",
+          "text": "Does someone know if push come to shove, do they have a ready to go escape pod or ship to go back Earth anytime in an emergency? How many backups do they get?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 2,
+      "id": 48414367,
+      "title_en": "pg_durable: Microsoft open sources in-database durable execution",
+      "title_ja": "pg_durable: Microsoft open sources in-database durable execution",
+      "url": "https://github.com/microsoft/pg_durable",
+      "hn_url": "https://news.ycombinator.com/item?id=48414367",
+      "score": 267,
+      "comment_count": 70,
+      "posted_at": "2026-06-05T15:59:57+00:00",
+      "comments": [
+        {
+          "id": 48414608,
+          "author": "levkk",
+          "text": "2026 is the year of the Postgres queue! (DBOS[0], pgQue[1]) It's awesome that the community is contributing this and giving us the option to use it. As an ex-app engineer though, I kind of prefer my queue logic to be in code, in Git, but maybe with the right tooling, you can change my mind. :) [0]: https://www.dbos.dev/ [1]: https://github.com/NikolayS/pgque"
+        },
+        {
+          "id": 48414723,
+          "author": "jraedisch",
+          "text": "If understanding correctly, Absurd (by the Pi LLM harness devs) minimizes the pure db approach as much as possible. I only just started getting into the topic myself, though. https://github.com/earendil-works/absurd"
+        },
+        {
+          "id": 48414662,
+          "author": "kilobaud",
+          "text": "> When not to use it > … > The workflow mostly lives outside Postgres and spans many heterogeneous systems. How is this project at all comparable to something like Temporal? Am I misunderstanding the limitation implied by this particular recommendation?"
+        },
+        {
+          "id": 48415580,
+          "author": "TuringNYC",
+          "text": "I'm trapped on Azure at work and we're constantly waiting for Azure pg to catch up with modernity. For example, you cant use this: https://www.paradedb.com/blog/hybrid-search-in-postgresql-th... Also for example, you dont get ultra-wide high dimensionality vectors. It is nice they are open sourcing pg_durable, but how about adopting table stakes I'd get with AWS?"
+        },
+        {
+          "id": 48416974,
+          "author": "CharlieDigital",
+          "text": "A few things are not clear to me from reading through docs and examples: df.wait_for_schedule() How does this call work? Is it idempotent if I call it from an application? If I run it 2x with the same parameters, does it double tick? Am I invoking this manually from a query console to only do this one time? Am I running this as part of a migration script? For this[0]: -- Wait for human signal (5 minute timeout) ~> (df.wait_for_signal('approval', 300) |=> 'sig') ~> df.if( $$SELECT NOT ($sig::jsonb->>'timed_out')::boolean AND ($sig::jsonb->'data'->>'approved')::boolean$$, Is the `timed_out` a fixed constant that is returned on timeout? Also not immediately clear: how to handle errors/exceptions? [0] https://github.com/microsoft/pg_durable/blob/main/examples/i..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 3,
+      "id": 48414653,
+      "title_en": "Gemma 4 QAT models: Optimizing compression for mobile and laptop efficiency",
+      "title_ja": "Gemma 4 QAT models: Optimizing compression for mobile and laptop efficiency",
+      "url": "https://blog.google/innovation-and-ai/technology/developers-tools/quantization-aware-training-gemma-4/",
+      "hn_url": "https://news.ycombinator.com/item?id=48414653",
+      "score": 218,
+      "comment_count": 70,
+      "posted_at": "2026-06-05T16:18:48+00:00",
+      "comments": [
+        {
+          "id": 48416486,
+          "author": "simonw",
+          "text": "I just ran one of these locally on a Mac like this: uvx litert-lm run \\ --from-huggingface-repo=litert-community/gemma-4-E2B-it-litert-lm \\ gemma-4-E2B-it.litertlm \\ --backend=gpu \\ --prompt=\"Generate an SVG of a pelican riding a bicycle\" The first time you run that it downloads 3.2GB to ~/.cache/huggingface/hub/models--litert-community--gemma-4-E2B-it-litert-lm It can handle audio and image input too, which is pretty cool for a 3.2GB model. For images: uvx litert-lm run \\ --from-huggingface-repo=litert-community/gemma-4-E2B-it-litert-lm \\ gemma-4-E2B-it.litertlm \\ --backend=gpu --vision-backend gpu \\ --attachment image.jpg --prompt describe And for audio: uvx litert-lm run \\ --from-huggingface-repo=litert-community/gemma-4-E2B-it-litert-lm \\ gemma-4-E2B-it.litertlm \\ --backend=gpu --audio-backend cpu \\ --attachment audio.wav --prompt transcribe (The pelican is rubbish, but it's only a 3.2GB file so the fact it even outputs valid SVG is impressive to me: https://gist.github.com/simonw/94b318afde4b1ce5ff67d4b5d0362... )"
+        },
+        {
+          "id": 48415688,
+          "author": "satvikpendem",
+          "text": "Unsloth's collection as well [0], with their results [1]. Looks like they can get very close to 100% accuracy compared to the BF16 model that is unquantized, and Unsloth's quants are better than the original Google's QAT as posted in the article. Personal I'm using the 2B model for web search and structured JSON output back via Unsloth Studio and its API, works very well for that even with the model embedded on phones. [0] https://huggingface.co/collections/unsloth/gemma-4-qat [1] https://unsloth.ai/docs/models/gemma-4/qat#qat-analysis"
+        },
+        {
+          "id": 48417969,
+          "author": "jbarrow",
+          "text": "Very impressed with how much the Gemma ecosystem has advanced just this week. Gemma 12B, multitoken prediction, and official quants released. Feels like Google is putting real effort into this string of releases, and I'm very excited to see that!"
+        },
+        {
+          "id": 48418820,
+          "author": "jhatax",
+          "text": "It’s the Friday before WWDC during which Apple is going to announce an “improved” Siri based on Google models (a locked partnership, for now). Maybe it’s a coincidence, but this might be Google releasing models that will be showcased next week by Apple? No knowledge, just speculation."
+        },
+        {
+          "id": 48415466,
+          "author": "minimaxir",
+          "text": "It's a bit awkward to release Gemma 4 12B ( https://news.ycombinator.com/item?id=48385906 ), and then a canonical Q4_0 Gemma 4 12B a couple days later. It's good that this post lists the expected VRAM usage for the models with Q4_0 Gemma 4 12B being 6.7GB, which will indeed fit Google's claims of fitting within 16GB comfortably, altough it confirms that only the quantized version will do so. Relatedly, in Google's newly released Edge Gallery for macOS, Gemma 4 12B is explicitly listed as unsupported due to not enough RAM even on a 16GB machine, but given the expected VRAM usage here the Q4_0 variant definitely should fit and Google should fix that."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 4,
+      "id": 48413500,
+      "title_en": "New method turns ocean water into drinking water, without waste",
+      "title_ja": "New method turns ocean water into drinking water, without waste",
+      "url": "https://www.rochester.edu/newscenter/what-is-desalination-definition-ocean-water-704732/",
+      "hn_url": "https://news.ycombinator.com/item?id=48413500",
+      "score": 198,
+      "comment_count": 95,
+      "posted_at": "2026-06-05T15:04:03+00:00",
+      "comments": [
+        {
+          "id": 48415560,
+          "author": "ajb",
+          "text": "There is a fundamental minimum amount of energy needed to desalinate: you can't take less energy to do it,than you could gain back (from osmotic pressure) if you allowed the desalinated water to expand a cylinder containing the residual brine. This is large. This paper is a thermal method, so it doesn't have an electricity input, but to justify their efficiency claim, they should really compare against what you could do by using the same surface area for solar panels, driving a conventional setup. My (limited) understanding is that conventional reverse osmosis is not far from the theoretical optimum, energy-wise, the main difficulties being operational (the membranes need declogging). And of course RO is more expensive than rain. This paper is interesting, however, in directly producing crystalline salt, which is lower volume than brine and easier to dispose of, maybe even valuable."
+        },
+        {
+          "id": 48416580,
+          "author": "Animats",
+          "text": "The paper: [1] They're still at lab scale in glass. They haven't built a usable system, even a small one. The big claim here is that it doesn't clog; capillary action moves the salt out of the active area to another area, where some yet to be developed mechanism removes it. That needs to be demonstrated. If they can come up with something that runs for years without clogging or replacing the active material, that's a real advance. Laser surface preparation is known.[2] It's useful for roughening smooth surfaces in a very structured way, in preparation for painting. The result is a smooth paint surface. If you sandblast to roughen, the first paint layer is somewhat irregular. Then you need to sand and paint again to get a smooth surface. Laser roughening has been tried for auto painting, but didn't go mainstream. A good question here is whether commercial laser surface prep systems can make the material this new process uses. [1] https://www.nature.com/articles/s41377-026-02315-4 [2] https://www.youtube.com/watch?v=BKYOglHYo_Y"
+        },
+        {
+          "id": 48419314,
+          "author": "YeGoblynQueenne",
+          "text": ">> The solar-powered system uses specially engineered black metal to absorb sunlight. The new system replaces the earlier version that used specially engineered death metal."
+        },
+        {
+          "id": 48419541,
+          "author": "nandomrumber",
+          "text": "I’m not even going to night clicking on a title that is clearly a load of bullshit. I suppose you could water down the ocean water it’ll was drinkable, or like just add half a teaspoon of sea water to a cup or drinking water. Buy all work done eventually decades in to waste heat."
+        },
+        {
+          "id": 48415408,
+          "author": "fhdkweig",
+          "text": "This appears to be the same New Rochester article as 4 days ago with 20 comments. https://news.ycombinator.com/item?id=48349507"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 5,
+      "id": 48419023,
+      "title_en": "Microsoft wants users to be addicted to Scout, their AI personal assistant",
+      "title_ja": "Microsoft wants users to be addicted to Scout, their AI personal assistant",
+      "url": "https://disassociated.com/microsoft-users-addicted-ai-personal-assistant/",
+      "hn_url": "https://news.ycombinator.com/item?id=48419023",
+      "score": 16,
+      "comment_count": 15,
+      "posted_at": "2026-06-05T22:12:58+00:00",
+      "comments": [
+        {
+          "id": 48419389,
+          "author": "Morromist",
+          "text": "Scout sounds like an excitable little dog that runs headlong into trees when trying to catch a frisbee. Given Microsoft's long history of failure with personal assistants I'm looking forward to this one! Clippy, Cortana, Copilot! Wasn't an animated dog called rover one of these way back? The best of all was unquestionably Ms. Dewey for Microsoft Windows Live Search who is almost forgotten."
+        },
+        {
+          "id": 48419436,
+          "author": "grassfedgeek",
+          "text": "\"Addiction\" is a bad word. It implies the user is not in control of themselves. Anyone who makes products want users of our product to keep coming back as though they are addicted, but not actually addicted."
+        },
+        {
+          "id": 48419380,
+          "author": "Sharlin",
+          "text": "What, a Microsoft AI product that isn't branded \"Copilot\"?!"
+        },
+        {
+          "id": 48419296,
+          "author": "thewebguyd",
+          "text": "Statement from Nadella: https://www.404media.co/satya-nadella-not-sure-who-said-micr..."
+        },
+        {
+          "id": 48419340,
+          "author": "RajT88",
+          "text": "I have been using it for some weeks now. It is \"addictive\" in the sense that it works really well, and has some guardrails so the risk of it doing something insane is minimized. I have done some cool stuff with it!"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 6,
+      "id": 48398925,
+      "title_en": "My Agent Skill for Test-Driven Development",
+      "title_ja": "My Agent Skill for Test-Driven Development",
+      "url": "https://www.saturnci.com/my-agent-skill-for-test-driven-development.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48398925",
+      "score": 100,
+      "comment_count": 39,
+      "posted_at": "2026-06-04T14:10:40+00:00",
+      "comments": [
+        {
+          "id": 48417571,
+          "author": "simonw",
+          "text": "This article would benefit from a date. It looks like it's recent (Internet Archive first grabbed it on May 29th) but it's the kind of information that can quickly become stale as models and agents improve. (I've been getting solid results recently from simply telling Claude Code and Codex \"Test with uv run pytest, use red/green TDD\".)"
+        },
+        {
+          "id": 48419462,
+          "author": "realty_geek",
+          "text": "As an aside, check out Jason's podcast (codewithjason.com) - its pretty good. The latest one is with \"Uncle Bob Martin\" who has some interesting takes on coding with AI from .... can I say an oldie?"
+        },
+        {
+          "id": 48418239,
+          "author": "zuzululu",
+          "text": "TDD sounds great on paper for agentic development but you quickly realize it balloons the token cost. Often I write some feature and then its repurposed or removed, code is refactored moved around as time goes. With TDD I would be taxed heavily and velocity slow to a crawl. The waterfall approach is better after trying out TDD especially when you have a multi-agent setup. Also I found that in some cases the tests were just superficial hallucinations that never actually tested the components written or there some some context corruption and ultimately triggered a false positive that kicked off a completely unintentional refactoring."
+        },
+        {
+          "id": 48419097,
+          "author": "fowlie",
+          "text": "Haven't tried this, but I've recently become a big fan of Matt Pococks skills. Workflow: /grill-with-docs -> /to-prd -> /to-issue -> /tdd. That will interview relentlessy until there is a \"shared understanding\" using \"ubiquitous language\", then it will spec all requirements with user stories, create issues and implement them using tdd."
+        },
+        {
+          "id": 48417842,
+          "author": "dluxem",
+          "text": "I believe using a skill here is the wrong approach. LLMs already know what TDD is and how to do it, just like object oriented programming. If this is encoded in a skill, that skill essentially has to be loaded for everything thing your LLM is doing. This is probably one of the few areas where direct instructions via AGENTS.md is best, and I don't believe it requires much direction here to force the issue. But I think the OP is just trying to have their agent work in a very specific way -- that is fine too. > 5. Show me the test and ask for approval before continuing"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 7,
+      "id": 48383667,
+      "title_en": "Mouseless – keyboard-driven control of macOS/Linux/Windows",
+      "title_ja": "Mouseless – keyboard-driven control of macOS/Linux/Windows",
+      "url": "https://mouseless.click",
+      "hn_url": "https://news.ycombinator.com/item?id=48383667",
+      "score": 423,
+      "comment_count": 179,
+      "posted_at": "2026-06-03T13:22:06+00:00",
+      "comments": [
+        {
+          "id": 48413177,
+          "author": "NateEag",
+          "text": "I prefer ShortCat's model: https://shortcat.app/ Similar to Vimium, but for the whole OS. Apparently Homerow is similar, judging from comments I'm seeing here. I really wish I knew an equivalent for Linux. I might even leave Gnome behind if a different DE has a good model for this."
+        },
+        {
+          "id": 48411904,
+          "author": "CalRobert",
+          "text": "Wow, as cool as this is, it's kind of a shame that we need to say \"use coords to show where the mouse should click\" instead of designing interfaces that keep pointing-device-free users in mind."
+        },
+        {
+          "id": 48412767,
+          "author": "reconquestio",
+          "text": "Keynav – retire your mouse (2016) https://news.ycombinator.com/item?id=11945936 Wayland port: https://github.com/kovetskiy/waynav"
+        },
+        {
+          "id": 48413520,
+          "author": "sundar_p",
+          "text": "Some existing similar tools for those who might be curious. For vim, there's easymotion or hop.nvim. For tmux, there's Morantron/tmux-fingers. For Chrome, there's Vimium. You can also flash your keyboard to have mouse controls ( https://docs.qmk.fm/features/mouse_keys )."
+        },
+        {
+          "id": 48412828,
+          "author": "NickNaraghi",
+          "text": "If you wanted to go in the other direction, you could achieve more productivity with faster mouse skills. The competitive FPS genre has spawned a bunch of aim training tools[0] to improve muscle memory. [0] https://www.3daimtrainer.com/"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 8,
+      "id": 48415217,
+      "title_en": "Gov.uk has replaced Stripe with Dutch provider Adyen",
+      "title_ja": "Gov.uk has replaced Stripe with Dutch provider Adyen",
+      "url": "https://www.theregister.com/public-sector/2026/06/04/govuk-goes-dutch-on-payments-as-it-dumps-stripe/5250763",
+      "hn_url": "https://news.ycombinator.com/item?id=48415217",
+      "score": 289,
+      "comment_count": 97,
+      "posted_at": "2026-06-05T16:55:30+00:00",
+      "comments": [
+        {
+          "id": 48415644,
+          "author": "arjie",
+          "text": "Surprisingly small contract. It's interesting to see that a full government contract for a payment provider is a fraction of a US mid-size company's cloud bill. I am constantly surprised by things like this. Here's another: there are more foreigners in Taiwan (total pop. 25 m) than in China (total pop. 1.4 b)."
+        },
+        {
+          "id": 48416023,
+          "author": "siren2026",
+          "text": "I wish Adyen was as good at marketing and hype as Stripe was. Stripe is really good at making themselves look like a way bigger deal than they are."
+        },
+        {
+          "id": 48416946,
+          "author": "maelito",
+          "text": "Adyen refuses small clients, under the million :/"
+        },
+        {
+          "id": 48416601,
+          "author": "m101",
+          "text": "The solution to all these expenses is to just have the user pay the transaction costs. Then everyone will start using bank transfers."
+        },
+        {
+          "id": 48415918,
+          "author": "oakinnagbe",
+          "text": "I'm curious whether this will materially reduce costs for local authorities or whether the benefits are primarily in expanding payment options."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 9,
+      "id": 48411635,
+      "title_en": "Did Claude increase bugs in rsync?",
+      "title_ja": "Did Claude increase bugs in rsync?",
+      "url": "https://alexispurslane.github.io/rsync-analysis/",
+      "hn_url": "https://news.ycombinator.com/item?id=48411635",
+      "score": 242,
+      "comment_count": 236,
+      "posted_at": "2026-06-05T12:43:33+00:00",
+      "comments": [
+        {
+          "id": 48419197,
+          "author": "GodelNumbering",
+          "text": "Was just looking at commits and came across a commit and its revert original commit: https://github.com/RsyncProject/rsync/commit/d046525de39315d... ``` - if (!ptr) - ptr = malloc(num * size); - else if (ptr == do_calloc) + if (!ptr || ptr == do_calloc) ptr = calloc(num, size); ``` Written with claude. This is a good example of what slips through LLM attention. It forces all allocations to be calloc as if it is a strict upgrade. For large and recursive allocations, this becomes a significant cost. reverted in https://github.com/RsyncProject/rsync/commit/7db73ad9a1b8721... if you read the description of revert half carefully, it's easy to tell that even that was written by an LLM . I can understand the sentiment of whoever posted the original thread."
+        },
+        {
+          "id": 48416526,
+          "author": "aesthesia",
+          "text": "I don't have a dog in this fight, but a few points that look a little suspicious: - The release with the highest number of attributed bugs is the release _right before_ the first release with Claude-coauthored commits, released in January; is there a chance that unattributed LLM-authored commits made it into this release? - The release attribution methodology is not great, since it will tend to attribute bugs introduced in a minor version update to the longest-lived patch release of that minor version. I doubt that 3.4.1 actually introduced a lot of bugs, but since it was released a day after 3.4.0, bugs that were introduced in that release get attributed to 3.4.1. - Relatedly, more recent releases have had less time to have bugs filed against them, so there may be a bit of a bias toward evaluating recent releases as less buggy."
+        },
+        {
+          "id": 48416375,
+          "author": "thorum",
+          "text": "Unfortunately for the people mad about this, I predict the only thing they will accomplish by pressuring the rsync maintainers, is to discourage everyone else from responsibly disclosing their use of AI. You’re just going to make people disable Claude attribution on their commits to avoid drama."
+        },
+        {
+          "id": 48412035,
+          "author": "scsh",
+          "text": "> It does not control for commit complexity, security intensity, or bug severity. It does not distinguish between a one-line typo fix and a CVE patch. It is a blunt instrument. But the critics' accusation is also blunt: \"Claude is making things worse.\" A blunt instrument is the fairest response. If by fairest you mean to say that this analysis and response is sufficient, then I'm sorry but I have to disagree. We really need to understand if the nature of the bugs are worse from a user's perspective. Even if the rate stayed unchanged, if the result is the perceived quality of the software declined then I would personally consider that worse, especially if I were a project maintainer. That's not meant to be wholly dismissive either. But in general, I don't think quantitative analysis alone is enough to fully answer this type of question."
+        },
+        {
+          "id": 48419539,
+          "author": "iainctduncan",
+          "text": "What strikes me about the post is that it goes to great lengths to talk about proper statistical methods, but then is written in the most clearly biased language (\"what stupid AI haters get wrong etc). If you want people to take your study seriously, why wreck it by coming across with such a strong prior bias? I stopped reading..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 10,
+      "id": 48414027,
+      "title_en": "Conventional Commits encourages focus on the wrong things",
+      "title_ja": "Conventional Commits encourages focus on the wrong things",
+      "url": "https://sumnerevans.com/posts/software-engineering/stop-using-conventional-commits/",
+      "hn_url": "https://news.ycombinator.com/item?id=48414027",
+      "score": 240,
+      "comment_count": 189,
+      "posted_at": "2026-06-05T15:39:38+00:00",
+      "comments": [
+        {
+          "id": 48416027,
+          "author": "hn_throwaway_99",
+          "text": "As programmers I feel like we'll always nitpick and bitch over what the optimal setup is for rather mundane things (tabs v spaces, yada yada). I'm not saying that conventional commits are God's given best way to structure a commit message, but they are a defined structure , and I find it much more effective and important that some expectations be set around commit messages, and I think conventional commits are as good as anything. Like the author is making a big deal that they think scope is more important than type. I may tend to agree, but I think the difference between \"fix(compiler)\" and \"compiler fix\" is not exactly a hill I'd be willing to die on. The tech industry has tons of things that became standards even if they weren't optimal. E.g. if one were starting from scratch I think any sane person would argue JSON should support comments (sorry but Douglas Crawford's rationale for not including comments never made sense to me), better defined numeric formats, etc. But it was better in many contexts than what came before it, so it became the standard. I could believe that there is some other format that differs a bit from conventional commits that is a little better, but not really better enough to want a whole other competing way of structuring comments."
+        },
+        {
+          "id": 48414806,
+          "author": "ralferoo",
+          "text": "The real takeaway is that different projects have different requirements. In over 30 years of using source control, I've never once worked on something where it's useful to include the component (article calls it scope) in the description in a standardised way. It's obvious what components are affected based on where in the source tree the affected files are. Similarly \"bug\", \"fix\" or \"feature\" adds no useful value. It's important or it wouldn't be checked in. The only thing I've found useful, and which the article doesn't even consider, is a link / id for the relevant change request. The commit already contains all the information about what was done in the change, what's missing is the context about why. Even on my solo projects I include a JIRA reference in square brackets before the description. If it's just something I randomly decided to fix during the course of development, I'll create a short 1 line JIRA to get an id and explain the why there."
+        },
+        {
+          "id": 48419501,
+          "author": "NeutralCrane",
+          "text": "This is the kind of thing where the extent to which people get worked up over it far exceeds the benefit of actually doing so. Is it theoretically possible that people can write good commit messages without a framework? Yes. Does that work out in practice across entire teams? No. Any kind of a convention for commit messages is an improvement. Beyond that, type > scope vs scope > type or whatever is splitting hairs. The juice of that debate is not worth the squeeze."
+        },
+        {
+          "id": 48414803,
+          "author": "dotwaffle",
+          "text": "The use of the word \"chore\" in many users of conventional commits has always riled me. I've always tended to favour the \"linux kernel\"[0] style of commit subject, which thankfully gets a mention here. [0] https://www.kernel.org/doc/html/v7.0/process/submitting-patc..."
+        },
+        {
+          "id": 48414513,
+          "author": "mh-cx",
+          "text": "My main complaint with conventional commits always was that they don't include an issue number in the commit title. It's not even mentioned in their standards as optional or something. To me this is almost the most important information in a commit message. I don't know how often in the last 15 years I was cross checking the issue description referenced by some old commit to get the full context of a change. I also felt that this habit is kind of standard - until i had to learn about \"conventional commits\". I never got the hype."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 11,
+      "id": 48416635,
+      "title_en": "Transformers Are Inherently Succinct",
+      "title_ja": "Transformers Are Inherently Succinct",
+      "url": "https://openreview.net/pdf?id=Yxz92UuPLQ",
+      "hn_url": "https://news.ycombinator.com/item?id=48416635",
+      "score": 64,
+      "comment_count": 26,
+      "posted_at": "2026-06-05T18:50:26+00:00",
+      "comments": [
+        {
+          "id": 48417808,
+          "author": "dfabulich",
+          "text": "The last line of the abstract has the most important takeaway. > As a consequence of this succinctness, we show that basic verification problems for transformers, such as emptiness and equivalence, are provably intractable: specifically, EXPSPACE-complete. If you were hoping to formally prove the correctness of a large transformer, it turns out that you're going to need an exponentially larger amount of space to do your verification, more than you could possibly afford."
+        },
+        {
+          "id": 48418598,
+          "author": "doug_durham",
+          "text": "This is a truly important paper. It formalizes the intuition that many in the field have. We can stop wasting time doing formal analysis of LLMs. If you have a problem that requires formal verification, don't use an LLM. You can use an LLM to help you build such a system, but the LLM can't be the system."
+        },
+        {
+          "id": 48416860,
+          "author": "dang",
+          "text": "Discussed (a bit) here: Transformers Are Inherently Succinct (2025) - https://news.ycombinator.com/item?id=48014197 - May 2026 (9 comments)"
+        },
+        {
+          "id": 48417877,
+          "author": "thesz",
+          "text": "My comment in the previous discussion of that paper: https://news.ycombinator.com/item?id=48014197 Authors used LTL (linear temporal logic) to express, basically, non-reduced non-ordered binary decision diagrams. Or just binary decision diagrams, BDDs. BDDs are almost guaranteed to have exponential size because they do not employ reduction (sharing of common expressions). Reduced BDDs are more succinct and reduced ordered BDDs are even more succinct. Also, transformers in the paper are constructed, not trained. Training any model to express some truth table is very hard. They also did not perform comparison with, say, Kolmogorov-Arnold representation, which is also universal approximator. So this paper is not as deep as one may think it is."
+        },
+        {
+          "id": 48417630,
+          "author": "parasti",
+          "text": "Paper went over my head but is this in any way related to my experience of Claude Opus 4.8 using increasingly terse language with very short, overloaded words? Lately I've been having trouble parsing the things it writes about my own code, it's using the kind of compressed language that you see typically in git commit message subject lines but relentless, always on."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 12,
+      "id": 48406174,
+      "title_en": "Ask HN: What was your \"oh shit\" moment with GenAI?",
+      "title_ja": "Ask HN: What was your \"oh shit\" moment with GenAI?",
+      "url": null,
+      "hn_url": "https://news.ycombinator.com/item?id=48406174",
+      "score": 99,
+      "comment_count": 281,
+      "posted_at": "2026-06-04T23:42:20+00:00",
+      "comments": [
+        {
+          "id": 48419396,
+          "author": "al_borland",
+          "text": "I won’t deny they are useful tools, but the hyperbole from the tech CEOs about them replacing all white collar workers in 12-18 months set the expectation so high that I’m still in the “fancy auto-complete” camp. It still feels nowhere close to replacing anyone, at least where I work. While useful, they haven’t been anywhere close to as useful as promised. Hallucinations and poor guidance are still a regular day-to-day issue that makes it impossible for me to trust agents with anything. Had they been more realistic with the promises and didn’t frame it as replacing all of us within 2 years, I would have been more excited about the tech. Now that their claims are proving to be false and they’re trying to walk it back, it’s too late. The time for excitement has passed and it’s just something that exists. The data center battles have also thrown a wet blanket on the tech, as they file lawsuits against towns near me to force construction to begin, despite the towns voting against it. The town can’t afford the fight, so the will of the people and the town gets bulldozed. It’s pretty gross to watch."
+        },
+        {
+          "id": 48418158,
+          "author": "jzemeocala",
+          "text": "I bought an Alesis QS8.1 super cheap in perfect condition (was a top grade digital piano/synth in the 90s). and then i realized that ALL of the software (which i collected from defunct websites and archived on github) related to it was ancient and after a while of getting tired of using WINE every single time i decided i wanted a cross platform modern equivalent that did everything that several of these different programs did (plus break out some stuff that was now potentially possible with modern computer) i thought it would be extremely hard because the computer to synth communication is pretty much only via sysex commands (of which the actual wave file encoding protocol was undocumented) Claude walked me through examining the some of the original software in GHIDRA, and I had a working demo that night.....now im just playing with adding new features to it."
+        },
+        {
+          "id": 48418620,
+          "author": "jp57",
+          "text": "Actually seems absurdly simple now, but sometime last year I was trying to figure out what I'd need to tow my daughter's car cross country with my truck: what are the trailer/dolly options, what do they cost, can my truck actually tow the combined weight, etc. I started out prompting ChatGPT kinda how I would with Google, one small prompt at a time, asking about various details. But after one or two of those I just tried \"I want to tow a car of make A with my truck model B, from point C to point D, what are my options?\" And it wrote me a report with comparison tables and computed towing weights and other details for different options. At that point, I was like \"Oh. This is different. And it's just the beginning.\""
+        },
+        {
+          "id": 48418364,
+          "author": "kstrauser",
+          "text": "I have a large token budget as part of my work. A coworker was scanning some repos for vulnerabilities as a test. He found a scary looking remote exploit in a popular project and shared it with me for a second opinion. I spun up a local instance of the project and ran the POC against it: nothing. Turns out it needed some configuration knobs tweaked to lower some security protections. So I told the AI what happened, and asked it to fix the POC so that it would work with the default configuration. It chewed away at that for a few minutes until it cheerfully patched the POC into a weaponized version. I ran it. The local instance, which I had just downloaded, compiled myself, and launched with the default config file, immediately crashed. I got the cold sweats. I've read this novel. I've seen this movie. Wow. I have a blinking cursor on the console of a nuclear information bomb. I tossed and turned all night, got about half an hour of actual sleep, and probably looked like I'd seen a ghost at work the next day. On the plus side, it gave our team some very clear ethical and moral guidance: we're going to do this, and we're going to share our findings with the relevant authors, because we can. Because I want to live in a world where the good guys are trying to fix problems before the bad guys can find them, I decided to help build that world. It was like, well, I guess this is what I'm doing now."
+        },
+        {
+          "id": 48417845,
+          "author": "andrewthornton",
+          "text": "My furnace went out during the 2025 holiday and I couldn't get an appointment with a repair person for 2 days. It was getting very cold in my house so I went into my attic and made several videos of the furnace attempting to start and gave it to gemini. It diagnosed the issue immediately and had me spin one of the components (a small exhaust fan) while the furnace tried to fire. It came on immediately. I had to do that several times, but it worked until the HVAC service showed up."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 13,
+      "id": 48413072,
+      "title_en": "I tested every IP KVM in my Homelab",
+      "title_ja": "I tested every IP KVM in my Homelab",
+      "url": "https://www.jeffgeerling.com/blog/2026/i-tested-every-ip-kvm/",
+      "hn_url": "https://news.ycombinator.com/item?id=48413072",
+      "score": 217,
+      "comment_count": 61,
+      "posted_at": "2026-06-05T14:30:50+00:00",
+      "comments": [
+        {
+          "id": 48415046,
+          "author": "gregsadetsky",
+          "text": "+1000 points for the PiKVM V4 Plus. We (Revise Robotics - a YC company!) refurbish laptops with robots and AI - as part of this, we (or rather, the AI) send(s) keyboard commands in software to the computers we're refurbishing. How/why? The AI needs to navigate the BIOS among other tasks - so we need a KVM to send arrow down and enter, roughly speaking. We were a GL.iNet KVM shop until we ran into a nasty issue with a specific ThinkPad - the GL.iNet would send an incorrect USB 0 byte which most laptops ignored, except this ThinkPad which was freaked out by it / beeped / wouldn't accept any key command. I couldn't let this problem go, so I got a low level USB debugger [0] (which I extremely recommend) and wire-debugged the USB signal, A/B comparing the GL.iNet and the PiKVM. The PiKVM was doing things properly (usb-wise), so we swapped all (~10) of our KVMs for it. I also remember that the GL.iNet was stranger/more difficult to customize (it's just running pikvm the software but doesn't let you customize it as much). The GL offers a nicer UI, but it doesn't matter that much (we drive it via API) and we're happy to support the actual PiKVM authors/company. It's a fantastic product. Not cheap, but truly truly great. P.S. If someone from GL wants to reach out, I can offer you a lot of low-level debugging info -- fixing this issue would be great. [0] https://greatscottgadgets.com/cynthion/"
+        },
+        {
+          "id": 48415078,
+          "author": "Zenbit_UX",
+          "text": "Hey Jeff, I did some research on the jetkvm after reading this as I was very impressed but wanted full scale hdmi + Poe and was going to pull the trigger on the clone you mentioned later, ArkKVM but felt like I’d rather support the main project if I could… What I found seems to indicate that Jet fixed those two issues in a hardware revision but it’s really difficult to distinguish the new on from the old as they’ve seemingly kept the same name and not added a v2 or something like that to the naming. One of their vendors has a Poe va non poe sku, the other has a an emmc vs tf card sku. All seemingly without a name distinguishing them. There’s also just chaos on Amazon as they are being sold in at least 4 separate listings with no name distinguishing which model is which, non of them mention poe and all claim full size hdmi. In any case I thought you should know that your write up is out of date here but you probably need to do some digging to figure it out."
+        },
+        {
+          "id": 48418242,
+          "author": "mstaoru",
+          "text": "Surprised nobody mentioned Intel vPro AMT so far. It is basically an always-on KVM that's part of CPU firmware, powered by an always-on 5V PSU rail. There is a scary amount of options, including unattended periodic (or alarm based) phone home, user acceptance or full user override, boot media spoofing, Serial over WiFi... All built-in into consumer(-ish) CPUs."
+        },
+        {
+          "id": 48414952,
+          "author": "syntaxing",
+          "text": "Not affiliated but I had good experience with GL.inet’s comet line [1]. They have one on kickstarter that’s the size of a google cast puck that uses purely usb-C. Though all my KVM do not have internet access (blocked at my gateway). I can only access it via tailscale externally. [1] https://www.gl-inet.com/products/gl-rm1/"
+        },
+        {
+          "id": 48414147,
+          "author": "Barbing",
+          "text": "Neat, someone mentioned these when I proposed a ludicrous anti-fingerprinting strategy https://news.ycombinator.com/item?id=44549352 Jeff Geerling rocks"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 14,
+      "id": 48402744,
+      "title_en": "\"Maybe later\" was a feature",
+      "title_ja": "\"Maybe later\" was a feature",
+      "url": "https://arnorhs.dev/posts/2026-06-04/maybe-later-was-a-feature/",
+      "hn_url": "https://news.ycombinator.com/item?id=48402744",
+      "score": 61,
+      "comment_count": 16,
+      "posted_at": "2026-06-04T18:31:55+00:00",
+      "comments": [
+        {
+          "id": 48419236,
+          "author": "staticshock",
+          "text": "Everything is search. Software development is search through the space of useful/interesting automations. Business is search for product market fit (at the intersection of expertise, capital, problem, etc.) Writing is search for lossless, efficient idea transfer. AI software development is more search . If we search more, will we find a bunch of garbage? Hell yes. We'll find a TON of garbage. That's not new, though. The world has been writing way more books than you'll ever read, recording more music you'll ever hear, filming more television shows than you'll ever get to watch, etc. A lot of it is garbage, but the good stuff stands the test of time and rises to the top, and I'd rather live in a thriving, flourishing world full of all these things, because there's more cream-of-the-crop when there's more everything. It's evolutionary fitness operating in the space of ideas. I agree that \"maybe later\" was indeed a useful mechanism, and maybe even a local optimum in the development methodology search space (which recently experienced a major earthquake!), but evolutionary pressure will bring it back into existence in some form sooner or later."
+        },
+        {
+          "id": 48417560,
+          "author": "overgard",
+          "text": "Definitely agree with this. Even without a large backlog, one of the things I find working on my personal project/product where I'm simultaneously the engineer/designer/project manager is it's really easy to ask the LLM to implement an idea I've been mulling for an hour or two, it one-shots it and I'm happy, and then a week or two later it starts to dawn on me that the feature was maybe not a great idea. Which isn't on the LLM, but I know when I write features by hand I tend to reach the \"this is a bad idea\" conclusion a lot earlier because I'm directly confronted with the cases where it won't work out, I have to think a lot harder about corner cases, etc. Where I think/hope this goes is instead of using LLMs to go faster , we use them to do better work. I'd rather someone vibe code up better ways to test things, or use it to do in-depth code analysis and bug fixing, etc., then just pile in features."
+        },
+        {
+          "id": 48418475,
+          "author": "patcon",
+          "text": "Doesn't this just mean we need to get better at the active deconstruction and disassembly process? Like it's too easy to build, so we build more things we realize later that we shouldn't. Now, a comparable energy budget we used to use \"deciding what to build\" (because labour was scarce) is now energy we can divert toward \"unbuilding stuff that was a mistake\". I'd much rather learn to live in the latter world. That world is based more on validated experience, and less on assumptions about a hypothetical future that hasn't yet been experienced. Of course, we will perhaps start to atrophe in our skills at projecting futures, which is a real concern. As in \"what's the benefit of building robust mental models of the future when it makes more sense to YOLO through it and experience it the results directly?\" It's all a little scary, to be honest. It turns a lot of the world on its head in many ways. Experientially tumbling into things with robust sensing processes... this is perhaps becoming more important than modelling futures in a judicious sense of economizing resources..."
+        },
+        {
+          "id": 48418383,
+          "author": "jordwest",
+          "text": "From the title I thought this was gonna be about software (like MacOS updater) giving users an “Update now” and “Maybe later” option but no “don’t show this again”. I’m still holding out from upgrading to macOS 26 and it’s doing its absolute best to make me accidentally misclick to update"
+        },
+        {
+          "id": 48418616,
+          "author": "cortesoft",
+          "text": "Sometimes it is, but sometimes it isn’t. I can remember plenty of times in my career there were some “nice to haves” that we didn’t get to, and not having them continued to waste our time over and over again as we kept putting it off. Time saving work for our software lifecycle that we spent so much time working around. Some of those things we finally did get to, and then spent the next few months wondering why we hadn’t don’t it before."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 15,
+      "id": 48418949,
+      "title_en": "Boeing 787 Dreamliner Loses Door at Remote Pacific Airport, Puzzling Engineers",
+      "title_ja": "Boeing 787 Dreamliner Loses Door at Remote Pacific Airport, Puzzling Engineers",
+      "url": "https://aeroxplorer.com/articles/boeing-787-dreamliner-loses-door-at-remote-pacific-airport-puzzling-engineers",
+      "hn_url": "https://news.ycombinator.com/item?id=48418949",
+      "score": 18,
+      "comment_count": 18,
+      "posted_at": "2026-06-05T22:02:27+00:00",
+      "comments": [
+        {
+          "id": 48419518,
+          "author": "I_dream_of_Geni",
+          "text": "\"The recent incident of this nature occurred on May 29, 2026, when a LATAM Airlines Boeing 787-8 (registration CC-BBD) had its L2 passenger door torn off by an air-stairs vehicle on Easter Island \" There. Fixed it for you."
+        },
+        {
+          "id": 48419549,
+          "author": "866-RON-0-FEZ",
+          "text": "As few have already pointed out, an AI hallucination... Quick, to the top of HN!"
+        },
+        {
+          "id": 48419454,
+          "author": "jey",
+          "text": "I thought other reporting claimed that a ground handling truck crashed into the door, thereby detaching it?"
+        },
+        {
+          "id": 48419422,
+          "author": "dylan604",
+          "text": "\"Still, any event in which a door separates from a commercial aircraft tends to attract attention from regulators, manufacturers, and airline safety teams.\" As well as stockholders I'd imagine."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 16,
+      "id": 48380174,
+      "title_en": "Cooldown Support for Ruby Bundler",
+      "title_ja": "Cooldown Support for Ruby Bundler",
+      "url": "https://blog.rubygems.org/2026/06/03/cooldown-let-new-gems-be-vetted.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48380174",
+      "score": 136,
+      "comment_count": 36,
+      "posted_at": "2026-06-03T05:15:09+00:00",
+      "comments": [
+        {
+          "id": 48416142,
+          "author": "ashishb",
+          "text": "Hypothesis: a big accelerant of these rapid repository compromise (from Red hat to GitHub to Amazon to small startups) might be GitHub+dependabot automatic dependency updates. So, just like COVID-19 used air travel, modern malware attacks are relying on GitHub+dependabot to speed up the spread. Even for single page website built using Vue, I would get about 5 updates a week."
+        },
+        {
+          "id": 48413357,
+          "author": "swader999",
+          "text": "Aren't we back to the drawing board once everyone uses this?"
+        },
+        {
+          "id": 48412949,
+          "author": "delichon",
+          "text": "> A version whose source does not expose created_at, such as older gem servers, historical entries from before the v2 cutover, or private registries still on the v1 format, is treated as outside the window and stays resolvable. How is that not an easy exploit to circumvent the cooldown?"
+        },
+        {
+          "id": 48414035,
+          "author": "doctorpangloss",
+          "text": "you have 1.0 installed. you enable 7 day cooldowns. an exploit is discovered in 1.0, and 1.1 is immediately released to fix the exploit. do you sit on 1.0 for 7 days?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 17,
+      "id": 48411799,
+      "title_en": "The Empty Field That Wasn't: GPS, OTAD and Two Decades of Encrypted Broadcasts",
+      "title_ja": "The Empty Field That Wasn't: GPS, OTAD and Two Decades of Encrypted Broadcasts",
+      "url": "https://lsc-pagepro.mydigitalpublication.com/publication/?i=865273&p=62&view=issueViewer",
+      "hn_url": "https://news.ycombinator.com/item?id=48411799",
+      "score": 41,
+      "comment_count": 9,
+      "posted_at": "2026-06-05T12:56:44+00:00",
+      "comments": [
+        {
+          "id": 48415049,
+          "author": "moritzwarhier",
+          "text": "Later submission: https://news.ycombinator.com/item?id=48414479 https://www.404media.co/the-u-s-military-quietly-turned-gps-... The 404 article seems fluff-free and cites https://insidegnss.com/current-issue/ as source."
+        },
+        {
+          "id": 48414377,
+          "author": "timeinput",
+          "text": "This is an interesting article. It has a very strong AI accent. I really wish I could tell how real it is. When some part of it I can tell is AI slop, how much of it is AI slop? Inside GNSS has always been a marketing rag with sometimes some interesting articles. The author is a security researcher, so maybe poking at GPS bits makes sense, but talking about floating point bit depth? There's too much slop for me to figure out if there's anything of real interest or if this is just a hallucination. Edit. After reading more carefully this is 100% AI slop. Inside GNSS published Steven Murdoch's chat gpt session. Maybe some data was transmitted? The only way you'll actually know is to redo the research your self. There are many fabrications / confabulations that clearly happen with AI in the text."
+        },
+        {
+          "id": 48414200,
+          "author": "transistor-man",
+          "text": "This is a fantastic writeup"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 18,
+      "id": 48416845,
+      "title_en": "Three of our worst VC stories",
+      "title_ja": "Three of our worst VC stories",
+      "url": "https://twitter.com/eastdakota/status/2062860530360959273",
+      "hn_url": "https://news.ycombinator.com/item?id=48416845",
+      "score": 159,
+      "comment_count": 68,
+      "posted_at": "2026-06-05T19:08:12+00:00",
+      "comments": [
+        {
+          "id": 48418683,
+          "author": "satvikpendem",
+          "text": "More and more I see why bootstrapping is the way to go. And especially in this SaaSpocalypse with AI companies commoditizing entire companies with new feature releases like Claude Design or Codex for legal, it's better to just run your little corner of the Internet and make sustainable money over hyperscaling with millions and billions and being put out of business the next week. One might say why bootstrappers won't get erased too but they can carve out a specific market too small for AI companies to want to touch, and still remain sustainable rather than needing to make a ton of money; and pivoting as a venture backed company can be much harder as there are more people to please like investors and your employees which you likely have more of than a bootstrapper."
+        },
+        {
+          "id": 48418750,
+          "author": "tty456",
+          "text": "I hear story #1 periodically, but almost never see a quote. How is this stuff said specifically? It always seems like hearsay. I'm sure it's authentic, but I'd love to hear the details on how that stuff is actually said in conversation."
+        },
+        {
+          "id": 48417405,
+          "author": "stevepotter",
+          "text": "All I ever hear are horror stories. Can someone tell me a good story about VC that isn't Facebook or something?"
+        },
+        {
+          "id": 48417506,
+          "author": "cowthulhu",
+          "text": "#3 is insane, if for no other reason than the VC is signaling that he’s likely going to try and do the same thing to you some day… even if you were totally willing to screw over your team, why would you ever get involved with that VC given you’ll then have to watch your back until the end of time?"
+        },
+        {
+          "id": 48418830,
+          "author": "carefulfungi",
+          "text": "I doubt VCs have different distribution of personal character from other professional groups. In my experience, a more interesting friction is that VCs are pursuing a diversification strategy while founders are pursing a singleton strategy."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 19,
+      "id": 48413254,
+      "title_en": "India's surprise baby bust",
+      "title_ja": "India's surprise baby bust",
+      "url": "https://www.economist.com/leaders/2026/06/04/indias-surprise-baby-bust-is-a-warning-to-the-world",
+      "hn_url": "https://news.ycombinator.com/item?id=48413254",
+      "score": 105,
+      "comment_count": 489,
+      "posted_at": "2026-06-05T14:44:44+00:00",
+      "comments": [
+        {
+          "id": 48413895,
+          "author": "MontyCarloHall",
+          "text": "This has happened to every single society [*] as it industrializes [0], and offering extensive support and incentives to parents (e.g. as has been tried in Scandinavian countries) does very little to reverse this trend [1, 2]. My hypothesis is that as societies industrialize, they afford their population more and more activities that are simply more fun and rewarding than having children. So many people I know put off having children (or curtailed the number they had) because they were reluctant to give up the activities only available in a childfree/one-and-done life. Ultimately, we are hedonistic creatures, and having kids is antithetical to the myriad hedonic pursuits available in wealthy, industrialized societies. [*] Israel is the lone exception, due to its Orthodox Jewish population. [0] https://ourworldindata.org/global-decline-fertility-rate [1] https://pub.nordregio.org/r-2024-13-state-of-the-nordic-regi... [2] https://pmc.ncbi.nlm.nih.gov/articles/PMC10049131/"
+        },
+        {
+          "id": 48413612,
+          "author": "i_idiot",
+          "text": "What's the strong case against population dwindling other than supporting aging population? Given the AI armageddon, it just makes sense to reduce the population. If there's less population, we need less production and less workers. Of course, countries have to deal with oldest population for a brief period of time."
+        },
+        {
+          "id": 48417286,
+          "author": "fangorn",
+          "text": "FT's \"Why birth rates are falling everywhere all at once\" was published, and discussed, recently: https://news.ycombinator.com/item?id=48168928 https://www.ft.com/content/fba35eca-df3a-4ad6-b42d-eb08eb7c9... https://archive.is/6VpWy Spoiler: smartphones, social media, housing."
+        },
+        {
+          "id": 48418155,
+          "author": "onesociety2022",
+          "text": "Naive question- why does the human population need to keep growing? Why can’t we let it shrink? If AI and robotics are going to come to fruition in the next 50 years, why do we need so many people?"
+        },
+        {
+          "id": 48419467,
+          "author": "messh",
+          "text": "We're becoming people that care only about money and career, and kids are not exactly helping..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 20,
+      "id": 48414869,
+      "title_en": "Launch HN: General Instinct (YC P26) – Frontier models on edge devices",
+      "title_ja": "Launch HN: General Instinct (YC P26) – Frontier models on edge devices",
+      "url": null,
+      "hn_url": "https://news.ycombinator.com/item?id=48414869",
+      "score": 39,
+      "comment_count": 13,
+      "posted_at": "2026-06-05T16:33:00+00:00",
+      "comments": [
+        {
+          "id": 48416203,
+          "author": "BoorishBears",
+          "text": "I like the technique described here around distillation to recover from quantization, but I don't understand why we keep performing lossy compression on LLMs then using benchmarks that were nearly saturated before post-training to measure the effects. You could erase the gains from literally half the compute going into some of these recent models and barely make a dent in MMLU-Pro and GPQA-D."
+        },
+        {
+          "id": 48416355,
+          "author": "rdksu",
+          "text": "Have you run ablations on the actual effect/impact of on-policy distillation on contributing to the performance ? Just Curious ! As Unsloth based mixed quantisation methods on MoE models are widely used with great community rep."
+        },
+        {
+          "id": 48415146,
+          "author": "VikRubenfeld",
+          "text": "You've likely heard about this - he'd probably like to talk to you and might potentially give you some good PR. https://www.youtube.com/watch?v=rAzT5lcezPs&t=467s"
+        },
+        {
+          "id": 48416977,
+          "author": "gesai",
+          "text": "Sorry if this is somewhat off-topic: Through my estimations, based on Bonsai's parameters/GB ratio, if one model were to have this ratio and Gemma4:12b's size, it would have the nice number of 54.125b parameters (that could run on 16GB of RAM). Is there any organization attempting something of this kind?"
+        },
+        {
+          "id": 48418270,
+          "author": "debo_",
+          "text": "As an aside, General Instinct sounds like the name I'd give a megacorp in one of my cyberpunk ttrpg campaigns."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 21,
+      "id": 48414978,
+      "title_en": "Mantine-datatable (and others) compromised – owner account suspended",
+      "title_ja": "Mantine-datatable (and others) compromised – owner account suspended",
+      "url": "https://github.com/icflorescu/mantine-datatable/discussions/813",
+      "hn_url": "https://news.ycombinator.com/item?id=48414978",
+      "score": 55,
+      "comment_count": 22,
+      "posted_at": "2026-06-05T16:39:57+00:00",
+      "comments": [
+        {
+          "id": 48415626,
+          "author": "jerf",
+          "text": "\"We have checked our own environments thoroughly and found no traces of compromise. We suspect this may be part of the broader GitHub infrastructure breach carried out by the TeamPCP hacking group in May 2026: https://techcrunch.com/2026/05/20/github-says-hackers-stole-... \" Greater HN collective, please help me metaphorically double-click on this. I've poked around a bit but didn't find out much more than the given link. What are we concerned about the hack possibly having accomplished? Because stealing repos is bad enough... but are we saying it's possible that commits can now magically appear in repos from hackers? I don't want to raise any alarms if I'm misreading this or if we're early in the news cycle, but if that's possible, I and a lot of other people reading this need to have some immediate conversations with a lot of people. So... is that what this is saying? Or am I misreading it? I sure hope so."
+        },
+        {
+          "id": 48415498,
+          "author": "j1elo",
+          "text": "So in summary: * GitHub's backwards priorities end up causing a hack on their systems. * Hackers use their newly gained powers to compromise other people's repos. * GitHub dectects compromised repo, and suspends the account of its maintainer, so they cannot warn nor act against it to protect or at least warn their community of users. \"I cause a fire, and later ban you for getting burned.\" No wonder people are leaving."
+        },
+        {
+          "id": 48419447,
+          "author": "wewewedxfgdf",
+          "text": "Its funnyweird that the post is from his wife rather than from him using his wife's account."
+        },
+        {
+          "id": 48417830,
+          "author": "christeamrs",
+          "text": "We're working on an antiworm. One of our customers got affected. Our tool already discovers infected repositories and mitigates/removes the implants from the filesystem. Please revoke/rotate all your tokens and passwords that were used in the infected repositories, the worm is pretty sophisticated. https://github.com/Team-Rockstars-Security/antimiasma"
+        },
+        {
+          "id": 48416894,
+          "author": "Carbonhell",
+          "text": "Seems like it's similar to the attack reported in this other HN post: https://news.ycombinator.com/item?id=48409869"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 22,
+      "id": 48398689,
+      "title_en": "Inside FAISS: Billion-Scale Similarity Search",
+      "title_ja": "Inside FAISS: Billion-Scale Similarity Search",
+      "url": "https://fremaconsulting.ch/blog/faiss",
+      "hn_url": "https://news.ycombinator.com/item?id=48398689",
+      "score": 30,
+      "comment_count": 0,
+      "posted_at": "2026-06-04T13:54:28+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 23,
+      "id": 48416936,
+      "title_en": "Accidentally deleted subscriptions for chat integrations (Slack and MS Teams)",
+      "title_ja": "Accidentally deleted subscriptions for chat integrations (Slack and MS Teams)",
+      "url": "https://www.githubstatus.com/incidents/2nmfnbknhlnv",
+      "hn_url": "https://news.ycombinator.com/item?id=48416936",
+      "score": 103,
+      "comment_count": 40,
+      "posted_at": "2026-06-05T19:15:36+00:00",
+      "comments": [
+        {
+          "id": 48417280,
+          "author": "tapoxi",
+          "text": "I've been running GitLab internally on k8s for 6 years, it handles code, CI, security scans, build artifacts, helm charts, etc. It runs a nightly backup to a GCS bucket. Monthly upgrades are painless. Once a year the major versions (18 to 19, for example) bump external dependencies and we need about an hour on it. I've been using GitHub for other projects and for the life of me I can't see a single area where its better. Actions is worse without versioned and self documenting components, there's no concept of a project hierarchy or inherited permissions, even simple things like setting up deploy keys are more annoying than they need to be. I can't speak for GitLab.com - I've never used it."
+        },
+        {
+          "id": 48417228,
+          "author": "paulbjensen",
+          "text": "Anyone who deletes Microsoft Teams deserves a raise."
+        },
+        {
+          "id": 48417264,
+          "author": "progbits",
+          "text": "Huh, this is an incident now? Our github->slack subscription breaks every few months, they never acknowledged it before. At this point we have a doc with the list of repos and settings, whenever someone notices that things are awfully quiet we just go through it and resubscribe."
+        },
+        {
+          "id": 48417139,
+          "author": "zikohh",
+          "text": "https://isgithubcooked.com/"
+        },
+        {
+          "id": 48417229,
+          "author": "natas",
+          "text": "How long before github deletes all repos? or make private repos public? and such and such?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 24,
+      "id": 48409664,
+      "title_en": "Tracing a powerful GNSS interference source over Europe",
+      "title_ja": "Tracing a powerful GNSS interference source over Europe",
+      "url": "https://arxiv.org/abs/2606.03673",
+      "hn_url": "https://news.ycombinator.com/item?id=48409664",
+      "score": 349,
+      "comment_count": 192,
+      "posted_at": "2026-06-05T08:32:16+00:00",
+      "comments": [
+        {
+          "id": 48410515,
+          "author": "uijl",
+          "text": "Interesting to see that they are able to identify the specific satellite. I wonder if we can do something now that we know the source. Working on construction projects on the Romanian coastline (just South of Ukraine) and on the Polish continental waters (just West of Kaliningrad) we experienced jamming on a daily basis."
+        },
+        {
+          "id": 48410151,
+          "author": "yladiz",
+          "text": "Related Veritasium video: https://www.youtube.com/watch?v=tz23G_UXCGA"
+        },
+        {
+          "id": 48416920,
+          "author": "RealityVoid",
+          "text": "Mildly interesting, and highly likely related. A cluster of 5(?) Ukrainian marine drones wound up today outside and around of Constanta off the coast of Romania with one detonating in the port and the rest detonating... somewhere around. Que here noisy exposion in port: https://youtu.be/Y8kdneBU_3Q?si=cr07TeMnxJTG-3TM&t=17 No significant damage. The Ukrainans apparently lost control of the drones and they wound up there. My pet theory is that Russian EW jammed the control signals and guided the GPS jamming walking them to Constanta. I'll admit, if it was intentional (it seems so) it's pretty damn' impressive work from Russian EW."
+        },
+        {
+          "id": 48410108,
+          "author": "NKosmatos",
+          "text": "TLDR (conclusion from the paper): \"By a combination of these techniques the satellite Cosmos 2546 (NORAD ID 45608) was identified with high confidence as one source of the interference. Further analysis pointed to the Russian Edinaya Kosmicheskaya Sistema, an early warning constellation to which Cosmos 2546 belongs, as collectively responsible for the wide-area transient interference causing GNSS degradation across Europe since 2019.\""
+        },
+        {
+          "id": 48412402,
+          "author": "f137",
+          "text": "I do not see any discussion of the power required for such wide-area jamming. Even as the useful GPS signal is quite weak at the ground level, this satellite would require power in kW range, right?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 25,
+      "id": 48416392,
+      "title_en": "Aging and Eye Problems",
+      "title_ja": "Aging and Eye Problems",
+      "url": "https://ldstephens.net/posts/aging-and-eye-problems/",
+      "hn_url": "https://news.ycombinator.com/item?id=48416392",
+      "score": 24,
+      "comment_count": 2,
+      "posted_at": "2026-06-05T18:30:31+00:00",
+      "comments": [
+        {
+          "id": 48419435,
+          "author": "cwbrandsma",
+          "text": "My eye sight got MUCH worse after a covid infection. I was 20/20 or better before covid, now everything is blurry outside of a very narrow distance range, and white anything can hurt. Granted I'm over 50, so I was expecting my eyes to go bad at some point."
+        },
+        {
+          "id": 48419176,
+          "author": "thewebguyd",
+          "text": "Interesting. I've actually been making more use of light mode lately, even for code. Granted, I'm not that old yet but I'm almost 40, and I have astigmatism so dark mode was already difficult to read, but now I feel like its gotten much worse for me. I lament the lack of good light theme choices though because the majority use dark mode, and dark mode is increasingly becoming the default setting which I don't particularly like, but as long as there's a choice its fine. I don't do much work on a screen in the dark anymore though to where dark mode would be necessary. My home office is surrounded by big windows with a ton of natural light."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 26,
+      "id": 48417916,
+      "title_en": "Hacker News, Sans AI",
+      "title_ja": "Hacker News, Sans AI",
+      "url": "https://elijahpotter.dev/articles/hacker-news-sans-AI",
+      "hn_url": "https://news.ycombinator.com/item?id=48417916",
+      "score": 112,
+      "comment_count": 65,
+      "posted_at": "2026-06-05T20:38:40+00:00",
+      "comments": [
+        {
+          "id": 48418717,
+          "author": "millerm",
+          "text": "I can deal with a launch problem. I am looking forward to being able to check it out. I stopped coming to HN as often as I used to because there has been too much AI talk. It's like a dang AI subreddit. I don't want anything to do with AI. I have lost 2 jobs to AI budgets and stupid executive decisions. It's no longer part of my personal and professional life. I hope it works out."
+        },
+        {
+          "id": 48418743,
+          "author": "henriquemaia",
+          "text": "I've been training to naturally ignore AI mentions that I thought this entry was about some HN ui font change (Sans)."
+        },
+        {
+          "id": 48418524,
+          "author": "866-RON-0-FEZ",
+          "text": "Interesting this keeps moving up the front page when the site is inaccessible because it's hosted on a baked potato."
+        },
+        {
+          "id": 48418875,
+          "author": "factorialboy",
+          "text": "For one sec, I got excited for a new font!"
+        },
+        {
+          "id": 48418708,
+          "author": "simonw",
+          "text": "I built (well, vibe-coded) a version of this a while back that runs against the Hacker News API, it's static HTML on GitHub Pages so I don't have to run a server for it: https://tools.simonwillison.net/hacker-news-filtered"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 27,
+      "id": 48382047,
+      "title_en": "Redis 8.8: New array data structure, rate limiter, performance improvements",
+      "title_ja": "Redis 8.8: New array data structure, rate limiter, performance improvements",
+      "url": "https://redis.io/blog/announcing-redis-8-8/",
+      "hn_url": "https://news.ycombinator.com/item?id=48382047",
+      "score": 193,
+      "comment_count": 90,
+      "posted_at": "2026-06-03T10:05:11+00:00",
+      "comments": [
+        {
+          "id": 48413349,
+          "author": "simonw",
+          "text": "> Rate limiting is one of the most common Redis use cases. Traditionally, users implemented rate limiters using server-side Lua scripts combined with client logic. In Redis 8.8, we introduce a window counter rate limiter (by @raffertyyu, together with the Redis team). I had a look for this and it turns out it's slightly mis-described there - it's not a window counter, it's a \"GCRA (Generic Cell Rate Algorithm)\" - a leaky bucket algorithm. Code here: https://github.com/redis/redis/blob/unstable/src/gcra.c The code comments say it was heavily influenced by https://github.com/brandur/redis-cell by Brandur Leach. It's a neat algorithm (I just learned about it today) - it only needs to store a single integer for each rate-limited key, which is the \"Theoretical Arrival Time\" when the bucket would next be empty."
+        },
+        {
+          "id": 48411286,
+          "author": "9dev",
+          "text": "While I love Redis as a versatile tool for external data structures, it's still lacking in two areas IMHO: One, it would be cool to be able to embed it, similar to sqlite, directly into applications. Two, the HA story is so much more complicated than it should be. I totally acknowledge that concurrency and distributed computing is hard, but it should not require reading heaps of documentation and understanding two entirely separate multi-node approaches only to figure out there are lots of subtle strings attached that make it impractical for many applications."
+        },
+        {
+          "id": 48411431,
+          "author": "tapoxi",
+          "text": "Where did everyone end up on the Redis/Valkey split? Is there still a reason to use Redis after the license kerfuffle?"
+        },
+        {
+          "id": 48415558,
+          "author": "ShakataGaNai",
+          "text": "Are we still using Redis? License change, no more Kube operators."
+        },
+        {
+          "id": 48411281,
+          "author": "epolanski",
+          "text": "There's also a separate blog post that goes into the details of why existing data structures Redis already supported, which could provide array-like behavior, weren't good enough: https://redis.io/blog/diving-deep-into-rediss-new-array-data..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 28,
+      "id": 48411227,
+      "title_en": "Nango (YC W23, dev infra) is hiring staff back end engineers",
+      "title_ja": "Nango (YC W23, dev infra) is hiring staff back end engineers",
+      "url": "https://nango.dev/careers",
+      "hn_url": "https://news.ycombinator.com/item?id=48411227",
+      "score": 1,
+      "comment_count": 0,
+      "posted_at": "2026-06-05T12:00:18+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 29,
+      "id": 48408016,
+      "title_en": "C++: The Documentary",
+      "title_ja": "C++: The Documentary",
+      "url": "https://herbsutter.com/2026/06/04/c-the-documentary-released-today/",
+      "hn_url": "https://news.ycombinator.com/item?id=48408016",
+      "score": 357,
+      "comment_count": 266,
+      "posted_at": "2026-06-05T04:37:01+00:00",
+      "comments": [
+        {
+          "id": 48412171,
+          "author": "mirmor23",
+          "text": "Ken Thompson's criticism of C++ as incoherent, complex and garbage heap of ideas still resonates with me; C++98 was the last version I used for work although I've dabbled in 11/17/20 out of curiosity. IMO, if c++/cfront didn't ride on the tails of c, I'm skeptical it would've seen widespread use, but then, that's its main identity which limited it in ways that C++ was not willing to change; It is highly irritating to spend as much time to sanitize the implementation with Coverity/Valgrind and the ilk when the compiler could've handled it. With C++98, Bjarne's book on c++ internals could've give you good insight into what went on, but later it turned into a whole cottage industry of \"effective, more effective, proficient, performant, c++\" series of books -- so kiss goodbye to any notion of being able comprehend existing code that's not written by you (until llms arrived). I'm happy to have spent time to learn problem domain instead. I'll still watch the documentary since it has some of my favorite folks (Kernighan, Stepanov)."
+        },
+        {
+          "id": 48409027,
+          "author": "bdamm",
+          "text": "Since I've been working in C++ a lot recently I decided to watch the video as I waited for a build to complete. So the length is about right. And fortunately, the video is a delight!"
+        },
+        {
+          "id": 48409772,
+          "author": "tenderfault",
+          "text": "So happy to see Andrei Alexandrescu was included in this documentary. His book on modern C++ design was a mind opener at the time I read it. Maybe still is today. Anybody else read it?"
+        },
+        {
+          "id": 48410232,
+          "author": "GodelNumbering",
+          "text": "Personal opinion: C++ is the most elegant language I have used (for about 15 years). If you are the 'systemizer' type and like to have an extremely precise mental model of the thing you write down to the last bit, nothing beats C++. I acknowledge the limitations and uncertainties that come from compilers etc, but still"
+        },
+        {
+          "id": 48418975,
+          "author": "jviotti",
+          "text": "Time to stop hacking on my C++ codebase ( https://github.com/sourcemeta ) to watch this over dinner!"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 30,
+      "id": 48418839,
+      "title_en": "Warren's Abstract Machine: A Tutorial Reconstruction",
+      "title_ja": "Warren's Abstract Machine: A Tutorial Reconstruction",
+      "url": "https://github.com/a-yiorgos/wambook",
+      "hn_url": "https://news.ycombinator.com/item?id=48418839",
+      "score": 4,
+      "comment_count": 0,
+      "posted_at": "2026-06-05T21:52:02+00:00",
+      "comments": [],
+      "summary_ja": ""
+    }
+  ]
+}
