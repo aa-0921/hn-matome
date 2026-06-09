@@ -1,0 +1,1050 @@
+{
+  "date": "2026-06-10T00:00:00+09:00",
+  "slot": "07",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 48463808,
+      "title_en": "Claude Fable 5",
+      "title_ja": "Claude Fable 5",
+      "url": "https://www.anthropic.com/news/claude-fable-5-mythos-5",
+      "hn_url": "https://news.ycombinator.com/item?id=48463808",
+      "score": 1600,
+      "comment_count": 1268,
+      "posted_at": "2026-06-09T16:58:01+00:00",
+      "comments": [
+        {
+          "id": 48467564,
+          "author": "simonw",
+          "text": "I've spent enough time with this now in Claude Code (and Claude.ai and Claude Code for web) to have an opinion on Fable 5: it's a beast. I'm throwing some VERY difficult problems at at - things I've been dragging my heels on for months - and it's crunching through them very happily. One that I'm willing to share (albeit from just a week ago) - I built a Python library last week that bundles MicroPython compiled to WASM to create a sandboxed code execution library: https://github.com/simonw/micropython-wasm I just told Claude.ai (not even Claude Code - this was the standard Claude chat interface) running Fable 5: Clone simonw/micropython-wasm from GitHub and research how this could use a full Python as opposed to MicroPython A few prompts later (and I uploaded the zip files from https://github.com/brettcannon/cpython-wasi-build/releases/t... because Claude chat can't access those files itself) and I have a wheel file that bundles Python itself, compiled to WASM: uv run --with https://static.simonwillison.net/static/cors-allow/2026/cpython_wasm-0.1.0-py3-none-any.whl \\ cpython-wasm -c 'print(45 ** 56)' Here's the transcript: https://claude.ai/share/a73b8b8b-8ebc-4fef-9e5c-7438e5e7ae35 (It's possible Opus or GPT-5.5 could have done this too, I've not tried the exact same sequence. The Fable vibes are good here, though.)"
+        },
+        {
+          "id": 48464975,
+          "author": "dannyw",
+          "text": "Impressions from testing Fable 5 prior to launch: • My most noticeable immediate jump was in how its frontend design was much more intentionally crafted, and delightful without feeling like 'AI vibe coded'; with better end-user usability too. • In some internal agentic harnesses, it achieved better results with about half the tokens, making it cost the ~same as Opus 4.8 price-wise! The real price increase is less than 2x; with biggest differences in harder problems where Opus 4.8 struggles (or needs many turns). • Part of the token efficiency improvements come from Fable doing more targeted and surgical diffs, with less non-necessary changes. This is great, because PRs often have less LoC changes for review. It writes more maintainable code without explicit human steering. • For general conversation and assistant style use cases, didn’t really notice a difference vs 4.8. • 1M context window, without increased pricing for long context is AWESOME. This is a massive win. • The classifiers are super aggressive and sensitive and this does happen for very benign, non-security coding tasks. Fallbacks to 4.8 worked like a charm; but the filters are definitely super sensitive. Overall, I would describe this as a step change and worthy of the \"Claude 5\" model name. It did take some time to understand the intelligence ceiling of this model; and even with an extended testing window I'm still discovering new things and often surprised (in a good way) by the model."
+        },
+        {
+          "id": 48468371,
+          "author": "anematode",
+          "text": "Not impressed so far, to be honest. I'm having it try to optimize Stockfish in a loop (on xhigh mode) with a benchmarking oracle; even after giving it specific hints (\"consider whether we're prefetching Y optimally, can we make function X branchless\"), it's been so far unable to recover any of the recent optimizations we've implemented – let alone novel ones. Opus 4.8 felt a bit more creative to me ... but a small sample size so far. I'm next going to try it on some less open-ended problems. Edit: It did correctly identify that transparent huge pages were off in its sandboxed environment and that enabling it was helpful, so that's nice. It also noticed that we skip THP on a certain less used path. More importantly, I'm finding that the code that it produces for its experiments is a lot cleaner than what I'd expect out of Opus; there's fewer useless comments and it's more surgical and readable. I wonder if that explains the increased scores on benchmarks measuring mergability."
+        },
+        {
+          "id": 48464732,
+          "author": "bkjlblh",
+          "text": "> In light of the ability of recent models to accelerate their own development, we’ve implemented new interventions that limit Claude’s effectiveness for requests targeting frontier LLM development (for example, on building pretraining pipelines, distributed training infrastructure, or ML accelerator design). Using Claude to develop competing models already violates our Terms of Service, but enforcing this restriction through our safeguards avoids accelerating the actors most willing to violate these terms. > Unlike our interventions for cybersecurity, biology and chemistry, and distillation attempts, these safeguards will not be visible to the user. Fable 5 will not fall back to a different model. Instead, the safeguards will limit effectiveness through methods such as prompt modification, steering vectors, or parameter-efficient fine-tuning (PEFT). These interventions will not affect the vast majority of coding work. We estimate they will impact ~0.03% of traffic, concentrated in fewer than 0.1% of organizations"
+        },
+        {
+          "id": 48466340,
+          "author": "jumploops",
+          "text": "It's interesting that we're seeing these gains when it seems Mythos/Fable is \"just\" a scaled up version of their existing architecture[0]. When GPT 4.5 launched, the gains compared to the model size didn't seem that great, leading some to believe that the only progress we'd see would come from RL. This model certainly has quite a \"substantial amount of post-training and fine-tuning\", but it's also based on a new pretrain[1][3], which given the cost, indicate that it is in fact quite a bit larger than Opus 4.X. [0] One of the early testers mentioned: \"As far as I can tell from talking to people internally at Anthropic, there's nothing special about architecturally\"[2] [1] Section 1.1 in https://www-cdn.anthropic.com/d00db56fa754a1b115b6dd7cb2e3c3... [2] https://youtu.be/GrdEid8H6H4?t=168 [3] There were rumors going around when Mythos was first announced that it was the first 10T parameter model, but I can't find a verifiable source for that number."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 2,
+      "id": 48467705,
+      "title_en": "Upcoming breaking changes for NPM v12",
+      "title_ja": "Upcoming breaking changes for NPM v12",
+      "url": "https://github.blog/changelog/2026-06-09-upcoming-breaking-changes-for-npm-v12/",
+      "hn_url": "https://news.ycombinator.com/item?id=48467705",
+      "score": 90,
+      "comment_count": 26,
+      "posted_at": "2026-06-09T21:01:00+00:00",
+      "comments": [
+        {
+          "id": 48468154,
+          "author": "Tiberium",
+          "text": "I hope GitHub changes their vibecoded badges, what does RETIRED even signify in this context? Why does the preview have to be in ominous red?"
+        },
+        {
+          "id": 48468486,
+          "author": "efortis",
+          "text": "this release fixes a vulnerability reported 10 years ago https://www.kb.cert.org/vuls/id/319816"
+        },
+        {
+          "id": 48468973,
+          "author": "karakanb",
+          "text": "It is not obvious from the post but it seems like the allow list for the scripts supports whitelisting packages instead of a global setting. This should make it easier to maintain org-wise rules to allow scripts only for specific packages. Is there a linter that could be used for scenarios like this to prevent unsafe default on package manager config?"
+        },
+        {
+          "id": 48469000,
+          "author": "ComputerGuru",
+          "text": "My big question as an OSS dev distributing some precompiled binaries via npm for easy installation: does allowScripts also default to disabled when directly installing a package (globally or otherwise)?"
+        },
+        {
+          "id": 48468917,
+          "author": "heldrida",
+          "text": "> The resulting allowlist is written to package.json Couldn’t this effectively result in the same process we get in pre-12 defaults?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 3,
+      "id": 48466277,
+      "title_en": "Ultrafast machine learning on FPGAs via Kolmogorov-Arnold Networks",
+      "title_ja": "Ultrafast machine learning on FPGAs via Kolmogorov-Arnold Networks",
+      "url": "https://aarushgupta.io/posts/kan-fpga/",
+      "hn_url": "https://news.ycombinator.com/item?id=48466277",
+      "score": 129,
+      "comment_count": 15,
+      "posted_at": "2026-06-09T19:21:45+00:00",
+      "comments": [
+        {
+          "id": 48467851,
+          "author": "mikeayles",
+          "text": "So for people wondering if it can be used to accelerate LLM inference, sadly not. I've been trying to hit 100,000tokens/s with a 3.28m dumb model, and even this is an order of magnitude too large to benefit. It appears to be focussed more on latency, than throughput. Happy to be corrected?"
+        },
+        {
+          "id": 48466966,
+          "author": "RantyDave",
+          "text": "Right. But ... this would limit you to either extremely small models or extremely large FPGA's, yes? If there's a simple machine learning task that requires a sub microsecond latency I can see the point but otherwise??"
+        },
+        {
+          "id": 48469075,
+          "author": "cwmoore",
+          "text": "took long enough"
+        },
+        {
+          "id": 48467932,
+          "author": "tomrod",
+          "text": "Happy to hear that KANs continue to find solid footing."
+        },
+        {
+          "id": 48467104,
+          "author": "Animats",
+          "text": "This guy will be hired by a high-frequency trading firm, and the next time we hear about him, he will have a net worth in 9 figures."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 4,
+      "id": 48459294,
+      "title_en": "Making Graphics Like it's 1993",
+      "title_ja": "Making Graphics Like it's 1993",
+      "url": "https://staniks.github.io/articles/catlantean-3d-blog-1/",
+      "hn_url": "https://news.ycombinator.com/item?id=48459294",
+      "score": 734,
+      "comment_count": 121,
+      "posted_at": "2026-06-09T10:46:14+00:00",
+      "comments": [
+        {
+          "id": 48461928,
+          "author": "corysama",
+          "text": "If you want to play with software rendering, here's probably the shortest code that will get an ARGB8888 2D array from main memory to the screen efficiently for all platforms using SDL2 in C https://gist.github.com/CoryBloyd/6725bb78323bb1157ff8d4175d... you'll need to do the translation from a 320x200x8-bit palletized framebuffer to ARGB yourself ;) If you want to get inspired by what can be done with palletized framebuffers check out http://www.effectgames.com/demos/canvascycle/ (click Show Options) and the GDC presentation by the artist https://youtu.be/aMcJ1Jvtef0 With that you can fire up https://github.com/mriale/PyDPainter for that classic Deluxe Paint IIe vibe. Or, https://www.aseprite.org/ for something more modern."
+        },
+        {
+          "id": 48459874,
+          "author": "rob74",
+          "text": "This is taking a lot of inspiration from Doom, but the actual raycasting engine is more like Doom's predecessors, the most well-known of which is probably Wolfenstein 3D: perpendicular walls, constant floor and ceiling height. Wolf3D didn't have textured floors and ceilings because of performance reasons, but several other similar games had them. Doom and IIRC Duke Nukem as well used a BSP engine which was much more flexible (walls could intersect at any angle, variable floor and ceiling heights), although the levels were still \"flat\" (you couldn't have several \"stories\" inside a level, e.g. you couldn't design a bridge that you could walk over and under)."
+        },
+        {
+          "id": 48464747,
+          "author": "Teslazar",
+          "text": "Great article. I particularly enjoyed the approach to creating gibs. Although it was a tech demo, I created something like this around the mid 90s. One thing I did that I don't see mentioned in this article was I used 8x8 (or 16x16) light maps on the textures, which allowed me to easily have things like flickering torches and rockets that lit up the hallways as they shot down them. Lightmaps can also be used to \"bake in\" lighting if desired. Since the light map is \"only\" 8x8 you can afford to do some math on each luxel (each unit in the light map) to calculate distance and line of sight to light sources to determine a brightness value. When rendering the texture, the luxel was used with a lookup table to determine the actual color of the pixel being drawn. The light maps were updated 15 times a second if I recall correctly to help performance. Thanks to DJGPP, I was using inline assembly for the rendering. Since floating point math was slow at the time I used fixed point math which optimized well. The rendering was surprisingly performant on computers of the day."
+        },
+        {
+          "id": 48461036,
+          "author": "mkl",
+          "text": "Graphics programming in the early to mid 1990s was pretty fun: write pixel data into the memory-mapped video RAM and it appears on the screen! A pointer to 0xA0000 was all you needed - no API or anything. The reason for the non-square-pixel 320×200 VGA mode they mention was that the video buffer took 64000 bytes, which fit into a 16-bit segment, making addressing it easy in 16-bit code/CPUs."
+        },
+        {
+          "id": 48463795,
+          "author": "ferguess_k",
+          "text": "I find the most interesting things are the internal tools -- like the Python script to generate the gib animation, or the other Python script to generate 2D spritesheet from Blender. OP is definitely a 10x engineer who can also do good arts. This is very rare IMO. I'm very surprised to find that OP has consistent art direction."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 5,
+      "id": 48467896,
+      "title_en": "If Claude Fable stops helping you, you'll never know",
+      "title_ja": "If Claude Fable stops helping you, you'll never know",
+      "url": "https://jonready.com/blog/posts/claude-fable5-is-allowed-to-sabotage-your-app-if-youre-a-competitor.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48467896",
+      "score": 231,
+      "comment_count": 107,
+      "posted_at": "2026-06-09T21:19:11+00:00",
+      "comments": [
+        {
+          "id": 48468332,
+          "author": "variety8675",
+          "text": "It is absolutely fine to distill the IP of everyone else, but you'd be violating the TOS to distill ours :)"
+        },
+        {
+          "id": 48468752,
+          "author": "jkxyz",
+          "text": "\"To effectively contain a civilization’s development and disarm it across such a long span of time, there is only one way: kill its science.\" - Cixin Liu, The Three-Body Problem This immediately made me think of the Sophons silently manipulating the sensors of particle accelerators to prevent humanity from developing advanced knowledge of particle physics."
+        },
+        {
+          "id": 48468925,
+          "author": "SwellJoe",
+          "text": "The moat looks deep today but it's going to become more shallow every year. Training a new model from scratch takes serious resources. Post-training/fine-tuning an existing model, dramatically less. The knowledge for the process was esoteric two years ago, now you can ask a current model (one of several) to walk you through it, while building the tools to do it as you go. Several of my recent weekend projects have been exactly that sort of thing, just so I understand it better. \"Let's make a LoRA\", \"let's generate a corpus of training data for fine-tuning a model for X task\", \"how can I put my face in a text-to-image model?\" stuff like that. All of this is do-able on kinda modest local hardware (a couple of old GPUs or a Strix Halo or DGX Spark or big Mac Studio), or for a few bucks or a few hundred bucks or a few thousand bucks of cloud compute, depending on scale. Scale that up to corporate or startup scale, with the money that's been flowing into AI for the past couple/few years, and it's obviously there's going to be a lot of competition just as the top model makers need to start ringing the cash register. That's a lot of opportunities for people to look at their ballooning Claude usage costs and find other ways to do the same thing for drastically less money. $100/month or $200/month is a no-brainer for Claude Code with probably the best model for coding, but they're pushing more users to usage-based billing which becomes cost-prohibitive real fast. So, they desperately need to continue to be among the only ways to solve the hardest problems, and they need the alternatives to cost a similar amount. They can count on OpenAI and Google to ratchet up prices, too. They probably can't count on everybody, especially the vendors in China with different economics, to do it. And, they can't count on companies to look at their own usage and not ask, \"Can we train a smaller specialist model that does this one thing we're using the Anthropic API most heavily for?\" I'm hoping they just mean stuff like using Claude for distillation by e.g. Chinese model makers, and not \"how do I fine-tune Gemma 4 to write more like me?\" or whatever."
+        },
+        {
+          "id": 48468491,
+          "author": "somesortofthing",
+          "text": "This is a fun peek into the economic implications of RSI/ASI. Because it's so infinitely valuable that it basically destroys all markets, labs will eventually do stuff like stop releasing models completely and skipping out on contracted commitments because they'll have the power to just drive their competitors out of business before the legal battle gets expensive. Cloud providers - at first smaller ones, then the hyperscalers - will follow suit, completely closing sales to anyone but the labs and demanding payment in equity/direct decision-making power rather than cash. There's no particular reason why the inference/training split has to be 80/20, and no amount of willingness to pay can help you in an event that turns your money worthless."
+        },
+        {
+          "id": 48469009,
+          "author": "Artoooooor",
+          "text": "It is as if Jetbrains told that \"you can't use IntelliJ Idea to develop frontier IDE. We can introduce slight compilation errors if we detect you doing so\"."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 6,
+      "id": 48466812,
+      "title_en": "Grit: Rewriting Git in Rust with Agents",
+      "title_ja": "Grit: Rewriting Git in Rust with Agents",
+      "url": "https://blog.gitbutler.com/true-grit",
+      "hn_url": "https://news.ycombinator.com/item?id=48466812",
+      "score": 44,
+      "comment_count": 22,
+      "posted_at": "2026-06-09T19:58:21+00:00",
+      "comments": [
+        {
+          "id": 48468904,
+          "author": "Philpax",
+          "text": "> In looking at the code that the LLMs have produced for the project, especially given the pretty massive and widespread architectural changes needed to make the implementation libified and memory safe, we decided that the codebase is not a derivative work that would require carrying forward the GPL license and have decided to release the code under the MIT instead. Hmm. That's going to be interesting."
+        },
+        {
+          "id": 48469129,
+          "author": "ianm218",
+          "text": "I have been working on the same problem in other areas. My ultimate goal is to rewrite nginx in Rust passing as much as the upstream tests as possible while leveraging the strongest aspects of Ruts ecosystem - i.e. rustls (modern memory safe OpenSSL), Tokio (async runtime), h2 (http 2 impl) rather than implementing from scratch like the upstream. I started with Lua, then porting over Valkey, and now working on nginx. The reason was because I wanted to learn the ins and outs before taking on the most complex portion. [1]. https://github.com/ianm199/lua-rs/tree/main Lua [2]. https://github.com/ianm199/valdr Valkey/ Redis [3]. https://github.com/ianm199/nginx-rs-port nginx Happy to answer any questions on the approach! When I started a few weeks ago the harnesses on their own were not good enough to get very far without a \"meta harness\" of sorts but that is changing largely with Claude Workloads and Mythos. A lot of the work is developing some custom tooling to move these along faster."
+        },
+        {
+          "id": 48468834,
+          "author": "heyts",
+          "text": "I'd be really interested in the opposite, just for the sake of experimentation since that's what these projects mostly are. They all seem to be rewrites for the sake of \"performance\", because the cost is now lower bc of AI. I'd be interested to see something like a port of Quake III in Python or Kubernetes in Perl, even Rails in Python would be goofy and really fun to see"
+        },
+        {
+          "id": 48468965,
+          "author": "gdgghhhhh",
+          "text": "So, they \"decided\" it's not a derivative and thus can be listened under MIT instead of GPL...."
+        },
+        {
+          "id": 48468994,
+          "author": "imoverclocked",
+          "text": "What’s the long term strategy for this code base? Does the author expect community code contribution or just bug reports or maybe just test contributions?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 7,
+      "id": 48459659,
+      "title_en": "Test-case reducers are underappreciated debugging tools",
+      "title_ja": "Test-case reducers are underappreciated debugging tools",
+      "url": "https://tratt.net/laurie/blog/2026/test_case_reducers_are_underappreciated_debugging_tools.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48459659",
+      "score": 68,
+      "comment_count": 8,
+      "posted_at": "2026-06-09T11:27:49+00:00",
+      "comments": [
+        {
+          "id": 48467407,
+          "author": "skybrian",
+          "text": "Property-based testing frameworks will often do test case reduction as well (called shrinking)."
+        },
+        {
+          "id": 48467213,
+          "author": "mrkeen",
+          "text": "> To make things even worse, the community that has most thoroughly embraced them are compiler authors, who many programmers think of as being an impossibly skilled elite The article's approach seems super ad-hoc, leaving you to have to think hard, do all the work, and make all the mistakes. If you were to go down the other path, you might try dividing and conquering the problem. An arbitrary Pair<A,B> is trivially constructed from an arbitrary A and an arbitrary B. So if you can generate a string, and a number, you could generate a User full of number and string fields. If your generate function accepts a number describing how complex a string to make, then you can also choose how complicated to make your User. That's all shrinking needs to be. Repeatedly trying smaller Ns while the problem still happens (the problem being one of your unit tests - not an additional \"interestingness\" test you need to write.) You'll probably way more likely to hit boundary cases by using the structure of the input and making interesting variations that way, rather than hoping you can permute the right bytes from the CLI."
+        },
+        {
+          "id": 48467117,
+          "author": "sigbottle",
+          "text": "I've only ever known about these through compilers, very cool. On one project, through a variety of circumstances, dead code elimination was straight up not working, but we wanted to show the theoretical improvement of some approach - but we couldn't figure out why at the moment (we did spend a whole week chasing down the root cause after - maybe worth in hindsight...). We were doing it by hand at one point, but someone suggested using CReduce for shrinking the code. Definitely was an interesting test-iterate loop..."
+        },
+        {
+          "id": 48467802,
+          "author": "hungryhobbit",
+          "text": "I read the first part of this article, then gave up and Googled \"Test-case Reducers\". I'm not sure if that's an article failure (that I didn't want to read a whole ton of text and C code details), or a success (as it got me interested in the topic). I guess both?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 8,
+      "id": 48467759,
+      "title_en": "Exif Smuggling",
+      "title_ja": "Exif Smuggling",
+      "url": "https://github.com/signalblur/exifsmugglingpoc",
+      "hn_url": "https://news.ycombinator.com/item?id=48467759",
+      "score": 32,
+      "comment_count": 18,
+      "posted_at": "2026-06-09T21:06:00+00:00",
+      "comments": [
+        {
+          "id": 48468753,
+          "author": "Grom_PE",
+          "text": "It isn't necessary to use Exif to embed arbitrary data inside an image. Could as well use PNG extra chunk, JFIF app marker, or simply append data to the end of the file. It would be more interesting to devise a method that survives all extra data stripping and re-encoding, perhaps taking advantage of deterministic encoders, assuming they don't randomize pixel data on purpose. In other words: turning the image data stream itself into a polyglot."
+        },
+        {
+          "id": 48468529,
+          "author": "Omni5cience",
+          "text": "Why is this a link to a random fork that has no commits, rather than the original?"
+        },
+        {
+          "id": 48468368,
+          "author": "BoppreH",
+          "text": "Oh, that's clever. It's not just hiding the payload in the Exif, it's hiding the fact that the payload came from the network at all, by reading it from the browser cache (presumably after embedding the image into a page the user visited). So you have a package that doesn't include (directly) malicious code or make network calls, yet it can still run malicious code from the network. This is much better than simple obfuscation because you can vary the payload, like a command-and-control server."
+        },
+        {
+          "id": 48468346,
+          "author": "mkoryak",
+          "text": "I hid my toy vibe coded site's code inside the alpha channel of its logo. https://dogself.com I probably should have minified it too..."
+        },
+        {
+          "id": 48468038,
+          "author": "ale42",
+          "text": "Weren't similar techniques already used years ago by malvertizers to hide malicious code into images published for ads so it wouldn't be detected? (although it might have been more like steganography)"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 9,
+      "id": 48451966,
+      "title_en": "A giant star may have destroyed itself in one of the rarest explosions",
+      "title_ja": "A giant star may have destroyed itself in one of the rarest explosions",
+      "url": "https://phys.org/news/2026-05-giant-star-destroyed-universe-rarest.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48451966",
+      "score": 147,
+      "comment_count": 20,
+      "posted_at": "2026-06-08T21:00:13+00:00",
+      "comments": [
+        {
+          "id": 48463423,
+          "author": "chasil",
+          "text": "There is a wiki on pair-instability supernovas. Antimatter (in the form of positrons) is a key factor. https://en.wikipedia.org/wiki/Pair-instability_supernova"
+        },
+        {
+          "id": 48451981,
+          "author": "wglb",
+          "text": "Arxiv reprint: https://arxiv.org/abs/2605.16487"
+        },
+        {
+          "id": 48463634,
+          "author": "ck2",
+          "text": "I just want to live long enough for space telescopes to evolve exponentially to observe kilonovas in the visual spectrum I mean laser interferometers are an amazing advancement but just imagine seeing an earth-sized chunk of gold pop out of a kilonova (probably not my lifetime but eventually a human will see it happen) Thank goodness this administration did not frack with Nancy Grace Roman Telescope, I thought the name alone would make them cancel it or rename it after him, wait maybe I shouldn't even mention that idea... * https://science.nasa.gov/mission/roman-space-telescope/ * https://en.wikipedia.org/wiki/Nancy_Grace_Roman_Space_Telesc..."
+        },
+        {
+          "id": 48464849,
+          "author": "timwis",
+          "text": "Dark Forest theory, anyone?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 10,
+      "id": 48465675,
+      "title_en": "CEOs Who Think AI Replaces Their Employees Are Just Bad CEOs",
+      "title_ja": "CEOs Who Think AI Replaces Their Employees Are Just Bad CEOs",
+      "url": "https://www.techdirt.com/2026/06/09/ceos-who-think-ai-replaces-their-employees-are-just-bad-ceos/",
+      "hn_url": "https://news.ycombinator.com/item?id=48465675",
+      "score": 305,
+      "comment_count": 128,
+      "posted_at": "2026-06-09T18:45:59+00:00",
+      "comments": [
+        {
+          "id": 48467629,
+          "author": "ChrisMarshallNY",
+          "text": "Reminds me of the old joke \"90% of the code is 90% of the work. The last 10% of the code is the other 90% of the work.\" I have spent almost my entire adult life (since 1986) shipping products. One of the very first things that I learned, was that \"shipping\" > \"designing\". There's so much work in delivering products that will carry your brand, and then must be supported. I liken it to having children. Conceiving them is fun. Delivering them is painful. Raising them, is a lifetime of work. In my experience, the same type of thing applies to products that we ship (and charge money for)."
+        },
+        {
+          "id": 48469139,
+          "author": "taylodl",
+          "text": "Maybe the CEOs who think AI replaces their employees should be replaced by AI?"
+        },
+        {
+          "id": 48467052,
+          "author": "everdrive",
+          "text": "There are a lot of bad CEOs, though. It's a lot like a politician -- it's quite difficult to become a CEO, and the skills to make it to that position don't always intersect nicely with the skills necessary to actually do the job well."
+        },
+        {
+          "id": 48465984,
+          "author": "ungreased0675",
+          "text": "A custom-built AI would be pretty good at replacing a CEO. Think of all the things a company could do if they reduced overhead by that much?"
+        },
+        {
+          "id": 48468670,
+          "author": "StellarScience",
+          "text": "CEOs understands that AI offers potential productivity increases. Using that productivity boost to cut staff is an unimaginative approach. Bolder approaches include using that boost to exceed the expectations of current customers, or to increase sales without proportional increase in staff, etc."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 11,
+      "id": 48456048,
+      "title_en": "Flat Datacenter Networks at Scale at Amazon",
+      "title_ja": "Flat Datacenter Networks at Scale at Amazon",
+      "url": "https://perspectives.mvdirona.com/2026/06/flat-datacenter-networks-at-scale/",
+      "hn_url": "https://news.ycombinator.com/item?id=48456048",
+      "score": 73,
+      "comment_count": 9,
+      "posted_at": "2026-06-09T03:39:32+00:00",
+      "comments": [
+        {
+          "id": 48467738,
+          "author": "socketcluster",
+          "text": "Interesting reading this because this is essentially the principle behind https://socketcluster.io/ scalability; the sharding of channels across available brokers is pseudo-random. It uses a hash function for determinism but the distribution appears to be random and that was also the best way I could find to distribute load evenly between available nodes. It is key to its embarrassingly parallel design. It's interesting to see it being done at the data centre level as well."
+        },
+        {
+          "id": 48467371,
+          "author": "epistasis",
+          "text": "Oh man, James Hamilton blog posts, I love these things! (Edit: for more concrete details, the Arxiv paper linked from the blog post is here https://arxiv.org/pdf/2604.15261 and the amazon.science link has some higher level view of the details https://www.amazon.science/blog/how-flat-is-replacing-fat-in... ) > The results were striking: compared to traditional fat-tree networks, RNG (Resilient Network Graphs) uses 69% fewer routers, delivers 33% higher throughput, cuts network power by 40%, and lowers operating costs by 27. In early 2026, RNG became the default design for most newly built Amazon data centers globally. > For cabling, they developed the ShuffleBox—a passive optical device whose internal wiring combined with randomized ShuffleBox-to-ShuffleBox cabling yields “quasi-random” graphs that behave like truly random graphs. This is pretty incredible, random layouts of networks that have on-average better properties... I'm really curious about the long tail of performance though. What is the worst case scenario here? And are there some better case scenarios? Uniformity in Clos networks is pretty great, but many loads don't need uniformity, and if these RNG-based networks have non-uniformity, perhaps that has operational characteristics that can be helpful or harmful."
+        },
+        {
+          "id": 48468976,
+          "author": "wofo",
+          "text": "The win in operating costs is impressive, bordering in the unbelievable (27x). Does anyone have a clue about where the win comes from?"
+        },
+        {
+          "id": 48468483,
+          "author": "fdr",
+          "text": "I always like these randomized/semi-randomized network papers. Here's a little known one you might enjoy if you liked this one. https://repositorio.unican.es/xmlui/handle/10902/23594"
+        },
+        {
+          "id": 48468454,
+          "author": "mino",
+          "text": "Good 6 minute video explainer: https://youtube.com/watch?v=yDoRYRRPOA0"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 12,
+      "id": 48427423,
+      "title_en": "Show HN: Resonate – Low-latency, high-resolution spectral analysis",
+      "title_ja": "Show HN: Resonate – Low-latency, high-resolution spectral analysis",
+      "url": "https://alexandrefrancois.org/Resonate/",
+      "hn_url": "https://news.ycombinator.com/item?id=48427423",
+      "score": 11,
+      "comment_count": 7,
+      "posted_at": "2026-06-06T18:09:59+00:00",
+      "comments": [
+        {
+          "id": 48427836,
+          "author": "bialamusic",
+          "text": "I have such app for more than 4 years. Your algorithm is not new - it is new for you only :) Here is the app: https://play.google.com/store/apps/details?id=com.bialamusic... https://apps.apple.com/us/app/chord-detector/id1495811175"
+        },
+        {
+          "id": 48428107,
+          "author": "bialamusic",
+          "text": "And this is a tuner using same algorithm: https://apps.apple.com/us/app/resonance-chromatic-tuner/id16... Also very old stuff :)"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 13,
+      "id": 48421858,
+      "title_en": "OpenCV 5 Is Here: The Biggest Leap in Years for Computer Vision",
+      "title_ja": "OpenCV 5 Is Here: The Biggest Leap in Years for Computer Vision",
+      "url": "https://opencv.org/opencv-5/",
+      "hn_url": "https://news.ycombinator.com/item?id=48421858",
+      "score": 667,
+      "comment_count": 118,
+      "posted_at": "2026-06-06T06:02:28+00:00",
+      "comments": [
+        {
+          "id": 48459111,
+          "author": "plasticeagle",
+          "text": "The thing I love about OpenCV is that it remains hands down the best library for simply loading images and video. I've never even used any of its fancy computer vision features, but if I need to load a video file and look at the pixels - which I did need to do recently for an art project - OpenCV does it in about four lines of code."
+        },
+        {
+          "id": 48459512,
+          "author": "pzo",
+          "text": "Quite a good release although not sure why they invest so much time into their ONNX engine. I don't think they have enough stuff and big pockets to compete with ONNXRuntime, CoreAI, ExecuTorch, LiteRT. I'm happy they added option for ONNXRuntime. I wish their cv.dnn was mostly that unified wrapper around many different backends (ONNXRuntime, Executorch, LiteRT, CoreAI) and maybe just some tooling around it (performance metrics tools, model downloads etc). Transformers(.js) approach looks better for me. Wish they also invested more time into better production ready Camera I/O (for mobiles, device/format discovery, manual settings, depthmap support, etc) and better Highgui that could use different backends (skia, webgpu) and on mobiles."
+        },
+        {
+          "id": 48457875,
+          "author": "ftchd",
+          "text": "> One practical detail is worth knowing. The new engine is CPU-only at the moment, so if you select a non-CPU backend and target (for example CUDA or OpenVINO through setPreferableBackend and setPreferableTarget), you will want the classic engine. So there's room for even better performance!"
+        },
+        {
+          "id": 48460043,
+          "author": "GreenSalem",
+          "text": "AI written release post and it shows..."
+        },
+        {
+          "id": 48458248,
+          "author": "arcanine",
+          "text": "They really improved the performance. I tested yolov8 medium segmentation model on intel i7 11th gen cpu. Opencv 4.11 : ~255ms Opencv 5.0.0 : ~185ms with the same code."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 14,
+      "id": 48453275,
+      "title_en": "Let's Encrypt bans certificate usage in any US sanctioned territory [pdf]",
+      "title_ja": "Let's Encrypt bans certificate usage in any US sanctioned territory [pdf]",
+      "url": "https://letsencrypt.org/documents/LE-SA-v1.7-June-04-2026-diff.pdf",
+      "hn_url": "https://news.ycombinator.com/item?id=48453275",
+      "score": 284,
+      "comment_count": 231,
+      "posted_at": "2026-06-08T22:32:36+00:00",
+      "comments": [
+        {
+          "id": 48465178,
+          "author": "CobrastanJorji",
+          "text": "Let's Encrypt’s mission is to create a more secure and privacy-respecting web, except for people residing in countries with the most need for a more secure and privacy-respecting web. Sure, that's great. That said, pretty sure this is stems from the insane US legal requirement to not export SSL technology to enemy countries. I'm sure some of y'all are old enough to remember when web browsers came in \"international friendly\" versions that supported 40 bit encryption, or \"fancy secure\" versions with 128 bit encryption."
+        },
+        {
+          "id": 48457280,
+          "author": "idoubtit",
+          "text": "Couldn't LE have a branch in Europe or anywhere outside the USA and its minions? Because they're betraying their own goals, as stated in their About page: “It is a service run for the public’s benefit. [...] Anyone who owns a domain name can use Let’s Encrypt to obtain a trusted certificate at zero cost. [...] Let’s Encrypt is a joint effort to benefit the community, beyond the control of any one organization.” Now they own they are under the control of a political organization. Here is the paragraph Let's Encrypt added to their Subscription Agreement on 2026-06-04: > You are not a person or entity that is: > (a) located in, organized under the laws of, or ordinarily resident in any country or territory that is the target of comprehensive U.S. sanctions; > (b) a prohibited or restricted party under U.S. or other applicable sanctions and export control laws and regulations; > or (c) owned or controlled by or acting on behalf of anyone described in (a) or (b). > You agree to use Let’s Encrypt Certificates and any services provided by or on behalf of ISRG in compliance with applicable U.S. export control and sanctions laws and regulations."
+        },
+        {
+          "id": 48464273,
+          "author": "Insimwytim",
+          "text": "Iran is blocking internet for months, US ...bans creation of secure connections - that'll show 'em! Russian quasi-government structures are spending quadrillion of rubles on a TSPU (censorship system) to spy on Russian residents, US ...helps them by making snooping on what is currently encrypted traffic possible by banning accessible encryption!"
+        },
+        {
+          "id": 48459358,
+          "author": "axiologist",
+          "text": "This somehow confirms my gut feeling that digital certificates are mainly a means to enforce exclusion on behalf of the certificate authority ownership. It is a tool to prevent people from taking full ownership and control of whatever is affected by digital certificates, be it software, firmware, hardware, or as in this case SSL/TLS. That's digital tyranny in disguise."
+        },
+        {
+          "id": 48458234,
+          "author": "Igrom",
+          "text": "It seems that, as soon as you transact with a sanctioned entity, you are globally in breach of the agreement and risking the revocation of all your certificates — also the ones for non-sanctioned countries. Front matter: - it is called a \"Subscriber Agreement\" and not anything that suggests that its scope is a single certificate - it's a \"contract [...] regarding Your [...] rights and duties relating to [...] Certificates\" - plural 2.1 \"Term\": - \"[the agreement] will remain in force during the entire period during which *any* of Your Certificates are valid\" - plural 3.1 \"Warranties\": - \"[by] requesting, accepting, or using *a* Let’s Encrypt Certificate\" - plural"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 15,
+      "id": 48464330,
+      "title_en": "The LD_DEBUG environment variable (2012)",
+      "title_ja": "The LD_DEBUG environment variable (2012)",
+      "url": "https://bnikolic.co.uk/blog/linux-ld-debug.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48464330",
+      "score": 52,
+      "comment_count": 1,
+      "posted_at": "2026-06-09T17:29:05+00:00",
+      "comments": [
+        {
+          "id": 48466749,
+          "author": "alschwalm",
+          "text": "LD_AUDIT is another one worth knowing about (though I admittedly use it less often than LD_DEBUG) https://man7.org/linux/man-pages/man7/rtld-audit.7.html"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 16,
+      "id": 48463024,
+      "title_en": "Apple decided not to roll out Siri in EU after denied request for exemption",
+      "title_ja": "Apple decided not to roll out Siri in EU after denied request for exemption",
+      "url": "https://www.reuters.com/business/apple-failed-make-its-ai-tool-comply-eu-regulations-eu-commission-says-2026-06-09/",
+      "hn_url": "https://news.ycombinator.com/item?id=48463024",
+      "score": 335,
+      "comment_count": 561,
+      "posted_at": "2026-06-09T16:13:10+00:00",
+      "comments": [
+        {
+          "id": 48463209,
+          "author": "afavour",
+          "text": "Apple said \"hey, can we not comply with the law\", the EU said no, so it didn't launch. Seems pretty straightforward to me. I can see why Apple might want to request an 18 month exemption, there's clearly extra work required to comply with EU regulations. But on the other hand it also feels like a straightforward play for consumer sympathy: let them get used to using it every day for 18 months, then pressure the EU to let it continue or you rip the feature away and anger users (who you then point to the EU as the problem) It's not as if Apple doesn't have the money to dedicate a team to matching the EU's requirements on a deadline. They just choose not to."
+        },
+        {
+          "id": 48463536,
+          "author": "jandrewrogers",
+          "text": "I understand Apple's position on this one. This is essentially a backdoor into all of your data. It is also a very useful feature. The EU regulators are disallowing guardrails without which this backdoor will be used to strip-mine people's personal data. The privacy implications are not legible to most people. If I was more cynical I would suggest that this is being used as an end-run around encryption, since the encryption doesn't have backdoors for the government but this gives you access to all the same data. When this backdoor is inevitably exploited in some very public fashion, it won't be the EU regulators that required the backdoor to exist who will be blamed."
+        },
+        {
+          "id": 48464855,
+          "author": "andix",
+          "text": "It's totally fine that Apple doesn't release this feature for EU customers. If they think they can still sell enough phones it's also fine I guess. What's not fine, is to blame the EU for the missing feature. It's damaging their brand and damaging their reputation. Just think about if Porsche would make a press release and calling the US tariffs \"un-American\". Wouldn't be perceived well either."
+        },
+        {
+          "id": 48464874,
+          "author": "speedgoose",
+          "text": "I find it interesting that Apple prefers to fall behind in Europe rather than opening their platform a tiny bit. It gives us European some opportunities. I have a side project at work that was heavily threatened by Siri’s new features. Now I feel more relaxed as Siri isn’t coming there anytime soon. But overall I doubt we will replace Apple."
+        },
+        {
+          "id": 48463324,
+          "author": "grim_io",
+          "text": "I'd rather have my iPhone turn into a dumbphone than EU bow to the Megacorps."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 17,
+      "id": 48463273,
+      "title_en": "Launch HN: Transload (YC P26) – Measuring freight items with CCTV",
+      "title_ja": "Launch HN: Transload (YC P26) – Measuring freight items with CCTV",
+      "url": null,
+      "hn_url": "https://news.ycombinator.com/item?id=48463273",
+      "score": 31,
+      "comment_count": 9,
+      "posted_at": "2026-06-09T16:28:28+00:00",
+      "comments": [
+        {
+          "id": 48469096,
+          "author": "patches11",
+          "text": "Very interesting, I work in a similar space with diverse cameras and we’ve been using DepthAnything for a while, but I hadn’t seen these new models yet so thanks! The association model seems like the special sauce, anything more you can share about that? Architecture, inputs and outputs etc. I’m always really interested in unique CV models."
+        },
+        {
+          "id": 48468187,
+          "author": "dtrav",
+          "text": "I fully get this and think its an excellent piece of work. Have you considered interfacing into Warehouse Management in order to provide dimensioned arbitrary pallet heights ? In other words to inform the put away process in warehousing ?"
+        },
+        {
+          "id": 48464131,
+          "author": "bashd4",
+          "text": "This is really cool. Congrats guys. Just because I'm curious, how does the market for this look? How much revenue are you saving your customers with this? Also, surely this is very applicable in many many industries, do you have expansion plans? Nevertheless, this is awesome and I wish I'd built it :)"
+        },
+        {
+          "id": 48464392,
+          "author": "pX0r",
+          "text": "Interesting app of CV in OR. Questions: - what is the measurement precision? - do you need calibration? How do you do it in production? - what it is the root problem you are trying to solve? - what is your hypothesis about your solution- quantitatively?"
+        },
+        {
+          "id": 48463456,
+          "author": "snihalani",
+          "text": "Error Code: SSL_ERROR_RX_RECORD_TOO_LONG"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 18,
+      "id": 48462308,
+      "title_en": "FCC wants to kill burner phones by forcing telecoms to get all customers' IDs",
+      "title_ja": "FCC wants to kill burner phones by forcing telecoms to get all customers' IDs",
+      "url": "https://www.404media.co/fcc-wants-to-kill-burner-phones-by-forcing-telecoms-to-get-all-customers-ids/",
+      "hn_url": "https://news.ycombinator.com/item?id=48462308",
+      "score": 398,
+      "comment_count": 245,
+      "posted_at": "2026-06-09T15:21:46+00:00",
+      "comments": [
+        {
+          "id": 48463229,
+          "author": "bsimpson",
+          "text": "Here's the link to submit a comment to the FCC: https://www.fcc.gov/ecfs/filings/express Ran a quick search and found a whole bunch of news articles, but nobody includes info that makes it easy to route your comment. Feels like the beginning of Hitchhiker's Guide: > It was on display in the bottom of a locked filing cabinet stuck in a disused lavatory with a sign on the door saying Beware of the Leopard."
+        },
+        {
+          "id": 48463890,
+          "author": "toast0",
+          "text": "Great. As if telecoms can be trusted with customers' id. AT&T left my name, address, social security etc in an improperly secured database for others to have, and they tried to open accounts with it; they had retained the information after I closed my account, and they denied the information was coming from them for years before they finally admitted it and gave us all a quarter to call someone who cares and a year of credit monitoring."
+        },
+        {
+          "id": 48465789,
+          "author": "grishka",
+          "text": "As a Russian: huh, you guys could still just buy a sim card without any kind of identification? Impressive. We had that ID requirement introduced way back in the 00s. Even EU countries seem to require an ID now. When I traveled to France and Belgium in 2024, I bought a French tourist sim card, and the carrier kept sending me some rather insistent messages that my line would get disconnected if I don't upload my passport in 30 days."
+        },
+        {
+          "id": 48464668,
+          "author": "t1234s",
+          "text": "This is probably part of the larger scope of the system wanting to require ID to even boot a computer let alone connect to the internet."
+        },
+        {
+          "id": 48462372,
+          "author": "dkdbejwi383",
+          "text": "This is how it works in Australia, which means it's a pain for tourists as you need to provide a passport for ID and get it activated, as opposed to just grabbing one at an airport kiosk and being ready to go on your way to the taxi or train like most other places."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 19,
+      "id": 48445834,
+      "title_en": "Lies We Tell Ourselves About Email Addresses",
+      "title_ja": "Lies We Tell Ourselves About Email Addresses",
+      "url": "https://gitpush--force.com/commits/2026/06/lies-we-tell-ourselves-about-email/",
+      "hn_url": "https://news.ycombinator.com/item?id=48445834",
+      "score": 6,
+      "comment_count": 1,
+      "posted_at": "2026-06-08T14:24:57+00:00",
+      "comments": [
+        {
+          "id": 48445978,
+          "author": "adamzwasserman",
+          "text": "I enjoyed the deep dice. A lot of sensible advice, and enjoyed the deep dive. A lot of articles do not get a lot of that as right as this article does. Anyone who also enjoyed it would probably get a kick out of my article on the same subject that goes into the regex (which has some valid use cases): https://hackernoon.com/on-the-practicality-of-regex-for-emai..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 20,
+      "id": 48463018,
+      "title_en": "Biff.core: system composition for Clojure web apps",
+      "title_ja": "Biff.core: system composition for Clojure web apps",
+      "url": "https://biffweb.com/p/core/",
+      "hn_url": "https://news.ycombinator.com/item?id=48463018",
+      "score": 99,
+      "comment_count": 21,
+      "posted_at": "2026-06-09T16:12:52+00:00",
+      "comments": [
+        {
+          "id": 48468049,
+          "author": "lukaszkorecki",
+          "text": "Maybe I'm grumpy and old or something, but I wish there was only one Component library for Clojure, out of all the things this should have been the one everyone settled on."
+        },
+        {
+          "id": 48463076,
+          "author": "holistio",
+          "text": "Recently my impression has been that whatever the agentic tools are best at is also what's best for solo projects or proof of concepts. I used to love writing custom CSS, but Claude is just so much better at Tailwind that I ended up switching, even though I still kind of loathe the class soup. Is AI any good at Clojure?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 21,
+      "id": 48467712,
+      "title_en": "Company Will Add Phone, AirPod, and Smartwatch Trackers to ALPRs",
+      "title_ja": "Company Will Add Phone, AirPod, and Smartwatch Trackers to ALPRs",
+      "url": "https://www.404media.co/this-company-will-add-phone-airpod-and-smartwatch-trackers-to-license-plate-readers/",
+      "hn_url": "https://news.ycombinator.com/item?id=48467712",
+      "score": 58,
+      "comment_count": 17,
+      "posted_at": "2026-06-09T21:01:40+00:00",
+      "comments": [
+        {
+          "id": 48468354,
+          "author": "icameron",
+          "text": "I was in the space 10 years ago with a product. Primarily Bluetooth, later BLE and WiFi. At that time most consumer devices were constantly discoverable. About 3-5% of traffic would have a disoverable MAC. These days not so many. iPhones never are discoverable unless you are in pairing mode. BLE broadcasts beacons much more consistently and generates a lot of data to filter, but they also change MACs. Most WiFi chipsets use hardware based MAC layer, so promiscuous monitoring / sniffing is not possible on virtually every embedded module. There were a few chipsets, known as SoftMAC where linux drivers did the MAC layer, in which you could truly sniff the air for all traffic and capture a whole lot of MAC addresses. That was much more useful, but requires more CPU and specific older hardware. If you have a permanent power source like in a ALPR that isn't as much of a concern. I don't know of any companies that really did this though. Almost all our competitors used solutions that only supported the usual device discovery, which relies on BT being discoverable, or AP mode WiFi in order to track a MAC address. It's really easy to market though, it sounds great on paper. In practice the results are less than stellar and with time got even worse as vendors stopped being discoverable by default, and handsets started using used dynamic MAC addresses"
+        },
+        {
+          "id": 48468921,
+          "author": "analogpixel",
+          "text": "Program your flipper0 to record all wireless identifications for a few weeks. hook broadcaster to amplifier and attach to your car playing all the time. Every time you drive by one of these, it'll look like a parade just went by. Probably do the same thing when you go into retail stores. just flood the place with every possible identification. Maybe an easier solution is just write something that spoofs hundreds of fake ids and sends them out constantly where ever you go; bonus points if you can create IDs that can break the devices when they try to parse it."
+        },
+        {
+          "id": 48469100,
+          "author": "puppycodes",
+          "text": "This is essentially a wiretap. It's illegal in most states to place a listening device in public that captures private conversations, this is basically no different."
+        },
+        {
+          "id": 48468634,
+          "author": "crumpled",
+          "text": "According to the graphic, all RFID/NFC tags including pet microchips and your company badge will be associated with you too. I can remember in the late 1990's Berkeley Public Library was considering adding RFID tags to the books as asset tags. The public push-back was significant and surprising at the time. Freedom-loving library patrons were concerned about nefarious tracking. Proponents of the new tags thought that the concept of tracking people or the books they read was rooted in paranoia."
+        },
+        {
+          "id": 48468213,
+          "author": "mikeocool",
+          "text": "Isn't it not really possible to uniquely identify most modern bluetooth devices this way? Specifically to prevent things like this. Unless they're hoping my AirPods are in pairing mode all of the time and they're going to track the name \"mikeocool's AirPods.\""
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 22,
+      "id": 48460863,
+      "title_en": "Is Grep All You Need? How Agent Harnesses Reshape Agentic Search",
+      "title_ja": "Is Grep All You Need? How Agent Harnesses Reshape Agentic Search",
+      "url": "https://arxiv.org/abs/2605.15184",
+      "hn_url": "https://news.ycombinator.com/item?id=48460863",
+      "score": 106,
+      "comment_count": 51,
+      "posted_at": "2026-06-09T13:27:03+00:00",
+      "comments": [
+        {
+          "id": 48465969,
+          "author": "softwaredoug",
+          "text": "In my research grep is fine if you don’t care about tokens and you have less than 100k files. The direct corpus interaction paper [1] shows a breakdown past this level. In my personal experience you get a bit better relevance than a BM25 search engine with grep plus an agent. But it requires you to eat tokens. If you think grep is great, it’s because you’ve been social engineered to organize your content to be findable. We document why something is useful to an agent. We put it in a logical place. Just organizing content is at least half of building search, agentic or not. It’s one reason Google is successful, we’re all trying to make our content findable by the search engine. It’s not all technology :) 1- https://arxiv.org/abs/2605.05242"
+        },
+        {
+          "id": 48466059,
+          "author": "contextfree",
+          "text": "It seems ridiculous that, for example, Copilot running in Visual Studio working on a C# codebase finds stuff in code by grepping around instead of using the Roslyn-driven code symbol and semantic database built into Visual Studio. I'm guessing it's because the people they get to work on AI stuff are AI People who probably only write in Python"
+        },
+        {
+          "id": 48463853,
+          "author": "quinncom",
+          "text": "Don’t presume this study has anything to do with programming. They measured an agent’s ability to search long conversations, not code. > We evaluate on a 116-question representative subset of the LongMemEval benchmark (Wu et al., 2025), which tests an agent’s ability to answer questions over long conversations spanning multiple sessions."
+        },
+        {
+          "id": 48463236,
+          "author": "alexrigler",
+          "text": "Combining regex filtering with semantic ranking using multi-vector embeddings has yielded good results for me. I use ColGREP from the LightOn team asa daily driver - https://github.com/lightonai/next-plaid/blob/main/colgrep/RE..."
+        },
+        {
+          "id": 48463676,
+          "author": "piekvorst",
+          "text": "I have always used traditional grep to search codebases. It serves me better than an IDE when there’re lots of scattered and frequent queries. grep’s design is surprisingly winning, exceeding expectations to this day."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 23,
+      "id": 48467570,
+      "title_en": "Alpine Linux 3.24.0 Released",
+      "title_ja": "Alpine Linux 3.24.0 Released",
+      "url": "https://alpinelinux.org/posts/Alpine-3.24.0-released.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48467570",
+      "score": 102,
+      "comment_count": 18,
+      "posted_at": "2026-06-09T20:50:54+00:00",
+      "comments": [
+        {
+          "id": 48468375,
+          "author": "sudobash1",
+          "text": "My home server has been running alpine for a while now. I'm always delighted with how simple and robust it is. Not that this is probably recommended, but I have a cron script that checks for upgradable packages every night and automatically installs them. It has always been seamless. My family uses this server throughout the day, and the only daytime down-time has been due to power outages. (In some way the reliability is an issue because it enables me being lazy with backup testing). For a little home-server, I am in love with the KISS-ness of Alpine."
+        },
+        {
+          "id": 48468050,
+          "author": "Bender",
+          "text": "Upgraded two of my HTTPS nodes, nothing went boom. Also upgrade and rebooted home physical firewall/router, works fine. DoH listener in Unbound working fine. Upgraded authoritative DNS server, works fine. nginx version: nginx/1.30.2 built by gcc 15.2.0 (Alpine 15.2.0) built with OpenSSL 3.5.6 7 Apr 2026 Unbound Version 1.25.1 Linked libs: libevent 2.1.12-stable (it uses epoll), OpenSSL 3.5.6 7 Apr 2026 Linked modules: dns64 cachedb subnetcache respip validator iterator chronyd (chrony) version 4.8 (+CMDMON +REFCLOCK +RTC +PRIVDROP +SCFILTER +SIGND -NTS -SECHASH +IPV6 -DEBUG) HAProxy version 3.4.0-64a335366 2026/06/03 - https://haproxy.org/ Status: long-term supported branch - will stop receiving fixes around Q2 2031. NSD version 4.14.2"
+        },
+        {
+          "id": 48468503,
+          "author": "Crontab",
+          "text": "I know that Alpine has a package manager but I haven't tried it because I worry that Musl might present problems compiling software (I sometimes like to compile things myself, like Vim or Emacs). Is this worry valid? Also are there any issues compiling Go and Rust programs on Alpine?"
+        },
+        {
+          "id": 48468637,
+          "author": "proxysna",
+          "text": "Alpine is my go-to nowadays for everything in my homelab except desktop (I use Void btw), because of how dirty the setup to make GPU's work with musl kernel."
+        },
+        {
+          "id": 48468037,
+          "author": "dizhn",
+          "text": "What a beautiful little thing Alpine is."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 24,
+      "id": 48459837,
+      "title_en": "Show HN: Gravity – interactive solar-system simulator, from Newton to Einstein",
+      "title_ja": "Show HN: Gravity – interactive solar-system simulator, from Newton to Einstein",
+      "url": "https://qunabu.github.io/Gravity/",
+      "hn_url": "https://news.ycombinator.com/item?id=48459837",
+      "score": 137,
+      "comment_count": 34,
+      "posted_at": "2026-06-09T11:46:40+00:00",
+      "comments": [
+        {
+          "id": 48468854,
+          "author": "nerdsniper",
+          "text": "Step 5 shows the earth going as slow as 21.5 km/sec at aphelion and as fast as 39km/sec at the perihelion. I believe that should be closer to 29.3 and 30.3 km/sec, respectively."
+        },
+        {
+          "id": 48461809,
+          "author": "rfgplk",
+          "text": "Very nice, fairly efficient too. I don't like the explicit split of Newtonian and relativistic gravity, this is often how it's presented in educational content, but it creates too much confusion; for instance it gives the illusion that they are somehow separate theories even though Newtonian gravity is a limiting case of Einsteinian gravity when v << c and gravitational fields are weak (see Poissons eq for Newtons gravitational potential. Lastly, you should consider rendering spacetime similar to Alessandro Roussels spacetime visualization https://www.youtube.com/watch?v=wrwgIjBUYVc ; probably the best and most innovative one I've seen."
+        },
+        {
+          "id": 48462789,
+          "author": "jrflo",
+          "text": "I really liked your animations, but isn't step 14 incorrect? Earth's axis processes, but on a very long timescale. In the span of a day, the axis should be effectively stationary. That's why its the rotation 'axis' - it's the fixed line it rotates about. That's why Polaris is the north star: the axis of rotation points effectively directly at it at all times no matter the season. During summer in the northern hemisphere, the tilt is towards the sun, giving us more direct heating, and in the winter it's away from the sun. This isn't due to the axis moving, but due to the axis' relative position changing throughout earth's orbit around the sun."
+        },
+        {
+          "id": 48463226,
+          "author": "nonethewiser",
+          "text": ">The Sun’s gravity (red arrow) pulls the Earth straight toward it the whole time — so why no collision? Because the Earth is also moving sideways (green arrow) at 29.8 km/s. Each moment it does fall toward the Sun, but its sideways speed carries it past — it keeps missing. The dashed line shows where inertia alone would send it; gravity bends that straight path into a closed loop. An orbit is simply falling, continuously, and always missing. Reading stuff like this always makes me think \"well that is fortunate.\" Of course there is survivorship bias so its not exactly surprising. But it also makes me wonder what could change the status quo. I guess these are the things that could change it: - suns becomes lighter (earth shoots into space) - earth accelerates (earth shoots into space) - sun becomes heavier (earth falls into sun) - earth decelerates (earth falls into sun) I guess in theory some large interstellar object could pass to close too earth and fling us off into space or into the sun."
+        },
+        {
+          "id": 48467040,
+          "author": "jumploops",
+          "text": "This is neat! I love that your Step 15 shows an accurate version of the 3d helix, rather than the highly-viral \"vortex\" animation from a few years back[0] It'd be awesome to scale this up to the Milk Way, and beyond, watching everything move in relation to larger time scales. [0] https://astrorhysy.blogspot.com/2015/03/and-yet-it-moves-qui..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 25,
+      "id": 48459001,
+      "title_en": "The iPhone's Last Stand?",
+      "title_ja": "The iPhone's Last Stand?",
+      "url": "https://stratechery.com/2026/the-iphones-last-stand/",
+      "hn_url": "https://news.ycombinator.com/item?id=48459001",
+      "score": 162,
+      "comment_count": 200,
+      "posted_at": "2026-06-09T10:08:18+00:00",
+      "comments": [
+        {
+          "id": 48464056,
+          "author": "827a",
+          "text": "You cannot trust companies to communicate an unbiased vision of the future, because they will always build what they're capable of selling. Microsoft and Meta are incapable of selling phones and laptops; they're certainly capable of building them, but few people will buy them. So instead Meta builds smart-glasses and Microsoft presents this weird vision of \"connected thin devices\" by keeping the hardware itself very abstract and unknowable. The hardware doesn't matter to Microsoft, not because the hardware doesn't actually matter, but because it cannot matter, because Microsoft cannot win in hardware. Its not a vision of the future; its a vision of what Microsoft can meaningfully sell. Microsoft can meaningfully sell their weird constellation of 365 subscriptions that no one knows what they do or if they remotely do what you buy them for; thus their marketing now wears that idea of \"unknowable capability\" like a mask."
+        },
+        {
+          "id": 48466477,
+          "author": "billdybas",
+          "text": "What I don't see anyone talking about is how Private Cloud Compute is behind an iCloud subscription. From what I can tell, this means any app that is using their foundation model is sharing against a user's pooled usage quota & Apple takes all the revenue upside if a user chooses to upgrade their plan. Why would an app developer choose their model which has a minuscule 32K context window, might get throttled because of usage in another app, and doesn't share revenue over any frontier model vendor (where you can package/pass along token costs to your customers)?"
+        },
+        {
+          "id": 48460035,
+          "author": "economistbob",
+          "text": "They see \"thin is in\" and I see remote servers now watching everything on your screen or within audio visual range. Eventually the only jobs will be at the intel agencies watching the data feeds from all the rabble so they can ascertain who is mouthy enough to whack and charge the others by the word for what used to be processed locally for free. Of all the things they could build, why must they pick this future..."
+        },
+        {
+          "id": 48459486,
+          "author": "QuadmasterXLII",
+          "text": "i was under the impression that the 2024 apple intelligence rollout was something of a victory: Apple realized that the majority of people don't actually want this stuff forced on them at the os level, and the ai maximalists all used apple anyways via clawbot (including purchasing an additional apple device, the mini!) because of apples non-ai-specific commitment to phone computer interop. Certainly the copilot button in ms paint did nothing to attract the clawbot ecosystem to windows"
+        },
+        {
+          "id": 48464172,
+          "author": "Aperocky",
+          "text": "> Microsoft put forth a vision for a new ecosystem of hardware devices under the banner of Project Solara While I don't necessarily disagree with their vision but if implemented like \"Copilot for Windows\" I don't see me or anyone wanting to go anywhere near it. Apple being slow is just fine, at least they didn't launch \"Copilot for Mac\". Sometimes the lack of certain feature is the feature."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 26,
+      "id": 48465702,
+      "title_en": "Ask HN: Are you still using a Vision Pro?",
+      "title_ja": "Ask HN: Are you still using a Vision Pro?",
+      "url": null,
+      "hn_url": "https://news.ycombinator.com/item?id=48465702",
+      "score": 109,
+      "comment_count": 132,
+      "posted_at": "2026-06-09T18:47:52+00:00",
+      "comments": [
+        {
+          "id": 48467314,
+          "author": "dsernst",
+          "text": "I use it every day, approx ~95% of the days since it launched over 2 years ago. Many hours a day. Far and away my biggest use-case is connecting it to my laptop for gigantic (private) movie theater-sized screen. Getting it comfortable was the most important step. The 6-months-old DualKnit band is really great for making it a lot more comfortable. An open face mod (eg $10 Macally on amazon) helps a lot with eye breathability, and restoring peripheral vision. Also really great for being able to work well from anywhere. Sad that so many people are sleeping on it, but what can you do? Check out r/VisionPro for tons of people that love theirs and use them constantly."
+        },
+        {
+          "id": 48467911,
+          "author": "Me1000",
+          "text": "Stopped using it after about a week or two of usage. The only interesting use case was screen mirroring from my Mac, but that wasn't compelling enough to endure the weight of it on my face. I expected watching a movie would be a good use case, but in reality the brightness of the screen would reflect (I guess?) off my face and create a glare... so it ultimately wasn't a good movie device. Gave it to a friend who was excited about it, and he also stopped using it after about a week or two."
+        },
+        {
+          "id": 48467237,
+          "author": "CraigJPerry",
+          "text": "I bought the refreshed M5 version with the new headstrap. I read so many complaints about weight and it was just never an issue for me personally. Maybe the new strap is that much better? That said, the battery cable was super annoying, id accidentally catch it multiple times per day. The battery is good for less than 2 hours so i used it plugged into the wall. For zoom calls, the persona thing is hilariously bad, unusable in a business context. Interesting for a few minutes as a tech demo though. The virtual layout is good - a big citrix app screen (its the ipad app) for remote desktop, zoom, safari etc off to the sides and then things like calendar widget pinned to physical wall. But text clarity / quality is just slightly not good enough for software development. Almost, its close. If you dont mind large fonts its good enough. Ultimately returned it but it was a close run thing, i almost kept it. I do still hanker for something like this, tempted to try xreal or other glasses but seems like the PPD is even lower."
+        },
+        {
+          "id": 48466132,
+          "author": "curiouscavalier",
+          "text": "having developed multiple apps on it and tried every which way to use it (as an XR enthusiast in general), I have never been so happy to put a headset up on the shelf and never pull it out again. using as a spatial monitor was cool. for about 10min until my neck got tired of the added weight. but I’ll give credit that those 10min were pretty cool."
+        },
+        {
+          "id": 48466398,
+          "author": "tracyhenry",
+          "text": "Not regularly, but I do watch movies on it once in a while (in those beautiful environments), especially when I'm on a flight. WWDC also just rolled out some quite exciting features to RealityKit: https://developer.apple.com/videos/play/wwdc2026/279/ as well as visionOS itself ( https://developer.apple.com/videos/play/wwdc2026/287/ ) It makes me wonder if Apple is really giving it up as news have claimed."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 27,
+      "id": 48462062,
+      "title_en": "Can LLMs Beat Classical Hyperparameter Optimization Algorithms?",
+      "title_ja": "Can LLMs Beat Classical Hyperparameter Optimization Algorithms?",
+      "url": "https://arxiv.org/abs/2603.24647",
+      "hn_url": "https://news.ycombinator.com/item?id=48462062",
+      "score": 95,
+      "comment_count": 15,
+      "posted_at": "2026-06-09T15:01:15+00:00",
+      "comments": [
+        {
+          "id": 48462410,
+          "author": "harrigan",
+          "text": "Somewhat related, the experiment ongoing at https://www.ecdsa.fail/ is fascinating: it's a competitive, leaderboard-style research challenge trying to optimise a quantum circuit for breaking ECDSA (specifically the elliptic-curve point addition in Shor's algorithm). It quickly surpassed a result announced by Google researchers last month. Now it's showing a 40% gain over Google's result."
+        },
+        {
+          "id": 48463550,
+          "author": "cpard",
+          "text": "I'm personally interested in this problem and it's a quite active research area right now. My feeling is that the research is converging to what the paper claims, that the combination of two is the right way to do it and it's a matter of how you combine the two as part of the harness you built that makes the difference. At the AID-Wild / ACM CAIS 2026 workshop that happened recently, there are plenty of examples in the accepted papers on that. A great example is AI-PROPELLER: Warehouse-Scale Interprocedural Code Layout Optimization with AlphaEvolve. It uses AlphaEvolve and Vizier to evolve compiler code-layout heuristics. ( https://arxiv.org/abs/2606.00131 )"
+        },
+        {
+          "id": 48464262,
+          "author": "deerstalker",
+          "text": "I have been doing some research on this topic, and found that for some budget regimes (really expensive objective function evaluations) and some applications (HPC code parameter autotuning), the frontier LLMs can even outperform classical optimizers. Even open-weight models can perform well on certain applications but one some they fail abysmally (Of course this is limited to a bunch of niche applications)."
+        },
+        {
+          "id": 48462734,
+          "author": "woadwarrior01",
+          "text": "Their centaur idea[1] is interesting and quite straightforward. It should be fairly easy to implement using a coding agent for the LLM and the ask-and-tell interface in pycma[2]. [1]: https://github.com/ferreirafabio/autoresearch-automl/blob/ma... [2]: https://github.com/CMA-ES/pycma"
+        },
+        {
+          "id": 48466105,
+          "author": "janalsncm",
+          "text": "Honestly, the results kind of show the LLM is adding very marginal value. TPE crushes Karpathy’s autoresearch and it is neck and neck with the method in this paper, despite not needing to run any LLM inference at all. I remember a few months ago people were fairly skeptical about autoresearch, but we didn’t have a ton of data to say it was better or worse. My own bias is to prefer cheaper methods unless the more expensive method is shown to be better."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 28,
+      "id": 48435943,
+      "title_en": "Show HN: GentleOS – A pair of hobby OSes for vintage 32-bit and 16-bit PCs",
+      "title_ja": "Show HN: GentleOS – A pair of hobby OSes for vintage 32-bit and 16-bit PCs",
+      "url": "https://github.com/luke8086/gentleos32",
+      "hn_url": "https://news.ycombinator.com/item?id=48435943",
+      "score": 83,
+      "comment_count": 88,
+      "posted_at": "2026-06-07T15:45:50+00:00",
+      "comments": [
+        {
+          "id": 48459279,
+          "author": "mysterydip",
+          "text": "> The only future plans are bugfixes, optimizations, and adding more apps. Perfect. Nice to see a platform target stability instead of constantly reinventing itself and its APIs. Definitely want to give it a go!"
+        },
+        {
+          "id": 48454253,
+          "author": "iamnothere",
+          "text": "This is great, thanks for releasing your work. Very impressive. You may get some interest from others in the retrocomputing/permacomputing sphere if you implement an Uxn emulator; it is extremely simple and can run on very limited hardware. https://100r.co/site/uxn.html Vintage hardware would be a great host for Uxn programs, so I suspect this would generate some excitement."
+        },
+        {
+          "id": 48460096,
+          "author": "nosioptar",
+          "text": "I think this is fantastic! I love that the code is so clean my dumb ass can understand it despite not using C much."
+        },
+        {
+          "id": 48462302,
+          "author": "Waterluvian",
+          "text": "Kind of an odd statement I think, but I really like the aesthetic of early OS GUIs where you could tell half the tools were pretty much there as developer tools."
+        },
+        {
+          "id": 48468476,
+          "author": "ajxs",
+          "text": "Really awesome work! A simple OS for retro x86 hardware is a really cool project! I wish I still had some era-appropriate hardware I could test-drive it on."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 29,
+      "id": 48459968,
+      "title_en": "Emerge Career (YC S22) Is Hiring a Founding Growth Marketer",
+      "title_ja": "Emerge Career (YC S22) Is Hiring a Founding Growth Marketer",
+      "url": "https://www.ycombinator.com/companies/emerge-career/jobs/v0S1AEG-founding-growth-marketer",
+      "hn_url": "https://news.ycombinator.com/item?id=48459968",
+      "score": 1,
+      "comment_count": 0,
+      "posted_at": "2026-06-09T12:01:09+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 30,
+      "id": 48444758,
+      "title_en": "Blaise v0.10.0: Native Back End, Threads and Incremental Compilation",
+      "title_ja": "Blaise v0.10.0: Native Back End, Threads and Incremental Compilation",
+      "url": "https://github.com/graemeg/blaise/discussions/82",
+      "hn_url": "https://news.ycombinator.com/item?id=48444758",
+      "score": 13,
+      "comment_count": 1,
+      "posted_at": "2026-06-08T12:55:01+00:00",
+      "comments": [
+        {
+          "id": 48468962,
+          "author": "ComputerGuru",
+          "text": "As usual, another release post with no mention of what the damn thing is. “A modern, self-hosting Object Pascal compiler built for the 2020s. Zero legacy, full ARC, and unified UTF-8.”"
+        }
+      ],
+      "summary_ja": ""
+    }
+  ]
+}
