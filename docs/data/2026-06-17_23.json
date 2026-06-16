@@ -1,0 +1,1045 @@
+{
+  "date": "2026-06-17T00:00:00+09:00",
+  "slot": "23",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 48555993,
+      "title_en": "Running local models is good now",
+      "title_ja": "Running local models is good now",
+      "url": "https://vickiboykis.com/2026/06/15/running-local-models-is-good-now/",
+      "hn_url": "https://news.ycombinator.com/item?id=48555993",
+      "score": 555,
+      "comment_count": 270,
+      "posted_at": "2026-06-16T14:36:57+00:00",
+      "comments": [
+        {
+          "id": 48557467,
+          "author": "c0rruptbytes",
+          "text": "I don't know about good, I use a lot of local models and they're still pretty painful to run locally You have dense models (qwen 27b, gemma 31b) who are pretty smart, but pretty slow You have MoE models (gemma 26b, qwen 35b, north mini code 30b) who are pretty fast, but make a lot of mistakes You need a lot of memory to run these well, quantization makes tool calling weaker, so most run at 4 bit quants and are wondering why it kinda sucks and that's because you've essentially lobotomized the model (I recommend unsloth quants, i recommend 6bit for MoEs and 5bit for dense) So you need a lot of compute to make the pre-fill fast, you need bandwidth to make the decode fast, you need a lot of memory to hold everything - lot of ifs On top of that, your laptop becomes a loud hot churning machine, it's uncomfortable to work with. So are they good? not really. Do they work? yes edit: just wanna clarify - i think open models are the future, i think they're super important, i'm contributing constantly to the ecosystem - i think people should play around with these models, i think people should use `pi` and learn how it all works - but don't download a model expecting it to be good out of the box, you will have to tune and configure a lot of stuff to replace a \"coding agent\" that most people are using models for"
+        },
+        {
+          "id": 48556741,
+          "author": "hypfer",
+          "text": "After having been a happy user of Qwen3.6-27B for a few weeks, due to being away from the hardware, I'm currently forced to use Claude Sonnet 4.6 It is such a downgrade. I don't understand how that's even possible. The thing has so many strongly-held opinions I did not ever ask it for, talking just way too much and generally feeling somehow dumber. Of course, being significantly larger, it will encode more knowledge, but that doesn't help me when I hate talking to it. And all that on top of the fact that talking with it costs real money. I wonder what it might be that makes me hate it so much. Maybe because it doesn't see itself as a tool but almost an equal? As if its opinions would have weight. Qwen too can act like an overeager intern, but if you tell it that it is an idiot, it will drop that ego. Not so much with Claude. In my experience, anyway. Anyway, point is: full ack on that headline."
+        },
+        {
+          "id": 48559712,
+          "author": "robertkarl",
+          "text": "You can trade off latency / accuracy / cost for any ML task. And with the local models.... the cost is free. Having a local Qwen check another Qwen's work increases the accuracy quite a bit at the cost of more latency. You can't have your cake and eat it too. In benchmarking local models, I'm having success increasing even a 9B qwen's score on terminal-bench adjacent problems, just by asking it to plan and handing the plan back to qwen with a fresh context. Try it with Qwen3.5, unsloth Q4+, and a thinking budget of around 1024 tokens."
+        },
+        {
+          "id": 48556691,
+          "author": "rmunn",
+          "text": "This is the kind of thing that Anthropic et al should be worried about. As it becomes easier and easier to run local models, the ceiling of what they'll be able to charge will get lower and lower. Not that nobody will be willing to pay $$$$$ per month, but a lot of people are going to multiply the per-month charge by 12 or 24 and say \"Could I set up a local model for less than that, and have it pay for itself within a year or two?\" And if a significant portion of customers decide to buy instead of rent, the companies whose business model is entirely centered around renting will suddenly find themselves hurting for customers."
+        },
+        {
+          "id": 48556697,
+          "author": "embedding-shape",
+          "text": "Show us the resulting code of using them! :) I want to use local models, I have the hardware for it, but while trying them out as replacements for GPT 5.5 xhigh or Opus or other SOTA models, they aren't quite ready to be replaced yet, sadly. The quality and bumps they encounter just slows down the workflow so much, even screwing up tool call syntax sometimes. But, for smaller more well-defined workflows, or as straight \"edit this part to be like this exact\" edits, they seem more than enough. Still waiting for them to become mature enough to be able to replace what we have as SOTA today, I'd say it's ready to be switched over then. Speaking of local models, DiffusionGemma (and diffusion models in general) should not be slept on for local usage! Usually the problem locally is that the LLMs aren't efficiently making use of your hardware, unless you start batching requests and run many at the same time, but that require different approaches in general. Instead, diffusion models work much faster for individual prompts, and not by a small margin either. Today I finally finished porting diffusiongemma-26B-A4B-it support from Transformers into Candle, and together with some optimizations I now have it basically flying with ~450 tok/s (~19 it/s) in Candle during inference, instead of ~180 tok/s (~11 it/s) from HF's Transformers library. Even using vLLM with similar sized LLMs, I don't think I've ever gotten past the ~250 tok/s threshold for single prompts, exciting stuff for local models :)"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 2,
+      "id": 48558766,
+      "title_en": "Claude: Elevated errors across many models",
+      "title_ja": "Claude: Elevated errors across many models",
+      "url": "https://status.claude.com/incidents/xmhsglsz3h3w",
+      "hn_url": "https://news.ycombinator.com/item?id=48558766",
+      "score": 99,
+      "comment_count": 71,
+      "posted_at": "2026-06-16T17:30:30+00:00",
+      "comments": [
+        {
+          "id": 48559046,
+          "author": "evilturnip",
+          "text": "I do feel like for all their dogfooding of AI coding, their own software/APIs are quite buggy and work against their message. Claude Code is especially buggy in windows terminal. The rendering is quite slow, choppy and lines frequently get garbled. In contrast, using antigravity cli is the exact opposite: fast, smooth and very responsive."
+        },
+        {
+          "id": 48559739,
+          "author": "Wowfunhappy",
+          "text": "The errors are infrequent enough that this normally wouldn't be an issue for me. Except, starting this morning, one very long running session decided to start spawning subagents for each task. I'm not sure what caused this emergent behavior, but it seemed to be working fine, so I was eager to see where it went. Except, as soon as a subagent hits a 500 error, the main agent seemingly doesn't know what to do. It seems to usually just do a git checkout so the code isn't left in an \"inconsistent state\". I've just paused the job for now since this is a sort of background experiment."
+        },
+        {
+          "id": 48559445,
+          "author": "bastard_op",
+          "text": "This is every few weeks, I cancelled Anthropic and now use Codex only. Anthropic has been a hot mess since at least december in my usage, and has only gotten worse in 2026."
+        },
+        {
+          "id": 48559110,
+          "author": "wxw",
+          "text": "I’ve been using Codex w GPT 5.5 more than Claude Code recently. I think Anthropic won the marketing game because Codex is quite good, even better IME."
+        },
+        {
+          "id": 48559145,
+          "author": "rootlocus",
+          "text": "How is their \"Claude for Government\" having such a good uptime? I thought they were a supply chain risk and banned from use by the government?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 3,
+      "id": 48553224,
+      "title_en": "SpaceX to buy Cursor for $60B",
+      "title_ja": "SpaceX to buy Cursor for $60B",
+      "url": "https://www.reuters.com/legal/transactional/spacex-buy-anysphere-60-billion-2026-06-16/",
+      "hn_url": "https://news.ycombinator.com/item?id=48553224",
+      "score": 509,
+      "comment_count": 889,
+      "posted_at": "2026-06-16T10:44:24+00:00",
+      "comments": [
+        {
+          "id": 48558036,
+          "author": "01100011",
+          "text": "I stopped using Cursor when I started getting comfortable with Codex/Claude. Cursor is just annoying with the constant popups and it's just not as good. Now my workflow is to use my normal editor, add a todo describing what I want, and then ask Codex+gpt-5.5 to implement it. It absolutely nails it. Using codex is so much more like working with a partner vs the noise and annoyance of Cursor. That said, I think we're in a narrow window of time right now where any of this matters. Prompt \"engineering\" and working around your tools will be over in a year or so. Fwiw I am a c/c++ systems engineer. I think anyone mentioning anecdotal experience like this should clarify. Maybe frontend JavaScript folks have a totally different take and that's expected."
+        },
+        {
+          "id": 48558059,
+          "author": "Alifatisk",
+          "text": "A space company is buying an IDE for roughly the cost to build 150 of world's most expensive modern hospitals [1]. How is this in SpaceX's interest? Isn't it kinda bizarre that Elon is pivoting SpaceX to something else? 1. https://www.cnbc.com/2026/06/16/spacex-spcx-cursor-acquisiti..."
+        },
+        {
+          "id": 48559625,
+          "author": "timwis",
+          "text": "I've tried most of the tools out there but have used cursor most consistently. Sure, some of the UI quirks get in the way sometimes, but I've found its auto complete predictions to be unparalleled. More importantly, these days I mainly use its Ask mode, Plan mode, and Agent mode. I like that I can use Opus via subscription pricing without Claude Code's wild and buggy harness. And I find cursor's plan mode to perform better than Claude's, but that may just be my personal preferences. I know cursor stopped being the cool thing a few months back, but I genuinely feel most effective with it! But I'll stop using it now, for the same reason I wouldn't buy a Tesla, or support that maniac in any other way. And I'm sad about that :("
+        },
+        {
+          "id": 48559782,
+          "author": "dexterlagan",
+          "text": "For those who aren't aware, Cursor sports one of the best LLM harnesses for coding. The app itself is annoying to use compared to their CLI counterparts, but the harness is widely recognized as the best in the business, or very close. Buying that harness makes a lot of sense considering the cash Musk invested in Grok. He's clearly trying to play with the big boys and grab a chunk of the LLM-assisted dev market."
+        },
+        {
+          "id": 48554123,
+          "author": "glenngillen",
+          "text": "Back in the early days of Heroku (when I worked there), we were all fairly deep into the Ruby community. Ruby has never had a great reputation for performance, but... it seemed like almost a running joke that any time you went down a rabbit-hole trying to understand some weird performance issue you'd eventually discover that @tmm1 had already identified the same issue months earlier, patched it in core, and given an hour long talk about it somewhere. Despite his ability and willingness talk publicly about quite deep technical topics Aman always came across as an incredibly quiet and humble in person. Every Ruby developer has benefited from his attention to finding and fixing performance issues. I'm sure the same can probably said for every GitHub user (where he worked for years). Congrats to the entire Cursor team! I don't know all of their stories, but I do like to smile and celebrate a little when I see people who are often hidden in the shadows quietly making things x% better for all of millions of us every day for many years getting reward for that effort."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 4,
+      "id": 48553550,
+      "title_en": "Mechanical Watch (2022)",
+      "title_ja": "Mechanical Watch (2022)",
+      "url": "https://ciechanow.ski/mechanical-watch/",
+      "hn_url": "https://news.ycombinator.com/item?id=48553550",
+      "score": 516,
+      "comment_count": 96,
+      "posted_at": "2026-06-16T11:26:27+00:00",
+      "comments": [
+        {
+          "id": 48556514,
+          "author": "fellerts",
+          "text": "This article inspired me to build an exploded view of a mechanical watch movement in real-life (2025): https://fellerts.no/projects/epoch.html"
+        },
+        {
+          "id": 48554396,
+          "author": "turzmo",
+          "text": "The author seems too humble to put a giant Patreon link in a popup (it's at the very bottom), but in case anyone wants to know how to support: https://www.patreon.com/ciechanowski/membership?vanity=ciech..."
+        },
+        {
+          "id": 48554271,
+          "author": "awongh",
+          "text": "As a teacher I understand how difficult it is to explain complex topics in a simple step by step way. The site has some really impressive technical aspects, but the educational angle is the most rare and special! The simplicity of the language and explanations disguise how difficult this is to do. This is the original use of the internet- giving away free knowledge to people, perfectly suited for the medium of a website."
+        },
+        {
+          "id": 48553975,
+          "author": "technothrasher",
+          "text": "I find there is something indescribably fascinating with mechanical timepieces. I'm more of a clock guy than a watch guy, though I've had plenty of watches apart, and the two disciplines merge in many places. I've learned so many new mechanical skills in my now six year journey to be able to repair these things, and to learn to repair them is to learn to make them, as you need to know how to fabricate every single piece in order to be able to repair any movement, thus why clock and watch repairers are called clockmakers and watchmakers."
+        },
+        {
+          "id": 48554130,
+          "author": "gilleain",
+          "text": "I recently bought the book 'Watch Repair for Beginners' for reference (a project I slightly unwisely agreed to do). It has some great diagrams, but obviously nothing on these interactive animations (er, naturally, since it is a book). However the author (Harold C. Kelley) has descriptions for the diagrams similar to a maths proof - like \"Warning lever W is raised in position to engage the pin P ... The unlocking lever U lifts the drop lever D ...\" - not easy to follow, but maybe if you have the mechanism in front of you!"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 5,
+      "id": 48558018,
+      "title_en": "TIL: You can make HTTP requests without curl using Bash /dev/TCP",
+      "title_ja": "TIL: You can make HTTP requests without curl using Bash /dev/TCP",
+      "url": "https://mareksuppa.com/til/bash-dev-tcp-http-without-curl/",
+      "hn_url": "https://news.ycombinator.com/item?id=48558018",
+      "score": 64,
+      "comment_count": 39,
+      "posted_at": "2026-06-16T16:40:58+00:00",
+      "comments": [
+        {
+          "id": 48558771,
+          "author": "basilikum",
+          "text": "> As it turns out, bash can speak HTTP by itself. No, it can not. Bash lets you open TCP sockets. What you are doing here is trying to speak HTTP yourself, which is fine for testing and debugging, and hella cool for fun to do by hand, but you will shoot yourself in the foot if you try to use this pseudo http client unattended in reality. This toy code does not parse HTTP properly and will break. You could of course write a full http/1.1 client in bash, you can even do a full http server in pure bash: https://github.com/bahamas10/bash-web-server For less insane, non-bash shells there is always nc which is usually probably the wiser choice."
+        },
+        {
+          "id": 48559768,
+          "author": "dchest",
+          "text": "It's interesting that most of the comments here are about using this feature to bypass security restrictions (whether valid or not). It says a lot about the attack surface of GNU utilities caused by featuritis."
+        },
+        {
+          "id": 48558019,
+          "author": "mrshu",
+          "text": "I ran into this while checking connectivity between containers on an internal Docker network where the image had neither curl nor wget. The main surprise was that Bash has /dev/tcp which lets you do the equivalent of an HTTP request with a bit of shell magic, for instance: exec 3<>/dev/tcp/service/8642 printf 'GET /health HTTP/1.1\\r\\nHost: service\\r\\nConnection: close\\r\\n\\r\\n' >&3 cat <&3 Where `service` is just the hostname of whatever you’re talking to and 8642 is the port you are trying to talk HTTP to. Pretty cool!"
+        },
+        {
+          "id": 48558915,
+          "author": "simonw",
+          "text": "Neat, works against example.com exec 3<>/dev/tcp/example.com/80 printf 'GET / HTTP/1.1\\r\\nHost: example.com\\r\\nConnection: close\\r\\n\\r\\n' >&3 cat <&3 Outputs: HTTP/1.1 200 OK Date: Tue, 16 Jun 2026 17:37:45 GMT Content-Type: text/html ... I always end up on example.com for this kind of thing because there are so few domains these days that don't enforce https!"
+        },
+        {
+          "id": 48559355,
+          "author": "sam_lowry_",
+          "text": "A few years ago I had to do this for a SpringBoot health check from a Docker container: FROM openjdk:11-jre-slim HEALTHCHECK --start-period=10s --timeout=3s --retries=5 \\ CMD perl -e \"use IO::Socket; $sock = IO::Socket::INET->new(Proto => 'tcp', PeerAddr => 'localhost', PeerPort => '8888') or die $@; $sock->autoflush(1); print $sock 'GET /actuator/health HTTP/1.1' . chr(0x0a) . chr(0x0d) . 'Host: localhost:8888' . chr(0x0a) . chr(0x0d) . 'Connection: close' . chr(0x0a) . chr(0x0d) . chr(0x0a) . chr(0x0d); while (my $line = $sock->getline ) { if ($line =~ /UP/) {exit;} }; close $sock; exit 1;\""
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 6,
+      "id": 48558545,
+      "title_en": "Gamers beware: malicious wallpapers on Steam found stealing accounts",
+      "title_ja": "Gamers beware: malicious wallpapers on Steam found stealing accounts",
+      "url": "https://securelist.com/dozens-of-malicious-wallpapers-found-on-steam-workshop/120186/",
+      "hn_url": "https://news.ycombinator.com/item?id=48558545",
+      "score": 31,
+      "comment_count": 18,
+      "posted_at": "2026-06-16T17:15:02+00:00",
+      "comments": [
+        {
+          "id": 48558850,
+          "author": "beart",
+          "text": "So this vulnerability isn't directly the result of using Steam, or any of the Steam profile customizations, such as avatars and profile page backgrounds. But rather, it is a vulnerability in a third-party application \"Wallpaper Engine\" which is available on Steam. I recall when screen savers were a common malware vector on Windows. I suppose everything old is new again."
+        },
+        {
+          "id": 48559019,
+          "author": "jjmarr",
+          "text": "I love how the post is clearly written by AI. A human might've noticed all the screenshots appear to be of interactive hentai games distributed through Wallpaper Engine. And wouldn't have said: > On the surface, this wallpaper sample (above) we uncovered in December 2025 looks completely harmless. In reference to a screenshot of an anime woman with ripped clothes, eyes in fear, being monitored by CCTV camera. From my knowledge, \"adult entertainment\" is targeted by malware because it's socially embarrassing to admit that was the attack vector. It's relevant to point that out."
+        },
+        {
+          "id": 48559557,
+          "author": "wxw",
+          "text": "> The whole concept of “application wallpapers” essentially allows foreign code to be run directly on your computer. Cybercriminals took note of this feature and started embedding malware right into these types of wallpapers. > Because Wallpaper Engine relies on Steam Workshop for content sharing, anyone can create a wallpaper and publish it for the community to download and install for free. RIP"
+        },
+        {
+          "id": 48559290,
+          "author": "ApolloFortyNine",
+          "text": "Wallpaper Engine is pretty old now, and I remember using it years ago reading warning about not downloading unknown wallpapers. I believe there's even settings in the configuration not to run arbitrary code. 8 year old post about it, but honestly pretty sure it's been warned since day 1. [1] [1] https://www.reddit.com/r/wallpaperengine/comments/7xg27d/rem..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 7,
+      "id": 48555838,
+      "title_en": "But yak shaving is fun",
+      "title_ja": "But yak shaving is fun",
+      "url": "https://parksb.github.io/en/article/32.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48555838",
+      "score": 95,
+      "comment_count": 24,
+      "posted_at": "2026-06-16T14:26:26+00:00",
+      "comments": [
+        {
+          "id": 48559612,
+          "author": "monocultured",
+          "text": "I was taken by Christopher Priests book The Extremes and sat down to write a blog post about what compelled me so much about it, and wanted to add some gifs to it. In particular the \"deja vu\" scene from The Matrix, but I couldn't find it, and I no longer have an old version of Photoshop around to create the gif myself, and three weeks (and many tokens later) I'm finishing up an xcode MacOS native app that is dedicated to generating gifs. I've still not written the blog post."
+        },
+        {
+          "id": 48559201,
+          "author": "thimabi",
+          "text": "I always liked yak shaving, but avoided it because I knew it came with costs and tradeoffs. More recently, with the help of AI, I’ve been doing lots of it, as the costs and tradeoffs have greatly diminished. In fact, I’ve learned that building my own tools and frameworks, when done properly, comes with huge performance benefits and helps me understand the problems I’m trying to solve much more deeply. There has never been a better time for yak shaving!"
+        },
+        {
+          "id": 48559015,
+          "author": "danielrmay",
+          "text": "Yak-shaving-shaming puts limits on the creativity of talented engineers by constraining them to existing patterns and practices or building on top of abstractions, and practically, that results in engineers and teams with less breadth. In an applied software world that's exploded in framework and library complexity in recent years, I think there are always going to be yaks in dire need of a shave."
+        },
+        {
+          "id": 48558141,
+          "author": "kown7",
+          "text": "My favourite Yak from Malcolm in the middle. https://youtube.com/shorts/kSJgLA1frS4?is=2RA7C0EDEe7Mg8Fp"
+        },
+        {
+          "id": 48558708,
+          "author": "tombert",
+          "text": "Tangential but it's a story that I find funny. At a previous job, my coworkers coined the term \"Thomasing\" [1], referring to me, as \"the act of having a question explained so thoroughly, detailed, and long-winded that the asker has lost interest in the question that they were asking\". I thought it was pretty funny, because that does basically describe me in a nutshell. [1] Lovingly, it was a good, fairly-tight-knit group, they weren't being jerks. We all did lighthearted ribbing."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 8,
+      "id": 48557768,
+      "title_en": "Making ast.walk 220x Faster",
+      "title_ja": "Making ast.walk 220x Faster",
+      "url": "https://reflex.dev/blog/why-ast-walk-when-you-can-ast-sprint/",
+      "hn_url": "https://news.ycombinator.com/item?id=48557768",
+      "score": 40,
+      "comment_count": 8,
+      "posted_at": "2026-06-16T16:25:28+00:00",
+      "comments": [
+        {
+          "id": 48558460,
+          "author": "eska",
+          "text": "I appreciate that you first tried to optimize the original Python code. Idiomatic Python is unfortunately disappointingly slow and not so interesting to compare to."
+        },
+        {
+          "id": 48558238,
+          "author": "westurner",
+          "text": "Could this ast.sprint ast.walk optimization make libCST or bandit faster? https://news.ycombinator.com/item?id=39111747 libCST: https://github.com/Instagram/LibCST bandit: https://github.com/PyCQA/bandit Links to codemod tools; \"Baby Steps into Genetic Programming\" https://news.ycombinator.com/item?id=43617655"
+        },
+        {
+          "id": 48558083,
+          "author": "123rust123",
+          "text": "let me guess, the improved version is written in Rust?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 9,
+      "id": 48556644,
+      "title_en": "After AI Takes Everything",
+      "title_ja": "After AI Takes Everything",
+      "url": "https://ursb.me/en/posts/after-ai-takes-everything/",
+      "hn_url": "https://news.ycombinator.com/item?id=48556644",
+      "score": 51,
+      "comment_count": 34,
+      "posted_at": "2026-06-16T15:20:05+00:00",
+      "comments": [
+        {
+          "id": 48559592,
+          "author": "agentultra",
+          "text": "Again, they didn’t smash the machines because they hated the technology or wanted everyone to be making lace by hand. They were arguing for basic human rights in the workplace. Things like child labour were still super common and were among the practices the Luddites wanted to abolish. Along with the workhouses they wanted to replace with protection for workers (they didn’t have the word for it but they wanted a social security system). They smashed the machines for leverage. There was little labour law at the time. Most of it was written by the capital holders with the help of the constabulary. Things like showing up to work on time or no pay, etc. Violence, controlled violence, was the tool they used to try and get the capital holders to the table and negotiate. It failed, as we know, and it was a bloody failure. People were executed and jailed. The movement became a pejorative for someone who is backwards and against technology and progress."
+        },
+        {
+          "id": 48559769,
+          "author": "kmoser",
+          "text": "> Go where it’s new. Build things no one has built yet — things that other people’s workflows can come to depend on. One important rule here: don’t build what can be obtained by burning tokens. Any engineering product that someone has already built and that you can simply have AI clone — one more review bot, one more workflow tool — is not worth your energy, because its acquisition cost has already approached zero. What’s worth building is paradigm-level work: things that, once they exist, change how other people work. But once you build something new, that people depend on, they will shortly want to move away from that dependency, lest you raise prices or disappear. Even paradigm-level work ends up as tools that can be replicated by other humans, at the cost of a few tokens. That's a difficult dragon to catch and ride successfully. I think the author had it right when they talked about going deeper into the stack, where we are still loath to deploy AI. The only way to stay ahead of the beast is to do things the beast can't do reliably."
+        },
+        {
+          "id": 48558727,
+          "author": "no_multitudes",
+          "text": "Writing tip: you do not need to have LLMs expand your ideas into a longer form for you. Spreading out your ideas across a longer post does not make them better."
+        },
+        {
+          "id": 48559567,
+          "author": "visarga",
+          "text": "I have my own take on what is ours and can never be taken away by AI. When a task is initiated, it starts from a need, from a specific context. To work it out the AI needs to continuously interact with the context, and get feedback from it. At the end gains, losses, risks and costs sink back in the context. The context is you, the person who prompts, your team or company. It is indexical and relational. It is maximally distributed. It cannot be hoarded. You can't eat so that I feel satiated. AI is called to do the work, but it can't handle 3 things - start, middle and end of a task."
+        },
+        {
+          "id": 48559120,
+          "author": "functionmouse",
+          "text": "> My answer: soon. By the end of this year or next, the year after at the very latest. lol Two More Weeks(TM)"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 10,
+      "id": 48556163,
+      "title_en": "SubQ 1.1 Small",
+      "title_ja": "SubQ 1.1 Small",
+      "url": "https://subq.ai/subq-1-1-small-technical-report",
+      "hn_url": "https://news.ycombinator.com/item?id=48556163",
+      "score": 71,
+      "comment_count": 32,
+      "posted_at": "2026-06-16T14:50:10+00:00",
+      "comments": [
+        {
+          "id": 48556536,
+          "author": "cmogni1",
+          "text": "I don’t understand why this lab is allergic to providing details on what they actually made, especially when Chinese labs are more than willing to share architectural specs/code/kernels (eg NSA/FSA, RAMBa, HISA, DSA LightningIndexer, etc). I don’t doubt that they’ve done something here, but the lack of details makes me default not trust this, particularly when this is the second time that they’ve released a “technical report” that just waxes poetic about the concept."
+        },
+        {
+          "id": 48556412,
+          "author": "giancarlostoro",
+          "text": "This one's interesting, and I think the next frontier for LLMs should really just be, how can we get something like Opus 4.6 to cost drastically less, for the same output? I say 4.6 because from 4.6 onwards it's been pretty darn good, at least for me, always feels like every model upgrade someone hates it, heck even 4.5 was fine."
+        },
+        {
+          "id": 48556847,
+          "author": "wxw",
+          "text": "> SSA replaces the O(n²) dense attention pass with a learned sparse formulation that scales linearly with context length. > At 1M tokens, SubQ 1.1 Small requires 64.5x less compute than dense attention and runs 56x faster than FlashAttention-2. Awesome stuff. Solving context at the model architecture layer rather than trying to bolt on extra memory is the right direction IMO."
+        },
+        {
+          "id": 48557546,
+          "author": "samber",
+          "text": "According to Subquadratic, Needle in a Haystack is strong up to 12m tokens, but RULER has not been tested above 128k tokens ??"
+        },
+        {
+          "id": 48556560,
+          "author": "embedding-shape",
+          "text": "> SubQ 1.1 Small scores near-perfect at 1M, 2M, 6M, and 12M tokens. The model was trained predominantly at 1M tokens yet the retrieval held near perfectly at 12x that length, despite compressing attention to just 0.13% of relationships. This generalization is a direct consequence of SSA routing attention based on content relevance rather than fixed positional patterns. If the results persists from 1M to 12M, why not 24M or 48M? Sounds almost too good to be true. With back of the napkin math from inside my head, that'd be like 0.5/1 million LOC, depending on language/code density, could just fold the entire codebase into one prompt if it's a small one, that'd be neat :)"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 11,
+      "id": 48559188,
+      "title_en": "GPT‑NL: a sovereign language model for the Netherlands",
+      "title_ja": "GPT‑NL: a sovereign language model for the Netherlands",
+      "url": "https://www.tno.nl/en/digital/artificial-intelligence/gpt-nl/",
+      "hn_url": "https://news.ycombinator.com/item?id=48559188",
+      "score": 10,
+      "comment_count": 2,
+      "posted_at": "2026-06-16T17:54:02+00:00",
+      "comments": [
+        {
+          "id": 48559638,
+          "author": "HelloUsername",
+          "text": "Previously posted on 02-dec-2023 https://news.ycombinator.com/item?id=38497495 3 comments"
+        },
+        {
+          "id": 48559684,
+          "author": "Marciplan",
+          "text": "Supposedly this model also aims to treat publishers of all sizes well. Looking forward to its launch soon :)"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 12,
+      "id": 48557530,
+      "title_en": "Apple's weird anti-nausea dots cured my car sickness",
+      "title_ja": "Apple's weird anti-nausea dots cured my car sickness",
+      "url": "https://www.theverge.com/tech/942854/apple-vehicle-motion-cues-review-really-work",
+      "hn_url": "https://news.ycombinator.com/item?id=48557530",
+      "score": 192,
+      "comment_count": 68,
+      "posted_at": "2026-06-16T16:12:06+00:00",
+      "comments": [
+        {
+          "id": 48558673,
+          "author": "sowbug",
+          "text": "You might ask why motion sickness even exists in the first place. Why do nausea and vomiting make sense when your body is in a car or on a boat? Nobody knows for sure, but there's a convincing theory. Zillions of years ago, we were foragers. We ate what we found. And if we ate something bad, like a poisonous berry, we could die. One of the first symptoms of neurotoxin ingestion is that your eyes lose their tracking ability. And an easy way for your body to detect this is when your eyes and ears (vestibular system) disagree about your body's position and motion in space. So we presumably evolved a simple rule: if (eyes != ears) { vomit(); } Which gets that bad berry right back out of the system. This is why these Android and Apple gadgets work: they restore visual cues helping your eyes match what your ears are telling you. It's why looking at the horizon on a boat helps. And it's why reading in the car gets some people so horribly sick."
+        },
+        {
+          "id": 48558237,
+          "author": "40four",
+          "text": "Never knew this feature existed! I’ve gotten this type of motion sickness my whole life, so I’m excited to try it out. It would be nice if it’s effective for me. I get the same type of nausea described by the author. I can’t read a book or look at a screen for too long without a feeling awful. I can also get it just from sitting in a rear passenger seat, especially if vehicle has poor visibility, and even worse with a bad driver. I have to really focus on looking outside the vehicle at the moving world. Interestingly, I think there are people that have the opposite type of motion sickness. For example, my mom could never play arcade racing games without getting nauseous. The issue being focusing on a screen with rapidly moving objects and everything else in the peripheral being fixed, versus focusing on a fixed object and everything in the peripheral moving. She never had any issue reading a book in a moving car"
+        },
+        {
+          "id": 48558205,
+          "author": "advisedwang",
+          "text": "Seems like there's a few android equivalents: https://play.google.com/store/apps/details?id=com.panshen.mo... https://play.google.com/store/apps/details?id=com.urbandroid... And even one that claims to work with sound: https://play.google.com/store/apps/details?id=com.samsung.a1... EDIT: Actually there's an enormous number of apps like this, many released very recently with similar style etc. Weird."
+        },
+        {
+          "id": 48559138,
+          "author": "mmcclure",
+          "text": "As a kid I didn't get carsick at all. I could work on my laptop, read, whatever while my parents drove. As an adult, at some point I started to barely be able to do anything but keep my eyes on the road without feeling bad. Turned these on recently, and they work bizarrely well...unfortunately. Downside is that I feel like I lost an excuse to avoid devices for a few minutes while traveling."
+        },
+        {
+          "id": 48559416,
+          "author": "modeless",
+          "text": "They don't cure my kids' or wife's car sickness, unfortunately. I'm not sure the implementation is as good as it could be, it seems a bit rough. Motion sickness is an overlooked problem. A large percentage of the population has severe, almost debilitating motion sickness. It curtails a ton of travel. Almost all transportation and tourism related businesses would stand to benefit hugely from a real cure, not to mention VR and even regular gaming to some degree. There ought to be an industry effort to fund research."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 13,
+      "id": 48559083,
+      "title_en": "10Gb/s Ethernet: switching to a Broadcom SFP+ module",
+      "title_ja": "10Gb/s Ethernet: switching to a Broadcom SFP+ module",
+      "url": "https://www.gilesthomas.com/2026/06/10g-ethernet-switching-to-broadcom-sfp-plus",
+      "hn_url": "https://news.ycombinator.com/item?id=48559083",
+      "score": 13,
+      "comment_count": 3,
+      "posted_at": "2026-06-16T17:48:42+00:00",
+      "comments": [
+        {
+          "id": 48559664,
+          "author": "wingmanjd",
+          "text": "Speaking of modules that lie about themselves, unifi has an interesting little device called the \"SFP Wizard\" that can reprogram sfp modules. https://www.ui.com/us/en/integrations/accessory-tech/sfp-wiz... Previously seen: https://news.ycombinator.com/item?id=45732874"
+        },
+        {
+          "id": 48559510,
+          "author": "goolz",
+          "text": "I am in the market for an SFP+ module and was looking at this exact model! The serendipity made me smile. Cheers mate."
+        },
+        {
+          "id": 48559472,
+          "author": "jauntywundrkind",
+          "text": "Recommendations for 25Gbit next please!"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 14,
+      "id": 48552844,
+      "title_en": "Correlated randomness in Slay the Spire 2",
+      "title_ja": "Correlated randomness in Slay the Spire 2",
+      "url": "https://tck.mn/blog/correlated-randomness-sts2/",
+      "hn_url": "https://news.ycombinator.com/item?id=48552844",
+      "score": 223,
+      "comment_count": 67,
+      "posted_at": "2026-06-16T09:46:49+00:00",
+      "comments": [
+        {
+          "id": 48554947,
+          "author": "account42",
+          "text": "> Implementing a PRNG within the codebase instead of calling the C# standard library has an additional advantage: seeds are guaranteed to be the same on all platforms. In Spire 1, seeds on the desktop version of the game were different from seeds on the mobile version of the game, because the standard library implementation of PRNG differed between platforms. It is also worth mentioning that the standard library implementation might change over time, which would break all past seeds. This is the correct conclusion - game developers should consider gameplay-relevant random generators part of their gameplay code rather than platform code."
+        },
+        {
+          "id": 48556164,
+          "author": "jcalx",
+          "text": "Combining this article and discovery of an unwinnable seed in the original Slay the Spire [0] — I've always pondered the existence of some kind of \"RNG hell\", where a game uses the time as its random seed and, due to some quirk of the hashing function and the game mechanics, the game is rendered completely unwinnable for (say) four days straight. (Sometimes it feels like I'm in it!) [0] https://oohbleh.github.io/losing-seed/"
+        },
+        {
+          "id": 48556417,
+          "author": "kami23",
+          "text": "I haven't had time to read the whole article, but I really appreciate the cross section of the world that reads HackerNews and plays STS2. STS1 and STS2 are my favorite games and to see this pop up here brought a big smile on my face. Thanks for sharing."
+        },
+        {
+          "id": 48554333,
+          "author": "stdc105",
+          "text": "Interestingly, StS2 got this problem because it was using C# System.Random in Godot, while the RNG class in GDScript (Godot Engine's own scripting language) is using PCG32 which should be free of this particular problem."
+        },
+        {
+          "id": 48554893,
+          "author": "iliveinberlin",
+          "text": "This is also the cause of the thing in Minecraft where you find surface clay, move X blocks over, and dig straight down into diamonds."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 15,
+      "id": 48557079,
+      "title_en": "Calvin and Hobbes and the price of integrity",
+      "title_ja": "Calvin and Hobbes and the price of integrity",
+      "url": "https://therepublicofletters.substack.com/p/calvin-and-hobbes-and-the-price-of",
+      "hn_url": "https://news.ycombinator.com/item?id=48557079",
+      "score": 10,
+      "comment_count": 0,
+      "posted_at": "2026-06-16T15:44:44+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 16,
+      "id": 48550779,
+      "title_en": "I admire Fabrice Bellard. He is almost certainly a better overall programmer",
+      "title_ja": "I admire Fabrice Bellard. He is almost certainly a better overall programmer",
+      "url": "https://twitter.com/ID_AA_Carmack/status/2064095424420487226",
+      "hn_url": "https://news.ycombinator.com/item?id=48550779",
+      "score": 756,
+      "comment_count": 363,
+      "posted_at": "2026-06-16T04:58:15+00:00",
+      "comments": [
+        {
+          "id": 48554489,
+          "author": "andai",
+          "text": "Reading the list of Bellard's contributions, what strikes me is not the raw ability (although certainly there is that too!) but \"damn, he knows how to pick 'em!\" He keeps picking stuff to work on that ends up being insanely useful to a massive number of people. That seems somehow even more remarkable than the technical ability. Deciding what to work on might be the most important question in life."
+        },
+        {
+          "id": 48553342,
+          "author": "miki123211",
+          "text": "It's interesting to me that most of Bellard's work is basically turning specs into C. His most important projects are ffmpeg (codec specs), qEmu (ISA specs), QuickJS (the EcmaScript spec), tinyC (the C spec), and his telecom company (LTE specs). I guess the pi calculations and neural network stuff are exceptions. Just to be clear, this doesn't make his work any less impressive. Highly performant codec and emulator implementations are no easy feat; it's just interesting that most of this work falls into that relatively narrow area."
+        },
+        {
+          "id": 48551779,
+          "author": "pandaforce",
+          "text": "Bellard hasn't been involved in FFmpeg for *over 20 years* at this point, and more like 23. His code was not great and reeked of sphagetti due to FFmpeg back then lacking any framework for code sharing between components and codecs. These days none of his code survives. Everything that became of FFmpeg is because of other developers. Yet he's treated as the one-and-only BDFL of FFmpeg, with any other developers building upon his wise framework since time immemorial. These days all he does is hold the copyright, which lets him, *and only him*, elect which project/leader may call itself FFmpeg. He's an unelected dictator, who already used his powers once to ostracize libav developers in favor of another dictator."
+        },
+        {
+          "id": 48554237,
+          "author": "santiagobasulto",
+          "text": "Bellard has a very interesting project that is `ts_zip`, a compression algorithm powered by LLMs. It's just an \"experiment\" and should never be used in production, but very smart. The description on his website is amusing: \"The ts_zip utility can compress (and hopefully decompress) text files using a Large Language Model\" https://bellard.org/ts_zip/"
+        },
+        {
+          "id": 48556454,
+          "author": "delichon",
+          "text": "I have wondered if I sequentially ask people who is the smartest living person they know, and ask that person next, would it lead me toward the same small group of geniuses. If I were doing that with the best living coder I might well start with Carmack. So next I'd have to go to Bellard, and hope that his answer isn't Carmack."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 17,
+      "id": 48497067,
+      "title_en": "Formal Methods and the Future of Programming",
+      "title_ja": "Formal Methods and the Future of Programming",
+      "url": "https://blog.janestreet.com/formal-methods-at-jane-street-index/",
+      "hn_url": "https://news.ycombinator.com/item?id=48497067",
+      "score": 19,
+      "comment_count": 1,
+      "posted_at": "2026-06-11T22:07:37+00:00",
+      "comments": [
+        {
+          "id": 48559264,
+          "author": "Taikonerd",
+          "text": "Dupe of https://news.ycombinator.com/item?id=48526633"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 18,
+      "id": 48558045,
+      "title_en": "Why is Meta destroying its engineering organization?",
+      "title_ja": "Why is Meta destroying its engineering organization?",
+      "url": "https://newsletter.pragmaticengineer.com/p/why-is-meta-destroying-its-engineering",
+      "hn_url": "https://news.ycombinator.com/item?id=48558045",
+      "score": 99,
+      "comment_count": 61,
+      "posted_at": "2026-06-16T16:42:32+00:00",
+      "comments": [
+        {
+          "id": 48559730,
+          "author": "chvid",
+          "text": "Facebook and Instagram are such strong businesses that they could completely stop development work and the businesses would still be unbeatable monopolies for years to come. But what I don’t understand is how screen recording / keyboard recording is useful AI training data? It seems like a lot cost and a lot of pissing off people for something that is actually not very valuable."
+        },
+        {
+          "id": 48559261,
+          "author": "peanut-walrus",
+          "text": "Turns out you don't actually need top-tier engineering talent if your only business is selling ads to scammers to prey on the elderly?"
+        },
+        {
+          "id": 48559798,
+          "author": "jazzpush2",
+          "text": "This sounds bad to say, but it's difficult to feel bad for any meta engineers who lost their jobs. You undoubtedly had other options, yet you chose to work for one of the most well-documented do-bad-for-the-world organizations on the planet. Former employees will deflect and make the comparison to United Fruit workers, despite the obvious difference in employee-optionality and influence. You made your bed. I hope your organization gets destroyed. I hope you reflect on the damage you've caused the world."
+        },
+        {
+          "id": 48558963,
+          "author": "fabian2k",
+          "text": "> 30-50% of engineers on core teams have been forcefully reassigned to data labeling and RLHF, upsetting folks even more. This really doesn't sound believable to me, but who knows with all the craziness going on. Software developers in the US are seriously expensive, using them for data labeling would be a waste of resources. And the percentage sounds very high, unless \"core teams\" is only a small subset of the total developer count."
+        },
+        {
+          "id": 48559762,
+          "author": "Groxx",
+          "text": "[delayed]"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 19,
+      "id": 48550693,
+      "title_en": "The time the x86 emulator team found code so bad they fixed it during emulation",
+      "title_ja": "The time the x86 emulator team found code so bad they fixed it during emulation",
+      "url": "https://devblogs.microsoft.com/oldnewthing/20260615-00/?p=112419",
+      "hn_url": "https://news.ycombinator.com/item?id=48550693",
+      "score": 451,
+      "comment_count": 144,
+      "posted_at": "2026-06-16T04:46:36+00:00",
+      "comments": [
+        {
+          "id": 48551299,
+          "author": "psanchez",
+          "text": "This reminds me of a story from 15 years ago, where I was developing a technology to download games on demand by hooking into the OS calls. There was a particular game that was superslow when this tech was applied. Original game loading took around 15-20 seconds, whereas once the tech was applied it took easily 3-5 min, even with all data already downloaded. When I started digging into it, I realized the reason was the game was using something like fread(data, 1, 65536, fptr); instead of fread(data, 65536, 1, fptr); Which basically expanded back in the day to 65k reads of 1 byte for several MB file. Each fread translated to 65k reads of ReadFile Windows API. Since my code was hooking on ReadFile system call, and my call was heavier than ReadFile, the game loading felt really slow. Unusable. It would have not been fun for players. The easy fix was to swap arguments for certain calls. The long fix required to use an internal cache to account for these cases so that the hooked ReadFile was faster when data was already in disk. Funny thing is that as we started rolling out the tech and applying it to more and more games we realized lots of games did this. We went for the cache fix and games ended up loading faster than before. Honestly, games could have load all the data in a couple of seconds by just swapping the args. I'm guessing developers did this on purpose so that games seemed like they were loading a lot of stuff, although you never know."
+        },
+        {
+          "id": 48551052,
+          "author": "dlcarrier",
+          "text": "SimCity had a read-after-free bug that Microsoft patched in Windows 95. That was a lot easier for customers than having Maxis fix it, which could have required exchanging copies of the game."
+        },
+        {
+          "id": 48559436,
+          "author": "andikleen2",
+          "text": "Dave Jones used to have a series of \"Why user space sucks\" Linux kernel conference talks with many such examples, usually with dumb and redundant system calls. However as someone who looks a lot at instruction traces I could probably write on e on why Linux kernel code sucks too. One of my current pet peeves is the way Linux walks bitmasks of CPU bits, which is a reasonably common operation. Due to a chain of unfortunate changes and decisions it currently needs 16+ instructions to find the next bit for something which the x86 instruction set has a single instruction. Of course that is so big that it is even outlined, adding even more overhead."
+        },
+        {
+          "id": 48550898,
+          "author": "hodgehog11",
+          "text": "I think we're starting to see more of this sort of thing happening now with Proton and Wine gaining prominence in the Linux community. Some games (Elden Ring comes to mind) have bad enough PC ports when they come out that the compatibility layer can incorporate a hotfix to improve performance, while users of the software on the original platform still had to suffer."
+        },
+        {
+          "id": 48551146,
+          "author": "selcuka",
+          "text": "To be fair it is possible that the developer enabled a special \"unroll all loops, no matter what\" optimisation flag during compilation. I agree it would be stupid for a compiler to even support such a flag, but those were the 1980s/90s."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 20,
+      "id": 48558696,
+      "title_en": "The octopus architecture for AI agents",
+      "title_ja": "The octopus architecture for AI agents",
+      "url": "https://blog.goodman.dev/blog/octopus-agent-architecture/",
+      "hn_url": "https://news.ycombinator.com/item?id=48558696",
+      "score": 9,
+      "comment_count": 2,
+      "posted_at": "2026-06-16T17:24:45+00:00",
+      "comments": [
+        {
+          "id": 48559443,
+          "author": "chrisweekly",
+          "text": "You might want to add a link to your repos at https://github.com/torkbot"
+        },
+        {
+          "id": 48559069,
+          "author": "7e",
+          "text": "Everyone is doing this already. All the frontier model makers, as well as a number of startups which are trying to be the IDE for the center of the octopus. Nothing about this is novel."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 21,
+      "id": 48554814,
+      "title_en": "Qwen-Robot Suite: A Foundation Model Suite for Physical World Intelligence",
+      "title_ja": "Qwen-Robot Suite: A Foundation Model Suite for Physical World Intelligence",
+      "url": "https://qwen.ai/blog?id=qwen-robotsuite",
+      "hn_url": "https://news.ycombinator.com/item?id=48554814",
+      "score": 53,
+      "comment_count": 4,
+      "posted_at": "2026-06-16T13:15:15+00:00",
+      "comments": [
+        {
+          "id": 48559633,
+          "author": "wiremine",
+          "text": "Nice! What are some hardware platforms that leverage these models?"
+        },
+        {
+          "id": 48558528,
+          "author": "lukewarm707",
+          "text": "qwen just keeps delivering, it's too good"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 22,
+      "id": 48519723,
+      "title_en": "An interview with an Apple emoji designer",
+      "title_ja": "An interview with an Apple emoji designer",
+      "url": "https://shadycharacters.co.uk/2026/06/ollie-wagner/",
+      "hn_url": "https://news.ycombinator.com/item?id=48519723",
+      "score": 71,
+      "comment_count": 35,
+      "posted_at": "2026-06-13T17:56:47+00:00",
+      "comments": [
+        {
+          "id": 48557537,
+          "author": "9dev",
+          "text": "> We mapped almost 1:1 to SoftBank’s set, though Apple chose to omit a few of the more risqué ones. Which are these risqué emojis mentioned here? I don't think I have ever seen any that are even slightly graphic, which is probably why all the emoji slang conventions have spread like fire (Aubergine, Peach, etc.)"
+        },
+        {
+          "id": 48556015,
+          "author": "holistio",
+          "text": "There is still no walnut emoji. Blonde-haired, black-skinned pregnant man? Yes. Walnut? No."
+        },
+        {
+          "id": 48559135,
+          "author": "dwflanagan",
+          "text": "I just finished Keith Houston's previous book _Empire of the Sum_, a history of calculators, I'll be reading this next."
+        },
+        {
+          "id": 48557021,
+          "author": "ollien",
+          "text": "If the author is reading this, the hyperlink to the book in the first paragraph is broken. Looks like it's attempting to direct you to an absolute url that was meant to be relative. <a href=\"https://books/face-with-tears-of-joy\">"
+        },
+        {
+          "id": 48556539,
+          "author": "aforty",
+          "text": "So cool to get the background story on this. I remember adding the Japanese keyboard here in the US just so I could get access to emojis."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 23,
+      "id": 48558338,
+      "title_en": "'Ghost jobs' could soon be illegal in New York",
+      "title_ja": "'Ghost jobs' could soon be illegal in New York",
+      "url": "https://www.fastcompany.com/91558427/ghost-jobs-could-soon-be-illegal-in-new-york",
+      "hn_url": "https://news.ycombinator.com/item?id=48558338",
+      "score": 40,
+      "comment_count": 13,
+      "posted_at": "2026-06-16T17:01:12+00:00",
+      "comments": [
+        {
+          "id": 48559744,
+          "author": "mancerayder",
+          "text": "How do you enforce that? I don't even know what I applied to that's a ghost and what isn't. Maybe I'm completely clueless, but there's no difference: recruiters ghost, sometimes companies ghost and sometimes they reply, sometimes you get an F U letter, you're not good enough, sometimes not. How did people even find out ghost jobs existed? I feel like the swindle must not be new."
+        },
+        {
+          "id": 48559733,
+          "author": "danielvaughn",
+          "text": "I'd support it at the federal level. It's cruel towards people looking for work, and it costs them real time at a point in their lives when time is such a critical factor."
+        },
+        {
+          "id": 48558906,
+          "author": "tancop",
+          "text": "great news if this moves forward. while we at it lets ban ghosting applicants and make companies give a direct rejection email with a reason, it can be as simple as \"not qualified\" or \"we found a better candidate, try again next time\". waiting for answers that never come is always the worst part."
+        },
+        {
+          "id": 48559530,
+          "author": "PaulHoule",
+          "text": "Kinda funny. When I was looking for my current job I had an early (2019 or so) AI based system to manage my job hunt and I was struggling with \"ghost jobs\" and obvious fraudulent listings in New York's job bank. (e.g. they say it is a Java job in Syracuse and it is really a Cold Fusion job in Atlanta) If my job search had gone on any longer I would have given myself (and my bot) a job to search and destroy those listings."
+        },
+        {
+          "id": 48558739,
+          "author": "bsimpson",
+          "text": "> or they might be legally obligated to post a job publicly, even if they’ve already identified the person they want to hire Famous/obvious bug in the H1B process, but not sure how this legislation would address it. If they're legally obligated to post the role, won't they just say \"we'll fill this job <whenever the H1B process says we can take this down>\"?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 24,
+      "id": 48522316,
+      "title_en": "Getting Creative with Perlin Noise Fields",
+      "title_ja": "Getting Creative with Perlin Noise Fields",
+      "url": "https://sighack.com/post/getting-creative-with-perlin-noise-fields",
+      "hn_url": "https://news.ycombinator.com/item?id=48522316",
+      "score": 130,
+      "comment_count": 20,
+      "posted_at": "2026-06-13T22:55:39+00:00",
+      "comments": [
+        {
+          "id": 48554511,
+          "author": "thomascountz",
+          "text": "If you're into exploring this sort of thing yourself, I can extremely highly recommend Daniel Shiffman's Nature of Code[1]. It's among my top-5 recommended books about computing in general, let alone for algorithmic art. [1]: https://natureofcode.com/"
+        },
+        {
+          "id": 48553435,
+          "author": "mvanga",
+          "text": "Author here. I wrote this many years ago (2017?) while exploring techniques to create art that I could put up on my walls :-) If you enjoyed this article there are more similar ones linked on the main page: https://sighack.com/"
+        },
+        {
+          "id": 48557286,
+          "author": "iamsaitam",
+          "text": "If you dig Perlin noise fields, the next stop is fBM (Fractional Brownian Motion). Inigo Quilez has a good article about it - https://iquilezles.org/articles/fbm/"
+        },
+        {
+          "id": 48556067,
+          "author": "FeteCommuniste",
+          "text": "Nice examples, I think I landed on that page quite a while ago. I love Processing and Perlin noise. One thing I enjoyed was using Perlin noise values to compute a \"region\" on the canvas and making the behavior of a particle depend on which region it was in. Examples: https://020406.org/processing/PerlinNoiseBounds1.png https://020406.org/processing/PerlinNoiseBounds2.png https://020406.org/processing/PerlinNoiseBounds3.png The Processing code I wrote to make them is here: https://github.com/Brian-Fearn/Processing/blob/main/PerlinNo..."
+        },
+        {
+          "id": 48553448,
+          "author": "rikroots",
+          "text": "It turns out that adding noise to gradients is a really useful thing to do - so many new effects can be created with just a few additional parameters. Sadly, CSS and Canvas API gradients (linear, radial, conic) are very basic implementations (and SVG is not much more advanced). Recently I did some work to add software gradient enhancements to my canvas library. Because these run on the CPU rather than GPU they're computationally intense, but still worth the effort just to see what can be done with different spreads (pad, repeat, reflect, transparent) and noise engine operations inserted while calculating stuff like gradient color selection, and pixel positioning. Linear gradient demo test - https://scrawl-v8.rikweb.org.uk/demo/canvas-003.html"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 25,
+      "id": 48553450,
+      "title_en": "Unicorn – The Ultimate CPU Emulator",
+      "title_ja": "Unicorn – The Ultimate CPU Emulator",
+      "url": "https://www.unicorn-engine.org/",
+      "hn_url": "https://news.ycombinator.com/item?id=48553450",
+      "score": 66,
+      "comment_count": 19,
+      "posted_at": "2026-06-16T11:14:38+00:00",
+      "comments": [
+        {
+          "id": 48557934,
+          "author": "Retr0id",
+          "text": "For anyone who isn't familiar with Unicorn, it doesn't emulate any specific whole-system, it's a library/framework for emulation of just the CPU. You are responsible for hooking up the whole \"rest of the world\" to the emulated CPU, for whatever you might need. This includes things like emulating peripherals, syscalls, binary loading, etc. You usually use it to build your own emulator or other analysis tool, often for reverse engineering."
+        },
+        {
+          "id": 48558094,
+          "author": "fluoridation",
+          "text": "Somewhat relatedly, is there something halfway between QEMU and Unicorn? That is, a full VM in a library, with debugging capabilities. I'd like to be able to configure a VM, save the execution at a specific point, modify memory, run, and stop when some condition is hit (e.g. a memory address is read, or executed). For years I've had this idea of running the Jamella editor in multiple threads to crack Diablo II item seeds."
+        },
+        {
+          "id": 48555536,
+          "author": "bmenrigh",
+          "text": "I was just looking at Unicorn last week because it's used by unipacker to do automated unpacking of binaries. I built a \"toolbox\" for gpt-5.5 to do semi-automated malware and exploit reverse engineering and unipacker is sometimes useful for that purpose."
+        },
+        {
+          "id": 48556424,
+          "author": "harvie",
+          "text": "\"Based on Qemu 5, we built Unicorn2 from scratch\" What?"
+        },
+        {
+          "id": 48555836,
+          "author": "jsomedon",
+          "text": "uh.. what is a cpu emulator? or what can I do with it? I am kind of having hard time comprehend this."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 26,
+      "id": 48558337,
+      "title_en": "Specs Augmented Reality Glasses",
+      "title_ja": "Specs Augmented Reality Glasses",
+      "url": "https://newsroom.snap.com/introducing-specs-augmented-reality-glasses",
+      "hn_url": "https://news.ycombinator.com/item?id=48558337",
+      "score": 20,
+      "comment_count": 7,
+      "posted_at": "2026-06-16T17:00:59+00:00",
+      "comments": [
+        {
+          "id": 48559504,
+          "author": "Brystephor",
+          "text": "A few tech specs for those who don't want to read through the announcement: * 51 degree field of view. Stated as being like you're working at a 24\" monitor. * 4 hours of mixed-use battery life with the case holding another 20 hours * 132/136 grams depending on size * Supports prescription lenses, easily interchangeable/swappable Priced at $2195 w/ $200 deposit, arrival expected in Fall."
+        },
+        {
+          "id": 48559797,
+          "author": "tootie",
+          "text": "AR has yet to produce any value for anybody. Google failed, Apple failed, Meta basically built a creeper spy cam. These may be the most advanced devices to date, but hardware hasn't been the limitation for a long time. There's just no application that's more useful than just looking at your phone."
+        },
+        {
+          "id": 48559072,
+          "author": "asdev",
+          "text": ">Every important computing platform has been defined by what people built with it. The PC became meaningful because developers built software. The web became meaningful because developers built websites. Smartphones became meaningful because developers built apps. We believe augmented reality will be no different. At a $2195 price point, it just won't be possible to have an ecosystem. All the other platforms mentioned were orders of magnitude cheaper. That being said, I do think AR has real utility, but the price discovery will take a while"
+        },
+        {
+          "id": 48559205,
+          "author": "wxw",
+          "text": "> Today, SPECS are available for pre-order at SPECS.COM for $2,195, with a $200 refundable deposit. Dayum. I do buy into the AR glasses future. They’re insanely cool tech. Meta makes a great one."
+        },
+        {
+          "id": 48559447,
+          "author": "spullara",
+          "text": "they are expensive enough that they might be useful"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 27,
+      "id": 48550569,
+      "title_en": "Show HN: Garden of Flowers – an archive of pictorial typography before ASCII art",
+      "title_ja": "Show HN: Garden of Flowers – an archive of pictorial typography before ASCII art",
+      "url": "https://garden-of-flowers.heikkilotvonen.com/",
+      "hn_url": "https://news.ycombinator.com/item?id=48550569",
+      "score": 129,
+      "comment_count": 20,
+      "posted_at": "2026-06-16T04:25:57+00:00",
+      "comments": [
+        {
+          "id": 48559786,
+          "author": "quakeguy",
+          "text": "Very nice, i have a book in my library which you’ll find interesting. Jeremy Adler and Ulrich Ernst Text als Figur https://www.amazon.de/Text-als-Figur-Visuelle-Moderne/dp/352... It is full of pictures like you have collected. Example: https://imgur.com/a/mWL4kSs Sadly it seems this book is rather rare."
+        },
+        {
+          "id": 48556305,
+          "author": "BugsJustFindMe",
+          "text": "Hey, this archive you've put together is extremely impressive. How did you find all of these? Literally keyword search on digital collections?"
+        },
+        {
+          "id": 48551001,
+          "author": "efitz",
+          "text": "You should look at some Arabic calligraphy- there is a lot of artistic Arabic calligraphy where passages from the Quran, poetry, and other text are written beautifully as art."
+        },
+        {
+          "id": 48552892,
+          "author": "Aardwolf",
+          "text": "> https://garden-of-flowers.heikkilotvonen.com/?page=LKBGE51F3... Wow this is awesome, they had box-drawing characters in 1785!"
+        },
+        {
+          "id": 48551305,
+          "author": "softgrow",
+          "text": "At school studying typing there was a class of 66 all manual typewriters except for the two electrics. If you were good and had some spare time, you were given printed instructions to type particular characters and returns. Sometimes shift into red ink. Do it properly and you got an image. So maybe pre ASCII art?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 28,
+      "id": 48547985,
+      "title_en": "Banned book library in a wi-fi smart light bulb",
+      "title_ja": "Banned book library in a wi-fi smart light bulb",
+      "url": "https://www.richardosgood.com/posts/banned-book-library/",
+      "hn_url": "https://news.ycombinator.com/item?id=48547985",
+      "score": 549,
+      "comment_count": 327,
+      "posted_at": "2026-06-15T22:37:55+00:00",
+      "comments": [
+        {
+          "id": 48554713,
+          "author": "steviedotboston",
+          "text": "Cool project, except these aren't really \"banned\" books. thats a misleading term. In most of these cases, the book isn’t actually banned. Nobody is being arrested for owning it, Amazon isn’t forbidden from selling it, and adults can still read it whenever they want. What’s really being debated is whether a particular school library, children’s section, or curriculum should include a book. That’s not the same thing as government censorship. Schools and libraries make age-appropriate selection decisions all the time. They don’t carry every book ever published, and not every objectionable book belongs in front of kids just because someone wants to call its removal a “ban.” A single school library deciding not to carry a book because they think it's inappropriate, but that same book being available at the local public library, every book store in town, the internet, etc is not the same as the soviet union literally banning the ownership of books."
+        },
+        {
+          "id": 48549321,
+          "author": "N_Lens",
+          "text": "“As the Americans learned so painfully in Earth’s final century, free flow of information is the only safeguard against tyranny. The once-chained people whose leaders at last lose their grip on information flow will soon burst with freedom and vitality, but the free nation gradually constricting its grip on public discourse has begun its rapid slide into despotism. Beware of he who would deny you access to information, for in his heart he dreams himself your master.” - Commissioner Pravin Lal, Datalinks Alpha Centauri pertinent as ever."
+        },
+        {
+          "id": 48548592,
+          "author": "netsharc",
+          "text": "Years ago there was PirateBox: flash a small Wifi access point with a custom firmware that's a webserver that hosts a forum/filehost. Their website is dead, but here's a mod of the project; https://www.jasongriffey.net/librarybox/ Although, I dread to think what sort of files one would get when user uploads are allowed."
+        },
+        {
+          "id": 48555446,
+          "author": "rootbear",
+          "text": "A hidden “book server” like this could be set up in just about any electronic device with a sufficiently powerful microcontroller. But I think there is something delightfully poetic about using a source of light to spread suppressed knowledge."
+        },
+        {
+          "id": 48551653,
+          "author": "Schlagbohrer",
+          "text": "I have seen these described as Pirate Boxes before, way back around 2012. The basic idea is a box that throws up a wifi network and web server letting people upload/download files to it, while remaining disconnected from the wider internet. A geographically limited digital sharing library."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 29,
+      "id": 48558147,
+      "title_en": "Stop Using JWTs",
+      "title_ja": "Stop Using JWTs",
+      "url": "https://gist.github.com/samsch/0d1f3d3b4745d778f78b230cf6061452",
+      "hn_url": "https://news.ycombinator.com/item?id=48558147",
+      "score": 13,
+      "comment_count": 5,
+      "posted_at": "2026-06-16T16:49:46+00:00",
+      "comments": [
+        {
+          "id": 48559508,
+          "author": "solatic",
+          "text": "Necessary qualifier: for browser-based user sessions. Plenty of good uses for JWTs for service-to-service communication. edit: I read some of the linked stuff, e.g. https://paragonie.com/blog/2017/03/jwt-json-web-tokens-is-ba... . Please, if JWTs are such a horrifically insecure standard, go ahead and publish your means for hacking AWS STS's AssumeRoleWithWebIdentity , or don't publish and just exploit it by launching cryptominers in every Fortune 500 production AWS account. Let me know when you inevitably succeed, because JWTs are so insecure, right? /sarcasm"
+        },
+        {
+          "id": 48558148,
+          "author": "dzonga",
+          "text": "due to the recent FIFA hack - just a reminder - stop using JWTs"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 30,
+      "id": 48552687,
+      "title_en": "Feds freaked over Fable 5 after 'fix this code', not jailbreak, say researchers",
+      "title_ja": "Feds freaked over Fable 5 after 'fix this code', not jailbreak, say researchers",
+      "url": "https://www.theregister.com/security/2026/06/15/feds-freaked-over-fable-5-after-simple-fix-this-code-prompt-not-jailbreak-says-researcher/5255827",
+      "hn_url": "https://news.ycombinator.com/item?id=48552687",
+      "score": 485,
+      "comment_count": 289,
+      "posted_at": "2026-06-16T09:26:09+00:00",
+      "comments": [
+        {
+          "id": 48553494,
+          "author": "dathinab",
+          "text": "Lol \"fix this code\" is beautiful. Like it basically jail broke the \"no security vul guard rails\" not in any clever way but just by fixing them, producing exploit code just by writing test cases making sure it's fixed. So you just need to look at the code & tests as a human to get vulnerabilities and exploits(components). What makes this so beautiful IMHO is that it's a trivial jail break, but also a close to unfixable. At least not without making the model close to useless for normal development (it refuses to fix bugs/write code) or making it a major liability (it silently pretends it didn't see bugs and silently avoids fixing it, which for a human would count as intentional sabotage and might involve criminal liability)."
+        },
+        {
+          "id": 48553390,
+          "author": "martinald",
+          "text": "If you set aside political menace, this is a huge problem with Anthropic's strategy. You _cannot_ say that Mythos is super dangerous and can only be rolled out to certain people, but then release Fable with anything other than bulletproof cyber denials. Clearly with LLMs, bulletproof denials are ~impossible due to the way LLMs work. So you've ended up in a situation where Anthropic are simultaneously claiming it's a incredibly dangerous model _and_ there are (minor, potentially) problems with the security \"protections\". As technical people we understand that nothing can be perfect, esp in LLM world. But all my non technical friends were really confused how they had managed to make the model \"safe\" so quickly when it was released and the general sentiment was it shouldn't have been released - and now to an outsider I think it looks like it was never safe at all to release, so I can totally see how the current US administration have got themselves very upset with it. _Even if_ there was no political bad will, it's a bit of a silly scenario to end up in, and really quite easily foreseen."
+        },
+        {
+          "id": 48553486,
+          "author": "jpcompartir",
+          "text": "They weren't freaked by anything, it's a retaliatory shakedown after ideological differences and Anthropic not doing exactly what they're told/what the Admin wants them to do."
+        },
+        {
+          "id": 48558026,
+          "author": "peter422",
+          "text": "Also for all the people saying Amazon's part in this couldn't be fabricated, remember that Amazon is a \"friend of the administration\". During Andy Jassy's tenure, they paid $75MM (wildly outbidding everybody else) for a Melania documentary that grossed ~16MM, a move publicly defended by Jeff Bezos. Any neutral observer could see this was a wild overpay, and after the fact, a terrible business move. But that is not what Amazon said or continues to say. This was just a bribe with more steps to it. When the government comes out and says this is due to something Amazon pointed out, even if that is a complete lie, they know that Amazon won't say anything publicly about it. Amazon wants to maintain their \"friend of the administration\" status that they paid a lot of money to get. It is frustrating for all of us to have to think about our government like this, but if you just look at the reality of what is happening it is very difficult to trust not only anything the government is saying, but also anything companies aligned with the government are saying."
+        },
+        {
+          "id": 48553517,
+          "author": "bonsai_spool",
+          "text": "Here’s the blog post referenced in the article that’s written by the person who reviewed the paper that purportedly found a ‘jailbreak’ https://www.lutasecurity.com/post/the-fable-5-export-control..."
+        }
+      ],
+      "summary_ja": ""
+    }
+  ]
+}
