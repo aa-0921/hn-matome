@@ -1,0 +1,1089 @@
+{
+  "date": "2026-06-20T00:00:00+09:00",
+  "slot": "23",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 48595511,
+      "title_en": "Project Valhalla, Explained: How a Decade of Work Arrives in JDK 28",
+      "title_ja": "Project Valhalla, Explained: How a Decade of Work Arrives in JDK 28",
+      "url": "https://www.jvm-weekly.com/p/project-valhalla-explained-how-a",
+      "hn_url": "https://news.ycombinator.com/item?id=48595511",
+      "score": 395,
+      "comment_count": 229,
+      "posted_at": "2026-06-19T06:35:57+00:00",
+      "comments": [
+        {
+          "id": 48598444,
+          "author": "mattstir",
+          "text": "> But the difference in memory is fundamental. The JVM can now store the values themselves in the array, laid out densely one after another: 8 bytes per point (plus a possible null flag), in a contiguous block. No headers per element. No pointers. No jumping around the heap. How much was this article proof-read? Didn't they just get finished talking about how heap flattening won't work for objects with > 64-bit representations? Their `Point` is at least 65 bits (two 32-bit ints plus the null flag). The \"plus a possible null flag\" and oddly short following statements seem to suggest this was some AI that got sidetracked by trying to make emphatic statements... oh and also the \"[IMAGE: the same Point[] array in two variants...\" block halfway down the page is unfortunate."
+        },
+        {
+          "id": 48595972,
+          "author": "rf15",
+          "text": "I appreciate the hard work that went into the things that did make it into Valhalla eventually, but: > The model was powerful, but also mentally heavy No it isn't! it is this interpretation that kills off the null-safety debate entirely. Saying you have a variable that cannot be null is not a mentally taxing distinction, especially since everything is labelled thoroughly. > The team, faithful to the lesson “simplify the model for the user, even at the cost of the performance ceiling,” ultimately dismantled this dualism. but it would have simplified it for the user. The whole attitude and process around this and the other topics gives me very little faith that Java can be steered in a sensible direction here. The type system of a programming language is supposed to give convenient guarantees to the developer on a CPU that can only do numbers. There is no reason to reduce the optional(!) safety guarantees you can offer with the excuse of \"too mentally taxing\". Hell, they even get there half way by recognising: > the language model and the JVM model don’t have to overlap one hundred percent"
+        },
+        {
+          "id": 48596355,
+          "author": "tomaytotomato",
+          "text": "A lot of the comments on here are a bit unfair on what is great work being done and even more awesome work (JEPs) in the pipeline for the future. If Java was a child, imagine it being brought up by loving parents for the first few years (Sun) then it was thrown in a garage with some other children and neglected by its evil guardian (Oracle) Neglected and unloved till JDK 8, its basically been playing catch up. So when people say \"oh so its now got structs or value types of X\", yes it has but that's because it has been stunted in its development due to big bureaucratic and hostile corporate processes, but its free now and is getting love through the OpenJDK family. I will continue to enjoy writing once and deploying anywhere!"
+        },
+        {
+          "id": 48595873,
+          "author": "DarkNova6",
+          "text": "You could probably a whole tech thriller on the evolution on Value Types in Java. I’ve been reading the mailing lists and watched all videos on the topic and it is truly inspiring how much they managed to consolidate the design to something that always looked like java. But while also going far deeper in granularity and understanding what it even means to be a value type and what optimizations can be done where"
+        },
+        {
+          "id": 48596160,
+          "author": "layer8",
+          "text": "> But careful: == looks at internal state, which isn’t always what the object represents, so for “is this the same data” comparisons keep using equals. So == for value classes will basically be like memcmp() . That is a bit unfortunate, as it breaks encapsulation, exposing implementation details. Client code can use this to do case distinctions based on how a given value is internally represented. In a way, it’s worse than identity comparison, because identity comparison at least doesn’t expose internal state."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 2,
+      "id": 48553388,
+      "title_en": "DuckDB Internals: Why Is DuckDB Fast? (Part 1)",
+      "title_ja": "DuckDB Internals: Why Is DuckDB Fast? (Part 1)",
+      "url": "https://www.greybeam.ai/blog/duckdb-internals-part-1",
+      "hn_url": "https://news.ycombinator.com/item?id=48553388",
+      "score": 337,
+      "comment_count": 95,
+      "posted_at": "2026-06-16T11:07:08+00:00",
+      "comments": [
+        {
+          "id": 48595045,
+          "author": "smithclay",
+          "text": "If you're reading this and curious: consider writing a duckdb community extension* or contributing to an existing one* duckdb is becoming a kind of data superglue between a lot of data ecosystems (GIS, observability, analytics, lakehouses, object storage, etc) that don't talk to each other typically, and it's worth checking out in 2026. * https://github.com/duckdb/extension-template * https://duckdb.org/community_extensions/"
+        },
+        {
+          "id": 48598157,
+          "author": "axegon_",
+          "text": "I use duckdb HEAVILY at work and it's been a game changer. I'm sifting through terabytes of data multiple times a day, mixing, matching, updating, filtering, DuckDB is second to none. For anyone that hasn't used it: you are missing out."
+        },
+        {
+          "id": 48595128,
+          "author": "0xferruccio",
+          "text": "DuckDB is amazing for any sort of fast data analysis when the data is small enough that it can fit on your laptop Recently at work I've been using it to analyse the Claude code sessions of every engineer at our company (that we upload to S3) and it's been extremely helpful to help us find gaps in devex and have clear metrics to back up the impact of fixing them Another thing it's been really useful for has been getting metrics on Claude skills usage and then dive into use-cases by looking at the transcripts Other engineers that had never touched DuckDB were so impressed with how easy it is for AI agents to write queries on our dataset"
+        },
+        {
+          "id": 48594861,
+          "author": "anitil",
+          "text": "DuckDb makes so much of my life easier, though I've never used it for large problems. The ability to run `select * from 'data.json'` is just lovely. The fact that it's also a powerhouse is so impressive, I'd usually expect a project to be good at small problems (like mine) xor large problems, but not both"
+        },
+        {
+          "id": 48598670,
+          "author": "romaniv",
+          "text": "It's an interesting project, but the discussion on HN looks weird. It gets brought up every few weeks[1] and everyone just spams comments with messages about how \"fast\" it is. DuckDB is fast for some specific workloads . If you use it for most other things, it is at least an order of magnitude slower than SQLite. It also has some limitations in terms of what SQL it will currently run (e.g. I immediately ran into an issue with recursive queries). That will probably get better with time. [1] If you search HN for \"sqlite\" and \"duckdb\" you get 4,310 hits and 2,398 hits respectively. That's a very heavy skew, considering SQLite is everywhere and had been around for a quarter century, while DuckDB effectively appeared on the scene two years ago."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 3,
+      "id": 48548695,
+      "title_en": "The Productivity J-Curve [pdf] (2018)",
+      "title_ja": "The Productivity J-Curve [pdf] (2018)",
+      "url": "https://ide.mit.edu/sites/default/files/publications/jcurve.pdf",
+      "hn_url": "https://news.ycombinator.com/item?id=48548695",
+      "score": 21,
+      "comment_count": 6,
+      "posted_at": "2026-06-15T23:47:55+00:00",
+      "comments": [
+        {
+          "id": 48599652,
+          "author": "ok123456",
+          "text": "This completely breaks down under the current reality of AI investment, as players large and small are no longer price-takers. The marginal costs of investment are not constant because we have finite supplies of GPUs, TPUs, memory, hard drives, and power. The Hamiltonian in equations 5 and 6 needs to account for this."
+        },
+        {
+          "id": 48580725,
+          "author": "curio_Pol_curio",
+          "text": "If you are one of those that are amused by attempts to synthesize paradigms, here's one that superposes J-curve on the hype curve https://www.financialprofessionals.org/training-resources/re... Q: The J-dip is where capital stock is just about to overtake investment growth, why should it lag the hype trough where presumably value overtakes interest ?"
+        },
+        {
+          "id": 48600194,
+          "author": "alephnerd",
+          "text": "FYI about terminology before people who don't read the paper comment 1. GPT means general purpose technology or any sort of new technology that has a compounding effect on productivity, not the OpenAI model. 2. Productivity in this case means economic output , not the colloquial definition that means \"hard work\". If it takes 5 automtive factory workers to assemble a car manually but 2 with industrial automation, then the latter are more productive than the former despite expending equal amounts of effort. 3. The crux of this paper is that existing economic metrics are not able to adequately measure the impact of IP and R&D driven innovations in the larger economy. For example, think about how it took 20-30 years for traditional econometrics to fully gauge the impact of digitization and industrial automation that began in earnest in the 1990s and early 2000s."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 4,
+      "id": 48549118,
+      "title_en": "Zen and the Art of Machine Learning Research",
+      "title_ja": "Zen and the Art of Machine Learning Research",
+      "url": "https://blog.jxmo.io/p/zen-and-the-art-of-machine-learning",
+      "hn_url": "https://news.ycombinator.com/item?id=48549118",
+      "score": 168,
+      "comment_count": 51,
+      "posted_at": "2026-06-16T00:45:50+00:00",
+      "comments": [
+        {
+          "id": 48595822,
+          "author": "jdw64",
+          "text": "I feel that the Zen used in the West and the Zen in East Asia are quite different. I think the Western Zen is probably the one from the 1970s book Zen and the Art of Motorcycle Maintenance. It usually carries a sense of equanimity and beginner's mind. But in East Asia, Zen actually emphasizes aimlessness or non‑purposefulness. The point where I really feel the difference is that Western Zen seems to be about how to train the self to become stronger, whereas actual Seon (Zen) in East Asia is about going with nature, letting go of the self, and allowing things to flow. In the actual practice of Seon, it's about doubting the self, letting go of attachments, and realizing that achievement, comparison, and the desire for control are all just fleeting. There's a famous phrase: 'Banghasak (放下著)' — let it all go. If anything, I think ancient Roman Stoicism feels more like Zen than Western Zen does So that's fascinating. When I saw this article, I was expecting it to be about whether we should give up the desire for success, but instead it took a completely different direction, which was surprising"
+        },
+        {
+          "id": 48596038,
+          "author": "rented_mule",
+          "text": "Around 2015, I found myself managing back end and machine learning engineers (not researchers) at the same time. Many of the back end engineers wanted to do more ML. Some of them did well when given a chance, but others wanted to revert to back end within a few months. At the same time, one of the ML leaders wanted to step away from ML and only do back end work to support ML. As I studied these dynamics, something occurred to me... Different people need to see signs of success at different frequencies. Because of the nature of our product, measuring the performance of a new/updated model required the model to be live for at least a full calendar month. So, between initial work and final analysis, it was often a 2 month wait or more. For many back end tasks, you can build a quick prototype, run it to see if it works, and be on your way - the signals come all day long. The varying frequency needs of different people went a long way to determining which of them liked working on ML. This is sort of a manager's version of feature engineering. ;-) The people on that team taught me a lot!"
+        },
+        {
+          "id": 48597224,
+          "author": "mrmarket",
+          "text": "excellent essay. what a great read. like the author said, so much of 'success' or 'progress' (in research but of course also across disciplines) depends upon temperament. just straight up having a good attitude about things. the skills that make a good researcher could not be more transferable: patience, innate curiosity, and a resilience against failure. that said, these skills are increasingly rare/at a premium given our culture of minimizing discomfort tolerance via hyperconvenience. people have a harder and harder time waiting or failing."
+        },
+        {
+          "id": 48598320,
+          "author": "HarHarVeryFunny",
+          "text": "> on days we find insight, we sit. > on days we do not find insight, we sit. This reminds me of Ed Witten (greatest living physicist?) in an interview by Brian Green. Green asked Witten what his day-to-day was like at the Institute for Advanced Study ... Wittens' reply: \"I sit at my desk\"."
+        },
+        {
+          "id": 48597086,
+          "author": "Scene_Cast2",
+          "text": "I think this also stems from ML being more like biology or alchemy and less like math or programming (where you can get down to the first principles, abstractions are rock solid, and non-determinism is limited in scope)."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 5,
+      "id": 48546890,
+      "title_en": "Ten years of ClickHouse in open source",
+      "title_ja": "Ten years of ClickHouse in open source",
+      "url": "https://clickhouse.com/blog/open-source-10",
+      "hn_url": "https://news.ycombinator.com/item?id=48546890",
+      "score": 186,
+      "comment_count": 59,
+      "posted_at": "2026-06-15T20:51:54+00:00",
+      "comments": [
+        {
+          "id": 48600371,
+          "author": "dmix",
+          "text": "We use Clickhouse in a rails app for our customer facing dashboard analytics, logging, and datalake type stuff where Postgres is too heavy and expensive. The web admin panel they built is great and we’ve had solid performance."
+        },
+        {
+          "id": 48597041,
+          "author": "drchaim",
+          "text": "I discovered ClickHouse around 2017-18 and built a PoC to replace Elasticsearch: 5x better storage and qps, in a couple of weeks. Managers rejected it because it wasn't well known and was seen as \"some database made by Russians.\" On a personal level, it's quite sad to have seen that train coming so early and not been able to get on board."
+        },
+        {
+          "id": 48596792,
+          "author": "himata4113",
+          "text": "ClickHouse recently has been a breath of fresh air compared to using timescaledb for a long time. Although psql is the greatest there is and I really enjoyed the fact that I could rely on a single database system to run everything, when it came to migration maintenance and deployment it's really a pain and it also feels like development on timescaledb is a bit wishy washy with all the structural changes from version to version and it really feels like an alpha product sometimes."
+        },
+        {
+          "id": 48600169,
+          "author": "tdiff",
+          "text": "It is sad they are afraid to mention on the page that \"data processing for a web analytics system ... similar to Google Analytics\" was actually something used in Yandex."
+        },
+        {
+          "id": 48599208,
+          "author": "adsharma",
+          "text": "It's interesting that the blog post places SQLite and Ladybird on the spectrum, but omits it's chief open source rival: DuckDB. Agree that Level 3 is what inspires confidence. But we need to invent new business models to sustain in the era of vibe-coded databases."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 6,
+      "id": 48543311,
+      "title_en": "To study how chips work, MIT researchers built their own operating system",
+      "title_ja": "To study how chips work, MIT researchers built their own operating system",
+      "url": "https://news.mit.edu/2026/to-study-how-chips-really-work-mit-researchers-built-their-own-operating-system-0610",
+      "hn_url": "https://news.ycombinator.com/item?id=48543311",
+      "score": 291,
+      "comment_count": 43,
+      "posted_at": "2026-06-15T16:06:22+00:00",
+      "comments": [
+        {
+          "id": 48595678,
+          "author": "jprx",
+          "text": "Hi everyone, Joseph (paper author) here. You can find Fractal on Github: https://github.com/jprx/fractal The full paper, slides from my S&P talk, and all our experiment data can be found at the Fractal project website here: https://fractal-os.com We've been building Fractal internally for a very long time (first commit was almost exactly 2 years ago), so it's exciting to finally share it with the world. Let me know what you think!"
+        },
+        {
+          "id": 48595133,
+          "author": "landr0id",
+          "text": "Not to take away from the authors' work, but this was actually the approach taken by some engineers while Spectre / Meltdown were still under embargo. Not sure if they ever mentioned their work publicly so I will avoid naming them, but some talented folks from Microsoft who basically came to the same conclusion that a specialized environment free of noise was necessary both to test mitigations and find variants."
+        },
+        {
+          "id": 48598179,
+          "author": "polnurfer",
+          "text": "They didn’t build an operating system, they built a boot program that exposes the chip in a way an operating system doesn’t behave."
+        },
+        {
+          "id": 48599822,
+          "author": "ReyX",
+          "text": "The \"outer kernel thread\" idea -- userspace memory but kernel privileges -- is such an obviously good idea in retrospect that I'm surprised nobody did it before. You spend half your time in microarchitecture research just trying to control for OS noise. The Apple M1 phantom speculation finding is wild. I wonder if this is actually a bug in Apple's implementation or if CSV2 just has a fundamental race condition between the protection and the i-cache fill. The paper makes it sound like the latter. Also, 31k LOC for a from-scratch kernel supporting three ISAs is... not a lot. That's either very impressive or they're skipping a lot of stuff a production kernel needs. Curious which."
+        },
+        {
+          "id": 48596059,
+          "author": "feeley",
+          "text": "I'm really excited about this work, although I haven't read the code or paper yet. It seems to me Fractal would be ideal for running benchmarks for compilers so that the OS-induced noise is kept to a minimum. Author: do you see issues with that use case?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 7,
+      "id": 48583928,
+      "title_en": "I found 10k GitHub repositories distributing Trojan malware",
+      "title_ja": "I found 10k GitHub repositories distributing Trojan malware",
+      "url": "https://orchidfiles.com/github-repositories-distributing-malware/",
+      "hn_url": "https://news.ycombinator.com/item?id=48583928",
+      "score": 891,
+      "comment_count": 234,
+      "posted_at": "2026-06-18T11:45:43+00:00",
+      "comments": [
+        {
+          "id": 48587992,
+          "author": "guhcampos",
+          "text": "> Why do they only clone new repositories, rather than popular ones? > Why do they delete a commit and push a new one every few hours? Because this is not targetted to humans. It's targetted to agents. They just need to appear on a fraction of the searches agents do to add dependencies and get lucky a couple times to start a new infection cluster. Then to the more interesting question: why now? 1. Agents, agents everywhere. 2. MAJOR elections happening this year in the World, including US midterms and Brazilian mains. This appears to be an account-stealer worm - and my guess is it's looking to all those sweet sweet Facebook/Instagram/Tiktok/Whatsapp accounts ready to bot their way into oblivion."
+        },
+        {
+          "id": 48589110,
+          "author": "Jimmc414",
+          "text": "This is happening to me as well. I have a few moderately popular open source projects and I have found my name attached to new projects that I have nothing to do with or they are derivatives of my projects with redirection to unknown sites. Legitimate projects: https://github.com/jimmc414/onefilellm https://github.com/jimmc414/Kosmos https://github.com/jimmc414/cctrace Projects using my name which I have no affiliation with or they are projects I have written that they have injected new URLs into: https://hub.decision.ai/skills/jimmc414/benchling-integratio... https://lobehub.com/skills/jimmc414-claude-code-plugin-marke... https://mcpmarket.com/tools/skills/geniml-genomic-machine-le... https://mcpmarket.com/tools/skills/biopython-for-molecular-b..."
+        },
+        {
+          "id": 48586739,
+          "author": "RoadieRoller",
+          "text": "> Why do they delete a commit and push a new one every few hours? May be to make it appear on the top of the \"Last Updated\" repositories in case someone searches for the repo or a keyword. So instead of the author's actual repo, the users endup cloning the trojan infected one."
+        },
+        {
+          "id": 48587817,
+          "author": "danso",
+          "text": "Being reminded of this anecdote from NYMag's recent cover story (which had previously been reported in a WSJ story[0]) about a Disney engineer who downloaded an AI-gen tool from Github and \"checked the code himself, it had looked legitimate\": https://archive.is/yAUNy > He had no idea why the hackers had targeted him or what their plan was, whether they would drain his family’s finances or stalk his home. Eventually, after running another anti-virus program, he found a piece of malware hidden in a plug-in he had downloaded from GitHub, the open-source coding site, one day in February when he was messing around with an AI image generator. He had checked the code himself, it had looked legitimate, and others had reviewed it positively. But it seems it contained a Trojan-horse virus that gave the hackers free rein of his PC. Once inside, they just had to wait for Van Andel to log in to 1Password. From there, they were able to steal all his credentials, plus many of his multifactor-authentication codes, so every time Van Andel logged in to an app, a website, or an account, they could follow behind him. They’d had access for months. [0] https://www.wsj.com/tech/cybersecurity/disney-employee-ai-to..."
+        },
+        {
+          "id": 48585125,
+          "author": "jp0001",
+          "text": "I uploaded a sample found here ( https://github.com/alexct142010-cell/McBackuper ) to Genus Codes (need an account): https://genuscodes.com/results/7ad4b911d05a12f91ab27ba3baa35... Seems to be related to the disco trojan family, by way of normalized function matching at 50% to malicious file https://genuscodes.com/results/eddbc29db4677e00c1a901aadbadb... and a normalized 50% match to https://genuscodes.com/results/fdb6cff68a2a8c08779d64a7cf61d... Virustotal link: https://www.virustotal.com/gui/file/fdb6cff68a2a8c08779d64a7..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 8,
+      "id": 48541062,
+      "title_en": "Gribouille 0.3.0: A Grammar of Graphics for Typst",
+      "title_ja": "Gribouille 0.3.0: A Grammar of Graphics for Typst",
+      "url": "https://mickael.canouil.fr/posts/2026-06-15-gribouille-0-3/",
+      "hn_url": "https://news.ycombinator.com/item?id=48541062",
+      "score": 160,
+      "comment_count": 60,
+      "posted_at": "2026-06-15T13:35:23+00:00",
+      "comments": [
+        {
+          "id": 48600247,
+          "author": "NiloCK",
+          "text": "Is typst a good tool for something like a flyer (eg, printable respecting fold lines) or more generically one-page posters? I see PDF as a blessed output, but it seems mostly in context of longer form typesetting -heavy workflows (books, papers), rather than design -heavy."
+        },
+        {
+          "id": 48596029,
+          "author": "matijsvzuijlen",
+          "text": "Why are all the parameters full words except 'labs'? I find it jarring because to me 'lab' is short for laboratory, not label."
+        },
+        {
+          "id": 48596977,
+          "author": "red_admiral",
+          "text": "Always pleased to see Typst mentioned. TeX made a lot of choices that made sense at the time, but TeX macros and C #defines especially when nested and/or not properly bracketed to allow nesting are a mess when things go wrong."
+        },
+        {
+          "id": 48597104,
+          "author": "stared",
+          "text": "Interesting! If I get it right, the API is in the spirit of Observable Plot ( https://observablehq.com/plot/ ), less ggplot2. In any case, I'm curious whether aes is necessary, or whether it would suffice to drop this function entirely and just use keys in the mapping (similarly for labs). Or, more broadly, whether using patterns from other implementations of the Grammar of Graphics is a conscious decision, or some sort of legacy baggage."
+        },
+        {
+          "id": 48599025,
+          "author": "jeremyscanvic",
+          "text": "Is ggplot2 considered to be a nice interface to plot things compared to say matplotlib in Python? I'm asking out of curiosity, I haven't touched R much"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 9,
+      "id": 48592832,
+      "title_en": "The AirPods Effect",
+      "title_ja": "The AirPods Effect",
+      "url": "https://www.theescapenewsletter.com/p/the-airpods-effect",
+      "hn_url": "https://news.ycombinator.com/item?id=48592832",
+      "score": 264,
+      "comment_count": 473,
+      "posted_at": "2026-06-18T23:08:35+00:00",
+      "comments": [
+        {
+          "id": 48598509,
+          "author": "cassepipe",
+          "text": "To be fair when you live in a big city and you have to take the subway all the time, it just feels physically nice to remove the background noise whether it's the noise of the train itself or the musicians or the people asking loudly for money. I don't even have airpods, I have good old earplugs because I often too lazy to choose the soundtrack of my own life. It's not that don't want to talk to unknown people, it's that it's more important for me to avoid the unpleasantness of it all. It's all relative of course, I'd take a fast, crowded train any day rather than having to do the good old accelerate-and-stop of a traffic jam/city intersections. I live in a country with somewhat solid social net so I'd actually be in favor or preventing people to ask for money (loudly and in a pathos-optimized voice) in the train. It's generally people who are 1. having other income 2. drug addicts 3. mental issues or a combination of all that. I don't blame them but I wish there was a cruelty-free way of preventing them to do that because I don't think the amount of money they make is worth the amount of inconvenience they cause. Of course they are other ways of making the service better (more trains, closer to each other) but I believe the subway company is already hard at work on that. My point I guess is that it doesn't take much for something to become an unpleasant experience (as anyone who's ever had a significant dose of LSD will tell you) and that's it's easy to blame people (individualistic, selfish blablabla) but system-thinking is how you solve that kind of issue (and it's not easy)"
+        },
+        {
+          "id": 48596456,
+          "author": "steve1977",
+          "text": "What I find interesting is that the article seems to imply that wearing earbuds to isolate is somewhat \"unnatural\" (for lack of a better term). However it does not take into account that the kind of social interactions where people wear earbuds (i.e. loud and busy environments with many strangers, often physically closer than comfortable) is unnatural to begin with. For me, isolating myself acoustically is a way to normalize such environments back to a more \"natural\" setting."
+        },
+        {
+          "id": 48596987,
+          "author": "bejd",
+          "text": "After reading about the default mode network here a few times recently, I think missing out on all that critical \"daydreaming\" time is a bigger problem. I've stopped listening to things while I'm out walking, and I've noticed a lot more solutions and ideas coming to me. The DMN seems to fall into a similar area as meditation (remember when that was all the rage among tech leaders?); the lowered input noise gives the brain time to clear things out."
+        },
+        {
+          "id": 48593069,
+          "author": "tptacek",
+          "text": "I don't remember any time in my life where it ever felt normal to me to randomly talk to strangers. I went to London when I was a teenager and was made uncomfortable by how chatty the cab drivers were. Later, I worked at a startup and my boss was preternaturally gifted at chatting up strangers, which he did habitually in every setting we were in when we traveled; on the plane, on the bus from the airport, &c. I remember feeling like he was a freak of nature. And I'm not an introvert! All of this long predates Airpods. I think this is a cultural difference, not a technological shift."
+        },
+        {
+          "id": 48599753,
+          "author": "malshe",
+          "text": "The author is from Germany and still complaining about Americans interacting with each other less in public? I've been to Germany so many times and almost never seen anyone speaking to strangers on trains/buses/trams. Once I was on a train from Cologne to Frankfurt with a colleague and we were talking nonstop. After a while we realized it was just us talking and probably disturbing everyone else! People go to extreme lengths to avoid talking to strangers on public transport even in developing countries. Earphones are just so effective."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 10,
+      "id": 48543968,
+      "title_en": "Show HN: Modeloop – From visual algorithms to microcontroller C code",
+      "title_ja": "Show HN: Modeloop – From visual algorithms to microcontroller C code",
+      "url": "https://www.modeloop.app/",
+      "hn_url": "https://news.ycombinator.com/item?id=48543968",
+      "score": 18,
+      "comment_count": 22,
+      "posted_at": "2026-06-15T16:51:34+00:00",
+      "comments": [
+        {
+          "id": 48598950,
+          "author": "orbifold",
+          "text": "I wish that people would not use AI to generate copy or websites, at this point it induces an almost instinctual negative reaction: 'What Modelloop does -- in three movements' is a classical example of AI lingo. I don't have proof but I feel that the most recent models have gotten worse. The rhetorical devices they use are tiring and off-putting at this point."
+        },
+        {
+          "id": 48597951,
+          "author": "pfannl",
+          "text": "HN found the cursor bug faster than any QA team could. Cool idea though, who is the main user: students, makers, or embedded engineers?"
+        },
+        {
+          "id": 48598291,
+          "author": "boscillator",
+          "text": "Mostly unrelated, but what is going on with the \"I specifically approve section ... of the terms and conditions\" when you sign in without an account. Is this a new requirement somewhere? Other than that, seems interesting! Simulink could always do with a competitor, although I'm always saying Simulink needs a text-based interface. Same signal flow programming model that supports scopes and continues time integrators, just with text instead of drag-and-drop."
+        },
+        {
+          "id": 48598324,
+          "author": "ale42",
+          "text": "Someone already mentioned the mouse cursor... is it supposed to be solved? Now I see... none, which is kind of pointless on desktop."
+        },
+        {
+          "id": 48597927,
+          "author": "doc_monster7",
+          "text": "Hey, Embedded Dev here, i will suggest my team to use and i will test it out as well. but honestly i feel more than embedded developers it will be more useful for solution engineers who work with direct customers. Regardless i will my feedback here after testing it."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 11,
+      "id": 48540779,
+      "title_en": "Akse3D – open-source 3D modelling anyone can master",
+      "title_ja": "Akse3D – open-source 3D modelling anyone can master",
+      "url": "https://akse3d-en.skaperiet.no",
+      "hn_url": "https://news.ycombinator.com/item?id=48540779",
+      "score": 91,
+      "comment_count": 24,
+      "posted_at": "2026-06-15T13:13:38+00:00",
+      "comments": [
+        {
+          "id": 48597921,
+          "author": "jonatron",
+          "text": "Clicking \"Try Aske for free\" takes you straight to it, no sign up! I usually avoid clicking these buttons because they usually take you to a sign up form."
+        },
+        {
+          "id": 48597691,
+          "author": "lucasoshiro",
+          "text": "Really nice! Do you have plans to release it for desktop (maybe using Electron)? One of my main complains about tools like Tinkercad is that they are browser-based, and it's easier/faster to have everything local. That's one of the reasons that I moved to OpenSCAD"
+        },
+        {
+          "id": 48598493,
+          "author": "serf",
+          "text": "it's a valid idea to try to make an 'easy' modeling/cad system -- the problem is that every such version of software that takes on that challenge makes the suite near useless or incredibly hard to use/clunky for experts. glaring holes, omitted features, zero render or post-process support, poor drawing/print support, etc. i'm convinced this will always be the case and that the right approach, if there is one, is to take an industrial grade cad/modeling suite and attach a guided 'novice' interface onto it rather than making a novice-based cad system from scratch. I haven't seen an example of that, either -- but it feels like an easier approach."
+        },
+        {
+          "id": 48598337,
+          "author": "WillAdams",
+          "text": "Nice! I use BlockSCAD a lot --- maybe an option for more math-oriented students? Some quick testing: I really wish the dimension objects around the editable dimensions were draggable (the \"nudges\" (up/down spin arrows) are nice). I couldn't get \"Hole\" to function as I expected (assumed it would remove itself from all other objects). No panning of the 3D view?"
+        },
+        {
+          "id": 48599068,
+          "author": "stiray",
+          "text": "Was preparing a rant about CAD solutions being free as long as people didnt get hooked and then closed behind paywall with ever increasing price. Then I see that I can self host it. This is interesting novelty. But there were so many bad apples in CAD area, that I will stick with FreeCAD and after 20 years, if this will evolve and prove it is just not another scam, happily give it a try."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 12,
+      "id": 48563083,
+      "title_en": "Reinventing the Renaissance",
+      "title_ja": "Reinventing the Renaissance",
+      "url": "https://drb.ie/article/reinventing-the-renaissance/",
+      "hn_url": "https://news.ycombinator.com/item?id=48563083",
+      "score": 11,
+      "comment_count": 2,
+      "posted_at": "2026-06-16T22:26:12+00:00",
+      "comments": [
+        {
+          "id": 48600358,
+          "author": "kjhughes",
+          "text": "Related: Dwarkesh Patel recently interviewed Ada Palmer: Why Leonardo was a saboteur, Gutenberg went broke, and Florence was weird – Ada Palmer https://www.youtube.com/watch?v=PAIhVfGbREA"
+        },
+        {
+          "id": 48599938,
+          "author": "aerodexis",
+          "text": "Given that today there's a concerted effort to effect a similar invention today wrt AI, this book is highly relevant."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 13,
+      "id": 48592163,
+      "title_en": "Zero-Touch OAuth for MCP",
+      "title_ja": "Zero-Touch OAuth for MCP",
+      "url": "https://blog.modelcontextprotocol.io/posts/enterprise-managed-auth/",
+      "hn_url": "https://news.ycombinator.com/item?id=48592163",
+      "score": 226,
+      "comment_count": 88,
+      "posted_at": "2026-06-18T21:54:10+00:00",
+      "comments": [
+        {
+          "id": 48593190,
+          "author": "sean_lynch",
+          "text": "Before you get too far into the usual “MCP is dead, Skills forever” debate The real valuable capability MCP offers over skills/CLI is isolating the auth flow outside of the agent’s context window, and potentially out of the harness completely. This is valuable from a security perspective obviously. It’s also just a much easier user experience for normies and large businesses adopting AI tools. I hear all the context bloat and tool call redundancy complaints. But this structure for handling auth has real value. Maybe the idealized form of MCP is just an auth gateway for the API and nothing else. That’d still be a win."
+        },
+        {
+          "id": 48595427,
+          "author": "programmancer",
+          "text": "I am currently trying to use Microsoft Entra ID auth for an MCP server I'm implementing, and I genuinely feel like I must be an idiot. - I can use the `WWW-Authenticate` header to indicate a resource metadata URL for the client. - I can use this to indicate an authorization server (Microsoft Entra) and a scope (for the app registration that handle which app roles each user is given to differentiate different capabilities for different users). - I can NOT indicate a client_id, because that's just something that each client (agent) makes up on its own? - To initiate a login on the .../authorize URL in Microsoft Entra, you need to pass a known client_id that matches an app registration in Microsoft Entra. Whatever the client makes up will surely not match anything in Microsoft Entra. - I COULD in theory support dynamic client registration, but of course Microsoft Entra doesn't. Is it even possible to make this work out of the box? The only way forward I can see is implementing my own dynamic client registration shim in front of Microsoft Entra that just returns the same static client_id to everyone, which matches an actual client_id in Microsoft Entra. But surely this protocol actually works today for real Enterprises without workarounds? It feels like I must be missing something obvious."
+        },
+        {
+          "id": 48593149,
+          "author": "maxwellg",
+          "text": "Huge congrats to the folks behind this at Okta, A\\, Microsoft, Figma, Linear, etc... For the MCP nay-sayers - don't worry there's something here for you too :) This is powered by a new token format called an ID-JAG - https://datatracker.ietf.org/doc/draft-ietf-oauth-identity-a... - and isn't MCP specific at all. ID-JAGs can be used for safe and secure data sharing anywhere where data is shared between applications that use the same SSO provider."
+        },
+        {
+          "id": 48593218,
+          "author": "dend",
+          "text": "Hey folks - I am one of the folks at Anthropic that helped deliver this in partnership with Okta and a handful of MCP partners. We're very excited about this taking shape in Claude (in addition to the MCP spec, of course, where EMA is now a stable extension) and are looking to expand adoption to other identity providers and clients as well. If you have any feedback, feel free to drop it in here! Always happy to hear about folks' experience and how we can make it better."
+        },
+        {
+          "id": 48593373,
+          "author": "flashgordon",
+          "text": "This is fantastic. Ive been so fortunate to work with the mcp folks last few months on a couple of the SEPs (and my own experimental sdk in go). I used to be a naysayer. \"Its just apis\" I used to say. \"Sheesh the invented another abstraction\" I used to say. What folks dont realize is it is the \"P\" in MCP that throws people off. When you build a traditional app you have to build forms, ui, req/response handling, bidirectional channels, long running tasks, auth and so on. With mcp 80% of this common layer is taken care for you. So mcp is really an \"app framework\" than a protocol (well there is that too). Unified auth is a huuuge boost. Can't wait to see more cool things!"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 14,
+      "id": 48595331,
+      "title_en": "So You Want to Define a Well-Known URI",
+      "title_ja": "So You Want to Define a Well-Known URI",
+      "url": "https://mnot.net/blog/2026/well_known_uris",
+      "hn_url": "https://news.ycombinator.com/item?id=48595331",
+      "score": 125,
+      "comment_count": 74,
+      "posted_at": "2026-06-19T06:05:01+00:00",
+      "comments": [
+        {
+          "id": 48595877,
+          "author": "reddalo",
+          "text": "I wish people would follow this, instead of coming up with new standards in the root namespace. \"llms.txt\" [1] comes to mind, for example. Let's stop polluting the root of a domain! [1] https://llmstxt.org/"
+        },
+        {
+          "id": 48600232,
+          "author": "welder",
+          "text": "Does a change-password registry actually get used, even by bots? I don't see bots checking for a .well-known/change-password url on my sites. It seems a good place to put public configs, just to have a place for them, but not as a means of discovery."
+        },
+        {
+          "id": 48596014,
+          "author": "sandblast",
+          "text": "No, in fact I don't. But this post wouldn't be of any help anyway. It feels like it's about nothing, there is no substance, just stating some obvious facts. Without examples that lead to some real recommendations, this whole expertise claimed by the author is of no use."
+        },
+        {
+          "id": 48598786,
+          "author": "1vuio0pswjnm7",
+          "text": "\"This Web site requires a more modern browser to operate securely; please upgrade your browser.\" Alternative, no SNI required https://web.archive.org/web/20260619061625if_/https://mnot.n..."
+        },
+        {
+          "id": 48595847,
+          "author": "jvuygbbkuurx",
+          "text": "Why are they so specific? Why password-reset instead of a more generic link tree? Why discord domain verification instead of domain-verifications with a dynamic list on entries? Seems like a waste of time. I would just define my own spec outside of well known for my use case."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 15,
+      "id": 48570730,
+      "title_en": "How Japan's railways stayed one while splitting apart",
+      "title_ja": "How Japan's railways stayed one while splitting apart",
+      "url": "https://arun.is/blog/jr-logo/",
+      "hn_url": "https://news.ycombinator.com/item?id=48570730",
+      "score": 139,
+      "comment_count": 118,
+      "posted_at": "2026-06-17T14:03:58+00:00",
+      "comments": [
+        {
+          "id": 48597852,
+          "author": "akashwadhwani35",
+          "text": "Every platform at Shinjuku plays a different song when a train pulls in. There are sixteen platforms. The system started in 1989 with twelve. Made something to listen to all the songs - https://sheets.works/data-viz/bells-of-tokyo"
+        },
+        {
+          "id": 48595086,
+          "author": "Pooge",
+          "text": "For those of you planning to go to Japan, please make sure you actually calculate how much JR train trips would cost you. They upped the price a few years ago and, since then, it's basically impossible for the JR Pass to be more affordable than single tickets. For one of my recent trips, I was actually more better served with a local pass (Kansai Wide Pass) than the JR Pass. Too bad because it used to be a really good deal..."
+        },
+        {
+          "id": 48593875,
+          "author": "Liftyee",
+          "text": "A factor not mentioned is Japan's cultural sense of duty and honour. I don't think employees in the West generally feel such dedication or perfectionism towards their company but in Japan it helped make all these efficient and meticulous changes possible, and avoids issues of privatisation like neglecting maintenance / short term profit maximisation."
+        },
+        {
+          "id": 48593978,
+          "author": "tedd4u",
+          "text": "Here a link to the best recent HN-featured long-form article on Japan rail network. Probably spent more time with this than any other item posted here in months. “Why Japan has such good railways” https://news.ycombinator.com/item?id=47815395"
+        },
+        {
+          "id": 48593928,
+          "author": "TazeTSchnitzel",
+          "text": "I've always thought the JR logo looked like 駅, the kanji for “train station”, and assumed it was deliberate. Perhaps that was a factor in them settling on the JR name?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 16,
+      "id": 48585866,
+      "title_en": "Ubiquiti: Enterprise NAS, Built on ZFS",
+      "title_ja": "Ubiquiti: Enterprise NAS, Built on ZFS",
+      "url": "https://blog.ui.com/article/introducing-enterprise-nas",
+      "hn_url": "https://news.ycombinator.com/item?id=48585866",
+      "score": 384,
+      "comment_count": 317,
+      "posted_at": "2026-06-18T14:24:30+00:00",
+      "comments": [
+        {
+          "id": 48587092,
+          "author": "elevation",
+          "text": "I'm glad to see UBNT in this space. I've always used ZFS because it's vastly superior to other options. When I see storage companies building without fault tolerance, or without a merkle tree (so that you can backup deltas efficiently without having to recompute them) it's a sign their marketing team has more influence over the company than their engineers. Sadly, the few ZFS COTS options have been somewhat underpowered. QNAP supports ZFS filesystems, but their backup configuration won't let you arrange for a nas to pull from the source (instead of the source doing a push.) You can still pull it off by scheduling your own cron job, but this somewhat defeats the purpose of paying extra for a vendor solution. UBNT is still supporting my 15 year old edgerouters with security updates, and their interface is clean and usable for anyone with basic network experience. And their video surveillance solutions are unusual in that they allow you to keep your footage entirely onsite and offline, an uncommon level of privacy. If they can bring the same polish to their storage solutions, I'll be using these new products for a long time."
+        },
+        {
+          "id": 48586360,
+          "author": "exabrial",
+          "text": "Ubiquiti's biggest feature is no monthly recurring cost. I really hope they continue the streak on products like this. Seems like anything else bought up these days is switched to an MRR model with no vision into the long term viability."
+        },
+        {
+          "id": 48592640,
+          "author": "zzyzxd",
+          "text": "The biggest concern about Ubiquiti to me is still its software/infrastructure quality. Off top of my head, besides all the UI/UX glitches: - They once allowed a human employee to access static AWS root access key. - Their employee once claimed \"remote access\" was end to end encrypted, but later people figured out they probably just meant TLS in transit. - They had a configuration error that allowed some users to access other users' camera feeds. They corrected the error, but never explained how the hell was it even possible or if they made any architecture design change to prevent that from happening again. Now, ZFS is nice. But even after years of iterations, I still need to do 50% of my operations via SSH on my Truenas system. I can't imagine Ubiquiti to do any better"
+        },
+        {
+          "id": 48587290,
+          "author": "bhouston",
+          "text": "> \"Dual 25 Gigabit SFP28 ports and redundant power supplies for resilience\" Can you actually saturate the links with the spinning drives? I've had the hardest time making my TrueNAS ZFS server fast when it was filled with HDD spinning disks. I initially also had 12 of them trying to get maximum speed. I have 128GB RAM and a 10G ethernet connection. I tried all types of optimizations like L2ARC via NVMe, etc, and it wasn't very effective and just too much time spent tweaking and testing. Instead I just threw up my hands and replaced all the spinning disks with NVMe drives for the data I actually shared (8x 4TB NVMe drives.) And now it very usable and no need for LRArc, etc. Random or streaming access is equally fast. Best choice I made. Now I did do this over a year ago so I skipped the NVMe price inflation. I still keep 4 spinning disks but it is for archival data that I expect to never access unless something bad happens. It is slow and I use it like a tape drive."
+        },
+        {
+          "id": 48586782,
+          "author": "kyrra",
+          "text": "Store page: https://store.ui.com/us/en/category/network-storage/products... $3999"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 17,
+      "id": 48583356,
+      "title_en": ".gitignore Isn't the only way to ignore files in Git",
+      "title_ja": ".gitignore Isn't the only way to ignore files in Git",
+      "url": "https://nelson.cloud/.gitignore-isnt-the-only-way-to-ignore-files-in-git/",
+      "hn_url": "https://news.ycombinator.com/item?id=48583356",
+      "score": 491,
+      "comment_count": 155,
+      "posted_at": "2026-06-18T10:29:20+00:00",
+      "comments": [
+        {
+          "id": 48590707,
+          "author": "hungryhobbit",
+          "text": "Fun article, but it leaves out my favorite \"almost ignore\" feature in Git: `.gitattributes`. This file lets you specify that git should \"ignore\" the diff from certain files. For instance, Node projects have a `package-lock.json` that is pure noise from a Git standpoint (it's just massive amounts of diff specifying specific versions of libraries, and the real human-readable version is in a separate `package.json` file). With `.gitattributes` in the root of your project, you can just add a line: `package-lock.json -diff` Now, that file will still get staged/committed (which you want) ... but when you `git diff` you won't see the massive amounts of pointless diff in that file."
+        },
+        {
+          "id": 48587463,
+          "author": "kevincox",
+          "text": "The global/user wide exclude is a feature that should be more widely known. I frequently have people submitting changes to add their IDE/OS/AI/... files to every project's .gitignore. They are almost always pleasantly surprised when I tell them that they can add them to their standard configuration and have them ignored everywhere without bothering every project and without risk of accidentally committing them on a project where they haven't updated the .gitignore yet. My general rule is that in-repo .gitignore should only be used for repo-specific things (build outputs, dependency folders, ...) and most user tools should be in their own user config."
+        },
+        {
+          "id": 48596648,
+          "author": "rmunn",
+          "text": "I have a habit of writing myself notes in various .txt files, and then not cleaning them up often enough so they end up cluttering my `git status` view. I ended up with a solution not mentioned in the article: create a `scratch` directory, and a `scratch/.gitignore` file containing just one line: `*`. This makes Git ignore everything in the scratch directory, including that same .gitignore file — so I never accidentally check it into Git, and don't end up pushing my personal .gitignore settings onto my coworkers. Of course, I could have used .git/info/exclude for that, and not risked accidentally adding my `scratch` directory with `git add -A` or something. So I (re-)learned something (which I'd known about but forgotten) today. But as a reminder to anyone else who had forgotten this: .gitignore files are processed throughout the repo, not just at the top level. You can sprinkle them throughout the repo structure for finer-grained control, which may come in handy in some circumstances."
+        },
+        {
+          "id": 48585976,
+          "author": "hk1337",
+          "text": "~/.config/git/ignore and ~/.config/git/config is the proper place for your global git config and ignore instead of creating a ~/.gitignore_global and changing the config. IMO. my dotfiles are a lot smaller at the root level taking advantage of the ~/.config/ for a lot more things. the git exclude isn't used as much because it doesn't get committed to the repository so you'd have to recreate it each time you wanted to use it. that doesn't mean they're bad just why they are not used."
+        },
+        {
+          "id": 48586050,
+          "author": "judofyr",
+          "text": "Not sure where I picked up this, but I’ve added this to my global Git ignore: attic That way you can just create an attic directory in any project where you can keep random stuff that should never be committed. I’ve yet to find a repo which actually has such a directory checker in."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 18,
+      "id": 48583606,
+      "title_en": "CS 6120: Advanced Compilers: The Self-Guided Online Course (2020)",
+      "title_ja": "CS 6120: Advanced Compilers: The Self-Guided Online Course (2020)",
+      "url": "https://www.cs.cornell.edu/courses/cs6120/2025fa/self-guided/",
+      "hn_url": "https://news.ycombinator.com/item?id=48583606",
+      "score": 407,
+      "comment_count": 57,
+      "posted_at": "2026-06-18T11:04:31+00:00",
+      "comments": [
+        {
+          "id": 48585738,
+          "author": "titzer",
+          "text": "The section on dynamic compilers is more or less all about trace compilation. Generally, trace compilation is a dead end and has been abandoned repeatedly. The more important concepts here are type feedback and speculation and deoptimization, as well as making fast compilers and tiering. The course overall looks good, and it's great that so much is available online, so well done, Adrian."
+        },
+        {
+          "id": 48590543,
+          "author": "tomhow",
+          "text": "Previously... CS 6120: Advanced Compilers: The Self-Guided Online Course - https://news.ycombinator.com/item?id=39577878 - March 2024 (102 comments) Advanced Compilers: Self-Guided Online Course - https://news.ycombinator.com/item?id=35130975 - March 2023 (82 comments) Advanced Compilers: Self-Guided Online Course - https://news.ycombinator.com/item?id=25386756 - Dec 2020 (232 comments)"
+        },
+        {
+          "id": 48586006,
+          "author": "j2kun",
+          "text": "I'm a bit confused about what makes this course \"advanced.\" Most of the topics (dead code elimination, data flow, dominator analysis, SSA form) seem like they belong in a first course on compilers."
+        },
+        {
+          "id": 48597499,
+          "author": "sincerely",
+          "text": "Are there any other self-guided online university level CS courses like this?"
+        },
+        {
+          "id": 48590534,
+          "author": "xqb64",
+          "text": "How does this compare to Nora Sandler's \"Writing a C compiler\" in terms of the potential gains for the reader?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 19,
+      "id": 48553161,
+      "title_en": "Telescope Ranchers",
+      "title_ja": "Telescope Ranchers",
+      "url": "https://kottke.org/26/06/telescope-ranchers",
+      "hn_url": "https://news.ycombinator.com/item?id=48553161",
+      "score": 6,
+      "comment_count": 0,
+      "posted_at": "2026-06-16T10:34:10+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 20,
+      "id": 48547658,
+      "title_en": "SMTP Relay with Web Dashboard",
+      "title_ja": "SMTP Relay with Web Dashboard",
+      "url": "https://github.com/toinbox/simplerelay",
+      "hn_url": "https://news.ycombinator.com/item?id=48547658",
+      "score": 36,
+      "comment_count": 4,
+      "posted_at": "2026-06-15T22:06:12+00:00",
+      "comments": [
+        {
+          "id": 48596985,
+          "author": "ale42",
+          "text": "What does this bring compared to apt-get install-ing an established mail server like procmail or exim and configuring it to work as a relay for the local LAN?"
+        },
+        {
+          "id": 48598812,
+          "author": "figmert",
+          "text": "I am still setting it up, but I've seen Mailrise and Apprise that essentially achieves this. The nice thing about Apprise is that it can direct notifications to various places, not just another email server."
+        },
+        {
+          "id": 48600047,
+          "author": "greatgib",
+          "text": "Looks nice but does it support \"oauth2\" authentication for the final smtp server that will be used? It is a need because it is a cancer that propagated to all big mail domain providers like gmail and microsoft 365. They are supposed to be business tools and still it is almost impossible to setup \"device\" email accounts that would identify just with credentials or equivalent without having to use a \"web browser\"."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 21,
+      "id": 48546093,
+      "title_en": "\"No Feigning Surprise\"",
+      "title_ja": "\"No Feigning Surprise\"",
+      "url": "https://wizardzines.com/comics/surprise/",
+      "hn_url": "https://news.ycombinator.com/item?id=48546093",
+      "score": 66,
+      "comment_count": 47,
+      "posted_at": "2026-06-15T19:45:07+00:00",
+      "comments": [
+        {
+          "id": 48598653,
+          "author": "TaylorPhebillo",
+          "text": "This is a reference to one the Recurse Center's social rules: https://www.recurse.com/social-rules I was really impressed with how successful RC is at maintaining an environment where people can learn and grow. Part of that is certainly selection effects- the point of center is self directed growth around programming, and there's an interview process that I assume filters especially hostile people. But I think the social rules do a lot too, and have been trying to pay attention to the effects on others when someone breaks them at work. No Feigned Surprise is a particularly important one around people who are trying to learn and already a little insecure. It's great when they've learned a new thing, and you want to celebrate that, not meet it with denigration!"
+        },
+        {
+          "id": 48599811,
+          "author": "bmacho",
+          "text": "@mods: the title or the URL are wrong. They either meant to post https://wizardzines.com/comics/no-feigning-surprise/ or https://wizardzines.com/comics/surprise/ with a title that has any relation with it."
+        },
+        {
+          "id": 48598452,
+          "author": "akerl_",
+          "text": "Did you mean to link to https://wizardzines.com/comics/no-feigning-surprise/"
+        },
+        {
+          "id": 48599899,
+          "author": "scottlamb",
+          "text": "I don't think people are upvoting this for the fact at the top of \"say something surprising\" [1], but it indeed surprised me: > I can write 500MB/s to a hard drive? that's so much! Turns out a Seagate 2X18 can write at 528 MiB/s according to its spec sheet. [2] My rule of thumb was that HDDs could do like 100MB/s (aka 800 Mbps) but I guess between density improvements and this new \"dual-actuator\" class, it's gotten a lot faster. HDD seek time has basically been stuck for 30+ years and probably will remain so but capacity has increased a lot, and the throughput for sequential access probably should scale with capacity [edit: times rpm, thanks Retr0id]. For a while I think it wasn't increasing, but I guess they decided to fix that? SSDs of course can do way more than 500 MB/s, and you can do better by compressing as you write (depending on your data), and you can stripe across multiple HDDs, but it turns out none of those are necessary. [1] as I write this, the title \"no feigning surprise\" suggests < https://wizardzines.com/comics/no-feigning-surprise/ > but the link points to \"say something surprising\" < https://wizardzines.com/comics/surprise/ >. [2] https://www.seagate.com/www-content/datasheets/pdfs/exos-2x1..."
+        },
+        {
+          "id": 48598887,
+          "author": "hbrav",
+          "text": "I think I'd appreciate a compilation of such surprising facts, if anyone has a list. I feel like the \"falsehoods programmers believe about [thing]\" is a little similar, but about correctness and never about performance."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 22,
+      "id": 48596910,
+      "title_en": "Norway greenlights first full-scale ship tunnel",
+      "title_ja": "Norway greenlights first full-scale ship tunnel",
+      "url": "https://eandt.theiet.org/2026/06/18/norway-greenlights-world-s-first-full-scale-ship-tunnel",
+      "hn_url": "https://news.ycombinator.com/item?id=48596910",
+      "score": 101,
+      "comment_count": 57,
+      "posted_at": "2026-06-19T10:16:10+00:00",
+      "comments": [
+        {
+          "id": 48597427,
+          "author": "mkl",
+          "text": "Having no map is weird. Wikipedia has one: https://en.wikipedia.org/wiki/Stad_Ship_Tunnel"
+        },
+        {
+          "id": 48599183,
+          "author": "Someone",
+          "text": "FTA: Norway will start building the first full-size ship tunnel in the world And “Full-size” means what? Sea-faring? https://en.wikipedia.org/wiki/Canal_tunnel lists several tunnels that ships can pass through, and https://en.wikipedia.org/wiki/Rove_Tunnel , to me, seems to have supported decently sized ships."
+        },
+        {
+          "id": 48598440,
+          "author": "dgellow",
+          "text": "Only 4 years of work to be ready? That sounds pretty optimistic ( crying in German )"
+        },
+        {
+          "id": 48598223,
+          "author": "bigpeopleareold",
+          "text": "The first time I heard about this was last week when I was listening to the economic issues that the article mentions on NRK \"political quarter\" (NRK is the national broadcaster) with the word \"waste\" being thrown around a lot. This article from VG debates the cost and puts it into contrast what could have been done instead: https://www.vg.no/nyheter/i/q6k3ko/skipstunnelen-er-historis... ... it's been contentious as I understand."
+        },
+        {
+          "id": 48597574,
+          "author": "nairboon",
+          "text": "That's kind of cool. Norway also has roundabouts in tunnels. I guess they like tunnels."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 23,
+      "id": 48593731,
+      "title_en": "Datasette Apps: Host custom HTML applications inside Datasette",
+      "title_ja": "Datasette Apps: Host custom HTML applications inside Datasette",
+      "url": "https://simonwillison.net/2026/Jun/18/datasette-apps/",
+      "hn_url": "https://news.ycombinator.com/item?id=48593731",
+      "score": 119,
+      "comment_count": 50,
+      "posted_at": "2026-06-19T01:06:27+00:00",
+      "comments": [
+        {
+          "id": 48598855,
+          "author": "lmeyerov",
+          "text": "Multiple projects are coming to the same point it seems. Motherduck has been marketing \"dives\" since the beginning of the year ( https://motherduck.com/blog/duck-dive-and-answer/ ) and in the Louie.ai team, we have been iterating on different patterns for similar needs. I'm getting the feeling that the answer to SaaS apps as fixed UIs over databases being dead because of coding agents means just the fixed dashboard pattern is dead, not SaaS, and BYO UI is part of the new table stakes. I'm curious where the pattern will go. My sense is there is a split between cathedrals vs bazaar for approach here, where cathedrals are quite rigid app builders, think framer/wix, while bazaars focus a layer below for more flexibility but less integrated."
+        },
+        {
+          "id": 48600284,
+          "author": "est",
+          "text": "I didn't quite get the CSP part. Why use and srcdoc and <meta http-equiv=\"Content-Security-Policy\"> instead of a real server header? Static hosting?"
+        },
+        {
+          "id": 48597612,
+          "author": "fsuts",
+          "text": "To save anyone else wondering what is Datasette a search: “Datasette is a tool for exploring and publishing data. It helps people take data of any shape, analyze and explore it, and publish it as an interactive website and accompanying API. Datasette is aimed at data journalists, museum curators, archivists, local governments, scientists, researchers and anyone else who has data that they wish to share with the world. It is part of a wider ecosystem of 44 tools and 154 plugins dedicated to making working with structured data as productive as possible.”"
+        },
+        {
+          "id": 48594095,
+          "author": "anitil",
+          "text": "When I've needed something like this in the past I've spun up simple HTML pages and used the json endpoint that all datasette instances come with [0]. I like this new pattern much better, as it keeps your app and data in one place (I remember having some issue with this at the time, though I can't remember what the actual issue was) So I imagine we could now load some data in to sqlite, design some HTML also loaded in to the db, and deploy. Although looking at the source, it seems like stored apps are expected to be managed by the plugin itself, but I'm sure there's a way around that [0] Eg from one of the examples - https://datasette.io/legislators/-/query.json?sql=select+*+f... . If you strip the '.json' you get the html view. For what it's worth there's also a '.csv' version."
+        },
+        {
+          "id": 48595392,
+          "author": "euroderf",
+          "text": "I never understood why someone hasn't made a framework that makes it stupidly easy to fill an HTML page with SQLite database tables, with all the usual display controls, and with as much \"liveness\" as desired, and with a protocol (over HTTPS) to manage comms to a server-side instance. SQLite is robust, lightweight, bulletproof - a WASM build belongs on ALL the webpages !"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 24,
+      "id": 48583386,
+      "title_en": "Hospitals and universities repurposing drugs at lower cost",
+      "title_ja": "Hospitals and universities repurposing drugs at lower cost",
+      "url": "https://www.kcl.ac.uk/news/hospitals-and-universities-repurposing-drugs-at-90-lower-cost",
+      "hn_url": "https://news.ycombinator.com/item?id=48583386",
+      "score": 323,
+      "comment_count": 154,
+      "posted_at": "2026-06-18T10:33:22+00:00",
+      "comments": [
+        {
+          "id": 48589988,
+          "author": "atourgates",
+          "text": "I have a little insight here from working with ophthalmologists. When the article mentions \"using a cancer drug to treat a leading cause of blindness\" it's talking about using Bevacizumab (brand name Avastin) to treat macular degeneration. Avastin and Lucentis are molecularly the same drug. The difference is that Avastin isn't packaged to be injected into eyeballs, and Lucentis is. Also, Avastin costs about $50/dose, and Lucentis costs around $1,500/dose. There are compounding pharmacies that will repackage Avastin into a format that can be injected into eyeballs. However, many ophthalmologists are hesitatnt to use Avastin because that process introduces the potential for contamination. Not that it happens frequently, but every ophthalmologist I know lives in fear of introducing an infection into their patient's eyeballs. And what level of risk is worth saving $1,450 per dose on an injection? 1/100? 1/1000? I know at least one ophthalmologist who would use Avastin, but would culture a sample from every batch she got from the compounding pharmacy, and had at least one batch that cultured bacteria. Assumedly, if she hadn't, every patient she injected with that batch would have been at risk of contracting endophthalmitis, and endophthalmitis is no joke. Not infrequently, it can mean losing vision. I know several of that ophthalmologist's colleagues who had been using compounded Avastin to try and save their patients money, stopped after that incident. I don't really have a conclusion beyond \"drug pricing is insane and the issue is complex for providers.\""
+        },
+        {
+          "id": 48583917,
+          "author": "jawns",
+          "text": "I have been a supporter of Cures Within Reach, a nonprofit that focuses on repurposing drugs, especially for rare diseases. https://www.cureswithinreach.org They have funded some important repurposed-drug studies for Huntingtons Disease, which runs in my family. For a disease like this, it's never going to make sense for major pharmaceutical companies to invest the effort to develop entirely new drugs, but by repurposing existing drugs, it gives people living with rare diseases a chance to ease symptoms."
+        },
+        {
+          "id": 48600250,
+          "author": "heathrow83829",
+          "text": "universal health care can be offered even in 3rd world countries but they're really smart about keeping costs low. they drastically cut the costs of medical service by just offering one or two generic drugs bbought in bulk from china and india rather than all those custom expensive drugs that do the same thing. it does the same thing but at a much lower cost"
+        },
+        {
+          "id": 48587877,
+          "author": "dabinat",
+          "text": "I’m currently on Spravato, which is fully emblematic of how broken the incentives in the US healthcare system are. Spravato is esketamine - a modified version of ketamine. Ketamine is made up of mirror image molecules and esketamine is the right-handed molecule. They did this because ketamine is off-patent so they needed to modify it in order to patent it, however there is evidence that esketamine is a less effective treatment than ketamine. It’s very cheap for me but my insurance company pays about $17k a month for this treatment. Ketamine would be a more effective treatment that would be super cheap for them, but they don’t do it because it’s not FDA-approved. So they’re paying a fortune for a less effective treatment. It would be in the insurance companies’ interests to band together to fund the research so they can save huge amounts of money in the long term but they do not do this."
+        },
+        {
+          "id": 48584738,
+          "author": "functionmouse",
+          "text": "Related, one of my all time favorite articles: https://www.propublica.org/article/revlimid-price-cancer-cel..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 25,
+      "id": 48593694,
+      "title_en": "Flexport (YC W14) Is Hiring in Indonesia, India, and Thailand",
+      "title_ja": "Flexport (YC W14) Is Hiring in Indonesia, India, and Thailand",
+      "url": "https://www.flexport.com/company/careers/",
+      "hn_url": "https://news.ycombinator.com/item?id=48593694",
+      "score": 1,
+      "comment_count": 0,
+      "posted_at": "2026-06-19T01:01:13+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 26,
+      "id": 48544429,
+      "title_en": "If your product is Great, it doesn't need to be Good (2010)",
+      "title_ja": "If your product is Great, it doesn't need to be Good (2010)",
+      "url": "http://paulbuchheit.blogspot.com/2010/02/if-your-product-is-great-it-doesnt-need.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48544429",
+      "score": 131,
+      "comment_count": 92,
+      "posted_at": "2026-06-15T17:26:52+00:00",
+      "comments": [
+        {
+          "id": 48592483,
+          "author": "jonplackett",
+          "text": "Read something similar the other day about the original Walkman. The engineers wanted to add recording function, thinking it would help with sales and to only cost a negligible amount to add. Someone cleverer said no, because if you add that feature now people will be confused what it is for. If they don’t want to record audio, they’ll think the product isn’t for them."
+        },
+        {
+          "id": 48597397,
+          "author": "jraph",
+          "text": "> But this isn't about the iPad or the iPod -- it's about product design. Obviously GenAI. The author time-traveled to us, stole that sentence and put it in his article. He got encoding issues on blogspot so he typed the dash himself."
+        },
+        {
+          "id": 48592626,
+          "author": "ChadNauseam",
+          "text": "Apple messed up one thing about the iPad, which made me never use mine and eventually give it away. Basically, my iPad would die in a couple days if left unplugged. Because I only want to use it about once a week, that means I have to leave it plugged in all the time. Of course I or someone else inevitably wants to plug something else into that charger, so the iPad gets unplugged and forgotten about. Then, in a week when I actually want to use it, it's dead, and I use something else. The result was, I literally never used it."
+        },
+        {
+          "id": 48596380,
+          "author": "Elosha",
+          "text": "I remember the biggest \"missing features\" of the iPhone people asked for were MMS and OBEX, along with 3G. I also remember Apple had cared for most missing things by the iPhone 3G respectively iOS 3. Then they improved photo quality, speed and videos until the iPhone 4 respectively iOS 4/5. Similar things can be said about the iPad 2. After that, I've had the feeling the product didn't improve anymore, because there was nothing actually useful left to add. I've used my iPhone 4 for 10 years, while Apple enjoyed adding more complexity without true benefit, except maybe the file manager and on-device image editing."
+        },
+        {
+          "id": 48593617,
+          "author": "admjs",
+          "text": "The hardest part of product management is saying no to reasonably good ideas. Bad ideas are pretty easy."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 27,
+      "id": 48584497,
+      "title_en": "W Social, public institutions and the theater of European digital sovereignty",
+      "title_ja": "W Social, public institutions and the theater of European digital sovereignty",
+      "url": "https://blog.elenarossini.com/w-social-public-institutions-and-the-theater-of-european-digital-sovereignty/",
+      "hn_url": "https://news.ycombinator.com/item?id=48584497",
+      "score": 247,
+      "comment_count": 153,
+      "posted_at": "2026-06-18T12:46:04+00:00",
+      "comments": [
+        {
+          "id": 48585628,
+          "author": "xg15",
+          "text": "> Europe already has an ATproto social network - Eurosky - run by a non-profit foundation - Modal - that is building everything in the open, with full transparency, sharing all the steps in their development roadmap: And weirdly, there was never a peep about this in the press - while the W Social launch was on national news and a bunch of high-profile EU politicians immediately joined. What's going on here?"
+        },
+        {
+          "id": 48584604,
+          "author": "pocksuppet",
+          "text": "W Social felt extremely shady since their first advertisement on HN. Also, for all their talk about human verification, I have 6 accounts under different names :)"
+        },
+        {
+          "id": 48584893,
+          "author": "tao_oat",
+          "text": "I thought this was a good post on the topic: [W Social is TruthSocial with a European accent.][1] [^1]: https://wecanjustdothings.leaflet.pub/3mokohkfb4224"
+        },
+        {
+          "id": 48586750,
+          "author": "xg15",
+          "text": "Looking at the people who immediately joined and this being presented at WEF, this looks less like an EU BlueSky or X and more like an EU Truth Social - i.e. the core users seem to be EU politicians who don't want to depend on a platform owned by their political opponents for reach and so want to have their own platform."
+        },
+        {
+          "id": 48586365,
+          "author": "mortarion",
+          "text": "The guy who runs W Social, whilst he has a software developer background, has worked most of his time in the financial world. W social is also an LLC. It's a corporation with shares looking to make a profit somehow. No doubt there will be ads on there, and paid features. I don't see how this will ever become a success, not because it's going closed source (people here don't care), or because it might have paid features (people here don't care) in the future, or even ands (people here don't care), but because of the name. Who the hell thought \"W Social\" was a good name for a company? We are so bad at company names here in the EU it's embarrassing."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 28,
+      "id": 48583897,
+      "title_en": "Modos Color Monitor Pushes E-Paper Displays Further",
+      "title_ja": "Modos Color Monitor Pushes E-Paper Displays Further",
+      "url": "https://spectrum.ieee.org/modos-e-paper-monitor",
+      "hn_url": "https://news.ycombinator.com/item?id=48583897",
+      "score": 321,
+      "comment_count": 74,
+      "posted_at": "2026-06-18T11:41:21+00:00",
+      "comments": [
+        {
+          "id": 48600365,
+          "author": "billy_bitchtits",
+          "text": "When will I be able to get a 35” color e ink display with this high refresh rate?"
+        },
+        {
+          "id": 48585420,
+          "author": "varun_ch",
+          "text": "There is an awesome YouTube video about this from the person who made it: https://m.youtube.com/watch?v=nHbA2-_qzH4"
+        },
+        {
+          "id": 48590989,
+          "author": "empalms",
+          "text": "Been casually following the ePaper/eInk device space for years now and Modos is one of the more exciting developments I've come across in the space. Seriously impressive. That said, I'm curious what impact the increased refresh rate might have on a Carta panel's longevity. I assume the physical medium that allows each 'pixel' to be on/off has a certain tolerance after which the screen begins to degrade beyond a usable state. Separately, I also want to understand more about how Wenting's approach differs (or not) from the flickering modern displays use to emit a picture, and, whether the direction actually addresses eye strain or reproduces the same issues (I'm assuming are) inherent in LCD/LED displays — i.e. it's the flickering that strains our eyes, not just light. Maybe someone more versed than I am in this space would know. After 10+ years of computer work... my eyes hurt and I really want this to be a game changer."
+        },
+        {
+          "id": 48586684,
+          "author": "jackb4040",
+          "text": "Between this, the Daylight computer (I know it's RLCD), and some of the flagship Boox devices, I'm very excited for where alternative display technology is going in the next couple years. Displays that you can use outside and that drain the battery way slower open up so many possibilities for auxiliary devices. My ideal device would be an ultralight android tablet with a keyboard case and an outdoor display good enough to watch youtube on, that needs to be charged less than once per day. Hopefully this product is super successful and Modos move on to standalone devices next. There are counter trends, like Garmin discontinuing their e-paper smartwatches. But hopefully that has more to do with that market being too narrow for viable alternatives, and not a fundamental issue with the economics of the displays themselves."
+        },
+        {
+          "id": 48585461,
+          "author": "xnx",
+          "text": "> two-person startup is back fund-raising for Modos Flow, a 13.3-inch color e-paper monitor with a higher native resolution of 3,200 x 2,400, touch input, and a 60Hz refresh rate Those are some mighty specs. Godspeed."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 29,
+      "id": 48547969,
+      "title_en": "Cell-based architecture for resilient payment systems",
+      "title_ja": "Cell-based architecture for resilient payment systems",
+      "url": "https://americanexpress.io/cell-based-architecture-for-resilient-payment-systems/",
+      "hn_url": "https://news.ycombinator.com/item?id=48547969",
+      "score": 140,
+      "comment_count": 57,
+      "posted_at": "2026-06-15T22:36:33+00:00",
+      "comments": [
+        {
+          "id": 48600305,
+          "author": "chmod775",
+          "text": "As described, if one \"cell\" crashes, you re-route/retry everything on the other cell. Assuming your system is deterministic and the input stay the same, the second cell should now break as well. This reads to me like an attempt to patch a system that's already fucked beyond belief while pretending you're doing \"engineering\"."
+        },
+        {
+          "id": 48593496,
+          "author": "Insimwytim",
+          "text": "Whole lot of nothing. This isn't about payment technologies, it's not about isolating transactions, it's about scaling the middle layer. What's worse it's not even explained what middle layer does. No info on how routing works, no info on data synchronization. Folks just learning Kubernetes and write extremely abstract stuff."
+        },
+        {
+          "id": 48592504,
+          "author": "physix",
+          "text": "Nobody uses Amex for payments, so the system isn't ever under high load. Just kidding! I find the idea quite good, and have to assume that the amount of payment fails they experience due to partitions/outages isn't very high and that the post-payment reconciliation and reclamation process gives them the liberty to rank availability a bit higher than correctness. One thing that looked a bit shaky was the interplay between the global transaction router's state of knowing which cells can handle a particular payment and the asynchronous distribution of the \"failover data\", which I presume it needs to know to route correctly. To me that seems to create a window where it might route to the wrong cell due to an outdated routing state. It also doesn't go into the HA setup of the global transaction router itself. But still, I kind of like the design."
+        },
+        {
+          "id": 48594509,
+          "author": "rdtsc",
+          "text": "Some of it sounds like it reinvented Erlang supervision trees https://learnyousomeerlang.com/supervisors . As a joke there we’re calling gen_severs “nanoservices”. Granted, that was mostly when microservices were the hot new thing."
+        },
+        {
+          "id": 48593644,
+          "author": "mkhalil",
+          "text": "microservices / clusters / zones - really all of these are other \"cell-based\" architectures as well. there is absolutely no written rule that a microservice was just an API or a singular service, it basically can be a independent instance that is testable/usable/gives value on itself. that said: still a nice write up, learning about some of the architectural choices that AMEX makes is definitely insightful (and relavent/useful to what i am working on right now as well!)"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 30,
+      "id": 48584761,
+      "title_en": "Show HN: Talos – Open-source WASM interpreter for Lean",
+      "title_ja": "Show HN: Talos – Open-source WASM interpreter for Lean",
+      "url": "https://github.com/cajal-technologies/talos",
+      "hn_url": "https://news.ycombinator.com/item?id=48584761",
+      "score": 77,
+      "comment_count": 19,
+      "posted_at": "2026-06-18T13:10:44+00:00",
+      "comments": [
+        {
+          "id": 48600268,
+          "author": "BobbyTables2",
+          "text": "Only thing left is to make a Kanban out of it…"
+        },
+        {
+          "id": 48594902,
+          "author": "himata4113",
+          "text": "talos is already in use by https://github.com/siderolabs/talos , was confused for a second when I saw talos and wasm for a second, got excited about native wasm pod support."
+        },
+        {
+          "id": 48596844,
+          "author": "jacobjwalters",
+          "text": "What is the program logic used here? The num_integer verification example seems to be hardcoding addresses in the spec; what if I want to reason about larger programs that dynamically allocate, where the addresses may not be known statically? How can I make sure these do not overlap? And since this is a shallow embedding into lean, what’s the approach for verifying properties of non-terminating programs?"
+        },
+        {
+          "id": 48588358,
+          "author": "quietusmuris",
+          "text": "Interesting. Do I have to write specs in Lean against the Wasm semantics or can you annotate Rust directly?"
+        },
+        {
+          "id": 48586316,
+          "author": "lukerj00",
+          "text": "I’m on the Cajal team - not OP, but happy to answer questions. The core bet is that Wasm is a good verification target (close to compiled artifacts, many languages target it), and Lean is the right place to do verification. Super interested in hearing from people working with Lean, compilers or other Wasm verification frameworks (eg Iris-Wasm)."
+        }
+      ],
+      "summary_ja": ""
+    }
+  ]
+}
