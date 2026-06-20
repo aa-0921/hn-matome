@@ -1,0 +1,1054 @@
+{
+  "date": "2026-06-20T00:00:00+09:00",
+  "slot": "12",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 48606619,
+      "title_en": "I Stored a Website in a Favicon",
+      "title_ja": "I Stored a Website in a Favicon",
+      "url": "https://www.timwehrle.de/blog/i-stored-a-website-in-a-favicon/",
+      "hn_url": "https://news.ycombinator.com/item?id=48606619",
+      "score": 47,
+      "comment_count": 11,
+      "posted_at": "2026-06-20T05:33:59+00:00",
+      "comments": [
+        {
+          "id": 48606876,
+          "author": "Tepix",
+          "text": "Instead of going via pixels, why not use a SVG favicon and directly store markup inside it and extract it? Use this favicon.svg: <svg xmlns=\"http://www.w3.org/2000/svg\"> <circle cx=\"50%\" cy=\"50%\" r=\"50%\" fill=\"orange\"/> <p>hello HN!</p> </svg> use this in your <head> to use a svg favicon: <link id=\"favicon\" rel=\"icon\" href=\"favicon.svg\" type=\"image/svg+xml\"> finally use this in your <body> to extract it and add it to your document body: <script> fetch(favicon.href).then(r => r.text()).then(t => document.body.innerHTML += t.match(/<p[\\s\\S]*p>/)[0]); </script>"
+        },
+        {
+          "id": 48606972,
+          "author": "beardyw",
+          "text": "I would have used a minimal service worker to unpack the web data and present it as if it were just a normal page being loaded."
+        },
+        {
+          "id": 48606821,
+          "author": "sheept",
+          "text": "You can use the favicon cache as storage too, by redirecting users across domains. It's been proposed as a potential fingerprinting risk[0], and if a browser naively reuses the cache for incognito mode, it could be used to track users across browser profiles. [0]: https://www.schneier.com/blog/archives/2021/02/browser-track..."
+        },
+        {
+          "id": 48606932,
+          "author": "Walf",
+          "text": "PNG has comment chunks tEXt, zTXt, and iTXt. You can have a completely normal image whose file is stuffed with as much content as you want. That is less fun, I suppose."
+        },
+        {
+          "id": 48606755,
+          "author": "franciscop",
+          "text": "Is this timing coincidence? I just submitted 1h (30 mins before this) ago a website I just made about storing your stock porfolio in a URL + favicon! https://news.ycombinator.com/item?id=48606396"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 2,
+      "id": 48562662,
+      "title_en": "Data Compression Explained (2012)",
+      "title_ja": "Data Compression Explained (2012)",
+      "url": "https://mattmahoney.net/dc/dce.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48562662",
+      "score": 84,
+      "comment_count": 7,
+      "posted_at": "2026-06-16T21:51:57+00:00",
+      "comments": [
+        {
+          "id": 48606412,
+          "author": "dang",
+          "text": "Related: Data Compression Explained (2011) - https://news.ycombinator.com/item?id=40631931 - June 2024 (1 comment) Data Compression Explained - https://news.ycombinator.com/item?id=5931493 - June 2013 (14 comments) Data Compression Explained by Matt Mahoney - https://news.ycombinator.com/item?id=1179242 - March 2010 (1 comment)"
+        },
+        {
+          "id": 48606455,
+          "author": "rurban",
+          "text": "The leader boards are from the pre Fabrice Bellard days, btw. Neural network modeling helped finding better patterns in text. Also, you could say the same for the related data search problem. How to prepare data, so that it can most efficiently searched. Smallest encoding vs fastest search. Databases are mostly very, very stupid compared to more data-specific tuned algorithms. Like factor 1000 slower and bigger."
+        },
+        {
+          "id": 48606763,
+          "author": "usernametaken29",
+          "text": "Isn’t the idea of AI precisely to find universal compression from arbitrary input data, at least with LLMs?"
+        },
+        {
+          "id": 48606646,
+          "author": "wps",
+          "text": "This is the guy who created Zpaq btw. Super interesting but niche backup/archive software."
+        },
+        {
+          "id": 48606634,
+          "author": "NooneAtAll3",
+          "text": "does anyone have any sources to read about ai-based compression? I remember hearing a lot about \"compression is a lot about prediction\", but I don't remember reading any practical result"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 3,
+      "id": 48599515,
+      "title_en": "There are no instances in ATProto",
+      "title_ja": "There are no instances in ATProto",
+      "url": "https://overreacted.io/there-are-no-instances-in-atproto/",
+      "hn_url": "https://news.ycombinator.com/item?id=48599515",
+      "score": 409,
+      "comment_count": 212,
+      "posted_at": "2026-06-19T15:10:02+00:00",
+      "comments": [
+        {
+          "id": 48601340,
+          "author": "1dom",
+          "text": "> Every single time a post about atproto hits Hacker News, somebody asks in the comments: “But where are all the Bluesky instances?”. The problem is, there are no instances in atproto! The question is a category error. Instances are a Mastodon-brained concept, and I wanted something I can link to that explains this clearly. I feel like you've (perhaps purposefully?) misinterpreted \"instances\" just to plug ATProto specifically at the expense of ActivityPub (and RSS, a bit). I think you lower yourself by doing this: 1. it forces you to omit and contort the interesting technical truths about ATProto and Activitypub, like Relays and their pros/cons for ATProto and account migrations and pros/cons for ActivityPub 2. it creates unnecessary conflict and criticism and seems unnecessarily divisive for 2 platforms solving problems in such a similar space It's also just seems a bit silly: why would you assume that when someone asks \"where are the instances?\" they're not using the common mainstream use of the word \"instances\", like, servers, or running software, or VMs, or containers? Sorry if this is overly harsh or I've misunderstood, but it gives me a strong vibe that it was motivated by disdain and frustration towards ActivityPub and ActivityPub users rather than wanting to legitimately inform the world about ActivityPub. I did enjoy the diagrams and the explainers though! I just felt like the subtle digs and pops at activitypub were an unnecessary distraction."
+        },
+        {
+          "id": 48601880,
+          "author": "p4bl0",
+          "text": "I think the analogy presented here is broken. RSS doesn't depend on Google Reader at all. Even at its prime, RSS depended less on Google Reader than email depends on Gmail now. In ATProto, AppViews heavily depends on Relays to be useful, and Relays are quite expensive to run. Also, the yellow circles which represent blogs in the RSS illustration are really not of the same nature as the same circles which represent posts on Facebook. Blogs are self-sufficient, for example. I'm not saying ATProto is bad at all, but I feel like this blog post adds more confusion than it clarifies anything."
+        },
+        {
+          "id": 48600835,
+          "author": "muglug",
+          "text": "As far as I can tell, Relays[1] are the glue that makes ATProto work performantly. I think they're supposed to be content-agnostic — they just shuttle data through, reducing the number of services each AppView needs to be aware of. As the blog mentions, the big improvement vs Mastodon is that Relays, AppViews and PDSes are separate services with their own distinct scaling demands. It's a rather beautiful solution to a system design problem. [1] https://atproto.com/guides/glossary"
+        },
+        {
+          "id": 48601419,
+          "author": "JoshTriplett",
+          "text": "I appreciate how this explains the difference between the two. But I also found it a little frustrating, because it answered one part of the question but failed to answer the question so what does ATProto do to solve the problems that instances solve? For example, when this article dismisses defederation as merely a mysterious reason you might not see posts from your friends, it fails to answer \"so how does atproto solve the problems that defederation solves?\". Because the default reasonable answer to assume, given this framing, is \"it doesn't\"."
+        },
+        {
+          "id": 48601950,
+          "author": "4lx87",
+          "text": "If it quacks like a duck... An account has a single Personal Data Server (PDS), right? The DID links to a PDS which is the canonical data feed for a user, and where a user's writes go. Data can be replicated but the PDS is treated as canonical. That's much closer to client/server architecture than distributed architecture. There's no P2P database. There's no writes into a DHT or peers. You write to your PDS, then those writes are optionally mirrored. Also discovery happens via DNS, so you don't even ask peers for data. You connect to a relay not as a peer but as a client asking a server for a copy of data that's canonically hosted by the PDS. I don't think it's a stretch to call the PDS an instance and the relay a mirror."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 4,
+      "id": 48568652,
+      "title_en": "The discovery that changed how scientists think about memory – IBM",
+      "title_ja": "The discovery that changed how scientists think about memory – IBM",
+      "url": "https://www.ibm.com/think/news/discovery-changed-how-scientists-think-about-memory-kavli-prize",
+      "hn_url": "https://news.ycombinator.com/item?id=48568652",
+      "score": 25,
+      "comment_count": 1,
+      "posted_at": "2026-06-17T11:09:29+00:00",
+      "comments": [
+        {
+          "id": 48606955,
+          "author": "Animats",
+          "text": "\"They still struggle to explain the spark that transforms information into insight.\" Go watch Stable Diffusion iteratively transform noise into originality."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 5,
+      "id": 48602918,
+      "title_en": "Surprising economics of load-balanced systems",
+      "title_ja": "Surprising economics of load-balanced systems",
+      "url": "https://brooker.co.za/blog/2020/08/06/erlang.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48602918",
+      "score": 87,
+      "comment_count": 21,
+      "posted_at": "2026-06-19T20:30:59+00:00",
+      "comments": [
+        {
+          "id": 48604694,
+          "author": "bijowo1676",
+          "text": "the article offers a simplified world model: Poisson arrivals and infinite queue, which is fine as a math model. In the real world however, the bursts can be correlated, due to factors like timeouts/retries, thundering herd, correlated bursts. so the real economics of load-balanced system is a simple reliability story: being able to reasonably serve the peak traffic, which leads to over-provisioning of those systems. using cloud allows some form of scale up/down of resources, but doesn't completely solve the problem. I think the migration away from synchronyous systems towards async systems and letting clients gradually absorb the delays is a better approach (rather than forcing infrastructure to be dynamically scaled up/down and be billed per request-second by your cloud provider)"
+        },
+        {
+          "id": 48604659,
+          "author": "mjb",
+          "text": "A dead comment says: > Of course, this assumes independent events. World Cup, super bowls, etc break these assumptions. Yes, this is very true. The model here works for Poisson arrivals and exponential service time (the M/M), which are poor approximations of real-world traffic patterns (which tend to be non-stationary and non-ergodic, and include substantial seasonality). However, the frequency of that seasonality is typically rather low (e.g. daily cycles), and so these stronger assumptions are quite defensible for short time periods. A better approach is to do simulation with real traffic patterns, or even with more sophisticated parametric models, and get better answers (e.g. https://stability-sim.systems/ ). The good news is that kind of simulation is cheaper to do than ever before."
+        },
+        {
+          "id": 48606295,
+          "author": "resters",
+          "text": "It's not surprising if one has the mental model of the probability that the request gets enqueued. Then when you add variable time to process requests it becomes more clear why some requests can take unexpectedly long (there is a >0 probability that a request gets queued behind several of the slowest endpoints, for example). So even if 90% of the endpoints are fast and most of the requests aren't even queued, there will still be some that end up being quite slow."
+        },
+        {
+          "id": 48604031,
+          "author": "crypttales",
+          "text": "Of course, this assumes independent events. World Cup, super bowls, etc break these assumptions. Still, queuing theory is so cool."
+        },
+        {
+          "id": 48604520,
+          "author": "megamalloc",
+          "text": "What's conspicuously missing is the plot of performance when you do have a well tuned queue in front of the service. Yes, having a queue becomes less important the more backend servers you have, but here even with 10 servers the plot shows your latency remains >25% worse than it would be with a queue. Also missing is discussion of how the variance in processing times affects you when you rely on load balancing alone."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 6,
+      "id": 48582374,
+      "title_en": "Can you see three trees?",
+      "title_ja": "Can you see three trees?",
+      "url": "https://www.not-ship.com/can-you-see-three-trees/",
+      "hn_url": "https://news.ycombinator.com/item?id=48582374",
+      "score": 43,
+      "comment_count": 1,
+      "posted_at": "2026-06-18T08:16:20+00:00",
+      "comments": [
+        {
+          "id": 48606967,
+          "author": "helloplanets",
+          "text": "Esbo / Espoo is an odd one out, of those four. The three others look like the olden European cities you'd expect, but you'll have a hard time getting around in Espoo without a car. There are plenty of beautiful neighborhoods in Espoo, but it's basically a large spread of separate suburbs rather than a \"city\" in the way the rest are. The actual \"Espoo Center\" is not at all green and flowery, and people there don't really visit it at all, unless they live there. Espoo is right next to Helsinki, so a lot of people basically live in Espoo and work in Helsinki. And if you'd be talking about going to the city center from Espoo, you'd always be basically talking about going to the Helsinki city center."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 7,
+      "id": 48600312,
+      "title_en": "Hyundai buys Boston Dynamics",
+      "title_ja": "Hyundai buys Boston Dynamics",
+      "url": "https://startupfortune.com/hyundai-takes-full-control-of-boston-dynamics-as-softbank-exits-for-325-million/",
+      "hn_url": "https://news.ycombinator.com/item?id=48600312",
+      "score": 758,
+      "comment_count": 345,
+      "posted_at": "2026-06-19T16:28:20+00:00",
+      "comments": [
+        {
+          "id": 48601155,
+          "author": "giwook",
+          "text": "Back in December 2020, Hyundai purchased an 80% controlling interest in Boston Dynamics from SoftBank for $880 million, part of a transaction that valued the robotics company at $1.1 billion. That agreement included a put option allowing SoftBank to sell its remaining stake to Hyundai at a later date. SoftBank has now exercised that option."
+        },
+        {
+          "id": 48600998,
+          "author": "Hugsbox",
+          "text": "I don't understand why they would implement humanoid robots instead of purpose-built robots. The human form is not the most optimal way to do most tasks, especially as it relates to manufacturing. Robots don't need to look like humans, they need to be useful . Seems like putting in an awful lot of extra unnecessary work to end up with a worse result."
+        },
+        {
+          "id": 48601349,
+          "author": "sottol",
+          "text": "I don't think this is solely tied to car manufacturing automation. Even though Hyundai Motor Group is acquiring them, I would imagine they'd be well-positioned to commercialize general-purpose robotics and not just for car manufacturing, if Tesla is anything to go by. I do think this might be tied to South Korea's demographics, by 2040 the working-age population is projected to decline 25% from 2020 and keep declining almost linearly until leveling out around 17M around 2065, a 50% drop total in < 50 years. I would think HMG / Hyundai sees a huge business opportunity or this might be a national-level political priority but I don't know the specifics."
+        },
+        {
+          "id": 48600881,
+          "author": "tmach32",
+          "text": "Wait, haven’t they already owned them for years? Edit: right, they’re just buying the remaining 9%."
+        },
+        {
+          "id": 48601085,
+          "author": "Zigurd",
+          "text": "Hyundai bumped their ownership up to 100%, and took the opportunity to reset expectations about when Atlas would be working in Hyundai factories. While Atlas is the best humanoid robot so far, it still isn't useful in a car factory that's fully equipped with the latest factory robots that are strong enough to juggle car engines and are bolted to the floor. Everyone knows the killer app for humanoid robots is building the Mars colony amirte?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 8,
+      "id": 48600093,
+      "title_en": "Norway imposes near ban on AI in elementary school",
+      "title_ja": "Norway imposes near ban on AI in elementary school",
+      "url": "https://www.reuters.com/technology/norway-imposes-near-ban-ai-elementary-school-2026-06-19/",
+      "hn_url": "https://news.ycombinator.com/item?id=48600093",
+      "score": 593,
+      "comment_count": 403,
+      "posted_at": "2026-06-19T16:03:15+00:00",
+      "comments": [
+        {
+          "id": 48603742,
+          "author": "simonw",
+          "text": "> Pupils from first through seventh grade, aged 6 to 13, should as a general rule not be using AI, while those in lower secondary school, aged 14 to 16, can cautiously adopt tools under teachers' supervision, the government said. Sounds right to me. Kids under 13 need to learn to read, write and comprehend text. Generative AI is not going to help them with those skills. They can play with AI at home, and after 13 they can learn how to use AI productively and, ideally, in a way that enhances rather than detracts from their education. Also from the story: > Facing a broad decline in education test scores, the government in 2024 banned smartphones from schools and has given teachers back more powers to enforce discipline in the classroom. A big hooray for that. Will be interesting to see what impact that has on Norway education - a quick search just now didn't turn up any detailed studies, presumably those will show up eventually."
+        },
+        {
+          "id": 48604260,
+          "author": "nunez",
+          "text": "Spend a few minutes on the teacher subreddits: /r/teachers and /r/professors, specifically. AI has been a disaster for student outcomes and educator performance, more or less across the board. It should be banned in education, but there's no way to enforce that without increasing educator workload substantially (eliminating homework and re-working lesson plans around that; moving tests and projects back into the classroom; etc.)"
+        },
+        {
+          "id": 48603801,
+          "author": "suyavuz",
+          "text": "I think this is basically right. You don’t hand out calculators before kids understand arithmetic. LLM version is sneakier because skipping the work still produces something that looks finished."
+        },
+        {
+          "id": 48606768,
+          "author": "himata4113",
+          "text": "The fundemental problem is motivation not AI and this is simply the result of a larger societal shift that happened to correlate with the advent of AI. Personally I've never done any homework or assignments, when I was outside school it was over. However, this motivated me to do really well in tests which in-turn made me extremely active during the limited time I had in school and I became pretty damn efficient at absorbing information and picking things up. So on the surface at minimum it appears that we should stop grading on activities outside school. To be honest, what worked the best for me was what my history teacher did, 5 minute tests at the start of the lesson, then 10-20 minutes of teaching + self study assignments, remaining time is grading + answering any questions and if grading goes fast they usually had time to continue teaching for a few more minutes before the lesson ended. Group study was also heavily utilized as a form to take the load off themselves when they were overwhelmed from work due to 12th grade students especially right before exams, most of our classes became group study. All the students from their class always performed exceptionally well in nationals even though it was a mid tier public school. I will recognize that I am a bit special and that students are extremely varied I picked up on this when I discovered that someone in 11th grade still couldn't grasp the pythagorean theorem. I don't really have a solution to the motivation problem when phones are just so addicting and have an atmosphere of their own, the best way I can put it is that your child becomes an outcast if they can't play roblox because everyone in their school does which is a very real thing my friend experienced with their kids."
+        },
+        {
+          "id": 48603483,
+          "author": "bko",
+          "text": "Im confused, are there tasks given to 6 to 13 year old to use AI? In the classroom, are they just throwing gpt in front of them? Is that the modern equivalent of watching a vhs? Or do they have homework to vibe code something or given some prompts to ask at home and save somewhere? Serious question, what does this mean?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 9,
+      "id": 48606271,
+      "title_en": "Satellite reveals immense scale of GPS signal tampering",
+      "title_ja": "Satellite reveals immense scale of GPS signal tampering",
+      "url": "https://www.space.com/space-exploration/satellites/its-quite-a-bit-more-than-we-expected-satellite-reveals-immense-scale-of-gps-signal-tampering",
+      "hn_url": "https://news.ycombinator.com/item?id=48606271",
+      "score": 42,
+      "comment_count": 2,
+      "posted_at": "2026-06-20T04:07:03+00:00",
+      "comments": [
+        {
+          "id": 48606959,
+          "author": "random3",
+          "text": "GPS tampering “data” from a company who’s upcoming tech is advertised to solve the problem their data shows is indeed a problem, and coincidentally also raised their 170M series C"
+        },
+        {
+          "id": 48606968,
+          "author": "skeptic_ai",
+          "text": "The worst ad ridden website I’ve ever seen."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 10,
+      "id": 48598586,
+      "title_en": "How many of the 170k English words do you know?",
+      "title_ja": "How many of the 170k English words do you know?",
+      "url": "https://vocabowl-870366514258.us-west1.run.app/",
+      "hn_url": "https://news.ycombinator.com/item?id=48598586",
+      "score": 318,
+      "comment_count": 413,
+      "posted_at": "2026-06-19T13:51:36+00:00",
+      "comments": [
+        {
+          "id": 48606973,
+          "author": "Liftyee",
+          "text": "Far too slow to complete and too many clicks. I'm surprised it's not using a binary search method easy-hard-easy ... Then it could show an in progress metric."
+        },
+        {
+          "id": 48603620,
+          "author": "brianleb",
+          "text": "As others have pointed out, too many clicks per word. I am a sucker for a 'how many words do you know' quiz so I finished anyway. Overall I'm skeptical of the classifications. In broad strokes, the early words are easier and the latter words are more challenging, but the middle is pretty muddied. Some of the words chosen are rather absurd/inappropriate: breviary (which I got wrong but felt like a vaguely religious word) was characterized as intermediate but I think it's much more obscure and less obvious than that; Hippopotomonstrosesquippedaliophobia was used as a word (I got that wrong as well) - any type of 'phobia' word is really the sort of thing a fourth grader opens up a page in the dictionary and points out, not a word that is used... ever; metamorphosis and kinetic were labeled expert, which I don't agree with (what elementary schooler doesn't learn about the metamorphosis of a caterpillar into a butterfly? what high schooler doesn't learn about kinetic energy?). Most words were reasonably well defined in a way that most people would understand or recognize. A few words had poor definitions: lethargy (\"the state of being lethargic\" - obvious); complacent (\"smug satisfaction with oneself\" - I disagree that complacency is intrinsically smug); magnanimous (\"generous toward a rival\" - I disagree that a rival must be involved); gauche (\"socially awkward\" - this is sort of close but the given definition completely misses the idea of being tactless). They call it scientific and give a hand-wavey formula, but they don't explain how words are stratified in the first place. If stratified sampling is a formally recognized method of doing this, it would be nice to have a link to a real reference. I think I know a lot of words, but I am skeptical of the estimate this app provided (north of 75k)."
+        },
+        {
+          "id": 48599428,
+          "author": "sd9",
+          "text": "Interesting concept, but 100 words is really quite a lot to get through... It's tiresome trudging through the easy words at the start, and I never got to see the interesting words before getting bored. I've seen other systems like this calibrate far more quickly by assigning a sort of score and confidence behind the scenes. Confidence starts out low and increases over time - correct/incorrect answers rapidly adjust score at the beginning, then things settle down. In practice this means you get a sequence of increasingly uncommon words initially, until you get one wrong, then you drop back to something easier until you start getting things right again, and eventually circle around words at your level. Also - too many clicks per word. It's low stakes, just let me click the definition once and I'll live if I misclick (or add an undo button)."
+        },
+        {
+          "id": 48603397,
+          "author": "stbullard",
+          "text": "In addition to everything everyone else has said: their math is off by half (or 100%, depending on how you count), due to a structural error. (context: native English speaker, big reader, huge nerd, perfect SAT score) I got all 100 correct on the first try without looking anything up! Confusingly, that only resulted in a \"SCIENTIFIC ESTIMATE\" that I know 85,000/~170,000 words? Their \"How is this calculated\" page that appears at the end explains their error: > According to the Oxford English Dictionary (Second Edition), there are approximately 171,476 words in current use. > We use Stratified Sampling. Instead of testing random words, we divide the language into 5 distinct difficulty bands based on frequency of use: > 1. Core Basics ~3,000 words > 2. Intermediate ~7,000 words > 3. Advanced ~10,000 words > 4. Expert ~25,000 words > 5. The Obscure ~40,000+ words > If you answer 2 out of 3 'Intermediate' questions correctly, we estimate you know roughly 66% of the 7,000 words in that band. > Total Score = Σ (Accuracy in Band × Band Size) Their strata add up to 85000, not ~170k, making a perfect score still give a 50%. They're also using a pretty limited and perhaps non-difficulty-representative subset of the language. Cute, but wrong on many counts."
+        },
+        {
+          "id": 48599270,
+          "author": "Laurel1234",
+          "text": "Pretty fun. I suggest skipping the submit button and just showing it's correct when pressing and moving on after a sec or so. Having to click on submit twice really breaks the flow. Also in all the words I tried I noticed out of the 4 options one is the correct one, another is the opposite of the correct one, and the other 2 are random stuff. You can basically skip any option whose antonym isn't present as well."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 11,
+      "id": 48602352,
+      "title_en": "Bobby Prince, composer for Doom, Wolfenstein 3D, and Duke Nukem 3D, has died",
+      "title_ja": "Bobby Prince, composer for Doom, Wolfenstein 3D, and Duke Nukem 3D, has died",
+      "url": "https://www.legacy.com/legacy/robert-bobby-prince-lll",
+      "hn_url": "https://news.ycombinator.com/item?id=48602352",
+      "score": 316,
+      "comment_count": 36,
+      "posted_at": "2026-06-19T19:35:15+00:00",
+      "comments": [
+        {
+          "id": 48605210,
+          "author": "PaulCarrack",
+          "text": "Loss of an absolute legend. One of my favorite videos (and songs) sang by Bobby: https://www.youtube.com/watch?v=9w3yoIOK-9U (Eat Your Vegetables) RIP. You will be missed Bobby."
+        },
+        {
+          "id": 48605186,
+          "author": "amatecha",
+          "text": "Ah man, hell no :( The music in DOOM was such a huge influence on me. I had the Macintosh version which IIRC had the .mid files alongside the game, so I hung onto those and listened to them outside of the game quite frequently. I was just a kid at the time, and later on when I discovered bands like Pantera, Slayer, Judas Priest etc. I suddenly \"got\" all the references (not previously having known they were references/iterations on those bands' songs)! Great memories. RIP \\m/"
+        },
+        {
+          "id": 48604073,
+          "author": "bombcar",
+          "text": "NEDM, Prince. The sound of Doom was a big part of why it was so immersive, and everyone focuses on the mobs and gunshots (there's some pretty cool positional audio for the time), but the music really played a big part of the whole atmosphere."
+        },
+        {
+          "id": 48604397,
+          "author": "recallingmemory",
+          "text": "Wolfenstein 3D has such memorable tracks for me.. thanks for the music Bobby. https://www.youtube.com/watch?v=0UgvFSV2xxI"
+        },
+        {
+          "id": 48605897,
+          "author": "xnx",
+          "text": "Today I learned that he also did (all of?) the sound effects for Doom. RIP (and tear)"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 12,
+      "id": 48595511,
+      "title_en": "Project Valhalla, Explained: How a Decade of Work Arrives in JDK 28",
+      "title_ja": "Project Valhalla, Explained: How a Decade of Work Arrives in JDK 28",
+      "url": "https://www.jvm-weekly.com/p/project-valhalla-explained-how-a",
+      "hn_url": "https://news.ycombinator.com/item?id=48595511",
+      "score": 577,
+      "comment_count": 359,
+      "posted_at": "2026-06-19T06:35:57+00:00",
+      "comments": [
+        {
+          "id": 48595972,
+          "author": "rf15",
+          "text": "I appreciate the hard work that went into the things that did make it into Valhalla eventually, but: > The model was powerful, but also mentally heavy No it isn't! it is this interpretation that kills off the null-safety debate entirely. Saying you have a variable that cannot be null is not a mentally taxing distinction, especially since everything is labelled thoroughly. > The team, faithful to the lesson “simplify the model for the user, even at the cost of the performance ceiling,” ultimately dismantled this dualism. but it would have simplified it for the user. The whole attitude and process around this and the other topics gives me very little faith that Java can be steered in a sensible direction here. The type system of a programming language is supposed to give convenient guarantees to the developer on a CPU that can only do numbers. There is no reason to reduce the optional(!) safety guarantees you can offer with the excuse of \"too mentally taxing\". Hell, they even get there half way by recognising: > the language model and the JVM model don’t have to overlap one hundred percent"
+        },
+        {
+          "id": 48598444,
+          "author": "mattstir",
+          "text": "> But the difference in memory is fundamental. The JVM can now store the values themselves in the array, laid out densely one after another: 8 bytes per point (plus a possible null flag), in a contiguous block. No headers per element. No pointers. No jumping around the heap. How much was this article proof-read? Didn't they just get finished talking about how heap flattening won't work for objects with > 64-bit representations? Their `Point` is at least 65 bits (two 32-bit ints plus the null flag). The \"plus a possible null flag\" and oddly short following statements seem to suggest this was some AI that got sidetracked by trying to make emphatic statements... oh and also the \"[IMAGE: the same Point[] array in two variants...\" block halfway down the page is unfortunate."
+        },
+        {
+          "id": 48606786,
+          "author": "Panzerschrek",
+          "text": "> we want the JVM to be able to treat them as efficiently as primitives. They want basically to solve the main Java design flaw with (almost) everything is a reference paradigm. C++ and Rust have had value-types from day one. > 64 bits, including the null flag So, this basically makes every value-object optional, adds extra overhead and makes code less safe to null pointer dereference errors. > but a class with, say, two int fields or one double may not fit in an atomic write and end up as an ordinary object on the heap anyway So, the whole optimization is applied only for very small structs with no more than two scalars (or so). Did it worth to spend 10+ years of development to achieve this?"
+        },
+        {
+          "id": 48602534,
+          "author": "devin",
+          "text": "After reading a lot of comments in here, there is one thing that always repeats itself in Java/JVM-related comment sections on HN. There are a surprising number of people who have an idea of what the JVM or Java used to be and have very little idea of what it is today. It is a very fit predator in 2026. Does it have its warts? Yes, but the substrate is extremely good."
+        },
+        {
+          "id": 48596355,
+          "author": "tomaytotomato",
+          "text": "A lot of the comments on here are a bit unfair on what is great work being done and even more awesome work (JEPs) in the pipeline for the future. If Java was a child, imagine it being brought up by loving parents for the first few years (Sun) then it was thrown in a garage with some other children and neglected by its evil guardian (Oracle) Neglected and unloved till JDK 8, its basically been playing catch up. So when people say \"oh so its now got structs or value types of X\", yes it has but that's because it has been stunted in its development due to big bureaucratic and hostile corporate processes, but its free now and is getting love through the OpenJDK family. I will continue to enjoy writing once and deploying anywhere!"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 13,
+      "id": 48582180,
+      "title_en": "A Perceptron in Age of Empires II",
+      "title_ja": "A Perceptron in Age of Empires II",
+      "url": "https://adewynter.github.io/notes/aoe2-circuits",
+      "hn_url": "https://news.ycombinator.com/item?id=48582180",
+      "score": 60,
+      "comment_count": 27,
+      "posted_at": "2026-06-18T07:50:12+00:00",
+      "comments": [
+        {
+          "id": 48606410,
+          "author": "nomilk",
+          "text": "Related: Creatures (1996) is a video game containing a neural network: https://en.wikipedia.org/wiki/Creatures_(1996_video_game) Some other games containing neural networks: https://gaming.stackexchange.com/questions/399931/which-game..."
+        },
+        {
+          "id": 48606517,
+          "author": "aesthesia",
+          "text": "As far as I can tell, the actual argument in the paper is that an LLM instantiated in AoE II would (a) be very slow, (b) maybe not actually input or output text, and (c) just generally look silly. Therefore observers would not naturally ascribe anthropomorphic characteristics to it. But you don't need the Turing-complete embedding for this argument. You can run inference as slowly as you like and detach the tokenizer. Show some silly representation of the internal computations. Now it's just a cute art project producing sequences of numbers. No human characteristics there!"
+        },
+        {
+          "id": 48604954,
+          "author": "solid_fuel",
+          "text": "> In-game constructions of NAND gates and a perceptron (forward prop and training) as described in in 'If LLMs Have Human-Like Attributes, Then So Does Age of Empires II'. Interesting concept > We begin by proving that Age of Empires II is functionally- and Turing- complete. Then we build a perceptron and a circuit to train it in-game. With that, we argue that changing the substrate (representation) of an LLM also alters the perception of their attributes. This is fun, but I don't think it's particularly surprising. A substrate being turing-complete alone is enough evidence that you can train and run a perception on it, assuming the available memory is sufficient. > We then show that research in LLM anthropomorphic attributes cannot be done starting by assuming that these attributes exist (or not) in the system; even if you aim to conclude that they do not exist. This assumption can happen even when you do not make it explicitly! It also shows that there are ways to do good, sound research without needing to make that assumption. I... don't see how this follows? I wanted to see how this argument unfolded, but it seems the arxiv link on this page is broken? It just links to arxiv.org and the rest of what is on this linked page doesn't seem to cover this second assertion at all."
+        },
+        {
+          "id": 48605118,
+          "author": "aesthesia",
+          "text": "From the judge prompt in the paper: > Papers asking whether LLMs have such properties are assuming them (e.g., ‘Do LLMs have musical talent’, ‘Do LLMs present empathy’, etc). This seems like...a very bad definition of \"assuming\" something? If I ask \"do you know how to play the guitar?\" I am absolutely not assuming that you know how to play the guitar!"
+        },
+        {
+          "id": 48586228,
+          "author": "ecshafer",
+          "text": "Age of Empires II had a creative map editor, where you could \"program\" via triggers and effects. It wasn't as in depth as the blizzard games which you could write code, but was easier to use. You could make a trigger (ie. units in this area, time passed, number of units on the field, build a building, etc) then effect (ie spawn unit, move unit, kill something, etc). Which was used in custom maps to do all sorts of fun games. Or like here you can make a nand gate by moving units around."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 14,
+      "id": 48548612,
+      "title_en": "Egyptian Fractions",
+      "title_ja": "Egyptian Fractions",
+      "url": "https://blog.plover.com/math/egyptian-fractions.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48548612",
+      "score": 85,
+      "comment_count": 5,
+      "posted_at": "2026-06-15T23:37:54+00:00",
+      "comments": [
+        {
+          "id": 48605968,
+          "author": "chrismorgan",
+          "text": "We’ve grown used to a full-decimal system, but all kinds of weird stuff has existed in the past. Telugu (a language of southern India) has an interesting traditional numeric system: base ten for integers, and base four for fractions. U+0C78 \"౸\" TELUGU FRACTION DIGIT ZERO FOR ODD POWERS OF FOUR U+0C79 \"౹\" TELUGU FRACTION DIGIT ONE FOR ODD POWERS OF FOUR U+0C7A \"౺\" TELUGU FRACTION DIGIT TWO FOR ODD POWERS OF FOUR U+0C7B \"౻\" TELUGU FRACTION DIGIT THREE FOR ODD POWERS OF FOUR (U+0C66 \"౦\" TELUGU DIGIT ZERO is used for even powers of four too) U+0C7C \"౼\" TELUGU FRACTION DIGIT ONE FOR EVEN POWERS OF FOUR U+0C7D \"౽\" TELUGU FRACTION DIGIT TWO FOR EVEN POWERS OF FOUR U+0C7E \"౾\" TELUGU FRACTION DIGIT THREE FOR EVEN POWERS OF FOUR Seems complicated at first, but in practice it’s roughly just: circle for zero, and tally marks for one, two and three, alternating vertical and horizontal. Few Telugu speakers even know about this any more—no one can read even the traditional integers (౦౧౨౩౪౫౬౭౮౯), because 0123456789 have replaced them. (This is the case in most but not all Indian languages. Bengali’s traditional digits are still common, so you can enjoy ৪ being four and ৭ seven.) A couple of articles and discussions about it: • https://www.unicode.org/wg2/docs/n3156.pdf is the best public resource I know of (Unicode proposals and related papers are often delightful for information on obscure written stuff, because they had to write down and publish the details to get the characters encoded). One tid-bit: NYSE used a similar decimal/quaternary system until early 2001. • https://blog.plover.com/math/telugu.html from the same site as the current article, discussed in https://news.ycombinator.com/item?id=14683767 nine years ago."
+        },
+        {
+          "id": 48606855,
+          "author": "pests",
+          "text": "Thought this said Factions at first but still all the interesting."
+        },
+        {
+          "id": 48605327,
+          "author": "hilsdev",
+          "text": "Cool, and something I’ve been curious about (the civil engineering and math involved from earlier representations). I want the logic behind the notation, though. I assume there’s a background system of folding a rope into equilateral pieces that led to this system of fractional math that I would love any YouTube or other recommendations on"
+        },
+        {
+          "id": 48606579,
+          "author": "jojobas",
+          "text": "We take so much of modern math notation for granted, for centuries people were encumbered by various inefficiencies of what was agreed before them and couldn't be easily broken."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 15,
+      "id": 48606140,
+      "title_en": "Where to Find the Colors Your Screen Can't Show You",
+      "title_ja": "Where to Find the Colors Your Screen Can't Show You",
+      "url": "https://moultano.wordpress.com/2026/06/19/where-to-find-the-colors-your-screen-cant-show-you/",
+      "hn_url": "https://news.ycombinator.com/item?id=48606140",
+      "score": 6,
+      "comment_count": 0,
+      "posted_at": "2026-06-20T03:36:49+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 16,
+      "id": 48604232,
+      "title_en": "Ask HN: Will programmers write more efficient code during the memory shortage?",
+      "title_ja": "Ask HN: Will programmers write more efficient code during the memory shortage?",
+      "url": null,
+      "hn_url": "https://news.ycombinator.com/item?id=48604232",
+      "score": 78,
+      "comment_count": 128,
+      "posted_at": "2026-06-19T22:51:09+00:00",
+      "comments": [
+        {
+          "id": 48606870,
+          "author": "jimnotgym",
+          "text": "It is a really simple matter of incentives. If your backlog is full of feature requests you will add features. If your backlog is full of tasks to reduce memory usage, speed up areas etc., then that is what you will do. Most programmers will have no choice whatsoever."
+        },
+        {
+          "id": 48606218,
+          "author": "jpollock",
+          "text": "Programmers will write more efficient algorithms if their employers tell them to trade time-to-market for hardware cost. Previously, it was trade hardware cost for time-to-market. \"Programmers\" don't make this decision, the product owner does."
+        },
+        {
+          "id": 48606947,
+          "author": "citrin_ru",
+          "text": "If memory shortages were not caused by AI then may be (but still unlikely). In the current situation even cautious in the past companies are switching to “move fast and break things” mode to not fall behind vibe coding competitors. When the velocity is the top priority there is no time fo efficiency."
+        },
+        {
+          "id": 48604437,
+          "author": "cornstalks",
+          "text": "Some programmers will write more efficient code. At my $dayjob (one of the big tech companies) we're already planning a major goal next year of optimizing server code to reduce RAM requirements, and this is directly in response to the crunch. In practice I expect most optimizations will come from \"stop doing stupid stuff\" and not \"use fancy advanced algorithms.\" But that's a cynical perspective so don't be cynical like me."
+        },
+        {
+          "id": 48606523,
+          "author": "cco",
+          "text": "I expect mobile OS and maybe mobile app developers to do so. Google has already downgraded memory for their upcoming Pixel 11 while at the same time imposing local running models as a first-class feature. Both decreasing the memory pool and increasing the demands on it. The key is that they own the full stack (hardware and software) and can demand the OS be more efficient, along with perhaps forcing that goal on app developers as well via tightened background limits etc."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 17,
+      "id": 48601162,
+      "title_en": "John Jumper to join Anthropic",
+      "title_ja": "John Jumper to join Anthropic",
+      "url": "https://twitter.com/JohnJumperSci/status/2068001285173834106",
+      "hn_url": "https://news.ycombinator.com/item?id=48601162",
+      "score": 111,
+      "comment_count": 82,
+      "posted_at": "2026-06-19T17:53:00+00:00",
+      "comments": [
+        {
+          "id": 48603784,
+          "author": "frays",
+          "text": "Demis Hassabis posted a farewell for John Jumper on X: https://x.com/demishassabis/status/2068002732250640603 > Thanks John for an extraordinary partnership and wonderful collaboration over the past 9 years! What we achieved with AlphaFold changed the world, and showed the field what was possible with AI for science and medicine, lighting the way for how AI can benefit humanity."
+        },
+        {
+          "id": 48601679,
+          "author": "CuriouslyC",
+          "text": "Something spicy must have happened internally at Google. This rapid fire high level attrition isn't just down to the bureaucratic quagmire."
+        },
+        {
+          "id": 48603021,
+          "author": "abraxas",
+          "text": "Something seems afoot at Google. The real tell will be if Demis makes a move. Jeff Dean seems more like a lifer to me."
+        },
+        {
+          "id": 48602270,
+          "author": "musicale",
+          "text": "Name checks out."
+        },
+        {
+          "id": 48602714,
+          "author": "hackerbeat",
+          "text": "Super Mario leaves Nintendo to focus on plumbing."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 18,
+      "id": 48553161,
+      "title_en": "Telescope Ranchers",
+      "title_ja": "Telescope Ranchers",
+      "url": "https://kottke.org/26/06/telescope-ranchers",
+      "hn_url": "https://news.ycombinator.com/item?id=48553161",
+      "score": 115,
+      "comment_count": 44,
+      "posted_at": "2026-06-16T10:34:10+00:00",
+      "comments": [
+        {
+          "id": 48601546,
+          "author": "jimmy76615",
+          "text": "Really great idea! But one still has to buy a telescope and send it to this guy, I think it would be cool if one could just rent everything at once. For non-serious people that have a lot of money that they would like to put to use looking at the stars. Or maybe a time-share like concept."
+        },
+        {
+          "id": 48601478,
+          "author": "mattlondon",
+          "text": "> from as little as 99 USD a month > 550 telescopes So about ~55 to 60k USD a month to just have some telescopes on your land? Nice little earner."
+        },
+        {
+          "id": 48603682,
+          "author": "password4321",
+          "text": "Previous discussions on remote telescopes: https://news.ycombinator.com/item?id=45271108 https://news.ycombinator.com/item?id=44741078"
+        },
+        {
+          "id": 48601855,
+          "author": "orbital-decay",
+          "text": "Far from unique! There were and are telescope hosters in the Atacama Desert, which is as good as it can possibly be for the amateurs."
+        },
+        {
+          "id": 48600744,
+          "author": "jmward01",
+          "text": "We need more of this. Thanks for making the world more awesome!"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 19,
+      "id": 48600946,
+      "title_en": "Court Records Should Be Free",
+      "title_ja": "Court Records Should Be Free",
+      "url": "https://www.eff.org/deeplinks/2026/06/court-records-should-be-free",
+      "hn_url": "https://news.ycombinator.com/item?id=48600946",
+      "score": 335,
+      "comment_count": 70,
+      "posted_at": "2026-06-19T17:34:18+00:00",
+      "comments": [
+        {
+          "id": 48605246,
+          "author": "tptacek",
+          "text": "The discourse over PACER fees recapitulates a very common public policy conundrum, and we should all be more thoughtful about discussing it. In the municipality where I live, we're statutorily required to replace lead service lines[†] within the next 5-10 years (I forget how many). The municipality replaces the trunk lines, and homeowners are required to replace the last hop at their own (significant) expense. Naturally, people are extremely upset about this. They're all being forced to spend a bunch of money, out of the blue. They all want the municipality to pay for their own service line replacement. Other municipalities are doing this. But the thing here is: there's no free money. We all pay for the service line replacement one way or the other, because the ultimate source of funds for the things the municipality pays for is our property tax levy. In fact, having the municipality pay for homeowner service line replacement is straightforwardly regressive: it's a subsidy to homeowners, paid in part out of the pockets of people who don't own. A similar dilemma faces PACER. Overwhelmingly , PACER is used by attorneys, who are generally well-compensated professionals with a whole host of protectionist policies insulating them from market forces. Court records can, of course, be made \"free\". But nothing is actually free. To make those records free, you have to take money from the general fund, which means the tax payments of people who have nothing to do with the legal profession are... funding the legal profession. That doesn't mean I think it's great that PACER charges. Speaking as a nonlawyer who uses PACER kind of weirdly a lot, it's also not good ; it's pretty archaic. But it's also very cheap. I'd imagine that most of the use cases for which it isn't below the cost noise floor are cases that serve professions, in which case I have to ask what the public policy case is for subsidizing those uses. I don't know, things are complicated. [†] Added context: lead service lines in Chicagoland aren't necessarily immediately problematic, because the water management department here carefully manages the supply to ensure lead is mineralized; if you test your lead-service tap water for lead, you won't find any."
+        },
+        {
+          "id": 48603982,
+          "author": "jacobmarble",
+          "text": "PACER is for federal courts, price is $1 per page. I'm being sued in the State of Idaho, where the price of each page is $10."
+        },
+        {
+          "id": 48602869,
+          "author": "cdolan",
+          "text": "courtlistener and the Recap program fill a vital niche at the moment. Recap takes any PACER document you purchase and automatically adds it to CourtListener for others to see/download. Hopefully it will become obsolete soon!"
+        },
+        {
+          "id": 48604591,
+          "author": "treebeard901",
+          "text": "Financial cost is one if the many ways the Government intentionally limits your access to your ability to uphold your rights."
+        },
+        {
+          "id": 48604100,
+          "author": "user3939382",
+          "text": "> the public should not have to pay to read the law This goes back to Hammurabi. These decisions are the law. We pay tax dollars to create all this and even if we didn’t, if we’re held to these rulings we need to be able to read them."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 20,
+      "id": 48555903,
+      "title_en": "World Cup 2026: Soccer Arcade Games Through the Years",
+      "title_ja": "World Cup 2026: Soccer Arcade Games Through the Years",
+      "url": "https://arcadeheroes.com/2026/06/13/world-cup-2026-soccer-arcade/",
+      "hn_url": "https://news.ycombinator.com/item?id=48555903",
+      "score": 4,
+      "comment_count": 0,
+      "posted_at": "2026-06-16T14:30:12+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 21,
+      "id": 48601420,
+      "title_en": "Big Banana Car",
+      "title_ja": "Big Banana Car",
+      "url": "https://bigbananacar.com/",
+      "hn_url": "https://news.ycombinator.com/item?id=48601420",
+      "score": 139,
+      "comment_count": 75,
+      "posted_at": "2026-06-19T18:14:11+00:00",
+      "comments": [
+        {
+          "id": 48602296,
+          "author": "tsherb",
+          "text": "I feel like we’ve got to at least link to the guy’s website: https://bigbananacar.com/"
+        },
+        {
+          "id": 48602424,
+          "author": "harwoodr",
+          "text": "I used to drive a 1991 Suzuki Cappuccino - a tiny right-hand drive kei sports car. The first couple of years I drove it, the police pulled me over on a regular basis - no tickets issued but lots of questions asked. One time while I was waiting for a light, an officer knocked on my window (which is somewhat startling)... I rolled it down and he excitedly asked \"What kind of car is this?!\" https://en.wikipedia.org/wiki/Suzuki_Cappuccino"
+        },
+        {
+          "id": 48606494,
+          "author": "0xbadcafebee",
+          "text": "I hosted Steve on my couch (remember Couchsurfing?) when he was taking his Big Banana Car to a local art festival. Awesome guy, awesome car. I got to ride along for a bit. It was thrilling to see every single person's face light up as soon as they saw it, like a moving happiness machine. I hope somebody sees this and decides to make their own bit of whimsy"
+        },
+        {
+          "id": 48602073,
+          "author": "alentred",
+          "text": "> World Needs More Whimsy 100% that! When did everything get serious and look-alike? Anyway, I am taking off, shopping cart racing in the mall..."
+        },
+        {
+          "id": 48601943,
+          "author": "dcrazy",
+          "text": "Well this headline is certainly a crash blossom: https://www.merriam-webster.com/wordplay/crash-blossom-words..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 22,
+      "id": 48563047,
+      "title_en": "Digital Printing of Arabic: explaining the problem",
+      "title_ja": "Digital Printing of Arabic: explaining the problem",
+      "url": "https://digitalorientalist.com/2017/08/21/digital-printing-of-arabic-explaining-the-problem/",
+      "hn_url": "https://news.ycombinator.com/item?id=48563047",
+      "score": 47,
+      "comment_count": 15,
+      "posted_at": "2026-06-16T22:23:04+00:00",
+      "comments": [
+        {
+          "id": 48605958,
+          "author": "abdullahkhalids",
+          "text": "This problem is not limited to Arabic. Variants of the arabic alphabet are used by Persian (including Iranian and Dari dialects), Mazanderani, Qashqai, Luri, Gilaki, Kurdish (excluding Kurds in Turkey), Talysh, Azerbaijani (in Iran), Pamir languages, Pashto, Urdu, Balochi, Sindhi (in Pakistan), Punjabi (in Pakistan), Uzbek (in Afghanistan), Turkmen (in Afghanistan), Saraiki, Hindko, Brahui, languages spoken in Kashmir. Whole languages are dying out because people are unable to express them properly on computers. Even popular software that dominate these speakers does not care to improve their experience. For example, Urdu has traditionally been written in the Nastaliq form [1], but is usually is rendered everywhere in the Naskh form [2]. There is no way to change this, for example, in Android without basically rooting it and changing the system fonts. [1] https://en.wikipedia.org/wiki/Nastaliq [2] https://en.wikipedia.org/wiki/Naskh_(script)"
+        },
+        {
+          "id": 48606650,
+          "author": "numpad0",
+          "text": "It's... interesting how the author sees Han Unification as a feature, when it's just a longstanding and politically charged bug. CJK languages are mutually unintelligible, so displaying CJK texts in wrong fonts won't do anything meaningful; it won't make texts in one language readable to speakers of other languages."
+        },
+        {
+          "id": 48606055,
+          "author": "pseingatl",
+          "text": "For a while, Arabizi was wildly popular and universally used on feature phones. When mobiles became smarter, it was used less. Japanese has romaji and Mandarin has pinyin. Arabic's Arabizi would increase literacy rates and solve all these digital problems."
+        },
+        {
+          "id": 48606234,
+          "author": "harshreality",
+          "text": "(2017) How much of this is still a problem with modern software/font stacks and harfbuzz?"
+        },
+        {
+          "id": 48606862,
+          "author": "Panzerschrek",
+          "text": "Why do people still use this horrible-looking and hard to process alphabet? Why not switching to latin (as some countries did) or at least to reform it so that it's easier to type and to read?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 23,
+      "id": 48604851,
+      "title_en": "Hey, n00b, we didn't hire you to complete tasks",
+      "title_ja": "Hey, n00b, we didn't hire you to complete tasks",
+      "url": "https://newsletter.kentbeck.com/p/hey-n00b-we-didnt-hire-you-to-complete",
+      "hn_url": "https://news.ycombinator.com/item?id=48604851",
+      "score": 145,
+      "comment_count": 75,
+      "posted_at": "2026-06-20T00:11:07+00:00",
+      "comments": [
+        {
+          "id": 48606966,
+          "author": "simon84",
+          "text": "I see the article focuses on tasks and things to do or not do. These are primarily driven by skills of the junior. Though you should expect they have none. What sort of comes out between the lines is the attitude of the person, and I think this matters most and should be framed directly. You want someone curious that will peek beyond what you asked. Someone proactive that will not sit and wait for an assignment. Someone meticulous that will not self-satisfy of quick-and-dirty. When said like this, the article content resonates as the consequences rather than objectives."
+        },
+        {
+          "id": 48605430,
+          "author": "nilirl",
+          "text": "I've met maybe 1-2 people in my whole life who were clearly beneficial 'A' from the get go. There's also a weird 'A' that tries very hard but causes more pain than inspiration. Meaning, they're clearly smart but think that's all that's necessary to be useful. I once worked with an intern from MIT who came in and immediately submitted large PRs everyday that improved the algorithmic complexity for a bunch of functions. Which was awesome to see but the changes were off the hot path and the code was much harder to read. The part that still comes to me was when I'd said during a code review that there were other more pressing concerns, the intern said yes but you can't argue against the improvement in time complexity. Smart guy. Inspirational, even. But better suited to a large corp than a startup. I think a startup 'A' has a lot more to do with attitude about speed and uncertainty than competence."
+        },
+        {
+          "id": 48605130,
+          "author": "ANarrativeApe",
+          "text": "This makes complete sense in an environment where people transition from noob to senior engineer within the same company. It makes less sense in an era when tenure is better measured in months than years. It makes even less sense in an era of LLMs. One area where it might be relevant is the military. People are more likely to stay for longer (unvalidated assumption) and the same personnel jacket follows them if they are transferred. It might also be thought of as a guide as to when to jump ship. If you have managed to get yourself categorized as a C, then leave. Start fresh somewhere else, take the learning with you, and discover if you have what it takes to make it as an A or B."
+        },
+        {
+          "id": 48605587,
+          "author": "asveikau",
+          "text": "So much of this is written with an air of superiority over the noob. Indicates a bit of an ego problem. Yes, the noobs are noobs, but the goal isn't to exercise your status over them. Or even to waste that much time trying to categorize between A, B, C. The goal should be to boost everybody's productivity instead of treating them like a game."
+        },
+        {
+          "id": 48605027,
+          "author": "LPisGood",
+          "text": "This is an interesting perspective(and a great roadmap for juniors to try to improve), but I think for the most part the thesis is wrong, at least in my experience. Companies do not hire juniors as some long tern play to develop them into good engineers. They hire juniors because they have junior level tasks that need completed."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 24,
+      "id": 48600593,
+      "title_en": "AURpocalypse now: a look at the recent AUR attacks",
+      "title_ja": "AURpocalypse now: a look at the recent AUR attacks",
+      "url": "https://lwn.net/SubscriberLink/1077619/f7b07c5489fdd43a/",
+      "hn_url": "https://news.ycombinator.com/item?id=48600593",
+      "score": 58,
+      "comment_count": 38,
+      "posted_at": "2026-06-19T16:59:16+00:00",
+      "comments": [
+        {
+          "id": 48605079,
+          "author": "nickjj",
+          "text": "In case anyone missed it, the latest version of yay (v13+) supports being able to skip recently added packages through its new Lua extension system https://jguer.github.io/yay/lua.html#upgrade-selection-hooks . You can control the threshold since it's just user configuration now. A bunch of common yay commands also return back the last updated time of a package thanks to https://github.com/Jguer/yay/pull/2846 ."
+        },
+        {
+          "id": 48605787,
+          "author": "cozzyd",
+          "text": "I love the smell of npm install malware in the morning."
+        },
+        {
+          "id": 48605580,
+          "author": "Ferret7446",
+          "text": "Devil's advocate, except partially serious. This is a good thing, because the warning about checking everything you download from the AUR, which has always existed, is now actually \"enforced\". People respond to consequences."
+        },
+        {
+          "id": 48604701,
+          "author": "AshamedCaptain",
+          "text": "I'll note that OpenSuse also has Packman which a shitton of people enable (for codecs), has also 'one namespace only' an looser policies than the main distro. I do not think this something you can escape by switching distro."
+        },
+        {
+          "id": 48605583,
+          "author": "cookiengineer",
+          "text": "Note that the AUR attacks were part of the larger miasma worm campaign, gradually trying to gain more control through various package ecosystems since the RedHat prototype campaign. Mitigation Tool: https://github.com/cookiengineer/antimiasma Blog Post with details: https://cookie.engineer/weblog/articles/malware-insights-mia..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 25,
+      "id": 48605301,
+      "title_en": "How to feed a dictator",
+      "title_ja": "How to feed a dictator",
+      "url": "https://www.theguardian.com/film/2026/jun/09/how-to-feed-a-dictator-film",
+      "hn_url": "https://news.ycombinator.com/item?id=48605301",
+      "score": 125,
+      "comment_count": 43,
+      "posted_at": "2026-06-20T01:16:56+00:00",
+      "comments": [
+        {
+          "id": 48606971,
+          "author": "okaleniuk",
+          "text": "This is one of the most unexpected ecranisations ever. The book is great on its own, but I would never assumed it could become a film. The topic itself is a bit heavy, and I somehow assumed that most of the people pan Szablovski interviewed at one point or another are already dead. This is going to be a fascinating watch."
+        },
+        {
+          "id": 48605552,
+          "author": "ashalhashim",
+          "text": "> “It goes back to Hannah Arendt’s banality of evil a bit,” says director Andrew Neel. “These everyday things that are beloved to us, like food, can take on an entirely different dimension within the context of a dictatorship.” That’s not at all what Arendt was writing about. She was writing about those who do evil things are rarely the “evil” monsters we imagine but rather bureaucrats motivated by things like promotions. Hard to remain motivated to consume an article after reading this in the opening."
+        },
+        {
+          "id": 48605553,
+          "author": "sublinear",
+          "text": "Not the original title"
+        },
+        {
+          "id": 48606499,
+          "author": "esafak",
+          "text": "See also https://en.wikipedia.org/wiki/The_President's_Cake , which is nominally about cooking."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 26,
+      "id": 48549118,
+      "title_en": "Zen and the Art of Machine Learning Research",
+      "title_ja": "Zen and the Art of Machine Learning Research",
+      "url": "https://blog.jxmo.io/p/zen-and-the-art-of-machine-learning",
+      "hn_url": "https://news.ycombinator.com/item?id=48549118",
+      "score": 250,
+      "comment_count": 89,
+      "posted_at": "2026-06-16T00:45:50+00:00",
+      "comments": [
+        {
+          "id": 48595822,
+          "author": "jdw64",
+          "text": "I feel that the Zen used in the West and the Zen in East Asia are quite different. I think the Western Zen is probably the one from the 1970s book Zen and the Art of Motorcycle Maintenance. It usually carries a sense of equanimity and beginner's mind. But in East Asia, Zen actually emphasizes aimlessness or non‑purposefulness. The point where I really feel the difference is that Western Zen seems to be about how to train the self to become stronger, whereas actual Seon (Zen) in East Asia is about going with nature, letting go of the self, and allowing things to flow. In the actual practice of Seon, it's about doubting the self, letting go of attachments, and realizing that achievement, comparison, and the desire for control are all just fleeting. There's a famous phrase: 'Banghasak (放下著)' — let it all go. If anything, I think ancient Roman Stoicism feels more like Zen than Western Zen does So that's fascinating. When I saw this article, I was expecting it to be about whether we should give up the desire for success, but instead it took a completely different direction, which was surprising"
+        },
+        {
+          "id": 48596038,
+          "author": "rented_mule",
+          "text": "Around 2015, I found myself managing back end and machine learning engineers (not researchers) at the same time. Many of the back end engineers wanted to do more ML. Some of them did well when given a chance, but others wanted to revert to back end within a few months. At the same time, one of the ML leaders wanted to step away from ML and only do back end work to support ML. As I studied these dynamics, something occurred to me... Different people need to see signs of success at different frequencies. Because of the nature of our product, measuring the performance of a new/updated model required the model to be live for at least a full calendar month. So, between initial work and final analysis, it was often a 2 month wait or more. For many back end tasks, you can build a quick prototype, run it to see if it works, and be on your way - the signals come all day long. The varying frequency needs of different people went a long way to determining which of them liked working on ML. This is sort of a manager's version of feature engineering. ;-) The people on that team taught me a lot!"
+        },
+        {
+          "id": 48598320,
+          "author": "HarHarVeryFunny",
+          "text": "> on days we find insight, we sit. > on days we do not find insight, we sit. This reminds me of Ed Witten (greatest living physicist?) in an interview by Brian Green. Green asked Witten what his day-to-day was like at the Institute for Advanced Study ... Wittens' reply: \"I sit at my desk\"."
+        },
+        {
+          "id": 48605514,
+          "author": "jjssmith",
+          "text": "> One really impressive thing about OpenAI is that most of the people running the company (on the technical side, at least) are under 35. Many of the important decisionmakers behind chatGPT are under 30. During Gold Rush most 49ers were under 25, so there's still room for improvement! [Continuing the analogy, you may find that many AI heroes are just those who happened to be closer to pools of TPUs and GPUs in the early days...]"
+        },
+        {
+          "id": 48597224,
+          "author": "mrmarket",
+          "text": "excellent essay. what a great read. like the author said, so much of 'success' or 'progress' (in research but of course also across disciplines) depends upon temperament. just straight up having a good attitude about things. the skills that make a good researcher could not be more transferable: patience, innate curiosity, and a resilience against failure. that said, these skills are increasingly rare/at a premium given our culture of minimizing discomfort tolerance via hyperconvenience. people have a harder and harder time waiting or failing."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 27,
+      "id": 48586329,
+      "title_en": "Building a robotics research setup that lives next to my desk",
+      "title_ja": "Building a robotics research setup that lives next to my desk",
+      "url": "https://dfdxlabs.com/research/2026/robotics-setup/",
+      "hn_url": "https://news.ycombinator.com/item?id=48586329",
+      "score": 140,
+      "comment_count": 48,
+      "posted_at": "2026-06-18T14:51:53+00:00",
+      "comments": [
+        {
+          "id": 48606736,
+          "author": "b89kim",
+          "text": "- A single arm is sufficient for validating basic Pick/Place tasks, but more complex scenarios require Bi-arm - Calibration is not required for VLA models. - RGB or Stereo RGB inputs are sufficient for ACT, DP, and PI0/PI05. - ROS2 is not strictly required, but it can be useful for sharing/co-developing codes. For instance, the Stanford team built a custom framework for diffusion policy instead. I also developed similar framework because ROS2 is not optimized for bi-manual manipulation or VLA workloads."
+        },
+        {
+          "id": 48606460,
+          "author": "modeless",
+          "text": "VR controllers are significantly better than a SpaceMouse for teleoperation. Even if I already had a SpaceMouse I would buy a Quest 3s and switch to it, if I was doing more than a trivial amount of teleoperation. (As is typical with robot teleop setups, I would not wear the headset on my head. It's merely a dongle to track the controllers)."
+        },
+        {
+          "id": 48594633,
+          "author": "NalNezumi",
+          "text": "Cool stuff. At my previous (startup / research) job I had to set up similar system (but with franka arm and multi view camera) alone because I was the only one with robotics background. >I do not intend to calibrate the camera’s extrinsics or intrinsics for now. Sensible choice, although I suggest it's good in the long run to do at early stage in your setup, especially if you intend to collect data for policy learning. Debugging trained policies for visual manipulation task can be a headache and having as much context on variables that can change is a good practice. My previous setup was in Japan, a earthquake prone place and I wasted some time after realizing the camera got misaligned due to earthquake. A simple solution is just to place an Aruco marker on the table that tracks the relative extrinsic position of camera, and add it as metadata to collected teleoperation dataset."
+        },
+        {
+          "id": 48597341,
+          "author": "colinator",
+          "text": "Good move getting a nice robot! I'm doing something similar to you, but I went with a cheap robot, the \"HIWONDER 6DOF Robotic Arm Kit\". It was only $600, but wow is it bad. The precision and repeatability are both \"are you drunk?\" level. I can hear the gears grind when it moves. I suppose I should upgrade. But if my system can work with a terrible robot, I assume it would work even better with a nice one! My project is https://github.com/colinator/Ariel - basically, no VLAs - instead, \"just write code\". Or have the agents do it. I don't have a writeup yet about applying Ariel to _this_ robot, but this is for a previous one: https://colinator.github.io/Ariel/post1.html . Excited to follow your progress!"
+        },
+        {
+          "id": 48594600,
+          "author": "avilay",
+          "text": "Hey this is cool! I am doing something similar myself with the SO101 arm robot from Robot Studio using a patchwork of my own code and LeRobot. Would love to collaborate with you if you are open to it. You can find me on Discord as `.avilay`. https://www.linkedin.com/posts/avilay_lerobot-huggingface-ro... Would like to know your reasoning on not going with LeRobot."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 28,
+      "id": 48556082,
+      "title_en": "Show HN: Metiq: a real time 3D globe for 100 public datasets",
+      "title_ja": "Show HN: Metiq: a real time 3D globe for 100 public datasets",
+      "url": "https://metiq.space",
+      "hn_url": "https://news.ycombinator.com/item?id=48556082",
+      "score": 111,
+      "comment_count": 30,
+      "posted_at": "2026-06-16T14:43:38+00:00",
+      "comments": [
+        {
+          "id": 48601512,
+          "author": "jwardbond",
+          "text": "Very cool. The satellite views are awesome! I clicked around for 20 minutes and still felt like there was so much more to explore. Thoughts: --- Unless there is a soviet military installation in Southend, Saskatchewan, something is seriously funky with the \"military installation\" layer. It would be nice if clicking didn't lower the zoom level. It's fine to zoom in and center, but having it zoom me out every time I click something was annoying."
+        },
+        {
+          "id": 48604497,
+          "author": "noAnswer",
+          "text": "I know it's \"just\" AI but one could think there is a forkable project out there. I have seen like tenths of projects like this. OPs explanation is different though. Usually the line is \"inspired by movie\"."
+        },
+        {
+          "id": 48604383,
+          "author": "robby1110",
+          "text": "I really like this. Is this just pulling from free data sources? Wonder if you could also hook it up with a maps provider to show real terrain"
+        },
+        {
+          "id": 48600677,
+          "author": "dwa3592",
+          "text": "This is amazing. I have been exploring open public datasets for some GIS projects. How are you dealing with any rate limits for how much you can pull from these public servers?"
+        },
+        {
+          "id": 48600656,
+          "author": "daviding",
+          "text": "Very impressive! What's the stack used? Also, is there a way to stop the 'Satellite Inspect' dialog from coming up when clicking around the globe? It obscures a bit of the map."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 29,
+      "id": 48602817,
+      "title_en": "Think of the children: How to force real ID for all internet traffic (2023)",
+      "title_ja": "Think of the children: How to force real ID for all internet traffic (2023)",
+      "url": "https://nochan.net/b/Internet-Crap/20230829-Think-Of-The-Children/",
+      "hn_url": "https://news.ycombinator.com/item?id=48602817",
+      "score": 186,
+      "comment_count": 111,
+      "posted_at": "2026-06-19T20:19:57+00:00",
+      "comments": [
+        {
+          "id": 48605243,
+          "author": "asdff",
+          "text": "What is the final defense? I suppose we create underground relay networks of radio networks within cities that allow for computers to connect directly to eachother, and from there we seed all our pirated content and discuss whatever the hell we'd like. Maybe we'd have to contend with low bandwidth when we connect outside our own city network, using larger wavelength radio to bounce off the ionosphere across the planet. As for the FCC, I don't really care. I will set up nodes on top of abandoned buildings. I will set up nodes in front of the local FCC field office. I will set up nodes in the middle of the forest. I will set up nodes on buoys out at sea. They may capture me or worse, so be it. I will not be around forever anyhow. I pray there are still actual hackers out there on hacker news who might consider this idea and help further the technical side. This is a little out of my wheelhouse. I just can't accept this inevitable incoming future where all our communications will be IDed and censored. That is the end game for them. We can't allow for that to happen. This might be the biggest battle yet, bigger than all the other wars where power used us like pawns against the pawns of some other power, because for once in the history of civilization, we'd be fighting for our own right and not some elite group's right. I hope I am not alone in this line of thinking."
+        },
+        {
+          "id": 48604422,
+          "author": "orbital-decay",
+          "text": "To add to the list: KYC/AML-like regulations and practices (not necessarily financial) that shift the responsibility down the chain, outside the accountability zone, and result in preventive overly broad risk avoidance, self-censorship, and manipulation of your Overton window. See for example DMCA vs YouTube practices vs what actual channels choose to do to dodge both. Or algospeak. Or the PayPal situation which is mentioned in the article. But it's all talk. Political pressure is like gas pressure. Gas expands to fill the available volume. What do you actually do to push back, besides talking about it on the web? This defines the available volume, if you don't do anything it's infinite."
+        },
+        {
+          "id": 48604595,
+          "author": "big85",
+          "text": "<meta name=\"RATING\" content=\"RTA-5042-1996-1400-1577-RTA\" /> I wonder why the rating code is so complex. Pornhub.com has this code enabled, but it also uses a simpler <meta name=\"rating\" content=\"adult\">. 4chan also uses the latter."
+        },
+        {
+          "id": 48604962,
+          "author": "teddyh",
+          "text": "20 years before that, there was “ The Digital Imprimatur ”: < https://www.fourmilab.ch/documents/digital-imprimatur/ >"
+        },
+        {
+          "id": 48605128,
+          "author": "nodrog3000",
+          "text": "Simple solution, Use your router to block whatever you need to, control your kids devices, the internet stays free and open. What are we talking about? There are no laws that will turn out well."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 30,
+      "id": 48600167,
+      "title_en": "GPT-5.5 hallucinates 3x more than MIT-licensed GLM-5.2",
+      "title_ja": "GPT-5.5 hallucinates 3x more than MIT-licensed GLM-5.2",
+      "url": "https://arrowtsx.dev/bigger-models/",
+      "hn_url": "https://news.ycombinator.com/item?id=48600167",
+      "score": 63,
+      "comment_count": 14,
+      "posted_at": "2026-06-19T16:11:25+00:00",
+      "comments": [
+        {
+          "id": 48605020,
+          "author": "aesthesia",
+          "text": "Hallucination rate scores are a little tricky to interpret because they're conditional on the model not knowing the answer. That means they don't measure the probability of your encountering a hallucination in everyday use, since that also depends on the probability of the model not knowing the answer, as well as how well your distribution of tasks aligns with the distribution tested in the eval. I'd also hesitate to attribute this difference in hallucination rates purely to model size. Yes, GLM-5.2 hallucinates much less frequently than DeepSeek-V4 Pro with twice as many parameters, but DeepSeek-V4 Flash is less than half the size of GLM-5.2 and tops the AA-Omniscience hallucination index. Opus 4.8, which is likely larger than DeepSeek-V4 Pro, has a 36% hallucination rate on the index, above GLM-5.2's 28%, but way below the DeepSeek numbers. Opus also has a 47% accuracy rate vs GLM-5.2's 25%. If you use these numbers to calculate the absolute hallucination rate (i.e., the number of hallucinated responses divided by the total number of responses), you get 19% for Opus and 21% for GLM-5.2. So yes, all else equal larger models may be more prone to hallucination in scenarios where they don't know the answer, but there are a lot of other factors that affect hallucination rates, and it's not totally clear that this is the main metric that's worth tracking."
+        },
+        {
+          "id": 48606020,
+          "author": "nextaccountic",
+          "text": ">GPT-5.5 and DeepSeek V4 Pro are two of the clearest hallucination leaders, despite being absolutely huge. Because of their immense size they simply did not learn how to say “I don’t know” or recognize intricate logical and technical fallacies. While it is true that a multi-trillion parameter model will always beat a lightweight consumer model on paper (today at least), the commoditization of these huge models is blurring the line between benchmark performance and actual real-world truthfulness and accuracy. What about using two models, with a smaller model used for this kind of negative reasoning?"
+        },
+        {
+          "id": 48604666,
+          "author": "solid_fuel",
+          "text": "> It’s been proven that when a model is trained on large volumes of highly factual and non-theoretical data, it learns to always have an answer. DeepSeek V4 Pro (1.6T params, 49B active, 44 AA Intelligence Index score) has a ludicrous 94% hallucination score on the AA-Omniscience benchmark, meaning on questions that it couldn’t figure out, it only stated that it didn’t know around 6% of the time, and the rest it confidently hallucinated an answer. GLM-5.2 scored a 28% hallucination rate, Opus 4.8 was 36%, Fable 5 was 48%, and GPT-5.5 was 86%. Wow! I already knew from previous research shared here that hallucinations are a fundamental problem for LLMs and likely to be unfixable, just like prompt injection, but I didn't realize the hallucination rates were so bad! Everyone has been acting like the best models only hallucinate in edge cases, but even the best performing one mentioned here - GLM-5.2 - has a hallucination rate of 28% when it doesn't \"know\" the answer to something. That said, I think the title on the blog - \"Bigger models are not the way\" is probably more fitting and touches on what should be even bigger news. If bigger models and bigger training sets have already stopped producing proportional returns, then it seems likely we are already near the top of the S-curve. That's huge news, considering the valuation of companies like OpenAI and xAI is largely based around the (absurd) idea of ever increasing scaling from these models."
+        },
+        {
+          "id": 48605482,
+          "author": "cwillu",
+          "text": "Please don't editorialize titles unless the original title is misleading."
+        }
+      ],
+      "summary_ja": ""
+    }
+  ]
+}
