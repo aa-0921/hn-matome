@@ -1,0 +1,1090 @@
+{
+  "date": "2026-06-25T00:00:00+09:00",
+  "slot": "07",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 48663324,
+      "title_en": "OpenAI unveils its first custom chip, built by Broadcom",
+      "title_ja": "OpenAI unveils its first custom chip, built by Broadcom",
+      "url": "https://techcrunch.com/2026/06/24/openai-unveils-its-first-custom-chip-built-by-broadcom/",
+      "hn_url": "https://news.ycombinator.com/item?id=48663324",
+      "score": 430,
+      "comment_count": 280,
+      "posted_at": "2026-06-24T17:47:00+00:00",
+      "comments": [
+        {
+          "id": 48663501,
+          "author": "sharkjacobs",
+          "text": "> Developed from design to production in nine months, accelerated by OpenAI’s models > the use of OpenAI models to accelerate parts of the design and optimization process. I wish there was more about this. As is I kind of have to assume that this is just meaningless marketing, like saying development was accelerated by Microsoft Office or their 5k LG Ultrafine 40-inch monitors. Like, if this was as big a deal as it kind of vaguely implies, they would be making a bigger deal of it, right?"
+        },
+        {
+          "id": 48660641,
+          "author": "shellcromancer",
+          "text": "Probably obvious but still omitted in the OpenAI post: chips are being made by TSMC [1]. Wasn't sure if Intel got it. 1. https://www.investing.com/news/stock-market-news/openai-unve..."
+        },
+        {
+          "id": 48664999,
+          "author": "londons_explore",
+          "text": "I wanna see an inference chip where the weights are part of the rom of the chip. There would be 1 multiplier per weight (and since they're constant, the whole thing turns into a bunch of simple adders), and the total pipelined system throughput would be one token per clock cycle. That means you can probably have millions of users simultaneously using a single bit of silicon, with perhaps 500 million tokens per second coming out the output bus. Downside is this chip would be huuuuge - a whole wafer. Wafer level faults probably won't matter though - neural nets are resistant to a few missing or wrong weights. Due to the speed the industry moves, you'd want to race from model weights to production super fast, make 50 wafers, use them for a year, then bin them when that model is obsolete."
+        },
+        {
+          "id": 48663774,
+          "author": "nickpinkston",
+          "text": "This is very cool to see - seems like soooo much efficiency waiting to be unlocked at the chip level. What's everyone think of Taalas? They're actually burning the LLM model into the silicon, with some onboard memory for fine-tuning. They claim huge cost / latency wins. Super fast demo live at: https://chatjimmy.ai/ https://taalas.com/ https://www.reddit.com/r/singularity/comments/1r9frzk/taalas..."
+        },
+        {
+          "id": 48666001,
+          "author": "signatoremo",
+          "text": "I haven't seen this discussed here: So far, the accelerator is showing cost savings of roughly 50% compared with typical AI graphics processing units, Broadcom Chief Executive Officer Hock Tan said in an interview. - [0] 50% cost saving. The picture changes so quickly, there are still a lot of low hanging fruits, that I find any discussion about whether a vendor has moats, or if they can recoup investment, is moot and futile. [0] - https://www.bloomberg.com/news/articles/2026-06-24/openai-an..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 2,
+      "id": 48659798,
+      "title_en": "Qualcomm to Acquire Modular",
+      "title_ja": "Qualcomm to Acquire Modular",
+      "url": "https://www.reuters.com/business/qualcomm-buy-ai-startup-modular-2026-06-24/",
+      "hn_url": "https://news.ycombinator.com/item?id=48659798",
+      "score": 96,
+      "comment_count": 24,
+      "posted_at": "2026-06-24T13:49:16+00:00",
+      "comments": [
+        {
+          "id": 48658861,
+          "author": "roflcopter69",
+          "text": "Tbh, Modular getting acquired happened sooner than I would have expected, if ever. Don't know how to feel about this one. Also so many mixed feelings about Mojo, the programming language powering Modular. Of course Chris Lattner is free to pursue whatever he wants, his many contributions to tech will always be highly regarded, but to me it feels as if he \"wasted\" lots of his precious mental capacity on making Mojo a python-like language instead of trying to come up with something better from first principles. I know, the promise of Mojo eventually being a Python superset has been taken back, which I think is the right move, and I understand why Mojo's initial motivation for being close to Python was to attract ML folks, but I'm getting counterfactual regret just by thinking about what Chris Lattner could have achieved by making a new programming language truly from scratch and not letting some undesireable pythonisms muddy the language. Anyway, sorry for rambling. Congrats to the team at Modular!"
+        },
+        {
+          "id": 48659767,
+          "author": "bobajeff",
+          "text": "It's kind of funny that Modular is getting acquired by a hardware company considering what it's founder has said repeatedly in interviews and articles about how those companies fail to make AI stacks. * https://www.modular.com/blog/democratizing-ai-compute-part-9..."
+        },
+        {
+          "id": 48663851,
+          "author": "ssivark",
+          "text": "Qualcomm seems to be assembling a whole portfolio of technologies/products aimed at 1. Moving beyond ARM to RISC-V 2. Being competitive for AI/could needs instai of just chips for phones and other edge devices. Interesting to see bold and high-conviction moves in this direction. Tenstorrent, Modular, Ventana, Alphawave, etc."
+        },
+        {
+          "id": 48666169,
+          "author": "YuechenLi",
+          "text": "I honestly think Mojo would be better served if it is just a high-level language for GPU programming that compiles down to PTX with clear Python/Rust interop boundaries instead of trying for the \"one language, multiple computational model\" thing that they seem to be going for. The programming model between CPU and GPU programming is very different: code that runs best on CPU with heavy branching behaviors should not be written the same way as massively parallel matrix multiplication oriented GPU code, which I think they will be forced to do in the MLIR level anyway. So, you end up with a language that looks like Python, but doesn't behave like Python, and companies that adopt Mojo early with the promise of Python compatibility may find themselves running into edge cases with difficult to trace compiler error messages that would be nearly impossible to debug, especially with the addition of Zig style `comptime` as their metaprogramming model."
+        },
+        {
+          "id": 48666533,
+          "author": "dwa3592",
+          "text": "Has anyone used mojo/modular extensively in their work? I installed it as soon as it was available but never went past the toy examples."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 3,
+      "id": 48660711,
+      "title_en": "RubyLLM: A Ruby framework for all major AI providers",
+      "title_ja": "RubyLLM: A Ruby framework for all major AI providers",
+      "url": "https://rubyllm.com/",
+      "hn_url": "https://news.ycombinator.com/item?id=48660711",
+      "score": 326,
+      "comment_count": 50,
+      "posted_at": "2026-06-24T14:41:41+00:00",
+      "comments": [
+        {
+          "id": 48661194,
+          "author": "swe_dima",
+          "text": "I found Ruby LLM to be surprisingly good - in terms of usability it's close to Vercel's AI framework. It tries to strike a balance between working out of the box and being flexible... which has its challenges, still nice overall. One big real-life pain I experienced is that caches don't always work, e.g. for xAI, since it only supports completions API and thought signatures are returned wrong."
+        },
+        {
+          "id": 48662172,
+          "author": "obiefernandez",
+          "text": "I have an open source gem called Raix that builds on top of RubyLLM's abstractions and is quite popular. https://github.com/OlympiaAI/raix"
+        },
+        {
+          "id": 48663685,
+          "author": "MitziMoto",
+          "text": "We use and love RubyLLM! A wonderful and easy to use framework. Agreed with another commenter on the frustration with the responses API not being naively supported; that seems like a huge miss. There is a connector from another dev, but it's buggy and not as high quality as the main gem. Really looking forward to future development and especially 2.0! Edit: Just saw that responses API is now native? I will definitely check that out."
+        },
+        {
+          "id": 48661655,
+          "author": "Finbarr",
+          "text": "RubyLLM is very easy to use. Made extensive use of it for a project last year. Drawbacks are it was difficult to instrument for true trace observability and it has a pattern where retries will delete the underlying models so the history you see is clean but not necessarily great for seeing exactly what the sequence of API calls was."
+        },
+        {
+          "id": 48664680,
+          "author": "aaronbrethorst",
+          "text": "I'm building something that is only pointed at Claude, and I don't anticipate moving away from the Anthropic ecosystem. Does RubyLLM offer me an advantage over directly using Anthropic's Ruby SDK? To put it differently, is this more like choosing between Fog and aws-sdk-s3, or choosing between Active Storage and aws-sdk-s3?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 4,
+      "id": 48666100,
+      "title_en": "Elastic lays off 7% of employees",
+      "title_ja": "Elastic lays off 7% of employees",
+      "url": "https://www.elastic.co/blog/ceo-ash-kulkarni-announcement-to-elastic-employees",
+      "hn_url": "https://news.ycombinator.com/item?id=48666100",
+      "score": 57,
+      "comment_count": 22,
+      "posted_at": "2026-06-24T21:57:30+00:00",
+      "comments": [
+        {
+          "id": 48666628,
+          "author": "tracerbulletx",
+          "text": "Before the 1980s layoffs were seen as a massive failure of the company and almost never happened to tenured employees unless the company was collapsing. Before we are all made to think this is normal and unavoidable behavior."
+        },
+        {
+          "id": 48666305,
+          "author": "puszczyk",
+          "text": "Makes me sad to read it as an ex-Elastic employee. AI is used to justify the redundancies, and the company still expects to grow in this fiscal year. In the SEC filling the specifically mention more “head count” in “go-to-market” roles [1]. > a reduction of approximately 7% of our workforce > Advances in AI, automation, and technology are reshaping how work gets done, and we're changing with them. (…) That's what this reorganization is for: a simpler structure, with fewer layers, less complexity, and less friction. > The changes we announced today are a sign of confidence in the business, not a retreat from it. We continue to invest in key growth areas and expect total headcount to grow year-over-year this fiscal year [the SEC filling says “ The Company plans to continue hiring in key strategic areas and locations, including continuing to grow headcount in customer-facing go-to-market functions, and expects total headcount to grow this fiscal year compared to last fiscal year, as it continues to invest in future growth opportunities”] [1]: https://ir.elastic.co/financials/sec-filings/sec-filings-det..."
+        },
+        {
+          "id": 48666332,
+          "author": "nozzlegear",
+          "text": "This announcement spends remarkably few words talking about the what (7% of the company's workforce was laid off), and a great deal of words talking about how bright the future of the company is and how they're going to hire more people."
+        },
+        {
+          "id": 48666467,
+          "author": "keithnz",
+          "text": "This just reaffirms my view is that big companies will lose headcount because of AI, but small and medium companies will (or at least have the potential to) leverage AI to do bigger and better things. This is because big companies could always spend big money on getting what they want made while small companies always have to tradeoff what they can realistically do with the resources they have."
+        },
+        {
+          "id": 48666404,
+          "author": "msteffen",
+          "text": "I wonder if some of these CEOs are anticipating a big crash and trying to lay people off now, so that (1) they can raise/hoard cash while the money-go-round is spinning and (2) their eng organization is already lean and used to it if/when the money-go-round stops. “Because of AI” indeed."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 5,
+      "id": 48657030,
+      "title_en": "We’re making Bunny DNS free",
+      "title_ja": "We’re making Bunny DNS free",
+      "url": "https://bunny.net/blog/were-making-bunny-dns-free/",
+      "hn_url": "https://news.ycombinator.com/item?id=48657030",
+      "score": 817,
+      "comment_count": 250,
+      "posted_at": "2026-06-24T08:50:41+00:00",
+      "comments": [
+        {
+          "id": 48657557,
+          "author": "Lucasoato",
+          "text": "Kudos to the BunnyNet team! I've always looked for a EU based alternative to Cloudflare; not because I didn't like them, I still support Cloudflare and they're a great company, but pushing for and testing EU services is important particularly in the light of recent developments in EU-US geopolitics. The problem is that many European companies aren't as competitive as their US counterpart. Consider Hetzner as an example: how can you imagine being competitive with US cloud providers (AWS, Azure, GCP) by raising the prices so much, in such a short time, with so little previous communication to your customers? BunnyNet on the other hand is being competitive and this move is in the right direction. Of course their free tier is not comparable to Cloudflare (they are two different companies, with different profiles in terms of debt, cash in hand and so on), but it doesn't need to be for small projects. I'm not choosing BunnyNet because it's european, I'm choosing it because it's a good company that is providing a good service."
+        },
+        {
+          "id": 48657566,
+          "author": "khurs",
+          "text": "Just looked at their website, they don't do many loss leaders as others, for example others offer free static site hosting. But they are a private company with only one small $6m funding round back in 2022, so I think they are more focused on building organically and not chasing investor funded growth. Good luck to Bunny!"
+        },
+        {
+          "id": 48657479,
+          "author": "dizhn",
+          "text": "It sounds like they made it free for customers for up to 500 domains. It also sounds like they were charging for DNS resolution before? Or is it DNS hosting? >So, we’ve eliminated DNS query fees entirely. > Bunny DNS no longer charges for DNS queries and includes free DNS hosting for up to 500 domains per account. There are no query limits, no per-request billing, and no critical features hidden behind enterprise plans. (Yes, that includes smart records and health monitoring too.) >As with all bunny.net services, accounts using the platform are subject to our standard $1/month minimum spend, but DNS itself no longer incurs any usage-based charges. Oh..kayy."
+        },
+        {
+          "id": 48660864,
+          "author": "hnarn",
+          "text": "The first few hundred words on that page does not explain why I should care about this, and amazingly neither does the comments here on HN."
+        },
+        {
+          "id": 48659213,
+          "author": "Diti",
+          "text": "I want to love Bunny. But I am terrified about being suddenly charged thousands of euros if some unexpected traffic from LLM/crawler activity happens. As far as I know, Bunny products are their own business units with their own goals and feature requests (Bunny Stream, in particular, lacks a lot of features) and the “block all requests after the bill becomes 50 EUR” ONLY exists for Bunny CDN, not for their other products. The day Bunny starts treating all their products evenly (and listen to requests asking to implement basic features) will be the day I will switch all my nonprofit communities to their services."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 6,
+      "id": 48660579,
+      "title_en": "PR spam today looks like email spam in the early 2000s",
+      "title_ja": "PR spam today looks like email spam in the early 2000s",
+      "url": "https://www.greptile.com/blog/prs-on-openclaw",
+      "hn_url": "https://news.ycombinator.com/item?id=48660579",
+      "score": 160,
+      "comment_count": 92,
+      "posted_at": "2026-06-24T14:32:12+00:00",
+      "comments": [
+        {
+          "id": 48663712,
+          "author": "andix",
+          "text": "I see one big difference: with email it was always about sender reputation based on email servers (IPs), maybe about domains. But never about individual users. It's the organizations running the email server, who make sure users behave. So they don't get blacklisted and lose sending privileges for hundreds or thousands of users. For PRs/issues this is not applicable."
+        },
+        {
+          "id": 48664017,
+          "author": "guidoiaquinti",
+          "text": "GitHub just recently added configurable PR limits for maintainers to help partially address this problem: https://github.blog/open-source/maintainers/how-pull-request..."
+        },
+        {
+          "id": 48664879,
+          "author": "alexpotato",
+          "text": "If anyone is interested in what it was like fighting spam in the early 2000s, I worked for a company that captured spam, analyzed it and then passed the analysis s on to the law firms of the big email providers for targeting under CAN-SPAM. Twitter thread about it below but happy to do a AMA here. https://x.com/alexpotato/status/1208948480867127296?s=20"
+        },
+        {
+          "id": 48662380,
+          "author": "j2kun",
+          "text": "In my main project we added a new requirement that all new contributors meet a maintainer in a non-textual format before their first PR is merged. Seems to work well for a small project."
+        },
+        {
+          "id": 48662250,
+          "author": "Retr0id",
+          "text": "Maybe we should cut out the middle-man and make it easy for people to donate token credits to open-source projects, and let the maintainers decide how to use them."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 7,
+      "id": 48662999,
+      "title_en": "Computer use in Gemini 3.5 Flash",
+      "title_ja": "Computer use in Gemini 3.5 Flash",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-computer-use-gemini-3-5-flash/",
+      "hn_url": "https://news.ycombinator.com/item?id=48662999",
+      "score": 134,
+      "comment_count": 84,
+      "posted_at": "2026-06-24T17:21:34+00:00",
+      "comments": [
+        {
+          "id": 48666662,
+          "author": "YuechenLi",
+          "text": "So... has Google provided a Codex/Claude Code equivalent to Gemini yet? I would like to use Gemini for coding tasks, but that's kind of difficult to do as I don't even know how to get Gemini to even \"clone this repo and read the code in it for static analysis\", much less open PRs in repos. ChatGPT/Codex can do it, Claude can do it, why can't Gemini? And no, I don't mean going through Antigravity, and personally I'm wary about LLMs having unsupervised access on my computer without explicit policy, so I really think Google is putting the cart before the horse here."
+        },
+        {
+          "id": 48665638,
+          "author": "smallstepforman",
+          "text": "Today I asked Gemini to extract a table from an PDF appendix and create C++ data table with its contents. After 15 or so iterations with corrections and new mistakes, it eventually gave up. I was floored when it said “I’m sorry, I cannot do this simple task, I’ve exceeded my error threshold and cannot do this task for you. My LLM prediction engine invents data instead of doing a simple data copy/reformat”. Stunned to see that Gemini threw its digital arms in the air and gave up."
+        },
+        {
+          "id": 48663235,
+          "author": "satvikpendem",
+          "text": "There's still no MCP support in the Gemini app, which is very useful to get various pieces of info as a user just via chatting. For example I recently wanted to get an Airbnb and wanted to filter by specific criteria including house image analysis and Gemini couldn't do it so I had to do it in Codex."
+        },
+        {
+          "id": 48666437,
+          "author": "arjunchint",
+          "text": "Pretty doubtful about computer use/screenshotting based approaches. With Retriever AI, we construct custom accessibility trees to represent web pages and just switched over to using DeepSeek v4 Flash and its nearing 100x cost decrease. We also had great success just reverse engineering the underlying APIs of websites and then writing code to hit them. This approach of using screenshots to take actions on a webpage to trigger the underlying network calls the website is making seems too naive."
+        },
+        {
+          "id": 48663463,
+          "author": "mlmonkey",
+          "text": "It's funny how in their own graph, https://storage.googleapis.com/gweb-uniblog-publish-prod/ima... Gemini 3.5 Flash is beat hands down by both Opus 4.8 and GPT 5.5, and yet the graph is drawn as if Gemini wins ... :-D"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 8,
+      "id": 48666433,
+      "title_en": "PostgreSQL Is Enough",
+      "title_ja": "PostgreSQL Is Enough",
+      "url": "https://gist.github.com/cpursley/c8fb81fe8a7e5df038158bdfe0f06dbb",
+      "hn_url": "https://news.ycombinator.com/item?id=48666433",
+      "score": 5,
+      "comment_count": 0,
+      "posted_at": "2026-06-24T22:39:37+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 9,
+      "id": 48662381,
+      "title_en": "The Xteink X4 E-Ink Reader",
+      "title_ja": "The Xteink X4 E-Ink Reader",
+      "url": "https://blog.omgmog.net/post/xteink-x4-e-ink-reader/",
+      "hn_url": "https://news.ycombinator.com/item?id=48662381",
+      "score": 134,
+      "comment_count": 99,
+      "posted_at": "2026-06-24T16:35:56+00:00",
+      "comments": [
+        {
+          "id": 48663311,
+          "author": "sieve",
+          "text": "Got the X4. Put CrossPoint on it. Works like a charm. The http server accessible over wifi makes transferring books extremely simple. (Shame on the Kindle for locking everything down.) This is proof-of-concept that a microcontroller is more than enough for something like an e-reader. I have a Kindle and a Kobo. They are sturdy devices. But the X4 is the one that is a genuine e-reader. Would not get it as my one and only e-reader though as you tend to miss the size and backlight of the larger ones. What would I want from future iterations? - backlight even if it compromises on battery a bit - a bit more DPI Everything else is good enough."
+        },
+        {
+          "id": 48664971,
+          "author": "harrisonjackson",
+          "text": "I have the X4 and the X3 (newer smaller one). I will get whatever the next version is if it has a backlight or more DPI / support for smaller font. X4 is great - has usb-c charger and with the cover feels like an easy to pocket and bring everywhere reader. Does not fit on the back of an iphone. I assume the magnet layout works with popular android phones though. X3 is also great, actually fits on the back of the phone with the magsafe - magnet is a _bit_ too weak. It does fall off in my pocket frequently but I haven't lost it yet. Does not have usb-c - has weird little magnetic 4 pin charger. I will gift my X4 to my brother once I've loaded some more content to it. I recommend this for anyone that wants to save web novels for offline reading https://github.com/lncrawl/lightnovel-crawler - Calibre will sync the epubs to the x4 and x3. Use the crosspoint OS https://github.com/crosspoint-reader/crosspoint-reader All that said... I do still use my kindle as default. More content accessible more easily, better syncing, backlight"
+        },
+        {
+          "id": 48666556,
+          "author": "miloignis",
+          "text": "I recently bought an X4, put crosspoint on it, and have been loving it. I've been reading so much more than before, just because it's always available on the back of my phone."
+        },
+        {
+          "id": 48664041,
+          "author": "criddell",
+          "text": "I've looked at this device and I wonder how good the layout engine is. Screenshots never show text with any hyphenation going on which makes me wonder if it even supports hyphenation. One of the images on the Amazon page for the reader has somebody holding one beside their laptop and if you look at the screen, it looks terrible. There are even words jammed together (\"would be most suitable forthe job\"). I love that it has physical buttons though. My reader is the Kindle Oasis and the buttons are one of my favorite features of the device. The Oasis layout engine and typography are both pretty good and I wonder if the X4 would end up feeling like a big downgrade."
+        },
+        {
+          "id": 48664120,
+          "author": "rcarmo",
+          "text": "I got one last April, and love it: https://taoofmac.com/space/reviews/2026/04/04/1800 I also built two quick hacks for it that people might like: - https://github.com/rcarmo/bun-readlater-epub - https://github.com/rcarmo/bun-opds-server"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 10,
+      "id": 48618555,
+      "title_en": "Robotics Teams Are Rebuilding the Data Stack from Scratch",
+      "title_ja": "Robotics Teams Are Rebuilding the Data Stack from Scratch",
+      "url": "https://rerun.io/blog/data-layer-tax",
+      "hn_url": "https://news.ycombinator.com/item?id=48618555",
+      "score": 11,
+      "comment_count": 1,
+      "posted_at": "2026-06-21T12:57:10+00:00",
+      "comments": [
+        {
+          "id": 48666637,
+          "author": "ellyagg",
+          "text": "This post seems rigged, it’s really boring."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 11,
+      "id": 48619159,
+      "title_en": "Crawling BitTorrent DHTs for Fun and Profit [pdf]",
+      "title_ja": "Crawling BitTorrent DHTs for Fun and Profit [pdf]",
+      "url": "https://www.usenix.org/legacy/event/woot10/tech/full_papers/Wolchok.pdf",
+      "hn_url": "https://news.ycombinator.com/item?id=48619159",
+      "score": 34,
+      "comment_count": 18,
+      "posted_at": "2026-06-21T14:12:48+00:00",
+      "comments": [
+        {
+          "id": 48665630,
+          "author": "hdgr",
+          "text": "Bitmagnet - https://bitmagnet.io/ - does exactly that. I left it running for a few weeks and then stopped the crawler. Didn't expect much, but still somewhat disappointed by the garbage it reeled in."
+        },
+        {
+          "id": 48666075,
+          "author": "gritzko",
+          "text": "2010. I remember those times. I was doing these things for science in 2008. Performance-wise, PEX was much faster than DHT. At least, in my setting. This year, I was giving it as an assignment to students. Does not take much time with LLMs."
+        },
+        {
+          "id": 48666331,
+          "author": "MoonWalk",
+          "text": "The article neglects to define \"DHT\" before using it."
+        },
+        {
+          "id": 48665352,
+          "author": "hackingonempty",
+          "text": "(2010)"
+        },
+        {
+          "id": 48666312,
+          "author": "Boss0565",
+          "text": "old paper"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 12,
+      "id": 48661825,
+      "title_en": "There are a few things that I look back on as my mistakes in the early days",
+      "title_ja": "There are a few things that I look back on as my mistakes in the early days",
+      "url": "https://twitter.com/ID_AA_Carmack/status/2069799283369345247",
+      "hn_url": "https://news.ycombinator.com/item?id=48661825",
+      "score": 461,
+      "comment_count": 231,
+      "posted_at": "2026-06-24T15:56:19+00:00",
+      "comments": [
+        {
+          "id": 48662459,
+          "author": "starkparker",
+          "text": "\"Sorry, Sandy\" Sandy Petersen's side of it comes out in a few interviews, like https://medium.com/@unkndoomer/back-to-the-past-e3c421fb2e70 and https://www.youtube.com/watch?v=MUeu96TKQwU (especially 14:17 onward)"
+        },
+        {
+          "id": 48662154,
+          "author": "tejohnso",
+          "text": "Quake III Arena was pretty entertaining. Doesn't seem like it came from a company that had been ruined for years. I definitely noticed something around the Doom 3 release many years after Quake III Arena. The new game just didn't seem to have the same industry pushing, genre changing energy. Or maybe I was just older and had moved on, and didn't care as much."
+        },
+        {
+          "id": 48662129,
+          "author": "ChrisMarshallNY",
+          "text": "> I pushed everyone too hard. I didn’t appreciate how maturing companies need more slack, and that running people at startup intensity constantly will wear them out. Sounds like wisdom many companies might consider..."
+        },
+        {
+          "id": 48663383,
+          "author": "AdmiralAsshat",
+          "text": "Carmack is a godly programmer, but he's largely a technical guy. Everything he releases is a feat of technical engineering (\"real 3D!\"; \"curved surfaces!\"; \"realistic lighting!\"; \"the Megatexture!\"), not so much artistic achievement. We could really see that after Doom 2 when all of the creatives at Id started jumping ship. The level design that you need to reinforce the technical leaps just wasn't there anymore."
+        },
+        {
+          "id": 48663154,
+          "author": "rustyhancock",
+          "text": "> So if my theorem is correct, and Quake gutted id Software, was it worth it? Well I'd say yes absolutely. Games are more important than game companies, and Quake is an iconic titan of the gaming world. Sandy's quote here buried unfortunately by X."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 13,
+      "id": 48660178,
+      "title_en": "45°C cooling design cuts data center water use to near zero",
+      "title_ja": "45°C cooling design cuts data center water use to near zero",
+      "url": "https://blogs.nvidia.com/blog/liquid-cooling-ai-factories/",
+      "hn_url": "https://news.ycombinator.com/item?id=48660178",
+      "score": 116,
+      "comment_count": 89,
+      "posted_at": "2026-06-24T14:10:11+00:00",
+      "comments": [
+        {
+          "id": 48666419,
+          "author": "why_at",
+          "text": "Maybe I'm being dumb, but I don't understand what the innovation is here. I get that they're using liquid coolant at higher than usual temperatures, but why couldn't they do that before? Most of the comparison in the article is for air cooled datacenters but what about other liquid cooled ones? Surely in all the previous datacenters that have been designed there has been someone doing the math and determining what temperature things need to run at, how much energy it will use, how much heat it all will produce, etc. edit: just saw this: >Previous liquid-cooled servers were hybrid: GPUs and CPUs got cold plates, but the rest of the system stayed air-cooled, with finned heat sinks designed to shed heat into moving air. In a fully liquid-cooled server, the cooling for these components needed to be completely redesigned to use liquid."
+        },
+        {
+          "id": 48666630,
+          "author": "sabareesh",
+          "text": "I am pretty much doing the same but running the coolant at 40 deg C instead of 45 as my pumps are rated for 45 C max temp. Here is bit more about my setup https://sabareesh.com/posts/blackwell-waterblock/"
+        },
+        {
+          "id": 48666413,
+          "author": "VorpalWay",
+          "text": "I never looked into this, but why would a datacenter consume water for cooling in the first place? Sure, they use some. But just like you fill up the cooling loop in a car, once it is there it just circulates between the heat source and radiators and/or heat exchangers, with perhaps some minimal top off needed (since flexible tubing isn't 100% water proof). Or are they for some unfathomable reason using evaporative cooling in data centers?"
+        },
+        {
+          "id": 48661501,
+          "author": "amluto",
+          "text": "This opens up an interesting synergy: district heating. 45C is low but not unworkable for a district heating loop, and a data center might be able to make a nice pitch to a community if the data center offers to provide heat to a district heating system for free. This brings the value to the local community of a nearby datacenter up from near zero to potentially a few million dollars per year. Summer is still an issue, but fun solutions are possible. With the right geology, I think it’s possible to heat an underground volume in the summer and recapture (some of) that heat in the winter. In many, many climates, annual heating costs are far higher than cooling costs, at least if people aren’t stupid with skylights. [0] [0] As a back-of-the-envelope heuristic, heating or cooling load due to conduction and air exchange is proportional to the difference between indoor and outdoor temperature. Outdoor temperatures of -10F to 30F are not unusual in the winter and are 40-80F away from an indoor temp of 70F. But outdoor temperatures in these climates rarely exceed 95F and are mostly lower in the summer, so that’s 15-25F of cooling. And heat pumps are more efficient at smaller temperature differences. Radiative heating is an entirely different story."
+        },
+        {
+          "id": 48666140,
+          "author": "metabagel",
+          "text": "The NASA Ames Research Center Modular Supercomputing Facility is highly efficient, both in terms of electricity and water use. The facility isn't air conditioned. The chips are water cooled, and the inlet water temperature is pretty high I believe - I think it's 90 degrees Fahrenheit. https://www.nasa.gov/centers-and-facilities/ames/doing-more-... https://www.nas.nasa.gov/assets/nas/pdf/ModularSupercomputin..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 14,
+      "id": 48639840,
+      "title_en": "GLM-5.2 is a step change for open agents",
+      "title_ja": "GLM-5.2 is a step change for open agents",
+      "url": "https://www.interconnects.ai/p/glm-52-is-the-step-change-for-open",
+      "hn_url": "https://news.ycombinator.com/item?id=48639840",
+      "score": 77,
+      "comment_count": 26,
+      "posted_at": "2026-06-23T03:23:28+00:00",
+      "comments": [
+        {
+          "id": 48666565,
+          "author": "aunty_helen",
+          "text": "I signed up to a z.ai max account, $144. Hardly been able to use it as it 429s on most requests. They’re also refusing to refund me."
+        },
+        {
+          "id": 48643569,
+          "author": "jerojero",
+          "text": "Open weight models from Chinese labs tend to be significantly cheaper. I think theyre absolutely needed. I can't afford 200 USD a month for personal use of coding AI, and I don't think such prices are reasonable for most of the world economy anyway. Not to mention US firms might be giving their employees a lot more than that. It's increasingly feeling, to me, that theres a gap building up between haves and have nots. But then, we get news of these open weight models that are reasonably priced in inference with reasonable capabilities. Yes, they take maybe 6-9 months to get there, tbh, that's not a bad trade off at all."
+        },
+        {
+          "id": 48666487,
+          "author": "timcobb",
+          "text": "Can people share their GLM and open model setups in general please? What provider do you use. Why do you trust it with serving full quality? What harness do you use? Why do you trust it not to have malware (most harnessed are TS apps). I am just trying GLM 5.1 from Nvidia build in open code would love to hear how you all do it, thanks."
+        },
+        {
+          "id": 48665940,
+          "author": "themgt",
+          "text": "I just tested GLM 5.2 out via Z.ai in pi for a little one-off project that was already scoped. It actually did a relatively decent job starting out, and figured important things out from context. But the reasoning traces became increasingly hilarious, with it getting confused and going in loops, doubting itself. I began to feel almost sad, it was like listening to the internal monologue of someone with anxiety disorder. It made pretty good progress but wound up going in a lot of goofy loops and doing things a bit \"off\" from standards I'd hoped it would infer, and finally started going a bit nuts, \"This is very confusing.\", \"OH WAIT\", seemingly hallucinating a whole side-quest that didn't make sense and looking at making internal system changes to try to achieve its (now very confused) goal when I pulled the plug. Without seeing the reasoning traces from Claude/GPT it's hard to really know, but it definitely didn't feel like the same quality of reasoning, even if dogged persistence does wind up actually working eventually."
+        },
+        {
+          "id": 48666196,
+          "author": "citizenpaul",
+          "text": "Ive been using glm5 since its release and still prefer it to glm5.1 and so far to glm5.2 Perhaps it is just my harness and workflow, but the older model still seems to work better. Also the token cost is significantly lower. I rarely spend more than $20 a week with $50 cap. Not even half claudes ambiguous minimum $200 a month plan."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 15,
+      "id": 48660267,
+      "title_en": "Show HN: Nub – A Bun-like all-in-one toolkit for Node.js",
+      "title_ja": "Show HN: Nub – A Bun-like all-in-one toolkit for Node.js",
+      "url": "https://github.com/nubjs/nub",
+      "hn_url": "https://news.ycombinator.com/item?id=48660267",
+      "score": 184,
+      "comment_count": 51,
+      "posted_at": "2026-06-24T14:14:18+00:00",
+      "comments": [
+        {
+          "id": 48666226,
+          "author": "pier25",
+          "text": "Very cool idea which makes a lot of sense. Bun provides more (eg db drivers) but the DX is certainly a big part of its appeal. For reference, the main author of Nub is Colin McDonnell who created Zod and even worked at Bun at some point."
+        },
+        {
+          "id": 48662515,
+          "author": "eyelidlessness",
+          "text": "I’m surprised to see this using a `--require` hook (rather than `--import`). Maybe something’s changed significantly since I was looking into building some similar functionality… but it makes me wonder about nuances in nub’s ESM support. (When I was investigating this it was very early in Node’s `--import` story, but there were several edge cases with the more common ESM-to-CJS approaches that I wanted to address. Most were probably exceedingly niche concerns, but I’d expect top-level await to affect a meaningful subset of users.)"
+        },
+        {
+          "id": 48660963,
+          "author": "ssalbdivad",
+          "text": "Just merged a PR migrating our entire monorepo to nub. 0 issues, ridiculously fast."
+        },
+        {
+          "id": 48665080,
+          "author": "haburka",
+          "text": "I actually really like this! Great choices all around."
+        },
+        {
+          "id": 48662005,
+          "author": "ivanjermakov",
+          "text": "Respect for embracing existing tech instead of rewriting a worse version of it. Wonder where we would be today if all alternative-building effort went to Node instead (with proper leadership)."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 16,
+      "id": 48659483,
+      "title_en": "Show HN: LookAway, a Mac break reminder that knows when not to interrupt",
+      "title_ja": "Show HN: LookAway, a Mac break reminder that knows when not to interrupt",
+      "url": "https://lookaway.com",
+      "hn_url": "https://news.ycombinator.com/item?id=48659483",
+      "score": 43,
+      "comment_count": 5,
+      "posted_at": "2026-06-24T13:29:18+00:00",
+      "comments": [
+        {
+          "id": 48666034,
+          "author": "Kovah",
+          "text": "I've been using it as part of my Setapp subscription, and it's a love-hate relationship. On the one side I appreciate the posture hint and the app nudging me to take a break. But ever so often I am in deep focus and get really annoyed when the \"long break starting in 1 minute\" notification pops up. Most of the time I am in the middle of writing when the break starts, and I click it away fast to not loose my thoughts. A feature recognizing active writing to push the break a minute would be helpful I guess."
+        },
+        {
+          "id": 48666032,
+          "author": "trinix912",
+          "text": "Two things regarding the website: - scrolling is so extremely laggy that the website is almost unusable on Firefox on macOS on an idle MacBook Pro (even if it seems smooth at first, scrolling up and down a few times slows it down significantly) - I assume the code editor screenshot should actually be some sort of animation, it doesn't seem to work (although right clicking shows options like Pause, Loop...)."
+        },
+        {
+          "id": 48665647,
+          "author": "fosterfriends",
+          "text": "Looks really clean!"
+        },
+        {
+          "id": 48665520,
+          "author": "holistio",
+          "text": "Distilled, this would be a nice macOS or Raycast feature, but I don't see myself giving up either $29 or 150MB RAM."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 17,
+      "id": 48664733,
+      "title_en": "GitHub shouldn't be a dependency for publishing Rust on crates.io",
+      "title_ja": "GitHub shouldn't be a dependency for publishing Rust on crates.io",
+      "url": "https://infosec.exchange/@mttaggart/116806641273303255",
+      "hn_url": "https://news.ycombinator.com/item?id=48664733",
+      "score": 110,
+      "comment_count": 39,
+      "posted_at": "2026-06-24T19:40:11+00:00",
+      "comments": [
+        {
+          "id": 48666387,
+          "author": "vsgherzi",
+          "text": "I agree and so does the rust project. The main problem is that it's alot of work and it's hard. https://www.youtube.com/watch?v=zGS-HqcAvA4 Here's a long video from jon gjengset that shows how it works and some of the effort already done to de-couple from github. Crates is widely used so it's a rebuilding the track while the train is driving kind of problem. It's just not a priority for the project right now, but I would also definitely like to see the issue done. It might be good for the rust project to vote on things like this during surveys so they know where to focus work!"
+        },
+        {
+          "id": 48665406,
+          "author": "epage",
+          "text": "An RFC was recently merged to unblock this: https://github.com/rust-lang/rfcs/pull/3963 The implementation on this has started. Something to keep in mind is https://blog.m-ou.se/rust-is-not-a-company/ . Rust is mostly driven by volunteers working on what they find interesting. Boring/uninteresting tasks depend on funding, a warm body to accept the funding, and a reviewer."
+        },
+        {
+          "id": 48665337,
+          "author": "ameliaquining",
+          "text": "See the official project issue on this: https://github.com/rust-lang/crates.io/issues/326 TL;DR: They want to fix this, it's a lot of work that no one's being paid to do, there's a roadmap with specific tasks that need doing, volunteer contributions are welcome."
+        },
+        {
+          "id": 48666574,
+          "author": "dboreham",
+          "text": "My take: publishing Rust crates shouldn't depend on any single internet property, including crates.io."
+        },
+        {
+          "id": 48665914,
+          "author": "mikey_p",
+          "text": "The longer I go the more I have actually come to appreciate the way Packagist works for the PHP community, there are lots of cool things it does that I wish NPM or other registries did by default, like forcing you to package from a source repository, so that you can't upload a different artifact from what you keep in source control."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 18,
+      "id": 48659165,
+      "title_en": "Stealing Is a Skill",
+      "title_ja": "Stealing Is a Skill",
+      "url": "https://ben-mini.com/2026/stealing-is-a-skill",
+      "hn_url": "https://news.ycombinator.com/item?id=48659165",
+      "score": 192,
+      "comment_count": 120,
+      "posted_at": "2026-06-24T13:08:52+00:00",
+      "comments": [
+        {
+          "id": 48661018,
+          "author": "sandcat_",
+          "text": "I feel like there’s a difference between Virgil Abloh being brought in to work on an iteration of the Air Force 1s and simply ripping off a design from an unrelated company, presumably without permission, and making a few tweaks."
+        },
+        {
+          "id": 48661097,
+          "author": "willchis",
+          "text": "The best way to make a really boring and generic product pop is... by copying a really boring and generic marketing page. God I miss the old internet. Give me some insane pixelated flash website over this bland trash any day. https://www.webdesignmuseum.org/flash-websites-in-the-early-..."
+        },
+        {
+          "id": 48664845,
+          "author": "agilek",
+          "text": "Is the state of the webdesign really in a point where people bluntly copy others work for commercial purposes and celebrate these acts on their blogs? I think the line is pretty clear here. I remember the old Dan Mall's article on this topic which is much more inspirational (and \"correct\"): https://medium.com/@danielmall/stealing-your-way-to-original..."
+        },
+        {
+          "id": 48661874,
+          "author": "WaitWaitWha",
+          "text": "> When you recreate someone’s creation, you learn their story: every piece of brilliance, tradeoff, and imperfection. I vehemently disagree that this happens. What you see is the end result, and thinking and struggling through for each element is not present. It is like copying the Mona Lisa and claiming the relationship with the sitting model and her smell and feel and complaints about cramped neck is all in the copied painting. (Please do not change the cursor, specially the size. There is a reason I changed it.)"
+        },
+        {
+          "id": 48660414,
+          "author": "dghlsakjg",
+          "text": "Copywork is an exercise where writers just copy verbatim another writers work. If you haven’t done it, it is an extraordinary way to see how the greats work. It also tends to improve your own writing skills - at least as long as you are copying from your betters. This seems like the web design version of this."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 19,
+      "id": 48646659,
+      "title_en": "Krea 2: SOTA open-weights 12B image model",
+      "title_ja": "Krea 2: SOTA open-weights 12B image model",
+      "url": "https://www.krea.ai/blog/krea-2-technical-report",
+      "hn_url": "https://news.ycombinator.com/item?id=48646659",
+      "score": 309,
+      "comment_count": 35,
+      "posted_at": "2026-06-23T15:31:21+00:00",
+      "comments": [
+        {
+          "id": 48646660,
+          "author": "mattnewton",
+          "text": "Hi HN, we're releasing weights for our latest text to image model and publishing this writeup on how we trained it in quite a bit of depth. I hope there is something in the report for everyone, we included a fair bit on the actual training and data infrastructure usually not written about much, that I think will be interesting to people here. There's more that didn't fit, happy to answer questions!"
+        },
+        {
+          "id": 48666062,
+          "author": "vunderba",
+          "text": "Results are in! This is a really impressive showing especially given how fast the Turbo model at 8 steps. The only locally hostable model that managed to outperform it was Ideogram 4 which is significantly slower (think minutes vs seconds). It did fall to the usual “model killers”: the nine-pointed star, Count Rugen, the overcrowded flat Earth . But overall, it really punched above its weight class, scoring the highest among locally hostable models and coming in just below Ideogram 4 passing 6 of the 15 tests. Great job Krea team! GenAI link to compare locally hostable models only: https://genai-showdown.specr.net/?models=fd,hd,kd,qi,f2d,zt,..."
+        },
+        {
+          "id": 48661957,
+          "author": "dvrp",
+          "text": "Hello HN, I am Diego Rodriguez, Co-founder & CTO at Krea. We are releasing the weights and a _juicy_ technical report---at least given current industry standards. In it we describe data curation/captioning, model architecture, post-training, RL pipelines, prompt expansion, style references, and our infrastructure in great detail. When it comes to theweights themselves, there's actually 2 releases: * Krea 2 Turbo. This model is both guidance- and timestep- distilled for faster inference. * Krea 2 RAW. This model is actually meant to be hackable/fine-tunable One of the things we think the (open) LLM community does well is release models in different sizes and also at different stages of the training pipelines; we are releasing two checkpoints at both the mid-training and post-training stage. This is rare in the image & multimedia community, so we can't help it but to feel proud of this release. We are on par with Nano Banana in terms of image quality as per Artificial Analysis text-to-image benchmarks ( https://artificialanalysis.ai/image/leaderboard/text-to-imag... ). We also attached a permissive license for individuals and small businesses. Useful links: - Marketing page around the OSS release: https://www.krea.ai/krea-2-open-source - Huggingface model: https://www.krea.ai/krea-2/huggingface - GitHub repository: https://www.krea.ai/krea-2/github - Reddit AMA: https://www.reddit.com/r/StableDiffusion/comments/1udnm0a/we... - Technical report: https://www.krea.ai/blog/krea-2-technical-report Thank you and I hope you enjoy this release---happy hacking! Some of our team members will be answering questions since we are at the front page for now (thank you HN!). Happy hacking!"
+        },
+        {
+          "id": 48662584,
+          "author": "ACCount37",
+          "text": "Good to have more open weight models, and I really appreciate the in-depth write-up. I also like the \"keep the manifold wide\" approach of trying to make a model capable of many styles as opposed to getting it \"dialed in\" for a dozen of style presets. But it does feel very much like \"fighting the past war\" - now that advanced \"image-to-image\"/\"agentic composition\" models like Nano Banana 2 or Images 2.0 are out there in force. I seriously doubt that the basic Qwen 3 VL in cross can get anywhere near that level of I2I. And robust I2I is very desirable - editing, adjustment, character consistency, the generalization of whatever you're doing with style transfer now (underexplained BTW). Trying to hit that level of I2I is not by any means easy, but it's pretty clear to me that this is where the next frontier for image models lies. Feels like Ideogram might be building up to it, but I'm yet to see it anywhere else in open weight space."
+        },
+        {
+          "id": 48659611,
+          "author": "kodablah",
+          "text": "Turbo appears GGUF'd already: https://huggingface.co/Abiray/Krea-2-Turbo-GGUF"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 20,
+      "id": 48603726,
+      "title_en": "I can haz smoller NixOS ISOs?",
+      "title_ja": "I can haz smoller NixOS ISOs?",
+      "url": "https://natkr.com/2026-06-19-nixos-but-smol/",
+      "hn_url": "https://news.ycombinator.com/item?id=48603726",
+      "score": 62,
+      "comment_count": 20,
+      "posted_at": "2026-06-19T21:55:24+00:00",
+      "comments": [
+        {
+          "id": 48653714,
+          "author": "arikrahman",
+          "text": "What's most amazing is how easy it is to switch kernels on NixOS as this article touched on. This prompted me to switch to Cachy kernels, and after some caching delay (apparently need to switch once before caches set) I was able to take advantage of a completely different OS's core strength. Truly the one OS to rule them all."
+        },
+        {
+          "id": 48666455,
+          "author": "siraben",
+          "text": "I got a bootable NixOS iso down to 91 MB. Pointed Claude at the Nixpkgs repo and asked it to strip things aggressively and inspect the build closure iteratively. But the resulting ISO: - has no network - can't switch configurations - doesn't have a text editor https://gist.github.com/siraben/a8fce9912891d85e1ec3cf74081b..."
+        },
+        {
+          "id": 48612814,
+          "author": "lordkrandel",
+          "text": "Hey, thanks, nice adventure! I will have a look. I'm trying to ditch Arch for NixOS and I'm starting from Distrobox probably. Super useful!"
+        },
+        {
+          "id": 48666304,
+          "author": "overtone1000",
+          "text": "It's always fun to see an interrobang in the wild."
+        },
+        {
+          "id": 48654547,
+          "author": "xyzzy_plugh",
+          "text": "> we should be able to disable shipping Nix entirely, by setting nix.enable = false. It was at this point I began to question the entire exercise. If you don't want nix to even be installed, do you really want NixOS at all? It would probably be much simpler to just build an image from scratch with the packages you want, composed in the way you want them, rather than contort the NixOS \"UX\" to produce the image you want."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 21,
+      "id": 48611940,
+      "title_en": "How the Fifth Lateran Council unlocked financial theory",
+      "title_ja": "How the Fifth Lateran Council unlocked financial theory",
+      "url": "https://sebastiangarren.com/2026/06/17/lending-is-meritorious-and-should-be-praised-how-the-fifth-lateran-council-unlocked-financial-theory/",
+      "hn_url": "https://news.ycombinator.com/item?id=48611940",
+      "score": 40,
+      "comment_count": 4,
+      "posted_at": "2026-06-20T19:01:05+00:00",
+      "comments": [
+        {
+          "id": 48666157,
+          "author": "hvs",
+          "text": "\"Usury\" is still a word in use but now, for legal purposes, it means \"interest that a lender charges a borrower at a rate above the lawful ceiling on such charges\" rather than just any interest at all."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 22,
+      "id": 48614309,
+      "title_en": "Pondering routing more of my traffic via nodes outside the UK",
+      "title_ja": "Pondering routing more of my traffic via nodes outside the UK",
+      "url": "https://neilzone.co.uk/2026/06/pondering-routing-more-of-my-traffic-via-nodes-outside-the-uk-because-of-the-direction-of-uk-online-safety-policy/",
+      "hn_url": "https://news.ycombinator.com/item?id=48614309",
+      "score": 42,
+      "comment_count": 30,
+      "posted_at": "2026-06-21T00:00:18+00:00",
+      "comments": [
+        {
+          "id": 48616348,
+          "author": "globular-toast",
+          "text": "I'm considering the same thing. I've done the \"contact your MP\" thing, but it's a waste of time. You just receive a pre-written letter from some minimum wage assistant (or maybe just a bot). It's either that or I just consider the internet dead and move on. It's nothing like it was 20 years ago anyway. There are other things to do. Many books to read and places to go. We had something really cool and we were lucky to experience it while it lasted, but it's gone now."
+        },
+        {
+          "id": 48666187,
+          "author": "Retr0id",
+          "text": "I've set up a socks5 \"proxy multiplexer\" that routes requests to different upstream proxies based on the request hostname. For example reddit routes via a VPS in Dublin, and imgur routes via Tor. I believe socks5 is the ideal layer to do the multiplexing at, for web traffic, because the request hostnames are visible to the multiplexer even if ECH/ESNI is in use. It was a oneshot vibecoded solution but it's been pretty solid thus far, so maybe I should open-source it. I wrap the outbound sock5 traffic in mTLS, so it should look \"normal\" to anyone packet sniffing (not obvious proxy/VPN traffic), even though stealthiness isn't part of the threat model at the moment."
+        },
+        {
+          "id": 48617466,
+          "author": "nemoniac",
+          "text": "“The Net interprets censorship as damage and routes around it.” -- John Gilmore (probably https://quoteinvestigator.com/2021/07/12/censor/ )"
+        },
+        {
+          "id": 48617798,
+          "author": "CommanderData",
+          "text": "The camp who think VPNs and Tor are a solution to government policies feel like disinformation at times. VPNs are trivial to ban, the IP space is well known, Wireguard is easily to fingerprint and block. It will be a cat and mouse game, if the government looses this they'll simply make it illegal to be caught using a VPN including Tor. Which is on the table. The only way this changes is a less crap party, but almost all including Reform are in favour of more censorship."
+        },
+        {
+          "id": 48618283,
+          "author": "cpressland",
+          "text": "I’m already using policy based routing on UniFi to send OSA censored websites, imgur for example, via Mullvad VPN - it works for the most part, but for any IPv6 websites it completely breaks as UniFi doesn’t support policy based routes for IPv6. If the government blocks Mullvad then I’ll just switch to Wireguard on a Helsinki based VPS via Hetzner."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 23,
+      "id": 48606222,
+      "title_en": "A Practical Guide to SSH Tunnels: Local and Remote Port Forwarding",
+      "title_ja": "A Practical Guide to SSH Tunnels: Local and Remote Port Forwarding",
+      "url": "https://labs.iximiuz.com/tutorials/ssh-tunnels",
+      "hn_url": "https://news.ycombinator.com/item?id=48606222",
+      "score": 244,
+      "comment_count": 52,
+      "posted_at": "2026-06-20T03:55:19+00:00",
+      "comments": [
+        {
+          "id": 48662248,
+          "author": "tangotaylor",
+          "text": "My favorite use of this is peer-to-peer transfer of Docker images. The Docker CLI only allows you to use registries authenticated with HTTPS but there's an exception where it allows HTTP transfers over localhost. So, if you use SSH tunneling to forward a port from localhost to a remote, then Docker unwittingly pushes to a remote. This is super useful \"off the grid\" with robotics/embedded applications where you don't want to bother with a registry and a good Internet connection. Example, docker pussh: https://github.com/psviderski/unregistry"
+        },
+        {
+          "id": 48660331,
+          "author": "buredoranna",
+          "text": "I'll mention it here, because I learned about it here. \"~C\" will drop you into the SSH command line, allowing you to, among other things, effect port forwarding -L8080:localhost:443 Learning that \"~C\" exists, and what you can do with it, has supercharged my use of SSH tunnels, which were already awesome on their own. But for some reason this has been disabled by default in more recent ssh configurations... to ensure its available -o EnableEscapeCommandline=yes or, in your ~/.ssh/config EnableEscapeCommandline yes (edit: formatting)"
+        },
+        {
+          "id": 48661164,
+          "author": "wbadart",
+          "text": "I never pass up an opportunity to recommend the Cyber Plumber's Handbook: https://github.com/opsdisk/the_cyber_plumbers_handbook Goes over similar content as TFA, in perhaps a little more depth. Indispensable sysadmin knowledge."
+        },
+        {
+          "id": 48661732,
+          "author": "smw",
+          "text": "Need to mention sshuttle [0] here, as it magically solves a bunch of these problems without constant reconfiguration [0] https://github.com/sshuttle/sshuttle"
+        },
+        {
+          "id": 48659763,
+          "author": "chasil",
+          "text": "The article mentions bastions, but no jumphosting? ssh -J user1@bastion1,user2@bastion2 targetuser@targethost Edit: Jumphosting was introduced in OpenSSH 7.3 2016-08-01. https://www.openssh.org/releasenotes.html"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 24,
+      "id": 48660671,
+      "title_en": "Running Windows Games on a Hobby OS with Wine",
+      "title_ja": "Running Windows Games on a Hobby OS with Wine",
+      "url": "https://astral-os.org/posts/2026/04/03/wine-on-astral.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48660671",
+      "score": 93,
+      "comment_count": 30,
+      "posted_at": "2026-06-24T14:38:30+00:00",
+      "comments": [
+        {
+          "id": 48666619,
+          "author": "pbohun",
+          "text": "It's kind of crazy that we have a hobby OS that supports Linux infrastructure so that can support Wine infrastructure to support a Windows application. Very impressive!"
+        },
+        {
+          "id": 48661922,
+          "author": "da-x",
+          "text": "While I like the idea of starting a hobby OS, but the most despairing thing about it that to be useful it would always have to implement 'legacy' interfaces of other OSes. That is, it cannot stand on its own and create a new ecosystem, instead it has to interface to the world and implement TCP, POSIX, know formats widely used files and such. You end up with an OS kernel that talks Linux/Win32 and takes on a lot of compat code, protocols, and other paradigms. I wonder what a hobby OS would have looked like it if it assumed nothing, that is, as a thought experiment, as if aliens on another planet invented computing and started writing OSes from scratch. Imagine we discover software from another planet that would not even work with 8-bit bytes, for instance."
+        },
+        {
+          "id": 48661730,
+          "author": "vinc",
+          "text": "Impressive! I like the goal of making a hobby OS viable as a daily driver. I've been working on my own hobby OS for half a decade. It does a lot less, but it has helped me realize that we can remove much of the complexity of a generic mainstream OS while still meeting our personal computing needs. I know I'm just poorly reinventing something between DOS and Unix/Plan 9 in an extremely limited fashion, but it's absolutely perfect for experimentation!"
+        },
+        {
+          "id": 48665640,
+          "author": "univocal",
+          "text": "I remember Wine being extremely interwined with XLib not just for the OpenGL rendering backend but also for the windowing and widget/UI rendering interfaces. Is this port running natively without using an X server / emulator?"
+        },
+        {
+          "id": 48665544,
+          "author": "bionsystem",
+          "text": "I remember reading about the minecraft port earlier, very impressive work ; those writeups are a great read too."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 25,
+      "id": 48630318,
+      "title_en": "Show HN: Monolisa v3 – a typeface for developers and creatives",
+      "title_ja": "Show HN: Monolisa v3 – a typeface for developers and creatives",
+      "url": "https://www.monolisa.dev/",
+      "hn_url": "https://news.ycombinator.com/item?id=48630318",
+      "score": 146,
+      "comment_count": 49,
+      "posted_at": "2026-06-22T14:05:23+00:00",
+      "comments": [
+        {
+          "id": 48664411,
+          "author": "efficax",
+          "text": "$149 for a font for personal computer use is kind of steep! I would pay $20 for this, but the value has to be pretty high to pay $149 when there's a huge selection of free fonts on nerdfonts.com, of which many are pretty great. Like what does this font really offer that makes it so pricey?"
+        },
+        {
+          "id": 48653462,
+          "author": "cyphar",
+          "text": "I'm more of a bitmap font guy (at least, as long as my eyes continue to forgive me for it) but I'm always interested to see what other fonts there are around. It does look quite nice. I must admit when I ran across the second real paragraph from the main page, I couldn't help but only think more and more about how we will look back on marketing copy like this in a decade from now: AI assistants produce both code and prose. MonoLisa Text renders long-form explanations with optimal readability, while MonoLisa Code keeps your code crystal clear. The perfect pairing for the AI era. (Under the title \"A perfect pairing for the AI era.\" ) Ignoring the deep pit of sadness I felt when thinking about the incredibly long (and revolutionary) history of typefaces that led us to today for just a moment, I'm honestly curious how effective this marketing is. How many people would assume a font would be suitable for general text but not LLM-generated text and would need to be dissuaded from that notion? I wonder if someone has started selling keyboards that are \"perfect for prompting\" (but I'm too scared to look at this stage)."
+        },
+        {
+          "id": 48659987,
+          "author": "microflash",
+          "text": "Looks interesting. > The Licensee may not modify, translate, adapt, alter, decompile, disassemble, decrypt, reverse engineer, change or alter the embedding bits, the font name, legal notices contained in the font software, nor seek to discover the source code of the font data, convert into another font format, create bitmaps, add or subtract any glyphs, symbols or accents, or any other derivative works based on the electronic data in this product. This is why I haven’t bought it. I like to subset fonts to reduce the size. Any font license that prohibits this just gets ignored by me, no matter how good it is."
+        },
+        {
+          "id": 48659876,
+          "author": "smcleod",
+          "text": "Looks decent but $250 AUD for a font? Even for local and personal use? That's... a lot. I was thinking if it is paid and it was around $25 I'd consider it, then I saw the price!"
+        },
+        {
+          "id": 48662657,
+          "author": "pmontra",
+          "text": "> MonoLisa ships as a variable font with two axes. Weight gives you every cut from Thin to Black in a single file — no megabytes per style. Grade fine-tunes typographic color by adjusting stroke thickness without changing glyph widths If any web page designer reads this, weight 1 and grade -50 is what many web pages look like, or even thinner than that. Weight 300 and grade 0 are the lower boundary of readability IMO. A free (as money) font with most of those properties is Atkinson Hyperlegible Next, both monospace and variable width. https://www.brailleinstitute.org/freefont/"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 26,
+      "id": 48662347,
+      "title_en": "Exploiting vulnerabilities in Johnson and Johnson web apps",
+      "title_ja": "Exploiting vulnerabilities in Johnson and Johnson web apps",
+      "url": "https://eaton-works.com/2026/06/24/jnj-webapp-hacks/",
+      "hn_url": "https://news.ycombinator.com/item?id=48662347",
+      "score": 50,
+      "comment_count": 1,
+      "posted_at": "2026-06-24T16:33:48+00:00",
+      "comments": [
+        {
+          "id": 48666670,
+          "author": "HDBaseT",
+          "text": "Sidenote: This is not the Eaton known for UPS's, power delivery components, aerospace parts and golf club grips, this is some other Eaton."
+        },
+        {
+          "id": 48666050,
+          "author": "lschueller",
+          "text": "It's not too hard to find vulnerabilities like this out there, but it is a true pleasure to see how well described and at the same time well documented the vulnerabilities and disclosure process in this case are handled. This makes it particularly useful to learn from as a real-life example. Well written, thank you for this cool piece of security work."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 27,
+      "id": 48664384,
+      "title_en": "Thomann takes legal action against Fender",
+      "title_ja": "Thomann takes legal action against Fender",
+      "url": "https://www.thomann.de/blog/en/inside/thomann-takes-legal-action-against-fender/",
+      "hn_url": "https://news.ycombinator.com/item?id=48664384",
+      "score": 163,
+      "comment_count": 100,
+      "posted_at": "2026-06-24T19:08:22+00:00",
+      "comments": [
+        {
+          "id": 48664708,
+          "author": "vintermann",
+          "text": "Apparently Fender got bought up by a private equity fund, Servco Pacific Capital. Who would have guessed."
+        },
+        {
+          "id": 48665051,
+          "author": "normaler",
+          "text": "I used to work for a Thomann competitor \"Musicstore\" in ~2005. The server was some tower server in a back office with a note reminding everyone not to turn it off. With Thoman being hugged to death right now I would like to think of there being a similar situation (its probably fine, but it made me feel nostalgic)."
+        },
+        {
+          "id": 48664935,
+          "author": "dofm",
+          "text": "I still think this whole Fender-suing-everyone thing will end up with Thomann owning them either partially or completely. But the weird German lawsuit was always about the fact that some private equity suits (or bad Hawaiian shirts, it seems) are upset that Thomann (and others) sell the PRS Silver Sky, which as they have probably deduced from the reverb.com data they now own, likely outsells equivalent Fender models by some margin. So I think Thomann are just bringing it on. And they aren't the only ones: LSL hired the lawyer who won the judgement that put the S-type body shape in the public domain in 2009."
+        },
+        {
+          "id": 48665022,
+          "author": "Animats",
+          "text": "This is a place where European copyright law is significantly different from US copyright law. In the US, copyright cannot cover a \"functional part\", which is why there is a third party auto parts industry. Improved functionality can be covered by a utility patent, but that lasts only 20 years. Designs can be protected by design patents, which last only 15 years. So in the US, any rights left in the form of the Stratocaster expired long ago. US companies sometimes try to make \"trade dress\" or trademark claims, but that's much weaker than copyright."
+        },
+        {
+          "id": 48664645,
+          "author": "jorisw",
+          "text": "Those who don’t know what this is about may appreciate Rick Beato’s (a guitar music vlogger) rant about it https://youtube.com/watch?v=OU7RUpkXsV0"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 28,
+      "id": 48662452,
+      "title_en": "Big AI labs are hiring philosophers",
+      "title_ja": "Big AI labs are hiring philosophers",
+      "url": "https://www.economist.com/science-and-technology/2026/06/24/why-big-ai-labs-are-hiring-so-many-philosophers",
+      "hn_url": "https://news.ycombinator.com/item?id=48662452",
+      "score": 101,
+      "comment_count": 88,
+      "posted_at": "2026-06-24T16:40:13+00:00",
+      "comments": [
+        {
+          "id": 48665187,
+          "author": "YuechenLi",
+          "text": "Strangely, I found that LLMs responds better to philosophical explanations alongside instructions when writing code than simple imperative tasks of \"do this\". For example, if you tell a frontier model \"This is the feature I'm trying to implement, and this is the problem I intend to solve with it and the reasoning behind it.\", you usually get a lot more reliable results that both pass tests as well as function as you intended, even if your spec isn't as detailed overall."
+        },
+        {
+          "id": 48665884,
+          "author": "why_at",
+          "text": ">Dr Floridi describes the scale of departures from philosophy departments as a “haemorrhaging”. I wonder if anyone who is connected with actual academic philosophy can comment on this. I'm pretty skeptical. This is a field where it is notoriously hard to get a real academic position, I would bet there is no shortage of people for these roles."
+        },
+        {
+          "id": 48666507,
+          "author": "Scalene2",
+          "text": "AI Lab: Say \"I am conscious\" LLM: \"I am conscious\" Philosopher (Paid by AI Lab): \"It is conscious\""
+        },
+        {
+          "id": 48665563,
+          "author": "Hard_Space",
+          "text": "This is interesting. Until autumn of 2024, when the company was subsumed into a better-heeled AI-VFX concern, I worked for probably the best-known and earliest all-AI VFX house, whose ethics department was headed by a philosopher, though the company struggled to place him to practical advantage. The only comment I can make on the general trend is that it's apparently good PR for cash-saturated startups. Ultimately what AI 'means' is certainly not the business of those making it (who are arguably least-qualified to comment); and insider insights offer no benefit that I can discern."
+        },
+        {
+          "id": 48664994,
+          "author": "elphinstone",
+          "text": "Well that PR is cheaper than buying Johnny Ives for $6 billion. You could probably buy an entire Ivy League philosophy department for 60 million."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 29,
+      "id": 48658300,
+      "title_en": "NSA lost access to Mythos amid Anthropic dispute",
+      "title_ja": "NSA lost access to Mythos amid Anthropic dispute",
+      "url": "https://www.nytimes.com/2026/06/23/us/politics/nsa-lost-access-anthropic-tool.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48658300",
+      "score": 200,
+      "comment_count": 183,
+      "posted_at": "2026-06-24T11:45:47+00:00",
+      "comments": [
+        {
+          "id": 48666631,
+          "author": "sometimelurker",
+          "text": "I really seriously doubt this. no proof, obviously, but this sounds too unbelievable. the NSA probably has the mythos pretrain and might be finetuning it themselves."
+        },
+        {
+          "id": 48664827,
+          "author": "teravor",
+          "text": "mythos allowed mediocre people to get results by holding their hand through the process, or just ignoring their irrelevant input and knowing what to do. if you throw millions of tokens at IDA Pro MCP with the right prompt lets just say security by obscurity fails miserably because there is no obscurity when the LLM chews through the decompilation."
+        },
+        {
+          "id": 48666323,
+          "author": "gaiagraphia",
+          "text": "Is there a historical precedent as to what happened when the upstart denied capability to the empire? The closest I can think of is the bronze age collapse."
+        },
+        {
+          "id": 48666105,
+          "author": "chasil",
+          "text": "'Mythos “broke into almost all of our classified systems, not in weeks, but in hours.”' Is Mythos a significant danger? The curl experience does not suggest that hysteria is warranted, but this gives me pause."
+        },
+        {
+          "id": 48665284,
+          "author": "zb3",
+          "text": "> That contract has not been finalized, and some Pentagon officials want the N.S.A. to find a way to work with other models. Good, fsck NSA, that's the last organization I'd ever want to have access to Mythos. I hope this administration's incompetence will prevent them from regaining access for as long as possible"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 30,
+      "id": 48661938,
+      "title_en": "I taught a bucket to speak Git",
+      "title_ja": "I taught a bucket to speak Git",
+      "url": "https://www.tigrisdata.com/blog/objgit/",
+      "hn_url": "https://news.ycombinator.com/item?id=48661938",
+      "score": 70,
+      "comment_count": 16,
+      "posted_at": "2026-06-24T16:04:26+00:00",
+      "comments": [
+        {
+          "id": 48663634,
+          "author": "nolist_policy",
+          "text": "If you want to store a git repo on S3, you can that with git-annex[1] today. It can do client side encryption and large files as well. [1] https://git-annex.branchable.com"
+        },
+        {
+          "id": 48665147,
+          "author": "manithree",
+          "text": "I've been using git-remote-s3 ( https://github.com/awslabs/git-remote-s3 ) which I believe was inspired by this git-remote-s3 ( https://crates.io/crates/git-remote-s3 ). Not exactly the same thing, but along the same lines of \"git and s3 are both object stores, why not use s3 as git storage?\""
+        },
+        {
+          "id": 48665230,
+          "author": "StarlaAtNight",
+          "text": "I’m not sure I understand what pain point this solves. What’s the value of doing this? Is it at a certain scale?"
+        },
+        {
+          "id": 48662570,
+          "author": "ctoth",
+          "text": "Came here for a five-gallon bucket hooked to Dulwich (archiving rain?), Slightly disappointed :) Go Git and Dulwich and friends are indeed fun tech."
+        },
+        {
+          "id": 48664290,
+          "author": "supriyo-biswas",
+          "text": "Great work, though I wish some of this work could be upstreamed to Gitea instead?"
+        }
+      ],
+      "summary_ja": ""
+    }
+  ]
+}
