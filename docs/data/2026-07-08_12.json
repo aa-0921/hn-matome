@@ -1,0 +1,1085 @@
+{
+  "date": "2026-07-08T00:00:00+09:00",
+  "slot": "12",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 48827325,
+      "title_en": "How to Build a Minimal ZFS NAS Without Synology, QNAP, TrueNAS (2024)",
+      "title_ja": "How to Build a Minimal ZFS NAS Without Synology, QNAP, TrueNAS (2024)",
+      "url": "https://neil.computer/notes/how-to-setup-minimal-zfs-nas-without-truenas/",
+      "hn_url": "https://news.ycombinator.com/item?id=48827325",
+      "score": 74,
+      "comment_count": 32,
+      "posted_at": "2026-07-08T03:59:35+00:00",
+      "comments": [
+        {
+          "id": 48827630,
+          "author": "Confiks",
+          "text": "Not a great time price-wise to be building a NAS, but I have been doing so for the last two weeks. Inside a Jonsbo N6 case, which is pretty nice with an 8x SATA backplane and drive bays (unlike the earlier Jonsbo variants). I ended up on shucking 4x the 14 TB WD Elements Desktop. They contain helium drives, the WD140EDGZ in my case, and are about a third cheaper than 4x the 12 TB WD Red Plus drives (which are air-filled). The shucking was easier than I expected too, and the performance seems very comparable. The warranty is a definite downside (European, so no Magnuson-Moss), but I think I can even get them back in their enclosure should they fail during the 2-year warranty period. I've put some second hand 256 GB M.2 SSDs in there as boot drives. It was a bit of a struggle to get it to work in a way that failure of one of the drives doesn't hold up booting, combined with LUKS, TPM keys and ZFS on root. Learned a lot about systemd-boot which I have never used before, but feels a lot saner to me than grub ever was. So now I have a large script which debootstraps a Debian based NAS into being. I noticed that there are a lot of ZFS myths and cargo culting. For example TFA mentions ECC RAM, which in some circles is a must-have because ZFS would wreck your pool during a scrub otherwise, which is a myth. It's also very expensive, especially this year. You also don't need much RAM for ZFS, L2ARC doesn't use much RAM at all, to name a few others. Still doubting about setting `dnodesize=auto` (which is the default), because there are some horror stories about that [1]. And it seems impossible to find a cloud storage provider with reasonable prices that supports `zfs send`. Rsync.net upped their minimum order to 10 TiB recently, which is far too much for my use case. [1] https://github.com/openzfs/zfs/issues/11353 [2] https://www.rsync.net/products/zfsintro.html"
+        },
+        {
+          "id": 48827529,
+          "author": "beagle3",
+          "text": "I still pay for snooty, and the reason for that is that when a disk goes bad (not if; when) I pop its tray out, replace the disk, pop the tray with the disk back in, click a couple of widgets, and that’s it. I know it will be rebuilt properly. (And I know I have to do that, because when the disk fails it beeps and lights a led near the bad disk) It’s easy to build a NAS such as the one described in this article, but in the long run, data loss is significantly more likely. Also, any guide like this that doesn’t guide you through “disk 3 failed, this is how you safely replace it” is imho incomplete, even if it doesn’t go through telling you how you know a disk has failed."
+        },
+        {
+          "id": 48827852,
+          "author": "bradley13",
+          "text": "Just yesterday I was brainstorming with ChatGPT about this. I have an ancient QNAP plus a slightly less ancient NUC running PiHole, Wireguard and other services. Both need replaced, so why not combine them? I don't know much about ZFS, but it sounds like I need to learn. Docker may have conquered the world, but I plan to stay with LXD for services. The one thing I take issue with: an appliance like this runs 24/7. It should be low power and fanless. A processor like the N100 seems like the obvious choice."
+        },
+        {
+          "id": 48827619,
+          "author": "splitbrain",
+          "text": "I came to the same conclusion when I built my NAS. Just Nix for the system, zfs for raid and docker compose for any service I might want to run. https://www.splitbrain.org/blog/2025-08/03-diy_nas_on_nixos"
+        },
+        {
+          "id": 48827708,
+          "author": "AceJohnny2",
+          "text": "Tangential, but about this: > I am creating a RAIDZ1 (RAID 5) zpool. That means 1 drive redundancy in-case of failure A friend once told me that RAID5 has a high latency cost, because every Write requires a Read to update the stripes across all drives, and while this made sense when drives were expensive, nowadays you might as well do a RAID10 instead, and trade space for latency. Is this still true with ZFS RAIDZ1?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 2,
+      "id": 48826703,
+      "title_en": "Is The Economist Always Wrong?",
+      "title_ja": "Is The Economist Always Wrong?",
+      "url": "https://www.economist.com/interactive/finance-and-economics/2026/07/02/is-the-economist-always-wrong",
+      "hn_url": "https://news.ycombinator.com/item?id=48826703",
+      "score": 102,
+      "comment_count": 67,
+      "posted_at": "2026-07-08T02:17:01+00:00",
+      "comments": [
+        {
+          "id": 48827676,
+          "author": "papaver-somnamb",
+          "text": "After reading their newspaper (their label, not mine) for years, I've come away with three revelations: A) More than gaining insight and staying abreast of events, what I was really purchasing was the /feeling/ of being in-the-know. B) Whenever I met with \"certain\" people, they were likely to also read The Economist which turned out to be another, tremendously handy means of anchoring conversation. C) The trade balance tables on the inside back page were always interesting, sometimes jaw-dropping."
+        },
+        {
+          "id": 48827039,
+          "author": "ggm",
+          "text": "I'd love to know if \"the pink\" has the same problem because I used to find the editorial very good. As a non-investor, left leaning voter, it interested me that I found much to agree with in \"the financial times\" while still finding much to disagree with in \"the times\" and \"the daily telegraph\" and \"the spectator\" -as if money was more neutrally stanced on left-vs-right."
+        },
+        {
+          "id": 48827036,
+          "author": "claw-el",
+          "text": "The tricky thing about predictions made by public entity or persona is that, the fact that they are making public predictions creates a major influence on the outcome itself. People react to predictions made by them."
+        },
+        {
+          "id": 48827736,
+          "author": "givemeethekeys",
+          "text": "They don't have any real skin in the game. Who cares if they're right about something? Are they putting money on the line? What is their P/L for being \"right\"?"
+        },
+        {
+          "id": 48826901,
+          "author": "latch",
+          "text": "Repost of https://news.ycombinator.com/item?id=48791799 (with 63 comments)"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 3,
+      "id": 48825749,
+      "title_en": "Tenda firmware (multiple versions) contains hidden authentication backdoor",
+      "title_ja": "Tenda firmware (multiple versions) contains hidden authentication backdoor",
+      "url": "https://kb.cert.org/vuls/id/213560",
+      "hn_url": "https://news.ycombinator.com/item?id=48825749",
+      "score": 115,
+      "comment_count": 29,
+      "posted_at": "2026-07-08T00:08:51+00:00",
+      "comments": [
+        {
+          "id": 48826616,
+          "author": "fusslo",
+          "text": "> Tenda is a supplier of home and business network devices such as routers, switches, wireless access points, and video surveillance equipment. I was unfamiliar with Tenda. > Shenzhen Tenda Technology Co.,Ltd. ( https://www.tendacn.com/us/profile ) Tenda may just rebrand, right? It seems like many chinese brands will either rebrand or have a 'competing' brand with the same internals but different externals. (I have no idea if Tenda does this, I've just seen it previously. Specifically with security cameras) I wish the authors provided some method for checking this vulnerability other than fw version. It seems like Tenda could just change the password and say \"yep! all safe now\""
+        },
+        {
+          "id": 48826983,
+          "author": "greyface-",
+          "text": "The article doesn't disclose the value of \"sys.rzadmin.password\", but this writeup from 2022 does: https://boschko.ca/tenda_ac1200_router/ Spoiler: it's \"rzadmin\". And it looks like there are a bunch of other goodies in the firmware, too."
+        },
+        {
+          "id": 48827153,
+          "author": "HDBaseT",
+          "text": "The US/Israel would never do such a thing, buy UniFi/Fortinet/Palo Alto!"
+        },
+        {
+          "id": 48827652,
+          "author": "matltc",
+          "text": "My ifconfig is simple: if it's made in Shenzhen, throw it out"
+        },
+        {
+          "id": 48827137,
+          "author": "ggm",
+          "text": "Have used their travel wifi product back when hotel wifi was a strange beast. Wouldn't expect to need it now eSIM and ubiquitous internet travel pricing means the hotel wifi may be the LEAST valid path to access things. I have a free give-away mikrotik unit in the same price bracket (literally free: they were both conference give-aways) it's physically smaller and it runs what appears to be their mainline code. Say what you like about microtik for quality, they provide pretty much every knob and frob you could want."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 4,
+      "id": 48824826,
+      "title_en": "GAO: DOE Is Prematurely Excluding Less Expensive Options for Nuclear Cleanup",
+      "title_ja": "GAO: DOE Is Prematurely Excluding Less Expensive Options for Nuclear Cleanup",
+      "url": "https://www.gao.gov/products/gao-26-108193",
+      "hn_url": "https://news.ycombinator.com/item?id=48824826",
+      "score": 168,
+      "comment_count": 74,
+      "posted_at": "2026-07-07T22:23:58+00:00",
+      "comments": [
+        {
+          "id": 48826034,
+          "author": "jjk166",
+          "text": "This is an excellent example of how to communicate investigation findings. The summary is clear and succinct, there are illustrative examples readily understood by a layman, the recommendations are actionable and unambiguous, and the potential impact is quantified without promising some stupidly precise estimate. I've got some customers whose quality auditors could learn a lot from this."
+        },
+        {
+          "id": 48826426,
+          "author": "CircuitSeuss",
+          "text": "Tangential: https://arstechnica.com/science/2026/07/nuclear-regulatory-c..."
+        },
+        {
+          "id": 48826455,
+          "author": "random__duck",
+          "text": "Now this is a future 100 billion dollar industry!"
+        },
+        {
+          "id": 48826151,
+          "author": "freestanding",
+          "text": "saving is always great!"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 5,
+      "id": 48825664,
+      "title_en": "Structure and Interpretation of Computer Programs Video Lectures (1986)",
+      "title_ja": "Structure and Interpretation of Computer Programs Video Lectures (1986)",
+      "url": "https://ocw.mit.edu/courses/6-001-structure-and-interpretation-of-computer-programs-spring-2005/video_galleries/video-lectures/",
+      "hn_url": "https://news.ycombinator.com/item?id=48825664",
+      "score": 101,
+      "comment_count": 9,
+      "posted_at": "2026-07-07T23:57:29+00:00",
+      "comments": [
+        {
+          "id": 48826886,
+          "author": "neilv",
+          "text": "If you want to work through SICP, you can use MIT Scheme, but another option is to use Racket or DrRacket, with this add-on package: https://docs.racket-lang.org/sicp-manual/"
+        },
+        {
+          "id": 48827864,
+          "author": "mbrezu",
+          "text": "These sound a little better than I remember. I wonder if the sound was cleaned up?"
+        },
+        {
+          "id": 48827573,
+          "author": "dirteater_",
+          "text": "I tried SICP straight from the book once, but I think the lectures are much better and the book acts as a supplemental reference."
+        },
+        {
+          "id": 48827870,
+          "author": "songbird23",
+          "text": "Should I do the JS or Scheme SICP"
+        },
+        {
+          "id": 48827700,
+          "author": "bloppe",
+          "text": "Cannot recommend these enough. Watch the first one and you'll be hooked"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 6,
+      "id": 48786789,
+      "title_en": "Canada's only watchmaking school still ticking after 80 years",
+      "title_ja": "Canada's only watchmaking school still ticking after 80 years",
+      "url": "https://www.cbc.ca/news/canada/montreal/canada-s-only-watchmaking-school-9.7254211",
+      "hn_url": "https://news.ycombinator.com/item?id=48786789",
+      "score": 92,
+      "comment_count": 37,
+      "posted_at": "2026-07-04T16:46:24+00:00",
+      "comments": [
+        {
+          "id": 48826647,
+          "author": "sleepyguy",
+          "text": "My grandfather was a master watchmaker and jeweler who learned his trade in the Soviet Union and then in Europe. After emigrating to Toronto after the war, he opened his own jewelry store, where he repaired watches and clocks, as well as crafted and repaired fine jewelry. He was a true master of his craft and built a successful business based on his exceptional skill. He Was well known for his craftsmanship and his remarkable ability to repair virtually any watch or clock, no matter how complex. Jewelers from across the city would bring him pieces that no one else could repair. For antique and vintage timepieces, he would often fabricate tiny replacement parts by hand when originals were no longer available. When he retired, very large companies would still come to his home to repair incredibly expensive pieces. He liked to tinker and would quietly work in his little home shop, pipe burning, radio playing, and visitors coming throughout the day to have him fix things. When he passed, he had 10's of 1000's of watch parts in all these little bags that were all tagged and in boxes. We ended up giving them away to one of his customers who own several Jewelry stores. Had I known I would have offered them to this school along with 100's of watches he kept for parts."
+        },
+        {
+          "id": 48826580,
+          "author": "LzeYing",
+          "text": "I believe this is exactly the kind of high-paying job that is difficult for AI to replace."
+        },
+        {
+          "id": 48826472,
+          "author": "14",
+          "text": "As a Canadian cool! Never heard of this school before but on the west coast so probably why. I've watched many watch repair videos online and the knowledge base required is huge. Also there are many tools needed which are not cheap. There is just so much to know that takes years to learn. Very cool that the knowledge is being shared and the skill passed on. In my small town there was only one guy who worked on clocks and watches. He passed a while back and his kids continue with his jewelry store but they now send out watches and clocks to another business as none of his kids learned how to do it."
+        },
+        {
+          "id": 48827037,
+          "author": "throwatdem12311",
+          "text": "Maybe I will take up watchmaking when I get sick of AI slop programming and offshore morons going wild with a Claude subscription."
+        },
+        {
+          "id": 48826392,
+          "author": "ButlerianJihad",
+          "text": "Yes, but has it taken a licking?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 7,
+      "id": 48827092,
+      "title_en": "Copy That Floppy – Cambridge guide for preserving data from fragile floppy disks",
+      "title_ja": "Copy That Floppy – Cambridge guide for preserving data from fragile floppy disks",
+      "url": "https://www.digipres.org/the-floppy-guide/",
+      "hn_url": "https://news.ycombinator.com/item?id=48827092",
+      "score": 14,
+      "comment_count": 3,
+      "posted_at": "2026-07-08T03:22:31+00:00",
+      "comments": [
+        {
+          "id": 48827641,
+          "author": "gnabgib",
+          "text": "Where'd you get the title from? It's just Copy That Floppy! (maybe + Imaging floppy disks for long-term preservation if it fits)"
+        },
+        {
+          "id": 48827526,
+          "author": "mune2gu-chan",
+          "text": "It's easy to forget that preserving digital data often comes down to keeping aging physical media alive. Nice practical guide."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 8,
+      "id": 48821576,
+      "title_en": "Local, CPU-Friendly, High-Quality TTS (Text-to-Speech) with Kokoro",
+      "title_ja": "Local, CPU-Friendly, High-Quality TTS (Text-to-Speech) with Kokoro",
+      "url": "https://ariya.io/2026/03/local-cpu-friendly-high-quality-tts-text-to-speech-with-kokoro/",
+      "hn_url": "https://news.ycombinator.com/item?id=48821576",
+      "score": 358,
+      "comment_count": 73,
+      "posted_at": "2026-07-07T18:24:10+00:00",
+      "comments": [
+        {
+          "id": 48823393,
+          "author": "sudobash1",
+          "text": "I have used Kokoro fairly extensively for an accessibility product. I have loved working with it (especially because I don't have an NVidia GPU like many TTS of similar quality require). I particularly appreciate the fact that it lets you manually add IPA pronunciation guides. There have been some cases where an important word is a homograph and Kokoro assumed the wrong pronunciation. The place where it falls a little short is in saying just a single word or two. Try having it say simply \"six\" and it almost always says something like \"ah-six-ah\". I found a way around that though. If you give it a longer sentence to say (eg \"The word is: six\") it will say it fine. The trick is that the Kokoro API gives you the timestamp of each word in the sentence. So you can have a Python script crop out just the word you care about. The intonation is a little flat this way, but is very reliable. I asked about this on the discord, and was told that it is a limitation of the small parameter size. But in fairness to Kokoro, even eleven-labs' voices suffer from this occasionally."
+        },
+        {
+          "id": 48827938,
+          "author": "est",
+          "text": "https://wlejon.github.io/kokoro-lab-web/ You can tweak the pitch as well."
+        },
+        {
+          "id": 48824673,
+          "author": "bronco21016",
+          "text": "Love this model. I’m GPU poor and have had FOMO that I haven’t played with local models at all. About a month ago I setup Kokoro on my GTX1650 to do TTS for an article reader. A simple WebUI lets me paste a URL or a chunk of copy pasted text. Python cleans it up and sends to Kokoro for TTS and it’s then served via RSS for Apple Podcasts. Then for my morning drive I’ll catch up on articles or blog posts I’ve gathered. At some point I’d like to play with separate voices and see if I could build something like NotebookLM for kind of like a radio morning show of news items I’ve gathered."
+        },
+        {
+          "id": 48822845,
+          "author": "dmayle",
+          "text": "Fun... This is something I actually care about... I used to keep a version of whisperx around, because I think it's important to have not just transcription, but also timing and speaker identification (e.g. for subtitles)... It depends on pyannote, though, which has some wierd licensing (and is tougher to script the installs because of it), so I wanted to look at something that both had better transcription, and supported diarization (the speaker and timing). I decided on parakeet for the transcription with softformer (the diarization), but most of the available engines for it don't include softformer. I coded up an OpenAI compatible server for parakeet-rs ( https://github.com/altunenes/parakeet-rs ) (which does support softformer) and I've been using it with OpenWhispr (a desktop app for transcription that handles all sorts of neat thing). I'm doing CPU-only transcription (because I use my GPUs for other stuff and haven't gotten around to adding in the GPU-path), but it's incredibly empowering to be able to have local transcriptions at will."
+        },
+        {
+          "id": 48824438,
+          "author": "SambhavGupta",
+          "text": "A couple months back I wrote a chrome extension that does this on any webpage, with simultaneous highlighting of the sentence being read. Skips both the container launching step and the copy pasting website contents step. Might be useful to anyone trying to use kokoro ergonomically. https://chromewebstore.google.com/detail/local-reader-ai-on-..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 9,
+      "id": 48818311,
+      "title_en": "Chat Control 1.0 and 2.0 Explained",
+      "title_ja": "Chat Control 1.0 and 2.0 Explained",
+      "url": "https://fightchatcontrol.eu/chat-control-overview",
+      "hn_url": "https://news.ycombinator.com/item?id=48818311",
+      "score": 527,
+      "comment_count": 171,
+      "posted_at": "2026-07-07T14:23:15+00:00",
+      "comments": [
+        {
+          "id": 48822751,
+          "author": "mikaeluman",
+          "text": "Most everyone would love to see more work on stopping child sexual abuse. But this is the ultimate \"grant me dictatorial powers so I can do good\" play. Rather than narrow and specific - it's a broad based law that suddenly touches everyone even though offenders are a small percentage and should be able to be targeted more efficiently."
+        },
+        {
+          "id": 48822392,
+          "author": "arjie",
+          "text": "I don't understand. How does it affect encrypted messages? It seems like either you need: 1. allow MITM decryption by a privileged authority 2. require all devices doing E2EE have a non-user-modifiable piece of functionality to scan on-device The second is the Apple style on-device CSAM scanner? I have to say that I do sometimes think about it while taking a photo of my baby playing in the bathtub - photos like my parents have of me which have been kind of nice to see later. It would be a pity if I had to have a separate analog camera just for baby photos because then I'd need to learn the whole developing film stuff."
+        },
+        {
+          "id": 48822342,
+          "author": "Zufriedenheit",
+          "text": "They claim to protect consumers and privacy and then push this creepy surveillance state."
+        },
+        {
+          "id": 48821291,
+          "author": "olejorgenb",
+          "text": "Chat control 1.0 \"A temporary derogation from the ePrivacy Directive that allowed (but did not require) providers to scan private messages of unsuspected users for potential child sexual abuse material.\" Does that imply it's currently not allowed? EDIT: apparently not enforced at least: \"Chat Control 1.0 expires The legal ground for voluntary, indiscriminate scanning ends. Google, Meta, Microsoft, and Snap state they will continue scanning private messages regardless. \""
+        },
+        {
+          "id": 48822395,
+          "author": "delichon",
+          "text": "To be fair, this is even worse. https://www.euronews.com/my-europe/2026/07/07/european-parli... The party that they want to ban is a consistent and loud opponent of chat control. It would be hard to imagine a US party that didn't believe the other party is out of compliance with US values. As a justification for blocking democracy it's universal and ever present."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 10,
+      "id": 48827402,
+      "title_en": "GPT-5.6 Sol, along with Terra and Luna, will launch publicly this Thursday",
+      "title_ja": "GPT-5.6 Sol, along with Terra and Luna, will launch publicly this Thursday",
+      "url": "https://twitter.com/OpenAI/status/2074704958419792299",
+      "hn_url": "https://news.ycombinator.com/item?id=48827402",
+      "score": 61,
+      "comment_count": 17,
+      "posted_at": "2026-07-08T04:12:13+00:00",
+      "comments": [
+        {
+          "id": 48827811,
+          "author": "aarvin_roshin",
+          "text": "Thoughts[^0] from Theo, who had early access: > It's a damn good model. Not quite as \"smart\" as Fable, but it is incredibly capable. Fixed all the problems I had with GPT-5.5. > It is incredibly determined. Will run for a day without even using a /goal. It understands subagents incredibly well and is great at orchestrating. It's super pleasant in use cases like OpenClaw and Hermes Agent. It knows iOS dev incredibly well. > It has rough edges too, but FAR fewer than 5.5 did. > For many things, gpt-5.6-sol will become my obvious defaults. > It is better about [following instructions] than 5.5 was. Understands intent well and hammers until it gets there. Sometimes a bit too hard. Also[^1]: > gpt-5.6-sol is world leading in computer use. It made me use it 100x more. When we lost access to 5.6, I quickly started to go insane without it [^0]: https://nitter.net/theo/status/2074708892341481755 [^1]: https://nitter.net/theo/status/2074720467395756499"
+        },
+        {
+          "id": 48827955,
+          "author": "mhrmsn",
+          "text": "Is this the reason Anthropic extended use of Fable 5 via subscriptions until July 12? Seems a bit like it"
+        },
+        {
+          "id": 48827948,
+          "author": "jorisw",
+          "text": "Mirror: https://xcancel.com/OpenAI/status/2074704958419792299"
+        },
+        {
+          "id": 48827843,
+          "author": "reassess_blind",
+          "text": "I’m bouncing back between Codex and Claude like a ping-pong ball. I much prefer the experience using Codex, less verbose and to-the-point I’ve found. But Fable, being as strong as it is, is a big draw for Claude right now. I’ll likely switch back to Codex if 5.6 Sol is comparable."
+        },
+        {
+          "id": 48827933,
+          "author": "aarvin_roshin",
+          "text": "I'm most curious about whether OpenAI finally taught its models how to design interfaces. They have been behind the other labs in this area for what feels like ages."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 11,
+      "id": 48794042,
+      "title_en": "Show HN: Neil the Seal Game",
+      "title_ja": "Show HN: Neil the Seal Game",
+      "url": "https://neiltheseal.app/",
+      "hn_url": "https://news.ycombinator.com/item?id=48794042",
+      "score": 26,
+      "comment_count": 12,
+      "posted_at": "2026-07-05T13:11:30+00:00",
+      "comments": [
+        {
+          "id": 48827876,
+          "author": "Jordan-117",
+          "text": "Cute! But the car challenges in Tier 8 feel undoable -- they're a bear to \"steer\" and can't seem to go more than a short distance before bursting into flames."
+        },
+        {
+          "id": 48827671,
+          "author": "chao-",
+          "text": "Sound isn't working in Firefox on Linux, but otherwise very fun. The only thing it's missing are Neil's favorite traffic cones ;) Also glad that Neil is getting the protection he needs (and the public as well) despite the media attention."
+        },
+        {
+          "id": 48827893,
+          "author": "infinitebit",
+          "text": "i love this. i don’t understand why web games like this aren’t more prevalent"
+        },
+        {
+          "id": 48827770,
+          "author": "jumploops",
+          "text": "My preschooler loves the Untitled Goose Game, please vibe-port this to the Switch (:"
+        },
+        {
+          "id": 48827784,
+          "author": "mrspacejam",
+          "text": "Brilliant, I love Neil, great idea to immortalize him."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 12,
+      "id": 48819608,
+      "title_en": "30papers.com – Ilya's 30 essential ML papers, in a beginner friendly format",
+      "title_ja": "30papers.com – Ilya's 30 essential ML papers, in a beginner friendly format",
+      "url": "https://30papers.com/",
+      "hn_url": "https://news.ycombinator.com/item?id=48819608",
+      "score": 441,
+      "comment_count": 71,
+      "posted_at": "2026-07-07T15:58:13+00:00",
+      "comments": [
+        {
+          "id": 48827951,
+          "author": "nitin7",
+          "text": "How is this a beginner friendly format?"
+        },
+        {
+          "id": 48825143,
+          "author": "notmcrowley",
+          "text": "Hey guys, I really appreciate all of the attention this post has received. I honestly thought it was going to be just a small project to help some of my friends get into reading research papers. A large number of people complained about how intense some of the backgrounds/animations were (I might have been a bit too focused on making something that looked cool over usability). In response I have added toggles for both the movement on the page and the backgrounds for the papers. Other people mentioned that they would have liked some more personalised reflections on each paper. I currently have already done some of these for the more popular papers on my X @notmcrowley . I would have no problem adding these to the site if people think it will help. I feel the need to warn that I have not been formally educated on ML or AI so any interpretation will just be mine and may not necessarily be the correct one. (If anyone with more experience would like to contribute to this feel free to reach out)."
+        },
+        {
+          "id": 48822397,
+          "author": "HAL3000",
+          "text": "Someone posts on X, \"These are Ilya’s 30 papers\", gives no source, doesn't say where he got it from, and isn't connected to either Ilya or Carmack (Ilya gave him the list). Then someone vibe codes a barely usable website based on that, and it lands on the HN front page? Is this correct?"
+        },
+        {
+          "id": 48819659,
+          "author": "notmcrowley",
+          "text": "Author here. First year CS student at Trinity College Dublin. I Built this because when I was getting into reading research papers I ended up burning a ton of my Claude usage asking questions other people have probably already asked. The website is just a side project and definitely a WIP. Happy to answer questions or take PRs on GitHub."
+        },
+        {
+          "id": 48821436,
+          "author": "clintonc",
+          "text": "I wish this were organized according to suggested/logical reading order. For example, the paper introducing the attention mechanism probably ought to precede \"attention is all you need\"."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 13,
+      "id": 48756578,
+      "title_en": "Herdr: One terminal to rule them all",
+      "title_ja": "Herdr: One terminal to rule them all",
+      "url": "https://herdr.dev/",
+      "hn_url": "https://news.ycombinator.com/item?id=48756578",
+      "score": 225,
+      "comment_count": 102,
+      "posted_at": "2026-07-02T04:28:39+00:00",
+      "comments": [
+        {
+          "id": 48823332,
+          "author": "spudlyo",
+          "text": "So I've tried to figure out why you might want to use this over Tmux, and essentially I think it comes to down to: - everything is mouse clickable - tmux style display-popups are used for friendly UI interactions everywhere - it has a UI for agents running in panes, with a cool status (idle/working) display - has opinionated defaults like automatic clipboard copy on mouse text select - makes nested sessions easier & has default affordances for remote SSH attach - is generally prettier - uses display-popups for notifications Otherwise it seems exactly like tmux."
+        },
+        {
+          "id": 48825383,
+          "author": "bloody-crow",
+          "text": "I've been using tmux historically and it eventually became too cumbersome since my typical workflow started being a lot more AI-agent heavy. I now run over 10 agents at the same time and they're all working on some multi-hour workstreams that I occasionally need to check in on or unblock. Tmux was not making this particularly easy and I would occasionally lose an agent or forget about it until much later only to realize it's been sitting idle waiting for me to approve something for a few days. I've tried Cmux, but it didn't do it for me, since the agent statuses were displayed on the workspaces and having multiple agents in the same workspace would sometime produce confusing results. I've been using Herdr since the start of the week and so far it's been the best in terms of visibility of what my agents are doing and which of them need attention. The only wart I've noticed so far is that the performance is not always great — sometimes I see the text appearing with a noticeable delay as I type it."
+        },
+        {
+          "id": 48827437,
+          "author": "chaoxu",
+          "text": "Herdr did a lot of things really well. It have a great landing page where you can see and interact , and that really made me try it, and a few of my friend was also captured and immediately understood what it is for. I basically do everything remote, never on my own machine. Once I tried it, I can never go back. It is so simple and worked exactly as I thought how it should work. I would say it is just a modern version of tmux but really thought about user experience of more novice users. For people who come from the mouse world, moving to this is quite seamless. Also, coming to the comments, I would think maybe `zellij` would also work well. Or use `zmc` and build something on top. `zmc` is great, as the then the tab/window management can be handled by the desktop or TUI, depend on what someone want to use."
+        },
+        {
+          "id": 48825276,
+          "author": "robgough",
+          "text": "I'm a big tmux fan, but admittedly I've found myself switching between a lot of sessions recently and wishing it was a little bit more mouse friendly. If you're a Mac user, and can forgive the shameless plug, you might find belfry.robgough.net useful. Connects to local and remote machines entirely through tmux, ssh and libghostty - populating the sidebar from tmux session info, and optionally adds a little Claude visibility in there for good measure. There's even an iOS/iPadOS version – though for the moment you'll need to build that yourself. Source is all on Github."
+        },
+        {
+          "id": 48823673,
+          "author": "graypegg",
+          "text": "> Popular with engineers from... (bunch of logos) > Individual engineers, not company endorsements. Bold haha. Maybe that's fine with the disclaimer, but feels like lawyer-bait."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 14,
+      "id": 48821848,
+      "title_en": "Show HN: Davit, a Apple Containers UI",
+      "title_ja": "Show HN: Davit, a Apple Containers UI",
+      "url": "https://davit.app",
+      "hn_url": "https://news.ycombinator.com/item?id=48821848",
+      "score": 258,
+      "comment_count": 56,
+      "posted_at": "2026-07-07T18:44:29+00:00",
+      "comments": [
+        {
+          "id": 48827949,
+          "author": "pjmlp",
+          "text": "> No Electron, no web views, no background agents of its own. Sweet, regardless of the AI help. If anything even more so, no excuses for lazy Electron, with AI helping hand. Kudos."
+        },
+        {
+          "id": 48826947,
+          "author": "_doctor_love",
+          "text": "My current power move in the age of AI: do nothing. I had an idea like this and thought I could vibe code it, but then I figured someone else would care more and do it first. I was right! This looks like a great app and I'm excited to try it out. Free idea: I would like to be able to \"jail\" an agent inside a VM and send instructions to the harness from outside the VM to agent(s) installed inside. Ideally there is no Codex/Claude/etc. installed on the host. More awesome: let me provision multiple user accounts inside the VM and restrict filesystem / network policy by user. Then I can have a dev agent, QA agent, etc. each with its own view of the work. That would be a powerful base layer for further automation. Of course I should be able to provision various resources \"attached\" to the VM that agents can use on a permissioned basis; e.g., DB, queue, external volume, and so forth."
+        },
+        {
+          "id": 48823028,
+          "author": "simonw",
+          "text": "This looks like a really solid app. I like that it's 17 MB and uses the ContainerAPIClient library directly. 28 commits in 3 days, 5,015 lines of Swift, every commit \"Co-Authored-By: Claude Fable 5\". Also neat that it's signed/notarized. I installed it and it downloaded the necessary container platform stuff on first launch. Suggestion: add a getting started tutorial to the site which suggests an image to try out and has screenshots (or a silent video) showing you how to get that image up and running and what you can do with it. The create image dialog suggests \"nginx:latest\" but that's not a great starting demo."
+        },
+        {
+          "id": 48827856,
+          "author": "reassess_blind",
+          "text": "How does this compare to OrbStack? Do Apple Containers offer anything in the dev experience that I would notice? OrbStack’s implementation already feels lightning fast for my usage."
+        },
+        {
+          "id": 48825040,
+          "author": "dllrr",
+          "text": "I've been a fan of Orbstack for make 2 years or so. Worth the cost for me because it's so well integrated and fast and docker command compatible. I'll give this a try though."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 15,
+      "id": 48761788,
+      "title_en": "Pure-Python symbolic regression that rediscovered Kepler's law from 8 data point",
+      "title_ja": "Pure-Python symbolic regression that rediscovered Kepler's law from 8 data point",
+      "url": "https://github.com/ariel95500-create/gp-elite",
+      "hn_url": "https://news.ycombinator.com/item?id=48761788",
+      "score": 25,
+      "comment_count": 11,
+      "posted_at": "2026-07-02T14:02:07+00:00",
+      "comments": [
+        {
+          "id": 48827832,
+          "author": "sinuhe69",
+          "text": "And I wonder if somebody has tried with the available galactic data and see if the genetic programming can come up with a better formula than MOND or Einstein's general relativity. For simple problems as Kepler's law, a quick detour on Desmos will show a perfect fit for power law instantly. In general, there are many important criteria for a better curve fitting (for ex. independent, normal distributed residuals), not just R, so I hope the author has/will incorporate them into the search to create a more robust result."
+        },
+        {
+          "id": 48827463,
+          "author": "ziofill",
+          "text": "The battery example makes no sense: capacity_SOH ≈ 0.913 − 0.352 · tanh( cycle^((temperature/cycle)^0.485) ) I understand this fits the data, but exponents should be dimensionless, what is temperature/cycle?"
+        },
+        {
+          "id": 48786330,
+          "author": "gus_massa",
+          "text": "Some minor comments: What happens if you give the system not only the semi-mayor axis but also the semi-minor axis? Have you tried with only the 6 planets Kepler know? (I don't expect this to change the result too much.) Have you tired with noisy data?"
+        },
+        {
+          "id": 48761815,
+          "author": "sade_95",
+          "text": "What My Project Does GP_ELITE is a symbolic regression engine in pure Python: given (X, y) data, it searches for a readable mathematical formula linking them, instead of a black-box model. To show what that means concretely: I gave it nothing but the 8 planets' distance from the Sun and orbital period — 8 data points — and asked for a formula. It returned: T = a · sqrt(a) (i.e. a^1.5), R² = 1.000000 That's Kepler's Third Law (T² ∝ a³), which took Kepler ~10 years to find in 1618. GP_ELITE found it in ~3 seconds. Reproducible: examples/kepler_demo.py. v0.2.0 (this week) added the parts that make it reliable: Levenberg-Marquardt constant fitting (constants come back at machine precision — Coulomb's q1·q2/(4πεr²) is recovered exactly), multi-restart with a merged candidate archive, a Pareto front output (the full complexity ↔ accuracy staircase, not just one champion), and a guarded forecasting mode for extrapolating trends beyond your data without the usual GP blow-ups. Pure Python/NumPy — pip install gp-elite, no compiler, no Julia. Target Audience Anyone with small experimental datasets (≤10 variables, 100–5000 points) who wants to understand a relationship, not just predict it: lab engineers, scientists, students. One concrete use case that drove development: battery degradation (SOH) forecasting — the guarded mode gives you an honest bracket of scenarios (a Pareto front from a conservative straight line to richer bounded laws) instead of one overconfident curve. Production-usable for that niche (built-in hold-out validation, regression-tested); not aimed at large-scale ML. Comparison vs gplearn (the established pure-Python option): I ran both on the same frozen benchmark — 15 Feynman physics equations, identical data and splits, generous budget for gplearn. Exact symbolic recovery (machine precision): GP_ELITE 10/15 (67%) vs gplearn 6/15 (40%). gplearn recovers the constant-free formulas and stalls as soon as a ½ or a 4π appears (no real constant optimization); LM fitting is what closes that gap. Every number is reproducible: PYTHONHASHSEED=0 python benchmarks/feynman_bench.py 0 15 and benchmarks/duel.py in the repo. vs PySR / Operon (the state of the art): they are stronger on speed and scale, and I'm not claiming otherwise — but they require a Julia or C++ toolchain. GP_ELITE's whole point is zero barrier: pip install and go. vs neural nets / gradient boosting: those win on raw accuracy for large data, but give you a black box — GP_ELITE gives you the actual equation. Honest limits: weak on chaotic targets (tested on Collatz), degrades past ~6 variables with decoy features, and pure Python costs wall-time on big data. Code (MIT): https://github.com/ariel95500-create/gp-elite"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 16,
+      "id": 48826094,
+      "title_en": "Show HN: Chiptune Radio",
+      "title_ja": "Show HN: Chiptune Radio",
+      "url": "https://chiptune-radio.alephvoid.com/",
+      "hn_url": "https://news.ycombinator.com/item?id=48826094",
+      "score": 37,
+      "comment_count": 5,
+      "posted_at": "2026-07-08T00:55:19+00:00",
+      "comments": [
+        {
+          "id": 48826584,
+          "author": "big85",
+          "text": "There's also Nectarine Demoscene Radio: https://www.scenestream.net/demovibes/"
+        },
+        {
+          "id": 48827411,
+          "author": "lucasrufkahr",
+          "text": "https://www.scenesat.com/"
+        },
+        {
+          "id": 48826380,
+          "author": "goodwillhunting",
+          "text": "This thing is giving mad Ultima V childhood vibes! :) Very cute."
+        },
+        {
+          "id": 48826543,
+          "author": "lrvick",
+          "text": "For those like me that have surveillance capitalism services like Twitch blocked, try this completely FOSS alternative: https://watch.chiptune.fm/"
+        },
+        {
+          "id": 48826708,
+          "author": "anarticle",
+          "text": "I always tune into: https://kohina.com Thanks for sharing, I'll def put it on."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 17,
+      "id": 48826329,
+      "title_en": "LineageOS Statistics",
+      "title_ja": "LineageOS Statistics",
+      "url": "https://stats.lineageos.org",
+      "hn_url": "https://news.ycombinator.com/item?id=48826329",
+      "score": 19,
+      "comment_count": 9,
+      "posted_at": "2026-07-08T01:27:39+00:00",
+      "comments": [
+        {
+          "id": 48827498,
+          "author": "pavon",
+          "text": "Wow LineageOS really is a bazaar, and not a cathedral. * 74% of installs are unofficial builds, not ones released by LineageOS. * 2/3 of US installs are on non-phones (waydroid, nintendo switch, rpi, etc) * Most of the installs on actual phones are in China, Brazil and Vietnam * Less than 21% of installs are on versions that receive security updates, and less than 9% of installs are on the latest version (mostly because device's binary blobs don't support newer android versions?)"
+        },
+        {
+          "id": 48827743,
+          "author": "poisonborz",
+          "text": "Wonder how much of those Waydroid installs are from scam farms. I can imagine some legit uses, but not this amount."
+        },
+        {
+          "id": 48827513,
+          "author": "yjftsjthsd-h",
+          "text": "Wow, that's not the distribution I expected; waydroid beats any other version... Though I guess that's not apples-apples since it aggregates any physical device running waydroid... And also I didn't expect unofficial builds to be so popular."
+        },
+        {
+          "id": 48827855,
+          "author": "goodpoint",
+          "text": "That's really depressing."
+        },
+        {
+          "id": 48827236,
+          "author": "m1keil",
+          "text": "TIL waydroid..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 18,
+      "id": 48821378,
+      "title_en": "l: A new runtime for k and q",
+      "title_ja": "l: A new runtime for k and q",
+      "url": "https://lv1.sh/",
+      "hn_url": "https://news.ycombinator.com/item?id=48821378",
+      "score": 126,
+      "comment_count": 66,
+      "posted_at": "2026-07-07T18:08:29+00:00",
+      "comments": [
+        {
+          "id": 48822690,
+          "author": "enduku",
+          "text": "yeah the site's clearly vibecoded and isn't opensource, but i also think this is a genuinely interesting design space and more people should be building in it. APL ( https://www.dyalog.com/ ), BQN ( https://mlochbaum.github.io/BQN/ ), J/Jd ( https://code.jsoftware.com/wiki/Jd/Overview ), Klong ( https://news.ycombinator.com/item?id=10586872 ), Kerf ( https://news.ycombinator.com/item?id=9782520 ), RayforceDB ( https://news.ycombinator.com/item?id=45889607 ), k/q ( https://kx.com/ ) glad there's a new entrant."
+        },
+        {
+          "id": 48822686,
+          "author": "kristjansson",
+          "text": "Quite cool, but for a new runtime of an existing language it might make sense to compare to, y'know, the other[0] runtimes of that language? Even if one has to omit the best, closed ones for lack of access / permission to benchmark? [0]: https://k.miraheze.org/wiki/Running_K"
+        },
+        {
+          "id": 48824012,
+          "author": "lioeters",
+          "text": "Closed source (and vibe-coded) software, especially for a language runtime, is a non-starter for many people including myself. But proprietary license is actually common in the APL and K family of languages. They are fascinating though, and plenty of free/open implemenations exist, for example: https://ktye.github.io/"
+        },
+        {
+          "id": 48822353,
+          "author": "zacharynewton",
+          "text": "Not sure why all the hate (sure site may be vibecoded, not all of us are front-end masters and it's at least not spartan)... I've always found k to be fascinating, and cool idea to try and roll a new one. Wish it were wholly open source, but cool to have a new variant that seems to bench well."
+        },
+        {
+          "id": 48823377,
+          "author": "jloveless",
+          "text": "benchmarks at https://github.com/l-labs unlike klong/ngn/bqn et al (which are GREAT) this has the goal of full production database compatibility (and full language compatibility)."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 19,
+      "id": 48821102,
+      "title_en": "We're extending access to Fable 5 on all paid plans through July 12",
+      "title_ja": "We're extending access to Fable 5 on all paid plans through July 12",
+      "url": "https://twitter.com/claudeai/status/2074548242386178258",
+      "hn_url": "https://news.ycombinator.com/item?id=48821102",
+      "score": 129,
+      "comment_count": 139,
+      "posted_at": "2026-07-07T17:44:50+00:00",
+      "comments": [
+        {
+          "id": 48827887,
+          "author": "Khaine",
+          "text": "The drug dealers are giving out a bit more of a free hit to get people hooked on the more expensive models."
+        },
+        {
+          "id": 48827109,
+          "author": "seer",
+          "text": "Getting on and off fable this week has been quite interesting. For my personal work stream (big terraform monorepo, hundreds of states) I’ve using mostly superpowers to do heavy / quality work. But with fable, I tried just telling it what to do, and it produced roughly the same results without a big structured back and forth that I was accustomed to. Then after using up all my fable allowance I figured let’s see if opus can actually work without superpowers, and no, it was all over the place doing weird things. Thing is, superpowers produces meticulous specs and plans as a byproduct of its work, which is very useful for switching between work trees, stoping / resuming work by different people. But to do that in Fable you have to spend way more tokens than it’s reasonable. You get similar quality result, but without the specs in between. I’m not super sad that I’ll have to go back to opus though, with superpowers it was Fable but more structured. But I will miss the banter though - Fable is amazing for brainstorming big underspecced features."
+        },
+        {
+          "id": 48826866,
+          "author": "nickandbro",
+          "text": "Loosing Fable July 12th and getting usage cut by a third post July 13th is going to be rough. Looks like all the reporting about Anthropic trying their earnest to turn a profit this quarter is true. In the mean time, I will gladly switch to Codex. Their Pro plan gives you amble usage and only runs close when you are using the fast mode. And even if you run out of credits, they have given users so many credit resets this past month that you can just activate one of those after. I understand Fable is a great model, but switching to API usage will run many people thousands of dollars with the same usage from their subscription plans. Not worth it IMO. EDIT: corrected usage cut amount"
+        },
+        {
+          "id": 48827281,
+          "author": "somenameforme",
+          "text": "Does this affect anybody? It seems they didn't reset your Fable usage so this only applies to people who didn't hit their 50%-of-plan limit with Fable and I can't imagine that's many people given how this thing eats through tokens like that's its job. On Pro I generally could not complete a single plan+execution cycle without hitting my token cap, so that 50% of weekly limit got eaten up fast and I assume that's the typical case. I suppose it benefits people whose weekly reset is sometime between now and the 12th? Feels like vibe management, because I find this part of the promo more annoying than not."
+        },
+        {
+          "id": 48826797,
+          "author": "mil22",
+          "text": "If they pair this with a reset, then it will be good news. Otherwise we all just rushed to use our quota before the July 7th deadline for nothing. Corollary: use your quota now because a reset seems likely."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 20,
+      "id": 48819808,
+      "title_en": "Show HN: Rowboat – Open-source, local-first alternative to Claude Desktop",
+      "title_ja": "Show HN: Rowboat – Open-source, local-first alternative to Claude Desktop",
+      "url": "https://github.com/rowboatlabs/rowboat",
+      "hn_url": "https://news.ycombinator.com/item?id=48819808",
+      "score": 132,
+      "comment_count": 37,
+      "posted_at": "2026-07-07T16:10:44+00:00",
+      "comments": [
+        {
+          "id": 48825074,
+          "author": "dannyobrien",
+          "text": "What I'm looking for right now is a tool like this that lets more than one person participate in the conversation: right now Claude Code and similar tools are great for working alone, but I'd like to effectively pair-prompt with a partner who can see what's happening, and take turns steering the conversation. Can Rowboat do this? If not, does anybody know a harness that can?"
+        },
+        {
+          "id": 48827471,
+          "author": "dr_hooo",
+          "text": "Look really great! I'm a bit sad that the only way to connect to email is gmail. Is a generic IMAP connector on your roadmap?"
+        },
+        {
+          "id": 48824783,
+          "author": "starcalleryisss",
+          "text": "Looks great. Is there an onboarding/xfer workflow from an existing Claude code harness? I’ve spent a ridiculous amount of time building my wiki, feature plans, retrospectives, client overviews, meta overview, log, skills, commands and the barrier to trying a new command surface or agent is always “will I maintain my edge”. Or am I misunderstanding? Is it that I would just spawn windows to that existing harness and get to harvest additive features/data from rowboat on top? Edit - my typical approach would be to scrape out features from a tool like this to bolt onto my harness, why would I not do that here?"
+        },
+        {
+          "id": 48824567,
+          "author": "_puk",
+          "text": "I actually was using this quite a lot earlier this year, thanks for this! What I actually ended up doing was regularly pointing Claude at the Rowboat directory. Really useful to have all of this context available as markdown files. I use my own standard format for all context capsules, and had my own branch running with that format hacked in. Being able to describe the format in a plugin style architecture would be awesome. Granola notes silently stopped working when they decided to encrypt the DB, interesting to see you've got your own in there now. Will check it out again."
+        },
+        {
+          "id": 48822779,
+          "author": "ActionHank",
+          "text": "The growing problem with this and many other AI offerings is the asymmetry of effort. All of them take my notes, meeting transcripts, jira tickets, code, websites, and give me more to read. Then everyone else in the org is doing the same, to give me more to read. At the end of the day there is too much to read. AI is supposed to be reducing toil, but it's just making more."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 21,
+      "id": 48823557,
+      "title_en": "Every new car sold in the European Union must include a driver monitoring camera",
+      "title_ja": "Every new car sold in the European Union must include a driver monitoring camera",
+      "url": "https://allaboutcookies.org/eu-mandatory-distracted-driver-system",
+      "hn_url": "https://news.ycombinator.com/item?id=48823557",
+      "score": 509,
+      "comment_count": 668,
+      "posted_at": "2026-07-07T20:50:46+00:00",
+      "comments": [
+        {
+          "id": 48823665,
+          "author": "A_D_E_P_T",
+          "text": "All new cars. At this point I don't know if I'd buy anything made after 2008. Whenever I rent a new car around here (in the EU) I find them very annoying. The worst is the cruise control that tries to stick to the speed limit -- but its sensors don't always read the signs very well, so you'll often slow to 50 km/h (about 30 mph) for no reason. Then there's the incessant beeping at you, \"lane assist\" that you can't turn off (looking at you, Volkswagen,) and many more small annoyances. A camera pointed at your face just adds insult to injury."
+        },
+        {
+          "id": 48823671,
+          "author": "awakeasleep",
+          "text": "Ford has had that since Blue Cruise 2.0, or thereabouts. It really shocked me how often it catches my attention being diverted. Things like talking to my passengers, adjusting the climate controls, or eating- I'm not even talking about 'advanced distractions' like my phone. It also seemed really accurate. I never remember it beeping at me when I was actually paying attention. It's totally plausible to me that this kind of nudge will save a lot of lives."
+        },
+        {
+          "id": 48825098,
+          "author": "WalterBright",
+          "text": "Boeing found out the problem with \"beeping\" alarms. The first time they installed a warning horn, I think it was the stall warning, it was a big success. So, they started adding different horns for other situations. At one point, in an emergency, the pilot got confused about which horn meant what, and had an accident. So now, Boeing replaced horns with a voice, like \"pull up\". Sounds obvious, right? But car beeps generally give no clue what they're beeping about. Decades ago, I wondered why elevators announced floors with a beep. If you're blind, you have no idea what floor you're on. I thought a voice would be better. 50 years later, I heard some elevators announce the floor with a voice. P.S. It's not a technology issue. The IBM PC had an I/O port wired to the speaker. You could give the speaker +5V or 0V, making a square wave only, an annoying buzzing sound. But then some genius discovered that if you ran a wave form through a clipper which gave a sequence of 1s and 0s, running that produced quite a credible voice sound. P.P.S. My furnace gives its status in the form of a blinking LED. A fast blink means broken, slower blink means A-OK. Of course, when you're faced with a blinking LED, is it blinking fast or slow?"
+        },
+        {
+          "id": 48824093,
+          "author": "aljgz",
+          "text": "New cars are UX nightmares. I'm driving an electric Toyota bz4x. Lovely mechanics, but the general UX (some are because of Android Auto) is terrible. The remote's lock/unlock don't do anything when the car is on. Example: I'm by the trunk and it won't open unless I go back to the driver's door and unlock the doors. App's remote function has too many conditions to do anything. For instance, I'm resting in the back seat and want to turn on the car for some air conditioning, but it says: the doors should be locked, the key fab should be out of the car to start the car. I'm listening to an audio through a webpage, as soon as I change the volume it starts my last music. This is really annoying. I should guess the right volume, unlock my phone, resume my audio. Old physical volume knobs only changed the volume, not start one of the few apps they know about. Oh and if I've been listening to loud music and now someone's in the car, I can't lower the volume without starting the music. I want to start with a low volume and then increase it. These are some of the many stupid UX decisions. I would still not drive an old car. Especially ICE. But would pray that the equivalent of Frame.work appears, I can get an open source car with an open source infotainment. With Chevrolet starting to sell DIY EV packages and the general simplification of the mechanics of EV cars, I believe such a thing would eventually happen."
+        },
+        {
+          "id": 48823881,
+          "author": "avaer",
+          "text": "\"The cars have all have cameras checking for bad behavior, why shouldn't your phone and laptop?\" said the esteemed lawmaker. \"Oh course there will be exceptions for politicians and authorized individuals, for national security reasons.\""
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 22,
+      "id": 48794049,
+      "title_en": "Scheme Is a Hoot",
+      "title_ja": "Scheme Is a Hoot",
+      "url": "https://gracefulliberty.com/notes/scheme-is-a-hoot/",
+      "hn_url": "https://news.ycombinator.com/item?id=48794049",
+      "score": 50,
+      "comment_count": 4,
+      "posted_at": "2026-07-05T13:12:19+00:00",
+      "comments": [
+        {
+          "id": 48826723,
+          "author": "NordStreamYacht",
+          "text": "I don't understand. Why not just use Scheme directly, what's the benefit of porting to Hoot?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 23,
+      "id": 48742703,
+      "title_en": "IEEE Rolls Out Large Language Models Training Course",
+      "title_ja": "IEEE Rolls Out Large Language Models Training Course",
+      "url": "https://spectrum.ieee.org/large-language-models-ieee-course",
+      "hn_url": "https://news.ycombinator.com/item?id=48742703",
+      "score": 53,
+      "comment_count": 7,
+      "posted_at": "2026-07-01T05:41:22+00:00",
+      "comments": [
+        {
+          "id": 48824827,
+          "author": "ksd482",
+          "text": "Here is the linked course in the article: https://iln.ieee.org/public/contentdetails.aspx?id=B570F53B5... $240 (non member price) for a 5 hour course. Did I read that right? Or is it more 5 hours of instructional videos? Either way, it doesn't seem to include grading or other help etc."
+        },
+        {
+          "id": 48826314,
+          "author": "OutOfHere",
+          "text": "Why pay for this when Stanford has a playlist of a free course on LLMs: https://youtube.com/playlist?list=PLoROMvodv4rOCXd21gf0CF4xr..."
+        },
+        {
+          "id": 48825488,
+          "author": "abbefaria27",
+          "text": "I didn’t realize IEEE had courses. I’m curious if anyone can comment on the general quality and if they have any good ones."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 24,
+      "id": 48771200,
+      "title_en": "First Principles of Model Routing",
+      "title_ja": "First Principles of Model Routing",
+      "url": "https://try.works/first-principles-of-model-routing",
+      "hn_url": "https://news.ycombinator.com/item?id=48771200",
+      "score": 34,
+      "comment_count": 16,
+      "posted_at": "2026-07-03T05:36:12+00:00",
+      "comments": [
+        {
+          "id": 48827394,
+          "author": "iot_devs",
+          "text": "I am afraid that this post is missing the biggest point. Given a prompt (or task) how do I evaluate if it is a \"simple\" task that should be executed by a small model or if it is a complex one that may need a SOTA model? Are you guys using heuristics? Which one?"
+        },
+        {
+          "id": 48825788,
+          "author": "aeon_ai",
+          "text": "On it's face, there is useful content here. But it's also clearly contextual. It's absolutely the case that routing between frontier models can improve results, mainly because of the alloying effect. Ping ponging between different providers gives the task exposure to different data distributions, and can break models out of non-optimal feedback loops. That's not to say that's always the right approach, just not clearly wrong. And a small pool does not necessarily 'improve' model routing. The real advice is just 'know why you're routing to each model'. Especially with guidance to map to improve based on performance - with a large enough volume of tasks/requests, you'd want to maximize the initial pool size to expand the search space in order to determine which is best at each task. I read this as \"here are some thoughts on model routing\" -- not first principles I'd advise everyone to live by."
+        },
+        {
+          "id": 48825904,
+          "author": "handfuloflight",
+          "text": "Why have you put all the content on the right column like this on desktop."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 25,
+      "id": 48815982,
+      "title_en": "Why skilled workers come to Germany and then leave again",
+      "title_ja": "Why skilled workers come to Germany and then leave again",
+      "url": "https://www.dw.com/en/germany-migrants-skilled-workers-integration-labor-market-bureaucracy-language-housing/a-77853162",
+      "hn_url": "https://news.ycombinator.com/item?id=48815982",
+      "score": 220,
+      "comment_count": 550,
+      "posted_at": "2026-07-07T10:42:59+00:00",
+      "comments": [
+        {
+          "id": 48822531,
+          "author": "ikut3hva",
+          "text": "Hi everyone I don’t usually comment on topics like this because there are so many biases and different perspectives involved. In the end, I believe only the person who has actually gone through the experience can truly understand it; otherwise, it often becomes just another judgment. We are an ASEAN family earning more than €200k gross annually (sorry for mentioning the TC, but there is a reason for it—please keep reading before judging). We have lived here for more than six years, and you know what? I still haven’t obtained either permanent residence or German citizenship simply because I don’t have a B1 certificate. So first things first: regardless of how much you contribute to the country, German is a must today if you want to obtain residency and stabilize your life here. I was honestly devastated when the officer told me that I was not eligible for permanent residence. That was also the moment when I started to feel that maybe I don’t actually need permanent residence in this country after all. Story 2: In an international working environment, German may not matter much at the IC level. But I’ve seen countless situations where Germans exchange a glance with each other, and suddenly the final decision is not what was agreed upon in the meeting. Over time, I’ve learned that there are many unwritten rules behind the scenes, and when you speak their language, you start to understand them. One bright thing is that maybe we’re still lucky. We bought our first home without fully understanding the laws, the government system, or the tax rules. We simply worked hard and played the game in a way that we believed would be sustainable in the long run. Whatever happens, we know there are still many other places we could go. Our children speak German natively, but they are also willing to go the extra mile to speak our mother tongue at home. If you ask me for one piece of advice for immigrants and emigrants in Germany, I’d say: life is short—play naked!"
+        },
+        {
+          "id": 48822207,
+          "author": "malshe",
+          "text": "Here is my anecdote. I was in Germany recently and met with a South American woman. We briefly talked about our immigrant experiences. She is now a German citizen married to a German man. However, she said she can't identify as a German because nobody made her feel like one. By contrast, when I became an American citizen, my American friends (white and hispanic) insisted that they attend the naturalization ceremony."
+        },
+        {
+          "id": 48816255,
+          "author": "parheric",
+          "text": "I've been here for a decade, and sadly I feel the issue is upward mobility for skilled workers. Unless you're working for an intl company, with ex-pats in positions of leadership, your chances of \"getting ahead\" are going to be limited, especially when you're competing against natives. The reason is sadly, the culture is very reserved and cautious, so as an \"outsider\" it's going to take A LONG time before you can be trusted in a senior/leadership position (no matter how good your German language skills are). The good part, from my experience the people here are great, friendly, and yeh it takes time to get to know them but it pays off in the long run. But professionally... it's complicated. So while people come here, work and stay for a few years, they're going to leave when they realise that despite their best efforts, they need to do 10x more than someone who is simply \"a native\" to the country (or... you'll stay in a position and just rot until you move on). And this sadly affects applications for jobs (a photo is pretty much required which would be considered illegal in other countries like the UK), apply for apartments (which country is your last name from... automatic rejection), just to mention a few key cases that really affect immigration. i've lived+worked in 4 different countries on 3 continents and i think you always have to expect to adjust to the culture, it's not going to change for you, nor should it. But if you want to progress professionally (and Germany NEEDS tech-imports, the tech culture here is a disaster, it's embarrassing) you're going to have to promote these people into high positions, not just view them as \"cheaper labour\"."
+        },
+        {
+          "id": 48816431,
+          "author": "probably_wrong",
+          "text": "I migrated to Germany 10+ years ago and I'm still here. Based on my limited experience, there are two big issues. First, things are bad : trains are getting worse every year, the highways are in disrepair (ask me about Bonn!), overloaded doctors, impossibly slow bureaucracy, economic crisis, growing inequality, housing crisis, and so on. If you're a fresh immigrant who cannot find a job in an economic crisis (aka \"most of them\") you may very well wonder why staying here alone when you could be just as unemployed near your family. Second: I won't say that Germany is xenophobic (not even all AfD voters) but I will say it's unfriendly . Work example: I've worked in multiple places in German without language issues, and yet many jobs automatically disqualify me because they ask for \"minimum C2\", a rank I don't have and one that many native Germans wouldn't achieve either. Add less chances to make a social circle, inflexibility, not great weather, and a government that's constantly calling you lazy and entitled, and that's how you get depressed. The sad part is, Germany has all the pieces to be a great place to live that, for some reason, has decided to dismantle them all one by one."
+        },
+        {
+          "id": 48827690,
+          "author": "DStiego",
+          "text": "I see two big problems: 1. A \"meta-problem\": While many Germans agree that things are bad, people favour completely opposite solutions. My meta-solution to that would be decentralisation and letting more things be decided locally, but unfortunately Germans are united in favouring centralisation these days. 2. There's a strong superposition of \"things are bad\" and \"we are still the best\"; a high degree of defensiveness and stubbornness. This was accurately described as \"presumptuousness\" in another comment."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 26,
+      "id": 48820119,
+      "title_en": "Jim's TrueType QR Code Font",
+      "title_ja": "Jim's TrueType QR Code Font",
+      "url": "https://github.com/jimparis/qr-font",
+      "hn_url": "https://news.ycombinator.com/item?id=48820119",
+      "score": 160,
+      "comment_count": 21,
+      "posted_at": "2026-07-07T16:30:42+00:00",
+      "comments": [
+        {
+          "id": 48822170,
+          "author": "athenot",
+          "text": "Maybe it's not practical for day-to-day use but the way this hacks the font to produce something completely different is amazing!"
+        },
+        {
+          "id": 48821588,
+          "author": "shreddit",
+          "text": "It doesn’t seem to like spaces that much, the code for [QR coded] is broken for me on safari ios. When the space is removed it’s a working qrcode again"
+        },
+        {
+          "id": 48822885,
+          "author": "trillic",
+          "text": "Font rendering should scare you"
+        },
+        {
+          "id": 48821598,
+          "author": "andix",
+          "text": "Impressive, but on iOS 27 even one of the examples don't work. Seems like it has an issue with spaces. https://imgur.com/a/tZGqtjR"
+        },
+        {
+          "id": 48824288,
+          "author": "jhogervorst",
+          "text": "A fun benefit seems to be that you can select the QR code as text and copy it, which puts the original text in your clipboard."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 27,
+      "id": 48821441,
+      "title_en": "Notes on Software Quality",
+      "title_ja": "Notes on Software Quality",
+      "url": "https://anthonyhobday.com/blog/20260410",
+      "hn_url": "https://news.ycombinator.com/item?id=48821441",
+      "score": 108,
+      "comment_count": 50,
+      "posted_at": "2026-07-07T18:14:50+00:00",
+      "comments": [
+        {
+          "id": 48823795,
+          "author": "onion2k",
+          "text": "If thorough testing and 100 experts can’t find a problem, the thing is probably perfect. If you can get 100 experts to agree on something then you've cracked a much harder problem than software quality."
+        },
+        {
+          "id": 48823333,
+          "author": "amarant",
+          "text": "I disagree with the initial premise >Quality is the absence of problems A low quality code base can be problem free if surrounding circumstances are forgiving enough. Conversely, a high quality codebase can have a lot of problems in difficult circumstances. I haven't thought about it long enough to have a definition of quality that I'm really happy with, but I think a \"resilience to hardships\" would be a better definition of quality. Hardships can come in many forms, and often you're prepared for some of them but not all. Occasionally you'll be prepared for hardships that never occur. There is something to be said for being resilient against the correct kinds of hardships, which is why I'm not entirely pleased with my definition either. But absence of problems is not it. That might be entirely circumstantial and is therefore orthogonal to quality."
+        },
+        {
+          "id": 48822091,
+          "author": "manoDev",
+          "text": "> Some people don’t care enough > > The more people you hire, the more likely you are to hire people who don’t care enough about good interface design. Good interface design needs to be valued by everyone who can affect the work. That includes developers, designers, product managers, and often the CEO. I know where you're going with this, but here's a twist: A CEO who cares about interface _design_ is path to micromanaging and pain. A CEO should care about interface _designers_, who are (hopefully) the people trained on how do it well. Even better: CEOs should care about developers with UI/UX skills, because too often CEOs adopt designers like a pet and keep them busy 24/7 asking for mockups."
+        },
+        {
+          "id": 48827754,
+          "author": "d-yoda",
+          "text": "Isn't high quality defined by how easy it is to maintain as the scale grows? I feel there is a disconnect between the \"quality as perceived by developers\" and the \"quality as experienced by designers and users.\""
+        },
+        {
+          "id": 48823096,
+          "author": "chickensong",
+          "text": "I assume this is written by a UI designer or something, and it certainly feels like \"notes\" and not a cohesive article. Claiming \"The six signals of quality in software\" and then listing only user-facing concerns and including subjective items like \"Beauty: Is the software as aesthetically pleasing as possible?\" is questionable. I'm interested in quality, but I didn't find these notes enlightening, and couldn't even finish the article."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 28,
+      "id": 48761868,
+      "title_en": "The difference between \"today's task\" and \"accretive work\"",
+      "title_ja": "The difference between \"today's task\" and \"accretive work\"",
+      "url": "https://pluralistic.net/2026/07/02/canonization/",
+      "hn_url": "https://news.ycombinator.com/item?id=48761868",
+      "score": 8,
+      "comment_count": 0,
+      "posted_at": "2026-07-02T14:07:56+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 29,
+      "id": 48816883,
+      "title_en": "StreetComplete: Fixing OpenStreetMap, one tiny quest at a time",
+      "title_ja": "StreetComplete: Fixing OpenStreetMap, one tiny quest at a time",
+      "url": "https://streetcomplete.app/",
+      "hn_url": "https://news.ycombinator.com/item?id=48816883",
+      "score": 728,
+      "comment_count": 173,
+      "posted_at": "2026-07-07T12:38:35+00:00",
+      "comments": [
+        {
+          "id": 48821306,
+          "author": "wafflemaker",
+          "text": "I was once on a trip in Åndalsness, one of the most scenic places in Norway. Fjords, mountains, you know it. On the walk to our cabin, a little outside of town, I was checking something on OSM, might have been just learning to use it and read it (it has some learning curve when switching from G-maps). To my surprise, I saw a shortcut/walking path exiting from the road we were walking on. Already used such paths twice that day for a nice shortcut that didn't show up on G-maps. But there was nothing there. I told my friend that I'd like to check what this strange hacker map is showing. When we looked again, we noticed that there actually was a trail uphill, what at first sight seemed to just be a forested hillside. As we went up, the trail started to be more evident. We climbed for a couple minutes, went past a cabin with no road leading to it (pretty normal in Norway), and a few more minutes after it we arrived at a semi-top, with a big boulder and a picturesque view out from that viewpoint. Very cool memory on the last day of the holidays, made possible thanks to somebody marking that trail on OSM."
+        },
+        {
+          "id": 48820012,
+          "author": "lapetitejort",
+          "text": "I got into OSM and StreetComplete to flesh out intersections, stop signs, and sidewalks in my area. I always felt like I was doing something wrong though. I created crosswalks, then OSM would prompt me to connect the crosswalk to the road via a crossing. In StreetComplete, it felt like I was filling in duplicate data. I had to add whether the crossing had crossing lights not only at the middle crossing, but on the sides as well. This probably doesn't make any sense. Basically, I am never confident I am editing OSM correctly. Am I supposed to manually draw out sidewalks, or tag the road as having a sidewalk? After adding sidewalks in my area, StreetComplete is now asking me if roads have sidewalks, which I clearly see on the map. Reminds me of editing the various Wiki pages. There's several ways of documenting something, only one way is correct, and it's undocumented. edit: after playing with StreetComplete more, I noticed you can mark sidewalks as displayed separately. This is tagged as \"sidewalk:both=separate\" on the road. Whether this is the right way to do things I do not know"
+        },
+        {
+          "id": 48827494,
+          "author": "m463",
+          "text": "Tesla cars with their dashcam turned on collect enormous amounts of data. They have 4-6 cameras writing continuously to a USB flash drive. I wonder why we can't get folks to drive around and collect it, then use AI/automation to fill in great swaths of information automagically. EDIT: some people do similar things: - https://wcedmisten.fyi/post/dashcam-to-openstreetmap/ EDIT2: and maybe it goes the other way: - https://teslamotorsclub.com/2019/11/04/tesla-owners-can-edit..."
+        },
+        {
+          "id": 48817317,
+          "author": "aweb",
+          "text": "I discovered that recently, it's a very fun way to contribute to OpenStreetMap, and the UI is really well-done, it's totally beginner friendly! I wish there was a way to do more than labeling though, like add simple roads and footpaths"
+        },
+        {
+          "id": 48817362,
+          "author": "TeddyDD",
+          "text": "Great app. There is also https://every-door.app/ that gives you slightly different set of tasks and allows you to place POI easily. I recently mapped a lot of trash cans and benches around my neighborhood while walking with my dog."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 30,
+      "id": 48819308,
+      "title_en": "Why we built yet another Postgres connection pooler",
+      "title_ja": "Why we built yet another Postgres connection pooler",
+      "url": "https://pgdog.dev/blog/why-yet-another-connection-pooler",
+      "hn_url": "https://news.ycombinator.com/item?id=48819308",
+      "score": 162,
+      "comment_count": 40,
+      "posted_at": "2026-07-07T15:36:49+00:00",
+      "comments": [
+        {
+          "id": 48826488,
+          "author": "AdieuToLogic",
+          "text": "The fact that PgDog supports prepared statements[0] is a compelling feature in and of itself. This was a limitation of older versions of pgpool-II[1] thus disqualifying it in efforts where it otherwise could have been beneficial. 0 - https://docs.pgdog.dev/features/connection-pooler/prepared-s... 1 - https://www.pgpool.net/docs/4.7/en/html/"
+        },
+        {
+          "id": 48826930,
+          "author": "abrookewood",
+          "text": "Quick note to say that the article describing WHY you are different and why it matters was very well written. Congrats on the launch!"
+        },
+        {
+          "id": 48827265,
+          "author": "rubenvanwyk",
+          "text": "What really interests me most is the sharding and the possibility of using this for multitenancy - is the hooks / plugin architecture sufficient so you can run a small sidecar to add shards or tenants to the TOML file dynamically? Would be a game changer."
+        },
+        {
+          "id": 48824483,
+          "author": "27183",
+          "text": "It's awesome to see AGPL instead of the horrible BSL variants that have been going around."
+        },
+        {
+          "id": 48821159,
+          "author": "petters",
+          "text": "> Since connection poolers reuse connections between clients, the connection state of one client “leaks” into the connection state of another. Wow this is very bad. This actually happens in typical Postgres setups?"
+        }
+      ],
+      "summary_ja": ""
+    }
+  ]
+}
