@@ -1,0 +1,1085 @@
+{
+  "date": "2026-07-10T00:00:00+09:00",
+  "slot": "07",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 48842459,
+      "title_en": "Show HN: Getting GLM 5.2 running on my slow computer",
+      "title_ja": "Show HN: Getting GLM 5.2 running on my slow computer",
+      "url": "https://github.com/JustVugg/colibri",
+      "hn_url": "https://news.ycombinator.com/item?id=48842459",
+      "score": 239,
+      "comment_count": 59,
+      "posted_at": "2026-07-09T08:05:04+00:00",
+      "comments": [
+        {
+          "id": 48853412,
+          "author": "Archit3ch",
+          "text": "Working on something similar targeting macOS on Apple Silicon, Unsloth split GGUF, compressed partial residency in unified memory (would make more sense on 128GB instead of my 64GB...), native Metal kernels, and RAM-only native compressed KV. Happy to put on GitHub when it's ready."
+        },
+        {
+          "id": 48852349,
+          "author": "walrus01",
+          "text": "My main question is whether when put into practical use, this can be measured in tokens/second, or more like 1 token per minute... I have seen locally hosted LLM that are as slow as 1 tok/second still be very useful if you give it a project to do something overnight and metaphorically walk away from it, check back with what it has done in 6 or 8 hours. 0.05 to 0.1 tok/s on the other hand, as reported in the URL for the lowest class of hardware, isn't really usable for much. edit: I think this is a fantastic project in general concept, and look forward to seeing more efforts towards the general idea of being able to run a 350B to 900B size model locally, even if as slow as 1 tok/s, on hardware that ordinary people can afford. Anything along the general concept of \"we have fast read NVME SSD storage, we have a big ass model on local disk, we'll read it at 11GB/tok as we need it, not try to load the whole thing\"."
+        },
+        {
+          "id": 48852772,
+          "author": "Cieric",
+          "text": "I was actually just working on the same thing as this, but I went down the route of mmapping the entire model into memory to avoid the extra ram usage. I also had Claude implement Medusa[1] on the model to try and avoid loading an additional model into memory but still get the benefits of MTP. Currently at a stop light so I can't list everything and I didn't get to read your full post either yet. To expand since I just got home, I'm making all of my modifications to llama.cpp, the goal was to eventually put this on a SBC of some kind with an nvme to handle the mmapped files. I think the theoretical limit of my current setup is about 1.8 tok/s based on prior testing but that is also with the additional medusa heads not fully trained (I honestly don't know if the counting it's generated tokens or not.) In the end it seems like the idea we had is similar, I just don't know how to write an llm parser/runner from scratch yet and instead of specifying what needed to stay in memory I just let the linux kernel handle it. Oh last note, I also capped llama.cpp usage to 16GB of my 32GB, so it might be possible to get it down even lower. [1] https://arxiv.org/abs/2401.10774"
+        },
+        {
+          "id": 48853567,
+          "author": "tannertech",
+          "text": "I love it but where do you find that NVMe SSD for less than the price of an h100 fan let alone the memory"
+        },
+        {
+          "id": 48853358,
+          "author": "voidmain0001",
+          "text": "The page has an SSD wear warning [0] I use desktop PCs that I build from components so I can replace the SSD, but what do users with soldered SSD do? Just avoid these applications or forge ahead disregarding the possible early burnout of their storage? They must use external storage as the burner SSD. [0] https://github.com/JustVugg/colibri#ssd-wear-warning"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 2,
+      "id": 48849066,
+      "title_en": "GPT-5.6",
+      "title_ja": "GPT-5.6",
+      "url": "https://openai.com/index/gpt-5-6/",
+      "hn_url": "https://news.ycombinator.com/item?id=48849066",
+      "score": 934,
+      "comment_count": 696,
+      "posted_at": "2026-07-09T17:04:14+00:00",
+      "comments": [
+        {
+          "id": 48849198,
+          "author": "minimaxir",
+          "text": "The developer's guide ( https://developers.openai.com/api/docs/guides/latest-model ) has some interesting semantic tips for using the model: > Intent understanding: GPT-5.6 can better infer the user’s underlying goal and intended level of work without you specifying every step. Continue to state important constraints, approval boundaries, and success criteria explicitly. > Original image detail: GPT-5.6 preserves the original dimensions of images sent with original or auto detail instead of resizing them to a patch budget or pixel-dimension limit. > Use shorter prompts: In internal evaluations, replacing long, explicit system prompts with minimal prompts improved scores by roughly 10–15%, while reducing total tokens by 41–66% and cost by 33–67%. > Avoid generic brevity instructions: GPT-5.6 is more sensitive than GPT-5.5 to instructions such as “Be concise,” “Keep it short,” or “Use minimal text.” > Control warmth: GPT-5.6 does not become meaningfully better when prompted to be broadly friendlier or more empathetic."
+        },
+        {
+          "id": 48853660,
+          "author": "int3trap",
+          "text": "5.6 SOL is basically useless, even on fast mode. It takes so long to do anything that it would be faster to do yourself. And it burns usage so quickly it's genuinely not worth it."
+        },
+        {
+          "id": 48849608,
+          "author": "meetpateltech",
+          "text": "GPT-5.6 Sol sets a new SOTA on ARC-AGI-3: 7.8% Sol is the first verified frontier model to ever beat an ARC-AGI-3 game https://arcprize.org/results/openai-gpt-5-6"
+        },
+        {
+          "id": 48849126,
+          "author": "Syntaf",
+          "text": "Ok long time Claude Code user here; lately I've started to realize there's other great models out there I should be trying, but I'm hesitant to leave Claude Code behind for something new. What's the consensus today on codex vs claude code, does it really matter anymore?"
+        },
+        {
+          "id": 48849223,
+          "author": "eig",
+          "text": "Funny to see that they did not include Fable 5 in their GeneBench and LifeSciBench comparisons because \"it does not answer advanced biology questions and refuses the majority of questions in this eval\". Winner by default!"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 3,
+      "id": 48843923,
+      "title_en": "EU Parliament greenlights Chat Control 1.0",
+      "title_ja": "EU Parliament greenlights Chat Control 1.0",
+      "url": "https://www.patrick-breyer.de/en/eu-parliament-greenlights-chat-control-1-0-breyer-our-children-lose-out/",
+      "hn_url": "https://news.ycombinator.com/item?id=48843923",
+      "score": 908,
+      "comment_count": 438,
+      "posted_at": "2026-07-09T11:03:54+00:00",
+      "comments": [
+        {
+          "id": 48844437,
+          "author": "teekert",
+          "text": "This is a nice piece of democracy right here: \"a measure it had rejected twice in March. Although a majority of voting Members of the European Parliament (MEPs) actually opposed the regulation (314 against, 276 in favor, 17 abstentions), the motion to reject it failed to secure the required absolute majority of 361 votes. As a result, mass scanning is now permitted again until 2028.\" \"Oh no we can't get a majority to pass the law!\" \"Have you tried getting a majority to not pass the law?\" \"Worth a shot!\" \"It worked, should we also do this multiple times?\" \"Of course not! Pass the law, quickly!\""
+        },
+        {
+          "id": 48844238,
+          "author": "mrtksn",
+          "text": "FTA: What changes with the return of Chat Control 1.0—and what stays the same: *What is coming back:* US tech companies are once again allowed to scan private messages without a warrant or prior suspicion. This affects direct messages on platforms like Instagram, Discord, Snapchat, Skype, and Xbox, as well as emails via Google’s Gmail and Apple’s iCloud. *What remains unchanged:* Public social media posts and files hosted in cloud storage could already be scanned without this law. Furthermore, private messages can always be reported by users, or monitored by authorities using targeted, court-ordered wiretapping. *What is still NOT being scanned:* End-to-end encrypted chats, such as those on WhatsApp, have always been exempt from these scans. Additionally, European providers of messaging and email services have never implemented chat control measures. So, E2E is unaffected?"
+        },
+        {
+          "id": 48845671,
+          "author": "bradley13",
+          "text": "Stupid parliamentary trick: Hold the vote on the day before the summer break - ensuring that many people have already returned to their home countries. Then use a sort of \"reverse\" parliamentary trick: the default is that this legislation is accepted. They needed an absolute majority - not of voting members, but of all members - to reject it. Result: 314 against, 276 in favor, 17 abstentions, 113 absent The EU is well on the way to becoming a totalitarian government. ETA: It is shocking that 276 members of parliament would vote to support this. Are so many so naive? Or being paid off?"
+        },
+        {
+          "id": 48844102,
+          "author": "budududuroiu",
+          "text": "Roberta Metsola's actions this week jeopardise the legitimacy of the EU project as a whole. It's clear that member countries use the EU as a blame-laundering mechanism to pass domestically unpopular laws, but the forcing of this vote under the urgency procedure that requires absolute majority to reject, on the last EP session before summer break is so blatant that it might awaken people that might've overlooked the structural failures of the EU and finally radicalise them EDIT: bad wording, it's not that the urgency procedure causes the voting to require absolute majority, it's that an absolute majority second-reading is forced through an emergency procedure which is designed for first readings of legislation that's the implied meaning above"
+        },
+        {
+          "id": 48848315,
+          "author": "aw124",
+          "text": "Instead of solving real problems, the EU Parliament supports the globalists' agenda for privacy and human rights violations — our fundamental rights"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 4,
+      "id": 48853091,
+      "title_en": "Why American ambulance rides are so expensive",
+      "title_ja": "Why American ambulance rides are so expensive",
+      "url": "https://davidoks.blog/p/why-american-ambulance-rides-are",
+      "hn_url": "https://news.ycombinator.com/item?id=48853091",
+      "score": 32,
+      "comment_count": 14,
+      "posted_at": "2026-07-09T22:15:56+00:00",
+      "comments": [
+        {
+          "id": 48853554,
+          "author": "darth_avocado",
+          "text": "We’re all pretending this is an unsolvable problem when really most of the world has solved it by making ambulance (EMS) funding similar to fire and police departments. Somehow in any emergency I’ve seen, all three show up, often EMS before police or fire dept, and somehow that’s a service that has to be supplemented by insurance billings. The blog mentions it, but it’s one of those obvious things that somehow isn’t solved yet and blows my mind every time it comes up."
+        },
+        {
+          "id": 48853566,
+          "author": "gruez",
+          "text": "As much as I like articles that tries to use economics or finance to explain stuff, the \"options\" analogy is a bit hamfisted. The article starts off by noting about how ambulance is an \"option\" for a rescue, but even though the analogy might vaguely work, it's not really needed to answer the question. That can be answered far more simply: \"medicare and insurance companies pay them too little, so they have to charge everyone else more\". Or, from the article: >This meant that the payment structure and the cost structure were increasingly mismatched: and so ambulance services had to pay for their round-the-clock readiness by billing for individual rides. [...] >And notably, the fees that Medicare sets run far below cost. The average ambulance transport costs $2,673 to provide; Medicare pays only about $329 of that. A typical ambulance ride for a Medicare patient, in other words, loses theambulance service thousands of dollars."
+        },
+        {
+          "id": 48853534,
+          "author": "arjie",
+          "text": "You don't have to pay them unless they're specific. I got a bill 3 years after being in an accident and I asked them for the documentation they legally have to provide me (itemization, the legal basis, detailed incident record, attempts on their part to contact insurance) of how they arrived at the sum. It's been a year since and they haven't given me anything. Besides this kind of billing is banned in California now https://leginfo.legislature.ca.gov/faces/billHistoryClient.x... The insurers just pay the in-network fee and you call it a day."
+        },
+        {
+          "id": 48853528,
+          "author": "Avicebron",
+          "text": "> The most efficient way to fund ambulance services would simply be to pay for the option the way that options are normally paid for: with a premium, collected from everyone the service stands ready to rescue. That’s how it’s done in the rest of the rich world. Some places, like the United Kingdom or Japan, simply fund ambulance services directly out of taxes; others, like the Australian state of Victoria, sell memberships in “Ambulance Victoria,” with unlimited exercise at the cost of about $70 a year per family. So there is a solution."
+        },
+        {
+          "id": 48853573,
+          "author": "comrade1234",
+          "text": "Check your insurance to make sure you have transport. It's the same in Switzerland - it's an extra line on your insurance. My wife and also have Rega. They can't legally call it insurance but if we get injured in, for example, the USA they will send us a private hospital jet to bring us home."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 5,
+      "id": 48845049,
+      "title_en": "Show HN: 18 Words",
+      "title_ja": "Show HN: 18 Words",
+      "url": "https://18words.com/",
+      "hn_url": "https://news.ycombinator.com/item?id=48845049",
+      "score": 768,
+      "comment_count": 277,
+      "posted_at": "2026-07-09T12:48:52+00:00",
+      "comments": [
+        {
+          "id": 48846580,
+          "author": "pompomsheep",
+          "text": "Thanks everyone for the feedback! Two questions 1. For a version without the timer what would you like to happen if you are just completely stuck on a word? Hints to reveal letters or skip the word? 2. For those who like the timed version would you prefer to continue when you miss a word and then get a final score out of 18?"
+        },
+        {
+          "id": 48845503,
+          "author": "Waterluvian",
+          "text": "The timer makes it not enjoyable for me. It seems necessary to the game design and I’m not being negatively critical. Just sharing an additional perspective. I’ve been playing Zanagrams and the ability to hide the clock really improved my enjoyment of that game. If I could magically get a feature by request, it would be to give me infinite time even if that meant my score came with an asterisk. Maybe just call it Relax Mode vs. Challenge Mode. By the way: I really like the overall design of Zanagrams and 18 Words. These are small puzzle games with very simple, clean UIs. They work crisply and I've noticed you've been tidying up Zanagrams, adding minor features and settings. They have a very Classic Web feel to them. It's not like you're trying to get me to watch ads or subscribe to your newsletter or are just breadcrumbs to some for-profit thing. I like having a handful of very easy to pick up puzzles/toys when I need to fidget. They help keep me away from TikToks and Shorts."
+        },
+        {
+          "id": 48845528,
+          "author": "gopalakrishnans",
+          "text": "Would be nice to have a ‘scramble!’ button so it makes it slightly easier when we get stuck"
+        },
+        {
+          "id": 48853582,
+          "author": "redbell",
+          "text": "Lovely game indeed! Spoiler alert ahead: unethical way to win that needs to be fixed. Play in incognito mode and when you lose, you already know the word(s). Restart the browser and you are ready to play again, instantly."
+        },
+        {
+          "id": 48845833,
+          "author": "dirkc",
+          "text": "I like the idea, but I didn't like losing after a few words. Now it might just be me not being good at losing, but who is? Maybe the game can always progress to the next word with your total score being reduced. So if you get all within 30 seconds you score 18/18. That way everyone can play the whole game and share with their friends how far they got: |X|o|X|X|X|o|o|o|X|X|X|X|X|X|X|X|o|X| 13/18"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 6,
+      "id": 48849292,
+      "title_en": "Interview with Mitchell Hashimoto about Ghostty and Zig",
+      "title_ja": "Interview with Mitchell Hashimoto about Ghostty and Zig",
+      "url": "https://alexalejandre.com/programming/interview-with-mitchell-hashimoto/",
+      "hn_url": "https://news.ycombinator.com/item?id=48849292",
+      "score": 54,
+      "comment_count": 12,
+      "posted_at": "2026-07-09T17:17:16+00:00",
+      "comments": [
+        {
+          "id": 48853248,
+          "author": "skhameneh",
+          "text": "> I don’t like the Rust culture. There’s no better way to put it. This is just so weird to me, because I would say the same about Zig. I tried to get into Zig even chatted with Loris Cro when he was streaming. I was looking to explore what my Rust project could look like in Zig but there were features simply missing that I couldn't do without. The entire interaction was mostly about how bad Rust is and how I could just do something different in Zig (completely misunderstanding my ask, with little interest to explore my actual requirements). I remember watching HN and seeing every time there was something Rust related trending, there was ALWAYS a post made shortly after trying to hype Zig and this went on for like 4 years. I'm not a Rust contributor and I don't care for some of the challenges that come with Rust, but I love what it accomplished and I find it does it very well. Back then I found the Rust community had interest and respect for Zig, so the discourse was very much one sided."
+        },
+        {
+          "id": 48853545,
+          "author": "Jtsummers",
+          "text": "> I’ve always believed there should be way more forks, both personal and maintained ones. There aren't more forks because once you fork something you take on the burden of synchronization, or you forfeit the benefit of future upstream work. To focus on Ghostty, Mitchell has taken on the effort of maintaining cross-platform support. If I want one specific feature (or even a bunch of features) and create a custom fork, but then GTK changes, now I have to support that change myself (assuming it is relevant to me or my community of users), or figure out a way to integrate Mitchell's changes into my fork, or I risk losing my customizations by having to rollback to baseline if the differences between my fork and baseline are too great. If the system is well-engineered (the work on libghostty helps here) then you can keep that common core without forking, and fork just things on the periphery of the system. But well-engineered is not common."
+        },
+        {
+          "id": 48853295,
+          "author": "bel8",
+          "text": "Related from 13h ago: \"My thoughts on the Bun Rust rewrite\" by Zig's author Andrew Kelley https://news.ycombinator.com/item?id=48843352"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 7,
+      "id": 48847552,
+      "title_en": "Hy3",
+      "title_ja": "Hy3",
+      "url": "https://hy.tencent.com/research/hy3",
+      "hn_url": "https://news.ycombinator.com/item?id=48847552",
+      "score": 343,
+      "comment_count": 75,
+      "posted_at": "2026-07-09T15:27:48+00:00",
+      "comments": [
+        {
+          "id": 48848950,
+          "author": "simonw",
+          "text": "Pelican from a few days ago: https://simonwillison.net/2026/Jul/6/hy3/ - I was using the free tier on OpenRouter, which expires on July 21st. I tried the preview model 41 days ago and got a pelican with a \"change pelican color\" button: https://static.simonwillison.net/static/2026/hy3-preview-pel..."
+        },
+        {
+          "id": 48848715,
+          "author": "minimaxir",
+          "text": "A month ago I wrote a blog post about how Hy3 was topping the OpenRouter rankings despite no one talking about it: https://news.ycombinator.com/item?id=48317294 As of today, it has fallen to 8/9th on the rankings. I don't see a reason where you would use this model over competitors. However, price economics are bit confusing, as currently the effective input price of Hy3 via OpenRouter is now the same as DeepSeek-hosted DeepSeek Flash V4. https://openrouter.ai/tencent/hy3-preview https://openrouter.ai/deepseek/deepseek-v4-flash"
+        },
+        {
+          "id": 48850493,
+          "author": "andai",
+          "text": "Novita is offering free Hy3 on OpenRouter until July 21st https://openrouter.ai/tencent/hy3:free https://x.com/novita_labs/status/2074158304159510819"
+        },
+        {
+          "id": 48848284,
+          "author": "Catloafdev",
+          "text": "Curious how people feel about this compared to DS4 Flash, given they are pretty close in size. Also curious how well it holds up to heavy quantization. DS4 Flash can currently run reasonably well on systems with ~96gb+ RAM, I wonder if Hy3 can compete there."
+        },
+        {
+          "id": 48848190,
+          "author": "nshotton",
+          "text": "This model is shockingly small for how capable it is. its a little bit bigger than deepseekV4 flash but around as capable if not more on some benchmarks than V4 pro, i wouldnt be surprised if this becomes a popular local model."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 8,
+      "id": 48792383,
+      "title_en": "Train sim created by just one person is being called the best ever made",
+      "title_ja": "Train sim created by just one person is being called the best ever made",
+      "url": "https://kotaku.com/a-train-sim-created-by-just-one-person-is-being-called-the-best-ever-made-2000699429",
+      "hn_url": "https://news.ycombinator.com/item?id=48792383",
+      "score": 186,
+      "comment_count": 66,
+      "posted_at": "2026-07-05T08:40:27+00:00",
+      "comments": [
+        {
+          "id": 48853052,
+          "author": "f3408fh",
+          "text": "I always wonder how a solo developer can source high quality assets like these, plus develop a full game with them. In this case did the dev create the assets or did they purchase them from a freelancer? How much would purchasing this many assets cost?"
+        },
+        {
+          "id": 48851706,
+          "author": "dash2",
+          "text": "> including support for the Zuiki MASCON, a bespoke peripheral for train driving sims. This just makes me feel so glad to be alive today!"
+        },
+        {
+          "id": 48851917,
+          "author": "derdi",
+          "text": "The game in question is https://store.steampowered.com/app/4630570/RUNNING_TRAIN/"
+        },
+        {
+          "id": 48852446,
+          "author": "arjie",
+          "text": "This is a 1 person job?! It looks practically photorealistic. That's absolutely wild."
+        },
+        {
+          "id": 48851930,
+          "author": "wolvoleo",
+          "text": "I wonder if it's got VR. There's not many train Sims that do even though the sim community in general has really embraced VR."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 9,
+      "id": 48846281,
+      "title_en": "No leap second will be introduced at the end of December 2026",
+      "title_ja": "No leap second will be introduced at the end of December 2026",
+      "url": "https://datacenter.iers.org/data/latestVersion/bulletinC.txt",
+      "hn_url": "https://news.ycombinator.com/item?id=48846281",
+      "score": 218,
+      "comment_count": 169,
+      "posted_at": "2026-07-09T14:16:34+00:00",
+      "comments": [
+        {
+          "id": 48847282,
+          "author": "doctoboggan",
+          "text": "What causes the unpredictability in this? I would have guessed we have earth's rotation and orbit down to many decimals. Does geological activity, weather, or something else cause rotation speed differences that we just can't predict?"
+        },
+        {
+          "id": 48850334,
+          "author": "AbstractH24",
+          "text": "ELI5: How does this impact UNIX timestamps? Particularly for things that are in maintenance mode or otherwise minimally maintained. Nothing I do requires this level of precision, but certainly there are things that do."
+        },
+        {
+          "id": 48846771,
+          "author": "bombcar",
+          "text": "\"To authorities responsible for the measurement and distribution of time\" is just the best preamble ever."
+        },
+        {
+          "id": 48848163,
+          "author": "KboPAacDA3",
+          "text": "If the UTC-TAI offset remains at -37s, then it also means the UTC-GPS offset remains at -18s. TAI and GPS have a constant 19s offset from each system."
+        },
+        {
+          "id": 48847149,
+          "author": "delichon",
+          "text": "Hear me out. We can just mount jet engines along the equator and rotate them 180 to gain or lose time. And then connect them to my snooze button."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 10,
+      "id": 48841676,
+      "title_en": "Postgres rewritten in Rust, now passing 100% of the Postgres regression tests",
+      "title_ja": "Postgres rewritten in Rust, now passing 100% of the Postgres regression tests",
+      "url": "https://github.com/malisper/pgrust",
+      "hn_url": "https://news.ycombinator.com/item?id=48841676",
+      "score": 266,
+      "comment_count": 316,
+      "posted_at": "2026-07-09T06:18:19+00:00",
+      "comments": [
+        {
+          "id": 48843148,
+          "author": "malisper",
+          "text": "Hey author here. Wasn't expecting to see this up. To concisely give an overview of the project, I've been experimenting with using LLMs to build a better version of Postgres. Postgres is 30 years old and we've learned a lot about databases since hten. A lot of the techniques that work for doing a rewrite are also useful for doing a rearchitecture. I'm now working on a new, not yet published version of pgrust that incorporates a lot of techniques. Currently the new version: - Passes 100% of Postgres regression suite - Implements a thread per connection model instead of the process per connection model Postgres does - Is 50% faster than Postgres on transaction workloads - Is ~300x faster than Postgres on analytical workloads. Right now it's 2x slower than Clickhouse on clickbench and I think it's possible to get faster than Clickhouse If you have any questions, I'm happy to answer them."
+        },
+        {
+          "id": 48842635,
+          "author": "dirkc",
+          "text": "How would one go about reviewing a piece of code like this? One of the things I'd typically do is peek at the commit history. Seeing what people worked on and how they did it tends to say a lot about a project. But with LLMs generating 7101 commits in less than a month that isn't feasible. Even looking at a single day is way too much [1]. It probably also doesn't make sense since the commits content won't tell you much anyway. ps. How do you easily get to the first commit in a repo on GitHub? Browsing commit history feels rather tedious [1] - https://github.com/malisper/pgrust/commits/main/?since=2026-..."
+        },
+        {
+          "id": 48843800,
+          "author": "vintagedave",
+          "text": "This is impressive - but is a license change, from the PostgresQL license [0] to AGPL [1]. I like the AGPL and think it's the best truly free open source license, but I worry if this is compatible. Ie, if this is rewritten from the original source, should the original apply? (Yes.) There has been a trend to rewrite open source software with a more restrictive license (like coretools in Rust). This looks considerably more ethical by choosing the AGPL - I just wonder, safer with no change at all? [0] https://www.postgresql.org/about/licence/ [1] https://github.com/malisper/pgrust?tab=AGPL-3.0-1-ov-file"
+        },
+        {
+          "id": 48844008,
+          "author": "Chyzwar",
+          "text": "I think the best way to test this would be to put PgBouncer or a similar proxy in front of a busy production database, and mirror queries to both traditional Postgres and the Rust one at the same time. Then you can compare output and performance under real load. After running it for a while, you could diff the tables one to one against the normal Postgres instance."
+        },
+        {
+          "id": 48853147,
+          "author": "SirHackalot",
+          "text": "I don’t trust AI rewrites, definitely not in 2026 — possibly never."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 11,
+      "id": 48845209,
+      "title_en": "A road to Lisp: Why Lisp",
+      "title_ja": "A road to Lisp: Why Lisp",
+      "url": "https://scotto.me/blog/2026-07-09-why-lisp/",
+      "hn_url": "https://news.ycombinator.com/item?id=48845209",
+      "score": 92,
+      "comment_count": 86,
+      "posted_at": "2026-07-09T13:06:04+00:00",
+      "comments": [
+        {
+          "id": 48849015,
+          "author": "GMoromisato",
+          "text": "Programming is in tension between the Light Side and the Dark Side. The Light Side is about preventing the programmer from making mistakes: Get rid of go-tos! Add static types! Do not allow a bug to be expressible. The Dark Side is about giving power to the programmer: Macros? Obviously. Operator overloading? Self-modifying code? Multi-line reg-exps? Go to town! The Light Side knows programmers are flawed and imposes constraints. The Dark Side trusts programmers with power. Neither side is correct all of the time, and a good programmer learns both. Lisp is interesting in that it is clearly Dark Side programming (the programmer can do anything) but it's still admired by Light Side programmers. Maybe there's something about the simplicity of the language that makes it seem platonic--almost incorruptible. Or maybe Lisp is so pure that it embodies both Light Side and Dark Side, like a god that spawned the programming universe."
+        },
+        {
+          "id": 48853613,
+          "author": "awolven",
+          "text": "I've been programming Lisp to long to appreciate it's features. It is not until I watch in shock and horror how people sabotage themselves in the popular and economically less risky languages that I suddenly come to appreciate Lisp again."
+        },
+        {
+          "id": 48847531,
+          "author": "AlexeyBrin",
+          "text": "The website seems to have a bug with syntax highlighting. Pieces of code included in the post text are black, you can still see the actual text if you select it with your mouse. Same bug on Chrome desktop and on Safari on iPad"
+        },
+        {
+          "id": 48850010,
+          "author": "abetusk",
+          "text": "There are many articles extolling the virtues of Lisp. I would like to see some articles that have a level-headed criticisms or critique of Lisp, it's ideas and it's place in the ecosystem of languages. Articles like this, and the PG articles it references, amount to \"if you know, you know\". I understand the appeal and I understand the explicit and implicit arguments this article is making. Computer programming has matured quite a bit in the past 60 years. I would like to see more articles that are more considered in their examination."
+        },
+        {
+          "id": 48848239,
+          "author": "zbentley",
+          "text": "There are some truly powerful and unique things about Lisps, but I wish articles like this would stop including REPLs and hot-reloading. The former have been table stakes for interpreted languages (and some compiled ones!) for years, and the latter is neither unique nor particularly widely used (hot reloads have to tangle with state and patching, so resetting the world for ease of reasoning is considered a best practice for a reason)."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 12,
+      "id": 48845442,
+      "title_en": "The glass backbone: Why the Army's logistics will break in the next war",
+      "title_ja": "The glass backbone: Why the Army's logistics will break in the next war",
+      "url": "https://mwi.westpoint.edu/the-glass-backbone-why-the-armys-logistics-will-break-in-the-next-war/",
+      "hn_url": "https://news.ycombinator.com/item?id=48845442",
+      "score": 258,
+      "comment_count": 344,
+      "posted_at": "2026-07-09T13:24:43+00:00",
+      "comments": [
+        {
+          "id": 48845678,
+          "author": "kayo_20211030",
+          "text": "A very insightful, and correct, piece. I'll quote in full the following, which I think gets to the heart of the matter. If you have no push, you can't apply pressure to the point. > The notion that amateurs talk tactics and professionals talk logistics is frequently discussed in military academies and war colleges, yet it is rarely reflected in the Army’s budget requests or modernization priorities. The outdated concept of the tooth-to-tail ratio, which implies the logistical tail is a bureaucratic waste that must be minimized to support the combat teeth, must be fundamentally reexamined. In modern warfare, the tail is the primary target. If the tail is severed, the teeth are rendered useless."
+        },
+        {
+          "id": 48845790,
+          "author": "bad_haircut72",
+          "text": "When Russia invaded Ukraine, nobody (even the Ukranians) imagined that 5 years later they would have their own missiles hammering Russia 2500kms in the rear. Americans need to start accepting that a) the Iran war will also probably still be going on in 5 years and b) Iran will probably in a better place than they are now, strategically speaking."
+        },
+        {
+          "id": 48853475,
+          "author": "susiecambria",
+          "text": "I know nothing about the topic BUT I can remember John Kirby and Jake Sullivan regularly talking logistics, Poland, and other things mentioned here. I don't think I've heard those things from this administration's reps. Not sure if not hearing is good or bad. I sure learned a bunch from Kirby and Sullivan, though."
+        },
+        {
+          "id": 48852499,
+          "author": "0x59",
+          "text": "WWII? Fabius did this to Hannibal more than a thousand years ago. The core of his strategy was to dunk on supplies, stall, and have the Carthaginians run out of food. I imagine Iran, Ukraine, and Russia all know about Fabian strategy."
+        },
+        {
+          "id": 48850288,
+          "author": "a34729t",
+          "text": "China has missed their window of opportunity, sadly. For the next big war, the US will simply not even need to air or sea to deliver weapons or supplies (see SpaceX's StarFall, of which 60x4 should fit into Starship). Per my calculations, the JDAM version of this will be cheaper than flying planes (and pilots) to drop bombs or cruise missiles. For small(er) wars, cheap drones break everything as they can destroy your backfield. Unless of course you happen to move your backfield into orbit and beyond."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 13,
+      "id": 48800930,
+      "title_en": "Patterncollider: Generate and explore quasiperiodic tiling patterns",
+      "title_ja": "Patterncollider: Generate and explore quasiperiodic tiling patterns",
+      "url": "https://github.com/aatishb/patterncollider",
+      "hn_url": "https://news.ycombinator.com/item?id=48800930",
+      "score": 8,
+      "comment_count": 1,
+      "posted_at": "2026-07-06T05:26:22+00:00",
+      "comments": [
+        {
+          "id": 48853585,
+          "author": "kzrdude",
+          "text": "The grid and sliding tiles illustration is great, I've never understood it that way before. Thank you!"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 14,
+      "id": 48809574,
+      "title_en": "Girls just wanna have fast MPMC queues with bounded waiting",
+      "title_ja": "Girls just wanna have fast MPMC queues with bounded waiting",
+      "url": "https://nahla.dev/blog/waitfree_queue/",
+      "hn_url": "https://news.ycombinator.com/item?id=48809574",
+      "score": 114,
+      "comment_count": 23,
+      "posted_at": "2026-07-06T19:46:30+00:00",
+      "comments": [
+        {
+          "id": 48849737,
+          "author": "scottlamb",
+          "text": "> Disclaimer: An earlier version of this post claimed the structure is wait-free, this is incorrect. Being wait-free requires that failure or suspension of any thread can’t cause failure or suspension of another thread. This queue in fact does not fulfill that requirement. The main section which discusses the wait bounds of queue operations has been amended to reflect this, but other parts of this article have not been. As such there may parts of the text which refer to this as a wait-free queue, which it is not. I chose to keep those sections to avoid rewriting chunks of this post after it was already posted. Thanks for the correction Reddit user matthieum! Classy disclaimer! matthieum's (long) reddit comment is also an informative read: https://www.reddit.com/r/rust/comments/1up0uhg/girls_just_wa..."
+        },
+        {
+          "id": 48851896,
+          "author": "rigtorp",
+          "text": "Here's my widely used implementation of this approach in C++: https://github.com/rigtorp/MPMCQueue"
+        },
+        {
+          "id": 48851057,
+          "author": "duttish",
+          "text": "On the topic of lock free data structures I found this one on a SPSC very interesting too https://david.alvarezrosa.com/posts/optimizing-a-lock-free-r... taking it from 12M to 305M ops/s"
+        },
+        {
+          "id": 48850457,
+          "author": "RossBencina",
+          "text": "Perhaps I missed it but there didn't appear to be discussion of false sharing between the N individual data slots. It might be beneficial to pad each slot to a cache line width (or at least less slots per line), and/or using some kind of bijective hashing on the slot lookup so that sequential tickets don't access adjacent slots."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 15,
+      "id": 48847511,
+      "title_en": "A possible future for Damn Interesting",
+      "title_ja": "A possible future for Damn Interesting",
+      "url": "https://www.damninteresting.com/a-possible-future/",
+      "hn_url": "https://news.ycombinator.com/item?id=48847511",
+      "score": 208,
+      "comment_count": 24,
+      "posted_at": "2026-07-09T15:25:25+00:00",
+      "comments": [
+        {
+          "id": 48849309,
+          "author": "DamnInteresting",
+          "text": "Heavens to Betsy. My server alerted me that traffic was far exceeding a median Thursday. For the record, I am a fairly active user on HN, but I was not responsible for sharing this link here, directly or otherwise. I have little stomach for self-promotion (probably to my detriment)."
+        },
+        {
+          "id": 48848746,
+          "author": "dclowd9901",
+          "text": "Admittedly, I haven't read DI in quite a while, but seeing this post brought back a flood of memories from my college days of waiting for the next article to drop. This blog was the precursor of an entire genre of \"generally interesting shit\" that has kind of underpinned most of the spirit of podcasting today. Shows like 99PI, Stuff You Should Know, RadioLab and so on owe I think a little something to this blog. The amount asked for is meager, and I was more than happy to throw some bucks at it."
+        },
+        {
+          "id": 48850376,
+          "author": "scientifik",
+          "text": "https://www.damninteresting.com/this-place-is-not-a-place-of... - has long been one of my favorite articles on the internet. Happy to chip in to support the site."
+        },
+        {
+          "id": 48852760,
+          "author": "Aachen",
+          "text": "I found Damn Interesting because of an orbital mechanics simulation the author coded in javascript as a one-off for an article about iirc cyclers. Crazy amount of effort for what's probably about 10 seconds of eye-candy for the average reader. I found it a really neat implementation and while the articles are a bit long for me, it got me hooked on their podcast. There seem to be few projects as thorough and long-lived as this one."
+        },
+        {
+          "id": 48849033,
+          "author": "joeguilmette",
+          "text": "I miss the old internet. I wish this fellow traveler well."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 16,
+      "id": 48846995,
+      "title_en": "TLS certificates for internal services done right",
+      "title_ja": "TLS certificates for internal services done right",
+      "url": "https://tuxnet.dev/posts/tls-for-internal-services/",
+      "hn_url": "https://news.ycombinator.com/item?id=48846995",
+      "score": 123,
+      "comment_count": 84,
+      "posted_at": "2026-07-09T14:57:02+00:00",
+      "comments": [
+        {
+          "id": 48847881,
+          "author": "EvanAnderson",
+          "text": "The relative proximity of the words \"done right\" and \"split-horizon DNS\" makes my insides hurt a little bit. Use DNS validation to allow these internal services to pull ACME certs. There's so much less headache, long-term. Split-horizon DNS (and the tedious make-work it can create when you start needing to mirror public-accessibly records in the private DNS) has always been something to aspire to move away from in my experience."
+        },
+        {
+          "id": 48848512,
+          "author": "raffraffraff",
+          "text": "Hmm. I don't really care enough about leaking home network host names because they are all super generic names like 'router', 'laptop', 'tv', 'nas'. So I use my public zone on cloudflare. I just use internal ip addresses (eg: nas.example.com = 10.1.2.3) on the public zone and DNS01 challenge for let's encrypt. Anyone can resolve the ip for any of my hosts, but obviously you'd need to be on the wireguard vpn to hit them. This means that I can always use public DNS servers like 1.1.1.1, 8.8.8.8, nextDNS etc This is not \"done right\" by any stretch but it's extremely low effort to set up and has never once failed me, unlike countless complex meshy things."
+        },
+        {
+          "id": 48848139,
+          "author": "boscillator",
+          "text": "The real answer here is that configuring HTTPS clients to trust a self-signed cert (or signed by an internal CA) shouldn't be as difficult as it is. I find it extremely annoying that every programming language has it's own idea of where certificates should live instead of just checking the os trust store."
+        },
+        {
+          "id": 48851500,
+          "author": "xurukefi",
+          "text": "Or... - Don't use split DNS. Don't use any special internal or dev domain. Leave it to your infrastructure to route/NAT those public IPs to your internal network. - Don't use the HTTP-01 challenge. Use DNS-01. - Don't run your own internal CA. Use Let's Encrypt. If you care about name leakage (CT Logs), use wildcard certs. Use a central reverse proxy/load balancer for termination."
+        },
+        {
+          "id": 48849488,
+          "author": "samgranieri",
+          "text": "Split horizon DNS is not something I'm willing to do. I'll just rock out with .internal or .home.arpa, have step-ca and bind communicate to each other, either in step-issuer in kube or maybe even rfc2136 if i feel like a bit of the dns-01 strategy is in order. I slap the internal ca root certs everywhere, and keep my home infra out of the crt.sh logs. I get it, I could just do *.mydomain.com and slap that wildcard cert everywhere, but it's still in the public logs.."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 17,
+      "id": 48847562,
+      "title_en": "Launch HN: Context.dev (YC S26) – API to get structured data from any website",
+      "title_ja": "Launch HN: Context.dev (YC S26) – API to get structured data from any website",
+      "url": "https://www.context.dev",
+      "hn_url": "https://news.ycombinator.com/item?id=48847562",
+      "score": 64,
+      "comment_count": 52,
+      "posted_at": "2026-07-09T15:28:39+00:00",
+      "comments": [
+        {
+          "id": 48848796,
+          "author": "setgree",
+          "text": "I like the clarity, tone, and readability of your webpage. Also your FAQ is refreshing > When Should I talk to sales? > Talk to sales if you need high-volume pricing beyond 2M credits/month, custom rate limits, SSO / SAML, SCIM provisioning, an uptime SLA, annual invoicing, an MSA / DPA, or a dedicated support channel. Reach us at hello@context.dev or through the contact page. Would that this were the norm everywhere, rather than (say) a sales rep from Datadog scraping my phone number from who knows where to ask about my company's needs after I sign up for a free account on a whim :)"
+        },
+        {
+          "id": 48849410,
+          "author": "twosdai",
+          "text": "Are you using residential proxies? How do you handle websites that don't want to be scraped. EG if I start passing in Linkedin pages what is your expectation of the result that people would see per profile. EDIT: Congrats on the launch seriously hard work, just wanting to understand your scraping stance more. I've worked with a lot of tools on this, didn't mean for my initial comment to be adversarial."
+        },
+        {
+          "id": 48850758,
+          "author": "dataviz1000",
+          "text": "Have a look at Intercept. [0] I don't have a need for it, likely it is dated and will require some more tuning, and I want to get away from scraping. Creating typed Typescript proxy API for any website might be something you find useful. > Reverse-engineers any website by doing a breadth search across every transport (JSON, WebSocket, WebRTC, GraphQL, SSE, HLS, PubSub), listing them all, and generating a typed JSON API that bypasses almost all bot protections — including Turnstile. I didn't include the ability, but it bypassed the most advanced ChatGPT + Turnstile. Built with self-improving Claude Code agents that rewrite their own instructions until fresh agents consistently succeed. > Once connected to a page, it intercepts every byte of network traffic — then actively drives the page to surface endpoints that only fire on interaction. It types into forms, clicks buttons, scrolls, triggers modals, paginates, submits searches, and walks through multi-step flows, watching what each action produces on the wire. Every request gets captured with its method, headers, payload shape, and response, then classified by transport (JSON, WebSocket, WebRTC, GraphQL, SSE, HLS, PubSub). The result is a complete map of the site's real API surface — including the hidden endpoints that only exist behind a click — turned into typed proxy routes you can curl. [0] https://github.com/adam-s/intercept"
+        },
+        {
+          "id": 48852310,
+          "author": "tomerlir",
+          "text": "Really cool idea! I had something similar a while back. Maybe figure out a way to use MCP so the client can connect directly out of the box"
+        },
+        {
+          "id": 48848174,
+          "author": "modo_",
+          "text": "I was using Context back when it was still Brand.dev. I found it to be a great product- one of those rare APIs that immediately made a problem I had disappear. Had it in production within an hour of signing up Agents need clean/current context from the web, and this is the best way I’ve found to give it to them. The internet is clearly moving in this direction: companies are starting to realize their sites need to be legible to agents. Some are already adapting but many haven’t yet. Context feels like an important part of that transition Yahia is a great builder. His pace of expansion has been impressive, excited to see where he takes Context."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 18,
+      "id": 48849011,
+      "title_en": "Wildcard (YC W25) Is Hiring a Founding Engineer",
+      "title_ja": "Wildcard (YC W25) Is Hiring a Founding Engineer",
+      "url": "https://www.ycombinator.com/companies/wildcard/jobs/ZSLVaaU-founding-engineer",
+      "hn_url": "https://news.ycombinator.com/item?id=48849011",
+      "score": 1,
+      "comment_count": 0,
+      "posted_at": "2026-07-09T17:00:37+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 19,
+      "id": 48846184,
+      "title_en": "Muse Spark 1.1",
+      "title_ja": "Muse Spark 1.1",
+      "url": "https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/",
+      "hn_url": "https://news.ycombinator.com/item?id=48846184",
+      "score": 302,
+      "comment_count": 165,
+      "posted_at": "2026-07-09T14:10:22+00:00",
+      "comments": [
+        {
+          "id": 48847019,
+          "author": "GodelNumbering",
+          "text": "Lot more details in the linked report https://ai.meta.com/static-resource/muse-spark-1-1-evaluatio... From Terminal-bench-2.1 details, > We use a bash-tool-only agent harness to evaluate 89 Terminal-Bench 2.1 tasks from the official repository, where resources are capped at 6 CPU cores and 8GB RAM. This disqualifies the results. Each terminal bench task has a cpu upper limit and RAM upper limit. Overriding either is disqualification. For reference, in tbench-2.1, 1. 0 out of 89 task allow 6 cpu cores (highest is 4, and i think only 1 task) 2. 8 out of 89 tasks allow 8GB RAM This kind of shady benchmarking (I was talking about it just yesterday in a different context https://news.ycombinator.com/item?id=48838212 ) takes all joy out of building a harness to improve benchmark performance of a model because no matter what you do, you won't beat the headline (cheating) number. This is presumably why this model is not in the official benchmark leaderboard https://www.tbench.ai/leaderboard/terminal-bench/2.1 As an ex Meta employee, this is a little sad but not massively surprising. 'Number go up' is the core performance evaluation metric until PSC is done and you move on."
+        },
+        {
+          "id": 48848333,
+          "author": "simonw",
+          "text": "I had a few days of preview access, which was long enough to put together a plugin for LLM. You can try the model out in the terminal like this: uv tool install llm llm install llm-meta-ai llm keys set meta-ai # paste API key here llm -m meta-ai/muse-spark-1.1 \"Generate an SVG of a pelican riding a bicycle\" Here's the result: https://tools.simonwillison.net/markdown-svg-renderer#url=ht... For comparison, here's the pelican I got from Muse Spark 1: https://simonwillison.net/2026/Apr/8/muse-spark/"
+        },
+        {
+          "id": 48848147,
+          "author": "jacobgold",
+          "text": "Maybe Zuck should double down on his \"spoiler\" role with models rather than compete head-to-head. He doesn't have to match Anthropic or OpenAI model revenue if he can deflate theirs by 99%. All he has to do is keep spending a few billion dollars developing frontier models, release them as open weights, and turn coding models into a commodity. He also needs a good OSS reference harness to match. Very few people are in a position to do this and for it to make business sense. That's quite likely where things are headed regardless, and he could speed it up significantly. We should all hope models move from proprietary products to commodities the way compilers did. This may be one of the best things Zuck could do for the world."
+        },
+        {
+          "id": 48846464,
+          "author": "Tiberium",
+          "text": "The pricing is insane: $1.25/$4.5 for 1M tokens, and $0.15 for cached input! https://dev.meta.ai/docs/getting-started/pricing-rate-limits"
+        },
+        {
+          "id": 48847559,
+          "author": "Sol-",
+          "text": "Interesting how the prevalent opinion until yesterday seems to have been that OpenAI & Anthropic are irreversibly ahead and now with xAI and Meta at least delivered something that's competitive with useful models and cheap too. Granted, the narrative that the two leading labs are ahead still holds with Fable (and perhaps an upcoming GPT6), but it's not as over as common knowledge by the opinion leaders would have us believe."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 20,
+      "id": 48850372,
+      "title_en": "How to Start a Ruby Meetup",
+      "title_ja": "How to Start a Ruby Meetup",
+      "url": "https://guides.rubyevents.org/meetups/",
+      "hn_url": "https://news.ycombinator.com/item?id=48850372",
+      "score": 55,
+      "comment_count": 13,
+      "posted_at": "2026-07-09T18:27:06+00:00",
+      "comments": [
+        {
+          "id": 48851239,
+          "author": "patrickdavey",
+          "text": "I've been helping to run a meetup in Christchurch, New Zealand: https://christchurch.ruby.nz/ for about 10 years (maybe longer, I've lost track!). I _completed_ agree with the article that the best thing you can do to avoid burnout is to organise it with someone else (or better still, two or more others like we do). The other thing which really worked for us: We were getting fed up trying to badger people to help give talks etc (or just doing it ourselves). Completely exhausting. Ended up saying to the community: \"this is your meetup, we just help run it. If we don't get 11 speakers for the year we're going to shut it down\". We asked in January, got 11 speakers for the year (Dec is social), and we've been doing it like that ever since. Works an absolute treat. You do need to be prepared for no one to step up, in which case, it's sad, but, shut it down. You're not the community, the community is the community!"
+        },
+        {
+          "id": 48851696,
+          "author": "TheGRS",
+          "text": "This seemed like a great guide to starting any sort of meetup, not just Ruby, FWIW. Good read. I think a lot of meetups fizzled in non-hub cities. I lived in Portland, OR up until recently and we had a vibrant meet-up scene before covid where there was lots of walking to different tech offices and you could typically find a meetup every day of the work week, now its pretty dead on most fronts and there is definitely opportunity for folks to step in and restart it!"
+        },
+        {
+          "id": 48851170,
+          "author": "phaedryx",
+          "text": "If you're in the Salt Lake County/Utah County area, we're having Ruby meetups: https://www.meetup.com/utah-ruby-users-group/"
+        },
+        {
+          "id": 48852509,
+          "author": "dzonga",
+          "text": "Ruby needs to divorce itself from Rails. for it to find it's footing again and grow. wonderful language, wonderful ecosystem - but the Rails albatross - will be the death of ruby."
+        },
+        {
+          "id": 48851240,
+          "author": "mooreds",
+          "text": "I wrote up some related thoughts on wrangling speakers: https://www.mooreds.com/wordpress/archives/3283"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 21,
+      "id": 48778956,
+      "title_en": "Meta reuses old RAM in new servers with custom bridge chip",
+      "title_ja": "Meta reuses old RAM in new servers with custom bridge chip",
+      "url": "https://www.theregister.com/systems/2026/06/29/zuck-saves-meta-bucks-by-reusing-memory-from-old-servers-with-a-custom-cxl-asic/5263483",
+      "hn_url": "https://news.ycombinator.com/item?id=48778956",
+      "score": 288,
+      "comment_count": 208,
+      "posted_at": "2026-07-03T19:27:05+00:00",
+      "comments": [
+        {
+          "id": 48845477,
+          "author": "snowwrestler",
+          "text": "At the beginning of William Gibson’s Neuromancer , the protagonist is trying to sell 3 MB of RAM in underground markets. This is often cited as one of the ways the book has not aged well. But, looking at the direction of the memory market now… maybe we just haven’t gotten there yet."
+        },
+        {
+          "id": 48843368,
+          "author": "rob74",
+          "text": "Why not go directly to the source article that has a lot more details? https://www.theregister.com/systems/2026/06/29/zuck-saves-me..."
+        },
+        {
+          "id": 48845110,
+          "author": "kjs3",
+          "text": "I have always wondered why there was never a big market[1] for \"cheap PCI/PCI-X/PCI-e card you can stick a boatload of your old/surplus/n-generation old simms/dimms on and use as swap/slow memory/ram disk/etc\". It's rare you can populate a motherboard with a full address space full of 'new' memory, and you can teach kernels to prefer some memory to others because of speed[2], so it seems like a no-brainer. I seem to remember the market for doing similar with flash got neutered over patent issues, but I can't recall the details. And flash cache did end up being a market, at least for bigger players. Maybe something similar happened here, or maybe it just hit a niche I cared about at the time? [1] I know there were a handful of products in this space, but my impression is they never really took off. I could be wrong. [2] Definitely can in NetBSD; I've done it for archs like VMEbus where it's common to have a small, fast on board memory and much slower, often larger memory out on the bus. I assume this sort of thing is enabled in Linux by the work to support NUMA, but I've never looked into it."
+        },
+        {
+          "id": 48843804,
+          "author": "lizknope",
+          "text": "There are standard product CXL memory expander chips if you don't want to design a custom chip. https://www.marvell.com/products/cxl.html"
+        },
+        {
+          "id": 48843340,
+          "author": "rock_artist",
+          "text": "The interesting part of this \"RAM crisis\" is similar to other fields where a problem results multiple parties looking for alternative solutions. This yields for exciting ideas or workarounds that might result a post-crisis memory boom (hopefully) also for local machines. 1. Lowest, Apple is evaluating new Chinese manufacturer which means change of supply demand if indeed it has reasonable QA. ( https://www.ft.com/content/f4ac5c92-03be-4499-b16a-017a7e9ee... ) 2. Companies tries to workaround performance - suddenly single channel is 'ok' ? :) ( https://www.gigabyte.com/press/news/2403 )"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 22,
+      "id": 48852403,
+      "title_en": "Show HN: Rubiks Cube Solver",
+      "title_ja": "Show HN: Rubiks Cube Solver",
+      "url": "https://speedcube.com.br/",
+      "hn_url": "https://news.ycombinator.com/item?id=48852403",
+      "score": 12,
+      "comment_count": 2,
+      "posted_at": "2026-07-09T21:09:05+00:00",
+      "comments": [
+        {
+          "id": 48853560,
+          "author": "agar",
+          "text": "Note to the site author: Using Chrome's translate tool seems to break your UI. Upon first visit, I was prompted to translate from Portuguese to English and accepted. Subsequent visits required I click the \"Translate this page\" button on the right side of the URL bar. (Edit: Chrome 1490.7827.201 on Windows 10). When translated, clicking the Solver drop-down (default 3x3x3) displays: Unexpected error Something went wrong. The current screen broke unexpectedly. Please try again or switch routes to reload it."
+        },
+        {
+          "id": 48853603,
+          "author": "schoen",
+          "text": "Does it effectively achieve God's Algorithm (minimum theoretically possible sequence of moves to solve each position)?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 23,
+      "id": 48804935,
+      "title_en": "I Changed My Name",
+      "title_ja": "I Changed My Name",
+      "url": "https://robida.net/entries/2026/07/01/i-changed-my-name",
+      "hn_url": "https://news.ycombinator.com/item?id=48804935",
+      "score": 28,
+      "comment_count": 32,
+      "posted_at": "2026-07-06T14:15:19+00:00",
+      "comments": [
+        {
+          "id": 48852518,
+          "author": "BoppreH",
+          "text": "I'm obliged to mention Falsehoods Programmer Believe About Names: https://www.kalzumeus.com/2010/06/17/falsehoods-programmers-... . As someone who also has two family names, I always dread questions for my \"last name\". What's also fun are alphabet differences. Try to interact with the Greek government and they might ask you to spell your name using only their characters. An interesting challenge when your name contains sounds that don't exist in the local language (sh, hu)."
+        },
+        {
+          "id": 48853596,
+          "author": "syradar",
+          "text": "Sweden actually removed middle names. I believe now you can have 1–2 last names, 1+ first names and 0 middle names. You can choose a given name that you are called which can be different than the first names but usually isn’t. This causes problems with forms and at airports that don’t allow for Swedish name rules."
+        },
+        {
+          "id": 48852690,
+          "author": "pavel_lishin",
+          "text": "A question for any Portuguese or Spanish speakers here, which I think are languages and cultures in which these sorts of name patterns are common - when you see a name like \"Roberto Antonio Ferreira De Almeida\", is it obvious where the \"given\" name stops, and the \"family name\" starts? I'm guessing in this case it's fairly obvious, since I'm guessing Ferreira is analogous to something like Smith, but are there names where it's not obvious? And are things like middle names even a thing there? Or is it all \"given name consisting of several words\"?"
+        },
+        {
+          "id": 48853128,
+          "author": "Jhsto",
+          "text": "I have this weird thing about a birthday -- for some reason, I was assigned a different birth date in NHS records in the UK compared to the one I have in my native Finland. I want to believe it has something to do with electronic systems transacting with different countries' systems (I noticed this difference soon after I exchanged my driver license) -- and I would have indeed born on a different day if it'd been the UK. But, I would assume this to be such a well-known issue with people who migrate, that it must just been just a typo. Doesn't stop me from believing though."
+        },
+        {
+          "id": 48852483,
+          "author": "zulux",
+          "text": "Pretty normal. My Chinese name is Chinese. Much less friction to pick a 21st-century English name in the anglosphere."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 24,
+      "id": 48850414,
+      "title_en": "GLM 5.2 is nearly as accurate as a human book keeper",
+      "title_ja": "GLM 5.2 is nearly as accurate as a human book keeper",
+      "url": "https://toot-books.pages.dev/blog/glm-5-2-vat-benchmark",
+      "hn_url": "https://news.ycombinator.com/item?id=48850414",
+      "score": 163,
+      "comment_count": 100,
+      "posted_at": "2026-07-09T18:29:41+00:00",
+      "comments": [
+        {
+          "id": 48851406,
+          "author": "Diogenesian",
+          "text": "This shouldn't be ignored in the discussion here: The job performed by the humans was broader than what was requested of the model in this benchmark: humans also had to find the relevant invoices (searching through mailboxes, or requesting them from providers) and reason through any circumstances which cannot be inferred from the bank feed and invoices/receipts on their own. In the benchmark these circumstances are presented to the model as “user notes.\" This is precisely the kind of fine print on white-collar AI capability that companies keep running into: pretty much any non-entry office job worth having involves a lot of undocumented (even undocumentable) problems requiring judgment and experience. And I would be pretty nervous about asking any of the frontier LLMs to retrieve invoices: \"cool, Claude logged that it found the May 6th bill from the paper supplier, I am sure it didn't just make something up arbitrary, then compound on the error by agentically iterating over the made-up invoice lurking in its reasoning traces. I checked the first 30 times and there were no problems!\""
+        },
+        {
+          "id": 48851351,
+          "author": "zerobees",
+          "text": "This is a prime example of a problem space where accuracy matters, but it also matters who ultimately goes to prison. I'm going to go out on a limb and guess it's not the LLM. If you're acting in good faith and your accountant does something crazy or evil, your liability is limited to some extent. You may get a tax bill but you're probably not gonna end up behind bars. But if your LLM decides to do a little bit of tax fraud, you're in uncharted waters. In the end, the gun did it, but you were the one holding the gun. A lot of jobs are like that. You're not as much buying the service as you're buying not having to worry about the service ."
+        },
+        {
+          "id": 48850937,
+          "author": "raesene9",
+          "text": "Interesting write-up. Having been a bookkeeper a long time ago, I'm not too surprised at this being susceptible to automation by an LLM backed system. It seems also that the classes of error they encountered could be handled by improved skills/knowledge base access on the fine points of relevant tax legislation. The important part for their software ofc is, will they take responsibility for the output if HMRC come calling? Without that users are adopting the risk which they may not be keen to do (dealing with HMRC is not fun), with that it could be a very nice saving for a lot of small companies (and bad for the employees of a lot of accountancy firms)"
+        },
+        {
+          "id": 48851092,
+          "author": "aerhardt",
+          "text": "I'd be scared shitless to even try something like this. There is just a pretty website, a video, and a blog post. No info on the founders, I can't find anything on LinkedIn, just a company Vineyard Finance LTD that was incorporated last year. We're all unhinged about the data we're giving LLMs but here I'd draw the line. I'd rather keep paying the small amount I pay to have my accounts done."
+        },
+        {
+          "id": 48852755,
+          "author": "petercooper",
+          "text": "I wouldn't be surprised if it were more accurate based on the errors I've seen. I always eyeball the books and was confused when a £15k building popped up on our asset sheet. It turns out a \"workshop\" had been categorised as a building we had purchased, rather than the training session it actually was. This is the importance of having layers and multiple sets of eyes on things, though. Even if it had got past me, my accountant would have surely queried it at year end, but that could be true of an LLM mistake too."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 25,
+      "id": 48803004,
+      "title_en": "Buried Apple feature turns an iPhone into the perfect kids' dumb phone",
+      "title_ja": "Buried Apple feature turns an iPhone into the perfect kids' dumb phone",
+      "url": "https://www.wired.com/story/this-buried-apple-feature-turns-an-iphone-into-the-perfect-kids-dumb-phone/",
+      "hn_url": "https://news.ycombinator.com/item?id=48803004",
+      "score": 235,
+      "comment_count": 149,
+      "posted_at": "2026-07-06T10:53:51+00:00",
+      "comments": [
+        {
+          "id": 48853440,
+          "author": "msftgreed",
+          "text": "This is a great example of the curb cut effect -- a system designed for accessibility needs turns out to be useful in other contexts. Curb cuts were designed for people with disabilities, particularly veterans, and over time have become more and more standard. They help people who use wheelchairs, yes, but also people without disabilities like those with strollers, bikes, luggage, or small kids. We love to see accessibility features find uses outside their original intent."
+        },
+        {
+          "id": 48850107,
+          "author": "Cider9986",
+          "text": "Mobile Device Management (MDM) is the only effective way to restrict idevices. All you need is a macbook and Apple Configurator. You can remove safari, blacklist or whitelist websites, block installing apps, block deleting apps. It's really customizable. Edit: expanded acronym."
+        },
+        {
+          "id": 48826243,
+          "author": "Brajeshwar",
+          "text": "Archived https://archive.is/LV6Cw Long back Xiaomi Phones used to have soemthing like this. That one feature was how I migrated my in-laws to Smartphones from their Nokias. The key content from the article; Here's how you set it up: Head into Settings, tap Accessibility, scroll down to the General section at the very bottom, and tap Assistive Access. Now, tap Set Up Assistive Access, then Continue. It will then ask you to select your preferred appearance: rows or a grid. I suggest choosing a grid. This is how you get those super-large tiles. Now the OS will ask you to select allowed apps—tap the green plus icon next to the apps you want to allow."
+        },
+        {
+          "id": 48850988,
+          "author": "xnx",
+          "text": "Summary: Simplify the iPhone home screen with large icons for kids or seniors: Settings > Accessibility > General section at the very bottom > Assistive Access"
+        },
+        {
+          "id": 48850483,
+          "author": "bawolff",
+          "text": "> My son only gets Calls, Messages, Maps, Camera (so we can video call, but I've ruthlessly turned off selfies), Photos, and Music. Nothing else. I get that the internet is an addictive scary place with lots of content potentially dangerous to a young person. But why would you care if your child took a selfie? That seems pretty draconian."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 26,
+      "id": 48846332,
+      "title_en": "SimPolitics: America’s quest to solve politics with computers",
+      "title_ja": "SimPolitics: America’s quest to solve politics with computers",
+      "url": "https://mitpress.mit.edu/9780262053198/simpolitics/",
+      "hn_url": "https://news.ycombinator.com/item?id=48846332",
+      "score": 67,
+      "comment_count": 9,
+      "posted_at": "2026-07-09T14:20:14+00:00",
+      "comments": [
+        {
+          "id": 48849687,
+          "author": "al_hag",
+          "text": "Open access link https://direct.mit.edu/books/oa-monograph/6166/SimPoliticsAm..."
+        },
+        {
+          "id": 48848560,
+          "author": "ChrisArchitect",
+          "text": "Title is: SimPolitics - America’s Quest to Solve Politics with Computers"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 27,
+      "id": 48847407,
+      "title_en": "Opinionated and easy Pi.dev configuration",
+      "title_ja": "Opinionated and easy Pi.dev configuration",
+      "url": "https://lazypi.org/",
+      "hn_url": "https://news.ycombinator.com/item?id=48847407",
+      "score": 95,
+      "comment_count": 57,
+      "posted_at": "2026-07-09T15:19:33+00:00",
+      "comments": [
+        {
+          "id": 48848076,
+          "author": "klaxce",
+          "text": "Pi makes you think about what you’re doing with it on purpose. This defeats that, as the Mario quote on the page says, and therefore isn’t worth using. People really need to try out “less is more”. The new models are quite smart, so suffocating their context with dozens of MCPs and skills isn’t necessary like it used to be. A cli tool with good built in help and good errors is amazingly easy for the model to figure out. If Pi is too minimal for you and you don’t want to dig into it, OpenCode is pretty good out of the box. I use it for general work I haven’t setup Pi for. The only thing I add to OpenCode is some commands that are shortcuts to save me typing frequent prompts, and a subagent with a fixed model for implementing changes."
+        },
+        {
+          "id": 48848780,
+          "author": "roger_",
+          "text": "Currently using Oh My Pi ( https://github.com/can1357/oh-my-pi ) and appreciate the batteries included approach. From my limited time using pure Pi, I found quite a few of the plugins lacking and had no desire to upgrade/fix and maintain them myself. I know others feel differently though. I like the idea of keep Pi minimal but having “official”, high quality optional plugins to make it more usable."
+        },
+        {
+          "id": 48848992,
+          "author": "Jackevansevo",
+          "text": "This seems to be like the antithesis of pi, it's supposed to be this minimal thing you customise I guess it's the same kinda friction with vanilla vim/neovim vs vim 'distributions' that provide a bunch of stuff out of the box."
+        },
+        {
+          "id": 48852498,
+          "author": "alexhans",
+          "text": "I can understand someone being overwhelmed and not wanting to configure and \"build your own pi\" which is really one of the beautiful points of pi, but like with vim, I do recommend that after playing with this for a while you go back to pure pi and then decide what do you really need and incrementally add it. The power of the incremental in control approach is huge. It allows you to keep moving in whatever direction you want instead of taking yet another dependency."
+        },
+        {
+          "id": 48850467,
+          "author": "lfx",
+          "text": "60+ ! oh my, while this is cool it seems that is overkill. I want to know all my skills back and forth. But I like this kind of projects where I can peak of what extensions other people use. Is like .vimrc file back in the day. Do not clone blindly, but peak, learn and copy what is needed."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 28,
+      "id": 48836431,
+      "title_en": "Almost Always Unsigned",
+      "title_ja": "Almost Always Unsigned",
+      "url": "https://graphitemaster.github.io/aau/",
+      "hn_url": "https://news.ycombinator.com/item?id=48836431",
+      "score": 44,
+      "comment_count": 52,
+      "posted_at": "2026-07-08T19:35:07+00:00",
+      "comments": [
+        {
+          "id": 48853654,
+          "author": "delta_p_delta_x",
+          "text": "[delayed]"
+        },
+        {
+          "id": 48852903,
+          "author": "fpoling",
+          "text": "The article over-downplays the need for sentinel values. Surely Rust has Option that also spreads into C++ these days as std::optional. But for plain C using -1 or negative values to denote sentinels or error code is rather nice idiom. The argument will be more valid if array indexes will be 1-based like in Fortran/Matlab/Julia as then 0 becomes extremely nice sentinel values. But C is C and needs -1."
+        },
+        {
+          "id": 48838338,
+          "author": "dataflown",
+          "text": "Stroustrup recommends int over unsigned. Dijkstra recommends int over unsigned. Google coding guidelines recommend int over unsigned. Blogger recommends unsigned over int. Tough choice."
+        },
+        {
+          "id": 48841285,
+          "author": "jgtrosh",
+          "text": "> Where unsigned does benefit here is when these are used as indices into an array. The signed behavior will almost certainly produce invalid indices which leads to memory unsafety issues. The unsigned way will never do that, it’ll stay bounded, even if the index it produces is actually wrong. This is a much less-severe logic bug, but can still be used maliciously depending on context. The argument for signed often goes that it's easier to detect an invalid operation on an index by checking for bounds, or the higher probability of segmentation faults, than if your index is always “valid”. Granted, even with signed your invalid operation might still give a valid index. Simply put, seeing a negative index in your debugger is an obvious red flag you lose with unsigned. In general I want to complain about the idea that a subtle bug is less severe than an obvious bug. Obvious bugs can be caught automatically or manually and are therefore less severe than subtle ones. This is a mistakes all students do btw. Segmentation faults are your friends!"
+        },
+        {
+          "id": 48853383,
+          "author": "Asooka",
+          "text": "The entire reason for integer under/overflow to be undefined is to enable compiler optimisations. If you're going to be using unsigned anyway, we might as well drop the undefined behaviour from the standard and just say it's machine-defined. That should honestly be the correct choice. If a loop is hot enough to benefit from those optimisations, you can easily rewrite it in a form that makes the compiler assume overflow won't happen. Either using current syntax with unreachable(), or we can add a runtime_assume(expr) expression that signals to the compiler that it can assume expr is true. Though for full safety I would prefer using if(likely(expr)) {fast code} else {panic or return error}. As an aside, unsigned does not save you from undefined behaviour. When sizeof(short)==2 and sizeof(int)==4 (e.g. x86, x64, arm32, arm64), then multiplying two unsigned short values happens by upcasting them to ints (see integer promotion rules), which can overflow the int. My personal opinion is that along with making signed overflow defined, unsigned integers should be entirely removed as a type and there should instead be separate signed vs unsigned operators, because at the processor level there is no difference between the two, and there hasn't been a good case to separate them at the hardware level for the last ~half century. Basically, do what Java does with some syntax like unsigned{expr} which forces all integers inside expression to be treated as unsigned. Unsigned literals can stay, but they will be bitcast to signed equivalents if used outside unsigned context."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 29,
+      "id": 48849059,
+      "title_en": "ChatGPT Work",
+      "title_ja": "ChatGPT Work",
+      "url": "https://openai.com/index/chatgpt-for-your-most-ambitious-work/",
+      "hn_url": "https://news.ycombinator.com/item?id=48849059",
+      "score": 306,
+      "comment_count": 147,
+      "posted_at": "2026-07-09T17:03:53+00:00",
+      "comments": [
+        {
+          "id": 48849778,
+          "author": "postalcoder",
+          "text": "I just installed this. I am very confused. I no longer have a Codex app on my computer. ChatGPT is now Codex. But what happened to ChatGPT? Where am I supposed to casually chat? Also, when you toggle btween ChatGPT Work and ChatGPT Codex, nothing changes. This is super confusing. Can someone from the OpenAI team clarify the difference btwn the modes? Does chatgpt work have more business-y related plugins turned on by default? Edit: So it seems like the only place you can actually chat with chatgpt is in an awkward homeless nested window. idk. The chatgpt interface wasn't great (desperately needed artifacts), but I still used it a lot. I can't see this change going well with a lot of the casual users. Edit2: In their awkward homeless nested chat mode, you cannot even edit past messages. this is a mess, why was the team so zealous to pull the switch on unification in this state? guessing there was internal pressure to juice codex's growth but, based on what im seeing, they did it by torching chatgpt? Edit 3: Ok so it seems like ChatGPT is still around, but renamed to \"ChatGPT Classic\". Seems like it wont be long for this world because there's no place to download ChatGPT Classic should you choose to uninstall it. The dmg at https://chatgpt.com/download/ only contains the new ChatGPT."
+        },
+        {
+          "id": 48850888,
+          "author": "todfox",
+          "text": "This unification is garbage. Chats that are about topics other than programming projects are relegated to a tiny, unsearchable popup window. Renaming the old app \"ChatGPT Classic\" implies that it will be discontinued at some point. This is a serious regression. What existed before worked fine. I would expect the mode switcher to include a Chat mode, which would recreate the old, chat-focused UI, for asking about random topics. So, that's basically gone now. Technically, it's hidden and severely castrated. I hope someone from OpenAI reads this. You guys have made a serious design mistake. I suspect you'll be getting a lot of support requests along the lines of \"Where did all my chats go?\""
+        },
+        {
+          "id": 48851191,
+          "author": "asim",
+          "text": "This thread is so spot on but I can also imagine the product development internally is moving so fast that they're trying to reconcile everything and can't. And this is the huge mistake so many companies make. Leave what's working alone. Build new adjacent things. It's clear they want to make money and work or code is the focus of enterprise. But never rename something Classic...so bad."
+        },
+        {
+          "id": 48852373,
+          "author": "polyrand",
+          "text": "On one hand, this had to happen at some point. I feel the split between ChatGPT vs. Codex wasn't helping OpenAI. Anthropic did it right from the beginning by unifying everything in the same application. From my perspective, Codex is much better than any other app, but for non-technical users they were still stuck in ChatGPT only, and \"nobody\" knew about Codex. Anthropic also did it better by putting everything under the \"Claude\" brand: Claude Code, Claude Cowork, etc. Compared to ChatGPT vs Codex. OpenAI seems to be trying to revert that unwanted split. With that said, I share the sentiment that it's 100% unclear what's the difference between Codex and Work. Chats now are a second-class citizen of the app. Although the \"Attach to task\" feature of chats looks useful. Putting \"Chats\" below the \"Tasks\" section would have been much better. This may end up badly. Most people use ChatGPT just for regular chats, and they are not used to \"agentic\" interactions. It may take people time to adapt, and you can definitely lose users during that transition. This also seems to have indirect implications regarding pricing. Codex (and Work) consume credits. Chats were also limited before, but you could mostly use ChatGPT without thinking about it. Now people will inevitably use Codex/Work more, simply because that's what the UI shows them, thus consuming credits. This will force you to keep an eye on credits a lot more. Others have mentioned that the old ChatGPT can't be installed any more. Only if you had it installed before, it now became ChatGPT Classic. However, you can still add the chatgpt.com page as a Web App. You'll need an internet connection to use it, but the old ChatGPT app wasn't working properly without internet anyway... so the overall experience may not be that different. I'd even say that, to me, the web UI has always felt more polished than the native app."
+        },
+        {
+          "id": 48849568,
+          "author": "tekacs",
+          "text": "Anthropic just changed their web interface yesterday to have Chat versus Cowork as well, and every time I look at it, I'm so confused. I'm still so unclear when I'm supposed to use one or the other or the other. Now the 'ChatGPT desktop app' (the Codex app, renamed) also has the split between work and code, and as far as I can tell, all it does is change which plugins are loaded by default to include Office ones when you put it in work mode. Perhaps it also changes the system prompt slightly?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 30,
+      "id": 48847940,
+      "title_en": "AI content is everywhere on social media, especially LinkedIn",
+      "title_ja": "AI content is everywhere on social media, especially LinkedIn",
+      "url": "https://www.pangram.com/blog/ai-in-your-feed",
+      "hn_url": "https://news.ycombinator.com/item?id=48847940",
+      "score": 161,
+      "comment_count": 141,
+      "posted_at": "2026-07-09T15:50:09+00:00",
+      "comments": [
+        {
+          "id": 48849020,
+          "author": "redsymbol",
+          "text": "I wrote a post on linkedin last year titled \"Do not use AI to write.\" Boy, was it controversial. I could not believe how hard some people were pushing back in the comments. Quoting from myself there: \"When you write your own words, you are forging your own voice. It is distinctive, conveys your unique world view, and connects with others in a way that is specific to you alone. If you use an AI tool to write for you instead, you lose all of that.\" That seems blindingly self-evident to me, but apparently a lot of folks disagree. Something else I said: \"Writing is hard because thinking is hard. When you write, you forge your thoughts, distinctions, mental models and even feelings into the clarity of precision that the written word demands. When you outsource your writing to an AI tool, you lose more than you know.\" I guess a lot of people don't want to bother with all that."
+        },
+        {
+          "id": 48852631,
+          "author": "TrackerFF",
+          "text": "AI has just accelerated what has always been out there. LinkedIn has more or less always been a place where people write scripted BS stories, AI just made it a lot easier."
+        },
+        {
+          "id": 48848661,
+          "author": "palata",
+          "text": "My feeling is that it interferes a lot with \"the social media algorithms\" and hence with the \"infinite wall of random stuff from people you don't know\". In the last few years I have been going back to RSS feeds, subscribing to blogs I like. What I lose there is that I don't get suggestions for blogs I don't already know. I genuinely wonder if there could be an opportunity for webrings there. Like blogs could have an RSS feed of \"blogs I follow\" by the author, and I could choose to follow them or at least visit them and selectively subscribe. The thing is that many times, there is one article I like in a blog but not necessarily the rest. So more than \"blogs I follow\", it could be \"articles I liked\". So that if I subscribe to the RSS feed of someone, I get exposed to articles they \"bookmarked\", and eventually it can help me discover blogs I want to subscribe to. Or maybe it all exists already. Or used to exist, probably."
+        },
+        {
+          "id": 48852653,
+          "author": "JimsonYang",
+          "text": "Reddit has 13% bots? I dont believe it, reddit is swarmed with engagement farms and auto reply bots"
+        },
+        {
+          "id": 48848508,
+          "author": "ikesau",
+          "text": "Beyond the OP's AI-written or AI assisted distinction, I'm also noticing people mimicking LLM's speech patterns. I've read blogs from people who I'm quite sure are above pasting AI output directly into their words who nevertheless are sounding more and more like AI as the sum of all their conversations with Claude begins to rub off on them (myself included, probably)"
+        }
+      ],
+      "summary_ja": ""
+    }
+  ]
+}
