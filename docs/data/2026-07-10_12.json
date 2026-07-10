@@ -1,0 +1,1064 @@
+{
+  "date": "2026-07-10T00:00:00+09:00",
+  "slot": "12",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 48842459,
+      "title_en": "Show HN: Getting GLM 5.2 running on my slow computer",
+      "title_ja": "Show HN: Getting GLM 5.2 running on my slow computer",
+      "url": "https://github.com/JustVugg/colibri",
+      "hn_url": "https://news.ycombinator.com/item?id=48842459",
+      "score": 537,
+      "comment_count": 133,
+      "posted_at": "2026-07-09T08:05:04+00:00",
+      "comments": [
+        {
+          "id": 48852349,
+          "author": "walrus01",
+          "text": "My main question is whether when put into practical use, this can be measured in tokens/second, or more like 1 token per minute... I have seen locally hosted LLM that are as slow as 1 tok/second still be very useful if you give it a project to do something overnight and metaphorically walk away from it, check back with what it has done in 6 or 8 hours. 0.05 to 0.1 tok/s on the other hand, as reported in the URL for the lowest class of hardware, isn't really usable for much. edit: I think this is a fantastic project in general concept, and look forward to seeing more efforts towards the general idea of being able to run a 350B to 900B size model locally, even if as slow as 1 tok/s, on hardware that ordinary people can afford. Anything along the general concept of \"we have fast read NVME SSD storage, we have a big ass model on local disk, we'll read it at 11GB/tok as we need it, not try to load the whole thing\"."
+        },
+        {
+          "id": 48856274,
+          "author": "harrouet",
+          "text": "This is exactly the kind of technology that I expect Apple to ship anytime soon given the RAM prices and their HW/SW integration skills: - ship super fast SSD (tbh they are already top notch) - add a specific cache layer for tokens - keep the amount of unified memory reasonable"
+        },
+        {
+          "id": 48853412,
+          "author": "Archit3ch",
+          "text": "Working on something similar targeting macOS on Apple Silicon, Unsloth split GGUF, compressed partial residency in unified memory (would make more sense on 128GB instead of my 64GB...), native Metal kernels, and RAM-only native compressed KV. Happy to put on GitHub when it's ready."
+        },
+        {
+          "id": 48852787,
+          "author": "kodablah",
+          "text": "I've taken a similar strategy w/ image/video gen at https://github.com/cretz/thinfer (see video branch for a ton of work). Basically I kept needing an inference engine that could stream weights in and out as needed in an LRU manner. So I ended up vibe coding this thing that accepts a `--vram-budget` and stays under it (mostly). It turns out moving mmap'd bytes in and out of VRAM is way cheap compared to compute. Coupled with some pipelining/double-buffering, I almost always end up compute bound not memory bound. Granted I use way smaller models heh."
+        },
+        {
+          "id": 48852425,
+          "author": "shrinks99",
+          "text": "Pretty cool! I've also been playing around with GLM 5.2 this week and was equally impressed. At work we're running it locally on some crazy expensive hardware as a test before starting another project so it's great to see people taking this massive FOSS model release and running it on an average machine, even if it's not terribly practical at this point. Nice work!"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 2,
+      "id": 48843923,
+      "title_en": "EU Parliament greenlights Chat Control 1.0",
+      "title_ja": "EU Parliament greenlights Chat Control 1.0",
+      "url": "https://www.patrick-breyer.de/en/eu-parliament-greenlights-chat-control-1-0-breyer-our-children-lose-out/",
+      "hn_url": "https://news.ycombinator.com/item?id=48843923",
+      "score": 1212,
+      "comment_count": 579,
+      "posted_at": "2026-07-09T11:03:54+00:00",
+      "comments": [
+        {
+          "id": 48844437,
+          "author": "teekert",
+          "text": "This is a nice piece of democracy right here: \"a measure it had rejected twice in March. Although a majority of voting Members of the European Parliament (MEPs) actually opposed the regulation (314 against, 276 in favor, 17 abstentions), the motion to reject it failed to secure the required absolute majority of 361 votes. As a result, mass scanning is now permitted again until 2028.\" \"Oh no we can't get a majority to pass the law!\" \"Have you tried getting a majority to not pass the law?\" \"Worth a shot!\" \"It worked, should we also do this multiple times?\" \"Of course not! Pass the law, quickly!\""
+        },
+        {
+          "id": 48855840,
+          "author": "voodooEntity",
+          "text": "Some people say im rather pessimistic - but i still kinda hoped that the EU will not go down this path. That said - i was obviously wrong. I don't really know what else to say than : this breaks a fundamental foundation of privacy. Sure i was never 100% aligned with EU level decisions (neither with my residing country one's) but that's just... wrong on so many levels... how can i even still argue to people that EU and democracy are good if this is what its heading for? Usually i try to explain stuff with common grounds, the bigger picture or whatever is fitting. You can't have everyone happy on every decision. But at this point im lost of arguments. They just betrayed every citizen from my pov. So whats my point of this comment? Maybe i need to vent in an environment where i think people might get how bad this actually is, since people IRL around me don't seem to remotly understand the impact...."
+        },
+        {
+          "id": 48856442,
+          "author": "nout",
+          "text": "With this level of spying it becomes important to learn to use technologies that are outside of this system that people on HN usually laugh at. Tor, VPNs, Bitcoin, Bitchat, Nostr based socials, Signal and get some extra clean hardware (phone, laptop...) to work with when you need to..."
+        },
+        {
+          "id": 48844238,
+          "author": "mrtksn",
+          "text": "FTA: What changes with the return of Chat Control 1.0—and what stays the same: *What is coming back:* US tech companies are once again allowed to scan private messages without a warrant or prior suspicion. This affects direct messages on platforms like Instagram, Discord, Snapchat, Skype, and Xbox, as well as emails via Google’s Gmail and Apple’s iCloud. *What remains unchanged:* Public social media posts and files hosted in cloud storage could already be scanned without this law. Furthermore, private messages can always be reported by users, or monitored by authorities using targeted, court-ordered wiretapping. *What is still NOT being scanned:* End-to-end encrypted chats, such as those on WhatsApp, have always been exempt from these scans. Additionally, European providers of messaging and email services have never implemented chat control measures. So, E2E is unaffected?"
+        },
+        {
+          "id": 48845671,
+          "author": "bradley13",
+          "text": "Stupid parliamentary trick: Hold the vote on the day before the summer break - ensuring that many people have already returned to their home countries. Then use a sort of \"reverse\" parliamentary trick: the default is that this legislation is accepted. They needed an absolute majority - not of voting members, but of all members - to reject it. Result: 314 against, 276 in favor, 17 abstentions, 113 absent The EU is well on the way to becoming a totalitarian government. ETA: It is shocking that 276 members of parliament would vote to support this. Are so many so naive? Or being paid off?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 3,
+      "id": 48845049,
+      "title_en": "Show HN: 18 Words",
+      "title_ja": "Show HN: 18 Words",
+      "url": "https://18words.com/",
+      "hn_url": "https://news.ycombinator.com/item?id=48845049",
+      "score": 927,
+      "comment_count": 301,
+      "posted_at": "2026-07-09T12:48:52+00:00",
+      "comments": [
+        {
+          "id": 48846580,
+          "author": "pompomsheep",
+          "text": "Thanks everyone for the feedback! Two questions 1. For a version without the timer what would you like to happen if you are just completely stuck on a word? Hints to reveal letters or skip the word? 2. For those who like the timed version would you prefer to continue when you miss a word and then get a final score out of 18?"
+        },
+        {
+          "id": 48845503,
+          "author": "Waterluvian",
+          "text": "The timer makes it not enjoyable for me. It seems necessary to the game design and I’m not being negatively critical. Just sharing an additional perspective. I’ve been playing Zanagrams and the ability to hide the clock really improved my enjoyment of that game. If I could magically get a feature by request, it would be to give me infinite time even if that meant my score came with an asterisk. Maybe just call it Relax Mode vs. Challenge Mode. By the way: I really like the overall design of Zanagrams and 18 Words. These are small puzzle games with very simple, clean UIs. They work crisply and I've noticed you've been tidying up Zanagrams, adding minor features and settings. They have a very Classic Web feel to them. It's not like you're trying to get me to watch ads or subscribe to your newsletter or are just breadcrumbs to some for-profit thing. I like having a handful of very easy to pick up puzzles/toys when I need to fidget. They help keep me away from TikToks and Shorts."
+        },
+        {
+          "id": 48845528,
+          "author": "gopalakrishnans",
+          "text": "Would be nice to have a ‘scramble!’ button so it makes it slightly easier when we get stuck"
+        },
+        {
+          "id": 48856160,
+          "author": "green_wheel",
+          "text": "Other stats you could show: - average time to correct answer - correct percentage I think you should leave it hard like this. Make people earn that perfect score. Maybe add a dedicated clear button. Others have mentioned shuffle but I think you should leave as is, it's more challenging. Awesome stuff I'm going to send this to my mom she will be addicted."
+        },
+        {
+          "id": 48845833,
+          "author": "dirkc",
+          "text": "I like the idea, but I didn't like losing after a few words. Now it might just be me not being good at losing, but who is? Maybe the game can always progress to the next word with your total score being reduced. So if you get all within 30 seconds you score 18/18. That way everyone can play the whole game and share with their friends how far they got: |X|o|X|X|X|o|o|o|X|X|X|X|X|X|X|X|o|X| 13/18"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 4,
+      "id": 48792383,
+      "title_en": "Train sim created by just one person is being called the best ever made",
+      "title_ja": "Train sim created by just one person is being called the best ever made",
+      "url": "https://kotaku.com/a-train-sim-created-by-just-one-person-is-being-called-the-best-ever-made-2000699429",
+      "hn_url": "https://news.ycombinator.com/item?id=48792383",
+      "score": 446,
+      "comment_count": 159,
+      "posted_at": "2026-07-05T08:40:27+00:00",
+      "comments": [
+        {
+          "id": 48854830,
+          "author": "culi",
+          "text": "The dev is a person from Indonesia (Rizky Nova) who's device has 16GB of ram. Being able to use the Unreal Engine for free to develop this is awesome. This couldn't have happened 10 years ago."
+        },
+        {
+          "id": 48853052,
+          "author": "f3408fh",
+          "text": "I always wonder how a solo developer can source high quality assets like these, plus develop a full game with them. In this case did the dev create the assets or did they purchase them from a freelancer? How much would purchasing this many assets cost?"
+        },
+        {
+          "id": 48851706,
+          "author": "dash2",
+          "text": "> including support for the Zuiki MASCON, a bespoke peripheral for train driving sims. This just makes me feel so glad to be alive today!"
+        },
+        {
+          "id": 48853675,
+          "author": "whywhywhywhy",
+          "text": "Game looks amazing from a solo dev but this article is terrible, like the journo didn't even play the game they just watched the game."
+        },
+        {
+          "id": 48852446,
+          "author": "arjie",
+          "text": "This is a 1 person job?! It looks practically photorealistic. That's absolutely wild."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 5,
+      "id": 48849066,
+      "title_en": "GPT-5.6",
+      "title_ja": "GPT-5.6",
+      "url": "https://openai.com/index/gpt-5-6/",
+      "hn_url": "https://news.ycombinator.com/item?id=48849066",
+      "score": 1185,
+      "comment_count": 845,
+      "posted_at": "2026-07-09T17:04:14+00:00",
+      "comments": [
+        {
+          "id": 48849198,
+          "author": "minimaxir",
+          "text": "The developer's guide ( https://developers.openai.com/api/docs/guides/latest-model ) has some interesting semantic tips for using the model: > Intent understanding: GPT-5.6 can better infer the user’s underlying goal and intended level of work without you specifying every step. Continue to state important constraints, approval boundaries, and success criteria explicitly. > Original image detail: GPT-5.6 preserves the original dimensions of images sent with original or auto detail instead of resizing them to a patch budget or pixel-dimension limit. > Use shorter prompts: In internal evaluations, replacing long, explicit system prompts with minimal prompts improved scores by roughly 10–15%, while reducing total tokens by 41–66% and cost by 33–67%. > Avoid generic brevity instructions: GPT-5.6 is more sensitive than GPT-5.5 to instructions such as “Be concise,” “Keep it short,” or “Use minimal text.” > Control warmth: GPT-5.6 does not become meaningfully better when prompted to be broadly friendlier or more empathetic."
+        },
+        {
+          "id": 48849608,
+          "author": "meetpateltech",
+          "text": "GPT-5.6 Sol sets a new SOTA on ARC-AGI-3: 7.8% Sol is the first verified frontier model to ever beat an ARC-AGI-3 game https://arcprize.org/results/openai-gpt-5-6"
+        },
+        {
+          "id": 48849223,
+          "author": "eig",
+          "text": "Funny to see that they did not include Fable 5 in their GeneBench and LifeSciBench comparisons because \"it does not answer advanced biology questions and refuses the majority of questions in this eval\". Winner by default!"
+        },
+        {
+          "id": 48849126,
+          "author": "Syntaf",
+          "text": "Ok long time Claude Code user here; lately I've started to realize there's other great models out there I should be trying, but I'm hesitant to leave Claude Code behind for something new. What's the consensus today on codex vs claude code, does it really matter anymore?"
+        },
+        {
+          "id": 48851321,
+          "author": "senko",
+          "text": "I love testing the new models by asking them to code a toy RTS game. Here's what Terra did: https://senko.net/vibecode-bench/2026/rts-gpt-5.6-terra.html (one try, in codex app, xhigh effort) Comparing this to other models, I find it similar to GPT-5.5 and a bit behind Sonnet 5. You can see how other models fared here: https://senko.net/vibecode-bench/ (you can also fetch the prompt and the the 5.6 Terra resulting code on from that page). I don't have access to Sol yet (on a Plus sub, which should get it according to what I've read), so can't do the more interesting test. I'll update the above page as soon as I get access - hopefully soon."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 6,
+      "id": 48805598,
+      "title_en": "Apple Silicon Exec Explains Mac Mini AI Demand and On-Device Future",
+      "title_ja": "Apple Silicon Exec Explains Mac Mini AI Demand and On-Device Future",
+      "url": "https://www.macrumors.com/2026/07/06/apple-silicon-exec-explains-mac-mini-ai-demand/",
+      "hn_url": "https://news.ycombinator.com/item?id=48805598",
+      "score": 51,
+      "comment_count": 29,
+      "posted_at": "2026-07-06T14:59:21+00:00",
+      "comments": [
+        {
+          "id": 48856250,
+          "author": "JumpCrisscross",
+          "text": "Apple could probably sell a machine starting at $10,000 if they architected it as the sole place one’s private cloud AI compute ran on. It would need a path to a $2,500 machine. But this is a niche I don’t think another consumer-facing brand could do like Apple."
+        },
+        {
+          "id": 48856306,
+          "author": "huragok",
+          "text": "If I had the capital I’d make an household inference appliance. No peripherals except Ethernet, integrated compute (cpu+gpu+mem) and secondary storage (+mobo, psu). No accoutrements, just the minimum amount of hardware to run a model as a utility. Even the appliance faceplate would be a display showing stats like an old HiFi stereo."
+        },
+        {
+          "id": 48855976,
+          "author": "onion2k",
+          "text": "Running models on-device on a Mac is immensely annoying though. Figuring out what will work out of BF16, FP8, BF16+FP8, NVFP4, INT8, GGUF ... the list goes on ... is 'non-obvious' at best. Apple do little to support with tooling. There's MLX, but unless you're happy to transform a model to that format yourself you'll be lagging a long way behind. Apps like LMStudio, Ollama, Draw Things, etc do a great job of simplifying it but it's still a pain."
+        },
+        {
+          "id": 48856038,
+          "author": "drewda",
+          "text": "This is a paraphrase of https://www.thedeepview.com/articles/how-apple-s-decade-long..."
+        },
+        {
+          "id": 48856028,
+          "author": "znnajdla",
+          "text": "It’s not for the AI inference, it’s for the tool calls and desktop GUI app workloads and browser. There aren’t any on-device models capable enough of real work that can run on lower end Mac Minis. But for running a few browsers and GUI apps, you’re much better off buying a Mac Mini than paying for a more expensive and worse-performing container in the cloud. Browsers were not designed to run in Linux containers but they run optimally on baremetal desktop OSes. An M4 Mac Mini beats the single core performance of any VM you might rent in the cloud, in terms of raw compute per dollar (Geekbench scores)."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 7,
+      "id": 48854247,
+      "title_en": "Study: \"Mommy, do you love your phone more than me?\"",
+      "title_ja": "Study: \"Mommy, do you love your phone more than me?\"",
+      "url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2026.1766665/full",
+      "hn_url": "https://news.ycombinator.com/item?id=48854247",
+      "score": 76,
+      "comment_count": 37,
+      "posted_at": "2026-07-10T00:20:28+00:00",
+      "comments": [
+        {
+          "id": 48855730,
+          "author": "Aeolun",
+          "text": "This tracks with my son’s observations on my wife’s phone use. She’ll tell him to stop watching youtube, then go right back to doing so herself. It doesn’t really seem to compute how hypocritical that is."
+        },
+        {
+          "id": 48856293,
+          "author": "kqr",
+          "text": "This can be tricky. I know my mother loves me unconditionally, but I also have strong memories of her shutting herself inside her study to read textbooks and journals, and children were not allowed to disturb unless she was strictly needed to handle an accident. I have the same need for cognition as my mother, but I opt not to lock myself in my office. Instead I tell my kids, \"I'm around if you need me and I'll keep an eye on you but I'm not currently a playmate; I'll be here reading on my phone.\" The difference is my mother clearly separated relationship-building from study. I don't. This probably means I'm available more often, but with lower quality? I'm not sure. What is better? No idea."
+        },
+        {
+          "id": 48855691,
+          "author": "Wolfenstein98k",
+          "text": "I would expect anxious/insecure parents to use placating behaviours (like device use) themselves, and I would expect their children to be anxious/insecure too. So I would expect the study to find that the children of phone-overusers were more likely to be anxious/insecure. Still, I would also expect that less phone use (subbed with more attention to kid) would help the kid with this."
+        },
+        {
+          "id": 48855653,
+          "author": "whatever1",
+          "text": "Yes son. Go back to your iPad."
+        },
+        {
+          "id": 48855558,
+          "author": "paytonjjones",
+          "text": "This is a weak study that is exemplary of psychology's weak experimentation culture and correlation/causation laundering, especially with regard to self-report. The heavily hinted implication is that device use damages relationships. But look at what they actually measured. They ask adolescents to answer questions like: \"My primary caregiver ignores me when they are on a device.\" (DAIS, their new scale) And then also ask them to answer questions like: \"I often worry that this person doesn't really care for me.\" (ECR-RS) And then act like it's a revelation that these two self-report scales are correlated. A much more plausible causal explanation is that a single psychological variable (e.g. a bad relationship) causes both self reports, rather than the implied pathway that device use causes A, which then causes B."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 8,
+      "id": 48841676,
+      "title_en": "Postgres rewritten in Rust, now passing 100% of the Postgres regression tests",
+      "title_ja": "Postgres rewritten in Rust, now passing 100% of the Postgres regression tests",
+      "url": "https://github.com/malisper/pgrust",
+      "hn_url": "https://news.ycombinator.com/item?id=48841676",
+      "score": 570,
+      "comment_count": 476,
+      "posted_at": "2026-07-09T06:18:19+00:00",
+      "comments": [
+        {
+          "id": 48843148,
+          "author": "malisper",
+          "text": "Hey author here. Wasn't expecting to see this up. To concisely give an overview of the project, I've been experimenting with using LLMs to build a better version of Postgres. Postgres is 30 years old and we've learned a lot about databases since hten. A lot of the techniques that work for doing a rewrite are also useful for doing a rearchitecture. I'm now working on a new, not yet published version of pgrust that incorporates a lot of techniques. Currently the new version: - Passes 100% of Postgres regression suite - Implements a thread per connection model instead of the process per connection model Postgres does - Is 50% faster than Postgres on transaction workloads - Is ~300x faster than Postgres on analytical workloads. Right now it's 2x slower than Clickhouse on clickbench and I think it's possible to get faster than Clickhouse If you have any questions, I'm happy to answer them."
+        },
+        {
+          "id": 48852512,
+          "author": "sdevonoes",
+          "text": "Don’t understand these rewrites. - typically they are behind a single person. That’s usually bad because of spf - typically they are achieved in a very short amount of time, so the author hasn’t acquired any discipline in creating the project. That means it’s unlikely the author is going to stick to the project in the mid and long term - anyone that wants to contribute to the project needs to pay. Needs to pay tokens because it’s increasingly difficult to maintain these projects without AI So, who wants to put something like this in production? Doesn’t make much sense"
+        },
+        {
+          "id": 48844008,
+          "author": "Chyzwar",
+          "text": "I think the best way to test this would be to put PgBouncer or a similar proxy in front of a busy production database, and mirror queries to both traditional Postgres and the Rust one at the same time. Then you can compare output and performance under real load. After running it for a while, you could diff the tables one to one against the normal Postgres instance."
+        },
+        {
+          "id": 48842635,
+          "author": "dirkc",
+          "text": "How would one go about reviewing a piece of code like this? One of the things I'd typically do is peek at the commit history. Seeing what people worked on and how they did it tends to say a lot about a project. But with LLMs generating 7101 commits in less than a month that isn't feasible. Even looking at a single day is way too much [1]. It probably also doesn't make sense since the commits content won't tell you much anyway. ps. How do you easily get to the first commit in a repo on GitHub? Browsing commit history feels rather tedious [1] - https://github.com/malisper/pgrust/commits/main/?since=2026-..."
+        },
+        {
+          "id": 48843800,
+          "author": "vintagedave",
+          "text": "This is impressive - but is a license change, from the PostgresQL license [0] to AGPL [1]. I like the AGPL and think it's the best truly free open source license, but I worry if this is compatible. Ie, if this is rewritten from the original source, should the original apply? (Yes.) There has been a trend to rewrite open source software with a more restrictive license (like coretools in Rust). This looks considerably more ethical by choosing the AGPL - I just wonder, safer with no change at all? [0] https://www.postgresql.org/about/licence/ [1] https://github.com/malisper/pgrust?tab=AGPL-3.0-1-ov-file"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 9,
+      "id": 48849292,
+      "title_en": "Interview with Mitchell Hashimoto about Ghostty and Zig",
+      "title_ja": "Interview with Mitchell Hashimoto about Ghostty and Zig",
+      "url": "https://alexalejandre.com/programming/interview-with-mitchell-hashimoto/",
+      "hn_url": "https://news.ycombinator.com/item?id=48849292",
+      "score": 193,
+      "comment_count": 80,
+      "posted_at": "2026-07-09T17:17:16+00:00",
+      "comments": [
+        {
+          "id": 48853248,
+          "author": "skhameneh",
+          "text": "> I don’t like the Rust culture. There’s no better way to put it. This is just so weird to me, because I would say the same about Zig. I tried to get into Zig even chatted with Loris Cro when he was streaming. I was looking to explore what my Rust project could look like in Zig but there were features simply missing that I couldn't do without. The entire interaction was mostly about how bad Rust is and how I could just do something different in Zig (completely misunderstanding my ask, with little interest to explore my actual requirements). I remember watching HN and seeing every time there was something Rust related trending, there was ALWAYS a post made shortly after trying to hype Zig and this went on for like 4 years. I'm not a Rust contributor and I don't care for some of the challenges that come with Rust, but I love what it accomplished and I find it does it very well. Back then I found the Rust community had interest and respect for Zig, so the discourse was very much one sided."
+        },
+        {
+          "id": 48853803,
+          "author": "tecoholic",
+          "text": "Man, these are the kinds of things that I am so happy to read. People who think and care deeply about what they do, take pragmatic decisions that appears right to them and explain why they do things the way they do. Very motivating. Literally moved me from the couch to the work desk ."
+        },
+        {
+          "id": 48853545,
+          "author": "Jtsummers",
+          "text": "> I’ve always believed there should be way more forks, both personal and maintained ones. There aren't more forks because once you fork something you take on the burden of synchronization, or you forfeit the benefit of future upstream work. To focus on Ghostty, Mitchell has taken on the effort of maintaining cross-platform support. If I want one specific feature (or even a bunch of features) and create a custom fork, but then GTK changes, now I have to support that change myself (assuming it is relevant to me or my community of users), or figure out a way to integrate Mitchell's changes into my fork, or I risk losing my customizations by having to rollback to baseline if the differences between my fork and baseline are too great. If the system is well-engineered (the work on libghostty helps here) then you can keep that common core without forking, and fork just things on the periphery of the system. But well-engineered is not common."
+        },
+        {
+          "id": 48856253,
+          "author": "geraneum",
+          "text": "It's so sad that Rust vs Zig has been dragged into the AI psychosis vs anti AI narratives. I feel people are taking sides or picking and choosing now based on their allegiance and religious values. What good comes out of this?"
+        },
+        {
+          "id": 48853868,
+          "author": "sgarland",
+          "text": "This is the only statement I disagree with: > PowerShell gets a lot right with structured data. CLI programs should operate on text. If you want to parse and format it, do so, but the default output mode should be plain text, so that I can pipe it into grep or awk without a second thought. I am continuously irritated that the AWS CLI defaults to outputting in JSON. No one (I hope…) is using that tool in programs; that’s what boto3 and its ilk are for. But if humans are reading it, why default to something that they’re almost certainly going to be piping into jq if only for the formatting help?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 10,
+      "id": 48847552,
+      "title_en": "Hy3",
+      "title_ja": "Hy3",
+      "url": "https://hy.tencent.com/research/hy3",
+      "hn_url": "https://news.ycombinator.com/item?id=48847552",
+      "score": 436,
+      "comment_count": 90,
+      "posted_at": "2026-07-09T15:27:48+00:00",
+      "comments": [
+        {
+          "id": 48848950,
+          "author": "simonw",
+          "text": "Pelican from a few days ago: https://simonwillison.net/2026/Jul/6/hy3/ - I was using the free tier on OpenRouter, which expires on July 21st. I tried the preview model 41 days ago and got a pelican with a \"change pelican color\" button: https://static.simonwillison.net/static/2026/hy3-preview-pel..."
+        },
+        {
+          "id": 48848715,
+          "author": "minimaxir",
+          "text": "A month ago I wrote a blog post about how Hy3 was topping the OpenRouter rankings despite no one talking about it: https://news.ycombinator.com/item?id=48317294 As of today, it has fallen to 8/9th on the rankings. I don't see a reason where you would use this model over competitors. However, price economics are bit confusing, as currently the effective input price of Hy3 via OpenRouter is now the same as DeepSeek-hosted DeepSeek Flash V4. https://openrouter.ai/tencent/hy3-preview https://openrouter.ai/deepseek/deepseek-v4-flash"
+        },
+        {
+          "id": 48850493,
+          "author": "andai",
+          "text": "Novita is offering free Hy3 on OpenRouter until July 21st https://openrouter.ai/tencent/hy3:free https://x.com/novita_labs/status/2074158304159510819"
+        },
+        {
+          "id": 48854630,
+          "author": "mattstir",
+          "text": "This is admittedly an aside from the content of the post itself, but... why do so many mobile sites insist on preventing zooming in and seem to share the same incredibly buggy image zooming? It's quite frustrating."
+        },
+        {
+          "id": 48848284,
+          "author": "Catloafdev",
+          "text": "Curious how people feel about this compared to DS4 Flash, given they are pretty close in size. Also curious how well it holds up to heavy quantization. DS4 Flash can currently run reasonably well on systems with ~96gb+ RAM, I wonder if Hy3 can compete there."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 11,
+      "id": 48757291,
+      "title_en": "My Story of 3D Realms / Apogee Part I (2020)",
+      "title_ja": "My Story of 3D Realms / Apogee Part I (2020)",
+      "url": "https://joesiegler.blog/2020/11/my-story-of-apogee-3dr/",
+      "hn_url": "https://news.ycombinator.com/item?id=48757291",
+      "score": 59,
+      "comment_count": 2,
+      "posted_at": "2026-07-02T06:21:49+00:00",
+      "comments": [
+        {
+          "id": 48854976,
+          "author": "levicole",
+          "text": "When I was probably 13 years old, I got Duke Nukem 3D. I really wanted to figure out how to build my own levels. I had found other levels online and I couldn't figure it out. My 7th grade teacher made us do was write formal letters as a project for class. So I wrote a snail mail support request to 3D Realms asking for help getting set up with build.exe. They sent me a printed version of the manual, and some troubleshooting tips for the issue I was having. Now I wonder if it was this guy that resonded..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 12,
+      "id": 48845442,
+      "title_en": "The glass backbone: Why the Army's logistics will break in the next war",
+      "title_ja": "The glass backbone: Why the Army's logistics will break in the next war",
+      "url": "https://mwi.westpoint.edu/the-glass-backbone-why-the-armys-logistics-will-break-in-the-next-war/",
+      "hn_url": "https://news.ycombinator.com/item?id=48845442",
+      "score": 351,
+      "comment_count": 428,
+      "posted_at": "2026-07-09T13:24:43+00:00",
+      "comments": [
+        {
+          "id": 48845678,
+          "author": "kayo_20211030",
+          "text": "A very insightful, and correct, piece. I'll quote in full the following, which I think gets to the heart of the matter. If you have no push, you can't apply pressure to the point. > The notion that amateurs talk tactics and professionals talk logistics is frequently discussed in military academies and war colleges, yet it is rarely reflected in the Army’s budget requests or modernization priorities. The outdated concept of the tooth-to-tail ratio, which implies the logistical tail is a bureaucratic waste that must be minimized to support the combat teeth, must be fundamentally reexamined. In modern warfare, the tail is the primary target. If the tail is severed, the teeth are rendered useless."
+        },
+        {
+          "id": 48856161,
+          "author": "zhdc1",
+          "text": "Good article but, like a lot of stategic studies pieces, grossly underestimates what the American industrial base is capable of. 1. The US is second in the world, behind Ukraine, in military drone production. 2. The US is a close second to China in logistics + last mile drone production. 3. The US is still the only country with the proven ability to move mass anywhere in the world. None of this means that the US will win a hot war against China. However, that has - always - been the case. The US fought against China in Korea and SE Asia/Vietnam and had the opportunity twice to move the conflict into Chinese territory. They didn't, for obvious reasons. Geography + LOCs + population are a b***h."
+        },
+        {
+          "id": 48854826,
+          "author": "bandrami",
+          "text": "This is a pendulum I've now seen fully swing twice since I enlisted 30 years ago. \"We need more integrated logistics because the teeth can't fight without the tail!\" Some years pass \"Why do we have all these non-combat roles in the military? Shrink everything down and focus on warfighting!\" More years pass \"Why can't we do any support internally? We need stronger and more integrated logistics!\" Lather, rinse, repeat."
+        },
+        {
+          "id": 48845790,
+          "author": "bad_haircut72",
+          "text": "When Russia invaded Ukraine, nobody (even the Ukranians) imagined that 5 years later they would have their own missiles hammering Russia 2500kms in the rear. Americans need to start accepting that a) the Iran war will also probably still be going on in 5 years and b) Iran will probably in a better place than they are now, strategically speaking."
+        },
+        {
+          "id": 48852918,
+          "author": "vondur",
+          "text": "Yep, how long does it take to replace an F-35 or one Reaper drone? In WW2 we probably could have buried Germany in the amount of tanks we could produce. We are like Germany from WW2 now, with hand stitched upholstery in our Tiger Tanks."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 13,
+      "id": 48846281,
+      "title_en": "No leap second will be introduced at the end of December 2026",
+      "title_ja": "No leap second will be introduced at the end of December 2026",
+      "url": "https://datacenter.iers.org/data/latestVersion/bulletinC.txt",
+      "hn_url": "https://news.ycombinator.com/item?id=48846281",
+      "score": 266,
+      "comment_count": 202,
+      "posted_at": "2026-07-09T14:16:34+00:00",
+      "comments": [
+        {
+          "id": 48847282,
+          "author": "doctoboggan",
+          "text": "What causes the unpredictability in this? I would have guessed we have earth's rotation and orbit down to many decimals. Does geological activity, weather, or something else cause rotation speed differences that we just can't predict?"
+        },
+        {
+          "id": 48856172,
+          "author": "usr1106",
+          "text": "Isn't this anti-news? I vaguely remember they have stopped introducing leap seconds until further notice because they cause too much trouble with today's computing systems. On my phone now and did not research it, as I say vaguely remember. Now we are 37 seconds off. Nobody of us will have to worry that Christmas is around Easter time. We can leave that problem to future generations much more responsibly than many other problems. That the notice comes every 6 months is just to meet the letter of the original international treaty."
+        },
+        {
+          "id": 48850334,
+          "author": "AbstractH24",
+          "text": "ELI5: How does this impact UNIX timestamps? Particularly for things that are in maintenance mode or otherwise minimally maintained. Nothing I do requires this level of precision, but certainly there are things that do."
+        },
+        {
+          "id": 48846771,
+          "author": "bombcar",
+          "text": "\"To authorities responsible for the measurement and distribution of time\" is just the best preamble ever."
+        },
+        {
+          "id": 48848163,
+          "author": "KboPAacDA3",
+          "text": "If the UTC-TAI offset remains at -37s, then it also means the UTC-GPS offset remains at -18s. TAI and GPS have a constant 19s offset from each system."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 14,
+      "id": 48810218,
+      "title_en": "Common prefix skipping, adaptive sort",
+      "title_ja": "Common prefix skipping, adaptive sort",
+      "url": "http://smalldatum.blogspot.com/2026/01/common-prefix-skipping-adaptive-sort.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48810218",
+      "score": 11,
+      "comment_count": 0,
+      "posted_at": "2026-07-06T20:40:14+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 15,
+      "id": 48854681,
+      "title_en": "Build your own vulnerability harness",
+      "title_ja": "Build your own vulnerability harness",
+      "url": "https://blog.cloudflare.com/build-your-own-vulnerability-harness/",
+      "hn_url": "https://news.ycombinator.com/item?id=48854681",
+      "score": 36,
+      "comment_count": 16,
+      "posted_at": "2026-07-10T01:28:43+00:00",
+      "comments": [
+        {
+          "id": 48855867,
+          "author": "alberth",
+          "text": "Dumb question: Can someone help me understand whag it means to have a “harness” for agents (and why you need one)? I’ve done some reading on the topic and am just not getting it."
+        },
+        {
+          "id": 48855037,
+          "author": "atgreen",
+          "text": "VISA open sourced an expense-to-run harness they developed under glasswing, and I used that as the basis of a skill that I've found to be pretty effective with Claude Code: https://github.com/atgreen/secscan-skill"
+        },
+        {
+          "id": 48854969,
+          "author": "mappu",
+          "text": "The off-the-shelf player in this space (structured red-team search) is probably https://github.com/usestrix/strix (no affiliation). But any frontier model, if you tell it \"here's how the authentication system works, go looking for bugs\" will probably do a good job."
+        },
+        {
+          "id": 48855063,
+          "author": "joshka",
+          "text": "If I was doing this at scale, I'd be looking at two features in particular. Cached input tokens - leveraging the LLM's token cache to get a 10:1 cost advantage, and batch tokens, 2:1 cost saving. The benefits of doing your own harness here is that you get to explicitly program around those specific things to optimize cost. And they both heavily benefit you in the way that these sorts of jobs work - at least for the hunt side of things. TLDR - context management is pretty important for cost management when you're doing something repetitive in bulk."
+        },
+        {
+          "id": 48855007,
+          "author": "jerf",
+          "text": "This whole vulnerability thing is the first time I'm really feeling like AI tech is a shakedown more than a value-add to my job. So I have to take multiple different frontier models, burn tokens constantly scanning all my code bases with complicated harnesses that eat tokens by the hundreds of millions, burn tokens cross-checking the cross-checks of the cross-checks in some eight-phase process made out of non-deterministic agents, to feed them into another multi-stage multi-agent pipeline to try to turn them into actionable vulnerabilities, and if I ever stop or slow down this process I can expect to be explaining why I did that in a court case someday. That's ridiculous. And yet, presumably, the vulns are real. What are businesses supposed to actually do with this? What happens to the whole AI value proposition when instead of it being a way to pump out lines of code for crazy cheap it becomes a way for each line of code to become vastly more expensive than it was before? I can't help but notice that in the section headed \"What it costs\" the $ symbol is conspicuously absent. I would definitely like to hear a much more concrete number on some sort of per-100k-line basis or something. I know that per-line isn't great but at least it would be something. Maybe if the models get a lot better we wouldn't need all this cross-checking. And maybe they'd write fewer vulnerabilities for the other models to laboriously and expensively figure out in the first place. But good gracious does this sound like the AI industry just asking for you to hand the a blank check, because it sure would be a shame if something happened to your code base, wouldn't it? I don't have a solution to this. This is stricly a cri de coeur . Except maybe to say that if this is going to be the way in the future that it becomes vastly, vastly more important to work out how to write more secure code from the very beginning. We've certainly been trending this way for the last few decades, hand-wringing aside security has gotten a lot better than it used to be, it's just the world has gotten more complicated and harsh as well so it doesn't always look like it. But it takes over a decade for things like \"use parameters in your SQL query instead of concatenation\" to go from some crazy guy's idea in some obscure open source package somewhere to common practice that can almost be counted on. That loop is going to have to close much faster and there's a lot of things that are barely registering on people's radars, like, the *at APIs for files (openat, etc.) need to be the default much, much sooner than their current trajectory has them on."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 16,
+      "id": 48806305,
+      "title_en": "Life with Hazard Ratios",
+      "title_ja": "Life with Hazard Ratios",
+      "url": "https://dynomight.net/hazard-ratios/",
+      "hn_url": "https://news.ycombinator.com/item?id=48806305",
+      "score": 23,
+      "comment_count": 4,
+      "posted_at": "2026-07-06T15:45:50+00:00",
+      "comments": [
+        {
+          "id": 48855388,
+          "author": "jdw64",
+          "text": "I read it, and it seems like the core formula is ΔL ≈ ln(1 / HR) × 12.93 years (for U.S. males). It also gives you an easy way to approximate and interpret HR values from health studies, like an HR of 0.90 roughly translates to a little over a year of added life expectancy. Makes it easier to read those papers. Personally, I found it interesting. But what I'm curious about is this: are there any studies where the lower your exposure to risk, the shorter your lifespan gets? I've been thinking about this because I recently saw a story about an ultra wealthy guy who tried a reverse aging experiment and ended up with an incurable disease. This person probably had the best diet in the world and received top tier care, so how did he end up with something like that? It makes me wonder, maybe the human body just rejects reverse aging itself. Maybe we're wired to die because that's how species diversify. Just curious."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 17,
+      "id": 48845209,
+      "title_en": "A road to Lisp: Why Lisp",
+      "title_ja": "A road to Lisp: Why Lisp",
+      "url": "https://scotto.me/blog/2026-07-09-why-lisp/",
+      "hn_url": "https://news.ycombinator.com/item?id=48845209",
+      "score": 204,
+      "comment_count": 136,
+      "posted_at": "2026-07-09T13:06:04+00:00",
+      "comments": [
+        {
+          "id": 48849015,
+          "author": "GMoromisato",
+          "text": "Programming is in tension between the Light Side and the Dark Side. The Light Side is about preventing the programmer from making mistakes: Get rid of go-tos! Add static types! Do not allow a bug to be expressible. The Dark Side is about giving power to the programmer: Macros? Obviously. Operator overloading? Self-modifying code? Multi-line reg-exps? Go to town! The Light Side knows programmers are flawed and imposes constraints. The Dark Side trusts programmers with power. Neither side is correct all of the time, and a good programmer learns both. Lisp is interesting in that it is clearly Dark Side programming (the programmer can do anything) but it's still admired by Light Side programmers. Maybe there's something about the simplicity of the language that makes it seem platonic--almost incorruptible. Or maybe Lisp is so pure that it embodies both Light Side and Dark Side, like a god that spawned the programming universe."
+        },
+        {
+          "id": 48856362,
+          "author": "peter_retief",
+          "text": "The real test of a programming language is its readabilty. I looked at lisp many times and it just doesn't do it for me."
+        },
+        {
+          "id": 48856252,
+          "author": "holgerschurig",
+          "text": "It's really fun: I read so many propaganda on Lisp here that by now we should all be coding in it. Don't we get perhaps weekly posts like this? But ... somehow almost everyone simply ignores this propaganda --- that's actually the way we ought to handle propaganda! Funny that it works with Lisp, but not with many political topics where it can be shown that propaganda really works. My experience with Lisp is somewhat special-cornered. I only know Emacs-Lisp, and that not great. And for me, Lisp an out, outdated and confusing thing. I don't know ANY other programming language that elected assembler mnemonics to be \"high\"-level expression: car and cdr. While I love Emacs, they claim all the time that is has 100% discovery through build in doc. But that is only 70% true. It doesn't exist in Lisp like it does in other languages. For example, I have an association list. Now, what functions exist that uses them? I can't use the equivalent for (dir alist), alist.dir(), or use some LSP for that. I can't even look in the symbols, because operators are written like assoc or assq with not logic. And then there are either prefixes to them (rassoc) or postfixes (assoc-string). That there is no namespace is soooo 1970. I mean, even Turbo-Pascal had namespaces. Typechecking is nonexistant. At least we have byte-compiling. And note that I don't croak about the parenthesis. While I find it mildy weird that I as a human program in almost-AST, Emacs has superp support for the parenthesis. So people croaking about them just had never had a good editor IMHO. Now, one can argue that Emacs Lisp != Common Lisp. But these propaganda articles don't tend to promote one specific Lisp, they only talk in generals. So I can apply this general principle and compare it to the tiny corner of these awful language family."
+        },
+        {
+          "id": 48847531,
+          "author": "AlexeyBrin",
+          "text": "The website seems to have a bug with syntax highlighting. Pieces of code included in the post text are black, you can still see the actual text if you select it with your mouse. Same bug on Chrome desktop and on Safari on iPad"
+        },
+        {
+          "id": 48850010,
+          "author": "abetusk",
+          "text": "There are many articles extolling the virtues of Lisp. I would like to see some articles that have a level-headed criticisms or critique of Lisp, it's ideas and it's place in the ecosystem of languages. Articles like this, and the PG articles it references, amount to \"if you know, you know\". I understand the appeal and I understand the explicit and implicit arguments this article is making. Computer programming has matured quite a bit in the past 60 years. I would like to see more articles that are more considered in their examination."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 18,
+      "id": 48804400,
+      "title_en": "Triple Dragon Fractal (2020)",
+      "title_ja": "Triple Dragon Fractal (2020)",
+      "url": "https://paulbourke.net/fractals/tripledragon/",
+      "hn_url": "https://news.ycombinator.com/item?id=48804400",
+      "score": 38,
+      "comment_count": 8,
+      "posted_at": "2026-07-06T13:36:58+00:00",
+      "comments": [
+        {
+          "id": 48854653,
+          "author": "goodwillhunting",
+          "text": "Probably the first non AI-generated graphic I've seen in a year! :)"
+        },
+        {
+          "id": 48854553,
+          "author": "bananaboy",
+          "text": "Always love to see new stuff on Paul Bourke's web site!"
+        },
+        {
+          "id": 48855412,
+          "author": "jdw64",
+          "text": "Do they still make screensavers that collect these kinds of things these days? When I was a kid, I used to love just staring blankly at computer screensavers."
+        },
+        {
+          "id": 48855167,
+          "author": "anoneng",
+          "text": "That is some hubris for Paul to claim to have “created” this fractal in December 2020. Yes he coded up and rendered some nice images from this particular function. But this class of rational maps in complex dynamics has been studied by actual mathematicians for decades and there are many extremely similar visualizations. It’s a nice little exercise but there’s very minimal real original contribution that deserves attribution here. You could render this in Fractint in DOS just by plugging that function in, I explored many similar cubic fractals with Fractint back in the mid-90s. And would have earlier if my parents could have afforded a 386 before then. It was released in 1988."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 19,
+      "id": 48852199,
+      "title_en": "Building a real-time AI tutor for 5-year-olds",
+      "title_ja": "Building a real-time AI tutor for 5-year-olds",
+      "url": "https://www.ello.com/blog/teaching-a-child-in-1000-ms",
+      "hn_url": "https://news.ycombinator.com/item?id=48852199",
+      "score": 74,
+      "comment_count": 107,
+      "posted_at": "2026-07-09T20:51:06+00:00",
+      "comments": [
+        {
+          "id": 48856130,
+          "author": "catalinvoss",
+          "text": "Sorry — we had to step away to put our kids to bed, but this post has really blown up! not able respond to every comment right now but just wanted to say one thing: we've been working on this problem for over 5 years now, and our team has witnessed how transformative technology can be when set up correctly to change a child who has fallen behind back up to par, and at times even exceed their peers, in very short periods of time. Ello 1.0, our reading product that isn’t fully agentic but incorporates extensive use of AI, is already in the homes of tens of thousands of happy families, and every day we continue be be blown away by the messages we receive from our customers for whom Ello has been able to meaningfully impact. We know there's some skepticism on how AI will evolve over time, but we've been witness to how impactful technology can when done right can be. This is why we think it's even more important that we try to get this right, than to simply rule it off the technology because it's AI. If you want to read up on some reviews from the families using the current version of Ello, you can take a look here: https://www.reviews.io/company-reviews/store/ello"
+        },
+        {
+          "id": 48853929,
+          "author": "jostylr",
+          "text": "What are your thoughts about children in a Sudbury School model? These are democratic schools where children can do what they like in the day. Mostly they choose to play with other kids, games of imagination, though also doing screen time. One of the basic principles is that children figure out what they want to do and the learning comes along with it; the model views adults wanting children to learn something specific as generally counterproductive though having resources available is okay if it is not coupled with any expectations. Are your devices likely something that they would have fun with and choose to engage with or is it likely to be ignored unless adults use some kind of persuasion to have them use it? Is it cool with a child using it for a bit and then not using it for a few months and then wandering back to it? How far up into math does it go compared to what an a randomly sampled adult could actually do mathwise? Also for reading, are you using phonics or whole word sighting? For math, to what extent is it screen manipulatives versus manipulations of digits? Also, do you have provision for an older child to start learning this stuff so the basics need not be at a 4 year old presentation level, but the concepts still need to be covered? In Sudbury schools, the typical age of self-taught reading is 7-9 though it can range from 4 to 12. Useful arithmetic usually seems to happen much earlier than reading though reading tends to get completed by the children on their own while arithmetic does not advance further than the needs of money exchange without special effort. In the long run, Sudbury students have no problem with college level material, including mathematics, but it could be nice to have something that eases the white knuckling if it does not undermine the child's self-directedness."
+        },
+        {
+          "id": 48854186,
+          "author": "jordanmeyer",
+          "text": "The reality is, most 5 year olds don’t get access to the resources most of us have had while growing up. People are saying, “kids should have human tutors.” Guys, most people in the world don’t have any tutors! What Ello has built and other forms of AI-based tutoring is going to raise the average level of education and literacy in the world. Especially in developing countries. Let individual parents decide what’s best for their kids."
+        },
+        {
+          "id": 48853615,
+          "author": "jbotz",
+          "text": "I wish I had had this when I was a 5-year-old. Few of my teachers really understood the things I wanted to learn, my peers weren't interested in the nerdy things I was, and my parents certainly didn't have the wealth to provide me with private tutoring. There are a lot of negative comments here, but they are shallow... I'm sure those commenters wouldn't want to live without the access to the Internet, and even a brilliant five-year-old can't use the Internet effectively yet. A smart and curious 5-year-old has endless questions and a properly harnessed LLM has endless patience to provide answers at a level the kind can understand (which usually not even it's parents do). In fact, this could be one of the most beneficial uses of AI for society yet... private tutors of the level that the mega-rich always had, now for all kids everywhere! This gives me real hope for the future generations of humanity."
+        },
+        {
+          "id": 48854622,
+          "author": "erikschoster",
+          "text": "> Effective teaching isn't just about answering a child's question quickly, rather making the right move at the right moment. AI is also going to be an integral part shaping how this generation of kids learn to read and think, tackling this responsibly means getting the design right. Can you elaborate on what the experience is like for the child? How does this system help them learn? The article focuses on optimizing for interactivity and engagement, but doesn't discuss how this system challenges or facilitates learning and why AI needs to be the solution."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 20,
+      "id": 48853091,
+      "title_en": "Why American ambulance rides are so expensive",
+      "title_ja": "Why American ambulance rides are so expensive",
+      "url": "https://davidoks.blog/p/why-american-ambulance-rides-are",
+      "hn_url": "https://news.ycombinator.com/item?id=48853091",
+      "score": 164,
+      "comment_count": 207,
+      "posted_at": "2026-07-09T22:15:56+00:00",
+      "comments": [
+        {
+          "id": 48855585,
+          "author": "grogenaut",
+          "text": "He refused to go in an ambulance the first time. He could have refused the second ride. You can refuse transport or medical care at any time as long as you are able to make rational decisions. As an EMT if you're A&Ox4, alert to time, place, person and event, you make the choices. You do sign a release so we have proof we didn't abandon you, but you make the choice. If we move you without your approval, it's kidnapping or entrapment (not hit me up law arguers). To do that we either need implied consent (minor no parent, not A&Ox4, or Law Enforcement). My department, a small rural one with a small tax base which happens to cover a lot of injuries because we have 20 miles of dangerous mountain pass freeway and a ski and mountain bike area, only charge for calls if we transport. I think a transport is around $900. Our minimum transport is 37 miles. We scale it down depending on income and type of event. We're not massive sticklers about it. We're just trying to cover wear and tear on big expensive vehicles for all the non-transports, winter driving, equipment, uniforms, training, etc. Most of our \"business\" comes from \"transients\" eg folks who don't live there, eg those skiing, hiking, biking, or driving over the pass. This is also very much not the norm. But should explain a bit about those who do pay are covering those who don't. We don't want a chilling effect on calling 911 for precautionary stuff. We'd rather show up 99 times and check people out and let them go than miss the impending cardiac event. And we get those. It's very interesting just how much going over a 4k foot pass stresses people on the edge. Many of our medica calls are people driving to seattle for deeper care and things exacerbating when they get to 4k feet."
+        },
+        {
+          "id": 48853566,
+          "author": "gruez",
+          "text": "As much as I like articles that tries to use economics or finance to explain stuff, the \"options\" analogy is a bit hamfisted. The article starts off by noting about how ambulance is an \"option\" for a rescue, but even though the analogy might vaguely work, it's not really needed to answer the question. That can be answered far more simply: \"medicare and insurance companies pay them too little, so they have to charge everyone else more\". Or, from the article: >This meant that the payment structure and the cost structure were increasingly mismatched: and so ambulance services had to pay for their round-the-clock readiness by billing for individual rides. [...] >And notably, the fees that Medicare sets run far below cost. The average ambulance transport costs $2,673 to provide; Medicare pays only about $329 of that. A typical ambulance ride for a Medicare patient, in other words, loses theambulance service thousands of dollars."
+        },
+        {
+          "id": 48853745,
+          "author": "xp84",
+          "text": "I tell this story every time ambulance costs come up because it might be helpful to anyone. I once lived in San Francisco in the mid-2010s. In SF, the SFFD operates the vast majority of ambulances in the city. As in, 80%+. I once had the need to go to the hospital urgently and called 911. The ambulance that showed up was SFFD. They transported me and I recovered safely. I then got a bill from them saying that my insurance had refused to pay for it - apparently that insurance company (they're lucky I've forgotten which one, as naming and shaming health insurance people is one of my favorite hobbies) had refused to contract with SFFD, making them \"out of network.\" Yes, an out of network ambulance. And remember, there's at least an 80% chance that an SFFD ambulance will show up, and I've never heard of them offering a menu of ambulance companies to the caller who's likely having a heart attack, bleeding, etc! So of course, my insurance would only pay some small pittance, if anything, and I was sent a ~$1000 bill. I immediately filed a complaint with the insurance company's California regulator (at the time it was the Dept of Insurance for this one, but it seems most or all now are under the Department of Managed Health Care) since insurance companies are by law obligated to pay at the in-network rate in the case of an emergency (which presumably is why you call an ambulance in the first place). Within 2 weeks I received a letter from the insurance company that all was completely fine and that they'd corrected the situation and paid the bill. So we have an insurance company which surely knows that law, surely knows what an ambulance is for, but has discovered the \"life hack\" of having an extremely inadequate network, simply refusing nearly every ambulance claim made in the City, and then only paying the small percentage who know the law and know how to file a complaint. And of course, there's no punishment, the punishment is just having to pay the few times they're caught. And insurance companies wonder where all that anger (Delay, Deny, Depose, was it?) comes from. Anyway, practical moral of the story: don't let them get away with doing that if it happens to you or someone you know! Note: My story is obviously kind of tangential to the actual article which explains why the cost is so high due to everyone who's being subsidized by what they're charging privately-insured patients. However, I have but the world's tiniest violin for those extremely profitable insurance companies who would obviously really like one of their costs of doing business to just go away. Yeah, I'd also like it if I could be paid my full salary, even though I refuse any work I find annoying."
+        },
+        {
+          "id": 48853534,
+          "author": "arjie",
+          "text": "You don't have to pay them unless they're specific. I got a bill 3 years after being in an accident and I asked them for the documentation they legally have to provide me (itemization, the legal basis, detailed incident record, attempts on their part to contact insurance) of how they arrived at the sum. It's been a year since and they haven't given me anything. Besides this kind of billing is banned in California now https://leginfo.legislature.ca.gov/faces/billHistoryClient.x... The insurers just pay the in-network fee and you call it a day."
+        },
+        {
+          "id": 48853554,
+          "author": "darth_avocado",
+          "text": "We’re all pretending this is an unsolvable problem when really most of the world has solved it by making ambulance (EMS) funding similar to fire and police departments. Somehow in any emergency I’ve seen, all three show up, often EMS before police or fire dept, and somehow that’s a service that has to be supplemented by insurance billings. The blog mentions it, but it’s one of those obvious things that somehow isn’t solved yet and blows my mind every time it comes up."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 21,
+      "id": 48847511,
+      "title_en": "A possible future for Damn Interesting",
+      "title_ja": "A possible future for Damn Interesting",
+      "url": "https://www.damninteresting.com/a-possible-future/",
+      "hn_url": "https://news.ycombinator.com/item?id=48847511",
+      "score": 265,
+      "comment_count": 37,
+      "posted_at": "2026-07-09T15:25:25+00:00",
+      "comments": [
+        {
+          "id": 48849309,
+          "author": "DamnInteresting",
+          "text": "Heavens to Betsy. My server alerted me that traffic was far exceeding a median Thursday. For the record, I am a fairly active user on HN, but I was not responsible for sharing this link here, directly or otherwise. I have little stomach for self-promotion (probably to my detriment)."
+        },
+        {
+          "id": 48856398,
+          "author": "jdthedisciple",
+          "text": "Open a Patreon page with different tiers and a private Discord server for your patreons. From what I gather that's been a fairly successful standard model for independent content creators."
+        },
+        {
+          "id": 48848746,
+          "author": "dclowd9901",
+          "text": "Admittedly, I haven't read DI in quite a while, but seeing this post brought back a flood of memories from my college days of waiting for the next article to drop. This blog was the precursor of an entire genre of \"generally interesting shit\" that has kind of underpinned most of the spirit of podcasting today. Shows like 99PI, Stuff You Should Know, RadioLab and so on owe I think a little something to this blog. The amount asked for is meager, and I was more than happy to throw some bucks at it."
+        },
+        {
+          "id": 48850376,
+          "author": "scientifik",
+          "text": "https://www.damninteresting.com/this-place-is-not-a-place-of... - has long been one of my favorite articles on the internet. Happy to chip in to support the site."
+        },
+        {
+          "id": 48852760,
+          "author": "Aachen",
+          "text": "I found Damn Interesting because of an orbital mechanics simulation the author coded in javascript as a one-off for an article about iirc cyclers. Crazy amount of effort for what's probably about 10 seconds of eye-candy for the average reader. I found it a really neat implementation and while the articles are a bit long for me, it got me hooked on their podcast. There seem to be few projects as thorough and long-lived as this one."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 22,
+      "id": 48847562,
+      "title_en": "Launch HN: Context.dev (YC S26) – API to get structured data from any website",
+      "title_ja": "Launch HN: Context.dev (YC S26) – API to get structured data from any website",
+      "url": "https://www.context.dev",
+      "hn_url": "https://news.ycombinator.com/item?id=48847562",
+      "score": 85,
+      "comment_count": 64,
+      "posted_at": "2026-07-09T15:28:39+00:00",
+      "comments": [
+        {
+          "id": 48854559,
+          "author": "SOLAR_FIELDS",
+          "text": "If you want to vibe something that gets you 70% of the way to this well funded startup in like 15 minutes just tell your LLM of choice to create a hook or override the web fetching skill to pipe the content through Mozilla’s readability extension that strips the DOM elements out deterministically, leaving only the content. You can then parse it however you want. Can be done entirely client side, in runtime, with a few JavaScript libraries"
+        },
+        {
+          "id": 48855940,
+          "author": "aadv1k",
+          "text": "Hi! Congrats on the launch, I gained LOTS of great insights from your comments, particualrly the bits about diffrentiation in a crowded market. I am building something in agentic automation space, currently it's still under development, but would love to know your journey of ideating -> building -> getting the first customer -> iterating -> and presumably getting into YC. Am still relatively new to this (19 lol) so I got a long way, but would really appreciate any insights :) Cheers! Wish you luck with Context."
+        },
+        {
+          "id": 48856375,
+          "author": "rao-v",
+          "text": "This seems like a responsibly designed service, but I find it a little odd and baffling that we need such intermediaries for the average hobbyist / small project to reliably access sets of content published on the internet. Was’t this the point of the web?"
+        },
+        {
+          "id": 48849410,
+          "author": "twosdai",
+          "text": "Are you using residential proxies? How do you handle websites that don't want to be scraped. EG if I start passing in Linkedin pages what is your expectation of the result that people would see per profile. EDIT: Congrats on the launch seriously hard work, just wanting to understand your scraping stance more. I've worked with a lot of tools on this, didn't mean for my initial comment to be adversarial."
+        },
+        {
+          "id": 48855590,
+          "author": "jackienotchan",
+          "text": "How did you find your differentiation in a highly commoditized space? It's probably one of the most crowded spaces. Even within YC, there are many competitors that do pretty much the same thing: - Firecrawl - BrowserUse - Browserbase - CloudCruise - NotteLabs - Intuned - Expand.ai - Reworkd And then you have the extremely well-funded web retrieval players like Parallel and Exa. How do you differentiate to all these? Another thing that might interest HN: AI crawlers come with negative side effects for website owners (costs, downtime, etc.), as repeatedly reported here on HN (and experienced myself). Does Context respect robots.txt directives and do you disclose the identity of your crawlers via user-agent header?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 23,
+      "id": 48809574,
+      "title_en": "Girls just wanna have fast MPMC queues with bounded waiting",
+      "title_ja": "Girls just wanna have fast MPMC queues with bounded waiting",
+      "url": "https://nahla.dev/blog/waitfree_queue/",
+      "hn_url": "https://news.ycombinator.com/item?id=48809574",
+      "score": 150,
+      "comment_count": 31,
+      "posted_at": "2026-07-06T19:46:30+00:00",
+      "comments": [
+        {
+          "id": 48849737,
+          "author": "scottlamb",
+          "text": "> Disclaimer: An earlier version of this post claimed the structure is wait-free, this is incorrect. Being wait-free requires that failure or suspension of any thread can’t cause failure or suspension of another thread. This queue in fact does not fulfill that requirement. The main section which discusses the wait bounds of queue operations has been amended to reflect this, but other parts of this article have not been. As such there may parts of the text which refer to this as a wait-free queue, which it is not. I chose to keep those sections to avoid rewriting chunks of this post after it was already posted. Thanks for the correction Reddit user matthieum! Classy disclaimer! matthieum's (long) reddit comment is also an informative read: https://www.reddit.com/r/rust/comments/1up0uhg/girls_just_wa..."
+        },
+        {
+          "id": 48854483,
+          "author": "Human-Cabbage",
+          "text": "Surprised nobody here nor on the reddit thread caught this one: https://github.com/nahla-nee/wfqueue/blob/main/src/lib.rs#L3... unsafe impl<T, const N: usize> Sync for WFQueue<T, N> {} unsafe impl<T, const N: usize> Send for WFQueue<T, N> {} These impls are unsound, because neither constrains `T` to be `Sync`/`Send`. As-written this would let you declare a `WFQueue<Rc<T>, N>` and pass non-atomic-refcount pointers between threads. The fix is straightforward: unsafe impl<T: Sync, const N: usize> Sync for WFQueue<T, N> {} unsafe impl<T: Send, const N: usize> Send for WFQueue<T, N> {} I.e., WFQueue is only Sync if T is Sync, and likewise for Send. Actually, later on, the code makes a similar mistake, but only for one impl. unsafe impl<'a, T, const N: usize> Send for DrivableWFEnqueue<'a, T, N> where T: Send {} unsafe impl<'a, T, const N: usize> Send for DrivableWFDequeue<'a, T, N> {}"
+        },
+        {
+          "id": 48856303,
+          "author": "ThePowerOfFuet",
+          "text": ">fast MPMC queues with bounded waiting Sounds like fun."
+        },
+        {
+          "id": 48851057,
+          "author": "duttish",
+          "text": "On the topic of lock free data structures I found this one on a SPSC very interesting too https://david.alvarezrosa.com/posts/optimizing-a-lock-free-r... taking it from 12M to 305M ops/s"
+        },
+        {
+          "id": 48851896,
+          "author": "rigtorp",
+          "text": "Here's my widely used implementation of this approach in C++: https://github.com/rigtorp/MPMCQueue"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 24,
+      "id": 48846184,
+      "title_en": "Muse Spark 1.1",
+      "title_ja": "Muse Spark 1.1",
+      "url": "https://ai.meta.com/blog/introducing-muse-spark-meta-model-api/",
+      "hn_url": "https://news.ycombinator.com/item?id=48846184",
+      "score": 353,
+      "comment_count": 178,
+      "posted_at": "2026-07-09T14:10:22+00:00",
+      "comments": [
+        {
+          "id": 48847019,
+          "author": "GodelNumbering",
+          "text": "Lot more details in the linked report https://ai.meta.com/static-resource/muse-spark-1-1-evaluatio... From Terminal-bench-2.1 details, > We use a bash-tool-only agent harness to evaluate 89 Terminal-Bench 2.1 tasks from the official repository, where resources are capped at 6 CPU cores and 8GB RAM. This disqualifies the results. Each terminal bench task has a cpu upper limit and RAM upper limit. Overriding either is disqualification. For reference, in tbench-2.1, 1. 0 out of 89 task allow 6 cpu cores (highest is 4, and i think only 1 task) 2. 8 out of 89 tasks allow 8GB RAM This kind of shady benchmarking (I was talking about it just yesterday in a different context https://news.ycombinator.com/item?id=48838212 ) takes all joy out of building a harness to improve benchmark performance of a model because no matter what you do, you won't beat the headline (cheating) number. This is presumably why this model is not in the official benchmark leaderboard https://www.tbench.ai/leaderboard/terminal-bench/2.1 As an ex Meta employee, this is a little sad but not massively surprising. 'Number go up' is the core performance evaluation metric until PSC is done and you move on."
+        },
+        {
+          "id": 48848333,
+          "author": "simonw",
+          "text": "I had a few days of preview access, which was long enough to put together a plugin for LLM. You can try the model out in the terminal like this: uv tool install llm llm install llm-meta-ai llm keys set meta-ai # paste API key here llm -m meta-ai/muse-spark-1.1 \"Generate an SVG of a pelican riding a bicycle\" Here's the result: https://tools.simonwillison.net/markdown-svg-renderer#url=ht... For comparison, here's the pelican I got from Muse Spark 1: https://simonwillison.net/2026/Apr/8/muse-spark/"
+        },
+        {
+          "id": 48848147,
+          "author": "jacobgold",
+          "text": "Maybe Zuck should double down on his \"spoiler\" role with models rather than compete head-to-head. He doesn't have to match Anthropic or OpenAI model revenue if he can deflate theirs by 99%. All he has to do is keep spending a few billion dollars developing frontier models, release them as open weights, and turn coding models into a commodity. He also needs a good OSS reference harness to match. Very few people are in a position to do this and for it to make business sense. That's quite likely where things are headed regardless, and he could speed it up significantly. We should all hope models move from proprietary products to commodities the way compilers did. This may be one of the best things Zuck could do for the world."
+        },
+        {
+          "id": 48846464,
+          "author": "Tiberium",
+          "text": "The pricing is insane: $1.25/$4.5 for 1M tokens, and $0.15 for cached input! https://dev.meta.ai/docs/getting-started/pricing-rate-limits"
+        },
+        {
+          "id": 48847559,
+          "author": "Sol-",
+          "text": "Interesting how the prevalent opinion until yesterday seems to have been that OpenAI & Anthropic are irreversibly ahead and now with xAI and Meta at least delivered something that's competitive with useful models and cheap too. Granted, the narrative that the two leading labs are ahead still holds with Fable (and perhaps an upcoming GPT6), but it's not as over as common knowledge by the opinion leaders would have us believe."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 25,
+      "id": 48805358,
+      "title_en": "Harman and Dr. Sean Olive are reshaping headphone sound",
+      "title_ja": "Harman and Dr. Sean Olive are reshaping headphone sound",
+      "url": "https://www.crutchfield.com/S-ls67Oiva4Wu/learn/crutchfield-visits-harman.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48805358",
+      "score": 5,
+      "comment_count": 0,
+      "posted_at": "2026-07-06T14:42:35+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 26,
+      "id": 48813214,
+      "title_en": "Cache-Conscious Data Layout in Rust: Field Zoning, False Sharing, 128-Byte Rule",
+      "title_ja": "Cache-Conscious Data Layout in Rust: Field Zoning, False Sharing, 128-Byte Rule",
+      "url": "https://debasishg.github.io/blog/part1-cache-conscious-data-layout-in-rust/",
+      "hn_url": "https://news.ycombinator.com/item?id=48813214",
+      "score": 20,
+      "comment_count": 13,
+      "posted_at": "2026-07-07T03:01:03+00:00",
+      "comments": [
+        {
+          "id": 48856359,
+          "author": "teo_zero",
+          "text": "I don't get it. If the ring structure has 4 field (excluding the cold ones), and all 4 have alignment constraints, doesn't it define 4 zones in 4 cache lines, and not 2? I expected head and cached_tail, for example, to share the same line, but since they are both 128-byte aligned, they end up in separate lines. Granted, both lines are dedicated to only one side of the producer-consumer pipe, but we're wasting cache lines for nothing."
+        },
+        {
+          "id": 48855841,
+          "author": "teravor",
+          "text": "the best way to prevent false sharing is by making it so that no two threads are in a position to access the same data structure which may be inconsistent because it is being written to. embrace message passing."
+        },
+        {
+          "id": 48855913,
+          "author": "jauntywundrkind",
+          "text": "Side note, nice seeing Debasish Ghosh working in Rust! Yay. As is tradition in Rust world, yes they have their own (rather extensive) repo of ring buffers. https://github.com/debasishg/ringmpsc-rs"
+        },
+        {
+          "id": 48855504,
+          "author": "jdw64",
+          "text": "But I don't really get what the problem is with using AI for editing. This article clearly has a sense of what it's trying to say. A human wrote the first draft, and then AI polished it. It's a method I use a lot myself. So it's a human plus AI hybrid piece, and honestly, I don't see anything particularly wrong with the content. Stuff like isolating the hot core and packing the cold fields, that's just common knowledge you pick up. Compared to purely human writing, it's actually safer and reads better than you'd expect, so I find it hard to understand why people are complaining about this. If anything, I think tech blogs especially need to check whether their own thoughts line up with the knowledge of an LLM, which is basically a talking encyclopedia. But it seems like people don't really see it that way."
+        },
+        {
+          "id": 48855071,
+          "author": "kouteiheika",
+          "text": "> the mechanics that make zoning real: why #[repr(C)] is load-bearing, why the magic number is often 128 and not 64, and why adding prefetch hints can make things worse. > The honest rule Sigh... yet another Claude written article, and (unless I'm blind) it doesn't seem to be disclosed anywhere. Normally I'm not the one to complain, but it's really tedious to see this writing style pretty much everywhere nowadays, and the more you see it the more you start to find it unbearable to read."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 27,
+      "id": 48800930,
+      "title_en": "Patterncollider: Generate and explore quasiperiodic tiling patterns",
+      "title_ja": "Patterncollider: Generate and explore quasiperiodic tiling patterns",
+      "url": "https://github.com/aatishb/patterncollider",
+      "hn_url": "https://news.ycombinator.com/item?id=48800930",
+      "score": 38,
+      "comment_count": 2,
+      "posted_at": "2026-07-06T05:26:22+00:00",
+      "comments": [
+        {
+          "id": 48856441,
+          "author": "niksmather",
+          "text": "So cool! Really looking forward to playing around with this. It was also a great little explainer of how these tilings get made. One question: how do you guarantee/prove that the tiling you get back from the grid is quasiperiodic?"
+        },
+        {
+          "id": 48853585,
+          "author": "kzrdude",
+          "text": "The grid and sliding tiles illustration is great, I've never understood it that way before. Thank you!"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 28,
+      "id": 48855112,
+      "title_en": "Ben Bernanke Joins Anthropic Oversight Trust",
+      "title_ja": "Ben Bernanke Joins Anthropic Oversight Trust",
+      "url": "https://www.anthropic.com/news/ben-bernanke",
+      "hn_url": "https://news.ycombinator.com/item?id=48855112",
+      "score": 58,
+      "comment_count": 51,
+      "posted_at": "2026-07-10T02:39:07+00:00",
+      "comments": [
+        {
+          "id": 48855877,
+          "author": "esikich",
+          "text": "He's 72 years old, I'm sure he has the best brains and everyone's best interests in mind. This is exactly what I want to see. I'm sure he will have very good opinions on technology and it's implications."
+        },
+        {
+          "id": 48855710,
+          "author": "visiondude",
+          "text": "so the architect of government bailout gets a cushy gig. probably one of the most harmful precedents set and now companies expect bailouts. to bailout the company instead of people and small shareholders was always poor decision, emboldened the worst of the business class. don’t love this hire lol"
+        },
+        {
+          "id": 48855822,
+          "author": "brikym",
+          "text": "Just in case Anthropic are looking for some more members that are a good cultural fit I found this list: > Genie Energy's Strategic advisory board is composed of: Dick Cheney since 2009 (former vice president of the United States),[3] Rupert Murdoch (media mogul and chairman of News Corp), James Woolsey (former CIA director), Larry Summers (former head of the US Treasury), Michael Steinhardt, Jacob Rothschild,[4][5] and Mary Landrieu, former United States Senator from Louisiana."
+        },
+        {
+          "id": 48855636,
+          "author": "rekwah",
+          "text": "This feels like Theranos loading up their board with big names."
+        },
+        {
+          "id": 48856014,
+          "author": "whatever1",
+          "text": "Any idea how one can join a board? Eating donuts and bagels with coffee once a quarter for 200k is my dream job."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 29,
+      "id": 48803004,
+      "title_en": "Buried Apple feature turns an iPhone into the perfect kids' dumb phone",
+      "title_ja": "Buried Apple feature turns an iPhone into the perfect kids' dumb phone",
+      "url": "https://www.wired.com/story/this-buried-apple-feature-turns-an-iphone-into-the-perfect-kids-dumb-phone/",
+      "hn_url": "https://news.ycombinator.com/item?id=48803004",
+      "score": 314,
+      "comment_count": 188,
+      "posted_at": "2026-07-06T10:53:51+00:00",
+      "comments": [
+        {
+          "id": 48853440,
+          "author": "msftgreed",
+          "text": "This is a great example of the curb cut effect -- a system designed for accessibility needs turns out to be useful in other contexts. Curb cuts were designed for people with disabilities, particularly veterans, and over time have become more and more standard. They help people who use wheelchairs, yes, but also people without disabilities like those with strollers, bikes, luggage, or small kids. We love to see accessibility features find uses outside their original intent."
+        },
+        {
+          "id": 48850107,
+          "author": "Cider9986",
+          "text": "Mobile Device Management (MDM) is the only effective way to restrict idevices. All you need is a macbook and Apple Configurator. You can remove safari, blacklist or whitelist websites, block installing apps, block deleting apps. It's really customizable. Edit: expanded acronym."
+        },
+        {
+          "id": 48826243,
+          "author": "Brajeshwar",
+          "text": "Archived https://archive.is/LV6Cw Long back Xiaomi Phones used to have soemthing like this. That one feature was how I migrated my in-laws to Smartphones from their Nokias. The key content from the article; Here's how you set it up: Head into Settings, tap Accessibility, scroll down to the General section at the very bottom, and tap Assistive Access. Now, tap Set Up Assistive Access, then Continue. It will then ask you to select your preferred appearance: rows or a grid. I suggest choosing a grid. This is how you get those super-large tiles. Now the OS will ask you to select allowed apps—tap the green plus icon next to the apps you want to allow."
+        },
+        {
+          "id": 48855299,
+          "author": "sgerenser",
+          "text": "Is anyone who was in grade school in the 1990s reminded of Apple’s “simplified” MacOS shell called At Ease? https://en.wikipedia.org/wiki/At_Ease"
+        },
+        {
+          "id": 48850988,
+          "author": "xnx",
+          "text": "Summary: Simplify the iPhone home screen with large icons for kids or seniors: Settings > Accessibility > General section at the very bottom > Assistive Access"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 30,
+      "id": 48838876,
+      "title_en": "John Deere owners will get the right to repair equipment under FTC settlement",
+      "title_ja": "John Deere owners will get the right to repair equipment under FTC settlement",
+      "url": "https://apnews.com/article/john-deere-right-to-repair-agriculture-equipment-cb7514ffedb95c130a976af661f2bc02",
+      "hn_url": "https://news.ycombinator.com/item?id=48838876",
+      "score": 1304,
+      "comment_count": 275,
+      "posted_at": "2026-07-08T23:37:43+00:00",
+      "comments": [
+        {
+          "id": 48839300,
+          "author": "Cider9986",
+          "text": "Shout out to Louis Rossmann for doing a ton of work on Right to repair. He started a website called Consumer Rights Wiki to document anti-consumer practices. https://consumerrights.wiki/w/Main_Page He's also involved with FULU Foundation which has a bounty of 25k to get Ring cameras working without Amazon's servers. https://bounties.fulu.org/bounties/ring-video-doorbells"
+        },
+        {
+          "id": 48840226,
+          "author": "jamienk",
+          "text": "\"Right to repair\" isn't some kind of little negotiated contract fiddling. A company can't agree to a 5-year right to repair. Right to repair is a normal freedom, like speech, like using everyday objects you buy or make, generally walking around, meeting people, etc. Don't let's get all twisted up here and start thinking some dumb-ass business plan is the starting point in our basic conceptualization of humanity."
+        },
+        {
+          "id": 48854105,
+          "author": "mikewarot",
+          "text": "I've learned that I'm just not cynical enough. Here's the relevant Peter Girnus post[1], he tells the underlying truth through satire. 10 years. We report our compliance every 60 days, then once a year, which is to say we have turned handing you your own machine into a paperwork schedule that runs through 2036. Any new repair tool we build, we only have to share once more than 50% of our dealers already have it. We decide when a dealer has it. We build the clock and we wind the clock. https://x.com/gothburz/status/2075211022198096180"
+        },
+        {
+          "id": 48839245,
+          "author": "MarkMarine",
+          "text": "Great news, the fine is so small doesn’t matter, but curing the wrong does. My hope is this standard will apply to modern cars as well, repair manuals and the software tools to interact with the cars are also heavily restricted by the manufacturers."
+        },
+        {
+          "id": 48839210,
+          "author": "ggoo",
+          "text": "Bananas that stuff like this needs to get litigated in our society - if you asked 100 random people \"should farmers be able to repair their equipment\", you would get 100 yes's."
+        }
+      ],
+      "summary_ja": ""
+    }
+  ]
+}
