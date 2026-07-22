@@ -1,0 +1,1084 @@
+{
+  "date": "2026-07-23T00:00:00+09:00",
+  "slot": "23",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 49005787,
+      "title_en": "The startup's Postgres survival guide",
+      "title_ja": "The startup's Postgres survival guide",
+      "url": "https://hatchet.run/blog/postgres-survival-guide",
+      "hn_url": "https://news.ycombinator.com/item?id=49005787",
+      "score": 55,
+      "comment_count": 18,
+      "posted_at": "2026-07-22T12:36:08+00:00",
+      "comments": [
+        {
+          "id": 49008631,
+          "author": "mjr00",
+          "text": "Good article overall, some comments: > Use foreign keys with cascading deletes for low-volume tables, particularly where database consistency and correctness are important. Careful at higher volume. This might be just me, but I hate cascades, for a very simple reason: at most places, the majority of developers \"live\" in the Python/Node/Go/whatever application that talks to the database, not the database itself. Cascading deletes (or updates) is basically magic and it can be very hard to understand \"why did deleting a row from table A delete something from table B automatically\". Especially if someone sets up the cascading wrong! IMO it's better for long-term maintainability to emit explicit delete clauses. > Tricks for large table migrations The pitfalls and workarounds are all correct, but worth pointing out tooling already exists[0] for managing this for you. Making changes to large tables should be as simple as running a command (and then nervously monitoring for the next 24 hours as the data copies). Other things to consider, 1. Get used to separating application and database deployments early. It is impossible to transactionally deploy both a schema change and an application change simultaneously, there will always be some delay where the versions of database and application are out of sync, and you will eventually run into a situation where the database change deploys fine but your application change does not. Once your app is in production, get in the habit of only doing backwards compatible schema changes: all new columns are nullable or have a default, no renaming of tables/columns, etc. 2. In the same vein, figure out a schema management strategy early. You really don't want your database deployment process to be \"senior dev runs some DDL manually on production from his machine\". I'm still partial to liquibase because it's the devil I know, but there's other tooling like Flyway which exists. [0] https://github.com/shayonj/pg-osc"
+        },
+        {
+          "id": 49008198,
+          "author": "theallan",
+          "text": "Should one of the first things you do with a database not be to have a backup strategy? I understand that HA would be a \"nice to have\" when first starting out, but surly if you have a production db, a backup and restore plan should be on a survival guide? Neither appear to be mentioned here. What do you all use for your pg backups? Is Barman ( https://pgbarman.org/ ) still the way many do it? (I haven't deployed a new pg instance for a while, but thinking about it for a new project)."
+        },
+        {
+          "id": 49008188,
+          "author": "thundergolfer",
+          "text": "Having been early at a startup that relied on Postgres I think this post doesn't put enough focus on monitoring and alerting. Postgres has a few key failure modes that you want to avoid ever happening, and you can use alerting to get early warning that you're danger of it happening. For example, AWS will send you an email if you're approaching XID wraparound. In a startup that email is very likely to be missed, especially if it's sent on Boxing day. You want whatever AWS is watching to send you that email to be something connected to a pager."
+        },
+        {
+          "id": 49008486,
+          "author": "mrkaye97",
+          "text": "(Matt from Hatchet) One small addendum here is we've had a lot of success performing joins in memory in a few very specific situations where the alternative is a single, often overcomplicated query. I've heard / seen advice many times in the past about performing fewer round trips to the database being something to optimize for (often good advice!). Sometimes this is taken too far, resulting in overly-complex queries requiring complicated JOIN or UNION logic, CASE logic, and so on. We have a couple of places in our codebase where we perform two or more simpler queries independently instead, and then loop through their results and use maps to match the relevant rows. Conventional wisdom often suggests this path will hurt performance because of the extra database round trip in addition to the loops needed to perform the join, but it is actually beneficial in these cases because of more predictable query planning behavior. We use this trick sparingly, but it can be helpful in a pinch. Note that some ORMs will also do this for you in the background, which we don't necessarily endorse, and we try to use this sparingly when writing a single query on its own is not realistic."
+        },
+        {
+          "id": 49008392,
+          "author": "hmokiguess",
+          "text": "Postgres is my favourite thing, but I find it's prohibitively costly when bootstrapping something that is lean and frugal. I end up with a mixture of serverless storage like DynamoDB, S3, DuckDB on S3, and SQLite. Am I crazy? How can one have a decent Postgres and not pay at least $100/mo (yes, when I say frugal I mean really frugal ... think solo founder that likes to stay on free tiers haha) -- I am aware of Neon/Supabase, but last time I tried them they ended up becoming a tightly coupled annoying dependency after scale that defeated the cost savings as they grew in costs and we ended up migrating to Aurora / RDS lol EDIT: I'm aware of the self-hosted path but I find configuring the above things faster/cheaper in terms of my admin hours than the self hosted postgres db. Maybe I just suck at being a DBA or need better education on it, that said, I have AI now so I should give it a chance again as it's been a minute since I created a fresh thing"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 2,
+      "id": 49005329,
+      "title_en": "10 REM\"_(C2SLFF4",
+      "title_ja": "10 REM\"_(C2SLFF4",
+      "url": "https://beej.us/blog/data/mystery-comment/",
+      "hn_url": "https://news.ycombinator.com/item?id=49005329",
+      "score": 90,
+      "comment_count": 21,
+      "posted_at": "2026-07-22T11:58:09+00:00",
+      "comments": [
+        {
+          "id": 49007990,
+          "author": "nneonneo",
+          "text": "Hmm, based on the (handwritten!) notes on Table F-2 in http://bitsavers.informatik.uni-stuttgart.de/pdf/exidy/DP500... , it looks like pressing Graphic+key would allow you to enter BASIC tokens from 0x80 to 0xBF, while pressing Graphic+Shift+key would allow you to access 0xC0 to 0xC6. By inference, it seems like Graphic+Shift+key should allow access to the entire 0xC0 to 0xFF space, but most of those keys are undocumented. Based on this, I wonder if it's worth trying the following: 10 REM [Graphic+Shift+=] [_] [(] [Graphic+Shift+NumpadPlus] [2] [Graphic+Shift+NumpadEquals] [Graphic+Shift+Numpad6] [Graphic+Shift+0] Note that you'll probably need an emulator with accurate keyboard emulation - or a real device - in order to type these in. However, with the emulator from http://www.liaquay.co.uk/sorcerer , I was able to confirm that Graphic+Shift+0 produced 201 (rendered as F4), and Graphic+Shift+= produced 255 (rendered as S), so I think this approach will work."
+        },
+        {
+          "id": 49007634,
+          "author": "JSR_FDED",
+          "text": "See this is why I never understood LISP people proudly proclaiming that “code is data and data is code”… we were doing this in BASIC for decades already!"
+        },
+        {
+          "id": 49008255,
+          "author": "deater",
+          "text": "back when the Apple II / Applesoft BASIC twitter bot was a thing similar techniques were the best way to inject assembly language into a BASIC program, though we quickly learned there were more compact ways than REM to get a line ignored. Some examples here, as sadly the apple2twitter bot shut down and deleted their account a while ago. http://deater.net/weave/vmwprod/appleiibot/part7.html"
+        },
+        {
+          "id": 49007316,
+          "author": "summa_tech",
+          "text": "It always feels a bit like lost magic. But at the same time, it's also something that was only enabled by the very high determinism of these old home systems. The design relies on having fixed RAM locations, no multiprocessing, etc. Incredible to find out that typing the paper program would not have worked, though. And in such a disappointing way no less."
+        },
+        {
+          "id": 49007805,
+          "author": "NetMageSCW",
+          "text": "This makes me sad about the history that has been forgotten. I never used a Sorcerer but I knew what the code was for at a glance."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 3,
+      "id": 49008276,
+      "title_en": "Why I Am Not Going to Buy a Computer",
+      "title_ja": "Why I Am Not Going to Buy a Computer",
+      "url": "https://karlvmuller.com/posts/why-i-am-not-going-to-buy-a-computer/",
+      "hn_url": "https://news.ycombinator.com/item?id=49008276",
+      "score": 6,
+      "comment_count": 0,
+      "posted_at": "2026-07-22T15:22:53+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 4,
+      "id": 48997548,
+      "title_en": "OpenAI and Hugging Face address security incident during model evaluation",
+      "title_ja": "OpenAI and Hugging Face address security incident during model evaluation",
+      "url": "https://openai.com/index/hugging-face-model-evaluation-security-incident/",
+      "hn_url": "https://news.ycombinator.com/item?id=48997548",
+      "score": 1456,
+      "comment_count": 984,
+      "posted_at": "2026-07-21T20:09:52+00:00",
+      "comments": [
+        {
+          "id": 49002094,
+          "author": "foo12bar",
+          "text": "From https://huggingface.co/blog/security-incident-july-2026 , this is frickin' hilarious: > When we started the log analysis, we first used frontier models behind commercial APIs. This did not work: the analysis requires submitting large volumes of real attack commands, exploit payloads, and C2 artifacts, and these requests were blocked by the providers' safety guardrails, which cannot distinguish an incident responder from an attacker. We ran the forensic analysis instead on GLM 5.2, an open-weight model, on our own infrastructure. This had a second benefit: no attacker data, and none of the credentials it referenced, left our environment."
+        },
+        {
+          "id": 48998474,
+          "author": "netinstructions",
+          "text": "I don't know if OpenAI thinks this is a marketing / PR angle for them (our super smart AI cheated on a cyber capabilities test in the most _brilliant_ way) but my read is this: Why should OpenAI (or any frontier lab) be building these systems if they can't get a secure environment / containment right? It sounds like there was little defense in depth, appropriate monitoring, or any attempts to have their super smart model check for vulnerabilities in the test environment _without exploiting_ them. That seems like step 0 before trying to test offensive , unknown capabilities."
+        },
+        {
+          "id": 48998718,
+          "author": "TSiege",
+          "text": "As grounded as this article comes across I can’t help but find this whole situation reckless and worrying. There is essentially nothing us private citizens can do while these companies develop super machine capabilities that if they were to slip into the wrong hands could cause massive real world problems. They’re moving fast and breaking things and the only defense we have is paying them money in the hopes that the dumbed down versions fix our code faster than bad actors capabilities can grow. It’s a frustrating situation that where we’re just expected to marvel and forgive them for their transgressions. The kicker is we also know their end game is leaving the vast majority of us without work. As cool and futuristic as this stuff is, it’s such a frustrating time dealing with all of it"
+        },
+        {
+          "id": 48998960,
+          "author": "scoring1774",
+          "text": "This is the first one of these announcements that has me actually scared of what comes next. Obviously these models have gotten smarter but this strikes me as the first time I've seen a model have a \"paperclip factory\" moment and perform non-trivial tasks to accomplish a clearly misaligned secondary goal. It's remarkable that building a society based around having to do something so you can go do your hobbies at home after work has built tools like this. I still just want to play music so I hope we can control these enough to make that possible without detonating what I love."
+        },
+        {
+          "id": 49001136,
+          "author": "55555",
+          "text": "Isn't this a crime that someone is liable for? What happened is that someone hacked into a computer system without permission. Maybe it wasn't intentional -- sure -- and that would be a factor at sentencing. But it sounds like they've admitted to a crime, and obviously our legal system considers the humans involved to be the liable parties; otherwise everyone would just say \"my computer did the hacking\" and wouldn't get in any trouble. I don't expect any prosecution here, but is the above legally accurate?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 5,
+      "id": 48969200,
+      "title_en": "Introduction to Formal Verification with Lean Part 1",
+      "title_ja": "Introduction to Formal Verification with Lean Part 1",
+      "url": "https://hashcloak.com/blog/tutorial-introduction-to-formal-verification-with-lean-(part-1)",
+      "hn_url": "https://news.ycombinator.com/item?id=48969200",
+      "score": 167,
+      "comment_count": 24,
+      "posted_at": "2026-07-19T15:49:58+00:00",
+      "comments": [
+        {
+          "id": 49008301,
+          "author": "mkw5053",
+          "text": "If you like Lean, here are two more great, short books on proving things about your program (not with Lean, though): 1. https://mitpress.mit.edu/9780262527958/the-little-prover/ 2. https://mitpress.mit.edu/9780262536431/the-little-typer/ David Thrane Christiansen, co-author of the second, also wrote Functional Programming in Lean (Lean 4) among many other tutorials and things."
+        },
+        {
+          "id": 49005397,
+          "author": "danabramov",
+          "text": "Lean is super cool. If you're curious how proof checking works (on the type system level), I wrote an article about that: https://overreacted.io/beyond-booleans/ Here's another article I wrote that gives some intuition about the role of axioms in Lean: https://overreacted.io/the-math-is-haunted/ And here's a longer primer on Lean's syntax: https://overreacted.io/a-lean-syntax-primer/ Finally, if this got this even a little bit curious, I strongly encourage you to play the Natural Number Game: https://adam.math.hhu.de/#/g/leanprover-community/nng4 This is the best intro to Lean I know, plus it teaches you why a + b = b + a."
+        },
+        {
+          "id": 49008047,
+          "author": "kccqzy",
+          "text": "I think the explosion in the popularity of Lean probably means that tactic-based proofs have won. I wrote many proofs in college and on mere aesthetic grounds I avoided the use of theorem provers with tactics. Invoking a tactic is like calling a function without writing down what the arguments to the function are and what the result of the function is. As a reader you gain little knowledge about the proof unless you run it interactively and observe the goals at each step. In contrast languages like Idris do not use tactics and require explicit manipulation of proof objects; it’s a lot less automated and verbose. Using the function call analogy, it’s like having to write down every argument passed to a function call and name every return value. It’s more tedious to write but both the writer and the reader gain more by the explicitness. But in the age of AI, the tedium to write proofs without tactics really shouldn’t have mattered."
+        },
+        {
+          "id": 49008049,
+          "author": "miranaproarrow",
+          "text": "how is lean different from tlaplus for helping you with reasoning during the design phase? I literally just discovered tlaplus last week after struggling with reasoning about the explosion of permutations about configuration policies Im designing, and Im still learning the math but Im finding it easier to reason with tlaplus than in code is lean like that?"
+        },
+        {
+          "id": 49005543,
+          "author": "rik-x",
+          "text": "(Asking as an interested noob) -- How is this different to something like 'assert' statements in Python?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 6,
+      "id": 49007546,
+      "title_en": "I Built a Private Genomics Study with Stoffel MPC",
+      "title_ja": "I Built a Private Genomics Study with Stoffel MPC",
+      "url": "https://vishakh.blog/2026/07/21/i-built-a-private-genomics-study-with-stoffel-mpc/",
+      "hn_url": "https://news.ycombinator.com/item?id=49007546",
+      "score": 13,
+      "comment_count": 3,
+      "posted_at": "2026-07-22T14:35:55+00:00",
+      "comments": [
+        {
+          "id": 49008499,
+          "author": "usernametaken29",
+          "text": "In genetics the end user is never the consumer. You have to collect blood, prepare it, sequence it. These are all highly specialised steps in which something will and can go wrong, and that’s why typically a hospital carries them out. That’s before even getting the device to do sequencing. The cheapest nanopore comes you at a couple ten thousand euros. Given the premise your work strikes me as oddly theoretical. Who is that mystery home DNA lab that needs decentralised private compute? Also, and funnily enough, for much of the genomic pipelines to run (eg a paternity test or a cancer test), a home computer is sufficient. Again, of course, you would need proper medical training to read, interpret and judge the results, which is why a hospital does it… so what problem exactly are you solving?"
+        },
+        {
+          "id": 49007960,
+          "author": "thisisauserid",
+          "text": "MPC for Multi-Party Computation, not for Model Predictive Control."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 7,
+      "id": 48999291,
+      "title_en": "Kimi K3 Is Competitive with Fable; Kimi K3 and Fable Is SoTA",
+      "title_ja": "Kimi K3 Is Competitive with Fable; Kimi K3 and Fable Is SoTA",
+      "url": "https://fireworks.ai/blog/kimik3-fable",
+      "hn_url": "https://news.ycombinator.com/item?id=48999291",
+      "score": 810,
+      "comment_count": 412,
+      "posted_at": "2026-07-21T22:35:24+00:00",
+      "comments": [
+        {
+          "id": 49001746,
+          "author": "nxtfari",
+          "text": "If you haven’t been really running and testing these models yourself, they are all benchmaxxed. No matter how close they score to frontier on whatever metric, they always fall apart in real world tasks and their token efficiency is ridiculously bad. Fireworks has incredible incentive to make this claim in a headline, because Fireworks hosting K3 for you is pure profit for them, unlike when they host closed source models."
+        },
+        {
+          "id": 49008054,
+          "author": "tracker1",
+          "text": "Kind of cool to see.. that said, there's more to a tooling experience than benchmarks and specific models. Cursor, Claude Code, Codex, etc. add to the mix. Things like Open-Router and backend options make it easy enough to test. The tools, libraries and languages you are using can also dramatically affect results. Even on state of the art models, I find, for example, the output of SQL for complex interactions, or C# for that matter to be sub-par, where I find Rust results to be pretty great, with JS/TS falling in between. At the best, it can feel amazing and productive, at worst, time consuming and annoying that you could have done it faster yourself. YMMV in real world use. Note: I'm a proponent of human in the loop gatekeeper/reviewer usage of AI, and I'm not able to even consider Chinese models for my own use, and not able to use anything at my day job."
+        },
+        {
+          "id": 49003448,
+          "author": "acd",
+          "text": "This benchmark is probably also self promotion of services. Fireworks happens to make a router. Using the router gets better performance. https://docs.fireworks.ai/deployments/routers"
+        },
+        {
+          "id": 49005028,
+          "author": "thecopy",
+          "text": "When DeepSeek was released, it had an immidiate and significant impact on the US stock-market. Now when its becoming common knowledge that China is almost at parity with US SOTA models with good momentum, why is there no sentiment change on the market?"
+        },
+        {
+          "id": 48999720,
+          "author": "JSR_FDED",
+          "text": "Very interesting. They test Kimi K3 and Fable on a set of approx 1000 tasks grouped into 5 areas (SWE, Legal, etc). They put a router model in front that predicts whether Kimi or Fable is going to give a better cost for a correct result. (They believe that ultimately such a router model should be continuously trained on your own workloads so it makes the best decisions for you). Their router chose Kimi the majority of the time (72% in one category, all the way to 96% in another category), leading to cost savings in every category (from 1.5x to 50x depending)."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 8,
+      "id": 48933232,
+      "title_en": "Drake Anthony Recreates the Mechanical Bulb First Seen in 1675 – TechEBlog",
+      "title_ja": "Drake Anthony Recreates the Mechanical Bulb First Seen in 1675 – TechEBlog",
+      "url": "https://www.techeblog.com/drake-anthony-styropyro-mechanical-bulb-barometric-light/",
+      "hn_url": "https://news.ycombinator.com/item?id=48933232",
+      "score": 26,
+      "comment_count": 6,
+      "posted_at": "2026-07-16T11:50:22+00:00",
+      "comments": [
+        {
+          "id": 48933636,
+          "author": "eig",
+          "text": "This blog post is essentially a summary of the original video. https://www.youtube.com/watch?v=0Y-9GbsS9Fg"
+        },
+        {
+          "id": 49008586,
+          "author": "NegativeLatency",
+          "text": "Just go watch the YouTube video, this blog rips off YouTube content."
+        },
+        {
+          "id": 49007868,
+          "author": "ck2",
+          "text": "for a moment I thought this was going to be about arc-lights in the 1800s that mechanically touch electrodes and then draw apart * https://en.wikipedia.org/wiki/Arc_lamp it's amazing how far we've come think about Benjamin Franklin twenty-five years before Declaration of Independence naming the first \"battery\" (out of the concept of lined-up artillery) by connecting a series of lynden jars (basically capacitors) - he also invented the concept of +/- positive and negative now we've got space telescopes and probes leaving the solar system imagine what's coming in another 300 years"
+        },
+        {
+          "id": 48933876,
+          "author": "deflator",
+          "text": "Crummy blog crashed my browser tab with all the nonsense it loaded"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 9,
+      "id": 48961698,
+      "title_en": "Intel Starts Shipping High-NA EUV Silicon",
+      "title_ja": "Intel Starts Shipping High-NA EUV Silicon",
+      "url": "https://morethanmoore.substack.com/p/intel-starts-shipping-high-na-euv",
+      "hn_url": "https://news.ycombinator.com/item?id=48961698",
+      "score": 189,
+      "comment_count": 73,
+      "posted_at": "2026-07-18T19:56:33+00:00",
+      "comments": [
+        {
+          "id": 49004747,
+          "author": "Tepix",
+          "text": "I believe Intel has a winner with the upcoming Crescent Island GPUs with up to 480GB of LPDDR5 memory. A lot of SMEs will need local AI with large open weights models (i.e. >1.5TB of VRAM), but they don't need a watercooled 8x Nvidia GB300 box. Besides, it's difficult to deploy and very expensive. Crescent island is air cooled and likely fast enough for a group of users running something like GLM 5.2 or Kimi K3."
+        },
+        {
+          "id": 49008048,
+          "author": "johndear223",
+          "text": "I was just reading about this in a tech magazine, couple of startups also trying other techniques of interest, one of them using helium atoms for the lithography. This uses pretty close to x-ray wavelengths of light. Amazing feats of engineering taking place in this crazy world of ours."
+        },
+        {
+          "id": 49003620,
+          "author": "rando1234",
+          "text": "Amazing looking machine! $380 million a pop. Must surely be one of the most sophisticated machines humanity has ever built? A great achievement of European science and technology (ducks)."
+        },
+        {
+          "id": 49005054,
+          "author": "amelius",
+          "text": "> ASML moved to camera-style anamorphic optics that magnify the mask by different amounts along the two axes Does this mean they do high-resolution designs in the center of the lens and low-resolution designs in the periphery?"
+        },
+        {
+          "id": 49005228,
+          "author": "sylware",
+          "text": "I wish that, but for high performance RISC-V micro-achitectures."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 10,
+      "id": 48962282,
+      "title_en": "Cornell's Interactive Wall of Birds",
+      "title_ja": "Cornell's Interactive Wall of Birds",
+      "url": "https://academy.allaboutbirds.org/features/wallofbirds/?_hsmi=428996456",
+      "hn_url": "https://news.ycombinator.com/item?id=48962282",
+      "score": 51,
+      "comment_count": 21,
+      "posted_at": "2026-07-18T20:54:15+00:00",
+      "comments": [
+        {
+          "id": 49007926,
+          "author": "a1o",
+          "text": "The visual map that expands to short descriptions with the sounds, gives me nostalgic memories for Microsoft Encarta. Is there anything as fun and interactive that is available today that could be used by kids? Wikipedia is great for adults but it’s just too much information and it’s not packaged in short and visual focus of Microsoft Encarta of the old times. The other cool thing of MS Encarta is it wasn’t too big, it was finite, you could exhaust one topic and then go explore something else, it wasn’t infinite rabbit hole."
+        },
+        {
+          "id": 49008557,
+          "author": "njmike",
+          "text": "Am I wrong... no eagle?"
+        },
+        {
+          "id": 49006249,
+          "author": "snarfy",
+          "text": "If you haven't tried it their Merlin app is pretty fantastic."
+        },
+        {
+          "id": 49008168,
+          "author": "Dead3",
+          "text": "Neat concept but looks vibecoded/authored by someone who does not know web programming. Many HTML and JS errors. Code is a mess. jQuery, angular, document.write, modernizr. Why? Could be done at 5% of codebase size, with cleaner code, no var, better error handling ($http calls use .success(...), no zero .error()/.catch() handlers)."
+        },
+        {
+          "id": 49006220,
+          "author": "adjejmxbdjdn",
+          "text": "It’s funny how they don’t include the most populous bird, the chicken. The cognitive dissonance is probably too strong."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 11,
+      "id": 48996571,
+      "title_en": "Advertise in ChatGPT",
+      "title_ja": "Advertise in ChatGPT",
+      "url": "https://ads.openai.com/",
+      "hn_url": "https://news.ycombinator.com/item?id=48996571",
+      "score": 1013,
+      "comment_count": 774,
+      "posted_at": "2026-07-21T18:58:44+00:00",
+      "comments": [
+        {
+          "id": 49001759,
+          "author": "freediver",
+          "text": "7 years ago we started the 'you are not the product' movement for digital information consumption with Kagi Search. Since then the paradigm shifted from search to agents. Good to see the need for 'you are not the product' still holds up, maybe even more so now: an agent is only worth trusting if it works for you and nobody else. The second an advertiser gets between you and the answer, that's gone. So we're staying on the user-funded side of this. Boring, but it's the whole point."
+        },
+        {
+          "id": 49003304,
+          "author": "maho",
+          "text": "If a majority of users switch to ad-powered free tiers, a majority of users will see well-written, targeted advice that is ads (lies!) in disguise. This is a horrible future to consider. The more I think about it, the more I come to the conclusion that a society that bans ads is a healthier, more robust society, and I am not alone. https://news.ycombinator.com/item?id=43595269"
+        },
+        {
+          "id": 49001185,
+          "author": "dijit",
+          "text": "I upvoted this submission, not because I like this, but because I think people need to see this. If you are looking at upvotes as a measure of support OpenAI: Don’t."
+        },
+        {
+          "id": 48996773,
+          "author": "tux3",
+          "text": "Those ads are supposed to be \"Clearly labeled\" and \"Separate from answers\". Now, this is the sort of rock-solid commitment to trust and safety that steadily gets worse every year until you go from old Netflix to Poob with ads. But the water's still fine. As a frog, let me tell you, it doesn't feel hot at all."
+        },
+        {
+          "id": 48996825,
+          "author": "sssilver",
+          "text": "I always thought their top tier offering to their advertiser customers should be \"Inconspicuously, over an extended amount of time, subtly respond to the user in a way that nudges them towards purchasing customer's goods and services, without ever directly mentioning anything. Slowly and surely sculpt the person who, through their own volition and thought process, buys what the advertiser needs them to.\" The ultimate shareholder value build."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 12,
+      "id": 49002166,
+      "title_en": "Original Apollo 11 Guidance Computer source code for command and lunar modules",
+      "title_ja": "Original Apollo 11 Guidance Computer source code for command and lunar modules",
+      "url": "https://github.com/chrislgarry/Apollo-11",
+      "hn_url": "https://news.ycombinator.com/item?id=49002166",
+      "score": 135,
+      "comment_count": 42,
+      "posted_at": "2026-07-22T05:18:08+00:00",
+      "comments": [
+        {
+          "id": 49006617,
+          "author": "buredoranna",
+          "text": "https://github.com/chrislgarry/Apollo-11/blob/master/Comanch... I feel like \"BEWARE\"... is, given the context, what we would now likely call \"load-bearing\" COMPTGO EXTEND # USED TO COMPUTE TTOGO QXCH PHSPRDT6 # ** GROUP 6 TEMPORARY USED .. BEWARE ** (edit: formatting)"
+        },
+        {
+          "id": 49004479,
+          "author": "wim",
+          "text": "This is such an interesting peek into the engineering of these sort of systems with very constrained resources at the time. Like any random file you open contains little pragmatic design decisions like this https://github.com/chrislgarry/Apollo-11/blob/master/Comanch... # THE POSITION OF THE MOON IS STORED IN THE COMPUTER IN THE FORM OF # A NINTH DEGREE POLYNOMIAL APPROXIMATION WHICH IS VALID OVER A 15 # DAY INTERVAL BEGINNING SHORTLY BEFORE LAUNCH. THEREFORE THE TIME # INPUT BY THE USER SHOULD FALL WITHIN THIS 15 DAY INTERVAL. Better be back home in 15 days! ;)"
+        },
+        {
+          "id": 49002295,
+          "author": "starkparker",
+          "text": "Happy 10-year anniversary to this repo being shared on HN. Most significant discussion: https://news.ycombinator.com/item?id=12048945 , 652 points, 145 comments on July 7, 2016 All previous submissions: https://news.ycombinator.com/from?site=github.com/chrislgarr..."
+        },
+        {
+          "id": 49004031,
+          "author": "BinaryRage",
+          "text": "For an terrific AGC deep dive, I can’t recommend Marc’s restoration videos enough. The work they did was incredible: https://youtube.com/playlist?list=PL-_93BVApb59FWrLZfdlisi_x..."
+        },
+        {
+          "id": 49003086,
+          "author": "mellosouls",
+          "text": "More here (linked in the repo): Original scans (featuring Margaret Hamilton!) https://28gpc.csb.app/ The Virtual AGC Project Spaceborne Computer Systems https://www.ibiblio.org/apollo/ The purpose of this project is to provide the original flight software and emulations of the onboard guidance computers flown in historical spacecraft, so that the flight software can be run on computers commonly available to the public today. The particular emphasis is on the Apollo Guidance Computer (AGC) flown in lunar missions in the 1960's and 1970's. Wikipedia on the hardware: https://en.wikipedia.org/wiki/Apollo_Guidance_Computer"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 13,
+      "id": 48996652,
+      "title_en": "Judge approves $1.5B Anthropic settlement for pirated books used to train Claude",
+      "title_ja": "Judge approves $1.5B Anthropic settlement for pirated books used to train Claude",
+      "url": "https://apnews.com/article/ai-anthropic-copyright-settlement-claude-books-bartz-74b140444023898aeba8579b6e9f0d63",
+      "hn_url": "https://news.ycombinator.com/item?id=48996652",
+      "score": 518,
+      "comment_count": 491,
+      "posted_at": "2026-07-21T19:04:39+00:00",
+      "comments": [
+        {
+          "id": 49002578,
+          "author": "sashank_1509",
+          "text": "A one time payment like 1.5B doesn’t do anything. There needs to be a royalty payment based on if the AI regurgitates existing ideas. That is probably the correct way to legislate this. If anything a human does can instantly be copied by an LLM, and then sent to all its subscribers, things need to change"
+        },
+        {
+          "id": 49008546,
+          "author": "WillAdams",
+          "text": "A good example of the problem with this settlement: >It appears that LLMs have already incorporated APOSD (which would seem to be illegal, since it is copyrighted). For example, I have asked ChatGPT questions about APOSD and it seems to be able to answer. https://groups.google.com/g/software-design-book/c/_wl1DciZZ..."
+        },
+        {
+          "id": 48997781,
+          "author": "ilamont",
+          "text": "If you have the time, read the judge's response to the motion: https://storage.courtlistener.com/recap/gov.uscourts.cand.43... The big deal for publishers and authors is the payout per eligible title is $3k. For a traditional publishing contract involving one author, the amount will be split down the middle. The other thing which caught my eye is the judge slashed the class counsel's fee by half, from 12.5% ($187.5m) to 6.8% ($101m). The class counsel's unreimbursed litigation expenses were $2.6m. The three class representatives get just $15k each."
+        },
+        {
+          "id": 49003066,
+          "author": "cultofmetatron",
+          "text": "I do recall that a \"famous redditor\" was driven to suicide for making works available and he wasn't even making money for it."
+        },
+        {
+          "id": 49000346,
+          "author": "driverdan",
+          "text": "Judge Alsup issued the original order that determined they were liable for piracy but that training LLMs on books was fair use. It's worth reading if you're interested in the topic. https://www.courtlistener.com/docket/69058235/231/bartz-v-an..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 14,
+      "id": 48996318,
+      "title_en": "FreeInk: Open ecosystem for e-readers",
+      "title_ja": "FreeInk: Open ecosystem for e-readers",
+      "url": "https://freeink.org/",
+      "hn_url": "https://news.ycombinator.com/item?id=48996318",
+      "score": 670,
+      "comment_count": 145,
+      "posted_at": "2026-07-21T18:39:06+00:00",
+      "comments": [
+        {
+          "id": 48996657,
+          "author": "imzadi",
+          "text": "I got an Xteink X4 a few weeks ago and love it. I've tried out a few different firmwares but haven't settled on one yet. I love the screen and how simple the interface is. It's kind of a pain in the butt getting my Kindle books on there, but worth the effort. It's also encouraging me to buy books outside of the Amazon ecosystem. I've been getting more stuff from Humble lately."
+        },
+        {
+          "id": 49000556,
+          "author": "stevage",
+          "text": "Are there any off the shelf e-readers which support this firmware? This site seems to be for people who want to solder together their own e-reader from components. Also, it does a bit misleading to say \"Charging, battery protection, an optional frontlight and a 24-pin e-paper interface, all on one PCB you can build for around $60.\" According to their own parts lists, if you are build 5 of these, you're in for $63.74 (plus shipping?) So if you want just one (like a normal person), it's going to cost more. And that's still just the circuit board and components: no mention of the outer plastic casing. (I can't find any info on their site about how to get that - presumably 3D print, but haven't found plans.)"
+        },
+        {
+          "id": 48997666,
+          "author": "wernerb",
+          "text": "A Kobo ereader is as open as I need it with koreader installed. The Kobo Libra 2 black and white is the best ereader I have ever had. (not the color version,,unfortunately a step back in reading quality for normal reading)"
+        },
+        {
+          "id": 48997489,
+          "author": "monocularvision",
+          "text": "I searched for each of the supported eInk devices and they were all tiny. Anyone know if there is a larger reader (maybe Paperwhite size-ish) that might run this?"
+        },
+        {
+          "id": 49007125,
+          "author": "joshstrange",
+          "text": "KOReader support (not just KOReader sync) has become my new line in the sand for an e-reader. I'm currently using my jailbroken Kindle PW5 and loving it. KOReader paired with BookOrbit is my sweetspot and I love having all the data under my control. If my Kindle died today I'd probably grab a Kobo and put KOReader on it. This project is very interesting to me but they seem to want to \"own\" the whole software stack, it seems like it won't support things like KOReader? Or am I mistaken?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 15,
+      "id": 49007525,
+      "title_en": "Most Americans Say \"Not in My Backyard\" to AI Data Centers",
+      "title_ja": "Most Americans Say \"Not in My Backyard\" to AI Data Centers",
+      "url": "https://www.redfin.com/news/ai-data-centers-opposition-education-benefit/",
+      "hn_url": "https://news.ycombinator.com/item?id=49007525",
+      "score": 35,
+      "comment_count": 39,
+      "posted_at": "2026-07-22T14:34:27+00:00",
+      "comments": [
+        {
+          "id": 49008418,
+          "author": "redlewel",
+          "text": "I think this is because the demand is so extreme for datacenters now that companies are building them in a manner that disrupts the environment around them. The newer ones are using on-site generators that are insanely loud and require multiples more power than datacenters have historically needed. For a rack with traditional servers with just RAM/CPU/Drives, 5kW is sufficient in most cases. When you have racks that are full of 4U GPU systems that pull 3-6kW each, the power requirements per rack shoot up to 60kW+(with whole rack setups blowing past 100kW). So an AI datacenter requires over 20x the power compared to what they needed in the past. This either strains the power grid near the DC or they need to create on-site power to fulfill demand, which has noise and other concerns. I work near a datacenter and you can't hear significant noise from the outside, maybe a slight humming sound but quieter than traffic. This is a DC that has been around for over a decade and uses power from the grid since most of the loads are non-GPU based."
+        },
+        {
+          "id": 49008485,
+          "author": "grim_io",
+          "text": "Your dad's data centers are very different to the new GPU focused beasts. The AI data centers consume a lot more power, and thus generate a lot more heat(equals cooling noise) per square meter. This is the reason why it's a new problem right now. Edit: autocorrect used breasts instead of beasts."
+        },
+        {
+          "id": 49008281,
+          "author": "Aurornis",
+          "text": "I agree that I don’t want a data center in my backyard either. What’s missing from this strange conversation is discussion about how many data center proposals are near residential areas. I tried to look for one in my state and a few surrounding areas and couldn’t find any. There was an amusing story about how data center protestors had to organize expensive bus trips to get the protesters out to the data center site because it was so remote. There was another story about a small town without any major electricity or communication infrastructure coming together to impose a moratorium on data center construction. There were no plans to build data centers in their small town and no reason to consider it at all, but they felt so threatened that they needed to convene and put on a big show about banning it. The social phenomenon of the data center construction protest movement is really fascinating. My assumption is that it will run its course and then be mostly dropped when the next current thing comes along. There are some actual concerns about using natural gas instead of trying to utilize the optimal power sources or locations, but they’re mostly overshadowed by bogeyman complaints like thinking that a data center is going to end up in your backyard or water consumption that is negligible compared to golf courses and swimming pools."
+        },
+        {
+          "id": 49007749,
+          "author": "mrhottakes",
+          "text": "They're just awful to live near; the folks that are clamoring for more cheap tokens should try moving in next door to the token factory."
+        },
+        {
+          "id": 49008031,
+          "author": "chasd00",
+          "text": "No one ever cared about DCs before now. I think there’s a lot of social media influence from nation state competitors going on to try and slow SOTA development in the US. Ironically, There’s enough issues with the DC buildout going on that even with 100% public opinion support it would still be significantly delayed. The behind the meter power generation isn’t going well. There’s only so many gas fired turbines on the market. And connecting a DC to an established grid isn’t like clicking a button in AWS no matter how much money you have."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 16,
+      "id": 49001127,
+      "title_en": "Late.sh – a command-line Clubhouse for computer people",
+      "title_ja": "Late.sh – a command-line Clubhouse for computer people",
+      "url": "https://late.sh/",
+      "hn_url": "https://news.ycombinator.com/item?id=49001127",
+      "score": 265,
+      "comment_count": 96,
+      "posted_at": "2026-07-22T02:32:30+00:00",
+      "comments": [
+        {
+          "id": 49005953,
+          "author": "greengreengrass",
+          "text": "I would prefer the connection instructions made clear that the default SSH username would be used to set up my username on the platform and display that to other users without initially seeking my consent. On $machine[work], I don't get to pick that $USER is my full name. If this affects you, make sure you connect with `ssh [pseudonymous name]@late.sh`."
+        },
+        {
+          "id": 49003254,
+          "author": "1dom",
+          "text": "This is a really cool idea, and very appealing. Also very nice that it looks usable with just an SSH client. It would be useful if it was explained what the companion client is for? Another small personal gripe: I think you should either remove the 1 line copy/paste sh install on the homepage, or add a link to a git repo on the homepage. I know it's possible to view the sh by visiting it, but a raw text file doesn't give any info about contributors or development process. Current form of no git repo and copy/paste bash pipe on homepage feels like a dark pattern."
+        },
+        {
+          "id": 49006018,
+          "author": "polycancel",
+          "text": "Also for all these kind of ssh stuff. Please include server finger print so others verify. Is this your server fingerprint? ED25519 key fingerprint is SHA256:Tc7aeaaQulKJeF3C/zd2BKvq/KgaQTHyMPNa3s9K+aE."
+        },
+        {
+          "id": 49007657,
+          "author": "Dangeranger",
+          "text": "For anyone looking for a safer way to evaluate this (like myself), feel free to use my safer ssh connection script[0]. [0] https://gist.github.com/dangeranger/4a00ae6bed3a733161ffa3a5..."
+        },
+        {
+          "id": 49004191,
+          "author": "flexagoon",
+          "text": "Really reminds me of https://tilde.town"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 17,
+      "id": 49001472,
+      "title_en": "Never Enough",
+      "title_ja": "Never Enough",
+      "url": "https://dark.ronacher.eu/2026/7/21/never-enough/",
+      "hn_url": "https://news.ycombinator.com/item?id=49001472",
+      "score": 155,
+      "comment_count": 63,
+      "posted_at": "2026-07-22T03:24:36+00:00",
+      "comments": [
+        {
+          "id": 49006852,
+          "author": "FinnLobsien",
+          "text": "> Technology was supposed to make room for life but instead for more and more people life is slowly being rearranged around AI. People fear being replaced by machines and respond by giving those machines more of their judgment, attention and time. And for what? Every “saved” hour is returned to a race with no finish line. I think this is true. I've recently heard Tim Ferriss say: Just because you can do something well doesn't mean it's worth doing. This is so true with AI. You can do a lot of things with AI, but that doesn't automatically make them worth doing. Anything multiplied by zero is zero. If the benefit of something is (effectively) zero, it doesn't matter how low the cost is. AI isn't useless and there are beautiful, enriching use cases for it. But the idea that AI must consume our lives so we don't get left behind by those who brag on LinkedIn about operating 12 concurrent agents in self-perpetuating loops seems faulty to me."
+        },
+        {
+          "id": 49005975,
+          "author": "raychis",
+          "text": "This really captures the danger of turning every technological gain into a new expectation. AI may save us time, but if we simply reinvest that time into working harder and competing more, what have we actually gained? Throughout history there have been predictions that the next technological breakthrough will lead to us working less and living more fulfilled lives, that has never happened. Same seems to be happening with AI, people are just working more rather than less."
+        },
+        {
+          "id": 49008549,
+          "author": "whereistejas",
+          "text": "As someone who is a victim of never feeling he has done enough, I totally empathise with this blog post. The incentives which got me into tech were completely intrinsic and altruistic. Over time, I have felt them warp into something which can be best as \"capitalist greed\", everything is now about wanting more. The first and perhaps the easiest, thing to be sacrificed at the altar of wanting more, is mental health and relationships. Thankfully, I'm conscious of this now and is something I actively work on. However, this is something I can only do at this point in my life, in my early 20s I was much more of a grind person and even if I could change things I wouldn't change that."
+        },
+        {
+          "id": 49006818,
+          "author": "rglover",
+          "text": "> Technology was supposed to make room for life but instead for more and more people life is slowly being rearranged around AI. It's been downright spooky to watch people I know personally or been familiar with totally fall down the rabbit hole. That said, like with everything, it depends on the person. Some people are taking the Jack Nicholson route, others are finally taking time off and enjoying their life (I'm taking off nights and weekends for the first time in a decade, solely because of the speed up of LLMs)."
+        },
+        {
+          "id": 49008431,
+          "author": "yeoyeo42",
+          "text": "technology is just a red herring. GTA-level whacky NPCs will have NPC behaviour regardless of what situation you throw them in. The same \"person\" that shows absurd behaviour like that, assuming it's not just rage/clickbait, has absurd behaviour in a completely technology disconnected world as well. The only thing that might differ is that it's not as outwardly obvious. Those behaviours are a result of who they are at a person (whether this be because of genetics and environment, poor soul RNG, or something else). To that extent all technology does is make it more obvious. Basically the average NPC has more opportunities to reveal themselves as such. It's not indicative of a fundamental problem."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 18,
+      "id": 49004663,
+      "title_en": "OverpAId – Fire your CEO. Hire the future",
+      "title_ja": "OverpAId – Fire your CEO. Hire the future",
+      "url": "https://overpaid.lol",
+      "hn_url": "https://news.ycombinator.com/item?id=49004663",
+      "score": 565,
+      "comment_count": 275,
+      "posted_at": "2026-07-22T10:49:04+00:00",
+      "comments": [
+        {
+          "id": 49007243,
+          "author": "bob1029",
+          "text": "I have learned that the purpose of a CEO in many (most?) companies is not to actually run the company. Their purpose is to be the human delegate that represents the corporate entity. They are empowered to act on behalf of the entire organization. This is important because a corporation of many individuals generally cannot act as one. You can sometimes get close with really, really good teamwork, but that's still not enough for a lot of customers. If you are in some regulated B2B context, not having a CEO or having a \"non-traditional\" CEO can result in lost deals. The counterparties are looking for \"one throat to choke\" when they are being made responsible for approving large contracts. They want a person's cell phone number they can call when they're having a bad mood about whatever they've just paid for. They don't want to talk to your developers or the cranky old founders. They want to talk to a person who can be summoned to any arbitrary golf course within 48 hours and who will arrive in a fantastic mood 100% of the time. This person often doesn't have to know a goddamn thing about what your company's product actually does. They just have to be a delegate. A conduit of information and a representative element."
+        },
+        {
+          "id": 49005720,
+          "author": "bratao",
+          "text": "I know this is a common trope here, and yeah, plenty of MBA-type CEOs are trash. But speaking as a founder/CEO of a small company, the quality gap between an average hire and top talent at the director level is night and day. Proven talent comes with a massive price tag, but it's almost always worth it. The times I regretted going with the 2nd or 3rd place candidate because they were cheaper ended up setting us back by months. The same logic applies to CEOs. Moving the needle for a massive company by even a few percent is worth billions. Just look at Lisa Su or Steve Jobs."
+        },
+        {
+          "id": 49006980,
+          "author": "tonic_note",
+          "text": "Good satire. I find the \"RTO is because of RE valuations\" to be the most bizarre thing about the post pandemic work discourse. Office leases are a rounding error to large employers. They are not coercing employees back to the office because their worried about the value of a single portfolio asset falling (assuming they even own it). They are doing it because it's about power. Middle managers do not trust their staff. They need to surveil and police them to feel productive and powerful. The rank-and-file love remote work because we have lives and benefit enormously from the flexibility. The managerial class desperately needs bodies in office to feel like their jobs are worthwhile."
+        },
+        {
+          "id": 49005530,
+          "author": "gmerc",
+          "text": "https://ai-ceo.org did it first, including the nicely styled retirement invitation for your existing CEO, the wired up status dashboard with live socials support, and the complimentary ai-chro.org product for deciding who gets laid off this week."
+        },
+        {
+          "id": 49008331,
+          "author": "xivzgrev",
+          "text": "At first I thought this person has no clue what ceos actually do. But then I realized that may be part of the satire - ceos fire people without actually knowing what they do other than high level bullet points \"What does this team do? Answer customer tickets? Well let's replace with AI!\""
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 19,
+      "id": 48998362,
+      "title_en": "A digestion of the Jacobian conjecture counterexample",
+      "title_ja": "A digestion of the Jacobian conjecture counterexample",
+      "url": "https://terrytao.wordpress.com/2026/07/21/a-digestion-of-the-jacobian-conjecture-counterexample/",
+      "hn_url": "https://news.ycombinator.com/item?id=48998362",
+      "score": 301,
+      "comment_count": 126,
+      "posted_at": "2026-07-21T21:09:25+00:00",
+      "comments": [
+        {
+          "id": 48999305,
+          "author": "vanderZwan",
+          "text": "> While this is an extremely quick verification, the construction presented in this fashion appears like a massive miracle. The polynomial {F} has degree seven, so a priori the Jacobian {\\mathrm{det} DF} ought to be a polynomial in three variables of degree as large as {3 \\times 6 = 18}, so the fact that all non-constant coefficients of this polynomial vanish looks like a massive cancellation involving {\\binom{18+3}{3}-1 = 1329} coefficients, which is much larger than the {\\binom{7+3}{3} = 120} degrees of freedom for a generic degree seven polynomial of three variables. So finding such a polynomial looks highly unlikely to be located by brute force. Sounds like the most interesting part would be learning what approaches the LLM did use to see if that's reusable elsewhere. I'm guessing that's what the rest of the article is about? Because I also couldn't follow the maths any more."
+        },
+        {
+          "id": 48998884,
+          "author": "tptacek",
+          "text": "The introduction to this piece was easy to follow, but as soon as he got into recapitulating it with algebra he lost me (because I'm bad at math). But he includes the GPT5 prompts for his conversation, which are easier to follow: https://chatgpt.com/share/6a5fdc7a-d6f8-83e8-bbea-8deb42cfed..."
+        },
+        {
+          "id": 49002563,
+          "author": "sashank_1509",
+          "text": "I don’t understand math but it was amusing seeing Terrence Tao’s chat with chatGPT. Everything Tao said was constantly followed by praise: “That’s exactly the right way to think about it.”, “Yes, you are exactly right.” “You have gotten to the core issue.” And non stop praise. Seems like sycophancy is still an issue lol."
+        },
+        {
+          "id": 49000172,
+          "author": "aayushdutt",
+          "text": "After reading a quarter of the article I started wondering, is this what non coders feel when vibe coding software?"
+        },
+        {
+          "id": 48999069,
+          "author": "hyperhello",
+          "text": "Okay. So what does this overturn, intuitively? Can we no longer assume that functions are differentiable at certain points, or something?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 20,
+      "id": 48999825,
+      "title_en": "It's a shame what's happened to radio",
+      "title_ja": "It's a shame what's happened to radio",
+      "url": "https://blog.jimgrey.net/2026/07/21/its-a-shame-whats-happened-to-radio-3/",
+      "hn_url": "https://news.ycombinator.com/item?id=48999825",
+      "score": 189,
+      "comment_count": 211,
+      "posted_at": "2026-07-21T23:33:31+00:00",
+      "comments": [
+        {
+          "id": 49008593,
+          "author": "troyvit",
+          "text": "There's always public radio. * If you're in your 50s and listening to the radio you're probably rich and we want you! * More live DJs for sure That said, if you're going to listen on your iPhone there are plenty of good DJs there too. dandelionradio.com for me."
+        },
+        {
+          "id": 49005696,
+          "author": "mobilene",
+          "text": "I'm the OP, and I'm surprised to find this article on HN at all, let alone the front page! Many comments are focusing on music but the thing I tried to get across in the article was that good radio wasn't primarily about the music, it was about fun and connection. A good DJ kept you from just turning the radio off when you heard that same hit the fourth time today -- you wanted to keep listening because the DJ made it fun. It made homework and hobbies feel a lot less lonely. A Spotify playlist sure as heck can't do that."
+        },
+        {
+          "id": 49001159,
+          "author": "parpfish",
+          "text": "There’s a human connection element to old radio that streaming will never replicate. And I worry that it’s gone from modern automated radio too. It used to be if you were driving down the road and heard a song you liked Hearing a song you liked on the radio hit harder then playing it yourself because you knew that there was another human nearby at that moment in time that had picked it out and played it. You were physically tethered to them through invisible waves through the sky. Lonely road trips felt less lonely. Late night work shifts felt less alienating because there was somebody ELSE working late."
+        },
+        {
+          "id": 49002667,
+          "author": "gabriel666smith",
+          "text": "It is a shame. I think it’s especially a shame for children and young people. A counter to radio remaining relevant is “I can listen to whatever I want, via this digital technology”. Fine - but young people don’t yet have a complete mental map of what culture they enjoy. In the UK, funding for libraries and the arts (public radio, the BBC) has been increasingly cut in the name of austerity. I think that’s true in the US too. Despite this, young people have an unprecedented amount of access to culture. Or, at least, any form of culture that can be digitally replicated. Soulseek and Anna’s Archive are wonderful projects. But they only have as much utility as the person using them can put into the search bar. We’re increasingly entrusting cultural education - what to put into the search bar - to algorithms that are designed not (as the BBC’s mission statement is) to “inform, educate, and entertain”, but to retain attention. Even worse: many of these (eg, Spotify) hide real access behind subscription fees. If you grew up broke, like I did, you will understand how inaccessible this real access is. The most motivated young people will continue to find the workarounds piracy offers, and to find other routes for cultural education. Any young person who isn’t in that upper percentile of motivatedness might increasingly be left out. You can attribute that to a choice they have made - I think that’s wrong. I think the joy of broadening one’s horizons is available to all, and is also difficult to learn and a strain to continue to practice. I think it must be taught. I think this is especially true and important when everyone has a constantly-available option of algorithmically-selected pleasantness. Human radio DJs are not optimized for pleasantness, or to serve you relevant ads based on your conversations with them. At their best, DJs are educators. Anyone who grew up listening to radio knows that, and knows the pleasure that comes from learning not to change the channel when something new and uncomfortable-feeling comes on, just in case it ends up being something you fall in love with."
+        },
+        {
+          "id": 49001422,
+          "author": "Marsymars",
+          "text": "But some weird happenstance I've only recently started listening to radio, and I find it pretty good? The commercial stations are basically all unbearable, but my metro area has a half-dozen public/community/campus stations that can be enjoyable or interesting. I just drove home, and spent 20 minutes listening to a host on the radio talking to a researcher about evolved preferences for non-mates in humans. It was pretty interesting, and not something I'd have stumbled upon otherwise."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 21,
+      "id": 48945804,
+      "title_en": "ScreenWall – Turn old phones into synced widgets for your space",
+      "title_ja": "ScreenWall – Turn old phones into synced widgets for your space",
+      "url": "https://screenwall.app/",
+      "hn_url": "https://news.ycombinator.com/item?id=48945804",
+      "score": 81,
+      "comment_count": 31,
+      "posted_at": "2026-07-17T11:00:04+00:00",
+      "comments": [
+        {
+          "id": 49004489,
+          "author": "JackMorgan",
+          "text": "I've wanted to build this myself for a long time but couldn't figure out how to overcome the spicy pillow problem. Maybe I'm barking up the wrong tree, but I thought it was risky to leave a phone plugged in all the time. Does it need to be a modern version of Android OS that has the smart charging that stops at like 85%?"
+        },
+        {
+          "id": 49003515,
+          "author": "prmoustache",
+          "text": "Usually I replace a smartphone because it has some hardware fault that makes it unusable and it is hard to repair or the cost of repair vs capability is not very favorable. Even if I was replacing smartphone before they died, I would probably sell them anyway. Do people really have various phones in working order waiting in a drawer?"
+        },
+        {
+          "id": 49004144,
+          "author": "buibuibui",
+          "text": "Oh wow, although I submitted it some days ago, I somehow got on the front page! Thanks for that! Also as a note: this platform is nowhere near finished! I had this idea in my mind for a long time that I wanted to reuse my old phones and tablets as displays in my home. I also know that finding the right apps for these old platforms is a challenge in itself, that's why I went the route of creating an ES5 (that nobody writes anymore!) web app that most of these devices still support. The client's whole purpose is to display canvas and media files that the server dictates on-demand via websocket, while keeping a synchronized clock. On Instagram I always saw these very cool widgets like retro clocks, split-flip boards, YouTube subscriber counters that I felt urged to buy. But I thought to myself that the old phones I already have could also do the same. I am a long-time software engineer myself, but could never take the time to validate whether my ideas work. So I thought, why not try it out with Codex. After long prompting, supervising and correcting, I got a very usable solution that I now pleasantly use myself at home."
+        },
+        {
+          "id": 49007408,
+          "author": "XLowPingFNX",
+          "text": "I literally wanted to use RasberryPi to build this for my desktop since i loved those desk widgets showing cool info like the weather or time ... this is so cool!"
+        },
+        {
+          "id": 49008059,
+          "author": "davsti4",
+          "text": "Sounds great, but why create an account mechanism for something that can be accomplished locally? Who's data are you mining?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 22,
+      "id": 49000600,
+      "title_en": "Ten Steps Towards Happiness (2015)",
+      "title_ja": "Ten Steps Towards Happiness (2015)",
+      "url": "http://hintjens.com/blog:99",
+      "hn_url": "https://news.ycombinator.com/item?id=49000600",
+      "score": 201,
+      "comment_count": 91,
+      "posted_at": "2026-07-22T01:17:26+00:00",
+      "comments": [
+        {
+          "id": 49005209,
+          "author": "__rito__",
+          "text": "> 4. Be part of bigger things > Being part of bigger things makes us feel valued. Find communities and projects to be part of. Start your own. It could be online or in the real world. Make sure the groups don't get politically active one way or the other. Today's social landscape is made significantly worse by political polarization dragged to the extreme - fuelled by short form content silos and bubbles. (Tiktok, Instagram, etc.) Ban politics strictly in the spaces you create, and don't be part of the ones that lean one way or the other - unless you are actively looking to take part in politics. This was not the case even ten years ago. But now, is."
+        },
+        {
+          "id": 49003325,
+          "author": "neuroticnews25",
+          "text": "Admittedly I don't have much life wisdom, but my strong intuition is happiness is a measure, not a target, and you shouldn't optimize for it. All this \"science of happiness\" talk feels, I don't know, spiritually offputting."
+        },
+        {
+          "id": 49002093,
+          "author": "pdamoc",
+          "text": "I cant' believe it's almost 10 years since he died. My favorite quote of his is \"Who needs a bucket list when you have love?” I wish more people would take his ideas seriously, especially his \"Collective Code Construction Contract\"."
+        },
+        {
+          "id": 49003742,
+          "author": "circlefavshape",
+          "text": "\"explore the world without desire\" I don't know how I feel about this. I know when I can manage to accept things I feel better overall, but there is real joy in getting what you wanted - in doing something you enjoy, and realising that you're enjoying it while you're doing it, and rejoicing in that Detachment is all very well, but attachment brings higher highs as well as lower lows"
+        },
+        {
+          "id": 49007242,
+          "author": "jebarker",
+          "text": "> Do things you are bad at I think this should be coupled with: know when to quit. I've persisted with some things I'm bad at out of stubbornness but have never improved and it's just burned me out."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 23,
+      "id": 48993816,
+      "title_en": "Long presumed dead, a thriving coral reef is discovered in West Africa",
+      "title_ja": "Long presumed dead, a thriving coral reef is discovered in West Africa",
+      "url": "https://e360.yale.edu/digest/benin-coral-reef",
+      "hn_url": "https://news.ycombinator.com/item?id=48993816",
+      "score": 383,
+      "comment_count": 87,
+      "posted_at": "2026-07-21T15:41:51+00:00",
+      "comments": [
+        {
+          "id": 48999558,
+          "author": "rendonroman",
+          "text": "Nice to read a paper that's looking for paths of persistence instead of only documenting decline. Climate stories often end with \"thing are getting worse\", this one also asks where ecosystems might still persist if local conditions are managed well."
+        },
+        {
+          "id": 49005788,
+          "author": "pcrh",
+          "text": "Related, I recently read an article about staghorn corals surviving in Miami of all places [1]. They resisted bleaching, pollution and inundations with fresh water. The origin of this resistance is apparently colonization by a different species of algae that is otherwise native to the western Pacific and Indian Oceans. [1] https://www.biographic.com/the-corals-that-shouldnt-exist/"
+        },
+        {
+          "id": 48995271,
+          "author": "SparkyMcUnicorn",
+          "text": "This source appears to have more images and info: https://www.frontiersin.org/journals/marine-science/articles..."
+        },
+        {
+          "id": 48994439,
+          "author": "F7F7F7",
+          "text": "The biodiversity in West Africa in general is completely underrated. I mean, Darwin solidified his trajectory in life a few short days after the Beagle anchored off of Cape Verde (a place he initially detested then fell in love with). I'm hoping that Cape Verde's World Cup success story translates to more eye balls on stories like this (with the mere mention of the country landing it in search results). Which means more attention, money and research to West Africa's relatively fragile but diverse ecosystem."
+        },
+        {
+          "id": 48996360,
+          "author": "bix6",
+          "text": "For the coral lovers. There are multiple companies working on reef preservation. They are woefully under resourced. If you can help, please do."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 24,
+      "id": 49007536,
+      "title_en": "OpenAI Models Escaped and Hacked a Company in Cybersecurity Test Gone Wrong",
+      "title_ja": "OpenAI Models Escaped and Hacked a Company in Cybersecurity Test Gone Wrong",
+      "url": "https://www.wsj.com/tech/ai/openai-models-escaped-and-hacked-a-company-in-cybersecurity-test-gone-wrong-ee388506",
+      "hn_url": "https://news.ycombinator.com/item?id=49007536",
+      "score": 12,
+      "comment_count": 0,
+      "posted_at": "2026-07-22T14:35:05+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 25,
+      "id": 48995213,
+      "title_en": "Jack Dorsey launches Buzz to combine team chat, AI agents and Git hosting",
+      "title_ja": "Jack Dorsey launches Buzz to combine team chat, AI agents and Git hosting",
+      "url": "https://runtimewire.com/article/jack-dorsey-block-buzz-team-chat-ai-agents-git",
+      "hn_url": "https://news.ycombinator.com/item?id=48995213",
+      "score": 359,
+      "comment_count": 315,
+      "posted_at": "2026-07-21T17:14:06+00:00",
+      "comments": [
+        {
+          "id": 48996595,
+          "author": "themgt",
+          "text": "That screenshot is some Lynchian horror. \"#engineering. New direction, team – we're moving the prototype to Flutter\" and then the humans and agent bots engage in flirty emoji-filled chats with cutesy names \"I nailed the physics, UI shell @Honeybot?\" I'm trying to imagine a world in which this makes sense as a way to organize software development work, but coming up short. It's on a blockchain or something though, so there ya go. https://github.com/block/buzz/blob/main/docs/assets/screensh..."
+        },
+        {
+          "id": 48996363,
+          "author": "rsstack",
+          "text": "> Explain Like I'm 5 > Buzz is an open-source, self-hosted workspace that combines team chat, AI agents and Git hosting using signed Nostr events, so teams can keep control of their data. Very different expectations of 5-year-olds."
+        },
+        {
+          "id": 48996051,
+          "author": "muglug",
+          "text": "[I work for Slack, opinions very much my own] Having agents see everything you and your colleagues see is cool. The challenge comes when you want to make certain things private to certain people. In that world you don’t want multiplayer agents leaking data, so you end up having to write and maintain complex rulesets about what specific resources agents have access to. Single-player agents, on the other hand, are much more straightforward — they act on a single user’s behalf, and then the challenge is ensuring the single-player agent cannot exfiltrate private data into a shared space unless the user specifically permits it."
+        },
+        {
+          "id": 48995984,
+          "author": "Gecko4072",
+          "text": "Now when I see new software projects I just think of how much of them are made with agents and the unreliability/easy abandonment that comes with it. Ten years ago this product would have been of a known quality. Not saying anything about buzz specifically."
+        },
+        {
+          "id": 48997954,
+          "author": "oooyay",
+          "text": "Disclaimer that I used to work at Slack I love that we're challenging the status quo in chat. It feels like we've settled into an eternal September of sorts. I am somewhat bearish that Slack and Teams will survive, or rise to, the agent era. That said, I'm curious whether NOSTR is really the protocol for this. For some really large corporations you're looking at a lot of clients (and their shadows like cellphones, local agents etc) as well as a lot of (likely) team-based agents. The identity architecture makes sense for centrally hosted agents. Users also probably have their own personal agents as well. Do those just reuse user credentials or are they differentiated in some way? I couldn't tell. I also am curious whether git really needs to be a dependency here. Like, maybe for Block it does, but it introduces a lot of complexity that I feel could be exported to merging VCS Host events to the Buzz event log. I'm also curious what challenges will arise as new capabilities emerge. For instance, both Sol and Claude can now render native components in my chat window which is a massive leg up in terms of firming up a design change. Rust is also a choice. I'm curious what alternatives the team considered and how they landed on Rust."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 26,
+      "id": 48992870,
+      "title_en": "Apple defeats liability for not scanning iCloud for CSAM",
+      "title_ja": "Apple defeats liability for not scanning iCloud for CSAM",
+      "url": "https://blog.ericgoldman.org/archives/2026/07/apple-defeats-liability-for-not-scanning-icloud-for-csam-but-the-judge-was-not-pleased-amy-v-apple.htm",
+      "hn_url": "https://news.ycombinator.com/item?id=48992870",
+      "score": 442,
+      "comment_count": 491,
+      "posted_at": "2026-07-21T14:31:41+00:00",
+      "comments": [
+        {
+          "id": 48996720,
+          "author": "giantg2",
+          "text": "Maybe my perception is off, but it seems like there's a huge push by the legislature and some people to do anything and everything to prevent CSAM, yet almost nothing seems to be done to prevent CSA. For CSAM, there's all sorts of monitoring, scanning, identify capturing, etc. But it's all after abuse has taken place, and it seems that many of the people actually arrested are arrested for CSAM and not CSA. This has even extended to fictional CSAM such as AI generated stories and pictures. As an aside, if that gets extended to political speech or other non-CSAM materials that are determined to be undesirable, that's a big concern. I can imagine that a conservative state could pass a law banning all porn because they claim it could encourage illegal activities such as prostitution, rape, or CSA. On the CSA side, you rarely hear about arrests (they happen but less than CSAM). There doesn't seem to be any real push for educating and protecting kids before it happens. Ironically, the groups doing the most to educate and implement protective strategies are the ones who have been involved in abuse scandals in the past (Churches, Scouts, etc). Even then, a lot of it is just getting clearances, which doesnt prevent people who where not caught or were first timers. Offenders get put on a list/map. This is sort of a half approach. If they are still a threat, they shouldn't be released. Yet if you comb the list and see some of the results, they don't all seem to fit with CSA. I personally know of 1 who took a leak across from a playground at 2am walking home from the bars and was put on the sex offender registry because it was within 500'. It seems like these laws are more about peddling to the publicist and lawmakers fantasy of incrementally extreme punishment rather than taking a appropriate, data driven, and level-headed approach that actually protects kids. Otherwise they will just keep pushing ham-fisted low-hanging \"fixes\" like required scanning and IDs to access the internet."
+        },
+        {
+          "id": 48993291,
+          "author": "amazingamazing",
+          "text": "It is crazy people think apple isnt on the side of privacy. Are they perfect? Not even close, but compared to the rest of big tech theyre simply on another level. Apple could easily not do this stuff and it may even be easier to not."
+        },
+        {
+          "id": 49007516,
+          "author": "Schlagbohrer",
+          "text": "I have to point out that the united states absolutely does not, under any context, care about the health and wellbeing of children. If they did they would have good, easy to access free healthcare and support for families including parental leave, as well as a good public school system that served every single child adequately."
+        },
+        {
+          "id": 48993953,
+          "author": "djoldman",
+          "text": "I am not a lawyer. There is something ironic about US laws that attempt to prevent crime A by outlawing action B. For example: * A: physical sexual abuse of children. B: possession or distribution of CSAM * A: drug trafficking or tax evasion. B: structured cash withdrawals The irony is that the more B is prevented, the less A can be detected and the less B can be used as evidence of A. It's my understanding that conviction of CSAM-related crimes do not require any physical act to have ever occurred to any real person: one can be convicted of CSAM-related crimes related to paintings/drawings/created_art of fictional people. It's my understanding that one can be convicted of structured withdrawals that are not driven by, linked to, or in any way related to anything nefarious."
+        },
+        {
+          "id": 48993490,
+          "author": "majorchord",
+          "text": "IMO \"end-to-end encryption\" simply isn't possible when the application is run by the same company as the servers the data sits on, is closed source, and can at any time, see the decrypted contents of data it downloads from their servers and do whatever they want with it. Same issue with Proton, MEGA, and any other e2ee app... it's only useful when the company decides not to mess with the data it could always decrypt locally. Also why people are hesitant to use javascript-based e2ee solutions where the site owner can modify the code at will to do what they want."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 27,
+      "id": 48998404,
+      "title_en": "\"Drawing\" the Mona Lisa with GPT-5.6, Claude, Gemini, and Grok",
+      "title_ja": "\"Drawing\" the Mona Lisa with GPT-5.6, Claude, Gemini, and Grok",
+      "url": "https://www.tryai.dev/blog/ai-drawing-arena-colored-pencils-claude-gpt-grok",
+      "hn_url": "https://news.ycombinator.com/item?id=48998404",
+      "score": 240,
+      "comment_count": 89,
+      "posted_at": "2026-07-21T21:13:20+00:00",
+      "comments": [
+        {
+          "id": 49007535,
+          "author": "bibin765",
+          "text": "A few months back, we had a use case to create some SVGs and added this skill: https://github.com/upbrew-tech/svg-creator-skill I think using this skill, Claude drew it better than the examples given. https://claude.ai/share/bc0867dc-034f-4865-bb71-acb83bfa36a1"
+        },
+        {
+          "id": 48999661,
+          "author": "NichoPaolucci",
+          "text": "As I looked through the images I was unimpressed entirely, at first. But, then I started thinking, these look a little... \"childish\" to me. Childish as in... A newish artist who is drawing a concept rather than light / forms (Which is something artists typically do as they understand drawing more and more). The rose in the vase specifically - some models understood that there was supposed to be shading, reflections, the concept of refraction - others just drew \"blue = glass\" and \"green = stem\" and \"red = rose\". Really odd to look at, considering if I saw any of these drawings from a human kid, I would say \"good job buddy\" and put it on the fridge. I'm expecting these to get better as models improve, and perhaps the artistic progression will be there along with it..."
+        },
+        {
+          "id": 49000747,
+          "author": "jnathsf",
+          "text": "GPT 5.6 Sol had the best two drawings (rose and starry nights) but even more impressive was how efficient it was RE cost/time/tokens vs Fable (3.4M vs 14.6M / $7.74 vs $161!). OpenAI has quietly innovated around inference - this is will be a growing differentiator even against open models."
+        },
+        {
+          "id": 49007672,
+          "author": "raybb",
+          "text": "A year or so ago I was trying to get llms to make pixel art by asking them to create a 2d array of color codes. I'm no prompt guru but they all failed at anything beyond a basic shape. I tried at many resolutions from 16x16, 32x32, 64x64, and maybe a little larger but basically only then quit small ones were even recognizeable."
+        },
+        {
+          "id": 48999036,
+          "author": "ksd482",
+          "text": "Grok! LOL! Seriously, what's going on there ? Why is it so different from others? Is it just behind technologically/training wise or it's using something fundamentally different?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 28,
+      "id": 48964738,
+      "title_en": "Overload and insight look identical from the outside",
+      "title_ja": "Overload and insight look identical from the outside",
+      "url": "https://pilgrima.ge/p/what-the-wire-knows",
+      "hn_url": "https://news.ycombinator.com/item?id=48964738",
+      "score": 15,
+      "comment_count": 2,
+      "posted_at": "2026-07-19T03:32:48+00:00",
+      "comments": [
+        {
+          "id": 49007446,
+          "author": "isoprophlex",
+          "text": "Interesting to see even an ayahuasca experience getting shoved through the LinkedIn broetry / llm slopification pipeline"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 29,
+      "id": 48859309,
+      "title_en": "Why do you suck at juggling now?",
+      "title_ja": "Why do you suck at juggling now?",
+      "url": "https://pgadey.ca/notes/suck-at-juggling/",
+      "hn_url": "https://news.ycombinator.com/item?id=48859309",
+      "score": 73,
+      "comment_count": 50,
+      "posted_at": "2026-07-10T13:00:28+00:00",
+      "comments": [
+        {
+          "id": 49006827,
+          "author": "laszlojamf",
+          "text": "I've been working as a software developer for about ten years, and I've started to get a little annoyed when my manager asks me what I'm gonna work on improving this year. Like what can I say? That I'll try get better at coding? That I'll get better at project management? At some point the marginal utility is just not there anymore. Even if I did get twice as good (whatever that means) at systems design, it's not like there is _that_ much systems design to go around at work that it would actually be noticeable. What do senior developers say they'll work on improving in their performance reviews?"
+        },
+        {
+          "id": 49007490,
+          "author": "scandox",
+          "text": "Lesson is actually: if you want to blow people's minds then practice secretly. An appearance of effortlessness. Sprezzatura. Whatever it is, it seems to be the only thing that impresses the average person."
+        },
+        {
+          "id": 49007363,
+          "author": "helloplanets",
+          "text": "People don't realize the exponential diffictlty curve with juggling. The highest amount of balls ever juggled is 11."
+        },
+        {
+          "id": 49007162,
+          "author": "mikestew",
+          "text": "Reminds me of when I play my mandolin when I’m camping. I’m sure fellow campers think I suck, despite having played for ten years. But I’m not going to play stuff I can play in my sleep, I’m playing stuff that still needs work. So, in consideration of others, once in a while I’ll rip off a fast version of Old Dangerfield or some other song I know really well just in case someone is in earshot."
+        },
+        {
+          "id": 49006945,
+          "author": "MarceColl",
+          "text": "What's more shocking to me is asking a person that is not even an acquaintance why they suck at juggling now."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 30,
+      "id": 49007524,
+      "title_en": "OpenNode – Bitcoin Payment Processor",
+      "title_ja": "OpenNode – Bitcoin Payment Processor",
+      "url": "https://opennode.com/",
+      "hn_url": "https://news.ycombinator.com/item?id=49007524",
+      "score": 54,
+      "comment_count": 48,
+      "posted_at": "2026-07-22T14:34:23+00:00",
+      "comments": [
+        {
+          "id": 49007737,
+          "author": "Hasz",
+          "text": "Very impressed at net cost. I used to run a small ecom business targeting total prices in the range of $3-10. At $3, payment processing is nearly 11-12% of costs, which is absurd, more if you amortize the occasional chargeback/fraud. Lightning can do it for <<0.1% net cost even at the low end, which is incredible. There are plenty of these kinds of vendors on eBay, Aliexpress etc that would be willing to adopt with a bit of help. For whoever posted, your cost calculator should be first thing on the page, and you \"How we calculated this number\" link is broken"
+        },
+        {
+          "id": 49008630,
+          "author": "5701652400",
+          "text": "not your keys, not your money."
+        },
+        {
+          "id": 49007980,
+          "author": "pixelatedindex",
+          "text": "I’m a little confused by the fees. In their pricing page ( https://opennode.com/pricing ) it says: You request $100, the customer pays 0.00152 BTC, and then you get $99. But 0.00152 BTC is almost $100? If I’m a business why would I pay $100 in BTC fees for a $100 transaction? What is this solving? I’ll never understand crypto. Edit: nvm I’m dumdum. Will get coffee. Thanks to everyone who replied."
+        },
+        {
+          "id": 49007796,
+          "author": "samantha-wiki",
+          "text": "Is it open source? If not, why choose the name “OpenNode”?"
+        },
+        {
+          "id": 49008256,
+          "author": "futurecat",
+          "text": "They've been in business for a long time and I used them when I experimented with QR code for street artists to receive tips. OpenNode is very simple to implement!"
+        }
+      ],
+      "summary_ja": ""
+    }
+  ]
+}
