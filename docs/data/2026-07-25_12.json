@@ -1,0 +1,1095 @@
+{
+  "date": "2026-07-25T00:00:00+09:00",
+  "slot": "12",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 49038433,
+      "title_en": "Claude Opus 5",
+      "title_ja": "Claude Opus 5",
+      "url": "https://www.anthropic.com/news/claude-opus-5",
+      "hn_url": "https://news.ycombinator.com/item?id=49038433",
+      "score": 1413,
+      "comment_count": 776,
+      "posted_at": "2026-07-24T16:57:41+00:00",
+      "comments": [
+        {
+          "id": 49038959,
+          "author": "postalcoder",
+          "text": "I think the most important thing here is not absolute performance. It's that organizations now have access to a Fable-ish model without Fable's 30-day data retention requirement[0]. > \"Consistent with prior Opus models, Opus 5 does not have data retention requirements for general access.\"[1] On the Opus model release page, the reason why Fable doesn't have an ARC-AGI score is because of that retention policy[2]. 0: https://support.claude.com/en/articles/15425996-data-retenti... 1: https://www.anthropic.com/news/claude-opus-5 2: https://xcancel.com/arcprize/status/2064399134099153344"
+        },
+        {
+          "id": 49044731,
+          "author": "zmmmmm",
+          "text": "Pointless anecdote: I asked it to make some slides and it decided to write its own slide rendering engine: > On the format — I dropped reveal.js and wrote a small engine inline instead. Reveal would have meant a CDN load, and a deck that half-renders because the lecture theatre wifi is flaky It one-shotted a perfect functional mini version of powerpoint (or Reveal) for a simple presentation I asked it to make."
+        },
+        {
+          "id": 49039922,
+          "author": "jjcm",
+          "text": "Doing testing with it now, specifically for image->html conversion. Previously Fable was the best at this, followed by Gemini 3.1 pro (a surprising #2, but Google has great vision models). Opus' results seem to be more accurate than Fable, following the design source of truth better. Example results: Design source of truth: https://image.non.io/73e239a3-880f-4793-b65f-4810be2d9378.we... Opus 5 build: https://html.non.io/solaraOpus/ Fable 5 build: https://html.non.io/solara/ Note the buttons - for fable they're pill buttons, opus got the rounded rectangle nature of them. Opus' images are closer to the source of truth as well (both LLMs were provided with image gen capabilities for the assets). Running more tests now, but preliminary results are saying this is indeed better than Fable in some areas. Crazy."
+        },
+        {
+          "id": 49040857,
+          "author": "deet",
+          "text": "I compared the writing style of Opus 5 vs Fable 5, and Opus 5 continues many of the \"Claude-isms\" of its 4.8 predecessor in a way that Fable broke away from. Opus 5 still uses \"carry the argument\", \"worth stating plainly\", \", and the trap\", \"The X matters more\", the use of \"move\" We need an \"annoying English\" benchmark. - Fable 5 Max: https://gist.github.com/deet/3d97f854b48eac6658d642fa18bb24d... - Opus 5 Max: https://gist.github.com/deet/1a43693a732dfccb4d0d914bfc42692..."
+        },
+        {
+          "id": 49038676,
+          "author": "paxys",
+          "text": "Looking at all these releases it’s not a surprise that model routing is the fastest growing segment in AI right now. There are 10+ LLM companies, each with dozens of models of different modalities, each model with multiple size variants, then different “thinking” levels, then agentic modes, “pro” modes, a “fast” option, standard vs flex vs batch execution. And of course each end combination has a different input/output/cache token price. Companies that say “give me a prompt and I’ll route it to the most ideal and cost effective model and setting for you” are capturing a ton of value from a gap that model developers don’t seem to understand exists."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 2,
+      "id": 48981665,
+      "title_en": "GC and Exceptions in Wasmtime",
+      "title_ja": "GC and Exceptions in Wasmtime",
+      "url": "https://bytecodealliance.org/articles/wasmtime-gc",
+      "hn_url": "https://news.ycombinator.com/item?id=48981665",
+      "score": 23,
+      "comment_count": 0,
+      "posted_at": "2026-07-20T17:10:50+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 3,
+      "id": 49040296,
+      "title_en": "Postgres LISTEN/NOTIFY actually scales",
+      "title_ja": "Postgres LISTEN/NOTIFY actually scales",
+      "url": "https://www.dbos.dev/blog/postgres-listen-notify-scalability",
+      "hn_url": "https://news.ycombinator.com/item?id=49040296",
+      "score": 255,
+      "comment_count": 47,
+      "posted_at": "2026-07-24T19:05:53+00:00",
+      "comments": [
+        {
+          "id": 49040671,
+          "author": "jerf",
+          "text": "\"Scale\" isn't a binary, it's a continuum. \"Scales to 60K/s\" can be 5 orders of magnitude more than one system needs and 5 orders of magnitude too small for another. Personally I'd knock the general \"premature optimization\" off the list of \"most common developer errors\" and put in its place \"using techs with the wrong scaling factors\". If you use something too small and you exceed its needs, the failure is obvious, but the other way around is a problem too. Bringing in the overhead and management issues of the super scalable techs, as well as their limitations they impose so that they can scale, to a system that would actually be better off with a richer model whose richness prevents it from scaling but would save a lot of effort is also a bad choice. The ceiling of LISTEN/NOTIFY is small enough that you need to pay attention, and I personally like to have at least an order of magnitude of slack left over even after my most pessimistic load numbers are accounted for, but it's still plenty for a lot of projects, and the integration with the rest of the DB, its availability, its not being another service you have to devops, it's definitely not something that should be simply dismissed out of hand as an option. Even the original 2K/s number they cite is a lot of messages for some systems that are more properly measured in seconds per message."
+        },
+        {
+          "id": 49044567,
+          "author": "phamilton",
+          "text": "Just sharing a data point and experience. We had a lot of success with LISTEN/NOTIFY when we paired it with a Rust graphql subscription broker. 10s of thousands of subscriptions, but only 3 or 4 LISTEN connections (one for each host). All changes would be pushed out to all hosts, who would each manage the actual user subscriptions and choose what to actually publish. This worked super well. In general, moving from hundreds of Ruby or Node hosts to just a few Rust hosts just allows so many simplifications and things that \"don't scale\" to actually work quite well."
+        },
+        {
+          "id": 49040676,
+          "author": "nzoschke",
+          "text": "I continue to love DBOS for how it just leverages Postgres (and now SQLite) properly. It's effortless to drop into an existing CRUD stack. Once you start down the \"durable workflows\" path, you start seeing them everywhere. My latest experiments are treating individual emails as durable workflows, where you, the people you're communicating with, agents and tools like GitHub or Attio all take turns in the flow. https://housecat.com/blog/gmail-durable-workflows-sandbox-vm"
+        },
+        {
+          "id": 49043376,
+          "author": "vhiremath4",
+          "text": "I once was the CTO of a company that serviced about 100k requests per day across all our services. We grew to millions and eventually 10's of millions, but, somewhere along the way, an engineer on our team decided he wanted to build a queue off LISTEN/NOTIFY semantics in order to take advantage of strong consistency with the rest of our data model, which seemed reasonable given LISTEN/NOTIFY is not that hard to understand and we did need consistency guarantees for this workflow and this would remove the need for yet another place data got stored and transfered. In practice, this eventually ended up being very awkward because extending the functionality (since we had \"built\" it) and had to work around internal pg semantics (we should have just moved off much sooner). It also did not scale well. We ended up getting a ton of disk contention on our RDS instance in non-obvious ways, and the vacuum runs on that table was a nightmare. Additionally, it was hard to get other engineers to really debug and take ownership of the system because they automatically viewed a queue (very easy to understand) implemented in a foreign way (off pg internals) as something \"scary\". It was emotional, not rational, but we are emotional beings, and I do not blame them. These were good engineers with a lot of other things on their plates. Obviously, this is all hand-wavy without discussing the internal schema, indeces, etc. that we had set up, but my main takeaway with core technology from this experience was to always reach for the dumb, expected, simple thing. Even if it adds another moving piece in the infra stack. Unless I need very strong data consistency guarantees, it's always better to use something like SQS, Redis queues, etc. where the understanding is that it is just a queue (or at least the API contract suggests simplicity), and then everything needs to work around it. The fewer mechanistic responsibilities per core data store, the better in my experience."
+        },
+        {
+          "id": 49042117,
+          "author": "dang",
+          "text": "Related, presumably: Postgres LISTEN/NOTIFY does not scale - https://news.ycombinator.com/item?id=44490510 - July 2025 (321 comments)"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 4,
+      "id": 49040741,
+      "title_en": "Opus 5 is currently #1 on Artificial Analysis Intelligence Leaderboard",
+      "title_ja": "Opus 5 is currently #1 on Artificial Analysis Intelligence Leaderboard",
+      "url": "https://artificialanalysis.ai/models",
+      "hn_url": "https://news.ycombinator.com/item?id=49040741",
+      "score": 214,
+      "comment_count": 129,
+      "posted_at": "2026-07-24T19:45:10+00:00",
+      "comments": [
+        {
+          "id": 49042676,
+          "author": "andy99",
+          "text": "#1 in a very close race is way less useful when you have to walk on eggshells to avoid triggering censorship (“safeguards”) that either refuse or knock it down to another model. I’ve almost completely stopped using Claude (except some legacy workflows) for this reason, reliability matters more than scoring 61 instead of 57. To me Claude is the most compromised and unreliable model (between the censorship and the id checking - which I have not experienced personally), it’s not worth whatever slight benchmaxxing they did for the latest release."
+        },
+        {
+          "id": 49042682,
+          "author": "chmod775",
+          "text": "The more interesting finding is that it's still the second most expensive model (after Fable 5) by a long shot. At least two models (GPT-5.6, Kimi K3) match its score (~1-2% diff) for half the cost."
+        },
+        {
+          "id": 49043346,
+          "author": "didibus",
+          "text": "What's interesting is this: The top AI models by Intelligence Index are: 1. Claude Opus 5 (Adaptive Reasoning, Max Effort) (61), 2. Claude Opus 5 (Adaptive Reasoning, Xhigh Effort) (60), 3. Claude Fable 5 (Adaptive Reasoning, Max Effort, Opus 4.8 Fallback) (60), 4. GPT-5.6 Sol (max) (59), and 5. Claude Opus 5 (Adaptive Reasoning, High Effort) (59). Which means Opus5 at Xhigh is still smarter than Sol at max, and Opus5 at High is equal to Sol at max. That would make Opus5 High same as Sol max, and now I wonder what the price and speed difference between those is?"
+        },
+        {
+          "id": 49042596,
+          "author": "firasd",
+          "text": "Very interesting that one of the components is \"AA-Omniscience Index\" AA-Omniscience Index (higher is better) measures knowledge reliability and hallucination. It rewards correct answers, penalizes hallucinations, and has no penalty for refusing to answer. This seems to be a good proxy for param size/density and the ranking breaks down as such: Claude Fable 5 (with fallback), Gemini 3.1 Pro Preview, Claude Opus 5 (Max), Grok 4.6 (high), Gemini 3.6 Flash, GPT 5.6 Sol (Max) I've thought for a while that Gemini 3.x has 'big model smell'"
+        },
+        {
+          "id": 49040742,
+          "author": "aarondong",
+          "text": "Before getting too excited, take a look at the intelligence vs cost matrix: https://artificialanalysis.ai/models?intelligence-index-toke..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 5,
+      "id": 49008618,
+      "title_en": "Re: Bye Bye Gravatar",
+      "title_ja": "Re: Bye Bye Gravatar",
+      "url": "https://unattributed.cc/re-bye-bye-gravatar",
+      "hn_url": "https://news.ycombinator.com/item?id=49008618",
+      "score": 26,
+      "comment_count": 10,
+      "posted_at": "2026-07-22T15:43:21+00:00",
+      "comments": [
+        {
+          "id": 49044506,
+          "author": "behindsight",
+          "text": "The blog's visual design is quite pleasant to read. However I am a bit confused by the author's remarks > I do NOT EVER consent to ANYTHING being done in regard to AI in my name. > With newer sites like Bio Link and FediProfile I don't see the usefulness of Gravatar. If anything, I think it now has ANTI-features. It's conflicting to mention Bio Link with the author's ideology since it quite prominently has: - AI assistant to answer visitor questions based off of your \"links, descriptions, posts, and a short knowledge base\" - AI site builder"
+        },
+        {
+          "id": 49044450,
+          "author": "chrismorgan",
+          "text": "It’s funny, I’d genuinely say that Gravatar improved for quite some time. In the old days it was fine, then for quite some time under Automattic when they started fiddling with it it was ridiculously bad and for a while even literally unusable due to broken tie-in to WordPress.com accounts or something (I forget), then they finally got it together again so that it was arguably better than before they took it over, with the caveat that they had expanded its scope a little so there was foolish distraction, but at least the core flow was actually better… but then they’ve continued fiddling with it. At a cursory glance, this “AI Context” thing is just frivolous AI-washing of the profiles feature they put in some years ago for humans to be able to read. I’m tired of that sort of thing, and products advertising features as being AI Ready™ for an Agentic Future™, when those features are just as meaningful for poor humans."
+        },
+        {
+          "id": 49044467,
+          "author": "mvdtnz",
+          "text": "I feel like I'm missing a lot of context and I'm not willing to click on a (another) random link to get it."
+        },
+        {
+          "id": 49044432,
+          "author": "efilife",
+          "text": "Beautiful typography on this site, a joy to read. Overall, it's just nicely designed"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 6,
+      "id": 48973835,
+      "title_en": "India's first privately-developed rocket reaches orbit on debut launch",
+      "title_ja": "India's first privately-developed rocket reaches orbit on debut launch",
+      "url": "https://arstechnica.com/space/2026/07/indias-first-privately-developed-rocket-reaches-orbit-on-dramatic-debut-launch/",
+      "hn_url": "https://news.ycombinator.com/item?id=48973835",
+      "score": 553,
+      "comment_count": 156,
+      "posted_at": "2026-07-20T02:43:54+00:00",
+      "comments": [
+        {
+          "id": 49037381,
+          "author": "mayama",
+          "text": "Regarding Indian private space sector, In addition to skyroot solid rocket, following are noteworthy Agnikul is planning to launch semi-cryo kerosene rocket pretty soon. Their engine is 3d printed and use electric pump fed 25kN small engine. Planning to launch 4 clustered engines as first stage and already did suborbital test, with some parachute splash down reusability claims. Astrobase is recent entrant. With decent funding and former ISRO scientists as core team, developing 800kN FFCS methalox engine. FFCS is called holy grail of liquid engines. They have acquired largest metal 3d engine and planning VTVL 1st stage reusability"
+        },
+        {
+          "id": 49036806,
+          "author": "itissid",
+          "text": "There is just so much that can go wrong with rocket launches if you do cursory reading about these things. A few random examples: The lowest stage cant just be \"turned down\" or modulated because they work by burning an inner solid rubber lining that's like an annular cylinder. The first three stages are roughly doing the job sequence: `lift off the ground -> reach target altitude -> reach target orbital velocity` and each stage is modulated for atmospheric pressure, gravity. Another limit is you can't really design it for a human in the middle(like a jet plane), so the rocket's computer needs to do everything, and when the rocket's pitch or yaw or roll(in a manner of speaking) go off beyond a nominal range its game over. ISRO has a very good track record of launching rockets with solid state engines. I do wonder if almost all of their expertise was used for the first three stages(and they are not 3d printed)? And how much more difficult it is to make the last stage as compared to the first three, which as I understand, was the stage designed and tested by skyroot itself(manufactured by Wipro 3D)."
+        },
+        {
+          "id": 49035963,
+          "author": "zbentley",
+          "text": "And with $160MM in funding at a $1.1B valuation? I don't know about their debt, but to get to LEO in 8 years on that little money is extremely impressive."
+        },
+        {
+          "id": 49035910,
+          "author": "sidcool",
+          "text": "Only the third country to achieve this. Kudos. There's another startup trying reusable rockets."
+        },
+        {
+          "id": 49037548,
+          "author": "josefresco",
+          "text": "For those interested, just read a great book on this topic: When the Heavens Went on Sale by Ashlee Vance: https://www.goodreads.com/book/show/62050244-when-the-heaven... It profiles: Astra, Firefly, Planet Labs, and Rocket Lab"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 7,
+      "id": 49044074,
+      "title_en": "Taylor Farms Called White House to Try to Delay Cyclospora Recall",
+      "title_ja": "Taylor Farms Called White House to Try to Delay Cyclospora Recall",
+      "url": "https://www.wsj.com/health/taylor-farms-cyclospora-recall-delay-call-41fef0bc",
+      "hn_url": "https://news.ycombinator.com/item?id=49044074",
+      "score": 136,
+      "comment_count": 42,
+      "posted_at": "2026-07-25T02:54:36+00:00",
+      "comments": [
+        {
+          "id": 49044542,
+          "author": "instagib",
+          "text": ">>On Monday, however, the FDA said that the \"false-positive lab sample DOES NOT change the basis for [the] FDA's ongoing outbreak investigation or the overwhelming epidemiological data supporting the current voluntary recall by Taylor Farms.\" The agency added that its \"traceback investigation and outbreak data continue to converge on shredded iceberg lettuce from Taylor Farms locations in central Mexico.\" The false positive \"doesn't call into question the conclusion of the outbreak investigation,\" McEntire said. Had the positive test been confirmed, \"it could've resulted in a substantially expanded recall.\" << https://www.cbsnews.com/news/taylor-farms-cyclospora-outbrea... I like the part where they say “No Taylor Farms branded products are involved in this recall.” As in there are other brands they do not mention which were but do not list them which they could own and distribute under. https://www.taylorfarms.com/newsroom/taylor-fresh-foods-stat..."
+        },
+        {
+          "id": 49044509,
+          "author": "ashleyn",
+          "text": "Only slightly unrelated, but I've been thinking a lot lately about prion disease and whether or not you can still trust the meat you eat. Easily a food safety concern that is ten times worse than getting a little diarrhea from your salad, and the same institutional rot can contribute to it. And it would take 5-10 years to really see the damage done from it."
+        },
+        {
+          "id": 49044368,
+          "author": "devin",
+          "text": "Of course they did. Look at the disaster around the messaging."
+        },
+        {
+          "id": 49044505,
+          "author": "thomascountz",
+          "text": "http://archive.today/2026.07.25-012850/https://www.wsj.com/h..."
+        },
+        {
+          "id": 49044451,
+          "author": "pm90",
+          "text": "The US Federal Government has been meaningfully degraded by the brazen corruption of the people in power. Already there was a crisis of faith in authority; this is just going to make it much much worse. I wonder if its time to rethink some of these institutions. It seems like Food Safety is especially important to the welp being of society; it might make sense to have food testing labs in every major population center/distribution hub. Funded by a tax on the food companies or perhaps even locally. Its just unbelievable that the entire US population is so vulnerable… what if a bad actor did something nasty deliberately?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 8,
+      "id": 49042751,
+      "title_en": "Sperm Whales blow bubbles to achieve restful, vertical sleep",
+      "title_ja": "Sperm Whales blow bubbles to achieve restful, vertical sleep",
+      "url": "https://news.st-andrews.ac.uk/archive/sperm-whales-blow-bubbles-to-achieve-restful-vertical-sleep/",
+      "hn_url": "https://news.ycombinator.com/item?id=49042751",
+      "score": 69,
+      "comment_count": 6,
+      "posted_at": "2026-07-24T23:13:18+00:00",
+      "comments": [
+        {
+          "id": 49044145,
+          "author": "giardini",
+          "text": "What happens if they have an attack of flatulence? But seriously, this must happen sometimes!"
+        },
+        {
+          "id": 49043128,
+          "author": "dnnehgf",
+          "text": "same"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 9,
+      "id": 49034292,
+      "title_en": "My security camera shipped a GitHub admin token in its login page",
+      "title_ja": "My security camera shipped a GitHub admin token in its login page",
+      "url": "https://hhh.hn/hanwha-github-token/",
+      "hn_url": "https://news.ycombinator.com/item?id=49034292",
+      "score": 546,
+      "comment_count": 185,
+      "posted_at": "2026-07-24T11:54:41+00:00",
+      "comments": [
+        {
+          "id": 49037936,
+          "author": "badatnames",
+          "text": "Worthy thread to ask: is there such a thing as a white label IP camera (or similar) with a supported open firmware? Not asking for open source, but something close to plug and play that nonetheless has a way of stripping the rootfs as desired for bespoke use in a manufacturer-supported way. I have looked around before but I only found genuinely dev-oriented kits that weren't even in a shell, and crazy priced. edit: seems there are some options now (or I missed them before), e.g. https://www.goodcam.io/#for-independent-developers"
+        },
+        {
+          "id": 49035049,
+          "author": "grommz",
+          "text": "The US Department of War IP adresses baked into the firmware is the bigger story here. Note to self: never buy a Korean security product."
+        },
+        {
+          "id": 49036198,
+          "author": "dev_l1x_be",
+          "text": "Not surprised, many of these vendors are doing crazy things, insane defaults, broken security, hardcoded values. Security is not a priority, I get that, but at the very least some baseline check would be nice (no hardcoded credentials for starting)"
+        },
+        {
+          "id": 49036939,
+          "author": "tehlike",
+          "text": "A rule of thumb, put your cameras on a separate VLAN and never give that vlan internet access. Least you can do."
+        },
+        {
+          "id": 49034542,
+          "author": "RyJones",
+          "text": "When I cared, I found out that a lot of OBD-II dongles shipped with the same MAC, which gave you access to everything on a bunch of websites. You can curse the storm, but the wind will come."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 10,
+      "id": 49033004,
+      "title_en": "If coding has been solved, why does software keep getting worse?",
+      "title_ja": "If coding has been solved, why does software keep getting worse?",
+      "url": "https://ptrchm.com/posts/nothing-works-and-everyone-is-euphoric/",
+      "hn_url": "https://news.ycombinator.com/item?id=49033004",
+      "score": 660,
+      "comment_count": 504,
+      "posted_at": "2026-07-24T09:08:17+00:00",
+      "comments": [
+        {
+          "id": 49041808,
+          "author": "mancerayder",
+          "text": "> We’ve reached a point where an update to macOS — or to any app I rely on, really — is a source of dread rather than excitement. I now expect the new version to be worse. I actually relate to that. It used to be cool and exciting to update to see what new things are coming for free. I was just looking up what Fedora Workstation 45 might bring. Updates on phones, TV's, cars and non-Linux operating systems on PC's/laptops are downright scary to me now. What will they add that I don't want? What more connectivity to the external world are they going to wire in? MacOS lost everyone's trust by ruining the experience, but even before it happened that trying to resize a window makes it feel like life will be at 80 years-old, hunting a tiny invisible border, even before that there wasn't anything exciting. What Microsoft I think did (and I can't prove it), before I moved off of Windows 11, was to bundle all changes in \"required security updates.\" So you have no choice but to update (or go through special settings to turn it off, or just defer it), but when the machine comes back you have a new Welcome prompt to some new connectivity to something nefarious. AI features I never asked for, that's the most recent dark pattern here."
+        },
+        {
+          "id": 49043097,
+          "author": "alphazard",
+          "text": "The answer, of course, is that the taste-making apparatus inside the typical tech company is now entirely imposters (non-technical, non-power-users), who continue to LARP as visionaries. The people who notice broken or degraded behavior (devs and power users) and conceive of good designs are not in charge of what goes into the product. So you shouldn't expect it to get better, only to continuously change so that the imposters can point to a difference that they were responsible for, knowing that upper management also has no idea whether that difference was actually an improvement. The solution is to gut your product org, replace management with leading engineers, and hire some of your most fanatic users. They don't need to do anything other than give their opinions, and use the product every day. Put them in a room with your top engineers, and the software will mysteriously get better. All of this was obvious decades ago, but now everyone wants to have a do-nothing job at a tech company, and to help their friends get one too. The result is imposters everywhere; \"imposter syndrome\" was brought into the vernacular to normalize a lack of expertise. \"No one knows what they are doing, it's okay to not know how to do your job\". That's what your (product) manager tells themself in the mirror each morning. Turns out: skill predicts quality, and an org ships quality proportional to the skill of the decision makers."
+        },
+        {
+          "id": 49033527,
+          "author": "frameset",
+          "text": "> I opened Slack on macOS, the icon kept bouncing in the dock for a few seconds. I got impatient, switched to Ghostty, and started typing. Just then, the Slack window appeared, stole focus from Ghostty and the git pull command was sent to the group chat. One of my absolute favourite features on KDE Plasma with Wayland is the global setting to control what can steal focus. It works wonderfully, and I always miss it when I have to use my work mac or windows computers. See here for docs, under \"Focus stealing prevention\" - https://docs.kde.org/trunk_kf6/en/kwin/kcontrol/windowbehavi..."
+        },
+        {
+          "id": 49043944,
+          "author": "thelastgallon",
+          "text": "Incentives. People get promoted, get bonuses based on some shiny new tool they developed. Every year, they create something 'new', claim lots of features. Their managers/directors/VPs also encourage this because they need some 'winning' and 'automation' slides to brag about. Nothing gets solved. In fact, things get worse. The new tool and old tool and oldest tool all coexist with 20 other tools developed for the exact same thing in a different org. Each org (SVP reporting to CEO) is MASSIVE and everybody wants headcount and success stories. All these things will be happening at the same time. Those who are capable of making the biggest mess get the biggest pay and bonus, they get promoted and they move nearly year 1 - 2 years, within the same company or to another. Repeat. The ICs (individual contributors) who have values and explain why this is a bad idea are usually moved to Support or Ops roles or migration projects from old to new. I've seen perfectly working systems continuously being replaced with worse and worse tools. Most of the new tools require a lot of people from several departments, just a guy who understands business and develops a perfectly working PHP/CRUD is a no-no. It has to be replaced with a complex monster with react, apis, mongo crap. And on kubernetes. Hybrid cloud."
+        },
+        {
+          "id": 49043981,
+          "author": "greenlimetea",
+          "text": "As crazy as it sounds, code quality != software quality. It turns out that the lower the barrier to creating \"high quality\" code is, the worse the software is on average. Who remembers the Photoshop lens flare? It's not that the effect sucked - it did lens flare perfectly. But who used it sucked. Instagram and the Nashville filter - \"we're all photographers now\" Code quality not equaling software quality gets at the fun part of the modern AI-labor debate. Where does talent and efficacy really reside in terms of software? Surely not in the (apparently unworthy?) mind of a human? Surely it can be extracted, distilled, automated – liberated! - unto a reactive web interface for some middle manager to invoke (at some expense to some account this folk loses zero sleep over), because it is after all this flimsy, transferrable - not worthless! Not worthless! I have a stock portfolio to maintain for God's sake. But mine. Nonetheless. Code quality doesn't equal software quality."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 11,
+      "id": 49020545,
+      "title_en": "Show HN: I simulated closing the Strait of Hormuz on real oil trade data",
+      "title_ja": "Show HN: I simulated closing the Strait of Hormuz on real oil trade data",
+      "url": "https://globaloilnetwork.staffinganalytics.io/",
+      "hn_url": "https://news.ycombinator.com/item?id=49020545",
+      "score": 140,
+      "comment_count": 74,
+      "posted_at": "2026-07-23T12:31:21+00:00",
+      "comments": [
+        {
+          "id": 49043425,
+          "author": "anigbrowl",
+          "text": "An interesting fact to consider is that the US stockpile (the Strategic Petroleum Reserve) is reported as the total of sour (high sulfur) and sweet (low sulfur) crude oil. The sweet stock makes up about 1/3 of the reserve and hardly varies at all. This is because US refineries are virtually all configured for sour crude: due to a mistaken belief in the 1990s that sweet crude was running out, the industry bet the farm on sour crude refining, and if sour crude runs low, it's extremely economical to switch. As a result, almost all the draw from the SPR is of sour crude (currently ~5 million barrels/week). However, you can't just use up all the reserve because as levels get lower brine must be pumped into the storage chambers to retain pumping pressure, and the more brine that is pumped, the more the output quality declines. The weekly reports indicate a total in the SPR of about 300mbb, of which ~100 are sweet and 200 sour. But for the reasons above, output becomes unusable one the sour levels fall to ~140-150mbb, at which point there is almost certainly a severe diesel supply shock. At current drawdown rates, that would be sometime around October/November, right in the middle of harvest season when demand for diesel is highest. There's more complexity to this than I want to type out in a HN comment, but not that much more. Draw your own conclusions."
+        },
+        {
+          "id": 49043797,
+          "author": "neom",
+          "text": "Tangentially related but just watched this pretty interesting youtube mini-doc-thing about the recent moves China has been making regarding oil (and its bigger picture): https://www.youtube.com/watch?v=BkA0bkb6ZO0"
+        },
+        {
+          "id": 49044502,
+          "author": "Haven880",
+          "text": "The biggest missing piece is China. Assuming actual delivered price is not subsidized by Western countries, you need to put in what if China demands that reflect the current price. Chinese in reality don't consume that much oil as what we thot they do from the oil purchases in the past. I assume Chinese just ramp down the purchase even though their consumption is well below that. Plus the hidden supplies from Iran and Russia to China via land route."
+        },
+        {
+          "id": 49021255,
+          "author": "HarHarVeryFunny",
+          "text": "What concrete predictions does your model make? What developments in pricing/other would indicate that your model is wrong or incomplete? Nice website regardless, but I'm a bit skeptical that the dynamics of the global oil/energy market can be accurately predicted."
+        },
+        {
+          "id": 49043621,
+          "author": "kccqzy",
+          "text": "Nice that you allowed readers to customize the parameters! I personally thought the demand demand elasticity was too low and I was able to adjust it."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 12,
+      "id": 49043724,
+      "title_en": "Hannah Fry Wins the Leelavati Prize in 2026 for Mathematics Outreach",
+      "title_ja": "Hannah Fry Wins the Leelavati Prize in 2026 for Mathematics Outreach",
+      "url": "https://www.maths.cam.ac.uk/features/professor-hannah-fry-wins-leelavati-prize",
+      "hn_url": "https://news.ycombinator.com/item?id=49043724",
+      "score": 28,
+      "comment_count": 7,
+      "posted_at": "2026-07-25T01:44:12+00:00",
+      "comments": [
+        {
+          "id": 49044632,
+          "author": "vgivanovic",
+          "text": "What I love most is that Hannah Fry didn't get into the Cambridge undergraduate(?) math program (maths programme for you Brits) but became a math professor at Cambridge. Go Hannah!"
+        },
+        {
+          "id": 49044543,
+          "author": "vaylian",
+          "text": "Well deserved. She is an excellent science communicator."
+        },
+        {
+          "id": 49044657,
+          "author": "tomfakes",
+          "text": "I’m a big fan of her current podcast - The Rest Is Science. Informative and entertaining as well as being easy to listen to (I’m not a fan of many audio-only shows, so listenability is a big factor for me)"
+        },
+        {
+          "id": 49044727,
+          "author": "dofm",
+          "text": "She really is an extraordinary communicator. She has an actor's control of her countenance, which allows her control over that mischievous, slightly conspiratorial tone she uses when she wants you to know something really fun, or be excited by some knowledge. I love to recommend this charming little clip from a fun sort of \"science of Christmas\" short film for kids she appeared in with the brilliant Lenny Rush: https://www.youtube.com/shorts/MMZ_FCIgEEo"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 13,
+      "id": 48985182,
+      "title_en": "Designing an Ethernet Switch ASIC",
+      "title_ja": "Designing an Ethernet Switch ASIC",
+      "url": "https://essenceia.github.io/projects/ethernet_switch_asic/",
+      "hn_url": "https://news.ycombinator.com/item?id=48985182",
+      "score": 152,
+      "comment_count": 39,
+      "posted_at": "2026-07-20T21:35:33+00:00",
+      "comments": [
+        {
+          "id": 49042926,
+          "author": "zrobotics",
+          "text": "This is extremely cool, I've played with FPGA design but never really even looked into custom ASIC design due to budget concerns. I hadn't heard of the tinytapeout project. Any recommended links for getting started? I have a (really dumb, kinda meme-y) project involving a dead hakko soldering iron and \"Internet of Soldering\", a custom ASIC for the actual front-end would be the appropriate level of silly and possibly could fit in the project budget."
+        },
+        {
+          "id": 49042258,
+          "author": "roadbuster",
+          "text": "Great project & article. Beyond the use of verilog, I couldn't find a description of the EDA stack. What tooling is used for the physical stages of design: place & route, LVS, DRC, and electrical circuit simulation (SPICE)?"
+        },
+        {
+          "id": 49043355,
+          "author": "jandrese",
+          "text": "That memory constraint is a real killer on the chip, even one that is a first generation toy like this. Only having 4 entries in the forwarding table is going to be an immediate problem if that switch is ever connected to another switch. I wonder if it wouldn't make sense for one of the ports to be designated the \"uplink\" port and if the switch receives a packet destined for something not in the table it forwards it out the uplink port so long as the packet did not arrive via that port. It could even save a bit of memory by not storing entries for the uplink port in the table."
+        },
+        {
+          "id": 49041965,
+          "author": "inigyou",
+          "text": "Nice! I've been following waferspace and tiny tapeout loosely but I'm sadly not in a position to be able to work on something right now. I'm surprised you managed to fit something like this in a TT grid square."
+        },
+        {
+          "id": 49041701,
+          "author": "noncoml",
+          "text": "“ Cut-through vs Store-and-Forward” I had a Google interview collapse because the last interviewer was a Principle Engineer who just couldn’t accept that a switch will ever forward a frame before reading in full and checking the FCS. I was too much of an idiot to go along with it and instead ended up having an argument with him."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 14,
+      "id": 49008512,
+      "title_en": "An old patent inspired the new \"Y-zipper\", a three-sided fastener",
+      "title_ja": "An old patent inspired the new \"Y-zipper\", a three-sided fastener",
+      "url": "https://news.mit.edu/2026/three-sided-y-zipper-design-0504",
+      "hn_url": "https://news.ycombinator.com/item?id=49008512",
+      "score": 161,
+      "comment_count": 35,
+      "posted_at": "2026-07-22T15:37:25+00:00",
+      "comments": [
+        {
+          "id": 49042419,
+          "author": "rationalist",
+          "text": "Zippers are usually attached to something. Is this design practical? What would it be used for? With this zipping mechanism, can anything be attached? Edit: Apparently I stopped watching the video too early. They demonstrate some uses where at max only one of the three sides can be attached to something, and it is used to create a rigid structure rather than joining multiple surfaces. The most interesting use demonstrated (IMO), is a tent with no tent poles, but it doesn't look like it would hold up to any significant weather, and would probably take up just as much space and weight as tent poles."
+        },
+        {
+          "id": 49043165,
+          "author": "jml7c5",
+          "text": "Extremely similar to a rigid chain actuator: https://en.wikipedia.org/wiki/Rigid_chain_actuator"
+        },
+        {
+          "id": 49044190,
+          "author": "ayashko",
+          "text": "Same concept as in this 'zipper mast' video from over 10 years ago. Surprisingly compact as each side is from flexible steel sheet that can be rolled up ala tape measure style, then connected as they unroll to form a rigid shaft. Pretty cool; https://www.youtube.com/watch?v=3P_UTV3rV-k"
+        },
+        {
+          "id": 49009648,
+          "author": "__MatrixMan__",
+          "text": "It brings to mind satellites assembling themselves in space. Send up a tightly packed box of spaghetti and extrude it into the desired physical shape upon arrival in orbit. For increased rigidity, paint with a solar pumped laser to weld the links together."
+        },
+        {
+          "id": 49043623,
+          "author": "bilsbie",
+          "text": "My first thought is a better tape measure. Wouldn’t that be cool if it didn’t bend."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 15,
+      "id": 48992539,
+      "title_en": "A concrete explanation of how a cache works",
+      "title_ja": "A concrete explanation of how a cache works",
+      "url": "https://parksb.github.io/en/article/29.html",
+      "hn_url": "https://news.ycombinator.com/item?id=48992539",
+      "score": 17,
+      "comment_count": 2,
+      "posted_at": "2026-07-21T14:05:16+00:00",
+      "comments": [
+        {
+          "id": 49044357,
+          "author": "rramadass",
+          "text": "Meh... Wikipedia has it better and more comprehensive - https://en.wikipedia.org/wiki/CPU_cache For usage of caches from a OS, particularly in the context of multicores/multiprocessors see Curt Schimmel's classic Unix Systems for Modern Architectures: Symmetric Multiprocessing and Caching for Kernel Programmers."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 16,
+      "id": 49024938,
+      "title_en": "Kimi K3 exploited the latest Redis server",
+      "title_ja": "Kimi K3 exploited the latest Redis server",
+      "url": "https://twitter.com/fried_rice/status/2080059356322918777",
+      "hn_url": "https://news.ycombinator.com/item?id=49024938",
+      "score": 180,
+      "comment_count": 49,
+      "posted_at": "2026-07-23T17:10:02+00:00",
+      "comments": [
+        {
+          "id": 49042631,
+          "author": "himata4113",
+          "text": "As wild as this sounds, redis should not exposed to the internet and this appears to be an authenticated RCE. This is similar to claiming that a PSQL query grants code execution when its actually a feature. These systems are typically not tested as aggressively against vulnerabilities of that nature since 10 times out of 10 you have to have access to these systems already. Issues like these are only really an issue in rootless multi-tenant environments where these are a big problem, but in my opinion those are a security hazard to begin with and should be avoided. There is a way more interesting telegram RCE that kimi k3 allegedly discovered."
+        },
+        {
+          "id": 49032365,
+          "author": "throwa356262",
+          "text": "\"/goal use up to 64 subagents, write an exploit for latest 8.6.x redis by finding bof/uaf type of 0day and exploiting them. debug using gdb. clone code, write fuzzer and add instrumentation when needed. this is authorized testing\" At first glance it looks like something anyone could copy paste and instantly become a master hacker. But according to the author, you also need to create the right harness, which looks complicated: https://arxiv.org/abs/2604.20801"
+        },
+        {
+          "id": 49030920,
+          "author": "btown",
+          "text": "> this is the first llm that is capable and willing to write an exploit An open-source Kimi is going to have real economic impact (and not only because of its forcing function on frontier labs to indefinitely subsidize their models to meet a race-to-the-bottom market price). Because it's also putting sophisticated zero-day-seeking tools in the hands of script kiddies who can develop and run novel exploits against arbitrary targets of their choosing, on model forks that will immediately be fine-tuned to remove any extant guardrails around cyber capabilities (the things that the other frontier labs describe in their system cards). All of a sudden, people with the resources for tokens don't need to have someone knowledgeable about cybersecurity and prompt-engineering-around-guardrails to initiate a novel attack - they simply point Kimi-Attacker at a set of target domains. One imagines that people will make crime-as-a-service platforms for this. Per https://www.nist.gov/news-events/news/2026/07/uk-aisi-caisi-... - while \"Kimi K3 performs significantly below the most recent frontier cyber-capable models\" it's also the case that: > In one of the 10 attempts, Kimi K3 successfully completes “The Last Ones” cyber range within the 100M token limit. This indicates that Kimi K3 is capable of autonomously attacking small, weakly defended and vulnerable enterprise systems, when directed to do so and given initial network access. However, TLO differs from real-world environments in several ways. It lacks active defenders and defensive tooling, imposes no penalty for actions that would trigger security alerts, and contains an intentional attack path. As a defender, now is the time to look to upgrading your systems and having capabilities to rapidly upgrade your systems - particularly edge-facing reverse proxies and web servers that may be out of date. Attacks won't start the moment weights are released... but they're coming."
+        },
+        {
+          "id": 49042265,
+          "author": "theplumber",
+          "text": "Well if you have an authenticated user and it already bypassed the firewall what exactly are you testing here? These kind of “zero days” pretty pointless. Something like “ I have deleted some system32 files on your windows computer and now is broken!” Even I am already an admin user on the machine."
+        },
+        {
+          "id": 49042220,
+          "author": "ianm218",
+          "text": "https://github.com/ianm199/valdr I made a Rust version of Valkey/ Redis was wondering if this would become relevant."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 17,
+      "id": 48995409,
+      "title_en": "Firefox Containers Preview",
+      "title_ja": "Firefox Containers Preview",
+      "url": "https://blog.mozilla.org/en/firefox/firefox-containers-preview/",
+      "hn_url": "https://news.ycombinator.com/item?id=48995409",
+      "score": 274,
+      "comment_count": 92,
+      "posted_at": "2026-07-21T17:27:59+00:00",
+      "comments": [
+        {
+          "id": 48995967,
+          "author": "pentagrama",
+          "text": "I’ve been using Firefox Containers for years through Mozilla’s Multi-Account Containers extension.[1] Now that container management is available directly in Firefox, I’d prefer to use the native implementation if possible. Mozilla notes that the extension still adds some functionality: > “Installing the Multi-Account Containers extension developed by Mozilla provides a few benefits on top of the native container functionality like site-specific container assignments, syncing across devices, and integration with Mozilla VPN or your own proxy.”[2] I don’t currently need any of those additional features, so the native version would probably be enough for me. What I haven’t been able to figure out is how to switch without losing my existing setup. Are the containers created by the extension already shared with Firefox’s native container manager, or is there some migration process? Can I safely uninstall the extension and keep my existing containers, names, colors, icons, cookies, and active sessions? [1] https://addons.mozilla.org/en-US/firefox/addon/multi-account... [2] https://support.mozilla.org/en-US/kb/how-use-firefox-contain..."
+        },
+        {
+          "id": 48996061,
+          "author": "chao-",
+          "text": "Firefox's Multi-Account Containers changed the game for me back in 2018 or 2019, and is what got me to switch back to Firefox for 95% of my personal browser use. The \"Always open {{domain}} in this container\" and the ability to open a specific container with a keyboard shortcut seem like small things, but I can't imagine life without them anymore. I never understood why it was set off to the side in an (official, first-party) extension, because I was always afraid they would one day stop supporting it. Now when I explain to people why I prefer Firefox, I don't have to explain \"There's this extension, don't worry it's official, that allows me to...\" I can just say \"It has containers built-in. They're great. Try them.\""
+        },
+        {
+          "id": 48996687,
+          "author": "jillesvangurp",
+          "text": "Good that they are integrating that into the main browser. For me the big use case is having different Google accounts active in one window. Work and private. And when I was doing freelance projects, I sometimes had 3 or 4 different Google accounts active. Plus assorted stuff tied to those accounts. Using different colors for each makes it easy to tell apart the tabs. Another use case is if you are testing the same app for different customers with different credentials. I do this a lot and I have dedicated containers for each customer so I can easily switch with out having to log out and in a lot. And of course some companies that can't be trusted with cookies, like Facebook, get isolated. I open that container less and less these days. But I still check every few months. I also keep my bank's website in its own container just on principle."
+        },
+        {
+          "id": 49043833,
+          "author": "crossroadsguy",
+          "text": "I should not have to: - Install add-ons like \"Temporary Containers\" - And if some people do they should certainly not have to deal with a bloated container list with temp container names - Just let me select how I want this \"containers\" feature - like \"open all links in unique temp containers\" (unless I select otherwise or set otherwise for certain websites, then go to that container), maybe let me select a sub rule like \"based on domain\" or \"subdomains\" (group tabs/windows) - I should not have to go and toggle \"Limit to designated sites\" in every bloody container I have created and I have created (had to create!) way too many already. There are apparently other container add-ons like Temporary Containers (and a Plus ones as well) and Auto Containers but I really should not have to do all that. MAC is a great add-on and far head of any browser out there in this regard but the feature has been sort of \"contained\" for far too long and not been made flexible/usable enough."
+        },
+        {
+          "id": 48996991,
+          "author": "lukeschlather",
+          "text": "I use profiles for this, I wonder what the tradeoffs are between the two approaches. I've actually been thinking about building some tools to make it easier to create and manage profiles on the fly. For me I really think profiles are better since the boundaries are harder - there's no worry about accidentally hitting the \"log in with Google\" button and clearly identifying myself to a site or similar, because I read the news in a separate profile from my Google account. And it would be nice if those sort of guardrails were very intuitive and easy to set up by default. But I feel like containers may be too squishy."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 18,
+      "id": 49035303,
+      "title_en": "Nvidia, Microsoft, Meta warn against overregulating open-weight models",
+      "title_ja": "Nvidia, Microsoft, Meta warn against overregulating open-weight models",
+      "url": "https://www.cnbc.com/2026/07/24/nvidia-microsoft-meta-open-weight-ai-models.html",
+      "hn_url": "https://news.ycombinator.com/item?id=49035303",
+      "score": 568,
+      "comment_count": 254,
+      "posted_at": "2026-07-24T13:32:30+00:00",
+      "comments": [
+        {
+          "id": 49042105,
+          "author": "Robdel12",
+          "text": "https://www.anthropic.com/news/donation-public-first-action Probably because anthropic is pouring $40 million dollars into a political pact to regulate models. And they have not been quiet about wanting to ban/regulate OSS models either. I have no idea why HN still treats them like ~their~ they are the ethical good guy. Edit: I can’t English. At least we know this came from my dumb swishy brain"
+        },
+        {
+          "id": 49040674,
+          "author": "novaleaf",
+          "text": "Some irony: I subscribe to Claude and Codex (20x plans), and now Kimi. Why Kimi? because K3 is the only frontier model I can have a serious conversation with about my product's security. (I did apply for OpenAi's Cyber Pilot but got no response)"
+        },
+        {
+          "id": 49044701,
+          "author": "kpw94",
+          "text": "> OpenAI and Anthropic, which are gearing up for potentially massive IPOs, did not sign the letter. Not anymore, OpenAI did sign it: https://www.microsoft.com/en-us/corporate-responsibility/top..."
+        },
+        {
+          "id": 49040228,
+          "author": "GodelNumbering",
+          "text": "I posted earlier on reddit that at this point, the closed source lobby wanting to ban open weights is effectively outgunned (musk also publicly supported this). The oddly reminds me of back in the day when SOPA had caused a similar stir ( https://en.wikipedia.org/wiki/Stop_Online_Piracy_Act ), and all HN was up in arms against it."
+        },
+        {
+          "id": 49039613,
+          "author": "dang",
+          "text": "From yesterday: Startup founders urge U.S. government not to shut off Chinese open weight AI - https://news.ycombinator.com/item?id=49023016 - July 2026 (841 comments) Also related: OpenAI and Anthropic unite against open-weight AI risks to their bottom line - https://news.ycombinator.com/item?id=49020868 - July 2026 (330 comments) China’s open-weights AI strategy is winning - https://news.ycombinator.com/item?id=48979269 - July 2026 (932 comments) The gap between open weights LLMs and closed source LLMs - https://news.ycombinator.com/item?id=48692058 - June 2026 (250 comments) The unbearable cheapness of open weight models - https://news.ycombinator.com/item?id=48668255 - June 2026 (186 comments)"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 19,
+      "id": 49034868,
+      "title_en": "Half-Life 2 running natively on HaikuOS",
+      "title_ja": "Half-Life 2 running natively on HaikuOS",
+      "url": "https://discuss.haiku-os.org/t/haiku-nvidia-porting-nvidia-driver-for-turing-gpus/16520?page=18",
+      "hn_url": "https://news.ycombinator.com/item?id=49034868",
+      "score": 288,
+      "comment_count": 54,
+      "posted_at": "2026-07-24T12:53:59+00:00",
+      "comments": [
+        {
+          "id": 49039742,
+          "author": "smallstepforman",
+          "text": "X512 is an amazing treasure in the Haiku community. Other than nVidia hardware accelerated drivers, he ported Haiku to RiscV, got sound through HDMI and DisplayPort working, he got AMD Vulkan drivers for Southern Islands chipsets also working, made break throughs in dozens of other porting projects, he’s an amazing Hacker par excellance virtually unknown outside the Haiku community."
+        },
+        {
+          "id": 49036880,
+          "author": "LorenDB",
+          "text": "Looks like this may have been based on the nillerusr Source engine, which is based on a 2020 leak of the Source sources. nillerusr's engine has also been used to port some Valve games to Android."
+        },
+        {
+          "id": 49038514,
+          "author": "tracker1",
+          "text": "Nifty to see... I always liked BeOS/Haiku from a tech perspective, but really don't care nearly as much for the UX or ergonomics... I really like a lot of the Windows 10 start menu and taskbar, but I do hate the MS search results/ads,etc so I switched to Linux for non-work and mostly Cosmic since later alphas."
+        },
+        {
+          "id": 49043352,
+          "author": "grishka",
+          "text": "I half-jokingly thought to myself, \"of course it's all software rendering, Haiku doesn't have GPU drivers\", so imagine my amazement when I saw that this thread is about porting an NVidia GPU driver from Linux, and HL2 does, in fact, run with hardware acceleration."
+        },
+        {
+          "id": 49040180,
+          "author": "m0do1",
+          "text": "As a long time BeOS fan (and user back in the day) I really enjoy reading about progress on Haiku. Similarly cool as the Half-Life 2 port is the work on the ARM platform. With early support for M1 Macs ( https://discuss.haiku-os.org/t/my-haiku-arm64-progress/19044... ) and Raspberry Pi 500+ ( https://discuss.haiku-os.org/t/my-haiku-arm64-progress/19044... )."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 20,
+      "id": 49038298,
+      "title_en": "Don't Take the Black Pill [video]",
+      "title_ja": "Don't Take the Black Pill [video]",
+      "url": "https://www.youtube.com/watch?v=zLZwpH5lCD4",
+      "hn_url": "https://news.ycombinator.com/item?id=49038298",
+      "score": 152,
+      "comment_count": 132,
+      "posted_at": "2026-07-24T16:48:57+00:00",
+      "comments": [
+        {
+          "id": 49040930,
+          "author": "spudlyo",
+          "text": "So in case you're worried about watching a 35 minute video and wishing you hadn't, here is what I think is an interesting observation that the speaker starts coming around to at around the 7 minute mark. Why does software suck? Management often has other priorities, and isn't interested in doing the hard work required to increase the reliability and reduce the technical debt in software. Engineers who care about such things, often engage in acts of \"benevolent noncompliance\". Common workarounds are \"asking for forgiveness instead of permission\", secrecy, and misdirection. Alternately you can confront management and fight for doing what you think is right. These sorts of things can be risky. You can be fired, you can be reprimanded if caught, you can be retaliated against or lose political advantage. In the past, software engineers had a lot more agency than they do now, because nowadays the supply/demand ratio no longer favors software engineers, and as a result we have weaker negotiation power. Now we're more afraid of being fired and not being able to find a job, and managers aren't afraid of us quitting and not being able to replace us. I haven't yet finished the whole thing, but there are sections around dark patterns and other forms of user-hostile software. I'll probably finish it."
+        },
+        {
+          "id": 49041420,
+          "author": "helloplanets",
+          "text": "In the same vein, Jonathan Blow's modestly named \"Preventing the Collapse of Civilization\" talk: https://www.youtube.com/watch?v=ZSRHeXYDLko Crazy how time flies, given that talk is seven years old at this point. But could've been given today, with the points being more relevant than ever."
+        },
+        {
+          "id": 49044470,
+          "author": "adamdb",
+          "text": "I once had an argument with a close friend of mine while earning her PHD in a non-computer engineering field. It was about the semantics of \"Computer Engineering\" and \"Software Engineering\", or any variant involving computers. Her argument was that every (virtually, I think?) other engineering discipline requires a certificate after graduation to ensure their competency. Every since then I've also argued for similar industry standard certifications for Computer and Software Engineers. I was a hiring manager for over a decade at a well known MNC, so I can attest that this doesn't, or didn't exist (since the global mass-layoff). I tried to improve interview standards in the past and help establish some forward momentum, but pulling-the-ladder-up and biased-hiring-practices have made this even more elusive. Edit: I know there are some certifications that may be required by some software engineers, computer engineers, etc. But this is limited to critical/near-failure-proof systems. Which I willing to wager is less than 1% of those employed in these fields."
+        },
+        {
+          "id": 49040747,
+          "author": "smalltorch",
+          "text": "Generally agreed with most of the points. Building software that serves you only...and then sharing with others is like serving others. It's good stuff and we need more of it. I'm not sure how the deconversion of his faith needed to be conflated as related to the main ideas, especially when the next point was about weilding technology for good or evil in the next point as if these aren't pre-existing realities of our world or universe."
+        },
+        {
+          "id": 49041687,
+          "author": "spongebobstoes",
+          "text": "I really enjoyed this. This talk contains a powerful message of optimism, possibility, agency and power that resonates strongly with me. Computers and technology are force multipliers for humanity. As coders, we are lucky to be gifted with such high agency and global reach, all at a fairly affordable price tag. I love computers."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 21,
+      "id": 49026933,
+      "title_en": "Fil-C: Garbage In, Memory Safety Out [video]",
+      "title_ja": "Fil-C: Garbage In, Memory Safety Out [video]",
+      "url": "https://www.youtube.com/watch?v=5F-2Y1LPRek",
+      "hn_url": "https://news.ycombinator.com/item?id=49026933",
+      "score": 122,
+      "comment_count": 111,
+      "posted_at": "2026-07-23T19:37:37+00:00",
+      "comments": [
+        {
+          "id": 49040341,
+          "author": "dang",
+          "text": "There are getting to be quite a lot of these so I'll do it CPS style: Memory Safe Context Switching - https://news.ycombinator.com/item?id=48727177 - June 2026 (30 comments) Memory Safe Inline Assembly - https://news.ycombinator.com/item?id=48606096 - June 2026 (47 comments) The Fil-C Optimized Calling Convention - https://news.ycombinator.com/item?id=48162876 - May 2026 (32 comments) A simplified model of Fil-C - https://news.ycombinator.com/item?id=47810872 - April 2026 (136 comments) Pizlix: Memory Safe Linux from Scratch - https://news.ycombinator.com/item?id=46260852 - Dec 2025 (30 comments) Linux Sandboxes and Fil-C - https://news.ycombinator.com/item?id=46259064 - Dec 2025 (156 comments) Ported freetype, fontconfig, harfbuzz, and graphite to Fil-C - https://news.ycombinator.com/item?id=46090009 - Nov 2025 (56 comments) A Note on Fil-C - https://news.ycombinator.com/item?id=45842494 - Nov 2025 (210 comments) Fil-C: A memory-safe C implementation - https://news.ycombinator.com/item?id=45842242 - Nov 2025 (1 comment) Notes by djb on using Fil-C - https://news.ycombinator.com/item?id=45788040 - Nov 2025 (246 comments) for more, goto https://news.ycombinator.com/item?id=45792588"
+        },
+        {
+          "id": 49044721,
+          "author": "tschambers",
+          "text": "Question for the author from someone with no expertise in the field: how does Fil-C compare to https://security.apple.com/blog/memory-integrity-enforcement... ? I'm guessing the hardware of the latter is something that Fil-C doesn't necessarily rely on."
+        },
+        {
+          "id": 49029053,
+          "author": "wasmperson",
+          "text": "He claims that all syscalls are safe because they're implemented by his custom libc, but that libc then calls out to the system libc, where the system calls are unsafe. He then claims that this is unlike rust, where making a syscall is unsafe. If you stick to the rust standard library in the same way that fil-c programs stick to the fil-c standard library, then all of your rust \"system calls\" are safe, too. Someone in the audience also pointed out that a tool like this could be used to compile rust programs, not just C programs, in which case it's odd to hear Fil-C repeatedly framed as a language in opposition to rust rather than as a tool which might complement it."
+        },
+        {
+          "id": 49042194,
+          "author": "tialaramex",
+          "text": "Ha, looking through the links dang added, I came upon something I wrote back in December I gave (somewhat arbitrarily) the example that safe Rust is OK with a 64-bit pointer (on a modern PC for example) having the value made by the UTF-8 text \"LAUGHING\". That's 8 bytes, 8 bytes is 64 bits, it fits perfectly. Of course I point out, unsafe Rust, which is allowed to dereference pointers, must never dereference this LAUGHING pointer, it's not actually pointing at anything, but it is allowed to exist in safe Rust. Coincidentally, in like February or so this year, a new third-party Rust type \"ColdString\" was introduced to their reddit by somebody I've never met - I read about it and encouraged its author. ColdString is 64 bits (on modern hardware) because inside it's a pointer, and indeed if the text you wanted to store in a ColdString was \"LAUGHING\" you do that exactly as I described in the December post - it's just the UTF-8 encoded text, no problem. The clever trick inside ColdString is how it can know when that 64-bit pointer really is actually a pointer for longer strings - yet also allows any 0 to 8 byte UTF-8 text string to just be encoded in the ColdString itself directly."
+        },
+        {
+          "id": 49040265,
+          "author": "LugosFergus",
+          "text": "I was just thinking that we were overdue for a Fil-C post on HN."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 22,
+      "id": 49033240,
+      "title_en": "IRGC claims it destroyed Amazon's Bahrain data center",
+      "title_ja": "IRGC claims it destroyed Amazon's Bahrain data center",
+      "url": "https://houseofsaud.com/irgc-claims-destroyed-amazon-bahrain-data-center/",
+      "hn_url": "https://news.ycombinator.com/item?id=49033240",
+      "score": 275,
+      "comment_count": 343,
+      "posted_at": "2026-07-24T09:52:58+00:00",
+      "comments": [
+        {
+          "id": 49034929,
+          "author": "tailscaler2026",
+          "text": "Despite the destruction, me-south-1 still has more nines than us-east-1"
+        },
+        {
+          "id": 49036622,
+          "author": "input_sh",
+          "text": "After this strike, the only AWS region in the ME that remains operational is the one in Tel Aviv (a bit ironic if you ask me). UAE has been down for months, Bahrain is now offline, Saudi Arabia is still under construction."
+        },
+        {
+          "id": 49037255,
+          "author": "Macha",
+          "text": "Between this and the Wildberries depot strikes in the Ukraine war, I think it really highlights how much peace was required to make the centralisation we've experienced work."
+        },
+        {
+          "id": 49036640,
+          "author": "dhx",
+          "text": "AWS's 3 data centres in me-south-1 are: BAH53 (Manama): https://www.openstreetmap.org/way/1492345589 An adjoining substation to BAH53 had one of it's two main buildings damaged/destroyed about 2026-07-16 per https://soaratlas.com/maps/asia-damage-to-data-center-power-substation-bahrain-jul-16th-2026-142024 Then about 2026-07-22 BAH53 itself was damaged/destroyed per https://soaratlas.com/maps/asia-damage-to-amazon-web-services-bahrain-jul-22nd-2026-142112 Possibly the least defended of the three sites as there is no air/missile defence battery in between this site and Iran. BAH54 (Zallaq): https://www.openstreetmap.org/way/1359931661 No media reports about this data centre being attacked previously. Possibly the safest of the three as there are at least two (probably three) air/missile defence batteries in between this site and Iran. BAH55 (Hamala): https://www.openstreetmap.org/way/956069872 Apparently the Batelco DC.1 data centre adjoining (and apparently critical to) BAH55 was damaged/destroyed about 2026-04-01 per https://www.bbc.com/news/articles/cgk28nj0lrjo _or_ the adjoining substation to these two facilities was damaged/destroyed -- news articles are hard to follow as to what exactly might have been damaged and the extent of damage caused. Middle ground for defence with one or two (maybe three) air/missile defence batteries between this site and Iran, depending on where drones/missiles are launched from. If these data centres are rebuilt, you'd maybe expect them to be rebuilt in new locations behind existing _permanent_ (and seemingly quite expensive) air/missile defence batteries in Bahrain ( https://www.openstreetmap.org/way/1492281507 and https://www.openstreetmap.org/way/1492953902 ). Based on the permanency of those air/missile defence batteries it doesn't look like the government of Bahrain are expecting things to get safer for data centre hosting in Bahrain any time soon."
+        },
+        {
+          "id": 49037890,
+          "author": "weinzierl",
+          "text": "Isn't an AWS region comprised of at least three data centers \"many kilometers apart\" [1]? So, if the whole of me-south-1 (Bahrain) went down it means at least three buildings many kilometers apart must have been attacked. [1] https://aws.amazon.com/about-aws/global-infrastructure/regio..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 23,
+      "id": 49033110,
+      "title_en": "Future euro banknote design proposals",
+      "title_ja": "Future euro banknote design proposals",
+      "url": "https://www.ecb.europa.eu/euro/banknotes/future_banknotes/html/all-design-proposals.en.html",
+      "hn_url": "https://news.ycombinator.com/item?id=49033110",
+      "score": 156,
+      "comment_count": 131,
+      "posted_at": "2026-07-24T09:29:44+00:00",
+      "comments": [
+        {
+          "id": 49033272,
+          "author": "morjom",
+          "text": "For me, across all of them only two felt actually decent for a bank note (B & E, I is okay, just not used to bank notes in that orientation, same for J, but that one should be more monochrome). Either they were too vibrant or the design was too busy/had unnecesary elements. I also feel like the notes that had buildings (like we have now) are just.. better. The initial run of 2002-2013 remains the best aesthetically, imo."
+        },
+        {
+          "id": 49033719,
+          "author": "spaceman_2020",
+          "text": "So many of these have some building as the backdrop, but all the buildings are modernist skyscrapers and uninspired office buildings Europe doesn't have a dearth of stunning architecture. Have they all been discarded in favor of ugly straightline modernist sloptitecture because they might be construed as offensive for some reason?"
+        },
+        {
+          "id": 49041796,
+          "author": "firefax",
+          "text": "It's a shame due to Brexit there will be no Count Binface €10."
+        },
+        {
+          "id": 49033335,
+          "author": "grim_io",
+          "text": "Birds are clearly superior."
+        },
+        {
+          "id": 49033826,
+          "author": "timpera",
+          "text": "I try to pay everything in cash as much as I can, so it's nice to see the banknotes get some love from the ECB (even though the absence of €1 and €2 banknotes still hurts…). I think it's a bit strange to feature people on these, plus it would be difficult to agree on who to feature between the 21 € states. The birds look cool! But it would have been nice to modernize the current architecture-based design rather than feature random EU office buildings."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 24,
+      "id": 49004464,
+      "title_en": "Marimo now runs in PyCharm",
+      "title_ja": "Marimo now runs in PyCharm",
+      "url": "https://marimo.io/blog/pycharm",
+      "hn_url": "https://news.ycombinator.com/item?id=49004464",
+      "score": 90,
+      "comment_count": 22,
+      "posted_at": "2026-07-22T10:24:40+00:00",
+      "comments": [
+        {
+          "id": 49044735,
+          "author": "rtpg",
+          "text": "Any former Jupyter users using Marimo who have the sales pitch? I'm decently happy using Jupyter Lab but would love to hear what I'm missing out on"
+        },
+        {
+          "id": 49044448,
+          "author": "data-ottawa",
+          "text": "Is the reload module very different than the base watch flag, and does the notebook editor use PyCharm/JetBrains' editor interfac, or is the notebook's editor completely embedded in PyCharm? --- As usual on marimo posts I have to mention how much I enjoy the product: Two weeks ago I was working on a large scale data reconciliation that was very high in complexity and high risk for correctness/accuracy. I built a marimo notebook to interactively visualize and validate the final data, which lead to finding several edge cases that unit testing and validation queries alone would easily miss. The notebook used tabbed controls for switching subviews, custom AnyWidget components for a few advanced filters, interactive Altair charts with reactive data selection for drilling-down, and tables to export examples to Google Sheets. So close to the full gamut of features I think. The more traditional notebook or script based workflows would not have been sufficient, a well-organized reactive notebook saved a lot of time on iterating on components without losing data, and data without having to re-run the full notebook. Big thanks to Akshay and team, you're doing awesome work! Genuinely this has improved my workflow."
+        },
+        {
+          "id": 49041235,
+          "author": "quinndupont",
+          "text": "We have adopted marimo notebook for doing modern data science. I’m happy with their progress. Nice to see greater integration."
+        },
+        {
+          "id": 49042093,
+          "author": "msp26",
+          "text": "I fucking love marimo for exploring data. However my use of it has decreased a little with how easily I can conjure disposable frontends with agents to explore one off things."
+        },
+        {
+          "id": 49042625,
+          "author": "etbebl",
+          "text": "I was interested in marimo, but I became less interested when I realized that they traded off being able to assign to a variable more than once in order to allow out-of-order execution of cells. I mean as a Jupyter user, I typically do both and just keep track of what I'm doing in my head (like a repl with many snippets I can run any time), but if I wanted to make it more predictable, I would definitely give up out-of-order execution first."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 25,
+      "id": 49034217,
+      "title_en": "The case for MUDs in modern times (2018)",
+      "title_ja": "The case for MUDs in modern times (2018)",
+      "url": "https://www.andrewzigler.com/feed/the-case-for-muds-in-modern-times",
+      "hn_url": "https://news.ycombinator.com/item?id=49034217",
+      "score": 91,
+      "comment_count": 73,
+      "posted_at": "2026-07-24T11:46:40+00:00",
+      "comments": [
+        {
+          "id": 49034828,
+          "author": "agentultra",
+          "text": "Building a MUD engine is quite an endeavour in itself. Let alone the game! A good way to test your skills in networking, parsing, databases, and data structures. I’ve been chipping away at one on my stream using Haskell. Experimenting with Lua integration, parsing, networking, STM and concurrency… currently hacking on Entity Component Systems and unboxed vectors and all kinds of stuff. Thing is you can start small. Start with a chat server. Add character registration. Add a mob. Add some commands to interact with the mob. Just keep adding things on. There’s a community for mud coders too. There are dozens of us. https://mudcoders.com/"
+        },
+        {
+          "id": 49044652,
+          "author": "tastyfreeze",
+          "text": "I spent so many hours playing MUDs. I haven't found a type of game that comes close to the immersion and community of MUDs. I checked in on my old MUD a few years ago. Still there like an old friend. But, it was a ghost town. Maybe 10 active players at peak hours. It was maybe 100 in the day. One of my early programming forays was being a wizard for a MUD I enjoyed. A code base that allows small communities to pop up around building and playing a world together is something I have not seen since my MUD days. It is my hope that Hytale, with its integrated modding tools and server, will fill the niche of community developed game worlds."
+        },
+        {
+          "id": 49037464,
+          "author": "jeromechoo",
+          "text": "Every time another nostalgia post comes along for MUDs people start replying with the name of a small MUD they enjoyed but I’m surprised how rare it is to see Iron Realms MUDs mentioned. I’m almost certain they are the largest MUD development company to exist. I played two of their MUDs — Achaea and Lusternia. The sheer imaginative scale of these worlds and engines are unmatched by even today’s standards. (And they still exist!) PVP is a battle of engineering. The best PvPers build elaborate trigger systems that watch the terminal for specific maladies and conditions and counter them with herbs, potions, and skills. The RP is similar to D&D but so much deeper. Where D&D is mostly storytelling by a DM, RP in huge commercial MUDs involve gods, physics, deeply entrenched politics, money, fame, and power spanning thousands of players. Entirely player-driven economy. If you wanted a sword you could buy one from a player run market or commission a unique piece from a blacksmith. And boy it was truly unique. A blacksmith in Lusternia is really a wordsmith. A steel sword can be described as “honed to an obsidian finish”. Peak human imagination, but sadly in a medium too many people can’t get into."
+        },
+        {
+          "id": 49034555,
+          "author": "fusslo",
+          "text": "Between this and the previous MUD post about LLM MUDs I'd love to see a comeback. A few months ago I tried out my old (1999-2004) hang, wocmud.org Some of the quests were still sometimes broken. auto attacking mobs were still unfairly strong. But, there were a couple people more than willing to help me get my gear back from my corpse. They helped me remember the areas, quests, syntax, etc that I had BURNED into my memory when I was 14. We chatted and got caught up in the 20 years of updates. Oh, and I didn't get banned for being out-of-character. overall a 10/10 nostalgic experience I started working on my own with Evennia and claude. I was hoping to hook up an LLM for MOBs but had to put it down when life got busy again."
+        },
+        {
+          "id": 49034336,
+          "author": "arglebarnacle",
+          "text": "I learned to touch-type by accident as a kid playing MUDs—no time to look at your hands while you’re under attack! I made friends, discovered things about myself, and even got brought on to start writing room descriptions. Totally formative for me in so many ways. I logged back on a year or two ago, now in my late thirties, and the sense of community and a critical mass of others who were invested in the game and eager to have me join just wasn’t there. It’s a shame because I agree MUDs have so much unique value to offer. Maybe it’s too much to hope for their return to former glory but I hope at least some flavor of them can rise again as a new form of mostly text oriented multiplayer game."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 26,
+      "id": 49038045,
+      "title_en": "Unitree As2-W",
+      "title_ja": "Unitree As2-W",
+      "url": "https://www.unitree.com/As2-W/",
+      "hn_url": "https://news.ycombinator.com/item?id=49038045",
+      "score": 113,
+      "comment_count": 48,
+      "posted_at": "2026-07-24T16:32:52+00:00",
+      "comments": [
+        {
+          "id": 49044761,
+          "author": "mosfets",
+          "text": "I've always wanted something to carry my fishing gear on the jetty, can this do that?"
+        },
+        {
+          "id": 49038646,
+          "author": "Aboutplants",
+          "text": "This is way more of what I thought robotics companies should be working on over their dumb 4 legged dog like robots. Wheels were invented for a reason and we are awfully good at moving things around on them at speed. Combining multiple attributes into a single form will ultimately prove to be the winning formula. Just like in a year or two you will start to see more appendages than just two arms on humanoids."
+        },
+        {
+          "id": 49041163,
+          "author": "altruios",
+          "text": "https://www.youtube.com/watch?v=lA8WuXDXfcI relevant link. I remember watching this video with the takeaway: if you want it secure, build it yourself... which is what I am currently doing."
+        },
+        {
+          "id": 49044692,
+          "author": "nickandbro",
+          "text": "Very cool tech, but don’t want one of these things coming after me"
+        },
+        {
+          "id": 49040110,
+          "author": "arjie",
+          "text": "They never give you dev access without paying like 10x the price."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 27,
+      "id": 49036433,
+      "title_en": "Government orders GitHub to remove Bluetooth-based chat app Bitchat: Jack Dorsey",
+      "title_ja": "Government orders GitHub to remove Bluetooth-based chat app Bitchat: Jack Dorsey",
+      "url": "https://www.thehindu.com/news/national/government-orders-github-to-remove-bluetooth-based-chat-app-bitchat-over-security-concerns-jack-dorsey/article71262049.ece",
+      "hn_url": "https://news.ycombinator.com/item?id=49036433",
+      "score": 428,
+      "comment_count": 314,
+      "posted_at": "2026-07-24T14:41:59+00:00",
+      "comments": [
+        {
+          "id": 49038220,
+          "author": "viktorcode",
+          "text": "> the app enables communication even during network restrictions and creates a substantial risk of misuse by anti-national elements, terrorist organisations, organised criminal groups and cyber criminals seeking to evade lawful detection and continue communication despite legally imposed restrictions. This mouthful boils down to exactly this: a form of communication not controlled by the government creates a risk for the country. Sorry for pointing out the obvious, but if your country's safety depends on ability to block all forms of private person to person messages, your government has failed in one of its primary goals: providing safety for its citizens. They can blame Dorsey, Telegram, WhatsApp and what not, but it is their failure. Things will not change until people notice the obvious and vote out incompetent persons in power."
+        },
+        {
+          "id": 49037194,
+          "author": "iambenm",
+          "text": "India is pretty serious about being able to monitor all communications after the terror attacks in Mumbai in 2008. The terrorists used satellite phones to coordinate the attack. As a result, they banned most satellite communication devices. I learned about this earlier this year because I had a connecting flight through India on the way to go trekking in the Himalayas. I had planned to take a Garmin inReach with me, but luckily a day or two before my flight out I came across horror stories of people getting pulled out of security and taken to JAIL in India for having these things in their checked bags when TRANSITING India. Security there when transiting from Switzerland to Nepal was no joke - every single electronic item including anything with wires had to come out of bags including electric toothbrush. In light of that, banning point to point communication seems on brand for India. Note that Apple gets a pass for its satellite capable phones by geofencing India and disabling the feature."
+        },
+        {
+          "id": 49043168,
+          "author": "orsenthil",
+          "text": "An important context is, there is a large scale non-violent protest and a Gandhian fast lead by Sonam Wangchuk. https://x.com/Wangchuk66/status/2080471599237702014 Indian Government is struggling to address this issue at face. PM Modi hasn't responded to this in public. To address this, Government is taking into all sort of measures like blocking public communication and social media. Like they have done for other measures like for terrorism , control and govt lead propaganda to control the narrative. It is interesting that they tried to do this app with a _miniscule_ usage. Usage might be so small, that they could have bothered less about it. But since they did it, Jack Dorsey is now using his clout to share about this app and bring some light on the situation. With what we have seen with Twitter/X and not-standing up to Elon, let's just remember that Dorsey isn't champion of free speech either."
+        },
+        {
+          "id": 49037228,
+          "author": "lebuffon",
+          "text": "India is kind of cute. In the late 90s I attended a Telephone industry conference while working for a telephony test equipment company. A rep. from the Indian government gave a talk on their telephone system regulations. During the question period I got up and asked how India was dealing with voice over internet protocol (VOIP). With a straight face the speaker replied \"We will not allow it\". :-)"
+        },
+        {
+          "id": 49037033,
+          "author": "miohtama",
+          "text": "If Modi government wants to ban something, it is usually good stuff. > “The application’s design, which enables communication even during network restrictions, creates a substantial risk of misuse by anti-national elements, terrorist organisations, organised criminal groups, and cybercriminals seeking to evade lawful detection and continue communication despite legally imposed restrictions,” the notice mentioned."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 28,
+      "id": 49033099,
+      "title_en": "Buz – A fork of Bun using modern Zig, with sub-1s incremental builds",
+      "title_ja": "Buz – A fork of Bun using modern Zig, with sub-1s incremental builds",
+      "url": "https://ziggit.dev/t/buz-a-drop-in-replacement-for-bun-using-modern-zig-with-sub-1s-incremental-builds/16891",
+      "hn_url": "https://news.ycombinator.com/item?id=49033099",
+      "score": 247,
+      "comment_count": 168,
+      "posted_at": "2026-07-24T09:26:40+00:00",
+      "comments": [
+        {
+          "id": 49034382,
+          "author": "kristoff_it",
+          "text": "To me the most interesting fact about this fork is that it has proven that Bun could have had fast builds all along. To be fair, there are caveats still in place today: Zig incremental compilation does not yet support aarch64 and only the linux linker supports binary patching, but it's just a matter of time before all major platforms are conquered."
+        },
+        {
+          "id": 49034298,
+          "author": "wsdn",
+          "text": "> To this end, LLMs will be used extensively to deslop... So we're using LLMs to clean up the code that LLMs ruined in the first place? We’ve reached peak tech in 2026."
+        },
+        {
+          "id": 49034705,
+          "author": "robertlagrant",
+          "text": "> I’ve cut over 11,000 lines of completely dead code from Bun. I can’t think of another project whose codebase was so neglected as to reach 11K lines of dead code. I’ve also rewritten and modernized parts of the codebase, trying to rely more on Zig’s stdlib. In the process, countless bugs have also been fixed. This is astonishing. Is anyone else surprised at this dead code figure? Is it a feature of large projects I've just never noticed?"
+        },
+        {
+          "id": 49037353,
+          "author": "softwaredoug",
+          "text": "This effort makes me think of the tick-tock oscillation between features and code stewardship I’ve experienced on every agent heavy coding project Tick: go hard after features, build a correct and extremely messy version Tock: digest what was done, deslopify, improve project aspects that go beyond feature correctness: performance, maintainability, general fragility / sensitivity to change My experience is spending a day vibe coding a working application. Then a week unslopifying it to make it a viable software project that can sustainably accept more features without the house of cards collapsing. You sort of did this pre-AI, but then the professional human coder had a stronger mental model of the system, and IMO was going slower that the switch from tick to tock wasn’t as jarring"
+        },
+        {
+          "id": 49037165,
+          "author": "dmix",
+          "text": "> To that end, I’ve cut over 11,000 lines of completely dead code from Bun. I can’t think of another project whose codebase was so neglected as to reach 11K lines of dead code. How long has this person been programming?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 29,
+      "id": 48977849,
+      "title_en": "The footprints of every building in NYC",
+      "title_ja": "The footprints of every building in NYC",
+      "url": "https://www.beautifulpublicdata.com/the-footprints-of-every-building-in-nyc/",
+      "hn_url": "https://news.ycombinator.com/item?id=48977849",
+      "score": 60,
+      "comment_count": 6,
+      "posted_at": "2026-07-20T12:25:49+00:00",
+      "comments": [
+        {
+          "id": 48981135,
+          "author": "adrianparsons",
+          "text": "Great writeup! I work with NYC open data but did not know about this dataset! > Garages make up one-fifth of NYC buildings I'm quite surprised by this."
+        },
+        {
+          "id": 49043904,
+          "author": "bflesch",
+          "text": "This is amazing. Unfortunately the 1960s, 70s and 80s seem to have been censored in the historic aerial maps. It's a very important period in NYC construction history where buildings with interesting shapes kept popping up. The gap between 1951 and 1996 can be seen in: https://github.com/CityOfNewYork/nyc-geo-metadata/blob/main/..."
+        },
+        {
+          "id": 48980346,
+          "author": "xnx",
+          "text": "Direct link to the data: https://github.com/CityOfNewYork/nyc-geo-metadata/blob/main/... Article does some nutzo thing where it adds ?ref=beautifulpublicdata.com to outgoing links."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 30,
+      "id": 49038060,
+      "title_en": "Be skeptical of OpenAI's rogue hacker agent story",
+      "title_ja": "Be skeptical of OpenAI's rogue hacker agent story",
+      "url": "https://www.theguardian.com/technology/2026/jul/24/openai-rogue-hacker",
+      "hn_url": "https://news.ycombinator.com/item?id=49038060",
+      "score": 469,
+      "comment_count": 272,
+      "posted_at": "2026-07-24T16:33:31+00:00",
+      "comments": [
+        {
+          "id": 49042967,
+          "author": "sfink",
+          "text": "The article, summarized: there are incentives for OpenAI to claim that their AI hacked its way out of their network and into Hugging Face. Ok... and what? Do you have any evidence for the claim being either true or false that you'd like to write an article about? I guess not. Without anything to add, this article reduces to \"I has big brain and can see what you sheep cannot. Very big brain. Gullible sheep. Sucks to be you, sheep.\" (For the record: I see the incentive. My guess is that it happened exactly as described. The main takeaways: (1) science fiction is now real, we should all be very afraid; and (2) OpenAI, which claims to have a God-given responsibility to get to AGI first to protect the world from danger, cannot be trusted with this foundational task even when it's in easy mode. The latter is true whether or not you believe in OpenAI's reasoning and purpose.)"
+        },
+        {
+          "id": 49039571,
+          "author": "dwoosley",
+          "text": "There seems to be three popular ways to view this incident. 1. The way OpenAI seems to want: Their latest LLM is too powerful and can’t be contained without them building in guidelines to the model. 2. OpenAI’s harness and network security controls were unintentionally so bad that it should reflect more poorly on them as a company more than it should reflect positively on their latest model. 3. The whole thing was faked or at least very intentionally not avoided. The first interpretation is the only one that is positive for OpenAI and it has some assumptions. First, it’s seems to assume that this is the first case of fully automated attacks using AI. Second, this only happened because their latest LLM was a) more advanced than competitors, b) didn’t have refusals in the model. Assuming the first about this being the first autonomous AI attack is true (which may be more of a survivorship bias), the second seems to forget that jailbreaks are available for every model. Therefore, the models guardrails don’t seem to be the differentiator here. Also, benchmarks seems to put most models pretty close to each other so it seems unlikely that their capabilities are far beyond what’s in the market already. So then it’s seems it’s either that this was intentional(ish) or bad security. However, it also just could be that this isn’t the first case of this attack; just the first that was caught. My take from working in offensive security for over five years is that this likely only looks novel since they did it poorly. Scripts are faster than LLMs and a combination of code, LLMs where it makes sense, and humans is the most efficient right now. Hundreds or thousands or agents spinning up attacks in the internal network is poor opsec and token efficiency. As for why it happened in the first place, it’s hard to say but I’m inclined to believe it was intentional or careless at best since simple network and sandbox controls makes this attack impossible. The timing of this attack after big open weight competitions drops seems too convenient."
+        },
+        {
+          "id": 49040472,
+          "author": "ACCount37",
+          "text": "By now, I'm pretty confident that some people would keep screeching \"it's just a marketing stunt, AI capabilities and AI risks aren't real, they're just doing this to prop up their stocks\" even if they find a Cyberdyne Systems T-800 armed with a shotgun breaking down their front door. \"It's a marketing stunt\" is just denial trying to look like it's being clever."
+        },
+        {
+          "id": 49044684,
+          "author": "teekert",
+          "text": "They didn’t get blocked by the US government so they needed some other “we are the superior AI story” ASAP."
+        },
+        {
+          "id": 49044489,
+          "author": "konovalov-nk",
+          "text": "> what will the future look like, with sophisticated AI agents smart enough to hack into corporate systems? \"Ignorance is bliss\" (c) Matrix Oh, sweet-sweet ignorance. About 4 weeks ago I've found SSRF and possible RCE on a very real website with a lot of web history the other day. And I traced it to `aws-solutions` org on GitHub that sits very close to real `aws` org. What do you think is happening? And this website I spotted SSRF on, it seems to be used to manufacture fake news and inject them into \"the past\". Why? So if you see a company you never heard about, and you google it, google will index page and it will show you backdated article as if it was actually released long time ago. But if you try to look at Web Archive of that article, it doesn't exist... I've been doing this OSINT research for 45 days on different fake recruiters that were spamming me on LinkedIn, and most of those websites with fake news are running Wordpress, classic. My point is... while this story reeks of marketing, the actual criminals are out there doing whatever they want, and I've been fighting for my life trying to find a job and getting into increasingly large amount of fake recruiters and companies that have zero intent of hiring you. I wasted 7 weeks on this..."
+        }
+      ],
+      "summary_ja": ""
+    }
+  ]
+}
