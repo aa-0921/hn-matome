@@ -1,0 +1,1111 @@
+{
+  "date": "2026-07-27T00:00:00+09:00",
+  "slot": "12",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 49063754,
+      "title_en": "PGSimCity - How PostgreSQL Works",
+      "title_ja": "PGSimCity - How PostgreSQL Works",
+      "url": "https://nikolays.github.io/PGSimCity/",
+      "hn_url": "https://news.ycombinator.com/item?id=49063754",
+      "score": 382,
+      "comment_count": 41,
+      "posted_at": "2026-07-27T00:19:04+00:00",
+      "comments": [
+        {
+          "id": 49064136,
+          "author": "layoric",
+          "text": "I love what is trying to be done here. Some feedback to improve would be to cut out a lot of the noise with the \"Take tour\". There are too many boxes and things changing on the screen to get a sense of what is happening. Also make it interactive rather than automatically switch onto the next subject. Being a passive observer to so much information trying to be conveyed is very confusing. I really do like these kinds of approaches to showing the inner workings of different kinds of tech, so think this is on the good path to being a very useful tool, but needs some focus rather than more data/graphs/info boxes."
+        },
+        {
+          "id": 49064172,
+          "author": "narmiouh",
+          "text": "I imagined as soon I saw the initial visual that I would somehow be able to enter a query and it would walk me through the flow through the entire system starting from input parsing to all the way to delivering output and perhaps along the way understand some of the autonomous processes that happen in parallel that aren't query specific but run constantly. What others are saying - fantastic attempt, but don't know where to start or where to end."
+        },
+        {
+          "id": 49064171,
+          "author": "Curtis_Guan",
+          "text": "Understanding how scheduling works inside a database used to require numerous architecture diagrams to explain. I was amazed when I saw PGSimCity — it presents such a complex technical implementation process in such an engaging way. Since it's already open‑source, I think the same idea can be reused in other domains, such as cloud computing, Kubernetes, and so on."
+        },
+        {
+          "id": 49064433,
+          "author": "arjie",
+          "text": "I can't believe \"Rendering The First Frame...\" is not \"Reticulating Splines...\" :) Cool UI."
+        },
+        {
+          "id": 49065441,
+          "author": "getfluxly",
+          "text": "It's a cool and very educative way to learn. But I wish there's like a live query thing going on so that it'd be easy to understand. I am viewing on the 27\" 4K screen and it's perfect for it, like others said, I don't feel there's too much boxes and info at the same time. Although the site is going blank sometimes if I zoom in a bit too much. Really cool nonetheless."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 2,
+      "id": 49021270,
+      "title_en": "Show HN: Physically accurate black hole you can put in your room",
+      "title_ja": "Show HN: Physically accurate black hole you can put in your room",
+      "url": "https://blackhole.plav.in",
+      "hn_url": "https://news.ycombinator.com/item?id=49021270",
+      "score": 199,
+      "comment_count": 54,
+      "posted_at": "2026-07-23T13:29:24+00:00",
+      "comments": [
+        {
+          "id": 49064341,
+          "author": "Waterluvian",
+          "text": "It’s fascinating how things that were inverted seem to become corrected when I point this at the pre-existing black hole in my room."
+        },
+        {
+          "id": 49065718,
+          "author": "drivingmenuts",
+          "text": "Good work! Gimmer two, chief! Two black holes at once?!?!?? Yeah, I'm crazy like that."
+        },
+        {
+          "id": 49064694,
+          "author": "dluan",
+          "text": "I remember like 10 years ago when Occulus first came out there was that space simulation demo where you could go around the solar system in VR. You could also \"fast travel\" by zooming in towards a planet, moon, blackhole. Yeah, that was the day I learned I have a deep, crippling phobia of large objects. And Melanoheliophobia, which is fear of black holes. The only other time I've felt that way was snorkeling once near a giant 3 story tall bait ball of swirling fish, which was so disorienting and panic inducing that I vomited."
+        },
+        {
+          "id": 49065252,
+          "author": "nomilk",
+          "text": "From a certain angle it looks like an eyeball https://imgur.com/a/Dam3XT0"
+        },
+        {
+          "id": 49065148,
+          "author": "20k",
+          "text": "If anyone's interested in the accuracy, this is very 'visualisation grade' software. Its a bit of a pet peeve of mine that people present these sims as being very physically accurate, when they contain major inaccuracies, some of which are very obvious and/or deliberate. This one has some serious physical limitations I wouldn't mind at all if it didn't say that this was a *physically accurate* black hole specifically, but this now falls under misleading science communication in a way that often gets hand waved away as if it doesn't matter, so we've got to clear some things up! 1. The accretion disk shouldn't be red, people just expect it because it looks cool. Black hole accretion disks are near universally hot enough to be blue. Interstellar did this too, and tried to handwave it away very unconvincingly 2. This is a non/low (?) spin black hole, which isn't super duper realistic 3. It ignores the position of the camera (which affects the lorentz shifting) 4. The doppler shifting isn't terribly accurate 5. It doesn't model the accretion disk temperature distribution or colour with any kind of accuracy. Usually you model accretion disks as a blackbody radiator, shift it by the doppler, and to display this convolve this against the human eye response (LMS), go to XYZ, then RGB, do a physical tonemapping step, before an sRGB conversion. This instead does none of that - no step of this is done with any physical accuracy. Its not even illustratively correct as we'll get into 6. The actual radiative transfer is very simplified compared to what you'd use for realsies, and isn't based on any real numbers, with very simplified equations. The opacity and emissivity of the disk is arbitrary, as is the size, and it does not correctly incorporate brightness or extinction, eg here https://github.com/aplavin/blackhole.plav.in/blob/2f004bfeca... is super simplified 7. The wrong equation is used for the doppler calculation. They use the I^3 variant, whereas the data you get out of a disk sample is *radiant flux* which is actually F_obs = F_emit / (z+1)^4. This is a very common mistake in image processing, which means that the doppler shift and observer brightness isn't correct. Surface brightness over here https://github.com/aplavin/blackhole.plav.in/blob/2f004bfeca... is *not* a spectral radiance but instead a radiant flux Stuff like the brightness -> colouring conversion is particularly inaccurate. Eg if you check out the source: https://github.com/aplavin/blackhole.plav.in/blob/2f004bfeca... It maps the pseudo brightness completely arbitrarily to colour. The resulting colour/brightness here then doesn't correspond to anything remotely physical. It also performs a *linear* mapping of a linear quantity (brightness) to sRGB (which is a nonlinear process!!), which means that it doesn't even retain any of the underlying physical characteristics of the brightness simulation, which itself is quite inaccurate. Its vibes all the way down This is all fine if you're doing visualisation, but this isn't an accurate simulation. I wish this was just called a visualisation of a black hole, but its being communicated as if this is super hard science with credentials and all"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 3,
+      "id": 49060856,
+      "title_en": "Decker, a platform that builds on the legacy of Hypercard and classic macOS",
+      "title_ja": "Decker, a platform that builds on the legacy of Hypercard and classic macOS",
+      "url": "https://beyondloom.com/decker/",
+      "hn_url": "https://news.ycombinator.com/item?id=49060856",
+      "score": 277,
+      "comment_count": 71,
+      "posted_at": "2026-07-26T18:23:06+00:00",
+      "comments": [
+        {
+          "id": 49062043,
+          "author": "zeroq",
+          "text": "I'm afraid that HyperCard is too old for broader audience to be able to grasp how extraordinary experience it was providing. As a 6-7yo I had a collection of English words, stored with my own definitions and pronunciations, using basic building blocks, and it was as easy and intuitive as writing these words in my notebook. People used the same building primitives to make real games or stuff like accounting applications. And the best part - at that time it didn't looked cheap. This one is really hard to describe - it's the same uncanny valley that makes small village in Fallout 1 feel massive and full of people despite it taking two screens with just few sprites running around, while full blown 3D world of Fallout 3, with real buildings and voice overs felt flat, soulless and empty."
+        },
+        {
+          "id": 49062200,
+          "author": "mbreese",
+          "text": "Is there a place these days for interfaces like this? I’m thinking about self contained applications like HyperCard stacks, but also FileMaker databases or even Access databases where we had interfaces linked to a database all as a self contained application. These tools with scripting languages powered a ton of small business applications. I know a lab I worked with was still using FileMaker databases up until a few years ago. These were user developed applications, done by people who may have been a bit technical, but who didn’t to know a full programming language. If you’re a small shop and have a need for a little database, what do you use? Is there a default now? Notion?"
+        },
+        {
+          "id": 49061836,
+          "author": "tomhow",
+          "text": "Previously: Decker: A reincarnation of HyperCard with 1-bit graphics - https://news.ycombinator.com/item?id=40292181 - May 2024 (78 comments) Decker – A HyperCard Replacement - https://news.ycombinator.com/item?id=38985409 - Jan 2024 (36 comments) Decker, a platform that builds on the legacy of Hypercard and classic macOS - https://news.ycombinator.com/item?id=33377964 - Oct 2022 (88 comments)"
+        },
+        {
+          "id": 49064978,
+          "author": "hallole",
+          "text": "Woah, this is something I've wanted for forever! Only, without the \"quirky\" aspects of its design. I can appreciate the charm, but it does obstruct utility, and this sort of tool -- a super-general digital whiteboard -- would be oh so useful. I never knew of its predecessor, \"HyperCard,\" either, which looks to be essentially what I wish for, only modernized."
+        },
+        {
+          "id": 49061913,
+          "author": "donohoe",
+          "text": "I miss HyperCard and I love projects like this at a nostalgia level - but if you're going to have aspirations that this is useful today (2026) with a real project then its a complete waste of time. I want HyperCard where I can build out a stack or whatever and actually present it to people as a real and tangible thing. I love living in the past as much as anyone else, but this is a little disappointing."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 4,
+      "id": 49063175,
+      "title_en": "Scriptc by Vercel: TypeScript-to-Native compiler, no JavaScript engine in binary",
+      "title_ja": "Scriptc by Vercel: TypeScript-to-Native compiler, no JavaScript engine in binary",
+      "url": "https://github.com/vercel-labs/scriptc",
+      "hn_url": "https://news.ycombinator.com/item?id=49063175",
+      "score": 100,
+      "comment_count": 38,
+      "posted_at": "2026-07-26T22:46:10+00:00",
+      "comments": [
+        {
+          "id": 49064594,
+          "author": "acmnrs",
+          "text": "Porforr< https://porffor.dev > has been working towards the same goal for a while. The creator, CanadaHonk< https://honk.foo >, is extremely talented and the project still only passes ~68% of Test262. I'm more than a little suspicious of how Vercel has made so much progress so fast, unless I'm misunderstanding the scope of this project."
+        },
+        {
+          "id": 49064680,
+          "author": "sheept",
+          "text": "One of the strengths of TypeScript besides its expressiveness is that it's compatible with the massive npm ecosystem. Most packages only ship untyped JavaScript with type declarations defining the interface,[0] so realistically you'd still need a JavaScript engine if you use any packages. But if you're starting from scratch and know you won't be using any npm packages, you might as well use AssemblyScript.[2] [0]: Publishing packages in TypeScript is explicitly discouraged by Node[1]. TypeScript isn't backwards compatible even in minor releases, and its compiler settings aren't portable for packages. [1]: https://github.com/nodejs/node/blob/main/doc/api/typescript.... [2]: https://www.assemblyscript.org/"
+        },
+        {
+          "id": 49064704,
+          "author": "chilipepperhott",
+          "text": "It's difficult to ignore how the README is filled with Claudisms."
+        },
+        {
+          "id": 49064557,
+          "author": "satvikpendem",
+          "text": "A lot of people are trying this now with AI, a native TypeScript compiler, for example https://github.com/PerryTS/pry . It's a compelling value proposition, TypeScript is already well typed and barring a few cases it can be turned into machine code without a JS runtime."
+        },
+        {
+          "id": 49064521,
+          "author": "aabhay",
+          "text": "178kb?! What are you putting in there, a JVM?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 5,
+      "id": 49060495,
+      "title_en": "French firefighters face 'pyrocumulonimbus' for first time",
+      "title_ja": "French firefighters face 'pyrocumulonimbus' for first time",
+      "url": "https://www.france24.com/en/live-news/20260726-french-firefighters-face-pyrocumulonimbus-for-first-time",
+      "hn_url": "https://news.ycombinator.com/item?id=49060495",
+      "score": 278,
+      "comment_count": 164,
+      "posted_at": "2026-07-26T17:49:44+00:00",
+      "comments": [
+        {
+          "id": 49065740,
+          "author": "wosk",
+          "text": "Le Monde, very reputed French newspaper (NYtimes equivalent for France perhaps) says that it’s not the first time this cloud is seen in France [1]: (translation mine) > “What is happening right now is extremely, extremely unusual. Seeing a cloud this massive and reaching such an altitude above a wildfire is exceptionally rare,” the researcher explains. “During the Pedrógão fire [which claimed around 60 lives in Portugal in 2017], there were two episodes of fire-induced thunderstorms. Here, we are already at eight or ten, and the forecast is not encouraging at all.” Although unprecedented in both intensity and frequency, the phenomenon has been observed in France before, according to the expert: during the Fontainebleau wildfire (Seine-et-Marne) in July, the Ribaute fire (Aude) in 2025, and the Générac fire (Gard) in 2019. It seems that this cloud and the attached storms have been seen before, even recently, in France, but this one is one of a kind for intensity, by far. [1] https://www.lemonde.fr/planete/article/2026/07/27/le-pyrocum..."
+        },
+        {
+          "id": 49063527,
+          "author": "Dibby053",
+          "text": "For context on why this region is burning so easily: the Landes and Médoc are huge, artificial pine forests created in the 19th century under Napoleon III to drain and reclaim what was considered an inhospitable wetland, where shepherds famously walked around on stilts. Pine resin and needle litter makes it exceptionally flammable, and being an uninterrupted monoculture on flat land it lacks natural barriers to stop the fire from advancing."
+        },
+        {
+          "id": 49060584,
+          "author": "verzali",
+          "text": "The situation in Bordeaux right now feels close to apocalyptic. I left yesterday. Two hundred thousand people are evacuated, hundreds of homes destroyed, and the fire about 10 miles from the edge of the city."
+        },
+        {
+          "id": 49064477,
+          "author": "falloon",
+          "text": "Pedantic cloud enjoyer here, the article should name this a pyrocumulus not pyrocumulonimbus - the nimbus part means 'rain-bearing' in meteorology, fire clouds don't rain."
+        },
+        {
+          "id": 49061091,
+          "author": "ynac",
+          "text": "Just had the same here in Washington state for the Little Giant fire. Great image in the article. We had another fire cloud behind Rainier the other day, and saw it from the Rount Mainier farm - it really looked like the volcano was smoking up and ready to top-off. <clench> https://www.seattletimes.com/seattle-news/climate-lab/little..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 6,
+      "id": 49063022,
+      "title_en": "US citizen charged after GrapheneOS phone wipes during airport search",
+      "title_ja": "US citizen charged after GrapheneOS phone wipes during airport search",
+      "url": "https://www.techspot.com/news/113236-us-prosecutors-charge-atlanta-man-after-grapheneos-phone.html",
+      "hn_url": "https://news.ycombinator.com/item?id=49063022",
+      "score": 493,
+      "comment_count": 337,
+      "posted_at": "2026-07-26T22:21:41+00:00",
+      "comments": [
+        {
+          "id": 49064242,
+          "author": "cameldrv",
+          "text": "I’ve seen a lot of people on the internet over the years say things like “the government can’t make x illegal, it’s just y.” For example, the government can’t make wiping your phone at the border illegal, it’s just punching four numbers into your phone, just like a pin, only a different four numbers, which could just have well been your pin. U.S. law though is highly non-autistic and what you were trying to do is just as important as what you superficially did. Hell there could have been a third set of four numbers that were the nuclear launch codes. It’s not the fact that it was four numbers, it’s what you were trying to make happen when you typed them. Now of course whether they can prove what your intent was when you typed them is another matter, but generally a duress pin should be for when robbers are breaking into your house, and the government will be on your side, and not when the government will be against you."
+        },
+        {
+          "id": 49063972,
+          "author": "sfRattan",
+          "text": "Ultimately, when you choose to enter a duress PIN that will wipe your device, you have to recognize that choice may have legal consequences. I don't like the amount of power our government has at the national border when it comes to detaining and pressuring citizens, but our Constitution explicitly grants it at least some of the power it now exercises in that context. If your threat model includes US state actors at the national border, then your security practices need to account for the confiscation of your device at that border without requiring you to willfully wipe the phone and (in the eyes of police and prosecutors) destroy evidence. That means: 1. Don't travel with anything you can't afford to lose on device . This means setting up travel-specific password managers and hardware keys for a subset of your accounts that you absolutely need to access while abroad, and being prepared to reset those passwords and disable those hardware keys very quickly once home. 2. Review past legal cases against travelers and identify what behaviors the government considers worthy of prosecution or harassment. Your secure setup must function without needing you to engage in those behaviors , even if it is less convenient as a result. This isn't perfect, as the government may decide some new behavior is prosecutable. 3. Consult with a lawyer and review your security procedures from a legal standpoint . All of the above is technical and practical advice, not legal counsel and no substitute for it. We Americans are fortunate to carry powerful passports and enjoy relatively easy international travel but, for better or worse, that velvet glove covers an iron fist we would be foolish to forget or ignore."
+        },
+        {
+          "id": 49065508,
+          "author": "whats_a_quasar",
+          "text": "Here is the indictment: https://www.documentcloud.org/documents/28513012-samuel-tuni... Here is the statute Tunick is indicted under: https://www.law.cornell.edu/uscode/text/18/2232 There is an immediate problem: the device was being searched, and this statute criminalizes destruction of property to prevent seizure, not searches. I don't think this statute applies this situation. Regardless of whether the border agents could lawfully search his phone at the border, they didn't have grounds to seize it. I suspect this prosecution will quietly be dismissed within a few months."
+        },
+        {
+          "id": 49063468,
+          "author": "Grimblewald",
+          "text": "VeraCrypt has a cool function which is a reserved space for a decoy OS.[1] Everything else registers as free space while decrypting to dummy volume. You make the dummy volume look lived in, and forget. provide dummy password, volume decrypts such that only dummy is accessible/readable. give proper password, real OS and FS decrypt and load. Something like this may need to become the standars over duress pins which should be treated as a fallback or more extreme alternative. Right now, A single choice to reasonably and rightfully protect your privacy reuslts in jail time over something which likely wouldnt have resulted in any issues if superficial compliance was observed. These goons, even if a branch of a facist regime, are ultimately burocrats with violent options to settle. They aren't doing forensics on your device etc. They have neither means nor knowledge to do so. They just need to tick their boxes. Did the phone unlock? tick. Did our spyware complain? no? tick. Overall appearance of compliance from person? yes? tick. free to go, next! You just have to find ways to stay safe without agitating their workflow and all is well. - [1] https://veracrypt.io/en/VeraCrypt%20Hidden%20Operating%20Sys..."
+        },
+        {
+          "id": 49064210,
+          "author": "DanHulton",
+          "text": "If your threat model means you can’t afford for border security to view your device, wipe the damn thing yourself before crossing the border and restore it from an encrypted online backup on the other side. You’re just carrying a blank phone that you intend to set up and use later, and they can’t force you to install your backup onto a phone. Now, this is sus as hell, and you’ll probably draw all kinds of extra attention, but if border security wants access to your phone in the first place, you’re already in a weird place."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 7,
+      "id": 49062291,
+      "title_en": "We have proof automation now",
+      "title_ja": "We have proof automation now",
+      "url": "https://www.imperialviolet.org/2026/07/26/zstd-lean.html",
+      "hn_url": "https://news.ycombinator.com/item?id=49062291",
+      "score": 136,
+      "comment_count": 31,
+      "posted_at": "2026-07-26T20:53:26+00:00",
+      "comments": [
+        {
+          "id": 49065254,
+          "author": "m1el",
+          "text": "Self-insert time. I spent some time exploring this topic. Here's my thesis: Formal verification was expensive. 20x expensive compared to just developing the software, as the author notes. The cost of finding and developing exploits also was high. That creates an incentive to put software verification aside, since it solves a relatively small problem, at an extremely high cost. We've seen how Mythos has found more vulnerabilities than the rest of the security industry combined. (you can argue about the quality and what counts as a vulnerability, but not the point) So the cost of finding and developing exploits has dropped dramatically. On the other hand, formal verification is now much easier, since LLMs can automate the proof. You don't even need to worry about hallucinations, you merely need to trust Lean core. If the LLM is wrong, the proof will get rejected! The problem of exploits gets bigger, and the solution of formal verification gets cheaper. As a result, the needle is now moving in the direction of \"more formal verification\". I, personally, think that it is ridiculous that ~none of the software we use is known to work correctly. It just happens to work correctly, most of the time. My (ambitious) goal is to have a self-hosting, formally verified compiler, which allows proof transfer from source code down to assembly. I have not achieved that goal yet. What I have so far: - one (non-optimized) compiler step which is formally verified - three simple functions (hex, hex with labels, strtoull) formally verified, against RISC-V assembly, and against a custom IR https://github.com/m1el/riscv-fv-bootstrap The project is in quite a bad shape, and I am trying to improve my skills in that direction."
+        },
+        {
+          "id": 49064650,
+          "author": "gz09",
+          "text": "Strongly agree with the author here. The future will belong to programming languages that natively embed theorem proofers into their type systems so LLMs can forego a lot of testing by just validating the implementations they write against the specs with formal proofs. Writing formal specs is probably the main skill a programmer in the future will need to get work done. Verus ( https://github.com/verus-lang/verus ) is a good start for the rust ecosystem, but it's essentially a standalone language today (with custom syntax and type system)."
+        },
+        {
+          "id": 49063008,
+          "author": "Jhsto",
+          "text": "As a meta-comment on the topic, something I have noticed is that there still exists confusion what it means to use theorem provers for projects -- the other day I read a tweet from Paradigm, a crypto-VC now seemingly AI-pilled. Some LP of theirs had made a Lean 4 formalization of the Ethereum's virtual machine. The tweet said this would have cost like $150k in API tokens (\"would have\", as in, I guess they get theirs for free), and took a week of inference time for an LLM to produce. I somehow got distracted to actually take a look at the code, which I found rather light on theorems. Nor did the project make use of Batteries or Mathlib which are arguably the one of the strongest motivation for me personally to use Lean4. That is, I generally rather rely on someone else getting the category theory and algebraic structures right, which then leaves me the proof obligation to show the correspondence with whatever toy I'm working on. Here I'm fine to use LLMs for proof search, very similar to how would I use a SMT solver. But what I have found is that the language models have to be really coerced into using these libraries, because otherwise the models much rather overfit and overclaim a solution with a 3 minute inference task rather than attempt to fulfill the proof obligations over 3 hours. And I feel nauseated when I need to convince the LLM (I use Claude) that filling the proof obligation is for \"academic exercise\" or because I'm coerced into doing so, because otherwise it will come up with reasons of its own why it does not want to do it. Now, this happens under the mental model in which I'm interested in finding equivalences with prior work. Many LLM generated Lean code reads more as if someone was interested whether X can be turned into a Lean 4 program, which is mostly yes, and that in general is a positive thing. But, if you are not interested in refinement types and theorems, why not just choose Haskell? The point is, I strongly sense that unless you have good questions to ask, then that's very evident in these languages. And, this is something the LLM won't help you -- if you don't impose a proof obligation for it, it certainly will not try to go the extra mile to conjure one for you."
+        },
+        {
+          "id": 49065741,
+          "author": "momentoftop",
+          "text": "Theorem provers have always made extensive use of AI and automation. Formal logic is insanely laborious, and it took Russell a monumental effort to not get very far with his manual verifications in Principia Mathematica, working out all the details by hand. In 1956, Newell came up with the Logic Theorist which was able to prove a decent chunk of the Principia automatically. When Newell informed him, Russell conceded that his manual efforts had turned out to be wasted effort. I used HOL Light about 15 years ago. The vast majority of the proof details are done by a machine, generally split between term rewriting and then offloads to a generic automated prover for first-order logic. Your job then is formalising the theorem statements and orchestrating the automation, and the latter still takes an enormous amount of labour. Around this time, we were getting excited about recommender systems for lemma selection. The idea was that you turn every theorem into a bunch of features and train a recommender system against the lemma needed to prove it. Then when you face a new problem, you use its features to recommend which lemmas are likely to be needed. You then throw those lemmas and your conjecture at a bunch of industrial strength automated provers, get the provers to come back with a minimal set of necessary lemmas, and then use your verified automated prover to do the real proof with a tractable set of inputs. It first got implemented in Isabelle/HOL as Sledgehammer, and was a massive improvement to tooling. Now LLMs are here and the game looks completely different. I went back over some verification I spent a week on about 5 years ago, in a pretty obscure formal verifier called HOL Light, on a problem of my own making. I'd seen how terrible ChatGPT was at propositional logic a few years back, so this is the sort of thing I'd had in my back-pocket as an \"impossible benchmark\" for LLMs. So as a half-joke, I gave Claude the main theorem I wanted proving, hoping to watch it embarrass itself. In a minute or two, it has come up with the same proof strategy I had used, proving four lemmas to get to the main theorem. This was impressive, but that's not the laborious part, and I was pretty confident it would die trying to prove just the first lemma. It has its four lemmas enumerated and goes to thinking, while I go off for a cup of tea. I come back five minutes later and it has scratched off the first goal. I'm pretty shaken, and go off again trying to process that. Come back, the second goal has gone. And then the third. And then the fourth. And then, after just fifteen minutes, it's pulled off a week of my work, done it more efficiently, and near enough one-shotted each proof. That took me a while to process. I realised that if I had this 15 years ago, it would have done 95% of my PhD, which is to say that 15 years ago, I would have done a 20x more ambitious thesis. I contacted my old supervisor, who said the theorem proving community are all on top of this, including the creator of HOL Light, now at AWS. HOL Light, incidentally, was used on what I still believe is the most ambitious mathematical theorem proving project to date, the verification of the Kepler Conjecture. The lead on that project recruited a team to get the proof through over about 5 years. Today, I wouldn't be surprised if he could have solo'd it in 6 months. The same goes for another extremely ambitious project, the verification of the seL4 microkernel. And for another open problem, I know there are people seriously wanting to get a verification of Fermat's Last Theorem, which sounded delusional 15 years ago, but sounds pretty plausible now. Exactly where this goes, I am not sure. I suspect we can now start on verification projects that would have been insane to contemplate. But a few things concern me. One is that Lean seems to have all the mind-share. Maybe it deserves it, but there are very major and mature theorem proving technologies such as Coq (now Rocq), Isabelle, HOL Light, ACL2 and Mizar that I believe still win in terms of having the largest verification libraries and the biggest verified projects. These should not be forgotten about, since they will also probably have the most training data, having been going for many decades now. The second is that verifying our crappy human specifications probably isn't going to fly. As the creator of HOL Light says, representation (how you formalise your problem domain) is still where it all matters, and the LLMs aren't very good at this. And neither are the writers of our current specs. Verifying that a piece of software meets the HTTP spec will be considered an achievement, but it's the wrong goal. We'll need specifications that are modular and composable, that mesh together so that each piece is sanity checking the others. This is how we build mathematics, and it's how we'd need to build software. Specs need to be short and comprehensible, so that a human can verify them. If your spec is as long and complex as the implementation, it's worthless. But I believe it is possible to design software from the ground up where the motivation is specification engineering rather than code engineering, and thereby the specifications become the only human-facing understandable part of software. The implementation is just some artifact that an LLM generates that nobody looks at unless they are curious."
+        },
+        {
+          "id": 49063670,
+          "author": "keithwinstein",
+          "text": "This is really cool stuff, and I agree the future is likely to look more like this. I was surprised by the last two paragraphs (\"Aside: verified assembly\") -- my understanding was that this future is basically already here. I believe agl's colleagues at Google have already deployed some auto-mutated verified assembly versions of some crypto routines, based on the Fiat Crypto + CryptOpt work ( https://arxiv.org/pdf/2211.10665 ), both involving Andres Erbsen who I think is currently at Google before starting a professorship soon. I dunno if this work would count as \"cheap\" (it looks like Fig. 10 unfolds over the course of a day) but spending a day auto-exploring many verified-correct machine code implementations of the same routine to find the fastest one (which you then ship forever) doesn't seem impractically expensive either."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 8,
+      "id": 49020219,
+      "title_en": "I wanted a clock that never needed setting. Things escalated",
+      "title_ja": "I wanted a clock that never needed setting. Things escalated",
+      "url": "https://arstechnica.com/gadgets/2026/07/i-wanted-a-clock-that-never-needed-setting-things-escalated/",
+      "hn_url": "https://news.ycombinator.com/item?id=49020219",
+      "score": 72,
+      "comment_count": 72,
+      "posted_at": "2026-07-23T12:01:52+00:00",
+      "comments": [
+        {
+          "id": 49063718,
+          "author": "Frost1x",
+          "text": "I’ve had a Phillips “atomic” alarm clock beside my bed for 23 years that just sets based on radio signal and auto restores if the power is lost, to which it has a backup 9v battery. There’s a time zone setting offset slider and a DST slider. I basically touch it twice a year, maybe another if I move time zones. I’ve only had to touch it for DST (never switched time zones). Takes me conservatively 10 seconds to find and flip, so it’s taken me 460 seconds or a little under 8 minutes in the past 23 years to do time adjustments. While these efforts are definitely fun hobby projects, there are cheap reliable solutions out there with minimal intervention that consume the NIST radio signal for time. Just for anyone interested who wasn’t aware there’s some “old school” time broadcast solutions out there too besides NTP: https://www.nist.gov/pml/time-and-frequency-division/time-di..."
+        },
+        {
+          "id": 49063792,
+          "author": "Animats",
+          "text": "It's a clock. Does it really have to have remote updating, a command line interface, an Internet connection, and HomeKit integration? That's too IoT. I have three La Crosse clocks that run off the NIST time signal out of Boulder, CO, and need their AA battery replaced maybe once a year. The real challenge is running such a thing on a small battery for a year. I once made a small clock that displayed \"A LITTLE AFTER SIX\" and such, changing its text every five minutes. Needed a power connection, though."
+        },
+        {
+          "id": 49065504,
+          "author": "mikewarot",
+          "text": "I too find myself going down the time-nut rabbit hole. I want a perfect 10 Mhz reference, not necessarily a time of day clock. I was tempted to go the Atomic Clock route, based on actual cesium oscillators, having found a cheapish ($999) used CSAC on ebay[1]. However, once I started digging into the data sheets[2], I found something unacceptable, Pin 1, labeled \"Tune\", an analog tuning input. It was then that I learned that while the Cesium vapor cells were accurate, they aged, and drifted, unlike a properly degaussed and Zeeman harmonic calibrated Cesium Beam atomic clock, which is a primary standard. Further demotivating was learning they have a 5-10 year service life. That's a lot of money to pay for what's essentially a better OXCO. I'll stick with GPS disciplined oscillators for now. [1] https://www.ebay.com/itm/327134074179 [2] https://www.mouser.com/datasheet/2/523/Microsemi_CSAC_Space_..."
+        },
+        {
+          "id": 49065496,
+          "author": "mrheosuper",
+          "text": "Using a supercomputer to power a clock, now that is overengineering. I made a LED matrix clock using esp32 syncing time with ntp server every hour and an external RTC to do time keeping if my network is down, and it runs perfectly for years, with accuracy +-1s to time.is. Never have to do setting except the first boot to setup wifi."
+        },
+        {
+          "id": 49063836,
+          "author": "sasaf5",
+          "text": "\"One, the path not taken, started with an Arduino or Arduino-like microcontroller. The other began with a Raspberry Pi or Pi-like computer-y thing. I went with the Pi, variously using both a Raspberry Pi Zero W and Zero 2 W.\" Ok, so instead of bumping your clock +- one hour twice a year you preferred distro upgrades?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 9,
+      "id": 49057241,
+      "title_en": "Htmx 4.0, the first JavaScript library to release exclusively on the Game Boy",
+      "title_ja": "Htmx 4.0, the first JavaScript library to release exclusively on the Game Boy",
+      "url": "https://swag.htmx.org/en-cad/products/htmx-4-the-game",
+      "hn_url": "https://news.ycombinator.com/item?id=49057241",
+      "score": 406,
+      "comment_count": 140,
+      "posted_at": "2026-07-26T12:00:11+00:00",
+      "comments": [
+        {
+          "id": 49059377,
+          "author": "blister",
+          "text": "I've been using htmx for three years now, and it's completely unlocked new ways of building software for the web, especially if you use a server-side templating language. But more importantly (as this \"Game Boy\" option reveals), the head honcho is really responsive with the items in the store. I had purchased a coffee mug a few years back and complained on Twitter that they need to sell larger mugs instead of only offering little tiny baby mugs that only hold ~8 ounces of liquid. The next day, he added giant 48-ounce monsters to the store and I've been drinking out of that mug every day since."
+        },
+        {
+          "id": 49059159,
+          "author": "rpdillon",
+          "text": "HTMX's whole vibe is amazing. It's good tech, kept simple, useful in gobs of situations, but doesn't take itself too seriously. I've used it in professional and side projects since intercooler.js, and still love it. Here's a crazy unicorn-laser-eyes mug[0] that evokes the vibes of NROL-39[1]. I adore it. [0]: https://swag.htmx.org/collections/octohorse [1]: https://en.wikipedia.org/wiki/USA-247"
+        },
+        {
+          "id": 49061866,
+          "author": "aarondf",
+          "text": "I was at Big Sky Dev Con when they unveiled the GameBoy game. I kid you not my jaw dropped. I thought it was some sort of like emulator gimmick until they said \"everyone can take a physical cartridge home!\" One of the most delightful little swag stunts I've ever seen, and emblematic of the HTMX crew just how much they care about craft and delight in everything they do."
+        },
+        {
+          "id": 49061429,
+          "author": "ballon_monkey",
+          "text": "I love HTMX and use it in a few projects, but its amusing how whats old is new again. .NET Framework / Web Forms had update panels to do partial rendering of web pages back in 2005. Outside of .NET developers it got a lot of hate. But to a certain extent HTMX is a super well refined and more capable version of update panels and more."
+        },
+        {
+          "id": 49059574,
+          "author": "throw2ih020",
+          "text": "HTMX is awesome. I've replaced several OSS web apps on my home server with HTMX + Go + PostgreSQL replacements. The results are lightweight, responsive, work great on desktop and mobile alike, all with the absolute minimum complexity required. The codebases are easy to understand and modify, and so far I'm going months between updates (mostly just minor bugfixes for my applications). I fully expec my mature apps will go years if not decades between required upgrades."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 10,
+      "id": 49060724,
+      "title_en": "Introduction to Data-Oriented Design [pdf]",
+      "title_ja": "Introduction to Data-Oriented Design [pdf]",
+      "url": "https://www.gamedevs.org/uploads/introduction-to-data-oriented-design.pdf",
+      "hn_url": "https://news.ycombinator.com/item?id=49060724",
+      "score": 149,
+      "comment_count": 40,
+      "posted_at": "2026-07-26T18:11:16+00:00",
+      "comments": [
+        {
+          "id": 49061815,
+          "author": "dustbunny",
+          "text": "The real key pillar to this world view is putting the data first in your design of the algorithm. So if your working on a physics engine and your optimizing collision detection, you think about the data in -> data out of the problem you are solving as the primary driver of how the code should be written. You start with defining the data, and build from there. Different types of applications all have different shapes of data so would have differently shaped optimal code. Eg) a physics engine would use some kind of spatial hash thing which can be optimized differently based on if stuff can be added/removed while it's running. A 3d renderer operates on big buffers of matrices and vertex data. A game is usually composed of some long lived things and a lot of short lived things. The key message in Mike Acton's talk was: \"If you have different data, you have a different problem.\" While ECS systems are not a panacea that solves all problems in a perfect data oriented way, they are generally more malleable than Object Oriented hierarchies. This means it's generally more feasible to write \"near optimal\" code in an ECS framework than in a mature Object Oriented code base. But the key message isn't \"use X framework\", it's \"start by defining the data\"."
+        },
+        {
+          "id": 49062520,
+          "author": "HexDecOctBin",
+          "text": "Mike Acton (author of this presentation) has released a LLM skill for Data Oriented Programming: https://github.com/macton/nagent/blob/main/context/data-orie..."
+        },
+        {
+          "id": 49062676,
+          "author": "ghosty141",
+          "text": "I personally love the idea of DoD but from my experience it rarely works well in practice since one of the key assumptions of understanding ur problem is often not given as new requirements pop up and change all the time. At work we are rewriting and reengineering system from scratch and its crazy because the limitations of the old system are now gone we get the most insane feature requests that are even accepted by the team lead et al. This makes such an approach impossible since DoD is exactly the opposite of flexible design in my opinion. Im curious has anybody really followed this in a big long living commercial project?"
+        },
+        {
+          "id": 49065647,
+          "author": "remiminnebo",
+          "text": "That's where my agents got it from!"
+        },
+        {
+          "id": 49062673,
+          "author": "PessimalDecimal",
+          "text": "This seems like a particular branding on cache-aware data structures and algorithms. Is there more to it?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 11,
+      "id": 49059367,
+      "title_en": "Design is compromise",
+      "title_ja": "Design is compromise",
+      "url": "https://stephango.com/design-is-compromise",
+      "hn_url": "https://news.ycombinator.com/item?id=49059367",
+      "score": 226,
+      "comment_count": 78,
+      "posted_at": "2026-07-26T15:51:12+00:00",
+      "comments": [
+        {
+          "id": 49059922,
+          "author": "ChrisMarshallNY",
+          "text": "Absolutely spot-on. However, most folks (not just designers) have a difficult time with compromise, these days. It's become a value judgment (You're \"weak,\" if you compromise). I learned, when I was a kid, that I can't always get what I want (I think that someone even sang about it, way back then). The art of compromise, is one of the most valuable skills I had, during my career, and I'm still at it. In fact, I was just texting with a team member, a few minutes ago, where we have to come to a compromise."
+        },
+        {
+          "id": 49059963,
+          "author": "tikotus",
+          "text": "Compromise is the last tool in the designer's toolbox. Before settling with a compromise, the designer should relentlessly try to narrow down what the problem being solved is, while trying out all possibilities, until it looks like there is no solution that matches exactly the problem (or they run out of time). More often than not, a compromise means that the problem wasn't scoped out well enough, and it ends up partially solving a problem that didn't need solving. Edit: I do think it's about trade-offs though. Choosing to solve one problem, acknowledging another problem will be disregarded."
+        },
+        {
+          "id": 49065531,
+          "author": "dilawar",
+          "text": "Something similar can be said about \"values\". They help you make hard decisions. You don't need values if only make easy decisions. But values conflicts with each other. You can't value more than a few at the same time. E.g. If you make a decision which is good for your employee who is struggling (value employee), it may not be a good decision for your client who is already delayed (value client/speed). Etc.."
+        },
+        {
+          "id": 49062171,
+          "author": "bryzaguy",
+          "text": "I fundamentally disagree with the premise. Why are we attempting to change the meaning of the word compromise? “compromise” and “has trade-offs” are NOT synonymous. The antithesis of compromise is to make strong decisions that WILL alienate people, but will better target your intended audience. That, IMHO, is a great thing."
+        },
+        {
+          "id": 49060640,
+          "author": "ttoinou",
+          "text": "Once constraints are fixed you can choose your tradeoff among dimensions, that’s the compromise. But constraints are not fixed, you can optimize, discover new techniques and change the space of requirements. For example thanks to computer scientists we get better and better algorithms for compression, and thanks to hardware companies we get new / faster chips with different models to do new kinds of computation Thus, you can move the compromise space, by working harder"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 12,
+      "id": 49061887,
+      "title_en": "Simulate cassette tape audio profiles using FFmpeg",
+      "title_ja": "Simulate cassette tape audio profiles using FFmpeg",
+      "url": "https://github.com/AARomanov1985/Audio-Cassette-Simulation",
+      "hn_url": "https://news.ycombinator.com/item?id=49061887",
+      "score": 104,
+      "comment_count": 43,
+      "posted_at": "2026-07-26T20:02:15+00:00",
+      "comments": [
+        {
+          "id": 49062738,
+          "author": "massagedpelican",
+          "text": "How would one go about determining what effect to add for each cassette type? I don't know much about cassettes, I'm curious if this was something that could be done by ear or if these are commonly held opinions about the sound of each tape. Again knowing nothing about tape, if I were tasked with this I would probably try to record the same audio to each of the tapes and then compare it with the original."
+        },
+        {
+          "id": 49062881,
+          "author": "gwbas1c",
+          "text": "Has anyone come across a Dolby B (or similar) encode / decode program? I've been wanting to experiment with quantizing Dolby (or similar) encoded audio to 8 bits, and then unencoding to see how well it can sound."
+        },
+        {
+          "id": 49063396,
+          "author": "omar_alt",
+          "text": "This is interesting as I would assume multiple passes from each output would result in further multi generational loss akin to tape trading of band demos, soundclashes and dj mixes from pirate radio"
+        },
+        {
+          "id": 49063854,
+          "author": "JSR_FDED",
+          "text": "I’m wondering besides the hiss and wow/flutter, what is the frequency range of cassette tape? Is there an “eq” to tape where certain frequencies are rendered more strongly than others? And how does it compare with records?"
+        },
+        {
+          "id": 49064766,
+          "author": "flyingcapabara",
+          "text": "This is awesome and very useful for one of my projects !! Thank you so much"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 13,
+      "id": 49063523,
+      "title_en": "Fonts In Use – Find out where a font is used",
+      "title_ja": "Fonts In Use – Find out where a font is used",
+      "url": "https://fontsinuse.com/",
+      "hn_url": "https://news.ycombinator.com/item?id=49063523",
+      "score": 38,
+      "comment_count": 3,
+      "posted_at": "2026-07-26T23:45:09+00:00",
+      "comments": [
+        {
+          "id": 49065118,
+          "author": "fny",
+          "text": "The whitehouse.gov item is quite the blast from the past: https://fontsinuse.com/uses/78453/the-typography-of-whitehou..."
+        },
+        {
+          "id": 49065396,
+          "author": "amstan",
+          "text": "Checks out, Papyrus: https://fontsinuse.com/uses/61309/avatar-movie-posters"
+        },
+        {
+          "id": 49064749,
+          "author": "ChrisArchitect",
+          "text": "– \"Type at work in the real world\""
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 14,
+      "id": 49059398,
+      "title_en": "Show HN: CheapSecurity – Lightweight, Self-Hosted CCTV for Linux SBCs",
+      "title_ja": "Show HN: CheapSecurity – Lightweight, Self-Hosted CCTV for Linux SBCs",
+      "url": "https://github.com/gmrandazzo/CheapSecurity",
+      "hn_url": "https://news.ycombinator.com/item?id=49059398",
+      "score": 122,
+      "comment_count": 24,
+      "posted_at": "2026-07-26T15:53:55+00:00",
+      "comments": [
+        {
+          "id": 49064128,
+          "author": "synergy20",
+          "text": "V4L2 (MJPG) -> cap.read() -> CLAHE(night) -> imencode -> _current_frame (web MJPEG) -> resize .25 -> gray -> blur -> absdiff -> contours -> motion? -> motion? VideoWriter.write() : pre_buffer.append(jpeg) -> on stop: ffmpeg remux fps fix -> Telegram/email a mjpeg system basically, all in python but does need opencv"
+        },
+        {
+          "id": 49061843,
+          "author": "lormayna",
+          "text": "What are the difference with systems like Motion ( https://motion-project.github.io/4.0/motion_guide.html ) ?"
+        },
+        {
+          "id": 49061500,
+          "author": "kube-system",
+          "text": "My question about this project and the numerous similar projects: where do I get a usb camera suitable for this? Webcams typically have unsuitable enclosures, focus behavior, and low light performance."
+        },
+        {
+          "id": 49061171,
+          "author": "drnick1",
+          "text": "What is the difference between this and Frigate? Before clicking the link, I thought this would be a hardware solution (build you own camera from open components)."
+        },
+        {
+          "id": 49060335,
+          "author": "mattlondon",
+          "text": "How does this handle motion detection? Anyone tried it? I have a bunch of Nest cameras and some cheaper Tapo cameras. The \"motion detection\" is night and day different. The Tapo does some basic frame-diffing and it's awful . Shadows? DING DING DiNG MOTION DETECTED! gust of wind made some blades of grass move? Motion! Spider? Motion motion motion! Turn down the sensitivity a notch or two and it won't notice a human walk across the frame 2 meters away. The Tapo ones claim to be smart but twigs and leaves still trigger pet/person/motion alerts. It makes them essentially useless. The Nest cameras are so much better and their \"human\" detected is usually zero-false-negatives at the cost of one or two false-positives perhaps once every 3 or 4 months, and their app is superior (tapo one frequently needs to be false-killed to load clips). Yes I am aware that the nest ones are streaming back to google 24/7. Tldr: naive frame-diffing sucks for this sort of thing if used outside. An open source implementation that has accurate and reliable \"human detection\" would be amazing. Doesn't need to be \"AI\" - I would hope that there is some sort of computationally reasonable OpenCV way of doing person detection. Perhaps wait for frame-diffing to flag motion then feed it to a more expensive algorithm?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 15,
+      "id": 49020842,
+      "title_en": "The Usefulness of Useless Knowledge (1939) [pdf]",
+      "title_ja": "The Usefulness of Useless Knowledge (1939) [pdf]",
+      "url": "https://faculty.lsu.edu/kharms/files/flexner_1939.pdf",
+      "hn_url": "https://news.ycombinator.com/item?id=49020842",
+      "score": 50,
+      "comment_count": 3,
+      "posted_at": "2026-07-23T12:58:02+00:00",
+      "comments": [
+        {
+          "id": 49065533,
+          "author": "devindotcom",
+          "text": "\"Institutions of learning should be devoted to the cultivation of curiosity and the less they are deflected by considerations of immediacy of application, the more likely they are to contribute not only to human welfare but to the equally important satisfaction of intellectual interest which may indeed be said to have become the ruling passion of intellectual life in modern times.\" Very smart guy. I bought the print copy of this essay here: https://press.princeton.edu/books/hardcover/9780691174761/th..."
+        },
+        {
+          "id": 49064679,
+          "author": "niraj-agarwal",
+          "text": "\"The mere fact that they bring satisfaction to an individual soul bent upon its own purification and elevation is all the justification that they need.\""
+        },
+        {
+          "id": 49044122,
+          "author": "oliculipolicula",
+          "text": "This is by the founder about IAS (aka (Turing's) [*Bazaar-]Cathedral ) founding between war & depression, while it was still at 20 Nassau St Further Quaker background by Freeman Dyson's son George who wrote that book having grown up there https://www.ias.edu/ideas/2009/george-dyson-tavern-and-meeti... *IAS was an open-maxxed Bell Labs https://www.embeddedrelated.com/showarticle/700.php > Dyson misses the point somewhat about virtual machines and cloud computing, which are much more about relocatable and rescalable computing — rather than having to house and maintain computers to handle the peak computational load, we can run software remotely as a service, and purchase resources on an as-needed basis; the providers of these services can reroute and reallocate resources in real-time without any intervention by or impact on their customers. There’s something here in Dyson’s statement alluding to parallel processing... Paradoxes for outwitting the uni-context.."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 16,
+      "id": 49060295,
+      "title_en": "How to write English prose (2023)",
+      "title_ja": "How to write English prose (2023)",
+      "url": "https://thelampmagazine.com/blog/how-to-write-english-prose",
+      "hn_url": "https://news.ycombinator.com/item?id=49060295",
+      "score": 106,
+      "comment_count": 52,
+      "posted_at": "2026-07-26T17:29:35+00:00",
+      "comments": [
+        {
+          "id": 49065202,
+          "author": "ofalkaed",
+          "text": "His em-dash usage is not clearly defined and distinct from other punctuation marks, it introduces a fair amount of unintended ambiguity. It is easy enough to understand but a few times I had to stop and try and figure out if there was some nuance and intent behind it all. >And—well, here, That was especially egregious. And! but—well, here, I guess, if I had to guess—which I don't(but I will)—the purpose of his essay seems to be, that; unintended ambiguity is good and really quite nice from an aesthetic standpoint. David Bently Hart seems to be the anti-McCarthy and falls into all the same traps as McCarthy, just walks into them backwards and blindfolded through a parentheses and a digression instead of jumping in head first."
+        },
+        {
+          "id": 49061250,
+          "author": "GCA10",
+          "text": "Kept out of sight in this rogue essay is the classic question: Who's your audience? If you're writing for yourself (and maybe a very small number of equally erudite readers) cut loose! Embrace \"anfractuous density and heedless flamboyance.\" But if you're trying to change people's minds, or share knowledge widely, everything in this essay is defiantly at odds with what's necessary to get the rest of the world to pay attention."
+        },
+        {
+          "id": 49065659,
+          "author": "znnajdla",
+          "text": "This piece of writing moved me to my core, shook my whole being, enlivened my soul. It reminded me that I need to step away from Claude Code every once in a while and read the Classics."
+        },
+        {
+          "id": 49062723,
+          "author": "doodaddy",
+          "text": "Look, I am in no position to seriously critique the author’s writing. He clearly has linguistic chops. But what kind of bunk is this? We get it, the flowery, overdrawn language of yore is more expressive. But that kind of writing gets in its own way. Words seem to trump concept. But reading that sort of writing feels like being in a museum; sure that Victorian gown looks pretty but does anyone actually want to wear it? And then, while arguing against monotony, this piece spends all its time repeating the same structure: a ten-dollar adjective followed by a ten-dollar noun. Ironically, the five passages cited as “good writing” mostly avoid the wordiness that the piece spends all its time arguing for. > Do not use a thesaurus. Oh now he’s just taking the piss."
+        },
+        {
+          "id": 49064361,
+          "author": "skobes",
+          "text": "We are fortunate that this individual's stylistic perspective is out there adding spice and variety to the world. I think, however, that most of us would be ill-advised to emulate it. Orwell's maxim, \"never use a long word when a short one will do\", is something the best writers have always freely ignored. But it's a reliable guardrail for the writer of merely average skill, steering them toward something passable rather than vomit-inducing."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 17,
+      "id": 49057398,
+      "title_en": "Go Analysis Framework: modular static analysis by go team",
+      "title_ja": "Go Analysis Framework: modular static analysis by go team",
+      "url": "https://pkg.go.dev/golang.org/x/tools/go/analysis",
+      "hn_url": "https://news.ycombinator.com/item?id=49057398",
+      "score": 195,
+      "comment_count": 52,
+      "posted_at": "2026-07-26T12:21:26+00:00",
+      "comments": [
+        {
+          "id": 49060089,
+          "author": "b7e7d855b448",
+          "text": "You guys can keep complaining about how go is too verbose, but I love everything about go. I love the error handling, I love the forced formatting, i love all the linting it has including style guides. When you read other source code it's so easy to understand it and make sense of it. Thank you go team (Ok, maybe I am a bit sceptical with the latest generic additions, but overall it's a great language. I love it.)"
+        },
+        {
+          "id": 49060636,
+          "author": "jzelinskie",
+          "text": "For SpiceDB[0], we've found a lot of success using this framework to define our own analyzers; it's probably 10x easier now with LLMs. No need for tribal knowledge or more time wasted on code review if you can just turn it into a linter and move on. [0]: https://github.com/authzed/spicedb/tree/main/tools/analyzers"
+        },
+        {
+          "id": 49058263,
+          "author": "jamescun",
+          "text": "This isn't new? You can see it's used by _a lot_ of linters already: https://pkg.go.dev/golang.org/x/tools/go/analysis?tab=import..."
+        },
+        {
+          "id": 49065201,
+          "author": "bijowo1676",
+          "text": "the most valuable thing in this article for me was this: The early loop looked like this: /goal improve the perf by 20% -> a great deal of plausible code -> a confusing benchmark -> another plausible patch Later it looked like this: find the expensive work -> explain why it happens -> change one mechanism -> compare with the previous Rust revision -> test the complete application -> retain, revise, or reject"
+        },
+        {
+          "id": 49065374,
+          "author": "eonwe",
+          "text": "This is one of the least informative discussions in HN front page that I remember."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 18,
+      "id": 49058993,
+      "title_en": "The relay market powering token resellers and fraud",
+      "title_ja": "The relay market powering token resellers and fraud",
+      "url": "https://vectoral.com/blog/token-relay-market",
+      "hn_url": "https://news.ycombinator.com/item?id=49058993",
+      "score": 181,
+      "comment_count": 107,
+      "posted_at": "2026-07-26T15:17:06+00:00",
+      "comments": [
+        {
+          "id": 49060922,
+          "author": "wtobey1",
+          "text": "I spent years working on financial integrity at a large ads company and this isn't novel at all! The same resale markets are at play for the last generation of internet giant's products. Highly sophisticated actors, able to cobble together impressions through abuse of the billing systems, stolen financial instruments, taken over accounts, etc, create massive markets of discounted impressions for resale. It was very interesting to compete against them as we hardened our defenses and they invented new ways to exploit them. I imagine the same defensive tools and techniques are being deployed by my former colleagues who moved to the labs."
+        },
+        {
+          "id": 49060176,
+          "author": "namanyayg",
+          "text": "One aspect that seems to be missing is the abuse of the free credits provided for new companies by AWS, Azure, and other providers. I know of a friend's company in India who purchased inference, at 4% of the actual price and states that it gave him an unbeatable competitive edge in their large running video influence pipelines. Any new competitors could not offer their pricing at all. Primarily that operated because registering a new company getting free AWS credits was a very tiny cost"
+        },
+        {
+          "id": 49060031,
+          "author": "benlivengood",
+          "text": "The real problem is subscription models. Businesses want recurring revenue so they try to game the ratio of fixed subscription prices to COGS but it's always a game and so whoever can figure out the upside for the company can figure out the complementary upside for themselves. How would one even word a bulletproof subscription contract for agentic tokens, anyway? You can't forbid automation because sub-agents are automation. You could forbid \"using tokens for the benefit of more than the human who signed up\" but then what do families (especially with kids) need to do? What if your friend asks you a question and you turn to a chat model? Forbidding \"reselling\" tokens outside of a household sounds like the closest terms but that's leaky for anyone who travels a lot, etc. Fixed cost per token simply works."
+        },
+        {
+          "id": 49060979,
+          "author": "grinich",
+          "text": "This is the problem we've been working on solving with WorkOS Radar. We run it for Cursor and a bunch of other AI companies who have a free trial that gives some free inference to test the product. It turns out to be a pretty complex program to solve at scale. Token fraud is a lucrative market and the adversaries are surprisingly sophisticated. It's a cat-and-mouse game, accelerated with AI. https://workos.com/radar (If you'd like to work on this, we are hiring :))"
+        },
+        {
+          "id": 49061819,
+          "author": "ifwinterco",
+          "text": "It's the same fundamental problem as \"ticket touting\" for popular events - if you sell something that's in demand at a price that's far lower than the clearing price of the market, you're creating a juicy arbitrage opportunity that sooner or later somebody is going to try and exploit"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 19,
+      "id": 49057666,
+      "title_en": "Show HN: Reverse Minesweeper",
+      "title_ja": "Show HN: Reverse Minesweeper",
+      "url": "https://sunflowersgame.com/",
+      "hn_url": "https://news.ycombinator.com/item?id=49057666",
+      "score": 185,
+      "comment_count": 57,
+      "posted_at": "2026-07-26T12:51:03+00:00",
+      "comments": [
+        {
+          "id": 49063734,
+          "author": "bonoboTP",
+          "text": "Single click places an x instead of a sunflower. I solved the puzzle but placed those xes instead of sunflowers and was confused why it doesn't say I solved it. I would suggest making a single click be the main action, ie placing a sunflower."
+        },
+        {
+          "id": 49059078,
+          "author": "hyperhello",
+          "text": "I don’t understand how this is reverse minesweeper when it’s just minesweeper with flowers instead of bombs."
+        },
+        {
+          "id": 49061911,
+          "author": "ltsSmitty",
+          "text": "There were a few boxes in the game I just played that didn't have enough information; e.g. only one number pointed to them and you couldn't reason it out. I think it's the kind of thing in regular minesweeper where it would've auto-cleared it when I opened a box next to it. I didn't take a screenshot but I hope that makes sense - I suppose maybe once you play the game more you'd learn that these are safe x's, but I found it to lack real information. I looked around for a tip or something on it but didn't quickly find anything"
+        },
+        {
+          "id": 49064824,
+          "author": "itherseed",
+          "text": "It is really good but it needs a dark theme. My eyes!"
+        },
+        {
+          "id": 49063859,
+          "author": "sickcodebruh",
+          "text": "This is great! Did a few rounds, will come back. A few months ago someone on HN shared Dragonsweeper and it completely hooked me and my wife to the point that we had to agree to break up with it. https://danielben.itch.io/dragonsweeper"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 20,
+      "id": 49038035,
+      "title_en": "History of John Backus's functional programming project (draft)",
+      "title_ja": "History of John Backus's functional programming project (draft)",
+      "url": "https://softwarepreservation.computerhistory.org/FP/",
+      "hn_url": "https://news.ycombinator.com/item?id=49038035",
+      "score": 22,
+      "comment_count": 1,
+      "posted_at": "2026-07-24T16:32:23+00:00",
+      "comments": [
+        {
+          "id": 49063984,
+          "author": "discarded1023",
+          "text": "I've always wondered if there's more to FP than (more or less) point-free style with an associated algebra. TFA seems to stop just when it might get interesting. Did Backus ever develop (or aim for) a notion of semantic completeness, e.g. Cartesian closure or whatever works [0] for Hughes's Arrows? The last has the interesting property of being foundationally point-free but also supporting a syntax with variables (with non-standard scoping rules). Which perhaps refutes Backus's original concerns. [0] https://en.wikipedia.org/wiki/Arrow_(computer_science)"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 21,
+      "id": 49057877,
+      "title_en": "The New AI Superpowers: Focus and Followthrough",
+      "title_ja": "The New AI Superpowers: Focus and Followthrough",
+      "url": "https://www.rickmanelius.com/p/the-new-ai-superpowers-focus-and",
+      "hn_url": "https://news.ycombinator.com/item?id=49057877",
+      "score": 186,
+      "comment_count": 54,
+      "posted_at": "2026-07-26T13:13:03+00:00",
+      "comments": [
+        {
+          "id": 49061112,
+          "author": "cgearhart",
+          "text": "This seems very related to a trend I’m seeing as my company goes all in on AI: everyone thinks that every problem is “a couple hours” with AI now, and they all want zero external dependencies because they can move faster alone. As a result, we’re now in an even worse “yet-another-…” age where everyone has built approximately the same (but somehow incompatible) versions of all the same beginner-level software, and (ironically) while they want no external dependencies they’re also pushing for org-level mandates to require everyone else to use their solution. Meanwhile, no one wants to do the slow/bottleneck part that cant easily be automated or scaled; they just throw an “agent” at it and call it done—but there’s nothing _there_. You can trust the agent on easy tasks and you can’t trust it on hard ones, but you can’t tell which ones are easy or hard. Improvements in foundation model tech move thresholds of the problem but can’t eliminate it. Long story short, I think we’re in a phase where the organizational value function is lagging behind the tech. A “proof of concept” used to be correlated with “proof of work” and some amount of domain understanding, but I think now what we need is a focus on “proof of understanding” or else you’re probably just wasting tokens on a baby version of the problem. A decent proxy right now is that if you have zero external dependencies then your solution is probably a toy."
+        },
+        {
+          "id": 49059217,
+          "author": "LogicFailsMe",
+          "text": "In my side hustle time, I use coding agents to explore what if projects I would otherwise never get to build. At my day job, I use AI to fix config, container, and installation issues so I can spend my time coding instead of struggling to fix mostly other people's mistakes. And really, in this age of python wheels, containers, virtual environments, and fragmented APIs, the cognitive load of doing this by hand would shut me down for the day. 1.5 years in and I haven't burnt out. If anything, I'm ramping up. I'm no longer afraid of adding a web UI, or insane numbers of unit tests, or deploying other people's software. What I'm not doing is using it to build products, but instead just doing so to augment the supporting stack. All of this is subject to change as the AI landscape evolves."
+        },
+        {
+          "id": 49061910,
+          "author": "crucialfelix",
+          "text": "I was getting frothy and feeling stress due to juggling sessions. I switched to managing my backlog (Obsidian base), writing specs, launching agents in the background. I review and make changes,merge and release. It's a fixed cycle and I optimize to maintain relaxed engagement. Rate of features and fixes went up a lot."
+        },
+        {
+          "id": 49060097,
+          "author": "bigyax",
+          "text": "I'm actually not feeling the 'burnout', though I too have a bunch of projects sitting at various levels of vibe-completeness. Mostly one just kind of yanks on my attention a bit more than the others and so they end up getting a little neglected. I'm fine with it though, I love having all these little forever projects of mine finally coming to life. My worry is kindof the opposite, what happens when I've finished all the things. Will I run out of ideas? I hope not, but already some of my pet projects have reached a level of completeness where I just cannot see anymore to add, for me they have reached a level of done. That frees me up for the next project but what if I run out of projects!"
+        },
+        {
+          "id": 49065312,
+          "author": "Skinney",
+          "text": "> So logically, if AI can help us complete tasks 2-100x faster than before, we should be UNDERWORKED and experiencing ZERO burnout, right? Got to admit, I stopped reading here. In my experience, burnout isn't related to the amount of work, but to your confidence in being able to do your job and if you find your job meaningful (like, does it even matter?). I'm probably doing twice as much work now compared to the period just before I burned out, but I'm also nowhere near a burnout. Part of that is general experience, but it's also because I feel like I know what I'm doing (so, no imposter syndrome) and because I've chosen my job based on what I find meaningful to do (is it ethical? does it make a difference in society? is it interesting?). I understand why LLM assisted development can lead to burnout. You now have a machine that \"does most of the work for you\". It's a gateway to questions like \"how good are you really at your job?\" and \"anyone could push these buttons, couldn't they?\" and \"is this what the rest of my life should be?\". It probably also reduces how interesting or fulfilling the job is for many people. You've been reduced to a cog in the machine, and you might be questioning your ability to be anything but."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 22,
+      "id": 49062700,
+      "title_en": "Teaching Kids Forth",
+      "title_ja": "Teaching Kids Forth",
+      "url": "https://gracefulliberty.com/articles/teaching-kids-forth/",
+      "hn_url": "https://news.ycombinator.com/item?id=49062700",
+      "score": 72,
+      "comment_count": 22,
+      "posted_at": "2026-07-26T21:39:17+00:00",
+      "comments": [
+        {
+          "id": 49063615,
+          "author": "jeberle",
+          "text": "Leo Brodie's \"Starting Forth: An Introduction to the Forth Language and Operating System for Beginners and Professionals\" is well-suited for any level student. It's quite fun and made a mark on my thinking. It's hard for a postfix dereference operator not to."
+        },
+        {
+          "id": 49064830,
+          "author": "lebuffon",
+          "text": "I used Forth to explain numbers in different radices to my grandson. Being able to interactively try things at the console was really helpful. It also helps to separate the internal number in the machine from how we display it, due to the different operators to print numbers as signed or unsigned. This is something that I have seen young programmers confuse. I think another area where Forth can help young people is in understanding some low level details like memory addresses and reading and writing memory. It seems simpler than abstracting it to \"pointers\", more like assembler but interactive."
+        },
+        {
+          "id": 49062809,
+          "author": "veltas",
+          "text": "I really love Forth and spend almost all my free programming time playing with it and I'd never teach it to a class of kids."
+        },
+        {
+          "id": 49064593,
+          "author": "bolangi",
+          "text": "Decker, a hypercard style app, seems to give quick gratification. Looks like an easy and fun way to get started with programming. Was just posted to HN: https://news.ycombinator.com/item?id=49060856"
+        },
+        {
+          "id": 49063858,
+          "author": "sudb",
+          "text": "I doubly enjoyed reading this because I feel like I'm reasonably sure the author never ran this through an LLM because of the \"cirriculum\" typo."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 23,
+      "id": 49062120,
+      "title_en": "Plasma Tunnels Reveal How Dying Satellites Fall to Earth",
+      "title_ja": "Plasma Tunnels Reveal How Dying Satellites Fall to Earth",
+      "url": "https://spectrum.ieee.org/space-debris-atmosphere-burn-up",
+      "hn_url": "https://news.ycombinator.com/item?id=49062120",
+      "score": 53,
+      "comment_count": 31,
+      "posted_at": "2026-07-26T20:31:57+00:00",
+      "comments": [
+        {
+          "id": 49063101,
+          "author": "bolangi",
+          "text": "Satellites have many chlorinated and florinated chemicals, so being vaporized means introducing large volumes to the upper atmosphere where they can catalyze the destruction of ozone molecules. I'd be interested how the volume compares to other sources of atmospheric halogens. They could hardly match the quantity of refrigerant gases released, but being deposited directly in the upper atmosphere may make them more potent."
+        },
+        {
+          "id": 49065553,
+          "author": "rapjr9",
+          "text": "So do incinerating satellites create tunnels of conductive plasma through the atmosphere? Perhaps they are creating short circuits in the air. Could pieces of junk reaching the lower atmosphere cause lightning strikes by creating conductive paths? When I read the title about \"plasma tunnels\" that's what I thought the article was going to be about, not wind tunnels."
+        },
+        {
+          "id": 49063133,
+          "author": "piskov",
+          "text": "What would be the number of reentries in the near future? 5-20 satellites daily? At first glance, it seems negligible. On the hand, given the intentional nature if disposable low-orbit, 20 more than ideal."
+        },
+        {
+          "id": 49063851,
+          "author": "fastball",
+          "text": "> However, the rapidly increasing numbers of launches to low Earth orbit now threaten to increase the levels of space junk reentering the atmosphere. Isn't it not space junk if it is burning up in the atmosphere? Kinda conflating two different concerns here that are somewhat mutually exclusive."
+        },
+        {
+          "id": 49063870,
+          "author": "marcosdumay",
+          "text": "So... We still don't know if aluminum on satellites can be a problem or not. Yes, it's nice that failed experiments get reported. But why another press article claiming the problem that this one research has been failing for a decade to show that exists?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 24,
+      "id": 49057175,
+      "title_en": "Kill The Cookie Banner",
+      "title_ja": "Kill The Cookie Banner",
+      "url": "https://killthecookiebanner.eu/",
+      "hn_url": "https://news.ycombinator.com/item?id=49057175",
+      "score": 914,
+      "comment_count": 441,
+      "posted_at": "2026-07-26T11:53:17+00:00",
+      "comments": [
+        {
+          "id": 49059640,
+          "author": "chrismorgan",
+          "text": "The other approach to killing the cookie banner is simply to declare that such a thing cannot constitute “informed consent”. (Perhaps: “ticking a checkbox and/or clicking a button cannot constitute informed consent”; and see what they try next.) From a factual perspective, I honestly think that shouldn’t be controversial: it’s well-understood that very few people actually read those things, they just want to get them out of the way. Just as shrink-wrap licenses and even simple contracts have at times in some jurisdictions essentially been neutered, so that only terms that a reasonable person would expect to be there are enforceable, at which point it becomes obvious that the whole thing needs tearing down in favour of standard licenses/contracts. In the Australian state Victoria, for example, there are standard rent and property sale contracts; for renting you must use that contract < https://www.consumer.vic.gov.au/housing/renting/starting-and... >, and I got the impression that residential sales practically always use the standard contract. But of course it’s impossible to convince someone of something when their livelihood depends on their not understanding it."
+        },
+        {
+          "id": 49059240,
+          "author": "Phemist",
+          "text": "> Tired of misleading cookie banners? The EU Commission has finally proposed a solution: set your privacy preferences in the browser once, and never see another banner. So lawmakers do know how to make legally binding preferences based on device settings? What a crazy innovation.. now if only parents were given these options to indicate their child is using a device.. we could do away with all this Online Safety Act nonsense..."
+        },
+        {
+          "id": 49065465,
+          "author": "getfluxly",
+          "text": "I am a builder in the same space(tracking analytics) and I agree with killing the cookie banner. It is really annoying and most of the time, sites don't even respect the decision, they just track it nonetheless. Setting up a consent stance once per browser is way better, also I think there should be fines for the websites that don't follow the same."
+        },
+        {
+          "id": 49061045,
+          "author": "tomp",
+          "text": "Or you could just stop spying on people. No cookie banner is required for functionally necessary cookies."
+        },
+        {
+          "id": 49061478,
+          "author": "mullingitover",
+          "text": "It's great they're talking about it, but they should just do like California and DO something about it.[1] > When the law takes effect in January 2027, Californians will see new privacy options in web browsers. When enabled, these controls will automatically inform websites of their privacy preferences, helping to protect personal information from being sold to data brokers and other third parties. This means they will be able to protect their data — like their browsing history, location data, purchase history, and personal interests — across the entire internet with a single step. [1] https://cppa.ca.gov/announcements/2025/20251008_2.html"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 25,
+      "id": 49060945,
+      "title_en": "How to Block Some of the Bots",
+      "title_ja": "How to Block Some of the Bots",
+      "url": "https://nochan.net/b/Internet-Crap/20260606-How-To-Block-Some-Of-The-Bots/",
+      "hn_url": "https://news.ycombinator.com/item?id=49060945",
+      "score": 94,
+      "comment_count": 112,
+      "posted_at": "2026-07-26T18:32:46+00:00",
+      "comments": [
+        {
+          "id": 49065637,
+          "author": "thayne",
+          "text": "You need to be careful with blocking based on IP. IP blocks get reassigned every once in awhile, and you can end up blocking the wrong people. I've seen multiple cases where a block of IPs was blocked either because based on geography, or being a data center, then the block changed hands to a residential ISP. Blocking http 1.1 has a higher risk of blocking real users if they are using old browsers. > One class of bots always claims to come from the root page of google. Obviously this is a lie. This isn't just bots. Some browsers won't include the full url for cross-origin requests, so that is the referrer if the request came from google, so you probably don't want to block that unless you don't want any traffic from google search."
+        },
+        {
+          "id": 49063534,
+          "author": "AussieWog93",
+          "text": "I say this as someone who runs several publicly-facing websites, and also scrapes a few others for use in my own tools: why do people care so much about bots? WordPress with a cache can handle on the order of 1k requests per second on the cheapest VPS money can buy. An actual proper static site would likely 10x that. Are you using lambdas or something like that to serve a blog? Is it basically just OCD? Vulnerability protection? Old habits from a time where crawling really did impact service?"
+        },
+        {
+          "id": 49061273,
+          "author": "fxtentacle",
+          "text": "I like the idea of adding a fake cpanel subdomain for 169.254.169.254 so that script kiddies will start port-scanning their own hosting provider, which will likely get them flagged/banned."
+        },
+        {
+          "id": 49062517,
+          "author": "userbinator",
+          "text": "You are only helping the entrenched browser monopoly and furthering the dystopia if you attempt to block anything but \"approved\" user-agents. This is what people like RMS were warning us about decades ago. Block on traffic volume and request frequency if that's causing a problem. (And yes, I can't access the site either. No, I will not conform. But I bet anyone determined enough will still get through, just like with DRM.)"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 26,
+      "id": 49022355,
+      "title_en": "I learned PCB design, 3D printing and C just to listen to music",
+      "title_ja": "I learned PCB design, 3D printing and C just to listen to music",
+      "url": "https://pentaton.app/blog/2026-07-12-introducing-pentaton-lp/",
+      "hn_url": "https://news.ycombinator.com/item?id=49022355",
+      "score": 192,
+      "comment_count": 41,
+      "posted_at": "2026-07-23T14:37:13+00:00",
+      "comments": [
+        {
+          "id": 49058639,
+          "author": "mananaysiempre",
+          "text": "> Once I had the design [of the enclosure], I tried to 3D print it on my brand new 3D printer, which turned out to be a disaster. Took me some time to learn more about designing for manufacturing, especially for 3D printing. Would have been nice to hear how specifically it was made to work in the end. > Turns out, cross-fading two 4MP images at 60 frames per second on a moderately powerful single board computer is not so easy. Yeah, at first it feels stupid that every pretty LCD screen for bus or train stops, ads or whatnot has a full computer behind it, but then you ballpark the memory bandwidth and realize you need a ~ 1 GHz device anyway just to be able to chew through the pixels fast enough. (1920² px × 24 bpp × 60 Hz = 620 MB/s.) You also realize why “fill rate” used to be such a buzzword 20 years ago and why it took a while until true color became ubiquitous. On the flip side of the O(n²), you can easily drive a watch-sized display with pretty good ppi using a 32-bit MCU, which is why the Apple/Google/Samsung battery-guzzling approach to smartwatches seems wrongheaded to me compared to Pebble/Zepp/etc."
+        },
+        {
+          "id": 49022356,
+          "author": "interfeco",
+          "text": "Hey HN, I've finally finished my dream music streamer featuring a vinyl-sleeve-sized square display, a custom carrier PCB for a compute module and a 3D printed case, running a custom-compiled kernel, Alpine mini rootfs and a small C app driving the display. I did not think that this was doable by a hobbyist at all, let alone using free/open source software only (KiCAD, FreeCAD, VSCode). Turns out I was wrong!"
+        },
+        {
+          "id": 49060909,
+          "author": "matheusmoreira",
+          "text": "> I never did this before so there was plenty to learn, from basic electronics and magnetics to high-speed signal routing. How did you learn this? As a hobbyist I found hardware to be quite impenetrable, given the hard mathematics and physics requirements. My attempts to learn this essentially degenerate to taking an informal engineering course. It quickly becomes clear that I'm years away from making something, and I eventually run out of both free time and executive function. AI's been helping... But I don't have the ability to tell when the output is wrong."
+        },
+        {
+          "id": 49065275,
+          "author": "egypturnash",
+          "text": "> Turns out, cross-fading two 4MP images at 60 frames per second on a moderately powerful single board computer is not so easy. I needed to use GPU acceleration to make it happen and look smooth. fizzle fade, munching squares, horizontal/vertical/circular/pinwheel/etc wipes - anything that lets you replace a small number of pixels in the display buffer each frame."
+        },
+        {
+          "id": 49065632,
+          "author": "eahm",
+          "text": "Sorry but ...a Mini PC with foobar2000, remote controlled via phone/web and a monitor for the full screen cover and done, that's what I'd do."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 27,
+      "id": 49012339,
+      "title_en": "Why care about programming languages",
+      "title_ja": "Why care about programming languages",
+      "url": "https://ebellani.github.io/blog/2026/why-care-about-programming-languages/",
+      "hn_url": "https://news.ycombinator.com/item?id=49012339",
+      "score": 11,
+      "comment_count": 6,
+      "posted_at": "2026-07-22T19:42:48+00:00",
+      "comments": [
+        {
+          "id": 49065642,
+          "author": "ulrikrasmussen",
+          "text": "Can't remember who said it, but I think the most poignant commentary about the prospects of LLMs completely replacing humans is the simple observation that yes, you can delegate many if not all of your tasks requiring thinking to LLMs, but it is inherently impossible to delegate the task of understanding . If you hope to write an efficient prompt which gives you what you think you want, you need to actually understand what you want, which also requires you to understand what you currently have. Programming languages are a medium for transferring and - not the least - maintaining shared understanding of a software system in terms of the basic abstractions that the programming language provides. The need for good programming languages does not go away just because we use LLMs to write the code, on the contrary: would you rather review LLM-written assembly or LLM-written Haskell?"
+        },
+        {
+          "id": 49065569,
+          "author": "kusokurae",
+          "text": "Any and all discussion that suggests the deprecation of human-held domain-specific, manually-able knowledge & skill, on the basis of LLM capacity, is propaganda."
+        },
+        {
+          "id": 49065568,
+          "author": "alpha_trion",
+          "text": "I think a lot of folks in the industry are feeling this way. It’s an existential crisis for many of us right now. Why bother progressing when slop is “good enough”? Some of us still care but I have a feeling there are a lot of people that don’t."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 28,
+      "id": 48997828,
+      "title_en": "Some more things about Django I've been enjoying",
+      "title_ja": "Some more things about Django I've been enjoying",
+      "url": "https://jvns.ca/blog/2026/07/21/more-nice-django-things/",
+      "hn_url": "https://news.ycombinator.com/item?id=48997828",
+      "score": 147,
+      "comment_count": 91,
+      "posted_at": "2026-07-21T20:30:22+00:00",
+      "comments": [
+        {
+          "id": 49056394,
+          "author": "CraigJPerry",
+          "text": "There are so many footguns[1] in async python but it really has stolen the zeitgeist of modern python web. Synchronous django has a lot to commend it. If you deploy it reasonably well (workers, behind a caching reverse proxy etc) it's easy to operate in production even under duress. It's not going to be the right stack for long lived websocket connections or whatever but for a CRUD-ish or enterprise app, often very productive. [1] buffer bloat is too easy to sleep walk into queue = asyncio.Queue() # oops unbounded concurrency await asyncio.gather(*(fetch(item) for item in items)) # look mum! no outbound sockets left or maybe even no file descriptors accidental blocking data = requests.get(url).json() # oops! we're blocking the event loop and sure you can setup a separate task to measure the event loop latency and alert on that but this is the kinda thing you'll never find in a tutorial, you just need to experience this stuff and figure out a solution you like I can go on and on about async python (cancellation bugs, leaking a task - that has a cataclysmic failure mode where if you forget to hold a reference to your asyncio.create_task() then it's all weak refs in that machinery so your task can get garbage collected before it ran or completed in production! super tricky forensics. Then there's all the obvious stuff like race conditions, new ways of creating deadlocks, blah blah i really can go on for days."
+        },
+        {
+          "id": 49055730,
+          "author": "echoangle",
+          "text": "> Some light load testing (with (ab -n 1000 -c 1) shows that right now we can serve about 2-3 requests per second (on a ~$10/month VM). > After turning on template caching, it seems like the site can now pretty easily handle 12 requests per second or so without using all of the CPU. I have not carefully benchmarked the before and after but it seems like it’s made a pretty big difference. That seems crazy low, I think there has to be something else going on here."
+        },
+        {
+          "id": 49055979,
+          "author": "ranedk",
+          "text": "I have been using Django since 0.95 and I haven't seen anything which is so flexible with amazing DSLs while also making it easy to understand the magic behind it. For the last 10 years, even in a Golang stack or Java stack, I still use Django for models and migration. I even have generators which generate Gorm (or other framework) DAO or Java hibernate classes using Django models. With LLMs, it becomes easier since I can now write all the model, custom querysets in Django, ask the LLM to generate Golang DAO, setters and getters... and test the query against the Django generated queries for completeness. Atlas, sqlx, sqlc and all other ORM like things in golang cannot do migrations the way Django does."
+        },
+        {
+          "id": 49055581,
+          "author": "altbdoor",
+          "text": "Good ole Django. Worked with a number of frameworks (tm), but nothing really quite scratches my itch like Django does. I still find the ORM and database migration system unmatched."
+        },
+        {
+          "id": 49062499,
+          "author": "hecreto",
+          "text": "Not to be a downer since a lot of JEvans’ content is great. People should really give .NET a try. I don’t know if we are just old greybeard curmudgeons who look at this and go “is this a new thing? haven’t we been doing this for decades?”, but .NET out of the box with a few packages for databases, logging, etc is so pleasant you don’t even think about it. Maybe it’s just not a vocal community idk."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 29,
+      "id": 49006049,
+      "title_en": "What's Under Your Feet in New York City?",
+      "title_ja": "What's Under Your Feet in New York City?",
+      "url": "https://practical.engineering/blog/2026/7/21/whats-under-your-feet-in-new-york-city",
+      "hn_url": "https://news.ycombinator.com/item?id=49006049",
+      "score": 178,
+      "comment_count": 41,
+      "posted_at": "2026-07-22T12:56:54+00:00",
+      "comments": [
+        {
+          "id": 49062675,
+          "author": "evrydayhustling",
+          "text": "Around 2012 I was working near 5th Ave and 14th st, and there was a giant water main break. They had to dig about three stories down in a large intersection, and you could walk near the edge and look in. It was extraordinary, like something out of a sci-fi where an alien ship has been torn open and the mess of pipes and wires looks organic. It was also a funny case of lost tech / organizational memory -- I heard they had to ask the union to help find retired folks who had worked on the lower levels and could explain why pipes were laid out the way they were."
+        },
+        {
+          "id": 49059336,
+          "author": "mike_hock",
+          "text": "That's where the mutants live. Also, there's a thousand year old, old New York City buried underneath that had bathroom booths with phones in them."
+        },
+        {
+          "id": 49058781,
+          "author": "hotstickyballs",
+          "text": "https://en.wikipedia.org/wiki/New_York_City_synagogue_tunnel..."
+        },
+        {
+          "id": 49061686,
+          "author": "dbuxton",
+          "text": "I can’t read something like this without thinking of the late great Richard Scarry Luckily ChatGPt does a pretty good impression https://chatgpt.com/s/m_6a6662e9af6c81918523fb06d1384e74"
+        },
+        {
+          "id": 49060711,
+          "author": "programmertote",
+          "text": "One of the most informative videos from Practical Engineering channel. I thought I knew NYC infra fairly well, but I learned so much from that video still (like how NYC's electric grid is actually a grid and more fault tolerant)."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 30,
+      "id": 49016917,
+      "title_en": "Using sed to make indexes for books (1997)",
+      "title_ja": "Using sed to make indexes for books (1997)",
+      "url": "https://www.pement.org/sed/make_indexes.txt",
+      "hn_url": "https://news.ycombinator.com/item?id=49016917",
+      "score": 61,
+      "comment_count": 11,
+      "posted_at": "2026-07-23T04:25:24+00:00",
+      "comments": [
+        {
+          "id": 49065385,
+          "author": "ggm",
+          "text": "I used awk and eqn and t/roff to make a university phone book in the late 80s and early 90s. I was set the task of mimicing the hand-set phototypsetter version from a printout listing. I needed EQN to make giant ellipsis across groups of names who shared a phone, and had to tune macros to use to get n column output to work with the gutter needs of the new bitstream bromide making machine."
+        },
+        {
+          "id": 49062093,
+          "author": "tomhow",
+          "text": "Previously: Using sed to make indexes for books (1997) - https://news.ycombinator.com/item?id=16080505 - Jan 2018 (17 comments)"
+        },
+        {
+          "id": 49060875,
+          "author": "janandonly",
+          "text": "Two thought: 1. I feel the use of AWK, SED, GREP and Bash (to name a few) is general waning. I rarely see it outside of HN posts. I wish I were better at using it. Sometimes for a special need I’ll ask a LLM to write me a script in bash just to keep this spirit alive. 2. On the other hand, I’ve written a book and added an index by using Microsoft Word, and it was basically pretty easy to add. I don’t know why I should want to go back to a world of intricate command line tools to do a job that should just be easy enough?"
+        }
+      ],
+      "summary_ja": ""
+    }
+  ]
+}
