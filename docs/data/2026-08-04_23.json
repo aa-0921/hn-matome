@@ -1,0 +1,1035 @@
+{
+  "date": "2026-08-04T00:00:00+09:00",
+  "slot": "23",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 49154332,
+      "title_en": "Critical CVE issued for hallucinated SQLite vulnerability",
+      "title_ja": "Critical CVE issued for hallucinated SQLite vulnerability",
+      "url": "https://research.jfrog.com/post/sqlite-critical-cves-or-llm-slops/",
+      "hn_url": "https://news.ycombinator.com/item?id=49154332",
+      "score": 551,
+      "comment_count": 187,
+      "posted_at": "2026-08-03T11:28:54+00:00",
+      "comments": [
+        {
+          "id": 49155075,
+          "author": "gortok",
+          "text": "We can chalk this up as another example of over-exhuberance by what folks believe LLMs can accomplish vs. what they actually are. LLM-based “AI” is able to use its vast corpus of inputs and calculate the most statistically likely output in a given situation. It is probabilistic, and when you are dealing with probabilities in a situation where certainties, not probabilities, matter, you’re going to get dinged on credibility massively when your LLM-based “AI” gets the probabilities wrong at best, or in this case, claims a line of code generates a vulnerability when it is, in fact, a code comment. LLMs are text-prediction engines. They are not Artificial Intelligence, and shouldn’t not be treated in any form or fashion as if they possess intelligence. What bothers me about this entire situation is that presumably the folks that relied on the LLM-based “AI” to generate these vulnerabilities knew (or should have known) enough about their tool to know this would happen, but did not. Now, we all pay the consequence, to the tune of hundreds of thousands if not millions of dollars of wasted productivity from teams that have to deal with the resulting fall-out of this usage of “AI”. A human must verify everything an LLM presents as fact. Everything. If you don’t, we all pay the price. LLMs do not remove the onus of responsibility on the human being, if anything they amplify it because LLMs can generate lots more output more quickly that needs to be verified than humans can."
+        },
+        {
+          "id": 49154534,
+          "author": "ChrisMarshallNY",
+          "text": "The problem with this kind of thing, is that it reduces the S/N (Signal-to-Noise) ratio, so weeding out the legit CVEs becomes a lot more difficult. But, on the other hand, I do know that LLMs have been discovering a lot of legit CVEs, and I will lay odds that the blackhats are leveraging them to the max."
+        },
+        {
+          "id": 49157522,
+          "author": "linuxhansl",
+          "text": "I almost feel that we have a new generation of the \"script-kiddie\". People without much (or any?) knowledge of software engineering using outside tooling to do \"stuff\" they wouldn't be able to do themselves. Maybe it's a not a perfect analogy - in this case the intentions seemed to be laudable - but we will see much more of this, including from malicious actors."
+        },
+        {
+          "id": 49157938,
+          "author": "hnjbx769kd",
+          "text": "Underrated wisdom here"
+        },
+        {
+          "id": 49154645,
+          "author": "Ekaros",
+          "text": "Not validating submissions seems like avenue for massive attack. Flood the whole system with endless false reports. Thus making it significantly less reliable."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 2,
+      "id": 49156111,
+      "title_en": "Devtools must be open source",
+      "title_ja": "Devtools must be open source",
+      "url": "https://blog.exe.dev/devtools-must-be-open-source",
+      "hn_url": "https://news.ycombinator.com/item?id=49156111",
+      "score": 127,
+      "comment_count": 43,
+      "posted_at": "2026-08-03T14:15:47+00:00",
+      "comments": [
+        {
+          "id": 49156719,
+          "author": "simonw",
+          "text": "One of the arguments for open source software for end-users has always been the freedom to examine and modify how that software works. The reality for most people - even expert programmers - has been that the freedom is more about being able to lean on other people to do that. Most people can't justify the time commitment needed to read and then modify the code for tools they use very often. I think LLMs have changed that equation in a way that makes the original dream much more feasible. Several times a day I'll prompt regular Claude chat to \"Clone x/y from GitHub and tell me how Z works\". Getting software to compile in order to start hacking on it used to be enough friction that I often wouldn't bother. Now I treat that as a zero time investment challenge: tell Codex or Claude Code to checkout and build X and then come back ten minutes later and see how it got on. I'm not habitually modifying the software I use yet, but I can see a path to that which didn't exist a year or so ago."
+        },
+        {
+          "id": 49156731,
+          "author": "kelnos",
+          "text": "I agree that devtools should be open source, but... I very much disagree with the premise that no tools should have config files, options, or plugin systems, and instead when you want to change something like your text editor's font size, you should have an LLM download the code, change the hard-coded value, and rebuild it. That's just so inefficient and wasteful. Assuming a world in which LLMs do most of the coding work, do we want to burn electricity having the LLM build an options dialog or config file parser once, or do we want to burn electricity millions of times as users want to change any little thing about the software they use? I really hope what you should expect is my answer to that question isn't controversial. Having an LLM do bespoke customizations that are unlikely to be interesting to other people? Great, sure. But adding a generally-useful feature to a piece of software, but not caring to try to upstream it? Lame. Lame, lame, lame."
+        },
+        {
+          "id": 49157595,
+          "author": "js8",
+          "text": "Some time ago, there was a comment https://news.ycombinator.com/item?id=48849015 I deeply disagree with the light vs dark framing. I think the real tension between \"hacker languages\" and \"blub languages\" is the expectation to modify the language by it's user. And this is true for dev tools as well. Hackers prefer modifiable environments (such as Emacs), while corporations prefer standard environments (IDEs) to which programmers will adapt. (As the saying goes: \"The reasonable man adapts himself to the world: the unreasonable one persists in trying to adapt the world to himself. Therefore all progress depends on the unreasonable man.\" Might be why Paul Graham preferred founders with non-blub languages after all, nothing to do with Lisp as such.) But to be able to adapt the environment, one must understand it. Therefore the pull to make it simpler, a set of universal tools, rather than a complicated machine with many features and ease of use through following prescription."
+        },
+        {
+          "id": 49157016,
+          "author": "theamk",
+          "text": "> Set up a nightly cron job that executes the prompt: fetch upstream changes to the <software> and rebase all local changes on top of upstream. Check that the software works as intended and replace the current version. This sounds like hell. You have unreliable actor redoing the software every night, and every day there is a chance you wake up and find your workflow broken. And no, \"Check that the software works as intended\" is not going to cut it, as AI are very, very good at obeying the letter but not the spirit of the ask. Yes, your diffs appear but they lack filenames. You've added this requirements to the prompt? Ok, filenames are back but they are font size 4, unreadably small. You want them well-seen? next week they become size 54, taking entire screen.. This is not a problem with regular AI development - you review the changes and test them a bit. But doing it day-to-day with no overview is just asking for trouble."
+        },
+        {
+          "id": 49156664,
+          "author": "doc_ick",
+          "text": "I disagree. As if a tool is customized via agents and something goes wrong, it should be the users issue to fix it. Say I want to customize a bank app (or sca tool) to use a nickname instead of my name, if it breaks then who fixes it?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 3,
+      "id": 49155629,
+      "title_en": "MiniMax H3 Day-0 Support in ComfyUI: Open Weights, Native Audio, and 2K Video",
+      "title_ja": "MiniMax H3 Day-0 Support in ComfyUI: Open Weights, Native Audio, and 2K Video",
+      "url": "https://blog.comfy.org/p/minimax-h3-day-0-support-in-comfyui",
+      "hn_url": "https://news.ycombinator.com/item?id=49155629",
+      "score": 126,
+      "comment_count": 43,
+      "posted_at": "2026-08-03T13:34:43+00:00",
+      "comments": [
+        {
+          "id": 49156169,
+          "author": "embedding-shape",
+          "text": "> We found that the model's modulation weights (~40% of the total parameters) could be pruned and replaced with a functionally equivalent lookup table, dramatically shrinking the memory footprint with no loss in output quality. Is this a common approach to reducing weights with \"no loss in output quality\", assuming this is true? Seems almost too simple to work. If this is doable, would this be applicable to LLMs as well? Neat with native frame-to-frame generation, but wonder how easy it is to \"link\" together clips at the intersection, typically the models kind of lose the \"momentum\" across these stiches, being able to merge things with frame-to-frame between clips might help with this it feels like."
+        },
+        {
+          "id": 49155969,
+          "author": "vblanco",
+          "text": "Im running this on my 4070ti super (16 gb vram), and it takes 10 minutes for a 10-seconds 480p video. but the results are spectacular."
+        },
+        {
+          "id": 49155947,
+          "author": "Mashimo",
+          "text": "> The result gives a total memory footprint reduced by 66%, from 123.6 GB in full precision to 42.5 GB with the smallest models variants. Combining this with our dynamic VRAM offloading enables a next-generation 2K video model to run locally on a GPU like the RTX 3060. Pretty cool. But assuming you have a 16GB 3060, how long would it take to generate a 15 second clip?"
+        },
+        {
+          "id": 49155964,
+          "author": "sheesdev",
+          "text": "The mouse render is surprisingly good. Several of those clips stood out to be a pretty big leap in terms of current SOTA models. The only one that looks \"off\" is the beverage ad video during the can opening clip, it still has that \"AI smoothening\" effect. Good thing this can be done pretty well using traditional rendering. I feel like for a good while now we'll transition into a process that uses traditional \"close-up\" rendering/shots + AI generated wide-shots or quick cuts. Exciting, but also troubling. This being open-weights is a massive win for the community though."
+        },
+        {
+          "id": 49157608,
+          "author": "storus",
+          "text": "Reference-to-video mode seems like all that was missing to enable completely independent cinematography as right now one couldn't stitch different scenes together properly without altering substantial portions of the scene."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 4,
+      "id": 49157128,
+      "title_en": "Taylor Farms Has Rewritten Its Cyclospora Statement Four Times in Sixteen Days",
+      "title_ja": "Taylor Farms Has Rewritten Its Cyclospora Statement Four Times in Sixteen Days",
+      "url": "https://www.marlerblog.com/case-news/taylor-farms-has-rewritten-its-cyclospora-statement-four-times-in-sixteen-days-it-still-has-not-said-what-changed-at-that-plant-after-2013-or-why-two-thousand-negative-tests-should-mean-an/",
+      "hn_url": "https://news.ycombinator.com/item?id=49157128",
+      "score": 108,
+      "comment_count": 38,
+      "posted_at": "2026-08-03T15:31:32+00:00",
+      "comments": [
+        {
+          "id": 49157457,
+          "author": "sharps_xp",
+          "text": "I went to restaurant last night and asked where the chicken was sourced from and their response was \"it's not the usual place we get chicken, but it's US Farm Raised Hatched\", but I misinterpreted the her answer as a distributor name but then I realized even if I had a name, I probably couldn't figure out past that whether or not these chickens were pasture raised. If food labels are law, why doesn't this apply to where restaurants source their ingredients?"
+        },
+        {
+          "id": 49157510,
+          "author": "cube00",
+          "text": "It's next level for a family owned company act like they have stock holders to please by cutting corners rather then doing the right thing."
+        },
+        {
+          "id": 49157414,
+          "author": "senthil_rajasek",
+          "text": "I have not been following this very closely but it seems like the source of this cyclospora contamination has been very challenging to identify. Especially because it takes weeks before the infected start showing symptoms. Isn't it reasonable to update the official statement as new information emerges? \"When the facts change, I change my mind. What do you do, sir?” -John Maynard Keynes."
+        },
+        {
+          "id": 49157660,
+          "author": "herf",
+          "text": "GPTZero \"AI\" score for this post: 100%"
+        },
+        {
+          "id": 49157607,
+          "author": "t1234s",
+          "text": "I was always under the impression that disease and pesticide don't usually just \"wash off\" at home."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 5,
+      "id": 49082937,
+      "title_en": "Hollywood Stopped Making Movies in Hollywood",
+      "title_ja": "Hollywood Stopped Making Movies in Hollywood",
+      "url": "https://www.statsignificant.com/p/how-hollywood-stopped-making-movies",
+      "hn_url": "https://news.ycombinator.com/item?id=49082937",
+      "score": 60,
+      "comment_count": 37,
+      "posted_at": "2026-07-28T12:41:00+00:00",
+      "comments": [
+        {
+          "id": 49157277,
+          "author": "datakan",
+          "text": "Nothing new. When I was in college down in LA I lived in a very small town founded by stunt people. Probably 80% of the people there were in the stunt business. Every few months they were off to another state or country for filming. Hollywood is just for the studio execs now, everyone else flies to whatever country offers the best tax breaks for them to film. They go to some pretty incredible lengths too, A friend of mine and his dad own a stunt company that works explicitly with semi-trucks. Pretty much every time you see a semi in a stunt in a movie it's either my friend or his dad driving it. They will ship these semi's to foreign countries instead of film locally because the tax incentives are greater than moving entire production companies around the world."
+        },
+        {
+          "id": 49157710,
+          "author": "dotBen",
+          "text": "An interesting read but also feels like the rearranging of the deckchairs on the Titanic given the forthcoming disruption from generative AI in this industry. I spent some time last month with a relative in the industry (camera operator and producer) and he already uses some very sophisticated AI to map out scenes and shots in gen ai full video before they shoot IRL. It's mostly a cost saving exercise as well as occasionally helping to improve the quality of the deliverable. He is totally expecting that the next shift will be that gen ai video will become good enough to be considered the master (ie no need to film) and he is already transferring his skills as a camera operator into prompting and AI assisted scene design. He knows that many different disciplines he works with will all compete for that prompting work and there obviously won't be enough work for everybody to go around. The first part of this is using human actors in front of 360 video stages like The Volume [0] to display the sets (which was pioneered by The Mandalorian) and then ultimately the actors themselves will be AI rendered. And at this point it doesn't matter where this is filmed. I grew up close by to Pinewood Studios 30+years ago - I can't imagine them putting a lot more investment and development into that lot given where this is all going. [0] https://en.wikipedia.org/wiki/StageCraft"
+        },
+        {
+          "id": 49157069,
+          "author": "AlexB138",
+          "text": "The article repeatedly mentions how production moved to Atlanta due to tax incentives. Even that is a race to the bottom, as Disney moved production of Marvel movies out of Atlanta last year to the UK where they got better tax incentives. Even the undercutting cities are being undercut."
+        },
+        {
+          "id": 49157617,
+          "author": "harrall",
+          "text": "The cost of housing is probably the #1 reason and, in my opinion, California’s biggest problem. California as a whole is still doing pretty well but high housing cost is slowly pulling out the rug from under the state. But the California legislature does know that and has forced many cities to start building housing but there is still a lot work still in flight."
+        },
+        {
+          "id": 49156748,
+          "author": "vrosas",
+          "text": "> For a major blockbuster, tax incentives equate to tens of millions of dollars, freeing up money for name-brand actors, elaborate set pieces, and unremarkable CGI effects. Love the dig at the end."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 6,
+      "id": 49151933,
+      "title_en": "Don't be a meat proxy",
+      "title_ja": "Don't be a meat proxy",
+      "url": "https://gruhn.me/blog/2026-08-03/",
+      "hn_url": "https://news.ycombinator.com/item?id=49151933",
+      "score": 1353,
+      "comment_count": 567,
+      "posted_at": "2026-08-03T06:28:01+00:00",
+      "comments": [
+        {
+          "id": 49152018,
+          "author": "eddythompson80",
+          "text": "I deal with this all day long at work and it’s exhausting. People almost acting like no one has thought of it “I asked Claude what happened, and it spit out this 300 line response. Can you read it for me and see if it’s right?” What kills me is you might expect this from a busy high level manager that doesn’t really understand the technical details and they just point the AI to an error they got. They don’t know how to interpret the response, so they ask someone who work on the thing. It’s still kinds annoying because you could just ask, but whatever. But to get these from junior and senior engineer for the areas they work in and expect someone else to read it for them? It’s crazy behavior. How can someone serious even think that’s ok."
+        },
+        {
+          "id": 49156022,
+          "author": "felipeerias",
+          "text": "One way to prevent obvious AI language from sneaking in text destined for other human beings is to ask the model to produce ASD-STE100 Simplified Technical English bullet points. This will result in a list of sentences that are clear and explanatory, easier to double-check, and convenient for the user to rewrite into a more readable format with a human voice."
+        },
+        {
+          "id": 49153521,
+          "author": "gregsadetsky",
+          "text": "On social media, I saw the much more vulgar “Learned engineering just to become the condom between Claude Code and prod” And that (re)framing helped as well to think about the “what are we even (left) doing” as an industry"
+        },
+        {
+          "id": 49152488,
+          "author": "maccard",
+          "text": "At my last job, a coworker did this to me. The first time it happened, I ignored it. The second time, I responded in public saying “thanks but I can ask Claude myself.” Nobody ever pasted me an LLM response again. YMMV with team size and seniority though"
+        },
+        {
+          "id": 49151968,
+          "author": "jpnc",
+          "text": "If you create a machine for laziness you're going to get lazy people. It's only going to get worse I'm afraid. Do you guys think we're going to see a de-evolution of human beings due to technology?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 7,
+      "id": 49156011,
+      "title_en": "Andy Pavlo Joins ClickHouse to Establish ClickHouse Labs",
+      "title_ja": "Andy Pavlo Joins ClickHouse to Establish ClickHouse Labs",
+      "url": "https://clickhouse.com/blog/andy-pavlo-joins-clickhouse",
+      "hn_url": "https://news.ycombinator.com/item?id=49156011",
+      "score": 84,
+      "comment_count": 18,
+      "posted_at": "2026-08-03T14:09:00+00:00",
+      "comments": [
+        {
+          "id": 49157078,
+          "author": "tomsanbear",
+          "text": "Always enjoyed his lecture series from CMU, hopefully those continue in a sponsored format from Clickhouse."
+        },
+        {
+          "id": 49157324,
+          "author": "danlark1",
+          "text": "Congrats, that's incredible news. Watched apavlo@'s lectures while studying in the university and finished my bachelor thesis implementing features and doing research at ClickHouse. Surprised to see these worlds being together now!"
+        },
+        {
+          "id": 49157866,
+          "author": "nikhilsimha",
+          "text": "Congrats! Andy is incredible!"
+        },
+        {
+          "id": 49157458,
+          "author": "jzelinskie",
+          "text": "Congratulations, Andy! This sounds like a great opportunity and continues your bet that SQL always wins out in the end. What idea are you most excited about to work on first?"
+        },
+        {
+          "id": 49157455,
+          "author": "adrianco",
+          "text": "Hi Andy, that’s very cool news. Will you be at the HPTS workshop in October?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 8,
+      "id": 49150470,
+      "title_en": "Qwen3.8-Max: A New Bar for Coding and Cowork",
+      "title_ja": "Qwen3.8-Max: A New Bar for Coding and Cowork",
+      "url": "https://qwen.ai/blog?id=qwen3.8",
+      "hn_url": "https://news.ycombinator.com/item?id=49150470",
+      "score": 907,
+      "comment_count": 467,
+      "posted_at": "2026-08-03T02:16:09+00:00",
+      "comments": [
+        {
+          "id": 49157077,
+          "author": "ilaksh",
+          "text": "As someone who is searching for a new programming contract right now, reading all of the incredible abilities here is pretty intimidating. Especially since I get almost all of my projects from Upwork which is an outsourcing site. I believe I am competing directly with these frontier models in some circumstances. Like there are a ton of programmers who previously would be outsourcing work to that site, but now they assign that same work to AI agents. Ever since November 2022 when ChatGPT blew up, I have been focusing on agents in order to try to get ahead of the curve. But I haven't managed to get an agent business off the ground and have been doing poorly paid agentic projects from that site instead. But now everyone is building agents, and this crazy list of accomplishments makes it look like we are close to the point where the agents are building agents. In fact the next time I get an Upwork contract for another agent, I actually should run it through my agent and see how far it can get. What I'm seeing a lot of now is requests to automate as much of a business as possible. Anyway the point is these models are just about capable of doing the entire job of analyzing a small business and building out all the agents and iterating on them with the business owner. That's actually what I should build is a SaaS that does that. Which I would if I wasn't basically desperate to get another contract this week. And I know Upwork is bad but I have not had much success with other options on short notice."
+        },
+        {
+          "id": 49150809,
+          "author": "toshinoriyagi",
+          "text": "They've also announced Qwen3.8-27B being released open-weight next week. Qwen3.6-27B is widely regarded as one of the best local models, especially since nothing else comes close to it, that isn't benchmaxxed, without being significantly larger. If 3.8 truly improves upon it that would be awesome."
+        },
+        {
+          "id": 49152992,
+          "author": "me551ah",
+          "text": "This makes me wonder if AI companies even have a MOAT in the first place. All requests to an LLM are idempotent, for every API call you need to send it the entire conversation history so that it can process it. LLMs do not learn or remember anything, which makes it super easy for users to switch LLMs on the fly. Most popular AI frameworks, make this a one-liner change these days. And that makes me wonder if the trillion dollar valuations for OpenAI and Claude are even justified. Cause if that is justified, then Kimi, Qwen, Deepseek etc are also valued at a trillion dollars. Or all of them are worth a lot less. One of those statements is true. Also this makes me wonder if the next iteration of LLMs would be based on fine-tuning, where LLMs actually learn from your past behaviour so that it would grant some amount of stickiness to the product. OpenAI used to offer fine tuning runs for GPT-3.5, but they don't seem to do that anymore."
+        },
+        {
+          "id": 49151983,
+          "author": "jjcm",
+          "text": "The visual web development / perceptionbench scores are very promising for image->html flows. Here are some test results. Original designs: https://image.non.io/257dc9cb-9e6b-4e00-8f12-23ea5e073649.we... These are fairly rich, pattern-heavy, nuanced designs. I've asked each to create it as a SPA where the map flows behind it. Opus 5 results: https://html.non.io/opusAcmeBooks Qwen 3.8 max results: https://html.non.io/qwenAcmeBooks Same prompt for both for the conversion. I used OpenCode for the qwen version, but I encountered a significant amount of errors / timeouts while it was running. Claude finished in around 16 min, but I spent close to 2 hours shepherding the Qwen build. For the implementation, there were signs it had good vision, but the timeouts make this very hard to use in a production setting."
+        },
+        {
+          "id": 49152972,
+          "author": "Zenst",
+          "text": "Whilst these coding models improve, they seem to cater for multiple languages, and for many, a trimmed-down LLM that supports just one language would be fantastic. This would be smaller, more able to run on the hardware people have at home, realistically (even on the CPU). Having one LLM that knows assembler, java, bain, C etc is neat, but when you only work and use one language at a time, it would be kinda neat to have those broken out into dedicated, smaller LLMs. After all Qwen3.8-Max handles over 90 programming languages - ask any programmer to name a list of computer languages and if they get over 20, they are doing well."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 9,
+      "id": 49154228,
+      "title_en": "AirLLM 70B inference with single 4GB GPU",
+      "title_ja": "AirLLM 70B inference with single 4GB GPU",
+      "url": "https://github.com/lyogavin/airllm",
+      "hn_url": "https://news.ycombinator.com/item?id=49154228",
+      "score": 106,
+      "comment_count": 40,
+      "posted_at": "2026-08-03T11:15:48+00:00",
+      "comments": [
+        {
+          "id": 49155253,
+          "author": "imenani",
+          "text": "For anyone wondering “how slow is this?” IIUC, Kimi K3 on RTX 6000 Ada (48GB) takes 292 s/token https://github.com/lyogavin/airllm/releases/tag/v3.1.0"
+        },
+        {
+          "id": 49155378,
+          "author": "roger_",
+          "text": "Seeing a lot of these “run 1TB models with 1GB RAM” projects recently. Most seem vibe coded and probably won’t be maintained. Hoping a winner emerges with some real momentum behind it."
+        },
+        {
+          "id": 49155163,
+          "author": "cpfohl",
+          "text": "I’m still slightly confused on what this adds. Let’s say I wanted to run a full size open weight model. I have a 128GB m3 max laptop. Does this basically load layers in and out on demand? So I still have to download the full model to disk, but the RAM requirements go way down? The readme calls out that one still needs to connect HuggingFace, which leads me to believe that maybe you don’t even need to download the full model?"
+        },
+        {
+          "id": 49155500,
+          "author": "ilaksh",
+          "text": "I guess the use case is something like: you have a slightly obsolete Mac or PC or a whole bunch of them, and just need to compose one or more convincing spam emails, but it's fine if it takes a full week to do it?"
+        },
+        {
+          "id": 49155830,
+          "author": "book_mike",
+          "text": "We will see if this project has legs. This is the kind of efficiency we desperately need. Now if we can address efficiency with llm training."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 10,
+      "id": 49152842,
+      "title_en": "Bonsai: Janestreet's UI Library",
+      "title_ja": "Bonsai: Janestreet's UI Library",
+      "url": "https://github.com/janestreet/bonsai",
+      "hn_url": "https://news.ycombinator.com/item?id=49152842",
+      "score": 199,
+      "comment_count": 74,
+      "posted_at": "2026-08-03T08:29:57+00:00",
+      "comments": [
+        {
+          "id": 49157870,
+          "author": "bsmith89",
+          "text": "There's a great Signals and Threads (Jane Street's Podcast) episode about this work: https://signalsandthreads.com/building-a-ui-framework/"
+        },
+        {
+          "id": 49153587,
+          "author": "flufluflufluffy",
+          "text": "> And because Bonsai is written in OCaml, it becomes possible to use the same language and types on both the backend and frontend. Finally! I was waiting for this to become possible!"
+        },
+        {
+          "id": 49154525,
+          "author": "rw2",
+          "text": "I am sure it's very performant, but to me it's extremely ugly; Surely someone can fix margins and still have it be performant."
+        },
+        {
+          "id": 49154414,
+          "author": "chrischen",
+          "text": "Curious how this compares to Melange which is used by Ocaml shops as well to double up on Ocaml for both front and backend (ahrefs being the major user and sponsor). Does this mean giving up a lot of the JS ecosystem (React, graphql, etc)?"
+        },
+        {
+          "id": 49155443,
+          "author": "user2342",
+          "text": "Interesting! What are Bonsai's dependencies? I use OCaml but - so far - none of Janestreets libraries etc."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 11,
+      "id": 49155626,
+      "title_en": "SPF Record Syntax: Mechanisms, Qualifiers, Modifiers, and Macros",
+      "title_ja": "SPF Record Syntax: Mechanisms, Qualifiers, Modifiers, and Macros",
+      "url": "https://dmarcguard.io/blog/spf-record-syntax/",
+      "hn_url": "https://news.ycombinator.com/item?id=49155626",
+      "score": 25,
+      "comment_count": 7,
+      "posted_at": "2026-08-03T13:34:25+00:00",
+      "comments": [
+        {
+          "id": 49157550,
+          "author": "YesThatTom2",
+          "text": "SPF flattening is difficult to get correct and then you have to check it every so often to update it. DNSControl automates this. https://docs.dnscontrol.org/language-reference/domain-modifi... (It’s open source)"
+        },
+        {
+          "id": 49156108,
+          "author": "dan_sbl",
+          "text": "> SPF record syntax follows one shape: The first six words do not scream \"human written\" to me."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 12,
+      "id": 49125168,
+      "title_en": "The Abandoned Fish Sauce Terrorizing a Small Canadian Town",
+      "title_ja": "The Abandoned Fish Sauce Terrorizing a Small Canadian Town",
+      "url": "https://defector.com/abandoned-fish-sauce-canada-interview",
+      "hn_url": "https://news.ycombinator.com/item?id=49125168",
+      "score": 137,
+      "comment_count": 102,
+      "posted_at": "2026-07-31T16:23:10+00:00",
+      "comments": [
+        {
+          "id": 49156715,
+          "author": "peri-cl",
+          "text": "I recall reading there were zoning laws in the classical era about where you could manufacture garum (the Roman fermented fish condiment). Here's one attributable example I could find, from the tail end of the Eastern empire. This is 2.4.22 in the Hexabiblos (1344–1345) [\"–\" sic ] of the Byzantine jurist, Constantine Harmenopoulos of Thessalonica; it legislates a ~450–600-meter exclusion zone (three stadia ). The archive.org page I linked is in Byzantine Greek with a Latin translation. I've quoted the Greek part here, and I used Deepseek V4 Flash for OCR-cleanup and machine translation. https://en.wikipedia.org/wiki/Constantine_Harmenopoulos https://archive.org/details/constharmenopul00heimgoog/page/2... ( \"Ἐπαρχιχὸν ΠΕΡῚ ΓΑΡΕΨΩΝ\" / \"Edictum DE GARI COCTORIBUS\" ) > \"22. Ἡ τέχνη τῶν γαρεψῶν καὶ ἡ τῶν τυροποιῶν οὐ τὴν τυχοῦσαν ποιεῖ τοῖς παρακειμένοις βλάβην· πολλὴ γὰρ ἡ ἀπ᾽ αὐτῆς ἀτμὶς δυσώδης τε ἀμέτρως ἐστὶ καὶ ἐπιβλαβὴς ἐπὶ πολὺ διάστημα. Ὅθεν χρὴ τοὺς τοιούτους ἅπασαν μὲν πόλιν μὴ οἰκεῖν μηδὲ κώμην. Εἰ δὲ χρεία τούτων εἴη πρὸς τὰς χρήσεις τῶν πόλεων καὶ τῶν κωμῶν, ἀφεστάναι στάδια τούτους δεῖ τρία. Εἰδέναι δὲ χρὴ ὡς ταῦτα πάντα τὰ προειρημένα ἐπὶ τῶν ἐκ νέου κατασκευαζόντων εἴρηται· εἰ δὲ χάρται εἰσὶ παλαιοὶ ἢ καὶ δουλεία τις προλαβοῦσα, κεχρῆσθαι δεῖ τοῖς ἐξ ἀρχῆς περὶ αὐτῶν συμπεφωνημένοις.\" > \"The craft of the salt‑fish merchants and that of the cheesemakers causes no ordinary harm to those nearby; for the vapour arising from it is exceedingly foul‑smelling and harmful over a great distance. Hence such persons ought not to dwell in any city or village. But if there should be need of them for the uses of the cities and villages, they must keep a distance of three stades [~555 m]. And it must be known that all these aforestated things have been said concerning those who set up (such establishments) anew; but if there exist old charters or some prior servitude (i.e., an established legal right or prescriptive practice), one must abide by what was originally agreed concerning them.\""
+        },
+        {
+          "id": 49155566,
+          "author": "anon84873628",
+          "text": "Sounds like the Canadian Food Inspection agency screwed the town out of spite. Like they had a target on Ngo's back. Anyone have more details? From the linked Eater article: >He suggests that a prior conflict with the CFIA over product labeling motivated them to close the factory before the inspection began. Ngo claims that he had been vocal about their interactions, and speculates “if they shut [us] down, nobody makes any complaints anymore.” >After the government-run lab found Ngo’s product to be safe, he went on to win a court case and an appeal against the government. Even after those victories, the CFIA moved to restrict the sales of his product to the province of Newfoundland. “If I sell there, who will use my product?” Ngo says, pointing out the small population of Newfoundland and its non-existent Vietnamese community. “I could sell maybe one or two cases a month[...] we can’t survive.” The CFIA declined to comment, citing the amount of time that has passed since filing its initial complaint. They could have stopped production in the moldy factory but allowed sale of the remaining product."
+        },
+        {
+          "id": 49157922,
+          "author": "freediddy",
+          "text": "Just out of curiosity, would dumping a ton of bleach into the mixture get rid of the smell by breaking apart all of the components? Or maybe high concentration acid?"
+        },
+        {
+          "id": 49155363,
+          "author": "comrade1234",
+          "text": "There's a farmers market here in Zurich where some Italians drive up and sell Italian products like cheeses, sausages, etc. but one thing I buy from them I've never seen anywhere else - they are rotten salted anchovies packed with peppercorns. Stink super bad and are falling apart but when you're making a sauce you drop one in and the anchovy dissolves and delivers tons of umami - glutamates - and you no longer smell the rotten fish smell. I'm sure professional chefs must know about these. I keep them in baggies in the freezer so that they don't stink up the fridge."
+        },
+        {
+          "id": 49157826,
+          "author": "inigyou",
+          "text": "malicious compliance? The government shut down a fish sauce factory while it was in the process of making fish sauce. So the factory owner said fine, I'll stop operations right now."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 13,
+      "id": 49154127,
+      "title_en": "Show HN: Nightcrawler – A local AI pentesting agent running on a smartphone",
+      "title_ja": "Show HN: Nightcrawler – A local AI pentesting agent running on a smartphone",
+      "url": "https://github.com/garagehq/nightcrawler/",
+      "hn_url": "https://news.ycombinator.com/item?id=49154127",
+      "score": 70,
+      "comment_count": 23,
+      "posted_at": "2026-08-03T11:06:15+00:00",
+      "comments": [
+        {
+          "id": 49154925,
+          "author": "voodooEntity",
+          "text": "The following rant is not against the owner/project - but... What an irony. I cant publish a attack surface mapping / pentesting tool i wrote which runs fully deterministic and really controlable due to \"dual use\" legal problems - but llm driven tools hit public space...... sorry for the rant...."
+        },
+        {
+          "id": 49156016,
+          "author": "haeseong",
+          "text": "What does the 50% look like when it fails? Garbage the parser throws out is easy to handle, but a well formed command aimed at the wrong host gets past the scope check, and you would only catch that reading the report afterward."
+        },
+        {
+          "id": 49156491,
+          "author": "aaa_aaa",
+          "text": "Judas Priest reference?"
+        },
+        {
+          "id": 49154675,
+          "author": "kreidema",
+          "text": "I completely forgot that AI can very much also attack networks/devices in the wild. Interesting project."
+        },
+        {
+          "id": 49154824,
+          "author": "oquidave",
+          "text": "Why phone? This cuts out a lot of phones. Why not on a computer?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 14,
+      "id": 49152023,
+      "title_en": "Rust project goals: Immobile types and guaranteed destructors",
+      "title_ja": "Rust project goals: Immobile types and guaranteed destructors",
+      "url": "https://github.com/rust-lang/rust-project-goals/blob/main/src/2026/move-trait.md",
+      "hn_url": "https://news.ycombinator.com/item?id=49152023",
+      "score": 180,
+      "comment_count": 63,
+      "posted_at": "2026-08-03T06:42:00+00:00",
+      "comments": [
+        {
+          "id": 49153716,
+          "author": "panstromek",
+          "text": "For everybody who doesn't have the context, just note that this is not an accepted langauge change. It's a just project goal, which means it's accepted as something people will work on, but the design might change significantly or it can even be abandoned completely (which is pretty unlikely for this one, to be fair)."
+        },
+        {
+          "id": 49152509,
+          "author": "stymaar",
+          "text": "Great new! Since 2016 or so it became apparent that immovable types were a crucial missing part of Rust, but for a long time it was believed it wouldn't be possible to add them without breaking everything, which is why we ended up with the Pin hack. I'm very glad they found a way to add it eventually, as it's really filling a glaring hole in the language."
+        },
+        {
+          "id": 49157038,
+          "author": "groundzeros2015",
+          "text": "Guaranteed destructors is probably the most complex features ever added to C++, more than templates or move semantics."
+        },
+        {
+          "id": 49152650,
+          "author": "yccs27",
+          "text": "There's a different proposal by @withoutboats to make immovability a property of the place/reference instead of the type: https://without.boats/blog/pinned-places/ Does this project goal mean that the rust maintainers have decided to implement @yoshuawuyts' immovable types proposal in favor of pinned places?"
+        },
+        {
+          "id": 49157127,
+          "author": "dorjoy",
+          "text": "Does anyone know if there is any plan for no-panic to be a language feature? I think there was some discussion about this regarding Rust in the Linux kernel or embedded Rust but I don't know if there is any consensus or any plan regarding this."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 15,
+      "id": 49153374,
+      "title_en": "Prevent cognitive debt by manually retyping LLM-generated code",
+      "title_ja": "Prevent cognitive debt by manually retyping LLM-generated code",
+      "url": "https://ankursethi.com/blog/prevent-cognitive-debt-by-manually-retyping-llm-generated-code/",
+      "hn_url": "https://news.ycombinator.com/item?id=49153374",
+      "score": 265,
+      "comment_count": 229,
+      "posted_at": "2026-08-03T09:32:07+00:00",
+      "comments": [
+        {
+          "id": 49155229,
+          "author": "npras1",
+          "text": "Big no for retyping llm generated code by hand. But a big yes for still typing code by hand, and not leaving it to the llm. Except it has to be the code generated by your brain. That is what will create new neurons and new connections, which is what will keep away the cognitive decline. And the constraint of not having to use llms will enhance creativity. Actually, the constraints llms add to your code are more in number than the former. llms code in only the specific ways they've been trained on. So you won't ever come across of other ways. Off the top of my head.. here's RubyQuiz.com [0] which I came across when I was learning ruby more than a decade ago. Looking at the many user-submitted solutions (you have to download the zip file!) you'll see completely different ways the problems were solved. Sure, many won't be deemed efficient or standard by today's llm or rubocop checks, but looking at their code.. and retyping them and seeing them work.. was crucial in how I was able to think in Ruby for solving coding problems. I did the same with Go too, with the \"learn go with tests\" guide [1]. [0] - http://rubyquiz.com/ [1] - https://quii.gitbook.io/learn-go-with-tests"
+        },
+        {
+          "id": 49154929,
+          "author": "estebarb",
+          "text": "This will cause cognitive debt anyway. As mentioned in https://arxiv.org/pdf/2509.21972v1 : \"When students rely on these outputs as a substitute for their own reasoning or critical engagement, the learning process is fundamentally compromised. Genuine learning requires the active construction of meaning, integration of knowledge, and reflective engagement with content. These processes cannot occur through passive consumption of syntactically correct but semantically hollow responses. Without this deeper cognitive work, learners risk mistaking linguistic fluency for understanding, thereby undermining the very goals of education\". Personally, I don't think we will ever be able to reconcile using LLMs and cognitive debt. Even before LLMs we were aware if it: we knew people moving to managerial/PM roles eventually get their coding skills rusted. Well, now we are all in those managerial roles..."
+        },
+        {
+          "id": 49157927,
+          "author": "smegma2",
+          "text": "Seems like an ok solution, but what about doing something like the opposite? Write out the scaffolding and general shape of the code (classes, interfaces, function signatures), and have the LLM fill it in. That seems more important for understanding."
+        },
+        {
+          "id": 49153987,
+          "author": "f311a",
+          "text": "This does not sound fun. It's better to work on your side projects with manual coding. You will learn more. Retyping things is inefficient for learning. It's like trying to retype calculus solutions — you don't learn from it. Even if there is an explanation of why the code is written in such a way, you did not come up with it, and you don't know alternative solutions. It is a practice for memorizing, not for building your intuition. A better option is to write it yourself first and ask LLMs for better options. They are pretty good at it, especially when you need to optimize hot loops."
+        },
+        {
+          "id": 49156525,
+          "author": "WhyComboNadir",
+          "text": "Lots of reactions here, but if it works for you then that's great. For me I feel that LLMs have exploded (in a good way) my cognitive capabilities. I'm now the general of an army, rather than playing the role of a soldier. Of course that means that I lose the experience of being the lonely soldier, but it is a no-brainer tradeoff for me. Anyway, I have to go now so I can push my car to the grocery store (so I don't forget how to walk), me and my giant calves will be back in a few hours. All meant in good spirit. Keep doing what you're doing, thanks for sharing, and hope people are kind and only give good natured ribbings."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 16,
+      "id": 49147907,
+      "title_en": "Games at the press of a button: The Rip-O-Bot (1989)",
+      "title_ja": "Games at the press of a button: The Rip-O-Bot (1989)",
+      "url": "https://blog.gingerbeardman.com/2026/08/02/games-at-the-press-of-a-button-the-rip-o-bot/",
+      "hn_url": "https://news.ycombinator.com/item?id=49147907",
+      "score": 22,
+      "comment_count": 3,
+      "posted_at": "2026-08-02T20:19:16+00:00",
+      "comments": [
+        {
+          "id": 49157935,
+          "author": "schnevets",
+          "text": "It's funny that this was written in 1989, right after the Japanese pulled the industry out of the 80s Atari crash, where shovelware destroyed consumer confidence in Atari products (I know that is a simplification, but the Nintendo Seal of Approval carried weight). The fact is the 90s was riddled with derivatives, where every cartoon character had a derivative side-scroller of varying quality. The scale of a cartridge game grew enough that just changing animation quality, physics, attack methods, and level design was enough to make the Aladin side-scroller a different enough experience from the Lion King side-scroller that a customer would be satisfied by both purchases. I'd say we have lived in the world MTJ predicted since this was written, but innovation and quality were hardly ever buried by rip-o-bot churn. Even today, I'd consider the \"slop\" genres ($5 co-op games, stream-worthy horror projects) to be healthy ecosystems where the cream typically rises to the top."
+        },
+        {
+          "id": 49156492,
+          "author": "qingcharles",
+          "text": "Very prescient! That said, should AI tools allow us to create more original games? When you can now prototype something very quickly and decide whether to keep going or tear it down in minutes..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 17,
+      "id": 49156071,
+      "title_en": "Utah produced more power from solar than any other source in May, a new first",
+      "title_ja": "Utah produced more power from solar than any other source in May, a new first",
+      "url": "https://www.sltrib.com/news/environment/2026/08/03/utah-sets-solar-power-record/",
+      "hn_url": "https://news.ycombinator.com/item?id=49156071",
+      "score": 52,
+      "comment_count": 18,
+      "posted_at": "2026-08-03T14:13:24+00:00",
+      "comments": [
+        {
+          "id": 49157772,
+          "author": "epistasis",
+          "text": "Also true for California for quite some time. https://www.canarymedia.com/articles/solar/california-solar-... What's going to happen in the future is that May will be a month of extreme electricity abundance, with a good chunk of the electricity just not being collected at all because the grid doesn't need it, and it will be cheaper to have unused electricity in May than to have too little solar in December."
+        },
+        {
+          "id": 49156083,
+          "author": "toomuchtodo",
+          "text": "https://ember-energy.org/data/us-electricity-data-explorer/?..."
+        },
+        {
+          "id": 49157363,
+          "author": "buckle8017",
+          "text": "Utah isn't a power grid. They're on the western interconnect. Combined solar and wind are about 25-30% of production there. These articles about individual states are trash."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 18,
+      "id": 49078856,
+      "title_en": "Walk on Decomposed Subdomains",
+      "title_ja": "Walk on Decomposed Subdomains",
+      "url": "https://clementjambon.github.io/wods/index.html#blogpost",
+      "hn_url": "https://news.ycombinator.com/item?id=49078856",
+      "score": 27,
+      "comment_count": 2,
+      "posted_at": "2026-07-28T03:17:03+00:00",
+      "comments": [
+        {
+          "id": 49157101,
+          "author": "paulglx",
+          "text": "Amazing presentation! Super interesting and the live demos help make it engaging"
+        },
+        {
+          "id": 49156540,
+          "author": "ddevnyc",
+          "text": "Absolutely amazing presentation, the interactive examples alone are worth the click. Thank you very much!"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 19,
+      "id": 49153361,
+      "title_en": "What DMARC Protects You From, and What It Does Not",
+      "title_ja": "What DMARC Protects You From, and What It Does Not",
+      "url": "https://senderledger.com/articles/what-dmarc-actually-protects-you-from",
+      "hn_url": "https://news.ycombinator.com/item?id=49153361",
+      "score": 84,
+      "comment_count": 22,
+      "posted_at": "2026-08-03T09:29:46+00:00",
+      "comments": [
+        {
+          "id": 49153709,
+          "author": "sam_lowry_",
+          "text": "> Every email carries two \"from\" addresses I made a presentation about exactly the same subject many years ago, but I was not shy of separating the SMTP protocol (RFC 821 and the following ) and the email message (RFC 822 and the following). It makes the link between SPF, DKIM and DMARC much clearer. Anyway. The article covers just the bare minimum, and in the most obscure way. For those interested in the inner workings of contemporary email delivery... I recommend the posts by Alex Shakhov on LinkedIn https://www.linkedin.com/in/alexshakhov/ (Yes, there is still meaningful content on LinkedIn, it's just vanishingly rare)"
+        },
+        {
+          "id": 49154034,
+          "author": "avian",
+          "text": "Vaguely related question: what is the go-to open DMARC check implementation these days? I mean the part that checks _received_ mail against DMARC rules. It used to be opendmarc, but it seems people have been dropping it for a while because of history of breaking changes and general lack of good stewardship [1]. Anyone using pydmarc [2]? It's hard to find good info on this since 99% of search hits are people talking about setting up DMARC from the _sender_ side. [1] https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1014058#39 [2] https://pypi.org/project/dmarc/"
+        },
+        {
+          "id": 49154535,
+          "author": "joladev",
+          "text": "> Here is the part that trips people up. It's hard to take something seriously when it's very clearly AI generated. It's just a coin toss on whether the information in the article is correct."
+        },
+        {
+          "id": 49154124,
+          "author": "sylware",
+          "text": "I think DMARC is missing email address with IPv[46] literals support. As being self-hosted, without paying the DNS mob, I am still blocked to send email to gmail.com because such email addresses do throw out of whack gogol code. Email addresses with IPv[46] literals are intrinsincly stronger than SPF. If in the envelope or any of the 'from' headers (if my memory does not fail me, there are few more headers to scan), the IPv[46] literal does not match the actual and real IP of the SMTP server, the email is dropped, not even going into any spam folder. Conspiracy mode: they know and are careful not to support that, in order to create a walled garden of internet messaging for them and their friends."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 20,
+      "id": 49110912,
+      "title_en": "Kraid is a now a real compiler",
+      "title_ja": "Kraid is a now a real compiler",
+      "url": "https://www.collabora.com/news-and-blog/news-and-events/kraid-is-a-now-a-real-compiler.html",
+      "hn_url": "https://news.ycombinator.com/item?id=49110912",
+      "score": 8,
+      "comment_count": 1,
+      "posted_at": "2026-07-30T14:52:03+00:00",
+      "comments": [
+        {
+          "id": 49157961,
+          "author": "jdw64",
+          "text": "800,000 test??? wow So if I can use Kriad, does that mean I can build AI without having to use NVIDIA chips"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 21,
+      "id": 49145193,
+      "title_en": "Finding zombies in our systems: A real-world story of CPU bottlenecks",
+      "title_ja": "Finding zombies in our systems: A real-world story of CPU bottlenecks",
+      "url": "https://medium.com/pinterest-engineering/finding-zombies-in-our-systems-a-real-world-story-of-cpu-bottlenecks-ea4722e552eb",
+      "hn_url": "https://news.ycombinator.com/item?id=49145193",
+      "score": 13,
+      "comment_count": 4,
+      "posted_at": "2026-08-02T14:50:48+00:00",
+      "comments": [
+        {
+          "id": 49157658,
+          "author": "troelsSteegin",
+          "text": "This was a nostalgic pleasure to read in contrast to all the AI implications and tools posts. That said about AI, this as a case study would make an interesting benchmark. Especially noted that the root cause here was pegged because somebody else had blogged about it. Our \"digital commons\" should be valued as other than an externality. Edit: by that I think that \"the internet should be free\" but that commercialization through derivative work should compensate authors. That's off-topic, so, nevermind."
+        },
+        {
+          "id": 49157046,
+          "author": "alain94040",
+          "text": "Interesting story. I don't know anything about the Linux scheduler, but if one core out of 96 is busy chasing after those ghost allocations, why would a network thread not use one of the other 95 cores, and instead be stuck for seconds? Unless that one core is blocking the entire kernel, but then that would be a lot more visible instantly."
+        },
+        {
+          "id": 49157512,
+          "author": "4fterd4rk",
+          "text": "I know this is a hopelessly naive question but what is Pinterest even doing with all this AI training?"
+        },
+        {
+          "id": 49157342,
+          "author": "mfro",
+          "text": "Jeez. Surely the ECS agent could just query for permission to join a cluster, and disable if disallowed?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 22,
+      "id": 49155359,
+      "title_en": "Wind and solar overtake fossil fuels in Germany for the first time",
+      "title_ja": "Wind and solar overtake fossil fuels in Germany for the first time",
+      "url": "https://www.intellinews.com/wind-and-solar-overtake-fossil-fuels-in-germany-for-the-first-time-ever-458379/",
+      "hn_url": "https://news.ycombinator.com/item?id=49155359",
+      "score": 16,
+      "comment_count": 0,
+      "posted_at": "2026-08-03T13:13:02+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 23,
+      "id": 49115935,
+      "title_en": "Train Simulator Controller",
+      "title_ja": "Train Simulator Controller",
+      "url": "https://z80.me/blog/tsc-2026-july/",
+      "hn_url": "https://news.ycombinator.com/item?id=49115935",
+      "score": 73,
+      "comment_count": 5,
+      "posted_at": "2026-07-30T21:18:39+00:00",
+      "comments": [
+        {
+          "id": 49154188,
+          "author": "lbriner",
+          "text": "I love this stuff. Seems like a massive untapped market if you get in partnership with a manufacturer. There are enough train buffs around the world, although I guess the tricky bit is that the dashboards are all different. I found it surprising that despite having amazing international supply chains, it can still be hard to source electro-mechanical parts. I wondered about knocking up an NX signalling panel as a nice to have to my layout but sourcing those latching push/pull buttons is equally difficult although maybe they were only really used on the real thing and the demand has disappeared along with the supply."
+        },
+        {
+          "id": 49156311,
+          "author": "Liftyee",
+          "text": "Wow, really clean design. I'm surprised that you could get hold of original hardware. Not sure how much of it is commodity industrial equipment Vs bespoke buttons, etc."
+        },
+        {
+          "id": 49156573,
+          "author": "ddevnyc",
+          "text": "I would love a controller like that for my editor, or my LLM. That would make coding so much more fun."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 24,
+      "id": 49156299,
+      "title_en": "Why does Mail app contact iCloud when sending a non-iCloud email?",
+      "title_ja": "Why does Mail app contact iCloud when sending a non-iCloud email?",
+      "url": "https://lapcatsoftware.com/articles/2026/8/2.html",
+      "hn_url": "https://news.ycombinator.com/item?id=49156299",
+      "score": 49,
+      "comment_count": 10,
+      "posted_at": "2026-08-03T14:29:51+00:00",
+      "comments": [
+        {
+          "id": 49157376,
+          "author": "transcriptase",
+          "text": "Fun activity: install glasswire on windows for a day or 2, set it to prompt you before any connection is allowed, and watch as about 500 different windows components attempt connections with Microsoft as a result of any and every action. And how many onedrive exes randomly fire off throughout the day despite having never once used it. And how onedrive changes its version number every day when it realizes it can’t connect."
+        },
+        {
+          "id": 49157528,
+          "author": "speak_plainly",
+          "text": "Probably Handoff and cross-device application state syncing."
+        },
+        {
+          "id": 49157209,
+          "author": "bantunes",
+          "text": "I assume for the same reason the OS pings Cupertino when you run a binary - surveillance, masquerading as protection."
+        },
+        {
+          "id": 49157905,
+          "author": "Barbing",
+          "text": "Jeff Johnson is an Apple privacy information hero and deserves every penny for his apps like StopTheMadness https://underpassapp.com/StopTheMadness"
+        },
+        {
+          "id": 49157680,
+          "author": "zer0zzz",
+          "text": "Everyone wearing their tinfoil hat while using Gmail and drive for everything"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 25,
+      "id": 49152640,
+      "title_en": "Octane – React's programming model, compiled",
+      "title_ja": "Octane – React's programming model, compiled",
+      "url": "https://octanejs.dev",
+      "hn_url": "https://news.ycombinator.com/item?id=49152640",
+      "score": 97,
+      "comment_count": 33,
+      "posted_at": "2026-08-03T08:04:04+00:00",
+      "comments": [
+        {
+          "id": 49154225,
+          "author": "rco8786",
+          "text": "> Measured, not vibes Sort of ironic considering that there are a LOT of vibe tells in the copy throughout this page. It's a neat looking project, it's a shame that every other sentence has Claude's fingerprints all over it."
+        },
+        {
+          "id": 49155567,
+          "author": "Guillaume86",
+          "text": "Just took a glance so I may be completely wrong, fell free to ignore, but if I understand correctly, tsrx is just syntactic sugar for normal tsx code and does not enable anything new? If this is the case: I think introducing tsrx as part of Octane muddies the water a bit and makes me more hesitant to try (even if it is optional). The idea to make tsx files more readable may be interesting but in that case it should go into its own separate project, and maybe just put a lang toggle in Octane docs and a page about tsrx compat, that way if people are intrigued by the new syntax they can just look it up but the docs stay focused."
+        },
+        {
+          "id": 49156349,
+          "author": "ricardobeat",
+          "text": "Would look more appealing without the AI flavour. If you're vibe coding, do yourself a favor and write website copy yourself - it's the only evidence of human input or oversight your project will have."
+        },
+        {
+          "id": 49156933,
+          "author": "adzm",
+          "text": "An interesting feature is this: > A current-state getter. useState and useReducer return [state, update, getState], so a delayed callback can read the latest value instead of a stale capture. There are currently a few workarounds in React for this, and using other state management libs also give you non-reactive access to current state, but this is a big help in certain situations. For example, a callback / event that you pass to all your child elements, that needs to access the current state when run, therefore normally needs to be recreated with the new state captured (in useCallback) whenever state changes, which then causes all child components to re-render. Non-reactive access to current state in callbacks avoids this entirely. There are some hacks that fix this by wrapping the updated callback in a ref and updating it with an event (for example, https://usehooks-ts.com/react-hook/use-event-callback useEventCallback as implemented various places) and returning a stable reference to a function that calls that saved one, though I always wonder if there are downsides to this."
+        },
+        {
+          "id": 49156948,
+          "author": "vivzkestrel",
+          "text": "- please post 10 new frontend frameworks daily to HN - i ll take that over the AI, GPT, LLM, Agent stuff on HN anyday now"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 26,
+      "id": 49149966,
+      "title_en": "Show HN: Isopolis – Isometric pixel map of SF",
+      "title_ja": "Show HN: Isopolis – Isometric pixel map of SF",
+      "url": "https://sf.isopolis.city/",
+      "hn_url": "https://news.ycombinator.com/item?id=49149966",
+      "score": 306,
+      "comment_count": 69,
+      "posted_at": "2026-08-03T00:46:38+00:00",
+      "comments": [
+        {
+          "id": 49156074,
+          "author": "karpour",
+          "text": "Honest opinion: Really charming on first look, but nothing where you can get lost in the details, because once you look closer, the soullessness of the generated imagery comes through. So I spent about 5 minutes looking at it, then moved on, and likely won't ever go back there. With other things, like Floor796 that other people pointed out, I can spend so much time looking at all the labor of love that went in there, but making something to look at too closely likely wasn't the point here."
+        },
+        {
+          "id": 49150567,
+          "author": "lawrencechen",
+          "text": "Behind the scenes stuff: https://sf.isopolis.city/dev.html > The source is Google Photorealistic 3D Tiles. Isometric.nyc explored and rejected the use of 3d building data. It is pretty insane that US gov has free LIDAR data for every city in the US available to the public. I spent <30mins exploring this and stuck to google 3d images. Claude Code whipped up a scraper to stream the 3D Tiles and render with three.js. This gives the best \"real\" texture base for the model to learn from. Anything else would involve a LOT of manual work to get the inputs right. > Now that we have the 3D tiles, we need to generate the ground truth pairs for training! Similar to isometric.nyc, I generated a few ghibli-style pixel-art images using Google's Nano Banana. SF terrain is very interesting. There are quite a few distinct features like skyscrapers in FiDi, the hills in the southeast, 2 iconic bridges, lots of coastline, piers, parks, suburban grids and lots of water. I generated a ton of images and curated from them. Getting consistent style was a challenge. There was a LOT of manual trial and error. But as usual, Claude Code added this feature to the dev app that allowed me to select the best images and approve them."
+        },
+        {
+          "id": 49152617,
+          "author": "rob74",
+          "text": "Nice! But for a city renowned for its steep streets, this looks suspiciously flat :) Ok, you could say it's only a 3D rendering of a 2D map, and it probably has to be this way for practical reasons, to avoid hills obscuring objects behind them, because you can't rotate the map as far as I can see, but not seeing actual height represented in a 3D view still takes some getting used to. Also, there are neighbourhoods and landmarks, but not actual street names as far as I can see? Not to mention transit stops/lines and other fancy stuff one could add..."
+        },
+        {
+          "id": 49151158,
+          "author": "EZ-Cheeze",
+          "text": "https://arstechnica.com/science/2018/04/these-oblique-satell... \"Satellite images from highly oblique angles are pretty mindblowing\" If u like this u will like that"
+        },
+        {
+          "id": 49150331,
+          "author": "murphyslab",
+          "text": "Incredible. It's easy to just go on browsing and exploring. The massive, scrollable pixel art aspect reminds me a little of Floor796: https://floor796.com/"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 27,
+      "id": 49152973,
+      "title_en": "The true power of regular expressions (2012)",
+      "title_ja": "The true power of regular expressions (2012)",
+      "url": "https://www.npopov.com/2012/06/15/The-true-power-of-regular-expressions.html",
+      "hn_url": "https://news.ycombinator.com/item?id=49152973",
+      "score": 63,
+      "comment_count": 49,
+      "posted_at": "2026-08-03T08:47:23+00:00",
+      "comments": [
+        {
+          "id": 49155311,
+          "author": "jakobnissen",
+          "text": "This article misleads you by conflating regular expressions with specific implementations like PCRE, which also does non-regex string matches. Annoyingly, the article does a good job of explaining what a regex is and what the limitations of regex are relative to PCRE, so the author should understand that what they are talking about when they talk about NP-complete string matching is not regex, but PCRE-specific features. The distinction matters because regex absolutely can't match HTML, and because regex, unlike PCRE expressions, have guaranteed O(1) space and O(n) time complexity when matching a string of length n. When you use PCRE features for string matching, that may degrade to exponential time which makes it useless. For example, you can do denial of service PCRE attacks, but not denial of service regex attacks (unless you can query with some megabyte-large regex)."
+        },
+        {
+          "id": 49154747,
+          "author": "AussieWog93",
+          "text": "It might just be a me problem, but I've always been wary of regexes. They're not too bad to write, but reading them back and understanding what's actually going on can get a bit hairy. Plus, all of the subtle differences between regex libraries seems like a bit of a footgun. Obviously they have their place, but I know a lot of the older guys seemed to love them way more than the young."
+        },
+        {
+          "id": 49153800,
+          "author": "cadamsdotcom",
+          "text": "Some people, when confronted with a problem, think \"I know, I'll get my agent to solve it with regular expressions.\" Now they have three problems."
+        },
+        {
+          "id": 49153844,
+          "author": "HelloUsername",
+          "text": "\"Doom Using Regular Expressions\" https://news.ycombinator.com/item?id=49094081"
+        },
+        {
+          "id": 49154130,
+          "author": "lbriner",
+          "text": "Something that seems obvious but not always implied by people's comments is that people are rarely trying to match an entire document with a regular expression so it doesn't really matter that \"HTML is not a regular language\". If I am trying to e.g. count div tags with a regex like \"<div\" or whatever, then clearly this would work in 99.9% of cases and probably achieve what the poster is looking for. As soon as you also add character classes to ignore various parts of the document that you are not interested in like \"<div[^>]*>\" or whatever it is, then it is eminently useful even if the bit we are ignoring is not fully regular. One lovely thing about regex is how fast it is. I was asked to parse a massive CAN Bus log file for how many times some event had logged. This was the early 2000s and the file was 6GB, which was pretty big. I tried .Net's string.StartsWith or something and that took ages to run through the file. I did the same thing with a regex and it finished in like 5 seconds (HDD, not SSD!). I don't know how the magic works but it is very impressive."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 28,
+      "id": 49152871,
+      "title_en": "Show HN: We Fixed UniFi's Slow PPPoE Performance with PPPoE Half-Bridge",
+      "title_ja": "Show HN: We Fixed UniFi's Slow PPPoE Performance with PPPoE Half-Bridge",
+      "url": "https://arcbox.dev/blog/unifi-pppoe-half-bridge-acceleration",
+      "hn_url": "https://news.ycombinator.com/item?id=49152871",
+      "score": 57,
+      "comment_count": 33,
+      "posted_at": "2026-08-03T08:34:24+00:00",
+      "comments": [
+        {
+          "id": 49156416,
+          "author": "chaz6",
+          "text": "A lot of people dunk on PPPoE, but it does have one redeeming feature: failover is a lot easier and faster compared to IPoE. With IPoE you often rely on vendor-proprietary mechanisms. The closest thing to a common standard is packet-triggered sessions. Normally, BNG's set up sessions using DHCP but you can rig it to do a RADIUS request for a non-DHCP packet without a known session. In this case, it will send the source IP as the radius username, rather than the configured value (this usually comes from dhcp option 82 which includes the customer-id and circuit-id). In an access network, the source address is usually untrusted so instead you would want to have your BNG attach the NAS-Port-Id to the request (which usually contains the SVLAN and CVLAN)."
+        },
+        {
+          "id": 49154608,
+          "author": "sarabveer",
+          "text": "> Even in 2026, a huge number of ISPs still rely on PPPoE, including Bell Canada, AT&T Fiber, and Xfinity in the US, along with the vast majority of ISPs in Europe, Asia, and China. Comcast (Xfinity) does not use PPPoE."
+        },
+        {
+          "id": 49157407,
+          "author": "throwaway67743",
+          "text": "There is really so much failure in this post: crappy vendor, misunderstanding how PPP actually works (it requires no addressing at all), using \"half bridge\" (idiot term) instead of just using it properly. I swear people are even less informed than 20 years ago, it's very sad."
+        },
+        {
+          "id": 49154425,
+          "author": "nottorp",
+          "text": "Oh thanks. My local ISP insists on pppoe even for business lines. I like the unifi APs but then using their gateways is a no-no."
+        },
+        {
+          "id": 49154133,
+          "author": "davidhariri",
+          "text": "In my specific situation I was able to use this WAS-110 to get full speed PPPoE from my fiber provider (Bell). https://pon.wiki/guides/masquerade-as-the-bce-inc-giga-hub-2..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 29,
+      "id": 49125065,
+      "title_en": "Why we write our own C and C++ inference engines",
+      "title_ja": "Why we write our own C and C++ inference engines",
+      "url": "https://localai.io/blog/why-we-write-our-own-engines/",
+      "hn_url": "https://news.ycombinator.com/item?id=49125065",
+      "score": 106,
+      "comment_count": 44,
+      "posted_at": "2026-07-31T16:17:04+00:00",
+      "comments": [
+        {
+          "id": 49157508,
+          "author": "bastawhiz",
+          "text": "Ignoring the fact that this is clearly not written by a human, it's untrustworthy and the claims are dubious at best. 1. The comparison of vLLM to vLLM.cpp never shows more improvement than a handful of tokens per second. That's less than 0.05x improvement on every run, and the gap doesn't grow as concurrency increases. The comparison doesn't show any real net improvement, let alone justify the project. 2. The depth anything comparison isn't apples to apples. Of course a q8_0 quant is faster than f32. It's 4x less data to chew on. 3. This point is silly, it again fights against the argument that writing your own c++ engines are worth it. It's a bug, just fix it: > The reason it is faster has nothing to do with writing better matmul kernels than PyTorch. Two positional embeddings, the DPT head’s UV embedding and the backbone’s bicubic position embedding, were being recomputed on every forward pass with single-threaded scalar sin, cos and bicubic loops, even though they depend only on the input geometry and are identical every call. They argue against their own point again just after: > For a biometric pipeline, matching the reference exactly matters more than being faster than it. Okay, then don't rewrite it! It's not faster anyway! 4. If the argument is that the venv is large, then rewriting it in C++ doesn't seem like the answer, it seems like a lot of work and maintenance to avoid having to cull unreachable files in your venv. In a past life I maintained a simple denylist for files in node_modules. The low hanging fruit is plentiful and generally very safe."
+        },
+        {
+          "id": 49157688,
+          "author": "cyanregiment",
+          "text": "People are critiquing whether or not AI wrote the article. Well, it's clearly not 1-shot / low effort. (can we agree there's a difference between low effort 1-shotting a prompt and those who use LLMs interactively?) The one reason why I can't take a mega hardline stance against AI for writing: Not everyone speaks English as a first language. People with awful English speaking and writing skills are using LLMs to contribute content in English. This is a good thing. They used to try their best and suffix every post with \"sorry for my english\". The author's name is Ettore Di Giacinto - I put 2 and 2 together on this one. I don't think we should be so hardcore against people using AI when clearly effort was put forth, especially when non-English speakers are just using it to write better English and keep up with the rest of us. The content is beyond that, and I more than welcome stuff like this here."
+        },
+        {
+          "id": 49151027,
+          "author": "stephbook",
+          "text": "Should have started with writing your own blog posts."
+        },
+        {
+          "id": 49153179,
+          "author": "aabdi",
+          "text": "I don’t think it would be surprising that people want to write their own kernels. A big problem with the existing engines like llama or sd is that they don’t support optimal graph compilation. Usually this means about a real 2 or 3x multiplier loss relative to optimal. Cuda graphs do okay but they still leave a lot on the floor It’s usually worth it to optimize in that context if you are willing to peer into the mechanics. Of course that’s expensive. You need to know how to appropriately pipeline and merge your kernels."
+        },
+        {
+          "id": 49151149,
+          "author": "dennis16384",
+          "text": "I had a similar success with Model2Vec static embedder and NER inference (both GGUF, compiled for WASM), ported to plain C from ONNX Runtime. Wasm size from 30Mb to 300kb and 1.5x speedup. It's definitely worth it for performance or distribution size."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 30,
+      "id": 49114146,
+      "title_en": "Characterizing Warp Divergence from Pascal to Blackwell",
+      "title_ja": "Characterizing Warp Divergence from Pascal to Blackwell",
+      "url": "https://arxiv.org/abs/2607.23402",
+      "hn_url": "https://news.ycombinator.com/item?id=49114146",
+      "score": 19,
+      "comment_count": 1,
+      "posted_at": "2026-07-30T18:56:00+00:00",
+      "comments": [
+        {
+          "id": 49156101,
+          "author": "majke",
+          "text": "> Across all tested generations, divergent paths serialize linearly with the number of paths k, following T(k)≈sk with no super-linear reconvergence penalty. Warp execution efficiency falls as 32/k, the penalty is independent of occupancy, and predication removes the serialization cost So... Nvidia did a good job?"
+        }
+      ],
+      "summary_ja": ""
+    }
+  ]
+}
