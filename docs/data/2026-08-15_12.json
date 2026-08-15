@@ -1,0 +1,1070 @@
+{
+  "date": "2026-08-15T00:00:00+09:00",
+  "slot": "12",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 49306577,
+      "title_en": "Magnitude 7.7 Earthquake – 68 km NNW of Ende, Indonesia",
+      "title_ja": "Magnitude 7.7 Earthquake – 68 km NNW of Ende, Indonesia",
+      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us6000tkt2/executive",
+      "hn_url": "https://news.ycombinator.com/item?id=49306577",
+      "score": 100,
+      "comment_count": 18,
+      "posted_at": "2026-08-15T01:14:05+00:00",
+      "comments": [
+        {
+          "id": 49306982,
+          "author": "insaider",
+          "text": "Is this big enough to produce a Tsunami? Apparently maybe only a small localised one, but I'm supposed to be getting the ferry from Lombok to Bali shortly and two of those have already burnt down the last 2 weeks!"
+        },
+        {
+          "id": 49306936,
+          "author": "CookieCrisp",
+          "text": "I know large earthquakes are effectively random (ignoring aftershocks) but this feels like a lot this year, yeah?"
+        },
+        {
+          "id": 49306984,
+          "author": "burnt-resistor",
+          "text": "So Google Earth says the ocean depth at the epicenter is 6,286 ft / 1,916 m, but I couldn't find a corresponding tsunami alert or evaluation of risk."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 2,
+      "id": 49299605,
+      "title_en": "Qwen 3.8 27B",
+      "title_ja": "Qwen 3.8 27B",
+      "url": "https://huggingface.co/Qwen/Qwen3.8-27B-FP8",
+      "hn_url": "https://news.ycombinator.com/item?id=49299605",
+      "score": 952,
+      "comment_count": 617,
+      "posted_at": "2026-08-14T15:00:00+00:00",
+      "comments": [
+        {
+          "id": 49305335,
+          "author": "CMay",
+          "text": "Credit where it's due. Qwen 3.8 27B is only the second local model after Gemma 4 that managed to correctly reason through one of my private benchmarks. It took 5x as many tokens to do it and 12m30s with MTP enabled, but it did do it. Gemma 4 reasoned through it more implicitly, while Qwen 3.8 reasoned more explicitly. Laguna and Muse Glimmer failed hard on it, though they're useful for other tasks. The VRAM usage seems way less efficient than Gemma 4 or Glimmer though, with 32K of context taking 2.5GB of VRAM. With those, even with MTP or a DFlash model loaded, you could still fit 256k-768k of context. With Qwen 3.8 27B I can't even fit 128k if I quantize V to Q4_0. Maybe with some trial and error I can find some settings that perform well enough with a larger context window that it's still useful for longer tasks. Lots more testing to do, though I was getting some decent results out of Muse Glimmer which was more than twice as fast and supported huge context windows, managing to solve some bugs that Gemma 4 struggled with. I can't even begin to throw that task at Qwen, because just the prompt alone would use the entire context window and then it would reason for probably that same amount. If you've got a 32GB card, it should be a decent model even if it really is memory hungry. EDIT: Tried a few kv cache quantization settings, but it failed with those. I designed this benchmark to be pretty brutal in the face of KLD and any reasoning quality loss, so it's not too surprising. Gemma 4's QAT held up pretty well, at least and could consistently complete it."
+        },
+        {
+          "id": 49304034,
+          "author": "simonw",
+          "text": "Absolutely the best pelican I've seen from a model that runs on my laptop: https://tools.simonwillison.net/markdown-svg-renderer#url=ht... Bicycle is the right shape. Pelican beak is excellent. Nice background. Most importantly, the pelican has one leg on each side of the bicycle - that's very rare. (No chain on this bicycle though - in the reasoning trace it says \"already chainstay... skip chain detail; maybe a small chainring.\") I ran that on an M5 Max MacBook Pro using LM Studio and their 17GB GGUF: https://lmstudio.ai/models/qwen3.8 It took 21 minutes(!) and used 22,276 reasoning tokens to produce 3,223 tokens of output. (For the \"they're training on your benchmark now\" crowd, all of that cheating didn't prevent it from spending 20 minutes thinking about the task first! You can see the reasoning trace in the link I shared.) For comparison, here's one I got from qwen3.8-2.4t-a95b on OpenRouter, which is pleasingly animated: https://tools.simonwillison.net/markdown-svg-renderer#url=ht..."
+        },
+        {
+          "id": 49307187,
+          "author": "RandyOrion",
+          "text": "Thank you Qwen team for this release. Compared to closed weight (especially unreleased and access-limited) and open weight/source large sparse MoE LLMs/VLMs, small dense models benefits public the most because they just reaches more people. Compared to Qwen 3.6, 3.8's thinking style changed drastically. With xhigh budget, it thinks a lot MORE, and longer thinking session directly translates to better performance. This tradeoff between performance and computation, memory, etc. is meaningful to me. However, because Qwen 3.6 and 3.8 share the same architecture, with 32GB vram, llama.cpp, IQ4_XS model, MTP and FP16 mmproj, I can only get 200k context, which is not good compared to 640k context of muse glimmer. Hopefully this problem will be solved in Qwen 4.0 release."
+        },
+        {
+          "id": 49304017,
+          "author": "dofm",
+          "text": "There's a real change (compared to 3.6) in the way it writes in thinking — it drops words like \"to\" and \"we\" in \"We need to\", talks generally in note form, drops the/and all over the place, avoids \"for\". \"Need be helpful concise\", \"Need maybe not overdo\", \"Need ask!\" Almost caveman. I have an (unsourced, vague) suspicion that this rather unique thinking trace pattern is actually hobbling the MTP predictions, which seem to perform poorly. Other notes: it uses the trick of repeating the prompt in the thinking trace. It also worries about hidden chain of thought appearing in the final answer. It talks about \"desired oververbosity 9\", which is new. A bit GPT-ish. It is being extraordinarily thorough in thinking through one of my code requests, but I don't know if the net result will be any better than the 35B MoE. I asked it to ask me clarifying questions — it did, and it offered me a list of defaults I could simply agree to. I don't think it is necessarily overthinking in the looping sense, but it is in the being exhaustive sense. I need to explore how it does with a tighter reasoning budget. I am impressed but I am definitely in Camp Please-35B-A3B-When? here, because on an M1 Max this isn't really practical. I hope they do one, though I think they may not."
+        },
+        {
+          "id": 49305938,
+          "author": "kimsey0",
+          "text": "If anyone else is running this on an RTX 5090, https://github.com/Neroued/ninfer as inference engine gets me ~138 tokens/second, roughly double what I get with a naive llama.cpp setup."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 3,
+      "id": 49304447,
+      "title_en": "Going Dark, and the era of law enforcement hacking",
+      "title_ja": "Going Dark, and the era of law enforcement hacking",
+      "url": "https://blog.cryptographyengineering.com/2026/08/14/everything-is-about-to-go-dark/",
+      "hn_url": "https://news.ycombinator.com/item?id=49304447",
+      "score": 235,
+      "comment_count": 126,
+      "posted_at": "2026-08-14T20:52:44+00:00",
+      "comments": [
+        {
+          "id": 49305577,
+          "author": "Animats",
+          "text": "It's worth realizing that, before computerized central offices, telephone wiretapping required running physical wires. Back when Rudi Giuliani was prosecuting organized time, not only did physical wires have to be run, the cops were billed for them as expensive private lines. His task force was spending about a million dollars a year with New York Telephone on wiretapping. In one case, law enforcement didn't pay their bill, resulting in the person being wiretapped having the wiretap connection show up on their bill, blowing the case. That resulted in the Communications Assistance to Law Enforcement Act, which mandated that central offices offer remote wiretapping. Capacity up to 1% of lines is required. Back in the electromechanical era, the only call data that could be collected was outgoing dial pulses, using a \"pen register\".[1] (The one shown in Wikipedia is mine. It's a beautiful piece of antique brass telegraph technology. It records dial pulses as dashes, and has to be wound up like a clock, with a big brass key.) The Supreme Court decision allowing \"pen registers\" without a warrant refers to these \"extremely limited\" devices. That definition has been stretched and stretched by law enforcement into all non-voice data collected by telcos. Law enforcement still wants more. [1] https://en.wikipedia.org/wiki/Pen_register"
+        },
+        {
+          "id": 49305186,
+          "author": "mbroshi",
+          "text": "> In the real world, it does feel likely that we’re going to hit some sort of a ceiling on the number of useful bugs, and probably we’ll hit it soon. This doesn't resonate with me. I see companies adding more sloppily written features with AI. I see more bugs in the software I use, not less. While it's plausible that software is getting both buggier and more secure, I suspect those two move in the same direction not opposite. My guess is that we're getting better at finding _existing_ security issues with AI (and thus fixing those issues), but simultaneously adding more insecure surface areas _at a faster rate_."
+        },
+        {
+          "id": 49305108,
+          "author": "Insimwytim",
+          "text": "On one side, you have pieces like this, where seemingly there are constant fights between serious actors with large and properly distributed budgets, employing top tech and top minds; on the other - regular news of the hackz, where responsible person in charge of security with root access failed to grasp basic technical knowledge (several times), ticking every checkbox in \"never do this\" list from security best practices, which led to every customer being pwned. It's like two parallel worlds, that exist in the same place at the same time, but somehow don't cross."
+        },
+        {
+          "id": 49306399,
+          "author": "fitblipper",
+          "text": "I've always loved the ridiculousness of the \"going dark\" label when law enforcement can't access encrypted chats or a back door isn't built into a piece of software. When there are security cameras on the vast majority of houses, stop lights and in people's hands, and when so much meta data about people's associations are shared from Google, Facebook, any other social platform, how in the world can they say they are \"going dark\". How did they ever solve crimes before these things?"
+        },
+        {
+          "id": 49305097,
+          "author": "Gigachad",
+          "text": "I'm supposed to be concerned that the US government and Israel won't be able to hack everyone's phones?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 4,
+      "id": 49306443,
+      "title_en": "The Ploopy A+ Trackball Is Here",
+      "title_ja": "The Ploopy A+ Trackball Is Here",
+      "url": "https://blog.ploopy.co/the-aplus-is-finally-here-499",
+      "hn_url": "https://news.ycombinator.com/item?id=49306443",
+      "score": 43,
+      "comment_count": 27,
+      "posted_at": "2026-08-15T00:55:31+00:00",
+      "comments": [
+        {
+          "id": 49306808,
+          "author": "imglorp",
+          "text": "Hugged. https://web.archive.org/web/20260814114201/https://blog.ploo..."
+        },
+        {
+          "id": 49306940,
+          "author": "branon",
+          "text": "I bought the regular mouse and had a fun time assembling it. It works fine. However the \"ergonomic\" design is extremely uncomfortable for me and caused hand pain. I let it ride for a few weeks hoping I'd get accustomed, the pain got better but didn't go away. Also the far-left and far-right mouse buttons are superfluous and detract from the core experience. Please do a symmetrical version and maybe throw in a scroll wheel with steps/clicks, I'd happily buy another."
+        },
+        {
+          "id": 49307121,
+          "author": "malloryerik",
+          "text": "Instantly couldn't resist clicking on some unknown thing called \"the Ploopy A+\"."
+        },
+        {
+          "id": 49306817,
+          "author": "walrus01",
+          "text": "I see we've reinvented the slashdot effect."
+        },
+        {
+          "id": 49307061,
+          "author": "mkl",
+          "text": "> preorder a kit for $99CAD What is a kit here? A trackball? All the parts needed to assemble a trackball? A populated circuit board, where the rest needs 3D printing? A pile of electronic components that need to be soldered together and the rest needs 3D printing?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 5,
+      "id": 49306196,
+      "title_en": "Simplifying and Refactoring Introductory Calculus",
+      "title_ja": "Simplifying and Refactoring Introductory Calculus",
+      "url": "https://arxiv.org/abs/1811.03459",
+      "hn_url": "https://news.ycombinator.com/item?id=49306196",
+      "score": 42,
+      "comment_count": 8,
+      "posted_at": "2026-08-15T00:15:23+00:00",
+      "comments": [
+        {
+          "id": 49307217,
+          "author": "cool_dude85",
+          "text": "Got to the place where he says \"As you can see, this is identical to the d/dx() operation except that the result is not divided by dx.\" What does it mean with his d() operator to \"divide by dx\"? All of a sudden it seems like he has changed dy/dx from unfortunate notation that sort of looks like a division into something that actually is dividing two meaningful things, dy and dx? And so what the hell are dy and dx?"
+        },
+        {
+          "id": 49307211,
+          "author": "conorbergin",
+          "text": "This guy has an interesting publication history, programming books and what looks like evolutionary biology from a creationist perspective."
+        },
+        {
+          "id": 49307138,
+          "author": "bee_rider",
+          "text": "Looks like this came out nearly 8 years ago, so… how’d it work out? Given the way job titles work these days I guess we could have some Senior Engineers here who learned calculus from this paper…"
+        },
+        {
+          "id": 49307117,
+          "author": "E-Reverance",
+          "text": "where I heard of this from : https://youtu.be/4ZB2PNUYR1Y"
+        },
+        {
+          "id": 49307275,
+          "author": "light_hue_1",
+          "text": "> Again, by using differentials instead of derivatives, we have transformed a number of processes that students find unintuitive into a single process where the intuition is supplied by the student’s knowledge of algebra. Ah yes. Algebra. The subject all students love dearly. If only we could get students to love and appreciate calculus as much they love algebra! I have a hard time even imagining an article that is more disconnected from the reality of teaching calculus to tiny humans."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 6,
+      "id": 49300314,
+      "title_en": "Google is making private AI practical with homomorphic encryption",
+      "title_ja": "Google is making private AI practical with homomorphic encryption",
+      "url": "https://blog.google/security/how-google-is-making-private-ai-practical-with-homomorphic-encryption/",
+      "hn_url": "https://news.ycombinator.com/item?id=49300314",
+      "score": 301,
+      "comment_count": 178,
+      "posted_at": "2026-08-14T15:43:10+00:00",
+      "comments": [
+        {
+          "id": 49301386,
+          "author": "sabretooth1405",
+          "text": "My master's thesis is on a topic in this field (Privacy Preserving ML) and from my understanding HE and other techniques have very high overheads(~10^3) on inference tasks and thus aren't very commercially viable."
+        },
+        {
+          "id": 49303443,
+          "author": "meindnoch",
+          "text": "Great, private AI, at the cost of >1000x the resource usage. Because apparently AI companies weren't already using quite enough energy to cook the planet. The most private AI is the one running on my own hardware, not in some giant data center."
+        },
+        {
+          "id": 49301466,
+          "author": "Cider9986",
+          "text": "This is the same Google that doesn't have e2ee on their password manager by default. Like WTF, it's a password manager."
+        },
+        {
+          "id": 49301817,
+          "author": "lsb",
+          "text": "Google is making private AI practical with Gemma4 something that you can run without an Internet connection. All of the proofs of privacy rely on us getting the math right. All of the privacy from unplugging your internet cable is there by default."
+        },
+        {
+          "id": 49305792,
+          "author": "magios",
+          "text": "https://fhetextbook.github.io/ which i believe was linked on this website previous is what i used to learn about how this stuff works."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 7,
+      "id": 49305250,
+      "title_en": "eigendrum",
+      "title_ja": "eigendrum",
+      "url": "https://eigendrum.com/#p=circle",
+      "hn_url": "https://news.ycombinator.com/item?id=49305250",
+      "score": 57,
+      "comment_count": 12,
+      "posted_at": "2026-08-14T22:15:12+00:00",
+      "comments": [
+        {
+          "id": 49306752,
+          "author": "BaselAshraf81",
+          "text": "Thanks for reposting this! I'm the developer (BaselAshraf81) - happy to answer questions or hear suggestions here. If you find it interesting, a star on the GitHub repo helps a lot. And don't forget to follow me on github, I build cool stuff!"
+        },
+        {
+          "id": 49307296,
+          "author": "nxc18",
+          "text": "Thanks, ChatGPT."
+        },
+        {
+          "id": 49306900,
+          "author": "Waterluvian",
+          "text": "I tapped twice and got nothing but sketchy popup ads suggesting I need to install a VPN. Does it work on safari mobile for anyone else?"
+        },
+        {
+          "id": 49306381,
+          "author": "andai",
+          "text": "Very cool. Number keys and QWERTYU (or clicking the rows on the right) trigger the \"modes\" in isolation, which are surprisingly microtonal. Also you can draw your own drums! What! That's so cool"
+        },
+        {
+          "id": 49306863,
+          "author": "esafak",
+          "text": "https://en.wikipedia.org/wiki/Hearing_the_shape_of_a_drum"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 8,
+      "id": 49306432,
+      "title_en": "NSA and IETF, Part 9",
+      "title_ja": "NSA and IETF, Part 9",
+      "url": "https://blog.cr.yp.to/20260814-update.html",
+      "hn_url": "https://news.ycombinator.com/item?id=49306432",
+      "score": 25,
+      "comment_count": 5,
+      "posted_at": "2026-08-15T00:54:01+00:00",
+      "comments": [
+        {
+          "id": 49307212,
+          "author": "philodeon",
+          "text": "I enjoyed the @tptacek cameo. I suspect tptacek didn’t."
+        },
+        {
+          "id": 49307041,
+          "author": "stackghost",
+          "text": "It's never been clear to me why NSA's \"blue team\" directorates haven't been spun off into a separate agency. Sure, NSA strengthened the S-boxes in DES and SHA-1 but from the outside there's no way to know whether they're making DES stronger against differential cryptanalysis or whether they're introducing a DUAL_EC-style vulnerability. I'm sure there's a game-theoretic optimum choice when it comes to accepting proposals from the NSA vs rejecting them out of hand, but I'm not sure what that optimal choice is."
+        },
+        {
+          "id": 49306998,
+          "author": "jauntywundrkind",
+          "text": "> I'm happy to report that 82 people spoke up on the TLS mailing list in unambiguous opposition to this spec during the voting period How many of them spoke before on this mailing list, in any capacity what so ever? I suspect this is 99% people who showed up because you organized a brigadging, because you incited people and told them to show up and be completely outraged. There's a >0% chance that DJB could be correct that there is some risk to this spec (which notably is not seeking recommendation status ! So WTF ?) The people approving and wanting this aren't fools, aren't lackies, aren't some great foe. There's little real opposition? Making up ghosts and enemies lurking in every corner, brigading people to show up in IETF meetings, who have never participated before, just to spread heat and anger you've programmed them for, is ignoble & indecent. All too recently: https://news.ycombinator.com/item?id=48760490 https://news.ycombinator.com/item?id=48811887"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 9,
+      "id": 49300759,
+      "title_en": "RustDesk now supports true unattended remote access on Wayland",
+      "title_ja": "RustDesk now supports true unattended remote access on Wayland",
+      "url": "https://rustdesk.com/blog/unattended-remote-access-wayland/",
+      "hn_url": "https://news.ycombinator.com/item?id=49300759",
+      "score": 234,
+      "comment_count": 101,
+      "posted_at": "2026-08-14T16:12:52+00:00",
+      "comments": [
+        {
+          "id": 49302135,
+          "author": "inktype",
+          "text": "RustDesk still does not support encrypted connections when self hosting: https://github.com/rustdesk/rustdesk/issues/3714"
+        },
+        {
+          "id": 49305619,
+          "author": "OsrsNeedsf2P",
+          "text": "Rustdesk is amazing. I was using it just 2 days ago and ran into this hiccup, so it's a pleasure to see it resolved"
+        },
+        {
+          "id": 49301811,
+          "author": "throwaway27448",
+          "text": "What is rustdesk and how is it distinct from vnc? Edit: i appreciate the explanations; thank you."
+        },
+        {
+          "id": 49305138,
+          "author": "SXX",
+          "text": "Btw does RustDesk support microphone input passthrough from client to the host yet? So far it's only feature I found missing compared to proprietary solutions."
+        },
+        {
+          "id": 49304339,
+          "author": "aborsy",
+          "text": "I have used Remmina over SSH and Tailscale (and generally don’t trust remote desktop tools), which is mentioned in various places by my operating system provider. How does RustDesk compare with that?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 10,
+      "id": 49263186,
+      "title_en": "Hi-Fi Tape Recorder Changed Radio Forever",
+      "title_ja": "Hi-Fi Tape Recorder Changed Radio Forever",
+      "url": "https://spectrum.ieee.org/magnetophon-laugh-track",
+      "hn_url": "https://news.ycombinator.com/item?id=49263186",
+      "score": 21,
+      "comment_count": 1,
+      "posted_at": "2026-08-11T19:23:33+00:00",
+      "comments": [
+        {
+          "id": 49307245,
+          "author": "joezydeco",
+          "text": "Sent to Germany at the war’s end, Mullin eventually came across that technology at a radio station... Fun trivia: that radio station was in Bad Nauheim, Germany, which is where Elvis Presley was stationed during his stint in the US Army."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 11,
+      "id": 49307099,
+      "title_en": "AI Driven Testing",
+      "title_ja": "AI Driven Testing",
+      "url": "https://app.deltix.ai",
+      "hn_url": "https://news.ycombinator.com/item?id=49307099",
+      "score": 3,
+      "comment_count": 0,
+      "posted_at": "2026-08-15T02:42:14+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 12,
+      "id": 49303202,
+      "title_en": "Firefox is now the last major browser that still supports uBlock Origin",
+      "title_ja": "Firefox is now the last major browser that still supports uBlock Origin",
+      "url": "https://www.pcworld.com/article/3212428/firefox-is-now-the-last-major-browser-that-still-supports-ublock-origin.html",
+      "hn_url": "https://news.ycombinator.com/item?id=49303202",
+      "score": 524,
+      "comment_count": 195,
+      "posted_at": "2026-08-14T19:03:20+00:00",
+      "comments": [
+        {
+          "id": 49305222,
+          "author": "GeekyBear",
+          "text": "Firefox is also the only browser that vets uBlock's code on every update to make sure the developer hasn't inserted spyware or malware into the extension. They don't do it for every extension, but they do so for a wide selection of popular options. > Recommended extensions differ from other extensions that are regularly reviewed by Firefox staff in that they are curated extensions that meet the highest standards of security, functionality and user experience. After receiving Recommended status, safety standards are maintained through automated checks, monitoring, and periodic technical reviews https://support.mozilla.org/en-US/kb/recommended-extensions-..."
+        },
+        {
+          "id": 49305425,
+          "author": "avaer",
+          "text": "What's funny is that extensions were supposed to be a way to let you do the things the browser didn't want you to do. Guess that was a bit too much freedom for Google to accept, so they had to make a store with a gate, and destroy the APIs so that they're useless. Then they had to make up some reasons to justify that and ram it through the pipeline despite everyone's objections, and the frog got boiled. Now we're back to needing an actual extension system that does what extensions were supposed to do in the first place."
+        },
+        {
+          "id": 49307303,
+          "author": "thrusong",
+          "text": "I'm a web developer and I have a deep love of Firefox. I've been on it since version 3 and I'll be with it to the bitter end. I love that uBlock Origin is still available and while the news of Firefox's declining market share can be quite concerning, I hope it will be around for a long time."
+        },
+        {
+          "id": 49306557,
+          "author": "windowliker",
+          "text": "I often forget how browsing the web looks for most people. Can't understand why they put up with it, or do they just think that it's part and parcel of the internet to have every page look like a slot machine from hell?"
+        },
+        {
+          "id": 49306267,
+          "author": "tech234a",
+          "text": "Haven’t tried it but apparently there is an unofficial port of the full version of uBlock Origin to work on manifest v3, the largest challenge being that, on manifest v3, the webRequestBlocking permission is only available to enterprise sideloaded extensions: https://github.com/r58Playz/uBlock-mv3"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 13,
+      "id": 49215682,
+      "title_en": "Super Mario Derivations",
+      "title_ja": "Super Mario Derivations",
+      "url": "https://fzakaria.com/2026/08/05/super-mario-derivations",
+      "hn_url": "https://news.ycombinator.com/item?id=49215682",
+      "score": 68,
+      "comment_count": 11,
+      "posted_at": "2026-08-07T20:16:10+00:00",
+      "comments": [
+        {
+          "id": 49306136,
+          "author": "JHonaker",
+          "text": "What a delightfully insane abuse of Nix. I enjoyed reading that immensely."
+        },
+        {
+          "id": 49307225,
+          "author": "vatsachak",
+          "text": "Some of use nix as a package manager. And others..."
+        },
+        {
+          "id": 49228169,
+          "author": "MiroslavPokorny",
+          "text": "Im confused whats the point of this ?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 14,
+      "id": 49300568,
+      "title_en": "AI by Hand",
+      "title_ja": "AI by Hand",
+      "url": "https://www.byhand.ai/",
+      "hn_url": "https://news.ycombinator.com/item?id=49300568",
+      "score": 224,
+      "comment_count": 19,
+      "posted_at": "2026-08-14T15:58:59+00:00",
+      "comments": [
+        {
+          "id": 49303570,
+          "author": "iamnotarobotman",
+          "text": "This is also recommended reading if you want to learn more about building LLMs from scratch: See: Train your own LLM - https://github.com/angelos-p/llm-from-scratch HN Discussion - https://news.ycombinator.com/item?id=48017948"
+        },
+        {
+          "id": 49301784,
+          "author": "rustyminnow",
+          "text": "https://www.byhand.ai/p/library > AI by Hand is the research publication of By Hand Research, founded by Prof. Tom Yeh. By Hand Research studies model interpretability and explainability at the math and algorithm level. Subscribers receive free new articles and join live seminars. Members get access to our full research library."
+        },
+        {
+          "id": 49305238,
+          "author": "slowin",
+          "text": "I found Deep Learning by No Starch Press to be an excellent primer the foundation of AI: https://nostarch.com/deep-learning-visual-approach"
+        },
+        {
+          "id": 49301671,
+          "author": "zhainya",
+          "text": "I'm not sure what this is. Click past the subscribe page to get a bunch of links to descriptions of articles I could read if I was a subscriber?"
+        },
+        {
+          "id": 49302979,
+          "author": "megadragon9",
+          "text": "i created something similar a while back. Inspired by micrograd for showing the connection between math/calculus and code, then building along the way to a full NumPy deep learning library that I pretrained GPT-2 124M model with it. One way to learn is to trace through the PRs merged to the repo in chronological order. The philosophy is the same: \"What I cannot create, I do not understand.\" https://github.com/workofart/ml-by-hand"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 15,
+      "id": 49272784,
+      "title_en": "Unearthing a 31 year old Easter egg in Ecco the Dolphin",
+      "title_ja": "Unearthing a 31 year old Easter egg in Ecco the Dolphin",
+      "url": "https://32bits.substack.com/p/under-the-microscope-ecco-the-dolphin-98c",
+      "hn_url": "https://news.ycombinator.com/item?id=49272784",
+      "score": 38,
+      "comment_count": 11,
+      "posted_at": "2026-08-12T14:19:05+00:00",
+      "comments": [
+        {
+          "id": 49279049,
+          "author": "_def",
+          "text": "> CD check gets rid of the This program can only be run from the original CD! nag screen. A built-in no-cd patch, neat :-)"
+        },
+        {
+          "id": 49307226,
+          "author": "BobbyTables2",
+          "text": "I’d love to know how the author found this! I mean, who reverse engineers the “About” dialog on an application!?!? That’s the last place I would have ever looked!"
+        },
+        {
+          "id": 49274583,
+          "author": "Jzush",
+          "text": "That’s super cool! I loved the original Ecco on the genesis. Beat it several times. I miss when games had real cheats/debug modes. It’s part of the reason I hot in to programming and development in the first place. I feel like kids these days don’t get this experience anymore."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 16,
+      "id": 49299746,
+      "title_en": "Introducing Toast 1",
+      "title_ja": "Introducing Toast 1",
+      "url": "https://www.mixedbread.com/blog/toast-1",
+      "hn_url": "https://news.ycombinator.com/item?id=49299746",
+      "score": 185,
+      "comment_count": 59,
+      "posted_at": "2026-08-14T15:07:57+00:00",
+      "comments": [
+        {
+          "id": 49300478,
+          "author": "trjordan",
+          "text": "I deeply love this idea of specialized LLMs for search. It's also extremely confusing to me how rough Google's entrance here is. When I, a human, need an answer to anything moderately complex, it's unlikely that I get it on the first (pre-AI) round of google searching. Simple stuff, sure, but more likely I'll need to go 2-5 rounds. Maybe click a few links. Double-check my assumptions. An LLM that can do that quickly seems like a slam dunk. I wonder what other problems benefit from that 10x-100x increase in context + 2-5 rounds with the LLM."
+        },
+        {
+          "id": 49304665,
+          "author": "blitzar",
+          "text": "I really wanted this to be a hardware startup - the Juicero of toast. Sadly its another software company."
+        },
+        {
+          "id": 49304482,
+          "author": "satvikpendem",
+          "text": "Looks good as I use something similar with the SearXNG MCP, but a shame this isn't an open weight model. There are some wrappers around SearXNG which seem to reduce the token counts returned thus making it easier for the calling model to understand, but a full dedicated model for search is nice. How does it compare with Perplexity, Gemini with search, and Parallel AI? Those are the cloud providers of search based models that I've seen so far."
+        },
+        {
+          "id": 49306455,
+          "author": "dmix",
+          "text": "I've been using https://www.voyageai.com/ for this in production. Might try this out to see how it compares."
+        },
+        {
+          "id": 49300499,
+          "author": "tolugenius",
+          "text": "I guess someone who has used a search agent (or a dedicated subagent) can speak when I'd reach for a tool like this vs either just 1) a smaller general model or 2) a non-llm approach to the problem? Like it's interesting I'm just curious how a search agent compares to say a model with dedicated rag pipelines is that much different?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 17,
+      "id": 49299081,
+      "title_en": "I turned my RSS feeds into an e-ink newspaper to stop reading on my phone",
+      "title_ja": "I turned my RSS feeds into an e-ink newspaper to stop reading on my phone",
+      "url": "https://heyjonny.dev/posts/rss-to-eink-newspaper/",
+      "hn_url": "https://news.ycombinator.com/item?id=49299081",
+      "score": 157,
+      "comment_count": 63,
+      "posted_at": "2026-08-14T14:21:18+00:00",
+      "comments": [
+        {
+          "id": 49307322,
+          "author": "second_brain2",
+          "text": "dude this is actually kinda cool ngl"
+        },
+        {
+          "id": 49299835,
+          "author": "ynac",
+          "text": "I like to read a physical dirty (ink dust, not content) finger newspapers whenever I can get them. At a bakery / cafe a few weeks ago, sitting outside having cherry Danish and an Americano (the international special), I was reading the NYT and the SeaTimes section by section. It was awesome. Comics, international, regional beats, magazines. I realized somewhere in the middle of the caffeine and sugar rush, just what a huge effort it takes to put out a DAILY newspaper. It's incedible, even without considering the cheap price. There was a couple nearby looking at the mess of papers on my table. I realized I needed to tidy my donnage pile of sections, and impulsively offered them to the couple. They almost jumped. If I didn't know better I swear they were living out some fantasy of holding a newspaper for the first time."
+        },
+        {
+          "id": 49300505,
+          "author": "dewey",
+          "text": "In my regular RSS reader I often have the problem that some feeds are not full feeds, or some images are missing (In case they have some gallery) and I have to click out to the page, even just to verify I got the full text. That always kinda stops me from going the eink route where I don’t have a proper browser. Depends on which feeds you subscribe to I guess, probably works really well for long form, reliable feeds."
+        },
+        {
+          "id": 49305589,
+          "author": "zie",
+          "text": "Calibre does this for you and has for a long time. Docs: https://manual.calibre-ebook.com/news.html I used to read lwn.net from my e-reader, worked great."
+        },
+        {
+          "id": 49299791,
+          "author": "TFNA",
+          "text": "This doesn't work for me in spite of over 10 years of trying. I am currently eating lunch and wasting time on HN on my phone, but my ebook reader full of edifying material is sitting there ignored on the table, right in front of me. I need some way of leaving the phone at home completely, but in my country so much basic everyday stuff relies on a phone (and strong bank authentication through a phone)."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 18,
+      "id": 49211375,
+      "title_en": "Ultraviolet Bird Photography",
+      "title_ja": "Ultraviolet Bird Photography",
+      "url": "https://uvbirds.com/",
+      "hn_url": "https://news.ycombinator.com/item?id=49211375",
+      "score": 118,
+      "comment_count": 22,
+      "posted_at": "2026-08-07T14:51:09+00:00",
+      "comments": [
+        {
+          "id": 49304332,
+          "author": "rwmj",
+          "text": "My favourite blue tit fact is that they are sexually dichromatic under UV light only . The male crown is brighter in UV and females prefer males with brighter crowns. Mere humans can't tell the difference. Comes from this rather brilliantly titled paper: Blue tits are ultraviolet tits https://pmc.ncbi.nlm.nih.gov/articles/PMC1688906/"
+        },
+        {
+          "id": 49304829,
+          "author": "andai",
+          "text": "I read a passage in a book growing up, I can't remember what book it was, but it was about how crows are only black to humans, they can see different colors than we can so they're very colorful to each other, covered in all sorts of brilliant colors. Another fun fact: bees can see utraviolet, and flowers are \"designed\" for bees, so many of the patterns are invisible to humans, but visible under UV photography: https://en.wikipedia.org/wiki/UV_coloration_in_flowers https://www.wildflower.org/magazine/native-plants/a-differen..."
+        },
+        {
+          "id": 49302769,
+          "author": "Tagbert",
+          "text": "I'm a little surprised at how little difference there is. Yes, some of the colors shift due to the false-color addition of the UV channel but there were no new patterns or highlighted areas."
+        },
+        {
+          "id": 49301732,
+          "author": "nomel",
+          "text": "Daytime birds are tetrachromats (as are some reptiles), and have dedicated receptors for UV, so they see each other VERY different than we see them! https://www.webexhibits.org/causesofcolor/17B.html"
+        },
+        {
+          "id": 49305253,
+          "author": "glaslong",
+          "text": "So much of the world passes us by out of sight Oh to be a mantis shrimp, have 16 different photoreceptors, and see not only into IR and UV, but the polarization of light too!"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 19,
+      "id": 49305558,
+      "title_en": "Stop sending me huge PRs; a rant",
+      "title_ja": "Stop sending me huge PRs; a rant",
+      "url": "https://getsmall.xyz/post/cmstjfl9l000if70ljmpzr4va",
+      "hn_url": "https://news.ycombinator.com/item?id=49305558",
+      "score": 95,
+      "comment_count": 60,
+      "posted_at": "2026-08-14T22:48:15+00:00",
+      "comments": [
+        {
+          "id": 49306219,
+          "author": "danpalmer",
+          "text": "In my experience the models perform substantially worse if asked to create small PRs or commits. They lack the ability to sequence work and understand dependencies efficiently enough to manage it – it's not that they can't do small PRs, it's that doing them takes vastly more resources which then hits context limits etc. And if you want to then go back and edit a stack of commits or PRs, rebasing work into the middle, that's even more. I don't think any of this scales linearly in the amount of code or number of commits. This is all in addition to the fact that the models are generally poor at storytelling, because that requires a theory of mind of the person you're communicating with. Authoring for review is storytelling, it's making changes in such a way as to build confidence in the reviewer. I believe current LLMs are still years away from this. In my opinion, if you can't do these things, you're just cosplaying software engineering. Vibe coding has its uses, as does LLM programming, I do a lot of this! But we're kidding ourselves and dropping our standards dangerously low if we think that this is software engineering."
+        },
+        {
+          "id": 49307209,
+          "author": "sackfield",
+          "text": "It is reasonable to break PRs up into smaller chunks, but there is a limit. There are frequently reviewers who get very zealous about this and insist on breaking things up beyond what is reasonable, for example if breaking it up would destroy the intent, or if the \"thousand line\" PR just contains lots of tests (AI's love to write tests, and I love that they do that). Some tasks are just long, and its important to contextualise this when reviewing. In the end though, these reviewers will die off like the dinosaurs. The article actually states that they find the idea of reviewing a large PR with AI bad because \"it wastes your tokens reviewing a reingesting code that was already made by an AI\". This doesn't make a whole lot of sense, AI will frequently reingest AI generated content, evals are a great example of this. Just after this the article touches on the real issue at play: \"okay, great, why did you put it up for a human review at all then?\". Indeed, this is a good question to ask, why do we put it up for human review? I would wager that they don't actually want human feedback, a human has placed themselves as a gatekeeper and thus must be placated, and probably chooses the most inefficient way to keep that gate slowing everyone down who has kept up with the technology of our times."
+        },
+        {
+          "id": 49306211,
+          "author": "gensym",
+          "text": "> why did you put it up for a human review at all then? This seems to be the crux of the issue. I'm guessing the most of the time, the answer is \"because that's a mandatory gate to getting these changes into production\". If the PR author doesn't see the value in review, it's going to be hard to convince them to write reviewable PRs. If they're actually looking for human feedback, telling them how to submit PRs in a way that's amenable to human feedback is going to be a lot more successful."
+        },
+        {
+          "id": 49306303,
+          "author": "bawolff",
+          "text": ">I'm tired boss. I'm tired of reviewing one, two, three thousand line PRs because some agent was able to \"one shot the whole issue.\" Small PRs were never asked for because they're easier to write, it's always been for the benefit of the reviewer. 100% but also \"no\" is a two letter word and one of the most important and hardest parts of being a maintainer."
+        },
+        {
+          "id": 49306957,
+          "author": "leeoniya",
+          "text": "It's possible to do a large amount of AI-assisted work, then do a second/third/fourth pass to break it up into a reviewable stack of self-contained PRs. But it takes time, and there's no such thing as one-shotting it. And it's basically impossible to continuously rebase manually without burning tokens. The way to merge the stack is more-or-less \"stop the world\". However, I have yet to see how this will play out with upstream contribs: https://github.com/moment/luxon/discussions/1796 https://github.com/leeoniya/luxon/tree/leeoniya/perf-patches..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 20,
+      "id": 49269809,
+      "title_en": "Turbo Pascal on CP/M, MSX-DOS and MS-DOS",
+      "title_ja": "Turbo Pascal on CP/M, MSX-DOS and MS-DOS",
+      "url": "http://pascal.hansotten.com/delphi/turbo-pascal-on-cpm-msx-dos-and-ms-dos/",
+      "hn_url": "https://news.ycombinator.com/item?id=49269809",
+      "score": 78,
+      "comment_count": 24,
+      "posted_at": "2026-08-12T09:34:38+00:00",
+      "comments": [
+        {
+          "id": 49303875,
+          "author": "nlehuen",
+          "text": "I purchased Turbo Pascal 3 for Amstrad CPC 6128 with my pocket money back in 1989(?). That was 1000 FF back then (~275€ today) so quite a big sum for a teenager. My dad took pity on me and funded 50% of it. Best investment ever! Learning Pascal after Locomotive Basic was night and day. And the speeeeeed! I could finally compute 320x200 Mandelbrot set renderings in reasonable amounts of time (few minutes IIRC). I still have the disk & manual somewhere, as well as a couple related books. And for whatever reason Ctrl-K Ctrl-W still haunts my mind. It's really mind boggling that the entire thing (CP/M + IDE + compiler + libraries) fit on one side of a 3\" floppy disk (<180 kB)."
+        },
+        {
+          "id": 49272014,
+          "author": "jshaqaw",
+          "text": "Pascal will always have my heart. My first bridge outside Basic (I was stuck with a home pc so didn’t go down the assembly rabbit hole like others of my generation). Turbo Pascal’s IDE. Add it possible for a kid to learn and create in a way I never would have done if stuck with a collection of semi independent tools. for those who say just use the command line - this was 1989. DOS was not exactly today’s modern shell environment!"
+        },
+        {
+          "id": 49305344,
+          "author": "wowczarek",
+          "text": "Small machines eh? How about a Casio PB-2000C, in all its pocketable 910 kHz glory, up to 64k RAM shared between heap, stack, code and RAM filesystem. 192 x 32 LCD and a piezo buzzer. Serial and parallel ports available and a FDD. It also has a ROM card slot. And a card was developed, the only third-party ROM for this platform, by one Hans Larsson in Sweden, in the late 1980s. A 64k ROM with: - a mostly TP 5.5 compatible Pascal compiler, crt and friends - inline assembly - units, loadable libraries and all - debugger - full-screen editor, global search and replace, etc. - visual file manager - CLI with redirection and rudimentary shell scripting - variables, conditionals, arguments While the hardware platform is somewhat available and there is a very good emulator, due to \"issues\", the DL-Pascal ROM is not at this time publicly available and only a chosen few have access to it. Luckily there is a preservation effort underway."
+        },
+        {
+          "id": 49279702,
+          "author": "anthk",
+          "text": "Simlar language, compatible with MSDOS, CP/M and Unix: https://t3x.org/t3x/0/index.html"
+        },
+        {
+          "id": 49306439,
+          "author": "jgord",
+          "text": "Turbo Pascal is such an iconic and beloved product, they need to make a movie about it."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 21,
+      "id": 49232870,
+      "title_en": "Show HN: Ember – Redshift safe color palettes",
+      "title_ja": "Show HN: Ember – Redshift safe color palettes",
+      "url": "https://github.com/carpdiem/ember",
+      "hn_url": "https://news.ycombinator.com/item?id=49232870",
+      "score": 71,
+      "comment_count": 15,
+      "posted_at": "2026-08-09T16:26:37+00:00",
+      "comments": [
+        {
+          "id": 49304727,
+          "author": "QuantumNomad_",
+          "text": "Pretty neat! I currently have night shift active on my phone (it’s 11 PM here), so I have to take into account that the preview of what it looks like with redshift on is filtered twice for me, but I can see from the preview images that have not had filtering applied ahead of time that it does look good and distinguishable :) The README having a lot of preview images is great. If you could I would also much appreciate if there were a couple of example web pages linked that uses your CSS. For example if you make a GitHub pages branch in your repo and use it to host a couple of different kind of HTML pages (like an example blog post page with either lorem ipsum text or for example repeating parts of the text that you have in the README itself, and also an example dashboard page for example). So that one can look at that too in addition to the images in the README."
+        },
+        {
+          "id": 49306001,
+          "author": "hankbond",
+          "text": "This is pretty cool. Seems like a somewhat similar concept to certain types of color blindness? On so many occasions I have been photo editing in the evening and not realized I am wildly overcompensating my balance adjustments because I forgot to turn off redshift."
+        },
+        {
+          "id": 49306550,
+          "author": "kangruixiang",
+          "text": "How did you end up so invested and becoming so good with colors? I ask because typically programmers aren't good designers. Did you learn color theory professionally or is this a hobby?"
+        },
+        {
+          "id": 49304335,
+          "author": "cnity",
+          "text": "I love this, and the example images are really beautiful. It feels sci-fi, but is actually practical too. Nice job and thank you for sharing."
+        },
+        {
+          "id": 49304746,
+          "author": "andai",
+          "text": "I wanted to say \"under filter\" ones look way better, but then realized I have redshift enabled, so I was looking at double filtered ones!"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 22,
+      "id": 49296740,
+      "title_en": "Why does Opus 5 feel worse to work with?",
+      "title_ja": "Why does Opus 5 feel worse to work with?",
+      "url": "https://mun-logadan.github.io/why-does-opus-5-feel-worse/",
+      "hn_url": "https://news.ycombinator.com/item?id=49296740",
+      "score": 807,
+      "comment_count": 740,
+      "posted_at": "2026-08-14T10:12:48+00:00",
+      "comments": [
+        {
+          "id": 49296860,
+          "author": "barrkel",
+          "text": "The single biggest annoyance with Opus 5 is that it writes too elliptically. Sentences that orbit a point, then jump to it like it's a revealed insight. Unnecessarily abstract phraseology. Constantly using inanimate nouns as the subjects in sentences in order to unlock variety in verb choice, especially when it helps construct a sentence where the real action can 'land' like a surprise at the end. It is definitely more capable, and yes, I've found it can make unwarranted decisions, but actually I've found Fable worse for that, particularly if it's off in a subagent somewhere out of sight. And comments are out of control. I have a subsystem in my hobby app that I wrote over a couple of weekends with Opus + Fable. After ~30 or so commits it apparently started instructing subagents to copy the \"existing verbose comment style of the codebase\" - a verbose style it initiated. A review of the code showed it was approaching 3:1 comments to code ratio. I spent a day's worth of tokens (5x) rephrasing and eliminating comments."
+        },
+        {
+          "id": 49297770,
+          "author": "D13Fd",
+          "text": "I’ve been doing some heavy work on a personal project lately. I burned through the limits on Claude, the plus a few hundred dollars in credits, and ultimately decided to move to an OpenAI account just so I can keep going. I was surprised to find that OpenAI Sol is much much nicer to work with than Opus 5 or Fable at the moment. Especially on Opus 5, the way it communicates is just exhausting. It keeps “being honest” and “confessing” mistakes and just generally talking a lot. I felt like I had to really dig to see what it’s doing. The project involves OCR, and despite repeated instructions not to, both Claude models keep spinning out a bunch of agents to re-invent the OCR setup, and they inevitably seem to invent a primitive serial version that takes 20x the time, or longer, to complete, and then running it against thousands of docs. Basically I have to watch it like a hawk or it just spins out on red-teaming tasks that take hours and hours. I don’t know what its system prompt is, but Sol/Codex is just so much nicer to talk to. It only asks exactly what’s needed, it tells me only what I need to know, and it is just generally workmanlike. And it has not once decided to spawn an agent that spends hours pointlessly burning tokens and CPU cycles re-inventing the OCR process. I’m really liking it."
+        },
+        {
+          "id": 49305418,
+          "author": "zmmmmm",
+          "text": "I'm with the author and others in this comment thread, speculating that effectively the balance has tipped to where humans are no longer the target audience of post training - other agents are. Whether it's through the reasoning / CoT, or whether it's in handing off to subagents etc, the focus has moved to agents communicating in \"agent-speak\" to themselves or other agents. And human niceties are just kind of, noise in the way of getting work done. This will probably bring us to a cross roads where the folks that want to remain in oversight and control of the AI work will bifurcate from those that want to skate straight to the future where nobody looks at anything and outcomes are evaluated purely empirically."
+        },
+        {
+          "id": 49296889,
+          "author": "MyFirstSass",
+          "text": "I've gone back to 4.8. 5 would constantly veer of in random directions if not working from 100% strict and narrow instructions. I find it weird there's not more discussion here on HN on how the most used model now has clearly degraded in quality and it seems we've hit a peak and are on a downslope - because the model is clearly smaller or more economical for Anthropic no doubt about it, and the benchmaxxing they do is pure marketing bs - Fable in my view has also been not much better than 4.6 or 4.8 after a few days, disregarding the insane amounts of astroturfing and marketing everywhere. Theres thousands of threads of twitter, reddit and the internet at large but silence here. Weird but not weird as crypto bs was also insufferably rampant here for a while. Personally i think we've hit the top of the subsidisation phase and prices will probably 10-15x soon as foreshadowed with both API price policy changes from all the big providers, and now the 1100% deepseek API price changes from yesterday, this could domino into a market implosion and an AI winter, because expecting growth from the bizarre bubble carousel investments with little ROI atm is just not viable. A bit worried about this as i've already grown quite accustomed to these tools."
+        },
+        {
+          "id": 49298444,
+          "author": "sixdimensional",
+          "text": "Anthropic, if you're listening - by the time this crops up on Reddit, the front page of HN, etc.... you should be expecting calls from CEOs of major corporations next threatening to abandon ship... We've seen this pattern before several times.. I hope they are listening and address this publicly. I'm not sure what is going on, some users report it works fine or great, others report the degradation. I've experienced both at times, and it's been such a different experience it has made me wonder if there isn't some sort of hidden A/B test or model router in the background silently downgrading requests at times. Also, regarding the subsidized access to models, in my opinion, the frontier companies owe it to society to continue it. After mining the public content of all of humanity, I personally feel it is a service they owe the public in return.. not that my feeling of this counts for anything though."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 23,
+      "id": 49294997,
+      "title_en": "GLM-5.3: Frontier coding with emergent cyber capabilities",
+      "title_ja": "GLM-5.3: Frontier coding with emergent cyber capabilities",
+      "url": "https://z.ai/blog/glm-5.3",
+      "hn_url": "https://news.ycombinator.com/item?id=49294997",
+      "score": 1042,
+      "comment_count": 518,
+      "posted_at": "2026-08-14T05:19:59+00:00",
+      "comments": [
+        {
+          "id": 49297537,
+          "author": "leobuskin",
+          "text": "I bought $18 GLM official subscription yesterday (5.2, but new model version was already leaking on some docs), set it up with Claude Code harness... and I’ve bumped to $80 plan almost immediately. It’s the first model that agreed on a proper security research (red team scenario), executed it seamlessly, including 0-days in WP plugins, RCE, 6.8 kernel exploit adaptation, etc - while playing against another GLM agent as a defender (following HF story)! I understand that such models can be used by malicious actors, but it’s fair to have it publicly available (and play on your side in case of emergency). This is what changes the world in a better way, I think, not the guardrails."
+        },
+        {
+          "id": 49295921,
+          "author": "z4y5f3",
+          "text": "Apparently they are scanning OSS and popular software at scale and disclosing the vulnerabilities they found: https://cvd.z.ai/ Most of these are under embargo, but it seems there are a lot of CVE here from a wide range of popular software, many considered critical or high. I understand the argument of \"people are not actively looking\", but isn't the cost for such a scan getting lower by the week, and Anthropic's Project Glasswing is supposed to find them quite a while ago?"
+        },
+        {
+          "id": 49295043,
+          "author": "aliljet",
+          "text": "This is absolutely still shy of Sol and Fable, but only just by a hair. Ridiculous results. There's still not a compelling economic reason to drop OpenAI courtesy of the ludicrous reset addiction that's taken place, but it feels like we're on the precipice. How are you all toying with running this kind of thing in a mega quantized way locally? Two weeks out from released weights, but this is still just GLM 5.2 with post-training magic."
+        },
+        {
+          "id": 49295134,
+          "author": "hypfer",
+          "text": "I might be just reading my positive bias into that text, but is it possible that it is written less like SV marketing hype trash and more like researchers wrote it? It does feel like it respects both me and my time. Thank you, Z.AI. Amazing what difference it makes when the top of your org are actual university professors."
+        },
+        {
+          "id": 49295202,
+          "author": "aand16",
+          "text": "> Mythos 5 remains well ahead at 181 and 247 tasks. The pattern across the three is consistent: the further up the exploitation chain a benchmark sits, the wider the remaining gap to the closed frontier. Capability is growing fastest exactly where we are furthest behind. I appreciate they don't just take the opportunity to self-glaze."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 24,
+      "id": 49300800,
+      "title_en": "Maximizing the value of your Claude Code sessions",
+      "title_ja": "Maximizing the value of your Claude Code sessions",
+      "url": "https://claude.com/blog/maximizing-the-value-of-your-claude-code-sessions",
+      "hn_url": "https://news.ycombinator.com/item?id=49300800",
+      "score": 144,
+      "comment_count": 98,
+      "posted_at": "2026-08-14T16:15:21+00:00",
+      "comments": [
+        {
+          "id": 49304847,
+          "author": "superasn",
+          "text": "Recently I came across the /handoff skill, which I've been using a lot. I find it much better than /compact. Basically: - /handoff file creates a short document with the important context from your current session and maybe next steps as checklist. - You can then start a fresh session with /continue file - You can also hand the work from Claude to ChatGPT, or the other way around. Very useful at time of session limits. - Plus your handoff files becomes a useful piece of project memory that you can reference later. I find this much more useful than /compact or /clear because the context is saved in something portable instead of being tied to one session and i've seen better results doing this every 20 messages or so than running long sessions."
+        },
+        {
+          "id": 49302957,
+          "author": "rhaksw",
+          "text": "> @-mention files instead of naming them Love Claude, but the @ mention is broken in the desktop app. For the same project if I type the same query \"@ephem\" I get: CLI: https://imgur.com/a/VZMUCOa (good, relevant results) Desktop: https://imgur.com/a/QLSo4Ms (bad, irrelevant) Opened issue for this and it was automatically closed: https://github.com/anthropics/claude-code/issues/71421 I could have written the issue better (using CLI as comparison instead of VS Code). But, no doubt in my mind Claude could fix this itself in a minute."
+        },
+        {
+          "id": 49302293,
+          "author": "jnwatson",
+          "text": "Can anyone explain why the prefix cache is tied to effort? I frequently run Fable at xhigh effort to run statistical modeling way above my undergraduate understanding. Claude Fable produces Masters-degree level output, and then I spend lots of round trips asking it to explain different parts to me. The first part absolutely uses the extra effort, but the interrogation exercise is something a much simpler model, or the same model with much less effort, could answer."
+        },
+        {
+          "id": 49302988,
+          "author": "Glyptodon",
+          "text": "What I see is that I have to read a bunch of stuff and go through a bunch of hassle to save money when the root of it is that if I tell an AI to do work on a task while I'm busy with something else and come back later I've doubled my cost because the cache expires too quickly?"
+        },
+        {
+          "id": 49303086,
+          "author": "BeetleB",
+          "text": "> @-mention files instead of naming them. The file gets attached to your message directly, which saves a Read call, or a search if Claude has to go find it. I've heard it argued that this is an antipattern. If the file is large, it will read the whole file. With Read or something similar, it can do a targeted search and read only the relevant portion. Is this still not the case? Also, since they mention /context: Can anyone explain why /context takes so long to run? It usually takes several seconds, and I've had cases of it taking over a minute. And why don't they just show the basics in a status line somewhere? Just a plain: \"120K/200K tokens\" I hate having to type /context just to get this. And I shouldn't need to install an extension."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 25,
+      "id": 49303652,
+      "title_en": "New Lower and Upper Bounds for the Grothendieck Constant",
+      "title_ja": "New Lower and Upper Bounds for the Grothendieck Constant",
+      "url": "https://arxiv.org/abs/2608.11158",
+      "hn_url": "https://news.ycombinator.com/item?id=49303652",
+      "score": 41,
+      "comment_count": 8,
+      "posted_at": "2026-08-14T19:41:42+00:00",
+      "comments": [
+        {
+          "id": 49303984,
+          "author": "lukeplato",
+          "text": "related paper on the long-horizon AI research system used: https://arxiv.org/pdf/2608.11195"
+        },
+        {
+          "id": 49306454,
+          "author": "throwaway81523",
+          "text": "Interesting. I wonder if there has also been any recent progress on the Legendre constant. Kidding."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 26,
+      "id": 49249523,
+      "title_en": "Don't classify, hallucinate",
+      "title_ja": "Don't classify, hallucinate",
+      "url": "https://softwaredoug.com/blog/2026/08/10/hypothetical-classifications",
+      "hn_url": "https://news.ycombinator.com/item?id=49249523",
+      "score": 224,
+      "comment_count": 93,
+      "posted_at": "2026-08-10T20:50:36+00:00",
+      "comments": [
+        {
+          "id": 49299233,
+          "author": "Sharlin",
+          "text": "I can’t believe programming is now at the stage where advice like \"first have the computer give you totally wrong answers, then just find a function that maps the wrong answers to the correct ones!\" is a thing."
+        },
+        {
+          "id": 49299263,
+          "author": "kgeist",
+          "text": "A common case I have is when you don't have classifications to begin with. For example, you need to find what users complain about most. I take embeddings of all records, then cluster the embeddings into semantic groups, then ask an LLM to take a random sample from each clustered group and create a classification for that group. This method is sensitive to the thresholds (what is the maximum distance between embeddings for them to be still considered part of the same semantic group), so I run it all in an agentic loop where an agent tries different thresholds and clustering algorithms until it's satisfied with the result, plus it may deduplicate some groups. I run it all on self-hosted hardware, so it costs nothing to leave it running for, like, a night, and as a bonus, none of the corporate data leaves the office. I think a rigid set of manually created classifications may not capture all the possible classifications that can exist. Needs a review by a human, though."
+        },
+        {
+          "id": 49299011,
+          "author": "pu_pe",
+          "text": "Nice trick. Couldn't you embed the query though, compare it to the embedding of the categories, then ship only categories that are close to it in the prompt to a smaller model?"
+        },
+        {
+          "id": 49298600,
+          "author": "Majromax",
+          "text": "> In the notebook, I compute a MiniLM embedding of every real Wayfair classification. I compute the embedding of the fake, hypothetical embedding from the LLM. I then dot product the fake embedding into the real ones to find the most similar. Producing: [the right answer] Isn't this begging the question that the hallucinated classification will be more selective with respect to the real schema than the query itself? What would the dot product of <E(search query), E(schema)> have given? Even if that is too vague, smaller LLMs are capable rerankers; return the top N matching true categories and ask for a contextual ordering."
+        },
+        {
+          "id": 49307163,
+          "author": "hahahaa",
+          "text": "Don't hallucinate, mask logits if possible?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 27,
+      "id": 49299675,
+      "title_en": "Seven books I keep close because I love them",
+      "title_ja": "Seven books I keep close because I love them",
+      "url": "https://blog.plover.com/2026/08/02/",
+      "hn_url": "https://news.ycombinator.com/item?id=49299675",
+      "score": 312,
+      "comment_count": 136,
+      "posted_at": "2026-08-14T15:03:26+00:00",
+      "comments": [
+        {
+          "id": 49302791,
+          "author": "ntdef",
+          "text": "The New International Version (NIV) translation of the Bible is by far the worst translation on almost any metric you can think of, except maybe understanding how evangelical Christians read the Bible in the 90s and 2000s. The NIV has so many inexcusable translations that reinforce a theological worldview that matched the conversation on atonement and justification that was happening in the 90s and 2000s. There's a great catalog out there of the most egregious translations in the NIV [1]. One such example: > Romans 7:18 — The NIV here translates σάρξ (sarx) as “sinful nature” even though this implies later Augustinian doctrine on original sin that is not intended by the original writer. In contrast, the NRSV correctly chooses to translate this tricky Pauline term more literally as “flesh”. Are you interested in a readable Bible that flows well to modern English ears? The New Living Translation (NLT) is fantastic and very underrated. I recommend reading the Psalms in the NLT since much of the language of the Psalms being in a higher register in the NIV and other translations doesn't land as well, but reading the Psalms in NLT makes it much more relatable and human. I find the way it reads refreshing, and it's based on more modern scholarship. Are you interested in latest scholarly understanding of the Bible? The NRSV is the consensus version (as much as there could be one). Are you interested in understanding the Bible as American Evangelical Christians read it today? That's currently the English Standard Version (ESV), which many churches have switched to as the NIV has lost favor in Reformed circles. [1]: https://isthatinthebible.wordpress.com/articles-and-resource..."
+        },
+        {
+          "id": 49301391,
+          "author": "cvoss",
+          "text": "> knowing full well that [Delilah] will betray [Samson] It is not clear from the text that Samson is aware of the presence of Philistines the first three times. We are told they are lying in ambush in an inner chamber. We are not told that they make themselves known, attempt to subdue Samson, or interact with him in any way. Instead, we are told that Delilah announces their imminent presence, with no follow-through. (And why, after all, would they dare come in until Delilah has established that he is weak and harmless, given his reputation for strength and bloodthirst?) I don't believe Samson understands Delilah is betraying him. Not until the end when he's told her the real secret. Until that point, he may only receive her behavior as, at worst, a taunt and, at best, an attempt to pursue a kind of relational intimacy in which he makes himself vulnerable to her. And indeed, that's exactly where the story goes. He eventually makes himself vulnerable to her, both emotionally and physically. A shallow reading that concludes the characters must be dumb and naive to explain the ridiculousness of the plot is rarely the most appropriate reading. Frequently, the characters and nuances run much deeper, and a more careful and thoughtful reading is required. Ancient literature is stylistically terse compared to modern literature. Space on the manuscript is precious and not given over to things that the reader is meant to infer by reflection. And whenever a phrase or pattern is repeated, that means it is very, very significant. In this case, Samson's interaction with Delilah is not a one-off inexplicable behavior. It is one episode in a series of episodes, both preceding and following, where consistent patterns of behavior develop and escalate (e.g., his vengefulness, his vulnerability to women)."
+        },
+        {
+          "id": 49301337,
+          "author": "bdr",
+          "text": "Speaking of “witty, and learned, and wise, and humane”, this post is all of the above. The kind of writing that, before you’re even done reading, makes you eager to look up everything else the author has written."
+        },
+        {
+          "id": 49304576,
+          "author": "rsynnott",
+          "text": "> I have trouble connecting with the thinkers of the Middle Ages. Their thinking seems to me to be frightened, so overcautious, so cramped and circumscribed, I can't read it without sadness for the way that medieval Christianity strangled the human spirit for so long. As I understand it, particularly for the bizarre natural sciences stuff, a lot of this is actually _Aristotle's_ fault, not Christianity's. Adding the Pseudodoxia Epidemica to my list of things to read if I ever have infinite time."
+        },
+        {
+          "id": 49300544,
+          "author": "Joker_vD",
+          "text": "> After several repetitions of this, Samson decides that being shaved, blinded and crushed will be less exasperating than listening to any more of Delilah's nagging. A very off-tangent note, but I recently learned that Samson's last words, \"ἀποθανέτω ἡ ψυχή μου μετὰ τῶν ἀλλοφύλων\"/\"moriatur anima mea cum Philisthiim\", pretty much have never been translated into English literally; it's always \"Let me die with the Philistines\" for some reason."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 28,
+      "id": 49303046,
+      "title_en": "Show HN: Mole – Deep research agent for your terminal",
+      "title_ja": "Show HN: Mole – Deep research agent for your terminal",
+      "url": "https://github.com/lajosdeme/mole",
+      "hn_url": "https://news.ycombinator.com/item?id=49303046",
+      "score": 54,
+      "comment_count": 8,
+      "posted_at": "2026-08-14T18:52:48+00:00",
+      "comments": [
+        {
+          "id": 49304748,
+          "author": "recroad",
+          "text": "That is a LOT of code for a pretty basic feature."
+        },
+        {
+          "id": 49303670,
+          "author": "basedpolymer",
+          "text": "https://github.com/tw93/Mole I see a certain conflict of interest."
+        },
+        {
+          "id": 49303683,
+          "author": "daybox",
+          "text": "> Never spend more than you budgeted I assume that this is \"$ spent on search + $ spent on LLM\" < budget, but how do you handle the LLM spending more than you would expect on a request? Or is this handled by max_tokens and some form of pricing table? (and if so, how does caching play a role?)"
+        },
+        {
+          "id": 49306430,
+          "author": "hankbond",
+          "text": "> Honest numbers I'm glad your numbers are honest! For a moment I thought, hey, maybe this person's numbers are lying to me... but it turned out they were not so thank you!"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 29,
+      "id": 49301215,
+      "title_en": "Show HN: LuaCAD – Parametric CAD Scripted in Lua",
+      "title_ja": "Show HN: LuaCAD – Parametric CAD Scripted in Lua",
+      "url": "https://luacad.ad-si.com",
+      "hn_url": "https://news.ycombinator.com/item?id=49301215",
+      "score": 83,
+      "comment_count": 17,
+      "posted_at": "2026-08-14T16:43:22+00:00",
+      "comments": [
+        {
+          "id": 49307203,
+          "author": "lkjdsklf",
+          "text": "The change history on this repository is fascinating"
+        },
+        {
+          "id": 49303713,
+          "author": "fhn",
+          "text": "Does this have a web-based playground? I find https://www.pythonscad.org/playground/ to be nice to try out the project."
+        },
+        {
+          "id": 49302253,
+          "author": "tolugenius",
+          "text": "Really interesting! I actually use freecad so I'm use to that layer of the process but I'll check this out. Also good to see the work being done in modeling software these days"
+        },
+        {
+          "id": 49302341,
+          "author": "manny_rat",
+          "text": "Love it! OpenSCAD has very painful syntax. Is it possible to easily do bevels/chamfers or does it have the same limitations as OpenSCAD there?"
+        },
+        {
+          "id": 49302309,
+          "author": "WillAdams",
+          "text": "Is it able to access the file system and write/read files? I've been doing that via PythonSCAD for my current project https://github.com/WillAdams/gcodepreview and it might be interesting to do a re-write in another language."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 30,
+      "id": 49269240,
+      "title_en": "A humble cabbage became one of the Forbidden City’s treasures (2025)",
+      "title_ja": "A humble cabbage became one of the Forbidden City’s treasures (2025)",
+      "url": "https://www.cnn.com/2025/11/10/style/jadeite-cabbage-taiwan-forbidden-city-curio-hnk-intl",
+      "hn_url": "https://news.ycombinator.com/item?id=49269240",
+      "score": 60,
+      "comment_count": 8,
+      "posted_at": "2026-08-12T08:12:15+00:00",
+      "comments": [
+        {
+          "id": 49304262,
+          "author": "guessmyname",
+          "text": "> The cabbage is often referred to as one of the institution’s “three treasures,” along with two other popular artifacts — namely the Meat-Shaped Stone, a piece of jasper carved to resemble braised pork belly, and the Mao Kung Ting, a traditional cooking vessel featuring the longest known inscription of ancient characters on any item of Chinese bronzeware. The trio are often collectively described as “pickled cabbage pork hotpot” by tour guides and as a marketing gimmick. • https://en.wikipedia.org/wiki/Jadeite_Cabbage • https://en.wikipedia.org/wiki/Meat-Shaped_Stone • https://en.wikipedia.org/wiki/Mao_Gong_ding • https://theme.npm.edu.tw/exh106/npm_anime/cabbage/en/index.h... • https://theme.npm.edu.tw/exh106/NorthandSouth-4/en/index.htm... • https://theme.npm.edu.tw/exh104/npmforfun/en/mediaworks/medi..."
+        },
+        {
+          "id": 49302944,
+          "author": "Procrastes",
+          "text": "It really is beautiful. It also makes me think of Sir Terry Pratchett, which is a good thing. If this were Ankh-Morpork, it would be a stunningly realistic carving of a cabbage—carved from another, larger cabbage."
+        },
+        {
+          "id": 49302382,
+          "author": "jackyinger",
+          "text": "I have seen this in person, it really is remarkable how the artist used the natural color gradient in the stone. The entire museum is well worth a visit."
+        },
+        {
+          "id": 49302822,
+          "author": "Ir0nMan",
+          "text": "https://archive.is/rRDdk"
+        },
+        {
+          "id": 49304685,
+          "author": "mrlonglong",
+          "text": "Older than Liz Truss chuckles"
+        }
+      ],
+      "summary_ja": ""
+    }
+  ]
+}
