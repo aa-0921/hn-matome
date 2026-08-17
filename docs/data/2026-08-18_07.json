@@ -1,0 +1,1017 @@
+{
+  "date": "2026-08-18T00:00:00+09:00",
+  "slot": "07",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 49334991,
+      "title_en": "GPU Offload in Rust: Portable, Safe, and Fast",
+      "title_ja": "GPU Offload in Rust: Portable, Safe, and Fast",
+      "url": "https://arxiv.org/abs/2608.13759",
+      "hn_url": "https://news.ycombinator.com/item?id=49334991",
+      "score": 124,
+      "comment_count": 24,
+      "posted_at": "2026-08-17T17:54:59+00:00",
+      "comments": [
+        {
+          "id": 49337805,
+          "author": "whateverboat",
+          "text": "> This module is under active development. Once upstream, it should allow Rust developers to run Rust code on GPUs. We aim to develop a rusty GPU programming interface, which is safe, convenient and sufficiently fast by default. This includes automatic data movement to and from the GPU, in a efficient way. We will (later) also offer more advanced, possibly unsafe, interfaces which allow a higher degree of control. I really appreciate the work and the effort that went into this. However, such an approach has previously not really worked for C++ with LLVM offload. Why would it work for Rust?"
+        },
+        {
+          "id": 49338120,
+          "author": "YuechenLi",
+          "text": "So... why go through LLVM at all instead of having the MIR target PTX/HIP C directly then? If they really wanted a vendor neutral solution for Rust GPU, that already exists: you write the CPU side code, including buffering, allocation, concurrency, etc through Vulkan binding and consume the compute kernel in SPIR-V from HLSL/GLSL/WGSL etc. As it stands, the way they use Rust here feels more like using it like TypeScript types/interfaces than anything else. Again, the size of most operations that should be done on the GPU is known ahead of time before compilation, so it's very much possible to statically allocate memory at compile time instead of going through all this trouble to write what's essentially a Rust shaped DSL for GPU compute."
+        },
+        {
+          "id": 49337725,
+          "author": "boywitharupee",
+          "text": "is this mainly about making host binaries self-contained for heterogenous workloads? also, seems like this is mostly targeted towards HPC audience?"
+        },
+        {
+          "id": 49336474,
+          "author": "Thomashuet",
+          "text": "That's promising but did they publish any code? I can't find anything in the abstract."
+        },
+        {
+          "id": 49336721,
+          "author": "jasonjmcghee",
+          "text": "> the rust-gpu project has to emulate pointers[8], which we consider a blocking issue for most HPC benchmarks. Why is it a blocking issue? I feel like this is very aligned with the goals of rust-gpu."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 2,
+      "id": 49330781,
+      "title_en": "A Preview of DuckDB v2.0",
+      "title_ja": "A Preview of DuckDB v2.0",
+      "url": "https://duckdb.org/2026/08/17/duckdb-20-highlights",
+      "hn_url": "https://news.ycombinator.com/item?id=49330781",
+      "score": 489,
+      "comment_count": 85,
+      "posted_at": "2026-08-17T13:46:27+00:00",
+      "comments": [
+        {
+          "id": 49338488,
+          "author": "dangoodmanUT",
+          "text": "It's funny to me that we still don't have incremental materialized views. All of the parts are there (export state, agg_state (forget fn name), finalize). I wonder if they're avoiding an explicit war with clickhouse or something. I do recall they mentioned they want to add this to ducklake. Incremental MVs are ClickHouse's best feature. If DDB adds this, the last moat is distributed query execution."
+        },
+        {
+          "id": 49333754,
+          "author": "otter-in-a-suit",
+          "text": "Super excited about Quack (partially due to the name). I use duckdb for both analytics and runtime, but I do have to serve/handle/manage a giant, multi-GiB duckdb file as effectively a runtime artifact[1]. I'm aware that this isn't the _perfect_ database for this, but the mix of it being fast, having spatial support, sane coding interfaces, great dbt integration, and me being able to do everything between \"run a giant several hundred step dbt pipeline\" to \"query the output of said pipeline\" to \"read/query a csv on disk\" with the exact same tool is just so nice. If I could centrally manage said asset more akin to a traditional database, I'd be very happy. I've partially solved this with separate databases for different steps in the data pipeline(s) and have even experimented with Clickhouse as a complete alternative, but I really like way too many things about duckdb to replace it. [1]: If you care: https://skaldmaps.com/blog/2026/07/zip-codes-are-a-bad-spati..."
+        },
+        {
+          "id": 49332405,
+          "author": "jtbaker",
+          "text": "DuckDB is one of the things I've been most excited about in a long time. Introduced it to projects at 3 companies since 2023, greatly lowering resource requirements and running it in a variety of environments. Just having the ability to do out of core bigger than memory data processing on lower end consumer grade hardware is remarkable. Thanks to the team for everything!"
+        },
+        {
+          "id": 49337836,
+          "author": "therealdrag0",
+          "text": "Hate to bring it up, but 10,000 commits in less than 6 months is a lot. Is AI a major contribute here? Is AI use for accelerated development of a beloved tool like DuckDB enough to quiet lingering doubters?"
+        },
+        {
+          "id": 49338329,
+          "author": "luizfelberti",
+          "text": "> A repository is a name, a URL prefix, and one or more RSA public keys that are trusted to sign the extensions served from it. Is it too late to beg Hannes and Mark to let us have something like minisign instead of RSA? :) Very excited for 2.0, congrats folks!"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 3,
+      "id": 49331423,
+      "title_en": "AI-Generated GitHub Copilot “Autofix” Allowed Compromise of Snowflake's Jira",
+      "title_ja": "AI-Generated GitHub Copilot “Autofix” Allowed Compromise of Snowflake's Jira",
+      "url": "https://www.wiz.io/blog/red-agent-snowflake-copilot-cicd-bug",
+      "hn_url": "https://news.ycombinator.com/item?id=49331423",
+      "score": 289,
+      "comment_count": 120,
+      "posted_at": "2026-08-17T14:18:38+00:00",
+      "comments": [
+        {
+          "id": 49333161,
+          "author": "inahga",
+          "text": "I probably would have made the same mistake. It is negligent to write GitHub Actions without using static analysis. Use zizmor in CI https://github.com/zizmorcore/zizmor error[template-injection]: code injection via template expansion --> .github/workflows/jira_issue.yml:24:29 | 22 | run: | | --- this run block 23 | # Escape special characters in title and body 24 | TITLE=$(echo '${{ github.event.issue.title }}' | sed 's/\"/\\\\\"/g' | sed \"s/'/\\\\\\'/g\") | ^^^^^^^^^^^^^^^^^^^^^^^^ may expand into attacker-controllable code | = note: audit confidence → High = note: this finding has an auto-fix"
+        },
+        {
+          "id": 49332391,
+          "author": "mjr00",
+          "text": "It's interesting to look at what was being attempted when the vulnerability was introduced[0] > Workflows like jira_close.yml use deprecated atlassian JIRA actions and have a dependency on the gh-actions repo. This is not ideal and unecessarily complex. PR updates jira_close workflow to use direct API calls via curl. It preserves custom fields used too. I won't speak to this projects' management and how they prioritize things, but from my own experience, pre-AI, this type of change would have been firmly in the \"this is a minor annoyance, put it in the Tech Debt Backlog alongside the 50000 other tickets\" and never actually done. The cost of a human investing the time understanding how to fix the problem, doing code changes, testing them, and deploying them is just way too high for what actual value this change brings, which is close to nothing. Now with AI, it's as simple as firing up an agent and telling them to make a change; as much effort as writing that backlog Jira ticket in the first place. Similar to the problem open source is having with low-value PRs, companies are going to have to start realizing that code is not free to review or maintain, even when it's generated for ~free, in their internal processes. Just because an agent can fix a minor tech debt annoyance with a few lines of instructions doesn't mean it should . [0] https://github.com/snowflakedb/snowflake-connector-net/pull/..."
+        },
+        {
+          "id": 49332462,
+          "author": "procone",
+          "text": "YAML is a nightmare fuel spec. In its quest to make markup \"human readable\", it has created countless footguns. I honestly prefer XML at this point."
+        },
+        {
+          "id": 49332696,
+          "author": "vultour",
+          "text": "The first linked PR (#1218) has only one commit co-authored by Copilot and it's not related to the vulnerability, and neither are the other suggestions in the PR. Am I missing something?"
+        },
+        {
+          "id": 49334578,
+          "author": "CodeWithLeo",
+          "text": "The interesting lesson here isn't really “AI generated insecure code.” We've had insecure code for decades. The bigger issue is that AI makes it much cheaper to introduce changes, while the cost of reviewing those changes hasn't gone down nearly as much. The bottleneck is moving from code generation to code verification."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 4,
+      "id": 49338285,
+      "title_en": "Fairphone 6 and PostmarketOS working main camera",
+      "title_ja": "Fairphone 6 and PostmarketOS working main camera",
+      "url": "https://catcrafts.net/posts/fairphone-6-postmarketos-working-main-camera",
+      "hn_url": "https://news.ycombinator.com/item?id=49338285",
+      "score": 11,
+      "comment_count": 0,
+      "posted_at": "2026-08-17T22:01:17+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 5,
+      "id": 49336573,
+      "title_en": "AI;DR (AI; Didn't Read)",
+      "title_ja": "AI;DR (AI; Didn't Read)",
+      "url": "https://www.rickmanelius.com/p/aidr-ai-didnt-read",
+      "hn_url": "https://news.ycombinator.com/item?id=49336573",
+      "score": 428,
+      "comment_count": 259,
+      "posted_at": "2026-08-17T19:47:15+00:00",
+      "comments": [
+        {
+          "id": 49336966,
+          "author": "gortok",
+          "text": "The part that astonishes me is that in the year of our common era two thousand twenty-six that it's not universally offensive and reviling to post an AI-generated response to another person. If I'm reading something on the internet, I'm either reading it to learn, or I'm reading it to be persuaded. If I wanted the LLM to teach me (thank you, no), I would ask an LLM. I'm reading your website/newsletter/email because I want to hear from you. . If you can't be bothered to put your time into writing it and teaching me what you think, why should I be bothered to read it?"
+        },
+        {
+          "id": 49337050,
+          "author": "LPisGood",
+          "text": "My coworkers continue to dump hundreds of lines of AI documentation in every PR and every other line of code has between one and ten lines of AI generated comments, talking about the real unlock and how things are byte for byte identical on the load bearing path or how the acceptance ladder is misleading. Features are coming out and metrics are improving, but we’re basically in a post readability code base, with the occasional performative comment about a variable name. I don’t really know how to address this situation or if it needs addressed. I certainly don’t read the long-winded AI comments or the AI documentation, but perhaps it’s useful for the AI on its next pass."
+        },
+        {
+          "id": 49337297,
+          "author": "afr0ck",
+          "text": "I think the main reason many people (including me), very often, lack the motivation to read content that is likely generated by AI is the suspicion that it comes from a place of intellectual laziness. Another reason, based on personal experience, is that AI content may suffer from too much verbosity, too much jargon and over-confidence, which makes the reading experience feel fake and border-line irritating. In many cases the content may have very little to no nuance, which is ultimately a waste of time. As an anecdote, someone posted a blogpost on Linkedin on using agents to implement a driver to access PCIe devices over TCP/IP. I was intrigued because that's not an easy task for several reasons, like handling PCIe interrupts and DMA. For exmaple, how does the remote machine map the device's PCIe BARs? And when it issues I/O to the devices registers, how are these reads and writes transferred to the remote device. In the end, this is just some virtual memory. In a local machine, this is either directly mapped to the PCIe physical addresses or some IOMMU virtual address space which is then translated by the hardware upon CPU/device/VM access. After reading the long verbose promising article, in the end, the guy (with the help of the agent) only managed to implement access to the PCIe config space so that lspci on the remote machine works and shows the remote PCIe device, but that's all. It never addressed the issues above nor even mentioned them. The code was AI generated. The article was AI-written. The article never made a reference to DMA, interrupts, MSIX-X, IOMMU, IOTLB, virtual memory, etc, but it made big claims on next-gen datacenter disaggregated architecture, boosting GPU utilization, reducing large scale inference costs, etc. Anyway, you get my point: big long beautiful words, but zero nuance."
+        },
+        {
+          "id": 49337011,
+          "author": "cortesoft",
+          "text": "I really like the point I read somewhere the other day; instead of sending me the AI output, just send me the prompt you used to generate it. That is the only part that contains only the information you are trying to convey. The rest is just guesses flowery language added, and it confuses the actual message being sent."
+        },
+        {
+          "id": 49337044,
+          "author": "neilv",
+          "text": "> Look, I get it. It’s Q3 2026, and we should expect that everyone is utilizing AI at SOME point in their process (sourcing ideas, creating outlines, refining prose, etc.). Sounds like this isn't everyone, but rather, it's people who have nothing to say, and -- even after they've \"sourced ideas\" -- they don't know how to reason about it, nor how to communicate it. This isn't everyone. This is people engaged in generating noise, for the sake of noise."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 6,
+      "id": 49330597,
+      "title_en": "Incident with Github.com",
+      "title_ja": "Incident with Github.com",
+      "url": "https://www.githubstatus.com/incidents/zkxwbgr0cnmx",
+      "hn_url": "https://news.ycombinator.com/item?id=49330597",
+      "score": 472,
+      "comment_count": 847,
+      "posted_at": "2026-08-17T13:35:06+00:00",
+      "comments": [
+        {
+          "id": 49333670,
+          "author": "jubilanti",
+          "text": "Almost 3 hours in and still \"We are still working to identify the root cause\" Can't even view diffs in the web interface! I'm out! I am willing to pay ~$5-10/mo for a reliable host I can swap as painlessly as possible. Mostly just building little static sites and little PWAs, no more than 500mb a repo and 10gb total. Need a repo with PRs and issues, where people can register free account and contribute or raise issues, GH actions CI, and pages host to deploy static sites. I don't use more than 100 mins of CI a month. Any recommendations? edit: GitLab free tier has all I need, but I kind of want to pay and have some kind of reliability (not necessarily an SLA, but). But their next tier is $29/mo, which is too much."
+        },
+        {
+          "id": 49331168,
+          "author": "leishman",
+          "text": "I don't understand why Github hasn't solved this problem with pricing updates. My understanding is they are getting hammered with LLM generated code growing their traffic by over an order of magnitude. So why not rate limit non-paying users and charge for whatever scarce resource is being consumed that is causing them to constantly fall-over? This seems like a basic economics problem."
+        },
+        {
+          "id": 49330791,
+          "author": "khvn26",
+          "text": "I had a lot of goodwill for GitHub but I think today is the tipping point. Looking at a unicorn page, I feel this lingering hope that it's transient (like it usually was in the old days) but my mind reassures me it's probably going to be a long full outage again. The hope is dead."
+        },
+        {
+          "id": 49335861,
+          "author": "tom1337",
+          "text": "Wow they just went into \"another\" outage > Update 16:59 UTC - The degradation affecting API Requests, Actions, Git Operations, Issues, Pages, Pull Requests and Webhooks has been mitigated. We are monitoring to ensure stability. > Update 17:30 UTC - Git Operations is experiencing degraded performance. We are continuing to investigate. > Update 17:36 UTC - Issues is experiencing degraded performance. We are continuing to investigate. > Update 18:48 UTC - API Requests is experiencing degraded availability. We are continuing to investigate."
+        },
+        {
+          "id": 49331097,
+          "author": "s_dev",
+          "text": "I recall reading years ago that cloud services were expected to run with a reliability of 3 or 4 '9's and that if they didn't competing services would quickly overtake them in adoption. The industry was supposed to be that cut throat. Has big tech reached a similar status like banks in that they are \"too big to fail\" i.e. when they do fail we all just look the other way and say: \"well everyone else is out too\". Didn't someone recently calculate that GitHub is running at 95%? For comparison the Irish Rail service which is not reliable has 80% of it's trains run on time. This seems absurd and really challenges a lot of ideas I had about big tech and cloud infrastructure. GitHub seems to have remained the dominant player relative to GitLab etc."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 7,
+      "id": 49336909,
+      "title_en": "The Origin of Consciousness (2008)",
+      "title_ja": "The Origin of Consciousness (2008)",
+      "url": "https://blog.plover.com/brain/Jaynes.html",
+      "hn_url": "https://news.ycombinator.com/item?id=49336909",
+      "score": 39,
+      "comment_count": 31,
+      "posted_at": "2026-08-17T20:12:58+00:00",
+      "comments": [
+        {
+          "id": 49338509,
+          "author": "nemo",
+          "text": "[delayed]"
+        },
+        {
+          "id": 49338029,
+          "author": "txrx0000",
+          "text": "The article's definition of consciousness is precise, but it's not what people are referring to in most cases where the word \"consciousness\" is used. Of course, a word can have multiple definitions. But colloquially, when people say consciousness, we usually mean the thing that goes away when we sleep or are anesthetized. I don't think there's a much better way to define that. The contrast between the wakeful and non-wakeful state as oneself experiences from the inside is precisely what defines consciousness in the colloquial sense. It seems to be a self-defining concept because I can't even define what \"experiences\" means without thinking about the wakeful/non-wakeful contrast phenomena that is consciousness, and \"experiences\" was supposed to be a part of the definition of \"consciousness\" one sentence ago."
+        },
+        {
+          "id": 49337985,
+          "author": "GlenTheMachine",
+          "text": "Isn't this a testable hypothesis? If consciousness spread virally and isn't a natural outgrowth of the physical structure of the brain, then presumably isolated indigenous tribes would still have pre-consciousness mental processes, and that should be detectable somehow. The being said, I'm reading \"Proto\" By Laura Spinney, and the thing that strikes me is how recently the world's major languages developed. Everyone assumes we had language fifty thousand years ago, but the actual language families we know about all seem to trace to no more than about 10,000 BCE, and maybe a lot younger than that. The odds of Proto-Indo-European being traceable to a single tribe in the Black Sea region circa 4500 BCE seem really low to me, but that's what seems to have happened."
+        },
+        {
+          "id": 49338452,
+          "author": "colinrand",
+          "text": "I find this on the crackpottery side. Narrowly defining a certain aspect of consciousness to make a point, and disregarding many (most) other aspects of consciousness. Self-aware much?"
+        },
+        {
+          "id": 49337472,
+          "author": "pavel_lishin",
+          "text": "I think this was also one of the inspirations for Neal Stephenson's \"Snow Crash\", which also deals with (among other things) the nature of consciousness and religion in the human mind."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 8,
+      "id": 49338459,
+      "title_en": "Bluesky draws its logo on screenshots",
+      "title_ja": "Bluesky draws its logo on screenshots",
+      "url": "https://timmarinin.net/2026/bluesky-screenshots/",
+      "hn_url": "https://news.ycombinator.com/item?id=49338459",
+      "score": 6,
+      "comment_count": 0,
+      "posted_at": "2026-08-17T22:20:40+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 9,
+      "id": 49333824,
+      "title_en": "Sun Clock",
+      "title_ja": "Sun Clock",
+      "url": "https://sunclock.net/",
+      "hn_url": "https://news.ycombinator.com/item?id=49333824",
+      "score": 148,
+      "comment_count": 45,
+      "posted_at": "2026-08-17T16:37:54+00:00",
+      "comments": [
+        {
+          "id": 49338252,
+          "author": "TimTheTinker",
+          "text": "It looks like the \"golden hour\" may be hardcoded as the hour before sunset. May I suggest updating it to be based on the sun's position in the sky? In high-northern and low-southern latitudes, the sun can stay close to the horizon for long stretches of the day depending on the season. For example, in Iceland in parts of the spring and fall, the golden hour lasts for most of the day - amazing for photography and just enjoying the scenery."
+        },
+        {
+          "id": 49336758,
+          "author": "mourner",
+          "text": "Author of suncalc (the JS library behind the sun calculations) here — happy to see such a nice application of it! Heads up if the author's reading this — I recently released a major overhaul of the library that makes it a lot more precise: https://github.com/mourner/suncalc"
+        },
+        {
+          "id": 49338435,
+          "author": "donohoe",
+          "text": "Unrelated but a little related (semi-shameless plug?)- I made a small weather web-app that also plotted daylight hours as a secondary feature. Its really weather over the next 12 hours on the primary ring, and day/night transition on the inner. https://donohoe.dev/weather/"
+        },
+        {
+          "id": 49335447,
+          "author": "zamadatix",
+          "text": "I love it. It'd be nice if I could click points on a map and see the difference to my local one as well. Or in the calendar view if it'd show a copy of the clock (i.e. coloring not current hand positions) for the time I'm hovered over."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 10,
+      "id": 49331220,
+      "title_en": "How to disable or avoid intrusive AI",
+      "title_ja": "How to disable or avoid intrusive AI",
+      "url": "https://www.librarian.net/notoai/",
+      "hn_url": "https://news.ycombinator.com/item?id=49331220",
+      "score": 220,
+      "comment_count": 118,
+      "posted_at": "2026-08-17T14:07:56+00:00",
+      "comments": [
+        {
+          "id": 49332207,
+          "author": "dinkleberg",
+          "text": "I recently discovered that you need to have Siri enabled for Apple CarPlay. I expect we're going to see a lot of this where when you disable the AI functionality the devs won't have put in fallback states and you'll be effectively locked out. With CarPlay for instance there is no reason that I shouldn't be able to listen to my music or use the map without Siri. But things like responding to texts does rely on Siri, so just gate that piece. It is rather unfortunate."
+        },
+        {
+          "id": 49331888,
+          "author": "rad-b",
+          "text": "Such a cool guide to such a bizarre problem we live in… Companies forcing features that nobody wants, but that are also expensive to operate and cost real money to run? Market can definitely stay irrational for long."
+        },
+        {
+          "id": 49338380,
+          "author": "VCFundedGenYer",
+          "text": "The article missed a few obvious ones: LibreWolf and Waterfox rip out the AI features with prejudice. I don't know anyone who uses Zen or Helium (and haven't heard of the latter). If you have an iPhone 14 or older, you're safe from any AI features and have legacy Siri. LibreOffice instead of Office Linux instead of Windows (and I will not be entertaining \"but end users won't do that\" - because that is false. Linux market share is growing year over year) Codeberg instead of GitHub VSCodium instead of VSCode"
+        },
+        {
+          "id": 49336190,
+          "author": "kennywinker",
+          "text": "Switch to linux, that's what I did. Literally. The endless waves of companies forcing LLMs down our throats and into our workflows drove me off the mac. And windows is worse, which leaves linux."
+        },
+        {
+          "id": 49335962,
+          "author": "jessamyn",
+          "text": "Hello -- this is mine! There's a short URL: https://NoToAI.org If people have suggestions I'll add them."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 11,
+      "id": 49329575,
+      "title_en": "GPT 5.6 Sol is the best \"vision\" model OpenAI ever released",
+      "title_ja": "GPT 5.6 Sol is the best \"vision\" model OpenAI ever released",
+      "url": "https://blog.roboflow.com/openai-gpt-5-6/",
+      "hn_url": "https://news.ycombinator.com/item?id=49329575",
+      "score": 282,
+      "comment_count": 146,
+      "posted_at": "2026-08-17T12:09:42+00:00",
+      "comments": [
+        {
+          "id": 49330801,
+          "author": "HarHarVeryFunny",
+          "text": "The summary \"There are still clear limits. Gemini 3.5 Flash remains a better practical choice [than GPT 5.6 Sol] for high-volume detection and counting in our benchmark, especially at its price.\" seems rather understated ! GPT 5.6 Sol was outperformed on all benchmarks by Gemini 3.5 Flash, apart from a single exception (OCR) where Fable was the winner. Gemini 3.5 Flash not only outperformed GPT 5.6 Sol, but did so at 1/3 of the cost."
+        },
+        {
+          "id": 49330004,
+          "author": "weli",
+          "text": "Anecdotal, opinion: Gpt is really good in vision stuff, or at least their MoE seems to be really cohesive. From my experience Claude models can be really good at language but the moment they need to look at a picture and decide why the design is not good what parts need improvement it degrades a lot. My easiest benchmark is giving them a screenshot of a feature in my app and tell it \"identify non-normative UI blocks and improve readability and consistency\". Sol does a great job at re-structuring the page into composable units that build upon each other and the general looks and feels of the app. Claude tends to over-focus one one part while completely forgetting about the rest or the cohesion as a whole."
+        },
+        {
+          "id": 49330156,
+          "author": "evrimoztamur",
+          "text": "Penny sample shown looks like failed EXIF orientation registered by the model/harness. The coins are correctly marked, it's rotated 90 degrees."
+        },
+        {
+          "id": 49331008,
+          "author": "bearjaws",
+          "text": "It is funny to me seeing Sol used for what a \"traditional\" AI model can do already (counting pills). We have vision models for our pharmacy and I could never imagine taking the latency hit to use a Sol in our robotics, it would be likely 25-50x slower."
+        },
+        {
+          "id": 49334444,
+          "author": "dllu",
+          "text": "Vision is still embarrassingly bad. ChatGPT Pro with GPT 5.6-sol: https://chatgpt.com/share/6a834217-ca8c-83e8-a8e8-45d5b8797b... The puzzle: https://activityvillage-files.s3.eu-west-2.amazonaws.com/s3f..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 12,
+      "id": 49270194,
+      "title_en": "Olo (Color)",
+      "title_ja": "Olo (Color)",
+      "url": "https://en.wikipedia.org/wiki/Olo_(color)",
+      "hn_url": "https://news.ycombinator.com/item?id=49270194",
+      "score": 252,
+      "comment_count": 59,
+      "posted_at": "2026-08-12T10:26:14+00:00",
+      "comments": [
+        {
+          "id": 49337846,
+          "author": "antics",
+          "text": "If you are interested in \"imaginary\" colors, the gamut is actually well-specified, and (I hope it is appropriate to comment) that I made a visualization where you can drag a selection thumb over the gamut to see the \"simulated\" version of that color. Also include it is a 12-step contrast-sensitive color palette generator for said imaginary colors, which would allow you to make websites and (say) vscode themes using entirely imaginary colors! https://docs.moment.dev/d/hausdorff/2zmqjlmldchela29xvbzlbki..."
+        },
+        {
+          "id": 49333814,
+          "author": "GolfPopper",
+          "text": "It is possible to see something close (how close I don't know) by saturating the S & M cones instead of avoiding them. Wikipedia refers to these as 'chimerical colors': https://en.wikipedia.org/wiki/Impossible_color#Chimerical_co..."
+        },
+        {
+          "id": 49334349,
+          "author": "hdz",
+          "text": "The closest approximation to Olo colored paint you can buy is also by the company that makes some of the blackest black paint. I haven't used it personally. https://culturehustle.com/collections/paint/products/yolo-ne..."
+        },
+        {
+          "id": 49333233,
+          "author": "drayfield",
+          "text": "Is it too late to rename it to Octarine? https://en.wiktionary.org/wiki/octarine"
+        },
+        {
+          "id": 49337107,
+          "author": "jeremyjh",
+          "text": "Reminds me a bit of a Greg Egan story from Instantiation called Seventh Sight. Kids with artificial eyes hack them to see colors and spectrum not perceptible by humans."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 13,
+      "id": 49279146,
+      "title_en": "Intriguing Stories in Computer Science",
+      "title_ja": "Intriguing Stories in Computer Science",
+      "url": "https://inventwithpython.com/blog/intriguing-stories-in-cs.html",
+      "hn_url": "https://news.ycombinator.com/item?id=49279146",
+      "score": 11,
+      "comment_count": 0,
+      "posted_at": "2026-08-12T21:56:40+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 14,
+      "id": 49333344,
+      "title_en": "Judge sets framework for Nine PBS to retrieve archival data",
+      "title_ja": "Judge sets framework for Nine PBS to retrieve archival data",
+      "url": "https://current.org/2026/08/judge-sets-framework-for-nine-pbs-to-retrieve-archival-data/",
+      "hn_url": "https://news.ycombinator.com/item?id=49333344",
+      "score": 101,
+      "comment_count": 41,
+      "posted_at": "2026-08-17T16:11:37+00:00",
+      "comments": [
+        {
+          "id": 49336208,
+          "author": "hn_throwaway_99",
+          "text": "I think stories like these highlight the need for clearer (not necessarily more) regulations around contractor/subcontractor/client relationships and what happens when one of them goes tits up. There were rampant issues in the fintech world that exploded when Synapse, a banking as a service provider, went bankrupt and their ledger didn't match what partner banks had in their accounts. End users were told \"your deposits are FDIC insured\", but in bankruptcy court the judge was sort of at a loss over how to rectify things - the banks weren't insolvent, and the FDIC (rightfully) said \"hey, this isn't our problem, our regulated entities are in compliance\". Looks like a similar situation happened here, where the contractors are both doing the \"not it\" thing. I feel like a lot of tech innovation and \"business process innovation\" over the past 15 years was just ignoring regulations that were built up over decades, only discovering the reasons for those regulations when the tide went out and seeing that lots of companies had been pantsless the whole time."
+        },
+        {
+          "id": 49336566,
+          "author": "js2",
+          "text": "Open Source Storage (OSS), the vendor in question, was around for two decades before going out of business last year. The first and last archived versions of its web site: https://web.archive.org/web/20040628023451/https://www.ossto... https://web.archive.org/web/20250329140721/https://www.ossto... (The first version isn't too exciting. It's a broken Flash site.)"
+        },
+        {
+          "id": 49338336,
+          "author": "Animats",
+          "text": "The court got this right. This is when you need a special master to help with cleanup after a bankruptcy. We saw something like this when TechShop went bankrupt, with member property in storage on the premises. The bankruptcy trustee set up a procedure where former members could make an appointment to retrieve their property, escorted by a representative of the trustee. Huge pain, but necessary."
+        },
+        {
+          "id": 49337221,
+          "author": "dredmorbius",
+          "text": "Earlier coverage (St. Louis KETC / Nine PBS sues Iron Mountain for data access): \"Nine PBS sues Iron Mountain over blocked access to archival data\" < https://news.ycombinator.com/item?id=49285418 > This is working out largely as I'd suggested it should, albeit with a court's intervention. See: < https://news.ycombinator.com/item?id=49293058 >. I'd still argue that I.M. should have anticipated this situation, and have some process in place to address it. \"See a court\" might well be part of that process."
+        },
+        {
+          "id": 49337896,
+          "author": "johnnyApplePRNG",
+          "text": "https://archive.is/OBGDn"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 15,
+      "id": 49335517,
+      "title_en": "Roboflow Playground: Try and Compare 30 Computer Vision Models",
+      "title_ja": "Roboflow Playground: Try and Compare 30 Computer Vision Models",
+      "url": "https://blog.roboflow.com/roboflow-playground/",
+      "hn_url": "https://news.ycombinator.com/item?id=49335517",
+      "score": 30,
+      "comment_count": 3,
+      "posted_at": "2026-08-17T18:28:07+00:00",
+      "comments": [
+        {
+          "id": 49336738,
+          "author": "my002",
+          "text": "Neat! Looks like an updated version of OCR Arena[0], which doesn't seem to have kept up with new models for a bit. Would be nice to see the inclusion of Mistral OCR 4, Baidu's Unlimited-OCR, and OlmOCR2. [0]OCR Arena: https://www.ocrarena.ai/"
+        },
+        {
+          "id": 49338267,
+          "author": "amelius",
+          "text": "What free and open models are people using for segmentation tasks these days?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 16,
+      "id": 49332751,
+      "title_en": "Launch HN: Speko (YC S26) – OpenRouter for Voice AI",
+      "title_ja": "Launch HN: Speko (YC S26) – OpenRouter for Voice AI",
+      "url": "https://speko.ai/",
+      "hn_url": "https://news.ycombinator.com/item?id=49332751",
+      "score": 81,
+      "comment_count": 50,
+      "posted_at": "2026-08-17T15:36:18+00:00",
+      "comments": [
+        {
+          "id": 49333279,
+          "author": "MikhailTal",
+          "text": "What is the difference with Livekit Gateway? https://livekit.com/blog/introducing-livekit-inference Or even something more managed like Vapi?"
+        },
+        {
+          "id": 49334259,
+          "author": "webo",
+          "text": "The benchmarks page seems interesting and something I can use to help make an informed decision. Can you talk about how you're measuring some of these? I imagine it needs to involve some human input. https://benchmarks.speko.ai/turntaking"
+        },
+        {
+          "id": 49333835,
+          "author": "spmartin823",
+          "text": "Does this include a turn taking API? It'd be great to have one API that could do \"Conversation in a box\". One of the biggest annoyances is daisy chaining many models together for turn taking, dumb models for immediate responses, with smarter models returning and taking over after."
+        },
+        {
+          "id": 49337578,
+          "author": "aleksiy123",
+          "text": "Is this only for realtime tts use cases? Wondering if you also support some non realtime models."
+        },
+        {
+          "id": 49334290,
+          "author": "bewareofscams",
+          "text": "Seems to be useless, the state of art for all categories is local on-device, voice model vendors are just rent seekers for those who know no better."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 17,
+      "id": 49272891,
+      "title_en": "A particle made of force: physicists say they've found mysterious 'glueball'",
+      "title_ja": "A particle made of force: physicists say they've found mysterious 'glueball'",
+      "url": "https://www.nature.com/articles/d41586-026-02498-1",
+      "hn_url": "https://news.ycombinator.com/item?id=49272891",
+      "score": 81,
+      "comment_count": 3,
+      "posted_at": "2026-08-12T14:26:41+00:00",
+      "comments": [
+        {
+          "id": 49336557,
+          "author": "lorenzohess",
+          "text": "> After almost two decades of searching, a team of physicists in China says it has observed strong evidence of a mysterious particle called a glueball, which is made entirely of force-carrying particles. > ... The discovery of glueballs would provide direct evidence that gluons can interact with themselves, researchers say. This is a key prediction of quantum chromodynamics"
+        },
+        {
+          "id": 49335889,
+          "author": "chasil",
+          "text": "https://archive.ph/9Lfum"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 18,
+      "id": 49288644,
+      "title_en": "Marketers are Addicted to Bad Data (2020)",
+      "title_ja": "Marketers are Addicted to Bad Data (2020)",
+      "url": "https://www.jacquescorbytuech.com/writing/marketers-addicted-bad-data",
+      "hn_url": "https://news.ycombinator.com/item?id=49288644",
+      "score": 32,
+      "comment_count": 37,
+      "posted_at": "2026-08-13T16:47:40+00:00",
+      "comments": [
+        {
+          "id": 49337963,
+          "author": "jhartikainen",
+          "text": "I work in adtech. We actually had to mangle some of our analytics data because it didn't match the broken data a client was used to. Our data was more accurate , but because the numbers didn't match the other analytics suite the client used, so we had to make it worse. I wish I was joking."
+        },
+        {
+          "id": 49336146,
+          "author": "hermitcrab",
+          "text": "The average time on site and bounce rates I have got from advertising my software inside ChatGPT and Reddit are so terrible that I can only assume that most of the clicks I am paying for are fraudulent, although it is not clear who is doing the fraud. https://successfulsoftware.net/2026/08/13/my-experience-buyi... https://successfulsoftware.net/2025/08/11/what-i-learned-spe..."
+        },
+        {
+          "id": 49336817,
+          "author": "pandog",
+          "text": "A lot of the time you are running experiments and seeing how the data changes, not looking at the data in a vacuum. Many of the example critiques here don't apply so much when looking at the changes in data: - if I got 50% more hits on my site this week vs last week, that's meaningful despite 36% of people blocking ads - if my open rate doubled when I changed my email subject, also meaningful The other examples are hard to pick holes in as they simply say \"Z is a lie\", but I can be looking at multiple data sources to decide how much of a lie Z is."
+        },
+        {
+          "id": 49336315,
+          "author": "hackthemack",
+          "text": "This has been known a long time. Freakanomics did a two part podcast on does advertising actually work. It is long but well worth a listen if you want to hear some science about advertising. https://freakonomics.com/podcast/does-advertising-actually-w... The second part goes into internet advertising. https://freakonomics.com/podcast/does-advertising-actually-w... There are transcripts of the episodes on the page if you want to read instead of listen."
+        },
+        {
+          "id": 49337036,
+          "author": "natnat",
+          "text": "> Marketers are addicted to bad data This article cites a random Statista page for the \"36% percent of people in the UK use an adblocker\" stat."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 19,
+      "id": 49331033,
+      "title_en": "Ask HN: Alternatives to GitHub",
+      "title_ja": "Ask HN: Alternatives to GitHub",
+      "url": null,
+      "hn_url": "https://news.ycombinator.com/item?id=49331033",
+      "score": 452,
+      "comment_count": 288,
+      "posted_at": "2026-08-17T13:59:17+00:00",
+      "comments": [
+        {
+          "id": 49331916,
+          "author": "plqbfbv",
+          "text": "To all of those proposing self-hosted GitLab: we did it for 6+ years in my company, and it's not always a smooth sailing. We had our own runners and we made it auto-upgrade across docker images daily before business start. It mostly worked really well, except those few times were a Docker upgrade had to be rolled back, or that one time the bundled pg_shared_buffers was set at 1MB by default, making schema upgrades impossible for bigger instances, or a version major would break pipeline expectations forcing to upgrade 200+ repos at a time (we pinned to major afterwards). Lately I was also receiving an almost weekly \"critical patch\" newsletter due to critical/high vulnerabilities, which I can only imagine are due to LLM running over the code and identifying bugs. That said, I wish we hadn't migrated to GH, our self-hosted instance had WAY less downtime despite being perhaps a bit slower (mgmt saving money) and required a bit more toil: GH is nowhere near Enterprise-ready and it feels a downgrade across the board. GL has better access granularity, better docs, better integrations, and you can clearly see the UI received a lot of attention (although it does take 10m with a new account to pin the proper items in the maze of sub-menus that is the sidebar). You can also look at the code and help out if needed, and/or simply provide a patched version to your image via a docker mount. If you're really looking at self-hosting GitLab for a smallish team (up to 50-100 ppl), prepare at the very least a 16GB machine (best 32GB) with 4 cores and a decent SSD, and at least a small team (1-3 people) that can maintain it properly or jump at it at any moment. For runners, a small k3s cluster is ideal to make use of all the resources you can throw at it without worrying about managing the runner state/configuration."
+        },
+        {
+          "id": 49333996,
+          "author": "rhdunn",
+          "text": "It depends on what you are after? 1. Do you want something that works and feels like GitHub? -- Forgejo and Gitea are good for this. 2. Do you want a place to host git repositories with minimal hassle? -- GitLab, CodeBerg, and others are available. 3. Do you have your own hosting infrastructure? You could use gitolite and CGit/GitWeb on that hosting platform or local hardware. 4. Do you just want to host repositories? -- Gitolite can be used to help with SSH/auth/repository creation, and CGit or GitWeb for the frontend. 5. Do you need something like GitHub Actions? -- GitLab, Forgejo, and Gitea offer CI, or use external CI infrastructure. 6. Do you need issue tracking and management? -- GitLab, Forgejo, and Gitea provide these. There are alternatives from Jira to Kanban (including Trello) to Markdown (Obsidian and others) and more."
+        },
+        {
+          "id": 49338529,
+          "author": "gdorsi",
+          "text": "For my personal projects I use https://radicle.dev/"
+        },
+        {
+          "id": 49333266,
+          "author": "icy",
+          "text": "https://tangled.org ! Founder/CEO here. We're a new forge building things from the ground up, and are fully federated -- you can host your git repos on your own infra, along with the CI runners. We've also got a pretty neat set of features (if I may say so myself): stacked PRs, Nix-based CI (if you want it), and a fully open protocol ( https://atproto.com ) to for you and your agents. Happy to answer any questions."
+        },
+        {
+          "id": 49331444,
+          "author": "polycaster",
+          "text": "https://forgejo.org/"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 20,
+      "id": 49295179,
+      "title_en": "A simple fix for LLM tail latency",
+      "title_ja": "A simple fix for LLM tail latency",
+      "url": "https://engineering.myhoai.com/posts/a-simple-fix-for-llm-tail-latency/",
+      "hn_url": "https://news.ycombinator.com/item?id=49295179",
+      "score": 22,
+      "comment_count": 7,
+      "posted_at": "2026-08-14T05:58:16+00:00",
+      "comments": [
+        {
+          "id": 49338210,
+          "author": "nine_k",
+          "text": "Sending two identical parallel requests is the classic approach. But, logically speaking, it should also double the cost. I would send a second request if the first request fails to return the first token within, say, 1 second. Then there's a chance the first request is stalling, which is an infrequent event. I wonder if higher-availability tiers of LLM providers do a similar thing internally."
+        },
+        {
+          "id": 49338155,
+          "author": "dvaplima",
+          "text": "Nice turn around, does anyone has a benchmark regarding other types of requests (priority vs send twice) other than voice/call? Or the tests already test that?"
+        },
+        {
+          "id": 49337639,
+          "author": "eigenblake",
+          "text": "I love this. Simple. Useful. To the point. If AI was used, I can't tell because it is clearly representing the author's beliefs."
+        },
+        {
+          "id": 49338175,
+          "author": "ramon156",
+          "text": "for a tier thats twice the cost i would expect >2x the speed. somewhere 5-10x e.g. 1.40m would become 0.30s. do people really pay for these priority plans?"
+        },
+        {
+          "id": 49338282,
+          "author": "crisnoble",
+          "text": "Why not send it thrice?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 21,
+      "id": 49334544,
+      "title_en": "Qwen3.8 27B scores 52 on Artificial Analysis",
+      "title_ja": "Qwen3.8 27B scores 52 on Artificial Analysis",
+      "url": "https://artificialanalysis.ai/models/qwen3-8-27b",
+      "hn_url": "https://news.ycombinator.com/item?id=49334544",
+      "score": 259,
+      "comment_count": 117,
+      "posted_at": "2026-08-17T17:25:17+00:00",
+      "comments": [
+        {
+          "id": 49335434,
+          "author": "beltsazar",
+          "text": "As a comparison, Qwen3.6 27B scores 38, which was the highest in its small model category (4B–40B). Qwen3.8 27B beats all medium models (40B–150B). It has the same score as DeepSeek V4 Flash 0731, which ranks #5 in large model category (> 150B). Sources: - https://artificialanalysis.ai/models/open-source/small - https://artificialanalysis.ai/models/open-source/medium - https://artificialanalysis.ai/models/open-source/large"
+        },
+        {
+          "id": 49337238,
+          "author": "Balinares",
+          "text": "And once again, Qwen 3.8 27B beats Opus 4.6, what the hell. It's both funny and a bit terrifying and I still can't quite believe it. It runs decently on a gaming PC! Opus 4.6 came out only 6 months ago and was then broadly considered the new SOTA by a comfortable margin! How in hell did they package capability in the ballpark of a Feb 2026 frontier SOTA into 27B?! More importantly, what's the point of building monster-scale data centers on unprecedented amounts of debt when a more than good enough model runs on a GPU from a couple years ago? The coming months are going to be exciting, that's for sure..."
+        },
+        {
+          "id": 49336610,
+          "author": "x313",
+          "text": "I used this a lot over the weekend, and it's a really intelligent and strange model. It gets really agentic at the higher reasoning levels. It does the basics like goal tracking and tool calling well, but more than that, it gets obsessed with solving problems and will do insane/unusual things to get to the solution. It actually reminds me of GPT-5.6-Sol-max which is similarly obsessive. It doesn't surprise me at all that it outscores Opus 4.6. Opus had way better world knowledge but was more \"human\" with agent stuff - sort of lazy and uncreative, basically giving up once the obvious solutions failed. These newer models work more like magic, they are so creative and persistent at finding ways to get to the solution."
+        },
+        {
+          "id": 49336075,
+          "author": "K0IN",
+          "text": "I used Qwen 3.6 27B extensively (>1B tokens) and DeepSeek V4 Flash (the older one also 2B+ tokens). And I just can't fathom that the new 3.8 beats the new DeepSeek V4 Flash (which, in my eyes, is one of the best everyday coding models). What an insane release, and convenient size to use every day/locally. but i will test this model extensivly."
+        },
+        {
+          "id": 49336043,
+          "author": "kmike84",
+          "text": "I have an internal automated benchmark, which roughly follows my workflow, and I've been testing various models on it, local and cloud. Qwen 3.8 27B did awesome. Its understanding is correct, research is better than e.g. glm's (and I like glm), and implementation is good and careful. Qwen 3.8 27B doesn't look benchmaxxed. These \"52 AA score\" numbers feel real, which is surprising. I've been using it locally for a few days for other tasks as well. If not the speed, I'd be totally happy to use it as a daily driver instead of cloud models, it is that good. --- (benchmark, to get an idea): 1. First, initial prompt which is not super precise - similar to how I'd write a task when talking e.g. to Opus. I'm describing an idea, and asking model to come up with some plan, and also to criticize the approach. Task is about implementing a particular pi extension. I'm checking if a model actually understands what I'm asking. 2. Then, as a follow-up, I ask to research alternative implementations, research UX of similar extensions, etc. It needs to do web searches, inspect open source codebases, read articles and papers, etc. I don't prompt to do this exactly, but I expect good models to figure out they need to do it. 3. Then, implementation. Also, one finding: Q4 and Q8 seem to have very different behavior in this benchmark. Q4 produces 2-3x thinking in the end, and makes more turns - it seems it makes more mistakes, and needs effort to recover from them, while Q8 gets more things right in a first try. In the end, quality is roughly similar, but Q8 gets there much faster, especially the implementation (tried it several times). Could be a difference between concrete artifacts, or between runtimes, I don't know, but be careful - it seems the real-world experience with qwen 3.8 27B can be vastly different, depending on how it's set up. Regarding DeepSeek 0731 vs Qwen 3.8 27B. On this benchmark, Qwen understand my intent better, it's better at research, and I also liked its implementation more. But: if you're more precise in what you ask, 0731 is also very good, and it's quite a lot faster on mac; raw speed is better, and it needs less thinking to get there. So, I'd say it's a tie in practice, both are awesome :)"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 22,
+      "id": 49336304,
+      "title_en": "India has paved the way for charging merchants a fee on UPI transactions",
+      "title_ja": "India has paved the way for charging merchants a fee on UPI transactions",
+      "url": "https://www.bbc.com/news/articles/c8xnwqe00v1o",
+      "hn_url": "https://news.ycombinator.com/item?id=49336304",
+      "score": 74,
+      "comment_count": 64,
+      "posted_at": "2026-08-17T19:25:11+00:00",
+      "comments": [
+        {
+          "id": 49337411,
+          "author": "gsa",
+          "text": "I really hope cash transactions become a little more normalised in India. The UPI experience is built for a single audience in mind. It has changed the way people transact in India but at the same time it's been an absolute nightmare for a tourist to play along. The only route for a tourist to use UPI is via third party apps, which charge a markup for loading money (3%). But let's say you accept that as a part of travelling - the limitation of tourist wallets is that they can't be utilised for P2P payments - exactly what UPI is most used for across the country. Alternative, since no one accepts cash anymore, is that I have to carry thick wads of cash so I can hand out exact change. That still gets you the stink eye because most vendors don't like to deal with cash anymore."
+        },
+        {
+          "id": 49336874,
+          "author": "sieve",
+          "text": "Pennywise, pound foolish decision. India is forced to subsidize farmers to the tune of $37B JUST for urea. Governments routinely offer free bus services to women, free cash handouts to women, free electricity to farmers (who then use the power to pump out groundwater and grow paddy in areas otherwise not suitable for it). The list goes on. A $1B subsidy to eliminate friction on the payment front is peanuts."
+        },
+        {
+          "id": 49337787,
+          "author": "Karthick81",
+          "text": "UPI payment has enabled tracking actual sales data and helped with tax collection. This is an intangible benefit which is likely to go away with the introduction of the fee."
+        },
+        {
+          "id": 49337208,
+          "author": "HaloZero",
+          "text": "0.3-0.5% is still nowhere near the rates of visa and mastercard. Does UPI offer the same level of fraud protections or is it a free for all like Zelle is here in the states? Especially if they limit to > 2000 rupees. Hopefully they allow foreigners some track to access UPI in the future."
+        },
+        {
+          "id": 49338176,
+          "author": "jmward01",
+          "text": "Yesterday an article on tipping hit HN and this reminds me of it. When you remove barriers people spend freely. Start throwing stupid pause moments, the value doesn't match the advertised price because of x fee, y tax, z undisclosed service or an outright wall screen begging for a tip, and people slow down their purchasing. It will be interesting to see an impact here if this goes through and it could be instructive to the value prop that tips bring to industry. You may think you are externalizing a cost but maybe you are really harming sales."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 23,
+      "id": 49334409,
+      "title_en": "An update on leaving Gmail for Fastmail",
+      "title_ja": "An update on leaving Gmail for Fastmail",
+      "url": "https://moddedbear.com/an-update-on-leaving-gmail-for-fastmail/",
+      "hn_url": "https://news.ycombinator.com/item?id=49334409",
+      "score": 72,
+      "comment_count": 60,
+      "posted_at": "2026-08-17T17:15:20+00:00",
+      "comments": [
+        {
+          "id": 49338268,
+          "author": "dbgobrrr",
+          "text": "Good move! I was there before, and the worst part was... I was using a @gmail.com address. Bad mistake on my part. So actually tracking what I used the address with, that was my real pain. Now everything is on my custom domain, so if I need to move on from my current provider, it will be painless. In the process I did manage to delete a whole bunch of accounts I didn't use anymore. Incidentally, I also moved to fastmail, and it is just boringly fantastic. It works. It has features I actually need and enjoy (masked emails!) and I recommend it to anyone who asks."
+        },
+        {
+          "id": 49337418,
+          "author": "beart",
+          "text": "Changing email providers sounds daunting, but it was relatively painless when I actually committed to it. I did a search over my password manager for my old email and just went through the list logging in and switching to the new email. Probably took a few hours at most. For anything I missed, I set gmail to forward everything to my new host. Cleaned up the few things I missed, and am only left with spam. I still leave the forwarding rule there in case a personal contact or service I forgot pops up, but it has been years without any issue, and I never feel the need to log into gmail. Certain emails are not forwarded I think, despite the \"forward all\" rule... but nothing I've ever found to matter."
+        },
+        {
+          "id": 49338498,
+          "author": "stevenhubertron",
+          "text": "I have used Fastmail for 5+ years, no real complaints other then some real emails get caught up in spam folder."
+        },
+        {
+          "id": 49337014,
+          "author": "steve_adams_86",
+          "text": "Fastmail is the service I've paid for longer than any other, without any pauses, and with the most satisfaction of any subscription. Like the author says, email isn't exciting, it isn't a fun or interesting subscription, but it works perfectly for me and offers excellent value for what I pay. It's so gratifyingly functional and boring."
+        },
+        {
+          "id": 49338440,
+          "author": "frou_dh",
+          "text": "I like Fastmail but I'm starting to feel that the subscription cost is a bit overpriced for the way I use it (just IMAP email - not using the app, calendars, contacts, file hosting, ...). I've researched and found some other independent paid email providers that are significantly cheaper, although I suspect most of having a low bus factor with just 1 or 2 people operating them."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 24,
+      "id": 49289898,
+      "title_en": "The oldest bar in every state",
+      "title_ja": "The oldest bar in every state",
+      "url": "https://www.businessinsider.com/oldest-bar-every-state",
+      "hn_url": "https://news.ycombinator.com/item?id=49289898",
+      "score": 45,
+      "comment_count": 26,
+      "posted_at": "2026-08-13T18:14:06+00:00",
+      "comments": [
+        {
+          "id": 49337535,
+          "author": "supern0va",
+          "text": "The Pioneer Saloon in Paisley, Oregon is pretty solid, considering it's in the middle of nowhere in the Oregon outback. It's actually a popular stop (not that there's a lot of options) for folks who drive down to Burning Man from Seattle and Portland, so it will be seeing quite a few more visitors over the next few weeks."
+        },
+        {
+          "id": 49337911,
+          "author": "looknee",
+          "text": "Just ate at The Tavern in Abingdon, Virginia last night. I'm biased since I grew up here and am back visiting, but truly a beautiful little town with some stunning nature and hiking nearby. The Tavern itself has a great food and wine service for such a small town!"
+        },
+        {
+          "id": 49337973,
+          "author": "noboostforyou",
+          "text": "Safari's reader mode is a godsend for this article. I just want to see a simple list of \"state - bar - date\" but this is like those recipe blog posts where you need to sort through a bunch of filler until you finally get the recipe after numerous paragraphs of fluff."
+        },
+        {
+          "id": 49337593,
+          "author": "xoxxala",
+          "text": "I've been to the Palace in Prescott, AZ. Neat place. I was told by locals that during the 1900 fire, the patrons picked up the actual bar and carried it out of the saloon to save it."
+        },
+        {
+          "id": 49298479,
+          "author": "FatherOfCurses",
+          "text": "Re: Callahagn's in Mobile, AL starting as a \"members only\" club. To quote Gene Hackman in \"Mississippi Burning\" - \"Member of what?\""
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 25,
+      "id": 49331474,
+      "title_en": "How to put 170 atoms in an atom",
+      "title_ja": "How to put 170 atoms in an atom",
+      "url": "https://signoregalilei.com/2026/08/02/how-to-put-170-atoms-in-an-atom/",
+      "hn_url": "https://news.ycombinator.com/item?id=49331474",
+      "score": 95,
+      "comment_count": 20,
+      "posted_at": "2026-08-17T14:21:25+00:00",
+      "comments": [
+        {
+          "id": 49332822,
+          "author": "tromp",
+          "text": "> So in 2018, an international team of scientists created a BEC out of strontium atoms, and hit one of those atoms with a carefully tuned laser, exciting its outermost electron and turning it into a Rydberg atom. Several other atoms from the BEC were caught within between that outer electron’s inflated orbital. This is not so much putting 170 atoms in one, but inflating one beyond the size of its 170-atom neighbourhood. The hard part being to cool the neighbourhood to such an extremely low temperature that the inflated atom doesn't ionize."
+        },
+        {
+          "id": 49338394,
+          "author": "JoeAltmaier",
+          "text": "Wait - if the 170 atoms are a Bose-Einstein Condensate, then they are really just one atom. That's the whole deal with Condensates."
+        },
+        {
+          "id": 49332796,
+          "author": "simonebrunozzi",
+          "text": "The article, rather shallow, is about Bose-Einstein Condensate (BEC). I found it a bit more interesting that the author's middle name is Galileo, and that he is participating in a \"blogging\" residency [0]: Inkhaven residency: A 30 day residency for you to grow as a writer. For one month, you'll publish a blogpost every day. Or pack your bags. [0]: https://www.inkhaven.blog/"
+        },
+        {
+          "id": 49336888,
+          "author": "andai",
+          "text": "Poor atoms. They froze them to absolute zero, of course they're going to huddle together!"
+        },
+        {
+          "id": 49337274,
+          "author": "laxpri",
+          "text": "as a naive , it is non-intuitive for me how the lower bound is 0 kelvin, is this the temp where things truly stops oscillating (quantum level) or we just dont care ."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 26,
+      "id": 49335001,
+      "title_en": "We Are Forking dotenvy into dotenv-ng",
+      "title_ja": "We Are Forking dotenvy into dotenv-ng",
+      "url": "https://secretspec.dev/blog/we-are-forking-dotenvy-into-dotenv-ng/",
+      "hn_url": "https://news.ycombinator.com/item?id=49335001",
+      "score": 30,
+      "comment_count": 29,
+      "posted_at": "2026-08-17T17:55:24+00:00",
+      "comments": [
+        {
+          "id": 49336713,
+          "author": "threecheese",
+          "text": "Am I weird or old-fashioned for relying on direnv over .env? These days my projects use a lot of different tech, and it just feels weird to me to have them all parsing .env files and hoping everything works. Especially with inference provider tokens basically connecting my checking account to the internet."
+        },
+        {
+          "id": 49335904,
+          "author": "hinkley",
+          "text": "> But migrating away from .env starts with reading it correctly. We had a system that mediated all access to the static config through an in-house library. Because nobody touched the environment-specific data directly, it was a convenient spot to layer on reloadable configuration from a Raft source, and fold in environment-specific secrets coming through an old 12 Factor solution, although we could have also integrated some other secrets management as well. Or, left it as a separate API. That tends to work for tired and distracted people well. Having security related stuff use a unique code pattern to access it does, I find, help keep people from treating it all the same way they treat other data, which is to throw it around profligately and occasionally write it to the logs. The moral equivalent to the guard over the missile launch switch versus the machine gun trigger. One of those has much more forgiving failure modes than the other. It's the same problem 'capability' based systems frequently run into - capabilities end up meaning that if you can see something you're entitled to use it. And when your coworkers add new features to the system, you end up accidentally being able to see things you shouldn't be able to see. Java for instance ran into this rather frequently with theirs. Someone would add an object to the global state and not notice that some peer added a reference to a reference to that object with proprietary data the client code wasn't meant to have at all. Information wants to be 'free'."
+        },
+        {
+          "id": 49337803,
+          "author": "asveikau",
+          "text": "I am an old man yelling at cloud, but why is a library that does something this simple something that needs maintenance ? Like if your jaw is dropping because an environment variable parser hasn't seen commits since 2023 ... ... How old is /usr/bin/env ? Lots of code churn on that one?"
+        },
+        {
+          "id": 49336328,
+          "author": "a1o",
+          "text": "What does the ng at the end means? I have seen a few products/projects that added it and no explanation of the meaning."
+        },
+        {
+          "id": 49336082,
+          "author": "drdexebtjl",
+          "text": "Can’t you just escape the dollar sign? If you really believe .env was a mistake (it was), just let it die. You are the ones keeping it alive now."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 27,
+      "id": 49335600,
+      "title_en": "Los Puesteros, solitary men who look after ranches and livestock in Patagonia",
+      "title_ja": "Los Puesteros, solitary men who look after ranches and livestock in Patagonia",
+      "url": "https://www.newyorker.com/culture/photo-booth/the-lonely-men-at-the-end-of-the-world",
+      "hn_url": "https://news.ycombinator.com/item?id=49335600",
+      "score": 92,
+      "comment_count": 35,
+      "posted_at": "2026-08-17T18:34:09+00:00",
+      "comments": [
+        {
+          "id": 49335607,
+          "author": "bookofjoe",
+          "text": "https://archive.ph/XDM2H"
+        },
+        {
+          "id": 49337043,
+          "author": "sriacha",
+          "text": "Good article about living at a remote estancia at the bottom of Argentina, January 1971, 'The Housewife at the End of the World'. Not too much has changed since then. https://archive.org/details/edg-ng-1961/edg%20NG%201971-01%2..."
+        },
+        {
+          "id": 49338188,
+          "author": "_whiteCaps_",
+          "text": "I was just looking up lightkeeper positions in my province. Unfortunately no openings right now. But it would be an interesting job for an introvert like myself."
+        },
+        {
+          "id": 49336813,
+          "author": "wxw",
+          "text": "These photos are beautiful: https://media.newyorker.com/photos/6a7f7ed55b6cfa7eff424505/..."
+        },
+        {
+          "id": 49336132,
+          "author": "foodandart",
+          "text": "Looks amazing. Just finagle a small solar array for power, some backup batteries and a satellite uplink for the web and I'd be there in a heartbest."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 28,
+      "id": 49337630,
+      "title_en": "How do functions like alloca allocate memory from the stack?",
+      "title_ja": "How do functions like alloca allocate memory from the stack?",
+      "url": "https://devblogs.microsoft.com/oldnewthing/20260817-40/?p=112617",
+      "hn_url": "https://news.ycombinator.com/item?id=49337630",
+      "score": 3,
+      "comment_count": 0,
+      "posted_at": "2026-08-17T21:06:10+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 29,
+      "id": 49338404,
+      "title_en": "Nation's Largest Reservoirs Are Drying Up, Threatening Life in the Southwest",
+      "title_ja": "Nation's Largest Reservoirs Are Drying Up, Threatening Life in the Southwest",
+      "url": "https://www.nytimes.com/2026/08/17/climate/lake-powell-record-low-colorado.html",
+      "hn_url": "https://news.ycombinator.com/item?id=49338404",
+      "score": 7,
+      "comment_count": 1,
+      "posted_at": "2026-08-17T22:15:38+00:00",
+      "comments": [
+        {
+          "id": 49338513,
+          "author": "toomuchtodo",
+          "text": "There is enough water for human consumption, but agriculture is over in the basin. There simply isn’t enough water forward looking for the water intensive crops in question."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 30,
+      "id": 49323474,
+      "title_en": "How I developed an Am29000 C compiler and web browser",
+      "title_ja": "How I developed an Am29000 C compiler and web browser",
+      "url": "https://nanochess.org/am29000_c_compiler_web_browser.html",
+      "hn_url": "https://news.ycombinator.com/item?id=49323474",
+      "score": 74,
+      "comment_count": 11,
+      "posted_at": "2026-08-16T20:41:57+00:00",
+      "comments": [
+        {
+          "id": 49333915,
+          "author": "jacquesm",
+          "text": "Fascinating. DJ Delorie rates a mention, I wonder how he's doing, I owe him a good chunk of my career. This reads very much like the same journey I made recently when reviving my old OS, only Oscar went much further than I did and wrote a working browser as well, which - even though the browsers back then were much simpler - is extremely impressive. I still have a stack of disks from those days, I should probably find a way to read them to see what's on there. edit: I sent DJ Delorie a short note, I should have done that years ago, without him I would have never managed."
+        },
+        {
+          "id": 49337184,
+          "author": "jll29",
+          "text": "Well done. I agree with the credits to DJ Delorie (and to Stallman, for the original GCC!). The code of the O.P. is actually not so bad for a teenager; however, the variables in Spanish do not help: \"[isq]\" and \"[der]\" probably stood for \"isqierda\" and \"derecha\", so the index of the left and right subtree of an expression. Speaking of Transputers, Dr. Tim King, founder of Perihelion, was another big name of the Transputer times; he sadly passed away last month (he also wrote Tripos, which turned into AmigaDOS)."
+        },
+        {
+          "id": 49335571,
+          "author": "chasil",
+          "text": "How closely related is this CPU to SPARC? https://en.wikipedia.org/wiki/AMD_Am29000 \"Based on the seminal Berkeley RISC, the 29k added a number of significant improvements... One design element used in some of the Berkeley RISC-derived designs is the concept of register windows, a technique used to speed up procedure calls significantly.\""
+        },
+        {
+          "id": 49333903,
+          "author": "dboreham",
+          "text": "This part brought back memories from an even older time: \"Worst, it required two more programs: Flex and Bison.\" In the early 80s I had the idea to port a C compiler to a new machine (I forget if this was K&R or pcc, but those were the only two C compilers you could get the source for at the time, legal issues aside...). At some point I had that same realization: uhh...this thing needs two other pretty big things: yacc and lex. The \"first catch your fish\" of compilers: \"first port the parser-generators\"."
+        },
+        {
+          "id": 49335332,
+          "author": "anthk",
+          "text": ">Ciega, sordomuda\", \"Amor de papel\", “Laura no esta” and “Barbie girl”. Oh poor soul... https://github.com/nanochess/Am29000 This is cool, it's very Motif like."
+        }
+      ],
+      "summary_ja": ""
+    }
+  ]
+}
