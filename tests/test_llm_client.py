@@ -71,3 +71,51 @@ async def test_translate_titles_fallback_when_content_is_null(client):
     titles = ["Title 1", "Title 2"]
     result = await client.translate_titles(titles)
     assert result == titles
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_call_falls_back_to_next_model_on_429(client):
+    # :free は upstream の 429 が日常的に起きるため、次モデルへ進めること
+    respx.post(OPENROUTER_URL).mock(
+        side_effect=[
+            httpx.Response(429, json={"error": {"message": "rate-limited upstream"}}),
+            httpx.Response(200, json=make_response("1. 翻訳タイトル1")),
+        ]
+    )
+    result = await client.translate_titles(["Title 1"])
+    assert result == ["翻訳タイトル1"]
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_call_skips_model_returning_empty_body(client):
+    # 推論だけして本文を返さないモデルは失敗扱いにして次へ進む
+    respx.post(OPENROUTER_URL).mock(
+        side_effect=[
+            httpx.Response(200, json=make_response("   ")),
+            httpx.Response(200, json=make_response("要約本文")),
+        ]
+    )
+    result = await client.summarize_comments("Test Article", ["comment 1"])
+    assert result == "要約本文"
+
+
+@pytest.mark.asyncio
+@respx.mock
+async def test_call_returns_empty_when_whole_chain_fails(client):
+    # チェーン全滅時は例外を投げず空文字（翻訳全滅は update.yml 側が検知する）
+    respx.post(OPENROUTER_URL).mock(
+        return_value=httpx.Response(429, json={"error": {"message": "rate-limited"}})
+    )
+    result = await client.summarize_comments("Test Article", ["comment 1"])
+    assert result == ""
+
+
+def test_model_chain_is_all_free():
+    # 有料モデルが紛れ込むと課金が発生するため :free 固定を保証する
+    from scripts.llm_client import MODEL_CHAIN
+
+    assert MODEL_CHAIN, "チェーンが空"
+    assert all(m.endswith(":free") for m in MODEL_CHAIN)
+    assert len(set(MODEL_CHAIN)) == len(MODEL_CHAIN), "重複あり"
