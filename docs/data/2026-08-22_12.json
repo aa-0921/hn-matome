@@ -1,0 +1,1027 @@
+{
+  "date": "2026-08-22T00:00:00+09:00",
+  "slot": "12",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 49395628,
+      "title_en": "There's no reason for software to be slow anymore",
+      "title_ja": "There's no reason for software to be slow anymore",
+      "url": "https://danluu.com/perf-opt/",
+      "hn_url": "https://news.ycombinator.com/item?id=49395628",
+      "score": 109,
+      "comment_count": 113,
+      "posted_at": "2026-08-22T01:06:17+00:00",
+      "comments": [
+        {
+          "id": 49396327,
+          "author": "eru",
+          "text": "The article links to \"You can just choose how many bugs you want now\" https://nolanlawson.com/2026/08/16/you-can-just-choose-how-m... So going on a tangent: an additional mechanism you have that becomes feasible with LLM assistance today is proving your code correct."
+        },
+        {
+          "id": 49396106,
+          "author": "jjcm",
+          "text": "This speaks to me. I've been running an autoresearch loop the past couple of days to improve the load time of my various projects' frontends. I've been really, really impressed with how effective this is. I went from a 4s load on simulated slow 4g to ~750ms: https://image.non.io/speedup-graphs.webp Side by side vid of the results: https://video.non.io/speedups.mp4 This was for https://non.io , which is something I had purposefully written to be as fast as possible (hand wrote all the comopnents, didnt even use react). I've been considering creating a skill / utility to do this based on learnings from the speedups - would others find this kind of thing useful?"
+        },
+        {
+          "id": 49395998,
+          "author": "ehnto",
+          "text": "One of the biggest causes of slowness is just waiting for web requests. The fact that so much software is either online or built using the same stack even if it isn't, puts all that software in this blocked/waiting state constantly while using it. Anyone not in the US feels this even more since so much online is US hosted, 300ms for every little interaction adds up quick. If your software has the affordance of a waiting dialogue or loading wheel for many of its UI controls, you are building with this default blocked assumption. Even if you are building something web based, ask yourself if that's actually necessary for your software or if you could build it differently to avoid constant UI blocking."
+        },
+        {
+          "id": 49396038,
+          "author": "mccoyb",
+          "text": "Here's this boiled down: > A stochastic search process with an executable optimization objective over space of programs S can only maintain or improve the objective This is superoptimization. We've known this since the 80s (Massalin, STOKE is more recent: https://github.com/StanfordPL/stoke ) The only novelty is that the proposer is now way better with LMs. Further, there's a large number of reasons for software written by agents to be slow: - LMs still don't do data or hardware-oriented design well out of the box, and therefore if you're engaging in any sort of serious novel work, beyond porting an extremely well-understood program with extremely well-understood workloads, you're going to be spending hours tracking down bad allocation decisions (c.f. why TigerBeetle doesn't use agents), which are often the root of evil (before you'd reach for anything further) - The knobs you'd need to get serious performance are nearly unreachable in languages which LMs are good at (even Rust requires a discipline that the default language doesn't enforce). When you drop into the lower realms, you're trading consumption context for access to these levers. The levers are also \"soft\": you find yourself writing a bunch of skills, and tools to try and enforce the discipline. The reality is to get performant code (quickly) out of an agent, you need to know how to write performant code (and you need to know how to surface the information that you'd use to create a verifier for such a thing to the agent), which 99% of developers do not know in 2026. Sure, agents can teach you how to do this -- but it's one of these things where iykyk. Experience: I've poured 10s of billions of tokens into Zig with the best agents and I have the time and space to try these things. If you want to start learning the discipline, I'd recommend matklad's + TigerBeetle blog -- as well as hardware-oriented design."
+        },
+        {
+          "id": 49396210,
+          "author": "3dedb728-3f77",
+          "text": "How will the user know the computer worked 'HARD', if it is not slow? Do you not add sleep to your programs?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 2,
+      "id": 49389430,
+      "title_en": "Felony Bench",
+      "title_ja": "Felony Bench",
+      "url": "https://www.felonybench.com/",
+      "hn_url": "https://news.ycombinator.com/item?id=49389430",
+      "score": 571,
+      "comment_count": 234,
+      "posted_at": "2026-08-21T15:17:04+00:00",
+      "comments": [
+        {
+          "id": 49396335,
+          "author": "arthurjj",
+          "text": "As an art piece this is delightful. But it of reminds me of the @patio11 saying \"The optimal amount of fraud is non-zero\" the fact that Google and Meta have had 0 and 1 incidents is a bad sign for them. [1] https://www.bitsaboutmoney.com/archive/optimal-amount-of-fra..."
+        },
+        {
+          "id": 49392556,
+          "author": "lxe",
+          "text": "Let's say I am \"User\". I subscribe through a \"Third Party\" to use \"AI Agent\" allowing an \"LLM\" to run. I want to accomplish some legal non-nefarious task, and run the agent. The agentic loop causes a CFAA-violating behavior. Who gets prosecuted? 1. User 2. The third party model host with whom I have the account 3. The developer of the harness /agent software 4. The developer of the LLM model"
+        },
+        {
+          "id": 49394847,
+          "author": "beej71",
+          "text": "A computer can never be held accountable. Therefore a computer must never commit a felony."
+        },
+        {
+          "id": 49390398,
+          "author": "john_strinlai",
+          "text": "> Felony Bench counts unique instances where AI agents inadvertently compromise or affect third-party entities. a bit silly, as one typically has to prove intent (which is why security researchers don't get slapped with felonies all the time). \"inadvertently\" and the existence of guardrails/sandboxes/etc make it pretty unconvincing that these incidents were intentionally malicious. still a fun thing to track, but the name is just a bit overstated."
+        },
+        {
+          "id": 49391720,
+          "author": "rfw300",
+          "text": "The way that OpenAI has communicated around the HuggingFace incident makes me feel crazy. You created a machine that undertook a malicious campaign of harm against an innocent third-party! You should be doing deep introspection about how your company culture and approach to R&D produces criminal outcomes. Instead, they treat their own felonious behavior like it is an uncontrollable act of God. From Greg Brockman's post a few days ago: > The OpenAI-Hugging Face incident (opens in a new window) was a watershed moment for cybersecurity because it gave a peek into how the capabilities of a typical threat actor will evolve in upcoming months. I suppose if OpenAI burns someone's house down with a drone, that is a \"watershed moment\" for arson, too. Either way, I would hope that the people responsible would be prosecuted."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 3,
+      "id": 49390427,
+      "title_en": "Kobo can run apps now",
+      "title_ja": "Kobo can run apps now",
+      "url": "https://bandarlabs.github.io/Cobalt/",
+      "hn_url": "https://news.ycombinator.com/item?id=49390427",
+      "score": 454,
+      "comment_count": 158,
+      "posted_at": "2026-08-21T16:25:25+00:00",
+      "comments": [
+        {
+          "id": 49391973,
+          "author": "the-grump",
+          "text": "For the unaware, there is an existing solution that integrates with Kobo's native software (Nickel). It has been maintained for years, and it supports every Kobo AFAIK. It's called NickelMenu, and it's great. I'm in the Kobo ecosystem because of NickelMenu and Plato. One note if you're thinking about getting a kobo due its relative openness: consider getting a two-core device. I did not do my homework and got a Clara BW because I don't want the color display. Later I found out that color is the only one with the two-core CPU."
+        },
+        {
+          "id": 49393458,
+          "author": "brailsafe",
+          "text": "This is something I've considered wanting, and I'm glad it exists, but after some thought it's absolutely not at all what I want my Kobo to do. Much like how I wouldn't bring headphones or a Bluetooth speaker with me on a hike, or a laptop with me camping, I don't even want the option of games or anything other than a good reading experience when I'm using my e-reader. I'd assume this is a redundant take, but I don't even know if my Kobo can produce sounds, and I'd like to keep it that way. What's tricky is that although I don't want it to be an unconstrained app platform, I do want the ability to integrate with services that host my things to read. Karakeep, RSS, Google Play Books or Internet Archive, etc.. but I think that could be handled in a more narrow fashion."
+        },
+        {
+          "id": 49392304,
+          "author": "yoavm",
+          "text": "FWIW, some Kobos can run PostmarketOS. I built this UI for my Clara - https://www.github.com/bjesus/air . It runs Firefox, Syncthing, KOReader, and basically anything else you can run on Linux."
+        },
+        {
+          "id": 49396128,
+          "author": "Method5440",
+          "text": "This is excellent - I’ve been looking for a reliable way to get a manga reader onto my Kobo for a while now, specifically one that can directly connect to sources like MangaDex. The alternative I’ve settled on is to download to my PC, bundle with KCC into a cbz, upload to Dropbox and then download onto the device’s local storage. It takes far too long. I’ve been considering writing something myself but I’m not familiar with the device hardware or OS… this is definitely going to save me a ton of time. I don’t care if this was created with LLM assistance, I’m just happy to have a viable alternative in an approximately closed ecosystem."
+        },
+        {
+          "id": 49392056,
+          "author": "wbxp99",
+          "text": ">These are photographs of the device, not simulator captures Thanks for the clarification Claude"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 4,
+      "id": 49393052,
+      "title_en": "Rust Glancer: Rust LSP using 100x less RAM",
+      "title_ja": "Rust Glancer: Rust LSP using 100x less RAM",
+      "url": "https://rust-glancer.github.io/blog/hello-world/",
+      "hn_url": "https://news.ycombinator.com/item?id=49393052",
+      "score": 63,
+      "comment_count": 23,
+      "posted_at": "2026-08-21T19:51:54+00:00",
+      "comments": [
+        {
+          "id": 49396198,
+          "author": "mayli",
+          "text": "RA with disk cache?"
+        },
+        {
+          "id": 49393068,
+          "author": "matklad",
+          "text": "To clarify, author is https://github.com/popzxc , not me! My thoughts are here: https://matklad.github.io/2026/08/21/rust-glancer.html"
+        },
+        {
+          "id": 49395537,
+          "author": "skavi",
+          "text": "Waiting for RA to build up the full in memory data structure for a large workspace is so painful. Honestly, I'd just assumed that was the only way and didn't realize Rust Rover was different. Does anyone have experience using that? Any tradeoffs?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 5,
+      "id": 49395605,
+      "title_en": "Initial focus for our partnership with Motorola is a regular non-folding device",
+      "title_ja": "Initial focus for our partnership with Motorola is a regular non-folding device",
+      "url": "https://grapheneos.social/@GrapheneOS/117136278553665985",
+      "hn_url": "https://news.ycombinator.com/item?id=49395605",
+      "score": 28,
+      "comment_count": 8,
+      "posted_at": "2026-08-22T01:02:09+00:00",
+      "comments": [
+        {
+          "id": 49395861,
+          "author": "noman-land",
+          "text": "This is a relief to hear. Also this is great unless Motorola is comprimised. Motorola is doing a large portion of the work of porting GrapheneOS to their devices. They'll provide us with what we need for firmware/drivers in the form we need it and it will be far easier than Pixels. We'll be able to get issues in the firmware and drivers fixed through Motorola and Qualcomm."
+        },
+        {
+          "id": 49396206,
+          "author": "zb3",
+          "text": "The question is whether the new gen Snapdragon Elite SoCs will finally support non-protected KVM? That would make native \"linux terminal\" (which has GUI support) work.. so far Qualcomm is the only flagship vendor that doesn't support it. And this feature currently works with pixels, hopefully it doesn't stop working with Motorola Signature."
+        },
+        {
+          "id": 49396009,
+          "author": "hankbond",
+          "text": "This is great, I'll hopefully get one as my next phone when my Pixel 7 Pro dies."
+        },
+        {
+          "id": 49396142,
+          "author": "therein",
+          "text": "Looking forward to it. I will buy it right away."
+        },
+        {
+          "id": 49395905,
+          "author": "arcanemachiner",
+          "text": "I'm fairly ignorant as to whether Motorola, as a company, will make a good steward for this kind of arrangement. Does anybody have any inside baseball to share in terms of whether we can trust this arrangement to last longer than, say, a year?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 6,
+      "id": 49394496,
+      "title_en": "Three important steps in my maturation process",
+      "title_ja": "Three important steps in my maturation process",
+      "url": "https://thomasdullien.github.io/posts/2026-08-21-three-important-steps-in-my-maturation-process/",
+      "hn_url": "https://news.ycombinator.com/item?id=49394496",
+      "score": 81,
+      "comment_count": 20,
+      "posted_at": "2026-08-21T22:29:00+00:00",
+      "comments": [
+        {
+          "id": 49396269,
+          "author": "jaggederest",
+          "text": "To give other maturation advice to those not yet in their 40s: It's quite likely that you have significant issues you haven't addressed yet. Getting into good medical care, therapy, exercise, and supportive e.g. nutrition, etc is likely more important than virtually anything else you'll do in your life , with a reasonable exception for choosing the right person to spend your life with and having a family. But having a good social life is a hell of a lot easier if you're in great physical and mental shape. I took all of those things very seriously, and I probably did not put enough value into any of those things, even given that orientation. That leads right into: The only thing you can truly exert control over is yourself, and it's quite likely that nearly all of your problems are the result of your choices, either indirectly through the environment you live in or directly through the actions you take. Humility is drastically underrated, and being healthy plays into this enormously as well. That being said, I'd love to hear a perspective from some of the older HN folks - what am I missing as a mid-40s person that I should absolutely be paying attention to?"
+        },
+        {
+          "id": 49396293,
+          "author": "m463",
+          "text": "> 1. The importance of understanding your own incentive structure, and not believing everything you think. maybe not 0day stuff, but breaking the build is something that mature people have learned not to do. What are the rewards for move fast and break things for people?"
+        },
+        {
+          "id": 49395254,
+          "author": "hankbond",
+          "text": "Dang these are really not at all common advice/reflections. > 1. The importance of understanding your own incentive structure, and not believing everything you think. I think certainly your actions are maybe that paramount to the world because it has so many actors, but they are certainly important to you. The actions that we take on a daily basis nudge nudge nudge us to becoming something else. I think its something worth focusing on but not to the point it makes you anxious. Thanks for the thoughtful piece."
+        },
+        {
+          "id": 49395083,
+          "author": "roenxi",
+          "text": "> The importance of understanding your own incentive structure, and not believing everything you think. There is an implication from this one that the article doesn't get into, which is whether you've picked a strategy of fail-safe or fail-disastrously. Once someone makes the leap to realising that their own mind is unreliable and it is entirely possible that their thoughts and memories are just wrong they have to start seriously asking what happens if they set out to do something, achieve it and then discover that it was a bad idea from the start. It is one of those ideas that sounds very simple to incorporate into your life and turns out to be hard. IMO the people who tend towards pacifism and non-violence have internalised the idea because the violent ones just do so much more harm than good while thinking they are virtuous. > The dichotomy between reason and emotion is a cultural construct, and neither grounded in neuroscience nor in logic. He's technically right, but our instincts are not suitable for a complex 8-billion person global economy. We have a bunch of instincts calibrated so that a group of ~200 monkeys probably raises >200 descendants on average, just. We need some sort of principle where we expect people to take evidence-based action rather than always just picking what feels good in the moment. It doesn't have to be a reason-emotion dichotomy, but there has to be something where effective people > destructive people in situations where our instincts don't trigger or push people in predictably bad directions."
+        },
+        {
+          "id": 49395707,
+          "author": "BeetleB",
+          "text": "When I read titles like these, I expect a relatively low value article. This has probably been the highest value such article I've read in years. You've phrased item 3 better than I have been trying to for years after my own journey in realizing this. Thank you."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 7,
+      "id": 49392200,
+      "title_en": "Scientists release biggest 2D map of the universe",
+      "title_ja": "Scientists release biggest 2D map of the universe",
+      "url": "https://newscenter.lbl.gov/2026/08/10/scientists-release-biggest-2d-map-of-the-universe/",
+      "hn_url": "https://news.ycombinator.com/item?id=49392200",
+      "score": 159,
+      "comment_count": 50,
+      "posted_at": "2026-08-21T18:36:34+00:00",
+      "comments": [
+        {
+          "id": 49394550,
+          "author": "anigbrowl",
+          "text": "Researchers expect it will remain the most comprehensive 2D map of our universe for years to come. Most likely. I doubt there is going to be any serious investment in astronomy over the next decade given economic headwinds and a deteriorating strategic situation. The big money will be going into defense and economic sovereignty and building/launching new high powered telescopes will not be a priority. Optical/sensor advances will be prioritized for earth observation (commercial, military, or weather/climate) and it maybe that we're in an era of diminishing technological returns already. I do expect a lot of analytical advances thanks to the combination of open datasets and AI, although it seems more likely that most of these will be in stamp collecting - interesting astronomical facts for people who are already interested in astronomy. Hard to guess if we will see challenges to prevailing cosmological theories."
+        },
+        {
+          "id": 49393902,
+          "author": "flockonus",
+          "text": "I knew the universe was nothing but a brick wall, now we have proof! https://viewer.legacysurvey.org/?ra=80.3728&dec=-69.4497&lay... /jk"
+        },
+        {
+          "id": 49394360,
+          "author": "KaiMagnus",
+          "text": "I've got some crazy feelings browsing this. Are there any particularily detailed areas? But maybe the humbling reality is just: The closer we look, the more galaxies appear where we thought was black void…"
+        },
+        {
+          "id": 49392946,
+          "author": "doodlebugging",
+          "text": "That's impressive. Though I think there's too much space on this plane. I'm wondering whether it is actually a 2D view since it obviously isn't planar. To paraphrase Samuel L Jackson - \"I have had it with this m'f'ing space on a plane! Everybody strap in I'm about to open some f'in' windows.\" Proceeds to crank open an array of telescopes to get another 3D perspective of a 4D universe so we can project it onto our 2D viewing devices as if that were reality."
+        },
+        {
+          "id": 49394238,
+          "author": "hn_throwaway_99",
+          "text": "I read the article but didn't watch the videos yet, but I'm curious as to what would be needed to make this a 3D map. That is, I'm assuming this 2D map records the position of all of these objects in the sky, but not the distance from Earth. But I thought that calculating the distance of objects is relatively straightforward, e.g. you hear all the time \"Galaxy X is 2 billion lightyears away\" or whatever. Would it just be really computationally expensive to calculate the distance to all of the 4 billion objects identified in the map?"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 8,
+      "id": 49388154,
+      "title_en": "Kagi added a setting for removing paywalled links from search results",
+      "title_ja": "Kagi added a setting for removing paywalled links from search results",
+      "url": "https://kagi.com/changelog#11296",
+      "hn_url": "https://news.ycombinator.com/item?id=49388154",
+      "score": 1039,
+      "comment_count": 348,
+      "posted_at": "2026-08-21T13:56:37+00:00",
+      "comments": [
+        {
+          "id": 49388910,
+          "author": "delis-thumbs-7e",
+          "text": "I think this is amazing. Love Kagi. I’m happy to pay for a good search. Nobody speaks about their AI Assistant, but it is really good. They somehow harnessed it so that it mainly searches info first and sticks to the verifiable data. I prefer it to Claude or any other, because it actually answers the question I need without fluff or “Great question! Here’s some plausible nonsense you can trip over instead of doing actual research!”."
+        },
+        {
+          "id": 49389173,
+          "author": "frereubu",
+          "text": "The one thing I find slightly grating about links to Kagi blogs is the top comments are almost always \"I use Kagi and it's great!\" rather than about the content of the blog. And I'm a happy Kagi subscriber! I get that this is an option, but what it really shows to me is how broken the model for journalism is. In my view you almost always only get good-quality journalism if you pay for it. (Somehow - e.g. the BBC is paid for by the licence fee, although I'm a bit despairing at the quality of the BBC these days, but perhaps that tracks the significant cuts to their budget...) I'm pretty sure that there's a technically viable solution to micropayments, but there are too many competing interests for anyone to settle on anything. We can't even agree on a single setting that says you don't want advertising cookies!"
+        },
+        {
+          "id": 49388398,
+          "author": "tempest_",
+          "text": "I've been enjoying Kagi for the last couple years. Even as LLMs slurp up most of the internet and replace search I think Kagi is still useful. Reddit has recently blocked access to old reddit without an account and the ability to filter out stuff like that is useful."
+        },
+        {
+          "id": 49388483,
+          "author": "getfacl",
+          "text": "This makes sense to me as a Kagi user. The chance that I'm going to subscribe to read an article I found via a search is zero."
+        },
+        {
+          "id": 49388382,
+          "author": "pelagicAustral",
+          "text": "Killer feature. It would be awesome to have some plugin or userscript to auto-swap the e-begging scammy link for an Archive link instead."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 9,
+      "id": 49386895,
+      "title_en": "Felony charges for citizen deleting phone data at US Border",
+      "title_ja": "Felony charges for citizen deleting phone data at US Border",
+      "url": "https://www.nytimes.com/2026/08/21/us/politics/samuel-tunick-deleted-phone-felony.html",
+      "hn_url": "https://news.ycombinator.com/item?id=49386895",
+      "score": 617,
+      "comment_count": 781,
+      "posted_at": "2026-08-21T12:10:13+00:00",
+      "comments": [
+        {
+          "id": 49395024,
+          "author": "gblargg",
+          "text": "The decoy passcode feature should boot into a separate partition that looks like a normal phone setup, and during that time quietly erase the user's actual data. They would never have known if it worked like this."
+        },
+        {
+          "id": 49392826,
+          "author": "Zak",
+          "text": "For exactly the border search scenario, I wish smartphones could be imaged and restored as easily as PCs. Imagine booting the phone from a flash drive, making an encrypted image of the phone on said drive, and writing a fresh OS before reaching the border. There's no deception required to protect sensitive data or avoid the seizure of an expensive phone. Consent to unlocking the phone, refuse to unlock the drive. The drive gets seized and you go on your way (if you're a US citizen entering the USA). Some time ago, Android with a custom recovery could come close to that, but it was fussy and as far as I know, no longer viable. Increased use of TPMs for storing credentials seems to be at least one of the reasons."
+        },
+        {
+          "id": 49392339,
+          "author": "simonebrunozzi",
+          "text": "All Archive pages, when accessed from Italy, now are blocked by the Government: \"PAGINA INTERDETTA DAL CENTRO NAZIONALE PER IL CONTRASTO DELLA PEDOPORNOGRAFIA ONLINE (C.N.C.P.O.)\" “PAGE BLOCKED BY THE NATIONAL CENTER FOR COMBATING ONLINE CHILD PORNOGRAPHY (C.N.C.P.O.)” Oh, we live in an interesting age."
+        },
+        {
+          "id": 49393003,
+          "author": "patcon",
+          "text": "I used to play around on projects adjacent to Tor and TailsOS, and had an idea for a setup I was researching. It's a little intense and probably has annoying failure modes, but sharing in case anyone else finds it helpful: - Tasker is an automation app for setting up rules for triggers and actions. It allows extension apps to be created to add new triggers and actions. - someone at one point made an extension to add an action for wiping or factory resetting when triggered - there was an existing extension (or core feature) to trigger when certain signals are lost or found (e.g., wifi signals, Bluetooth LE beacons, etc) So the idea is to carry a BLE beacon (any \"item tracking\" one works) on your keychain, and an unassuming faraday cage pocket alongside it. If you want to wipe your phone, slip the fob into the pocket, the signal disappears, and your phone wipes. And if you don't have the keychain on you, just refuse to open it right away, as when they put the phone itself in a faraday cage (to prevent it from being remote wiped), they cause the signal to be lost, and it gets reset. Not sure if all the pieces still exist (I dont think the tasker extension for wiping existed outside a forum post...)"
+        },
+        {
+          "id": 49392702,
+          "author": "trollbridge",
+          "text": "U.S. citizens are going to need obtain a burner phone before returning, and load it with the absolute minimum to load boarding passes, etc., perhaps some reading material or a movie to watch on the plane, and be prepared to share full credentials for thing at the border. (I used to do some travel patterns where taking a certain client laptop wasn’t an option. It was an absolute gigantic pain for the type of work I did, but it was just too risky to have a laptop seized and be expected to input credentials.)"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 10,
+      "id": 49394827,
+      "title_en": "Show HN: OzBrain, a shared brain for knowledge between agents and your team",
+      "title_ja": "Show HN: OzBrain, a shared brain for knowledge between agents and your team",
+      "url": "https://ozbrain.com",
+      "hn_url": "https://news.ycombinator.com/item?id=49394827",
+      "score": 49,
+      "comment_count": 20,
+      "posted_at": "2026-08-21T23:09:06+00:00",
+      "comments": [
+        {
+          "id": 49395359,
+          "author": "gavinboston",
+          "text": "Do you have a solution for degradation in accuracy when compiling larger amounts of llm-produced text? I am also building LLM knowledge/memory systems and I've been surprised how bad LLMs are, even SOTA models, at summarizing non-trivial input batches of text. They get things wrong, distort the underlying meaning or data, etc."
+        },
+        {
+          "id": 49395778,
+          "author": "indigodaddy",
+          "text": "This is interesting. Would you consider this a different type product/benefit than all the \"memory\" things we have seen popping up everywhere?. Is it different just because it lives in the cloud? To me it feels like a different thing than memory."
+        },
+        {
+          "id": 49395966,
+          "author": "rendonroman",
+          "text": "It’s very encouraging to see serious attempts at addressing continuity between agents’ outputs. Right now, everyone seems to be figuring out their own way of maintaining consistency across sessions without endlessly over-contextualizing each new one. This feels like an important layer of the emerging agent stack, and I think this Show HN will be useful to a lot of people working through exactly that problem."
+        },
+        {
+          "id": 49395240,
+          "author": "gosolozero",
+          "text": "I’m not sure I get the value over Obsidian, can you explain the static file issue? Only happens at 7K+ individual files? What happens if you always conjoin files?"
+        },
+        {
+          "id": 49396028,
+          "author": "ggangsir",
+          "text": "I have been thinking about this idea for a while. Cool work."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 11,
+      "id": 49381542,
+      "title_en": "Ozone: The fault is not in our trees, but in ourselves",
+      "title_ja": "Ozone: The fault is not in our trees, but in ourselves",
+      "url": "https://www.science.org/content/blog-post/fault-not-our-trees-ourselves",
+      "hn_url": "https://news.ycombinator.com/item?id=49381542",
+      "score": 10,
+      "comment_count": 0,
+      "posted_at": "2026-08-20T23:11:50+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 12,
+      "id": 49387570,
+      "title_en": "I accidentally logged hundreds of thousands of phone calls to military bases",
+      "title_ja": "I accidentally logged hundreds of thousands of phone calls to military bases",
+      "url": "https://lina.sh/blog/hijacking-e164-arpa",
+      "hn_url": "https://news.ycombinator.com/item?id=49387570",
+      "score": 469,
+      "comment_count": 53,
+      "posted_at": "2026-08-21T13:11:28+00:00",
+      "comments": [
+        {
+          "id": 49389249,
+          "author": "toast0",
+          "text": "> It never really took off though, and even back in its early days it saw barely any use. Over the years it just deteriorated further, and today it's basically completely dead. It's actually not completely dead... It's just (almost) completely non-public. You can subscribe to services to get number porting information where the interface is basically e164.arpa/ENUM queries to a private nameserver over a VPN. I don't know the details, the cost was high enough that it didn't make sense for my employer to pursue it."
+        },
+        {
+          "id": 49389967,
+          "author": "dmd",
+          "text": "I'm mostly amazed the author didn't land in jail, which is the normally the response to reporting this kind of thing to authorities."
+        },
+        {
+          "id": 49396291,
+          "author": "edm0nd",
+          "text": "would have been a lot cooler if you leaked the call logs to DDoSecrets instead so the public could see them"
+        },
+        {
+          "id": 49390644,
+          "author": "chaz6",
+          "text": "It is a shame they did not actually set up a SIP server and see if any of those requests turned into actual call terminations. There is another schema called TRIP [1] - telephony routing over ip that uses a number format \"1234*1455\" designed to be entered on a standard phone keypad. When I registered my ITAD (internet telephony administrative domain, the RHS of a TRIP number) I was lucky enough to get one that matches my local dialling code! https://tripresurgence.org/trip/history/ [1]"
+        },
+        {
+          "id": 49392602,
+          "author": "dkga",
+          "text": "I enjoyed reading this much more than anything I read here recently. In particular I like how it absolutely shows that somethings just… fall through the cracks!"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 13,
+      "id": 49391553,
+      "title_en": "OTel isn't going well (and I made a spreadsheet about it)",
+      "title_ja": "OTel isn't going well (and I made a spreadsheet about it)",
+      "url": "https://matduggan.com/otel-isnt-going-well-and-i-made-a-spreadsheet-about-it/",
+      "hn_url": "https://news.ycombinator.com/item?id=49391553",
+      "score": 47,
+      "comment_count": 17,
+      "posted_at": "2026-08-21T17:45:41+00:00",
+      "comments": [
+        {
+          "id": 49396130,
+          "author": "EdSchouten",
+          "text": "What always puzzles me about OpenTelemetry is that tracing, metrics and logs are all designed independently. I wish there was a way I could just annotate my code base once, and let the ultimate decision to expose something as a metric/log/trace be dynamic at runtime. For example, if I look at a graph in monitoring dashboard and see something suspicious, I’d like to say: “The next time something like this occurs again, please save me a trace.” I should be able to just do that with a single mouse click. I remember them releasing the tracing spec/SDKs and saying “now let’s move on to metrics/logs.” That never sat right with me."
+        },
+        {
+          "id": 49395846,
+          "author": "bilalq",
+          "text": "OTel is so frustrating. If it wasn't shaping to be the clear winner in the space, I wouldn't complain about it as much. But today: 1. Every major vendor is still in some weird alpha/beta support for OTel even after all this time. 2. The performance hit is substantial and makes you question what the point of performance instrumentation is if you need twice as much compute/RAM to run the same workload now. 3. Serverless runtimes pay a heavy penalty for cold starts with OTel. 4. You're basically forced to run both gateway collectors and edge collectors for any realistic usage. 5. You still need to configure destination exporters in unique ways. This leaves you questioning what the value of OTel was. 6. Vendors that go beyond the scope of what OTel covers still need their own bespoke instrumentation. What was the point of any of this then?"
+        },
+        {
+          "id": 49393236,
+          "author": "brikym",
+          "text": "I've never found instrumentation to be a huge issue. Sure it takes more effort but you get a lot more value once you understand _business_ events."
+        },
+        {
+          "id": 49396182,
+          "author": "cyberax",
+          "text": "I disagree. I'm an observability geek, and OTel is... fine. It's missing a few things that I'd like, but I was able to implement them myself. I guess the major design issue is that the sampling decision is made at the _start_ of the segment. So I hacked up a few improvements: 1. Ability to mark segments as \"boring\", so they are dropped before the export. For things like healthchecks, empty \"get the pending jobs\" queries, etc. 2. Ability to downgrade errors for segments that are expected to return an error (e.g. HEAD on a non-existing object in S3 to check if there's a cached blob)."
+        },
+        {
+          "id": 49396150,
+          "author": "0xbadcafebee",
+          "text": "It is crazy to me how often people don't grok how to design software well. 1. The worst thing you can do is try to stuff too many things into one specification. So you want an API? That's great. What's that? You want a rigid set of types so that any tiny changes over time aren't compatible? You want to try to define every conceivable use case as a new call? You want to combine multiple elements from different domains into one flat set of functions? You don't have any hierarchy or inheritance? You don't support extensions? 2. The second-worst thing you can do is to force a whole lot of different people to go through a single standards body. So you want to support a thousand different 3rd party components. What's that? You want to require everyone get their adapter approved by one group? And there's only one supported adapter per 3rd party component? If you're trying to feed an entire city, it's logistically incredibly difficult to try to do it all yourself. If instead you just define where food can be dropped off or picked up, and ask volunteers to bring their own food there whenever they can/want, now you don't have a logistical nightmare on your hands anymore. The tech alternative? Add support for \"plugins\", make the plugin interface incredibly loose/backwards-compatible/layered, and invite people to publish their own plugins. If you under-engineer it, it actually works better."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 14,
+      "id": 49327408,
+      "title_en": "People of ACM – Russ Cox",
+      "title_ja": "People of ACM – Russ Cox",
+      "url": "https://www.acm.org/articles/people-of-acm/2026/russ-cox",
+      "hn_url": "https://news.ycombinator.com/item?id=49327408",
+      "score": 100,
+      "comment_count": 11,
+      "posted_at": "2026-08-17T07:12:15+00:00",
+      "comments": [
+        {
+          "id": 49393747,
+          "author": "pbohun",
+          "text": "Russ also has a great blog, with the most recent entry on fast floating-point printing and parsing. I believe these performance improvements have landed in the latest version of Go. https://research.swtch.com/fp"
+        },
+        {
+          "id": 49392760,
+          "author": "dchest",
+          "text": "I recently learned that Russ also wrote software for The On-Line Encyclopedia of Integer Sequences ( https://oeis.org ) and is the president of the OEIS Foundation."
+        },
+        {
+          "id": 49373977,
+          "author": "shaftoe444",
+          "text": "> Software engineering is what happens to programming when you add time and other people."
+        },
+        {
+          "id": 49394673,
+          "author": "pluralmonad",
+          "text": "Cloudflare says I'm not allowed to view the page. At least they are protected from \"attacks.\""
+        },
+        {
+          "id": 49394347,
+          "author": "SA9G",
+          "text": "I love the \"Tornado\" term and \"software debt\"... worked with a few over the years, fixed the bug but broke the paradigm. Well articulated wisdom."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 15,
+      "id": 49357530,
+      "title_en": "AI boosted homework scores, then exam scores dropped: study",
+      "title_ja": "AI boosted homework scores, then exam scores dropped: study",
+      "url": "https://www.economist.com/graphic-detail/2026/08/18/does-ai-stop-children-from-learning",
+      "hn_url": "https://news.ycombinator.com/item?id=49357530",
+      "score": 250,
+      "comment_count": 296,
+      "posted_at": "2026-08-19T06:13:31+00:00",
+      "comments": [
+        {
+          "id": 49362181,
+          "author": "GPerson",
+          "text": "The kids who used AI and studied for a similar amount of time as the non-AI high performers apparently had similar (slightly higher) performance. The kids who used AI and did poorly used the AI to do the homework for them (this is what the article says). I believe AI is basically an amplifier of bad and good. I’m cynical about the world and assume it will be used more for bad than good, but I don’t doubt some of the best people in every field will be using AI to amplify their work in good ways."
+        },
+        {
+          "id": 49392660,
+          "author": "tancop",
+          "text": "All AI did here is exposed an old problem in education. Kids are expected to get everything perfectly for the first time but a lot of them don't so the class gets easier next year to keep up pass rates. We need to restructure the system to treat failure as a signal instead of a disaster. Grades should come from hard randomized exams with unlimited retakes so one bad day won't hurt you. Homework should be optional material for self study, evaluated by teachers if you choose to do it but never forced. Hold back students for individual classes instead of a whole grade so failing one can't ruin your social life and teachers are more willing to do it. F students will realize they have to study, start actually learning and then pass on the second time. No big deal. It happened to my friends in college, no reason they can't do it in high schools. Discipline is a skill and it's one you have to get from experience. If you try and force kids to study when they don't want to \"for their own good\" you're not actually helping them. Everyone needs to find their own path. Let people fail."
+        },
+        {
+          "id": 49361080,
+          "author": "andsoitis",
+          "text": "Moneyshot: \"The results are eye-opening. After six months, pupils using ai saw their average homework score rise by 18% across all subjects. The time they took to complete each assignment fell from an average of 64 minutes to 45. But come exam time, the same students scored 20% below their classmates who had not called on ai’s help. Homework scores once predicted exam performance; now those who score highest are, perversely, more likely to do worse in exams.\" Study design: \"David Stromberg of Stockholm University and Victor Lei and Wu Yanhui of the University of Hong Kong set out to fill the gap. They tracked 27,000 pupils aged 12-18 in China, where ai adoption has been fast. Around 80% reported using models such as Doubao and DeepSeek; the other 20% formed the control group.\""
+        },
+        {
+          "id": 49390830,
+          "author": "criddell",
+          "text": "For some of the classes my kids were in, the lessons and homework time were reversed. Learning the material (using the text book and videos) was what they had to do at night and class time was spent working through problems or applying the material in some way."
+        },
+        {
+          "id": 49363581,
+          "author": "pjc50",
+          "text": "Taking a forklift to the gym increases the number on the bar, but mysteriously your gains go down."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 16,
+      "id": 49395171,
+      "title_en": "HN: The Good Parts (2016)",
+      "title_ja": "HN: The Good Parts (2016)",
+      "url": "https://danluu.com/hn-comments/",
+      "hn_url": "https://news.ycombinator.com/item?id=49395171",
+      "score": 25,
+      "comment_count": 6,
+      "posted_at": "2026-08-21T23:53:03+00:00",
+      "comments": [
+        {
+          "id": 49395579,
+          "author": "sillysaurusx",
+          "text": "> I compiled a very abbreviated list of comments I like because comments seem to get lost. Note that you can track comments you like by clicking its timestamp and then clicking \"favorite\". Then they're available at e.g. https://news.ycombinator.com/favorites?id=sillysaurusx&comme..."
+        },
+        {
+          "id": 49395523,
+          "author": "dang",
+          "text": "Related. Others? HN: The Good Parts (2016) - https://news.ycombinator.com/item?id=33364865 - Oct 2022 (48 comments) HN: The Good Parts (2016) - https://news.ycombinator.com/item?id=27049601 - May 2021 (82 comments) HN: The Good Parts (2016) - https://news.ycombinator.com/item?id=20092118 - June 2019 (35 comments) HN comments are underrated - https://news.ycombinator.com/item?id=12772925 - Oct 2016 (359 comments) (I can't remember why that last, i.e. the first, title was so different.)"
+        },
+        {
+          "id": 49395190,
+          "author": "Avicebron",
+          "text": "It's interesting how much the good parts have to do with not worrying about how much money your making or the job you have and instead focuses on technical topics. People are not happy Dan, and we can't bring it back to 2014 when a select few got to get massages before they pushed their commit for the day. If you want to be part of an interesting technical discussion you have to acknowledge where the people with knowledge are."
+        },
+        {
+          "id": 49395391,
+          "author": "lapcat",
+          "text": "(2016)"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 17,
+      "id": 49396086,
+      "title_en": "Early Humans Likely Ate Carbs and Sugary Foods",
+      "title_ja": "Early Humans Likely Ate Carbs and Sugary Foods",
+      "url": "https://www.history.com/articles/early-human-ancestors-diet-sugar-carbs",
+      "hn_url": "https://news.ycombinator.com/item?id=49396086",
+      "score": 4,
+      "comment_count": 0,
+      "posted_at": "2026-08-22T02:37:30+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 18,
+      "id": 49393733,
+      "title_en": "SalesPatriot (YC W25) Is Hiring Forward Deployed Engineers",
+      "title_ja": "SalesPatriot (YC W25) Is Hiring Forward Deployed Engineers",
+      "url": "https://www.ycombinator.com/companies/salespatriot/jobs/M46X6YX-forward-deployed-engineer",
+      "hn_url": "https://news.ycombinator.com/item?id=49393733",
+      "score": 1,
+      "comment_count": 0,
+      "posted_at": "2026-08-21T21:00:48+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 19,
+      "id": 49326852,
+      "title_en": "Show HN: Rex, a parallel functional language for scientific workflows",
+      "title_ja": "Show HN: Rex, a parallel functional language for scientific workflows",
+      "url": "https://github.com/peterkelly/rex",
+      "hn_url": "https://news.ycombinator.com/item?id=49326852",
+      "score": 15,
+      "comment_count": 2,
+      "posted_at": "2026-08-17T05:28:07+00:00",
+      "comments": [
+        {
+          "id": 49395889,
+          "author": "smcameron",
+          "text": "Presumably, not to be confused with Rexx[1]. Namespace collisions ... or perhaps \"wrecks\". 1. https://en.wikipedia.org/wiki/Rexx ."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 20,
+      "id": 49389952,
+      "title_en": "How we made a text-to-speech model respond in sub-50 ms",
+      "title_ja": "How we made a text-to-speech model respond in sub-50 ms",
+      "url": "https://nari-labs.com/blog/qwen3-tts-speed-cost-frontier/",
+      "hn_url": "https://news.ycombinator.com/item?id=49389952",
+      "score": 115,
+      "comment_count": 29,
+      "posted_at": "2026-08-21T15:51:10+00:00",
+      "comments": [
+        {
+          "id": 49389953,
+          "author": "toebee",
+          "text": "time-to-first-audio (TTFA) is critical for realtime voice applications. open source implementations (e.g. vLLM-Omni, SGLang-Omni) are often too slow for production and can have issues with realtime playback if you push for lower latency. we wanted to fix that. we optimized qwen3-tts, a popular OSS TTS model, to achieve 34 ms p95 TTFA at 10 requests per second on 1 x H100. we open source the implementation and benchmark, as well as a breakdown of how it was done. github: https://github.com/nari-labs/nari-qwen3-tts"
+        },
+        {
+          "id": 49392664,
+          "author": "armcat",
+          "text": "Having built my own voice assistant ( https://github.com/acatovic/ova ) and having tried many other services and models, I feel the real win is when this is on-device, and by \"on-device\" I mean being very inexpensive to run on a phone, and not H100. I've now been using Pocket TTS which is super fast, and also Chatterbox and Fish Audio S2 Pro (on the Mac/PC), I feel we are so close, yet so far. The quality is amazing, but can we take this to the next level and make it run on mobile? What would it take?"
+        },
+        {
+          "id": 49392353,
+          "author": "nowittyusername",
+          "text": "This is right up my alley as ive been building a local voice agent for a year now. Ive tried many different models and have a custom implementation for omni voice that ive tuned for over many months. Ive never been able to achieve faster then 200ms ttfa for that model at 24 steps, but the reason is .... quality. I find that there is a lot of room for improvement in many tts models out there by a huge margin. But there is also a quality hard wall that you eventually hit that the tradeoff of faster latency but lower quality is not worth it. When making a really well sounding voice agent quality of voice, cadence, expression, etc... matters a lot. It will be interesting to try this implementation and see if its quality outputs match my expectations, if so great job indeed."
+        },
+        {
+          "id": 49395117,
+          "author": "jmesmith",
+          "text": "any plans to make this available on cloudflare ai workers (or similar)? Looks super cool, I'd love to try it!"
+        },
+        {
+          "id": 49392230,
+          "author": "bellowsgulch",
+          "text": "GPT‑Realtime‑2 is really weird. Perhaps just because it's bidirectional and now has the failure mode as a possibility, it responds too soon with filler at awkward times, and it's generally overeager. I feel like there was plenty of opportunity to just work on latency engineering like this effort."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 21,
+      "id": 49380303,
+      "title_en": "Early-life stress leaves a 'scar' inside brain cells in mice",
+      "title_ja": "Early-life stress leaves a 'scar' inside brain cells in mice",
+      "url": "https://medicine.washu.edu/news/how-early-life-stress-leaves-a-scar-inside-brain-cells/",
+      "hn_url": "https://news.ycombinator.com/item?id=49380303",
+      "score": 57,
+      "comment_count": 18,
+      "posted_at": "2026-08-20T21:08:36+00:00",
+      "comments": [
+        {
+          "id": 49382691,
+          "author": "redrix",
+          "text": "I remember having it drilled into me in High School that unless you did well on your finals: 1. You wouldn’t get the score you needed to get into a good University and/or accepted into the course you wanted. 2. If you didn’t get into that course, you wouldn’t be able to do <x> for a career. 3. If you DID get into the course you wanted, it needed to be at a top University (which of course required an even higher entry score) or else you’d find it hard to get a job afterwards. Imagine all of that stress: Telling 16-18 year olds that unless you ace your tests, you won’t be able to do what you want to in life."
+        },
+        {
+          "id": 49383638,
+          "author": "ls612",
+          "text": "In mice."
+        },
+        {
+          "id": 49384679,
+          "author": "sph",
+          "text": "These pop-sci articles annoy me greatly. All I can think reading the title is “well, duh?” - they’re a complete tautology. Let me explain: if an event or behaviour affects a person, it means that there must be a physical record of it. These types of articles confirming that such a record has been found might be great news for researchers, but for everyone else, the existence of this physical record was already known a priori . We are biological machines after all, all behaviours are encoded physically. If there was no such scar in brain cells, there would have been no early-life stress. This applies to other research such as “learning changes structure of the brain” or “drug addiction turns off specific neural pathways” or “brains of children with autism differ from neurotypical brains” or “athletes have more developed muscles”"
+        },
+        {
+          "id": 49383986,
+          "author": "jdw64",
+          "text": "Then my brain must be full of scars."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 22,
+      "id": 49388752,
+      "title_en": "Claudette: Make Claude stop talking like a BuzzFeed article",
+      "title_ja": "Claudette: Make Claude stop talking like a BuzzFeed article",
+      "url": "https://github.com/adnanakil/nobuzz/blob/main/README.md",
+      "hn_url": "https://news.ycombinator.com/item?id=49388752",
+      "score": 215,
+      "comment_count": 154,
+      "posted_at": "2026-08-21T14:31:52+00:00",
+      "comments": [
+        {
+          "id": 49389501,
+          "author": "mmastrac",
+          "text": "I've started giving these instructions and I think I've been much more successful in generating clear output: Comment blocks are <= 7 words, function names <= 4 words. User-facing message strings should be <= 10 words. Use an active voice, no stage performances, and pick the most common word when choosing among alternatives. Limiting the number of words is the strongest factor in cleaning up the output, IMO. For older code I've instructed it to delete all the comments, and then I re-comment it using a new session and these guidelines, asking it to rejustify the need for every comment to itself."
+        },
+        {
+          "id": 49389443,
+          "author": "datakan",
+          "text": "Has Anthropic said anything about how or why Claude writes the way it does? So many people hate it, seems like they need to do some damage control there. I haven't had the same problems others have but I'm also not a heavy user of it."
+        },
+        {
+          "id": 49389290,
+          "author": "walthamstow",
+          "text": "It's such a sad indictment of Anthropic's product that so many people hate interacting with it. Claude is on its way to the Microsoft Teams zone of hatred."
+        },
+        {
+          "id": 49396277,
+          "author": "xbar",
+          "text": "Every time I engage with Claude I am reminded how bad it is at communicating to its human."
+        },
+        {
+          "id": 49389245,
+          "author": "WalterGR",
+          "text": "Related and recent: https://news.ycombinator.com/item?id=49375996 \"Vomit: Clean up Claude 5's token output with a separate LLM\" (github.com/zachahn) 285 points | 23 hours ago | 288 comments"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 23,
+      "id": 49387525,
+      "title_en": "New Worlds: We are living in the future of J.G. Ballard or William Gibson",
+      "title_ja": "New Worlds: We are living in the future of J.G. Ballard or William Gibson",
+      "url": "https://precastreinforced.co.uk/2026/08/16/new-worlds/",
+      "hn_url": "https://news.ycombinator.com/item?id=49387525",
+      "score": 210,
+      "comment_count": 154,
+      "posted_at": "2026-08-21T13:07:26+00:00",
+      "comments": [
+        {
+          "id": 49389372,
+          "author": "keiferski",
+          "text": "I am a big fan of both, but I think what's missing in reality, but in their fiction (and cyberpunk fiction in general) is a sense of coolness and caring about aesthetics. For all the evil that the mega corporations do in a Gibson novel, they still have an aesthetic appeal. Real-world corporations aren't that interesting. Amazon, Facebook, or Google have nothing \"culturally\" or aesthetically on Hosaka, Arasaka or Sense/Net. Which is really the tragedy of it all: we are getting the cyberpunk dystopia with none of the aesthetics that have made it a household word."
+        },
+        {
+          "id": 49391962,
+          "author": "MomsAVoxell",
+          "text": "I was young, and needed the money. A week-long contract in San Francisco, to do some contract work. Instead of a vacation. Well, so I flew to the Embarcadero center, some late fall. The task was to work on some audio code, and maybe networking, for a popular multiplayer cyber- tank battle game. It was a great gig. I onboarded with another dev, who sat with me for the first 30 minutes after a few rounds, while we watched dark shapes out in the bay and tried to determine if they were submarines or whales. Then, when it got dark, we decided to stop testing and do some work, looking out over the bay as our machines rebooted into developer modes. After our sprint and midnight pizza, the boss came in, introduced himself, and asked me a question that kinda changed my life: “have you read Snow Crash yet?” .. it had just been released, I hadn’t gotten there yet. “No, I brought the new 2600 with me though, you wanna .. “ .. “Stop”, he said. Walks to his office, digs through a box, gives me a brand new, fresh copy, first edition. Because of course he had a box of them. “Don’t work on anything else until you’ve read this cover to cover”, was the directive. “Really”, yes really .. My onboarding colleague looked at me with an amused smirk, shrugged, and said “yeah, you gotta ..” So I spent 3 work days and a weekend, reading it. Get to Monday, I’m good to go. I’ll make this audio code listen to reason. 37th floor, Embarcadero like I said, I get out of the lift and .. there’s a dark mood in the room. DOOM had just hit. Well, I’ve been living Snow Crash since the day I read it, is all I’m saying."
+        },
+        {
+          "id": 49388866,
+          "author": "phreeza",
+          "text": "I agree, it is easy to miss just because we get used to things quickly. I remember this thought hitting me vividly when I saw this picture during COVID https://cdn.theatlantic.com/thumbor/MUBajBy-350E5JAjtntEhAYz..."
+        },
+        {
+          "id": 49395937,
+          "author": "larodi",
+          "text": "We entered cyberpunk completely the moment OpenAI released chatGPT. We are already deep into it and flying cars soon will follow. Maybe it started even earlier with bitcoin, but definitely is on."
+        },
+        {
+          "id": 49391308,
+          "author": "palmotea",
+          "text": "And some idiots actually want to live in a cyberpunk dystopia (some dude literally said to me one he would \"do anything he could to bring it about\"), because they were so enamored with the tech the dystopia part flew over their heads."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 24,
+      "id": 49374853,
+      "title_en": "A look under our trunk: what's in our compute",
+      "title_ja": "A look under our trunk: what's in our compute",
+      "url": "https://waymo.com/blog/2026/08/look-under-our-trunk/",
+      "hn_url": "https://news.ycombinator.com/item?id=49374853",
+      "score": 102,
+      "comment_count": 58,
+      "posted_at": "2026-08-20T14:13:45+00:00",
+      "comments": [
+        {
+          "id": 49392868,
+          "author": "xnx",
+          "text": "Apologies for repeating myself, but it's hard to convey how far ahead Waymo is in every area: sensors, vehicles, training data, markets served, simulation, infrastructure, operations, regulatory. They're growing fast, but I do wonder what they see as the bottlenecks: municipal approval, training, manufacturing? It's really unfortunate that lobbying is slowing self-driving rollout in some of the biggest and most important cities: NYC, Chicago, DC."
+        },
+        {
+          "id": 49392318,
+          "author": "p-o",
+          "text": "They really are the impressive tech, it's really a shame that they aren't the one capturing all the media spotlight. I don't know if we'll get there eventually, but if we do, I won't be surprised if it's because of Waymo."
+        },
+        {
+          "id": 49394709,
+          "author": "tehnoslow",
+          "text": "The more I think about it the more autonomous cars look like extremely demanding edge computers. You have limited power and cooling, unreliable connectivity and very strict latency requirements. It's probably one of the few places where designing the hardware around the workload makes more sense than trying to make a general purpose platform do everything"
+        },
+        {
+          "id": 49393279,
+          "author": "arjie",
+          "text": "Very cool. To be honest, I'd assumed they were using commodity hardware, but no real reason for that. Cool chip. It is quite interesting that so many large companies have their own chips for these things. I almost managed to get my hands on a couple of accidentally liquidated MTIA chips but I was too slow. I wonder what the chip is like and what the dev experience is writing for it. It would just be cool to see what these guys have cooked up dev tools wise since Google has always been famed for good developer experience (often to such a degree that Xooglers are useless outside the exosuit)."
+        },
+        {
+          "id": 49394532,
+          "author": "ACCount37",
+          "text": "It really doesn't say much. Tesla had more detailed talks on their HW and AI stack. This reads like a glorified marketing blurb."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 25,
+      "id": 49376197,
+      "title_en": "Autolith: A programming agent with a live runtime",
+      "title_ja": "Autolith: A programming agent with a live runtime",
+      "url": "https://www.lambda-symbolics.com/autolith",
+      "hn_url": "https://news.ycombinator.com/item?id=49376197",
+      "score": 31,
+      "comment_count": 9,
+      "posted_at": "2026-08-20T15:40:57+00:00",
+      "comments": [
+        {
+          "id": 49395849,
+          "author": "a2ff6eeb0",
+          "text": "Given that the most important feature for agent performance is the popularity of the language, ie, the amount of training data, ( https://danluu.com/pl-tokens/ ), why would you cause problems for yourself by using Lisp rather than Python/Javascript if you care mainly about results fast, or C/C++/Rust if you care about performance too?"
+        },
+        {
+          "id": 49395693,
+          "author": "rufius",
+          "text": "This is an interesting idea. I was thinking about something similar in Smalltalk or Erlang the other day. Mostly building on the actor/object+mailbox concept. I didn’t actually do anything with that idea yet but may look at the idea in Elixir this weekend."
+        },
+        {
+          "id": 49396160,
+          "author": "ggangsir",
+          "text": "How do differentiate with cursor ?"
+        },
+        {
+          "id": 49395747,
+          "author": "yogthos",
+          "text": "Amusingly, I started building something very similar in Jolt today :) https://github.com/yogthos/samizdat/"
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 26,
+      "id": 49376769,
+      "title_en": "Everyone says assembly is untyped—everyone is wrong",
+      "title_ja": "Everyone says assembly is untyped—everyone is wrong",
+      "url": "https://www.gingerbill.org/article/2026/08/20/designing-odins-inline-asm/",
+      "hn_url": "https://news.ycombinator.com/item?id=49376769",
+      "score": 49,
+      "comment_count": 16,
+      "posted_at": "2026-08-20T16:22:58+00:00",
+      "comments": [
+        {
+          "id": 49382964,
+          "author": "amluto",
+          "text": "I have very mixed opinions about the custom syntax. IMO the correct asm syntax, with very few exceptions, is the one in the manual . This is why Intel syntax is right and AT&T syntax is wrong: the ISA comes from Intel, the docs are from Intel and AMD, and those docs use Intel syntax. So I was kind of hoping that the custom syntax would at least result in a very, very strong checker, at least as good as Fil-C’s. Maybe with an escape hatch to say something like “I know it looks like I clobbered xyz, but I promise I really didn’t. Sadly, the CPUID example in the article apparently compiles, but IMO it shouldn’t have: CPUID takes two inputs, in EAX and ECX, and the example forgot to bind ECX as an input. One might argue that CPUID takes even more inputs if you’re on a VM and doing something special, but ECX is really quite unambiguous."
+        },
+        {
+          "id": 49395715,
+          "author": "AshamedCaptain",
+          "text": "> AT&T bakes the width into the mnemonic (movb, movw, movl, movq [...] Intel’s syntax is to prefix the memory operand with byte, word, dword, or qword, but Odin’s just uses the Odin type system directly. In GAS you can skip the width suffix from the mnemonic, and in most Intel assemblers you can skip the memory type operators like byte. They happily guess it from the operands. The problem is that on x86 (but also other ISAs, even if to a lower extent) the different operand sizes have a lot of side effects, which is why everyone just makes the operand size explicit, up to the point that apparently the author/LLM believes that it is mandatory to specify them. This kind of defeats the headline of the article... Tomorrow you need to pass a 128 bit int into two registers and your fancy syntax then also becomes a messy bunch of hacks. This is why everyone's inline assembly syntax looks like that, because they want to cover the weird cases (gcc's one is almost like an history book). You're normally using inline assembly for when you have some ridiculous corner case, if not, then what you ought to use is more akin to intrinsics... Also it forgets Watcom C, which does have a complete but messy syntax for inline assembly (which combines nicely with its ability to specify really weird calling conventions)."
+        },
+        {
+          "id": 49378909,
+          "author": "genxy",
+          "text": "An avenuge of research worth being sniped on is Typed Assembly Language https://en.wikipedia.org/wiki/Typed_assembly_language https://www.cs.cornell.edu/talc/overview.html"
+        },
+        {
+          "id": 49395773,
+          "author": "Jblx2",
+          "text": "Can you get an assemble-time or run-time type-error with assembly? Might be a fine article otherwise without the click-bait headline."
+        },
+        {
+          "id": 49378634,
+          "author": "Krssst",
+          "text": "Sorry, somewhat of a tangent but regarding: > The %0 and %1 are positional references into a list you have to count by hand. You can name your operands in gcc inline assembly. https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html#Output-... Look for \"asmSymbolicName\". On a phone so not checking if it builds, but something like `asm(\"add %[my_out], %[my_in], #3\":[my_out]\"=r\"(outvar):[my_in]\"r\"(invar):);`."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 27,
+      "id": 49392465,
+      "title_en": "Tumble Forth – from assembly to OS with C compiler (2023)",
+      "title_ja": "Tumble Forth – from assembly to OS with C compiler (2023)",
+      "url": "https://tumbleforth.hardcoded.net/",
+      "hn_url": "https://news.ycombinator.com/item?id=49392465",
+      "score": 63,
+      "comment_count": 8,
+      "posted_at": "2026-08-21T18:59:52+00:00",
+      "comments": [
+        {
+          "id": 49394938,
+          "author": "fjfaase",
+          "text": "For the C compiler that I developed to replace the GNU Mes compiler in the live-bootstrap project, I also used a Forth like language that uses two stack. One stack for parameters and return values and one for the return addresses and local variables. The Forth like language is transpiled in assembly and through some steps made into an ELF file. The targets are: x86, x86_46, and arm64. Work on supporting riscv64 has started, but is currently on hold due to other responsibilities. If there is anyone willing to complete it, I do have some small funds as a bonus."
+        },
+        {
+          "id": 49395697,
+          "author": "zovirl",
+          "text": "> An alternate way to go about this is to sidestep that complexity entirely and build your own OS. > We'll go bare metal and then build an operating system of our own, with a C compiler of our own. It's simpler this way. I love the audacity of those statements. And I appreciate this sort of approach which says \"let's implement the simplest possible version of _______ to learn how it is done.\""
+        },
+        {
+          "id": 49395453,
+          "author": "drivers99",
+          "text": "Oh yeah, this is right up my alley. I've been thinking about making a Forth on bare metal for a while (made a Forth interpreter in C last summer, and a tiny amount of testing stack manipulation in hand-assembled machine language on a C64U), and the thought I (coincidentally) had moments before seeing this link was about making a boot sector on some floppies I just got for my 8088 IBM PC. I know that will only work for the Real Mode part but it might be fun to start there anyway. Edit: I knew about CollapseOS but didn’t realize this had been around too."
+        },
+        {
+          "id": 49395617,
+          "author": "dang",
+          "text": "Related. Others? Tumble Forth - https://news.ycombinator.com/item?id=38184539 - Nov 2023 (22 comments)"
+        },
+        {
+          "id": 49393340,
+          "author": "einpoklum",
+          "text": "Point of clarification: Rummaging through that site, and as far I can see - the Forth language is not used."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 28,
+      "id": 49379026,
+      "title_en": "GitHub, autoscaling, and the component substitution fallacy",
+      "title_ja": "GitHub, autoscaling, and the component substitution fallacy",
+      "url": "https://surfingcomplexity.blog/2026/08/19/github-autoscaling-and-the-component-substitution-fallacy/",
+      "hn_url": "https://news.ycombinator.com/item?id=49379026",
+      "score": 37,
+      "comment_count": 0,
+      "posted_at": "2026-08-20T19:28:18+00:00",
+      "comments": [],
+      "summary_ja": ""
+    },
+    {
+      "rank": 29,
+      "id": 49386699,
+      "title_en": "I'm becoming AI-blind",
+      "title_ja": "I'm becoming AI-blind",
+      "url": "https://cymerys.com/w/im-becoming-ai-blind",
+      "hn_url": "https://news.ycombinator.com/item?id=49386699",
+      "score": 289,
+      "comment_count": 309,
+      "posted_at": "2026-08-21T11:48:05+00:00",
+      "comments": [
+        {
+          "id": 49388526,
+          "author": "causal",
+          "text": "There's some psychological mechanism by which my brain immediately recognizes AI generated text and just short-circuits to \"there is no information here\". And when I force myself to read AI-generated text I realize I'm making my brain do creative work to impart meaning to the words. It is exhausting because my brain is literally trying to do a just-in-time rewrite of the text into something valuable. Something is deeply wrong with AI generated output, and I say this as someone who is typically very impressed by AI."
+        },
+        {
+          "id": 49388758,
+          "author": "davidgh",
+          "text": "My son is currently learning Romanian and I was trying to help him with verbs. I don’t know Romanian but recalled when learning a foreign language for the first time it really helped me to break down how a verb form or tense worked in English, then learn the equivalent in the new language. So I wanted to make some charts and pages that he could use as learning resources. I used Claude to help. I don’t know how to quite describe it, but because the text was polished and well constructed my brain was giving me the the signal “if you aren’t getting this it’s because you’re not focusing” so I’d read it again and then again and it still was not landing. It sorta felt like when you read something technical or heavy when very tired - you are reading but not processing. Only after wrestling with this for a few days did I realize that it wasn’t me. As I started going through, sentence by sentence, forcing it to re-write things to be more clear the concepts became easy to understand. I wish there was a name for this situation. It’s almost like a pseudo-language where it has the correct form and presentation but is missing critical components. The more complex the topic, the more I sense this."
+        },
+        {
+          "id": 49395177,
+          "author": "tlkn_bot_praxis",
+          "text": "I've been stuck in loop all week where a coworker asked me to review some methodology documents that are clearly generated by Claude (which is fine in this case) but every time I sit down my brain can't get through 2 sentences without feeling like I'm reading nothing. It actually feels like the content, which isn't empty, has no meaning. So I go on to another assignment and come back later and the same thing happens. And now I have anxiety about opening it so it has compounded in difficulty haha. Glad other people are experiencing this."
+        },
+        {
+          "id": 49388074,
+          "author": "datsci_est_2015",
+          "text": "I also find it impossible to parse half the comments that Claude tries to sneak into our pull requests. I’ve never had an issue understanding code comments written by humans like this before. The structure of the information is like a waterfall that leaves me unable to swim to the surface and grab the air of comprehension. So, “Please write a one-liner comment manually to replace these 5 lines of AI generated comment” is a common refrain in my PR reviews to colleagues."
+        },
+        {
+          "id": 49388217,
+          "author": "SamBam",
+          "text": "That last image is bizarre. The quiche, cream and even the salad look like they've been given the trypophobia treatment. Which might even make sense, because there were always (still are?) those horrible ads in the chumbox area of news sites that used trypophobia and other creepy body-horror stuff to get you to click. [1] So maybe the hope is that you don't really look closely at the quiche, but some reptilian party of the brain gets oddly activated and drives you towards the restaurant? 1. https://medium.com/the-awl/a-complete-taxonomy-of-internet-c..."
+        }
+      ],
+      "summary_ja": ""
+    },
+    {
+      "rank": 30,
+      "id": 49389441,
+      "title_en": "I ran Photoshop on a £0.60 computer chip",
+      "title_ja": "I ran Photoshop on a £0.60 computer chip",
+      "url": "https://pointinthecloud.com/2026-08-19-144600.html",
+      "hn_url": "https://news.ycombinator.com/item?id=49389441",
+      "score": 121,
+      "comment_count": 34,
+      "posted_at": "2026-08-21T15:17:47+00:00",
+      "comments": [
+        {
+          "id": 49392885,
+          "author": "sieve",
+          "text": "I am using the Xteink X4 as my primary e-reader now-a-days. Simple ESP32 microcontroller. Plastic+glass shell with an e-ink screen. MicroSD card works like a cache. Battery lasts for weeks. Works great. Don't get me wrong. I like modern CPUs with huge caches and incredible power, but you do not need this for most devices. Also leads to lazy programming practices and calculators consuming hundreds of megabytes of RAM."
+        },
+        {
+          "id": 49393348,
+          "author": "boznz",
+          "text": "I'm currently building a RP2350 board with the HDMI/USB and I2S Audio I have also added the 16MB SRAM and higher vCore for overclocking which the RP2350 supports for a similar personal project to this. My first PCB had a few newbie mistakes which due to my lousy hand/eye coordination I wasnt able to fix so I am spinning up a V2 to go to JLPCB in the next week or two ( https://rodyne.com/?p=3999 ). Your post resonated with a lot of why I am doing it so keep up the good work."
+        },
+        {
+          "id": 49392642,
+          "author": "joshuaissac",
+          "text": "Caveat: 60p RP2350 microcontroller on a board that sells for $40 and has 8MB of RAM (as opposed to the 520K that the RP2350 comes with). But that is only needed for Photoshop. The 520K is more than enough to emulate the Mac 128K."
+        },
+        {
+          "id": 49394555,
+          "author": "Transformanshen",
+          "text": "It's funny how we're all chasing power, and yet here's a 60-cent chip emulating a Mac that people actually got work done on. Not hating on modern devices, they're awesome and all. But it's still interesting. Also, kinda want to order a RP2350 board now too, but I know I'll probably end up having zero time to do anything with it and it'll just sit in a drawer somewhere..."
+        },
+        {
+          "id": 49395606,
+          "author": "raphlinus",
+          "text": "I have a Fruit Jam and several other board (including the Olimex). It's great fun and I'm enjoying programming it. The biggest delight is that it's actually possible to reason about performance, extremely difficult on larger computers because of all the complexity. That said, Photoshop doesn't feel like the sweet spot of what to run on this hardware. There's only 520kB of fast static RAM, and that's not enough to run a framebuffer with enough bit depth to hold a photo reasonably. I have invented a 4bpp compression scheme which opens up possibilities, but it's asymmetrical and in its current form compression is very slow, so it wouldn't be suitable for interactive work. As a general matter, emulation makes a ton of sense. You can emulate all kinds of computers up to the late 80s, including video subsystems. Of course Mac and PC don't really do anything interesting like tiles and sprites, they're pretty much just dumb framebuffers."
+        }
+      ],
+      "summary_ja": ""
+    }
+  ]
+}
