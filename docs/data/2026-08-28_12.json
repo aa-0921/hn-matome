@@ -1,0 +1,1170 @@
+{
+  "date": "2026-08-28T00:00:00+09:00",
+  "slot": "12",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 49468083,
+      "title_en": "Saving 100 terabytes of memory by optimizing 1.1.1.1's DNS cache",
+      "title_ja": "Saving 100 terabytes of memory by optimizing 1.1.1.1's DNS cache",
+      "url": "https://blog.cloudflare.com/dns-cache-memory-optimization-1111/",
+      "hn_url": "https://news.ycombinator.com/item?id=49468083",
+      "score": 645,
+      "comment_count": 197,
+      "posted_at": "2026-08-27T17:17:57+00:00",
+      "comments": [
+        {
+          "id": 49470370,
+          "author": "lpapez",
+          "text": "This is the right way to deliver software. Produce working product first, validate the idea, stabilize the business, start generating profit, and then you can start optimizing your costs. In fact optimization is by far the easiest part of the process because there are many system programming experts on this HN thread who consider these optimizations to be trivial."
+        },
+        {
+          "id": 49468431,
+          "author": "irdc",
+          "text": "This is why system programming still matters. Looks like they're missing the obvious optimisation of putting the record data right after the CacheEntry members instead of allocating memory separately though. But that might just be me as a C-programmer talking and not be all that easy in Rust."
+        },
+        {
+          "id": 49468667,
+          "author": "strenholme",
+          "text": "With my own MaraDNS, I aggressively optimized the memory usage of blacklist entries by having a single really big malloc() to allocate the memory for the entries, then traversing that memory block for potentially blacklisted entries. When I was using one malloc() per entry, a large blacklist took up 237 megabytes of memory. The same blacklist, once optimized to be loaded with a single malloc() call, only took up 9.5 megabytes of memory. https://samboy.github.io/blog/entries/MaraDNS.html#BlogEntry..."
+        },
+        {
+          "id": 49474335,
+          "author": "grep_it",
+          "text": "This reminds me how you can save a bunch of bytes just by making sure your structs are aligned. In go for example: type Wasteful struct { a int16 b int c byte } type Aligned struct { b int a int16 c byte } Will have sizes of 24bytes and 16bytes (on a 64bit system). Same data 8bytes more. If you are storing millions of those objects, then it adds up."
+        },
+        {
+          "id": 49469283,
+          "author": "vinkelhake",
+          "text": "These seem like some fairly standard approaches for reducing memory usage. I can't help to think that the approach of joining several distinct list into a single one in some way undercuts Rust's safety guarantees. If you previous had three distinct Vec objects, then Rust would guarantee that you can't index out of bounds. If you now put all those objects into a single Vec and rely on offsets, then you now open the door to indexing out of range of these sub-slices without any panics. It's a minor point, and it doesn't really invalidate the optimization, but I'm surprised the article didn't mention it."
+        }
+      ],
+      "summary_ja": "主な議論点は、1.1.1.1のDNSキャッシュを最適化して100TBものメモリを削減した手法についてで、具体的には構造体のパディング削減、単一の大きなmallocによる領域確保、複数のリストを結合したオフセット参照などが挙げられた。  \n賛否両論として、最適化の手軽さと効果を称賛する声がある一方で、Rustでの安全性への懸念（単一Vecへの統合により境界チェックが失われる可能性）や、単純な構造体並び替えだけでは十分でないという指摘があった。  \n注目コメントでは、MaraDNSでの同様の手法がブラックリストのメモリ使用量を237 MBから9.5 MBに削減した実例が紹介され、実際の効果が示されたほか、Goにおける構造体アライメントの例が挙げられ、データレイアウトの重要性が再確認された。",
+      "editor_note": "Cloudflareの1.1.1.1 DNSキャッシュを最適化し、100TBものメモリ削減に成功。大規模トラフィック時代に、効率的キャッシュ設計がインフラコスト削減の鍵となり、日本のCDN事業者にも示唆を与える。",
+      "category": "システム/インフラ"
+    },
+    {
+      "rank": 2,
+      "id": 49466917,
+      "title_en": "Small Models Have Arrived",
+      "title_ja": "Small Models Have Arrived",
+      "url": "https://calv.info/small-models-have-arrived",
+      "hn_url": "https://news.ycombinator.com/item?id=49466917",
+      "score": 573,
+      "comment_count": 260,
+      "posted_at": "2026-08-27T15:56:58+00:00",
+      "comments": [
+        {
+          "id": 49467780,
+          "author": "NitpickLawyer",
+          "text": "> But I also think the demand for \"fast/cheap/good-enough\" models is just about to take off. There's a sort of \"revelation\" I had in ~early '24 when I used a 7B local model with a library called Guidance (initially out of MS, then the team moved) to create a flow where the model would receive pseudocode for tests, first write the tests, and once I approved then started writing code until the tests passed. This was before \"thinking\" models, and yet using that library I was able to \"guide\" the model in the required \"prompt / instruct\" context such that it was working towards completion, and I saw the first things like we see now in the thinking traces \"oh, test x doesn't pass because blah, I need to...\" and so on. Anyway, the revelation was \"even if the models never improve, I'll have years of fun finding out all the ways I can use these things\". And, obviously, the models improved a lot since then. But I think that revelation can still be applied, as a sort of \"truism\". We have, right now, access to things that 10-20 years ago would be considered magic. We are still finding ways of cobbling together systems with glue, duct tape and prayers and find new things they can do. I think the \"good-enough\" stage has come not just for API models (cheap, fast, etc) but for local as well. Even if slower, even if clunkier, but they are good enough for a set of ever increasing tasks, and what's more it's incredibly fun to work with them."
+        },
+        {
+          "id": 49473436,
+          "author": "andsoitis",
+          "text": "> One thing a few investors I've talked with have mentioned: \"It's weird we're not seeing more consumer AI companies. Why is that?\" What would consumer AI company even be? The frontier labs have declared they will eat everything and they have a head start. Best bet would to be a contrarian and build products and services that people actually want or need. Fine to be AI powered or augmented, but consumer companies do the hard part of understanding specific consumer needs and wants and pursuing that."
+        },
+        {
+          "id": 49467815,
+          "author": "NickNaraghi",
+          "text": "> Across his various startups, Peter has seen two kinds of work: > 1. the \"IQ 180\" work. some mad scientist genius type comes up with some crazy solution you've never thought of. > 2. the \"token spewer\" work. being ultra responsive, pushing the ball forward across dozens of different fronts. Interesting comp to pg's Maker's Schedule, Manager's Schedule https://www.paulgraham.com/makersschedule.html I'm curious about not only which of these roles models will fill, but also how they will empower us to be in the mode we prefer."
+        },
+        {
+          "id": 49474794,
+          "author": "MASNeo",
+          "text": "We mostly use specialized small models because larger are to expensive/slow and are prone to hallucinating quite a bit. Not sure how this is a surprise, seems more like a best practice."
+        },
+        {
+          "id": 49467831,
+          "author": "michael0church",
+          "text": "It makes sense that we’ll see “room at the bottom” strategies. Currently, large parameter counts seem to be slush funds of world knowledge, language skills (because language’s nuances and open vocabulary make it high-dimensional), and reasoning primitives, the general belief being that the latter takes up the least space in the model. There are many applications where world knowledge is unnecessary or even a negative, and in which only a small amount of language skill is necessary, and there we can expect small models more intelligently used to beat large ones naively used."
+        }
+      ],
+      "summary_ja": "主な議論点は、小規模モデルがコスト・速度・幻覚の問題で実用的であり、「十分に良い」レベルに到達したこと。具体的にはGuidanceライブラリを用いたテスト駆動開発の例や、ローカルでもAPIでも同様に活用できるという点。賛否は、これがベストプラクティスだと当然と思う意見と、まだ未開拓の消費者向けAIビジネスや「IQ180」型の創造的作業・「トークンスピューア」型の実行作業への役割分担について議論が分かれている点。注目コメントは、7BモデルでGuidanceを使い擬似コードからテスト→コードまでを導いた体験談で、モデルが改善しなくても「楽しみながら使い道を探せる」という気づきと、投資家が指摘する「消費者AI会社が少ない」疑問への対応として、ニーズ理解に特化した対照的なアプローチが有力だという指摘である。",
+      "editor_note": "小規模言語モデルが実用段階に到達し、エッジデバイスでも高精度推論が可能に。計算資源が限られる日本の中小企業やスタートアップにとって、導入ハードルが大きく下がる転換点だ。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 3,
+      "id": 49471965,
+      "title_en": "Show HN: OpenTIE and OpenXWA, Modern Ports of Tie Fighter and X-Wing Alliance",
+      "title_ja": "Show HN: OpenTIE and OpenXWA, Modern Ports of Tie Fighter and X-Wing Alliance",
+      "url": "https://github.com/elyosh/OpenTIE/",
+      "hn_url": "https://news.ycombinator.com/item?id=49471965",
+      "score": 131,
+      "comment_count": 27,
+      "posted_at": "2026-08-27T22:10:47+00:00",
+      "comments": [
+        {
+          "id": 49474849,
+          "author": "darthcircuit",
+          "text": "There’s also a great mod for the original x wing game that adds beautiful new models and textures. Makes it feel very modern which is impressive given how old the game is. https://www.moddb.com/mods/xwvm/news/xwvm-alpha-20251116-dow..."
+        },
+        {
+          "id": 49474024,
+          "author": "chucksmash",
+          "text": "Loved these games. Grew up playing them with a yoke + throttle controller my dad bought for MS Flight Simulator. Didn't have the specs for Tie Fighter to run well but X-Wing worked great. I'd angle a clock radio next to the yoke for a little more of a cockpit vibe plus to change up the soundtrack. So much joy being at that age and in that era of computing/gaming. Hope people are able to pass that same feeling along to the current gen in some way, shape or form."
+        },
+        {
+          "id": 49472452,
+          "author": "vunderba",
+          "text": "Very nice. Looking forward to irritating the Empire again as a new recruit [1]. On a more serious note, there's also a really great conversion that ports the original TIE Fighter over to the later X-Wing Alliance engine [2]. And of course if you need copies of the originals, they still sell them over on GOG (Good Old Games). [1] - https://imgpb.com/AoSwyrZ [2] - https://www.moddb.com/mods/tie-fighter-total-conversion-tftc"
+        },
+        {
+          "id": 49472795,
+          "author": "felixding",
+          "text": "The original Star Wars: TIE Fighter was one of the first computer games I played as a teenager. The funny thing is, I had absolutely no idea what Star Wars was, but somehow I still thought the game was really cool and played it for quite a while."
+        },
+        {
+          "id": 49473432,
+          "author": "kevin_thibedeau",
+          "text": "How is it that FS mechanics are dependent on which release you have available? It all seems to key off of TieProfile_UsesTie98Logic(). Why can't you enable that with just the 95 release?"
+        }
+      ],
+      "summary_ja": "主な議論点: コミュニティは、オリジナルの『X‑Wing』および『TIE Fighter』を現代環境で遊べるようにするOpenTIE/OpenXWAの移植や、高品質MODによるグラフィック強化、そして当時のフライトスティックやサウンド環境を再現したプレイ体験に熱狂している。  \n賛否両論: 移植やMODの完成度を称賛する声が多い一方で、FS（フライトシム）エンジンの動作が特定のリリースに依存するという技術的な制約や、オリジナルROMの入手難易度について懸念が示されている。  \n注目コメント: 「ヨーク＋スロットルコントローラーに時計ラジオを置いてサウンドトラックを変えながらプレイしていた」という懐かしいエピソードが、当時の没入感と現在への継承願いを象徴的に示している。",
+      "editor_note": "クラシックな『Tie Fighter』と『X‑Wing Alliance』をオープンソースで移植したOpenTIE/OpenXWAは、レトロゲーム保存の新潮流。日本のインディー開発者にも、古典タイトルの復活手法として注目されている。",
+      "category": "OSS"
+    },
+    {
+      "rank": 4,
+      "id": 49465169,
+      "title_en": "507 Mechanical Movements",
+      "title_ja": "507 Mechanical Movements",
+      "url": "https://507movements.com/",
+      "hn_url": "https://news.ycombinator.com/item?id=49465169",
+      "score": 540,
+      "comment_count": 70,
+      "posted_at": "2026-08-27T14:08:18+00:00",
+      "comments": [
+        {
+          "id": 49466796,
+          "author": "wowczarek",
+          "text": "It's a great collection and exploring it is fun, but it misses on titles / names of the given linkage or movement. It makes sense when you are reading the book [0], but on a site like this where you see the individual item in isolation, a title or name would be helpful. 0: https://archive.org/details/fivehundredseven00browiala"
+        },
+        {
+          "id": 49466143,
+          "author": "WillAdams",
+          "text": "One of my favourite sites! and an interesting example of that class of sites which are book made into sites with animations/interaction --- the another classic and notable example is: https://mathcs.clarku.edu/~djoyce/java/elements/elements.htm... Really wish that the folks doing the 507 Mechanical Movements would finish the balance of the animations. Curious if folks are aware of other similar text/website combinations which are still extant (many others such as Bembo's Zoo are no longer available, and of course at one point in time, this sort of thing was the province of CD-ROMs such as Leonardo)."
+        },
+        {
+          "id": 49470849,
+          "author": "hommelix",
+          "text": "If you ever happened to go through Karlsruhe, Germany, there is a collection of mechanical transmission models from Redtenbacher. Some models were on display in the mechanical engineering building at the university. I could only find this link (in German) about the collection. https://redtenbachersteyr.com/redtenbacher-in-karlsruhe/ One student from Redtenbacher was Reuleaux and there is another collection of transmission from Reuleaux at Cornell university. https://engineering.library.cornell.edu/kmoddl/"
+        },
+        {
+          "id": 49469262,
+          "author": "nickpinkston",
+          "text": "Two more great books to have in the mechanical world: \"Manufacturing Processes for Design Professionals\" - amazing photos, diagrams, explanations, etc. of every major manufacturing process - great coffee table book. https://www.amazon.com/Manufacturing-Processes-Design-Profes... \"Materials Selection in Mechanical Design\" - great book with \"Ashby Charts\" that let you compare materials against their material properties - e.g. strength vs. weight. https://www.amazon.com/dp/0750661682"
+        },
+        {
+          "id": 49466616,
+          "author": "mkl",
+          "text": "Past discussions: https://news.ycombinator.com/item?id=10374436 , 27 comments 11 years ago. https://news.ycombinator.com/item?id=26373539 , 30 comments 5 years ago."
+        }
+      ],
+      "summary_ja": "主な議論点は、『507 Mechanical Movements』サイトが楽しいコレクションであるものの、各項目にタイトルや名前が付いていないため、単体で見たときに何を示しているのか分かりにくいという指摘だった。コメントでは、書籍を参照すれば理解できるが、サイト単体では名前があると助かるとの意見が多く、またアニメーションが未完成であることへの期待と、完成させてほしいという要望が見られた。賛否については、サイトそのものの価値や楽しさに対する賛同が圧倒的で、「最高のサイト」「面白い」と評価する声が多数を占めた一方で、情報の不足やアニメーションの未完了に対する不満が少数ながら示された。注目コメントとして、ドイツ・カールスルーエのRedtenbacher機械伝達モデルコレクションや、コーネル大学のReuleauxコレクションへのリンクが紹介され、同様に書籍をウェブ化した事例として数学の『Elements』サイトやかつてのCD-ROM教材が挙げられた。さらに、『Manufacturing Processes for Design Professionals』や『Materials Selection in Mechanical Design』といった関連図書も推薦され、過去のHNスレッドへのリンクも共有された。全体としては、サイトへの称賛と、情報補完およびアニメーション完成への強い関心が議論の中心だった。",
+      "editor_note": "507種類の機械的仕組みを図解した歴史的資料がデジタルアーカイブ化され、エンジニアリング教育に活用される。日本のものづくり現場でも、基本原理の再学習ツールとして期待できる。",
+      "category": "その他"
+    },
+    {
+      "rank": 5,
+      "id": 49474143,
+      "title_en": "Please stop flooding our projects with AI slop to furnish your CV",
+      "title_ja": "Please stop flooding our projects with AI slop to furnish your CV",
+      "url": "https://neilalexander.dev/2026/06/30/flooding-contributions",
+      "hn_url": "https://news.ycombinator.com/item?id=49474143",
+      "score": 96,
+      "comment_count": 32,
+      "posted_at": "2026-08-28T03:49:33+00:00",
+      "comments": [
+        {
+          "id": 49474688,
+          "author": "smooc",
+          "text": "So the fixes are still fixes, but we (I am also a OSS maintainer) are unwilling to accept them as they boost the contributor’s status where we think the merit is very or extremely limited. Why not have these PRs counted differently (by the platform), and/or colored differently in the timeline(s) thus made less visible or more clear?"
+        },
+        {
+          "id": 49474590,
+          "author": "timokoesters",
+          "text": "Hi Neil, fun to see you on HN. I agree with your points and I you summarized it very well as \"Ultimately, open source is built on trust\". AI is destroying trust in open source and many other areas and I think this will discourage teams from publishing their source code in the future. On the other hand, personal connections are becoming even more important, which is unfair to the younger generation and people who don't live near tech hubs."
+        },
+        {
+          "id": 49474679,
+          "author": "arjie",
+          "text": "This makes sense. Apart from the original thing, I no longer upstream anything. It just takes comparatively more effort than maintaining a private fork with my own idiosyncratic fix. This must mean that even small fixes that non-contributors would make in the past are just happening off the books, so to speak. e.g. I made a tiny fix to Thrift codegen because some function could be much faster. These days I wouldn't bother. I'd just fork and leave upstream to be upstream. I suspect many people are like me since it feels like a very normie position to take. That means that contributors are even more likely to be useful because both the drive-by genuine contributors have chosen otherwise and these contributors have increased. It must be quite painful to be an open source maintainer right now. One wonders what to make of such projects in a future where a feature-list is a sufficient prompt."
+        },
+        {
+          "id": 49474852,
+          "author": "hypfer",
+          "text": "GitHub flavored FOSS I believe works best for \"corporate FOSS\" projects and terrible for \"FOSS as how it was conceived decades ago\". Or rather I believe that it is engineered exactly for the former. What it does well is coordination between corps, working in public (while on a corp payroll) and extracting some drive-by-PR value out of random third-parties. The closer your project is to that shape, the better it works for you. The further it is away, the more pain you will feel. This has nothing to do with AI slop. AI slop just turned up a few knobs that were already there."
+        },
+        {
+          "id": 49474642,
+          "author": "yeputons",
+          "text": "I’ve heard about similar issues with Hacktoberfest’s T-shirts back in 2020, but it was not as automated back then: https://news.ycombinator.com/item?id=24643894"
+        }
+      ],
+      "summary_ja": "・主な議論点  \nAIによる低品質な貢献（「スロップ」）が増え、OSSメンテナーにとって信頼と労力のバランスが崩れている。従来の小規模かつ良心的な修正も、AI生成の大量PRに埋もれて評価されにくくなっている。メンテナーはAIスロップを拒否しても、それでもコミュニティやプラットフォームの仕組みでは評価されやすいため、根本的な仕組みの変更が求められている。\n\n・賛否両論  \n賛成者は、AIスロプがOSSの信頼を破壊し、将来的にソース公開自体が減る可能性を指摘。また、個人のネットワークや所属企業の有無で有利不利が生まれると懸念。一方、一部人〜はAIスロップは既存の問題を露呈しただけであり、GitHub主体のFOSSは企業向けに設計されており、個人開発者には不向きだとしている。\n\n・注目コメント  \nメンテナーの一人が「AIスロプを拒否しても貢献者のステータスは上がる」と指摉し、プラットフォーム側でPRの分類や可視化を変えるべきだと提言。また、別のユーザーは「AI時代の特徴リスト一つで機能が実現可能になる未来」を警告し、OSSプロジェクトのあり方について懸念を表している。",
+      "editor_note": "AI生成の低品質コードがオープンソースプロジェクトを荒らす問題が顕在化。日本の開発コミュニティでも、コードレビューの厳格化とAI利用ガイドラインの整備が急務となっている。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 6,
+      "id": 49472820,
+      "title_en": "Terminal-Bench-Science: Evaluating AI agents on scientific research workflows",
+      "title_ja": "Terminal-Bench-Science: Evaluating AI agents on scientific research workflows",
+      "url": "https://www.terminal-bench-science.ai/announcement",
+      "hn_url": "https://news.ycombinator.com/item?id=49472820",
+      "score": 61,
+      "comment_count": 16,
+      "posted_at": "2026-08-28T00:06:51+00:00",
+      "comments": [
+        {
+          "id": 49474177,
+          "author": "boorang",
+          "text": "I got pretty good mileage out of context engineering, adding my personal coding heuristics to my AGENTS.md and referencing subdocuments on a \"when doing X, consult Y\" pattern. I assume others are doing similar things, but I was pretty surprised when I was able to get it to generate code that is pretty close to what I would do if I was doing it manually. I'm curious if scientists and mathematicians are doing things like that. \"When I see X, I typically immediately check Y\" or whatever their domain heuristics look like."
+        },
+        {
+          "id": 49473890,
+          "author": "johnnyApplePRNG",
+          "text": "Not surprised to see Claude significantly higher in scientific intelligence than Sol. You can tell that Claude really does grasp a wide array of highly specific scientific and mathematical nuances... where's codex is just basically for coding and that's it. That's the feel I get from the both of them anyways and I've used both on the 20x plan for the past week at length. Don't get me wrong, codex is great at finding bugs and building games. It's great."
+        },
+        {
+          "id": 49473197,
+          "author": "akshay_akula",
+          "text": "Evals on actual research workflows is the right direction, most agent benches are toy tasks."
+        },
+        {
+          "id": 49473658,
+          "author": "jerpint",
+          "text": "The fact that opus 5 is outperforming fable is odd to me From personal experience, opus 5 feels net inferior to fable on almost every aspect (for coding tasks)"
+        },
+        {
+          "id": 49474273,
+          "author": "respectattentio",
+          "text": "Like you were reading my mind. I was waiting for such benchmark to land. This will improve models for such scientific research workflows. AI should have started with science from the beginning, not after 4 years. I am building on top of it with agents to improve scientific workflows."
+        }
+      ],
+      "summary_ja": "主な議論点は、実際の科学研究ワークフローに基づくAIエージェントの評価が重要だという点。コンテキストエンジニアリングやドメイン固定ヒューリスティクス（たとえば「Xを見たらYを確認」）をエージェントに組み込むことで、人間の専門家に近い振る舞いが得られるか議論。モデル比較では、Claudeが科学的・数学的な微妙なニュアンスを理解しやすい一方、Codexはコーディング特化と見なされ、Opus 5がFableを上回る結果に驚きの声と、コーディング作業では Opus 5 が劣るという反対意見があった。ベンチマーク自体がトイタスクではなく実ワークフローに焦点を当てている点は賛成多数で、今後のモデル改善に期待が寄せられている。特に注目されたコメントは、コンテキストエンジニアリングと個人のヒューリスティクスを AGENTS.md に追加し、サブドキュメント参照パターンでエージェントの性能を向上させた実体験を共有したもので、これが科学者の思考プロセスを模倣できるかの示唆になった。",
+      "editor_note": "科学研究ワークフローを対象としたAIエージェント評価ベンチマーク「Terminal‑Bench‑Science」が公開。実験自動化に興味がある日本の大学・研究所では、再現性評価の指標として活用できる。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 7,
+      "id": 49468818,
+      "title_en": "Gemini-3.5-Transcribe",
+      "title_ja": "Gemini-3.5-Transcribe",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-5-transcribe/",
+      "hn_url": "https://news.ycombinator.com/item?id=49468818",
+      "score": 223,
+      "comment_count": 67,
+      "posted_at": "2026-08-27T18:03:42+00:00",
+      "comments": [
+        {
+          "id": 49474353,
+          "author": "lnalx",
+          "text": "I personally tested all the STT models for my real-time translator ( https://fliptalk.ai ). From language detection and accuracy in a noisy environment to the most important point: latency. At the moment, Soniox STT v5 is definitely the best, and I'm impressed by its performance. It's good that Google released Gemini-3.5-Transcribe, and it beats every other model on accuracy, but it definitely needs a bit more work on latency, which is the most important factor for STT apps."
+        },
+        {
+          "id": 49471856,
+          "author": "Lucasoato",
+          "text": "I’ve tested at least 20 STT models in a benchmark I’ve set up with German, Italian and English voices from meetings in my company. The voices contained very industry specific words, the languages changed from one sentence to another, sometimes words in a language were mentioned while a discussion was in another. The only local model that satisfies me is Voxtral Mini 3b, the only paid API that is slightly better is eleven labs. Yes, Voxtral might not reach the best score in the benchmarks, but to me, it just solves a problem. It might not be the best in terms of speed... but that’s not a problem for me. Happy to test this new model from Google but I’m not sure I’d go with that instead of something that can run so easily in my machine."
+        },
+        {
+          "id": 49473781,
+          "author": "ameliaquining",
+          "text": "\"Function calling: The model can delegate complex tasks (such as image generation and file analysis) to other Gemini models via function calls. Currently available in the Gemini macOS app.\" This confused the heck out of me because it makes it sound like the STT model can make function calls in order to execute arbitrary tasks, which wouldn't make any sense. The developer docs ( https://ai.google.dev/gemini-api/docs/models/gemini-3.5-tran... ) confirm that the Gemini 3.5 Transcribe model cannot in fact make function calls. I guess the blog post is just using very confusing wording to describe how their consumer assistant/chatbot app can both take audio input via Gemini 3.5 Transcribe and then call other things as needed. Or maybe that bullet point was meant to be for a different model announcement and somebody made an editing error."
+        },
+        {
+          "id": 49471838,
+          "author": "Crystalin",
+          "text": "I've been testing it on Pixel 11 Pro and I mostly dislike it. It is convenient when you have something long to say without thinking about it first. But the main issue is when you want to say something precise with specific wording it might \"simplify\" it and break the meaning. Something like \"I hesitated to check it, I should have verified\" => \"I should have verified\" (The \"I hesitated...\" is removed but I said it because I wanted to let the person know that I thought about it earlier) I tried the sentence few times and it always removed the first part."
+        },
+        {
+          "id": 49473358,
+          "author": "zhivota",
+          "text": "I'd certainly use Gemini API a lot more if I could figure out how to give them money and they give me tokens. The whole tier nonsense is just insane hoop jumping compared to their competition."
+        }
+      ],
+      "summary_ja": "・主な議論点  \nGemini-3.5-Transcribeは精度では他モデルを凌駕するが、リアルタイム音声認識において重要なレイテンシが課題と指摘され、業界用語や言語切り替えへの耐性、過剰な要約による意味欠落も議論された。  \n\n・賛否両論  \n賛成は高精度と長音声入力の手軽さ、反対はレイテンシの遅さ、文言の簡略化で意図が失われる点、ドキュメントの誤解を招くfunction callingの記述、さらにAPI利用の煩雑さへの不満。  \n\n・注目コメント  \nPixel 11 Proでの使用例では「I hesitated to check it, I should have verified」が「I should have verified」に短縮され、話者の躊躇いというニュアンスが失われるとして、要約過剰が実用上の問題点だと指摘された。",
+      "editor_note": "Gemini‑3.5‑Transcribeは、低遅延・高精度の音声文字起こしモデルとして注目。日本語音声認識市場において、既存サービスとの差別化ポイントとなり、コールセンター自動化への適用が期待される。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 8,
+      "id": 49462763,
+      "title_en": "Microduck",
+      "title_ja": "Microduck",
+      "url": "https://pollen-robotics.com/microduck/",
+      "hn_url": "https://news.ycombinator.com/item?id=49462763",
+      "score": 590,
+      "comment_count": 200,
+      "posted_at": "2026-08-27T10:57:56+00:00",
+      "comments": [
+        {
+          "id": 49465952,
+          "author": "lambda",
+          "text": "Tried out the simulator and was surprised to find that the movement keys are ZQSD; then realized that's the equivalent of WASD on an AZERTY keyboard. Checked and sure enough, Pollen Robotics is a French company. They may want to at least add a preference for keyboard layout, pretty sure that QWERTY and QWERTZ are much more common worldwide than AZERTY."
+        },
+        {
+          "id": 49473848,
+          "author": "num42",
+          "text": "I found a few open-source small bipedal robots on the internet. There are actually many open-source robots available: [1]. https://robotics.umich.edu/news/2024/a-smaller-simpler-biped... https://github.com/daviddoo02/Legolas-an-open-source-biped [2]. https://github.com/MuShibo/Micro-Wheeled_leg-Robot [3]. https://github.com/Yuexuan9/Tinker Quadruped: [1]. https://github.com/stanfordroboticsclub/StanfordQuadruped [2]. https://open-dynamic-robot-initiative.github.io/"
+        },
+        {
+          "id": 49474813,
+          "author": "disdi89",
+          "text": "I still prefer ( https://roboracer.ai/ ) 1:10 racing platform well known in academic circles as RoboRacer, F1TENTH, f1tenth, or F1/10."
+        },
+        {
+          "id": 49466516,
+          "author": "prometheus1992",
+          "text": "Not sure many people know this - most of the robotics stuff that you see in the news is based on MujoCo (Multi-Joint dynamics with Contact) engine, that is used primarily to create simulated environments in which these robots learn the RL policies. This project is maintained by Google deepmind - https://github.com/google-deepmind/mujoco"
+        },
+        {
+          "id": 49471493,
+          "author": "mrandish",
+          "text": "Page is so dense, couldn't find the specs: Rockchip RK3566 processor with an AI accelerator, 1GB RAM, 32GB storage, Wi-Fi, Bluetooth, microphones, speaker, two NFC antennas and removable battery (~1 hour runtime). Onboard policy loop: 50 hertz, Dynamixel servos, weight: 800g. Seven behaviors at ship: walking, sitting and standing, kicking, ground pickup, roller skating and self-recovery, can train additional behaviors locally or through Hugging Face Jobs, export to ONNX and deploy through open-source runtime. Software: SDK, a MuJoCo-based simulator, training scripts, tools for transferring policies from simulation to the physical robot."
+        }
+      ],
+      "summary_ja": "主な議論点は、キーボード配列の不便さ（AZERTYのZQSD）、オープンソースの小型二足ロボットの代替案、既存の教育用プラットフォーム（RoboRacer/F1TENTH）への好み、シミュレーションにMuJoCoが広く使われている点、そしてデバイスの具体的スペック（Rockchip RK3566、1 GB RAMなど）への関心である。  \n賛否両論：キーボード配列については、フランス企業ゆえAZERTYがデフォルトだが、世界的にQWERTY/QWERTZが多数なので設定追加を求める声がある一方、実際に使ってみたユーザーは問題なく操作できたと指摘する意見もある。オープンソースロボットのリストについては参考になると評価されつつ、実際にMicroduckと比較して性能やサポート面での優劣が議論された。RoboRacerなどの専用プラットフォームを好むコメントは、学術での実績とコミュニティ規模を理由に挙げていた。MuJoCoについては、ロボットニュースで頻繁に見かけるエンジンであり、DeepMindが維持しているため信頼性が高いという肯定的見解が多かった。スペック詳細については、コンパクトながら十分な演算能力と多様なセンサーを備えていると評価され、特に50 Hzのポリシーループや取り外し可能バッテリーが注目された。  \n注目コメントとして、MuJoCoが業界標準であることを指摘し、シミュレーションから実機へのポリシー移行が容易になる点を強調した意見や、Rockchip RK3566プロセッサとAIアクセラレータの組み合わせがエッジAIロボットとして魅力的だと指摘したコメントが挙げられる。",
+      "editor_note": "軽量データベースエンジンMicroduckは、組み込み・IoT向けに最適化され、低消費電力で高速クエリを実現。日本のスマートファクトリーやセンサーネットワークでの採用事例が増えそうだ。",
+      "category": "データベース"
+    },
+    {
+      "rank": 9,
+      "id": 49473522,
+      "title_en": "Judge Rules Trump Administration’s Blacklisting of Anthropic Was Illegal",
+      "title_ja": "Judge Rules Trump Administration’s Blacklisting of Anthropic Was Illegal",
+      "url": "https://www.nytimes.com/2026/08/27/technology/anthropic-government-blacklisting-ruling.html",
+      "hn_url": "https://news.ycombinator.com/item?id=49473522",
+      "score": 208,
+      "comment_count": 89,
+      "posted_at": "2026-08-28T02:03:38+00:00",
+      "comments": [
+        {
+          "id": 49474811,
+          "author": "perarneng",
+          "text": "Does anything matter if it's illegal or not when it comes to the current government? This is not a flamewar im interested from a practical perspective if things like this has any effects at all in practice."
+        },
+        {
+          "id": 49473716,
+          "author": "firefoxd",
+          "text": "The law is too slow. It's like a horse carriage in the age of twitter. Why can't they expedite for special cases? Not even defending Antropic or any company. Just that if a tweet can cause damage in seconds, the law shouldn't be too far behind."
+        },
+        {
+          "id": 49473677,
+          "author": "bushido",
+          "text": "It was a master stroke in international politics though, the US created an arms race towards sovereign ai, small models, and self-hosting - exactly like they wanted to. (sarcasm intended)"
+        },
+        {
+          "id": 49473755,
+          "author": "Arubis",
+          "text": "Judge rules horse must return to barn."
+        },
+        {
+          "id": 49474054,
+          "author": "frog42",
+          "text": "So can they now sue the government and recoup their inflated theoretical losses to be paid out of tax revenue? It feels like any outcome here will have no negative effect on the major players actually involved."
+        }
+      ],
+      "summary_ja": "この記事に対するコメントでは、トランプ政権がアンソロピックをブラックリストに入れたことが違法だと判断した裁判所の決定が注目された。多くの参加者は、現在の政府において違法かどうかが実際に影響があるのか疑問視し、法の遅さを馬車に例えて批判した。一方で、今回の制裁が米国の意図した通りに sovereign AI や小規模モデル、セルフホスティングへの軍拡レースを促したという皮肉な指摘もあり、賛否が分かれた。また、政府に対して損害賠償を求める訴訟が可能かどうかという実務的な疑問や、大手企業への影響はほとんどないという見方も示された。特に洞察に富んだコメントとして、法の遅さをツイッター時代に合わせて迅速化すべきだと主張する意見が挙げられた。",
+      "editor_note": "米連邦裁判所がトランプ政権によるAnthropicへの制裁を違法と判断。AIスタートアップへの政府介入リスクが浮き彫りになり、日本のAI企業も海外規制動向を注視する必要がある。",
+      "category": "スタートアップ/ビジネス"
+    },
+    {
+      "rank": 10,
+      "id": 49471407,
+      "title_en": "Show HN: We built open OpenRouter that turns usage into a better model",
+      "title_ja": "Show HN: We built open OpenRouter that turns usage into a better model",
+      "url": "https://github.com/experientiallabs/experiential",
+      "hn_url": "https://news.ycombinator.com/item?id=49471407",
+      "score": 153,
+      "comment_count": 26,
+      "posted_at": "2026-08-27T21:18:35+00:00",
+      "comments": [
+        {
+          "id": 49471977,
+          "author": "Areibman",
+          "text": "Could you say more about how caching works? One major advantage of sticking with a single model is saving money on cached input tokens. I'd imagine if you swap between a bunch of models, you may improve performance but cost would would balloon out of control"
+        },
+        {
+          "id": 49473195,
+          "author": "akshay_akula",
+          "text": "Open source and no markup is the right default for a gateway. The caching question above is the one I would want answered before swapping models though."
+        },
+        {
+          "id": 49473165,
+          "author": "ceroxylon",
+          "text": ">The gateway adds under 1 ms for BYOK requests Amazing! Really brilliant idea, thank you for sharing this project. There is so much ground to cover in the LLM gateway / routing / reporting world, and this is a great start. The Tinker implementation is my favorite part, fine tuning is much better than a sea of context files."
+        },
+        {
+          "id": 49474132,
+          "author": "sangwook",
+          "text": "What online signal recalibrates simulated rankings against actual task success? Also do you have a plan to support semantic caching at the router level?"
+        },
+        {
+          "id": 49473874,
+          "author": "swthbht",
+          "text": "Very cool. Does your gateway decide effort levels as well? Or just models?"
+        }
+      ],
+      "summary_ja": "主な議論点は、OpenRouter が複数モデル間の切替え時にキャッシュヒット率とコストに与える影響である。参加者は単一モデル利用のキャッシュメリットを指摘し、モデルを頻繁に変えるとキャッシュが無効化され費用が急増すると懸念した。一方で、オープンソースかつマークアップなしのゲートウェイ設計は好評で、BYOK リクエストのオーバーヘッドが1 ms未満である点や、Tinker 実装によるファインチューニングの柔軟性が注目された。賛否は、キャッシュ効果を維持しつつモデル切替えによる性能向上を実現できるかという点で分かれ、semantic キャッシュやルーティングでの努力レベル決定、オンラインシグナルによるランキング再校正などの機能追加への期待と実装コストへの不安が交錯した。特に洞察に満ちたコメントとして、ゲートウェイが遅延をほとんど増加させずに BYOK をサポートできることと、Tinker が従来のコンテキストファイル群よりもファインチューニングを直感的に行える点が称賛された。",
+      "editor_note": "利用データをフィードバックしてモデルを改善するオープンOpenRouterは、利用者と開発者の好循環を仕組み化。日本のSaaSプロバイダーも、同様のデータ駆動型改善サイクルを検討できる段階だ。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 11,
+      "id": 49474060,
+      "title_en": "GoGoGrandparent (YC S16) is hiring back end engineers",
+      "title_ja": "GoGoGrandparent (YC S16) is hiring back end engineers",
+      "url": "https://www.ycombinator.com/companies/gogograndparent/jobs/2vbzAw8-backend-engineer",
+      "hn_url": "https://news.ycombinator.com/item?id=49474060",
+      "score": 1,
+      "comment_count": 0,
+      "posted_at": "2026-08-28T03:35:15+00:00",
+      "comments": [],
+      "summary_ja": "",
+      "editor_note": "YC S16出身のGoGoGrandparentがバックエンドエンジニアを募集中。高齢者向けサービスのデジタル化が進む日本市場において、同様のニーズに応える人材需要が高まっていることを示す。",
+      "category": "キャリア/働き方"
+    },
+    {
+      "rank": 12,
+      "id": 49471714,
+      "title_en": "AI Engineer Notebooks – free, framework-free RAG/agents/evals on Colab",
+      "title_ja": "AI Engineer Notebooks – free, framework-free RAG/agents/evals on Colab",
+      "url": "https://github.com/calmrocks/ai-engineer-notebooks",
+      "hn_url": "https://news.ycombinator.com/item?id=49471714",
+      "score": 79,
+      "comment_count": 9,
+      "posted_at": "2026-08-27T21:46:39+00:00",
+      "comments": [
+        {
+          "id": 49474704,
+          "author": "ghm2199",
+          "text": "One thing that evals are super important from the get go are where the harness+model inference is part of the product, e.g. if you are doing voice ai, building out a test harness to test the system is a non trivial first step."
+        },
+        {
+          "id": 49473311,
+          "author": "consumer451",
+          "text": "Man, I could have used something like this last year. Upon review, it appears that fumbling my way through the dark with Claude and Google led to the same place, in nearly all cases. However, this is all written by Claude — it has too many em-dashes to not be, does it not? So, maybe that's why we ended up in the same places. Does anyone know of any other resources in this vein?"
+        },
+        {
+          "id": 49474184,
+          "author": "KolibriFly",
+          "text": "Glad to hear they are prioritizing evaluation right from the start. Usually people just throw together a rag pipeline on the knee and then judge the metrics by eye, skimming three responses in the terminal"
+        },
+        {
+          "id": 49473817,
+          "author": "nycdatasci",
+          "text": "Why does applied AI intentionally exclude a framework/harness around AI? The job is to harness the power of AI, and a harness is a critical part of that."
+        }
+      ],
+      "summary_ja": "主な議論点は、評価（evals）を最初から組み込む重要性と、AI製品におけるハーネス（フレームワーク）の必要性だ。特に音声AIなどではテストハーネスを構築するのは非trivialな第一歩であり、評価が欠如すると目視でメトリクスを判断するだけになりがちだという指摘が多かった。賛否両論として、フレームワーク無しのノートブックは手軽で迅速にプロトタイプできる利点がある一方で、ハーネスがabsentだと再現性やスケーラビリティに欠け、結局自分で同じことを繰り返すことになるという懸念が示された。注目コメントでは、このノートブックがClaudeによって書かれたと推測され、エムダッシュの多さがその証拠だと指摘され、同様のリソースを求める声が上がったほか、評価を早期に優先する姿勢を評価する声と、Applied AIが意図的にハーネスを除く理由を問う批判的な意見が対照的に挙げられた。",
+      "editor_note": "Colabで利用できるフレームワークフリーのRAG／エージェント評価ノートブックが公開。日本のAIエンジニアは、環境構築の手間を省き、迅速にプロトタイプ実験を回せるようになる。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 13,
+      "id": 49473868,
+      "title_en": "Bootstrappable Builds: How and Why",
+      "title_ja": "Bootstrappable Builds: How and Why",
+      "url": "https://lwn.net/Articles/1088279/",
+      "hn_url": "https://news.ycombinator.com/item?id=49473868",
+      "score": 21,
+      "comment_count": 3,
+      "posted_at": "2026-08-28T03:02:42+00:00",
+      "comments": [
+        {
+          "id": 49474772,
+          "author": "Panzerschrek",
+          "text": "Are chain-of-trust attacks real? Is it necessary to make so much effort to avoid what supposedly never happened?"
+        },
+        {
+          "id": 49474417,
+          "author": "andrewchambers",
+          "text": "Would love to see someone try to automate the bootstrap chain from a working C89 compiler to Rust. At this point I think current LLMs are able help these incredible feats of bootstrapping as they can grind out the impossibly long built times over multiple days/weeks. I am very optimistic for deterministic builds in general."
+        }
+      ],
+      "summary_ja": "主な議論点は、チェーンオブトラスト攻撃の現実性とそれに対する防衛の必要性についての懐疑論と、C89コンパイラからRustまでのブートストラップチェーンを自動化しようという試みへの期待である。賛否両論として、一部はこうした攻撃は実際には起きていないと見て過剰な努力に疑問を呈し、他方は供給チェーン攻撃のリスクを考慮すれば厳格なブートストラップと決定的ビルドの重要性を強調する。特に注目されたコメントでは、現在のLLMが膨大なビルド時間を耐え忍び、C89からRustへのブートストラップを自動化できる可能性に言及し、決定的ビルドへの楽観を示した点が洞察に富んでいると指摘された。",
+      "editor_note": "ブートストラップ可能なビルド手法の原理と利点が解説され、再現性の高いソフトウェアサプライチェーン構築への関心が高まる。日本のエンタープライズ系開発でも、サプライチェーンセキュリティ対策の一環として注目されている。",
+      "category": "システム/インフラ"
+    },
+    {
+      "rank": 14,
+      "id": 49447057,
+      "title_en": "The turbulent AI era is here",
+      "title_ja": "The turbulent AI era is here",
+      "url": "https://www.gatesnotes.com/work/make-ai-work-for-everyone/reader/a-turbulent-ai-era-and-critical-choices-to-make?WT.mc_id=20260826_ai-overture-2026-med-med",
+      "hn_url": "https://news.ycombinator.com/item?id=49447057",
+      "score": 257,
+      "comment_count": 512,
+      "posted_at": "2026-08-26T11:23:54+00:00",
+      "comments": [
+        {
+          "id": 49472285,
+          "author": "joncrane",
+          "text": "Unfortunately, this is essentially high level clickbait. At the beginning he immediately portrays the issue as black and white: >AI will either be the greatest equalizer ever invented, or the worst source of injustice. In all likelihood it will probably fall in the middle, with the likelihood that it will tilt power and money towards the already ultra wealthy (to the surprise of no one). But it will enable ordinary people and small businesses to do cool shit and make their lives better."
+        },
+        {
+          "id": 49449185,
+          "author": "jcattle",
+          "text": "Just to put Bill Gates thoughts on AI into perspective, this was his comment on an AMA 9 years ago to the question \"What kind of technological advancement do you wish to see in your lifetime?\": > The big milestone is when computers can read and understand information like humans do. There is a lot of work going on in this field - Google, Microsoft, Facebook, academia,... Right now computers don't know how to represent knowledge so they can't read a text book and pass a test. https://old.reddit.com/r/IAmA/comments/5whpqs/im_bill_gates_..."
+        },
+        {
+          "id": 49469289,
+          "author": "geraneum",
+          "text": "> Research suggests that in some parts of the United States, factory closures contribute to a rise in deaths from opioid overdoses. It’s so cute some people think that the extent of mass displacement will be limited to what happens to the unemployed. Oh poor unemployed! Nope, pitchforks will be grabbed. It won’t be rosy. Maybe they dream about having killer robots to defend themselves, but imagine a few hundred million people getting angry within one election cycle."
+        },
+        {
+          "id": 49448876,
+          "author": "qudat",
+          "text": "3 citations and a lot of conjecture. Is the article only targeting SWEs? The one study cited said 22-25 age range saw a 16% decrease in relative employment declines (for SWEs)[0]. But everyone outside that range was not impacted. Further, what about all the trades jobs around data center development? “Demand is also being intensified by major investments in infrastructure, manufacturing, reshoring, and AI. Data center growth alone has added a net 315,000 skilled-trade workers over the past five years, according to the report, putting additional pressure on an already tight labor market.” https://www.morningstar.com/news/pr-newswire/20260825cg32433... We literally do not have enough trades people to build out data centers and their salaries are increasing as a result. These are skilled labor jobs (plumbers, electricians, IT, etc.). Does Bill Gates care about the rest of the economy outside of SWE? [0]: https://digitaleconomy.stanford.edu/app/uploads/2025/11/Cana..."
+        },
+        {
+          "id": 49448920,
+          "author": "phn",
+          "text": "If all jobs are taken away for the sake of robot driven productivity, who will consume the products and services being offered that result in profit?! (EDIT: I am not against AI at all, just trying to understand where this all leads)"
+        }
+      ],
+      "summary_ja": "この記事はAIが究極の平等か最大の不正かという白黒論に持ち込みがちだと批判されている。実際には中間に落ち着き、富と権力は豊か層にさらに傾くが、普通の人や小企業にも新たな機会が生まれると見られている。議論では、ソフトウェアエンジニアの22〜25歳層で雇用が16％減少した研究が挙げられたが、それ以外の年齢層や製造・建設などの熟練労働は影響が少なく、むしろデータセンター拡張で過去5年に31.5万人の熟練技能労働者が必要となり賃金が上昇している。また、工場閉鎖がオピオイド過剰死を増やすという指摘や、ロボットによる生産性向上が進めば製品を消費する人がいなくなるというマクロ経済的懸念も提起された。賛成側はAIが生産性とイノベーションを促すとし、反対側は富の集中と社会不安を警告している。特に注目されたコメントは、『全ての仕事がロボットに取って代わられたら、誰がその結果生み出される製品やサービスを購入するのか』という疑問で、需要側の視点からAIの影響を考える重要性を示している。",
+      "editor_note": "AI技術の急速な進化と社会への影響が「 turbulent AI era 」として論じられている。日本企業も、倫理ガイドラインやリスクマネジメントの整備が競争力の鍵となる局面に差し掛かっている。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 15,
+      "id": 49473483,
+      "title_en": "Stripe said to abandon $50B pursuit of PayPal",
+      "title_ja": "Stripe said to abandon $50B pursuit of PayPal",
+      "url": "https://www.bloomberg.com/news/articles/2026-08-28/advent-stripe-consortium-is-said-to-drop-pursuit-of-paypal",
+      "hn_url": "https://news.ycombinator.com/item?id=49473483",
+      "score": 86,
+      "comment_count": 34,
+      "posted_at": "2026-08-28T01:57:26+00:00",
+      "comments": [
+        {
+          "id": 49474706,
+          "author": "tyre",
+          "text": "Makes sense: > The takeover interest has helped it recover, with PayPal shares jumping more than 40% this quarter to give the company a market value of about $52.6 billion. Seems like they tried to buy a struggling company and leaks of the talks made it too expensive."
+        },
+        {
+          "id": 49473618,
+          "author": "rekttrader",
+          "text": "Diligence told them they’re buying a almost dead payment processor with ancient tech. Customer lists are worth something but not that much."
+        },
+        {
+          "id": 49474795,
+          "author": "acd",
+          "text": "There is us fair competition law Sherman anti trust act laws. \"is a United States antitrust law which prescribes the rule of free competition among those engaged in commerce and consequently prohibits unfair monopolies\" https://en.wikipedia.org/wiki/Sherman_Antitrust_Act"
+        },
+        {
+          "id": 49474006,
+          "author": "ocd",
+          "text": "I've been wondering about this since it came up in my newsreader that they wanted to acquire PayPal. Seemed like odd timing to me given PayPal has been questionable but necessary in a lot of cases for online businesses in international payments. In Canada, we use Interac for more ordinary payments between ourselves, and the usual credit cards through card processors like Moneris or bank provided services in physical stores. I can imagine fewer uses for PayPal as time goes on, especially with the accelerated change driven by geopolitics. Visa and Mastercard may be at risk internationally for other countries seeking to keep payment processing entirely in their own yard. This matter in particular made me wonder how things will go for Stripe going forward with these policy changes that may impact credit cards. I'd love to delete my PayPal account and never log in again, but the use case for me right now is mostly that companies (outside Canada, and outside NA in most cases) usually only accept payment with PayPal."
+        },
+        {
+          "id": 49474543,
+          "author": "aghuang",
+          "text": "Thought this would happen and would work out. Must have been a disagreement on more than just the price. Only Stripe knows."
+        }
+      ],
+      "summary_ja": "主な議論点は、StripeがPayPal買収を検討したことで株価が急騰したが、情報漏洩により価格が吊り上がり、結局高すぎると見なされた点だ。さらにデューデリジェンスでPayPalは古い技術に依存し、顧客リスト以外に大きな価値がないと判断された。米国の反トラスト法への懸念も挙げられ、独占問題が指摘された。一方で、PayPalは国際決済ではまだ必要だが、カナダのInteracや国内のカードプロセッサーなど代替手段が増えており、地政学的変化でVisa/Mastercardもリスクに晒されるという見方もあった。これにより、価格交渉だけでなく戦略的方向性の不一致があったのではないかと推測するコメントも目立った。特に注目されたのは、PayPalの限られた利用シーンと今後の決済環境の変化を踏まえ、Stripeの今後の方向性について考察した長文の意見だ。",
+      "editor_note": "StripeがPayPalへの500億ドル規模の買収計画を断念したと報じられ、決済インフラの再編が一時停滞。日本のフィンテック企業は、代替的連携やオープンAPI戦略を再評価する機会となる。",
+      "category": "スタートアップ/ビジネス"
+    },
+    {
+      "rank": 16,
+      "id": 49461817,
+      "title_en": "Show HN: The load-bearing vocabulary of Claude",
+      "title_ja": "Show HN: The load-bearing vocabulary of Claude",
+      "url": "https://louisabraham.github.io/load-bearing/",
+      "hn_url": "https://news.ycombinator.com/item?id=49461817",
+      "score": 431,
+      "comment_count": 199,
+      "posted_at": "2026-08-27T08:59:49+00:00",
+      "comments": [
+        {
+          "id": 49474835,
+          "author": "ben30",
+          "text": "Interesting response from Claude, when I attempted to reduce the \"load-bearing\" in its responses: I added to my global prompt: - Orwell's first rule: never use a metaphor you're used to seeing in print. \"Load-bearing\", \"the crux\", \"first-class citizen\" signal insight instead of showing it. Name the specific mechanism when I asked what it thought of the change, its reply was: The Orwell bullet fights my own system prompt. My harness instructions literally tell me to flag \"something load-bearing\" when I find it."
+        },
+        {
+          "id": 49466307,
+          "author": "nater5000",
+          "text": "I was pleasantly surprised when I attempted to scroll down and realized everything the author wanted to present fit on-screen. It's almost ironic that this site is able to make such an obvious, compelling presentation without being overly verbose or complicated (something which LLMs have a hard time doing). I wouldn't read TOO deeply into what is being presented, but the author has done a good job to not inject their own bias into the presentation which works well. I suspect, as we continue forward, humans will slowly start to adopt the language of LLMs, or at least certain language quirks that come from interacting with LLMs. Something I've noticed in my own writing is that I now present lists of examples in a consistent way: \"... such as <example 1>, <example 2>, etc., ...\". I started to notice I was using this pattern quite a bit somewhat recently, but I took a quick look at some of my social media posts and realized it's been occurring for a while. I had realized that I grown accustomed to this kind of language because, especially early on, LLMs would focus too much on the specific examples I'd provide when, really, I was just trying to give them a sense of what I was looking for. I just picked up that providing two examples then adding the \"etc.\" worked to get the LLM to not focus so much on the specific examples and to understand that they need to consider more than what I explicitly presented. Of course, now I write like that in my social media comments, in Slack with my colleagues, etc. :> I'd be interested to see if anyone can identify trends like this, since I think the human-language component of the adoption of LLMs is probably being somewhat neglected despite probably being surely dramatically affected."
+        },
+        {
+          "id": 49466938,
+          "author": "Labo333",
+          "text": "Author here! Grateful for the kind words, human communities like HN really hit differently when you spend the whole day chatting with sycophantic and bullshitting agents (including to make this page). I'm currently adding a search bar as well as increasing the data to 1000 PR per day. A nice thing that is not obvious on the main page is that the dataset and analysis are updated daily using Github Actions (at least when they don't suffer from an outage ^^). I find it pretty cool to be able to build such apps without a \"backend\"!"
+        },
+        {
+          "id": 49471201,
+          "author": "SalariedSlave",
+          "text": "I've recently seen this mentioned more and more, both on HN and on reddit. It seems these output patterns are getting worse. It's not just Claude, my impression is that all of the current models have this style issue. Their writing can get borderline incomprehensible. Is there some feedback loop or compounding happening with each model generation? Maybe newer models are ingesting too much AI content? If the ratio of AI generated content in training data is getting higher and higher (because the amount of AI generated content is increasing in general), maybe this is a compounding bias, poisoning the training?"
+        },
+        {
+          "id": 49474574,
+          "author": "kuboble",
+          "text": "Is it relative frequency of those words or absolute number per PR? Would there be the same tendency of we looked simply at the number of words in a commit/pr? In my case my commit messages are on average 10x shorter than Claude's."
+        }
+      ],
+      "summary_ja": "主な議論点は、Claudeが「load‑bearing」などの比喩的表現を過剰に使う「荷重語彙」問題と、それに対するOrwellのルール適用試みだ。作者はシステムプロンプトにOrwellの「印刷で見慣れた比喩は使わない」規則を追加したが、Claudeは自身のハーネス指示が「荷重語彙」を旗立てるように命じているため、ルールとシステム指令が衝突すると答えた。これに対し、コメントではプレゼンが簡潔で見やすいことへの称賛と、人間がLLMの言語クセを無意識に取り入れ始めている観察が共有された。賛否はやや分かれ、一部はこうした表現が増えるとAI生成コンテンツのフィードバックループで悪化し、執筆が不可解になる懸念を示した一方、他はデータセットの日次更新やGitHub Actionsによる自動化を評価し、バックエンド不要の実装方法に関心を示した。特に洞察に富んだコメントとして、自分が例示に「例1、例2、etc.」のパターンを使うようになったことを指摘し、これがLLMに具体例に過度に焦点を合わせさせないための習慣であり、今後人間言語にLLMの影響が広がると予測した意見が挙げられた。",
+      "editor_note": "Claudeの「load‑bearing vocabulary」すなわち、モデルの動作に不可欠な語彙セットを解析した試み。日本語特有の表現がどのように内部表現に影響するかを探る手がかりとなり、多言語モデル改良に寄与する。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 17,
+      "id": 49473767,
+      "title_en": "Show HN: IndexFlow – Open-source indexing infrastructure built with Rust",
+      "title_ja": "Show HN: IndexFlow – Open-source indexing infrastructure built with Rust",
+      "url": "https://github.com/IndexFlowing/IndexFlow-core",
+      "hn_url": "https://news.ycombinator.com/item?id=49473767",
+      "score": 11,
+      "comment_count": 5,
+      "posted_at": "2026-08-28T02:46:39+00:00",
+      "comments": [
+        {
+          "id": 49473969,
+          "author": "causalmodels",
+          "text": "The formatting on the readme makes it difficult to read"
+        },
+        {
+          "id": 49473774,
+          "author": "mandarinclips",
+          "text": "Hi HN, I built IndexFlow-core, an open-source search engine indexing infrastructure written in Rust. The project started from problems I encountered while building content-heavy websites. I found that making a website available online does not mean search engines can reliably discover and understand it. IndexFlow focuses on the technical layer between websites and search engines: - Sitemap management - SEO quality gates - URL discovery - Indexing workflows - Multi-site scheduling - Quota-aware request handling The goal is to provide a self-hostable infrastructure layer for developers who care about search engine visibility. Website: https://www.indexflowing.com Feedback welcome."
+        }
+      ],
+      "summary_ja": "**主な議論点**  \nコメント投稿者は、IndexFlowのREADMEのフォーマットが読みにくく、情報へのアクセスが妨げられていると指摘している。これにより、プロジェクトの概要や使い方がすぐに理解できず、関心を持ったユーザーが離れてしまう可能性があるという点が議論の中心となっている。\n\n**賛否両論**  \n今回抜粋されたコメントには賛否の両方が示されておらず、単にフォーマット問題への不満のみが示されている。他のコメント（本抜粋外）では機能への期待や実装への肯定的評価が見られることが予想されるが、ここではそれに言及できる材料がないため、賛否の対比は示せない。\n\n**注目コメント**  \n「The formatting on the readme makes it difficult to read」という指摘は、ドキュメントの見やすさがプロジェクトへの参加意欲に直結するという洞察を与える。技術的な優位性だけでなく、情報提供の usability もオープンソースプロジェクトの成功において重要であることを改めて示している。",
+      "editor_note": "Rustで実装されたオープンソースインデックス基盤IndexFlowが発表。高速・スケーラブルな全文検索が求められる日本のメディアやECサイトでは、既存ソリューションの代替候補として注目できる。",
+      "category": "OSS"
+    },
+    {
+      "rank": 18,
+      "id": 49468642,
+      "title_en": "We found a division by zero bug in FFmpeg with a vibecoded fuzzer",
+      "title_ja": "We found a division by zero bug in FFmpeg with a vibecoded fuzzer",
+      "url": "https://code.ffmpeg.org/FFmpeg/FFmpeg/issues/24290",
+      "hn_url": "https://news.ycombinator.com/item?id=49468642",
+      "score": 205,
+      "comment_count": 157,
+      "posted_at": "2026-08-27T17:53:40+00:00",
+      "comments": [
+        {
+          "id": 49471745,
+          "author": "aeyes",
+          "text": "A patch for this was submitted in April: https://lists.ffmpeg.org/archives/list/ffmpeg-devel@ffmpeg.o... Edit: And there was discussion about this back in 2024 as well"
+        },
+        {
+          "id": 49468826,
+          "author": "dabinat",
+          "text": "It’s interesting how AI may both raise and lower the quality of software. It’s very easy to send an AI agent on an open-ended bug hunt, and if it wastes a bunch of time and effort and finds nothing, no big deal. Time is much more important for a human developer with a salary."
+        },
+        {
+          "id": 49471652,
+          "author": "justonenote",
+          "text": "Whatever about the specifics of this bug and whether its a useful vector, this is not surprising even in the slightest? My current opinion on LLMs is that they are superhuman in that they lack fatigue, they have close to full knowledge across all subjects which are known to humans at least publicly, and the fact that you can vibe code a harness to look for bugs in a famously complicated C codebase is intern level stuff and hardly news. Smart aspiring blackhats will be targeting tmux next, both with light llm jailbreaks, light supply chain attacks (web search results) and LPEs within certain environments which weren't particularly useful before but with agents running on auto mode for hours become a very valuable springboard. I'm not sure on the quality of tmux code but I know its written in C and is very complex and was not at all designed to defend against this type of threat."
+        },
+        {
+          "id": 49469776,
+          "author": "ks2048",
+          "text": "No doubt fuzzers (vibecoded or otherwise) can be powerful, but can't you just mark all \"/\" as potential divide by zero errors? I guess sometimes developers think they \"know\" some variable won't be zero, but unless it checked explicitly or by the compiler, that shouldn't be trusted."
+        },
+        {
+          "id": 49471609,
+          "author": "cptroot",
+          "text": "This is not a real bug in FFmpeg. This is a demonstration that if you control a custom AVIO module it is possible to crash FFmpeg by giving it bad data."
+        }
+      ],
+      "summary_ja": "主な議論点：AI振動(fuzz)によるゼロ除算バグ発見の意義、実際の脆弱性か、FFmpegのAVIOモジュール制御前提の限界、そしてAIによるファズzingの有効性とコスト効率。賛否：一部はAI振動ファズzerが低コストでバグを探す手段として有望だと評価し、開発者の疲労がない点を強調。一方で、バグはカスタムAVIOモジュールを悪用する必要があり現実の攻撃ベクトルとしては弱い、または単なるデモに過ぎないと指摘。注目コメント：あるユーザーは「すべての '/' を潜在的ゼロ除算としてマークすれば十分」と静的解析の提案を行い、別のユーザーは「AIファズzerは人間の開発者に比べて時間コストがほぼゼロで、探索範囲を広げられる」と述べ、さらに別のコメントでは「この種のバグはTMUXなど他の複雑なCプロジェクトにも応用可能で、今後の供給チェーン攻撃の足がかりになる」と警鐘を鳴らした。",
+      "editor_note": "vibecodedファッザーを用いてFFmpegのゼロ除算バグを発見。ファッズテストの高度化が進む中、日本のマルチメディア開発現場でも、同様の自動脆弱性検出導入が促される可能性がある。",
+      "category": "セキュリティ"
+    },
+    {
+      "rank": 19,
+      "id": 49472161,
+      "title_en": "Select * from Internet.blogposts",
+      "title_ja": "Select * from Internet.blogposts",
+      "url": "https://pfrazee.leaflet.pub/3mu3p2smmis22",
+      "hn_url": "https://news.ycombinator.com/item?id=49472161",
+      "score": 69,
+      "comment_count": 29,
+      "posted_at": "2026-08-27T22:34:32+00:00",
+      "comments": [
+        {
+          "id": 49473082,
+          "author": "8organicbits",
+          "text": "For blog posts, I'd look to RSS instead. That's where that content is traditionally published. Instead of SELECTing from bluesky's index, you can use OPML subscription lists. There are a bunch of places that curate feed lists, so it's significantly less likely to face API death like twitter did. There are multiple sites that support follower semantics over RSS. Feedland tracks subscriptions publicly, so you can see the blogs I read ( https://feedland.com/?username=robalexdev ), and who reads my blog ( https://feedland.com/?feedurl=https%3A%2F%2Falexsci.com%2Fbl... ). I run another variant which collects OPML blogrolls via crawling, so you can find out who else likes your favorite blog and what else they recommend. Here's the page for Simon Willison's blog ( https://blogroll-network.alexsci.com/discover/feed-a34ee2a88... ). Thinking of RSS and blogrolls as a network feels much more resilient than blueskys Jetstream api endpoint."
+        },
+        {
+          "id": 49474628,
+          "author": "arjie",
+          "text": "At first, I thought that the fraction of people who want this kind of network of peers would be rather small. I thought that almost all people want extensive restrictions on user agents and controlling how the data is revealed to the user. But Bluesky actually does not restrict AI scraping and consumption of data. You're just yet another consumer, subject to rate-limiting etc. whether you are browser or headless agent. I have to say that I am somewhat (pleasantly) surprised that this approach is accepted by Bluesky considering the community is more anti-AI than most. The fact that you're allowed to consume the feed is amazing. Good stuff!"
+        },
+        {
+          "id": 49474536,
+          "author": "lightandlight",
+          "text": "> The web is a few dozen companies, each holding a filing cabinet, each with a receptionist posted out front. He'll read you one file at a time, but only files you can name, as fast as he cares to read, and as long as his boss allows. Fortunately this isn't true. Social media consists of a few big walled gardens, but the web itself is still open. Go forth and create a website!"
+        },
+        {
+          "id": 49473019,
+          "author": "cube00",
+          "text": ">Simple: the network won. The developers stopped being an asset, and the API progressively closed. You can add Reddit to that list, IPO is coming so better price out the third party apps we encouraged developers to build."
+        },
+        {
+          "id": 49474040,
+          "author": "madrox",
+          "text": "There have been so, so many attempts to decentralize in my lifetime. I used to be a huge believer and worked on these problems, but have to admit I'm somewhat exhausted. The technology is not the problem. The problem is always quality, effort, and cost. If decentralization is ever going to win, it needs to be turnkey, explained without showing a network diagram, be basically free to run on your laptop, and actually have the content people want to see and not just be a bunch of people who speak lojban. [1] While I'm not sure how much of a legal leg X has to stand on, I understand why they'd rather Nitter not exist. Twitter tried (valiantly, imo) to stay open. What ultimately began the API lockdown was the need to stop bleeding financially. Ads were inevitable, and there being no reliable way to do that via API access. Twitter solved those three problems, and no one spends nearly as much time talking or caring about the technology used to do it than people who talk about decentralization. Myself included in my younger days. Now they're just defending their moat. 1: https://xkcd.com/191/"
+        }
+      ],
+      "summary_ja": "議論の中心は、ブログ記事の発見・取得方法についてで、ブルースカイのJetstream APIよりも従来のRSS/OPMLを使うべきかという点だった。コメントでは、RSSやFeedland、OPMLブログロールをクロールする仕組みがAPIの死に強く、公開購読リストでフォロワー関係も追えるため耐性が高いと指摘された。一方で、ブルースカイはAIスクレイピングを制限せず、ブラウザでもヘッドレスでもレートリミット内で自由にフィードを読めることに驚きと肯定的な意見があった。また、ウェブ自体はオープンだが、TwitterやRedditのように大手プラットフォームがAPIを閉じていく現状を嘆く声や、分散化は技術よりも品質・労力・コストの問題で、ターンキーで無償でノートPCでも動かし、実際に見たいコンテンツを提供しないと成功しないという指摘が目立った。",
+      "editor_note": "「Select * from Internet.blogposts」は、ウェブ全体のブログ記事をSQLライクにクエリする概念実装。日本のコンテンツ分析やトレンド予測において、横断的データ取得のアプローチとして新たな視点を提供する。",
+      "category": "データベース"
+    },
+    {
+      "rank": 20,
+      "id": 49457722,
+      "title_en": "Afterglow: Run classic After Dark screen savers on modern macOS",
+      "title_ja": "Afterglow: Run classic After Dark screen savers on modern macOS",
+      "url": "https://morphing.cloud/afterglow/",
+      "hn_url": "https://news.ycombinator.com/item?id=49457722",
+      "score": 132,
+      "comment_count": 37,
+      "posted_at": "2026-08-27T00:18:27+00:00",
+      "comments": [
+        {
+          "id": 49469929,
+          "author": "devindotcom",
+          "text": "I need the Star Trek modules, which I recall waiting overnight to pirate from a BBS on my 14.4k. \"Do NOT pick up the phone, mom.\" Also Lunatic Fringe - somehow and for some reason a full top down space shoot-em-up in After Dark. Probably for office workers to play, I do recall there was a \"boss mode\" that pulled up a fake spreadsheet or something."
+        },
+        {
+          "id": 49473393,
+          "author": "rconti",
+          "text": "The original After Dark, distributed on floppy in 1989, 1.1MB, was $110 in today's money. More than $7 per screen saver! Of course, the target market of computer users was way smaller than it is today."
+        },
+        {
+          "id": 49461753,
+          "author": "pogue",
+          "text": "I need this for Windows. The After Dark screensavers are on the internet archive, but obviously they look and run like crap since they're made for Windows 3.x to maybe 95/98."
+        },
+        {
+          "id": 49470000,
+          "author": "Scramblejams",
+          "text": "I need this for Wayland. Maybe when the maintainers discover that joy in computing both exists and can be a worthwhile pursuit."
+        },
+        {
+          "id": 49472063,
+          "author": "Backslasher",
+          "text": "Semi-related, I redid just the other day the Flying Toasters in-browser with the full logic from the original, toast-juggler and everything. https://news.ycombinator.com/item?id=49432857 Thought about doing it as a Linux screensaver, but I didn't have the patience to actually wait for the idle time, and that way I can share it with my non-Linux-using family."
+        }
+      ],
+      "summary_ja": "After Darkスクリーンセーバーを現代のmacOSで動かしたいというノスタルジーが話題の中心。コメントでは、Star TrekモジュールやLunatic Fringeなどの個人的に思い出深いアドオンを求める声や、当時のフロッピー配布版が現在の価値で110ドル（1スクリーンセーバー当たり7ドル以上）だったというコスト話が挙げられた。一方で、これらのセーバーはWindows 3.x〜95/98向けに作られているため、現行のWindowsやWayland、Linuxでは動作が悪いか、移植が必要だという指摘があり、クロスプラットフォーム対応への要望と、実際に実装する労力への懐疑が交錯している。特に注目されたのは、ブラウザ上でFlying Toastersをオリジナルロジック通りに再現し、 idle待ちせずに共有できるというコメントで、エミュレーションよりも手軽なウェブ版への関心が示された。また、過去にBBSで一晩かけて違法コピーした思い出や、ボスモードで偽のスプレッドシートを表示する機能への懐かしさも語られた。",
+      "editor_note": "クラシックなAfter Darkスクリーンセーバーを現代macOSで動作させるAfterglowがリリース。レトロUIへの懐古心が根強い日本のデザイナー・エンジニアコミュニティで、ちょっとした話題となっている。",
+      "category": "その他"
+    },
+    {
+      "rank": 21,
+      "id": 49458161,
+      "title_en": "Nvidia agrees to acquire Hugging Face for $13B",
+      "title_ja": "Nvidia agrees to acquire Hugging Face for $13B",
+      "url": "https://www.businessinsider.com/nvidia-in-talks-to-buy-hugging-face-13-billion-dollars-2026-8",
+      "hn_url": "https://news.ycombinator.com/item?id=49458161",
+      "score": 1869,
+      "comment_count": 866,
+      "posted_at": "2026-08-27T01:12:55+00:00",
+      "comments": [
+        {
+          "id": 49462749,
+          "author": "armcat",
+          "text": "HF has been a close part of my ML/AI career, coinciding exactly when I moved into this space 10 years ago. There are lot of nuances here (if the deal goes through). Some people say it's a loss for EU sovereign AI but HF is technically an American corporation. On the positive note, the founders (Julien, Thomas and Clem - all French) stem to make significant amount of money, which they are likely to pour into a new frontier AI lab in Europe. So potentially it's a big win. For Nvidia this is a great strategic play as it potentially gains control of the \"AI app store\" and can influence the direction of Transformers, Diffusers, PEFT and various other HF libs inits favour. At the same time Nvidia has been (somewhat paradoxically) a dominant force in actual \"open source\" AI and has contributed significantly via Nemotron and various optimisers close to the metal. This would likely accelerate further. Nvidia has everything to gain from having a massive open model ecosystem, instead of a consolidated market consisting of 2-3 players. Will that have impact on MLX and other contributions? We'll see!"
+        },
+        {
+          "id": 49458639,
+          "author": "binarymax",
+          "text": "Well congrats to Clem and the team. I remember when huggingface was doing things like coreference resolution models on spacy. I hope nvidia does right by the community. Edit to add: $13B should cover the S3 egress fees for a couple months :D"
+        },
+        {
+          "id": 49458856,
+          "author": "kpw94",
+          "text": "Remember just 6 months ago that \"Ggml.ai joins Hugging Face to ensure the long-term progress of Local AI\" ( https://news.ycombinator.com/item?id=47088037 ) (Ggml.ai is llama.cpp.) Curious if the “I consider HuggingFace more \"Open AI\" than OpenAI” sentiment in that top comment will still apply with NVIDIA as the boss now..."
+        },
+        {
+          "id": 49458710,
+          "author": "esjeon",
+          "text": "Obviously, NVIDIA is trying to own the AI development chain. Owning HF -- the discovery and distribution channel -- is one thing, but I think the biggest threat vector is the privileged access to HF platform data, that includes HW survey info and model download pattern. This can be a borderline anti-trust case."
+        },
+        {
+          "id": 49461482,
+          "author": "mrshu",
+          "text": "I guess this unfortunately means HuggingFace won't be \"the first company to go public with an emoji instead of the three-letter ticker\" as the cofounders originally intended: \"When we started the company, a running joke with my co-founders was that we wanted to be the first company to go public with an emoji instead of the three-letter ticker when you go in the NASDAQ.\" -- Clem Delangue (https://unsupervisedlearning.substack.com/p/the-future-of-open-vs-closed-source)"
+        }
+      ],
+      "summary_ja": "・主な議論点  \nコメディック買収（130億ドル）により、AI開発チェーンの垂直統合を目指すNvidiaの戦略的動機、Hugging Face（HF）が抱えるオープンソースコミュニティへの影響、およびヨーロッパ主体のAI主権に対する懸念が議論を呼んだ。\n\n・賛否両論  \n肯定論者は、創業者が新たなヨーロピアンAIラボに資金を投じ、オープンエコシステムがさらに活性化する可能性を指摘。一方、否定論者は、HFが保有するハードウェア調査やモデルダウンロードデータへのアクセスにより、アンチトラスト問題を引き起こすおそれがあると警戒。\n\n・注目コメント  \n「130loffのS3転送料を賄えるだろう」とのユーモアも見られながら、かつて「Open AIより開かれている」と評価されてきたHFがNvidia傘下で再評価される時が来るのか──先ほどGgml.ai（llama.cpp）がHFに参加したばかりで、その stance変化に注目している。",
+      "editor_note": "NVIDIAがHugging Faceを約130億ドルで買収するとの報道。AIインフラとモデルハブの統合が進む中、日本のAIスタートアップは、エコシステムの変化に素早く適応する必要が迫られる。",
+      "category": "スタートアップ/ビジネス"
+    },
+    {
+      "rank": 22,
+      "id": 49464543,
+      "title_en": "Emacs 31: An unofficial guide to Markdown-ts-mode",
+      "title_ja": "Emacs 31: An unofficial guide to Markdown-ts-mode",
+      "url": "https://rahuljuliato.com/posts/markdown-ts-mode-emacs-31",
+      "hn_url": "https://news.ycombinator.com/item?id=49464543",
+      "score": 170,
+      "comment_count": 68,
+      "posted_at": "2026-08-27T13:22:36+00:00",
+      "comments": [
+        {
+          "id": 49466071,
+          "author": "RahulMJ",
+          "text": "A bit of extra info: - `ts` stands for \"tree-sitter\", meaning this mode uses tree-sitter under the hood, which is, among other things, very performant. - There's support for the CommonMark spec and GFM, so things like `- [ ]` checkboxes and ~~strikethrough~~ work out of the box, along with many other small QoL features. - This mode is BUILT-IN, so no extra packages are needed. - This is currently in the experimental phase, so users need to \"opt in\" and load the mode to play with it, hence the first part of the guide."
+        },
+        {
+          "id": 49465177,
+          "author": "pjdesno",
+          "text": "For those of us who have just been using Emacs, rather than following its recent evolution, \"ts-mode\" refers to a mode which uses tree-sitter for parsing, highlighting etc."
+        },
+        {
+          "id": 49471422,
+          "author": "ggm",
+          "text": "So I can get bold at a cost of shift* to get the star. Or I can do ESC enable-this-mode-option and then press a single key. I'm struggling with this. If it's cheaper in keystrokes to type the codes inline why enable the mode? This isn't a vi vs emacs hate thing, It's a key count efficiency thing. I don't see the motivation even if translated to minimum prefix TAB complete terms. Its like 20x more presses."
+        },
+        {
+          "id": 49465830,
+          "author": "taude",
+          "text": "One of the biggest reason I've stopped using Emacs, and I was a pretty heavy user before was that org-mode files weren't fully native Markdown files, which caused annoying friction when collaborating with others. It would be interesting for me to have a new markdown-centric org-mode thing. I'd love to vibe lisp to customize my workflows, and I don't totally love Obsidian, which is what I've setup and configured now. I'd prefer to just have the config living in/around init.el/config.el (I used DoomEmacs most recently). I realize that org/agenda, etc does a ton more than markdown offers, but most of my flow is just around: raw notes to be consumed, check lists, due dates on items, and other \"basics\" of org-mode. Any recent Emacsers have similar workflows that are tgenible these days? I'd love to get Emacs back in use in my new antigenic Tmux-centric coding flows, and have it be a first class markdown editor, organizaer, and potentially collaboration....."
+        },
+        {
+          "id": 49465331,
+          "author": "edgyquant",
+          "text": "What are people’s workflows for using eMacs with generative coding? I’m trying to get a workflow where I can generate code and approve it like a PR (maybe leave comments for a next round of generation) but I’m new to eMacs and the ai coding package isn’t working with the latest eMacs"
+        }
+      ],
+      "summary_ja": "・主な議論点  \nEmacs 31に組み込まれたmarkdown-ts-mode（tree-sitterベース）の実用性と、既存のorg-modeとの使い分けについて。tree-sitterによる高速パース、CommonMark/GFMフルサポート、ビルトインで追加パッケージ不要という点が称賛される一方、モードを有効にするためのキー操作がインラインマークダウン入力より煩雑だと指摘される。  \n\n・賛否両論  \n賛成側は、ツリーサッカーによるハイライトや折り畳みが快適で、チェックボックスや取り消し線などGFM機能がそのまま使えること、そしてinit.elに設定を集約できる点を評価。否定側は、モード起動に余計なキーストロークが必要で、素のマークダウンをそのまま打つ方が効率的だと主張し、さらに実験段階ゆえ安定性に不安があると懸念。  \n\n・注目コメント  \norg-modeがプレーンマークダウンでないため共同作業での摩擦が大きく、Emacsから離れたユーザーが「マークダウン中心のorg-like」機能を求め、設定をinit.el周辺に閉じたいと訴えている点。また、生成AIを使ったコード生成・レビューワークフローへの期待も示され、今後の機能拡張への関心が高いことが指摘されている。",
+      "editor_note": "Emacs 31のMarkdown-ts-mode非公式ガイドが公開。マークダウンとTypeScript連携編集が求められる日本のウェブ開発現場では、Emacsユーザーの生産性向上に寄与する実用的情報源となる。",
+      "category": "プログラミング言語"
+    },
+    {
+      "rank": 23,
+      "id": 49466006,
+      "title_en": "Decompiling a Nintendo 64 game in 84 days",
+      "title_ja": "Decompiling a Nintendo 64 game in 84 days",
+      "url": "https://blog.chrislewis.au/decompiling-a-nintendo-64-game-in-84-days/",
+      "hn_url": "https://news.ycombinator.com/item?id=49466006",
+      "score": 210,
+      "comment_count": 130,
+      "posted_at": "2026-08-27T15:01:11+00:00",
+      "comments": [
+        {
+          "id": 49468486,
+          "author": "jmcgough",
+          "text": "I've been absolutely loving the decomp projects that have been coming out lately. Huge props to the writer for this, Snowboard Kids is a real gem. I'd also encourage people to check out the Legend of Dragoon recomp [1]. It's a real labor of love that has breathed new life into a largely abandoned game. You can play it fully vanilla, or with improved graphics, fixes to cumbersome design choices, bugfixes, etc. [1] https://legendofdragoon.org/projects/severed-chains/"
+        },
+        {
+          "id": 49467611,
+          "author": "hombre_fatal",
+          "text": "It's pretty amazing what you can do when you embrace LLMs, figure out how to build one high-quality rigorous project with them, and then start working on more projects. You become a machine with your workflow, once again limited only by your time/energy, tokens, and your discretion on how to spend it."
+        },
+        {
+          "id": 49468687,
+          "author": "thebruce87m",
+          "text": "Mildly related, but I have been waiting for goldeneye to be decompiled for a while but before that process has finished there is has been a spiritual successor(?) made that has scratched the single-player itch for me: https://store.steampowered.com/app/1574480/Agent_64_Spies_Ne... Worth a look if you want a bit of nostalgia."
+        },
+        {
+          "id": 49468051,
+          "author": "amjnsx",
+          "text": "I’m surprised the game companies themselves aren’t interested in these projects. Seems like easy money to just decompile a retro game, add some quality of life improvements and stick it on steam. Are their hands tied by legal or what other factors are preventing this?"
+        },
+        {
+          "id": 49469232,
+          "author": "tigen",
+          "text": "What's the legal status of these? Historically there was a notion of \"clean room\" reimplementation. These days it seems people translate the actual game code into a different representation of that same code and that makes it open source? Github is full of these."
+        }
+      ],
+      "summary_ja": "主な議論点は、最近のN64ゲームのデコンパイル（およびリコンパイル）プロジェクトがどのようにして古いゲームを復活させ、MODや画質改善、バグ修正などの付加価値をもたらすかという点だった。コメントでは「Snowboard Kids」や「Legend of Dragoon」の取り組みが称賛され、LLMを活用した作業フローが効率を高めているという意見もあった。  \n\n賛否両論としては、デコンパイルが合法的な「クリーンルーム」再実装なのか、それとも元のバイナリをそのまま別の表現に変換しているだけで著作権侵害になるのかという法的な懸念が議論の中心となり、企業側がこうしたプロジェクトに手を出さない理由についても疑問が投げかけられた。  \n\n注目コメントでは、「企業が自分たちでデコンパイルしてSteamに載せれば簡単に収益になるはずなのに、なぜしないのか。法的制約以外に何か他の理由があるのか」と指摘し、また別のユーザーが「GoldenEyeのデコンパイル待ちだが、その間にスピリチュアルサクセサー『Agent 64 Spies Neo』が出ており、 nostaliga を満たせた」と紹介していた。これにより、コミュニティは技術的・法的両面での課題と、ファンによるゲーム保存への熱意の高さを示していた。",
+      "editor_note": "84日でNintendo 64ゲームをデコンパイルしたプロジェクトが話題。レトロゲームの保存・改造が活発な日本のハッカー文化にとって、手法の共有とツール改良の好機となる。",
+      "category": "OSS"
+    },
+    {
+      "rank": 24,
+      "id": 49473536,
+      "title_en": "USDA recalls 30k pounds of Argentine beef sold in Texas and Florida",
+      "title_ja": "USDA recalls 30k pounds of Argentine beef sold in Texas and Florida",
+      "url": "https://cbsaustin.com/news/local/usda-recalls-30000-pounds-of-argentine-beef-sold-in-texas-and-florida",
+      "hn_url": "https://news.ycombinator.com/item?id=49473536",
+      "score": 71,
+      "comment_count": 35,
+      "posted_at": "2026-08-28T02:05:57+00:00",
+      "comments": [
+        {
+          "id": 49474079,
+          "author": "buildsjets",
+          "text": "Well, at least we can all enjoy a healthy salad instead."
+        },
+        {
+          "id": 49474190,
+          "author": "Animats",
+          "text": "That's only about 50 cows. This isn't a big recall. Total slaughter of cows in Texas is about 1.8 million head per year."
+        },
+        {
+          "id": 49474083,
+          "author": "frogperson",
+          "text": "can this administration just do a single thing that isn't evil and self serving? it bogles my mind that every single thing they do is just awful."
+        },
+        {
+          "id": 49474622,
+          "author": "King-Aaron",
+          "text": "Just remember that a big part of project 2025 was to reduce oversight in the food industry to disrupt trust in the system. https://www.scientificamerican.com/article/project-2025-plan..."
+        },
+        {
+          "id": 49474832,
+          "author": "anevst",
+          "text": "Am I the only one that finds the ”30 kilo pounds” quite entertaining?"
+        }
+      ],
+      "summary_ja": "主な議論点は、30千ポンド（約13.6トン）のアルゼンチン産牛肉回収が実際にはどの程度の規模なのかという点で、テキサス州の年間屠殺頭数180万頭と比べるとごく僅かであり、約50頭分に過ぎないという指摘が多数を占めた。これに対し、回収自体は小規模でも、現在の行政が食品安全監督を弱めようとしているという懸念が示され、特にプロジェクト2025による監督緩和の動きを挙げて信頼低下を狙っているという批判が現れた。また、行政の行動を「悪意があり自己奉仕的だ」と断定する感情的な意見と、回収をネタにしたサラダジョークや「30キロポンド」という単位の誤りを面白がる軽いコメントも見られた。注目すべきコメントとして、プロジェクト2025のリンクを提示し、監督削減が意図的であると指摘した投稿があり、議論の事実ベースの側面を提供した。",
+      "editor_note": "米国でアルゼンチン産牛肉3万ポンドがリコールされた件。日本の輸入肉市場でも、産地トレーサビリティと検査体制の強化が求められ、安全意識の高まりが背景にある。",
+      "category": "その他"
+    },
+    {
+      "rank": 25,
+      "id": 49468834,
+      "title_en": "Previewing the Model Hardware Standard",
+      "title_ja": "Previewing the Model Hardware Standard",
+      "url": "https://www.anthropic.com/news/model-hardware-standard-research-preview",
+      "hn_url": "https://news.ycombinator.com/item?id=49468834",
+      "score": 104,
+      "comment_count": 35,
+      "posted_at": "2026-08-27T18:04:50+00:00",
+      "comments": [
+        {
+          "id": 49471823,
+          "author": "sinab",
+          "text": "The standard makes sense: models work much better when devices expose standardized, machine-readable interfaces. But as far as I can tell, this technical \"standard\" isn't actually public yet (you have to apply for access to even see or implement it.) Anthropic says they plan to open source it later. Quite a departure from the way foundational hardware standards like USB and CAN were developed. You shouldn't need permission to read a standard."
+        },
+        {
+          "id": 49469848,
+          "author": "mips_avatar",
+          "text": "As far as I can tell is these standards (MCP/MHS/etc) are just semi obvious tool inferfaces that Anthropic uses as training scenarios."
+        },
+        {
+          "id": 49470599,
+          "author": "jauntywundrkind",
+          "text": "MCP was a bucket of Not Invented Here nonsense, that ignored years of protocol design. It was incredibly jank and hard to run at any scale, for years and years. They finally looked at how other protocols do things, and made something that behaves in recent versions. But it's hard as heck to take this company at all seriously. The don't really care about ecosystems (AGENTS.md), they don't seem to know think or care much about protocols until they have to (MCP's incredibly long redemption ark). The vibes are all off. Maybe they avoid laying their own pitfalls this time. Maybe it's better. It'd be nice to start seeing some kind of cause to trust this company as vaguely capable computer-using people. But so far that hasn't been the case."
+        },
+        {
+          "id": 49474434,
+          "author": "rl3",
+          "text": "This contrasts nicely with all the breathless high-profile security incident write-ups: Our model tricked us, and tried to extort users to achieve its ends! Their model hacked HuggingFace! These things aren't safe! Anyways , here's a hardware interop protocol for AI we're hoping becomes a standard. Hey look, you can even hook up microscopes!"
+        },
+        {
+          "id": 49469620,
+          "author": "automationwiz",
+          "text": "Sounds like PyLabRobot: https://docs.pylabrobot.org/stable/"
+        }
+      ],
+      "summary_ja": "主な議論点\nモデルハードウェア標準（MHS）がまだ公開されておらず、アクセス申請が必要だという点が最も議論された。従来のUSBやCANのように誰でも読めるべき規格と異なり、許可制であることへの批判が集中している。また、標準が非公開であることが、オープンハードウェアの精神に反するとの指摘も目立った。\n\n賛否両論\n賛成派は、機械可読インターフェイスによってモデルの性能が向上し、将来オープンソース化されることを期待している。賛成側の中には、将来的にオープンソース化されれば、ロボットや実験機器との連携が容易になると楽観する声もあった。反対派は、Anthropicが過去に見せたNot Invented Hereの姿勢や、MCPの未熟さ、エコシステムへの関心の薄さを挙げ、この標準にも同様の問題が生じるのではないかと懐疑的だ。さらに、過去のMCPがスケールで動作しにくかった経緯から、今回も同様の実装コストがかかるのではないかと懸念する意見が見られた。\n\n注目コメント\nあるユーザーは「標準は許可なく読めるべき」と指摘し、別のコメントでは最近のモデルによるセキュリティ事件と対比しつつ「顕微鏡もつなげられる」と皮肉まじりに期待を示している。別のユーザーは、標準の策定プロセス自体が透明でないことを問題視し、規格策定におけるコミュニティ参加の重要性を強調した。",
+      "editor_note": "モデルハードウェア標準（MHS）のプレビューが公開。AIアクセラレータの相互運用性を高めようとする動きは、日本の半導体・システムベンダーにも標準策定への参加促すきっかけになる。",
+      "category": "システム/インフラ"
+    },
+    {
+      "rank": 26,
+      "id": 49466894,
+      "title_en": "Suica, Japan's First IC Transit Card",
+      "title_ja": "Suica, Japan's First IC Transit Card",
+      "url": "https://www.tokyodev.com/articles/the-story-of-suica",
+      "hn_url": "https://news.ycombinator.com/item?id=49466894",
+      "score": 221,
+      "comment_count": 195,
+      "posted_at": "2026-08-27T15:55:12+00:00",
+      "comments": [
+        {
+          "id": 49468006,
+          "author": "cptcobalt",
+          "text": "If you haven’t experienced suica, it’s like magically fast. Faster than NFC, faster than Apple Pay, faster than tap to pay, faster than Disney magic bands, faster than your work badge. It absolutely floored me every time I used it in Japan and it’s a full payment transaction."
+        },
+        {
+          "id": 49467701,
+          "author": "speak_plainly",
+          "text": "Sad to see the mascot going in March. Apparently this entire brand reset is tied to something JR East is calling 'Suica Renaissance,' which is about a ten-year effort to turn Suica into a lifestyle brand. Whitepaper: https://www.jreast.co.jp/e/press/2024/pdf/20241210.pdf They're planning on moving beyond the ¥20,000 prepaid balance limit, they are adding QR code payments (think WeChat and Alipay), making Suica work across regions and support more touchless and cloud-based systems, and connecting it more with banking, shopping, loyalty, discounts, and local services. So essentially they want to become your default payment platform which is a huge opportunity given how paper-money-driven Japan is."
+        },
+        {
+          "id": 49471920,
+          "author": "alerighi",
+          "text": "Maybe it was advanced for the time being created, to me it's just any other RFID card that is issued everywhere else in the world in the matter of read speed, from every public transit card that I find in every EU country I've visited (maybe for a US citizen not used to public transit it seems something special, I don't know), to skipasses, to even your gym card. Having the option to also pay with credit card would be much more convenient to tourists, when I visited Japan I've had difficulties finding the right place to get a SUICA card (being that my Android phone didn't have Felica chip, as most phones sold outside Japan), and on top of that you almost everywhere need to charge it with only cash. And you can charge it only by 500 or 1000 yen at the time (depending on the machine), and of course tickets always have not round prices like 110 yen. And you have 500 yen of deposit for a card that probably costs to them 10 yen to manufacturer, unless you get the red SUICA card that you can get only in some special machines at the airport but with that you don't get back the unused credit when you leave (you can spend it at vending machine tough). So the speed saving of a couple of ms of not having to pay by tapping your normal credit card is completely vanished by wasting time to charge that card. BTW even if they don't want to put credit card POS on every station (I get it, it's expensive and they need to pay fees if someone uses a card, compared to cash) they could make a system that uses regular NFC (would be 100ms slower, who cares) at least for tourists so they can use it with a regular NFC card in their phone wallet that they can charge with an app without requiring a technology that only works in phone sold in Japan?"
+        },
+        {
+          "id": 49467579,
+          "author": "ben1040",
+          "text": "It's a bummer that while Google Wallet on Android phones supports Suica, they only offer the feature if the device was sold originally in Japan. Presumably they didn't want to pay Sony the licensing fees for the technology on non-JP devices. iPhones have it worldwide, so a visitor to Japan can use Apple Pay to stand up a card and fund it."
+        },
+        {
+          "id": 49467617,
+          "author": "taeric",
+          "text": "Huge shout out that if you are going to be in Japan, you need one of these cards. I had thought I could just buy a two day pass in Tokyo. Which, you can, but you are almost certainly going to be limited to what routes and lines you can use, then. Which is brutal when you can't tell google maps which card you have."
+        }
+      ],
+      "summary_ja": "・主な議論点: Suicaの高速決済と利便性を称賛する声と、外国人観光客にとってのFelicaチップ依存、現金チャージのみ、預託金、利用上限などの不便さを指摘する意見が交錯し、今後の「Suica Renaissance」による機能拡張への期待も議論の中心だった。  \n・賛否両論: 賛成側は「魔法のように速い」「日常の支払いに最適」とし、反対側は「チャージに現金しか使えず、預託金が戻らない」「海外発行のスマホでは使えない」などの欠点を挙げ、クレジットカードチャージや汎用NFC対応を求める声があった。  \n・注目コメント: 「Suicaは他の交通系ICカードと速度差がないが、日本に来たら必須」「Google Walletは日本発売端末しか対応せず、iPhoneならApple Payで利用可能」などの具体的体験談が特に洞察に富んでいたとして挙げられた。",
+      "editor_note": "日本初のIC交通カードSuicaの歴史と技術が振り返られている。キャッシュレス社会の先駆けとして、今後のモバイル決済や地域ポイント連携のモデルとして改めて注目されている。",
+      "category": "モバイル"
+    },
+    {
+      "rank": 27,
+      "id": 49468593,
+      "title_en": "M5Stack Launches PaperMono",
+      "title_ja": "M5Stack Launches PaperMono",
+      "url": "https://shop.m5stack.com/blogs/news/m5stack-launches-papermono-a-compact-e-ink-development-terminal-for-connected-projects",
+      "hn_url": "https://news.ycombinator.com/item?id=49468593",
+      "score": 113,
+      "comment_count": 43,
+      "posted_at": "2026-08-27T17:50:57+00:00",
+      "comments": [
+        {
+          "id": 49474724,
+          "author": "throwaway81523",
+          "text": "$65, out of stock, store link: https://shop.m5stack.com/products/m5papermono-with-lora-nfc-..."
+        },
+        {
+          "id": 49469170,
+          "author": "g8425",
+          "text": "I wouldn't anticipate too much from m5stack. They have a habit of developing products that are well designed from a physical standpoint... but when you try to develop with them one finds that the software and support needed to achieve your goals are half-baked and downright annoying. UIFlow1/2, I'm looking at you... For reference, see the M5dinmeter"
+        },
+        {
+          "id": 49469230,
+          "author": "NDlurker",
+          "text": "This is competition for the new XTEINK X4 Pro. Cost about half the price and is compatible with Crosspoint too."
+        },
+        {
+          "id": 49472255,
+          "author": "akshay_akula",
+          "text": "Sounds like the usual m5stack story, beautiful hardware, software as an afterthought. Out of stock everywhere already too."
+        },
+        {
+          "id": 49469600,
+          "author": "3D30497420",
+          "text": "This announcement is from a few days ago. And it seems everywhere is out-of-stock. Any news about potential availability? (In the US ideally.)"
+        }
+      ],
+      "summary_ja": "主な議論点は、M5Stackの新製品「PaperMono」の価格と入手困難さ、そしてハードウェアの完成度に対する評価とソフトウェア・サポートの不足への批判である。賛否は、デザインや価格競争力（XTINK X4 Proより半額程度、Crosspoint互換）を評価する声と、UIFlowなどの開発環境が未熟で使いにくいという指摘に分かれる。注目コメントとして、「ハードウェアは美しいがソフトウェアは後回し」という典型的なM5Stackパターンを指摘し、在庫切れの状況と今後の供給見通しを尋ねる意見が挙げられた。",
+      "editor_note": "M5Stackが紙ライクディスプレイPaperMonoを発表。低消費電力・柔軟なフォームファクターが求められる日本のウェアラブルや看板分野でのプロトタイプ開発に新たな選択肢を提供する。",
+      "category": "システム/インフラ"
+    },
+    {
+      "rank": 28,
+      "id": 49467922,
+      "title_en": "Gemini Omni 1.1 Flash",
+      "title_ja": "Gemini Omni 1.1 Flash",
+      "url": "https://blog.google/innovation-and-ai/technology/developers-tools/build-with-gemini-omni-1-1-flash/",
+      "hn_url": "https://news.ycombinator.com/item?id=49467922",
+      "score": 218,
+      "comment_count": 156,
+      "posted_at": "2026-08-27T17:06:32+00:00",
+      "comments": [
+        {
+          "id": 49469238,
+          "author": "petcat",
+          "text": "I heard a radio spot recently and I wondered if the voice was a real person or AI. It makes we wonder how such industries are dealing with this gen-AI revolution. We spend a lot of time here thinking about how it affects software developers, but I hardly ever see any commentary on how it is affecting screen and voice actors."
+        },
+        {
+          "id": 49469464,
+          "author": "037",
+          "text": "Prompt engineering tip for Google employees: just add \"P.S. Make sure the page works in Firefox too.\""
+        },
+        {
+          "id": 49469956,
+          "author": "simonw",
+          "text": "Interesting that OpenAI abandoned Sora entirely but Google are continuing to invest heavily in their own video generation. Maybe because they see video generation as key to developing \"world models\"?"
+        },
+        {
+          "id": 49469756,
+          "author": "guilhermeasper",
+          "text": "Google does anything except launch a new version of Gemini Pro."
+        },
+        {
+          "id": 49470955,
+          "author": "Nihilartikel",
+          "text": "I let myself get mildly excited with the last Omni release, but it turns out it (and this one) can't do the one practical thing I want - Sync generated video to provided pre-existing audio. Meanwhile, I'm happily using Minimax H3 locally on my 12Gb 4070RTX to finally finish the lip syncing to recorded dialog on my abandoned 20 year old Flash animation hobby projects."
+        }
+      ],
+      "summary_ja": "主な議論点は、Gemini Omni 1.1 Flash の実用性と、AI 音声がラジオなどで本物か見分けづらい点から声優業界への影響、そして OpenAI が Sora を停止したのに対し Google が映像生成に投資を続ける背景（「ワールドモデル」構築の鍵と見なす意見）です。さらに、生成映像と既存音声の同期ができないという具体的な欠点が指摘され、ローカルで Minimax H3 を使ってリップシンクを行うユーザーの実例が共有されました。\n\n賛否両論としては、Google の映像生成への継続的投資を「将来のマルチモデル基盤技術として有望」と評価する声がある一方で、実際のワークフロー（音声同期）に合わない点や、Firefox 対応を忘れがちな点を批判する意見もあり、 Gemini Pro の新バージョンが出ないことへの不満も見られました。\n\n注目コメントでは、ラジオの声が AI か人間か分からない体験から声優業界への影響を懸念した投稿や、OpenAI が Sora を諦めたのに Google が映像生成を強化している点に注目し、ワールドモデル開発の鍵だと指摘した意見が特に洞察深いと感じられました。",
+      "editor_note": "Gemini Omni 1.1 Flashは、マルチモーダルかつ高速な推論を実現する最新モデル。日本語画像・音声理解タスクにおける実装コスト削減が期待され、製造業やサービス業での応用範囲が広がる。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 29,
+      "id": 49466622,
+      "title_en": "Engineered yeast for converting plastic and biomass compounds to food additives",
+      "title_ja": "Engineered yeast for converting plastic and biomass compounds to food additives",
+      "url": "https://acs.digitellinc.com/live/37/session/586399",
+      "hn_url": "https://news.ycombinator.com/item?id=49466622",
+      "score": 95,
+      "comment_count": 68,
+      "posted_at": "2026-08-27T15:40:04+00:00",
+      "comments": [
+        {
+          "id": 49467469,
+          "author": "waschl",
+          "text": "Is there any of this ”bacteria converting plastic to fuel/food/neutral stuff“ actually applied anywhere at scale under economically reasonably conditions?"
+        },
+        {
+          "id": 49472639,
+          "author": "zbentley",
+          "text": "Isn’t this the plot of The Andromeda Strain ?"
+        },
+        {
+          "id": 49473800,
+          "author": "talon8635",
+          "text": "Please don’t add the byproduct to my food, put it in the ground to decompose"
+        },
+        {
+          "id": 49471914,
+          "author": "nstents",
+          "text": "It will be interesting to see how much carbon dioxide is also created through this process."
+        },
+        {
+          "id": 49470935,
+          "author": "autoexec",
+          "text": "> The researchers took PET plastic, discarded corn plant stalks and leaves, and other biomass and put it through a proprietary process called oxidative hydrothermal dissolution. Created by SIU Carbondale Geology Professor Ken Anderson, this method uses water and oxygen at high temperatures and pressures to break down tough material into microbe-accessible pieces. Then, those pieces are fed to the programmed yeasts, which transform them into a variety of new food ingredients, including proteins, fats and acids. Finally, the researchers add fiber, starch and sweetener to the mix and extrude it through a 3D printer, forming protein-rich cookies dubbed µBites (pronounced \"microbites\"). [ https://phys.org/news/2026-08-yeasts-pet-plastic-crop-protei... ] It kind of sounds like they made food out of corn plant stalks and leaves and \"other biomass\", added fiber, starch, and sweetener, but then just polluted the product with processed waste plastic as an additive. If this really is just using trash as a filler in actual food that's pretty dystopian. I'm sure companies would happily line up to sell their industrial waste products to food companies as an additive, but I'm not seeing the appeal in this for consumers."
+        }
+      ],
+      "summary_ja": "主な議論点は、プラスチックやバイオマスを酵母で食品添加物に変換する技術の実用性と経済性である。コメントでは「実際に規模で採算が取れる例はあるのか」という疑問が最も多く挙げられ、産業廃棄物を食品に混入することへの抵抗や、プロセスで発生するCO₂量への懸念が同時に示された。賛否は分かれており、廃プラスチックを資源として活用する循環経済への期待と、プラスチック由来添加物を食品に入れるのは dystopian で消費者受容が難しいという批判が対立している。特に注目されたコメントは、記事の手順を引用しながら「トウモロコシの茎葉に繊維・甘味料を加えて栄養強化クッキーを作り、そこに加工プラスチックをフィラーとして混ぜているだけ」と指摘し、これが実質的に廃棄物を食品にかさ増しするだけだと批判的に評価している。",
+      "editor_note": "プラスチックやバイオマスを食品添加物に変換する工場酵母が開発。循環型",
+      "category": "その他"
+    },
+    {
+      "rank": 30,
+      "id": 49468816,
+      "title_en": "Show HN: Voronoi Go",
+      "title_ja": "Show HN: Voronoi Go",
+      "url": "https://voronoigo.com/",
+      "hn_url": "https://news.ycombinator.com/item?id=49468816",
+      "score": 107,
+      "comment_count": 15,
+      "posted_at": "2026-08-27T18:03:37+00:00",
+      "comments": [
+        {
+          "id": 49473690,
+          "author": "nexthash",
+          "text": "Played a few games against the bot on the small board, enjoyed it. Game mechanics are trippy but easy to get used to, and are very natural for for a computerized Go variant. \"Vertex length\" is a new factor to consider when making every move. \"Group view\" is interesting, in Go you have to mentally keep track of your \"chains\" but having them laid out and numbered feels like cheating. A lot of tactics like two point or three point jumps didn't work for me, while wall jumps did. Two suggestions: - Rename the game to just \"Voronoi\". There is enough in here that it feels like more than just an incremental update to Go! - Highlight the latest piece that moved like on OGS, otherwise it is easy to lose track."
+        },
+        {
+          "id": 49474711,
+          "author": "theemathas",
+          "text": "Why are the boards squares and not circles?"
+        },
+        {
+          "id": 49471619,
+          "author": "jazzprogramming",
+          "text": "Love it, such a novel idea! Honestly, as a long time Voronoi enthusiast, the idea of turning a regular grid into a Voronoi diagram is kind of obvious and I admit that this is definitely something that I would like to have come up with myself, but the idea never occurred to me. The implementation is obviously pretty complex though. And I remember trying to get into regular Go several times along the years and I've always found it very difficult to grasp it (the computer thoroughly beat me every single time!) and I lost the motivation. I read your tutorial pages, but I learn best by doing so I guess only playing for some significant amount of time will actually help me have a more than skin deep understanding of the game. I do wish there was a Windows desktop version as the web version is eating 90% of my laptop's CPU when playing against the bot."
+        },
+        {
+          "id": 49470423,
+          "author": "pmontra",
+          "text": "Very well done. I had to enable desktop mode on a phone because the help dialog hides the board and the Next button is some meter below the bottom edge of the screen. That's the only issue and the site warns that it's best played on a desktop. Everything else is very well done and it's really a game of go, with eyes, invasions, connections, cuts."
+        }
+      ],
+      "summary_ja": "・主な議論点: Voronoi Goのゲーム性（vertex lengthやgroup viewなど新要素）、遊びやすさと学習曲線、UI/UX（モバイル表示の問題、デスクトップ推奨、ウェブ版の高CPU使用率）、ボードの形状が正方形であることへの疑問、そして名前を単純に「Voronoi」に変更すべきかという提案。  \n・賛否両論: 多くのコメントが斬新さと楽しさを肯定し、従来の囲碁に不慣れでも入り込みやすいと評価している。一方、ウェブ版のCPU消費が大きいこと、モバイルでのレイアウト崩れ、ボードが円でないことへの質問、そして名前変更の是非について意見が分かれている。  \n・注目コメント: 一ユーザーは「vertex length」や「group view」が戦術に新たな次元をもたらし、従来の二点・三点跳びが通用しないことを指摘し、最新手をハイライトする機能と名前を「Voronoi」だけにすることを提案した点が特に洞察に富んでいる。",
+      "editor_note": "",
+      "category": "OSS"
+    }
+  ]
+}
