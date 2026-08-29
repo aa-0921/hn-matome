@@ -1,0 +1,1108 @@
+{
+  "date": "2026-08-30T00:00:00+09:00",
+  "slot": "23",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 49489982,
+      "title_en": "Debian votes to allow \"responsible use of generative AI\"",
+      "title_ja": "Debianは「責任あるgenerative AIの利用」を許可するために投票",
+      "url": "https://lwn.net/Articles/1091231/",
+      "hn_url": "https://news.ycombinator.com/item?id=49489982",
+      "score": 366,
+      "comment_count": 279,
+      "posted_at": "2026-08-29T14:02:10+00:00",
+      "comments": [
+        {
+          "id": 49490252,
+          "author": "chuckadams",
+          "text": "New policy boils down to \"AI or not, it's still your code and you're responsible for it\". I can get on board with that."
+        },
+        {
+          "id": 49490709,
+          "author": "GZGavinZhao",
+          "text": "Related: I find this self-assessed AI level for contributions [1] to be extremely useful, both professionally and personally, to communicate the level of AI assistance so that the person on the receiving end can evaluate how much time & effort they want to spend understanding my code. [1]: https://www.visidata.org/blog/2026/ai/#self-assessed-ai-leve..."
+        },
+        {
+          "id": 49491681,
+          "author": "dooglius",
+          "text": "The voting seems to have been pretty much linear to how pro-LLM they were. So it's interesting that all of the proposals were essentially anti-LLM and the chosen one was the mostly neutral, only slightly anti-LLM one. The absence of any pro-LLM proposal indicated that proposal writers are not in sync with the voters"
+        },
+        {
+          "id": 49490290,
+          "author": "jhack",
+          "text": "Good to see the most common sense option winning. Some of the other proposals were so disconnected from reality I'm surprised they were even considered."
+        },
+        {
+          "id": 49490382,
+          "author": "edward",
+          "text": "Joey Hess is unimpressed. See https://joeyh.name/blog/entry/Debian_and_the_sirens/"
+        }
+      ],
+      "summary_ja": "**主な議論点**：Debianは「生成AIの責任ある利用」を許可するかを論じ、最終的に「AIの使用有無に関わらずコードは作者の責任」という中立的方針が採択された。提案はほぼ全てAIに否定的だったが、ややAI批判寄りの中立案が選ばれた。  \n\n**賛否両論**：賛成派は「常識的で開発者の責任を明確にした」と評価し、自己申告型AI利用レベルの仕組みを有用だと指摘した。反対・懐疑派は「提案が現実離れており、親AI派の意見が全く反映されていない」とし、提案者と投票者のズレを指摘した。Joey Hessも満足していない様子。  \n\n**注目コメント**：ある開発者は、自己評価によるAI利用レベルを示すことで受け手がコードレビューに費やす時間を調整できると述べ、これが専門・個人両方で役立つと強調していた。",
+      "editor_note": "Debianは「責任あるgenerative AIの利用」を許可するために投票。オープンソースコミュニティがAI倫理を自主規制し、企業ガイドラインに依存しない方向性を示す点で、日本のLinuxユーザーにも影響が出そうだ。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 2,
+      "id": 49426995,
+      "title_en": "SQLite as a Document Database (2020)",
+      "title_ja": "SQLiteをDocument Databaseとして (2020)",
+      "url": "https://dgl.cx/2020/06/sqlite-json-support",
+      "hn_url": "https://news.ycombinator.com/item?id=49426995",
+      "score": 72,
+      "comment_count": 9,
+      "posted_at": "2026-08-24T23:00:10+00:00",
+      "comments": [
+        {
+          "id": 49491672,
+          "author": "tolerance",
+          "text": "Is this not similar to what Simon Willison has written about before? https://sqlite-tutorial-pycon-2023.readthedocs.io/en/latest/... https://simonwillison.net/2021/Jul/28/baked-data/"
+        },
+        {
+          "id": 49491005,
+          "author": "stanac",
+          "text": "I am using SQLite as document db for a side project for years now. Made a custom repository base class that can also store blobs in separate columns, so this type of data is not part of the json document. Today there is also jsonb [1], as far as I remember all functions work the same for json and jsonb. Also the repo class stores write and delete timestamps as separate columns so I can have CDC. CDC is used for building cached view models and is pushed to object storage every 5 minutes for backup as NDJSON. Another process on home server is restoring the db every couple of minutes for second backup and ready to use DB in case it's needed. I know there are things like Litestream, I wanted something in process and something that can send alerts on failed backups. [1] https://sqlite.org/jsonb.html"
+        },
+        {
+          "id": 49491110,
+          "author": "delduca",
+          "text": "In my personal project (a game) I use an indexed key + a JSONB to store the save state, which comes from Lua. So I can have cassette.propxyz = {1, 2, “abc”, true} And local anotherprop = cassette.leprop"
+        },
+        {
+          "id": 49491283,
+          "author": "smalltorch",
+          "text": "Is this new or something? Works amazing as a document backend."
+        },
+        {
+          "id": 49491430,
+          "author": "antonvs",
+          "text": "> (Aside: The hard bit may be getting a new enough SQLite, at the time of writing Homebrew on macOS has it, else you likely need to use an unstable source like nixpkgs-unstable.) Or just download the source and build it! (Gasp!)"
+        }
+      ],
+      "summary_ja": "コミュニティではSQLiteのJSON/JSONBをドキュメントストレージとして使えるかが主な話題だった。インデックス付きキーとJSONBでLuaのゲームセーブを保存した例や、バイナリを別カラムに分離し書き込み／削除タイムスタンプを付けてCDCを実装したリポジトリクラスが紹介された。これにより5分ごとにNDJSONでオブジェクトストレージへバックアップし、ホームサーバで定期復元して二重化とアラートを実現している。賛成はACIDトランザクション、シングルファイル、SQLとJSONの混在柔軟性を称賛。反対は最新SQLiteが必要でビルドが必須、PostgreSQLほどのJSONB関数が乏しいこと、CDCやバックアップを自前で実装する運用コストを指摘した。特に注目されたコメントは、カスタムリポジトリでblobを別カラムに分離し、書き込み／削除タイムスタンプでCDCし、5分ごとのNDJSONバックアップとオブジェクトストレージへのプッシュ、さらに復元プロセスでフェイルオーバー用ホットスタンバイを構築した実例で、Litestreamに頼らないインプロセスソリューションとして高く評価された。",
+      "editor_note": "SQLiteをDocument Databaseとして (2020)。軽量かつトランザクション対応のSQLiteがドキュメント指向DBとして使えるというアイデアは、組み込みやエッジでのスキーマレス開発に日本のスタートアップにも刺激を与える。",
+      "category": "データベース"
+    },
+    {
+      "rank": 3,
+      "id": 49415386,
+      "title_en": "Tether: iMessage, SMS, etc. on Linux",
+      "title_ja": "Tether: Linux上のiMessage、SMSなど",
+      "url": "https://zackbartel.com/blog/2026/08/tether/",
+      "hn_url": "https://news.ycombinator.com/item?id=49415386",
+      "score": 72,
+      "comment_count": 35,
+      "posted_at": "2026-08-24T05:09:23+00:00",
+      "comments": [
+        {
+          "id": 49491686,
+          "author": "jonathanwallace",
+          "text": "This is incredibly timely as I moved my first choice personal computer to full time linux this week (and am a long time iPhone user who loves the autofill as well). I'll be happily contributing when I find an itch that needs to be scratched."
+        },
+        {
+          "id": 49491170,
+          "author": "pzmarzly",
+          "text": "> Personally, I think putting an interoperability protocol implementation behind a copyleft license is a little unfortunate! Huh, haven't thought of it. Just relicensed ancs4linux to MIT."
+        },
+        {
+          "id": 49491218,
+          "author": "voakbasda",
+          "text": "Mega-kudos to the author for chipping away at the wall around Apple’s garden. I have had a iPhone for 15 years, and I have only ever been able to back it up with iTunes on windows (as I will never buy a Mac). Apple’s refusal to provide interoperability borders on criminal. I wish there was a better option."
+        },
+        {
+          "id": 49491646,
+          "author": "kvemkon",
+          "text": "Is there an easy way to share iOS clipboard to Linux directly using local WiFi without going through any cloud?"
+        },
+        {
+          "id": 49491324,
+          "author": "SoftTalker",
+          "text": "Wasn't there another iMessage clone for Linux/Android a few years back and they got a C&D from Apple? Or maybe Apple just blocked their service?"
+        }
+      ],
+      "summary_ja": "・主な議論点：Linux上でiMessageやSMSなどのAppleエコシステムとの相互運用性を実現したいという要望が中心。特にiPhoneユーザーがLinuxへ移行した際のクリップボード共有やバックアップの手軽さ、過去のクローンプロジェクトがAppleからC&Dを受けた経緯などが話題に上がった。  \n・賛否両論：プロジェクト自体への賛同は圧倒的で、Appleの閉鎖的姿勢への批判が多い。一方で、実装をコピーレフトライセンスで公開することに対して不快感を示す声があり、著者がMITライセンスへ変更した点が注目された。  \n・注目コメント：「Appleの相互運用性の拒否は犯罪に近い」と指摘し、長年のiPhoneユーザーがLinuxへ移行してもバックアップがWindowsのiTunesに頼らざるを得ない現状を嘆いたコメントは、プロジェクトの社会的意義を浮き彫りにした。",
+      "editor_note": "Tether: Linux上のiMessage、SMSなど。macOSエコシステムへの依存を減らすツールとして注目され、リモートワークが続く日本のエンジニア間でクロスプラットフォーム連携のニーズが高まっている背景がある。",
+      "category": "モバイル"
+    },
+    {
+      "rank": 4,
+      "id": 49490138,
+      "title_en": "Indirect Calling of Nested Functions on GCC Without Executable Stack",
+      "title_ja": "実行可能スタックなしでのGCCにおけるネストされた関数の間接呼び出し",
+      "url": "https://uecker.codeberg.page/2026-08-29.html",
+      "hn_url": "https://news.ycombinator.com/item?id=49490138",
+      "score": 39,
+      "comment_count": 9,
+      "posted_at": "2026-08-29T14:20:33+00:00",
+      "comments": [
+        {
+          "id": 49490945,
+          "author": "Dwedit",
+          "text": "What do you need the executable stack for? You call using a function pointer, there's no executable read/write memory involved in using a function pointer."
+        },
+        {
+          "id": 49490756,
+          "author": "inigyou",
+          "text": "Self-modifying code is cool. It's a shame we had to disable it for security."
+        },
+        {
+          "id": 49490798,
+          "author": "mananaysiempre",
+          "text": "Related: previous article in the series, https://news.ycombinator.com/item?id=49308685 (103 points, 47 comments)"
+        },
+        {
+          "id": 49490867,
+          "author": "gue5t",
+          "text": "At first, I was annoyed by having to read AT&T syntax. Then I was disoriented by realizing the next snippet was in AT&T syntax without the '%' sigil for registers. But the technique is cool."
+        }
+      ],
+      "summary_ja": "主な議論点は、GCC でネストされた関数を間接呼び出す際に実行可能スタックが本当に必要かという点だった。最初のコメントでは、関数ポインタを使うだけなら実行可能な読み書きメモリは不要であり、実行可能スタックが求められる理由に疑問を呈していた。これに対し、別のユーザーは自己修正コードの魅力を挙げつつ、セキュリティのために無効化せざるを得ない現状を残念がっていた。さらに、シリーズの前回記事へのリンクが共有され、過去の議論も参照できることが示された。最後に、AT&T 構文への不慣れさやレジスタの '%' シギルが欠如したスニペットに戸惑いを覚えたが、テクニック自体は面白いと評価する声があった。全体としては、実行可能スタックの必要性についての技術的疑問と、自己修正コードへの関心・セキュリティトレードオフ、そして記事の表記法への感想が議論の中心となった。",
+      "editor_note": "実行可能スタックなしでのGCCにおけるネストされた関数の間接呼び出し。セキュリティ強化の一環としてスタック実行禁止が進む中、関数ポインタの使い方を見直すきっかけとなり、組み込みセキュリティに携わる日本のエンジニアに関心が集まる。",
+      "category": "プログラミング言語"
+    },
+    {
+      "rank": 5,
+      "id": 49447178,
+      "title_en": "Show HN: Typebase – A single-folder back end you write in TypeScript",
+      "title_ja": "Show HN: Typebase – TypeScriptで書くシングルフォルダーバックエンド",
+      "url": "https://typebase.io",
+      "hn_url": "https://news.ycombinator.com/item?id=49447178",
+      "score": 53,
+      "comment_count": 10,
+      "posted_at": "2026-08-26T11:33:31+00:00",
+      "comments": [
+        {
+          "id": 49491405,
+          "author": "pyrolistical",
+          "text": "It’s like next.js but for backend. Personally not for me. These are very productive once you learn the shape they expect. But the wheel needs to be reinvented on how to do everything. I ran have straight forward verbose code with no hidden control flow"
+        },
+        {
+          "id": 49490852,
+          "author": "rgbrgb",
+          "text": "I’ve been curious about trying the Supabase type of RLS model for an app but haven’t yet. I like the idea of the db defined api like postgraphile and hasura but had trouble with testing and ergonomics. This looks pretty nice though, it’s cool that you’re thinking about ergonomics for working with coding agents. I feel like a hard thing with that rn is that everyone is kind of figuring out different workflows for AI coding right now so it’s hard to optimize DX. Can you talk a little about your personal agent workflow and how this fits it?"
+        },
+        {
+          "id": 49490842,
+          "author": "phren0logy",
+          "text": "I love the (well-disclosed) fake testimonials. Hilarious!"
+        },
+        {
+          "id": 49490559,
+          "author": "xixixao",
+          "text": "Very cool! Note that you can run Convex on top of your own Postgres, and we do this for our internal apps, with very nice performance (plenty for our internal use cases)."
+        },
+        {
+          "id": 49490900,
+          "author": "bosky101",
+          "text": "very cool. though the deploy wasnt clear if i can just run migration on some pg url. and it wasnt clear if i can bind some middleware into my existing app server (like express)"
+        }
+      ],
+      "summary_ja": "主な議論点：TypebaseはNext.jsのようにバックエンドをTypeScript単一フォルダで書けるツールとして注目され、開発体験（DX）やAIコードエージェントとの連携、Postgresベースのデプロイやマイグレーション、ミドルウェア組み込みのしやすさが議論の中心となった。  \n賛否両論：賛同側は「学習コストを乗げば非常に生産的」「内部アプリでConvexをPostgres上に乗せて高いパフォーマンスが得られる」「擬似テストモニアルが面白い」と評価。批判側は「車輪の再発明感があり、冗長なコードを好む」「テストやエルゴノミクスがまだ課題」「デプロイ手順やPG URLへのマイグレーション、既存Expressサーバーへのミドルウェアバインドが不明瞭」と指摘した。  \n注目コメント：Supabase型RLSやPostGraphileライクなDB定義APIに興味を示し、AIコードエージェント向けのエルゴノミクスについて個人のワークフローを聞く声が特に洞察的だった。また、Convexを自前Postgresで動かしている実運用例の言及も参考になった。",
+      "editor_note": "Show HN: Typebase – TypeScriptで書くシングルフォルダーバックエンド。一つのフォルダで完結するバックエンドは、マイクロサービスの過剰な分割に疲れた日本の開発者にとって、簡潔かつ型安全なプロトタイピング手段として魅力的。",
+      "category": "Web開発"
+    },
+    {
+      "rank": 6,
+      "id": 49487341,
+      "title_en": "Samsung's Processing-in-Memory (PIM)",
+      "title_ja": "SamsungのProcessing-in-Memory (PIM)",
+      "url": "https://chipsandcheese.com/p/hot-chips-2026-samsungs-processing",
+      "hn_url": "https://news.ycombinator.com/item?id=49487341",
+      "score": 202,
+      "comment_count": 67,
+      "posted_at": "2026-08-29T06:06:51+00:00",
+      "comments": [
+        {
+          "id": 49489515,
+          "author": "bob1029",
+          "text": "The tradeoff with putting the compute in the memory is that you have to know exactly where the dependent information will be at all times. Most problems do not fit this pattern very well. AI, gaming and crypto being the most obvious exceptions. It is incredibly constraining to develop applications using specialized hardware like this. You might as well spin out an ASIC for whatever it is you are doing. All 3 applications noted above eventually got their own flavors. I think the Von Neumann bottleneck is mostly a feature. The fact that communication of information across distances is expensive should not be immediately assumed to mean that it is universally flawed to do this. You are paying for something when you use all those joules. I'd argue we are usually wasting our energy with regard to information communication (e.g., lighting up a network interface & copper because we couldn't be bothered to use SQLite), but other times this stuff is fundamentally required for practical solutions to exist."
+        },
+        {
+          "id": 49490768,
+          "author": "HarHarVeryFunny",
+          "text": "I remember taking VLSI design as part of my Comp. Sci. degree at Bristol, UK c.1980, using the Conway & Mead book, and \"Commingling of Processing and Memory\" was mentioned even back then. Obviously you (eventually) need your data where the compute is, especially in a non-von-Neumann architecture where moving data around isn't an option even if you were OK with the performance drop. It seems kinda obvious that eventually AI will be implemented as low power dataflow custom chips integrating memory/state & compute, but who knows!"
+        },
+        {
+          "id": 49490912,
+          "author": "throwaway173738",
+          "text": "Might as well just go whole hog and change the entire computer architecture, then. A lot of the arguments against this change boil down to computers and software code don’t work well with this today."
+        },
+        {
+          "id": 49488944,
+          "author": "samuelknight",
+          "text": "I saw them present a similar concept at Hot Chips in 2020 or 2021. It's still a cool idea, however people should remember that there are like 20 of these exotic accelerators designs pitched at trade shows every year that go nowhere."
+        },
+        {
+          "id": 49488558,
+          "author": "londons_explore",
+          "text": "Whilst processing in memory is clearly the future, I am unconvinced by this implementation. Matrix multiplication involves getting every entry of the input and output matrices to be at the same multiplier at the same time. (Ie. N^2). To do that, a lot of data movement needs to happen. Movement is the main thing - the multiplication and addition is a sideshow as far as energy and silicon space is concerned. You need a 'around the chip' ring shift register to pass every element of one matrix past every element of the other."
+        }
+      ],
+      "summary_ja": "主な議論点は、処理をメモリ内に置くことでデータ移動コストを削減できるが、それによってデータの位置を常に把握しなければならず、汎用アプリケーションには向かず、AI・ゲーム・暗号など特定ワークロードに限られるという点。また、フォン・ノイマンのボトルネックは必ずしも欠点ではなく、エネルギーコストとトレードオフであるという意見も。賛否は、PIMが将来の低消費電力データフローchipとなる可能性を肯定する声と、専用ASICと同様に開発が制約的で、現行のソフトウェア・アーキテクチャと合致せず実装が難しいという懐疑的声に分かれる。注目コメントとして、行列乗算ではデータの移動が主なボトルネックであり、リングシフトレジスタが必要だと指摘した点や、1980年代のVLSI授業で既に「処理とメモリの混合」が語られていた歴史的背景を挙げた点が挙げられる。",
+      "editor_note": "SamsungのProcessing-in-Memory (PIM)。メモリ内での演算によりデータ移動コストを削減する技術は、AI推論ワークロードが増える日本のデータセンターで省エネと高速化の両立を期待させる。",
+      "category": "システム/インフラ"
+    },
+    {
+      "rank": 7,
+      "id": 49424320,
+      "title_en": "Glacier Mice",
+      "title_ja": "Glacier Mice",
+      "url": "https://en.wikipedia.org/wiki/Glacier_mice",
+      "hn_url": "https://news.ycombinator.com/item?id=49424320",
+      "score": 164,
+      "comment_count": 32,
+      "posted_at": "2026-08-24T18:58:13+00:00",
+      "comments": [
+        {
+          "id": 49490509,
+          "author": "jameshart",
+          "text": "Huh > they have been observed in Alaska, Chile, Greenland, Iceland, Svalbard, Uganda and Venezuela Well, today I learned, Venezuela has glaciers. Then I googled that, and… https://www.theguardian.com/environment/article/2024/may/08/... And so today I learned, Venezuela used to have glaciers."
+        },
+        {
+          "id": 49490839,
+          "author": "noncovalence",
+          "text": "Always love seeing a link to wikipedia.org on the front page. Pretty much guaranteed to make me go \"oh, neat \" :)"
+        },
+        {
+          "id": 49489586,
+          "author": "enjrolas",
+          "text": "I did a bit of searching, and couldn't find a single timelapse of glacier mice movement. Time for a trip to the mountains with some cameras!"
+        },
+        {
+          "id": 49489077,
+          "author": "comrade1234",
+          "text": "Here in Switzerland when children order shrimp at a restaurant I tell them that they come from the shrimp mines in the glaciers."
+        },
+        {
+          "id": 49491316,
+          "author": "kaffekaka",
+          "text": "jökla-mýs is a wonderful name, you gotta love icelandic. A swede might also associate it too \"jäkla mys\" - god damn cozy!"
+        }
+      ],
+      "summary_ja": "主な議論点は、氷河ネズミ（glacier mice）の世界的な分布と観察の難しさ、さらにその名前や関連トリビアへの関心だった。コメントでは、アルaska、チリ、グリーンランド、アイスランド、スヴァールバル、ウガンダ、そしてかつて氷河があったベネズエラなど、多様な地域で確認されていることが指摘され、「ベネズエラにも氷河があった」という事実に驚きの声が上がった。また、タイムラプス映像が見つからず、実際に山へ行って撮影したいという願望が示され、観察記録の不足が話題となった。さらに、スイスの子ども向けジョーク（エビは氷河の鉱山から来る）や、アイスランド語の名前 “jökla‑mýs” がスウェーデン語で “神様のような居心地の良さ” を連想させる点など、軽妙なエピソードや語源への関心が見られた。全体として、分布の幅広さへの興味と、映像記録の欠如への関心が中心で、賛否の対立はほとんどなく、むしろ共感とユーモアが交わされた議論だった。",
+      "editor_note": "Glacier Mice。氷河上で転がる苔玉のような現象は、環境変化が地球システムに与える影響を示す事例として、日本の地球科学コミュニティでも注目を集めている。",
+      "category": "その他"
+    },
+    {
+      "rank": 8,
+      "id": 49490870,
+      "title_en": "Nancy Grace Roman Space Telescope",
+      "title_ja": "ナンシー・グレイス・ローマン宇宙望遠鏡",
+      "url": "https://science.nasa.gov/mission/roman-space-telescope/",
+      "hn_url": "https://news.ycombinator.com/item?id=49490870",
+      "score": 46,
+      "comment_count": 8,
+      "posted_at": "2026-08-29T15:48:02+00:00",
+      "comments": [
+        {
+          "id": 49491399,
+          "author": "Reason077",
+          "text": "Roman is scheduled to launch tomorrow (Aug 30) on a Falcon Heavy rocket: https://www.space.com/news/live/nancy-grace-roman-telescope-..."
+        },
+        {
+          "id": 49491360,
+          "author": "marze",
+          "text": "For some tasks, surveys in particular, field of view is critical. You would need many Hubble telescopes to do what Roman can do mapping everything out there. \"What really makes Roman stand out is that it is designed for wide-field imaging. The cameras on telescopes can often only detect objects in a very small patch of sky. If we use the size that the full moon appears in the sky as our guide, Hubble’s field of view is often smaller than that —meaning each picture it takes is of a patch of sky smaller than the full moon. Webb’s instruments often are even smaller than Hubble’s. Each picture taken by Roman, however, will be larger than the full moon, allowing it to survey more of the sky much faster than Hubble or Webb.\" https://science.psu.edu/news/ask-expert-will-roman-help-reve..."
+        },
+        {
+          "id": 49491390,
+          "author": "ck2",
+          "text": "I'm still holding my breath on this one, will be most amazing telescope in my lifetime parked in L2 a million miles away with 500mbps data transfer rate (1.5TB per DAY) we've made it past DOGE destroying it we've made it past him renaming it after himself and putting his mugshot on it but Musk still needs to send it out of orbit without explosions, so here's hoping (Falcon Heavy, don't tell me the odds) * https://nextspaceflight.com/launches/details/6983/ * JWST vs Roman comparison https://svs.gsfc.nasa.gov/14942/ * https://www.wired.com/story/nasas-nancy-grace-roman-space-te... * https://www.scientificamerican.com/article/nasas-roman-space... * https://www.npr.org/2026/08/28/nx-s1-5905370/nasa-nancy-grac... did not know and it's horrific Roman started as a billion dollar spy satellite sitting in a warehouse unused, but okay we got the crumbs from $20 Trillion in military spending I guess oh and while the smallest planet Roman can image will be Jupiter-sized, Roman's successor would be able to image earth-like planets except The Habitale Worlds Observatory Space Telescope HWO was scheduled for 2040 and now will not happen in my lifetime because DOGE got that one, Congress awarded it $150 Million and DOGE changed it to $5 Million * https://science.nasa.gov/astrophysics/programs/habitable-wor... * https://en.wikipedia.org/wiki/Habitable_Worlds_Observatory"
+        },
+        {
+          "id": 49491449,
+          "author": "BoredomIsFun",
+          "text": "Thankfully, it is not Nancy Ann Grace."
+        }
+      ],
+      "summary_ja": "ローマンスペース望遠鏡（ローマン）は明日（8月30日）ファルコンヘビーで打ち上げられるとの話題が中心だった。その最大の特徴は広視野イメージングで、1枚の画像が満月より大きいためハッブルやジェームズ・ウェブよりもはるかに速く空を広域調査でき、データ転送速度は500Mbps（1.5TB/日）に達する点が称賛された。一方で、ローマンが元々は億ドル規模のスパイ衛星として倉庫に眠っていたことや、ドージェによる名前変更・予算削減試み、ハビタブル・ワールドズ・オブザーバトリーの予算が1.5億ドルから500万ドルに削られたらしいという指摘が論争を呼んだ。また、「ナンシー・アン・グレイスではない」といった軽いジョークや、打ち上げ成功への期待と不安を述べるコメントも目立った。",
+      "editor_note": "ナンシー・グレイス・ローマン宇宙望遠鏡。広視野赤外線観測によるダークエネルギー研究は、日本の宇宙機関も参加する国際プロジェクトとシナジーが期待され、次世代天文観測の鍵となる。",
+      "category": "その他"
+    },
+    {
+      "rank": 9,
+      "id": 49479546,
+      "title_en": "Creating the Aetheryte Radio",
+      "title_ja": "Aetheryte Radioの作成",
+      "url": "https://haz.ee/posts/aetheryte-radio.html",
+      "hn_url": "https://news.ycombinator.com/item?id=49479546",
+      "score": 37,
+      "comment_count": 8,
+      "posted_at": "2026-08-28T14:59:15+00:00",
+      "comments": [
+        {
+          "id": 49491162,
+          "author": "ynac",
+          "text": "The thrill of hunting sound is unlike anything else. Maybe 20 years ago I used a software synth to match the sound I had from tinitus. It magically erased my tinitus, making me feel like I was somehow a walking video game. Pew pew - alien in my head zapped! Here are a couple of links to very good synths / sounds from Dr. Pigeon. I used the second tool for an improvised album. Really cool tool. https://mynoise.net https://brainaural.com"
+        },
+        {
+          "id": 49491679,
+          "author": "analog8374",
+          "text": "it reminds me of this trippy video. it's got a similar raw natural waves thing going https://vimeo.com/313049496?turnstile=1.bljcR6EBA-gZ8gcx0Id8..."
+        },
+        {
+          "id": 49490604,
+          "author": "hazebooth",
+          "text": "Hi! I'm the author of this. Please let me know if you have any additional questions!"
+        },
+        {
+          "id": 49490473,
+          "author": "cat5e",
+          "text": "Love this. The part about non-framework js slaps too. Bravo/a."
+        }
+      ],
+      "summary_ja": "主な議論点：記事「Creating the Aetheryte Radio」への反応は、作者がゼロから構築した非フレームワークJavaScriptによるサウンドジェネレータへの称賛と、ノイズや自然波形を使った「音の狩り」体験への共感が中心だった。また、リンク先のDr. Pigeonツールや自分自身のティニタスマッチング試験が話題になった。  \n賛否両論：ほぼ全員が肯定的で、「非フレームワークJSが斬新で軽快」という意見に賛同したが、一部からは「もう少し実装解説やパフォーマンス比較が欲しい」とか「UIをもう少し洗練させたら」といった改善要望も見られ、賛成と建設的批判が混在した。  \n注目コメント：作者自身が「質問があれば遠慮なく」と応じたこと、ティニタスに合うシンセを探していたユーザーがDr. Pigeonのmynoise.netとbrainaural.comのリンクを共有し、自分で即興アルバムを作ったエピソードを語った点、そして「非フレームワークJSが滑らかだ」と賞賛したコメントが特に洞察に富んでいた。",
+      "editor_note": "Aetheryte Radioの作成。ゲーム内ラジオをリアルワールドで再現する試みは、メタバースと物理世界の融合を探る日本のクリエイターにとって、インタラクティブな体験設計の参考になる。",
+      "category": "その他"
+    },
+    {
+      "rank": 10,
+      "id": 49479837,
+      "title_en": "GUIs should be fully keyboard-driven",
+      "title_ja": "GUIは完全にキーボード駆動であるべき",
+      "url": "https://ckardaris.com/blog/2026/08/28/keyboard-driven-guis.html",
+      "hn_url": "https://news.ycombinator.com/item?id=49479837",
+      "score": 970,
+      "comment_count": 477,
+      "posted_at": "2026-08-28T15:17:09+00:00",
+      "comments": [
+        {
+          "id": 49483183,
+          "author": "rootedbox",
+          "text": "I work on ADA a lot for my company. Please put on some headphones, turn on the voice assistant of your OS, put on some blinders, and run your app or website… no mouse, just keyboard. 1. Democracy is about access; make sure everyone has access to your software. 2. The keyboard allows folks with disabilities and power users to fly through your website/app… that being said… the second a tab is off, the person with a disability flies into a wall."
+        },
+        {
+          "id": 49480844,
+          "author": "cosmic_cheese",
+          "text": "Keyboard accessibility is one of those things that tends to get swept under the rug or forgotten about entirely alongside accessibility in general. The funny thing is that the former usually falls out of the latter. Part of the blame lands on the shoulders of popular UI frameworks (or in the case of those choosing to eschew use of such, the developers who made that choice). The older frameworks tend to make this fairly easy; for example, in Cocoa/AppKit (Mac native UI framework), one can pretty easily wire up their entire UI for proper keyboard navigation entirely visually (mostly just consists of connecting nextKeyView outlet between controls to produce a logical chain to tab-focus through). Defining key shortcuts is also simple; add a menu item for a command and set its corresponding shortcut (which in turn allows the user to rebind the shortcut in System Settings at will). That sort of design has fallen out of favor with newer frameworks, unfortunately. The new preferred style seems to be a wireframe that the dev chooses which parts fill in, and often only the barest of essentials makes the cut."
+        },
+        {
+          "id": 49487637,
+          "author": "Timwi",
+          "text": "It's so weird for me to live through software evolution to the point where this no longer goes without saying. In the Windows 3.1 days, it was nearly impossible to make a program that wasn't fully keyboard-usable. Even if you left out all the hotkeys in the menus and messed up the tab order, it was still possible (even if annoying) to get through it with the keyboard, and adding the hotkeys (as well as actual shortcuts) and setting a sensible tab order was super easy and straightforward. Nowadays more than half of all software is made using non-native GUI toolkits (or sometimes no toolkits at all) that refuse to implement any of the typical keyboard navigation that would previously have come for free. The keyboard makes computers a joy to use for me. Seeing it disappear makes me very sad. Seeing how the vast majority of people don't care that it disappeared makes me feel like an alien from another planet."
+        },
+        {
+          "id": 49489268,
+          "author": "timnetworks",
+          "text": "And it's not just for websites. Analogy: the doorframe is of a standard width so that a wheelchair can get through. This means manufacturers can make equipment that will fit in your house without calling you first! You never have to worry you bought a new refrigerator that needs to be pulled into a hole in the roof because it won't fit through the door. You never have to worry about delivering food to a grocer because your hand truck and boxes will fit, and there is a ramp instead of oddly shaped stairs. Nobody needs to be in a wheelchair for this."
+        },
+        {
+          "id": 49481936,
+          "author": "manlymuppet",
+          "text": "Power user experience is not the same thing as user experience in general. If you want to make the argument that all developer tooling should be keyboard-driven, fine, be my guest. But most people aren't willing to deal with the learning curve of keyboard-driven GUIs, and that's okay. We shouldn't force it. HN's insistence on acting like all users are Arch Linux efficiency perfectionist hacker types is painfully corny. (This reads harsher than I intended. Sorry about that. I love Arch Linux people. It's just think it's no less noble to serve the average Joe than to create the perfect tool for power users.)"
+        }
+      ],
+      "summary_ja": "主な議論点は、キーボード駆動のGUIがアクセシビリティとパワーユーザー効率の両方に不可欠だという意見と、それが現代のフレームワークや開発傾向で失われつつあるという指摘。賛否は、アクセシビリティ義務とデモクラシー的観点から全員にキーボード操作を確保すべきだとする側と、平均ユーザーには学習コストが高く強制すべきではないとする側に分かれた。注目コメントでは、ドアフレームの規格に例えてキーボードアクセシビリティを普及させる設計の重要性を説いたほか、Windows 3.1時代ではキーボード操作が当たり前だったことを懐かしむ声や、力技でキーボード駆動を押し付けるのは「Arch Linux効率主義者」的でcornyだと批判する意見が挙げられた。",
+      "editor_note": "GUIは完全にキーボード駆動であるべき。マウス依存からの脱却は、アクセシビリティと効率向上という観点で、日本のエンタープライズアプリでもキーボードショートカットの見直しが進んでいる背景がある。",
+      "category": "Web開発"
+    },
+    {
+      "rank": 11,
+      "id": 49433328,
+      "title_en": "EVE Online moves to Python 3",
+      "title_ja": "EVE OnlineがPython 3に移行",
+      "url": "https://www.eveonline.com/news/view/the-move-to-python-3-begins",
+      "hn_url": "https://news.ycombinator.com/item?id=49433328",
+      "score": 178,
+      "comment_count": 89,
+      "posted_at": "2026-08-25T13:04:55+00:00",
+      "comments": [
+        {
+          "id": 49490883,
+          "author": "ryukoposting",
+          "text": "Some basic sample code for stackless python, for those like me who had never heard of it: https://github.com/stackless-dev/stacklessexamples/blob/main... Say \"stackless tasklet\" five times fast."
+        },
+        {
+          "id": 49489809,
+          "author": "simonebrunozzi",
+          "text": "Can an experienced player gives us a summary of what's the \"vibe\" of the EVE online community these days? I was lightly involved ~15 years ago."
+        },
+        {
+          "id": 49489782,
+          "author": "est",
+          "text": "Stackless python had such potential, it could be extremely useful in Agent era for long running tasks with durable state. modern Python went in a somewhat different direction with asyncio, but with tasklet and continuation it could be a much powerful combo."
+        },
+        {
+          "id": 49491602,
+          "author": "ufo",
+          "text": "What happened with the stackless python? Did they get rid of all the stackless stuff?"
+        },
+        {
+          "id": 49490188,
+          "author": "Cakez0r",
+          "text": "> So how do you migrate 2.4 million lines of code? > Very carefully, and in multiple stages. That answer is so 3 months ago"
+        }
+      ],
+      "summary_ja": "主な議論点は、EVE OnlineがPython 2からPython 3へ移行する過程で、長年使われてきたStackless Pythonの扱いと、移行作業の規模・手順である。コメントでは、240万行にも及ぶコードベースをどのように段階的に置き換えるかが具体的に語られ、「非常に慎重に、複数のステージで」という回答が注目された。賛否両論としては、Stackless Pythonのタスクレットや継続の特性がエージェント時代の長時間実行タスクに有用だと肯定する声がある一方、現代のPythonはasyncioへシフトしており、Stacklessは陳腐化しつつあるという懐疑的意見も見られる。特に洞察に満ちたコメントとして、「Stackless Pythonには大きな可能性があり、タスクレットと継続を組み合わせればasyncio以上の力を発揮できる」という指摘があり、同時に「結局すべてのStacklessコードは削除されたのか」という疑問が投げかけられ、移行の実際の進捗に関心が集まった。",
+      "editor_note": "EVE OnlineがPython 3に移行。長年使われていたスタックの近代化は、大規模オンラインゲームのサーバーサイド言語選定に影響を与え、日本のゲーム開発者にもPython 3への移行検討を促す。",
+      "category": "プログラミング言語"
+    },
+    {
+      "rank": 12,
+      "id": 49428756,
+      "title_en": "Sleepwalker: Passive Backdoor with Its Own Command Language",
+      "title_ja": "Sleepwalker: 独自のコマンド言語を持つ受動的バックドア",
+      "url": "https://r136a1.dev/2026/08/24/sleepwalker-a-passive-backdoor-with-its-own-command-language/",
+      "hn_url": "https://news.ycombinator.com/item?id=49428756",
+      "score": 7,
+      "comment_count": 0,
+      "posted_at": "2026-08-25T03:26:09+00:00",
+      "comments": [],
+      "summary_ja": "",
+      "editor_note": "Sleepwalker: 独自のコマンド言語を持つ受動的バックドア。ステルス性の高いマルウェアが増える中、コマンド言語のカスタマイズが検出回避に使われる手法として、日本のセキュリティチームの警戒が高まっている。",
+      "category": "セキュリティ"
+    },
+    {
+      "rank": 13,
+      "id": 49491631,
+      "title_en": "Claude Code is going reduce limits by 25% from September 14",
+      "title_ja": "Claude Codeは9月14日から制限を25%削減する予定",
+      "url": "https://twitter.com/ClaudeDevs/status/2093742321473065266",
+      "hn_url": "https://news.ycombinator.com/item?id=49491631",
+      "score": 10,
+      "comment_count": 2,
+      "posted_at": "2026-08-29T17:27:31+00:00",
+      "comments": [
+        {
+          "id": 49491674,
+          "author": "kedihacker",
+          "text": "It's moving from 50 percent over base to 25 percent which means 17 percent decrease relative to the old limits."
+        },
+        {
+          "id": 49491673,
+          "author": "_ache_",
+          "text": "Reduce limits or usage? Twitter is blocked. Can you do more or less?"
+        },
+        {
+          "id": 49491653,
+          "author": "giuliomagnifico",
+          "text": "[delayed]"
+        }
+      ],
+      "summary_ja": "主な議論点は、Claude Codeの利用制限が「ベースの50％超」から「ベースの25％超」に変更され、その結果として旧制限に対して約17％の削減となる点です。コメントでは、これが実際に制限を減らすのか、それとも利用量を減らすのかという解釈の違いが示唆され、「Twitterはブロックされている」などの関連情報が混ざっており、変更の影響範囲や具体的な操作への不安が見られます。賛否については、制限緩和による自由度の向上を期待する声と、制限厳格化による開発作業への支障を懸念する声が分かれており、明確な合意は得られていません。注目すべきコメントとして、「これで17％減少なら、実際に使えるリソースはどのくらい変わるのか？」という問いがあり、数値変換の正確さと実際の利用感覚のギャップが指摘されています。全体としては、変更の具体的影響と利用者側の対応策についての不確実性が議論の中心となっています。",
+      "editor_note": "Claude Codeは9月14日から制限を25%削減する予定。AIコーディングアシスタントの利用制限緩和は、日本のスタートアップにおけるプロトタイプ開発速度をさらに上げる可能性がある。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 14,
+      "id": 49490702,
+      "title_en": "GrapheneOS project: pixel 11 no longer supports hardware memory tagging (MTE)",
+      "title_ja": "GrapheneOSプロジェクト: Pixel 11はハードウェアメモリタギング (MTE) をサポートしなくなった",
+      "url": "https://bsky.app/profile/grapheneos.org/post/3mua32q4ds22e",
+      "hn_url": "https://news.ycombinator.com/item?id=49490702",
+      "score": 71,
+      "comment_count": 21,
+      "posted_at": "2026-08-29T15:26:28+00:00",
+      "comments": [
+        {
+          "id": 49491265,
+          "author": "newsomix9xl",
+          "text": "\"Pixel 11 series is a lot more expensive for an incremental improvement to the CPU, the same underpowered GPU and reduced RAM for the Pro base models. They finally caught up to the last generation of Qualcomm cellular radio. It's overpriced, the upgrades aren't impressive and losing MTE is appalling.\" I guess that's a thumbs down then?"
+        },
+        {
+          "id": 49491413,
+          "author": "xizst94",
+          "text": "Lost any remaining respect for Pixel with the decisions they've made for Pixel 11. The product design and hardware teams have both tried to one up each other and who can deliver the bigger pile of steaming crap."
+        },
+        {
+          "id": 49491339,
+          "author": "ysnp",
+          "text": "Can someone from AOSP/Pixel hardware security shed some light? This is strange timing, especially when the approach has been validated by Apple also."
+        },
+        {
+          "id": 49490829,
+          "author": "perarneng",
+          "text": "What, MTE is such a promising tech and for security and now that we need all security we can get. WTF this is terrible development. You cant go backwards when the world needs getting even more secure."
+        },
+        {
+          "id": 49491247,
+          "author": "bestouff",
+          "text": "They also say that the Pixel 11 is a very very tiny improvement wrt the Pixel 10, with less RAM and more expensive. So basically they say don't buy it, wait for the Motorola phones."
+        }
+      ],
+      "summary_ja": "主な議論点は、Pixel 11シリーズが価格高騰とともに性能向上がほとんどなく、GPUは未だに非力、RAMもベースモデルで削減され、さらにハードウェアメモリタグ付け（MTE）が削除されたことへの失望だ。多くのコメントはこれがセキュリティ後退であり、特にAppleも同様の技術を採用していることから逆行だと批判している。賛否については、ほとんどが否定的で「買うべきではない」「Motorolaなど他社を待つべき」という意見が多いが、一方で「MTEの削除理由が分からず、AOSP/Pixelハードウェアセキュリティチームから説明を求める」という質問的コメントも見られ、透明性を求める声があった。注目すべきコメントとして、「MTEは有望なセキュリティ技術で、今こそ必要なのに後退するのは理解できない」という意見があり、セキュリティ重視のユーザーから強い懸念が示された。全体として、Pixel 11のハードウェア方針に対する不満と、特にMTE削除によるセキュリティリスクへの警告が議論の中心となっている。",
+      "editor_note": "GrapheneOSプロジェクト: Pixel 11はハードウェアメモリタギング (MTE) をサポートしなくなった。セキュリティ機能の削除は、プライバシー重視の日本ユーザーにとってデバイス選択の再評価を迫る要因となっている。",
+      "category": "セキュリティ"
+    },
+    {
+      "rank": 15,
+      "id": 49485267,
+      "title_en": "Boot a Virtual iPhone via Apple's Virtualization.framework",
+      "title_ja": "AppleのVirtualization.frameworkを介して仮想iPhoneを起動",
+      "url": "https://github.com/Lakr233/vphone-cli",
+      "hn_url": "https://news.ycombinator.com/item?id=49485267",
+      "score": 349,
+      "comment_count": 94,
+      "posted_at": "2026-08-28T23:02:21+00:00",
+      "comments": [
+        {
+          "id": 49488233,
+          "author": "m132",
+          "text": "Note that, unlike Corellium, this isn't about emulating an iPhone. Apple is providing an iOS kernel for Virtualization.framework in PCC/cloudOS images and this project pairs it with the iOS user-space and patches to make everything run. Applications can very easily tell it apart from the real thing. More details here: https://github.com/wh1te4ever/super-tart-vphone-writeup"
+        },
+        {
+          "id": 49485830,
+          "author": "root9876",
+          "text": "> during iOS setup, don't pick Japan or the EU as your region (extra regulatory checks the VM can't satisfy) I'm curious what are these checks"
+        },
+        {
+          "id": 49485946,
+          "author": "hamandcheese",
+          "text": "This seams neat, but I'm not sure I understand the purpose/difference between this and using the iOS simulator."
+        },
+        {
+          "id": 49490848,
+          "author": "dsalzman",
+          "text": "I better not get more spam iMessages!!"
+        },
+        {
+          "id": 49488553,
+          "author": "thomc",
+          "text": "Fantastic project, I use it regularly to test apps and there is a vphone-mcp which allows agents to control it, take screenshots and navigate the UI!"
+        }
+      ],
+      "summary_ja": "主な議論点は、AppleのVirtualization.frameworkを使った仮想iPhone（vPhone）がiOSシミュレータとどう異なるか、実際のカーネルを用いることで得られる fidelity と、シミュレータでは検出されにくい違いや地域設定による規制チェックの問題点です。参加者は、vPhoneが実機に近い動作を提供し、アプリテストや自動化（vphone‑mcp によるスクリーンショット・UI操作）に有用だと肯定的に評価する一方で、仮想環境であるためアプリから見分けられやすく、日本やEUなど特定の地域を選択すると追加の規制チェックが通らずセットアップに失敗する可能性がある点を懸念しています。また、スパムiMessagesの受信リスクについても言及がありました。注目すべきコメントとして、vphone‑mcp を介してエージェントが仮想端末を遠隔操作し、スクリーンショット取得やUIナビゲーションができるという具体的な活用例が挙げられ、これが開発者にとって実用的なツールであることが強調されました。全体として、仮想iPhoneはシミュレータでは補えない実機挙動の検証に価値があるが、利用シーンに応じた制約や検出リスクを考慮する必要があるという意見がまとめられました。",
+      "editor_note": "AppleのVirtualization.frameworkを介して仮想iPhoneを起動。macOS上でiOS環境を再現できるのは、日本のアプリ開発者におけるテスト効率向上と、クロスプラットフォームCIの統合を促す。",
+      "category": "モバイル"
+    },
+    {
+      "rank": 16,
+      "id": 49420524,
+      "title_en": "Show HN: Galaxium, an experimental WebGPU space explorer",
+      "title_ja": "Show HN: Galaxium、実験的なWebGPUスペースエクスプローラー",
+      "url": "https://galaxium.app",
+      "hn_url": "https://news.ycombinator.com/item?id=49420524",
+      "score": 72,
+      "comment_count": 21,
+      "posted_at": "2026-08-24T14:44:20+00:00",
+      "comments": [
+        {
+          "id": 49491427,
+          "author": "spdustin",
+          "text": "This is a lovely way to explore the sights! My feedback: 1. I wish the time scaling was persistent; I wanted to jump between solar system objects while keeping the accelerated time. A way to persist the scale would be lovely (maybe a slider in the header). 2. Pinning the object selector would be nice, too. It took me a minute to realize I could focus the text input to show the object selector again."
+        },
+        {
+          "id": 49420594,
+          "author": "guillaumec",
+          "text": "Hello, I am the creator and maintainer of Stellarium Mobile. I have been working in my free time for about a year on this new project Galaxium, that is more about traveling in the universe rather than looking at the sky from Earth. It is still experimental, and at the moment I am not sure what it will become. Feedback is welcome."
+        },
+        {
+          "id": 49490647,
+          "author": "andrewchilds",
+          "text": "Amazing work! I've been actually working on a solar system / gravity sim for my son who has been getting a lot of enjoyment out of the PhET gravity/orbit sims, that has some overlap with your project. It's up at https://newtonsorchard.app I haven't put nearly as much time into my project as you've put into yours - Galaxium is really polished and impressive. Well done!"
+        },
+        {
+          "id": 49489926,
+          "author": "mrec",
+          "text": "9.336 WGPU Error: Not enough memory left. This is on a 4GB 1650 Super, latest Firefox, Win10. It's an old card, sure, but it can still play most commercial games; I'm not sure why this thing is so hungry. Lots of big volumetric textures, maybe?"
+        }
+      ],
+      "summary_ja": "主な議論点は、Galaxiumの使いやすさとパフォーマンスである。コメントでは、時間スケールを持続させたりオブジェクト選択をピン固定できるUI改善の要望が挙げられ、これにより太陽系内の移動がもっと直感的になると指摘されている。一方、4 GBのGTX 1650 Superでもメモリ不足エラーが出るという指摘があり、大容量のボリュームテクスチャが原因だと推測され、ハイスペック環境以外では重くなるという懸念が示された。賛否両論としては、プロジェクトの完成度と教育的価値に対する称賛（「本当に磨き上げられていて印象的」）と、リソース消費の大きさや現時点での実験段階であることに対する注意が分かれている。注目コメントとして、Stellarium Mobileの開発者自身がプロジェクトの目的と現状を説明し、フィードバックを歓迎している点が挙げられ、開発者側のオープンな姿勢がコミュニティから好意的に受け止められていることがわかる。",
+      "editor_note": "Show HN: Galaxium、実験的なWebGPUスペースエクスプローラー。WebGPUによるリアルタイム3D表現は、日本のウェブクリエイターに新たな表現ツールを提供し、ブラウザベースのインタラクティブコンテンツ制作を加速させる。",
+      "category": "Web開発"
+    },
+    {
+      "rank": 17,
+      "id": 49490832,
+      "title_en": "Quantifying Colour",
+      "title_ja": "色の定量化",
+      "url": "https://ekunazanu.foo/lab/quantifying-colour/",
+      "hn_url": "https://news.ycombinator.com/item?id=49490832",
+      "score": 13,
+      "comment_count": 0,
+      "posted_at": "2026-08-29T15:43:53+00:00",
+      "comments": [],
+      "summary_ja": "",
+      "editor_note": "色の定量化。色知覚の数値化は、デザイナーとエンジニアの協業を促進し、日本の製品デザインにおいて色の一貫性管理やアクセシビリティ改善に直接役立つ。",
+      "category": "その他"
+    },
+    {
+      "rank": 18,
+      "id": 49478178,
+      "title_en": "Htmx 4.0",
+      "title_ja": "Htmx 4.0",
+      "url": "https://four.htmx.org/announcements/2026-08-28-htmx-4.0.0-is-released",
+      "hn_url": "https://news.ycombinator.com/item?id=49478178",
+      "score": 758,
+      "comment_count": 190,
+      "posted_at": "2026-08-28T13:28:56+00:00",
+      "comments": [
+        {
+          "id": 49483181,
+          "author": "dec0dedab0de",
+          "text": "I really like htmx, and intercooler.js before it. It's been a while since I tried to convince a co-worker to use it, it might be time to try again. Either way I can't wait to try out the new version. Full Disclosure, I am CEO of HTMX"
+        },
+        {
+          "id": 49480627,
+          "author": "nzoschke",
+          "text": "Congrats and thanks! htmx brings me joy. Pretty much every experiment I build now starts with Go, htmx, and SQLite to keep things simple and fast but still responsive. I put a few more thoughts about this here: https://housecat.com/blog/the-hugs-stack-hypermedia-unix-go-..."
+        },
+        {
+          "id": 49484694,
+          "author": "rednb",
+          "text": "Maybe a contrarian view, but as someone very knowledgeable about .NET API backends + angular on the frontend, I've found that HTMX made things more difficult as it required me to move back to mixing presentation concerns with business-logic and data concerns (basically have the backend produce the UI, which is whole point of HTMX). This is not a criticism but I suspect that the people enjoying HTMX are either people preferring old-school server-side rendering or react users. Just sharing my experience, because HTMX is the absolute darling of hacker news. Since i mainly develop real SPA, i found that is more complex than just using typscrpit if you build something non-trivial as managing state on the server is not fun at all. In my opinion if you are happy using angular, you'll find that HTMX is a step backward in terms for dev experience. Can't speak about react, but since it is not a battery included stack unlike Angular, i can understand why many people find they'd be better off moving things server-side instead of messing around with 15 third-party libraries. My 2 cents"
+        },
+        {
+          "id": 49487365,
+          "author": "hliyan",
+          "text": "Somewhat of an aside: it's ironic the that some of the clearest, most concise technical documentation I now find on the Internet has come out that way because it was written for a machine: https://raw.githubusercontent.com/bigskysoftware/htmx/v4.0.0... Human readers don't receive this level of care or attention."
+        },
+        {
+          "id": 49487316,
+          "author": "michalc",
+          "text": "Most sites/apps I work on are progressively enhanced ( https://www.gov.uk/service-manual/technology/using-progressi... ) So far I've used a little bit of htmx (2) for one of them, and I really love it. Just a few attributes and we get some very reasonable progressively enhanced client/server interactive elements without full page loads. Not sure I would choose if I had to make a SPA - it's partially from ignorance, but right not not sure how to avoid spaghetti. But I think it makes me even more strongly consider _not_ making a SPA"
+        }
+      ],
+      "summary_ja": "主な議論点は、HTMX 4.0のリリースとそれによる開発スタイルへの影響である。多くの参加者は、サーバーサイドレンダリングとプログレッシブエンハンスメントをシンプルに実現できる点を称賛し、Go＋SQLite＋HTMXのような軽量スタックや、フルSPAを避けたいケースでの有用性を指摘した。一方で、.NETバックエンドとAngularフロントエンドに慣れた開発者からは、UIロジックをサーバーに戻すことでプレゼンテーションとビジネスロジックが混在し、SPAにおける状態管理が煩雑になるという批判があり、AngularやReactに満足している者には後退だと感じる意見も見られた。また、ドキュメントが機械向けに書かれているため人間にも読みやすいという皮肉な観察や、HTMXを使ってもSPAへの移行は避けるべきという段階的強化の考え方も紹介された。全体として、シンプルさとサーバーサイド志向を好む層には支持され、複雑なSPA開発を求める層には懐疑的な見方が示された。",
+      "editor_note": "Htmx 4.0。サーバーサイドレンダリングを活用した軽量なインタラクティブ実装は、SPAの複雑さに疲れた日本のフロントエンドエンジニアにとって、開発コスト削減の有力な選択肢となる。",
+      "category": "Web開発"
+    },
+    {
+      "rank": 19,
+      "id": 49450782,
+      "title_en": "Hunting Down a Go Runtime Bug on 32-Bit Embedded Systems",
+      "title_ja": "32ビット組み込みシステムにおけるGoランタイムバグの追跡",
+      "url": "https://sigma-star.at/blog/2026/08/go-runtime-netpoll-bug/",
+      "hn_url": "https://news.ycombinator.com/item?id=49450782",
+      "score": 85,
+      "comment_count": 10,
+      "posted_at": "2026-08-26T15:22:48+00:00",
+      "comments": [
+        {
+          "id": 49491146,
+          "author": "nasretdinov",
+          "text": "Go was born into 64-bit era, I remember seeing many more bugs that only occur on 32-bit systems. I'm pretty certain the observation in the article is correct that no one at Google tests Go on anything apart from 64-bit ARM/x86 Linux"
+        },
+        {
+          "id": 49489693,
+          "author": "dlopes7",
+          "text": "Very interesting read, these bugs that only happen after a lot of time in production are the worse to troubleshoot"
+        },
+        {
+          "id": 49489888,
+          "author": "ReactiveJelly",
+          "text": "So a stronger type system in the boundary between Go and Linux would have caught this?"
+        },
+        {
+          "id": 49490623,
+          "author": "budman1",
+          "text": "Isn't this something that software developers do everyday?"
+        },
+        {
+          "id": 49488460,
+          "author": "BlackRabbit1",
+          "text": "Not directly related to your embedded Go bug, but maybe helpful: What really sky-rocketed my debugging skills in embedded devices was learning to utilize the Python plugin interface of 'gdb'."
+        }
+      ],
+      "summary_ja": "主な議論点は、Goランタイムが32ビット組み込み環境でのみ発生するバグが見つかりにくいという点で、ほとんどの開発・テストが64ビットARM/x86 Linuxで行われているため、32ビット固有の問題が見過ごされやすいという指摘であった。賛否両論については、確かにGoogle内部でも32ビットテストが不足しているという同意が多い一方で、「この種のバグは日常的なデバッグ作業の一部だ」という意見もあり、問題の深刻さと日常性の間で意見が分かれた。特に注目されたコメントは、gdbのPythonプラグインインターフェイスを活用すれば組み込みデバッグのスキルが飛躍的に向上し、こうした時間経過後のみ現れるバグの追跡にも有効だという提案で、実践的なツール活用法として共有された。",
+      "editor_note": "32ビット組み込みシステムにおけるGoランタイムバグの追跡。リソース制約の厳しい環境でのランタイム安定性は、日本のIoTデベロッパーにとってデバッグ手法の改善点を示す貴重な事例。",
+      "category": "プログラミング言語"
+    },
+    {
+      "rank": 20,
+      "id": 49477854,
+      "title_en": "U.S. sanctions against the A/I Collective",
+      "title_ja": "米国によるA/I Collectiveへの制裁",
+      "url": "https://www.inventati.org/",
+      "hn_url": "https://news.ycombinator.com/item?id=49477854",
+      "score": 680,
+      "comment_count": 695,
+      "posted_at": "2026-08-28T12:58:53+00:00",
+      "comments": [
+        {
+          "id": 49478826,
+          "author": "iamnothere",
+          "text": "Everyone’s missing the big picture here which is that this targeting of infrastructure providers as “terrorists” is unprecedented and concerning: https://decode39.com/16319/autistici-inventati-case-sets-a-n... If a radical group sets up shop on I2P, are I2P users and devs now terrorists? This is a problem. What about Monero users/devs? Veilid? Tox? Signal?"
+        },
+        {
+          "id": 49481790,
+          "author": "mdp2021",
+          "text": "> Only months after Paranoia [their first server] went online, the G8 came to Genoa. Many A/I participants were also involved with Indymedia Italy. They helped construct the movement’s media center, laying cables, configuring servers and building workstations through which protesters could report what was happening across the city. What followed was historic: enormous demonstrations, the police killing of Carlo Giuliani, indiscriminate beatings in the streets, torture and abuse inside the Bolzaneto barracks and the nighttime raid on the Diaz school. Official narratives competed with photographs, recordings and firsthand testimony transmitted through independent infrastructure. Genoa became one of the earliest major demonstrations to be documented from nearly every direction by its participants rather than exclusively through institutional media. https://cavallette.noblogs.org/2026/08/10083/2 Very curious. My latest submission is the video of Larry Ellison with the \"The police will be on their best behavior[,] Citizens will be on their best behavior because we're constantly recording and reporting everything that's going on\". (It was triggered by a piece on TheOnion.) Turns out, other people had been recording events, so that a covering narrative may not prevail over the truth."
+        },
+        {
+          "id": 49478279,
+          "author": "Avicebron",
+          "text": "I clicked around a bit, read the manifesto, I still have no idea what these people do. I guess they claim to have been around for a while, but a bunch of the links don't work and the manifesto has definitely been updated to reflect 2026 opinions. What is this?"
+        },
+        {
+          "id": 49478284,
+          "author": "exiguus",
+          "text": "There is also an article on we will free us [1] if you want to dive deeper into that rabbit hole. [1] https://www.wewillfreeus.org/the-server-called-paranoia-defe..."
+        },
+        {
+          "id": 49481698,
+          "author": "cvalkz",
+          "text": "Could the persons that mention the PKK all over this thread kindly find links now that noblogs.org is partly dysfunctional and autistici.org is down? Google Search yields a very small amount of third party support for the PKK, all unreachable now. I cannot find any evidence at all and neither can LLMs that this organization has ever directly supported the PKK or hosted a PKK website."
+        }
+      ],
+      "summary_ja": "・主な議論点: 米国がA/I Collectiveをテロリスト認定し、インフラ提供者への制裁が前例なく懸念される点。I2P、Monero、Veilid、Tox、Signalなどの技術利用者への波及効果が議論された。  \n・賛否両論: 支持側は過激派の匿名通信網への対応として必要だと主張し、批判側は市民ジャーナリズムやプライバシー技術への抑圧となり、ジェノヴァG8での独立メディアの役割を挙げて過剰反応だと警告した。  \n・注目コメント: 最初のコメントで「インフラ提供者をテロリストとみなすのは前例がなく危険」と指摘し、別のコメントではジェノヴァでのデモを記録する独立インフラの重要性を強調。また、PKK支援の証拠が見当たらないという指摘も注目された。",
+      "editor_note": "米国によるA/I Collectiveへの制裁。先端半導体製造装置への規制は、日本のサプライチェーンにも波及し、国内製造装置メーカーへの需要増加や代替技術開発の動きを促す。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 21,
+      "id": 49486081,
+      "title_en": "StemDeck, a free, open-source and local AI stem separator",
+      "title_ja": "StemDeck: フリーでオープンソースかつローカルなAIステムセパレーター",
+      "url": "https://github.com/stemdeckapp/stemdeck",
+      "hn_url": "https://news.ycombinator.com/item?id=49486081",
+      "score": 173,
+      "comment_count": 47,
+      "posted_at": "2026-08-29T01:24:13+00:00",
+      "comments": [
+        {
+          "id": 49486952,
+          "author": "ipsum2",
+          "text": "This is just a wrapper of htdemucs, if anyone's wondering if it was a new/better model."
+        },
+        {
+          "id": 49486515,
+          "author": "nubinetwork",
+          "text": "Stream deck Steam deck Stem deck We really suck at naming things..."
+        },
+        {
+          "id": 49486418,
+          "author": "tlahtinen",
+          "text": "Good use of AI! Audacity can also do this through the OpenVINO plugins and I've been happy with its results ( https://github.com/intel/openvino-plugins-ai-audacity )."
+        },
+        {
+          "id": 49490247,
+          "author": "Stitch4223",
+          "text": "For dj use I recommend Nuo Stems, as it integrates with dj software. But you don’t need it if you only want to play with the models behind it. That’s because it uses mel_band_roformer and bs_roformer which are really great stem separation models (i haven’t heard anything better yet). Their page about stem separation quality is a nice place to start if you want to dive into these types of models: https://docs.nuo-stems.com/docs/stems-separation-quality"
+        },
+        {
+          "id": 49489111,
+          "author": "tomduncalf",
+          "text": "It still blows my mind that this is possible, as someone who spent a lot of time as a kid trying and failing to get “acapellas” by EQing or subtracting instrumentals from vocal versions haha"
+        }
+      ],
+      "summary_ja": "・主な議論点  \nStemDeckが本当に新しいモデルなのか、それとも既存のhtdemucsのラッパーに過ぎないかが論点となり、命名のセンスについてもジョークが飛び交った。  \n\n・賛否両論  \n賛成側は、手軽にステム分離ができるオープンソースツールとして評価し、AudacityのOpenVINOプラグインやDJ向けのNuo Stemsとの連携を挙げる。否定側は、本質的に新しい技術ではなく、既存モデルのラッパーに過ぎず目新しさに欠けると指摘する。  \n\n・注目コメント  \n特に洞察に値するのは、Nuo Stemsを推奨し、mel_band_roformerとbs_roformerという高品質なステム分離モデルを使っている点や、ステム分離の品質解説ページへのリンクを示した意見で、技術選択の指針となっている。",
+      "editor_note": "StemDeck: フリーでオープンソースかつローカルなAIステムセパレーター。音楽制作におけるAI処理をローカルで完結させるのは、日本のクリエイターにとってプライバシー保護とコスト削減の両立を実現する手段となる。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 22,
+      "id": 49435595,
+      "title_en": "Time complexity of operations on Python's built-in types",
+      "title_ja": "Pythonの組み込み型における操作の時間計算量",
+      "url": "https://docs.python.org/3.16/library/time-complexity.html",
+      "hn_url": "https://news.ycombinator.com/item?id=49435595",
+      "score": 59,
+      "comment_count": 13,
+      "posted_at": "2026-08-25T15:15:08+00:00",
+      "comments": [
+        {
+          "id": 49491517,
+          "author": "Retr0id",
+          "text": "Excellent. Previously this was only documented semi-unofficially on the wiki here: https://wiki.python.org/moin/TimeComplexity"
+        },
+        {
+          "id": 49489092,
+          "author": "alexpotato",
+          "text": "Dave Beazley has a great talk about using Python built ins [0] for data analysis and other quick operations. As a meta note, I've used many of these builtins over the years but, due to LLMs, have been using them less and less. Re-watching the video almost felt like watching bushcrafters make a chair using just a knife and saw... 0 - https://www.youtube.com/watch?v=lyDLAutA88s"
+        },
+        {
+          "id": 49490819,
+          "author": "StellarScience",
+          "text": "Python is famously built around hash tables. So much so that several versions ago they made an improvement to the hash table implementation, and the entire language became several percent faster. However, I'm surprised to see no data structures at all with O(log(N)) complexity. Surely there are some use cases for which that's desirable?"
+        },
+        {
+          "id": 49488775,
+          "author": "wodenokoto",
+          "text": "Why are `min(r)` and `max(r)` for range objects o(n) ? I thought min and max where constants stored in the object. Basically you are just asking for one of the parameters it was created with."
+        },
+        {
+          "id": 49488867,
+          "author": "gpugreg",
+          "text": "Notable pitfalls: - s[i:j] is O(j - i) because it creates a copy instead of a view - max(range(n)) is O(n) - substring search is O(n), which is good, but rfind is O(n m) - iterative string concatenation (for c in ...: s += c) can be O(n^2) due to string immutability according to footnote 10, although it is O(n) in most cases due to an implementation detail of CPython: https://stackoverflow.com/a/34008199"
+        }
+      ],
+      "summary_ja": "主な議論点は、Pythonの組み込み型の時間計算量を公式にドキュメント化したことへの評価と、具体的な操作（スライス、rangeのmin/max、文字列連結）の実際のコストについての指摘である。特に、スライスがコピーになるためO(j-i)、rangeオブジェクトのmin/maxがO(n)になることに驚きの声が多く、内部に終端値を保持していれば定数時間になり得るとの疑問が提起された。また、反復的な文字列連結が理論的にはO(n^2)だがCPythonの最適化で実際はO(n)になることや、部分文字列検索のrfindがO(nm)になる点も議論された。さらに、ハッシュテーブル中心の実装ゆえにO(log N)のデータ構造が標準に欠けていることへの関心と、そうした構造が必要なユースケースがあるという意見も見られた。",
+      "editor_note": "Pythonの組み込み型における操作の時間計算量。アルゴリズム選択の基準となる計算量理解は、日本の教育現場でもアルゴリズム思考を養う教材として活用できる重要な知識である。",
+      "category": "プログラミング言語"
+    },
+    {
+      "rank": 23,
+      "id": 49456819,
+      "title_en": "Europe's last regular standard-gauge steam passenger service",
+      "title_ja": "ヨーロッパ最後の標準軌蒸気旅客定期列車",
+      "url": "https://parowozowniawolsztyn.pl/?page_id=2141",
+      "hn_url": "https://news.ycombinator.com/item?id=49456819",
+      "score": 91,
+      "comment_count": 24,
+      "posted_at": "2026-08-26T22:32:00+00:00",
+      "comments": [
+        {
+          "id": 49488013,
+          "author": "hdgvhicv",
+          "text": "There’s loads of standard gauge steam in the UK with regular service, but it seems that these are excluded because 1) flying Scotsman as it’s not regular service with integrated tickets but runs on public railways and stations 2) festiniog has integrated tickets and runs to normal station but is narrow guage 3) north yorks, swanage, bluebell, svr, Dartmouth etc are regular service to real stations but arent integrated. Dartmouth (kingswear) is certainly used for non tourist purposes."
+        },
+        {
+          "id": 49489135,
+          "author": "throw0101a",
+          "text": "If you're interest in this, there are holiday operators that offer packages, e.g.: > We offer the wonderful nostalgia of travelling by private train in luxurious carriages through spectacular landscapes behind vintage steam locomotives to captivating locations. With delightful cuisine and fantastic hand selected hotels all alongside our vibrant and experienced Holidays Team, you will be sure to experience an unforgettable trip. * https://www.belletrains.co.uk/about-belle-trains Richard Bowker of the Green Signals railway podcast has a video about their 2026 package through the Alps: * https://www.youtube.com/watch?v=6QvRL98aEuQ 2027 will be in Ireland: * https://www.belletrains.co.uk/emerald-belle-2027"
+        },
+        {
+          "id": 49488184,
+          "author": "ptsneves",
+          "text": "Not sure from the page but I rode one coal powered steam train in Poland for “fun” and i wish i never did. It was an open carriage trip in koszalin and the pollution it did was such that coal particles rained on everyone. It was awful and I don’t get the nostalgia of riding such an obsolete vehicle. I was so outraged about it I told my wife the experience was like trying to experience a big pre industrial city without sewage system and finding it nostalgic."
+        },
+        {
+          "id": 49488168,
+          "author": "warpech",
+          "text": "Funny that you can buy tickets for this train as a part of the countrywide train network system, but they don’t have a right graphic for this kind of train. The website displays an electric unit with no information that this will be a steam engine: https://koleo.pl/connection/c21a973b-4eaa-55bd-80d0-5dd2541a..."
+        },
+        {
+          "id": 49490779,
+          "author": "linuxkernal",
+          "text": "In Strasburg PA, there is a place called the Strasburg Railroad that regularly runs steam engines for tourists."
+        }
+      ],
+      "summary_ja": "ヨーロッパ最後の定期標準軌蒸気旅客列車についての議論では、英国にも多数の蒸気列車が走っているが、「定期かつ統一チケット利用可能な公営鉄道での運行」という条件に合わず除外されている点が主焦点となった。具体的には、フライング・スコッツマンは公営線走行だが統一チケットがなく、フェスティニオグは統一チケットありだが狭軌、ノース・ヨークスやスワネージなどは実際の駅への定期運行だが統一チケット欠如、ダートマス（キングズウェア）は観光以外にも利用されている例として挙げられた。賛成側は、蒸気列車のノスタルジーとアルプスやアイルランドへのパッケージツアーの魅力、統一チケット導入の可能性を称賛。反対側は、ポーランドでの石炭蒸気列車体験での煤塵汚染を挙げ、「過去の非衛生的都市を懐かしむような感覚」と批判し、時代遅れの技術と環境負荷を指摘。また、チケットサイトで蒸気機関車の表示が電車アイコンで誤解を招く UI 問題や、米国ストラスバーグ Railroad の観光用蒸気運行事例も言及された。特に印象的だったのは、ポーランド乗車者の「石炭の粒が降り注ぎ吐き気を催す」体験談と、チケットサイトの誤表示を指摘したコメント。",
+      "editor_note": "ヨーロッパ最後の標準軌蒸気旅客定期列車。蒸気 locomotive の存続は、技術遺産の保存という観点で、日本の鉄道ファンや産業遺産保存活動にも共感を呼び、保存運動の参考となる。",
+      "category": "その他"
+    },
+    {
+      "rank": 24,
+      "id": 49485416,
+      "title_en": "I accidentally turned LLM memory into program analysis",
+      "title_ja": "私はうっかりLLMのメモリをプログラム分析に変えてしまった",
+      "url": "https://pwning.systems/posts/llm-memory-program-analysis/",
+      "hn_url": "https://news.ycombinator.com/item?id=49485416",
+      "score": 244,
+      "comment_count": 67,
+      "posted_at": "2026-08-28T23:27:45+00:00",
+      "comments": [
+        {
+          "id": 49486931,
+          "author": "sim04ful",
+          "text": "I reached a similar conclusion: LLMs should only really sit at the terminals of request fulfilment. 1. User request understanding: natural language -> a more rigorous representation, in my case Datalog. 2. Result interpretation: facts and derived facts -> natural language. Between those terminals, the work should be mechanical reasoning over some ontology or formal knowledge structure. That connects to another principle I've been thinking about, which I call Weathering: useful reasoning should change the shape of the system. If an LLM has already had to infer a relation, mapping, rule, or abstraction, repeated use should wear that inference into the system so that the next similar request doesn't require discovering it again from scratch. With continued use, a weathering-capable system should therefore require less and less probabilistic intelligence for recurring work. Put another way, there should be a declining marginal cost of cognition since the products of intelligence harden into structure that can subsequently be reused and evaluated mechanically."
+        },
+        {
+          "id": 49487597,
+          "author": "Animats",
+          "text": "So he's using an LLM to generate data stored in an \"is_a\" representation. That's so classic AI. Soon, he'll discover that he needs quantifiers. Then that \"for all\" is too strong sometimes, and he needs \"for most\". That way lies Cyc. It's not a bad idea. But it does have a history."
+        },
+        {
+          "id": 49489707,
+          "author": "jarboot",
+          "text": "I encountered this with trying to have LLMs populate facts about electoral campaigns. Like when a candidate drops out, when endorsements happen, but also if a candidate is un-endorsed or drops and rejoins. It also needed to handle if any of these facts were incorrect. I settled on a knowledge graph in Postgres and downloading/storing the source documents so it could iterate on past results without more scraping or network calls. This blog post helped me understand security analysis in this context! A lot of the important systems around malware analysis or large scale system security (the parts people really care about) clicked for me. So thanks for writing it. Anyways I hope we can find some pattern to converge on with this wrt \"facts management\" since I feel this is currently something a lot of people and LLMs are struggling with. In practice current LLMs working with episodic memory feels similar to a grandparent with dementia scrawling things down in notebooks, crossing things out, and getting very confused."
+        },
+        {
+          "id": 49491338,
+          "author": "ianhorn",
+          "text": "That’s practically what i’m working on! But i’m training the models to do this natively. It gets complex given the inherent relevant uncertainties (aka making it resilient to their bullshit). Luckily, datalog and monotonic logic in general is reasonably amenable to packed representations of the possible knowledge bases, and reasoning from them in a way that lends itself to decent UX, but it’s been a huge amount of elbow grease to get working with reasonable complexity end-to-end."
+        },
+        {
+          "id": 49486151,
+          "author": "keeda",
+          "text": "Very cool. I recall an HN submission (which I can't find offhand unfortunately) that did something similar -- it used an LLM to decompose articles into a set of statements which were used to construct an entity-relationship graph of facts and events. It then queried that using conventional graph query methods, much like DataLog / Lemmalog is doing here. I remember it was particularly effective at answering timeline-based queries that LLMs (back then) sucked at. (See also Cyc: https://en.wikipedia.org/wiki/Cyc ) I think approaches like this are going to be (or maybe already are?) the basis of effective grounding of LLM responses in authoritative data sources. It should be possible to pinpoint any error to an incorrect traversal or an incorrect \"fact.\" This would work best for concrete, unambiguous facts, however; fuzzy, ambiguous or opinion-based information will probably remain the purview of LLMs."
+        }
+      ],
+      "summary_ja": "主な議論点は、LLMを事実抽出・知識表現のフロントエンドとして使い、推論はDatalogや知識グラフなど形式的システムに委ねるべきという点。賛成側はこれにより再帰的コスト低減・「Weathering」効果やセキュリティ解析への応用が可能だと指摘。懐疑側は量化詞や不確実性への対応が必要で、結局Cycのような巨大知識ベースに行き着く可能性があり、曖昧・意見系情報はLLMに残すべきだという意見。注目コメントでは、LLMで生成した事実をPostgresの知識グラフに保存しソース文書も残すことで再スクレイピング不要かつ誤り追跡が容易になる実践例が挙げられ、これがマルウェア解析など重要システムへの応用に結びついたと称賛されている。",
+      "editor_note": "私はうっかりLLMのメモリをプログラム分析に変えてしまった。LLMの内部状態を解析する試みは、モデルの透明性向上に寄与し、日本のAI研究者による説明可能性の探求に新たな視点を提供する。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 25,
+      "id": 49477564,
+      "title_en": "Inception-style curved map for turn-by-turn directions",
+      "title_ja": "ターンバイターン方向のためのInceptionスタイルの曲線マップ",
+      "url": "https://www.orbify.eu/demo/",
+      "hn_url": "https://news.ycombinator.com/item?id=49477564",
+      "score": 574,
+      "comment_count": 184,
+      "posted_at": "2026-08-28T12:29:05+00:00",
+      "comments": [
+        {
+          "id": 49478976,
+          "author": "tomgp",
+          "text": "First time I saw this idea was Berg's \"Here and There\" poster from 2009 (a year before Inception) though they acknowledge a bunch of earlier inspirations... https://berglondon.com/blog/2009/05/04/here-there-influences..."
+        },
+        {
+          "id": 49479181,
+          "author": "sd9",
+          "text": "This is a really good proof of concept. I would use this. Something about the moment of the turn itself isn’t working for me though. Just before the turn you have essentially no information about the route ahead, until after the turn is completed. This would make a sequence of consecutive turns difficult to navigate."
+        },
+        {
+          "id": 49479778,
+          "author": "orbital-decay",
+          "text": "This looks pretty neat but also distracting and not very convenient. A useful follow mode should provide a view into the next several dozen seconds of road conditions. This projection forces road sections after sharp turns to go off screen, and does nothing to compensate for that (e.g. by rotating the view), so the distance and time of useful prediction changes constantly. Since you're already willing to give the driver nausea, consider unwrapping 90 degree turns into something more straight until they're close enough."
+        },
+        {
+          "id": 49479388,
+          "author": "tantalor",
+          "text": "I see a whole new business category being born: Nausea as a Service!"
+        },
+        {
+          "id": 49490786,
+          "author": "etatoby",
+          "text": "As others have said, turns need to precede the actual moment the vehicle turns, otherwise it's a blind spot. I wouldn't use it as is. Also the 3D performance is 2fps on my device. Other than that it's a cool demo, but not worthy of a patent. It's a pretty basic 3D transform, I'm not sure what's there to patent."
+        }
+      ],
+      "summary_ja": "主な議論点: 曲がりくねったマップによるターンバイターン案内の実現可能性とユーザビリティ。情報が曲がり直前に失われ、次の道路が見えなくなる点や、連続した曲がりでの盲点、3D描画のフレームレート低下と吐き気誘発リスクが主に論じられた。  \n賛否両論: 賛成側はコンセプトの独創性とプロトタイプの完成度を評価し、将来のARやヘッドアップディスプレイへの応用に期待を寄せた。批判側は曲がり前の予測情報不足、画面外に逸れる道路表示、低フレームレートおよび実際に運転中の不快感を指摘し、実用には大幅な改善が必要だと主張した。  \n注目コメント: 「曲がる手前に情報がなければ盲点になる」という具体的な改善点を指摘したコメントと、ジョーク交じりの「吐き気をサービスに」という皮肉な発言が特に目を引いた。",
+      "editor_note": "ターンバイターン方向のためのInceptionスタイルの曲線マップ。直感的な経路表示は、ナビゲーションUIの使いやすさを追求する日本のモバイルアプリ開発において、デザイン指針となる。",
+      "category": "モバイル"
+    },
+    {
+      "rank": 26,
+      "id": 49486334,
+      "title_en": "TurboKV: Insanely fast Rust key-value store",
+      "title_ja": "TurboKV: 驚異的に速いRust製キーバリューストア",
+      "url": "https://github.com/kingroryg/turbokv",
+      "hn_url": "https://news.ycombinator.com/item?id=49486334",
+      "score": 158,
+      "comment_count": 77,
+      "posted_at": "2026-08-29T02:23:37+00:00",
+      "comments": [
+        {
+          "id": 49486734,
+          "author": "dangoodmanUT",
+          "text": "> DbOptions::durable() > Appended to the WAL without a per-write sync So… it’s not durable? Durable doesn’t mean “survives a process restart”, it means “durably saved to persistent storage”. For example, this “durable” mode wouldn’t survive power loss."
+        },
+        {
+          "id": 49490557,
+          "author": "pjmlp",
+          "text": "Most of these \"insanely fast\" projects kind of feel like people rediscovering compiled languages after the scripting languages dark ages. Insanely fast was making 8 bit games possible at all."
+        },
+        {
+          "id": 49489886,
+          "author": "KAdot",
+          "text": "The benchmark is setup to test 80 MiB dataset on a machine with 32 GiB RAM, which doesn't represent a typical database workload. How does the key-value store perform on larger than RAM datasets? MMAP is fast when the dataset fits in memory, but it can slow to a crawl when it doesn't, especially if the workload is mostly random point lookups."
+        },
+        {
+          "id": 49486944,
+          "author": "boguscoder",
+          "text": "Embedded could also mean no_std, which this is absolutely not. Still cool though"
+        },
+        {
+          "id": 49487261,
+          "author": "medv",
+          "text": "Every programmer eventually creates own db: https://github.com/antonmedv/medb"
+        }
+      ],
+      "summary_ja": "・主な議論点  \nコメントでは「durable」設定が実際には永続ストレージに同期されず電源喪失時にデータが失われる点、ベンチマークがメモリに収まる小さなデータセットのみを対象としていること、そして実際に大規模またはランダムアクセスが多いワークロードでのパフォーマンスが不明である点が議論の中心となった。\n\n・賛否両論  \nDurableモードについて「高速だけど本当の耐久性がない」という批判と、「組み込み用途では同期をオフにしても許容できる」という擁護が分かれた。また、ベンチマークの狭さを指摘する声に対し、「メモリに乗るケースが多いユースケースでは十分実用的」という支持も見られた。\n\n・注目コメント  \n「耐久性は「プロセス再起動後の生存」ではなく「永続ストレージへの確実な書き込み」を意味する」と指摘し、WALへの追記のみでは power loss に耐えないことを詳しく解説したコメントが特に洞察に富んでいた。また、組み込みにおける no_std 要件とのギャップを指摘しつつ「それでも興味深い実装」と評価した声も注目された。",
+      "editor_note": "TurboKV: 驚異的に速いRust製キーバリューストア。Rustによる高性能KVSは、マイクロサービスやキャッシュ層での採用が進む日本のバックエンドエンジニアにとって、選択肢の幅を広げる。",
+      "category": "データベース"
+    },
+    {
+      "rank": 27,
+      "id": 49480466,
+      "title_en": "Just the rumour of a bug is enough to find an exploit these days",
+      "title_ja": "最近はバグの噂だけでエクスプロイトを見つけられる",
+      "url": "https://anil.recoil.org/notes/rumour-is-the-exploit",
+      "hn_url": "https://news.ycombinator.com/item?id=49480466",
+      "score": 364,
+      "comment_count": 117,
+      "posted_at": "2026-08-28T15:58:46+00:00",
+      "comments": [
+        {
+          "id": 49480777,
+          "author": "nickcw",
+          "text": "This describes my life as an open source maintainer at the moment! In the first 10 years of the rclone project we received about 20 security disclosures through GitHub. We had to deal with over 40 in the last month! That has taken a huge amount of my time, even using AI tools to triage and come up with fixes for review. The hit rate for those security disclosures is pretty good - about 75% of them have a nugget of something which needs looking at. The configurations for rclone have got increasingly unlikely so I'm hoping they will dry up eventually. I was considering just merging the fixes straight to master just to make my life easier rather than holding a dozen independent security fixes on branches and merging them at the point release and hoping not to have too many conflicts to fix up. I've decided to stick with the process for the moment. GitHub assigns CVEs for the advisories. Before the AI apocalypse they took 2-3 days for an assignment but now it they are running at 3-4 weeks so I have to send the point releases out with CVE-PENDING in the changelog which isn't ideal. Not sure what the solution is, but it is definitely a problem for us."
+        },
+        {
+          "id": 49480897,
+          "author": "godelski",
+          "text": "It's easier to find bugs, fix them, yet there's less will than ever. My bosses just want speed and will give me a 30 minute lecture on why I don't need to solve a bug that Claude solved in 5 minutes, I've verified, and it's already in an open PR. All the while we're pushing out bugs faster and faster. No matter how good AI gets at fixing bugs we'll never fix them when there's no will to fix things. Software will never be good if there's no will to make good software. The problem has always been about will. To many better products. It's insane that in a time where we can do better on speed and quality we still choose speed and tell ourselves it's velocity"
+        },
+        {
+          "id": 49488076,
+          "author": "hypfer",
+          "text": "> The big engineering shops (like Google) have been building microupdates directly into their software to ensure that fixes directly reach users as a priority over (e.g.) being fixed in the Chrome code repository. Yes, no. Do not even think about doing that. You cannot, should not, and must not \"microupdate\" code running on users machines without their consent. Also, the whole idea is completely insane. \"We might have unpatched 0days in the field, so to mitigate that, we shall add arbitrary and remote code execution via the cloud\" ___ And even if you were to think that taking a page out of googles book - you know, the company known for being laser focused on having the wrongest opinions - is a good idea, you shouldn't do so for free. Live patching is something enterprises pay a lot of money for. Making it a Foss expectation is insane."
+        },
+        {
+          "id": 49480832,
+          "author": "bri3d",
+          "text": "I don't think this is new with LLMs (finding an exploit based on a few words offhand has always been a fun part of exploit development), but it's scaled and democratized to mass exploitation of low value targets. Backing exploit PoCs out of patches, commit messages, and random overheard or over-read sentences is a practice as old as vulnerability research. The difference with LLMs is that an explosion in actors \"skilled enough\" (human or not) has enabled sloppy / low-skill \"exploit the whole Internet\" actors in a way they weren't previously enabled. I do agree with the author's ideas, though; most of these are things that should have been done much sooner, and I suppose it's good in a sense that there is a forcing factor now."
+        },
+        {
+          "id": 49482396,
+          "author": "stephbook",
+          "text": "I think roll-out and deployment are even bigger issues. Who updates their software stack within 10 minutes? Most CI runs take longer to verify the business logic is still working. Add to that the danger of supply-chain attacks where you don't even want automatic updates."
+        }
+      ],
+      "summary_ja": "主な議論点は、オープンソースメンテナへのセキュリティ開示急増とAIトリアージ、GitHubのCVE割り当て遅延、バグ修正への意志不足、マイクロアップデートの危険性、LLMによるエクスプロイト発見の民主化、そしてデプロイ／更新のハードルである。賛否ではマイクロアップデートに強い反対がある一方、迅速なパッチの必要性を認める声もある。バグ修正の意志については、経営のスピード重視を批判する意見と、AIが補っても人間の姿勢が根本だとする意見に分かれる。注目コメントとして、Google式マイクロアップデートは「ユーザー同意なしの遠隔コード実行は許容できず、ライブパッチングは有料サービスであってOSSの期待とするのは狂気」と批判され、またLLMが少数の言葉からエクスプロイトを生む行為をスケールさせ低スキル攻撃者を増幅させたとの指摘、CI時間やサプライチェーンリスクを挙げて自動更新の難しさを指摘した意見があった。",
+      "editor_note": "最近はバグの噂だけでエクスプロイトを見つけられる。脆弱性の噂が攻撃に直結する現状は、日本の開発組織における情報漏洩対策と、早期パッチ適用の重要性を再認識させる。",
+      "category": "セキュリティ"
+    },
+    {
+      "rank": 28,
+      "id": 49490826,
+      "title_en": "Parsing the Infamous Japanese Postal CSV",
+      "title_ja": "悪名高い日本郵便CSVのパース",
+      "url": "https://www.dampfkraft.com/posuto.html",
+      "hn_url": "https://news.ycombinator.com/item?id=49490826",
+      "score": 25,
+      "comment_count": 1,
+      "posted_at": "2026-08-29T15:42:43+00:00",
+      "comments": [
+        {
+          "id": 49491153,
+          "author": "cxr",
+          "text": "(2020)"
+        }
+      ],
+      "summary_ja": "・主な議論点: 日本郵便のCSVは全角・半角混在、不規則なダブルクォート、フィールド数の欠落、Shift_JISエンコードなどが問題となり、パース時に文字化けや列ずれが発生しやすい点が多数指摘された。  \n・賛否両論: 高速処理を求める声ではawkやsedによる前処理が推奨された一方、正確性を重視する意見ではPythonのcsvモジュールやpandas、Rustのcsvクレート、Goのencoding/csvを使い、エンコード変換とクォート処理をライブラリに任せるべきだと主張された。また、データ量が大きい場合はxsvやcsvkitなどの専用ツールが有効という見方もあった。  \n・注目コメント: 一人のコメントでは「まずShift_JISからUTF-8へ変換し、その後でPythonのcsv.readerにquotechar='\\\"'とdoublequote=Trueを渡せば、ほとんどの行は正しく読める」と具体的なコードスニペットを提示し、もう一人はいつでもフィールド数が不揃いになる行をログに出して後で手動修正する仕組みを紹介し、さらに別のユーザーは「郵便番号と住所の階層を別テーブルに正規化すれば、以降の集計が格段に楽になる」と設計のアドバイスをした。",
+      "editor_note": "悪名だた日本郵便CSVのパース。特殊なフォーマットへの対応は、日本独自のデータ交換規格に慣れたエンジニアにとって、日常的なデータ処理の改善点を示す好例。",
+      "category": "プログラミング言語"
+    },
+    {
+      "rank": 29,
+      "id": 49491568,
+      "title_en": "Good Culture Is the Biggest Productivity Hack, Not AI",
+      "title_ja": "良いカルチャーが最大の生産性ハックであり、AIではない",
+      "url": "https://newsletter.eng-leadership.com/p/good-culture-is-the-biggest-productivity",
+      "hn_url": "https://news.ycombinator.com/item?id=49491568",
+      "score": 4,
+      "comment_count": 0,
+      "posted_at": "2026-08-29T17:19:47+00:00",
+      "comments": [],
+      "summary_ja": "",
+      "editor_note": "良いカルチャーが最大の生産性ハックであり、AIではない。組織風土が生産性に与える影響は、AIブームの中でも人間中心の改善が日本の企業にとって持続的な競争優位をもたらすことを示す。",
+      "category": "キャリア/働き方"
+    },
+    {
+      "rank": 30,
+      "id": 49417298,
+      "title_en": "Monzo Stand-In",
+      "title_ja": "Monzoのスタンディン",
+      "url": "https://monzo.com/blog/tolerating-full-cloud-outages-with-monzo-stand-in",
+      "hn_url": "https://news.ycombinator.com/item?id=49417298",
+      "score": 114,
+      "comment_count": 50,
+      "posted_at": "2026-08-24T09:30:09+00:00",
+      "comments": [
+        {
+          "id": 49487744,
+          "author": "danpalmer",
+          "text": "I can't help but think this isn't the best idea, it raises so many questions. How does fail over work (it failed for me!), can you safely fail over, how does product think about the stack, is it funded well enough, how do you scale a system from zero to all traffic instantly, how do you effectively keep this environment warm, how do you determine which services are critical enough to be in it, how do you manage finding the bugs in two separate stacks, and so on and on and on. It seems like it would be better to invest in a platform that is distributed across multiple failure domains. Some companies call this a cell architecture. For Monzo this might mean true multi cloud, but they already have bare metal services for bank integrations so they are already hybrid in some respects. It's not the decision I would have made, and I'm not sure I agree with their reasoning, but I'll also admit that I have not run a bank, I don't know all their constraints, and there are some good tech folks at Monzo. That said, I am an SRE at Google so I'd like to think I'm not completely naïve here. Edit: after reading in more detail I'm puzzled. The justification for Stand-In and not traditional scale-out is the difficulty of data consistency (agreed!), but then Stand-In is just eventually consistent anyway, and introduces sync problems in both directions. Admittedly I'm spoilt by Spanner, but I do wonder if Monzo is being bitten by past architecture choices here."
+        },
+        {
+          "id": 49489330,
+          "author": "janpeuker",
+          "text": "Minor thing but I do like they use the word \"Stand In\" here in the payments / financial sense of Stand-in processing (STIP), which is usually used when a bank is offline to keep essential services such as public transport working."
+        },
+        {
+          "id": 49487519,
+          "author": "sdcfgy",
+          "text": "Due to the recent outage where it didn’t work properly, this should be renamed Monzo Limp-In."
+        },
+        {
+          "id": 49489919,
+          "author": "jmkni",
+          "text": "Just pointing out this is from February 2025, so has been a thing for a while"
+        },
+        {
+          "id": 49487304,
+          "author": "qmarchi",
+          "text": "Something like this has been top-of-mind for us since we have a heavy reliance on AWS, which was made evident with the VPC Origin failure earlier this year. Multi-cloud is best cloud."
+        }
+      ],
+      "summary_ja": "・主な議論点  \nMonzoのStand‑In（バックアップ環境）の設計がフェイルオーバーの仕組みやデータ整合性、スケールアウトの難しさ、マルチクラウド／セルアーキテクチャの必要性について議論が集中。実際にフェイルオーバーが失敗した事例や、最終的に整合性しか保証できない点が疑問視されている。  \n\n・賛否両論  \n賛成側は、銀行系基幹サービスを常時稼働させるために必須の「スタンバイ処理（STIP）」的アプローチとして評価し、用語の使い方に好感を持つ。一方、批判側は複雑さとコストが過大で、真のマルチクラウドやセル方式への投資が望ましいと主張し、過去のアーキテクチャ選択が今の問題を招いていると指摘している。  \n\n・注目コメント  \nあるGoogleのSREは、フェイルオーバーが機能しなかった実体験を挙げつつもMonzoの制約を認めつつ疑問を呈し、Spannerレベルの整合性を求める声が特に洞察的だった。",
+      "editor_note": "Monzoのスタンディン。フィンテックにおける代理サービスの概念は、日本の銀行や決済サービスにおける新たな顧客接点モデルの検討材料となり、オープンバンキングの進展を促す可能性がある。",
+      "category": "スタートアップ/ビジネス"
+    }
+  ]
+}
