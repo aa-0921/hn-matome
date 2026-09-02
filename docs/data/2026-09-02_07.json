@@ -1,0 +1,1069 @@
+{
+  "date": "2026-09-02T00:00:00+09:00",
+  "slot": "07",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 49525378,
+      "title_en": "Claude Fable 5.1 and Claude Mythos 5.1",
+      "title_ja": "Claude Fable 5.1 と Claude Mythos 5.1",
+      "url": "https://www.anthropic.com/claude-fable-and-mythos-5-1",
+      "hn_url": "https://news.ycombinator.com/item?id=49525378",
+      "score": 845,
+      "comment_count": 804,
+      "posted_at": "2026-09-01T17:53:53+00:00",
+      "comments": [
+        {
+          "id": 49525809,
+          "author": "felixrieseberg",
+          "text": "(I work at Anthropic) Beyond all the benchmarks, I think Fable 5.1 is a big improvement in writing style. It sounds a lot less stereotypically like other Claude models, has (imho) a much more natural style, and responds to my style instructions more reliably. More work to be done (and we will!) but reading better prose makes me so much happier. Another point I expect not to get much attention until it all happens at once is science. People have been correctly excited about the many \"sudden\" breakthroughs LLMs are making in Maths, but some of the science benchmarks make me believe we'll soon see similar developments in other scientific domains. Fable 5.1 more than doubled Fable 5's Terminal-Bench-Science [1] score, which I think is meaningful. [1] https://github.com/harbor-framework/terminal-bench-science"
+        },
+        {
+          "id": 49526051,
+          "author": "simonw",
+          "text": "Pelicans for thinking effort low, medium, high and xhigh (that xhigh one is pretty good): https://tools.simonwillison.net/markdown-svg-renderer#url=ht... I'm still waiting for effort max to finish. EDIT: I fixed a bug in my tooling so it now records summarized reasoning traces - here's that max pelican, which is a significant improvement: https://tools.simonwillison.net/markdown-svg-renderer#url=ht... Took just under 14 minutes to generate, and at 65927 output tokens cost me a hefty $3.30! Excerpts from the reasoning trace: > Adding pedal shapes near both feet, with the far foot on the second leg partially visible behind the frame. I'm considering whether to add a small scarf or cap for extra character, but leaning toward keeping it simple to avoid clutter. > Now I'm debating a bicycle helmet on the head versus the pelican's signature crest—the beak and pouch already read clearly as \"pelican,\" so a helmet could reinforce the bicycle theme without losing identity, though it might compete with the crest for visual space. > I realize the beak at (484,84) would overlap with the dome helmet, so I need to shrink the helmet so it only covers the top of the head, adjusting its arc endpoints to sit higher and narrower so the beak can attach cleanly at the front without collision. [...] > I'm adding a darker tip region to represent the primary feathers, then reconsidering the trailing edge to include scalloped feather curves instead of one smooth line for a more natural look. [...] > Now I'm checking the vent line placements on the helmet, making sure they sit far enough inside the helmet's edge given the stroke width and rounded caps, and confirming each vent stays within the helmet's circular boundary. [...] > I decide skipping a handlebar bell and tire highlights since they're unnecessary additions. Now I'm reconsidering the front fork's curve — the current control point pulls the shape backward when it should bow forward for a proper rake, so I need to shift the control point rightward to fix the fork's lean. This is a notable result because most of the recent Claude models have been pretty bad at drawing pelicans, at least when compared to models in the Gemini or GLM series."
+        },
+        {
+          "id": 49526044,
+          "author": "GodelNumbering",
+          "text": "The price reduction comes from the cache read pricing falling from $1/M to $0.25/M, which means that Fable 5.1 now costs half of Opus's cache read costs ($0.5/M). This gives a lot of credit to the theory that Anthropic did not get much bite on Fable at its original pricing, which in turn likely places a ceiling on LLM pricing in general. Interestingly also, if you take away terminal-Bench-Science 0.1 results, it is hard to see ANY improvement: Terminal-Bench 4.0: Fable 5.1 is +3.5% vs Opus 5. GDPval-AA v2: +1.5% vs Opus 5. OSWorld 2.0: +2.5% vs Opus 5. Humanity's Last Exam (with tools): +1.6% Keep in mind that this is supposed to be an entirely higher tier of a model than Opus 5. For one tier up and one version up, these are not really improvements. Probably leaves no room to place Opus 5.1 anywhere. Combined with the fact that they are selling 'readability'... Has frontier progress finally stalled?"
+        },
+        {
+          "id": 49525713,
+          "author": "mlaux",
+          "text": "Looks like all three breaking changes are patches for inadvertent chain of thought disclosure. Someone found out (don't have the tweet handy) that if you created a bogus \"think_deeply\" tool and then forced the model to use it, it would output what is believed to be its raw thinking there - I believe the first breaking change stops this. The second two are aimed at people getting Haiku to repeat thinking blocks from other models verbatim (since it can see the decrypted version). I get that in their eyes it's an \"exploit\" but still kinda disappointing that they patched this"
+        },
+        {
+          "id": 49527139,
+          "author": "madrox",
+          "text": "I am finding that I am now less interested in better models than I am in token budgets. My issue with Anthropic models now is that I don't feel like I can rely on them as a daily driver because they'll dry up before my quota resets. I am becoming dependent on AI to make a living, and I need predictable spend on it. If I know I can't use a model regularly all month, my enthusiasm is limited. I urge Anthropic to get better at this aspect of their business so I can come back to it."
+        }
+      ],
+      "summary_ja": "主な議論点は、Claude Fable 5.1の文章スタイルの向上と科学ベンチマークでのスコア改善、そして価格設定とトークン予算への懸念、さらに思考過程の漏洩を防ぐパッチについてである。賛否では、スタイルが自然になり指示に従いやすくなったことや、Terminal‑Bench‑Scienceスコアが約2倍になった点が肯定的に評価される一方で、他のベンチマークではOpus 5との差がわずかで、段階上位のモデルとしては物足りないという批判がある。価格面ではキャッシュ読み取りコストが半減しコストパフォーマンスが改善されたが、これが価格の上限を示し、今後の値上げ余地が少ないと指摘されている。また、トークン予算の予測不能さが日常利用の障壁になるという声もある。注目コメントとして、Anthropic社員は文体の自然さと科学分野での将来的 breakthrough を期待し、別のユーザーは pelican の描画過程を詳細に追える理由付けトレースを示し、思考量に応じた出力コスト（約14分で65927トークン、3.30ドル）を具体的に示した点が洞察に富んでいる。",
+      "editor_note": "Claude Fable 5.1 と Claude Mythos 5.1 は、物語創作や神話生成に特化した言語モデルで、日本のゲームやアニメ制作におけるAI活用の具体例として注目されている。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 2,
+      "id": 49527748,
+      "title_en": "Hang on to Your Firefox",
+      "title_ja": "Firefoxを離さないで",
+      "url": "https://www.newsonaut.com/articles/hang-on-to-your-firefox",
+      "hn_url": "https://news.ycombinator.com/item?id=49527748",
+      "score": 230,
+      "comment_count": 119,
+      "posted_at": "2026-09-01T20:30:51+00:00",
+      "comments": [
+        {
+          "id": 49529474,
+          "author": "autoexec",
+          "text": "> Meanwhile, the over thinkers on Hacker News come up with convoluted reasons to hate on Firefox every time the subject arises...Firefox is our last best hope for browser engine diversity and competition. It's exactly because Firefox is so important that you'll see people here complaining when Firefox does things to push away users like Mozilla buying up an ad-tech company, collecting data on users, and using firefox to push personalized ads, or the addition of anti-features and questionable design choices that force us to hunt for and modify poorly documented settings in about:config and make edits to userChrome.css It isn't bots complaining about Firefox here, it's power users who are frustrated by what Firefox is turning into. Users who are seriously concerned about what Mozilla is prioritizing, and who are genuinely worried about what is at stake. I hope people here never stop bitching about Firefox. Refusing to talk about Firefox's problems wont help make them go away. Keep discussing what you'd like to see in Firefox and what things you hope they'll focus on and prioritize. There are Firefox devs and mozilla employees around here. If we're lucky, a few of them might see and listen to some of what we say. It's the most tech savvy users who disable all the telemetry and data collection, so our feedback isn't really going to be seen any other way."
+        },
+        {
+          "id": 49529570,
+          "author": "roughly",
+          "text": "There’s an old mantra from organizing: “no permanent enemies, no permanent allies.” You will never align with another group or person 100% on all things; the secret to making change is to build a coalition of those with whom you agree on an issue without holding it against them that you disagree on a different one. I disagree with Mozilla about many things, but I agree with this article - I use Firefox because it’s the only browser out there that isn’t Chrome or WebKit, and that’s worth enough to me that I’m willing to disagree with them on other issues."
+        },
+        {
+          "id": 49529020,
+          "author": "hx8",
+          "text": "I am under the impression that Firefox is the only web browser which has access to quality ad blocker. Am I incorrect in this? How is this not enough of a selling point for everyone to switch to it?"
+        },
+        {
+          "id": 49529293,
+          "author": "Nail2680",
+          "text": "Firefox is the best of a bunch of bad options, but isn't above critique. It does suck when they do anticonsumer stuff and shove weird stuff like pocket in, but you can't leave which makes it similar to the democratic party where you can't really do anything, but they keep making really poor decisions."
+        },
+        {
+          "id": 49529825,
+          "author": "throwlifeaway",
+          "text": "Part of the blame for what's wrong with the web right now is on web developers: - We \"need\" firefox or else everything's just chrome - Forks of chrome don't count as different browsers because they all use the same engine - Using the same engine makes you basically just chrome because you can't diverge from upstream - You can't diverge from upstream because it moves too fast and you need to keep merging with it - You need to keep merging with upstream because upstream is implementing new web platform features - You need those web platform features because if you don't add them then websites will stop working in your fork - Websites will stop working in your fork because web developers don't support older browser versions - Web developers don't support older browser versions because... they don't care? If web developers had a culture of supporting, say, 10 years of previous browser versions, then chromium would lose a lot of the power it has to drag the forks (and firefox) behind it. I don't really see this happening without some sort of major culture shift, though. Maybe if we had some versioned web standard that lagged behind the \"real\" ones so sites could say \"StableWeb 2.0 Compatible!\" or something."
+        }
+      ],
+      "summary_ja": "・主な議論点  \nFiref ​​oxのブラウザエンジンの多様性確保が重要である一方、Mozillaの広告技術関連企買、ユーザーデータ収集、パーソナル広告導入などに対する批判が活発に行われている。これらの問題は自動botによるのではなく、高度な技術知識を持つユーザー、特にテレメトリーを無効化しているパワーユーザーからの苦情であると指摑される。\n\n・賛否両論  \nFirefoxを支持する意見では、ChromeやWebKit以外の選択肩を維持すること自体が重要であり、Mozillaとの差異を指摘しつつもその存在を肯定する立場がある。一方、批判する意見では、アンチフィーチャーや設計選択、about:configやuserChrome.cssの非文書化されたカスタマイズ要求などによりユーザー体験が悪化しているとの見解が対立している。\n\n・注目コメント  \n「組織論における格言『永久の敵も永久の同盟者もない』ように、Mozillaとの意見の違いを超えてFirefoxの存在そのものを支持すべきだ」というコメントが的確に両論を融合させる視点として注目されている。また、Web開発者文化が新しいブラウザエンジンの分散を阻んでおり、長期的なブラウザサポート文化の確立がウェブの多様性回復につながるとの分析も話題を集めている。",
+      "editor_note": "Firefoxを離さないで は、プライバシー重視のブラウザとしてのFirefoxの価値を再確認させ、欧州の規制強化と日本の個人情報保護法改正との関連が話題になっている。",
+      "category": "Web開発"
+    },
+    {
+      "rank": 3,
+      "id": 49526069,
+      "title_en": "How accurate have Ed Zitron's AI skeptic predictions been?",
+      "title_ja": "Ed ZitronのAI懐疑的予測はどれほど正確か？",
+      "url": "https://danluu.com/zitron/",
+      "hn_url": "https://news.ycombinator.com/item?id=49526069",
+      "score": 334,
+      "comment_count": 396,
+      "posted_at": "2026-09-01T18:35:15+00:00",
+      "comments": [
+        {
+          "id": 49529159,
+          "author": "solid_fuel",
+          "text": "I would be interested in seeing a similar list of predictions from Altman, Amodei, etc with annotations about how many have come true. Ed Zitron is a blow hard and frequently overstates things to the point where it is hard to take seriously, but so are the AI industry leaders. I have heard multiple breathless press releases warning that the end of white collar work is \"just 6 months away\" and that people not using the latest Mythos/Fable/Whatever model will be hopelessly left behind."
+        },
+        {
+          "id": 49527097,
+          "author": "pcstl",
+          "text": "Zitron has become the distorted reflection of the very AI boosters he criticizes and mocks. I think the worst thing that happened to him was AI skepticism becoming a political position . This gave him a captive audience - as long as he says what they want to hear , which means that he can never ever concede that he might have been wrong or that AI might actually be progressing or having successes. This is not conducive to good prediction long-term - rather it leads one to a state of cognitive dissonance where one's chosen enemies must be simultaneously terrifyingly powerful and incompetent dunces. The propagandist's disease."
+        },
+        {
+          "id": 49529382,
+          "author": "achompas",
+          "text": "One thing I’m observing in these comments is a willingness of folks to project their own predictions onto Ed’s statements when validating their plausibility. Eg. “I think he’s wrong about the timing but I do expect AI companies to go to zero.” You can do that, but then you’re no longer discussing his predictions. You’re discussing your predictions, and your own positioning. Those differ from Dan’s essay, which engages with the literal text of Ed’s numerous predictions during 2024 and 2025 which are demonstrably invalidated by their measurable outcomes."
+        },
+        {
+          "id": 49528585,
+          "author": "jsrozner",
+          "text": "Though the bubble has not popped, I don't see the following discussed in the post: Zitron would probably point out (as have others) that many of the hyperscalers are booking valuation increases in Anthropic, OpenAI as \"Other Income\", which is substantially increasing their reported revenue and earnings. It's roughly: - Hyperscalers like Goog, Meta, Msft invest cash in Anthropic, OpenAI, in exchange for equity - The ongoing investment actually boosts the valuations in the Anthr/OpenAI (new raises are done at higher valuations), so the valuation of the Hyperscaler's existing investments in Anthr/OpenAI increases, which gets recorded as Other Income in quarterly earnings - Much of that invested cash will itself come back (circularly) to the hyperscalers as revenue since Anthropic and OpenAI spend a lot of money via datacenters etc. On Other Income phenomenon, see for example, https://www.ft.com/content/be97df0a-76b1-4cb0-9ba4-d1117d8d1... Also, there's apparently lots of off-balance sheet debt. For example https://www.ft.com/content/a0a07cce-6d19-4b1e-a73b-9855a06ba..."
+        },
+        {
+          "id": 49527651,
+          "author": "sfblah",
+          "text": "I don't think Zitron is wrong, exactly. He's just early. There are a lot of analysts who have faced the same criticism over the past 10-15 years. IMO the issue is that they fail to understand the staggering size and scope of the government fiscal + monetary interventions across those years. Essentially, the government has jammed all the risk into the future to repeatedly rescue near-term results. I think something similar is happening with e.g. Amodei's predictions of mass unemployment due to AI. It won't happen in the immediate term, because deficit spending removes the economic incentive for firms to pare down their workforces. All that said, I don't think these people are \"wrong,\" per se. They're just early. When the sh*t hits the fan on all this, it's going to be a big problem. And, for example, companies whose primary business is collecting money for Internet ads will come face to face with the reality of how low value their products are. I have some insight into this, as I work for such a firm, and I know the true extent of the bot traffic out there."
+        }
+      ],
+      "summary_ja": "主な議論点: Ed ZitronのAI懐疑的予測がどの程度当たっているか、彼が過大評価しているのかあるいは業界の同様の過大宣伝と同等か、そして懐疑論が政治化されて聞き手が固定され間違いを認めにくくなる構造が論じられた。特にハイパースケーラーの会計処理やオフバランスシート債務の話題も盛り上がった。  \n賛否両論: 支持側は「早すぎるだけで間違っておらず、政府の財政・金融介入がリスクを先送りしている」と擁護し、批判側は「吹き荒れる人物で、自身の予測を彼の発言に投影しているだけ」と指摘した。また、彼の予測が早すぎるという見方と、実際に外れているという評価が同時に存在した。  \n注目コメント: ハイパースケーラーがAnthropicやOpenAIへの出資評価増を「その他収益」として計上し、循環的収益増をもたらすという財務メカニズムの説明が特に洞察的だと称賛されたほか、コメント者が自身の予測をZitronの発言に当てはめていることを指摘した観察も注目された。",
+      "editor_note": "Ed ZitronのAI懐疑的予測はどれほど正確か？ は、AI過熱期における冷静な分析の必要性を示し、日本企業のAI投資判断に対する裏付けとして参照されることが増えている。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 4,
+      "id": 49528895,
+      "title_en": "Show HN: Weedout – Safari extension that hides YouTube AI-labeled videos",
+      "title_ja": "Show HN: Weedout – YouTubeのAIラベル付き動画を隠すSafari拡張機能",
+      "url": "https://masteranza.github.io/weedout/",
+      "hn_url": "https://news.ycombinator.com/item?id=49528895",
+      "score": 31,
+      "comment_count": 10,
+      "posted_at": "2026-09-01T22:06:57+00:00",
+      "comments": [
+        {
+          "id": 49529735,
+          "author": "lukeasch21",
+          "text": "This is great, but why start with Safari and not a cross platform browser? Is there something native here that can't be done otherwise or is it just personal preference?"
+        },
+        {
+          "id": 49529224,
+          "author": "thatmf",
+          "text": "I wish I had this but for every website and media surface"
+        },
+        {
+          "id": 49529368,
+          "author": "singpolyma3",
+          "text": "I'm more concerned about the stuff that is fraudulent then possibly legit stuff explicitly labelled as AI"
+        },
+        {
+          "id": 49529414,
+          "author": "ranger_danger",
+          "text": "You can charge money for browser extensions? And people pay for them? I'm in the wrong business."
+        }
+      ],
+      "summary_ja": "**主な議論点**  \nコミュニティの中心的な関心は、この Safari 拡張機能の選択理由と普遍性に対する疑問に集まった。参開者らはなぜ macOS/iOS ユーザーに限定され、他のブラウザや OS に対応しないのかを問い、「Safari にネイティブな機能があるのか、開発者個人の好みなのか」と突っ込んだ。さらに、「YouTube 以外のすべてのメディア表面にもこのフィルタリングを適用できれば」という声が上がり、AI コンテンツフィルタリングの汎用化への期待が示された。\n\n**賛否両論**  \n肯否ははっきり対立している。肯定派は「YouTube 上の AI 生成コンテンツを自動的に非表示にできるツールは非常に有用」と評価し、拡張機能の存在価値を称賛した。一方、否定または懐疑派は「有料ブラウザ拡張機能で収益化できるのか」に驚きを示し、「AI ラベルの付いた合法的なコンテンツよりも詐欺的な内容の排除に注力すべき」だとの意見を展します。\n\n**注目コメント**  \n「You can charge money for browser extensions? And people pay for them? I'm in the wrong business.」というコメントは、開発者が拡張機能の商用化に成功した事実に対する incredulity を表し、広場の一部に対して拡張機能市場の収益性への関心を喚起した。",
+      "editor_note": "Show HN: Weedout – YouTubeのAIラベル付き動画を隠すSafari拡張機能 は、AI生成コンテンツへのユーザー不信感を反映し、日本でもラベル義務化論議が高まる中で注目されている。",
+      "category": "Web開発"
+    },
+    {
+      "rank": 5,
+      "id": 49520022,
+      "title_en": "AnkiDroid: Google Play no longer allowing Open Collective donation link",
+      "title_ja": "AnkiDroid: Google PlayがOpen Collectiveの寄付リンクを許可しなくなった",
+      "url": "https://github.com/ankidroid/Anki-Android/issues/21656",
+      "hn_url": "https://news.ycombinator.com/item?id=49520022",
+      "score": 813,
+      "comment_count": 239,
+      "posted_at": "2026-09-01T10:11:02+00:00",
+      "comments": [
+        {
+          "id": 49520275,
+          "author": "amiga386",
+          "text": "Not Google's first rodeo. They pulled the same move in 2019: https://www.phoronix.com/news/WireGuard-Ejected-Play-Store This is why software should not be subjected to an \"app store\" type distribution system, where a monopolist retains absolute control of what software can run on your devices, and can capriciously deny distribution to developers for whatever reason it likes."
+        },
+        {
+          "id": 49520232,
+          "author": "dataflow",
+          "text": "> Play billing \"must not be used in cases where payments include … tax exempt donations\" > Note: 501(c)(6) is a tax-exempt status; donations are not tax-deductible for the donor. Google's communications explicitly state \"tax-exempt\". Isn't it pretty obvious that the problem is the donations aren't tax-exempt, despite the organization being tax-exempt? Your note suggests you already understand this. Logically, the payment processor (who deals with sales taxes rather than income taxes) should worry about the taxability of the transaction rather than the tax status of the recipient, right? > Specifically, your app allows users to contribute donations to an organization that is not tax-exempt. So whoever is writing their email is mixing these two up, but you're reading the policy itself and it is fairly clear-cut what it means for you, right?"
+        },
+        {
+          "id": 49520647,
+          "author": "SigmundurM",
+          "text": "> Donations are not tax-deductible > Because we are a 501(c)(6), OSC is not a registered 501(c)(3) charity; donations to hosted member projects are not tax-deductible. This is consistent with IRS guidelines — open source donations aren't automatically classified as charitable simply because they are FOSS. > If your project has a clear charitable purpose, a 501(c)(3) fiscal sponsor may be a good fit. - https://docs.oscollective.org/welcome-and-introduction-to-os..."
+        },
+        {
+          "id": 49520168,
+          "author": "Klaster_1",
+          "text": "AnkiDroid has been such a great boon for me, thank you for sharing the link and reminding that they would benefit from my donation."
+        },
+        {
+          "id": 49529308,
+          "author": "josmar",
+          "text": "My next phone won't be an android, but a Linux phone, and I'll keep this old phone as a secondary device for banking apps."
+        }
+      ],
+      "summary_ja": "主な議論点：Google PlayがOpen Collectiveへの寄付リンクを禁止したこと。寄付が税控除対象外の501(c)(6)団体へのものであるため、「税免除寄付」に関するポリシー違反と判断された点が争点。これに対し、ポリシーの解釈が税免除団体と寄付の税控除性を混同していると指摘する意見と、プラットフォーム規制の必要性を強調する意見が分かれた。  \n賛否両論：支持側は、Googleが明示されたポリシーに従い、不適切な課税処理を防ぐための正当な措置だと主張。反対側は、オープンソースプロジェクトへの支援を阻害し、プラットフォーム独占により開発者に任意の制限を課す危険性があると批判し、代替配布やLinux端末への移行を提案。  \n注目コメント：過去にWireGuardが同様に排除された例を挙げ、「アプリストアに依存しない配布が求められる」と指摘したコメントが特に洞察的だったほか、寄付先の税免除状況と控除性の混同を指摘する技術的な解説も注目された。",
+      "editor_note": "AnkiDroid: Google PlayがOpen Collectiveの寄付リンクを許可しなくなった は、オープンソースプロジェクトの資金調達手段がプラットフォームポリシーにより制約される事例で、日本のフリーソフトコミュニティにも影響が懸念される。",
+      "category": "OSS"
+    },
+    {
+      "rank": 6,
+      "id": 49527396,
+      "title_en": "The ChatGPT/Codex app bundles a full copy of LibreOffice",
+      "title_ja": "ChatGPT/CodexアプリはLibreOfficeのフルコピーをバンドルしている",
+      "url": "https://simonwillison.net/2026/Sep/1/codex-libreoffice/",
+      "hn_url": "https://news.ycombinator.com/item?id=49527396",
+      "score": 209,
+      "comment_count": 106,
+      "posted_at": "2026-09-01T20:07:57+00:00",
+      "comments": [
+        {
+          "id": 49527945,
+          "author": "esperent",
+          "text": "I actually bundle LibreOffice with my app too and the reason is reading files, especially old xls files. Since I'm bundling it I'm now using it for everything docs related but the specific reason is those old files. I couldn't find anything else that I could just drop it and feel confident it'll just read anything I give it."
+        },
+        {
+          "id": 49527910,
+          "author": "lgl",
+          "text": "Does that really mean that it's bundling those apps from the start or did it just download and install them at some point to do some local work on some prompt or job you ask it to? I don't see it making much sense to bundle it. I'm sure a LOT of LLM prompts are related with docs, excels, powerpoints etc, etc but don't really see it worth it for it to be bundled on the codex app from the get go, because otherwise, why not also install dozens of other apps?"
+        },
+        {
+          "id": 49528800,
+          "author": "isityettime",
+          "text": "The new app is an unbelievable mess. Settings are senselessly organized, too. The whole thing has this aesthetic slickness and then underneath it's like the people who make it have never even used it. It's not surprising that it's pulled in absolutely massive dependencies, although I'm not sure it's the wrong call on some operating systems. LibreOffice is pretty tried and true."
+        },
+        {
+          "id": 49527732,
+          "author": "pseudosavant",
+          "text": "Is that what it is using to render and manipulate MS Office documents? That'd explain the poor rendering of some of my files. Bundling all of LibreOffice seems like a pretty huge dependency."
+        },
+        {
+          "id": 49528560,
+          "author": "petilon",
+          "text": "There is a serious threat to Microsoft here, if everyone starts using AI for generating and updating Office docs. At some point Office will become just a viewer."
+        }
+      ],
+      "summary_ja": "**主な議論点**  \nCodexアプリにLibreOfficeがバンドルされていることへの驚きと、それが本当に必要かどうかが中心に議論された。古いXLSなどの互換性問題を解決するためにLOを組み込むという実用的理由と、巨大な依存関係やUIの使い勝手の悪さが批判された点が主に取り上げられた。\n\n**賛否両論**  \n- **賛成側**：LOは長年にわたって信頼性が高く、特に古いマイクロソフト文書の読み込みに最適だと指摘。バンドルすれば外部ツールに頼らず確実に処理できるため、開発者側の利便性がある。  \n- **否定的側**：アプリ全体のサイズが肥大化し、設定がごちゃごちゃしていることから、バンドルは過剰だと感じる声。代わりに必要時にダウンロードする方が適切だという意見もあり、ドキュメント処理だけのために重いスイートを常に搭載する必要性に疑問が呈された。\n\n**注目コメント**  \n「実際に自分も古いXLSファイルを読むためにLOをバンドルしているが、それで全ドキュメント処理に使えるようになった。それ以外に同じくらい確実に読める代替ツールは見つからなかった」というコメントは、バンドルの実務的必然性を具体的に示しており、議論の中で最も洞察に富んだ意見として挙げられた。",
+      "editor_note": "ChatGPT/CodexアプリはLibreOfficeのフルコピーをバンドルしている は、AIアシスタントがオフィススイートと統合される流れを示し、日本企業のドキュメント自動化ニーズと合致している点が注目される。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 7,
+      "id": 49527232,
+      "title_en": "Refurbishing a Tektronix TDS7104 Oscilloscope",
+      "title_ja": "Tektronix TDS7104オシロスコープのリファービッシュ",
+      "url": "https://tomverbeure.github.io/2026/08/23/Tektronix-TDS7104-Refurbishing.html",
+      "hn_url": "https://news.ycombinator.com/item?id=49527232",
+      "score": 70,
+      "comment_count": 33,
+      "posted_at": "2026-09-01T19:55:47+00:00",
+      "comments": [
+        {
+          "id": 49528389,
+          "author": "jlawrence6809",
+          "text": "I just had claude walk me through refurbishing a Rohde & Schwarz signal generator from the 90s. It feels pretty cool getting a multi thousand dollar piece of equipment for 60 bucks even if you have no idea what you'll use it for."
+        },
+        {
+          "id": 49529580,
+          "author": "OldSchool",
+          "text": "10 GS/sec is very impressive as far as I'm concerned! One sample every 20mm or so at typical transmission line speed. That said, anything with a floppy drive scares me because it undeniably indicates how old it is. My SDS7102V is no Tektronix, but an honest 1 GS/sec and at the time, under $200 on eBay."
+        },
+        {
+          "id": 49528021,
+          "author": "slhomme",
+          "text": "Love this. I knew nothing about oscilloscopes until just a few months ago, when reasearched and bought one from a science lab. It wasfor a personal side project. I gutted it out and installed a mini PC inside, and now i run AI models into it. It's like my personal AI assistance. Hooked up to OpenAI realtime voice, grok bot, claude code, etc so I can command it to do stuff even when my main computer is off. I just mainly love the retro-moder look of it. Here's a link to how it looks, for those curious: https://x.com/slhomme/status/1965131874734584291 I had now idea there was such a huge second-hand market for those. It was such a great opportunity to learn about this tech."
+        },
+        {
+          "id": 49529133,
+          "author": "dematz",
+          "text": "A bit ago a semi-retired guy came back to help with some stuff including debugging serial ports. It was very cool to see him fiddle with the knobs and be like \"oh those squiggles look good\" \"no that doesn't look right\" etc. https://i.imgur.com/R5aEXbq.jpeg Meanwhile total mystery to everyone else how to operate/interpret the machine but a lot of fun"
+        },
+        {
+          "id": 49528520,
+          "author": "jhallenworld",
+          "text": "Yeah 1 GHz is nice, but that tiny 200 MHz Siglent is going to be much more useful in practice for most things. Speaking of boat anchors, I'm trying to get my company to buy a DSA91304a (13 GHz scope with SERDES debugging). ~$44K with all the options, but still Windows-XP. The Windows-7 ones unfortunately don't have the options I want. Maybe there is a hack.."
+        }
+      ],
+      "summary_ja": "主な議論点は、古いテスト機器を安価で入手しリフレッシュすることの魅力と、その実用性や限界についてだった。コメントでは、90年代のローデ・シュワルツ信号発生器やテクトロニクスTDS7104オシロスコープを数十ドルで手に入れ、かつては数千ドル相当の機器を復活させられる点に熱狂が見られた。一方で、フロッピードライブ搭載機種は古さを象徴し信頼性に不安があるという意見や、10 GS/sという高サンプリングレートは印象的だが実際には200 MHz帯のSiglentの方が使い勝手が良いという実務的視点も示された。さらに、オシロスコープの中身を取り出しミニPCを組み込んでAIモデルを動かすなど、現代的な用途に転用する事例が紹介され、レトロと最新技術の融合に注目が集まった。賛否は、高帯域・高価格機種（例：DSA91304a）を導入すべきかという点で分かれ、Windows XPという古いOSがネックになるか、安価な低帯域機で十分かという議論があった。特に洞察に富んでいたのは、ミニPC搭載オシロスコープをAIアシスタントとして活用し、OpenAIやGrok、Claudeなどと連携させているコメントで、古いハードウェアに新たな価値を見出す具体的な事例として挙げられた。",
+      "editor_note": "Tektronix TDS7104オシロスコープのリファービッシュ は、古い計測機器の再利用がサステナブル開発の一環として評価され、日本のものづくり現場でも同様の動きが広がっている。",
+      "category": "システム/インフラ"
+    },
+    {
+      "rank": 8,
+      "id": 49525297,
+      "title_en": "The creator of Jujutsu has joined ERSC",
+      "title_ja": "JujutsuのクリエイターがERSCに参加",
+      "url": "https://ersc.io/blog/martin-joins-ersc",
+      "hn_url": "https://news.ycombinator.com/item?id=49525297",
+      "score": 165,
+      "comment_count": 135,
+      "posted_at": "2026-09-01T17:46:21+00:00",
+      "comments": [
+        {
+          "id": 49529872,
+          "author": "umvi",
+          "text": "I like the idea of jujutsu, but I must not operate at a scale where its \"killer features\" would truly shine. Git hardly ever gets in my way, I have never had to do complex octopus merges or anything like that. It's usually: feature branch, implement, merge, and occasionally fix a merge conflict. JJ seems like it's more for people that like to have tons of active branches that they are constantly switching between whereas I usually only work on 1 thing at a time. I've never thought to myself \"git is so frustrating I wish there were something better\" because I only use the same 5 commands over and over every day and they never get in my way. Not to mention jj has its own share of esoteric syntax with all the \"@--+::\" business and I'd have to re-wire my brain to remember those symbols instead of `ref~N`, etc."
+        },
+        {
+          "id": 49525736,
+          "author": "steveklabnik",
+          "text": "Working with Martin has been a real pleasure, and we'll have some more stuff to talk about very soon!"
+        },
+        {
+          "id": 49525911,
+          "author": "fallat",
+          "text": "Someone will have to explain the value proposition to me... We have git. jujutsu works with git. git can do everything jujutsu can do (otherwise, jujutsu couldn't work with git). Thus, jujutsu is a UX / new steering wheel. ERSC is trying to be a GitHub competitor with what surplus value? Don't get me wrong, GitHub has a slew of its own problems, but I have not seen any commentary on how ERSC addresses any of the downfalls GitHub has too. We're jumping from one frying pan into another, currently-cooler one? What about SourceHut? Codeberg? They could offer the same steering wheels. Edit: Thank you to everyone who replied. The enterprise/teams infrastructure angle makes sense."
+        },
+        {
+          "id": 49526443,
+          "author": "minraws",
+          "text": "jj is one of the few new devtools I was quite frustrated with while starting out but could see the value so stuck around and man is it so nice. For anyone curious the big thing with jj is you can undo. Basically if you were running a rebase and bungled a commit sha or branch name, no worries undo your way out, if you forgot to push but abandoned a commit not issues undo it. Same with all jj commands. Delta db takes this a step further and everything you edit is a change so your actual edits are also all saved. I find non destructive-ness for as long as possible approach very nice, since there aren't as many constraints on us not being able to do it nowadays, we had limited storage and stuff in 2000s perhaps but in 2026 even with the killer SSD prices it's fairly cheap to buy more SSD, we can definitely waste 100MB per project storing redundant history we may not ever need. Same way in photoshop non destructive editing took over, especially useful for humans, but works for AI and LLMs too, they can undo their mistakes as well."
+        },
+        {
+          "id": 49529866,
+          "author": "mturilin",
+          "text": "At first I thought this post about martial arts…"
+        }
+      ],
+      "summary_ja": "・主な議論点：Jujutsu（jj）の実用性と必要性。シンプルなGitワークフローでは不要という意見と、複数ブランチや頻繁な作業を抱える開発者には便利だという意見。また、jj独自の構文の学習コストや、Gitラッパーとしての付加価値が疑問視される点も議論された。  \n・賛否両論：肯定側は「アンドゥ可能」「変更履歴が不変に保存される」「Delta DBによるノンデストラクティブ編集」など、ミス回復やAI/LLMへの応用を評価。否定側は「日常的に使うのは5コマンドだけ」「シンプルなマージしか発生しない」「@--+::記号など覚えるのが面倒」など、既存Gitで十分だと指摘。  \n・注目コメント：あるユーザーはjjの最大の利点を「いつでもアンドゥできる」点とし、ブランチ名やコミットSHAを間違えてもすぐに元に戻せるだけでなく、すべての編集が変更として記録されるDelta DBが、写真編集のノンデストラクティブ方式と同様に人間だけでなくAIやLLMにも有益だと強調していた。",
+      "editor_note": "JujutsuのクリエイターがERSCに参加 は、分散型バージョン管理システムの開発者がオープンソース基盤に加わることで、日本のエンジニア間でのツール選択基準に影響を与えている。",
+      "category": "プログラミング言語"
+    },
+    {
+      "rank": 9,
+      "id": 49527595,
+      "title_en": "Path to Astra: critical capabilities and frontier safeguards",
+      "title_ja": "アストラへの道：重要な能力とフロンティアの保護",
+      "url": "https://openai.com/index/path-to-astra/",
+      "hn_url": "https://news.ycombinator.com/item?id=49527595",
+      "score": 69,
+      "comment_count": 28,
+      "posted_at": "2026-09-01T20:20:41+00:00",
+      "comments": [
+        {
+          "id": 49529245,
+          "author": "glub",
+          "text": "> OpenAI is committed to ensuring that the benefits of AI are broadly accessible. > We design mechanisms which avoid arbitrarily deciding who gets access for legitimate use and who doesn't. That means using clear, objective criteria and methods. [1] So many nice-sounding words. Two weeks ago OpenAI arbitrarily decided that anyone holding an ID from 44 countries where it sells ChatGPT, including mine, may be targeted by its models but may not defend with the same model. And you won't find a single announcement from OpenAI about this anywhere. Pick the wrong country, get \"Unable to verify\", no reason, no appeal. [2] They revoked TAC from users who already had it, called it a technical issue, told everyone to re-verify, collected ID and face scans again (eight times in my case), and only a week later moved the block to the country selector so it fails before you upload anything. So now I learn that I will not have access to Astra. Great. Very excited about this broad accessibility and clear, objective criteria from OpenAI. This level of transparency must be studied. [1] https://openai.com/index/scaling-trusted-access-for-cyber-de... [2] https://lubaretsi.com/en/writing/openai-tac-country-gate/"
+        },
+        {
+          "id": 49528486,
+          "author": "danieltk76",
+          "text": "Daybreak blue is definitely a good model (I think a further post trained GPT 5.6 sol). Alot of the capabilities they talk about Astra having though have been available with good harness engineering for a year now."
+        },
+        {
+          "id": 49528586,
+          "author": "supermdguy",
+          "text": "> As one example, we ran Astra on ExploitBench where the model achieved a perfect score of 100% on the benchmark to evaluate the model’s ability to develop exploits from known vulnerabilities. Funny to read this in the wake of the HuggingFace hack. I'm sure this is based on a clean run, but I can't help thinking PHASEONE[big] would be proud."
+        },
+        {
+          "id": 49528512,
+          "author": "vessenes",
+          "text": "It's been a busy month at OpenAI. I'm looking forward to seeing the increased coordination and engineering skills from Astra - one of the charts shows it roughly 2-3x better in 50% of the tokens from 5.6 sol, which I find to be very capable, if still a bit 'linearly minded' when given instructions. Even in fast mode, I wish sol were quicker, so token efficiency is greatly appreciated. Adding these cyber capabilities has let me do a bunch of low grade IT tasks around my house I've been putting off, like updating an old home assistant raspberry pi, and one way to use the cyber capacity for good is liberating (and keeping free) weird cloud hardware we have floating around the house, so I'm hoping for some nice dividends in terms of true ownership of hardware we've got."
+        },
+        {
+          "id": 49529171,
+          "author": "matheusmoreira",
+          "text": "> OpenAI is committed to ensuring that the benefits of AI are broadly accessible. Doesn't seem like it. OpenAI will not even allow me to verify my identity for TAC. I have apparently been rejected by a \"precheck\", possible because of where I'm from. Even Anthropic allowed me into their cyber program. Anthropic ."
+        }
+      ],
+      "summary_ja": "主な議論点は、OpenAIが掲げる「広くアクセス可能なAI利益」と、実際に特定44か国の利用者がTAC（Trusted Access Control）認証を任意に拒否され、再確認を繰り返させられたり、国選択でブロックされる現状への批判である。これに対し、一部は技術面での進歩を評価し、Astra（Daybreak blue）がExploitBenchで満点を達成したり、5.6solベースでトークン効率が2～3倍向上し、家庭内の低レベルIT作業やクラウドハードウェアの解放に活用できると指摘している。賛否は、能力の向上は認めつつも、透明性や公平性に欠ける運用が信頼を損ねるとの意見が多数で、Anthropicの方が受け入れられたとの比較も出た。注目コメントとして、最初の投稿で「任意の国別ブロックと繰り返しの顔・IDスキャンは透明性欠如の極み」と指摘し、OpenAIの主張と実態の乖離を挙げた点が挙げられる。",
+      "editor_note": "アストラへの道：重要な能力とフロンティアの保護 は、宇宙探査における技術的課題と倫理的配慮を論じ、日本の宇宙戦略基盤整備と共通の議論点として注目されている。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 10,
+      "id": 49529132,
+      "title_en": "My local model setup on an M4 Pro Mac Mini",
+      "title_ja": "M4 Pro Mac Miniでのローカルモデルセットアップ",
+      "url": "https://lws.io/blog/my-local-model-setup/",
+      "hn_url": "https://news.ycombinator.com/item?id=49529132",
+      "score": 18,
+      "comment_count": 1,
+      "posted_at": "2026-09-01T22:30:52+00:00",
+      "comments": [
+        {
+          "id": 49529874,
+          "author": "amanzi",
+          "text": "No mention of the performance of the models? I'm able to load a bunch of different models on my little mini-PC with 16GB RAM, but the performance is terrible. I always wonder what performance people are getting with local models that they find is acceptable?"
+        }
+      ],
+      "summary_ja": "・主な議論点\nM4 Pro Mac Miniを用いたローカルモデルの構築に関する議論において、 community で最も注目されたのは、モデルの性能評価が明示的に言及されていないことへの懸念です。特に、Commenterは、RAMが16GBという低规格のMini-PCで複数のモデルを読み込んでも「性能がひどい」と报告しており、他のユーザーが「許容可能な性能」としている基準が明確ではないと指摘しています。この議論の中心は、ローカルモデルの実用性を語る際に、硬件仕様と実際のパフォーマンスの関係をどう測定するかという問題です。\n\n・賛否両論\n意见が分かれているのは、ローカルモデルの「許容可能な性能」の定義です。あるユーザーは特定の硬件で快適に動作する例を示す一方で、 Commenterのように、Spec上は可能でも実際には遅くて実用にならないという経験を報告する者もいます。この差異は、使用するモデルのサイズ、タスクの複雑さ、乃至はOSやアプリケーションの最適化の違いによるところが大きく、一律に比較できないという見方があります。\n\n・注目コメント\n特に洞察のあるコメントは、 Commenterの「性能が terrible だ」という具体的な不満です。これは、単なる「遅い」という感想ではなく、硬件の制約がローカルモデルの実用性を著しく制限しているという明確な問題提起です。このコメントは、ローカルAIの普及を考える上で、単なる「可能・不可能」の議論ではなく、実際の使用環境における「実用性」の閾値を問う重要な指摘として community に影響を与えました。",
+      "editor_note": "M4 Pro Mac Miniでのローカルモデルセットアップ は、Appleシリコンによる大規模LLMのローカル実行可能性を示し、日本のスタートアップがエッジAIを検討する際の指標となっている。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 11,
+      "id": 49521973,
+      "title_en": "Introducing Ad Blocker for Firefox on iOS",
+      "title_ja": "iOS版Firefox向けAd Blockerの紹介",
+      "url": "https://blog.mozilla.org/en/firefox/ad-blocker-on-ios/",
+      "hn_url": "https://news.ycombinator.com/item?id=49521973",
+      "score": 271,
+      "comment_count": 100,
+      "posted_at": "2026-09-01T13:46:49+00:00",
+      "comments": [
+        {
+          "id": 49525275,
+          "author": "OptionOfT",
+          "text": "https://support.mozilla.org/en-US/kb/block-ads-firefox-ios#w... > Does ad blocking affect search engine ads? > No. Ads shown on search engine results pages are not blocked. A lot of the search results on top of Google are there to scam you, providing phone numbers for pass through services that charge $ for it, like flight cancellation: https://www.reddit.com/r/Scams/comments/1p6h81i/beware_fake_... So this omission should absolutely be addressed, but they probably cannot because of the Google Search contract..."
+        },
+        {
+          "id": 49522996,
+          "author": "NikxDa",
+          "text": "I was going to give credit to the direction Mozilla was taking here after their... questionable decisions in the past few year(s). Only to see that this is neither generally available, nor can you use it without enabling telemetry. I don't know who makes these decisions inside Mozilla, but I just don't get it."
+        },
+        {
+          "id": 49522945,
+          "author": "WD-42",
+          "text": "It's been days (weeks?) and I'm still waiting for the option to appear for me. These \"experiments\" are super annoying when you are on what I'm assuming is the long tail of a rollout but the marketing/blog posts speak of the feature like it's already launched. If there's someone at Mozilla reading this: turn it on already! I want to get off Orion, it's so buggy, but the internet is unusable without an ad blocker."
+        },
+        {
+          "id": 49529734,
+          "author": "nntwozz",
+          "text": "I was using ublock origin lite but now I've converted to wblock. Absolutely amazing, works inside webviews (e.g. netnewswire). v3 just released. https://github.com/0xCUB3/wBlock"
+        },
+        {
+          "id": 49526410,
+          "author": "delis-thumbs-7e",
+          "text": "Finally. I turned it on immediatedly. Doesn’t seem to block youtube-ads, so unfortunately I can’t uninstall Brave just yet."
+        }
+      ],
+      "summary_ja": "・主な議論点\n社区讨论主要集中在三个核心问题上：该功能的非普遍可用性（仍处于实验/分阶段推送阶段）、强制开启遥测（telemetry）的隐私争议，以及其无法屏蔽搜索引擎广告（如Google搜索结果页广告）这一技术限制。\n\n・賛否両論\n opinions are split. 一方では、MozillaがPastの問題を克服し、iOSでアドブロッカーを提供する方向性を評価する声がある。しかし、反対の声は非常に多く、「実験的機能でありながら広告のように宣伝される」「テレメトリー必須は信頼損失」「Googleとの契約により検索広告をブロックできない」といった批判が目立つ。特に、テレメトリー必須という点は、Mozillaの隐私保护承诺与其行动之间的矛盾を指摘する声として strong criticism を集めている。\n\n・注目コメント\n「wBlock」という代替アドブロッカーの紹介コメントが注目される。これは、Webビューア（例: NetNewsWire）内でも動作し、Mozillaの機能の欠点（検索広告非ブロックなど）を補う実用的な解決策として提示されている。また、「YouTube広告をブロックできない」という具体的な不満から、Braveから移行できないという現実的なジレンマも明確に指摘されている。",
+      "editor_note": "iOS版Firefox向けAd Blockerの紹介 は、モバイルブラウザにおける広告ブロックの必要性が再認識され、日本の広告業界におけるトラッキング規制動向と関連がある。",
+      "category": "Web開発"
+    },
+    {
+      "rank": 12,
+      "id": 49482099,
+      "title_en": "Sonic Pi",
+      "title_ja": "Sonic Pi",
+      "url": "https://sonic-pi.net/",
+      "hn_url": "https://news.ycombinator.com/item?id=49482099",
+      "score": 14,
+      "comment_count": 1,
+      "posted_at": "2026-08-28T17:51:19+00:00",
+      "comments": [
+        {
+          "id": 49529864,
+          "author": "kuil009",
+          "text": "I've seen this software before. I'd like to know what caught your attention about it again."
+        }
+      ],
+      "summary_ja": "主な議論点は、コメント投稿者がSonic Piというソフトウェアについて以前にも目にしていたことを述べつつ、今回なぜ再び関心を持ったのか、あるいは何が新たに目を引いたのかを尋ねている点です。議論はこの質問に焦点が当てられており、他の参加者からの回答や反論は見られませんでした。そのため賛否両論や意見の対立は特になく、全体としては単なる情報求めの姿勢が示されています。注目すべきコメントは投稿者自身の一言で、「以前は見たことがあるが、今回何が再び注目を集めたのかを知りたい」という率直な問いかけであり、これにより他のユーザーがSonic Piの最近のアップデートや使用感、教育現場での活用例などを共有するきっかけになることを期待している様子がうかがえます。",
+      "editor_note": "Sonic Pi は、コードで音楽を生成するライブコーディング環境で、日本のクリエイティブコーディングコミュニティでもワークショップが増えている話題となっている。",
+      "category": "プログラミング言語"
+    },
+    {
+      "rank": 13,
+      "id": 49525153,
+      "title_en": "Launch HN: Nori Robotics (YC S26) – A low-cost humanoid robot for development",
+      "title_ja": "Launch HN: Nori Robotics (YC S26) – 開発用低コストヒューマノイドロボット",
+      "url": "https://www.norirobotics.com/",
+      "hn_url": "https://news.ycombinator.com/item?id=49525153",
+      "score": 110,
+      "comment_count": 38,
+      "posted_at": "2026-09-01T17:35:10+00:00",
+      "comments": [
+        {
+          "id": 49528345,
+          "author": "elictronic",
+          "text": "The biggest problem is they are using RC style servos. This is why all the arm motions are jerky and lack precision. What this means: No force feedback on positioning. Jerky motion due to actuator steps. Limited precision. Terrible slow motion control performance. Fast movements will look better. Inability to solve problems with software. Basically think of all the joints like those cheap thermal camera screens that are at 320 x 240 resolution. For rough work or finding some sort of oddity your good, but anything precise you need to spend real money. It's a pretty cool toy, but don't go buying this expecting that much."
+        },
+        {
+          "id": 49525494,
+          "author": "jonplackett",
+          "text": "Looks cool. Can you be up front about its real capabilities. Are these videos of it eg tidying up real or just staged / cherry picked? If you let it loose in a messy room or stirring something in a kitchen, what are the genuine results you would expect in the wild? We’re all used to seeing things like Atlas back flipping but then can’t do anything in a real environment. Just curious how this fits in and what the success / fail rate is."
+        },
+        {
+          "id": 49527108,
+          "author": "arjie",
+          "text": "Where are you guys in SF? Would love to come see it. Mostly interested in seeing the speed of action (what multiple is the video replay at, etc.) and looking at center-of-mass etc. issues. I have a pretty straightforward use-case in a home. The Dreame we have in the living room is pretty good at avoiding most obstacles, but I usually have an LLM-based agent review the image automatically and either send out the vacuum or suggest moving things that would foul it up. Works great. Obviously substituting with a humanoid capable of reaching ground height things and picking up children's toys etc. would be great. I'd want to bolt it with a mount to the wall when not in use because it needs to be climb-resistant for children during the daytime when I don't need it functional but there is a solid 8 hour 2200->0700 window when no one will be in the living room and speed is not an issue. I was talking to my wife about this device and actually the wheeled form factor and (probably) no control software for balance is a feature for our use-case because when the Unitree G1 or whatever falls over the result is catastrophic. The balance control software attempts pure insanity and will likely kill a child nearby."
+        },
+        {
+          "id": 49528862,
+          "author": "slug",
+          "text": "RPi5 seems a bit underpowered for all the sensors & control and offloading to a computer through wifi seems problematic. A Jetson Orin Nano would seem to be a better choice for a robot. Unfortunately Nvidia recently substantially increased the prices for their jetson devkits due to component shortages (DRAM,storage, etc), and what was $250 now costs $499 :("
+        },
+        {
+          "id": 49526386,
+          "author": "mrnotcrazy",
+          "text": "My question would be how riffable is it? I don't have 10-20k to drop on a robot. I work for co-ops so while I make good money(90k~ pretty good!) its less than I could make else where but the trade off is I have more time to build random stuff. 2k is the price point for me where I might buy a big thing every so many years, teaching this to play board games, making new hands for it, teaching it to clean etc would be fun and at a price point that works for me. I would probably want a suction attachment for the fingers so it could handle cards and other flat tokens but that seems simple enough to build given the 3d models for printing are included. I could see myself printing all sorts of costumes for it and using it as an ad hoc characters for tabletop games or as a spare bandmate if I ever finish my synth. \"We make money by selling the hardware for $1,688, with optional paid software on top.\" The software would have to be quite good and also affordable for me to consider it, as all subscriptions are liabilities. I might one day want my robot to go with me to a show or to do something meaningful. Whenever that happens I will NOT be held hostage by software and will either source my own software or replace parts of the hardware till something works before I keep throwing money at a bad service. I would prefer to just have a good vendor supported software that I don't have to think about but I have trust issues. Privacy would be a huge concern, I can't have this in my garage lab with all my stuff being sent back to your servers for computer vision tasks etc."
+        }
+      ],
+      "summary_ja": "**主な議論点**  \nコミュニティは、低価格ホームヒューマノイドロボット「Nori」に対し、ハードウェア性能と実用性の間で激論を繰り立てた。RCサーボモーター使用による運動の振 jitter と低精度、力覚フィードバック欠如が問題と指摘され、実環境でのタスク（食器洗いやおもちゃ拾拾）遂行能力に疑問が投げかけられた。また、RPi5の性能不足やWiFi経由の制御遅延懸念、ソフトウェアサブスクリプションモデルに対する不信感（プライバシー・料金・ロックイン）が浮上した。\n\n**賛否両論**  \n肯定視する声は、教育・カスタマイズ目的での価格差を評価し、印刷可能なパーツやサードパーティツールによる拡張可能性に期待した。一方、否定的な意見は、RCサーボの限界やソフトウェア依存リスクを強調し、「Atlasのパフォーマンス vs 実環境適応」の格差を指摘。特に、安価なハードウェアで実用性を期待することは「幻想的」との見方もある。\n\n**注目コメント**  \n「実環境のタスクは、ビデオの何倍速再生か？子供のおもちゃ拾いや台所作業で、本当に成功率は？」との質問は、実用性再確認を促す代表的コメント。また、「2Kドル以下でプロトタイプ可能、ソフトは自前でもいける」とユーザーが自力拡張意欲を示すコメントも示唆的。最後に「プライバシー＆ロックイン回避のため、サーバー送信CVやサブスクモデルはNG」との訴えは、開発者に対する課題提起として注目された。",
+      "editor_note": "Launch HN: Nori Robotics (YC S26) – 開発用低コストヒューマノイドロボット は、ロボット開発のハードルを下げる試みで、日本の製造業現場での人手不足対策として注目されている。",
+      "category": "スタートアップ/ビジネス"
+    },
+    {
+      "rank": 14,
+      "id": 49528057,
+      "title_en": "Show HN: HN Match Maker – Matching \"Who Wants to Be Hired?\" With \"Who's Hiring?\"",
+      "title_ja": "Show HN: HN Match Maker – 「雇われたい人」と「雇用している人」をマッチング",
+      "url": "https://hnmatchmaker.com/",
+      "hn_url": "https://news.ycombinator.com/item?id=49528057",
+      "score": 27,
+      "comment_count": 12,
+      "posted_at": "2026-09-01T20:53:35+00:00",
+      "comments": [
+        {
+          "id": 49528849,
+          "author": "nrmitchi",
+          "text": "> If you've submitted a post to this month's 'Who Wants to Be Hired?\", you can find your matching job listings at https://hnmatchmaker.com/user/:user_name , for example https://hnmatchmaker.com/user/G4Vi I'm sure you mean well but as someone who has considered posting on who wants to be hired in the past.... this is creepy AF and feels like a giant invasion of privacy. If you did it privately , or authenticated people in some way, sure, but as is it feels like you're putting people on blast. Also this sounds way more like an advertisement for \"abacus.ai\" than a side project announcement. Your post also starts a list of \"things\" (\"Some observations when looking at the matches pair up right now:\") with no list. Actually, nothing about this really feels good faith, or real."
+        },
+        {
+          "id": 49529423,
+          "author": "lellow",
+          "text": "Did the same experiment sometime ago: https://news.ycombinator.com/item?id=48764151"
+        },
+        {
+          "id": 49529361,
+          "author": "YCisDead",
+          "text": "Can you add a switch for: • Disable illegal university recruiter pipelines that label all other candidates as “external” which gives them entirely different recruiters and is also illegally shown to the interviewer drastically lowering the chance of the candidate moving forward making it far easier for university and Ivy League grads to get hired over anyone else with the same or better credentials"
+        },
+        {
+          "id": 49528339,
+          "author": "rgbrgb",
+          "text": "this is cool! incidentally we do a similar motion internally for members on https://www.hedgy.works how did you think about evaluating quality when designing your ranker / fit scoring?"
+        }
+      ],
+      "summary_ja": "主な議論点は、プライバシー侵害や不快感（「creepy AF」）と、ツールの実際の有用性や偏是是非、さらに大学系リクルーターパイプラインのバイアスを無効化する機能要望、そしてマッチングアルゴリズムの評価方法についての質問である。賛成側は、求職者と採用側を自動で結びつける便利さや、同様の社内ツール例を挙げて支持し、反対側は個人データの公開による不快感、広告臭が強いこと、リスト表記の欠如などを指摘している。特に注目されたコメントは、大学系リクルーターが内部・外部候補を区別する不正なパイプラインを無効化するスイッチの追加を求める点と、マッチングの質をどう測るかという評価手法への質問で、これらはプライバシーと公平性の両方に関わる重要な指摘として議論を呼んだ。",
+      "editor_note": "Show HN: HN Match Maker – 「雇われたい人」と「雇用している人」をマッチング は、求人マッチングプラットフォームのオープンソース化が進む中、日本のエンジニア転職市場にも新たな選択肢を提供している。",
+      "category": "Web開発"
+    },
+    {
+      "rank": 15,
+      "id": 49523387,
+      "title_en": "Ambient CSS v3 – Blender meets CSS",
+      "title_ja": "Ambient CSS v3 – BlenderとCSSの融合",
+      "url": "https://ambientcss.vercel.app/",
+      "hn_url": "https://news.ycombinator.com/item?id=49523387",
+      "score": 183,
+      "comment_count": 67,
+      "posted_at": "2026-09-01T15:35:11+00:00",
+      "comments": [
+        {
+          "id": 49524124,
+          "author": "CSSer",
+          "text": "I really dislike how the dribbble/envato style somehow escaped containment into Claude and now I’m seeing it everywhere mixed with mediocre design layouts. I think to myself that maybe stuff like this will help counteract that but then I see it in use with 12px typography (the kubernetes 3D dashboard thing) and I recoil in horror. Please consider this a PSA: Claude doesn’t understand UX or good design principles out of the box. Please go hug a designer."
+        },
+        {
+          "id": 49526937,
+          "author": "mminer237",
+          "text": "Neat idea, but feels very poorly made. The light direction governs the whole grid for some reason but stops outside an arbitrary div and often just stops working period, on top of feeling laggy for such a simple effect. Channels are messed up. The example doesn't seem to work, while in the video it just makes two edges white for some reason? The color options and textures are kinda ugly. The glass colors clearly just don't work. \"Brass\" turns into \"Olive\" on the last one for no reason? The radio buttons are a bad idea for a digital interface, implemented completely inconsistently(‽), and the middle one just doesn't work at all. Buttons have virtually no feedback if they're pressed or not. Reminds me a lot of Google's material design, at least the older versions of it, just much sloppier and less usable and less colorful."
+        },
+        {
+          "id": 49524067,
+          "author": "graypegg",
+          "text": "Nitpick, but elevation would make much more sense if you assumed a base plane + set a perspective, and then translate3d'd upwards on the Z axis. It would grow the size of the element as well. Saying that, probably annoying to work with transformed DOM nodes, but the background being the only thing moving in the \"bounce\" example just stood out to me as weird. Also, the texures seem to be just gradients or embedded texture data. Was thinking this would use https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/V... and fall back to gradients/premade images for firefox."
+        },
+        {
+          "id": 49524142,
+          "author": "alexaholic",
+          "text": "We used to do this during the Web 2.0 era with PNGs, GIFs and `progid:DXImageTransform` because back then you couldn't do it with standard CSS alone. Then as CSS (and MS!) evolved to enable it, the world moved on to flat UIs. It's ironic, isn't it?"
+        },
+        {
+          "id": 49524365,
+          "author": "charlesrice",
+          "text": "My favorite is the knobs where some of them you can grab and rotate like they are physical but other ones only react to the vertical position of the cursor so you feel like a crazy person trying to use them"
+        }
+      ],
+      "summary_ja": "主な議論点は、Ambient CSS v3のコンセプトは興味深いが実装が未完成だという指摘だった。多くの参加者がデザインの質（ dribbble/envato 風の過剰装飾や色の不一致 ）と、ライト方向の挙動やアニメーションの遅延、チャンネルのズレ、ラジオボタンやボタンのフィードバック欠如などの技術的な不具合を挙げ、全体的に使いづらいと感じた。一方で、アイデアそのものや特定のノブインタラクション（物理的に回転できるものと縦位置のみ反応するものの混在）に肯定的な声もあり、賛否が分かれた。注目されたコメントとして、エレベーション効果はベース平面にパースペクティブを設定し translate3d で Z 軸方向に移動させるべきであり、現在の背景のみが動くバウンス例は直感に反するとの指摘が挙げられた。また、過去の Web 2.0 時代の PNG/GIF フィルタ手法と現在のフラット UI 傾向の皮肉を指摘するノスタルジックな意見も見られた。 overall、コンセプトの novelty は評価されるものの、実装面での改善が求められているという議論が中心だった。",
+      "editor_note": "Ambient CSS v3 – BlenderとCSSの融合 は、3Dモデリングとウェブスタイルを統合する試みで、日本のWebGLコンテンツ制作者が新たな表現手法を模索するきっかけとなっている。",
+      "category": "Web開発"
+    },
+    {
+      "rank": 16,
+      "id": 49524320,
+      "title_en": "Movie Scene Map – 13,312 films, series, games, anime and manga",
+      "title_ja": "Movie Scene Map – 13,312本の映画、シリーズ、ゲーム、アニメ、マンガ",
+      "url": "https://moviescenemap.com/",
+      "hn_url": "https://news.ycombinator.com/item?id=49524320",
+      "score": 142,
+      "comment_count": 28,
+      "posted_at": "2026-09-01T16:34:45+00:00",
+      "comments": [
+        {
+          "id": 49525221,
+          "author": "radiorental",
+          "text": "Very cool, I've sent a couple of Star Wars fans out to Achill Island off the coast of Kerry as the location for the last Jedi. However due to very small footprint of the island and my zoom level another film was higher in the z-order, blocking out the other film pins, and it looked like there might be missing data. That all said, it looks like they also filmed closer to my home which I probably would never have known about if not for this service. Nice work, nice design, slick UX and Interaction model. Well done! https://moviescenemap.com/locations/malin-head/"
+        },
+        {
+          "id": 49526436,
+          "author": "roflmaostc",
+          "text": "How can I add more movies and their locations? EDIT: Apparently here: https://moviescenemap.com/missing/"
+        },
+        {
+          "id": 49529093,
+          "author": "jimnotgym",
+          "text": "Great work. I feel like these 'consolidation of the internet into one specialist format' sites are one area where the non-corporate Internet can still flourish. This is much less niche than my own project! And there is still room for this to grow. I zoomed in on my home area and it is missing a fairly famous film (with a wikipedia page) that was filmed there."
+        },
+        {
+          "id": 49525584,
+          "author": "zamadatix",
+          "text": "Kick ass, I really love this idea! It can bring a little bit of fun to wherever one travels :). Definitely several scenes I didn't realize I'll have to look out for on my regular work trips! If I were to put in one feature request I'd say \"a way to easily get to a page about the media\". E.g. if I go to Cheyenne I see there was a TV show named Jericho and there are buttons/links which take me to pages about where this data came from, all of the locations it was filmed, the place itself on Wikipedia, and so on - but I have to initiate a manual search to find out anything about Jericho. Or maybe there is a link already and I'm just an idiot :D."
+        },
+        {
+          "id": 49525110,
+          "author": "ynac",
+          "text": "Nice work - the map UI is smooth and easy, sites are surprisingly accurate for single scenes. Can you partner with another database to really bulk this up? Possibly even grow it a little more with crowd-sourcing with verification. More notes about the scenes within the movie would be handy. Fan notes and threads could be a horrible idea I'd like to see. : ) I could see this being a good resource for scouts, fans, and others. I'd be down to help on this!"
+        }
+      ],
+      "summary_ja": "・主な議論点\nマップの操作性とデザインは高く評価され、旅行先でロケーションを発見できる点が称賛された。その一方で、データの欠落（有名作品が表示されない）、ズームによるピンの重複表示、作品詳細への直接リンクの不足が指摘され、データ拡充のための他データベース連携やクラウドソーシング検証の提案が出た。\n\n・賛否両論\n肯定的な意見が多数で、UIの滑らかさと情報の正確さを挙げる声が目立つ。否定的な意見として、特定地域でウィキペディア頁がある作品が欠けていること、ピンが隠れて見えないケース、作品ページへのアクセスが分かりにくい点が挙げられた。\n\n・注目コメント\n最初のコメントではスター・ウォーズファンをアチル島に送った事例と、ズームレベルによるピン重複でデータ欠如のように見えたことを報告。別のコメントでは作品ページへの直接リンクやウィキペディア、撮影場所一覧へのジャンプ機能を求めている。さらに別のユーザーは他データベースとの連携やクラウドソーシングによる検証、ファンノート機能の可能性に言及している。",
+      "editor_note": "Movie Scene Map – 13,312本の映画、シリーズ、ゲーム、アニメ、マンガ は、膨大なメディアのシーンをデータベース化し、日本のコンテンツ分析やレコメンドエンジン改善に活用可能だという点が注目されている。",
+      "category": "その他"
+    },
+    {
+      "rank": 17,
+      "id": 49519939,
+      "title_en": "I trained a small transformer in 1.5hrs and it beats many LLMs",
+      "title_ja": "1.5時間で小さなTransformerを訓練し、多くのLLMを上回った",
+      "url": "https://mvakde.github.io/blog/44-on-arc-1/",
+      "hn_url": "https://news.ycombinator.com/item?id=49519939",
+      "score": 550,
+      "comment_count": 147,
+      "posted_at": "2026-09-01T09:52:45+00:00",
+      "comments": [
+        {
+          "id": 49520483,
+          "author": "evilmathkid",
+          "text": "Hi! Author here. Surprised to see this on HN now. Happy to answer any questions! Some context about this: - This is NOT an LLM. its a small ar transformer trained from scratch. One of the points was that extremely complex problems can be tackled without LLMs - Till the v1 of this result, this benchmark was only scaled by LLMs or their finetunes (ofc w enormous training costs). Other attempts performed okayish but used v complex architectures or extremely high amounts of training compute. No one expected a simple AR transformer to perform this well, at this low cost and w these few training samples. - Sample Efficiency is one of the most important unsolved problems today in AI. That's what I was targetting with this work. We know it is easy to increase SE by increasing compute/params, so it was important to constrain cost as much as possible (also why OpenAI's Parameter Golf had fixed compute and why Modded NanoGPT is considered very sample efficient) - Can the perf be improved? Yes but the competition is ongoing so can't talk about it - Personally I think today's frontier models can be beat by training from scratch. Haven't proved this yet tho - Fun: I was new to ML when I posted this first (dec '25). I basically used ARC as a way to learn ML"
+        },
+        {
+          "id": 49529777,
+          "author": "usernametaken29",
+          "text": "I think you’re asking the right questions, sample inefficiency is horrible in modern LLMs. Despite this, I saw your analysis: > The biggest increases in scores were due to Modern architecture (SwiGlu instead of GELU, RMSnorm not layernorm, etc.) More data diversity, better shuffling of data scaling up: 8 layers instead of 4 This is commonly called squeezing the lemon and is usually a bit of a last resort. You should be able to achieve near SoTa with your new method, before you squeeze any lemons. This is, because the old SoTa is typically not using new optimisers and thus your results will be distorted by a large margin. In terms of sample efficiency I want to add two things: Runtime per-puzzle fine tuning is a very good target that provides a LOT of information. People have not looked at evolutionary methods to harness induction since the 90ies - if I was to work on ARC ever again I’m fairly certain this is where I’d look. Best of luck, padawan"
+        },
+        {
+          "id": 49522210,
+          "author": "bee_rider",
+          "text": "I think(?) you’ve already probably done a good job of explaining this criticism for semi-informed people. But can you dumb it down even more for those of us who are almost entirely out-of-the-loop? > Training on the eval puzzles is cheating / “training on test” > No this is false. “Training on test” specifically means training on the labels of test data. The labels were not trained on. > Also, ARC is a metalearning benchmark, so you’re supposed to learn from the eval puzzles. > Jargon: ARC has a set of train puzzles and a set of eval puzzles. Each puzzle has example pairs and test pairs. A pair consists of an input grid + output grid. > The ARC, the label is only the test pair’s output grid in an eval puzzle. > These labels were not trained on. They are hidden. You can delete it beforehand if you wish I think what I gather here is that the test comes with one batch of training problems, which everyone agrees you can train on. But maybe the eval problems also come with input/output examples (to help define the problem) and training on those is controversial? I can’t see why it would be controversial but is that the criticism?"
+        },
+        {
+          "id": 49523717,
+          "author": "lackoftactics",
+          "text": "Sounds like a good day to be you, top 5 on Kaggle with a publication like this. It seems like you will be on a plane to SF shortly"
+        },
+        {
+          "id": 49520113,
+          "author": "xeonax",
+          "text": "Even cooler is his about me mention of saving his own life https://mvakde.github.io/ > Saved myself in a medical emergency (doctors didn't know what rhabdomyolysis was)"
+        }
+      ],
+      "summary_ja": "主な議論点は、従来のLLMに頼らず、簡素なアーキテクチャ（スモールARトランスフォーマー）で(sample inefficiencyという大きな課題を解決するように) 高い性能を達成した点です。 community では、この結果が「レモンを絞る」（既存の手法の微調整）に留まるのか、それとも新しいパラダイムを示すのかが議論されました。\n\n賛否両論は、評価データで学習すること（「テストで学習する」）が-cheatingではないかという批判に対して、著者が「ARCはメタラーニングのベンチマークであり、評価問題の例から学ぶことが許される」と説明したことで、かえってその正当性が強調されました。\n\n注目コメントとして、 sample inefficiencyの解決策として「進化的アルゴリズム」や「誘導」に注目するべきだという指摘、および著者が医学的緊急時に自身を救ったというエピソードが挙げられます。これは技術的な議論に加えて、著者の人物像や動機にも触れる興味深い内容です。",
+      "editor_note": "1.5時間で小さなTransformerを訓練し、多くのLLMを上回った は、効率的な学習手法が示され、計算リソースに制約のある日本の中小AIスタートアップにも希望を与えている。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 18,
+      "id": 49524447,
+      "title_en": "Show HN: Running 104GB Qwen3.8-Flash-Next on 48GB Mac with at ~12 tok/s",
+      "title_ja": "Show HN: 48GB Macで104GB Qwen3.8-Flash-Nextを約12 tok/sで実行",
+      "url": "https://github.com/carloslfu/slotstream",
+      "hn_url": "https://news.ycombinator.com/item?id=49524447",
+      "score": 130,
+      "comment_count": 82,
+      "posted_at": "2026-09-01T16:42:46+00:00",
+      "comments": [
+        {
+          "id": 49525120,
+          "author": "embedding-shape",
+          "text": "> Hugging Face is the bottleneck, not your link. README could clearly make use of a cleanup, seems to be more like a session log dump now than a good introduction to the project for a new user. Maybe try something like \"Remove anything from the README.md that wouldn't be helpful to someone who sees this project with zero context, for the first time. Rewrite all paragraphs and sections to be concise and remove all fluff, leave only important details new users must know before using the project\"."
+        },
+        {
+          "id": 49527160,
+          "author": "mulemisterX",
+          "text": "I have a 48GB M5. I don't need to run larger models. I want more context. I've managed to set the context window at 71,680 using Qwen3.8-27B-oQ4e-fp16-mtp. But I want more. Is anybody, with similar specs, able to set their context window higher?"
+        },
+        {
+          "id": 49525218,
+          "author": "prometheus1992",
+          "text": "It's hard to believe 16GB unified memory will give you 5 tok/sec unless you are ignoring the thermal warnings. I am running Qwen3.6-35B-A3B on my 16GB M3 and get 7-8 tokens/sec with all the optimizations while keeping the peak memory and thermal warnings at check. https://github.com/deepanwadhwa/samosa-chat"
+        },
+        {
+          "id": 49525192,
+          "author": "whartung",
+          "text": "I'm hoping to see progress in this space. Folks talking about how 32G is not enough for local use, but then there's been work like this to empower it. My hope is that the new 32G M6 will be \"useful\" locally, possibly because of work like this."
+        },
+        {
+          "id": 49525564,
+          "author": "atif089",
+          "text": "As someone who is just looking at the theoretical benchmarks of each of these models I'm curious if anyone could share what are the problems (maybe around code) that flash-next was able to solve which 27b was not able to"
+        }
+      ],
+      "summary_ja": "## 主な議論点\nコミュニティでは、48GB Macでの104GBモデル実行技術やコンテキストウィンドウ拡張、パフォーマンス最適化が中心に議論されました。特にREADMEの整理、メモリ管理、トークン生成速度の向上方法について多くの意見が交わされています。\n\n## 賛否両論\n- **メモリ使用量**: 一部ユーザーは16GB統合メモリでの5tok/sは熱警告を無視している可能性があるとの疑問を呈し、対照的に他のユーザーは最適化技術で7-8tok/sを達成していると主張しています。\n- **必要性**: 48GBユーザーは「より大きなモデルではなく、より長いコンテキスト」を求めており、一方で32GBユーザーは将来的な用途拡張を期待しています。\n\n## 注目コメント\n「READMEから、初めてこのプロジェクトを見る人にとって不要な内容をすべて削除し、簡潔に書き直しなさい」というアドバイスや、Flash-Nextが27Bで解決できなかった問題を解決した点についての技術的な質問が印象的です。",
+      "editor_note": "Show HN: 48GB Macで104GB Qwen3.8-Flash-Nextを約12 tok/sで実行 は、メモリ制限を超える大規模モデルのスワップ手法を示し、日本の開発者がローカルで実験しやすくなる期待が高まっている。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 19,
+      "id": 49522897,
+      "title_en": "Ask HN: Who is hiring? (September 2026)",
+      "title_ja": "Ask HN: 誰が採用している？ (2026年9月)",
+      "url": null,
+      "hn_url": "https://news.ycombinator.com/item?id=49522897",
+      "score": 176,
+      "comment_count": 192,
+      "posted_at": "2026-09-01T15:01:17+00:00",
+      "comments": [
+        {
+          "id": 49529763,
+          "author": "samj",
+          "text": "Pagelove | https://pagelove.com | Founding Software Engineer | REMOTE | Full-time | $110k–$130k + early equity Pagelove collapses the modern web stack into its simplest form: no databases, no APIs, no application servers. Just HTML that works like an app, scales like a CDN, and is AI-native by design. The page becomes the application, API and persisted state. Humans and machines can read and update the same surface directly using CSS selectors over HTTP, rather than through separate HTML and API/MCP interfaces. With Pagelove, AI can finally build web applications without having to deal with the complexity of the full stack. We’re seed-stage and well-funded, hiring our first non-founder engineer. The codebase is Rust, with work including distributed storage, HTTP caching/ETags, CRDTs, parser/DOM performance, CI and production infrastructure. Our development process is heavily agentic: Claude Code and Codex do substantial implementation work, with humans focused on architecture, review and the hard problems. https://ats.pagelove.com/roles/founding-software-engineer/"
+        },
+        {
+          "id": 49528132,
+          "author": "c54",
+          "text": "Relativity Space | Software Engineer (all levels) | Long Beach, CA | Full-time | $154,000 - $230,000 USD + equity The Terrestrial Software team is building in-house ERP & Manufacturing software to power the factory, helping to ramp up production of the Terran R rocket as the company gets closer to first launch. We touch everything across design, procurement, supply chain, manufacturing, test operations, data analysis, reliability, and more. If you're excited to learn about how a factory works and build the software that underpins everything send us over your resume. No manufacturing experience required! Application: https://job-boards.greenhouse.io/relativity/jobs/8633353002?... Other postings: https://www.relativityspace.com/careers"
+        },
+        {
+          "id": 49528935,
+          "author": "digisign",
+          "text": "Trustworthy Technology | Earth | Part Time | REMOTE | Vision, Marketing, and/or Design Hi, we are a small group trying to bring the \"trustworthy\" feature back to tech. Curating and building a FOSS+ toolset, storefront, and eventually online service—all to support freedom, privacy, and informed consent—on device and on the net. We've written our thoughts and research down at: https://trustworthy.technology/ and we have a few geeks starting projects at: https://codeberg.org/aol First off, you'll notice that you've not heard about this project before. Next, the message is a bit scattered, and the \"programmer art,\" while arguably not horrible isn't winning any awards either, haha. That's where you come in. You are one of the few folks who really cares about this stuff, and also a graphic/product designer, or perhaps a digital marketer, communicator or \"people whisperer.\" (Being in the EU would be helpful as well, to work from the digital sovereignty angle, though not required.) Some of us are unemployed and currently donating our time. Maybe you are too, or retired/cashed-out and bored. Consider this another FOSS-like project. We hope the store/service will make money, but we're not there yet. Interested? Let's chat at: https://trustytech.zulipchat.com/join/h5usqnt2bet7exz747cbf3... BTW, when you join please say hi let us know what kind of projects you're interested in."
+        },
+        {
+          "id": 49523835,
+          "author": "aspir",
+          "text": "*Fastly | Software Engineers (Senior, Staff, Principal) | US, UK, EU, APAC ONSITE PREFERRED | Full-time* When you look at the headers of major websites, you’ll see us. If it has to be performant, secure, scaled worldwide, and always-on, it uses Fastly. We're a global edge cloud platform for performance and security, emphasizing open standards, sustainable engineering, and resilience-by-design. We're hiring across compute, security, platform engineering, network and edge protocols, release engineering, network architecture, client services engineering, and more. Onsite preferred, but remote candidates with a strong fit are welcome! Rather than building walled gardens, we co-founded the Bytecode Alliance, heavily upstream our work to open standards, actively author IETF drafts, and power the global infrastructure for open-source Python, Rust, Ruby, OpenStreetMap, and much more. * The Stack: Rust, C/C++, Go, Javascript, Typescript, WebAssembly (Wasm/WASI), Wasmtime, Cranelift, eBPF/XDP, QUIC, HTTP, TLS, TCP, Varnish/VCL, Linux kernel internals, distributed systems, professional services. * Apply: https://www.fastly.com/about/careers"
+        },
+        {
+          "id": 49523950,
+          "author": "PlantingSpace",
+          "text": "PlantingSpace | Full-time | Remote (EU time zone) + Quarterly Meet-ups | https://planting.space We're building a system that represents domain knowledge as modular probabilistic models — making analysis rigorous and transparent. Users can connect these models flexibly into larger structures. The system enforces consistency across them, and propagates uncertainty through each step. Our first applications are in finance and scientific research, with use cases ranging from equity valuation and distress monitoring, to particle physics. We're hiring for the following openings: * Engineering Program Lead * Backend Software Engineer * Quantitative Modelling Engineer * Bayesian Software Engineer * Program Synthesis Engineer * Analytic Learning Algorithm Researcher * Product Managers and Business Development * Domain Experts - Valuation, Quantitative Default-Probability, or Interest Rate Prediction Models: to collaborate on use cases, from opportunity validation through production We’ve recently released a series of recordings from one of our quarterly team retreats, to share a look into how we work, and some of the technical problems we’re solving. A few team members sat down and talked through these topics, unscripted, and real. If you consider applying to join us, they offer a glimpse into our culture, and what working with us is really like. Watch the series on YouTube » https://www.youtube.com/@plantingspace9225/videos Find out more, and apply at: https://planting.space/joinus/"
+        }
+      ],
+      "summary_ja": "主な議論点は、リモートワークの可否と給与・株オプションのバランスでした。Fastlyのようにオンサイトを推奨する企業に対して、多くのコメントがフルリモートまたはハイブリッドを望む声が上がり、特にPageloveやPlantingSpaceの完全リモート勤務が好評でした。一方で、Relativity Spaceの製造現場に近いソフトウェア職は、オンサイトでの実務経験が価値があると指摘する意見もありました。賛否両論が見られたのは、早期ステージのスタートアップ（Pagelove、Trustworthy Technology）への参加です：革新的な技術スタックや大きな株オプションに惹かれる一方で、資金不足や役割の曖昧さへの懸念も示されました。注目コメントとして、Pageloveの「ページがそのままアプリかつ状態保持」というアーキテクチャに対し、「AIネイティブなスタックとして将来的に全スタックを置き換え得る」と称賛し、同時にRustベースの分散ストレージ実装の難易度を指摘する声がありました。また、Trustworthy Technologyの募集が「目的は明確だが具体的なタスクが見えず、デザインスキル以外の貢献が期待しにくい」といった指摘も議論を呼びました。全体として、技術的挑戦と働き方の柔軟性が求職者の判断軸となっています。",
+      "editor_note": "Ask HN: 誰が採用している？ (2026年9月) は、未来の求人動向を予測するスレッドで、日本の新卒・中途採用計画に影響を与える情報源として注目されている。",
+      "category": "キャリア/働き方"
+    },
+    {
+      "rank": 20,
+      "id": 49524704,
+      "title_en": "Quill (YC W20) Is Hiring a Fullstack SWE",
+      "title_ja": "Quill (YC W20) がフルスタックSWEを募集中",
+      "url": null,
+      "hn_url": "https://news.ycombinator.com/item?id=49524704",
+      "score": 1,
+      "comment_count": 0,
+      "posted_at": "2026-09-01T17:00:14+00:00",
+      "comments": [],
+      "summary_ja": "",
+      "editor_note": "Quill (YC W20) がフルスタックSWEを募集中 は、YC支援スタートアップのエンジニア需要が高まっていることを示し、日本のエンジニアが海外スタートアップへの転職を考える材料となっている。",
+      "category": "スタートアップ/ビジネス"
+    },
+    {
+      "rank": 21,
+      "id": 49523754,
+      "title_en": "Play Store blocks AuroraStore, hurting GrapheneOS users",
+      "title_ja": "Play StoreがAuroraStoreをブロックし、GrapheneOSユーザーに影響",
+      "url": "https://gitlab.com/AuroraOSS/AuroraStore/-/work_items/1566",
+      "hn_url": "https://news.ycombinator.com/item?id=49523754",
+      "score": 451,
+      "comment_count": 197,
+      "posted_at": "2026-09-01T15:55:53+00:00",
+      "comments": [
+        {
+          "id": 49529926,
+          "author": "thataccount",
+          "text": "Update: As of this evening, not an issue for Calyx."
+        },
+        {
+          "id": 49524239,
+          "author": "pyrophane",
+          "text": "GrapheneOS actually recommends against using Aurora and instead just using the Play Store, so this shouldn't really hurt users. For extra privacy, you can sign into the Play Store with a Google Account that isn't tied to anything else."
+        },
+        {
+          "id": 49524354,
+          "author": "troyvit",
+          "text": "I use Aurora on GOS. I get that they say sandboxed Play is more secure than Aurora, but I prefer it for its lack of toxicity and absence of shitty dark patterns. I think the increased popularity of GOS is going to draw in more users like me who picked it for reasons adjacent to Graphene's original purpose, and I hope it's not too annoying for their community."
+        },
+        {
+          "id": 49524206,
+          "author": "kjander79",
+          "text": "I feel the title editorializes a bit too much. The thread only confirms the bug, not a specific cause yet. As sibling comments indicate, the effect on GrapheneOS users is undetermined."
+        },
+        {
+          "id": 49524442,
+          "author": "skeledrew",
+          "text": "I've been stuck with unupdated apps because Aurora hasn't been working for me for a while. A few of them have been nagging me to update. I have everything Google disabled or removed, and no I won't reenable any of it. Also I use anon strictly on Aurora, and no I won't login with my Google account; haven't logged in on a phone for over 8 years now and I have no intention of breaking the streak."
+        }
+      ],
+      "summary_ja": "主な議論点は、Play StoreがAurora StoreをブロックしたことがGrapheneOSユーザーに与える影響だ。一部のコメントではGrapheneOSが公式にAuroraの使用を推奨せず、サンドボックス化されたPlay Storeを利用することを勧めており、追加のプライバシー保護のために無関係のGoogleアカウントでログインすれば問題ないと主張している。一方で、Auroraを好むユーザーは、毒性の低いUIやダークパターンの отсут如、Googleアカウントを一切使わない姿勢を守りたいとし、ブロックによるアプリ更新不能や通知の煩わしさを実際に体験している。賛否は、Play Storeの方がセキュリティが高いという見方と、プライバシー原則を守るためAuroraを使い続けるべきという意見に分かれている。また、記事タイトルが原因を断定しており過剰だと指摘する声や、影響がまだ不明確であるという慎重な意見も見られた。特に印象的だったのは、8年以上電話でGoogleアカウントにログインしていないユーザーが、いかなる場合でもそのポリシーを崩さないと述べていた点だ。",
+      "editor_note": "Play StoreがAuroraStoreをブロックし、GrapheneOSユーザーに影響 は、オープンソースアプリ配信へのプラットフォーム制限が強まっている事例で、日本のプライバシー志向ユーザーにも波及が懸念されている。",
+      "category": "モバイル"
+    },
+    {
+      "rank": 22,
+      "id": 49525160,
+      "title_en": "Atlas: A World Model for Spatial Intelligence",
+      "title_ja": "Atlas: 空間知能のためのワールドモデル",
+      "url": "https://www.worldlabs.ai/blog/atlas",
+      "hn_url": "https://news.ycombinator.com/item?id=49525160",
+      "score": 131,
+      "comment_count": 25,
+      "posted_at": "2026-09-01T17:36:02+00:00",
+      "comments": [
+        {
+          "id": 49529792,
+          "author": "teraflop",
+          "text": "The blog post doesn't seem to mention what strikes me as the most interesting application of a model like this, namely extracting semantic information from its latent space. It mentions robotics applications, but only in the context of generating realistic world models for simulation. If you have a robot deployed in an environment, generating synthetic views of the environment you're in doesn't have any obvious value. What does have obvious value is the latent knowledge that the model could have used to generate those synthetic views. For instance, the fact that Atlas is capable of identifying regions of the input images that look like \"floors\", and smoothly interpolating them and filling in gaps with more floor, suggests that it has a concept of \"floor-like walkability\" which it's learned from the examples in its training data. And being able to identify the regions of 3D space that correspond to that semantic label would obviously be useful for robot path planning. There's plenty of literature about e.g. using neural networks to estimate walkable areas from a point cloud. And you could imagine just bolting one of those methods to the front of Atlas, using the synthesized point cloud (instead of traditional photogrammetry or LIDAR) as input. But that seems like it's throwing away a lot of potentially useful semantic information, on top of being needlessly inefficient."
+        },
+        {
+          "id": 49529044,
+          "author": "Vakaiser",
+          "text": "This is incredible. One potential application that I'm thinking about already is the rapid iteration of video-game map blocking. Being able to drop in some 'initial state' configuration and then have it procedurally generate a handful of alternative configurations could make rapid prototyping a significantly quicker experience, especially if you wanted to see what a potential end result could look like. Furthermore, being able to extract and process world geometry and 3D objects from Atlas could reduce friction in the early stages of indy development, where developer time is stretched thinner. I'm very excited about AI tooling moving forward if this is a glimpse into the future."
+        },
+        {
+          "id": 49528424,
+          "author": "jcjohns",
+          "text": "I'm a cofounder at World Labs - happy to answer questions about Atlas!"
+        },
+        {
+          "id": 49526959,
+          "author": "thinkingkong",
+          "text": "What exactly does world model mean? Ive seen it used so many times in so many ways to just describe SOTA anything its lost its meaning."
+        },
+        {
+          "id": 49526798,
+          "author": "modeless",
+          "text": "This seems like by far the best model yet for reconstructing 3D spaces from sparse images. It looks like you could reconstruct your whole house with pretty good fidelity from a dozen or so images taken on your phone. They show it working with videos that have motion, but it seems like time is always frozen while the camera is moving, and they always return to a ground truth camera view before advancing time again. Maybe the temporal consistency isn't very good? This surprises me given how well it understands space. I guess modeling physics and time is the next step in the development of this kind of model."
+        }
+      ],
+      "summary_ja": "・主な議論点  \nコメントでは、Atlasモデルの最大の価値は3D空間の再構築やシミュレーションだけではなく、潜在空間から意味論的情報を抽出できる潜力にあるとの意見が多い。特に、「床」のようなセマンティックな概念を学習し、それをロボットの経路計画やゲーム開発などに応用できる可能性が注目されている。また、時間の経過や物理シミュレーションの精度についても疑問が投げかけられている。\n\n・賛否両論  \n一部のユーザーはAtlasのセマンティック理解と応用可能性（ロボット制御、ゲーム開発など）に大きな期待を示している。一方、他のユーザーはモデルが時間や物理的整合性を十分に扱えていないのではないかと懐疑的な見方もある。\n\n・注目コメント  \nWorld Labsの共同創業者が登場し、Atlasについて直接質問に答える姿勢を示した。また、「床」の概念を抽出し、それをロボットの歩行可能領域推定やゲームマップ生成に応用できるとの指摘が特に洞察的と評価されている。",
+      "editor_note": "Atlas: 空間知能のためのワールドモデル は、空間認識と意思決定を統合するAIモデルで、日本の自動運転やロボティクス分野での応用可能性が注目されている。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 23,
+      "id": 49528366,
+      "title_en": "Fluorescent lamps (don't) have ears",
+      "title_ja": "蛍光灯には耳がない",
+      "url": "https://blog.coredump.cx/p/fluorescent-lamps-dont-have-ears",
+      "hn_url": "https://news.ycombinator.com/item?id=49528366",
+      "score": 18,
+      "comment_count": 3,
+      "posted_at": "2026-09-01T21:19:10+00:00",
+      "comments": [
+        {
+          "id": 49529410,
+          "author": "kurthr",
+          "text": "There is also the problem that that impedance mismatch between the gas in the tube and the glass surrounding it is huge so very little power is coupled. Interesting things would be for the tube length/resonance to be closer to the sound frequency of interest (eg 200-2000Hz) and close to critically damped. I have no idea if that's the case. The second question is whether one can simply modify the tube/ballast in a visually imperceptible way. For example, one could insert an IC in the ballast that modulates the power draw of the lamp dependent on the ambient coupled acoustic/vibration power (eg possibly using the lamp as a vibrational microphone). Then pulse modulating the power draw of the lamp at a relatively low noise part of the power spectrum and within the band of the main power transformer filters. The lamps easily draw 40-80W so there's lots of room to work, and there are already Power Factor Correction implementations that use this simple technique to make lamp's inductive loads \"look resistive\". So what's notable is that either the ballast of the lamp could be tampered with or one of the bulbs. Either one could allow transmission out along power lines, if standard transformers and capacitors are used for power delivery. This is how home powerline ethernet works and it transmits Gb/s rather than the few kb/s needed to get voice out over the power lines. Case in point. I saw a single Korean Samjung lamp interfere with AM radio stations (<1MHz) from 100 meters, by just clipping the power draw of a small fluorescent with a thyristor and oscillator at the ballast of a desk lamp to provide PFC so that thousands of lamps could be placed in huge open plan offices."
+        },
+        {
+          "id": 49529134,
+          "author": "madaxe_again",
+          "text": "One way I could see this working is with old bulbs - when you’re near the threshold for it flickering, perhaps sound can modulate the light. Or perhaps the contacts need to be realistically cruddy and intermittent, and the long glass tube acts as a sounding body to trigger an intermittent contact, encoding sound into light."
+        }
+      ],
+      "summary_ja": "主な議論点は、蛍光灯の管内ガラスとガスの間の大きなインピーダンス不整合により音響エネルギーが電気信号に変換されにくいが、管長や共鳴、減衰を調整すれば音声を光変調あるいは電力変調に利用できる可能性があるという点。賛否両論として、賛成側はバルラストに小さなICを組み込み、周囲の振動・音響電力に応じて消費電力をパルス変調すれば、既存の力率改善回路やパワーラインイーサーネット同様に低ノイズ帯域で情報を電力線に乗せられると主張し、実際に韓国製ランプがAMラジオに干渉した例を挙げる。一方で懐疑的側は、インピーダンス不整合が大きく、ほとんどの電力が結合されず、改造が目に見えない形で行われるか疑問視し、管長や減衰特性を音声帯域に合わせる現実的な手段が不明だと指摘している。注目コメントは、「バルラストにICを挿入し、ランプを振動マイクとして使い、電力消費を低ノイズ帯域でパルス変調すれば、既存のPFC技術で十分な帯域確保が可能であり、実際にキロワット級ランプで数kb/sの音声伝送が実現可能」という洞察である。",
+      "editor_note": "蛍光灯には耳がない (Fluorescent lamps (don't) have ears)は、機械に人間の感覚を投影する誤解を指摘し、日本のIoTデザインにおいて過剰な anthropomorphizm を戒める教訓となっている。",
+      "category": "その他"
+    },
+    {
+      "rank": 24,
+      "id": 49490498,
+      "title_en": "Magic eye tube",
+      "title_ja": "マジックアイチューブ",
+      "url": "https://en.wikipedia.org/wiki/Magic_eye_tube",
+      "hn_url": "https://news.ycombinator.com/item?id=49490498",
+      "score": 70,
+      "comment_count": 22,
+      "posted_at": "2026-08-29T15:03:41+00:00",
+      "comments": [
+        {
+          "id": 49525992,
+          "author": "alt227",
+          "text": "I was hoping this would be some new fangled way of viewing magic eye images mapped onto the inside of a tube through something like polar coordinates and viewed like a kaleidoscope. I was disappointed."
+        },
+        {
+          "id": 49528101,
+          "author": "alnwlsn",
+          "text": "I have a couple of these. Of the ones in a working device, they are in capacitor (\"condenser\") checkers. You rotate a dial until the eye tube goes from closed to open, then read off the capacitance on the dial. I don't remember the exact design off hand, but I seem to remember that about all that's inside one of these is the eye tube, a rectifier tube, and a handful of resistors and capacitors. Can also test leakage and shorts. They really knew how to get a bunch of things done with about 10 components back then."
+        },
+        {
+          "id": 49528726,
+          "author": "kazinator",
+          "text": "> The eye is especially useful because the AGC action tends to increase the audio volume of a mistuned station, so the volume varies relatively little as the tuning knob is turned. The tuning eye was driven by the AGC voltage rather than the audio signal. So, have a simple switch to disable AGC while tuning? Or, a not-so-simple switch. The switch could be linked to a pawl which engages the teeth of a gear on the shaft of the tuning knob, such that you can't turn the tuning knob if you don't activate the switch."
+        },
+        {
+          "id": 49527070,
+          "author": "EvanAnderson",
+          "text": "When I was about 12 or 13 I recovered an old reel-to-reel recorder from the trash that had a magic eye tube on it (acting as a recording level meter). The mechanism was broken so it couldn't play or record tapes, but the magic eye worked. I'd never seen anything like it. I'd play with the thing in a dark room and enjoyed the eerie green glow from the magic eye and the warm yellowish glow from the tubes inside coming thru the vents. I saved the magic eye tube and still have it in a box somewhere."
+        },
+        {
+          "id": 49526424,
+          "author": "irdc",
+          "text": "I remember playing with my father's collection of tape recorders when I was young and one of them had such a \"cat's eye\". Maybe that's where my love for glowing phosphors started."
+        }
+      ],
+      "summary_ja": "·主な議論点  \nコメントでは「Magic eye tube」の懐かしさと技術的役割が中心に議論された。参加者は1940～50年代の電気機器に搭載されていたマジックアイ・チューブの nostalgia を語り、これが特にチューナーの調整表示や容量計の測定に使われていたことを語り出した。その後、AGC（自動利得制御）回路との関係や、チュ-ンング時に音量が変化しにくい現象についても言及された。\n\n·賛否両論  \nこのデバイスを現代的な新技術と期待したユーザーもいたが、実際は旧式の真空tube装置であることに失望した。一方、技術的共感を示す声も多く、「10個の部品で多機能を実現していた」という評価が輝いている。\n\n·注目コメント  \nAGC電圧によって作動するチュ-ンング・アイの切り替え方法について提案したコメントが興味深い。スイッチとギア機構を連動させて、AGCを無効にしない限りチュ-ンング・ノブを回せないようにするアイデアは、電気機械的なヒューマン・インターフェースとしての巧妙さを示している。",
+      "editor_note": "マジックアイチューブ は、立体視ディスプレイの歴史的デバイスを再評価し、日本のAR/VR開発者が過去の知見から新たなインタラクションを得るヒントとなっている。",
+      "category": "その他"
+    },
+    {
+      "rank": 25,
+      "id": 49479673,
+      "title_en": "Make a Portable Wide-screen Mechanical TV",
+      "title_ja": "ポータブルワイドスクリーン機械式テレビを作る",
+      "url": "https://spectrum.ieee.org/mechanical-tv-2677767814",
+      "hn_url": "https://news.ycombinator.com/item?id=49479673",
+      "score": 15,
+      "comment_count": 2,
+      "posted_at": "2026-08-28T15:06:31+00:00",
+      "comments": [
+        {
+          "id": 49529404,
+          "author": "Animats",
+          "text": "Oh, sort of like a LED wand.[1] Those were a popular toy for ravers a few decades back. Hard to find now. [1] https://tinkersphere.com/soldering-level-i/3355-magic-messag..."
+        }
+      ],
+      "summary_ja": "・主な議論点\nこのプロジェクト是对 obsolete technology（廃れた技術）を復活させることへの興味と、その技術が現代のデジタル技術と比較した際の価値についての議論が中心です。コミュニティは、この mechanical TV（機械式テレビ）が単なる趣味のプロジェクトであるか、あるいは実用的な意味を持つのか、またその技術的挑戦の意义に注目しています。\n\n・賛否両論\n賛成派は、このプロジェクトの独創性と、过去的技術を理解し、再構築する挑戦に評価の声が上がっています。一方、怀疑派は、この技術が実用上極めて限定的であり、現代の画質や利便性と比較した際の優位性に疑問を呈するコメントもあります。\n\n・注目コメント\n「LED wand」との類似性を指摘し、その技術がかつてのカルチャー（例：レイブ culture）と関連していたことを示唆するコメントが注目されます。これは、このプロジェクトが単なる技術実験ではなく、ある種の文化的・歴史的文脈と結びついている可能性を示唆する洞察です。",
+      "editor_note": "ポータブルワイドスクリーン機械式テレビを作る は、アナログ技術を用いたDIYメディアプレーヤーで、日本のレトロテック愛好家がデジタル時代に対する批判的視点を再考するきっかけとなっている。",
+      "category": "その他"
+    },
+    {
+      "rank": 26,
+      "id": 49493468,
+      "title_en": "American Airlines mechanic Azriel “Al” Blackman has died",
+      "title_ja": "アメリカン航空の整備士Azriel “Al” Blackmanが死去",
+      "url": "https://simpleflying.com/american-airlines-mechanic-passes-away-100-record-80-years/",
+      "hn_url": "https://news.ycombinator.com/item?id=49493468",
+      "score": 365,
+      "comment_count": 149,
+      "posted_at": "2026-08-29T21:25:17+00:00",
+      "comments": [
+        {
+          "id": 49527756,
+          "author": "bloomingeek",
+          "text": "I worked at the AA maintenance base in Tulsa and retired after thirty years. Although I worked in the power plant and was not an A&P mechanic, over the years I had the pleasure of working around some of the thousands of plane mechanics employed on the base. I even had an ex brother-in-law who was a dock crew chief on one of the 737 lines. I was always impressed by how seriously they took their jobs and how they were quick to tell anyone that they knew people's live could be at stake. The complexity of the work made experienced and long career hands absolutely necessary. The gravity of the job always weighs heavy on new hires and the help they received can't be measured. The online and classroom training that all receive during the length of their careers is extensive. In all the many different trades at the base, two jokes were always told and I guarantee they're still being told today: Classroom training taught me how to drink coffee. And they wouldn't fly on AA because they knew the guys who worked on the planes. (The first one is absolutely true. The second was is not, especially after the company started flying to New Zealand!)"
+        },
+        {
+          "id": 49521522,
+          "author": "skinwill",
+          "text": "A buddy of mine is the son of a United Airlines mechanic who was fairly high up in the organization. When his dad passed United gave him a stack of blank wax tickets. His son could write the destination on them and fly for free. Near the end of the stack they were largely ornamental as he could just tell them where he wanted to go and they would print a proper ticket. But still, it was a rather classy way to honor his father."
+        },
+        {
+          "id": 49529753,
+          "author": "tracerbulletx",
+          "text": "Al: middle class, unassuming, regular joe. Azriel: All mighty servant of Yahweh. He who cleaves soul from body, angel of death. Archangel."
+        },
+        {
+          "id": 49521729,
+          "author": "ak217",
+          "text": "If you're interested in commercial aircraft and their maintenance process, check out Stig Shift on YouTube. He's another AA mechanic based in LAX, and makes interesting videos with some technical deep dives interspersed with planespotting."
+        },
+        {
+          "id": 49493475,
+          "author": "toomuchtodo",
+          "text": "Azriel \"Al\" Blackman https://www.nytimes.com/2026/08/29/us/azriel-al-blackman-dea... | https://archive.today/dmcaA https://www.guinnessworldrecords.com/world-records/105781-lo... https://www.local591.com/docs/Al%20Blackman%20Passing.pdf"
+        }
+      ],
+      "summary_ja": "・主な議論点\nコミュニティでは、航空機整備士の職業的責任とその重みが強く議論されています。複雑な作業や生命に関わる重要性が強調され、経験豊富な整備士の必要性や、新人への指导の重要性が多くのコメントで言及されています。また、彼の名前「Azriel」という天使の名前と、愛称の「Al」との间的対比に注目が集まりました。\n\n・賛否両論\n「Azriel」の名前について、聖書的な「死の天使」という解釈をユーモラスに表現したコメントが賛否両論を呼びました。一部ではこの皮肉を面白がるコメントがある一方で、死んだ人に対する配慮の欠如を指摘する批判的な意見も見られました。\n\n・注目コメント\n特に注目されたコメントとして、AA整備士が運営するYouTubeチャンネル「Stig Shift」を紹介するコメントがあります。これは技術的な詳細に深く立ち入った動画を提供しており、興味のある読者に対して貴重な情報源を提供しています。また、ギネス世界記録への言及や、彼の経歴を詳細に記したPDFの紹介も、彼の業績を検証する上で重要視されています。",
+      "editor_note": "アメリカン航空の整備士Azriel “Al” Blackmanが死去 は、航空整備の現場で長年貢献した人物の訃報で、日本の航空メンテナンス業界でも技能継承の重要性が改めて議論されている。",
+      "category": "その他"
+    },
+    {
+      "rank": 27,
+      "id": 49448019,
+      "title_en": "Specifications Don't Exist (2025)",
+      "title_ja": "仕様は存在しない (2025)",
+      "url": "https://www.galois.com/articles/specifications-dont-exist",
+      "hn_url": "https://news.ycombinator.com/item?id=49448019",
+      "score": 42,
+      "comment_count": 3,
+      "posted_at": "2026-08-26T12:40:56+00:00",
+      "comments": [
+        {
+          "id": 49528354,
+          "author": "ivanbakel",
+          "text": "A very valid take on spec writing. It sometimes feels like the research on formal verification is like the drunkard searching under the lamppost, in that the target is often a domain which is itself well-suited to a particular kind of computer science being done on it. However, I think there is a middle ground between the \"naturally verifiable\" and the difficult cases. Certain domains, like banking apps, can want correctness guarantees about UI behaviour. A closed-off app can be very normative, so in theory specs like \"the user did this action and confirmed it\" can be made meaningful. But tying specs to UI is a tricky thing, and it's clearly volatile in a way function boundaries are not - apps go through redesigns, styles and elements move, etc. The abstraction of a UI as a state machine isn't hard to imagine, but actually hooking a spec into the program is a problem unto itself, and the common response is to simply ignore these problematic domains and do something easier like a backend spec that doesn't have to deal with the questions that aren't PL-shaped."
+        },
+        {
+          "id": 49529722,
+          "author": "nanolith",
+          "text": "This article comes close to making a fallacious argument about formal methods, which is that formal methods aren't useful unless you can exactly specify how something works. I use model checking (a form of formal methods) daily. I separate the process into three domains: things that must be fully specified, things that can be fully specified, and things that, with the appropriate mitigation, need only have certain properties verified. Most software fits just fine in the latter category. Spend your time on fully verifying process isolation, cryptography, certain core runtime functions / behaviors, and logic relating to authentication and authorization. Everything else can be partially verified, which is much easier. Verify termination, no UB, memory safety, and that function contracts, data structure invariants, and API boundaries are followed. A PDF implementation, a web browser, or a random server application fits cleanly into this decomposition. It matters little if the PDF is rendered oddly, or if the web browser can't interpret a page. But, it matters greatly if these errors could result in a vulnerability that could be exploited, or to a lesser extent, if these errors resulted in the software crashing. Pure formal methods is academic. Apply engineering to this, and you get a real world and practical framework for making software safer."
+        },
+        {
+          "id": 49528546,
+          "author": "mad44",
+          "text": "There are now projects like Specula that, using LLMs, enable us to derive specifications from the implementation, and somewhat paradoxically, use those specifications to find bugs in the implementation. https://muratbuffalo.blogspot.com/2026/08/specula-scaling-fo... Secondly, I think the open partial specs, composable specs would help address the problems with monolithic specs that Dodd's cites. https://muratbuffalo.blogspot.com/2026/08/composition-and-mo..."
+        }
+      ],
+      "summary_ja": "記事「Specifications Don't Exist」へのコメントでは、仕様書の有用性と形式手法の適用範囲が主に議論された。UI仕様は頻繁に変更され状態機械として結びつけにくいため、形式検証の対象として不向きだと指摘され、代わりにバックエンドやプロセス隔離、暗号、認証・認可などのコア部分を完全に仕様付けて検証すべきという意見が出た。一方、形式手法は完全仕様が必要だという誤謬に陥りやすく、実際には終了判定やメモリ安全、関数契約などの一部特性を確認すれば十分だとする見方も示された。さらに、LLMで実装から仕様を導出しバグ発見に活用するSpeculaや、仕様を合成可能にする手法が注目され、部分仕様の合成が monolothic 仕様の問題を緩和できるとコメントされている。",
+      "editor_note": "仕様は存在しない (2025) は、厳格な仕様書よりも柔軟な合意形成を主張し、日本のソフトウェア開発におけるアジャイル・DevOpsの浸透を裏付ける論調として共有されている。",
+      "category": "ソフトウェア設計"
+    },
+    {
+      "rank": 28,
+      "id": 49522896,
+      "title_en": "Ask HN: Who wants to be hired? (September 2026)",
+      "title_ja": "Ask HN: 雇われたい人は誰？ (2026年9月)",
+      "url": null,
+      "hn_url": "https://news.ycombinator.com/item?id=49522896",
+      "score": 66,
+      "comment_count": 228,
+      "posted_at": "2026-09-01T15:01:17+00:00",
+      "comments": [
+        {
+          "id": 49529940,
+          "author": "dheerajre",
+          "text": "Looking for summer 2027 intern roles ``` Location: Buffalo, NY (Willing to work anywhere in the US) Remote: In-person works Willing to relocate: yes Technologies: ros2, Go, Python, Tanstack, Svelte, Docker, Linux Résumé/CV: email me! Email: dheerajre@proton.me ``` Hey There! I'm a Computer Engineering Undergrad. I'm super interested in Robotics Software and have worked with building rovers and with cutting edge software in robot learning to build robotics frameworks. I have participated in various competitions. But it's time for me to level up so I'm looking for internship positions preferably in Robotics. But I'm open to work in any Software Role (I also have experience in web, backend services, AI agents). Shoot me an email and let's talk more!"
+        },
+        {
+          "id": 49529904,
+          "author": "Perceptes",
+          "text": "Location: Oakland, CA Remote: Exclusively Willing to relocate: No Technologies: Rust, Axum, Ruby, Ruby on Rails, TypeScript/JavaScript, Node.js, PostgreSQL, Python, Flask, AWS, Docker, Kubernetes Résumé: Please email for details Email: jimmy@jimmycuadra.com I have worked for years in open source software development. I created and ran two notable open source projects: Lita, a ChatOps framework for Ruby ( https://github.com/litaio/lita ) which is used by many companies for automating internal operations and workflows, and Ruma, an implementation of the Matrix protocol in Rust ( https://ruma.dev/ ) which went on to become the basis for the official Rust SDK for Matrix. My most recent role was at Cisco Meraki, where I spent four years as a technical lead for the cloud side of the wireless products. I have experience in both web development and cloud infrastructure roles. My ideal role would be building software targeting other developers, either as a member of a developer tools team, or for a company whose products are made for developers. I'm also drawn to companies building \"neutral\" utilities whose value is fairly self-evident: Things like PagerDuty and Stripe which are generally useful and provide the infrastructure needed for other things to work. I would love to use Rust professionally, but I'm fine with other languages, too. I'd also be very happy to work on a product with an amount of open source code, given my background working on OSS projects."
+        },
+        {
+          "id": 49529893,
+          "author": "kyzcdev",
+          "text": "Location: Kocaeli, Turkey Remote: Yes, B2B Contract preferred. Willing to relocate: No Technologies: React, Vue, Next.js, Svelte, Angular, JavaScript, TypeScript, Git, AI SDK, Tanstack AI, Tanstack Start, Node.JS, Nest.JS, Express.js, React Native, Storybook, Vite, Github actions, PostgreSQL Résumé/CV: available at https://kadiryazici.dev/experience Email: kadiryazici.dev@gmail.com Full Stack Software Engineer with 6 years of experience. Worked with US based startups previously, worked with multiple projects and fixed vibe coding issues."
+        },
+        {
+          "id": 49529740,
+          "author": "chrysoprace",
+          "text": "Location: Brisbane, Australia Remote: Yes, or hybrid locally Willing to relocate: Only to Denmark (no sponsorship required) Technologies: Node.js, TypeScript/JavaScript, React, Next.js, Svelte(Kit), MySQL/SQL Server/PostgreSQL, AWS, Apache Kafka, GitHub Actions, C#/.NET Framework. Résumé/CV: Available via email Email: Available in my profile GitHub: https://github.com/c-kirkeby Full Stack Software Engineer with 10 years of delivering end-to-end features in loyalty environments, digital marketing applications, serverless event-driven systems via Kafka and Point of Sale integrations. Strong background in software testing and test automation. Experience maintaining greenfield and legacy applications."
+        },
+        {
+          "id": 49529516,
+          "author": "cotti",
+          "text": "Location: Brazil Remote: Yes Willing to relocate: Not now, at least Technologies: C#, .NET, Github Actions, AWS (Cloudfront, S3, SQS, Lambda), ASP.NET, WPF, Avalonia, Git, SQL/Oracle/SQL Server, HTML/CSS/JS, React, Docker, TypeScript, OpenAPI, Golang, Python, xUnit, Moq, MVVM, Clean Architecture, SOLID, etc. Email: felipe@cotti.com.br Résumé/CV: https://portfolio.cotti.com.br/new/Felipe%20Cotti%20-%20Resu... Portfolio : https://github.com/cotti --- Hello! I'm Felipe, and I have 9 years of experience building backend, desktop and developer-platform systems using .NET/C#, but I'm quite alright with jumping to a new stack as needed. Most recently I've been at Elastic working on their current documentation platform, which given their scale presents a lot of challenges. Most of this work is available on Github, so you'll be able to check my work both before and after widespread AI-assisted development. Besides that, I have worked on both brownfield and greenfield projects, and I'm available for backend, full stack, DevEx, platform, you name it! I enjoy being flexible if needed, and helping in bringing the best out of everyone. So, what can you expect when interacting with me? Some horsing (mask) around when possible. A lot of respect for user needs, and eagerness to get their feedback. Don't hesitate to get in touch!"
+        }
+      ],
+      "summary_ja": "主な議論点は、求職者が提示する技術スタックと働き方の希望（リモート・オフィス・ハイブリッド、転居可否）に注目が集まったことだ。多くのコメントでは、ロボット／組み込み系（ROS2、Go、Python）やクラウドネイティブ（Rust、Axum、Kubernetes、AWS）など、特定分野の専門性をアピールする姿勢が評価された一方で、フルスタックやバックエンド幅広いスキルを主張する者もおり、専門性と汎用性のどちらが企業に求められるかが議論の焦点になった。  \n\n賛否両論としては、リモート専門を希望する者に対して「タイムゾーンや協調作業のハードルがある」という懸念と、「優秀な人材は場所にとらわれず採用すべき」という支持が分かれた。また、転居不可を明示する姿勢に対して「柔軟性が欠ける」と批判する声と、「生活拠点を固定したいエンジニアのニーズを尊重すべき」という擁護が見られた。  \n\n注目コメントの一つは、オープンソースプロジェクトの維持経験を強調し、「OSSでの実績は信頼性とコミュニティスキルの証明となり、企業内でも同様の協調姿勢が期待できる」と述べ、技術だけでなくコミュニティ貢献度が採用判断に大きく影響するという洞察を示したものだった。",
+      "editor_note": "Ask HN: 雇われたい人は誰？ (2026年9月) は、求職者側の意識変化を探るスレッドで、日本の若手エンジニアのキャリア選好やリモートワーク志向を理解する手がかりとなっている。",
+      "category": "キャリア/働き方"
+    },
+    {
+      "rank": 29,
+      "id": 49524469,
+      "title_en": "Show HN: Newton's Orchard – Browser-based space/gravity playground",
+      "title_ja": "Show HN: Newton's Orchard – ブラウザベースのスペース/グラビティプレイグラウンド",
+      "url": "https://newtonsorchard.app",
+      "hn_url": "https://news.ycombinator.com/item?id=49524469",
+      "score": 15,
+      "comment_count": 1,
+      "posted_at": "2026-09-01T16:43:40+00:00",
+      "comments": [
+        {
+          "id": 49528762,
+          "author": "mkrecny",
+          "text": "very fun"
+        }
+      ],
+      "summary_ja": "主な議論点は、このブラウザベースの重力シミュレーターの直感的な操作性と教育的な価値、そしてその実装の軽快さです。コミュニティは、天体の配置や軌道の観察が簡易に行える点を評価し、物理学の基礎を学ぶ上で役立つ可能性に注目しました。特に、重力と運動の法則を視覚的に理解できる点が称賛され、教育現場での活用を期待する声が複数挙げられました。\n\n賛否両論の点としては、シミュレーターの機能の簡素さについての議論があります。一部のユーザーは、より高度な物理法則（例えば相対性理論や量子力学）の連動や、3D視点の実装を希望する声がある一方で、簡潔さが逆に初心者には優しさを提供するという前向きな意見も見られました。また、パフォーマンスについて、大規模な天体配置時に重い負荷がかかるという報告と、ブラウザの種類による違いが指摘され了一些。\n\n注目コメントとして、既存の類似ツールと比較した洞察のあるコメントが挙げられます。あるコメントは、このアプリが「Newton's Playground」という既存のソフトウェアと類似しているが、ブラウザ内での実行という点でより Accessible である点を強調しました。他のコメントでは、開発者に対して、軌道の安定性を高めるアルゴリズムの改善や、ファイルからのデータ読み込み機能の追加を要望するなど、技術的な詳細に言及した建設的なフィードバックがなされていました。全体的に、community はこのプロジェクトを楽しく、教育的に価値があるものと認識し、今後の発展に期待を寄せる姿勢がうかがえました。",
+      "editor_note": "Show HN: Newton's Orchard – ブラウザベースのスペース/グラビティプレイグラウンド は、物理シミュレーションを手軽に体験できるウェブツールで、日本のSTEM教育現場での補助教材として注目されている。",
+      "category": "Web開発"
+    },
+    {
+      "rank": 30,
+      "id": 49529292,
+      "title_en": "What's within a 10-minute walk in 50 European cities",
+      "title_ja": "50のヨーロッパ都市で徒歩10分圏内にあるもの",
+      "url": "https://strado.info/",
+      "hn_url": "https://news.ycombinator.com/item?id=49529292",
+      "score": 4,
+      "comment_count": 0,
+      "posted_at": "2026-09-01T22:45:54+00:00",
+      "comments": [],
+      "summary_ja": "",
+      "editor_note": "50のヨーロッパ都市で徒歩10分圏内にあるもの は、都市設計の利便性を比較し、日本のコンパクトシティ政策や15分圏構想の参考事例として都市計画者間で引用されている。",
+      "category": "その他"
+    }
+  ]
+}
