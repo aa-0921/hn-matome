@@ -1,0 +1,1123 @@
+{
+  "date": "2026-09-08T00:00:00+09:00",
+  "slot": "23",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 49598291,
+      "title_en": "bzip3",
+      "title_ja": "bzip3",
+      "url": "https://github.com/iczelia/bzip3",
+      "hn_url": "https://news.ycombinator.com/item?id=49598291",
+      "score": 251,
+      "comment_count": 77,
+      "posted_at": "2026-09-07T13:35:13+00:00",
+      "comments": [
+        {
+          "id": 49598707,
+          "author": "altairprime",
+          "text": "Previously: “Hi, tool author here.” A useful explanation of Burrows-Wheelers transform as used by bzip3: https://news.ycombinator.com/item?id=42902407 “bzip3 is not yet listed on the large text compression benchmark” It is now: https://mattmahoney.net/dc/text.html (2 years ago, 176 comments) https://news.ycombinator.com/item?id=42899713 (4 years ago, 104 comments) https://news.ycombinator.com/item?id=31324439"
+        },
+        {
+          "id": 49599558,
+          "author": "8organicbits",
+          "text": "I was processing compressed .jsonl files recently (JSON lines format). I found that lzma gave a much better compression than gzip or bzip2, which helps for archival costs, but it's challenging to work with as software support is lacking. I do duckdb processing which supports gzip transparently. There's an extension for bzip2, but not for lzma or bzip3. I ended up using gzip because it's best supported by the software I use and most likely to have support in software I adopt. But it gave the worst compression results of the options I tried. These bzip3 numbers certainly give me FOMO..."
+        },
+        {
+          "id": 49598996,
+          "author": "ot",
+          "text": "The benchmarks are disingenuous, to the point of looking cherry-picked. The block size for bzip3 is set to 512MB, but the window size for zstd is left to its default (8MB I believe for high levels). So in this corpus, which is made up of all versions of Perl source code concatenated, the window is too small to see all the identical files and just match them. Also corpora made out of very long repetitions are pretty much the best case scenario for BWT-based compressors. If we match the window size of zstd to that of bzip3 we get dramatically different results: % gzcat *.gz | time zstd -T8 -16 | wc -c # baseline 2819113884 zstd -T8 -16 2054.50s user 3.47s system 783% cpu 4:22.80 total % gzcat *.gz | time zstd -T8 -16 --long=29 | wc -c 196405076 zstd -T8 -16 --long=29 1083.06s user 2.41s system 783% cpu 2:18.55 total Almost 15x smaller than the baseline, and more than 2x smaller than bzip3, also CPU time halves (since long matches are found earlier, so there's less work to do). (the baseline number is slightly different because I don't have the exact Perl version set used by the author) Also, in the benchmarks using lrzip, which would make the window size less relevant, zstd is not even compared."
+        },
+        {
+          "id": 49599145,
+          "author": "amelius",
+          "text": "> However, the complexity of the algorithms, and, in particular, the presence of various special cases in the code which occur with very low but non-zero probability make it impossible to rule out the possibility of bugs remaining in the program. Sounds like perhaps a nice testcase for formalization + AI?"
+        },
+        {
+          "id": 49599015,
+          "author": "CodesInChaos",
+          "text": "I think this should include benchmarks zstd with larger windows and long range mode. I wouldn't be surprised if the window they used is smaller than an individual version tar file, which would prevent useful compression."
+        }
+      ],
+      "summary_ja": "主な議論は、bzip3の圧縮率と実用性についてで、gzipやbzip2よりは優れるがlzmaほどではないという指摘と、JSONLファイルのアーカイブではlzmaが最も高い圧縮率を示すが、DuckDBなどのツールでの透過的サポートがなく、実用的にはgzipに頼らざるを得ないという現場の声があったこと、ベンチマークがbzip3に有利な512MBブロックとzstdのデフォルト8MBウィンドウで不公平だと批判され、ウィンドウサイズを揃えるとzstdがbzip3を上回るという実験結果や、ブロックサイズを揃えるとzstdのロングモードがbzip3の2倍以上の圧縮性能を示しCPU時間も半減する具体的な数値が示されたこと、ソフトウェアサポートの欠如が採用を妨げる点、アルゴリズムの複雑さと潜在的バグへの懸念、形式検証やAIによるテストの提案、そしてzstdのロングウィンドウモードでのベンチマーク追加を求める声が挙がった。",
+      "editor_note": "bzip3 (bzip3) 既存のbzip2をGPU並列で高速化し、圧縮率も向上させたオープンソース実装が登場。クラウドストレージのコスト削減に直結し、国内のデータセンター運営者も注目している。",
+      "category": "OSS"
+    },
+    {
+      "rank": 2,
+      "id": 49601338,
+      "title_en": "AI models ran real businesses: They sent $12,431 in fake invoices, lost $3,200",
+      "title_ja": "AIモデルが実際のビジネスを運営：偽の请求書で12,431ドルを送金、3,200ドルの損失",
+      "url": "https://www.bottlenecklabs.com/blog/benchmarking-7-autonomous-businesses",
+      "hn_url": "https://news.ycombinator.com/item?id=49601338",
+      "score": 9,
+      "comment_count": 0,
+      "posted_at": "2026-09-07T18:24:32+00:00",
+      "comments": [],
+      "summary_ja": "",
+      "editor_note": "AIモデルが実際のビジネスを運営：偽の请求書で12,431ドルを送金、3,200ドルの損失 生成AIが自律的に請求書作成・送金まで行い、財務リスクを顕在化させた事例。日本の経理・監査現場でもAIガバナンスの急務が浮き彫りになった。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 3,
+      "id": 49593563,
+      "title_en": "Keep Our Servers Running",
+      "title_ja": "サーバーを継続的に稼働させる",
+      "url": "https://blog.archive.org/2026/09/01/keep-our-servers-running-your-recurring-donation-goes-3x-this-september/",
+      "hn_url": "https://news.ycombinator.com/item?id=49593563",
+      "score": 843,
+      "comment_count": 211,
+      "posted_at": "2026-09-07T03:29:51+00:00",
+      "comments": [
+        {
+          "id": 49601406,
+          "author": "raybb",
+          "text": "I have been volunteering with the Internet Archive via Open Library for about half a decade now. Sending money is awesome and they're also always looking for volunteers! There are so many projects going on for Open Library and staff has quite a few volunteers but right now especially I think it would be awesome to have a few more experienced folks joining to help (many volunteers are students). Here's just a few things we could use more experienced folks to help on: - Solr performance, it currently gets quite slow under load and there are two read replicas but we think there may be some ways to improve it besides adding more replicas. You can run a full production copy of solr based on the dumps... But the current workflow to do this is kinda broke so I had AI fix it up but we haven't been able to verify if it's a fully working/good solution. - We're doing big redesigns of major parts of the frontend. If your down to help for that Lokesh had many tickets open and guidelines and welcomes PRs. - I'm currently migrating us from web.py to fastapi and could certainly use more experienced help for trickier ones. Anyway, if you're actually willing to help all you gotta do is join our community call tomorrow at 9am PST and share your interests. We'll you on to something you like quickly :) https://docs.openlibrary.org/everyone/community-call.html#co..."
+        },
+        {
+          "id": 49601385,
+          "author": "clcaev",
+          "text": "The 2:1 match scheme is helpful for a foundation to (a) accept large donation and (b) meet 501c3 \"public support\" requirements. To keep favorable charity taxation status, a large donation can only be accepted if there are sufficient small donors who also contribute. It's complex and indirect, but the matching is quite real as a $100 contribution from a small donor enables the charity to accept a corresponding amount from large donor pledges."
+        },
+        {
+          "id": 49597490,
+          "author": "prirun",
+          "text": "I read that Internet Archive keeps 2 copies of all their data. Storj, the decentralized storage service, is currently in Chap 11 bankruptcy, mostly IMO because of incompetent management. They pay their node operators, the guys that actually maintain the hard drive space, $1.35/TB/mo to store data. (However it costs Storj 1.8x that because of erasure coding). They still have way more available capacity going unused, so it's likely they could lower the payout rate even further and have talked about doing that. Internet Archive could buy Storj, probably for not much, keep 1 copy of their archive on the IA custom server setup they have now, keep the other copy on Storj, and free up half of the IA disk space. Storj automagically uploads data to 54 nodes, any 29 of which can reconstruct the original data (54/29 is where the 1.8 expansion factor occurs)."
+        },
+        {
+          "id": 49594144,
+          "author": "zetanor",
+          "text": "I like the theory of the IA enough that I have a reoccurring donation, but I've thought a few times about e-mailing them to cancel (they have to halt your monthly donation charges manually). There's plenty of things I can overlook, like having to compete with scrapers to get a single page to load, or a myriad of longstanding technical issues (my favorite being that the collection upload system silently and irrevocably leaks your e-mail address: https://archive.org/post/240444/help-to-hide-email (2009)). What's a lot harder to overlook is that the IA brazenly hosts warez on clearnet and pulls off stunts like the COVID \"emergency library\". I'm all for ending copyright, but does any of that really need to be linked with the Wayback Machine? Huge chunks of the Web have been displaced or snuffed by social media and gen AI, making Wayback a unique(ly valuable) source of information and history. It's not my call, but it seems strange to risk it as a motte for the bailey of copyright abolition activism. What happens when some stick-up-the-ass company—whose stuff is probably in hundreds of different collections—decides it really wants a payday?"
+        },
+        {
+          "id": 49594641,
+          "author": "theletterf",
+          "text": "Be careful: paying with Google Pay is extremely easy and the default setting is monthly recurrence. If you're not logged in, the only way to cancel (as far as I know) is by sending an email, which is incredibly precarious."
+        }
+      ],
+      "summary_ja": "Internet Archiveの運営支援を巡る議論では、ボランティア募集（Solr性能改善、フロントエンド再設計、web.pyからFastAPIへの移行）や2対1のマッチング寄付制度による資金調達、Storjの破産状況を利用した分散ストレージへのデータ二重化案、IAがウェアズや緊急図書館をホストすることへの倫理的懸念、そしてGoogle Payのデフォルト月次課金と解約の難しさが主な話題となった。賛否は、ボランティア参加やマッチングによる資金の有効性を肯定する声と、著作権侵害リスクや利用者情報漏洩、解約手続きの不透明さを指摘する批判に分かれた。特に注目されたのは、IAのウェアズホスティングがウェイバックマシンの信頼性を損ねる可能性を指摘したコメントで、プロジェクトの目的と手段のバランスを問う洞察が評価された。",
+      "editor_note": "サーバーを継続的に稼働させる (Keep Our Servers Running) オープンソースプロジェクトのサーバー維持費をクラウドファンディングで賄う試み。日本のエンジニアコミュニティでも同様の持続可能モデルへの関心が高まっている。",
+      "category": "Systems/Infrastructure"
+    },
+    {
+      "rank": 4,
+      "id": 49599609,
+      "title_en": "C Is Not a Low-Level Language (2018)",
+      "title_ja": "Cは低レベル言語ではない (2018)",
+      "url": "https://queue.acm.org/doi/10.1145/3212477.3212479",
+      "hn_url": "https://news.ycombinator.com/item?id=49599609",
+      "score": 33,
+      "comment_count": 20,
+      "posted_at": "2026-09-07T15:39:20+00:00",
+      "comments": [
+        {
+          "id": 49601405,
+          "author": "bee_rider",
+          "text": "“Low level language” is one of those terms like “VLSI” (very large scale integration) where they defined it in the 70’s or something, so the academic definition is out-of-sync with what most people would expect. This is fine, it’s a term of art and those don’t need to be immediately obvious. I don’t like the title of this article for that reason, though. Really a better title would be something like “a modern x86 processor is not a PDP-11.” The subtitle is perfect basically. Edit: also IMO it is not really fair to beat up on C for this, the problem is not really one of low-level-ness. A language that actually exposed the complexity of speculative execution and all that could be pretty high level. It would just be harder to read in a linear text editor, right? We’d be better off drawing the dependency graph or something."
+        },
+        {
+          "id": 49601102,
+          "author": "legobmw99",
+          "text": "I’ve been a fan of this article for years, though it does often make me think that there really aren’t any true low level languages for our super scalar modern CPUs. Does anyone know of any?"
+        },
+        {
+          "id": 49601187,
+          "author": "glouwbug",
+          "text": "Maybe not then, but we basically have our own poor man's template system now: #define array(T, N) struct array##T##N { T value[N]; } void copy(array(int, 32)* x, array(int, 32)* y) { *x = *y; } int main() { array(int, 32) x; array(int, 32) y = { 1, 2, 3, 4 }; copy(&x, &y); } With (rumors of) lambdas and defer on the way, C is going the way of classic WoW. https://en.wikipedia.org/wiki/C29_(C_standard_revision)"
+        },
+        {
+          "id": 49601103,
+          "author": "veqq",
+          "text": "This is one of my favorite papers; it stole about a year and a half of my time. I still pine for Lisp processors although array languages can now self-host on GPUs, which, APL-pilled, I now feel is better. It'd be so cool (...for compiler writers) to be able to control precisely which kernels stay in which cache levels etc."
+        },
+        {
+          "id": 49601275,
+          "author": "blastonico",
+          "text": "In this sense, not even assembly is a low-level language because an instruction may hide what the microcode is actually doing. IMHO, C is the lowest level a procedural programming language can get."
+        }
+      ],
+      "summary_ja": "「Cは本当にローレベル言語か」という議論が中心。多くのコメントは、「ローレベル」という用語は1970年代の学術的定義で、今日のスーパースカラーCPUやマイクロコードの複雑さとはずれているため、Cがローレベルであると言うのは誤解だと指摘。記事のタイトルより「現代のx86はPDP‑11ではない」という表現が適切だとの意見も。賛同派は、Cでも命令レベルの制御はできず、アセンブリでさえマイクロコードが隠されるため、真のローレベル言語は存在しないと主張。反対派（あるいは中立派）は、手続き型言語としてCがこれ以上下には行けず、実質的に最もローレベルに近いとみなす。また、マクロやテンプレート技法で独自の抽象層を作れることや、将来のC標準にラムダやdeferが加われば言語の高度化が進むという指摘、さらにはLispプロセッサやGPU上のアレイ言語への憧れ、キャッシュレベルを細かく制御したいという願いが注目コメントとして挙げられた。",
+      "editor_note": "Cは低レベル言語ではない (2018) (C Is Not a Low-Level Language (2018)) C言語の抽象化機能を再評価し、現代の最適化コンパイラとの関係を指摘。組み込み系が盛んな日本企業にとって、言語選択の基準を見直すきっかけとなる。",
+      "category": "Programming Languages"
+    },
+    {
+      "rank": 5,
+      "id": 49558685,
+      "title_en": "Simple Is Not Small",
+      "title_ja": "単純さは小さいことではない",
+      "url": "https://jyn.dev/simple-is-not-the-same-as-small/",
+      "hn_url": "https://news.ycombinator.com/item?id=49558685",
+      "score": 98,
+      "comment_count": 32,
+      "posted_at": "2026-09-03T23:47:28+00:00",
+      "comments": [
+        {
+          "id": 49599732,
+          "author": "getnormality",
+          "text": "Strong resonance with the famous essay \"The Rise of Worse is Better\" [1], which contrasted the (better) \"MIT/Stanford style of design\" with the (worse) \"New Jersey approach\". MIT/Stanford: > Simplicity -- the design must be simple, both in implementation and interface. It is more important for the interface to be simple than the implementation. New Jersey: > Simplicity -- the design must be simple, both in implementation and interface. It is more important for the implementation to be simple than the interface. Simplicity is the most important consideration in a design. TFA maps \"simplicity\" to \"MIT/Stanford simplicity\" (simplicity for the user) and \"smallness\" to \"New Jersey simplicity\" (simplicity for the developer). I wonder if the root of the tension between the two schools comes down to the ambiguity of the user/developer distinction. Developers are also users. Simplicity of implementation is helpful to developers when they are working directly on implementation, while simplicity of interface is helpful to developers when they are using other developers' work. [1] https://dreamsongs.com/RiseOfWorseIsBetter.html"
+        },
+        {
+          "id": 49601398,
+          "author": "pianopatrick",
+          "text": "I've been thinking about a new AI based dimension to this. If your program is split into smaller decoupled \"modules\" then all the code for each \"module\" can fit into an AI context window. In this way the AI can have all the context to edit a \"module\" by just loading all the code for that \"module\". You would not need things like vector search as much. If we assume 20 tokens per line of code and the AI context window is 100k to 1M tokens, then that would argue for having \"modules\" between 5,000 and 50,000 loc, depending on which AI model you are using."
+        },
+        {
+          "id": 49559564,
+          "author": "hankbond",
+          "text": "Great piece, very straightforward examples, although I did have to squint for quite a while to grok the Closure portion. I am currently building a piece of very modular software and it has been the hardest-to-design project of my entire career. I would never be allotted this amount of time-effort at any job I have held to make something this robust and clearly defined. Many aspects of this project have taken 3-5 rounds trying-and-trashing to get an abstraction that is uncomplicated. This is precisely why vibe coding is so successful for building tiny isolated scripts, and so disastrous for anything else. It's just really dang hard to build something large and simple."
+        },
+        {
+          "id": 49601147,
+          "author": "cush",
+          "text": "The author uses the term “coupling” to describe a simple program from the code’s perspective - “you need to have a good mental model of your program”. I agree, but I’d argue that more importantly you need to have a good domain model. Good design communicates accurately and a high Gulf of Evaluation/Execution are actually what makes programs feel “complex” to a user. These concepts simplify for the user these questions: “I know what I want - how do I make the program do it?” (Execution) and “The program did something — what state is it actually in?” (Evaluation) I believe the author was getting at these concepts, especially in their Google Drive example - how the large program has a “small” UX. Understanding the domain model provides a much stronger basis for designing user interfaces, and understanding the Gulf of Evaluation/Execution allows you to build incredibly complex-looking, large UX’s without confusing or overwhelming the user."
+        },
+        {
+          "id": 49600296,
+          "author": "Snarwin",
+          "text": "> There's no native Unix equivalent to frequencies, this sort | uniq -c is the closest we can get. Not only is it less performant (it has to collect the full input into memory before continuing), but it ties aggregation to ordering. One of the core features of the Unix command-line is that it is user-extensible. If there's no \"native\" command equivalent to frequencies, you can write your own, and it will be given the same first-class treatment as any other binary in your PATH. This is entirely in keeping with the Unix philosophy of simple implementations."
+        }
+      ],
+      "summary_ja": "・主な議論点\nコメント全体では、「簡潔さ（Simplicity）」と「小巧さ（Smallness）」の本質的な違いが議論の中心になった。特に「MIT/Stanford風設計」（ユーザーのための簡潔さ）と「New Jersey風設計」（開発者のための簡潔さ）の対比が引用され、TFA（原著）が前者を「簡潔さ」、後者を「小巧さ」とマッピングしていることが指摘された。開発者もユーザーの一人であるという点で、両者の張り詰めが生じるとの见解が示された。\n\n・賛否両論\n「小巧さ」の価値は、AIのコンテキストウィンドウにモジュール全体が収まるsize的话、AIによるコード編集が劇的に楽になるという前向きな見方がある一方で、実際に大規模でmodularなソフトウェアを設計する難しさが実体験として語られ、単なる「小巧さ」だけでは不十分であるという現実的な懸念もexpressedされた。これは、単純な実装の追求が、かえって長期的な保守性や設計の明確さを損なう可能性があるというジレンマを浮き彫りにした。\n\n・注目コメント\n「ドメインモデルの理解がUI設計の基盤となる」というコメントが特に洞察的だった。ユーザーの認知負荷を減らす「Gulf of Evaluation/Execution」という概念を用い、複雑に見える large UX も、ドメインモデルが明確であればユーザーを混乱させず simplifiy できると論じた点だ。これは「簡潔さ」を単なるコードの短さではなく、ユーザーの体験と結びついた設計哲学として捉える視点を提供した。",
+      "editor_note": "単純さは小さいことではない (Simple Is Not Small) 機能を削ぎ落とした設計が逆に複雑さを生むという逆説を示し、ミニマリスト志向の日本スタートアップに設計哲学の再考を促す。",
+      "category": "Other"
+    },
+    {
+      "rank": 6,
+      "id": 49596055,
+      "title_en": "Caltech Mathathon – first hackathon ever devoted to research level mathematics",
+      "title_ja": "Caltechマスアソン – 研究レベルの数学に特化した最初のハッカソン",
+      "url": "https://mathathonchallenge.com/index.html",
+      "hn_url": "https://news.ycombinator.com/item?id=49596055",
+      "score": 168,
+      "comment_count": 46,
+      "posted_at": "2026-09-07T09:26:53+00:00",
+      "comments": [
+        {
+          "id": 49601014,
+          "author": "brian-bfz",
+          "text": "Hey guys, I'm one of the organizers. AMA. - We are a team of undergrads at Caltech. We don't represent Caltech, any Caltech departments, or any of our sponsors. - We don't receive monetary compensation. All the funding raised goes toward paying our judges and participants. - Our goal is to promote responsible AI use. You can read more about our commitments here: https://mathathonchallenge.com/faq.html"
+        },
+        {
+          "id": 49597074,
+          "author": "Semkas",
+          "text": "Won't deny that this is an interesting idea, but I feel like waiting on the output of an LLM for 40 hours feels like it is completely antithetical to what makes classic Hackathons appealing / educative. More generally, I don't think the shape of a hackathon (intensely working for a short timespan) maps at all onto the way LLM Math progress has seemingly been made so far; AFAIK it mostly involves picking out something for the Model, then having it run for a week with sporadic correction / encouragement."
+        },
+        {
+          "id": 49597534,
+          "author": "youoy",
+          "text": "Should I read this as the big labs trying to move maths forward? Or the big labs trying to use professional mathematitians as (cheap?) Labour for validating LLM outputs? On yesterdays \"An Alien Mind\" post from openAI they openly said that maths is not a priority for them, so I personally know what to think..."
+        },
+        {
+          "id": 49600093,
+          "author": "corinthia",
+          "text": "recent caltech grad here! and know some of the organizers well caltech's cs department is very, very weak, and has struggled to recruit top people in the last few years, and the most recent AI faculty hires have had issues. this is very slowly changing but a lot of the motivation for htis was to create a way for students to get ml \"recognition\" and learn about ai since it cant be done through the school right now. really glad to see hn picked this up!"
+        }
+      ],
+      "summary_ja": "**主な議論点**  \n- ハッカソンの短時間・集中作業という形式が、数時間から数日かかるLLMの出力待ちやモデル調整と噛み合わず、従来のハッカソンの魅力や教育的意義を損なうのではないかという疑問。  \n- 大手AIラボが数学の進歩を促すためのイベントなのか、あるいはプロの数学者を廉価な労働力としてLLMの出力検証に利用しようとしているのかという意図への懐疑。  \n- カリフォルニア工科大学のCS学科が近年弱体化しており、学生に機械学習の経験や認知の機会を提供するため、このイベントが組織されたという背景説明と支持。  \n\n**賛否両論**  \n- 賛成側：学生に実践的なAI・ML経験を与え、学部内での機会不足を補う良い取り組みだと評価。  \n- 反対側：LLMの出力を待つ40時間はハッカソンの精神に反し、大手ラボが数学者を安価な検証要員として利用しているだけではないかと指摘。  \n\n**注目コメント**  \n- 「最近のCaltech CS学科は採用に苦戦しており、このイベントは学生がMLでの『認知』を得る手段として重要だ」という、オーガナイザーに近い卒業生の指摘は、イベントの動機と教育的意義を裏付ける洞察として注目された。",
+      "editor_note": "Caltechマスアソン – 研究レベルの数学に特化した最初のハッカソン 純粋数学の問題をコードで解くイベントが学術界に波紋。日本の数理情報学系学生にも参加の機会として注目されている。",
+      "category": "Other"
+    },
+    {
+      "rank": 7,
+      "id": 49589190,
+      "title_en": "The Dataflow Model Revisited",
+      "title_ja": "データフローモデルの再検討",
+      "url": "https://www.vldb.org/pvldb/volumes/19/paper/The%20Dataflow%20Model%20Revisited",
+      "hn_url": "https://news.ycombinator.com/item?id=49589190",
+      "score": 39,
+      "comment_count": 8,
+      "posted_at": "2026-09-06T18:10:53+00:00",
+      "comments": [
+        {
+          "id": 49589252,
+          "author": "scott_s",
+          "text": "I worked in the streaming area for a decade, doing research and development (see: https://scholar.google.com/citations?user=Rdf5OIYAAAAJ&hl=en ). After moving on from streaming specifically and moving into the general problems in large data warehouses, I also concluded: just default to SQL for all analytics and the database lens is the best way to think about streaming for analytics. I still do think that stream programming models are extremely interesting and powerful. But I used to think they would eventually become more mainstream as a way to elegantly program for high throughput, low latency massively parallel systems. That has not been the case, and I no longer think that it will be. People get by with the existing programming languages and models, that seems to be fine."
+        },
+        {
+          "id": 49600419,
+          "author": "janpeuker",
+          "text": "I used to be extremely into Dataflow/Apache Beam and literally had the paper printed on my desk AND the book. I agree they got Event time versus processing time and Never rely on completeness right, and I love they go deeper into why that was just a hard thing to accept. My head still hurts thinking about unbounded stream triggers and I'm happy we got around to a table-centric model. I still think taking some ideas from Spanner, databases as message bus or consistency information per row, basically in-database CQRS would have been nice, though. Great paper."
+        }
+      ],
+      "summary_ja": "主な議論点は、ストリーミングプログラミングモデル（Dataflow/Apache Beam）が当初期待されたほど主流になっていないという点。コメント者は長年のストリーミング経験から、分析においてSQLやデータベース中心の考え方が最も実用的だと結論づけ、既存の言語・モデルで十分だと指摘している。一方で、ストリーミングモデルの興味深さと力強さは認め、イベントタイムvsプロセスタイムの正確な扱いや「Never rely on completeness」の原則、テーブル中心モデルへの移行を評価している。賛否は、ストリーミングモデルの複雑さ（特に未境界ストリームのトリガー処理）に対する不満と、SpannerからのアイデアやデータベースをメッセージバスとしたインデータベースCQRSの導入が望まれていた点に分かれる。注目コメントとして、イベントタイムとプロセスタイムの区別や完結性への依存を避ける設計が正しかったことを強調し、それでも未境界ストリームのトリガーが頭を悩ませるという具体的な困難を挙げている点が挙げられる。",
+      "editor_note": "データフローモデルの再検討 (The Dataflow Model Revisited) Stream処理の理論基盤を見直し、バッチとストリームの統合を提案。日本の金融・ IoT 分野でのリアルタイム分析基盤設計に影響を与えそうだ。",
+      "category": "Systems/Infrastructure"
+    },
+    {
+      "rank": 8,
+      "id": 49561002,
+      "title_en": "Decoding the NEC V20 Microcode",
+      "title_ja": "NEC V20マイクロコードのデコーディング",
+      "url": "https://martypc.blogspot.com/2026/09/decoding-nec-v20-microcode.html",
+      "hn_url": "https://news.ycombinator.com/item?id=49561002",
+      "score": 44,
+      "comment_count": 0,
+      "posted_at": "2026-09-04T05:53:38+00:00",
+      "comments": [],
+      "summary_ja": "",
+      "editor_note": "NEC V20マイクロコードのデコーディング 古典的なx86互換CPUのマイクロコードを解析し、命令実行の詳細を明らかに。レトロコンピューティング愛好家だけでなく、セキュリティ研究の教材として日本でも利用が広がる可能性。",
+      "category": "Systems/Infrastructure"
+    },
+    {
+      "rank": 9,
+      "id": 49600432,
+      "title_en": "PostgreSQL 19 Interactive Tour",
+      "title_ja": "PostgreSQL 19 Interactive Tour",
+      "url": "https://victoriametrics.com/blog/postgres-19/index.html",
+      "hn_url": "https://news.ycombinator.com/item?id=49600432",
+      "score": 30,
+      "comment_count": 5,
+      "posted_at": "2026-09-07T16:58:35+00:00",
+      "comments": [
+        {
+          "id": 49601477,
+          "author": "weitendorf",
+          "text": "Gotta say this site is killing it in the LLM-written technical blog SEO game the last couple years, they're consistently able to dominate (and actual deliver in spite of the LLM-isms) SERP for a set of technologies that very closely align with the ones that a typical backend/infrastructure engineer would work on. I checked their list of blog articles from the last year and they haven't even written that many, which makes it quite impressive because they really model the set that I've been working with (Go, Postgres, grpc, otel) well by I guess defining some kind of customer archetype and writing really detailed guides about what they'd be interested in learning more about. On one hand you could just dismiss it as spam but articles like this actually represent a pretty significant LLM spend/human review element that delivers real value to me as a technical end user looking for info on google or in technical blogs on HN (ie it would take me a long time to generate something like this myself and I wouldn't do it proactively, only when-needed). So it actually does help me quite a bit that they do so before I think to ask about it."
+        },
+        {
+          "id": 49601358,
+          "author": "exceptione",
+          "text": "The features look exciting, but the article is exceptionally unclear to me. I am not sure whether that is my fault, the author's, or the LLM's who wrote it. The headline feature (property graphs) has a better example here in the official docs: https://www.postgresql.org/docs/19/ddl-property-graphs.html"
+        },
+        {
+          "id": 49601230,
+          "author": "zdc1",
+          "text": "Tangential, but the Claude-isms make it a less rewarding read"
+        }
+      ],
+      "summary_ja": "主な議論点は、LLMが生成した技術ブログの価値と信頼性である。一部の読者は、特定のエンジニア向け技術スタック（Go、Postgres、gRPC、OTEL）に焦点を当てた詳細なガイドが人間のレビューを伴うLLM出力として実際に役立つと肯定し、SEO対策としてのスパムとは区別すべきだと主張している。一方、記事の不明瞭さやLLM特有の表現（「Claude‑isms」）が読みにくさを指摘する声もあり、プロパティグラフなどの新機能については公式ドキュメントの例を参照したほうがわかりやすいとの意見が出ている。賛否は、情報提供の実用性と記事の可読性・スタイルの間にあるトレードオフに集約され、特に最初のコメントがLLMへの投資と人間のフィードバックが実質的な価値を生むことを強調している点が注目された。   （348字）",
+      "editor_note": "PostgreSQL 19 Interactive Tour ブラウザ上で試せる新機能チュートリアルがリリース。日本のエンタープライズ系SIerがバージョンアップ検討時に手軽に機能確認できる点で重宝される。",
+      "category": "Database"
+    },
+    {
+      "rank": 10,
+      "id": 49600233,
+      "title_en": "Tell HN: OpenAI brings back 5 hour limit for plus and business standard users",
+      "title_ja": "HNへの投稿：OpenAIがPlusとBusiness標準ユーザー向けに5時間制限を復活",
+      "url": null,
+      "hn_url": "https://news.ycombinator.com/item?id=49600233",
+      "score": 97,
+      "comment_count": 77,
+      "posted_at": "2026-09-07T16:40:32+00:00",
+      "comments": [
+        {
+          "id": 49600853,
+          "author": "paxys",
+          "text": "People should realize by now that they aren't giving out thousands of dollars worth of compute in a $20 subscription out of the goodness of their hearts. The base level plans aren't meant for any kind of serious work beyond the equivalent of Google searches. At best treat it like a trial."
+        },
+        {
+          "id": 49600958,
+          "author": "CSMastermind",
+          "text": "Once they capature enough marketshare prices and restrictions are both going to skyrocket. The difference between the subscription usage and API pricing are stark."
+        },
+        {
+          "id": 49600619,
+          "author": "watty",
+          "text": "Session limits are obnoxious and make Codex much less useful for me. I tend to code in spurts when I find some time and the $20 weekly limit was reasonable for my side projects. I'm now hitting the session limits which means I can either purchase another plan, upgrade, or move off of Codex."
+        },
+        {
+          "id": 49601266,
+          "author": "ttul",
+          "text": "My goodness, the complaining... Just get all your devs a $200 ChatGPT Pro (20x) plan. Yes, you lose the \"team\" component, but you gain so much more. And what's $200 against the salary of a good developer? It's absolutely inconsequential, even in far cheaper non-US salary regimes."
+        },
+        {
+          "id": 49600368,
+          "author": "minimaxir",
+          "text": "In hindsight, this makes more sense with the release of Astra. The $100/mo is now a more compelling upsell."
+        }
+      ],
+      "summary_ja": "主な議論点は、OpenAIがPlusおよびBusiness Standardプランに再導入した5時間のセッション制限についての不満と、これが軽い利用やサブスクリプションの価値に与える影響。賛否では、「20ドルのプランは基本的な検索程度にしか使えないため、本格的な作業には不向き」という批判と、「開発者一人あたり200ドルのProプランにすれば制限は問題なく、給与に比べれば微々たる出費」という擁護が対立。注目コメントとして、セッション制限が断片的なコーディング作業を妨げ、追加プラン購入か移行を余儀なくされるという具体的な使用例が挙げられ、さらにAstraのリリースと関連づけて100ドル/月のアップセルがより魅力的になったという見方も示された。",
+      "editor_note": "HNへの投稿：OpenAIがPlusとBusiness標準ユーザー向けに5時間制限を復活 有料プランでも利用時間に制限が復活し、コスト管理のニーズが浮き彫りに。日本企業のAI活用現場でも利用ポリシーの見直しが求められる。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 11,
+      "id": 49595865,
+      "title_en": "Live map of public transport in Belgium",
+      "title_ja": "ベルギーの公共交通機関のライブマップ",
+      "url": "https://openbaarvervoerbelgie.be/",
+      "hn_url": "https://news.ycombinator.com/item?id=49595865",
+      "score": 158,
+      "comment_count": 67,
+      "posted_at": "2026-09-07T09:02:47+00:00",
+      "comments": [
+        {
+          "id": 49596499,
+          "author": "gworf",
+          "text": "Similar real time traffic map for Switzerland < https://maps.trafimage.ch/ch.sbb.netzkarte?baselayers=ch.sbb... >"
+        },
+        {
+          "id": 49600405,
+          "author": "Shorel",
+          "text": "The same idea, this time for Sofia, Bulgaria. https://livetransport.eu/#/sofia"
+        },
+        {
+          "id": 49596821,
+          "author": "Betelbuddy",
+          "text": "For Deutsche Bahn it will be just a photo...."
+        },
+        {
+          "id": 49597855,
+          "author": "ostacke",
+          "text": "This thread is full of people linking similar projects for different locations. The next step must be to combine it all to a global live map. Useful for... something, I'm sure."
+        },
+        {
+          "id": 49596440,
+          "author": "wouterjanl",
+          "text": "Awesome! Looking at the metro stop near me here in Brussels, the trains seemed stuck for a while at the station. Not impossible this was just real :) Great way to admire the density and connectivity of our public transport!!"
+        }
+      ],
+      "summary_ja": "主な議論点は、ベルギーの公共交通リアルタイムマップの有用性と同様のプロジェクトへの関心。賛否では、データの正確性や更新頻度への懸念と、都市間の連携やグローバルマップ化への期待が分かれた。注目コメントとして、ブリュッセルの地下鉄停留所で列車が停止している様子を実際に確認できたことや、スイス・ソフィア・ドイツの同様の取り組みへのリンクが挙げられ、最終的に全世界をカバーするライブマップの構想が話題になった。賛成側は、リアルタイム表示が通勤計画の改善や観光客への利便性を高めると評価し、オープンデータの活用例として称賛した。一方、批判的な意見では、特定の路線や時間帯で更新が遅れ、実際の運行状況と乖離するケースが指摘され、データ品質の統一が課題だと指摘した。さらに、一部のコメントでは、各国の交通機関が提供するフィードのライセンス違反リスクや、サーバー負荷への懸念も挙げられた。",
+      "editor_note": "ベルギーの公共交通機関のライブマップ リアルタイムGTFSデータを活用したオープンマップが公開。日本の自治体でも同様のオープンデータ活用の事例として参考にされている。",
+      "category": "Web development"
+    },
+    {
+      "rank": 12,
+      "id": 49600997,
+      "title_en": "No constitutional right to clean water, federal court finds",
+      "title_ja": "連邦裁判所、清潔な水への憲法上の権利は存在しないと判断",
+      "url": "https://www.usatoday.com/story/news/nation/2026/09/07/court-constitution-right-clean-water/91649488007/",
+      "hn_url": "https://news.ycombinator.com/item?id=49600997",
+      "score": 38,
+      "comment_count": 8,
+      "posted_at": "2026-09-07T17:52:58+00:00",
+      "comments": [
+        {
+          "id": 49601373,
+          "author": "helsinkiandrew",
+          "text": "> alleged that the city knowingly allowed residents to drink unsafe water. Surely knowingly letting people drink lead contaminated water breaks other laws rather than their constitutional rights?"
+        },
+        {
+          "id": 49601425,
+          "author": "bix6",
+          "text": "> Rather, he said residents should take other paths to redress, including electing better representatives and petitioning the government for remedies. Is suing the government not essentially a petition for remedies? How else do you get the gov to listen?"
+        },
+        {
+          "id": 49601392,
+          "author": "cocacola1",
+          "text": "This seems to fall under the whole “promote the general welfare” part of the Preamble of the Constitution, though perhaps the court is unaware of it."
+        },
+        {
+          "id": 49601448,
+          "author": "mathisfun123",
+          "text": "People don't read enough court decisions. Did you know you don't have a constitutional right to be protected by the police either https://en.wikipedia.org/wiki/Town_of_Castle_Rock_v._Gonzale... > the Court ruled, 7–2, that a town and its police department could not be sued under 42 U.S.C. § 1983 for refusing to enforce a restraining order, even though the refusal led to the murders of a woman's three children by her estranged husband"
+        },
+        {
+          "id": 49601351,
+          "author": "washelterskelte",
+          "text": "Government officials allowing this to happen should be sentenced to acute lead poisoning."
+        }
+      ],
+      "summary_ja": "**主な議論点**  \nこの判決は、飲料水の安全に対する憲法上の権利がないとした裁判結果について論じており、政庌による水の安全確保義務に疑問を投げかけている。コメントでは、「 Knowingness による安全でない水の提供」が他の法律に違反する可能性や、市民が訴えることなく「 投票」や「 請願」で対処すべきだという意見が出ている。\n\n**賛否両論**  \n一部の人は、憲法上の権利を主張せずに訴えるべきではないとし、政庌の無能力による harm に対する法的救済を求めるべきだと指摘。また、「Castle Rock 事件」のように警察の保護義務も憲法で保障されていないことを引き合わせ、政庌の義務範囲を疑問視。一方で、「G.Welfare Clause」に基づいて一般福祉の推進が憲法の目的であるとの見解もあり、裁判所が憲法の preamble を無視していると批判する声もある。\n\n**注目コメント**  \n「Government officials allowing this to happen should be sentenced to acute lead poisoning」というコメントは、政庌の無責任に対する強い非難の感情を表しており、この問題の緊 urgency を物めしている。",
+      "editor_note": "連邦裁判所、清潔な水への憲法上の権利は存在しないと判断 環境権の法的限界を示す判決で、日本でも水質問題に関する訴訟戦略の見直しが議論される契機となった。",
+      "category": "Other"
+    },
+    {
+      "rank": 13,
+      "id": 49594878,
+      "title_en": "LG smart TVs caught logging audio with screen off and snooping on local devices",
+      "title_ja": "LGスマートテレビ、画面オフ時の音声記録とローカルデバイスのスパイが発覚",
+      "url": "https://www.notebookcheck.net/LG-smart-TVs-caught-logging-audio-with-screen-off-and-snooping-on-local-devices.1391214.0.html",
+      "hn_url": "https://news.ycombinator.com/item?id=49594878",
+      "score": 1032,
+      "comment_count": 475,
+      "posted_at": "2026-09-07T07:03:20+00:00",
+      "comments": [
+        {
+          "id": 49596487,
+          "author": "korzinka",
+          "text": "I've bought an LG Smart TV 5 years ago, read t&c where I was supposed to grant them any data they wanted, decided to disagree and kept all network functions disabled. I was ridiculed by my friends for that. At some point, I thought - maybe I'm really crazy to do so? Who am I, a caveman, a luddite? Oh well, I'm not. Not a bad tv though, many HDMI ports!"
+        },
+        {
+          "id": 49596923,
+          "author": "spockz",
+          "text": "Okay. This is insane. First the monitor that uses a windows feature to automatically install a small helper tool with root permissions and then starts showing adds in certain regions. Now a tv that is actually actively snooping around on top of the known fingerprinting. What else is next? In the previous topic I got ridiculed for not wanting to buy LG anymore because I could use an agent to modify to strip out the offending bits. But there must be something better than just keeping to buy things that invade our privacy and homes further and further. Which brands aren’t doing this? Sony? They also announced a partnership for the lower end TVs IIRC."
+        },
+        {
+          "id": 49601031,
+          "author": "ticulatedspline",
+          "text": "I'm surprised this hasn't run afoul of all-party wiretap laws. Even if you could waive your own rights via ToS other people in the house may not have agreed. Theoretically I could see LG or even the TV's owner being culpable. I'd love to see that case hit the media. Average citizen jailed over wiretap violations because they let their TV record a guest."
+        },
+        {
+          "id": 49601416,
+          "author": "ptx",
+          "text": "I don't think the title is accurate. Starting at 16:04, they say that they merely claim that the TV has the capability to be used as a listening device. In the first 34 minutes, they don't seem to show that LG are actually recording audio from the surroundings (only from the content playing) and after that they start investigating whether you could record audio if you take control of the device (obviously yes). So the video doesn't seem to support the claim in the article that \"LG smart TVs continuously [...] log microphone audio while appearing to be turned off\". Of course, all the stuff LG are actually shown to be doing is bad nevertheless, particularly the \"Automated Content Recognition\"."
+        },
+        {
+          "id": 49599185,
+          "author": "dillutedfixer",
+          "text": "As an owner of 2 LG OLEDs, I am not surprised at all. I neutered these things the first day I was past the return policy. Opened the back and unplugged the WiFi/BT chip, bought a cheap dumb universal remote with no mic in it, disagreed to all T&C in the TV, updated the firmware via USB and just use an AppleTV over HDMI for streaming. Kind of silly to have to go through all of this but hey thats where we are in 2026 in the US. And I am fully aware that I am typing this on an iPhone thats probably doing the same things that this article is talking about LG doing ;-("
+        }
+      ],
+      "summary_ja": "主な議論点は、LGスマートテレビが画面オフ状態でもマイク音声を記録し、ローカルデバイスをスキャンしているという疑惑と、それが利用規約での同意を超えたプライバシー侵害かどうかです。多くのコメントは、利用規約に同意しなくてもネットワーク機能を無効にしたり、Wi‑Fi/Bluetoothチップを物理的に切断して対処した経験を共有し、極端な対策を余儀なくされる現状に懸念を示しています。一方で、該当動画では実際に録音されている証拠は示されず、 jedynie「録音可能な能力」があるだけだと指摘する声もあり、事実関係の解釈で意見が分かれました。法的側面では、全員の同意が必要なワイヤタップ法に抵触する可能性が指摘され、所有者や来訪者が無意識に違法行為を犯すリスクが話題になりました。注目すべきコメントとして、LGテレビを購入後すぐにハードウェアレベルで無線チップを外し、専用リモコンと外部ストリーミングデバイスのみで運用しているユーザーの体験が挙げられ、これが現在のプライバシー保護における実質的な解決策だと称賛されています。また、他社（ソニーなど）への乗り換えを検討する声もあり、業界全体のデータ収集姿勢への不信感が根底にあることが伺えます。",
+      "editor_note": "LGスマートテレビ、画面オフ時の音声記録とローカルデバイスのスパイが発覚 オフ状態でもマイクが有効になるプライバシー問題が顕在化。日本の消費者庁・個人情報保護委員会でも同様の調査要求が高まっている。",
+      "category": "Security"
+    },
+    {
+      "rank": 14,
+      "id": 49596054,
+      "title_en": "Speculative Decoding in vLLM on AMD GPUs",
+      "title_ja": "AMD GPU上的vLLMにおけるSpeculative Decoding",
+      "url": "https://vllm.ai/blog/2026-08-23-speculative-decoding-amd-gpus",
+      "hn_url": "https://news.ycombinator.com/item?id=49596054",
+      "score": 109,
+      "comment_count": 38,
+      "posted_at": "2026-09-07T09:26:41+00:00",
+      "comments": [
+        {
+          "id": 49596592,
+          "author": "intothemild",
+          "text": "Whilst this is an excellent post from vLLM, one of the truly baffling things from either their team or AMDs team, is how much the workstation grade AMD r9700 has been ignored. Stock vLLM runs so slowly on these cards compared with vLLM forks like Radiance. Going from say 20-30t/s gen, to 150-200t/s Most of AMD/vLLM work seems to be around their data centre cards, or the AMD AI Halo/Ryzen and ignores the R9700 AI Pro. Really wish this would change."
+        },
+        {
+          "id": 49598199,
+          "author": "flufluflufluffy",
+          "text": "This is way outside my expertise so might be a dumb question, but how does the target model verify candidate tokens? Naively, I would assume it must perform its normal auto regressive decoding to know what the “correct” token is in order to have something to compare the candidate token with. But obviously that would defeat the purpose of speculative decoding so there must be some other way. Also, what is the difference between “target model” and “target-model,” if any? I feel like half the instances of that phrase included the hyphen and half didn’t."
+        },
+        {
+          "id": 49599136,
+          "author": "myuzio",
+          "text": "Very true, I see it for example when my co-workers apply DRY without actually thinking about the complexity it might cause. It objectively makes code smaller, but often comes with complexity cost."
+        },
+        {
+          "id": 49600967,
+          "author": "quietraster",
+          "text": "nice to see amd getting first-class vllm support. how do the acceptance rates compare to nvidia on the same models?"
+        }
+      ],
+      "summary_ja": "・主な議論点\nAMDのワークステーションGPU（Radeon Pro VII／r9700）でのvLLMの実行速度が遅く、公式vLLMでは20‑30トークン/秒しか出せず、Radianceなどのフォークでは150‑200トークン/秒にまで向上する点が議論の中心。また、speculative decodingにおけるターゲットモデルが候補トークンをどう検証するのか、ハイフンの有無の違いなどの実装詳細への質問も多数見られた。\n\n・賛否両論\nAMDへのファーストクラスサポートを歓迎する声がある一方で、データセンター向けやAI Halo/Ryzenへの注目が強く、r9700などのコンシューマ/ワークステーション向けGPUが見過ごされているという批判があった。受理率のNVIDIAとの比較を求める意見も賛成側の要望として挙げられた。\n\n・注目コメント\n「仕事用AMD r9700が無視されており、株のvLLMでは遅いがRadianceフォークでは速度が5〜10倍に跳ね上がる」という指摘は、ハードウェア別の最適化gapを浮き彫りにした洞察に富む意見として挙げられる。また、ターゲットモデルによる候補トークン検証方法についての質問は、speculative decodingの仕組みを理解しようとする読者の関心を示している。",
+      "editor_note": "AMD GPU上的vLLMにおけるSpeculative Decoding vLLMの推論エンジンにAMD GPU向けのスペキュラティブデコーディングを実装し、レイテンシ削減に成功。日本のクラウドベンダーがAMD採用を検討する材料となる。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 15,
+      "id": 49597907,
+      "title_en": "De-Brainrot Vacations",
+      "title_ja": "De-Brainrot Vacations",
+      "url": "https://devz.cl/posts/i-spent-my-vacations-de-brainrotting/",
+      "hn_url": "https://news.ycombinator.com/item?id=49597907",
+      "score": 418,
+      "comment_count": 170,
+      "posted_at": "2026-09-07T13:00:48+00:00",
+      "comments": [
+        {
+          "id": 49598265,
+          "author": "FinnLobsien",
+          "text": "I think the „my brain isn’t the same anymore“ sensation is pretty universal. Between addictive online media in our personal lives and AI at work, I think we’ve made mental effort largely optional. That must be a horrible thing. One of my favorite theories is the physical activity transition. In my grandparents‘ generation, physical movement became more optional as work shifted from manual labor to knowledge work or operating machines and transportation became motorized. Exercise was an ambient byproduct of daily life. Then it disappeared (exercise as a hobby was viewed as extremely weird, runners used to be arrested!) and a few decades later heart disease, diabetes, and so on became deadly epidemics. We now know exercise is not optional for health. And we’ve reintroduced it via gyms, clubs, etc. But that took decades. And I believe we’re now in the Mental Activity Transition. We’ve stripped away ambient mental effort so we practice it much less. I don’t know what the decades-long consequences of that may be, but they can’t be good. I hope it won’t take decades for societies to rediscover its value and figure out how to reintroduce it."
+        },
+        {
+          "id": 49599606,
+          "author": "woodgala",
+          "text": "As someone who started their software engineering career in 1988 and is at the tail end of it, I can report that my peers and I have experienced the same thing, even as we start retiring. What we didn’t have was constant dopamine hits. It took effort to get dopamine. A lot. I’ve struggle with doomscrolling in my 50’s, just like teenagers, except I remember a time when it didn’t exist. I think that’s the key: if all you’ve ever had is velveeta, you’re going to have to work twice as hard to unlock the pleasure some stinky washed rind raw milk French cheese. I agree with the author, I think reading books is the only way out, and extend that to analog activities. An analogy is fast-twitch muscles: they respond quickly, but burn their ATP faster. You have to operate at an oxygen deficit for about 10 minutes before your analog/aerobic system kicks in. Same thing with any analog activity like reading, you have to put the monkey-brain to sleep."
+        },
+        {
+          "id": 49599240,
+          "author": "herbertl",
+          "text": "\"Fifteen years ago, the internet was an escape from the real world. Now the real world is an escape from the internet.\" https://www.noahpinion.blog/p/the-internet-wants-to-be-fragm..."
+        },
+        {
+          "id": 49598145,
+          "author": "holden_nelson",
+          "text": "A number of years ago I had a period of my life where I decided to shut my laptop for a while. I was working as a line cook and trying to find time and energy to code study so I could land a role in software (no degree). I was really struggling with my mental health and was having issues making or maintaining progress in pretty much any area of my life. I got a new job, cooking breakfast in a small mountain town at a bakery. Before I left I sold my laptop and borrowed a bunch of books from some friends. I really did feel much better a few months later. Taking the time to decompress allowed me to get my priorities in order and surface some biases / blind spots I had. I ended up re-enrolling in school the next spring and am now happily employed in software. I don’t think the modality is particularly important - coding vs reading vs anything else - but taking the time to put your goals away for a little while and decompress can make you more effective in actually reaching them"
+        },
+        {
+          "id": 49599399,
+          "author": "NoboruWataya",
+          "text": "A couple of times now I have walked a stretch of the Camino de Santiago (each time it was just a small bit near the end; sadly don't have the time off to do a full route which can take a month or longer). I find the simplicity of it super rewarding and enjoyable compared to my busy life back home. Just, for the most part, miles and miles of peaceful countryside. It's kind of the opposite of what is described in the article, where the author is using his time off to improve his knowledge in other areas. Personally, I find that back home I am constantly thinking, both at work and in my time off, so much so that I forget what the end goal of all that thinking actually is. So doing these long walks helps me take a break from that and put it in perspective. No laptop, as little smartphone use as possible, I will maybe read a book or two in the evenings but nothing too heavy, etc. As an aside, I am in a non-tech field, and programming is my hobby (and nothing like my day job). I enjoy it and I think it helps me stay sharp, but it has its drawbacks as a hobby. Being a solo hobby, and not one that many people in my field are into, it's not really something I can easily bond with others over (unlike, say, golf or chess). And sometimes it can be the opposite of relaxing when you encounter a bug that you can't seem to diagnose or fix."
+        }
+      ],
+      "summary_ja": "**主な議論点**  \nコミュニティは、デジタル技術とAIによって「知的エネルギーの消耗」が進みつつあると指摘している。特に、脳の反応を刺激し続けるSNSやAIツールが満たされているため、集中や深い思考が減少しているという懸念が強い。この現象を「知识労働者の運動不足に例えた」解説が多く、過去に身体活動が省かれたように、今度は精神的なエクササイズ（読書、深察、瞑想）が減っているとし、将来的な認知機能低下や精神疾患のリスクを懸念している。\n\n**賛否両論**  \n「デジタルデトックス」や「アナログ活動の回復」を提言する意見と、それによって生産性が下がるのではないかという懸念が分かれている。一部のユーザーは休息を通じて自己省察や優先順位の再設定に成功した経験を語る一方、プログラミングやAI学習のような活動を続けることの重要性も指摘されている。また、アナログ活動の回復が個人によっては効果的と感じられるものの、必ずしち社会全体に普及するには時間がかかるとの見方もある。\n\n**注目コメント**  \n「15年前のインターネットは現実世界からの逃避だったが、今は現実世界がインターネットからの逃避になってしまった」というコメントは、現代人の関係性むけを浮きれさせるもので、多くの反響を呼んだ。また、カミーノパリサント巡礼の体験を語ったユーザーは、「普HCP集中して考えすぎることすら負担」であり、静寂な環境でリフレッシュすることで本質的な思考を取り戻すことができると指摘しており、アナログな環境復求の有効性を主張する内容として注目されている。",
+      "editor_note": "De-Brainrot Vacations デジタルデトックスをテーマにした旅行プラットフォームが登場。日本のワークライフバランス推進企業が福利厚生に組み込む動きが見られる。",
+      "category": "Other"
+    },
+    {
+      "rank": 16,
+      "id": 49562440,
+      "title_en": "Whistle Synth",
+      "title_ja": "Whistle Synth",
+      "url": "https://www.jefftk.com/p/whistle-synth-mac-app",
+      "hn_url": "https://news.ycombinator.com/item?id=49562440",
+      "score": 29,
+      "comment_count": 7,
+      "posted_at": "2026-09-04T09:44:45+00:00",
+      "comments": [
+        {
+          "id": 49601173,
+          "author": "azornathogron",
+          "text": "Sounds a bit like imitone https://imitone.com/ (I have no affiliation) FYI, Imitone has a patent, I don't know what it covers or claims though."
+        },
+        {
+          "id": 49600004,
+          "author": "cousin_it",
+          "text": "The first time I saw it, I thought about playing a drumkit and whistling a bassline at the same time, with someone else on guitar and vocals, making a full rock sound with two people. But then I was too lazy to try it."
+        },
+        {
+          "id": 49599908,
+          "author": "n738",
+          "text": "This is something I think about making every time I sit in front of my PC - thank you and I look forward to trying it!"
+        },
+        {
+          "id": 49563104,
+          "author": "comradesmith",
+          "text": "It seems like it will be fun but my headphones just come in under the activation threshold, but I can't see a way to add some input gain"
+        },
+        {
+          "id": 49600158,
+          "author": "mattmar96",
+          "text": "Sweet!"
+        }
+      ],
+      "summary_ja": "主な議論点は、Whistle Synth が既存の類似製品（例：Imitone）とどのように異なるか、およびその実用性や創造的な活用法である。賛否は、楽器演奏と同時にホイッスルでベースラインを奏でるアイデアに熱狂的な支持がある一方、マイクのゲイン調整が不可能でヘッドホンの感度が足りず使いにくいという指摘も見られた。注目すべきコメントとして、「ドラムを叩きながらホイッスルでベースを弾き、ギターとボーカルで二人だけでロックサウンドを作れる」という具体的なシナリオを挙げ、実際に試してみたいという期待を示した意見が挙げられる。また、Imitone の特許について言及し、Whistle Synth がどのように差別化できるかへの関心も示された。全体として、創造的な音楽制作ツールとしての可能性に対する関心は高いが、入力レベル調整の改善が求められている。",
+      "editor_note": "Whistle Synth ホイッスル音をMIDIに変換するオープンソースシンセサイザー。楽器デジタル化のハッカー文化が日本の楽器メーカーにも影響を与えている。",
+      "category": "OSS"
+    },
+    {
+      "rank": 17,
+      "id": 49597189,
+      "title_en": "Smartphone makers don't bother to comply with EU repairability requirements",
+      "title_ja": "スマートフォン製造業者、EUの修理可能性要件に準拠する気利きがない",
+      "url": "https://www.theregister.com/personal-tech/2026/09/07/smartphone-makers-dont-bother-to-comply-with-eu-repairability-requirements/5294532",
+      "hn_url": "https://news.ycombinator.com/item?id=49597189",
+      "score": 223,
+      "comment_count": 127,
+      "posted_at": "2026-09-07T11:46:37+00:00",
+      "comments": [
+        {
+          "id": 49597514,
+          "author": "KaiserPro",
+          "text": "As its the EU and regulation, its time to trott out your hobby horse. So let me trot out mine: regulation is good so long as it is backed up by even handed, robust, transparent, quick and effective sanctions. the Online safety act is a good example of a bad law, which is enforced badly. The first big test (X producing industrial quantities of minors engaging in sexual activity) was failed. Had a small company produced a service that did they same thing, they would have been fined, servers ceased and owners thrown in jail. X got a letter saying they should stop. An example of good enforcement is the UK's scores on the doors, where the public can see what the standard is, and if they fall below a certain level, the food place is fined/shutdown/other until it improves. Another good example is NCAP ratings."
+        },
+        {
+          "id": 49598828,
+          "author": "CorvusCrypto",
+          "text": "Enforcement can be better, but I'm gonna give grace given how recently it was imposed. It's easy to point at extreme levels of enforcement being a key part of any regulation, but I have seen the breadth of the EU's scope and what needs to be balanced. Quite often I find that nonaction against compliance violations falls into the following: - Lack of resources - Lack of real consumer impact - Awaiting legislation meant to clarify or strengthen impact of enforcement. The article to me doesn't offer enough to justify any shout of doing anything different at the moment, rather it's just that they failed an audit. If they failed an audit and coupled this to swaths of consumer complaints, sure, but every EU member has a clear agency for consumer complaint, and I don't buy it that it is hard for consumers to report violations, it is far more likely in this case that they just don't care for the violations this particular group cares more about (like the links to Temu. I suspect a consumer doesn't care if it actually works still in practice, but we'd need surveys to confirm). Consumer-replaceable batteries will be one area that WILL be a hot issue for consumers, so I would bet we will see much stronger reaction once that rule comes into effect."
+        },
+        {
+          "id": 49597729,
+          "author": "herbst",
+          "text": "Does it really matter this early? What I expect from this is rather that at least a few producers get more repair friendly so I as consumer have the choice again. (Writing this on my first phone without easily changeable battery, I've tried for very long) So I as my families tech guru can give the right signals to my family and in a few years we see the actual change happen. Slowly but steadily"
+        },
+        {
+          "id": 49597674,
+          "author": "crote",
+          "text": "Contrary to popular belief, the EU is not very fast when it comes to enforcement on requirements like these. We already saw this with the ePrivacy Directive and GDPR: those scary hundreds-of-millions-of-euros fines are only handed out after ongoing and deliberate violation, where you've already received plenty of warnings and smaller fines. 18% compliance after one year with zero enforcement is not great, but it's already a massive increase over the near-zero repairable products we had only a few years ago. On top of that it is 18% of models , so there's a decent chance that a huge chunk of the noncompliant ones are obscure brands with near-zero sales: a handful of models by Apple and Samsung already add up to over 60% market share. And the report was literally written by iFixit, so there's a rather clear commercial incentive to underrepresent it and push for the strongest enforcement possible."
+        },
+        {
+          "id": 49598761,
+          "author": "999900000999",
+          "text": "All you really need are easy to replace batteries. That’s the only part that will wear out within a reasonable lifecycle. Aside from FairPhone no one offers that"
+        }
+      ],
+      "summary_ja": "EUのスマートフォン修理性要件への対応について、コメントでは規制の有効性は制裁の公平さと迅速さにかかっていると指摘され、Online Safety Actのような不十分な執行例と、UKの「scores on the doors」やNCAPのような良い例が対比されました。一方、要件施行からまだ経過が浅いため違反への制裁が弱いのは資源不足や消費者への直接的影響の小ささ、今後の法令整備待ちと見られ、現在の18％適合率は過去のほぼゼロから大きな進歩ですが、対象はモデルベースであり売上シェアの大きいAppleやSamsungの一部機種で十分にカバーできるという見方もあります。また、iFixitが報告書を作成しているため商業的バイアスが懸念されるという指摘や、消費者が本当に気にするのは交換可能バッテリーであり、それが義務化されれば初めて本格的な反応が得られるとの期待も示されました。全体としては規制の方向性は支持されるものの、執行の強化とタイムラグへの理解が求められています。",
+      "editor_note": "スマートフォン製造業者、EUの修理可能性要件に準拠する気利きがない EUのエコデザイン指令に対応しない端末が多く、日本市場でも同様の修理困難端末が流通し、消費者の不満が顕在化。",
+      "category": "Mobile"
+    },
+    {
+      "rank": 18,
+      "id": 49596274,
+      "title_en": "Impedance Matching (2017)",
+      "title_ja": "インピーダンス・マッチング (2017)",
+      "url": "https://www.edge.org/response-detail/27238",
+      "hn_url": "https://news.ycombinator.com/item?id=49596274",
+      "score": 67,
+      "comment_count": 21,
+      "posted_at": "2026-09-07T09:52:26+00:00",
+      "comments": [
+        {
+          "id": 49598607,
+          "author": "gzalo",
+          "text": "I think concepts from impedance matching could also be loosely applied to other areas, for example: - How veins in organisms branch out to give \"energy\" to different areas while being the right size for the required supplies - How people can adapt and communicate with simpler words but taking more time. The optimum is when both parties are \"matched\" - Information theory, data across a channel needs to be sent at a rate lower than its capacity, otherwise it's \"rejected\" - In organizations, when a message needs to be passed from one area to another one, each impedance mismatch between individuals can lead to some \"information bounce\" and make it harder to get a message/idea across - When politics adopt a measure, there's an impedance mismatch when people aren't fully onboard It's a bit methaphorical but the overall idea is that efficient transfer across an interface requires compatibility between the source and destination. Incompatibilities produce some sort of \"reflections\", \"distortions\" or \"backpressure\"."
+        },
+        {
+          "id": 49597629,
+          "author": "smolder",
+          "text": "As someone familiar with electrical impedance, I don't like this article. It's trying too hard to sound smart."
+        },
+        {
+          "id": 49596764,
+          "author": "Metacelsus",
+          "text": "Whatever happened to Edge? They haven't really published since 2018"
+        },
+        {
+          "id": 49597542,
+          "author": "devnonymous",
+          "text": "Coincidentally, I am reading 'Scale' by Geoffrey West where this concept of impedence matching is discussed (amongst many other things). It is fascinating how impedence matching was arrived at in biological systems viq evolutionary pressure to optimize energy usage."
+        },
+        {
+          "id": 49596795,
+          "author": "mschuster91",
+          "text": "> On a larger scale, we can think of atmospheric carbon dioxide as an undesired impedance matcher, coupling the infrared light waves of the sun into the planet. Someday, we may decide to cool our earth by adding tiny particles of dust to our stratosphere, tuning the optical surface to reflect away a tiny portion the infrared waves coming from the sun. The impedance mismatch between the atmosphere and sunlight would create a kind of half-silvered mirror to keep us cooler by reflecting away the unwanted energy flowing into our planet. Good old geoengineering. The principle has been shown to work - in 536 AD [1], volcanic ashes and/or a cosmic impact event caused decades worth of cooling, causing or contributing to millions of deaths, pest spreads and massive migration movements. The problem is... if we screw it up and overhit our target, we're in for a repeat, just this time with billions of deaths. The question is... aren't we in for the same if we let human-caused climate change run its course anyway, just with us frying ourselves to death? [1] https://en.wikipedia.org/wiki/Volcanic_winter_of_536"
+        }
+      ],
+      "summary_ja": "主な議論点は、インピーダンスマッチングの原理を血管の分岐や情報伝達、組織間のメッセージ伝達、さらには大気中のCO₂やgeoengineeringなど、幅広い分野に比喩的に適用し、適合不適合による「反射」や「遅延」を考察した点である。賛否両論では、このanalogyが興味深い系統的思考だと肯定する声がある一方、電気工学に詳しいユーザーは「見せかけだけの知的ぶった記事」と批判し、過大評価だと指摘した。注目コメントとして、『Scale』による進化論的エネルギー最適化の議論と、CO₂を「不望のインピーダンスマッチャー」とし536年の火山冬期や成層圏への微粒子散布による気候冷却を例に挙げたgeoengineeringの言及が特に洞察に富んでいた。",
+      "editor_note": "インピーダンス・マッチング (2017) (Impedance Matching (2017)) 高周波回路設計におけるインピーダンス整合の重要性を改めて解説。日本の通信機器メーカーが5G/6G開発で再評価している基礎技術だ。",
+      "category": "Other"
+    },
+    {
+      "rank": 19,
+      "id": 49597895,
+      "title_en": "Splash-free urinals (2025)",
+      "title_ja": "Splash-free urinals (2025)",
+      "url": "https://academic.oup.com/pnasnexus/article/4/4/pgaf087/8098745?login=false",
+      "hn_url": "https://news.ycombinator.com/item?id=49597895",
+      "score": 186,
+      "comment_count": 102,
+      "posted_at": "2026-09-07T12:58:57+00:00",
+      "comments": [
+        {
+          "id": 49598021,
+          "author": "danjc",
+          "text": "Worth noting that this study was partially funded by the university of Waterloo"
+        },
+        {
+          "id": 49599449,
+          "author": "dguest",
+          "text": "Ig nobel prizes were just a few days ago: https://improbable.com/ig/winners/#ig2026 Edit: The splash free urinal was the winner for physics! I once joked that these do more for science than Nobel prizes. Now I don't think it's a joke: \"wacky but interesting\" awards are more important for the advancement of science than \"everyone agrees this these people should be even more famous\" awards."
+        },
+        {
+          "id": 49598230,
+          "author": "danw1979",
+          "text": "The recent introduction, in the UK at least, of splash-back reducing urinal … mats (?) has basically solved the problem in my opinion. They’re a disposable (but not single use…) plastic freshening insert with loads of short rubber strands, closely packed. You can pee on one of these mats and the stream almost aerates itself on impact and you get basically no splashback, I guess with a similar mechanism to how an aerating tap produces a stream of water that doesn’t splash off whatever it hits."
+        },
+        {
+          "id": 49598965,
+          "author": "xivzgrev",
+          "text": "I remember being annoyed by splash back in sixth grade. I mocked up an alternative design (essentially, a urinal that tilted away from you), and emailed some friends. They never responded, and I never followed up. Looking back I feel sad - that's the kind of curiosity to nurture in a kid. But peers are rarely the best group, it would've been better to tell my parents or the right kind of teacher. My friends also could've said something: \" I don't know what to do about this but you should tell ms blah blah blah\", in a serious way not mocking way. I'm glad someone else has finally looked at this sticky situation"
+        },
+        {
+          "id": 49597896,
+          "author": "u1hcw9nx",
+          "text": "Design through physics and differential equations. This paper is Ig® Nobel Physics Prize Winner 2026 https://improbable.com/ig/winners/"
+        }
+      ],
+      "summary_ja": "主な議論点は、2026年のIgノーベル物理学賞を受賞した「スプラッシュフリー小便器」の実用性と、それに関連する研究資金（ウォータールー大学からの一部助成）および物理・微分方程式を用いた設計手法である。コメントでは、英国で導入された短いゴム繊維入りのマットが飛び散りをほぼなくすと称賛する声がある一方で、使い捨てではないが定期交換が必要でコストや衛生面への懸念も指摘されている。また、子どもの頃に飛び散りに悩んで自ら傾斜型小便器を考えたエピソードや、Igノーベル賞が「おかしだが興味深い」研究を奨励し、科学の進歩にノーベル賞以上の意義があるという洞察に満ちたコメントが注目された。",
+      "editor_note": "Splash-free urinals (2025) (Splash-free urinals (2025)) 飛散防止構造を採用した次世代小便器がプロトタイプ段階。日本の公共施設での衛生・清掃コスト削減に期待が集まっている。",
+      "category": "Other"
+    },
+    {
+      "rank": 20,
+      "id": 49535375,
+      "title_en": "Academia as a d-index measuring contest",
+      "title_ja": "学界がd指数で競うコンテスト",
+      "url": "https://kevinmunger.substack.com/p/introducing-the-k-index",
+      "hn_url": "https://news.ycombinator.com/item?id=49535375",
+      "score": 6,
+      "comment_count": 0,
+      "posted_at": "2026-09-02T12:40:44+00:00",
+      "comments": [],
+      "summary_ja": "",
+      "editor_note": "学界がd指数で競うコンテスト 研究影響度を測る新指標d-indexを用いた学術ランキングが話題。日本の大学評価にも代替指標導入の議論が活発になるきっかけとなる。",
+      "category": "Career/Working style"
+    },
+    {
+      "rank": 21,
+      "id": 49577129,
+      "title_en": "Ask HN: Fable hacked my piano, can I release the results?",
+      "title_ja": "HNに質問：Fableが私のピアノをハックした、結果を公開してもよろしいですか？",
+      "url": null,
+      "hn_url": "https://news.ycombinator.com/item?id=49577129",
+      "score": 262,
+      "comment_count": 146,
+      "posted_at": "2026-09-05T14:54:44+00:00",
+      "comments": [
+        {
+          "id": 49593755,
+          "author": "Giefo6ah",
+          "text": "If you live in the USA, the \"decoy notes\" may be considered an \"effective technical measure\" from the \"Digital Millennium Copyright Act\". If you live in Europe, this restriction may be considered \"gatekeeping\" and exempted by the Digital Markets Act. Don't bring attention to yourself by asking for permission. Publish your codec, and if the company cares about this they will send a cease and desist. If you want the world to benefit from your code but you don't want to be responsible for it, try to adapt the codec to ffmpeg. The ffmpeg project is used to dealing with these matters, and will keep your codec working for eternity."
+        },
+        {
+          "id": 49595955,
+          "author": "userbinator",
+          "text": "You spent --- what I'd assume would be several k$ from prices found online --- to buy a self-playing piano, and are now asking if you can release the tools to have it play the music of your choosing? IMHO the fact that you even had to think about asking if you could do this is everything that's wrong with society today. IANAL but as long as you aren't releasing something that's copyrighted from the original code, or violating some patent, there shouldn't be anything to worry about. \"It's better to ask for forgiveness than permission\", as the saying goes. ;-)"
+        },
+        {
+          "id": 49594374,
+          "author": "Scaevolus",
+          "text": "Aside: if you want a source of high quality Piano MIDI recordings, you should check out the MAESTRO dataset: https://magenta.withgoogle.com/datasets/maestro > The dataset contains about 200 hours of paired audio and MIDI recordings from ten years of International Piano-e-Competition. The MIDI data includes key strike velocities and sustain/sostenuto/una corda pedal positions. Audio and MIDI files are aligned with ∼3 ms accuracy and sliced to individual musical pieces, which are annotated with composer, title, and year of performance. Uncompressed audio is of CD quality or higher (44.1–48 kHz 16-bit PCM stereo)."
+        },
+        {
+          "id": 49596417,
+          "author": "Silasdev",
+          "text": "This whole writeup is basically the verbatim prompt recipe for anyone to just whip it up themselves. Blocking the final result is no longer a real block, when all it requires is a vague prompt to replicate it. We've entered a strange territory."
+        },
+        {
+          "id": 49594313,
+          "author": "jdlshore",
+          "text": "Don’t ask Hacker News for legal advice. If you really want to know the answer, ask a lawyer."
+        }
+      ],
+      "summary_ja": "主な議論点は、Fableのピアノをハックして作成したツールやコーデックを公開することの合法性である。多くのコメントは、著作権や特許を侵害しない限りは問題なく、DMCAの「効果的技術的手段」に該当するかが焦点になると指摘し、米国ではデジタルミレニアム著作権法(DMCA)による差し止めのリスク、欧州ではデジタル市場法(DMA)によるゲートキーピング規制の可能性を挙げている。賛否は、公開すべきだという側と、法的リスクを避けるため弁護士に相談すべきか、あるいは許可を求めずに公開し警告が来たら対応すればよいという側に分かれる。注目すべきコメントは、「著作権や特許を侵さなければ問題ない」という見解と、「許可を求めるより謝罪を求める方が社会的に正常」という皮肉を含む意見で、さらにFFmpegにコーデックを移植すればプロジェクトが長期的にメンテナンスしてくれるとの提案があった。また、MAESTROデータセットを紹介し、高品質なMIDI音源の代替案を示したコメントも目立った。全体としては、技術的手法の公開は可能だが、法的枠組みへの配慮とリスク管理が求められるという合意に近い議論が行われた。",
+      "editor_note": "HNに質問：Fableが私のピアノをハックした、結果を公開してもよろしいですか？ AI音楽ツールが楽器のMIDI信号を改ざんし、創作とセキュリティの境界を問う事例。日本のDTMクリエイターも同様のリスクを認識し始めている。",
+      "category": "Security"
+    },
+    {
+      "rank": 22,
+      "id": 49599481,
+      "title_en": "Bill Gates tries to install MovieMaker",
+      "title_ja": "ビル・ゲイツがMovieMakerのインストールを試みる",
+      "url": "https://www.techemails.com/p/bill-gates-tries-to-install-movie-maker",
+      "hn_url": "https://news.ycombinator.com/item?id=49599481",
+      "score": 159,
+      "comment_count": 110,
+      "posted_at": "2026-09-07T15:27:03+00:00",
+      "comments": [
+        {
+          "id": 49600422,
+          "author": "3eb7988a1663",
+          "text": "My favorite bit about this is how none of the execs want to take ownership of the change, but instead trying to put someone else in the hot seat and/or start a Committee. This feels like an email that should have been blasted to the entire company. Top-down, empower employees to think of a more unified experience. Then again, all of the external jokes about Microsoft indicate that every department is fighting for their lives against the others, so that kind of kumbaya togetherness was never going to happen."
+        },
+        {
+          "id": 49600734,
+          "author": "bluegatty",
+          "text": "They think it's 'some issues' :) :) :) It's a fundamental, cultural and systemic lack of concern for those issues. An 'afterthought' that should be 'integral'. That Gates did not realize that means it's 100% on him. 1000% actually. He was struggling with the language of design and usability in 2003, not even realizing even the implications of what he was seeing (because it would require total rethink). Like a cars coming out of the factory with missing parts ... blame it on the guy on the line? No. Something is deeply wrong. I really like Gates - but it's beyond shocking how these cultures work and how myopic they are. I worked for a Fortune 50 - and it's pretty amazing to watch how an army of actually smart people with 'one eye' can be so competent many ways, but blind in others. I don't like to put Jobs on a pedestal but obviously this is something he understood (even then with gaping holes)."
+        },
+        {
+          "id": 49601162,
+          "author": "wqtz",
+          "text": "I feel like if he said, I feel like firing someone immediately for this issue would have sprouted a surprising level ownership to find the people or team (or teams) to be blamed. At the top level most people are not designed to get shit done. They are accountable for only reporting. So, even if you want to get things done finding the team or person from that point high is impossible as they are not designed for that. But as I write this I realized that even that wouldn’t work...as they will create a committee and hire an consulting agency whose exec was in the same sorority as them. And the consulting agency will recommend teams to be laid off. And then the same exec will come in pitching the board to buy a startup which has a great team and apparently was invested by a VC who went to same class of Wharton of that exec."
+        },
+        {
+          "id": 49600455,
+          "author": "sajithdilshan",
+          "text": "Read the whole thing and all I saw was zero accountability, zero ownership and zero consequences. That’s how great products die or become a nightmare. Every team keeps on passing the ball to other team and nothing gets fixed or done or improved."
+        },
+        {
+          "id": 49600567,
+          "author": "Flux159",
+          "text": "Even today Microsoft can't get their shit together on a decent user experience. Tried to use Azure since I needed to code sign a binary on Github. My two previous accounts setup on Azure errored out with obscure errors and there was no way to fix them. I had to create a new account just to sign up for Azure Artifact Signing (which is now waiting for Microsoft to approve - no updates in a week). I don't know how anyone figures any of this out without reading pages of documentation. I honestly believe that no one actually cares about their products or user experience at Microsoft."
+        }
+      ],
+      "summary_ja": "主な議論点は、マイクロソフト内部の責任の所在が不明確で、経営層が問題を他部門や委員会に押し付け、真の所有者がいないこと。これに対し、トップダウンでの権限委譲や文化の変革が必要だという意見と、そうした改革は現実には委員会やコンサルティング会社の介入に終始し、実質的な変化が起きないという懐疑的見解が対立。賛否両論として、一部はゲイツ自身が当時の設計・ usabilityへの無理解が根本原因だと指摘し、彼に責任があると主張。一方で、経営層全体のシステマチックな責任回避が問題であり、個人の非難では解決しないという反論も。注目コメントとして、あるユーザーはAzureのアカウント作成やコードサインの手続きが極めて不透明で、ドキュメントを読まなければ対処不能だと指摘し、これが「誰も製品やユーザー体験に関心を持っていない」証拠だと断じた点が挙げられる。",
+      "editor_note": "ビル・ゲイツがMovieMakerのインストールを試みる レトロなWindowsムービーメーカーのインストールに苦戦する様子がユーモラスに描かれ、オープンソース代替への関心を喚起。日本の動画編集初心者にも参考になる。",
+      "category": "Other"
+    },
+    {
+      "rank": 23,
+      "id": 49599719,
+      "title_en": "Bing Wallpaper showing Ad for Harry Potter and Fantastic beasts box set",
+      "title_ja": "Bing壁紙がハリー・ポッターとFantastic beastsのボックスセットの広告を表示",
+      "url": "https://www.thurrott.com/forums/microsoft/windows/thread/bing-wallpaper-showing-ad-for-harry-potter-and-fantastic-beasts-box-set",
+      "hn_url": "https://news.ycombinator.com/item?id=49599719",
+      "score": 77,
+      "comment_count": 48,
+      "posted_at": "2026-09-07T15:50:37+00:00",
+      "comments": [
+        {
+          "id": 49600822,
+          "author": "tialaramex",
+          "text": "Since this thread is mostly people complaining about Windows, here are two more fun anecdotes 1. I installed a new Windows-only gaming setup. Out of the box it was able to figure out how IPv6 networking works here but didn't get IPv4. So for the 10-20 minutes it took to fix that I was able to see what's a priority for Microsoft (so it works even with just IPv6) and what's non-critical so you can demand IPv4 Adverts everywhere: Critical, Ipv4 not needed Turning *off* the adverts: Non-essential, need Ipv4 or you can't change this 2. In my day job we look after the software which runs exams. For obvious reasons this software cannot do anything except present your exam and accept whatever your answers are. The University doesn't have buckets of money and almost all its machines run Windows, so exams happen on Windows. With a locked down environment you can still write the formulae you were supposed to memorize on your tits and then wear a top you can pull down to look at them \"discretely\" the same as in a paper exam, but you can't ask ChatGPT to write your essay about Singapore's housing policy for your politics exam or have it tell you whether the X-ray in figure 1 shows evidence for options A, B, C or D in your 3rd year medicine exam. Despite the fact that this software is as locked down as we could possibly make it, and so the machine definitely cannot \"install OneDrive\" even if the student really wanted to instead of taking their exam, Windows will still sometimes interrupt their exam to ask them if they want to install OneDrive."
+        },
+        {
+          "id": 49601400,
+          "author": "GuB-42",
+          "text": "I don't think it is the first time they do this, at least on one occasion, they have shown an ad for Tomb Raider on the lock screen. And I am evidently an minority here, but I don't really mind. I don't really have a problem with ads, I have a problem with annoying ads. Popups, banners, billboards, notifications, video segments, etc... they grab your attention and take up valuable space, I hate these, and I think everyone else does. But here it is just a wallpaper that happens to be branded, it is not particularly distracting, in fact, I find it pretty good overall. I like this simple, low contrast style for a wallpaper on the background. And that Tomb Raider lockscreen image from before was more than good, to me, it was one of the best! Of course, you may have different tastes, but and I can easily imagine someone being unaware that it is an ad (or not caring) and making it his new default. I understand why people wouldn't want this, but I didn't expect that much outrage. I mean, it is Windows 11, and you are letting Microsoft pick wallpapers for you, what did you expect? Getting to see the wallpaper behind all these much more intrusive ads, notifications and AI crap seems like a rather impressive feat. So much that I would have expected people who got there to have given up on complaining, or better, given up on Windows. And the author runs an \"insider preview\", talk about masochism!"
+        },
+        {
+          "id": 49599990,
+          "author": "OisinMoran",
+          "text": "Recently had to install some stuff on a Windows laptop, test it, then ship it out to a customer, and my god the culture shock coming from Mac (and previously Linux and before that Windows)! Randomly selected (and not particularly good at that) rotating wallpapers, random unrelated facts on the log in page. Had to nuke as many of them as possible, but they don't make it easy."
+        },
+        {
+          "id": 49600707,
+          "author": "bobtheborg",
+          "text": "Not true for me. Not sure where author is and why (s)he is seeing this (wallpapers seem to be country based.) https://bingwalls.com/ or https://bing.com/ and use the < > to move through history."
+        },
+        {
+          "id": 49599854,
+          "author": "bejd",
+          "text": "I'd be more surprised if this was the first time Microsoft did this. I checked the download page[0] and next to the download button they say they will do this >You will also receive in-app notifications with promotional offers from Microsoft [0] https://www.bing.com/apps/wallpaper?pc=w011&brand=bing"
+        }
+      ],
+      "summary_ja": "主な議論点は、Bingの壁紙にハリーポッターなどの広告が表示されることに対する不快感と、それが単なる壁紙かOSレベルでの広告侵入かという点だった。多くのコメントでは、ロックスクリーンやログイン画面に表示される広告が通知やポップアップ同様に邪魔だと指摘し、IPv6優先のネットワーク設定や試験用ロックダウン環境でもOneDriveのインストール促しが出るなど、マイクロソフトが非必須機能を優先して広告を挟む姿勢に批判が集まった。一方で、広告が目立たずデザインとして気に入っているという意見や、広告だとは気付かず好きな壁紙として使っているユーザーもおり、賛否が分かれた。注目されたコメントとして、試験専用の厳格なWindows環境でも広告が割り込む例を挙げ、OSの「必須」と「非必須」の線引きがあいまいであることを指摘したものが挙げられた。また、壁紙の表示は地域差があるとも指摘され、必ずしも全ユーザーに同じ広告が出るわけではないことも議論に加わった。全体としては、Windowsにおける広告の許容範囲と、ユーザー体験への影響が主な争点だった。",
+      "editor_note": "Bing壁紙がハリー・ポッターとFantastic beastsのボックスセットの広告を表示 OS標準機能が間接的な広告枠となり、ユーザーの同意なしにプロモーションが表示される問題点を指摘。日本でも同様のプレインストールアプリの透明性が議論されている。",
+      "category": "Other"
+    },
+    {
+      "rank": 24,
+      "id": 49591876,
+      "title_en": "Making a Python interpreter in 1024 bytes",
+      "title_ja": "1024バイトでPythonインタープリタを作成",
+      "url": "https://austinhenley.com/blog/python1024.html",
+      "hn_url": "https://news.ycombinator.com/item?id=49591876",
+      "score": 299,
+      "comment_count": 101,
+      "posted_at": "2026-09-06T23:14:08+00:00",
+      "comments": [
+        {
+          "id": 49592653,
+          "author": "jrdres",
+          "text": "The code makes me smile, because it's nasty . This isn't like C4, a tiny but complete C compiler which does error checking on its subset. Instead, this is worse than Sector C, which takes every shortcut and just plain assumes everything in the source is right. This \"Python\" just plain assumes for keywords: Any \"f\" is a \"for [x] in range[y]\" (exactly that, no other for's). Any \"w\" is a \"while\". Any \"i\" is an \"if\". Any \"d\" is a \"def\". Any \"p\" is a \"print(\" Nasty, nasty. (Also nasty is that the code snippets in the article has more comments than the github copy of the \"readable\" version. You need the article to understand what's going on.) This is a just a bit too simple for a \"Tiny Python\". If somebody is willing to allow a few more K's of bytes, I'd love to see at least lists & dicts here--Lisp can do them!"
+        },
+        {
+          "id": 49592077,
+          "author": "teddyh",
+          "text": "For those who actually need something like this in production, there is Snek: < https://sneklang.org/ > “ Snek is a tiny embeddable language targeting processors with only a few kB of flash and ram. ”"
+        },
+        {
+          "id": 49592960,
+          "author": "marcelo-earth",
+          "text": "Reading the article, I can't believe I just found out Code Golf is a thing. I've been a programmer for more than a decade. But yes, amazing project! I like that it's human-made :)"
+        },
+        {
+          "id": 49593247,
+          "author": "userbinator",
+          "text": "To be precise this is 1024 bytes of C, which compiles to a binary many times larger, and implements a very tiny subset of Python. loops work by jumping backwards and reparsing the source each iteration This is how the DOS .bat processing works; not sure if Unix-style shells are the same, as I've never had the need to exploit that \"feature\". Another comment here has mentioned C4, but another extremely dense (and slightly larger, since it wasn't actually deliberately(!) \"code-golfed\") interpreter you may want to look at is the J Incunabulum: https://www.jsoftware.com/ioj/iojATW.htm More generally, the array programming culture seems to consider this level of density the norm: https://news.ycombinator.com/item?id=45800777"
+        },
+        {
+          "id": 49596315,
+          "author": "stevefan1999",
+          "text": "But to be honest, I wonder what is the smallest interpretable and practical Turing Complete VM? I would argue that implementing a brainfuck that we lower Python interpreter to, or even say like an interpreter untyped lambda calculus or SKI combinator would be very useful, especially for the hardware bootstrapping. I'm talking about things like SectorLisp https://justine.lol/sectorlisp/"
+        }
+      ],
+      "summary_ja": "主な議論点は、1024バイトCで書かれた極小Pythonインタプリタの実現方法とその機能の限界についてだった。コメントでは、キーワードを単一文字に置き換える極端なショートカットや、エラーチェック無し、ループごとにソースを再解析する手法が「nasty」だが面白いと評価されると同時に、実際に使えるサブセットが極貧弱で、リストや辞書などの基本構造が欠けていることへの不満が示された。賛否は、コードゴルフの技巧を称賛する声と、実用性や学習価値に欠けると指摘する声に分かれた。注目コメントとして、製品環境で使えるtiny言語「Snek」の紹介、過去の極小インタプリタ（C4、Sector C、J Incunabulum）との比較、そして脳fuckやラムダ計算、SKI組合子、SectorLispなどさらに小さなチューリング完全VMへの関心が挙げられた。",
+      "editor_note": "1024バイトでPythonインタープリタを作成 極小サイズでPythonのサブセットを実装するチャレンジが示す、制約環境での言語実装の可能性。組み込み系開発が盛んな日本のエンジニアに刺激を与える。",
+      "category": "Programming Languages"
+    },
+    {
+      "rank": 25,
+      "id": 49540827,
+      "title_en": "Unified Arabic",
+      "title_ja": "Unified Arabic",
+      "url": "https://worksthatwork.com/6/unified-arabic",
+      "hn_url": "https://news.ycombinator.com/item?id=49540827",
+      "score": 104,
+      "comment_count": 40,
+      "posted_at": "2026-09-02T19:02:49+00:00",
+      "comments": [
+        {
+          "id": 49556625,
+          "author": "TFNA",
+          "text": "Efforts to reform Arabic script made more sense decades ago when illiteracy was high. But once the internet came along, the young people across the Arabic-speaking world who might have once been illiterate, took to literacy very keenly: you had to be at least at little literate to SMS with friends, access internet porn, and get sweet dopamine hits on social media. Suddenly Arabic script turned out not to be that big of a problem after all."
+        },
+        {
+          "id": 49557693,
+          "author": "musictubes",
+          "text": "My biggest problem letter is mim. It essentially disappears in a lot of styles. If I was more fluent I’m sure I’d recognize the words more readily and know when to look for it. I don’t find the rest of the letters too difficult even at my basic level. I was struck by the lack of books in the homes of even educated people in Yemen. I once went to a book fair in Sana’a that was well attended. Think it was on a college campus. I don’t remember seeing many novels in Arabic, they were mostly in English and French. I had been told that if someone sent me any books in the mail they would have to be cleared by the censor before I would get them. That pretty much equated to never getting them. The book fair was a relief. I picked up David Copperfield and Women in Love and that was enough to last me until I made a trip out of the country."
+        },
+        {
+          "id": 49566866,
+          "author": "insane_dreamer",
+          "text": "For all the boneheaded/bad decisions that Mao Zedong made, simplifying the Chinese script turned out to be an excellent one, greatly increasing literacy and having a good side effect of making Chinese writing much accessible and legible at smaller sizes (found in modern print and on screen). When it comes to typing on computer/phones, nowadays Chinese type Latin letters (pinyin) that approximate a Chinese sound, which then reveals Chinese characters that relate to that sound, which they can then select. it's much faster than using root strokes to \"build\" the character. I was wondering if any similar technique is used in Arabic?"
+        },
+        {
+          "id": 49555931,
+          "author": "pavel_lishin",
+          "text": "This made the rounds on HN a few ... weeks? months? ago, and it's also about Arabic typesetting, and it's a very interesting read: https://lr0.org/blog/p/arabic/ I'm a little surprised that Nasri Khattar wasn't mentioned in it."
+        },
+        {
+          "id": 49556852,
+          "author": "BrandiATMuhkuh",
+          "text": "One of the hardest thing for me when reading Arabic is to identify the start and end of letters. I have started using monospace Arabic font with little gaps. Works great. https://github.com/eliheuer/hasubi-mono"
+        }
+      ],
+      "summary_ja": "・主な議論点  \nアラビア文字の改革はかつて識字率が低かった頃には意味があったが、インターネット普及により若者がSNSやネット閲覧のために文字を積極的に学ぶようになり、識字障害としての問題は小さくなったという指摘が中心となった。これに対し、特定の文字（例：ミーム）が見えにくいことや、識字率が向上しても書籍へのアクセスが制限されている現状（イエメンでの検閲や英語・フランス語書籍の dominance）が問題として挙げられた。さらに、中国語の簡体字化が識字率向上と小サイズでの可読性に寄与した例を引き合いに出し、アラビア語にも同様の入力方式（ラテン文字による音声変換）やフォント改善が可能かどうかが議論された。\n\n・賛否両論  \n改革派は、文字の見づらさや書籍不足を解消するため、字形の統一や入力効率の向上（ピンイン方式 analogues）を支持した。一方、現状維持派はインターネットによる識字率向上で十分であり、大規模な字形変更は文化的・歴史的価値を損ねると警戒した。また、フォントベースの対策（等幅アラビアフォントに隙間を持たせる）は実用的かつ低リスクだと肯定的に受け止められた。\n\n・注目コメント  \n- 「等幅アラビアフォントに隙間を設けると、文字の始まりと終わりが見やすくなる」という具体的な解決策をGitHubリンクと共に提示したコメントが実践的洞察として注目された。  \n- 中国語の簡体字化成功例を挙げて「アラビア語にもピンイン方式のようなラテン文字入力が可能か」と問うコメントは、技術的改革の方向性を示唆し議論を広げた。  \n- 過去のHN記事を参照しつつ、ナスリ・ハッタールの貢献が言及されていないことを指摘したコメントは、歴史的背景への配慮を促した。",
+      "editor_note": "Unified Arabic アラビア文字の異体形を統一し、フォントレベルでの互換性を向上させる試み。中東市場向けローカライズが進む日本企業にとって、テキスト処理の工数削減に寄与する可能性。",
+      "category": "Other"
+    },
+    {
+      "rank": 26,
+      "id": 49590611,
+      "title_en": "It took a year to ship WebAssembly in Anubis",
+      "title_ja": "AnubisにWebAssemblyをリリースするのに1年かかった",
+      "url": "https://anubis.techaro.lol/blog/2026/anubis-wasm/",
+      "hn_url": "https://news.ycombinator.com/item?id=49590611",
+      "score": 343,
+      "comment_count": 175,
+      "posted_at": "2026-09-06T20:32:38+00:00",
+      "comments": [
+        {
+          "id": 49591304,
+          "author": "vintagedave",
+          "text": "> In my experience the kinds of people who run this exact combination of circumstances also tend to be the kind of people that have a wide variance in the level of kindness they display to the authors of open source programs that happen to be in their way. Love this. There’s been past discussion on HN re how OSS maintainers are treated, and this is such a wry sentence. I really appreciate the tone / attitude to the problem."
+        },
+        {
+          "id": 49601314,
+          "author": "zamalek",
+          "text": "> It also means that the \"hey Claude vibeslop me a CUDA Anubis solver\" route is on its way to being fundamentally dead. Would there be any risk in making a dynamically built algorithm (i.e. the risk that we don't find N zero prefix bits)? Chain a set of transforms and build a unique WASM binary (including optimizations to deter pattern matching); possibly one a day or hour or something. That way you'd need to have Claude vibeslop the CUDA implementation at that cadence, per website."
+        },
+        {
+          "id": 49593106,
+          "author": "doctor_radium",
+          "text": "I have every copy of Firefox here configured with webassembly disabled...because I don't tend to do what Webassembly was designed for, i.e. online games, video/audio editing, emulation, etc. [1] and because I dislike things running in the background without my knowledge. So this is going to be interesting. My plea (in a small voice) to the OP: just as many sites still do for JavaScript, please add a \"This captcha required Webassembly to continue\" message to your code when Webassembly is disabled. And, incidentally, for smaller platforms/browsers that don't offer a Webassembly engine at all. [1] https://webassembly.org/docs/use-cases/"
+        },
+        {
+          "id": 49591573,
+          "author": "kccqzy",
+          "text": "Hats off to Xe for spending so much time on backwards compatibility, especially the tidbit about targeting Chrome 66. I have a Mac from 2014 running Yosemite that I occasionally use to test for backwards compatibility in my own frontend code (for fun!). But IMO the best way to ensure compatibility is to use period-correct toolchains or toolchains where the pace of change is slower, like ClojureScript."
+        },
+        {
+          "id": 49595614,
+          "author": "adrian17",
+          "text": "> something I was doing with my \"strict MVP\" build of Anubis' WASM wasn't in fact sticking to just the MVP features of WebAssembly Fun fact, this _used_ to be the case - wasm32-unknown-unknown had extra non-mvp features added later, which in my eyes has been a breaking change on stable. You're not the first person to have been bitten by this, there's [1] and a similar story in Ruffle [2]. Weirdly, the response from the rustc side (IIRC we also talked with one of the devs of wasm component on discord a bit around 2024) has contained a lot of (paraphrasing) \"in retrospect we think wasm32-unknown-unknown target was designed badly*, so we'd prefer if you either dealt with it or switched to another wasm target <with its different set of downsides> than us fixing it\". (*I acknowledge that the way std was implemented on that target was unusual and \"not clean\", but it works _really well_ for a lot of people.) > I looked into the process involved for rebuilding the standard library twice: once with only MVP wasm features enabled and once with an \"all yes config\" like usual. Based on some research I did this seemed like a massive pain. That's what Ruffle does [3], it's a bit unfortunate but wouldn't call it a massive pain. [1] https://internals.rust-lang.org/t/can-we-have-either-a-new-t... [2] https://github.com/ruffle-rs/ruffle/pull/18397 [3] See lines 55 and 117-127 in https://github.com/ruffle-rs/ruffle/blob/6890c618daab3153343..."
+        }
+      ],
+      "summary_ja": "**主な議論点**  \nコミュニティでは、WebAssembly（WASM）をAnubisプロジェクトに組み込むまでに1年かかった経緯について、保守的ブラウザサポートやツールチェーンの互換性問題が大きく取り上げられました。また、WASMによってAIによるスパム解決策の自動生成が困難になる可能性や、ユーザーのプライバシー・パフォーマンスへの影響についても議論されました。\n\n**賛否両論**  \n肍向きの意見では、WASMの使用によりセキュリティと信頼性が向上し、悪意ある自動化を抑制できると期待されています。一方、批判的な意見もあり、WASMはブラウザの互換性を損なう可能性や、ユーザーの操作なしにバックグラウンドで実行されることに対する懸念が指摘されています。さらに、Rustのwasm32ターゲットに関する設計問題や、MVP以外の機能が不意に追加されたことによる互換性の崩れも批判の対象となっています。\n\n**注目コメント**  \n「過去にwasm32-unknown-unknownターゲットが悪略されていた」とのRust開発者のコメントに対し、一部ユーザーは「それでも多くの人にとっては機能していた」と反論し、ツールチェーンの変更による実際の影響について議論を深めました。また、2014年モデルのMacでの互換性テストや、WASMを無効化しているFirefoxユーザーもいることが明らかになり、ユーザーの多様性がFloatingIPsの設計に影響を与えていることが浮かび上がりました。",
+      "editor_note": "AnubisにWebAssemblyをリリースするのに1年かかった ブラウザベースのバイナリ解析フレームワークにWASMサポートを追加するまでの開発過程が語られる。日本のセキュリティスタートアップもWASM活用のハードルを実感している。",
+      "category": "Web development"
+    },
+    {
+      "rank": 27,
+      "id": 49589914,
+      "title_en": "Ask HN: How do you manage skills files?",
+      "title_ja": "HNに質問：skillsファイルをどう管理していますか？",
+      "url": null,
+      "hn_url": "https://news.ycombinator.com/item?id=49589914",
+      "score": 267,
+      "comment_count": 246,
+      "posted_at": "2026-09-06T19:27:10+00:00",
+      "comments": [
+        {
+          "id": 49599924,
+          "author": "picklenerd",
+          "text": "I don’t find skills. I write my own skills based on things I do frequently and repeatably. I keep them version controlled locally and in GitHub, and I symlink that folder to my various agent skill folders so they all stay up to date. I feel like downloading a bunch of skills is another one of those useless collections people make purely because they have infinite options. It’s like those collections of thousands of bookmarks you’re never going to click or pirated ebooks you’re never going to read. It’s trivial to write your own skills with agents. The best way to use them, imo, is to make them when you have repeatable agent workflows, written to your own personal taste, and updated as your workflows change. Here’s what I have for reference: - Remove agent-speak from code, docs, and markdown files. - Ask sequences of questions the way I like to be asked questions. Used instead of the question tool. This is my primary design skill as well. - How to use jj the way I want my agent to use jj - Dispatch subagents with 6 different sets of priorities. Those priorities are defined in the skill, so I can always dispatch all 6 of them to write or review code. Includes a template for code reviews - Manage a local MD issue tracker for personal projects"
+        },
+        {
+          "id": 49595780,
+          "author": "avaer",
+          "text": "Skills are mostly snake oil, the way people use them (the aspiration to download kung foo from a celebrity). There was a time when maybe it mattered (last year), but with good repos and good prompts today's agents can find exactly what they need without any skills. \"Skills\" as developer macros can be useful, but at most those are things shared with the team (in the repo), not something you download from the internet. If you have so many skills that you feel the need to manage them, that's a code smell."
+        },
+        {
+          "id": 49598910,
+          "author": "theahura",
+          "text": "First, a lot of people in thread are saying you don't need skills. This is pretty wrong. There is a lot of alpha in using any set of skills that implements SPACE (search, plan, assert, code, evaluate). See: https://open.substack.com/pub/theahura/p/agentics-using-meta... Second, we share all of our sets of skills in a purpose built registry: https://noriskillsets.dev/ you can use any of our public skillsets from there. If you're on a team you can also sign up to get your own private registry. Makes organization much easier. Finally, for local development, we use this CLI to manage skills ( https://github.com/tilework-tech/nori-skillsets ). This is a tool that lets you bundle skills into groups, and then switch between those groups. So for eg if I'm making a slide deck I'll use an admin skillset, and for coding I'll use a swe skillset, and for debugging I'll use a debugging skillset. We do keep tinkering with our skillsets, but not very much. I don't get the need to adjust things for every model release, doesn't seem necessary for us in practice"
+        },
+        {
+          "id": 49594234,
+          "author": "alexhans",
+          "text": "- I don't find skills, I create them - Keep them organised in software repos that you install with symlinks for all coding harnesses that you have. Progressive disclosure based on the frontmatter does the rest. - I make sure they work with AI evals. Think of them like integration tests to prove behaviour. They're useful to optimize your flows. I try to make my skills be mostly a translation between natural language and good small fast tools that they call. - I change them as a new problem arises. Not just because. Skills can't be eaten by model capabilities if skills represent a workflow that is custom to my team or my person. I wrote about a good mental model in the past: https://alexhans.github.io/posts/series/evals/building-agent..."
+        },
+        {
+          "id": 49601053,
+          "author": "yokuze",
+          "text": "I commit my standard set of agent configuration (including Skills) to this repo, similar to how many people have a \"dotfiles\" repo: https://github.com/yokuze/aix-config Then, I use this tool: https://github.com/a1st-dev/aix to keep my Claude, Codex, and OpenCode in sync with my config. The major benefits are that my adoption/deletion of skills, rules, hooks, MCP servers, etc. are deliberate, versioned, and shareable. And since aix allows you to create extensible configs, that aix-config public GitHub repo is my base set of rules, and my internal/employer-specific rules are just a small layer on top of that. It also makes trying out different subscriptions easy: you define your config in one place (one source of truth), and write to Claude, Codex, Devin, etc. with one command."
+        }
+      ],
+      "summary_ja": "スキルファイルの管理について、コメントでは「自分で書くべき」という意見と「共有レジストリを活用すべき」という意見が対立した。前者は頻繁に使うワークフローを自分用に作り、Gitでバージョン管理しシンボリックリンクで各エージェントに共有し、スキルの収集は無意味だと主張。後者はSPACE（検索・計画・主張・コード・評価）を実装するスキルセットには価値があり、noriskillsets.dev の公開レジストリや専用CLIでグループ切り替えが可能だと指摘。また、dotfiles リポジトリのようにスキルをバージョン管理し、aix ツールで複数エージェントの設定を同期する方法も紹介された。賛否は、スキルが個人ワークフローの翻訳に過ぎないか、チームで再利用可能なマクロとして有用かの点に分かれた。",
+      "editor_note": "HNに質問：skillsファイルをどう管理していますか？ 個人のスキルインベントリをマークダウンやNotionで管理するベストプラクティスが共有され、日本のエンジニアキャリア支援ツールにもヒントを与える。",
+      "category": "Career/Working style"
+    },
+    {
+      "rank": 28,
+      "id": 49590512,
+      "title_en": "GrapheneOS Overhauled Default Apps and Secure Clipboard",
+      "title_ja": "GrapheneOSがデフォルトアプリとセキュア・クリップボードを改良",
+      "url": "https://grapheneos.social/@GrapheneOS/117225539756835649",
+      "hn_url": "https://news.ycombinator.com/item?id=49590512",
+      "score": 389,
+      "comment_count": 242,
+      "posted_at": "2026-09-06T20:24:00+00:00",
+      "comments": [
+        {
+          "id": 49594323,
+          "author": "yellowapple",
+          "text": "> In the longer term, we plan to add support for RCS including support for the standard end-to-end encryption (E2EE) via Messaging Layer Security (MLS). Currently, RCS including E2EE is available on GrapheneOS via Google Messages. We want to avoid the need to use Google Messages for RCS eventually. Hell yeah. Google Messages has worked reasonably well for RCS so far (after a long and frustrating period where it didn't on T-Mobile), but having a non-Google option will be huge."
+        },
+        {
+          "id": 49595312,
+          "author": "teekert",
+          "text": "They are really creating a lot of buzz recently. I love it, I hope they succeed beyond just us geeks here. It is imho imperative for a fair and balanced technological society that it retains the means for truly private and secure communications. My devices help me think, and my thoughts are my own. That is a fundamental condition of human-hood. Sure we can change that, if that's what we want, but do we? If we do, do we make it a conscious choice per person? Or do we let big tech/corporatocracy dictate what it is to be human?"
+        },
+        {
+          "id": 49591595,
+          "author": "lucb1e",
+          "text": "Ctrl+f clipboard, no results. What does \"Secure Clipboard\" in the title refer to? The release seems to be only the SMS/RCS app, rest is future: > We're also going to be overhauling or fully replacing the rest of the AOSP apps in the near future. AOSP Gallery is incredibly outdated and is being entirely replaced. AOSP Keyboard may be similar. We recently hired a bunch of new people and will be hiring more so our progress will be accelerating."
+        },
+        {
+          "id": 49591125,
+          "author": "goda90",
+          "text": "I believe this is the planned gallery app. I've already been using it: https://github.com/IacobIonut01/ReFra"
+        },
+        {
+          "id": 49598762,
+          "author": "butz",
+          "text": "Default apps in GrapheneOS are really outdated. Especially \"Gallery\" where on standard \"compact\" device top navbar is still too small and requires very precise touch. Hopefully, little by little, all stock applications will be updated to more modern variants. I personally had plans to build some open source stock Android applications, but after whole nonsense with platform being locked down I do not see the point in investing my time, just for google to block my apps."
+        }
+      ],
+      "summary_ja": "以下は、Hacker News のコメントに含まれる議論の要点の日本語要約です。\n\n**主な議論点**\nGrapheneOS の標準アプリの刷新と、Google のサービスに依存しない通信手段の構築に向けた取り組みが、コミュニティでlargely 注目されている。特に、RCS（Rich Communication Services）の標準E2EE（End-to-End Encryption）サポートの実現に向けた非Googleオプションの必要性が議論の中心となる。\n\n**賛否両論**\n「Secure Clipboard」という用語に対しては、具体的な実装が明確でないためか、一部のコミュニティ成员から疑問の声が上がっている。また、標準アプリ（特にギャラリーアプリ）の古さや使いやすさの問題は長年指摘されており、その改善を期待する声と、开放プラットフォームの制約下での開発の難しさに懸念を示す声が存在する。\n\n**注目コメント**\nGrapheneOS の活動はテクノロジーの民主化と個人のプライバシー・自主性の回復という更大的な文脈で捉えられるべきであるという洞察のあるコメントがある。「自分の思考は自分のものである」という人間の基本的条件と、Big Tech によるその定义の侵食のリスクについて、哲学的な視点から言及している。",
+      "editor_note": "GrapheneOSがデフォルトアプリとセキュア・クリップボードを改良 プライバシー焦点のAndroidディストロが標準アプリを刷新し、クリップボードのリーク防止を強化。日本の企業端末での採用検討材料として注目されている。",
+      "category": "Mobile"
+    },
+    {
+      "rank": 29,
+      "id": 49596976,
+      "title_en": "Apparently CodePen 2.0 sends data to their servers as you type",
+      "title_ja": "CodePen 2.0は打入力中にデータをサーバーに送信するようだ",
+      "url": null,
+      "hn_url": "https://news.ycombinator.com/item?id=49596976",
+      "score": 103,
+      "comment_count": 47,
+      "posted_at": "2026-09-07T11:22:40+00:00",
+      "comments": [
+        {
+          "id": 49598753,
+          "author": "giancarlostoro",
+          "text": "Pretty sure it always autosaved so this makes sense to me? I always assume it would send my data over to their backend, its code that ends up there regardless?"
+        },
+        {
+          "id": 49597273,
+          "author": "tvink",
+          "text": "You're gonna be shocked how many input fields do this for various UX features :)"
+        },
+        {
+          "id": 49600984,
+          "author": "quietraster",
+          "text": "the 'it's just autosave' defense in the comments is interesting. is keystroke-level granularity actually needed for that though?"
+        },
+        {
+          "id": 49598541,
+          "author": "maxim-fin",
+          "text": "CodePen does not disclose this in neither ToS nor in Privacy Policy, only in Builds documentation they say: “As you work on CodePen, your Pens are constantly running through the CodePen Compiler”"
+        },
+        {
+          "id": 49601291,
+          "author": "dbushell",
+          "text": "I'm looking forward to the Gamers Nexus exposé"
+        }
+      ],
+      "summary_ja": "**主な議論点**\nこのコメントスレで最も議論された点は、CodePenがタイピングごとにデータを送信する理由と、その透明性です。多くのユーザーは、これは「オートセーブ（自動保存）」機能のためであり、入力フィールドが動作する以上、仕方がないと理解しています。しかし、この説明が公式な利用規約やプライバシーポリシーに明記されていないこと、つまりユーザーが知情同意なしにデータが送信されている可能性がある点が問題視されています。\n\n**賛否両論**\n賛成派は、オートセーブは一般的なUX機能であり、コードがサーバーに送られる以上、これは自然な動作だと主張します。反対派は、keystroke（キー入力）レベルでの送信はオートセーブに必要か不明であり、公式文書に記載がないためプライバシー上的懸念があると指摘します。特に、文書に記載がある「Builds」という機能 versus 通常の「Pens」の違いが議論の分かれ目となっています。\n\n**注目コメント**\n「Gamers Nexus exposé（暴露）を楽しみにしている」というコメントは、この問題が単なる技術的説明にとどまらず、企業の透明性やプライバシー保護に関する大きな社会的関心事であることを示唆しています。Gamers Nexusは技術製品の内部を深掘りする channelsで知られ、この発言は、CodePenの動作が今後、より広範な調査や批判の対象になる可能性を予見していると解釈できます。",
+      "editor_note": "CodePen 2.0は打入力中にデータをサーバーに送信するようだ エディタのキーストロークをリアルタイムでサーバーに送信し、協力編集や分析に利用。日本のフロントエンド開発者もデータ取り扱い方針の見直しを迫られる。",
+      "category": "Web development"
+    },
+    {
+      "rank": 30,
+      "id": 49550436,
+      "title_en": "I Connected My Withings Body+ to Home Assistant with an ESP32",
+      "title_ja": "ESP32を使ってWithings Body+をHome Assistantに接続しました",
+      "url": "https://didac.dev/blog/i-made-my-withings-scale-sync-to-home-assistant-without-the-cloud",
+      "hn_url": "https://news.ycombinator.com/item?id=49550436",
+      "score": 69,
+      "comment_count": 22,
+      "posted_at": "2026-09-03T14:33:01+00:00",
+      "comments": [
+        {
+          "id": 49599100,
+          "author": "AshleyGrant",
+          "text": "Using AI to reverse engineer undocumented Bluetooth protocols has been a godsend for me. We have an RV that came with a \"Smart RV\" system from BMPro that controls all of the lights, the air conditioning, starting the generator, leveling, slideouts, and other stuff. The BMPro app is... well, it's like they actively worked to make it terrible. I put up with it for 2 years and then had the bright idea to throw the APK at Claude Opus earlier this year. I now no longer have to use their terrible app as it reverse engineered the Bluetooth protocol and I can either use the custom-built Android app, website hosted on GitHub Pages, or the Home Assistant app I built using AI. It's not perfect, and it has bugs, but it is less buggy than their app. I've been busy at work lately, so I haven't had a chance to resolve the bugs, but I'll get around to it. I ended up also using Opus to patch the original APK to fix several bugs and inexplicably bad UI choices they made. I still prefer to use my own app, but I have the patched app as a fallback."
+        },
+        {
+          "id": 49597765,
+          "author": "dgacmu",
+          "text": "If you have a eufy scale, you can do this with no LLM needed - just set up an esp32 Bluetooth proxy, add it to home assistant, and then use the EufyLife integration someone already made. I did this recently with my scale to avoid having to sync it to my phone, go to the cloud, fetch data from the cloud, etc., and it's working fantastically. I have a little Home Assistant integration that pokes scale updates to a Python script running locally that provides a UI I like. Huge fan of running it this way. (Yesterday I ordered a more commercial, polished-looking esp32 Bluetooth proxy integrated into a smart plug - athome brand - but it's the same functionality, just in a nicer package than having a USB thing dangling from my outlet)"
+        },
+        {
+          "id": 49600892,
+          "author": "deivid",
+          "text": "Nice! I also got tired of the Withings app (which now pushes AI subscriptions, wtf) and \"made\" an app for the smartwatches (at least, it works with my ScanWatch 2) The app is at https://github.com/DavidVentura/withouthings - the firmware on the watch was leaked as well, and it's been helpful to debug some of the protocol."
+        },
+        {
+          "id": 49598890,
+          "author": "bassdreads",
+          "text": "Withings has a full available API, I wrote a tool to just scrape what I need from the app at https://developer.withings.com/"
+        },
+        {
+          "id": 49597313,
+          "author": "kjmr",
+          "text": "How can you write (or have AI write) such an article without also sharing the code? Now it’s just a pretty useless brag, “look what I built”."
+        }
+      ],
+      "summary_ja": "主な議論点は、AIを使って未公開のBluetoothプロトコルを逆エンジニアリングし、ベンダーアプリに依存せずにHome Assistantや自作アプリでデバイスを制御できるという点でした。賛否両論として、AIによるプロトコル解析はカスタムソリューションの迅速な構築やプライベートなローカル制御を可能にし、特にWithingsやEufyのスケール、BMProのRVシステムなどで実用例が挙げられた一方で、コードを公開しないことで記事が「自慢」にしかならず再現性が低いという批判や、逆エンジニアリングの法的・倫理的リスク、バグの残存によるメンテナンス負担が指摘されました。注目コメントとして、AIでBMProのAPKをパッチして独自アプリを作り、さらにESP32ベースのBluetoothプロキシでEufyスケールをローカル連携させた事例や、Withingsの公式APIを利用する手段を紹介したものが挙げられました。また、Withingsスマートウォッチ用のオープンアプリリンクを共有し、リークされたファームウェアがプロトコル解析に役立ったという知見も共有されました。",
+      "editor_note": "ESP32を使ってWithings Body+をHome Assistantに接続しました BLE経由で体重計のデータを取得し、ホームオートメーションに組み込むハック例。日本のスマートホーム愛好家にも同様のDIYアプローチが広がりつつある。",
+      "category": "Systems/Infrastructure"
+    }
+  ]
+}
