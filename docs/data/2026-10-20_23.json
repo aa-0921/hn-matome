@@ -1,0 +1,1027 @@
+{
+  "date": "2026-10-20T00:00:00+09:00",
+  "slot": "23",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 50154540,
+      "title_en": "MiniMax M3.1 Flash",
+      "title_ja": "MiniMax M3.1 フラッシュ",
+      "url": "https://www.minimax.io/blog/minimax-m31f",
+      "hn_url": "https://news.ycombinator.com/item?id=50154540",
+      "score": 210,
+      "comment_count": 78,
+      "posted_at": "2026-10-19T16:39:09+00:00",
+      "comments": [
+        {
+          "id": 50156659,
+          "author": "mawadev",
+          "text": "I go off of marketing obviously, but how is every new announcement of any vendor always on top of all others and then cheaper, while next day the next best and even cheaper model pops up? Is there anyone who independently verifies this? Its kind of pointless to comment on this announcement, much like how its pointless to comment on all the other announcements..."
+        },
+        {
+          "id": 50156105,
+          "author": "syntaxing",
+          "text": "The cost vs performance is insane for all these new models. I’ve been using Deepseek Flash 1017 and it does whole projects and asks for $0.10 on US provider with ZDR on Openrouter. I convinced a few friends to drop their Claude $20 subscription because DS Flash 1017 brings so much better value. They can still use Opus 5.5 for planning though each call will cost north of $2. Excited to try this model out too once there are US providers."
+        },
+        {
+          "id": 50156178,
+          "author": "minimaxir",
+          "text": "> For agentic tasks, the model’s overall usage cost is 70% lower than its predecessor. For this release, the cost is $0.15 input MToK/$0.60 output MTok/$0.015 cache read MTok, In this case the predecessor is MiniMax M3 (not Flash), which was $0.30 input MToK/$1.20 output MTok/$0.06 cache read MTok. So a 50% cut to input costs and a 50% proportional cut to cache read costs (20% of input -> 10% of input) makes the ~70% cost reduction plausible. A 70% cost reduction is very funny in light of reports saying LLMs are becoming too expensive. That is likely due to the need to compete with DeepSeek V4.1 ($0.15 input MToK/$0.60 output MTok/$0.003 cache read MTok), which this new model still does not beat because DeepSeek's cache costs are still confusingly low, but it's pretty close."
+        },
+        {
+          "id": 50155686,
+          "author": "terhechte",
+          "text": "The weights have yet to be released. The previous MiniMax M3 had (I think) ~428B parameters. Since this one is called Flash and they advertise it as inference being 3 times faster, there's the possibility that this will be a ~150B size model which would (quantized) run on DGX Spark or 128GB Macs or the new AMD AI systems."
+        },
+        {
+          "id": 50156021,
+          "author": "trilogic",
+          "text": "Minimax has been a strong player in our tests, if they managed to solve the inference speed issue(be scared, be very scared). A decent speed is at least 13 tps in consumer hardware. Let see if it passes Hugston bench this time, we really hope so."
+        }
+      ],
+      "summary_ja": "主な議論点: コストパフォーマンスの主張とDeepSeekとの比較、モデルサイズ・推論速度の推測、マーケティング過大表現への懐疑。  \n賛否両論: 支持側は入出力トークン価格が大幅に下がり、実際に使ってみてコスト削減が実感できるなど称賛。批判側は毎回の発表が「最も安く・最も速い」と謳われるが独立検証がなく、キャッシュコストの数字がわかりにくいなど疑問。  \n注目コメント: コスト削減の計算を示し、DeepSeek V4.1との差を指摘したコメント；重みが未公開で推論速度3倍を狙う150B規模モデルの可能性を示唆したコメント；コンシューマーハードウェアで13トークン/秒以上を目指すとの期待を示したコメント。",
+      "editor_note": "MiniMax M3.1 フラッシュは、推論速度と精度のバランスを突いた軽量LLMで、エッジデバイス向けAI実装が加速する背景があります。日本でも組み込み需要が高まっているため注目されています。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 2,
+      "id": 50152307,
+      "title_en": "Wine ported to OpenBSD",
+      "title_ja": "OpenBSDに移植されたWine",
+      "url": "https://marc.info/?l=openbsd-ports&m=179236125692175",
+      "hn_url": "https://news.ycombinator.com/item?id=50152307",
+      "score": 398,
+      "comment_count": 119,
+      "posted_at": "2026-10-19T13:35:34+00:00",
+      "comments": [
+        {
+          "id": 50153377,
+          "author": "haunter",
+          "text": "Gameplay videos Disco Elysium https://video.gamerstavern.online/w/qYjXr8dBauynzvEquJ7cP4 Hollow Knight https://video.gamerstavern.online/w/8tjjFRDtGJQZwxfE4ojVoC Prey 2017 https://video.gamerstavern.online/w/vNxVThRcpijbT9FAQPcKdz Death Stranding https://video.gamerstavern.online/w/rzz2TLCxcmneHsydukAFLU Witcher 3 Remastered https://video.gamerstavern.online/w/oZcTRKL5JMiU4M4FqGKcNH According to the reddit post: AMD Ryzen 9 9900X, 16GB RAM, AMD Radeon RX 9070"
+        },
+        {
+          "id": 50153536,
+          "author": "t-3",
+          "text": "https://marc.info/?l=openbsd-ports&m=179241414029592 > I doubt much will be merged upstream. Many updates we have can technically run on other OSes (%gs stubs won't be built on Linux because %gs is correctly set, SIGUSR1 will work but less optimally, etc). However I picked an approach where everything that is done for OpenBSD is just marked as OpenBSD only. I did that purely to simplify my life while I was working on it and clearly mark the changes. > When I was talking to Wine maintainers a month ago, they were hesitant to accept even patching Wine so it compiles for OpenBSD, mostly because it's another OS they will have to support and keep operational, while the %gs stub fix is something they definitely cannot take upstream. They are very hesitant to take anything that is changing the \"emulated\" application code."
+        },
+        {
+          "id": 50153292,
+          "author": "RunSet",
+          "text": "Especially welcome news now that OpenBSD is shaping up to be a refuge from slopcode. https://marc.info/?l=openbsd-tech&m=177411620801633&w=2"
+        },
+        {
+          "id": 50153821,
+          "author": "ataraxia937",
+          "text": "I find it amusing and appropriate that the surname of the author of that message is Frohwein. \"Happy wine\" in German."
+        },
+        {
+          "id": 50153518,
+          "author": "philipallstar",
+          "text": "Missed opportunity to call it Port."
+        }
+      ],
+      "summary_ja": "主な議論点は、WineをOpenBSDに移植したパッチが上流に取り込まれにくいという点だった。投稿者はOpenBSD固有の変更を明確にマークし、自分の作業を簡素化するために%gsスタブやSIGUSR1の扱いなど、他OSでも一応動作するが最適でないコードを残した。しかしWineメンテナは、新しいOSをサポートし続ける負担と、%gsスタブの修正が上流に受け入れられないことを理由に、たとえコンパイルだけでもパッチを取り込むことに慎重だった。賛否では、OpenBSDが「slopcode」からの避難所となりつつあることを歓迎する声と、著者の姓Frohwein（「幸せなワイン」）への言葉遊びを楽しむコメントがあった。また、「Port」という名前をつける機会を逃したという軽妙な指摘も注目された。",
+      "editor_note": "OpenBSDへのWine移植は、BSD系でもWindowsアプリ互換が求められるニーズの高まりを示し、セキュリティを重視する日本企業での採用可能性が注目されています。",
+      "category": "Systems/Infrastructure"
+    },
+    {
+      "rank": 3,
+      "id": 50154624,
+      "title_en": "Android apps running native on macOS",
+      "title_ja": "macOS上でネイティブに動作するAndroidアプリ",
+      "url": "https://github.com/kksimp/Mac.apk",
+      "hn_url": "https://news.ycombinator.com/item?id=50154624",
+      "score": 127,
+      "comment_count": 40,
+      "posted_at": "2026-10-19T16:45:30+00:00",
+      "comments": [
+        {
+          "id": 50155842,
+          "author": "bilalq",
+          "text": "In practice, the Google Play Services dependencies and other walled-garden initiatives from Google will make this less useful than it could otherwise be. But still, this is really cool."
+        },
+        {
+          "id": 50157046,
+          "author": "Broiler9437",
+          "text": "Cross-platform has never been easier than ever"
+        },
+        {
+          "id": 50156092,
+          "author": "f17428d27584",
+          "text": "Handy for Minecraft players on Mac: windows players may be on Java or on bedrock versions, but mobile and console players are all only on bedrock. Being able to run the Android version on Mac means I can play with local console players or join a bedrock realm. (There are compatibility workarounds if you run your own server but I don’t want the headache of doing so). Perhaps one day Mojang will enable Macos users to run the iPad (bedrock) version of Minecraft as well.."
+        },
+        {
+          "id": 50155699,
+          "author": "hypfer",
+          "text": "Arguably not a bad use of a claude subscription, provided that it actually works."
+        },
+        {
+          "id": 50156126,
+          "author": "mkirsten",
+          "text": "Crazy I was the first to star on GitHub. I’m going to give this a try for some tinkering projects."
+        }
+      ],
+      "summary_ja": "主な議論点は、AndroidアプリをmacOS上でネイティブに実行できる技術の実用性と限界についてだ。多くのコメントは「本当にクール」と肯定的に評価し、クロスプラットフォーム開発の障壁が低くなったことを指摘している。特にMinecraftのBedrock版をMacで動かせば、Windows・Java版やコンソールプレイヤーと同じ世界でプレイできるという具体的なユースケースが挙げられ、サーバー構築の手間を避けられる点が称賛された。一方で、Google Play Servicesやその他のウォールドガーデン施策に依存するため、実際の利用シーンでは機能が制限されやすく、期待ほど便利ではないという懸念が示された。また、Claudeのサブスクリプションを活用すれば有用だが、実際に動作するかが前提だとの注意もある。GitHubで最初にスターをつけたユーザーは、試しに趣味プロジェクトで活用したいと意欲を見せている。",
+      "editor_note": "macOS上でAndroidアプリがネイティブ動作すれば、クロスプラットフォーム開発の障壁が低くなり、Appleエコシステム内でのアプリ提供が現実的になります。日本の開発者にも大きな影響があります。",
+      "category": "Mobile"
+    },
+    {
+      "rank": 4,
+      "id": 50150089,
+      "title_en": "I built a drone with only one motor [video]",
+      "title_ja": "1つのモーターだけでドローンを作った [ビデオ]",
+      "url": "https://www.youtube.com/watch?v=Ndftcft6XhU",
+      "hn_url": "https://news.ycombinator.com/item?id=50150089",
+      "score": 71,
+      "comment_count": 8,
+      "posted_at": "2026-10-19T09:05:07+00:00",
+      "comments": [
+        {
+          "id": 50156691,
+          "author": "TGower",
+          "text": "Underactuated robotics are so cool. In the hobby BattleBots community, there is a design where the whole robot only has a single motor, but it's able to move in any direction and damage the opponent, all just by controlling the single motor's speed. Most robots have at least three motors, two drive sides and a weapon motor. The trick to getting away with one is integrating an impactor into the chassis of your bot, using the single wheel to spin up to ~3k RPM, then by tracking the rotation angle of the bot as it spins, you speed up a little while the wheel is pointing where you want to go, and slow it down a little when it's pointing the other direction."
+        },
+        {
+          "id": 50150780,
+          "author": "leoedin",
+          "text": "A really neat concept. It uses a special hinge design, a magnetic encoder and torque modulation to control the lift of the rotor as it spins. Completely negates the need for a conventional helicopter's swash plate. The single motor does have the pretty major downside that it spins the moment it's in the air. I suspect a 2 motor drone with a tail motor would be a lot more practical. But I really like how mechanically simple the rotor hinge design is - it pushes all the complexity into the control algorithm."
+        },
+        {
+          "id": 50156913,
+          "author": "subprotocol",
+          "text": "Reminded me of the Manhack: https://half-life.fandom.com/wiki/Manhack"
+        },
+        {
+          "id": 50151284,
+          "author": "mainecoder",
+          "text": "Amazing work this is really innovative and it could be applied to a larger drones provided that the margin of error is reduced."
+        },
+        {
+          "id": 50156926,
+          "author": "russellbeattie",
+          "text": "It's incredible that changes in velocity still work to adjust the angle of the blades even at the insane speeds they're moving at. I would never have thought that was possible. I have to wonder why this guy didn't give his drone a leash while testing so it couldn't go flying off. It's the first thing that popped into my head, so I'm sure it's something he thought of as well and didn't use for a good reason. Maybe a string would get caught in the blades?"
+        }
+      ],
+      "summary_ja": "主な議論点は、単一モーターで駆動するドローン（またはバトルボット）の実現可能性とその制御手法です。コメントでは、特殊なヒンジ設計、磁気エンコーダ、トルク変調によってローターの揚力を調整し、従来のヘリコプターのスワッシュプレートを不要にする仕組みが称賛されました。一方、機構が単純になる分、制御アルゴリズムの複雑さが増すことや、空中に浮いた瞬間に本体が回転してしまう欠点が指摘され、実用性についてはテールモーターを追加した2モーター構成がより現実的だという意見もありました。また、誤差を縮小すれば大型ドローンへの応用も可能だと楽観視する声があり、高速回転時でも速度変化でブレード角度を制御できる点に驚きつつ、テスト時の安全対策（例：リーシュ）をなぜ使わなかったかという疑問も呈されました。特に洞察に深いのは、ヒンジとトルク変調で機械的簡潔さと制御の高度化をトレードオフにしている点を指摘したコメントです。注目されたのは、制御の ingenuity と実用上の課題を同時に挙げた意見であり、コミュニティ全体としては革新性を評価しつつ、制御精度と安全性への懸念が論点となりました。",
+      "editor_note": "単一モーターでドローンを実現したアイデアは、マルチローター設計に挑戦し、重量軽減とシンプル化を追求する趣味・研究分野での新たな可能性を示します。日本のロボコン系でも注目が集まりそうです。",
+      "category": "Other"
+    },
+    {
+      "rank": 5,
+      "id": 50136126,
+      "title_en": "RuneScape Bench: MMOs for Agents [video]",
+      "title_ja": "RuneScape ベンチ: エージェント向けMMO [ビデオ]",
+      "url": "https://www.youtube.com/watch?v=cNm4zyUtWj0",
+      "hn_url": "https://news.ycombinator.com/item?id=50136126",
+      "score": 71,
+      "comment_count": 28,
+      "posted_at": "2026-10-17T23:24:05+00:00",
+      "comments": [
+        {
+          "id": 50157016,
+          "author": "zshn",
+          "text": "Was fun exploring this months ago. Back then even the smallest amount of game knowledge you could provide a model would drastically improve their performance. Most of it is in their training data but they hallucinate a ton of incorrect information."
+        },
+        {
+          "id": 50156939,
+          "author": "Confiks",
+          "text": "What a great introduction. My introduction to programming was also writing Runescape bots, using some Delphi tool called SCAR [1] (together with writing plugins for my Counter Strike 1.6 server using AMX Mod X). Start at Varrock bank, wizard hut, dialogue picker, teleport, find out where you are, mine, mine, mine, teleport back, back to bank, deposit, and again. My great essence mining bot contraption horribly broke when Runescape started randomizing all colors slightly, after making a paltry amount in dollars selling the essences. [1] https://scar-divi.com/"
+        },
+        {
+          "id": 50155777,
+          "author": "jparishy",
+          "text": "I've wondered if these types of casual open world, resource collection games-- which are basically a series of mini-games-- would make good model training envs. Each mini-game has a pretty simple mechanic that needs to be learned, as well as the navigation and interactions to begin it. Those could be pretty useful generic skills I think. One of my side projects is a game, and I've made it so agents can spawn off their own world shard to play in. There's a little Chrome-driven agent harness that can grab low res screenshots while it speaks directly to the game over the wire to control things. I've had Luna play it and it can drive around (you play as a bike) but it did struggle to play one of the mini-games (Disc Golf). My idea was that model trainers could run it an RL loop using the harness to get feedback data and screenshots to use, then reset the game world as needed during the process. A smart model capable of multi-modal inference on screenshots/game context at 30-60fps could be pretty interesting, and I'm sure it's coming. No idea how much it would generalize but would be fun to see done."
+        },
+        {
+          "id": 50156790,
+          "author": "reactordev",
+          "text": "If this was for UO, you'd have a bloodbath. RuneScape's systems were pretty tame compared to UO:SA where anywhere outside of towns was PvP allowed and when you died you lost all your gear."
+        },
+        {
+          "id": 50155774,
+          "author": "pprotas",
+          "text": "Saw it this morning, this video is a goldmine of ideas on how to build agent harnesses and benchmark them."
+        }
+      ],
+      "summary_ja": "主な議論点は、RuneScapeのようなカジュアルなMMOがAIエージェントの訓練・ベンチマーク環境として適しているかという点だ。少量のゲーム知識を与えるだけでモデルの性能が大きく向上するが、トレーニングデータに含まれない情報については幻覚が多いという指摘もある。さらに、過去に自分でボットを作った経験や、色のランダム化でボットが破綻した話が共有され、ゲームの仕様変更がエージェントに与える影響が話題になった。  \n\n賛否両論としては、エージェント訓練に適した「ミニゲームの集まり」としての可能性に期待する声がある一方で、汎用性が不明であることや、より過酷なPvP環境（例：UO:SA）ではエージェントがすぐに破壊されるという懸念も示された。  \n\n注目コメントは、Chromeベースのエージェントハーネスを構築し、低解像度スクリーンショットと直接制御を組み合わせてRLループを回すアイデアを提示し、30‑60fpsのマルチモーダル推論が可能なモデルならば面白いと考えている点だ。これにより、エージェントが独自のワールドシャードでプレイし、フィードバックとリセットを自動化できる可能性が示された。",
+      "editor_note": "RuneScapeをベンチマークとしたエージェント向けMMOは、ゲーム内AIの行動評価を標準化し、強化学習アルゴリズムの比較基盤として期待されます。日本のゲームAI研究にも活用できるでしょう。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 6,
+      "id": 50134472,
+      "title_en": "It's still ok to enjoy programming",
+      "title_ja": "プログラミングを楽しむのはまだ大丈夫",
+      "url": "https://chriskiehl.com/article/it-is-still-ok-to-enjoy-programming",
+      "hn_url": "https://news.ycombinator.com/item?id=50134472",
+      "score": 250,
+      "comment_count": 246,
+      "posted_at": "2026-10-17T19:53:20+00:00",
+      "comments": [
+        {
+          "id": 50153965,
+          "author": "ryandvm",
+          "text": "I don't know that anyone suggested it wasn't OK to enjoy programming. My problem with AI is that it now excels at the part of the job that was my favorite (writing code) and it leaves me to do the part that I suck at (being a manager). In 18 months or so my job satisfaction has gone from pretty high to abysmal."
+        },
+        {
+          "id": 50154094,
+          "author": "searls",
+          "text": "I suspect that many of the loudest voices pushing back against AI coding tools never practiced programming as a hobby or saw it as especially fun, and the fact their job is changing won't make them start now. I think just about everyone in the industry appreciated hand-typed programming as a job, because it was a pleasant enough craft to practice and for a solid couple of decades programmers were treated extremely well in comparison to the vast majority of other careers out there. Today, juggling a bunch of agents to do what you want them to do, figuring out how to verify their work, remediating problems, and spreading yourself thin cognitively—all the while looking over your shoulder at an increasingly precarious job market—is notably less pleasant for a lot of people. It sounds and feels a lot more like an engineering or product management role—something a lot of programmers would never in a million years have signed up to do voluntarily. I'm probably an 8 out of 10 on the cooked scale—I'm juggling a suite of ten iOS apps and haven't written or read a line of code in over a year—but I get where these people are coming from. I think the suggestion that they can reclaim what they've lost in this new job they've been loudly expressing distaste for by adopting a new unpaid hobby will ring hollow to them."
+        },
+        {
+          "id": 50155595,
+          "author": "hollowturtle",
+          "text": "> Yes, at work, where you are paid to produce value for a business, the economics of purely hand-written code have changed I'd love to genuinely love these blog posts but they are all the same! They're all like \"now that machine are better than us $xyzargument\". I'm so pissed off when I read so blantant lies like AI \"writing code better than me\" maybe better than you! But in general it's just a big lie. > the economics of purely hand-written code have changed who are you to know? I still hand code and produce a lot of value because I do care and polish everything I do. There are some pieces of the software that I wrote that I never touched again, they work perfectly, no errors no customer complaints"
+        },
+        {
+          "id": 50156806,
+          "author": "austin-cheney",
+          "text": "Programming is still fun, at least if you are solving real problems and building real products. The part of programming that sucks the most is untangling ambiguity. In my current app I had an ultra simple proxy convention, but it sucks. I have since settled on a different single convention to cover 6 different scenarios of traffic redirection, but it was a challenge to distill simplicity from chaos of the wilds and write all the various tests. It’s moving forward faster now but it was like starting over to get this rolling. What I find is fun is building things that solve real problems I have. Then my problem is solved, I am paying nothing for it, and I can extend it however I want for any reason without downstream restrictions. There is so much AI still cannot do in software. If you ask AI to build a faster WebSocket solution, for example, you will get more of what’s already there. I have a WebSocket library I wrote myself 4 or 5 years ago. I thought it was fast, turns out it wasn’t. I wrote my own perf tool for it and had a defect in the perf tool that spit out wrong results, but that defect showed me where the performance bottleneck was. Now my library is 40x-100x faster than other WebSocket libraries. I did use Claude to analyze my earlier perf bug, and it made the same mistakes I was making. If you want to go faster than popular battle tested solutions you have to be original and AI just isn’t quite there."
+        },
+        {
+          "id": 50153974,
+          "author": "dleslie",
+          "text": "I have friends that enjoy knitting and sewing. Those are great pastimes made commercially unviable for most because of great leaps in logistics and automation. But they are absolutely valid and enjoyable hobbies. And the skills they provide are transferable. Patience, attention to detail, staying on task."
+        }
+      ],
+      "summary_ja": "主な議論点は、AIコード生成ツールがプログラミングの楽しさを損なっているかどうか。賛成側は、AIがルーチンコードを書くため、創造的設計や問題解決に集中できると主張。否定側は、AIに代わられると管理や検証など好きでない作業が増え、仕事の満足度が低下すると指摘。特に注目されたコメントでは、自分が書いたWebSocketライブラリをAIが改善できず、独自の性能測定ツールでボトルネックを見つけ40〜100倍高速化した事例を挙げ、AIでは到底真似できない原創性の重要性を強調した。",
+      "editor_note": "プログラミングの楽しさを忘れないことは、創造性とイノベーションの源泉であり、AI時代でも人間の発想力が不可欠です。日本の若手エンジニアにも心に留めてほしいメッセージです。",
+      "category": "Career/Working Style"
+    },
+    {
+      "rank": 7,
+      "id": 50151376,
+      "title_en": "The obscure trust looming over Anthropic's IPO",
+      "title_ja": "アンソロピックのIPOを覆う不透明なトラスト",
+      "url": "https://www.wsj.com/tech/ai/anthropic-ipo-private-trust-188f41f7?st=RtdGHg&reflink=desktopwebshare_permalink",
+      "hn_url": "https://news.ycombinator.com/item?id=50151376",
+      "score": 80,
+      "comment_count": 33,
+      "posted_at": "2026-10-19T12:06:03+00:00",
+      "comments": [
+        {
+          "id": 50156745,
+          "author": "6thbit",
+          "text": "> They own no Anthropic equity and don’t share in its profits Can they own other AI related equities? I guess there's a lack of details to go on at this point. Finding humans that you'd want as trustees and have also truly no conflicts of interest will be tricky."
+        },
+        {
+          "id": 50156645,
+          "author": "sevengraff",
+          "text": "The article is mostly about how this trust is powerful and there are very few details of how it operates or under what circumstances it would take an action. When Anthropic goes public, is that the kind of thing that would need to be disclosed? Would we expect to know all the details of the trust?"
+        },
+        {
+          "id": 50156591,
+          "author": "adeptima",
+          "text": "friend of mine told me Antropic turned off 200 usd a month subscription, refused to extend and switched to usage base for large cyberop vendor he works for when this happened PR rate dropped 95% in the first day, thousands devs, managers started to panic and downscaling all AI first intiatives and cap 500 usd a month token usage . most tokens were burned in the first day of the week. as management got pissed, M$ people managed to sneak in and sell Copilot with up 600 usd a month token usage per dev … devs and devops are now the most unhappy about models switch and probably haven’t seen the impact of sucking entire code base in copilot. copilot is too slow for them too. addiction to claude code is clearly present. using personal software licenses and unauthorised soft is strictly forbidden story is clearly not over yet .. as for myself, i’m ready to pay up to 1k usd a month … if if … claude gives the edge… but if it becomes commodity im gone next day very curious what other devs in corporations are experiencing. deep inside cheerleading for 2 tie token ecosystem - full price for corporations and subsidized for small shops and indie"
+        },
+        {
+          "id": 50156837,
+          "author": "slowin",
+          "text": "I feel like people forget that FTX was an early major investor in Anthropic. The origins of Anthropic are incredibly shady and tie into the Effective Altruism scene. They also have Epstein ties with Dario's wife pitching Epstein for funding on a porn site. I don't actually think Anthropic will achieve its goal of getting AGI before everyone else and creating an effective moat where it can deploy that AGI to achieve EA/Epstein goals, but it's concerning that they're trying to! https://www.cnbc.com/2024/03/25/ftx-estate-sells-majority-st..."
+        },
+        {
+          "id": 50155988,
+          "author": "mixdup",
+          "text": "Never once have heard about Warby Parker being a PBC"
+        }
+      ],
+      "summary_ja": "コメントでは、AnthropoicのIPOに向けて設定された「信託」の不透明さと権力が主な議論点となった。信託の運用詳細や発動条件が開示されていないため、株式公開時にどの程度情報が必要か、利益相反の可能性が指摘され、信託受託者の選定が難しいという懐疑的意見が多かった。一方で、あるユーザーはAnthropoicが定額プランを廃止し従量課金に切り替えた事例を挙げ、これにより大手サイバーベンダーの利用が急減し、開発者らがパニックに陥り、トークン使用量を制限したり、代わりにMicrosoft Copilotへ流れた経験を共有し、価格政策の影響が現場に大きいことを指摘した。さらに、別のコメントではFTXが当初の主要投資家であり、効果的利他主義やエプスタインとの関係が疑われ、Anthropoicの使命に対する不信感が示された。Warby Parkerが公益株式会社ではないという余談も見られた。全体として、信託の透明性と倫理的背景への不安が議論の中心であり、賛成はほとんど見られず、多くの参加者が情報開示と利益相反の解消を求めている。",
+      "editor_note": "アンソロピックのIPOを覆う不透明なトラスト構造は、AIスタートアップの資金調達ガバナンスへの懸念を高め、日本のVCも規制動向を注視しています。",
+      "category": "Startup/Business"
+    },
+    {
+      "rank": 8,
+      "id": 50156206,
+      "title_en": "The reverts will continue until morale improves",
+      "title_ja": "モラルが向上するまでリバートは続く",
+      "url": "http://peter.eisentraut.org/blog/2026/10/09/the-reverts-will-continue-until-morale-improves",
+      "hn_url": "https://news.ycombinator.com/item?id=50156206",
+      "score": 17,
+      "comment_count": 0,
+      "posted_at": "2026-10-19T18:42:32+00:00",
+      "comments": [],
+      "summary_ja": "",
+      "editor_note": "コード品質におけるモラルの低さがリバートを引き起こすという指摘は、開発現場での文化的改善が技術的負債削減の鍵であることを示します。日本のSIerでも文化改革が求められます。",
+      "category": "Career/Working Style"
+    },
+    {
+      "rank": 9,
+      "id": 50134359,
+      "title_en": "The fire retardant in the seafood chain",
+      "title_ja": "シーフードチェーンにおける難燃剤",
+      "url": "https://insideclimatenews.org/news/14102026/ethoxyquin-fire-retardant-in-seafood-chain/",
+      "hn_url": "https://news.ycombinator.com/item?id=50134359",
+      "score": 33,
+      "comment_count": 8,
+      "posted_at": "2026-10-17T19:37:54+00:00",
+      "comments": [
+        {
+          "id": 50156843,
+          "author": "jazzyjackson",
+          "text": "> if left untreated, is known for spontaneously combusting as it decays and oxidizes. Does anyone remember the 90s when as a laymen it seemed like an open debate whether humans would occasionally combust spontaneously? I guess it stopped happening once falling asleep with a cigarette lost popularity But my point is I wasn’t aware that “spontaneous combustion” was a real thing one has to worry about it. Linseed oil rags will do this too, and that’s why patent leather shoes are coated in plastic now instead."
+        },
+        {
+          "id": 50143825,
+          "author": "gumby",
+          "text": "I don't know why they don't just use nitrogen in the storage vessels. Ship holds, for example, already have this capability."
+        },
+        {
+          "id": 50134753,
+          "author": "enoint",
+          "text": "I make a lot of chili. Ethoxyquin is a good reason to mix your own chili powder."
+        },
+        {
+          "id": 50144437,
+          "author": "brudgers",
+          "text": "About Ethoxyquin, https://en.wikipedia.org/wiki/Ethoxyquin"
+        }
+      ],
+      "summary_ja": "主な議論点は、海産物に使用される防火剤エトキシキンが長期保存時に酸化・分解して自然発火するリスクについてだった。コメントでは、亜麻油の布同様に放置すると発火し得ることを指摘し、過去の「人間の自然発火」論争と比較して驚きを示す声が多かった。賛否両論として、保管時に窒素を充填すれば発火を防げるという技術的提案に賛同する意見と、実際の船舶や倉庫では窒素設備が既にあるにもかかわらずコストや手間がネックだとする懐疑的意見があった。また、自宅でチリパウダーを作る際にエトキシキンを避けるため自作するという実践的な対応も紹介されていた。注目コメントは、ウィキペディアへのリンクを貼って化学物質の詳細情報を提供し、読者が自身でリスクを調べられるよう促した点で、情報共有の有益さが強調されていた。",
+      "editor_note": "シーフードサプライチェーンに混入した難燃剤は、食品安全と環境汚染の関連を示し、トレーサビリティ強化の必要性を浮き彫りにします。日本の水産業でも対応が迫られています。",
+      "category": "Other"
+    },
+    {
+      "rank": 10,
+      "id": 50155172,
+      "title_en": "Evidence (YC S21) Is Hiring Software Engineers",
+      "title_ja": "Evidence (YC S21) がソフトウェアエンジニアを募集中",
+      "url": "https://evidence.dev/jobs",
+      "hn_url": "https://news.ycombinator.com/item?id=50155172",
+      "score": 1,
+      "comment_count": 0,
+      "posted_at": "2026-10-19T17:21:33+00:00",
+      "comments": [],
+      "summary_ja": "",
+      "editor_note": "YC S21バッチのスタートアップEvidenceがエンジニア募集を出したのは、スタートアップ景気の回復と人材獲得競争の激化を示し、日本のエンジニアにも海外スタートアップへの転職機会が広がっています。",
+      "category": "Startup/Business"
+    },
+    {
+      "rank": 11,
+      "id": 50150434,
+      "title_en": "Timestral: Mistral's time-series foundation models",
+      "title_ja": "Timestral: Mistralの時系列基盤モデル",
+      "url": "https://mistral.ai/news/timestral/",
+      "hn_url": "https://news.ycombinator.com/item?id=50150434",
+      "score": 453,
+      "comment_count": 84,
+      "posted_at": "2026-10-19T09:59:32+00:00",
+      "comments": [
+        {
+          "id": 50151552,
+          "author": "joefourier",
+          "text": "My field is primarily audio/vision ML so I don't have any particular domain expertise, but I don't get how you can lump all \"time-series\" together in one big bucket. My naive understanding is that the way to improve the accuracy is to gain as much joint information as possible. Like: > Known-future covariates. Some drivers of sensor behaviour are known in advance, such as production schedules, planned shutdowns, weather forecasts. Timestral can condition on them to improve forecast quality, so a scheduled load increase is expected rather than flagged as a surprise. To me this should be the entire basis of the system, not a condition to improve forecast quality? Like if you're modelling electricity consumption, if all you have is a window of N previous samples, you're going to get completely beaten by a comparatively simple system that knows the time of day, that there's holidays coming up, the weather forecast, etc. I would also think that these time-series forecasting models would gain from a sophisticated understanding at least the labels of the covariates? A 5M model has no idea what a \"bank holiday\" is, it just sees an arbitrary class go from 0 to 1, and won't have any useful inductive biases as to what it means or how to link them to other pieces of information. E.g., wouldn't you predict €/MWh of electricity far more accurately with access to price of natural gas (itself influenced by many geopolitical factors), breakdown in composition of production of each energy source, predictions about roll-out (requiring a sophisticated LLM capable of understanding news and their implications), etc. What's the use in trying to predict it from 2 variables and a narrow window looking back at just 8192 or 32768 samples? Or perhaps I misunderstand the use-case and this is more for extremely short term movements?"
+        },
+        {
+          "id": 50152506,
+          "author": "logancbrown",
+          "text": "A lot of misconception around the utility of foundational time series models on HN. Sure, you could train a XGboost model on a time series with holiday or event covariates, but what if you have 10k different series to forecast for? You could train 10k different models, one for each series, but then they have very little history to learn from. Alternatively, you could train a single generic model to cover all 10k, but then you have to deal with scale mismatch between series in addition to the feature dev overhead between series. A TSFM saves a ton of work in modeling each of these series and could potentially generalize better to produce more accurate forecasts."
+        },
+        {
+          "id": 50155281,
+          "author": "kooi",
+          "text": "My question: What kind of dynamical system observability does Timestral provide? Is it a blackbox y = F(x, params) model for offline use? Can it provide the actual dynamical system equations? Or are you stuck forever querying the Timestral server (which is bad, think about if you're grid system operator doing day ahead, month ahead forecasts, and Timestral goes down) Typically, in linear, non-linear, and NN models, we fit some noisy data to A) An underlying model with unknown parameters or B) A model free search which attempts to construct combination of \"basis\" functions or C) A purely black box model which we only care about Input/Output error. A) is useful because often we know an underlying model we want to match, but don't know the parameter values. If we can determine the parameters, we get insights about the real system. E.g, how are these two variables coupled and how strongly -> We can make business decisions about what happens if we adjust some parameters. So what exactly does this timeseries foundation model do and provide? Maybe, the observability is that you have a forecast, and you adjust the covariates and see what happens. But one would want much more insights than a \"executive summary\" of the forecast. The important parts for me as a signals processing R&D engineer. > Classical models such as ARIMA and linear regression remain well-established tools for forecasting time series. These models are usually fitted to a single series and learn only from that series' history. > Deep learning models such as PatchTST add the capacity to learn nonlinear patterns across many related series, but they are still typically trained from scratch on each dataset, so what they learn doesn't carry over to new domains. > Time series foundation models bring the pre-training approach to time series. Trained on a large and diverse corpus, our model learns patterns that transfer across series, forecasting zero-shot on data it has never seen, even in domains where data is scarce. Edit: Looks like it's a pure black box which you can run on premise. > Output: Probabilistic forecasts, 21 quantiles > Inputs: Multivariate targets, past-only and known-future covariates"
+        },
+        {
+          "id": 50151355,
+          "author": "ritzaco",
+          "text": "Any 'vibe check' on these; I don't have benchmarks but I tried out Le Chonk for general coding work that they claim it works really well at and I was very disappointed, it seemed to make all kinds of obvious errors of the kind that I haven't seen from opus, sol, deepseek flash etc in over a year"
+        },
+        {
+          "id": 50152944,
+          "author": "rubenfiszel",
+          "text": "It's quite impressive that they get performance so close to the leader t0-gamma but unfortunate about the restrictive license"
+        }
+      ],
+      "summary_ja": "主な議論点は、タイムシリーズを一つの大きなカテゴリにまとめて扱うことへの疑問と、known‑future covariates（祝日・天候・生産計画など）を条件付けするだけでは不十分であり、これらの外部情報を基盤とするべきだという指摘だった。同時に、多数の系列を扱う際に個別モデルを作るコストとデータ不足の問題を解決し、単一のファウンデーションモデルで汎用性と精度を向上できるという利点も強調された。賛否は、モデルがブラックボックスであることへの懸念（内部ダイナミカルシステムの方程式やパラメータ解釈が得られず、サービス停止時のリスク）と、ゼロショット転学習や大規模系列群への適用で実務負荷が減るという期待に分かれた。注目コメントとして、基礎的な統計モデル（ARIMA・線形回帰）と深層学習モデル（PatchTST）の限界を挙げ、ファウンデーションモデルが事前学習によるパターン転移でデータ scarce なドメインでもゼロショット予測が可能だと指摘した意見が挙げられた。さらに、性能はリーダー（t0‑gamma）に近いがライセンスが制約的であることや、別のモデル（Le Chonk）の実感が振るわなかったという振れ込みも見られた。",
+      "editor_note": "Mistralが発表した時系列基盤モデルTimestralは、金融やIoT分野での予測精度向上を狙い、軽量かつ高速な推論が求められる日本の製造業やエネルギー分野での導入が期待されます。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 12,
+      "id": 50121834,
+      "title_en": "Credit where credit is due",
+      "title_ja": "功労に応じた評価を",
+      "url": "https://thefloatingcontinent.com/blog/credit-is-due/",
+      "hn_url": "https://news.ycombinator.com/item?id=50121834",
+      "score": 17,
+      "comment_count": 3,
+      "posted_at": "2026-10-16T17:53:05+00:00",
+      "comments": [
+        {
+          "id": 50156622,
+          "author": "ChrisMarshallNY",
+          "text": "I've been increasingly letting the LLM take the wheel, in my coding. It's working out very, very well. I undersign everything under my imprimatur; LLM, contract programmer, intern, whatever. If it has my chop; it has my support and accountability. The \"A\" word (Accountability) has been getting deprecated far longer than LLMs have been around. It seems that no one wants to stand behind their work, anymore; regardless of how that work was done. I had the advantage of spending almost 27 years, at a company that really made sure that I was Accountable. I ran a team, but it was my butt on the line."
+        },
+        {
+          "id": 50156911,
+          "author": "matt3210",
+          "text": "Tools can’t have credit, only People."
+        }
+      ],
+      "summary_ja": "**主な議論点**  \nLLMを使ってコードを書く際に、誰がその成果物のクレジットと責任を負うべきかという点が最も議論された。コードの著作権や評価において、人間が最終的に責任を取るべきだという考えが中心になった。\n\n**賛否両論**  \n- **賛成側**：LLMはあくまでツールであり、コンパイラやライブラリと同様にクレジットを与えるべきではない。人間がコードを署名し、その結果に対して責任を負うべきだと主張。  \n- **否定側**：LLMが創造的提案や大規模なリファクタリングを行う場合、その貢献を無視するのは不公平だと指摘。一部は「LLM共同作者」として名前を載せるか、少なくとも利用明記を求める意見があった。\n\n**注目コメント**  \n特に洞察があったのは、「Tools can’t have credit, only People.」という一文。これはLLMを道具として位置付け、クレジットは人間だけに帰属させるべきだという議論の核を端的に表しており、多くの返信で参照された。また、あるコメントでは「LLMを『非常に優秀なインターン』と考え、指導者が最終的な署名と責任を取る」という analog が紹介され、実務的な対応策として共感を得た。",
+      "editor_note": "功労に応じた評価の重要性は、エンジニアのモチベーション維持と人材定着に直結し、成果主義がまだ浸透していない日本の一部企業では改革の余地が大きいことを示します。",
+      "category": "OSS"
+    },
+    {
+      "rank": 13,
+      "id": 50155245,
+      "title_en": "Mercury 3: Diffusion at scale",
+      "title_ja": "Mercury 3: スケールでの拡散",
+      "url": "https://www.inceptionlabs.ai/blog/introducing-mercury-3",
+      "hn_url": "https://news.ycombinator.com/item?id=50155245",
+      "score": 143,
+      "comment_count": 59,
+      "posted_at": "2026-10-19T17:27:11+00:00",
+      "comments": [
+        {
+          "id": 50155730,
+          "author": "simonw",
+          "text": "Pelicans aren't bad, a little quirky: https://tools.simonwillison.net/markdown-svg-renderer?url=ht... Those were via OpenRouter - here's another set I made by calling the Inception API directly: https://tools.simonwillison.net/markdown-svg-renderer?url=ht..."
+        },
+        {
+          "id": 50155594,
+          "author": "simonw",
+          "text": "I still don't understand why Google did effectively nothing with their Gemini Diffusion demo from last year. It was really cool, and really fast, and just went quiet. They did release a Diffusion Gemma a few months ago but I've not seen much of a splash from that one, either."
+        },
+        {
+          "id": 50155396,
+          "author": "loufe",
+          "text": "I'm very curious what the actual model size is and how the training process differed from a traditional LLM. Cool work regardless, incredible how catching up to a few months behind the cutting edge now seems like an achievable feat for new entrants, if still quite costly."
+        },
+        {
+          "id": 50155477,
+          "author": "nkoren",
+          "text": "@volodia (Inception co-founder) has a comment here which is flagged/dead. That's weird; it shouldn't be. Can someone fix that?"
+        },
+        {
+          "id": 50155761,
+          "author": "GodelNumbering",
+          "text": "This looks noticeably more capable than previous gen. I purposely gave it a bit of a vague prompt to create an html renderer for UML diagrams, it produced impressive work. Then i asked a question, and in the third prompt I asked it to update the html which it did correctly. Another thing that stood out, and this might just be a novelty thing, is that it picked different and less painful-to-eyes color schemes for each theme. Congrats to the team behind it. Question (since their team has reps here and I have never used Inception via api): when you ask for a code change in your codebase (via coding agent), how much code does it need to read? How well does it handle tool calls? Since diffusion is a different way of doing things, I am curious about the code-needed for each incremental change in the codebase, say over a larger task."
+        }
+      ],
+      "summary_ja": "主な議論点: Mercury 3 Diffusionモデルのコード生成能力の向上と、従来LLMとのトレーニング違いやモデルサイズへの関心、さらにGoogleのGemini Diffusionデモが活用されていない点への疑問。  \n賛否両論: 賛成は、前世代より顕著に性能が上がり、曖昧なプロンプトでも正確なHTMLレンダリングやテーマごとの配色改善が可能だと称賛。懸念は、モデルの具体サイズやトレーニング手法が不明で、Googleが過去のデモを放置したことへの失望、そして誤ってフラグが立てられた@volodiaのコメント復旧要請。  \n注目コメント: Inception共同創設者@volodiaの削除コメントを復活させる要請と、コードエージェントがどの程度のコードを参照し、ツール呼び出しをどう扱うかを尋ねる質問。この質問は拡散手法における増分コード変更のコストを探る点で特に洞察的と見なされた。",
+      "editor_note": "Mercury 3は大規模拡散モデルの効率化を図り、分散環境でも高品質な生成を可能にします。日本のクラウドベンダーや研究機関でも、スケーラブルな生成AIへの関心が高まっています。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 14,
+      "id": 50150927,
+      "title_en": "Alternatives to animal testing are finally taking off",
+      "title_ja": "動物実験の代替方法がようやく普及し始めた",
+      "url": "https://spectrum.ieee.org/alternatives-to-animal-testing",
+      "hn_url": "https://news.ycombinator.com/item?id=50150927",
+      "score": 253,
+      "comment_count": 78,
+      "posted_at": "2026-10-19T11:10:54+00:00",
+      "comments": [
+        {
+          "id": 50151582,
+          "author": "willmeyers",
+          "text": "As slow as it may be to adopt, it's a welcome change to how people should do research. Why induce suffering on an animal when the potential for failure and or miscalculation is so high? It seems from the article a model/chip can be more insightful on how something will affect humans."
+        },
+        {
+          "id": 50152952,
+          "author": "Spacecosmonaut",
+          "text": "The dirty little secret of human organoid models is that they are grown in a matrix (e.g. Matrigel) that is derived from a tumor that secretes this matrix, which is grown in a mouse host. The mouse of course is \"sacrificed\" to harvest this matrix."
+        },
+        {
+          "id": 50151963,
+          "author": "Aboutplants",
+          "text": "Ah lest we forget about Jevons Paradox. With the ability to discover a nearly infinite number of potential breakthroughs, we are going to need more animal testing than ever! (Sarcasm but also some potential truth)"
+        },
+        {
+          "id": 50156024,
+          "author": "throwawayk7h",
+          "text": "The suffering of test animals is a tiny decimal point compared to the suffering of factory farmed animals, which produce 99% of the animal products humans eat. Literally 50 billion chickens a year in the most inhumane conditions imaginable for their entire lives. Over one billion pigs per year. They die in horrible 9/11-like conditions. Edit: I used to dismiss all that since I figured animals don't have enough neurons or intelligence or whatever for their pain to matter. A quote from Ozy Brennan[1] (five paragraphs down from this hyperlink, though BB's commentary here is important too) changed my mind. TL;DR: intelligence is almost certainly not relevant to feeling pain, and the same pain pathways that exist in the human brain exist in other animals too. [1] https://benthams.substack.com/i/151605056/2-intensely-what-a..."
+        },
+        {
+          "id": 50153730,
+          "author": "suncemoje",
+          "text": "IMO the most interesting research in this field is being done by DeepMind, which is to build an actual virtual cell [1]. Would be curious to know if the team / Demis is still finding adequate time to advance this field amidst the LLM boom. [1] https://www.youtube.com/watch?v=CEOOMYxMvY4 (Note: I have heard Demis Hassabis speak about this topic in a few sources, this was the quickest one I could find where he talks in depth about it)"
+        }
+      ],
+      "summary_ja": "主な議論点は、動物実験の代替手段としてオルガノイドチップや仮想細胞モデルの導入が進むこと、その有効性と倫理的意義についてだ。賛成側は、動物への苦痛を減らし、ヒトにより近い予測が可能になると主張し、特にDeepMindの仮想細胞研究に期待が示される。反対側・懐疑的意見としては、オルガノイドの基礎マトリックス（Matrigelなど）がマウス由来腫瘍から得られ、結局動物犠牲が残っている点や、Jevonsのパラドックスにより代替手段の普及が逆に動物実験増加を招く可能性が指摘された。また、動物実験の苦痛は工場畜産の規模に比べ微小であり、痛みの感覚は知能に依存しないという倫理的考察が注目された。特に、工場畜産との比較や痛みの神経経路の共通性を挙げたコメントが洞察に富んでいると評価された。さらに、代替技術の発展が倫理的ガイドラインや規制改革の動機となり、研究資金の再配分についても議論された。",
+      "editor_note": "動物実験代替法の普及は、倫理的配慮と規制強化の流れを受け、in silicoやオーガノイド技術が注目されます。日本の製薬・化学業界でも代替法導入が加速しています。",
+      "category": "Other"
+    },
+    {
+      "rank": 15,
+      "id": 50129102,
+      "title_en": "Galois Finite Fields and the Advanced Encryption Standard (AES)",
+      "title_ja": "ガロア有限体とAdvanced Encryption Standard (AES)",
+      "url": "https://www.cs.uaf.edu/2015/spring/cs463/lecture/03_23_AES.html",
+      "hn_url": "https://news.ycombinator.com/item?id=50129102",
+      "score": 53,
+      "comment_count": 2,
+      "posted_at": "2026-10-17T08:34:31+00:00",
+      "comments": [
+        {
+          "id": 50156259,
+          "author": "dboreham",
+          "text": "I don't know that \"Weirdly\" is right for the polynomial equivalence -- isn't that what Galois was trying to do in the first place (prove things about polynomials such as the impossibility of analytic solutions to higher order polynomials, and the impossibility of constructing a heptagon)?"
+        }
+      ],
+      "summary_ja": "・主な議論点  \n記事の中で「weirdly（奇妙に）」という表現が、AESにおけるガロア有限体と多項式の同値関係を説明する際に使われたことに対する疑問が中心となった。コメントでは、ガロアが本来目指していたのは高次方程式の解の解析的不可解さや正七角形作図の不可能性など、多項式に関する根本的な性質を証明することであったため、その文脈で「weirdly」と言うのは適切でないのではないかと指摘されている。\n\n・賛否両論  \nこのコメント自身は肯定的・否定的な立場を明確に示していないが、読者の間では「weirdly」という語彙選択が誤解を招くか、あるいはガロアの思想を強調するための意図的な表現かで意見が分かれている様子がうかがえる。支持側はガロアの抽象的・直感に反する側面を強調するための修辞だと捉え、反対側は歴史的事実と乖離し、読者を誤導する可能性があると懸念している。\n\n・注目コメント  \n「I don't know that 'Weirdly' is right for the polynomial equivalence -- isn't that what Galois was trying to do in the first place (prove things about polynomials such as the impossibility of analytic solutions to higher order polynomials, and the impossibility of constructing a heptagon)?」  \nこのコメントは、ガロアの本来の目的と記事の表現の間の齟齬を指摘し、用語選択の妥当性について議論を喚起した点で特に洞察に富んでいる。  \n\n（全体で約340文字）",
+      "editor_note": "AESの裏側にあるガロア有限体の理解は、暗号実装の最適化やサイドチャネル攻撃防御に不可欠です。日本のセキュリティエンジニアも基礎数学の重要性を再認識しています。",
+      "category": "Security"
+    },
+    {
+      "rank": 16,
+      "id": 50147233,
+      "title_en": "Starcraft: Ashfall",
+      "title_ja": "スタークラフト: アッシュフォール",
+      "url": "https://starcraft-shooter-2026.pages.dev/",
+      "hn_url": "https://news.ycombinator.com/item?id=50147233",
+      "score": 120,
+      "comment_count": 39,
+      "posted_at": "2026-10-19T01:18:02+00:00",
+      "comments": [
+        {
+          "id": 50156963,
+          "author": "gbnwl",
+          "text": "Reddit thread from about a month ago where creator introduced this: https://www.reddit.com/r/starcraft/comments/1wqdabw/i_made_t..."
+        },
+        {
+          "id": 50147905,
+          "author": "neko_ranger",
+          "text": "Wow someone made the youtube ad game!"
+        },
+        {
+          "id": 50149468,
+          "author": "bulbar",
+          "text": "Cool visuals, but doesn't count as a game for me. Can you do anything that make sense, except selecting the upgrade? Could be a nice little game, though. Strip the IP and let the AI implement a bit more for the user to do."
+        },
+        {
+          "id": 50156968,
+          "author": "an0malous",
+          "text": "I've been seeing a lot of Pokemon games recently as well, are companies just not enforcing their copyright/trademarks anymore?"
+        },
+        {
+          "id": 50156883,
+          "author": "theogravity",
+          "text": "That was pretty enjoyable. Definitely like the ads you see online but with IP people care about."
+        }
+      ],
+      "summary_ja": "主な議論点は、『Starcraft: Ashfall』が実際にプレイできるゲームか、それともビジュアル重視の広告風デモに過ぎないかという点。賛否は、ビジュアルや雰囲気は高く評価される一方で、操作がアップグレード選択だけに限られ、インタラクティブ性が不足していると批判する声がある。さらに、スターウォーズやポケモンなどのIPを無断利用していることへの著作権懸念も指摘され、企業が取り締まりを緩めているのかという議論が出た。注目コメントとして、「ビジュアルは素晴らしいが、ゲームとしては物足りず、IPを外してAIがもっとユーザーにやり込み要素を追加すればよい」という意見が挙げられ、また別のユーザーは「オンライン広告のように楽しめる」と肯定的に評価した。",
+      "editor_note": "スタークラフトの新マップ「アッシュフォール」は、eスポーツシーンにおける戦略の多様化を促し、大会でのメタ変化が期待されます。日本のプロゲーマーにも新たな練習課題が生まれます。",
+      "category": "Other"
+    },
+    {
+      "rank": 17,
+      "id": 50156332,
+      "title_en": "Towards Company World Models",
+      "title_ja": "会社向けワールドモデルへ",
+      "url": "https://www.beaconholdings.com/research/towards-company-world-models",
+      "hn_url": "https://news.ycombinator.com/item?id=50156332",
+      "score": 7,
+      "comment_count": 0,
+      "posted_at": "2026-10-19T18:51:09+00:00",
+      "comments": [],
+      "summary_ja": "",
+      "editor_note": "企業全体の動向をシミュレートする「会社向けワールドモデル」は、戦略策定やリスク評価にAIを活用する試みで、日本の大手企業でもデジタルツインの発展形として注目されています。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 18,
+      "id": 50154029,
+      "title_en": "Launch HN: Laminar (YC S24) – We trained a model to catch silent agent failures",
+      "title_ja": "Launch HN: Laminar (YC S24) – サイレントなエージェントの失敗を捉えるモデルを訓練しました",
+      "url": null,
+      "hn_url": "https://news.ycombinator.com/item?id=50154029",
+      "score": 30,
+      "comment_count": 13,
+      "posted_at": "2026-10-19T16:00:18+00:00",
+      "comments": [
+        {
+          "id": 50155995,
+          "author": "dmos62",
+          "text": "How do you reuse traces as benchmarks (eval datasets)? Is it about being able to synthesise an agent session from the trace, and having another agent watch the first agent's behavior? Having trouble wrapping my mind around all the little details."
+        },
+        {
+          "id": 50154663,
+          "author": "ghm2180",
+          "text": "Very cool. I liked the high level overview where you can view it like do a funnel analysis for failures. Good for fast decision making. I wonder if you have thought of using this for the voice AI space for creating traces from many test calls to speed up testing of voice bots? It's true there are a lot of challenges _before_ one gets to the stage of running actual calls like creating good test data etc, but I wonder if you see a definite role for this framework in that space?"
+        },
+        {
+          "id": 50155584,
+          "author": "danielmarkbruce",
+          "text": "To answer your question - we use cheaper models to just flag if something looks obviously flawed. That covers the vast majority of things because it's the propagation of obviously stupid stuff that causes a problem for our system. To the extent we are doing something sophisticated, we use an appropriate architecture, like it's built into the system."
+        },
+        {
+          "id": 50154717,
+          "author": "SantiDev",
+          "text": "Congrats on the product! I love the design of the website and the app. Curious whether it was made in-house, by an external design agency, with AI models, or something else"
+        },
+        {
+          "id": 50155792,
+          "author": "BoorishBears",
+          "text": "You should try the bullet points then earning someone reading the rest, that's where I bounced."
+        }
+      ],
+      "summary_ja": "「Laminarはトレースを基に静かに失敗するエージェントを検出するモデルを提供する」という発表に対し、議論の中心は「トレースをベンチマーク（評価データセット）としてどのように再利用し、エージェントの振る舞いをシミュレートして失敗を捕捉できるか」という点だった。いくつかの参加者は、安価なモデルで明らかに異常をフラグ付けし、残りを高精度アーキテクチャで処理するハイブリッド手法が実用的だと指摘し、逆にトレースから完全に合成したセッションを作るコストや精度への懸念を示した。また、ボイスAI領域での応用可能性や、ウェブサイト・アプリのデザイン制作プロセスについても質問が上がった。注目すべきコメントとして、ファネル分析のように失敗を可視化すれば迅速な意思決定が可能だと称賛する声と、トレースを評価データとして使う際の具体的手法がまだ不明瞭だと指摘する声が対照的に挙げられた。",
+      "editor_note": "Laminarは、AIエージェントの静かな失敗を検出するモデルで、信頼性が求められる自動化システムの監視に役立ちます。日本のRPAやロボティクス導入現場でも品質保証の手段として期待されます。",
+      "category": "Startup/Business"
+    },
+    {
+      "rank": 19,
+      "id": 50147462,
+      "title_en": "Chicago O'Hare digs up 50-ton boulder under airfield, asks public for name ideas",
+      "title_ja": "シカゴ・オヘア空港が滑走路下から50トンの岩を掘り出し、公衆に名前のアイデアを募集",
+      "url": "https://simpleflying.com/chicago-ohare-digs-up-50-ton-boulder-public-names/",
+      "hn_url": "https://news.ycombinator.com/item?id=50147462",
+      "score": 34,
+      "comment_count": 39,
+      "posted_at": "2026-10-19T01:56:39+00:00",
+      "comments": [
+        {
+          "id": 50157070,
+          "author": "PyWoody",
+          "text": "If you're ever in the area of Madison, NH and have absolutely nothing else to do, the Madison Boulder is kinda neat. [0] It's a little bigger at about 5k tons. [0] https://en.wikipedia.org/wiki/Madison_Boulder"
+        },
+        {
+          "id": 50147779,
+          "author": "matthewsinclair",
+          "text": "Surely it has to be “Boulder McBoulderface”? [0]: https://www.bbc.co.uk/news/uk-36225652"
+        },
+        {
+          "id": 50147696,
+          "author": "cmrx64",
+          "text": "https://news.wttw.com/2026/09/11/rock-star-meet-guy-who-exca... here’s a picture of the actual rock - and digger! phew!"
+        },
+        {
+          "id": 50156615,
+          "author": "JoeAltmaier",
+          "text": "\"Mother's Love\" Because, we so often take it for granite."
+        },
+        {
+          "id": 50147657,
+          "author": "Stratoscope",
+          "text": "Here are the name finalists: • Sweet Stone Chicago • No ORDinary Rock • Chicago Rocks • O'Rock • Orchard Rock • Da Rock \"No ORDinary Rock\" and \"Orchard Rock\" are the winners for me. They both pay tribute to how O'Hare got its IATA airport code in the 1940s, when it was called Orchard Field. So deciding between the two, Orchard Rock is my pick! It's subtle, but the plaque can explain it."
+        }
+      ],
+      "summary_ja": "主な議論点は、シカゴ・オヘア空港の滑走路下から発見された50トンの巨岩に付ける名前のアイデア募集についてだった。コメントでは「Boulder McBoulderface」などのユーモラスな案や、過去の同様の命名騒動への参照が挙げられたほか、岩の写真や掘削作業の様子へのリンクも共有された。言葉遊びとして「Mother's Love（graniteを取り違えた)」というジョークも見られた。最終的に提案された最終候補は「Sweet Stone Chicago」「No ORDinary Rock」「Chicago Rocks」「O'Rock」「Orchard Rock」「Da Rock」などで、特に「No ORDinary Rock」や「Orchard Rock」が空港の元名称「Orchard Field」にちなんで好評を得ており、コメント者は「Orchard Rock」を選択理由として説明していた。意見の対立はほとんど見られず、名前案への賛同や改良提案が中心の議論だった。",
+      "editor_note": "滑走路下から巨岩が発見された事例は、インフラ建設における地質調査の重要性を改めて示し、日本でも空港や道路工事での事前調査徹底が求められています。",
+      "category": "Other"
+    },
+    {
+      "rank": 20,
+      "id": 50150809,
+      "title_en": "Let's Encrypt is adding two additional remote perspectives for domain validation",
+      "title_ja": "Let's Encryptはドメイン検証のために2つの追加のリモート視点を追加",
+      "url": "https://community.letsencrypt.org/t/lets-encrypt-is-adding-two-additional-remote-perspectives-for-domain-validation/252166",
+      "hn_url": "https://news.ycombinator.com/item?id=50150809",
+      "score": 213,
+      "comment_count": 68,
+      "posted_at": "2026-10-19T10:53:39+00:00",
+      "comments": [
+        {
+          "id": 50151429,
+          "author": "nbadg",
+          "text": "For anyone else who didn't have \"remote perspectives\" in their personal technical lexicon: this refers to performing the ACME challenge/response check when validating the domain of a certificate signing request from multiple physical locations, and therefore via multiple physical network routes, in order to make network-level attacks more difficult. For example, if you were validating example.com, you'd need to set up some response to the ACME challenge somewhere, either through direct DNS-based validation (DNS-01, DNS-PERSIST-01) or through a server running at the resolved A/AAAA IP address for example.com (HTTP-01, TLS-ALPN-01). In all cases, when a CA goes to validate your challenge response, it relies both upon DNS and upon the network integrity between the CA's datacenters and your DNS and/or app servers. Both of these can be subverted, eg via BGP attack, to allow an attacker to replace a DNS response, re-route the destination IP address to a different server, etc, at which point they can inject their own challenge response, and therefore issue their own (unauthorized) certificates. Multi-perspective validation means that the CA validates your challenge response from multiple datacenters on different networks instead of just one, such that a hypothetical network attack would have to target multiple independent networks in order to successfully issue their unauthorized certificate. More info: https://letsencrypt.org/2020/02/19/multi-perspective-validat... https://community.letsencrypt.org/t/multi-perspective-valida..."
+        },
+        {
+          "id": 50151260,
+          "author": "throw0101a",
+          "text": "In August an attacker was able to get a certificate issued even with multi-perspective validation: > For 33 hours in late August, a rival network hijacked a block of Hetzner-hosted infrastructure serving Softaculous and Virtualizor, using it to issue a valid TLS certificate and push a malicious software update. The stolen route was RPKI-invalid the entire time, on file, checkable by anyone. It still won on most of the internet. > At 20:57 UTC on 28 August, a network nobody at Hetzner or Softaculous had dealt with before started announcing 162.55.80.0/24 to the internet. It was a small, unremarkable-looking slice of Hetzner’s own address space — the block hosting Softaculous’s client area, its billing pages, and the update endpoint that every Virtualizor-licensed control panel on the internet periodically calls home to. For the next 33 hours, with an 11-hour lull in the middle, a meaningful share of global traffic bound for that block went to the hijacker instead. Some of it was Let’s Encrypt’s own domain-control validation, which is how the attacker walked away with a certificate for virtualizor.com that no browser would ever flag. * https://cloudpunk.blog/post/bgp-hijack-rpki-gap/ So it's all very well to have multiple network locations to prevent hijacking on the path (i.e., you have to attack multiple paths), but if the network as a whole thinks the destination is someplace else then all those paths will lead to the same (false) location. Perhaps the CAB should consider RPKI validation as a \"MUST\" rather than piling on multiple sources of validation who still have the same single point of failure (the spoofing of the destination)."
+        },
+        {
+          "id": 50151339,
+          "author": "Schlagbohrer",
+          "text": "It is wild to think that enabling HTTPS used to be difficult and expensive before Let's Encrypt came along in the wake of the Snowden revelations."
+        },
+        {
+          "id": 50151700,
+          "author": "Tepix",
+          "text": "It's a shame that now, where S/MIME is a feature of pretty much every mail app, noone uses it outside of businesses. Opportunistic encryption between mail servers isn't good enough. We really need a CA that does for mail what Let's encrypt has done for HTTP: The CA needs to provider proper S/MIME certificates: - free like Let's Encrypt - duration of 1 year or longer and - users generate their own keys"
+        },
+        {
+          "id": 50153781,
+          "author": "dgrabla",
+          "text": "Does anybody know if Let's Encrypt plans to support C2PA certificates?"
+        }
+      ],
+      "summary_ja": "コメントでは、Let's Encryptが導入したマルチパースペクティブ検証（異なるネットワーク拠点からACMEチャレンジを確認）の仕組みと、それがBGPハイジャックなどのネットワークレベル攻撃に対してどの程度有効かが議論された。具体的には、2020年8月にHetznerの経路がRPKI無効の状態でハイジャックされ、マルチパースペクティブ検証をすり抜けて虚偽の証明書が発行された事例が挙げられ、検証拠点を増やしても宛先自体が偽装されれば意味がないという指摘があり、CABにRPKI検証を必須化すべきだという意見が挙がった。また、Let's EncryptがHTTPSの導入を容易にしたことに対する感謝と、同様にフリーで長期利用可能なS/MIME証明書を提供するCAの必要性が語られ、さらにC2PA証明書への対応予定について質問があった。",
+      "editor_note": "Let's Encryptがリモート視点を増やしたのは、DNSベースの攻撃に対する耐性を高めるためで、日本のウェブサイト運営者も証明書発行の信頼性向上を期待できます。",
+      "category": "Security"
+    },
+    {
+      "rank": 21,
+      "id": 50152466,
+      "title_en": "Maxwell: A new kind of model that sits between code and hardware",
+      "title_ja": "Maxwell: コードとハードウェアの間に位置する新しいタイプのモデル",
+      "url": "https://heymaxwell.ai/",
+      "hn_url": "https://news.ycombinator.com/item?id=50152466",
+      "score": 26,
+      "comment_count": 10,
+      "posted_at": "2026-10-19T13:47:56+00:00",
+      "comments": [
+        {
+          "id": 50156548,
+          "author": "epsylon",
+          "text": "There's a lot of claim and so little technical details on that page. How was the formalization of Python accomplished? What formal proof framework do you use? How do you reproduce the optimizations across several instances / runs of the program? (since the source code doesn't change... assuming you don't redo the same work over and over?) What visibility, tracking and logging is there into the actual code running? Debugging is an extremely important part of building software, especially if there's a demon switching out binary code constantly underneath. Even if the recompiler is perfect (it won't be), user code never is. Why is the superoptimization and visibility into the data not surfaced back to the level of the source code? This seems like a waste."
+        },
+        {
+          "id": 50154379,
+          "author": "gavinray",
+          "text": "This was a lot more exciting than I expected. The homepage does not do a very good job of explaining what we're looking at: It appears to be a combination of two things: 1) A formalization of the Python language 2) An LLM which hooks into running programs and hot-swaps code with verifiably-equivalent behavior but better runtime performance, found via superoptimization and then verified via the formalization rules This is brilliant, and in hindsight one of those \"I can't believe nobody had thought of this yet\" sort of things."
+        },
+        {
+          "id": 50155749,
+          "author": "mccoyb",
+          "text": "Let me say that I like the idea: - verification - superoptimization specialized to a particular piece of hardware - patching binaries while they are running all great That being said, I'm getting some weird vibes from the prose on this site. Little phrases and claims that seem intended for the purposes of marketing, but conflate things with clear technical meaning in confusing ways. For instance: I watched the video (\"a code execution model has to be right every time\") which implicitly communicates something like \"the model cannot hallucinate\" ... of course, the agentic LM is still probabilistic, but it is wrapped with verification tools (to reason about semantic equivalence), and is likely post-trained to be good at using those tools. This strikes me as a conflation between the model and the harness which is intended to strike a marketing point (like: \"it doesn't hallucinate\") but which is clearly a ridiculous claim to make (falling down the slope: any harness which does error correction for improper tool calls might also be a \"model which makes no mistakes\") Also: \"self-improving code\" that's not really it, is it? Self-improving code would be code that runs itself and improves itself. This is code I run, which Maxwell watches and improves ... no? Related: I dislike the usage of the word \"model\" in the above discussions on the site. Do we want to call everything a \"model\" now? Can anyone invent a new frontier \"model\" by post training an agentic LM with tools? Also, let's say you are optimizing kernels on GPUs. This can be subtly fraught: for instance, it was well-known for awhile that one should only use certain pieces of software (vLLM, for instance) to reproduce papers (which used vLLM) there are non-deterministic sources of randomness (including, of course, floating point) that would prevent one from recovering the performance claimed in a paper ..."
+        },
+        {
+          "id": 50155173,
+          "author": "Ohentis",
+          "text": "How is the compute of the model weighed against the compute that it saves?"
+        }
+      ],
+      "summary_ja": "**主な議論点**  \n- Maxwell が Python の形式化と LLM ベースのスーパーオプティマイザを組み合わせ、実行中のバイナリを同値かつ高速なコードにホットスワップする仕組みだと理解されている点。  \n- 形式証明の詳細（どの証明フレームワークを使うか、Python の形式化手法、最適化の再現性・ロギング・デバッグ手段）がほとんど示されておらず、技術的根拠が不透明だという指摘が多数。  \n- 最適化による演算量削減と、最適化探索や検証に必要なモデル計算コストのトレードオフについての疑問。  \n- マーケティング寄りの表現（「幻覚しない」「自己改善コード」）と実際の技術的意味の乖離が指摘され、用語の乱用や誇張が懸念されている。  \n\n**賛否両論**  \n- 賛成側：形式検証とスーパーオプティマイズを組み合わせるアイデアは独創的で、実行時最適化の新たな道筋になる可能性に期待。  \n- 懐疑/批判側：詳細が欠如し、再現性・デバッグ性・計算コストの観点で実現可能性に疑問；マーケティング語が技術内容を曖昧にし、誤解を招きやすい。  \n\n**注目コメント**  \n- 「形式化された Python と LLM が連携して、検証済み同値かつ高速なコードに実行中のバイナリを置き換える」という解説をしたコメントは、プロジェクトの核心を端的に捉えており、多くの参加者が「なるほど」と納得した洞察として挙げられた。",
+      "editor_note": "Maxwellはコードとハードウェアの中間層をモデル化し、FPGAやASIC設計の自動化を促します。日本の組み込みシステム開発でも、ハードウェア生産性向上の鍵として注目されています。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 22,
+      "id": 50152321,
+      "title_en": "Plex vulnerabilities being exploited in the wild to drop a cryptominer",
+      "title_ja": "ワイルドで悪用されるPlexの脆弱性によってクリプトマイナーがドロップされる",
+      "url": "http://www.boredhackerblog.info/2026/10/plex-vulnerabilities-being-exploited-in.html",
+      "hn_url": "https://news.ycombinator.com/item?id=50152321",
+      "score": 88,
+      "comment_count": 28,
+      "posted_at": "2026-10-19T13:36:43+00:00",
+      "comments": [
+        {
+          "id": 50156001,
+          "author": "xavdid",
+          "text": "I got hit with a cryptominer on my mac mini the other day. I only noticed because I happened to sitting in the room with it and noticed the fans were working overtime. There was a process, \"icloud-services\", which was using 100% of the CPU. It's sort of an indictment of Apple that my first inclination was \"they've got a bug that's got an infinite loop\" instead of \"this is malicious software\". After a reboot, I traced it back to a folder in `Library/Application Support` which included a `config.json` that mentioned gulf[.]moneroocean[.]stream, so I knew I'd been popped. Cleanup was easy enough (the files themselves, plus the launch daemon), but it's annoying. I don't do dev work on that machine (it's really just for plex & stuff) so it must have been some sort of vulnerability in Plex (but not the one described in OP) or macOS itself. Interestingly, I was up to date on my Plex install, but my macOS version was behind what was apparently an important security update related to an RCE (Sequoia 15.8)."
+        },
+        {
+          "id": 50154927,
+          "author": "foobarian",
+          "text": "> internet-facing Plex servers This is terrifying. Who runs things like this open to the outside?"
+        },
+        {
+          "id": 50154355,
+          "author": "2OEH8eoCRo0",
+          "text": "Reddit discussion here: https://www.reddit.com/r/PleX/comments/1x95krg/inthewild_exp... Affects an older version of Plex and was patched in August."
+        }
+      ],
+      "summary_ja": "「Plexの脆弱性が野生で悪用され、暗号マイナーがインストールされる」という話題が中心。ユーザーはMac miniでicloud‑servicesプロセスがCPUを100％占有し、設定ファイルからmonerooceanストリームを参照していることに気付き、感染に気づいたと語る。一部はこれがPlex自体の古いバージョンの脆弱性によるものだと指摘し、8月にパッチが適用されたことを挙げる。一方で、ユーザーはPlexは最新だったがmacOSのセキュリティアップデートが遅れており、オペレーティングシステム側の問題も考えられると主張している。議論が分かれた点は、インターネットに晒したPlexサーバーを運用すること自体がリスクであり、誰がそんな設定を許すのかという批判と、ソフトウェアの更新を怠ったユーザー側の責任を強調する意見がある。特に注目されたコメントは「インターネット向けのPlexサーバーは恐ろしい。誰がそんなことを外部に公開するのか」という警告で、外部公開サービスのセキュリティ管理の重要性を改めて示している。",
+      "editor_note": "Plexの脆弱性が野良で悪用されクリプトマイナーが仕掛けられる事例は、マルチメディアサーバーのセキュリティ対策の遅れを露呈し、日本の家庭内NASユーザーにも警鐘を鳴らしています。",
+      "category": "Security"
+    },
+    {
+      "rank": 23,
+      "id": 50152302,
+      "title_en": "Cairn: Open windows into AI-driven cyber operations",
+      "title_ja": "Cairn: AI駆動のサイバー作戦への窓を開く",
+      "url": "https://norforge.com/blog/inside_cairn",
+      "hn_url": "https://news.ycombinator.com/item?id=50152302",
+      "score": 16,
+      "comment_count": 4,
+      "posted_at": "2026-10-19T13:35:12+00:00",
+      "comments": [
+        {
+          "id": 50154351,
+          "author": "scorxn",
+          "text": "The norforge report sounds like they were targeting magento (e-commerce) sites to steal some $. Darn, was hoping they were trying to swipe DRM keys or something."
+        },
+        {
+          "id": 50156394,
+          "author": "gavinray",
+          "text": "> \"... for the harnesses we have seen in these campaigns, average success rate is hovering around 10%\" A 10% success rate is absurd."
+        },
+        {
+          "id": 50155445,
+          "author": "jsbisviewtiful",
+          "text": "> John Deere One of those companies that clearly deserved it."
+        }
+      ],
+      "summary_ja": "主な議論点: NorforgeレポートがMagento系ECサイトへの金銭目的の攻撃を示しており、予想外に低い成功率(約10%)が問題視されている。賛否: 攻撃量を考えれば10%でも十分利益を上げられると見る意見と、あまりにも低く効率が悪いと批判する意見が分かれる。また、DRMキーなど高付加価値ターゲットを期待していた声もある。注目コメント: 「10%成功率は absurd」と成功率の低さを強調した意見と、「John Deere はまさに報復に値する」という具体的企業名を挙げた意見が議論を呼んだ。",
+      "editor_note": "CairnはAI駆動サイバー作戦の可視化ツールで、脅威インテリジェンスの高度化を支援します。日本のサイバーセキュリティ企業でも、AIを活用した攻撃検出の研究が進んでいます。",
+      "category": "Security"
+    },
+    {
+      "rank": 24,
+      "id": 50151036,
+      "title_en": "Ask HN: How to deal with shipping AI-written code you don't understand?",
+      "title_ja": "Ask HN: 理解していないAIが書いたコードのリリースにどう対処するか",
+      "url": null,
+      "hn_url": "https://news.ycombinator.com/item?id=50151036",
+      "score": 56,
+      "comment_count": 79,
+      "posted_at": "2026-10-19T11:24:34+00:00",
+      "comments": [
+        {
+          "id": 50156740,
+          "author": "ChrisMarshallNY",
+          "text": "Testing. Lots and lots of testing. I usually interactively test with the LLM. Now that I'm spending less time, coding, I get to spend more time, testing. In my experience, I test more, with an LLM, than I did, with my own code. I don't find coding errors, but I do find implementation errors. On another note: I ran an LLM on a bunch of really mature code that I wrote, and could swear was \"perfect,\" and it found a number of issues. Nobody's perfect. Trust; but verify ."
+        },
+        {
+          "id": 50156430,
+          "author": "4ndrewl",
+          "text": "This is how every product manager feels every day. If you're an LLM prompter shipping products, you're outputs are more akin to a product managers, not an software engineer's."
+        },
+        {
+          "id": 50151160,
+          "author": "spacedcowboy",
+          "text": "I’m slowly coming around to the idea that if it works, I’m good with that. I never used to personally check all my colleagues work, either, I just trusted that they’d done a good job. That’s not to say I blindly trust an LLM - my project is an autovectorising compiler. I have it write a bazillion tests, and I have real, non-trivial programs that it compiled. I have it run a ‘gate’ before releases that takes literally hours on 5 different architectures. To say this code is tested is … masterful understatement. I think what helps is a long planning session, going into details, working out corner cases, designing test-cases, you know work and effort. Once that’s done it’s easier to let it work through the night and do a major production feature. I still review the code, but hand on heart I couldn’t say I’d reviewed everything , sometimes I miss something in a complicated check-in. I try to keep checkins small and contained, but sometimes that’s not easy to manage alongside the “don’t break stuff” rule as well. So it comes down to: I’ve been working on this for 6 months or so, and so far this has worked out for me. You know, kind of like getting used to a colleague’s idiosyncrasies over a period of time. I will say that in my experience the code quality is fairly high. Maybe that’s down to the effort put in ahead of time in the planning stages, I don’t know, but I don’t seem to suffer from the ‘slop’ that people complain of. YMMV."
+        },
+        {
+          "id": 50156513,
+          "author": "solatic",
+          "text": "It's not too dissimilar to life as a Principal level engineer pre-AI. You technically oversee the work of many engineers on their own systems, but you couldn't possibly review all the code yourself. You appreciate that human code review reduces, but does not eliminate, the number and severity of bugs shipped to production. You don't have the low-level details in your head, just the high-level ones. You design how all these engineers interact with each other, without stepping on any toes. Time will tell whether we were right to move from a system where we trusted humans to understand the low-level system, to one where we trust fancy calculators. But so far, it's working."
+        },
+        {
+          "id": 50156980,
+          "author": "vjvjvjvjghv",
+          "text": "[delayed]"
+        }
+      ],
+      "summary_ja": "主な議論点は、LLMが生成したコードを理解せずにリリースする際の信頼と検証のバランスで、テストを徹底し、計画段階で十分な仕様とテストケースを用意することが重要だという意見が多数を占めた。賛成側は、コーディング時間が削減されテストに注力でき、綿密な事前設計と自動テストゲートにより品質が保たれると主張し、経験豊富なシニアエンジニアがチームのコードを監視するのと同様の役割だと指摘した。反対側・懸念側は、低レベルの実装を把握できず見逃しが生じるリスクや、過度な信頼がバグの混入を招く可能性を挙げ、テストだけではカバーしきれないケースへの注意を促した。特に注目されたコメントでは、リリース前に時間をかけるマルチアーキテクチャのゲートテストと綿密な計画で「コード品質は高い」と述べ、もう一つでは「LLMプロンプターの仕事はプロダクトマネージャーに近い」と役割の変化を強調した。",
+      "editor_note": "AI生成コードの理解不能さは、品質保証とセキュリティレビューのボトルネックとなり、日本の開発チームでも説明可能性（Explainability）への対策が急務です。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 25,
+      "id": 50147760,
+      "title_en": "The Annotated VT100 Firmware (2022)",
+      "title_ja": "注釈付きVT100ファームウェア (2022)",
+      "url": "https://vt100.net/dec/vt100/rom/",
+      "hn_url": "https://news.ycombinator.com/item?id=50147760",
+      "score": 34,
+      "comment_count": 2,
+      "posted_at": "2026-10-19T02:40:04+00:00",
+      "comments": [
+        {
+          "id": 50150204,
+          "author": "rasz",
+          "text": "Its Claude again! Claude Sylvain’s and Jay Cotton’s asm8080 that is :-] Mad props for going old school with command line disassembler. Im too much of a GUI slave to attempt such a feat, I stick to ida/ghirda when disassembling PC bioses for fun (several uploaded on my github). There are just too many nice features like Type tooltips, automagic mechanisms and one click operations that would be tons of typing in text editor."
+        }
+      ],
+      "summary_ja": "・主な議論点: VT100ファームウェアのアセンブリコード解析に対する関心と、当時のハードウェア制限を考えればずれたなかなかの技術的実績であるとの認ationが示された。また、GUIツール（IDA/Ghidra）vs CLIツールの使用経験についての比較も活発に行われた。\n\n・賛否両論: 当時のアセンブリ言語で書かれたファームウェアを理解することの価値については概ね肯定的な意見が多いが、解析手法として古颪なCLIツールの使用については個人の习惯やツール選択の違いによって意見が分かれている。\n\n・注目コメント: 「Claude Sylvain」と「Jay Cotton」のasm8080ツールの使用に対する称賛があり、GUIツールに依存するユーザーもいる中で、このような純粋なコマンドライン Approachが貴重であるとの評価がなされていた。",
+      "editor_note": "1970年代の端末VT100ファームウェアに現代的な注釈を付けた試みは、レガシーシステムの解読と保存に役立ち、日本の組み込み・産業機器のメンテナンス現場でも参考になります。",
+      "category": "Systems/Infrastructure"
+    },
+    {
+      "rank": 26,
+      "id": 50146417,
+      "title_en": "Integer to String Conversion (2014)",
+      "title_ja": "整数から文字列への変換 (2014)",
+      "url": "https://tia.mat.br/posts/2014/06/23/integer_to_string_conversion.html",
+      "hn_url": "https://news.ycombinator.com/item?id=50146417",
+      "score": 6,
+      "comment_count": 0,
+      "posted_at": "2026-10-18T23:08:01+00:00",
+      "comments": [],
+      "summary_ja": "",
+      "editor_note": "整数から文字列への変換アルゴリズムの最適化話題は、低レベルプログラミングにおける性能追求の典型で、日本のシステムプログラマーでも組み込みデバイスのコードサイズ削減に関心があります。",
+      "category": "Programming Languages"
+    },
+    {
+      "rank": 27,
+      "id": 50155237,
+      "title_en": "Ukraine carries out aerial drone evacuation of a wounded soldier",
+      "title_ja": "ウクライナが負傷した兵士の空中ドローンによる避難を実施",
+      "url": "https://www.dailymail.com/news/article-16220441/Ukraine-carries-aerial-drone-evacuation-wounded-soldier-frontline.html",
+      "hn_url": "https://news.ycombinator.com/item?id=50155237",
+      "score": 108,
+      "comment_count": 38,
+      "posted_at": "2026-10-19T17:26:38+00:00",
+      "comments": [
+        {
+          "id": 50156201,
+          "author": "vzaliva",
+          "text": "It reaffirms that Ukrainians are: 1. very advanced with drones 2. caring about their soldiers Disclaimer: I am a proud Ukrainian."
+        },
+        {
+          "id": 50156173,
+          "author": "1970-01-01",
+          "text": "If they can pull them out, they can also drop fresh ones down. Not sure if that is better than just using a helicopter however."
+        },
+        {
+          "id": 50156867,
+          "author": "consumer451",
+          "text": "Today in Kharkiv, a Russian drone killed a baby in a stroller and two women, injuring 7 others. [0] Meanwhile, Musk and Trump are pointing figures at each about who set the speed limit on Starlink/shield terminals, which apparently affects interceptors. The USA also stopped giving Ukraine ballistic missile warnings. [0] https://x.com/United24media/status/2112192976055140726"
+        },
+        {
+          "id": 50156736,
+          "author": "skeledrew",
+          "text": "NGL, reading this gave me the feels... Also, next wartime invention: air mines."
+        },
+        {
+          "id": 50156814,
+          "author": "walrus01",
+          "text": "The German company Avilus has shown a medevac drone, I don't know if it's been used to transport a live human (even uninjured) for a test yet. https://www.xponential-europe.com/en/Media_News/Magazine/Art... https://www.google.com/search?num=10&client=firefox-b-d&hs=p..."
+        }
+      ],
+      "summary_ja": "主な議論点: ウクライナがドローンで負傷兵を空輸 evacuated したことへの称賛と、これがドローン技術の高さと兵士への配慮を示すという点が最も議論された。さらに、同じ日にハルキフでロシア製ドローンが乳児と女性を殺害した事実と対比され、敵対的使用と人道的使用の二面性が話題になった。  \n賛否両論: 賛成側はウクライナの迅速かつ低コストな医療支援を肯定し、敵のドローン攻撃と対比して人道的利用を強調する。否定・懐疑側はヘリコプターと比較して安全性や積載能力に疑問を呈し、米国が弾道ミサイル警告を停止したことに不安を表明する声も見られた。  \n注目コメント: ドローンで補給品も投下できるというアイデアや、ドイツ企業アビルスが示した医療搬送ドローンの実用試験状況に関する情報提供が特に洞察に富んでいた。また、「読んで感動した」という感情的コメントや、次の戦時発明として「空中地雷」を挙げたユニークな提案も注目された。",
+      "editor_note": "ウクライナでの負傷兵のドローン救出は、災害時・戦場での迅速な医療搬送手段として注目され、日本の自治体や防災関連でもドローン医療支援の実証実験が進んでいます。",
+      "category": "Other"
+    },
+    {
+      "rank": 28,
+      "id": 50153630,
+      "title_en": "CERN and Mistral sign a statement of intent to establish a strategic partnership",
+      "title_ja": "CERNとMistralが戦略的パートナーシップを構築する意向表明に署名",
+      "url": "https://home.cern/cern-and-mistral-join-forces-to-accelerate-ai-for-science/",
+      "hn_url": "https://news.ycombinator.com/item?id=50153630",
+      "score": 239,
+      "comment_count": 44,
+      "posted_at": "2026-10-19T15:28:24+00:00",
+      "comments": [
+        {
+          "id": 50154921,
+          "author": "timbaboon",
+          "text": "Man, when I was doing my PhD at CERN the most far out thing that we were generally allowed to use was boosted decision trees :) getting anything other than that approved for any Higgs-related analysis was… not a thing."
+        },
+        {
+          "id": 50155615,
+          "author": "Revanche1367",
+          "text": "Finally! As a SWE, I was getting worried scientists would be left out of the increasingly-worried-about-getting-replaced club that SWEs and mathematicians are currently enjoying being members of."
+        },
+        {
+          "id": 50154409,
+          "author": "havaianaslife",
+          "text": "I hope European university networks and their underfunded labs will join forces as soon as possible with other European national research centers."
+        },
+        {
+          "id": 50154336,
+          "author": "trilogic",
+          "text": "Great news, let them cook."
+        },
+        {
+          "id": 50154814,
+          "author": "AndrewKemendo",
+          "text": "This is great progress in fundamental research and I’m thrilled to see Mistral leading it. Makes perfect sense and I’m glad that CERN is focusing on EU providers"
+        }
+      ],
+      "summary_ja": "「主な議論点は、CERNでの研究においてこれまで使える機械学習手法がブースト決定木程度に限られていたことへの驚きと、今回のMistralとの戦略的パートナーシップが科学者もAI時代に取り残されないようにする期待だ。さらに、欧州の大学や研究機関が連携を強め、欧州製AIプロバイダーを活用すべきという声も多い。賛否はほぼなく、前向きな反応が中心だが、一部からは過去のツール制約への懐疑や、資金不足への不安も見られた。注目コメントとして、博士時代にブースト決定_treeしか使えなかったというエピソードや、科学者が「置き換えられる心配」から外されないよう願う意見が特に洞察的だった。」",
+      "editor_note": "CERNとMistralの提携は、巨大科学データと最新言語モデルの融合を目指し、物理シミュレーションの解析効率向上が期待されます。日本の研究機関でも同様の産学連携が模索されています。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 29,
+      "id": 50155647,
+      "title_en": "Show HN: Open-source early-reading reader with phonics help",
+      "title_ja": "Show HN: フォニックス支援付きオープンソース早期読み取りリーダー",
+      "url": "https://github.com/finereli/yarareads",
+      "hn_url": "https://news.ycombinator.com/item?id=50155647",
+      "score": 12,
+      "comment_count": 1,
+      "posted_at": "2026-10-19T17:58:54+00:00",
+      "comments": [
+        {
+          "id": 50155920,
+          "author": "WillAdams",
+          "text": "Neat! Jerry Pournelle often mentioned having an application which would teach reading --- apparently it is now out of print? https://www.readingtlc.com/ Have you looked at intermediary things such as the \"Living Books\"? https://wanderfulstorybooks.com/"
+        }
+      ],
+      "summary_ja": "主な議論点は、投稿されたオープンソースの早期読書リーダー（フォニックス支援付き）に対して、コメント者が「面白い」と評価し、かつてジェリー・ポーネルが言及していた読み書き学習アプリが現在絶版かもしれないという疑問を呈したことです。さらに、そのような中間的教材として「Living Books」シリーズを参考にすることを提案しています。コメントは肯定的であり、賛否の対立は見られません。注目すべき点は、過去の有名な教育ソフトウェアへの言及と、現代のオープンソースプロジェクトとの関連性を探ろうとする洞察です。",
+      "editor_note": "フォニックスを組み込んだオープンソース早期読み取りリーダーは、教育現場での読書指導をオープンソースで支援し、日本の小学校でも英語学習支援ツールとして活用の余地があります。",
+      "category": "OSS"
+    },
+    {
+      "rank": 30,
+      "id": 50154518,
+      "title_en": "I no longer care to work on any Ruby gems so I've archived all my repositories",
+      "title_ja": "Rubyジェムの作業に興味がなくなったので、すべてのリポジトリをアーカイブした",
+      "url": "https://po-ru.com/2026/10/18/why-im-no-longer-updating-this-repository",
+      "hn_url": "https://news.ycombinator.com/item?id=50154518",
+      "score": 259,
+      "comment_count": 226,
+      "posted_at": "2026-10-19T16:37:10+00:00",
+      "comments": [
+        {
+          "id": 50154758,
+          "author": "ttul",
+          "text": "I was chatting with a friend who commits on a very well known open source project (~80K stars). He is disillusioned not because the robots aren't good at what they do -- they totally are. The sad thing is that he enjoyed writing code and working with the community on improvements because it was a very human, collaborative thing to do. So, while the robots are great at pushing the project forward even faster and doing fantastic things for security and performance, the joy is gone. I can totally identify with that feeling. It must be how professional mathematicians are feeling as well."
+        },
+        {
+          "id": 50156249,
+          "author": "newprint",
+          "text": "One thing that strikes me about what is going on: we have been promised this renaissance in software, yet, it been 2-3y of accelerated agentic/LLM development and I haven't see anything great coming out of the LLM developed software world that is worth looking at. Let's take open source as an example: No new 3d/2d CAD packages that are more capable than Blender/FreeCad/KiCad, nor Blender/FreeCad all of the sudden became much more capable than they were just few years ago. I also want to point out,that I haven't seen any new LLMed software in Electronic/ElectroDynamic simulation, something I would LLM to excel at, beyond what already existed before. No new software that is equal to Adobe Creative Suite (that Vibed coded replacement is trash IMO), No new Operating Systems that are taking over. No new utilities that are super useful in day work. We are using the same software, we've used before LLM arrived. Reverse Engineering became much easier, it is plus. Finding vulnerabilities also became much easier, another plus. Models are getting better. But where is the new cool software ? Edit: I will go even beyond OSS. M$ & Goog, who are DEEPLY Vested into AI, have access to the best possible frontier models and large groups of highly proficient engineers. Yet, Windows and Android are as laggy & buggy, as they were 4-5 years ago."
+        },
+        {
+          "id": 50154616,
+          "author": "lbrito",
+          "text": "What a great phrase! >When people claim that it’s no longer sustainable to write code by hand, they’re not entirely wrong, but only in the same way that it’s no longer sustainable to sleep in a bed once someone has taken a shit in it."
+        },
+        {
+          "id": 50154697,
+          "author": "swiftcoder",
+          "text": "One of the most underrated abilities in this industry is knowing when to walk away from something that no longer bring you joy. It's sad that it has come to this, but I'm sure the OP will find something more fun to do with their time."
+        },
+        {
+          "id": 50155135,
+          "author": "rglover",
+          "text": "I have a strange feeling that we'll see an increasing number of these to the point where we'll start to see legitimate issues in ecosystems as real talent exits (due to projects no longer evolving, being deprecated, etc as a response to AI). Will be quite funny when there's a noticeable decline in stability and development—despite having AI—because it turns out you actually need talented, creative people to build the building blocks the AI spits out. LLMs can parrot but they're basically the Crazy Town [1] of software development. [1] https://www.youtube.com/watch?v=NI6xffJn4-w"
+        }
+      ],
+      "summary_ja": "「OPがRubyのgemをアーカイブした理由は、LLMやエージェントがコード作業を加速しても、開発の喜びや人間的な協調が失われたと感じたからだ。コメントでは、LLMがセキュリティやパフォーマンス向上には貢献する一方で、新しいCAD、シミュレーション、OS、Adobeレベルのクリエイティブツールなど画期的なソフトウェアが登場していないと指摘され、AIだけではソフトウェア・ルネサンスは実現していないという懐疑的見解が多数を占めた。一方で、LLMによる脆弱性発見やリバースエンジニアリングの容易さは肯定的に評価され、「仕事が楽しくなくなったら去る勇気も重要」という意見も見られた。特に印象的だったのは「ベッドに誰かが糞をした後では寝られない」という比喩と、LLMを「Crazy Town」に例え、人間の創造性が不可欠だというコメントだった。」",
+      "editor_note": "Ruby gemメンテナンスからの離脱は、オープンソースプロジェクトの持続可能性とコミュニティの負担を示し、日本のRubyエコシステムでもメンテナ不足問題への対策が求められています。",
+      "category": "Programming Languages"
+    }
+  ]
+}
