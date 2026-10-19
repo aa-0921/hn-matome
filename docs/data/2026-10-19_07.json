@@ -1,0 +1,1134 @@
+{
+  "date": "2026-10-19T00:00:00+09:00",
+  "slot": "07",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 50145337,
+      "title_en": "Hybrid Reasoning Agents: LLM agents that think in latent space, act through text",
+      "title_ja": "ハイブリッド推論エージェント: 潜在空間で考え、テキストを通じて行動するLLMエージェント",
+      "url": "https://arxiv.org/abs/2610.18861",
+      "hn_url": "https://news.ycombinator.com/item?id=50145337",
+      "score": 155,
+      "comment_count": 91,
+      "posted_at": "2026-10-18T20:48:14+00:00",
+      "comments": [
+        {
+          "id": 50145696,
+          "author": "bhattisatish",
+          "text": "The code is available at: https://github.com/togethercomputer/HybridAgent LLM Models and data: https://huggingface.co/collections/togethercomputer/hybridag... Evaluations: https://arxiv.org/html/2610.18861v1#S5"
+        },
+        {
+          "id": 50146765,
+          "author": "larodi",
+          "text": "welcome thinking tokens, buy buy observe-ability"
+        },
+        {
+          "id": 50146330,
+          "author": "SwellJoe",
+          "text": "I'm running the 14B in llama.cpp (a version from yesterday), the 8-bit quantization from bartowski, and it looped on variations of the same paragraph for five minutes before running out its turn budget, in response to a pretty simple chat request that other similar-sized models (e.g. Gemma 4 12B) have no trouble with, a web search and data summarization task, sort of the sweet spot for models this size. It's possible llama.cpp needs some update to work with this model, but it's based on Qwen 3, so I would expect it to be pretty well-supported. The chat template is the same one upstream ships, which may or may not be correct. I'm currently downloading the 16-bit version, to see if it's quantization pathology. I'm also not confident it knows what a CSV is, either, as it put the data into a Markdown table during its reasoning phase as an example of how to present the data (my prompt asks for data in a CSV). My experience with most Qwen fine-tunes is they get dumber, but their benchmark results suggest otherwise, so I have to assume it's a llama.cpp incompatibility. Edit: Same looping in BF16. So, probably have to wait on a llama.cpp update."
+        },
+        {
+          "id": 50146496,
+          "author": "notnullorvoid",
+          "text": "Excited to see this applied to Qwen 3.8 27B. It's reasoning output tends to include lots of restatement, which I guess would be more likely to be kept in latent space with this hybrid reasoning."
+        },
+        {
+          "id": 50146255,
+          "author": "amluto",
+          "text": "I wonder how this compares to going all-in: widen the input embedding to fit the output (post-“Hybrid Link”) latent vector and a token embedding and pass both through even when in text mode. After all, you’re paying essentially the full cost of running the latent-mode model while generating text, so why not let it latently reason at the same time? (Or just add the vectors instead of using wider vectors - everyone seems to have good results from munging vectors together with plain addition.)"
+        }
+      ],
+      "summary_ja": "主な議論点は、Hybrid Reasoning Agentsの実際の動作と互換性についてで、特にllama.cppでの14Bモデルのループや量子化問題が指摘された点が最も多く取り上げられた。賛否両論としては、賛成側はQwen 3系への適用や、潜在空間での reasoning をテキスト生成と同時に行える可能性に期待し、否定的・懐疑的側は現在の実装がバグや効率の低さを露呈し、さらにチューニングやllama.cppのアップデートが必要だと指摘した。注目コメントとして、「入力埋め込みを拡張し、潜在ベクトルとトークンベクトルを常に併用（または単純加算）すれば、テキストモードでも潜在理由付けを同時に行えるのではないか」というアイデアが挙げられ、これによりコストを無駄にせず理由付け能力を向上させられるかという洞察が示された。",
+      "editor_note": "ハイブリッド推論エージェントは潜在空間で思考しテキストで行動する新枠組みで、推論コスト削減とマルチモーダル連携が期待され、国内のLLMスタートアップが注目している。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 2,
+      "id": 50142573,
+      "title_en": "Someone behind the software",
+      "title_ja": "ソフトウェアの陰にいる人",
+      "url": "https://karrisaarinen.com/posts/someone-behind-the-software/",
+      "hn_url": "https://news.ycombinator.com/item?id=50142573",
+      "score": 278,
+      "comment_count": 116,
+      "posted_at": "2026-10-18T16:32:00+00:00",
+      "comments": [
+        {
+          "id": 50144694,
+          "author": "jwr",
+          "text": "As a SaaS author, I couldn't agree more. That's how I see my work: the value is not in the code (AI can code better than me at this point), nor even in the software architecture (AI is just getting to the point where it will get better than me). It's in deciding what to build and what not to build, defining the overall character and vision of the product, looking at each screen and thinking \"how does this help my customer do their job\". This, unfortunately, takes time, as one has to restart many times because of ideas that turned out not to be as great as one had initially thought. And it results in software that is called \"opinionated\", and often does not follow what the \"industry\" does."
+        },
+        {
+          "id": 50144334,
+          "author": "allenu",
+          "text": "Something I've been thinking about a lot is that ultimately AI does not have values, intent, and taste. Even with humans, each of us has different values, intent, and taste, although we do share many of these things. As a living human being, you have biological or cultural desires and particular goals that you want to accomplish while you're alive on this earth. When you're creating art or even a product, what you create is a result of your particular values and particular tastes and those drive some sort of purpose for whatever it is you're creating. What you're building is, generally, made for the consumption or use by another person (even if indirectly), and we mostly have empathy and want those people to have a good experience with whatever we're creating. We think about our audience and weigh their particular needs. When you use good software, you can sense the intent in what was made. The person (or team) combined their particular point of view with that of the goals of the user. At this point, I don't think agentic coding is going to give you that, at least not fully. It might get most of the shared values and common things right as a result of its training data, but a human still needs to edit the output or steer it on a good path that only they can see and which is part of a larger vision. For simpler needs, taste and values matter less, but for more complex things, it makes a difference, in my opinion."
+        },
+        {
+          "id": 50142865,
+          "author": "ajrouvoet",
+          "text": "I enjoyed the introduction. I just picked up “The mind of the Maker” by Sayers, which Fred Brooks cites in The Mythical Man Month: “ Dorothy Sayers, in her excellent book, The Mind of the Maker, divides creative activity into three stages: the idea, the implementation, and the interaction. A book, then, or a computer, or a program comes into existence first as an ideal construct, built outside time and space, but complete in the mind of the author.” He goes on to say how the user meets the mind of the maker in the interaction: “The creation is complete when someone reads the book, uses the computer, or runs the program, thereby interacting with the mind of the maker.”"
+        },
+        {
+          "id": 50144352,
+          "author": "jakub_g",
+          "text": "> it's lot easier to add new capabilities, than rethink existing capabilities. So each product becomes a collection of abilities, without actually having unified point of view. This is a a very good and succinct summarization. What I'm also observing recently also is that pretty much every product tries to expand to do things that completely different products used to do, and become a mega-product-for-everything. It's like a Zawinski's Law on steroids."
+        },
+        {
+          "id": 50145335,
+          "author": "simonbarker87",
+          "text": "“Great software is opinionated” is something life been saying for years. I forget if I read it somewhere, heard it or came to the concept in my own thinking. All that is to say I don’t claim it’s a unique thought. And yet. I have to say it so often to the teams I’ve worked with or managed. The opinions are those of the creators and that isn’t changing with AI."
+        }
+      ],
+      "summary_ja": "主な議論点：ソフトウェアの価値はコードやアーキテクチャではなく、「何を作るか・作らないか」を決める人間のビジョン、意図、味わいにあるという点。AIはコード生成はできるが、価値観や意図、味わいは持たず、人間が方向性を定め、意見の強い(opinionated)製品を形作る必要がある。また、シンプルなニーズでは味わいは重要でなくても、複雑な製品では人間の判断が差を生むという議論。  \n賛否両論：多くのコメントは人間の意図が不可欠であることに賛同し、AIは共通の価値は学習データから近似できるが、最終的な方向付けや味わいは人間が編集・導く役割が残ると指摘。一方で、単純・機能的な要件についてはAIだけでも十分だとし、味わいの重要度はケースによるという意見も見られた。  \n注目コメント：「Great software is opinioned」というフレーズを繰り返し挙げ、「The Mind of the Maker」におけるアイデア・実装・相互作用の三段階を引用し、ユーザーが作り手の意図に触れる瞬間を強調した洞察が特に注目された。",
+      "editor_note": "ソフトウェアの陰にいる人は、オープンソースプロジェクトの維持・サポートを担う無名のエンジニアたちを指し、彼らの貢献がサプライチェーンリスク低減に直結するという視点が新鮮だ。",
+      "category": "Career/Work"
+    },
+    {
+      "rank": 3,
+      "id": 50136150,
+      "title_en": "There's never been a better time to go into math (by: 3blue1brown) [video]",
+      "title_ja": "数学に進むこれほど良い時期はかつてない（by: 3blue1brown）[ビデオ]",
+      "url": "https://www.youtube.com/watch?v=LKrwhjOI8Nc",
+      "hn_url": "https://news.ycombinator.com/item?id=50136150",
+      "score": 114,
+      "comment_count": 58,
+      "posted_at": "2026-10-17T23:26:35+00:00",
+      "comments": [
+        {
+          "id": 50146707,
+          "author": "nritchie",
+          "text": "I'd like to believe Grant but I find this assault on mathematics to be dehumanizing and demoralizing. AI has destroyed a major source of \"life's meaning\" for many people who pursued mathematics. Imagine waking up one morning to find that an alien technology has solved the problem you had dedicated your life to (and many more to boot.) Not another mathematician but an alien technology. As a scientist, I don't want to end up as a laboratory assistant to an AI. I can take not being the smartest human in the room, but I'm pretty sure I don't want to spend my life serving a silicon master."
+        },
+        {
+          "id": 50145948,
+          "author": "anitil",
+          "text": "I actually remember that in an old interview (that I can't find sorry) Grant Sanderson said he moved in to YouTube because he thought it was a more promising career than being mathematician, it's interesting to see his opinion change."
+        },
+        {
+          "id": 50146767,
+          "author": "whattheheckheck",
+          "text": "People with money will have questions and people or machines will need to give answers to satisfy them."
+        },
+        {
+          "id": 50146620,
+          "author": "keithnz",
+          "text": "I think a lot of these reactions by mathematicians are more akin to group theory than anything else. Reality is that things will naturally sort themselves out and there will be some role mathematicians play in all of it (most likely). To me it seems the timeline that some skill essentially gets retired such that if you want to keep doing it is more like \"historical re-enactment\" is getting quite short. Things like manually coding something is going to be a hobby. Some aspects of math are going to be a hobby, and professional math will be all about pushing up against the edge of what we can do mathematically with AI."
+        },
+        {
+          "id": 50145723,
+          "author": "gleenn",
+          "text": "3blue1brown has the absolute most educational and entertaining videos. Always fascinated by his animations which are custom programmed by him. I also appreciate the diversity of topics covered from deep math to software to science."
+        }
+      ],
+      "summary_ja": "主な議論点：AIが発展すれば数学の仕事が置き換わる懸念と、それによって数学者の意義や生活が失われる恐れが議論された点。同時に、AIをツールとして活用し、未解決問題への挑戦や教育コンテンツ制作での新たな役割が期待されるという見方も示された。  \n賛否両論：否定的側では、AIが「生命の意味」を奪い、数学者が補助的立場に追いやられるという懸念が挙げられた。肯定的側では、数学の一部は趣味化してもプロフェッショナルはAIと共に frontier を押し広げる仕事に就けるとし、Grant Sanderson の YouTube への転向例や彼の教育ビデオへの称賛がポジティブな反応として挙げられた。  \n注目コメント：あるコメントでは、数学者の反応は群論のように自然に整理されると指摘し、手作業的なコーディングや特定の数学技術は歴史再現の趣味になりつつある一方で、プロフェッショナル数学はAIと協力して未知の領域を探る活動になるだろうと洞察を示した。",
+      "editor_note": "3blue1brownのビデオは、AI時代における数学の必要性を説き、データサイエンスやアルゴリズム研究の基礎として日本の大学・企業が再評価している背景がある。",
+      "category": "Career/Work"
+    },
+    {
+      "rank": 4,
+      "id": 50144066,
+      "title_en": "Free Pascal compiler now supports dynamic packages",
+      "title_ja": "Free Pascal コンパイラは今やダイナミックパッケージをサポート",
+      "url": "https://www.getlazarus.org/dynamic/",
+      "hn_url": "https://news.ycombinator.com/item?id=50144066",
+      "score": 101,
+      "comment_count": 14,
+      "posted_at": "2026-10-18T18:48:04+00:00",
+      "comments": [
+        {
+          "id": 50144067,
+          "author": "sysrpl",
+          "text": "I am pleased to announce the first release of full dynamic package support for the Free Pascal Compiler and the Lazarus IDE. This feature has been a long time coming for the FPC ecosystem and has taken more than 20 years to realize through the work of many FOSS individuals. Dynamic packages allow programmers to create and install components, controls, and Lazarus extensions in seconds without rebuilding the entire Lazarus IDE. They can also be used in by Free Pascal programmers to develop and deploy plugins that expose native Pascal classes and types through dynamic package libraries. To support this functionality, I have made numerous improvements to the compiler, its runtime, and the Lazarus IDE. I have also created additional IDE extensions to improve the experience of working with Lazarus packages. Read more at the link above."
+        },
+        {
+          "id": 50145057,
+          "author": "kristianp",
+          "text": "This seems to be a fork of Lazarus. The official Lazarus is at https://www.lazarus-ide.org/"
+        },
+        {
+          "id": 50145297,
+          "author": "HexDecOctBin",
+          "text": "Last time I tried Lazarus, the strangest feature that FPC was missing when compared to Delphi was being able to declare variables anywhere (as opposed to only at the top of a block). FPC is still stuck in a very C89 model of declarations for some reason, perhaps that's just what happens when ecosystems stagnate."
+        },
+        {
+          "id": 50144749,
+          "author": "Pompidou",
+          "text": "Good Thanks."
+        }
+      ],
+      "summary_ja": "Free Pascalコンパイラが動的パッケージを正式にサポートした発表が議論の中心となった。これによりLazarus IDEやコンポーネントを再構築せずにプラグインを追加できるようになり、長年の要望が叶ったと評価する声が多い。一方、一部の参加者はこれがLazarusのフォークではないかと誤解し、公式サイトへのリンクを示して正しいことを指摘した。さらに、以前のLazarus利用時にFPCがDelphiと比べて変数をブロックのどこでも宣言できない点が不便だと指摘し、言語の古びた仕様への不満が示された。これに対して発表者は感謝の意を示し、動的パッケージの利便性を強調した。全体としては機能追加への賛同が目立ち、変数宣言の制約については改善を望む声が散見された。",
+      "editor_note": "Free Pascalのダイナミックパッケージサポートは、組み込みやレガシーシステムでのモジュール更新を容易にし、日本の産業機器メーカーが移行コスト削減を狙っている。",
+      "category": "Programming Languages"
+    },
+    {
+      "rank": 5,
+      "id": 50141076,
+      "title_en": "RepRapMicron",
+      "title_ja": "RepRapMicron",
+      "url": "https://github.com/VikOlliver/RepRapMicron/wiki",
+      "hn_url": "https://news.ycombinator.com/item?id=50141076",
+      "score": 321,
+      "comment_count": 51,
+      "posted_at": "2026-10-18T13:48:48+00:00",
+      "comments": [
+        {
+          "id": 50143355,
+          "author": "mikewarot",
+          "text": "I feel like we're reliving the late 1790s again, back then you had Ramsden figuring out how to divide the circle into into seconds of arc, taking the marking of scales from an artform into something that could be manufactured reliably. Maudslay with his thread cutting lathe took the making of screws from a manual process pawned off on apprentices to something that that could be done in mass production. Wilkinson's boring machine made it possible for Watt to build a pressurized steam engine. All of these tools are based on things that were one-offs of earlier efforts, and turned into practical machine tools by someone that history chose to remember. We're now at the point where making things by manipulating individual atoms is something a determined amateur can do, it's amazing! I find myself fascinated by the Wyler Inclinometer, which uses a thin copper disk with spiral arms as the basis of a differential capacitor, and when complete, resulting in a device that can used to calibrate a granite surface plate. It can typically measure 1 micron/meter of deviation. We now have 3d printers that can reliably make almost anything you want by fusing filament, or stereolithography, or fusion of metal powders. You can buy desktop 5 axis CNC machines. There are control systems available to let you build almost any type of machine tool you can imagine, in as many axis as you want. We've got software defined radio, cheap atomic clocks, transistors that can switch megawatts, all within reach of a hobbyist. What an amazing time to be alive."
+        },
+        {
+          "id": 50141336,
+          "author": "CarVac",
+          "text": "Related: https://www.youtube.com/watch?v=UvV2CH5il3Q And the channel's preceding few videos covering the development of the prerequisite technologies."
+        },
+        {
+          "id": 50141271,
+          "author": "godber",
+          "text": "Thank god, in 18 months we can start making our own RAM."
+        },
+        {
+          "id": 50143199,
+          "author": "samayashar",
+          "text": "I see a lot of micro-chip designs that are so cool, but they just exist as a design in some software on our computers. If this printer can allow cheap and sustainable printing of chip designs, then the hardware field could take a very interesting turn!"
+        },
+        {
+          "id": 50141674,
+          "author": "le-mark",
+          "text": "I know it is a preposterous proposition to think this thing could create a 1/1000 version of itself, hence 1/1,000,000 3d printing, but why?"
+        }
+      ],
+      "summary_ja": "主な議論点：マクロスケールの自己複製可能な3Dプリンタ（RepRapMicron）が実現可能か、それによって個人レベルで半導体製造やRAM作製ができるかという点。特に、過去の機械工具の革新と同様に、個人が原子レベルで構造を制御できるかが焦点となっている。  \n賛否両論：賛成側は過去の機械工具革命と同様に、個人が原子レベルで構造を作れる時代が到来し、オープンソースチップ設計や低コスト製造に期待。懐疑派はナノメートル級精度や自己複製メカニズムが未解決であり、18か月でのRAM自作は現実離れしていると指摘。例えば、ナノスケールでの熱変位や材料の純度管理が大きな障壁とされている。  \n注目コメント：「1/1000版の自己複製という考えは前提がおかしい、なぜそれが可能だと考えるのか？」というコメントが技術的ハードルを鋭く突き、議論の中心となった。",
+      "editor_note": "RepRapMicronはマイクロメートルレベルの3Dプリンタキットで、精密部品の内製化が可能になることから、日本のものづくり中小企業のプロトタイピング加速が期待される。",
+      "category": "OSS"
+    },
+    {
+      "rank": 6,
+      "id": 50136979,
+      "title_en": "Dogs seem to agree with humans that 'bouba' is round and 'kiki' is spiky",
+      "title_ja": "犬は人間と同じく「bouba」は丸く、「kiki」はとがっていると思っているようだ",
+      "url": "https://www.sciencealert.com/dogs-seem-to-agree-with-humans-that-bouba-is-round-and-kiki-is-spiky",
+      "hn_url": "https://news.ycombinator.com/item?id=50136979",
+      "score": 100,
+      "comment_count": 71,
+      "posted_at": "2026-10-18T01:38:08+00:00",
+      "comments": [
+        {
+          "id": 50145055,
+          "author": "dang",
+          "text": "Related. Others? Evidence of the bouba-kiki effect in naïve baby chicks - https://news.ycombinator.com/item?id=47105198 - Feb 2026 (107 comments) Which is \"Bouba\", and which is \"Kiki\"? [video] - https://news.ycombinator.com/item?id=46572742 - Jan 2026 (23 comments) Bouba / Kiki Effect - https://news.ycombinator.com/item?id=45320327 - Sept 2025 (2 comments) Bouba/kiki effect - https://news.ycombinator.com/item?id=40699583 - June 2024 (170 comments) Bouba/Kiki Effect - https://news.ycombinator.com/item?id=27885703 - July 2021 (94 comments) Bouba/kiki effect - https://news.ycombinator.com/item?id=8372550 - Sept 2014 (1 comment)"
+        },
+        {
+          "id": 50145625,
+          "author": "gste",
+          "text": "I think objects with these shapes make similar sounds in the real world. Sharp shapes make percussive sounds. Round shapes make softer sounds. Dog's have very good hearing, and their hearing must help them to model the world around them, to understand what different objects in the world are. So I think it's less about linguistics and more about our audiovisual mapping of the physical world. Then again, that must be where the origin of language evolved from in the first place."
+        },
+        {
+          "id": 50146562,
+          "author": "tdb7893",
+          "text": "Somewhat more surprising to me is there's already evidence for this in baby chickens so it appears to exist even across very different animals. https://www.science.org/doi/10.1126/science.adq7188"
+        },
+        {
+          "id": 50094626,
+          "author": "DoctorOetker",
+          "text": "I too would associate \"Bouba\" with the rounded and \"Kiki\" with the sharper figure, but to me this is just a relatively universal sense of continuity vs discontinuities: the local curvature is continuous for \"Bouba\", every point on the curve has a single tangent, which evolves continuously as you walk along this presented curve. For Kiki: the local curvature is discontinuous: at the inward or outward points, there are 2 tangents, so the tangent abruptly switches value when passing through this point when walking along the curve. similarly the \"B\"s in \"Bouba\" are voiced plosives, while the \"K\"s in \"Kiki\" are unvoiced plosives. I think people would similarily classify \"Titi, Pipi, Touta, Poupa, Kouka\" like \"Kiki\" but \"Didi, Douda, Bibi, Gigi, Gouga\" like \"Bouba\". The vowels are obviously voiced by the vocal chord carrier wave \"voice\". So when we pass through the unvoiced (T/P/K) plosives, we notice discontinuity like the discontinuously evolving tangents along the boundary curve of the figure. Obviously mammals like dogs have a concept of continuity, topology, distance, they might get spooked by \"open\" stairs, because they can see between the planks, etc. And when we hear voiced (D,B,G) plosives, the voice while muted still evolves continuously."
+        },
+        {
+          "id": 50145543,
+          "author": "throw9394030",
+          "text": "> Each dog/owner pair entered a room set up with a screen and a speaker to the left, and another screen and speaker to the right. I do not think this is realible experiment. Dogs are very sensitive to non verbal cues from their owner. For example if owner is scared, it will defend the owner. I get assaulted all the time, by dog owners who unleash their dogs on me, in self defense. Edit: just to clarify I get assaulted about once a week, while running at park at morning. I was at hospital a few times, mostly it is unwanted physical contact. It is leash only park full of runners, I have no idea why any sane person would allow dogs to run freely there! I can not afford to move out. I started wearing body cam, and air horn."
+        }
+      ],
+      "summary_ja": "主な議論点は、ブーバ／キキ効果が単なる言語的連想ではなく、形状と音声のクロスモーダル対応によるものかという点だった。多くのコメントは、とがった形は打撃音（無声音破裂音）と、丸い形は柔らかい音（有声音破裂音）に対応し、これが犬やひよこにも見られることから、普遍的な知覚メカニズムだと指摘した。一方、音の連続性・不連続性と図形の曲率の関係を詳細に解説し、有声音＝ブーバ、無声音＝キキという音韻パターンを挙げた意見もあった。賛否の分かれ目は実験の信頼性で、一部は犬が所有者の非言語的サインに敏感であるため結果が偏ると批判し、一方で統計的に有意な効果があると擁護する声があった。特に注目されたのは、音韻の有声・無声と形状の連続・不連続を結びつけた洞察的コメントと、実験設計の盲点を指摘したコメントだった。",
+      "editor_note": "犬がブーバ/キキ効果を示す研究は、人間以外の動物にも音象徴性があることを裏付け、日本のペットテック分野での音声インターフェース設計に新たな示唆を与える。",
+      "category": "Other"
+    },
+    {
+      "rank": 7,
+      "id": 50143536,
+      "title_en": "PalmOS Lemmings",
+      "title_ja": "PalmOS版レミングス",
+      "url": "https://github.com/ardiri/palmos-lemmings",
+      "hn_url": "https://news.ycombinator.com/item?id=50143536",
+      "score": 80,
+      "comment_count": 22,
+      "posted_at": "2026-10-18T17:56:59+00:00",
+      "comments": [
+        {
+          "id": 50145518,
+          "author": "nkx1",
+          "text": "Hi, I literally found an old SD card with files last modified from 2005 with a few palm games from then, would anyone find these useful for reverse engineering?"
+        },
+        {
+          "id": 50144189,
+          "author": "chuliomartinez",
+          "text": "Yeah Aaron is a PalmOS legend. I really liked the palmos c libs, MemCopy and WinCopyBitmap just reads so much nicer than memcpy and memset. Also UInt8 and UInt16:) Those were fun times, when 16bit ints were enough for everyone (just kiding;)"
+        },
+        {
+          "id": 50144191,
+          "author": "rickcarlino",
+          "text": "This README is begging for historical context and commentary."
+        },
+        {
+          "id": 50145074,
+          "author": "yitchelle",
+          "text": "Interestingly he removed some of his clones (Mario brothers and others) on the request of Nintendo. Maybe his clones were too close to the real thing."
+        },
+        {
+          "id": 50144472,
+          "author": "teddyh",
+          "text": "There was also a version of Lemmings on the HP48 calculator: < https://www.hpcalc.org/details/530 > (incidentally by the same author as Alpha Waves, a.k.a. Continuum)"
+        }
+      ],
+      "summary_ja": "主な議論点は、2005年に修正されたPalmOS用ゲームデータが逆エンジニアリングに有用かどうかという点と、その時代のPalmOS開発環境への懐かしさ、さらに作者がNintendoの要請でマリオ系クローンを削除したことによる著作権問題である。賛否両論として、PalmOSのCライブラリ（MemCopyやWinCopyBitmap、UInt8／UInt16）の使いやすさを称賛する声がある一方で、クローンがオリジナルに слишком 近かったため削除されたことに関し、合法性への懸念や逆エンジニアリングの正当性を疑う意見も見られた。注目コメントとして、作者Aaronを「PalmOSの伝説」と評し、MemCopyやWinCopyBitmapのコードが直感的で楽しかったと語る投稿があり、当時の開発体験を具体的に示している。",
+      "editor_note": "PalmOS版レミングスは、レトロゲームの移植が示す古いプラットフォームへの情熱を象徴し、日本のインディーゲーム開発者が同様にレガシーハードウェアでの復刻に挑戦している。",
+      "category": "Mobile"
+    },
+    {
+      "rank": 8,
+      "id": 50145715,
+      "title_en": "Show HN: WhatsApp MCP running free on Cloudflare",
+      "title_ja": "Show HN: Cloudflareで無料で動作するWhatsApp MCP",
+      "url": "https://github.com/finereli/whatsapp-mcp",
+      "hn_url": "https://news.ycombinator.com/item?id=50145715",
+      "score": 25,
+      "comment_count": 13,
+      "posted_at": "2026-10-18T21:36:10+00:00",
+      "comments": [
+        {
+          "id": 50146403,
+          "author": "SchemaLoad",
+          "text": "What bothers me about these projects is you are exposing the other side of your conversations to being uploaded to a 3rd party AI company who will ingest it in to their training data. You personally might not care about this privacy intrusion but the people you are messaging never consented to this."
+        },
+        {
+          "id": 50146508,
+          "author": "taldo",
+          "text": "I've experimented with some of these whatsapp-web-esque hacks (whatsappweb.js, whatsmeow, ...) and every now and then I'll get banned. It's quite inconvenient if you live in a country where WA is the universal contact channel for pretty much everything."
+        },
+        {
+          "id": 50146413,
+          "author": "jrecyclebin",
+          "text": "I've been using Baileys - but it's not ideal. (Periodically you have to go manually log the bot back in.) Is there no platform that's friendly to personal bots? Or is that what Telegram is for? Discord I suppose..."
+        },
+        {
+          "id": 50146611,
+          "author": "throwaway27448",
+          "text": "What does cloudflare contribute? free hosting or"
+        },
+        {
+          "id": 50146392,
+          "author": "D2OQZG8l5BI1S06",
+          "text": "Cloudflare already sniffs most of the internet traffic, why not also let them see our private messages?!"
+        }
+      ],
+      "summary_ja": "主な議論点は、WhatsAppの非公式APIを利用した個人ボットの利用において、プライバシーリスクと利用の安定性が争点となっていることだ。プライバシー側では、相手のメッセージが第三者のAI企業にアップロードされ学習データに使われる可能性を指摘し、同意されていない相手への侵害として批判している。一方、利用側では、whatsappweb.jsやBaileysなどのハックが頻繁にBANされ、WhatsAppが生活必須の連絡手段である国では不便だとの声が上がり、Baileysでも定期的な再ログインが必要で不満が残っている。これに対して、個人ボットに優しいプラットフォームとしてTelegramやDiscordが挙げられ、Cloudflareが提供する無料ホスティングやエッジ機能がどれほど役立つのか疑問視する声もある。注目コメントとして、Cloudflareが既にインターネットトラフィックの大半を監視しているため、さらにプライベートメッセージを晒すわけかという皮肉めいた指摘が、議論の中心となった。",
+      "editor_note": "Cloudflare上で無料動作するWhatsApp MCPは、メッセージングAPIの低コスト利用を可能にし、日本のスタートアップがチャットボットや顧客サポートツールを迅速にプロトタイプできる点が注目される。",
+      "category": "Systems/Infrastructure"
+    },
+    {
+      "rank": 9,
+      "id": 50138531,
+      "title_en": "DeepSeek search and fetch – $0.75 per 1000 successful requests",
+      "title_ja": "DeepSeek の検索と取得 – 成功リクエスト1000件あたり0.75ドル",
+      "url": "https://api-docs.deepseek.com/guides/search/",
+      "hn_url": "https://news.ycombinator.com/item?id=50138531",
+      "score": 530,
+      "comment_count": 252,
+      "posted_at": "2026-10-18T06:50:36+00:00",
+      "comments": [
+        {
+          "id": 50139399,
+          "author": "nikvdp",
+          "text": "What are people actually using these hosted search providers for? For personal use I've found using searxng-ai-kit [1] (disclaimer: I'm the author) or similar tools to be far more cost effective (free!). oh-my-pi uses a similar method and will scrape search results for you out of the box, no api key or search provider needed. [1]: https://github.com/nikvdp/searxng-ai-kit"
+        },
+        {
+          "id": 50143743,
+          "author": "londons_explore",
+          "text": "Since SEO is big business, and agent driving search is probably the future, I suspect we might see the price of search API's going negative in the future. Ie. Providers pay you to use their API over competitors, since then they get control of who has influence on the internet. They can probably get sites to pay to be up ranked for specific queries etc"
+        },
+        {
+          "id": 50143276,
+          "author": "DoctorOetker",
+          "text": "@DeepSeek teams, why not train your next series of LLM models with source-aware training? https://arxiv.org/abs/2404.01019 LLM's would be able to answer questions, delineating exactly which facts/assumptions/reasonings are prior work and from where (this URL, that book, etc.), and which parts are it's own deductions, or the user's."
+        },
+        {
+          "id": 50140985,
+          "author": "mjmvisser",
+          "text": "These services only exist because Google refuses to provide a paid search API."
+        },
+        {
+          "id": 50138776,
+          "author": "thombles",
+          "text": "For comparison that’s $5 with Brave Search API and $12 with Kagi API"
+        }
+      ],
+      "summary_ja": "**主な議論点**  \nコメントでは、有料検索APIのコストパフォーマンスが中心に議論されている。DeepSeekの「成功リクエスト1000件あたり$0.75」という価格設定について、自前でSearXNGベースのツール（searxng‑ai‑kitやoh‑my‑pi）を使えば無料で同等の機能が得られると指摘され、個人利用ではコスト削減の観点から自ホスト型が推奨されている。また、検索APIの将来価格について、SEOやエージェント駆動型検索の普及によりプロバイダーが利用者に報酬を払う「ネガティブ価格」になる可能性が予測されている。さらに、LLMの学習にソース情報を明示する「ソース認識トレーニング」への期待が示され、現状の有料検索サービスはGoogleが有料APIを提供していないために存在しているという指摘もあった。価格面では、Brave Search APIが$5/1000件、Kagi APIが$12/1000件と比較され、DeepSeekの提示価格が最も安価であることが強調された。\n\n**賛否両論**  \n- 有料APIのコストに対する賛同：価格が低く、手軽に利用できる点は評価された。  \n- 自ホスト型ツールへの懐疑：セットアップやメンテナンスの手間、信頼性やスケーラビリティにおいて不安を示す声もあり、個人利用以外では有料APIの方が現実的だとの意見も見られた。  \n- ネガティブ価格予測については、実現可能性に賛否が分かれ、実際に広告モデルやデータ独占が進めば起こり得ると楽観的に見る者と、ビジネスモデルとして成立しないと疑問を呈する者がいた。\n\n**注目コメント**  \n- 「SearXNGベースのキットは無料で同様の検索結果を取得でき、APIキー不要。個人利用ならコストゼロが最大の利点」というコメントは、自ホストソリューションの実用性を具体的に示しており、多くの読者に共感を呼んだ。  \n- 「将来的には検索プロバイダーが利用者に報酬を支払うネガティブ価格になるかもしれない」という洞察は、検索ビジネスの変革可能性を示唆し、今後の市場動向について考えるきっかけとなった。  \n- 「LLMにソース認識トレーニングを施せば、回答の根拠を明示でき、信頼性が向上する」という提案は、AIの透明性と説明可能性への期待を高める点で注目された。",
+      "editor_note": "DeepSeekの検索・取得APIが1000件あたり0.75ドルと安価であることは、大規模言語モデルへの外部知識供給を低コストで行えることを示し、日本のエンタープライズAI導入コスト削減に直結する。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 10,
+      "id": 50122058,
+      "title_en": "One parser, two bugs, many routers: Exploiting Broadcom WiFi across eCos, Linux",
+      "title_ja": "1つのパーサ、2つのバグ、多数のルータ: eCosとLinux間のBroadcom WiFiを悪用",
+      "url": "https://quentinkaiser.be/security/2026/10/16/one-parser-two-bugs/",
+      "hn_url": "https://news.ycombinator.com/item?id=50122058",
+      "score": 35,
+      "comment_count": 9,
+      "posted_at": "2026-10-16T18:07:44+00:00",
+      "comments": [
+        {
+          "id": 50140727,
+          "author": "myself248",
+          "text": "The article estimates the number of these routers in the author's home country (Belgium), but the vulnerability would exist in units sold worldwide, no? Seems to me that their estimates of affected units are a couple orders of magnitude low."
+        },
+        {
+          "id": 50146349,
+          "author": "cryptolobster",
+          "text": "An interesting situation, to be sure, that came about because of this bug"
+        },
+        {
+          "id": 50145499,
+          "author": "userbinator",
+          "text": "unless affected Original Equipment Manufacturers (OEMs) are willing to migrate. ...or someone spends a bit of time with an AI to come up with a patch? Bonus points for one that can be remotely installed using the same exploit..."
+        },
+        {
+          "id": 50146546,
+          "author": "TacticalCoder",
+          "text": "> Key Takeaways: Security through Complexity is Dead. Only systemd thinks this is not the case."
+        }
+      ],
+      "summary_ja": "主な議論点は、Broadcom WiFi チップのパーサバグが eCos と Linux を搭載したルータに広く影響し、影響台数の見積もりが過小評価されているという指摘だった。コメントでは、実際にはベルギーだけでなく世界中の同チップ搭載機種に脆弱性が存在し、著者の国別推計は桁違いに低いとの意見が多数を占めた。さらに、OEM がパッチを適用しない限り問題は残り続けるが、AI を活用して自動生成・リモート適用可能なパッチを開発できる可能性に期待が寄せられた一方で、そうしたアプローチは実装コードの複雑さを増し、「複雑さによるセキュリティは死んでいる」という批判と、「唯一 systemd だけがそれを信じている」という皮肉なやり取りが見られた。賛否の分かれ目は、脆弱性の緩和手段としての AI パッチの現実的可行性と、その結果生じるシステム複雑性の増大というトレードオフにあった。注目されたコメントは、「セキュリティのための複雑さは終わりを告げ、systemd だけがまだそれを信じている」という一語で、脆弱性対応における設計哲学の対立を端的に表していた。",
+      "editor_note": "Broadcom WiFiの1つのパーサに2つのバグがあるという発見は、eCosとLinuxを跨ぐ供給チェーンリスクを浮き彫りにし、日本のネットワーク機器ベンダーがファームウェア監査を強化すべき背景がある。",
+      "category": "Security"
+    },
+    {
+      "rank": 11,
+      "id": 50098148,
+      "title_en": "16-bit fully functional DIY magnetic core memory",
+      "title_ja": "16ビット完全機能 DIY 磁気コアメモリ",
+      "url": "https://www.youtube.com/watch?v=OJ1WYyO2jdY",
+      "hn_url": "https://news.ycombinator.com/item?id=50098148",
+      "score": 22,
+      "comment_count": 12,
+      "posted_at": "2026-10-15T01:51:02+00:00",
+      "comments": [
+        {
+          "id": 50146656,
+          "author": "cadr",
+          "text": "I have a little envelope of cores that I’ve been meaning to do something with for years, but they are just so tiny I haven’t wanted to mess with them. (Not sure when they were made, but I’m assuming fairly late based on the size.)"
+        },
+        {
+          "id": 50146561,
+          "author": "kjs3",
+          "text": "Dataram, back in the day, made 'generic' core memory planes. That is, the had a relatively speaking simple electrical interface, and many vendors just implemented whatever was needed to hook it up to the vendors (usually) proprietary interface. I have a couple I've been (very) slowly trying to get working with a modern-ish microcontroller with USB connectivity."
+        },
+        {
+          "id": 50145997,
+          "author": "Geof25",
+          "text": "You can buy FRAM (Ferroelectric RAM) which are effectively the same thing just in smaller package. But I have seen them only about few kB. However the amount of R/W operations is effectively unlimited,"
+        },
+        {
+          "id": 50146630,
+          "author": "Beijinger",
+          "text": "I doubt that this is the future. The future is to do calculations directly in the RAM."
+        },
+        {
+          "id": 50145902,
+          "author": "amelius",
+          "text": "With the current DRAM shortages, this couldn't have come at a better time."
+        }
+      ],
+      "summary_ja": "主な議論点は、DIYで16ビットの磁気コアメモリを作る際のサイズの小ささと入手難、Dataram製汎用プレーンの利用やマイコン＋USBでの接続試み、FRAMとの比較、そして計算をメモリ内で行う未来像や現在のDRAM不足という話題。  \n賛否両論：賛成側はレトロ技術の教育的価値、書き換え回数がほぼ無制限な点や低消費電力の可能性を挙げ、DRAM代替としての期待を示す。否定側は容量が数kBに限られ実用的ではないこと、将来は演算込みメモリ(PIM)への移行が必至だと指摘する。  \n注目コメント：「FRAMは同じ原理だが数kBしかなく、書き換え回数はほぼ無制限」という技術的整理と、「演算をRAMで行う方が未来」という観点が特に洞察に富んでいた。",
+      "editor_note": "16ビットDIY磁気コアメモリは、半世紀前の技術を今に復活させる趣味プロジェクトで、日本のハードウェア愛好家が低レベルアーキテクチャ理解を深める教育ツールとして活用されている。",
+      "category": "Systems/Infrastructure"
+    },
+    {
+      "rank": 12,
+      "id": 50123123,
+      "title_en": "\"Traditional, but Puzzling\"",
+      "title_ja": "「伝統的だが、謎めいている」",
+      "url": "https://unsung.aresluna.org/traditional-but-puzzling/",
+      "hn_url": "https://news.ycombinator.com/item?id=50123123",
+      "score": 10,
+      "comment_count": 0,
+      "posted_at": "2026-10-16T19:17:23+00:00",
+      "comments": [],
+      "summary_ja": "",
+      "editor_note": "「伝統的だが、謎めいている」は、古典的アルゴリズムや数学的構造が現代の課題に意外な解を提供する事例を示し、日本の研究者がレガシー知識の再活用を模索している。",
+      "category": "Other"
+    },
+    {
+      "rank": 13,
+      "id": 50140383,
+      "title_en": "A new way to think about borrow checking (in reverse)",
+      "title_ja": "借用チェックについての新しい考え方（逆方向）",
+      "url": "https://verdagon.dev/blog/reverse-borrow-checking",
+      "hn_url": "https://news.ycombinator.com/item?id=50140383",
+      "score": 7,
+      "comment_count": 3,
+      "posted_at": "2026-10-18T12:11:13+00:00",
+      "comments": [
+        {
+          "id": 50140433,
+          "author": "verdagon",
+          "text": "Figuring out how to make this was a pretty wild ride. I had zero clue how to approach this, so I went into the mountains with pencil and paper until I figured something out. I started with a sort of \"compile-time generational references\" approach, where every reference would also remember when it was made, at compile-time. Then that evolved into a couple more things until I finally figured out this reverse approach. We'll see if it sticks. Hope you all enjoy!"
+        },
+        {
+          "id": 50140460,
+          "author": "CoalitionOfPity",
+          "text": "I just wanted to take the time to compliment this note in your blog: > My stance: if you want someone to take the time to read something, take the time to write it by hand."
+        }
+      ],
+      "summary_ja": "主な議論点は、従来の「所有権＋ライフタイム」チェックではなく、参照が生成された時刻をコンパイル時に記録する「逆方向の借用チェック」の実現可能性と、その結果得られる安全性・パフォーマンスへの影響だった。  \n\n賛否両論としては、賛成側は「コンパイル時ジェネレショナル参照」によるシンプル化と、ランタイムオーバーヘッドの削減に期待を寄せ、否定側は「参照の生成時刻を正確に追跡するのは現実的でなく、複雑なケースではチェックが漏れたり過剰になる」と指摘した。  \n\n注目コメントでは、最初の投稿者が「山へ行って鉛筆と紙で試行錯誤し、最終的に逆アプローチにたどり着いた」という経緯を語り、もう一人のコメント者が「手書きで丁寧に書いたものほど読んでもらえる」という文言を引用し、アイデアの伝達において誠実さと労力の重要性を強調していた点が洞察に富んでいた。",
+      "editor_note": "逆方向から考える借り入れチェックは、所有権と参照の関係を逆に捉えることでエラーメッセージの直感性を向上させ、日本のRustコミュニティが初学者向け教材に取り入れている。",
+      "category": "Programming Languages"
+    },
+    {
+      "rank": 14,
+      "id": 50135762,
+      "title_en": "I built a programming language that LLMs can't use",
+      "title_ja": "LLMが使えないプログラミング言語を作った",
+      "url": "https://blog.picheta.me/post/killswitch-lang/",
+      "hn_url": "https://news.ycombinator.com/item?id=50135762",
+      "score": 58,
+      "comment_count": 53,
+      "posted_at": "2026-10-17T22:26:47+00:00",
+      "comments": [
+        {
+          "id": 50146769,
+          "author": "card_zero",
+          "text": "I can't see the hello world, because Cloudflare says I'm not human, as usual."
+        },
+        {
+          "id": 50146024,
+          "author": "dagss",
+          "text": "\"Writing code is probably something LLMs have excelled at the most. But how much of their ability to write code is due to their understanding of it vs. just them recalling code snippets which were present in their training dataset or their context window?\" This makes me think mostly about how humans work. Programming is to humans like speaking a language. You have ideas for what to achieve and express, and if you are a proficient programmer then outputting those thoughts in a programming language is second nature. Programming (like most things humans learn) takes practice. It is NOT enough to simply read a specification and then you know how to code (except for transferring skills between similar languages). You repeat, make mistakes, and learn from them. I would be tempted to say that humans definitely \"repeat snippets from their training dataset\". We mainly recall and express from our training/experiences. Creativity is mostly recombination of things already seen."
+        },
+        {
+          "id": 50146055,
+          "author": "dejj",
+          "text": "Related: the Darmok programming language: https://github.com/kevinselwyn/darmok Temba, his arms wide stdio Darmok on the ocean Kira at Bashi \"Hello, World!\\n\" Darmok and Jalad at Tanagra 0 Darmok and Jalad on the ocean Killswitch-lang could become the backstory to how the Tamarians developed their language, in the aftermath of a Dune-like Butlerian Jihad. Also see: https://news.ycombinator.com/item?id=50127274"
+        },
+        {
+          "id": 50146778,
+          "author": "foo12bar",
+          "text": "Can it compile itself?"
+        },
+        {
+          "id": 50145663,
+          "author": "pixl97",
+          "text": "Security by obscurity is not security at all. You're attempting to use a few little gotchas against LLMs that only make sense if you're looking at it one dimensionally as a standard execution flow. AI is not limited by that. Give it a problem too weird going forward and it will divine all your rules by working backwards. Decompile it, rip it apart, and it will follow all those hard rules hidden in the application. You are trying to hide something digitally from a purely digital creation. This is not a recipe for success."
+        }
+      ],
+      "summary_ja": "主な議論点は、LLMがコードを生成する際に「理解」によるものか、単なるトレーニングデータやコンテキスト窓からのスニペット再現かという点。コメントでは、人間も経験からスニペットを再利用し創造は再結合だと指摘し、LLMも同様に訓練データのパターンを再利用しているという見解が多数を占めた。賛否については、言語を意図的に難読化すればLLMをだますことができるかという議論で、一部は「 obscurityはセキュリティにならず、逆エンジニアリングでルールは解読される 」と否定的。一方で、自己コンパイル可能かや、タミアン語のDarmok言語を参照してユーモアを交えるコメントもあった。特に洞察に富んだのは、人間のプログラミングも「トレーニングデータからのスニペット再現＋創造的再結合」であり、LLMの振る舞いはそれと本質的に変わらないという指摘。",
+      "editor_note": "LLMが使えないプログラミング言語を作った実験は、言語設計がモデルのバイアスや安全性に与える影響を探る試みで、日本のAI倫理研究者が同様の観点で言語設計を議論している。",
+      "category": "Programming Languages"
+    },
+    {
+      "rank": 15,
+      "id": 50141579,
+      "title_en": "Java sealed classes and exhaustive pattern matching",
+      "title_ja": "Java のシールクラスと網羅的パターンマッチング",
+      "url": "https://neilmadden.blog/2026/04/24/java-sealed-classes-and-exhaustive-pattern-matching/",
+      "hn_url": "https://news.ycombinator.com/item?id=50141579",
+      "score": 128,
+      "comment_count": 98,
+      "posted_at": "2026-10-18T14:47:37+00:00",
+      "comments": [
+        {
+          "id": 50144140,
+          "author": "shepherdjerred",
+          "text": "I love how far Java has come. I still prefer TypeScript since I do a lot of frontend work and prefer to use the same language across the stack. With the said, you can do exhaustive pattern matching in TypeScript! https://github.com/gvergnaud/ts-pattern"
+        },
+        {
+          "id": 50146010,
+          "author": "another_twist",
+          "text": "Took me a while to get used to sealed and I didn't quite see the use. But AI seems to love it for Java so I gave it a go and now I get it. Its like a really good access control mechanism esp if you use DI and want to deprecated some stuff. Apart from ofcourse the pattern matching - which comes in handy for event driven messages where payload shape changes."
+        },
+        {
+          "id": 50142099,
+          "author": "armchairhacker",
+          "text": "Java also has recursive patterns and (maybe still in preview) literal patterns: `switch (x) { case A(B(true, var c)) -> f(c); }`"
+        },
+        {
+          "id": 50142681,
+          "author": "timshel2",
+          "text": "Scala punching the air rn"
+        },
+        {
+          "id": 50145426,
+          "author": "panny",
+          "text": "I don't think you need those switch defaults with the sealed types. I didn't check with a compiler, but I think those are unnecessary."
+        }
+      ],
+      "summary_ja": "主な議論点は、Javaのsealed classとexhaustive pattern matchingの実用価値と、他言語（TypeScriptやScala）との機能比較である。賛否は、機能への満足感とともに、TypeScriptでも同様のパターンマッチングが可能だと指摘する声がある一方で、AIが積極的に推奨することへの驚きや、sealed classをDI環境でのアクセス制御や非推奨APIの管理に有効だと実感した意見がある。また、デフォルトケースの必要性について分かれ、セール済み型なら不要だと考える者と、安全策として残すべきだと考える者がいる。注目コメントとして、sealed classをアクセス制御やDIでの非推奨管理に有効だと指摘し、再帰パターンやリテラルパターンの存在を挙げたもの、およびScalaへのジョークやデフォルト不要論があるコメントが挙げられた。",
+      "editor_note": "Javaのシールクラスと網羅的パターンマッチングは、閉じた型階層を安全に扱う仕組みで、Androidアプリ開発において状態管理のバグを減らすため国内のエンタープライズチームが導入を検討している。",
+      "category": "Programming Languages"
+    },
+    {
+      "rank": 16,
+      "id": 50142449,
+      "title_en": "The Intel 8087 chip: floating-point addition and subtraction",
+      "title_ja": "Intel 8087チップ: 浮動小数点の加算と減算",
+      "url": "https://www.righto.com/2026/10/8087-addition-subtraction-microcode.html",
+      "hn_url": "https://news.ycombinator.com/item?id=50142449",
+      "score": 85,
+      "comment_count": 27,
+      "posted_at": "2026-10-18T16:20:27+00:00",
+      "comments": [
+        {
+          "id": 50143956,
+          "author": "WalterBright",
+          "text": "I always thought the 8087 was way cool, but it never really caught on. Early versions of Win32 did not save the 8087 registers on a context switch. I called up some people at Microsoft to please not destroy the 8087, and they relented and preserved the registers. I've always been proud to support the 8087 with my compilers, and am baffled why the numerics people ignore it."
+        },
+        {
+          "id": 50144280,
+          "author": "dsign",
+          "text": "Kind of shocking that a 1980 chip could do 80 bits floating points. It makes me a little mad at all of those microcontrollers from this year, 46 years later that ship without floating point support or, at best, 32 bits, but they do come with a \"secure island\" and a radio capable to ring ET."
+        },
+        {
+          "id": 50142957,
+          "author": "kens",
+          "text": "Author here with another 8087 article. What part of the 8087 should I look at next?"
+        },
+        {
+          "id": 50144733,
+          "author": "kar1181",
+          "text": "Gosh thank goodness for Ken, a beacon of light in a sea of slop. For all these years, and countless hours of posts and videos, thank you."
+        }
+      ],
+      "summary_ja": "主な議論点は、1980年に登場したIntel 8087が80ビット浮動小数点演算を実現していたことへの驚きと称賛、そしてそれが広く普及しなかったことへの失望や、当時のWindowsがコンテキストスイッチでレジスタを保存しなかった問題への対応、さらに現代のマイクロコントローラが浮動小数点サポートを欠くことへの批判などが挙げられた。賛否については、8087の高精度とコンパイラでのサポートを評価する声がある一方で、OSやハードウェア側のサポート不足が普及を妨げたという指摘もあった。特に注目されたコメントは、「1980年のチップで80ビットFPが可能なのに、46年後も多くのMCUがFP無しまたは32ビットしか提供せず、『セキュアアイランド』や無線機能ばかり盛り込む」という嘆きで、過去の技術的進歩と現在のトレンドのギャップを鋭く指摘していた。",
+      "editor_note": "Intel 8087チップの浮動小数点加減算は、FPUの起源を示す歴史的技術解説で、日本の組み込み系エンジニアがレガシー浮動小数点実装の理解を深める教材として参照されている。",
+      "category": "Systems/Infrastructure"
+    },
+    {
+      "rank": 17,
+      "id": 50096110,
+      "title_en": "SIGSALY: Churchill's top secret hotline to the president",
+      "title_ja": "SIGSALY: チャーチルの大統領への極秘ホットライン",
+      "url": "https://www.iwm.org.uk/history/iwm/cwr/telephone",
+      "hn_url": "https://news.ycombinator.com/item?id=50096110",
+      "score": 103,
+      "comment_count": 31,
+      "posted_at": "2026-10-14T22:07:47+00:00",
+      "comments": [
+        {
+          "id": 50143612,
+          "author": "Merrill",
+          "text": "A 1983 review of this remarkable system for the Institute of Electrical and Electronic Engineers (IEEE) attributes no fewer than eight \"firsts\" to SIGSALY. They are as follows: 1) The first realization of enciphered telephony 2) The first quantized speech transmission 3) The first transmission of speech by Pulse Code Modulation (PCM) 4) The first use of companded PCM 5) The first examples of multilevel Frequency Shift Keying (FSK) 6) The first useful realization of speech bandwidth compression 7) The first use of FSK - FDM (Frequency Shift Keying-Frequency Division Multiplex) as a viable transmission method over a fading medium 8) The first use of a multilevel \"eye pattern\" to adjust the sampling intervals (a new, and important, instrumentation technique) From https://www.jproc.ca/crypto/sigsaly1.html I think that the relevant patents remained classified until 1975."
+        },
+        {
+          "id": 50145375,
+          "author": "Animats",
+          "text": "Here's the technical description, from NSA.[1] It was really an awful kludge. Today, you'd think, digitize audio into a bit stream, encrypt bitstream. That's not how it worked. It was somewhat similar to the older A-3 analog scrambler, which split up audio into a number of bands and rearranged them, changing the rearrangement occasionally. In SIGSALY, incoming audio was filtered out into 10 frequency bands. There was also a dominant pitch detector and a \"hiss\" detector for unvoiced content. That created 12 analog signals to encrypt. Those signals were much lower bandwidth than the original speech. The patent seems to indicate that the frequency band signals were merely encoded as above or below a threshold. Not a full A/D, just a 1-bit threshold. As late as 1973, people were still trying vocoder-like technologies, but it became easier to work on audio in the digital domain and that died out.[2] The keying system changed the key every 20ms. It's not clear from the description whether the digitization of the 12 signals was also one sample for 20ms, but it probably was. If you used the same key bits for more than one analog sample, that would create a vulnerability. It's a one time key system, and those only work against serious opposition if the key is only used once. See VENONA. The articles indicate that synchronizing the key stream, which was on phonograph records, was a huge synchronization headache. Keeping signals in sync was really hard, and was part of the curse of analog TV, with horizontal and vertical hold controls. What this looks like is a system which had to work regardless of cost. So it was put together out of known building blocks. Straight digitization of audio was probably considered, especially since Alec Reeves, who had demoed pulse code modulation in 1937, was involved. But it was a high-risk technology. They would have had to invent a good A/D converter and a decent modem, which would have added technical risk to the project. It's one of those systems of historical interest because it was too soon. You couldn't really do the job in the straightforward way, but it needed to be done, resulting in a magnificent kludge. [1] https://www.nsa.gov/portals/75/documents/about/cryptologic-h... [2] https://www.youtube.com/watch?v=UfpUexWJqb4"
+        },
+        {
+          "id": 50145159,
+          "author": "NitpickLawyer",
+          "text": "> a pair of vinyl phonograph records, each containing identical-but-random noise. > These were the (single-use) keys to the encryption and decryption process. > Then they set their identical records spinning at the exact same moment. On each end, the voices of these two world leaders are threaded through the SIGSALY terminal, mixed with a layer of noise, sent across the ocean via shortwave radio, then re-synthesized in a reverse process. > Anyone attempting to listen in on the calls would just hear a buzzing sound, which is how the system earned one of its nicknames: “The Green Hornet,” > At the end of each conversation, the records were destroyed to protect against potential future decryption. I wonder if with todays tech we could decrypt this. This sounds really close to a one-time pad (if the conversation was kept shorter than each record) so .. probably not? Unless their random noise wasn't as random, or if the mixing of random + voice would leave other tell-tale signs?"
+        },
+        {
+          "id": 50144947,
+          "author": "saghm",
+          "text": "> Each terminal cost $1 million (at 1943 values) and weighed more than 50,000 kg (50 tonnes). The first one was housed in the Pentagon, with an extension to the White House. A further 11 terminals were installed at different sites around the world, including one in the sub-sub-basement of Selfridges department store in central London I've learned that I tend to underestimate how large inflation is for historical values, so I looked this up. $1 million in 1943 is apparently just under $19.5 billion today, which means the full set cost $234 billion. I'm not sure if the US foot the bill for all of them or not, but to make it more concrete, 44 of these would have cost more than entire budget for the Department of Defense for this year."
+        },
+        {
+          "id": 50143998,
+          "author": "ahmedfromtunis",
+          "text": "I know this is a bit offtopic, but shouldn't the title say \"the President of the United States,\" since 1) Churchill is UK's Prime Minister, and Roosevelt is not his President and 2) the publication on which this article appears is from the UK?"
+        }
+      ],
+      "summary_ja": "主な議論点は、SIGSALYが持つ技術的「最初の実現」のリストと、それを実装した際の巨大なコストおよび同期の困難さであった。一部の参加者は、初のPCM音声伝送やコンパンドPCM、周波数シフトキーイングなどの先駆的成果を称賛し、戦時下での緊急必要性から生まれた「偉大なクラッジ」と評価した。一方で、同期のためにレコードを同じ瞬間に回転させる必要があることや、10バンド＋ピッチ・ヒス検出器によるアナログ信号の扱いが脆弱で、実際には一時パッドに近いが鍵の純粋なランダム性に疑問が残ると指摘する意見もあり、今日でも解読可能かどうかで意見が分かれた。また、端末1台あたり100万ドル（現在価値で約195億円）という費用と、総額が当時の国防予算を超える規模に驚きの声が上がった。注目されたコメントとして、タイトルが「President」ではなく「the President of the United States」であるべきだと指摘し、記事の出所が英国であることとの矛盾を挙げた点が挙げられた。全体として、技術的革新と実際的運用のギャップが議論の中心となった。",
+      "editor_note": "SIGSALYはチャーチルとルーズベルトの極秘音声通信システムで、量子暗号以前の音声保護技術を示し、日本の防衛関連スタートアップが同様の低遅延暗号通信を研究する契機となっている。",
+      "category": "Security"
+    },
+    {
+      "rank": 18,
+      "id": 50140769,
+      "title_en": "Show HN: The Zelda timeline to catch up before the Ocarina of Time remake",
+      "title_ja": "Show HN: オカリナ オブ タイム リメイク前に追いつくゼルダのタイムライン",
+      "url": "https://legendofhyrule.com/",
+      "hn_url": "https://news.ycombinator.com/item?id=50140769",
+      "score": 156,
+      "comment_count": 92,
+      "posted_at": "2026-10-18T13:06:54+00:00",
+      "comments": [
+        {
+          "id": 50144006,
+          "author": "somat",
+          "text": "I don't consider it to be one unified story at all, I mean some of the series obviously are connected, but the rest are, as the name suggests, legends about Zelda. Unconnected unreliable narrations about some sort of heroic past events. Everybody agrees about the characters involved but as to what exactly happened, that is lost to time. So each culture is now telling the story a different way, emphasizing whatever is important to them. I consider as a sort of modern equivalent to the coyote stories. or Paul Bunyan, Finn McCool, Gilgamesh, Or really, any legendary heroic epic passed along by oral storytelling. So it is fun to try to fit it into some sort of unified timeline. But I don't think it is, that is not how they were actually written and we would loose most of the interesting storytelling flexibility if that is how they write them in the future."
+        },
+        {
+          "id": 50143038,
+          "author": "ranger207",
+          "text": "I don't think most Japanese media is as concerned with fitting things into a canon as much as American media is. Like, in Gundam, you have 0079, Thunderbolt, and Origin all allegedly in the UC canon, but there's pretty significant deviations in Thunderbolt and Origin from 0079 so they're not really the same timelines. American comics will also have multiple timelines or universes, but they'll make it clear which one each individual series goes with, and have crossover events explicitly acknowledging the existence of the different canons. Japanese media doesn't tend to do that, and I think trying to fit it into a coherent timeline is a fool's errand"
+        },
+        {
+          "id": 50143851,
+          "author": "collinmcnulty",
+          "text": "I do not want to rain on your parade, but I find attempts to impose a coherent timeline on Zelda miss the opportunity to engage with it as a legend , a story told over and over with certain essential parts but many changing interpretations. How our very familiarity with the story creates the opportunity for surprise. There are so many fictional worlds with sprawling lore, and so few that engage with the retelling of stories and myths like Zelda does."
+        },
+        {
+          "id": 50141829,
+          "author": "hyperhello",
+          "text": "What’s the word for trying to do cluster analysis on what is actually randomly distributed data? The games do have obvious similarities and sometimes refer to each other, but they’re independent events."
+        },
+        {
+          "id": 50144866,
+          "author": "prophesi",
+          "text": "Love the site, though I'll always prefer this attempt at explaining the Zelda timeline by Brian David Gilbert https://www.youtube.com/watch?v=Q-25c8Rsobw"
+        }
+      ],
+      "summary_ja": "主な議論点は、『ゼルダの伝説』シリーズが統一されたタイムラインとして捉えるべきか、それとも各作品が伝説や神話のように独立した語り直しであるべきかという点だ。コメントでは、作品間には共通の要素があるものの、全体を一つの歴史に組み込むのは無理だと主張する意見が多く、アメリカンコミックやガンダムのように明確なカノンを示すのとは異なり、日本のメディアでは伝説的な解釈が重視されているという指摘も見られた。賛否両論として、タイムラインを当てはめてパズルのように楽しむファンもいれば、そうすることで物語の柔軟性や驚きを失うと危惧する声があり、後者はゼルダをオーラル伝承のコヨーテ物語やギルガメッシュに例えて、伝説として楽しむべきだと主張した。注目されたコメントでは、Brian David Gilbertによるタイムライン解説動画へのリンクが共有され、「常に好みの説明」と評価される一方、「ランダムに散らばったデータにクラスター分析を適用しようとするようなもの」と皮肉ったコメントもあり、議論の多様性が示された。",
+      "editor_note": "ゼルダのタイムライン解説は、オカリナオブタイムリメイク前にストーリー整理を助けるファンコミュニティの努力を示し、日本のゲーム開発者がリメイク時の世界観整合性確保に参考としている。",
+      "category": "Other"
+    },
+    {
+      "rank": 19,
+      "id": 50142866,
+      "title_en": "Namecheap just seized and disabled all my domains",
+      "title_ja": "Namecheap が私のすべてのドメインを差し押さえて無効化した",
+      "url": "https://www.reddit.com/r/sysadmin/comments/1x8cycd/namecheap_just_seized_and_disabled_all_my_domains/",
+      "hn_url": "https://news.ycombinator.com/item?id=50142866",
+      "score": 386,
+      "comment_count": 186,
+      "posted_at": "2026-10-18T16:56:56+00:00",
+      "comments": [
+        {
+          "id": 50144890,
+          "author": "opengrass",
+          "text": "Namecheap gave my account to an unverified third party https://news.ycombinator.com/item?id=49028037 Namecheap banned a few domain names purely based on an ambiguous tweet that got 6 likes https://x.com/Namecheap/status/1489485337885921284 Namecheap suspended Imgur in 2013 for 1 CSAM image out of millions https://news.ycombinator.com/item?id=5276648 Namecheap snipes your domains https://news.ycombinator.com/item?id=28732510"
+        },
+        {
+          "id": 50145128,
+          "author": "teddyh",
+          "text": "Like I have said previously¹ about choosing a registrar: If you have regular backups, and if some downtime is not really a problem, it might be fine to use web site hosting, e-mail (and in extreme cases even DNS hosting), from some fly-by-night el cheapo provider. But your domain name registrar? Pick them carefully, don’t skimp, and make sure they have good support. Because when things go pear-shaped, you really want to be able to actually talk to someone to change your web server or e-mail DNS records (or even DNS servers) to somewhere else. Big registrars can’t afford any support costs since they prefer to squeeze the price down as far as possible, and therefore they prefer to simply lose or outright drop any customer in case of any and all problems. Conversely, small registrars may charge more, but have better (i.e. actually existing, and sometimes even dedicated and personal) support for when things go wrong, and have a vested interest in keeping you as a customer. A small registrar might also be so small as to know you personally, which will help monumentally against any social engineering attacks. Full disclosure: I work at such a registrar, but you’re probably not in our target market. 1. < https://news.ycombinator.com/item?id=32095499 >"
+        },
+        {
+          "id": 50143705,
+          "author": "sourcecodeplz",
+          "text": "namecheap purchased by private equity CVC in 2025 for $1.5B so costs need to go down (-human support + ai automation) and prices go up (they increased i think .com 3 times this year alone)"
+        },
+        {
+          "id": 50146243,
+          "author": "nikolay",
+          "text": "Namecheap is the worst! Our CTO left and our account was tied to his phone. Our CEO didn't want to talk to him, so, over chat, I made them remove the phone 2FA. They didn't authenticate me in any way - only gave them a good story and our username. I know people trash talk GoDaddy, but I've been the most happiest with them - they have support, if you have lots of domains, they assign to your an account exec that can do stuff for you. I've dealt with literally all registrars as I own thousands of domains. Nobody else comes close to GoDaddy - they have APIs, they have support, they listen. Plus, they are big and you can sue them - try suing company abroad if they mess up! As far as I recall, Namecheap was based in Eastern Europe - as an Eastern European, I can tell you that I would never put anything important in an Eastern European company! Their new Spaceship offshoot is lipstick on a pig, literally. Cloudflare is also not a good choice - you have no support! Porkbun may seem cool, but I'm not impressed as they lack some basic features such as profiles, let's say."
+        },
+        {
+          "id": 50143682,
+          "author": "ericholscher",
+          "text": "Yea they did something like this with us. Fully turned off our business domain because we didn’t reply to a phishing email in 48 hours. We migrated out the next day once we got it resolved. It took over 6 hours from when we noticed the issue and responded until they turned it back on. Absolutely horrible service."
+        }
+      ],
+      "summary_ja": "主な議論点は、Namecheapが第三者にアカウントを渡した事例、曖昧なツイート（いいね6件）だけでドメインを停止したこと、過去のImgur停止（CSAM画像1件）やドメイン横取りの噂、そして最近のCVCによる買収とサポート削減・値上げの影響。賛否は、サポートが欠如しセキュリティリスクが高いと批判する声と、バックアップ取っていれば問題少ないという意見、あるいは大手 registrar（GoDaddy）のサポート体制や訴訟可能性を挙げて肯定的に評価する声に分かれた。注目コメントとして、個人レベルのサポートが得られる小規模レジストラを推す意見や、GoDaddyのアカウントエージェント制度を称賛し、東欧系企業への不信感を示す発言が挙げられる。",
+      "editor_note": "Namecheapによるドメイン没収は、レジストラの一方的な権限行使がもたらすリスクを浮き彫りにし、日本の中小企業がドメイン管理のマルチプロバイダー戦略を見直すきっかけとなっている。",
+      "category": "Security"
+    },
+    {
+      "rank": 20,
+      "id": 50131053,
+      "title_en": "Developing for Debugging (2025)",
+      "title_ja": "デバッグのための開発 (2025)",
+      "url": "https://www.davepacheco.net/blog/2025/developing-for-debugging-dns-propagation/",
+      "hn_url": "https://news.ycombinator.com/item?id=50131053",
+      "score": 24,
+      "comment_count": 0,
+      "posted_at": "2026-10-17T13:34:43+00:00",
+      "comments": [],
+      "summary_ja": "",
+      "editor_note": "2025年の「デバッグのための開発」は、観測性とテスト性を最初から設計に組み込むプラクティスを提唱し、日本のDevOpsチームがシャフト左シフトを推進する際の指針として注目されている。",
+      "category": "DevOps"
+    },
+    {
+      "rank": 21,
+      "id": 50118165,
+      "title_en": "\"I'm on a war footing\": Terry Tao and the crisis in math",
+      "title_ja": "「戦争状態にある」: テリー・タオと数学の危機",
+      "url": "https://www.nytimes.com/2026/10/16/us/math-ai-terence-tao.html",
+      "hn_url": "https://news.ycombinator.com/item?id=50118165",
+      "score": 59,
+      "comment_count": 83,
+      "posted_at": "2026-10-16T13:30:20+00:00",
+      "comments": [
+        {
+          "id": 50145873,
+          "author": "throwyawayyyy",
+          "text": "Has OpenAI shared any new interesting _problems_? I.e. do more than strip-mine mathematics, as said in the article, but said: \"Here is a question I cannot answer, it's interesting for this and that reason, I believe it's true for this and that reason, it's beyond me though, have at it.\" Has that happened yet?"
+        },
+        {
+          "id": 50146664,
+          "author": "pupppet",
+          "text": "Anyone without a big C in their job title will be on war footing soon enough."
+        },
+        {
+          "id": 50145651,
+          "author": "bagacrap",
+          "text": "https://archive.li/0LTWn"
+        },
+        {
+          "id": 50146074,
+          "author": "0x20cowboy",
+          "text": "“They took’er jobs!” Funny when it’s someone else eh? Just learn a new trade Terry. (I am kidding if it wasn't obvious)"
+        },
+        {
+          "id": 50146699,
+          "author": "pylua",
+          "text": "I know he says he’s ant talk a human about the proof, but why can’t he talk to ChatGPT? Is the cost prohibitive , or a proprietary model?"
+        }
+      ],
+      "summary_ja": "主な議論点は、AI（特に大規模言語モデル）が数学に与える影響で、『問題を掘り出すだけ』ではなく、新たな未解決問題を提示できるかという点、そして数学者の職業的危機感や『war footing』状態への懸念だった。賛否は、AIを脅威と見なし職を奪われると危惧する意見と、AIを補助ツールとして活用すべきだと前向きに捉える意見に分かれた。注目すべきコメントとして、OpenAIが本当に興味深い未解決問題を共有しているかを問う指摘や、ChatGPTと対話できるか、コストや proprietary モデルの壁があるのかという疑問が挙げられた。",
+      "editor_note": "テリー・タオの「戦争状態にある」発言は、数学分野の資金・人材不足と解の複雑化を危機感で表し、日本の基礎研究支援策の見直し議論に影響を与えている。",
+      "category": "Career/Work"
+    },
+    {
+      "rank": 22,
+      "id": 50140001,
+      "title_en": "Open MicroManipulator – A sub-micrometer 3D motion control plattform",
+      "title_ja": "Open MicroManipulator – サブマイクロメートルの3D運動制御プラットフォーム",
+      "url": "https://github.com/0x23/MicroManipulatorStepper",
+      "hn_url": "https://news.ycombinator.com/item?id=50140001",
+      "score": 170,
+      "comment_count": 13,
+      "posted_at": "2026-10-18T11:16:22+00:00",
+      "comments": [
+        {
+          "id": 50141054,
+          "author": "RobotToaster",
+          "text": "Reprap micron is doing something similar https://github.com/VikOlliver/RepRapMicron"
+        },
+        {
+          "id": 50140419,
+          "author": "option_greek",
+          "text": "This guy is a legend. His whole series on building this along with other videos is worth watching on YouTube. It amazes me how some random guy simply drops a sub um manipulator diy on YouTube and disappears into the ether. No promotions nothing."
+        },
+        {
+          "id": 50143791,
+          "author": "alted",
+          "text": "It's also possible to DIY piezoelectric stick-slip actuators with potentially sub-nanometer(!) resolution, albeit at greater expense (~$1k) [1]. [1] \"Low-cost, open-source XYZ nanopositioner for high-precision analytical applications\", https://doi.org/10.1016/j.ohx.2022.e00317"
+        },
+        {
+          "id": 50145023,
+          "author": "groos",
+          "text": "They also have a manual, non motorized version. I am building this currently for eventual use, with modifications, in a point diffraction interferometer. https://youtu.be/-mgqq0qdDRM?is=nFvtZprNsjMn3D_B"
+        },
+        {
+          "id": 50145439,
+          "author": "dubbie99",
+          "text": "Wow strange to see this on here. I just spent the weekend working on my build of this."
+        }
+      ],
+      "summary_ja": "主な議論点は、オープンソースのサブマイクロメートル3D運動制御プラットフォーム（Open MicroManipulator）のDIY実装と、それと類似したプロジェクト（Reprap Micron）や代替手段（ピエゾスティックスリップアクチュエータ、手動非モーターバージョン）への言及である。コミュニティでは、製作者への称賛（「レジェンド」「YouTubeシリーズが見る価値あり」）と、高解像度ピエゾアクチュエータのコスト（約1,000ドル）や複雑さへの注意が分かれていた。また、手動版を点干渉計に応用しようとしているビルド報告や、週末に自作に取り組んだという個人的な体験談が共有された。特に洞察に満ちたコメントとして、ピエゾスティックスリップアクチュエータの可能性と費用対効果を示したリンク付きの指摘が注目された。",
+      "editor_note": "Open MicroManipulatorはサブマイクロメートルの3D運動制御プラットフォームで、半導体やバイオ実験のナノスケール操作を可能にし、日本の精密機器メーカーが同様の技術導入を検討している。",
+      "category": "OSS"
+    },
+    {
+      "rank": 23,
+      "id": 50093020,
+      "title_en": "I electrified my push scooter with a power drill",
+      "title_ja": "電動ドリルでプッシュスクーターを電化した",
+      "url": "https://eddieabbondanz.io/post/shop/drill-powered-scooter/",
+      "hn_url": "https://news.ycombinator.com/item?id=50093020",
+      "score": 117,
+      "comment_count": 47,
+      "posted_at": "2026-10-14T18:53:52+00:00",
+      "comments": [
+        {
+          "id": 50143674,
+          "author": "robgough",
+          "text": "My first thought after reading this title: Oh cool, they've taken part in a drill and used the motor. I don't really know what that looks like inside a power drill. This will be an interesting post. Immediately opened it and laughed out loud. Perfect execution, no notes."
+        },
+        {
+          "id": 50145807,
+          "author": "kleiba2",
+          "text": "That's all nice and well -- but Matthias Wandel built a wooden scaffolding on wheels 12 years ago that was drill powered. That's _really_ crazy... https://www.youtube.com/watch?v=rBmnQN78aZU"
+        },
+        {
+          "id": 50146475,
+          "author": "burnt_toast",
+          "text": "Hey all, author here. I had no idea this hit hackernews until my website traffic spiked. Happy to answer any questions. The scooter is still holding strong."
+        },
+        {
+          "id": 50146408,
+          "author": "buildsjets",
+          "text": "OK, but here's a Lada in Russia powered by fifty cordless power drills. https://www.youtube.com/watch?v=sv8Q4bDl6lo"
+        },
+        {
+          "id": 50144570,
+          "author": "Doohickey-d",
+          "text": "I do wonder how long the electronics, motor and little (plastic) gears in the drill would last with this. Especially since I'd suspect that it's designed for intermittent use, where it has time to cool down between each screw / hole drilling that you'd do normally. If you drive 2 miles in one go, that'll be a lot of heat that doesn't have time go anywhere. Somehow I'd suspect that it won't last all that long..."
+        }
+      ],
+      "summary_ja": "主な議論点は、電動ドリルを動力源にしたキックボードの改造がいかに斬新かつ楽しいかという点。多くのコメントが「面白い」「完璧な実装」と称賛する一方で、ドリルは短時間の間欠使用を想定した設計のため、連続走行による熱蓄積やプラスチックギアの摩耗で寿命が短くなるという懸念が示された。さらに、過去に同様のドリル駆動作品（Matthias Wandelの木製足場やロシアの50台ドリルで走るLada）が挙げられ、novelty の程度について意見が分かれた。著者自身が登場し、現在もスクーターは問題なく走行できると報告し、質問を受け付ける姿勢を見せた。特に注目されたのは、熱と摩耗の問題を具体的に挙げ、「2マイル連続走行ではすぐに故障する」と予測したコメントで、実用性への技術的洞察が評価された。",
+      "editor_note": "電動ドリルでプッシュスクーターを電化したDIYは、低コストでのマイクロモビリティ化を示し、日本の都市部でのラストマイルソリューション探求にヒントを与えている。",
+      "category": "Other"
+    },
+    {
+      "rank": 24,
+      "id": 50137620,
+      "title_en": "The Elizabeth Holmes documentary “You Can See Everything” is deceiving",
+      "title_ja": "エリザベス・ホルムズのドキュメンタリー「You Can See Everything」は欺くものだ",
+      "url": "https://www.readtheprofile.com/p/elizabeth-holmes-documentary-you-can-see-everything",
+      "hn_url": "https://news.ycombinator.com/item?id=50137620",
+      "score": 355,
+      "comment_count": 499,
+      "posted_at": "2026-10-18T03:19:49+00:00",
+      "comments": [
+        {
+          "id": 50144468,
+          "author": "antasvara",
+          "text": "Nathan Fielder is pretty well-known for his work in The Rehearsal and Nathan for You. Nathan for You resides in the docu-comedy genre, where you take advantage of real people's reactions to absurd situations for comedic effect. Other examples are things like Kitchen Nightmares (where Gordon Ramsey goes into real restaurants and \"fixes\" them). It's a well-done version of the idea, but not revolutionary IMO. The Rehearsal, however, extends the idea further. In that show, he helps real people \"rehearse\" for hard conversations. It involves Fielder building extravagant sets and having absurdly detailed set-ups with multiple actors, then running the conversation multiple times. What makes this \"different\" is that now the real person is partially in on it? Like, they know that they're on a set. They know that this is a simulation. So the show is more \"meta\" than previous entries in the genre, opening up other avenues for humour. I say this because You Can See Everything is best understood as a further extension of those projects. Even the name indicates this, because by nature of a documentary, you can't see everything. You have a real person in Elizabeth Holmes, being interviewed by a person in Fielder that's known for his stunts taking advantage of \"real people,\" where he watches fictionalized versions of Holmes with Holmes herself? Viewed in light of his previous projects, this feels like an extension of them. But even with that, I think the setup does allow you to see something real in Holmes. She also knows how people \"want\" to see her! So there's also a sort of meta-narrative there too, where you know Holmes is on her best behavior to try and dispel the narrative from those fictionalized TV characterizations. The fact that she comes off poorly in the documentary says something, even accounting for the fact that Fielder is trying to sell a narrative. It's a real mind game, but I think it's representative of Holmes because of that. She is going to jail for a fraud that amounts to a similar sort of mind game, she agrees to a documentary to show herself differently, but that documentary is also a mind game. Wild stuff."
+        },
+        {
+          "id": 50138157,
+          "author": "jdorfman",
+          "text": "No one including my wife was interested in seeing it so I went by myself. It was long, but interesting. The author hits the nail on the head: “You sit there believing you’re watching a documentary about a woman who deceived the world, only to discover that you’re also watching a demonstration of how easy it is to deceive you.” I couldn’t agree more."
+        },
+        {
+          "id": 50138121,
+          "author": "nanolith",
+          "text": "I saw the movie Friday night. It is a mind job. You'll walk away with more questions than answers. Without spoiling the movie, it's possible for people to be multiple things at once. That doesn't excuse what Elizabeth Holmes did or explain what others in her circle may be guilty of. The movie is a wild ride."
+        },
+        {
+          "id": 50141538,
+          "author": "keiferski",
+          "text": "I haven’t seen the Holmes movie, but this article reminded me of Orson Welles’ F for Fake. An amazing movie that plays with some similar ideas in a pseudo-documentary format. https://en.wikipedia.org/wiki/F_for_Fake I highly recommend it!"
+        },
+        {
+          "id": 50140687,
+          "author": "zug_zug",
+          "text": "It's a worthy movie, plays with form, true to Fielder's style. However I strongly disagree with the author of this post. The one thing it does wrong is under-emphasizes how much hard evidence there is the Holmes personally did serious crimes: 1. Concealed use of competitor's machines since she knew there machines weren't capable. 2. Fabricated military contracts and endorsements. 3. Knowingly presented widely inflated revenue projections to investors. 4. Explicitly admitted in court to forging reports using the letterhead and logos of major pharmaceutical companies without their permission 5. There's text messages, internal emails, and firsthand whistleblower testimony—proving that Elizabeth Holmes and her chief operating officer, Sunny Balwani, orchestrated a ruthless campaign to silence anyone who tried to expose the fraud. If anything the movie tries to let Holmes dupe you into forgetting this. Frankly the fact that SHE invited NATHAN to film this makes me think she was trying to use her baby as a way to garner sympathy and whitewash her life (presumably not really understanding his work)."
+        }
+      ],
+      "summary_ja": "主な議論点は、Nathan Fielderが手掛けたドキュメンタリー『You Can See Everything』が、単なる詐欺の記録ではなく、見る側自身をだますメタ構造になっているかという点だった。コメントでは、Fielderの以前の作品（The Rehearsal、Nathan for You）との連続性を指摘し、ドキュメンタリー形式を利用した「自分がだまされている」体験が面白いと肯定的に評価する声が多かった。一方、賛否が分かれたのは、映画がホルムズの実際の犯罪行為を十分に強調していないかという点。一部は、証拠や裁判での自白など具体的な不正行為が軽視されていると批判し、ホルムズが同情を誘うために自ら参加したと見なす意見もあった。注目すべきコメントとして、映画をオーソン・ウェルズの『F for Fake』に例え、詐欺とメタフィクションの関係を深く考察したもの、そしてホルムズの具体的な不正行為を箇条書きで挙げて映画の姿勢を否定したコメントが挙げられた。全体として、映画の形式的な工夫は称賛されたものの、その背後にある事実の重さを見失っていないかが議論の中心となった。",
+      "editor_note": "エリザベス・ホルムズのドキュメンタリー批判は、真実とエンターテイメントの境界を問い直すもので、日本のメディアスタートアップがドキュメンタリー制作におけるファクトチェック体制強化を議論している。",
+      "category": "Startup/Business"
+    },
+    {
+      "rank": 25,
+      "id": 50144005,
+      "title_en": "Florida's HOAs and condo associations are making the housing crisis worse",
+      "title_ja": "フロリダのHOAとコンドミニアム協会が住宅危機を悪化させている",
+      "url": "https://hoaspy.com/hoa/fl/florida-hoa-housing-crisis.html",
+      "hn_url": "https://news.ycombinator.com/item?id=50144005",
+      "score": 153,
+      "comment_count": 263,
+      "posted_at": "2026-10-18T18:40:16+00:00",
+      "comments": [
+        {
+          "id": 50144283,
+          "author": "weberer",
+          "text": ">Is Florida the worst state for HOA foreclosures? >Florida ranks 1st of the states on HOA Spy for foreclosure suits brought by associations, with 10,296 of 14,168. The count depends on which courts are indexed in each state as well as on the associations, so it is a count of records, not a rate. Florida is known for having the strongest \"sunshine\" laws in the country, that make government records transparent. That makes this statistic pretty useless."
+        },
+        {
+          "id": 50144355,
+          "author": "firesteelrain",
+          "text": "This article slightly mixes condo and HOAs. HOAs are covered under 720 and it does not have the same rules (which are less stringent) than condo’s Condo rules are much stricter than HOAs State of Florida also puts caps on fines - the max is $100/day or $1000 for a single violation. But that’s after a period to cure and then due process meetings (made up of homeowners not board members) who may waive or not fine at all or defer. A homeowner can also fix the problem and later have the same problem again but not be fined if they fix in time. The foreclosures are for extreme cases and a lot of HOA attorney shops don’t charge a retainer but will tack on fees that are paid back to the HOA attorney and association. To get to that point takes a long time"
+        },
+        {
+          "id": 50144470,
+          "author": "jghn",
+          "text": "I would never buy a house that was part of a HOA. For people that like them, more power to ya. But I don't understand the people who complain, just don't buy into an HOA then?"
+        },
+        {
+          "id": 50144169,
+          "author": "pretzellogician",
+          "text": "I had the thankless task of being executor for my parents' estate. I distinctly remember the Florida HOA that made that so much worse. After expressing their utmost sympathies and saying they'd help any way they could, mere weeks later they put a legal \"estoppel\" on the sale of the house due to some overgrown vines(?), which of course, were never mentioned by anyone."
+        },
+        {
+          "id": 50144451,
+          "author": "CGMthrowaway",
+          "text": "People love to hate on HOAs but not all are bad, and in general they are a good example of self-governance, when the alternative is having people who DON'T live in your neighborhood regulate your neighborhood. Which would you prefer?"
+        }
+      ],
+      "summary_ja": "主な議論点: フロリダ州のHOA差し押さえ件数は全国第1位だが、サンシャイン法による記録公開のため実際の率とは異なり信頼しにくい。HOAはStatute 720で規制され、罰金は1日100ドル・1件1000ドルの上限、是正期間・住民構成の審査会を経るため執行は遅く、差し押さえは極例に限られる。弁護士が着手金を取らず後で費用を回収する仕組みも指摘された。  \n賛否両論: HOAに加入しないことを勧める意見と、葦の過生による売却阻止など個人的トラブルを挙げる批判がある一方、HOAは住民自治の良い例であり、外部よりマシだと擁護する声もあり、賛否が分かれた。  \n注目コメント: 遺産整理の経験者が語った「遺族に寄り添うフリをしてからすぐに法的阻止（estoppel）をかけ、過生した葦を理由に売却をブロックした」HOA事例は、手続きの形骸化と実際対応のギャップを如実に示し、多くの読者に共感を呼んだ。",
+      "editor_note": "フロリダのHOA・コンドミニアム協会が住宅危機を悪化させている事例は、集合規制が供給を阻害する仕組みを示し、日本のマンション管理組合が同様の規制緩和議論を促す比較材料となっている。",
+      "category": "Other"
+    },
+    {
+      "rank": 26,
+      "id": 50090927,
+      "title_en": "Types of types: Haskell's Kind system",
+      "title_ja": "型の型: HaskellのKindシステム",
+      "url": "https://thunk.blog/posts/types-of-types-haskell-kind-system/",
+      "hn_url": "https://news.ycombinator.com/item?id=50090927",
+      "score": 93,
+      "comment_count": 72,
+      "posted_at": "2026-10-14T17:00:31+00:00",
+      "comments": [
+        {
+          "id": 50135584,
+          "author": "adamddev1",
+          "text": "The more of Haskell's ideas that bleed into mainstream languages, the happier the world will become. It is just so beautiful how these higher abstractions can become so useful and powerful for tying all kinds of things together."
+        },
+        {
+          "id": 50135757,
+          "author": "i2talics",
+          "text": "I've long suspected that one of the things that makes monads notoriously difficult to explain to people outside of the Haskell ecosystem is that very few other languages even have a kind system that you are allowed to manipulate in code (and in some, like C++, it's so esoteric that you basically never see it). First explaining that you can even abstract over \"type->type\" kinded things gets you a lot of the way towards monads without actually describing monads."
+        },
+        {
+          "id": 50136451,
+          "author": "vatsachak",
+          "text": "One thing I've noticed since I've become an engineer who gets to design the architecture: No matter what I do, eventually algebraic structures like semi-groups and monads along with categorical structure like lenses and traversals keep popping up."
+        },
+        {
+          "id": 50137764,
+          "author": "childintime",
+          "text": "What is the article actually saying? It doesn't seem the author actually knows. It seems a tale about abstraction land, and how it never allows you to exit it again. How you pay taxes for every day spent in it, sold to you as a solution to a problem you didn't think you had. As any problem can be expressed in C, how would what the author did look like in C? KISS. Abstraction land clearly protects one from such vulgarities."
+        },
+        {
+          "id": 50136264,
+          "author": "cat-whisperer",
+          "text": "I really like the concept of dependent types, all type systems that I use rust or haskell have a very limited set of dependent types, but I do like the things that it let's you do"
+        }
+      ],
+      "summary_ja": "**主な議論点**  \n多くのコメントで取り上げられたのは、Haskell の kind システムが「型→型」レベルの抽象化を可能にし、それによってモナドやその他の代数構造を理解しやすくなるという点である。記事が kind システムをどのように説明しているか、そしてそれが実際にプログラミングに役立つかが議論の中心だった。\n\n**賛否両論**  \n賛成側は、kind システムを expose する言語（例えば Haskell や一部の拡張された Rust）は、高階抽象を自然に扱えるため、モナドやレンズなどの概念が直感的になるとしている。反対側は、記事が抽象的すぎて具体的なコード例が欠如しており、「抽象の土地」に閉じ込められているように感じられ、実際には C でも同じことをできるという KISS 原則に反すると指摘している。\n\n**注目コメント**  \n「依存型については、Rust や Haskell でも限られた形しか使えないが、それによってできること（例えば型レベルでの証明や不変量の保証）は非常に好きだ」という意見が特に洞察に富んでおり、kind システムと依存型の関連性についての考えを示していた。また、「モナドを説明する際の最初のハードルは『型→型』を抽象化できることを示すことだ」という指摘も、議論の要点としてよく挙げられていた。",
+      "editor_note": "HaskellのKindシステムは、型の型を扱う高度な抽象で、型安全なDSLやエフェクトシステム設計に不可欠であり、日本の関数型コミュニティが実務での活用事例を共有している。",
+      "category": "Programming Languages"
+    },
+    {
+      "rank": 27,
+      "id": 50139067,
+      "title_en": "Parser Combinators",
+      "title_ja": "パーサーコンビネータ",
+      "url": "https://t3.at/blog/2026-10-17-parser-combinators/",
+      "hn_url": "https://news.ycombinator.com/item?id=50139067",
+      "score": 219,
+      "comment_count": 77,
+      "posted_at": "2026-10-18T08:19:53+00:00",
+      "comments": [
+        {
+          "id": 50141554,
+          "author": "BoppreH",
+          "text": "If you're on Python and your problem is too big for a single regex, but too small for a full-blown parser like in the article, I can recommend the built-in re.Scanner[0]. It's a regex-based tokenizer[1] (so no recursive parsing) in the `re` module, that for reasons is completely missing from any official documentation. You give it a pattern for each token type, and a function to process each match, and you get back a list of processed tokens. Importantly, it processes the list in one pass and ensures the matches are contiguous, where a naive `re.findall` with capture groups will ignore unmatched characters. You also get a reference to the running scanner, so you can record the location of the match for reporting errors. import re # Initialize the scanner. scanner = re.Scanner([ (r\"\\d+\", lambda scanner, token: ('COUNT', int(token))), (r\"\\w+\", lambda scanner, token: ('ANIMAL', token.removesuffix('s'))), (r\"[,. ]\", None), # None -> skip token. ]) # Scan a sample string. results, remainder = scanner.scan(\"45 pigeons, 23 cows, 11 spiders.\") # Ensure we parsed the whole thing. assert not remainder print(results) # [('COUNT', 45), # ('ANIMAL', 'pigeon'), # ('COUNT', 23), # ('ANIMAL', 'cow'), # ('COUNT', 11), # ('ANIMAL', 'spider')] [0]: https://stackoverflow.com/a/693818/252218 [1]: https://en.wikipedia.org/wiki/Lexical_analysis#Tokenization"
+        },
+        {
+          "id": 50140707,
+          "author": "ArneCode",
+          "text": "I really like the animations, makes it intuitive to understand what is happening! One disadvantage that I think parser combinators have, for example compared to parser generator libraries (where the parser is generated from a seperate grammar file), is that you have to add a lot of mapping / unwrapping code. In my opinion this makes the parsers harder to read. As an attempt to improve this, I have been working on a parser combinator library in rust. It adds two extra combinators (capture and bind) which can store the results of parsers in buckets (bind) and use the values stored in these buckets later to construct results (capture). This allows you to eliminate the unwrapping / mapping code and seperate the grammar from the result contstruction. If you have the time, I would really appreciate feedback on this! You can find it here: https://github.com/ArneCode/marser"
+        },
+        {
+          "id": 50139981,
+          "author": "marginalia_nu",
+          "text": "I don't understand why this can't be on a single page. Makes it really hard to refer back to earlier \"chapters\" as you get new information when it's a slideshow. Can't search either. Seems like we're needlessly reintroducing limitations from the paper medium that don't exist in digital media for weird aesthetic reasons?"
+        },
+        {
+          "id": 50140446,
+          "author": "akst",
+          "text": "I think this is really cool website and love this topic But I think you might want to test this page on smaller screens, just very limited screen real estate for the content of interest, the top right half lots of padding, the scrollable content basically has 1/3 of the available screen space, the left hand side kind of has another 1/3 Look your website your vision, I get it and I respect your trying something different with the UI but if your goal here is to communicate your ideas, as a reader I'd appreciate having more screen space for the content, when I clicked on the link to see this specific post I'm just not interested in your other posts (or at least until I've read the one I went out of my way to read). FWIW, I'm using a macbook air right now."
+        },
+        {
+          "id": 50139909,
+          "author": "justinnk",
+          "text": "Very cool visual guide! I feel it is appropriate here to recite this little poem about parsers by Fritz Ruehr that stuck with me since my first semester of CS. With this, you will never forget the type signature of a parser. „A Parser for Things is a function from Strings to Lists of Pairs of Things and Strings!“ https://people.willamette.edu/~fruehr/haskell/seuss.html"
+        }
+      ],
+      "summary_ja": "・主な議論点：パーサーコンビネータの実用性について、正規表現だけでは処理しきれないがフルパーサーまでは必要ないケースでの代替手段として Python の re.Scanner や Rust の独自ライブラリが挙げられた点が中心だった。  \n・賛否両論：賛成側はアニメーションや視覚的説明が直感的で学びやすいと称賛し、特に Fritz Ruehr の詩を引用して感動した声が多かった。否定的・懐疑的側は、コンビネータではラップ/アンラップのコードが増えて可読性が低下すると指摘し、その結果を分離するための capture/bind などの拡張を試みた実装へのフィードバックを求めた。  \n・注目コメント：UI に関する指摘が目立ち、「スライドショー形式では前の章に戻りにくく、検索もできない」という不満と、画面左・右の余白が大きく実際のコンテンツ領域が狭いという指摘が特に洞察に満ちていた。また、re.Scanner の非公式ながら強力なトークナイザーとしての活用法を示したコード例も注目された。",
+      "editor_note": "パーサーコンビネータは、小さなパーサを組み合わせて複雑な文法を構築する手法で、日本のDSL開発や設定ファイルパーサーの可読性向上に広く利用されている実践的技法である。",
+      "category": "Programming Languages"
+    },
+    {
+      "rank": 28,
+      "id": 50136017,
+      "title_en": "Beyond Tetris: The other games of Alexey Pajitnov [video]",
+      "title_ja": "テトリスを超えて: アレクセイ・パジトノフのその他のゲーム[ビデオ]",
+      "url": "https://www.youtube.com/watch?v=QH_LPimUJMs",
+      "hn_url": "https://news.ycombinator.com/item?id=50136017",
+      "score": 53,
+      "comment_count": 3,
+      "posted_at": "2026-10-17T23:08:30+00:00",
+      "comments": [
+        {
+          "id": 50146772,
+          "author": "skulk",
+          "text": "[delayed]"
+        },
+        {
+          "id": 50146159,
+          "author": "RomanPushkin",
+          "text": "I don't wanna be a jerk, but it's another proof that Tetris success was accidental. All other games are beyond suboptimal. Also interesting how one random success could define a man's future, career, happiness, money, etc."
+        },
+        {
+          "id": 50146261,
+          "author": "3form",
+          "text": "Honestly, the biggest discovery to me is that the game was created later than I expected. 1984 in the video title would put it in the same year as Duck Hunt; Wikipedia seems to suggest 1985 was the actual year it was published, which is the same year as Super Mario Bros (which itself came few years after Donkey Kong)."
+        }
+      ],
+      "summary_ja": "主な議論点は、テトリスの成功が偶然であったという指摘と、実際の発売年に関する混乱です。最初のコメントでは、テトリス以外のパジットノフのゲームは「suboptimal」であり、ヒット作が彼の人生・キャリア・幸運を大きく左右した「ランダムな成功」の例だと主張しています。二番目のコメントでは、動画のタイトルにある1984年よりも実際の出版は1985年だとウィキペディアが示しており、これがダックハントや同年のスーパーマリオブラザーズと同時期であることに驚きを示しています。意見の分かれ目は特に見られず、両者ともテトリスの異例な成功を前提に議論しています。特に注目されたのは、最初のコメントでの「ランダムな成功が一人の未来を決定づける」という洞察で、ゲーム史における偶然性の影響を改めて考えさせる点です。",
+      "editor_note": "アレクセイ・パジトノフのテトリス以外のゲーム紹介は、パズルデザイナーの思考過程を明らかにし、日本のインディーゲーム開発者が新しいメカニクス探求のインスピレーションとして参照している。",
+      "category": "Career/Work"
+    },
+    {
+      "rank": 29,
+      "id": 50137950,
+      "title_en": "Show HN: Sphinx – A hook that quizzes you on your AI's code before shipping",
+      "title_ja": "Show HN: Sphinx – 出荷前にAIのコードをクイズするフック",
+      "url": "https://sphinx-six-theta.vercel.app/",
+      "hn_url": "https://news.ycombinator.com/item?id=50137950",
+      "score": 239,
+      "comment_count": 81,
+      "posted_at": "2026-10-18T04:33:49+00:00",
+      "comments": [
+        {
+          "id": 50138690,
+          "author": "theParadox42",
+          "text": "I certainly feel like certain AI coding practices I have leave me with nothing learned in a frustrating way. Sometimes the most effective way to getting what I want is just describing a goal really clearly, and then bashing the AI until it gets there. That bashing process can take a lot of energy and yet I don’t gain useful skills or a “better way” that I would if I was still coding. I generate more training data for BigAI corp, but that’s a slow return cycle. Not sure if this is the right solution, but I would like to learn/understand/grow more as I pursue reckless efficiency."
+        },
+        {
+          "id": 50140483,
+          "author": "fwlr",
+          "text": "It’s a neat idea, i think it’ll really take off if you change “before pushing to prod” to “before requesting another human’s time or attention”. If something like this was gatekeeping the “submit PR” and “update PR” buttons it would prevent a lot of waste."
+        },
+        {
+          "id": 50140179,
+          "author": "pjmlp",
+          "text": "The gimmicks we come around to justify existing practices being pushed into the industry never stops surprising me. One would expect the actual answer would be to write the code ourselves."
+        },
+        {
+          "id": 50144026,
+          "author": "rDr4g0n",
+          "text": "my technique to get a similar benefit is to write a quality PR description. a good PR description should be compact and helpful. describing something complex in a compact and approachable way requires understanding. the process of writing the description often leads me to understand hidden decisions the LLM made and occasionally uncovers bugs. my PR descriptions separately answer the following questions: Why is this change being made? a sentence or two about the problem, objective, etc, and a link to more detail (tickets, docs, etc) if available What does this change accomplish? typically describes observable changes, requirements, etc. crucially this section avoids describing how the change is implemented. the act of separating what from how isn't new, but it's crucial in the LLM era How does this change accomplish its goal? the answer to this question is \"read the code\", but the job of a PR description is to provide a quick hand drawn map before dumping the reviewer into the jungle. drawing a good \"how\" map requires understanding the jungle and the new path through it. the risk with LLMs (or any outsource) doing the work is the loss of understanding. this exercise encourages understanding."
+        },
+        {
+          "id": 50145925,
+          "author": "jeffreysmith",
+          "text": "We built something quite similar 6 months ago called PEAK (Proof of Effort And Knowledge). Blog post and YT video here: https://substack.com/@jeffksmithjr/p-195763168 Our version has its own TUI and was intended for semi-adversarial scenarios like OSS contribution and enterprise. Thus a lot of anti-cheat tech under the covers (including invalid questions). My guess is that a lot of folks have built something in this vein. It really made sense earlier in the coding agents cycle. These days, I dunno. Seems like we need to more fundamentally rethink the relationship between coding agents and human understanding of the implementation."
+        }
+      ],
+      "summary_ja": "主な議論点は、AIが生成したコードをそのままマージする前に人間が理解しているかを確認する「Sphinx」のような仕組みの有用性だ。多くのコメント者は、AIに頼りすぎると自分のスキルが伸びず、単にBigAIの訓練データを増やすだけになると指摘し、学習の機会を失うリスクを懸念した。一方で、PRボタンや「もう一人の人間の注意を引く前」にクイズを挟むことで無駄なレビューを減らせるという賛成意見もあり、コードレビューの質を向上させるゲートとして機能すると評価された。  \n\n賛否の分かれ目は、クイズが学習促進になるか、あるいは単なる面倒な手続きになるかである。支持側は、質問を通じて実装の意図や設計判断を振り返る機会が得られると主張し、逆に批判側は、すでにPR説明書を丁寧に書くことで同様の理解を得られるとし、クイズは余計な負担だと考えた。  \n\n注目コメントとして、PR説明書を「なぜ」「何を」「どう」の３つの質問に分けて書く手法を紹介し、これがLLM時代の「何を実装したか」と「どのように実装したか」を分離する重要な練習だと指摘した意見が挙げられた。また、半年前に同様のアイデアを実装したPEAK（Proof of Effort And Knowledge）というツールが紹介され、不正防止のためのアンチチート機能が組み込まれていたことが言及された。これらの議論から、AIコード生成時代における人間の理解をどう保証・深めるかが核心であることが浮かび上がった。",
+      "editor_note": "SphinxはAIコード出荷前にクイズを仕掛けるフックで、生成コードの品質保証を開発者自身に促し、日本のMLOpsチームが同様のセルフチェックパイプラインを導入し始めている。",
+      "category": "DevOps"
+    },
+    {
+      "rank": 30,
+      "id": 50145295,
+      "title_en": "Netflix vmaf: Perceptual video quality assessment based on multi-method fusion",
+      "title_ja": "Netflix VMAF: マルチメソッド融合に基づく知覚的ビデオ品質評価",
+      "url": "https://github.com/Netflix/vmaf",
+      "hn_url": "https://news.ycombinator.com/item?id=50145295",
+      "score": 14,
+      "comment_count": 6,
+      "posted_at": "2026-10-18T20:43:40+00:00",
+      "comments": [
+        {
+          "id": 50146099,
+          "author": "djoldman",
+          "text": "Blog post about the latest version: https://netflixtechblog.com/vmaf-v1-good-is-not-good-enough-..."
+        },
+        {
+          "id": 50146265,
+          "author": "anematode",
+          "text": "VMAF is super cool, although not the end-all-be-all of video quality measurement for sure. I'm currently evaluating switching over to the new v1.0 models. The (unsolicited) slop PRs on that repository are a sight to behold, though. The same slopper posted an aggressive response to my PR: https://github.com/Netflix/vmaf/pull/1586"
+        },
+        {
+          "id": 50145721,
+          "author": "fishgoesblub",
+          "text": "I was hoping this would be a post announcing the death of VMAF from Netflix, alas."
+        }
+      ],
+      "summary_ja": "・主な議論点  \nVMAF（Video Multi‑Method Assessment Fusion）の最新バージョンv1.0への移行を検討しているが、リポジトリに寄せられる低品質なプルリクエスト（「slop PRs」）や、それに対する攻撃的な反応が問題視されている点が最も議論された。  \n\n・賛否両論  \n賛成側：VMAFは perceptual video quality の指標として非常に優れており、v1.0モデルへの切り替えは品質評価の精度向上に期待できる。  \n反対側：指標だけに頼りすぎるのは危険であり、コミュニティ内の無責任な contributions や議論の雑さがプロジェクトの信頼性を損なっていると指摘されている。  \n\n・注目コメント  \n「VMAFは素晴らしいが万能ではない。v1.0への移行を検討しているが、リポジトリの低品質PRとそれに対する攻撃的な反応が目に余る。まさかVMAFの死を告げる発表になるとは思わなかった。」というコメントは、ツールへの期待と同時にコミュニティの品質管理への不満を端的に表しており、議論の核心をついている。",
+      "editor_note": "Netflix VMAFはマルチメソッド融合による percepual video quality評価で、ストリーミング品質最適化の標準となり、日本の動画配信サービスが同様の指標を採用しエンコードチューニングに活用している。",
+      "category": "AI/ML"
+    }
+  ]
+}
