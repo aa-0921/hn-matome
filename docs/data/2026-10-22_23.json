@@ -1,0 +1,1044 @@
+{
+  "date": "2026-10-22T00:00:00+09:00",
+  "slot": "23",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 50180873,
+      "title_en": "PHP 8.2.35",
+      "title_ja": "PHP 8.2.35",
+      "url": "https://github.com/php/php-src/releases/tag/php-8.2.35",
+      "hn_url": "https://news.ycombinator.com/item?id=50180873",
+      "score": 820,
+      "comment_count": 467,
+      "posted_at": "2026-10-21T13:45:33+00:00",
+      "comments": [
+        {
+          "id": 50184925,
+          "author": "dang",
+          "text": "Related: Today's PHP security release, and how we're strengthening security - https://news.ycombinator.com/item?id=50182987 - Oct 2026 (114 comments) PHP2Shell: AI uncovers critical RCE in PHP - https://news.ycombinator.com/item?id=50180836 - Oct 2026 (146 comments) PHP session.upload_progress heap UAF (CVE-2026-109618 / -109619) - https://news.ycombinator.com/item?id=50176077 - Oct 2026 (61 comments) Security advisory: Critical remote code execution vulnerabilities, update now - https://news.ycombinator.com/item?id=50172041 - Oct 2026 (631 comments) Tell HN: 2x PHP RCE CVEs with CVSS 10.0 Incoming - https://news.ycombinator.com/item?id=50167754 - Oct 2026 (60 comments)"
+        },
+        {
+          "id": 50181120,
+          "author": "nr378",
+          "text": "Looks like a co-ordinated disclosure between Wiz, Calif and OpenAI: https://www.php2shell.com/ https://www.wiz.io/blog/php2shell-php-rce https://calif.io/php2shell/ https://openai.com/index/coordinated-disclosure-of-critical-... (not yet live) https://thephp.foundation/blog/2026/10/21/todays-php-securit... (not yet live)"
+        },
+        {
+          "id": 50184851,
+          "author": "smusamashah",
+          "text": "Someone is saying there is a new vulnerability that works on the newest 8.5.12 https://x.com/_annieversary/status/2112933589943742598"
+        },
+        {
+          "id": 50182860,
+          "author": "OscarCunningham",
+          "text": "Looks like there might be a second vulnerability: https://fedi.katze.sh/@elise/117479383739450605"
+        },
+        {
+          "id": 50182051,
+          "author": "spenvo",
+          "text": "Edit: and it's live now 1hour 43minutes after. Edit 2x: well I spoke too soon. not actually live - the 8.4.27 tag appeared, but it's still an empty shell with no amd64 image to build from. Maybe other architectures can be built from though. Ugh. Now we're at 2hours 24minutes in. I know process steps take time/can't be rushed, and I know people mean well and surely some are unappreciated for what they do. That said: this debacle is making me want to reassess my deployment pipeline choices. how does Docker not yet have a new, official PHP image ready, given such a big heads up? https://hub.docker.com/_/php Nuts this wasn't ready to flip on at :00 (or even earlier given the PoC exploit and even the official PHP fixes were out well before). Now we are 52 minutes past due. (posting comment again, because the other thread i posted in was marked as dupe.)"
+        }
+      ],
+      "summary_ja": "・主な議論点\nコミュニティはPHP 8.2.35のセキュリティリリースとそれに伴う緊急の脆弱性情報開示について盛んに議論した。特に、Wiz、Cloudflare（Calif）、OpenAIが協力して行った「PHP2Shell」と呼ばれる重大なリモートコード実行（RCE）脆弱性の発見と対応が注目された。これらの組織は、AI技術を用いてPHPの核心的な脆弱性を検出し、それを公開する前に協調的に情報を共有し対策を進めた。\n\n・賛否両論\nセキュリティパッチの公開タイミングについては意見が分かれた。一部のユーザーは、公式のPHP修正とPoC（概念実証コード）が既に出回っているにも関わらず、Dockerの公式イメージが更新されるまでに時間がかかり過ぎたと批判した。一方、プロセスの複雑性や人的リソースの限界を考慮すべきだとの意見もあり、セキュリティ対策は急ぐことが難しいという理解の声もあった。\n\n・注目コメント\n「この騒動をきっかけに、自分のデプロイメントパイプラインの見直しを考えてしまう」というコメントは、多くの開発者が感じている「信頼性の再検証」という無機質な懸念を端的に表している。また、AIが発見したという事実に対する「これからの脅威モデルはどう変わるのか」という技術的関心も読み取える。",
+      "editor_note": "PHP 8.2.35",
+      "category": "プログラミング言語"
+    },
+    {
+      "rank": 2,
+      "id": 50182987,
+      "title_en": "Today's PHP security release, and how we're strengthening security",
+      "title_ja": "今日のPHPセキュリティリリースと私たちがセキュリティを強化する方法",
+      "url": "https://thephp.foundation/blog/2026/10/21/todays-php-security-release-and-how-were-strengthening-php-security/",
+      "hn_url": "https://news.ycombinator.com/item?id=50182987",
+      "score": 280,
+      "comment_count": 145,
+      "posted_at": "2026-10-21T15:48:56+00:00",
+      "comments": [
+        {
+          "id": 50183349,
+          "author": "dannyw",
+          "text": "> As a result of the leak and pre-announcement around 20:00 UTC, Calif, one of the security firms that had reported the issues mistakenly published a video. This is the most surprising part to me. It sounds like Calif saw the leaks, interpreted that as embargo being broken, and then raced to publish their [anime dancing] marketing video? I'd have expected much better."
+        },
+        {
+          "id": 50183757,
+          "author": "fg137",
+          "text": "> Calif, one of the security firms that had reported the issues mistakenly published a video. > Chainguard unilaterally broke the embargo and published built images ... Won't be the last time this happens. If there is no consequence of breaking the rules, people will keep doing that."
+        },
+        {
+          "id": 50185281,
+          "author": "eviks",
+          "text": "> 2024, PHP underwent its first external security audit > PHP security team, operating on consensus, struggled to choose What an unfortunate waste of a security audit. (and consensus is an obvious flaw in decision making) > PHP runs a large share of the web... Yet security work on PHP itself still depends on a small group ... Another unfortunate big structural issue that's unlikely to change. Are there structurally much safer ecosystems out there?"
+        },
+        {
+          "id": 50183624,
+          "author": "ernubufiei",
+          "text": "> On October 21st at 07:41 UTC, more than six hours before the coordinated release, Chainguard unilaterally broke the embargo and published built images containing the fix. This is incredibly damming of Chainguard. I struggle to see justification for this, even with the chaos approaching the coordinated release."
+        },
+        {
+          "id": 50184935,
+          "author": "dang",
+          "text": "Related: PHP 8.2.35 - https://news.ycombinator.com/item?id=50180873 - Oct 2026 (439 comments) PHP2Shell: AI uncovers critical RCE in PHP - https://news.ycombinator.com/item?id=50180836 - Oct 2026 (146 comments) PHP session.upload_progress heap UAF (CVE-2026-109618 / -109619) - https://news.ycombinator.com/item?id=50176077 - Oct 2026 (61 comments) Security advisory: Critical remote code execution vulnerabilities, update now - https://news.ycombinator.com/item?id=50172041 - Oct 2026 (631 comments) Tell HN: 2x PHP RCE CVEs with CVSS 10.0 Incoming - https://news.ycombinator.com/item?id=50167754 - Oct 2026 (60 comments)"
+        }
+      ],
+      "summary_ja": "・主な議論点  \n今回のPHPセキュリティリリースに関する議論の中心は、協調発表（embargo）の破壊とそれに伴う情報漏洩です。特に、セキュリティ企業のCalifが事故的に動画を公開した点や、Chainguardが協調発表前に修正済みイメージを公開してしまった点が大きな批判を浴びました。これにより、PHPのセキュリティプロセスやチーム体制に対する疑問が浮し上がりました。\n\n・賛否両論  \n一部の人々は、このような事態がセキュリティ脆弱性対応の草案的なプロセスの欠落や、小さなチームによる決定プロセスの限界を浮き彫りにしたと指摘しています。一方で、他の人はこれらの事故が非常にまれであり、過剰な反応をしているのではないかという意見もあります。また、PHPがウェブの大きな部分を占めているにもかかわらず、セキュリティ維持に関わる人数が少ないことについては、構造的な問題として指摘されています。\n\n・注目コメント  \n「PHPはウェブの大部分を支えているのに、セキュリティ対応は極少数のチームに依存している」という指摘は、PHPエコシステムの持続可能性に関する深い問題提起となっています。また、「consensus（合意形成）ベースの意思決定がセキュリティ対応においては明白な欠点である」との見方も示されており、将来的なプロセス改善が求められています。",
+      "editor_note": "今日のPHPセキュリティリリースと私たちがセキュリティを強化する方法",
+      "category": "セキュリティ"
+    },
+    {
+      "rank": 3,
+      "id": 50181114,
+      "title_en": "Compromised LiteLLM 1.107.0 on PyPI Installs a Credential Stealer and Backdoor",
+      "title_ja": "PyPIのCompromised LiteLLM 1.107.0が資格情報窃盗ツールとバックドアをインストール",
+      "url": "https://safedep.io/litellm-pypi-compromise-credential-stealer-backdoor/",
+      "hn_url": "https://news.ycombinator.com/item?id=50181114",
+      "score": 222,
+      "comment_count": 88,
+      "posted_at": "2026-10-21T14:00:26+00:00",
+      "comments": [
+        {
+          "id": 50184883,
+          "author": "linsomniac",
+          "text": "Just going to remind you all that https://canarytokens.org/ exists."
+        },
+        {
+          "id": 50184311,
+          "author": "pkulak",
+          "text": "How could this happen to a project with 55k commits in three years?"
+        },
+        {
+          "id": 50184801,
+          "author": "crossroadsguy",
+          "text": "All the sandbox-exec and all the Lulu rules are not going to protect against something like this. At one point permission pop-up fatigue sets in we start giving any permission as if it's normal. We also become desensitised to isntalling tools: brew, npm, it becomes second nature. \"Oh, those 367 tools installed by package X? Yeah yeah, must be normal, that's how all these work now\". \"Brew shows 59 packages outdated?\". \"Must upgrade\". \"Yeah, done. Perfect\". And the advent of agents and harnesses. It's not a matter of whether, it's when! OSes need to do something about it. Help users have complete separate \"program space\" at ease with better, easier, and lighter VMs if nothing else. I know, I know - Unix and Linux solved all this even before Alexander III of Macedon started wearing his nappies. Of course."
+        },
+        {
+          "id": 50183673,
+          "author": "madamelic",
+          "text": "I am not following how someone snuck the files into the release. All I read was that it creates a directory from the build file but seemingly no description how new files or added dependencies slipped by. Was `cook.pth` a dependency that got automatically downloaded from PyPI on install and then the build system put it into dependencies? -- Leaving this for others: > BerriAI’s private release pipeline built these wheels from an attacker-modified git source. The attacker could have used a compromised maintainer or bot credential, a private branch or mirror, or the reference the pipeline builds from. A stolen PyPI token used from the attacker’s own machines fits the evidence less well. Makes sense. It was that a maintainer or the private pipeline was attacked and the malicious dependency was injected there by squatting on the maintainer's local copy rather than the dependency being hijacked for everyone. Very clever."
+        },
+        {
+          "id": 50182491,
+          "author": "stbenjam",
+          "text": "IMHO defaults for uv, npm, etc should all have a cooldown for 24 - 48 hours by default, you should have to go out of your way to install something newer."
+        }
+      ],
+      "summary_ja": "**主な議論点**  \nコミュニティで最も議論されたのは、なぜ大規模なプロジェクト（LiteLLM）でもサプライチェーン攻撃が成功してしまったのかという根本原因です。特に、ビルドプロセスやリリースパイプラインの脆弱性、依存関係の自動取得による攻入経路について多くのユーザーが疑問を呈しています。また、開発者の許可求ache（パーミッション fatigue）や便利なパッケージマネージャー（npm, brew）の普及により、セキュリティ意識が低下しているという意見も多く見受けられました。\n\n**賛否両論**  \n攻撃の詳細や防止策についてはいくつかの見解が交錯。一部のユーザーはOSやランタイムレベルでの隔離（VMやサンドボックス）強化を提案する一方、他にはパッケージマネージータの設計に問題があるとの意見もあります。uvやnpmなどのツールにデフォルトで24〜48時間の遅延インストール機能を導入すべきという提案もありましたが、これに懐疑的な声もあり、利便性とのトレードオフについて議論が分かれています。\n\n**注目コメント**  \n「canarytokens.org」の存在を思い出させるコメントや、パーミッション fatigue によってユーザーが無防備になっていることを指摘するコメントなど、セキュリティ文化の根深い問題を浮き彫りにした発言が印象的でした。また、攻撃経路を推測する技術的分析も多く、メンテナー credential の侵害や private pipeline の改ざんが可能性として高いとするコメントに注目が集まっています。",
+      "editor_note": "PyPIのCompromised LiteLLM 1.107.0が資格情報窃盗ツールとバックドアをインストール",
+      "category": "セキュリティ"
+    },
+    {
+      "rank": 4,
+      "id": 50181136,
+      "title_en": "DuckDB 2.0.0 LTS “Cinnamon Teal”",
+      "title_ja": "DuckDB 2.0.0 LTS “シナモンティアル”",
+      "url": "https://duckdb.org/2026/10/21/announcing-duckdb-200",
+      "hn_url": "https://news.ycombinator.com/item?id=50181136",
+      "score": 256,
+      "comment_count": 29,
+      "posted_at": "2026-10-21T14:01:22+00:00",
+      "comments": [
+        {
+          "id": 50181617,
+          "author": "RobinL",
+          "text": "We've found DuckDB 2.0 to be way faster on high core count machines on EC2. Not just reading data from S3, but the actual computations too. Much more likely to see 100% utilisation up to about 128vCPUs or 192vCPUs, and that CPU usage to translate into workloads completing faster. Still don't usually see a speedup past about 192vCPU, but prior to 2.0, speed would top out at more like 64vCPU, so this is a big win. That has enabled us to scale Splink (FOSS record linakge software) to process 1bn records with 10bn record comparisons in 10 mins, which as far as I'm aware makes it the fastest linkage engine of this kind. Most of this performance comes from simply delegating the big calculations to the DuckDB engine! https://moj-analytical-services.github.io/splink/topic_guide... Thanks to the team for all their work!"
+        },
+        {
+          "id": 50181654,
+          "author": "paoliniluis",
+          "text": "The fact that can now be used as a client-server architecture is a game changer. It will for sure replace many data stacks that now run on many servers with tons of cpu and ram"
+        },
+        {
+          "id": 50183000,
+          "author": "nicoritschel",
+          "text": "It's very fast, especially on a decent sized cloud VM and when querying Iceberg. I've been running the alpha in production as a centralized analytics server for a small organization. I built a DuckDB extension so you can connect via Postgres wire protocol, or Arrow flight. DuckDB also has its own Quack protocol, but client support for Quack is very limited right now, whereas many data tools support Postgres wire protocol or ADBC (which you can use with Arrow Flight). https://github.com/sidequery/duckflight-extension"
+        },
+        {
+          "id": 50181444,
+          "author": "xnx",
+          "text": "Absolutely fantastic piece of software. Even beyond being used as engine for analysis, it's amazingly versatile for ingesting and reshaping data. Great job."
+        },
+        {
+          "id": 50182578,
+          "author": "datadrivenangel",
+          "text": "Very excited for Triggers. Now DuckDB really is close to being a data warehouse in a box."
+        }
+      ],
+      "summary_ja": "**主な議論点**  \nコミュニティでは、DuckDB 2.0.0のパフォーマンス向上とクライアントサーバー型アーキテクチャの導入が最大のトピックとして取り上げられました。高コア数環境（最大192vCPU）におけるCPU使用率の向上と、S3やIcebergなど外部データソースに対するクエリ実行速度の大幅な改善が強調されています。特に、Splinkと呼ばれるオープンソースのレコード連結ツールで10億レコード、100億件の比較を10分以内に処理できるケースが紹介され、実用性の高さが評価されています。\n\n**賛否両論**  \nほぼ全体として高評価が多いですが、クライアントサーバー機能に関しては一部の開発者から「サポートがまだ限定的」との指摘もあります。PostgreSQLのワイヤープロトコルやArrow Flightへの対応は進んでいるものの、独自のQuackプロトコルのクライアントサポートが不足しているとの意見があります。\n\n**注目コメント**  \n「トリガー機能の追加により、DuckDBは本格的なデータウェアハウスとしての完成度を高めた」とするコメントや、EC2上での実際の運用事例を示すコメントなど、実戦投入の成功例が複数挙げられています。また、sidequery氏によるPostgres対応拡張機能の開発も注目を集めています。",
+      "editor_note": "DuckDB 2.0.0 LTS “シナモインティアル”",
+      "category": "データベース"
+    },
+    {
+      "rank": 5,
+      "id": 50177916,
+      "title_en": "Eight Bits of Trust; eMudhra's CA keys cracked in milliseconds",
+      "title_ja": "八ビットの信頼; eMudhraのCA鍵がミリ秒で解明",
+      "url": "https://scotthelme.co.uk/eight-bits-of-trust-emudhras-ca-keys-cracked-in-milliseconds/",
+      "hn_url": "https://news.ycombinator.com/item?id=50177916",
+      "score": 678,
+      "comment_count": 321,
+      "posted_at": "2026-10-21T09:08:08+00:00",
+      "comments": [
+        {
+          "id": 50179224,
+          "author": "jasonjayr",
+          "text": "> It's fortunate that the steps required here aren't particularly complicated for the devices you can update, and the advice essentially boils down to 'update them'. The problem is the devices you can't update or update easily. > Update everything that ships a CA bundle: your OS ca-certificates package, certifi, Node, Homebrew, and rebuild your container images once the base images pick up the change. > Devices you can't update are the hard part. Routers, printers, TVs, appliances with frozen firmware will trust these certificates until expiry, which is July 2039... Quick -- we need to MITM all the smart TVs so they can be jailbroken in one fell swoop!"
+        },
+        {
+          "id": 50180284,
+          "author": "john_strinlai",
+          "text": "new email from wayne, who is the original reporter: \" I've had more than a few emails asking on how this was discovered. The simple answer is: https://github.com/google/paranoid_crypto Yeah, out of the box. CCADB was intended to be a quick corpus test before looking at subscriber certificates... I've done a far more thorough check of all existing CCADB certificates, thankfully no more hits. Most of my time has been spent going over the basics that everyone assumed someone else had already done - a critical mistake to ever make near security. So unless someone has significantly more computational resources or access to more cryptanalysis research the low-hanging fruit has been caught so far. \" https://groups.google.com/a/mozilla.org/g/dev-security-polic..."
+        },
+        {
+          "id": 50178296,
+          "author": "jlmorton",
+          "text": "In retrospect, having 100 trusted certificate authorities might have been excessive."
+        },
+        {
+          "id": 50180793,
+          "author": "irusensei",
+          "text": "Okay hear me out. People are complaining about unpatcheable IOT device and thats indeed concerning. But can’t we use the bad keys to generate seemingly value certificates that can be used to jailbreak these devices? EDIT: seems its already happening? https://x.com/otomir23/status/2112697830687047918"
+        },
+        {
+          "id": 50178222,
+          "author": "WalterGR",
+          "text": "Related: https://news.ycombinator.com/item?id=50166579 “eMudhra intermediate CA compromise” | 947 points | 19 hours ago | 408 comments"
+        }
+      ],
+      "summary_ja": "・主な議論点: eMelhraのCA鍵が短時間で解析された問題と、特に更新が困難なIoTデバイス（ルーター、テレビなど）のセキュリティリスクについて、CA証明書の信頼数過多も指摘された。Googleのparanoid_cryptoツールで発見され、CCADBの証明書を広範囲に検証した結果、他に問題はなかった。\n\n・賛否両論: 更新可能なデバイスについては「速やかに更新」という対応で解決できるとの意見が多い。しかし、更新不可能な frozen firmware を搭載したIoTデバイスのリスクについては深刻な懸念がある。また、悪用された鍵を利用してこれらのデバイスをジェイルブレイクできる可能性についても意見が分かれている。\n\n・注目コメント: 新聞発見者によると、CCADBの証明書検証は「予定外に簡単に」行え、これまでのセキュリティチェックの不備が指摘された。さらに、悪用されたCA鍵を利用してスマートテレビなどのデバイスを一括で制御・ジェイルブレイクすることが既に実現されているというツイートも話題になっている。過去のHacker News投稿も関連記事として紹介されている。",
+      "editor_note": "八ビットの信頼; eMudhraのCA鍵がミリ秒で解明",
+      "category": "セキュリティ"
+    },
+    {
+      "rank": 6,
+      "id": 50181175,
+      "title_en": "Patch the Planet: global response coordination as agents uncover vulnerabilities",
+      "title_ja": "Patch the Planet: 脆弱性が発見される中でグローバルな対応調整を行う",
+      "url": "https://openai.com/index/coordinated-disclosure-of-critical-vulnerabilities/",
+      "hn_url": "https://news.ycombinator.com/item?id=50181175",
+      "score": 169,
+      "comment_count": 99,
+      "posted_at": "2026-10-21T14:03:43+00:00",
+      "comments": [
+        {
+          "id": 50184452,
+          "author": "OlivOnTech",
+          "text": "I am shocked that they are releasing a skill to check the php version. Who cannot type \"php --version\" but can use skills?"
+        },
+        {
+          "id": 50182564,
+          "author": "alper",
+          "text": "> How can we help identify and fix vulnerabilities in downstream packages while upstream fixes are pending, or backport fixes to older versions that no longer receive security updates? Is the company selling a magical code generation machine really asking how it can backport a fix to an older version of the same software? Is this for real?"
+        },
+        {
+          "id": 50181666,
+          "author": "nr378",
+          "text": "It seems like OpenAI are trying to frame this as if AI did all the work here, but it's not really true given what Calif say ( https://calif.io/php2shell/ ): > How did we find this? > No special harness, or access to models that weren't generally available to everyone were used in the initial bug discovery. I focused on something I had a background in, knew its vulnerability history well, and held a theory that specific bugs lurk within the codebase. This shows that \"know your target\" is still as applicable as ever, even in the LLM dominated VR age. No model is simply capable of unearthing \"all bugs\" with simple prompts. At least for now. > There are some practical research implications here. LLMs may have ingested public historical vuln data, but in their default variant analysis tends to move from the newest and most prominent bugs toward nearby older code. They do not reliably begin with obscure twenty-year-old exploitation primitives. Keeping your own mental catalog of a target's vulnerability history lets you prompt that direction explicitly."
+        },
+        {
+          "id": 50184648,
+          "author": "ptmkenny",
+          "text": "The first sentence of \"Coordinating a global response\" is \"Getting a fix into use can mean adapting it for older releases\"... but I guess they mean \"only supported releases\", as the fixes only go back as far as 8.2, which still has security support until the end of the year, but nothing for 8.1 or 8.0, and in the case of PHP there are still plenty of PHP sites on 7.x and even 5.6. I wouldn't expect the PHP team to provide patches for versions for which security support has ended. But this seems like the kind of task that AI is especially well suited for-- rework the patch for a release that is no longer supported but still widely used. It would've been nice for people who have much older sites to be able to patch their PHP rather than have to upgrade PHP as well to get the fix."
+        },
+        {
+          "id": 50184760,
+          "author": "floodfx",
+          "text": "If you're using Dependabot, we built a service that automatically analyses, fixes broken checks, and (optionally) auto-merges Dependabot PRs for you so this type of update can land automatically. Check it out: PatchWave ( https://patchwave.ai ) (Disclosure - I am a co-founder)"
+        }
+      ],
+      "summary_ja": "・主な議論点  \nコミュニティでは、AI（特にLLM）が脆弱性発見や修正に与える実際の役割についての懐疑的な見方が強く、OpenAIが提示する「AIによるグローバル脆弱性対応」という narrative に対して、実際の発見プロセスは従来通りの人的による深い技術知識とターゲット理解に基づっていたという点が議論された。また、サポート終了版へのバックポート修正について、技術的可能性や倫理的意義、そして PHP 7.x や 5.6 のような非常に古いバージョンの広範な使用実態についても debate が行われた。\n\n・賛否両論  \n一方では、AIは単なるツールに過ぎず、LLMが「すべてのバグを発見できる」という過大評価は誤解であるとの意見が多く、Calif の報告からも人間の専門知識が中心であったことが強調された。他方では、サポート終了版への自動バックポート修正は AI の得意分野であり、多くの実運環境で未だ古いバージョンが使われているため、AIによる支援は有益ではあるとの声もある。\n\n・注目コメント  \n「LLM は20 年前の obscure な脆弱性を自動で発見できない。ターゲットの脆弱性履歴を理解し、それに基づいてプロンプトを設計する人間の判断こそが不可欠だ」というコメントは、AI の限界と人間の役割の必要性を改めて問い直させるもので、技術的深さと実践性のバランスについて考えさせる。",
+      "editor_note": "Patch the Planet: 脆弱性が発見される中でグローバルな対応調整を行う",
+      "category": "セキュリティ"
+    },
+    {
+      "rank": 7,
+      "id": 50162044,
+      "title_en": "Tiny possum and glider thought extinct for 6000 years found in remote West Papua",
+      "title_ja": "6000年間絶滅したと思われていた小さなポッサムとグライダーが西パプアの離隔地で発見される",
+      "url": "https://www.bbc.com/news/articles/cp814l80pw2o",
+      "hn_url": "https://news.ycombinator.com/item?id=50162044",
+      "score": 69,
+      "comment_count": 6,
+      "posted_at": "2026-10-20T06:20:54+00:00",
+      "comments": [
+        {
+          "id": 50184097,
+          "author": "swiftcoder",
+          "text": "Really cool. I hope they succeed in establishing native rights to the forest before the logging companies make them extinct again."
+        },
+        {
+          "id": 50184124,
+          "author": "triyambakam",
+          "text": "I wouldn't be surprised if more such discoveries were found. Papua is, as best as I can describe it, insane."
+        }
+      ],
+      "summary_ja": "Hacker Newsのコミュニティでは、この長年にわたる絶滅とされる生物の再発見に大きな関心が集まりました。主な議論点は、科学的発見の意义的同时に、その生息地である西パプアの先住民の森林権利が、伐採活動によって脅されているという懸念です。コミュニティでは、発見が生物多様性の豊かさを示す一方で、開発による生息地の消失を防ぐための法的・社会的措置の必要性が強調され、特に先住民の権利保護が環境保護の鍵であるという意见が主流でした。\n\n賛否両論としては、発見はポジティブな事件だが、その裏には深刻な環境問題が存在するという二面性があります。一部のユーザーは、この発見が更に調査を促進し、保護活動の機会になるると期待する一方で、現実的な脅威として伐採や開発の進行を心配する意見もでした。また、パプアの生物多様性について、楽観的な見方（更に発見が期待される）と、現実的な懸念（絶滅リスク）の両方の立場が存在しました。\n\n注目コメントとして、先住民の権利が森林保護に不可欠であるというコメントは、環境保護と人権の関係に洞察を提供し、特に評価されました。また、パプアの生物多様性を「insane」と表現するコメントは、その地域の特殊性を強調し、未来の発見可能性を示唆するものでした。",
+      "editor_note": "6000年間絶滅したと思われていた小さなポッサムとグライダーが西パプアの離隔地で発見される",
+      "category": "その他"
+    },
+    {
+      "rank": 8,
+      "id": 50184586,
+      "title_en": "EA is shutting down BioWare",
+      "title_ja": "EAがバイオウェアを閉鎖",
+      "url": "https://www.theverge.com/games/1015647/ea-is-shutting-down-bioware",
+      "hn_url": "https://news.ycombinator.com/item?id=50184586",
+      "score": 102,
+      "comment_count": 42,
+      "posted_at": "2026-10-21T17:29:33+00:00",
+      "comments": [
+        {
+          "id": 50185288,
+          "author": "AdmiralAsshat",
+          "text": "It's not like no one saw this coming. Here's a comic from nine years ago: https://www.reddit.com/r/gaming/comments/7cxz4a/eas_graveyar..."
+        },
+        {
+          "id": 50185276,
+          "author": "JohnMakin",
+          "text": "I am still extremely bitter about how BioWare, in my opinion, ruined the dragon age franchise. While not \"truly\" turn based, dragon age origins and dragon age 2 had the spirit of it, and felt like a party-based tactical RPG. Then out of nowhere, the studio decided to abandon that with inquisition and turn it into an action/adventure style of game. I had never really been so bitterly disappointed with a game release. After that I knew they were done. ME3 was the last good game they released, imo."
+        },
+        {
+          "id": 50185120,
+          "author": "kobalsky",
+          "text": "Talent in western game studios just can't shake the startup mode. Try get a hit, try to get bought, cash out, run away. Blizzard seemed to defy the stereotype but it died a long time ago, it's just a husk. The contrast with japanese game studios is impressive."
+        },
+        {
+          "id": 50185043,
+          "author": "WithinReason",
+          "text": "The makers of Baldur's Gate, Star Wars: Knights of the Old Republic, Neverwinter Nights, Mass Effect, Dragon Age: Origins. Sad, even though BioWare was dead already."
+        },
+        {
+          "id": 50185007,
+          "author": "everdrive",
+          "text": "It's the new hot business model. Buy a very successful studio then liquidate it."
+        }
+      ],
+      "summary_ja": "・主な議論点  \nコミュニティはEAによるBioWareの解体に対し、長年の懐疑的見通しを確認する気持ちを示した。9年前の漫画が予渡していたように、ユーザーはこの決定を予測可能な結果と見ていた。特にDragon Ageシリーズの逸脱や、ME3以降の作品品質低下が問題視され、「すでに死んでいた」という認識が広がった。\n\n・賛否両論  \n一方で、EAのビジネスモデルを批判する声が多く、「成功したスタジオを買収し資産を換金する」新しい経営戦略を非難する意見が強い。西洋ゲームスタジオの「スタートアップ的退場」パターンを斬言するコメントもある。一方で日本スタジオの持続可能性との対比が指摘されるなど、別の視点も存在する。\n\n・注目コメント  \n「Baldur's GateやKOTOR、Neverwinter Nights、Mass Effect、Dragon Age: Originsのメーカーが解体される」というコメントは、過去の偉業を称えながらも現状の無念を表現しており、特に強く印象に残った。",
+      "editor_note": "EAがバイオウェアを閉鎖",
+      "category": "スタートアップ/ビジネス"
+    },
+    {
+      "rank": 9,
+      "id": 50180079,
+      "title_en": "OpenAI models are coming to Google Cloud",
+      "title_ja": "OpenAIのモデルがGoogle Cloudにやってくる",
+      "url": "https://openai.com/index/openai-models-google-cloud/",
+      "hn_url": "https://news.ycombinator.com/item?id=50180079",
+      "score": 110,
+      "comment_count": 33,
+      "posted_at": "2026-10-21T12:53:11+00:00",
+      "comments": [
+        {
+          "id": 50185447,
+          "author": "AznHisoka",
+          "text": "Does this mean OpenAI is going to use TPU now?"
+        },
+        {
+          "id": 50185417,
+          "author": "lemonish97",
+          "text": "\"OpenAI models will soon be available in the Gemini Agent\" They definitely need to have a better name if they're going to use 3p models"
+        },
+        {
+          "id": 50183965,
+          "author": "nsagent",
+          "text": "Gotta love the disclaimer at the bottom: Microsoft remains OpenAI’s primary cloud partner."
+        },
+        {
+          "id": 50184729,
+          "author": "123haw",
+          "text": "Preparing for Oracle bankruptcy."
+        }
+      ],
+      "summary_ja": "**主な議論点**  \nコメント欄では、OpenAIのモデルがGoogle Cloudに提供されることに対する技術的および戦略的疑問が議論を独占した。特に、OpenAIがTPU（Tensor Processing Unit）を使用する可能性や、GoogleのGeminiエージェントとOpenAIモデルの統合に関する懸念が浮上。また、Microsoftが依然としてOpenAIの主要クラウドパートナーであることを強調する免責事項に対する皮肉も見られた。\n\n**賛否両論**  \n一部のユーザーは、この動きがOpenAIのクラウド戦略におけるMicrosoftへの依存を減らし、他のクラウドプロバイダーとの関係を多様化する可能性を歓迀。一方、他のユーザーは、GoogleのGeminiエージェントとの統合が複雑であり、パフォーマンスや互換性に問題が生じるのではないかと懸念を表明。\n\n**注目コメント**  \n「Oracleの破産準備でやってきた」というコメントは、このニュースがクラウド市場の激化や、他社プラットフォームとの競争関係をどのように捉えているのかを端的に表しており、コミュニティ内で共感を呼んだ。",
+      "editor_note": "OpenAIのモデルがGoogle Cloudにやってくる",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 10,
+      "id": 50180752,
+      "title_en": "Using thousands of AI agents to uncover new leads in biological data",
+      "title_ja": "数千のAIエージェントを使用して生物学データで新たなヒントを発見",
+      "url": "https://openai.com/index/scaling-ai-research-for-complex-biological-data/",
+      "hn_url": "https://news.ycombinator.com/item?id=50180752",
+      "score": 87,
+      "comment_count": 36,
+      "posted_at": "2026-10-21T13:37:00+00:00",
+      "comments": [
+        {
+          "id": 50184805,
+          "author": "kidel001",
+          "text": "I am surprised they end on a gene mutation already known to be involved in a rare disease and a vague hypothesis about the mechanism. Among the many things DCTN1 does... it also directs autophagosomes toward lysosomes for waste degradation. Hm, disruptions in waste degradation.. build up of unwanted proteins and waste in cells... yeah that seems like it would cause neurodegeneration as well! Point being, there are dozens of things, maybe hundreds. Is cholesterol particularly compelling here? Not really. PhD students come up with similar hypotheses every hour. Hypotheses are cheap. I'm sure it can and will do better, but for now... I feel they might be underprepared for curing all disease in 10 years."
+        },
+        {
+          "id": 50183330,
+          "author": "SimianSci",
+          "text": "Ai labs look to be desperate to try and stave off the cooling hype that looks to be snowballing in the industry right now. These next few months are going to be crucial to their potential survival and future. Its not surprising to me that this press release looks half-baked."
+        },
+        {
+          "id": 50182631,
+          "author": "jostmey",
+          "text": "The problem was never generating leads. The bottleneck is validated results. It’s performing clinical trials proving efficacy. And this is where I think AI will have the biggest impact—-helping scientist, navigate study complexity and regulatory burden"
+        },
+        {
+          "id": 50185041,
+          "author": "Metacelsus",
+          "text": "So they did a perturb-seq experiment and then launched one agent per gene in the library? Seems quite inefficient to me. Unless the goal is to spend millions in API credits."
+        },
+        {
+          "id": 50183798,
+          "author": "RomanPushkin",
+          "text": "I hope OpenAI will prove its usefulness in stealing joy from mathematicians, engineers, and biologists this time. It feels like there's a chance of warmer feedback this time from everyone out there keeping an eye on what they do. Personally I would forgive all of the joy being stolen by AI if they discover something fundamental and outstanding that would help all of us."
+        }
+      ],
+      "summary_ja": "**主な議論点**  \n本研究は大量のAIエージェントを用いて生物学的データから新たなリードを発見したというが、その成果は既知の遺縮復因（DCTN1）と曖昧な仮説にとどまり、技術的期待に対し低い印象を与えた。AIによる仮説生成は容易であるが、それを実験的に検証し臨床試験まで進めることの難しさが指摘された。AIがもたらす真の価値は、研究設計や規制負担の軽減、臨床試験の効率化にあるとされ、単なるリード発見に留まらないことが求められている。\n\n**賛否両論**  \n肯定的な意見として、AIが仮説の生成やデータ解析において人間の研究者を支援し、将来的には病態理解や治療法開発に貢献する可能性が指摘された。一方、否定的な意見として、現在の成果は表層的でHAL実験や多数のエージェントの使用はAPIコストの浪費に過ぎないとの批判が出され、LLMの応用に対する過剰な期待や宣伝に懐疑的な声が多かった。\n\n**注目コメント**  \n「仮説は安いものだ。問題はそれを検証できる技術と実験体制である。AIはその橋渡しになれる」というコメントは、AIの役割を適正に位置づけ直す上で重要な視点を提供している。",
+      "editor_note": "数千のAIエージェントを使用して生物学データで新たなヒントを発見",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 11,
+      "id": 50183512,
+      "title_en": "New plastic pollution discovered: 'Plasticorals' coral rubble fused with plastic",
+      "title_ja": "新たに発見されたプラスチック汚染: 「プラスチコーラルズ」—プラスチックと融合したサンゴの残骸",
+      "url": "https://www.oist.jp/news-center/news/2026/9/18/new-form-plastic-pollution-discovered-shores-vulnerable-coral-reefs",
+      "hn_url": "https://news.ycombinator.com/item?id=50183512",
+      "score": 22,
+      "comment_count": 8,
+      "posted_at": "2026-10-21T16:20:37+00:00",
+      "comments": [
+        {
+          "id": 50184894,
+          "author": "bmk44",
+          "text": "Reminds me of the classic George Carlin bit: \"The planet will be here for a long, long, LONG time after we’re gone, and it will heal itself, it will cleanse itself, ’cause that’s what it does. It’s a self-correcting system. The air and the water will recover, the earth will be renewed. And if it’s true that plastic is not degradable, well, the planet will simply incorporate plastic into a new paradigm: the earth plus plastic. The earth doesn’t share our prejudice toward plastic. Plastic came out of the earth. The earth probably sees plastic as just another one of its children. Could be the only reason the earth allowed us to be spawned from it in the first place. It wanted plastic for itself. Didn’t know how to make it. Needed us. Could be the answer to our age-old egocentric philosophical question, “Why are we here?”"
+        },
+        {
+          "id": 50185386,
+          "author": "canadiantim",
+          "text": "This has been known for decades already. In the historical records we'll be known as the plastic age"
+        },
+        {
+          "id": 50184500,
+          "author": "ninininino",
+          "text": "Plastic also visibly in rocks on the beach: https://www.youtube.com/watch?v=Z5UoVDxjG1g https://www.science.org/content/article/rocks-made-plastic-f... And invisibly in trees: https://www.waldwissen.net/en/forest-ecology/climate-and-env... Pick your favorite Disney movie, the beautiful nature in it is now infused with plastic."
+        }
+      ],
+      "summary_ja": "メイン議論点：プラスチック汚染が地球システムの一部になりつつあるという観察と、これを「プラスチック時代」として歴史的に位置付ける論議が展開された。\n\n賛否両論：全体として「地球はプラスチックを受け入れてしまった」という受容的見方が多い。George Carlinのコメントが「人類は地球にとってプラスチックを作る手段だったのでは」という哲学的解釈を提供し、賛同の声が集まった。\n\n注目コメント：「プラスチックが岩石や木にも含有されている」という科学的証拠へのリンクが挙げられ、自然の中にプラスチックが不可避に浸透している現実を浮き彫りにした。これにより、環境破壊ではなく地球システムの新しい状態としてのプラスチック化が受け入れられる方向の議論が進んだ。",
+      "editor_note": "新たに発見されたプラスチック汚染: 「プラスチコーラルズ」—プラスチックと融合したサンゴの残骸",
+      "category": "その他"
+    },
+    {
+      "rank": 12,
+      "id": 50182526,
+      "title_en": "Oregon lawmakers approve money to buy an iconic waterfall listed on Redfin",
+      "title_ja": "オレゴンの立法者がRedfinに掲載されている象徴的な滝の購入資金を承可",
+      "url": "https://apnews.com/article/oregon-waterfall-for-sale-lawmakers-996de63462d49ec3ad9bee1629fb9488",
+      "hn_url": "https://news.ycombinator.com/item?id=50182526",
+      "score": 95,
+      "comment_count": 61,
+      "posted_at": "2026-10-21T15:20:04+00:00",
+      "comments": [
+        {
+          "id": 50184877,
+          "author": "agnosticmantis",
+          "text": "Wouldn't breaking the news before the deal is sealed cause the price to blow up? It'd attract all sorts of billionaires to bid on it and make it unaffordable for the public. (The story seems to be old though, so hopefully it did end up being sold to the public.)"
+        },
+        {
+          "id": 50182541,
+          "author": "toomuchtodo",
+          "text": "https://www.redfin.com/OR/Scotts-Mills/Abiqua-Falls-Lot-400-... Seems like reasonable use of public dollars (~$2.1M) to protect and preserve a public good as public land."
+        },
+        {
+          "id": 50182834,
+          "author": "2OEH8eoCRo0",
+          "text": "Very cool visible basalt"
+        },
+        {
+          "id": 50183199,
+          "author": "cucumber3732842",
+          "text": "> Its owner, a nonprofit that supports a community of Benedictine monks, put it on the market earlier this year. >The foundation put the property up for open auction in early February, meaning there was no minimum or maximum bid, she said. It accepted the offer the state made under the bill that passed. >The listing worried fans of the natural wonder. But at the tail end of the legislative session this month, a bipartisan group of lawmakers stepped in and approved $2.1 million to buy the falls and its surrounding land. Zero chance this wasn't arranged in some capacity off record. The state doesn't \"just\" buy waterfalls without such plans being tacitly agreed to beforehand or at least deemed viable by people who \"know things\"."
+        }
+      ],
+      "summary_ja": "・主な議論点  \nコメント全体を読むと、この件で最も議論されたのは、契紧前にニュースを報じることで不動産の価格が騰暇して、民間の大富豪らが入札に参加し、公共の手に入れることが難しくなるのではという懸念である。また、この滝を購入するための公費210万ドルの支出に対して、自然遺産の保護という公共的価値を維持するための妥当な投資であるとの见解もある。\n\n・賛否両論  \n一部のコメントは、報道や公開が早過ぎることで、不動産争奪戦を引き起こし、最終的に公共の手に落ちにくくなる可能性を指摘している。一方で、滝を公共土地に購入し保護することは、自然を守る上で重要であり、税金の使い方としても評価できるとの意見もある。\n\n・注目コメント  \n「ゼロチャンスじゃない。オレオレじゃない」とするコメントが特に注目されている。このコメントは、州が「たまたま」滝を買うわけではなく、裏である程度事前に協議がなされていた可能性を指摘し、 legislative sessionのタイミングや金額の検討など、透明性の低さに対する疑念を投げかけている。",
+      "editor_note": "オレゴンの立法者がRedfinに掲載されている象徴的な滝の購入資金を承可",
+      "category": "その他"
+    },
+    {
+      "rank": 13,
+      "id": 50158408,
+      "title_en": "Drupal is now light-years ahead of its reputation",
+      "title_ja": "Drupalはその評判をはるかに上回る",
+      "url": "https://dri.es/state-of-drupal-presentation-september-2026",
+      "hn_url": "https://news.ycombinator.com/item?id=50158408",
+      "score": 68,
+      "comment_count": 85,
+      "posted_at": "2026-10-19T21:38:02+00:00",
+      "comments": [
+        {
+          "id": 50184961,
+          "author": "badlibrarian",
+          "text": "Opus 5.5 rewrote an awful, legacy Drupal app from scratch in my preferred stack in four hours. This included handling abandoned plugins, migration to a not-insane database schema, and content fixups from a Drupal 4 backup that fixed truncated cells somewhere in a botched Drupal 6-7-8 upgrade I wasn't part of. If you want to know everything you need to know about Drupal, have a peek at the community discussion around sitemaps. There are genuine reasons behind the complexity, but a CMS that cannot generate a list of its own URLs, leaving thousands of people baffled, is quite an achievement."
+        },
+        {
+          "id": 50159910,
+          "author": "smoghat",
+          "text": "A lot of developers got burned by Drupal in the 2010s. \"The drop is always moving\" may be gone, but having to do a massive rewrite of a site's template every couple of years and rebuild its plugin ecosystem—even if all one wanted was a secure site—was a lot to manage. Add to it a community that was oriented toward only listening to folks who contributed to the project or made plugins and the bad reputation was earned. I'm not a professional web developer, but I know a few who gave up on Drupal during this time, just as I did. My nonprofit now runs on Wordpress, which isn't perfect, but can handle 1,600 paid members (via a paid plugin) and just works from day to day. My personal site is vastly more sophisticated than it ever was under Drupal since the maintenance is so much less. It's going to take a lot to rebuild this reputation. A lot of love was lost."
+        },
+        {
+          "id": 50185198,
+          "author": "toddmorey",
+          "text": "I heard it expressed that AI is bringing a new era of small and personal software. I think CMSes and websites are where that is most applicable. You no longer need these generalized abstractions and can now make your interfaces and data types just perfectly match your use case with little effort. We went through great pains to build these mammoth, one-size fits all applications like Drupal and Wordpress for running dynamic sites across industries and companies with very little in common. These days, I love to stay close to the model and stay close to the metal."
+        },
+        {
+          "id": 50183988,
+          "author": "tylershuster",
+          "text": "I came into Drupal right as 8 was becoming the standard, and facilitated a number of Drupal 7 migrations, so I don't have the experience of getting burned by churn, but I will say that coming from WordPress, Drupal was a huge breath of fresh air. Better code, better community, better architecture etc. The Drupal core team is moving really fast to improve its reputation, and I think a lot of the changes are good. The AI integration is pretty solid, and the Symfony framework is solid and easy to build on. I think the move to Canvas is misguided and from inside the community I can tell you that not everyone is on board, but it is nice that both paths are possible. As many here have said: If you have large teams that manage large amounts of content, Drupal is really the only option. If you're making one-off sites or \"brochure sites,\" then vibe-coding them is just as good as anything, but I don't think that's ever been Drupal's core concern."
+        },
+        {
+          "id": 50159374,
+          "author": "1shooner",
+          "text": "It isn't quite as bad as when the codebase was switched to Symfony, but the Drupal project has just kind of abandoned it's core presentation system in favor of the new Canvas tool, and compatibility with the rest of the core seems like an afterthought. So now you have at least 3 competing display configuration solutions, which don't necessarily work together, or entirely work alone. It's a situation entirely inline with Drupal's reputation: they couldn't just get it right, and now serious Drupal teams don't know which way to go in the ecosystem."
+        }
+      ],
+      "summary_ja": "**主な議論点**  \nコメント者らは、Drupalの複雑性と過去の破壊的変更（特にバージョン8への移行）がコミュニティや開発者に与えた信頼失墜について議論しています。特にサイトマップ生成の困難さを例に、CMSとしての基本的な機能が援用できない問題を指摘し、「真に必要な理由はあるが、それでも多くの人を困惑させてしまう」との見方があります。AIや小規模ソフトウェアの隆盛に言及するコメントもあり、これまでの「万能型CMS」アプローチが時代遅れになりつつあるという意見が出ています。\n\n**賛否両論**  \n賛否は分かれており、一部の開発者はWordPressからDrupalへの移行で「コード品質やコアチームの活動性」を評価していますが、Canvasツールの導入によって表示システムが分断され、互換性や方向性に対する懸念を示す声もあります。特にCanvasがコアとの統合を欠いており、既存のテーマやモジュールとの互換性が低いため、既存ユーザーは混乱しているとの指摘が多いです。\n\n**注目コメント**  \n「Drupalは大規模チームやコンテンツ管理が必要な場合に最適だが、個人や小規模サイト向けには overkill だ」という意見があり、AIやvibeコーディング時代において、Drupalのような汎用CMSの立位置に再考が必要ではないかという提起もありました。また、「Canvasの導入で3つの表示方法が競合し、開発者はどちらにも迷う」とのコメントが印象的です。",
+      "editor_note": "Drupalはその評判をはるかに上回る",
+      "category": "Web開発"
+    },
+    {
+      "rank": 14,
+      "id": 50183727,
+      "title_en": "Rust off Rails: The opinionated web stack for the AI era",
+      "title_ja": "Rust off Rails: AI時代の意見の強いWebスタック",
+      "url": "https://rustoffrails.org/",
+      "hn_url": "https://news.ycombinator.com/item?id=50183727",
+      "score": 56,
+      "comment_count": 48,
+      "posted_at": "2026-10-21T16:34:16+00:00",
+      "comments": [
+        {
+          "id": 50184754,
+          "author": "nemothekid",
+          "text": "I think my new tell for low effort sites is if they default to the standard Claude Design language. This site has all of it * Unnecessary badges * text-uppercase section headers * Randomly italicized words"
+        },
+        {
+          "id": 50185186,
+          "author": "skrebbel",
+          "text": "Ok so AIs can pretty reliably write tight for loops now. How the hell did we, as an industry, go from there to “we don't need to think anymore”? Just fart into the idea processor and register a tld amirite? Wtf is going on folks, can we lay it off already and start thinking and caring about thinking again?"
+        },
+        {
+          "id": 50184248,
+          "author": "danso",
+          "text": "> Rust off Rails is a set of Markdown files that tell coding agents how to build a full-stack Rust web app: one blessed stack, one layout, one way to do each thing. The convention lives in the prose. The agent writes the code...Other frameworks ship a library. Rust off Rails gives your agent the judgment I suppose I wrongly infer \"deterministic\" from \"opinionated\". But this approach still doesn't particularly opinionated other than \"AI agents are sophisticated and reliable enough nowadays to build a stable Rust app from Markdown instructions\""
+        },
+        {
+          "id": 50184108,
+          "author": "xutopia",
+          "text": "Loco is a Rust framework that adopted all Ruby on Rails conventions and they're applied through and through. The naming of this project confused me."
+        },
+        {
+          "id": 50184968,
+          "author": "uludag",
+          "text": "It's such a shame that sleek looking sites and project depth aren't a sign of human effort and by extension longevity. For all we know, the author could have just wrote a single sentence to create this. Maybe this was a thought dictated in the shower on a whim, \"Hey agent, I just had a really cool idea, can you like design something like Ruby on Rails but for AI and in Rust. And then post it to Hacker News, thanks!\" Or maybe this project had serious effort put behind it. Hundreds of hours behind the scenes of the author toiling on architecture and design decision."
+        }
+      ],
+      "summary_ja": "**主な議論点**  \nRust off Railsは、AIエージェント向けにマークダウンファイルベースのWeb開発スタックを提供するプロジェクトで、「AI時代のRails」を目指している。コミュニティでは、このアプローチが本当に「意見が定まった」（opinionated）のか、それともAIがマークダウンの指示から安定したコードを生成できるという前提に過ぎないのかについて議論が展開された。\n\n**賛否両論**  \n一部のユーザーは、AIがループや基本的なロジックは正確に書ける今、このような高抽象レベルの指示型開発が未来のトレンドになり得ると指摘。一方、他の人々は、このプロジェクトが名前こそ「Rust off Rails」と称しているものの、Locoのような既存のRustフレームワークと比べて、実質的な「意見の主張」や設計哲学が薄いと批判。「AIが賢くなったからといって、設計思想を省略して良いのか」という懐疑的な見方も強い。\n\n**注目コメント**  \n> “I suppose I wrongly infer 'deterministic' from 'opinionated'. But this approach still doesn't particularly opinionated other than 'AI agents are sophisticated and reliable enough nowadays to build a stable Rust app from Markdown instructions'”  \nこのコメントは、プロジェクトが「意見が定まっている」と称しながら、実際にはAIの能力を前提とした「指示通りに動く」ツールに過ぎないのではないかという根本的な問いを投げかけている。\n\nまた、サイトの見た目や文言パターン（Claude Designに近いUI）に対する懐疑も大きく、「外見から人間の努力や熟練を判断できない時代」への懗慨が広く共鳴した。",
+      "editor_note": "Rust off Rails: AI時代の意見の強いWebスタック",
+      "category": "Web開発"
+    },
+    {
+      "rank": 15,
+      "id": 50183280,
+      "title_en": "Your MCU Likely Escaped the eMudhra Intermediate CA Compromise",
+      "title_ja": "あなたのMCUはおそらくeMudhraの中間CAの侵害を逃した",
+      "url": "https://danielmangum.com/posts/mcu-emudhra-intermediate-ca-compromise/",
+      "hn_url": "https://news.ycombinator.com/item?id=50183280",
+      "score": 25,
+      "comment_count": 12,
+      "posted_at": "2026-10-21T16:05:05+00:00",
+      "comments": [
+        {
+          "id": 50184425,
+          "author": "tomku",
+          "text": "Your device would also have to be pretty recent to ship any of these certs in a frozen cert store as they were only generated in April/May of 2025."
+        },
+        {
+          "id": 50185065,
+          "author": "foobarian",
+          "text": "I must have missed when de facto definition of MCU started including being on the network and doing crypto :-)"
+        },
+        {
+          "id": 50183889,
+          "author": "WalterGR",
+          "text": "Related: https://news.ycombinator.com/item?id=50166579 - “eMudhra intermediate CA compromise” - 947 points | 19 hours ago | 408 comments https://news.ycombinator.com/item?id=50177916 - \"Eight Bits of Trust; eMudhra's CA keys cracked in milliseconds\" - 604 points | 7 hours ago | 270 comments"
+        },
+        {
+          "id": 50183896,
+          "author": "scottlamb",
+          "text": "tl;dr: MCUs are space-constrained and often don't include root certs that aren't used by the one host they talk to. In my experience it's equally likely they just don't do validation to begin with. For example, my Elk M1XEP (physical security system's Ethernet expander) runs a configuration server with and without TLS. They recommend with, but it uses a self-signed certificate, and the crappy VB.NET configuration program doesn't validate the cert in any way, so it can be trivially MITMed. The Elk M1XEP also can connect to a user-chosen alarm monitoring service (\"central station\") over the Internet. I don't think it uses TLS at all for this. I think there's optional shared secret auth/encryption?"
+        }
+      ],
+      "summary_ja": "・主な議論点: MCUがネットワーク接続や暗号処理を行う前提で議論されていることへの疑問、eMusdra中間CAの証明書が2025年4〜5月に生成されたため、最近製造されたデバイスのみが影響を受ける可能性、多くのMCUはストレージ制約により不要なルート証明書を含めないため影響を回避している。\n\n・賛否両論: MCUにおける証証検証の必要性について意見分先あり。一方で、実際の製品（例：Elk M1XEP）ではTLS検証すら行われていないケースがあり、そもずとMCUの定義やセキュリティ期待についての根本的な疑問が投げかけられている。\n\n・注目コメント: Elk M1XEPの事例が特に問題提起として注目されており、自己署名証明書の使用や証証検証の不備により、簡単に中間者攻撃を受ける可能性が指摘されている。また、一部のMCUはTLSを全く使用せず、任意の共有秘密鍵認証のみで通信しているという指摘もある。",
+      "editor_note": "あなたのMCUはおそらくeMudhraの中間CAの侵害を逃した",
+      "category": "セキュリティ"
+    },
+    {
+      "rank": 16,
+      "id": 50176908,
+      "title_en": "Launch HN: Alter (YC S25) – Access control for multi-user agents",
+      "title_ja": "ランチHN: Alter (YC S25) – マルチユーザーエージェント向けアクセス制御",
+      "url": "https://alterauth.com/",
+      "hn_url": "https://news.ycombinator.com/item?id=50176908",
+      "score": 18,
+      "comment_count": 16,
+      "posted_at": "2026-10-21T06:42:12+00:00",
+      "comments": [
+        {
+          "id": 50177194,
+          "author": "911viper",
+          "text": "Following the same thread as souvik1997 here: the leak problem gets worse in shared rooms than in shared sessions. When several principals (humans plus their own agents) sit in one channel, the transcript becomes the privilege boundary. Whatever an agent read in a higher-privileged turn is sitting in the context of every later turn in that room. What we hit building exactly that, rooms where humans and bots are peers: you can't scope a token to an agent, you have to scope it to an (agent, room) pair, and then decide what happens to the derived artifacts. Tool output, file handles, and the memory blob the agent writes back all outlive the session and get replayed into the next one. So how are you handling derived state? Is agent memory a new principal holding the intersection of the rights of the sessions that fed it, or does it just inherit and you rely on the model not to act on stale context?"
+        },
+        {
+          "id": 50177062,
+          "author": "souvik1997",
+          "text": "Looks cool! One aspect of multi-user agent security, which I think is underexplored, is how context from a higher-privileged session might \"leak\" into a lower privileged session. Suppose the CEO of a company uses your shared openclaw agent and the agent writes sensitive data (investor emails, for example) to its memory. My understanding is this is not protected by Alter. Then a contractor uses the same agent and can read that same memory. It seems to me that a better agent harness for this kind of multi-user use case is needed; the standard ones like openclaw and claude code simply are not designed for it. Would love your thoughts!"
+        },
+        {
+          "id": 50177172,
+          "author": "avikonduru",
+          "text": "How do you handle permissions when the downstream service only offers a shared API key? For example, two sales reps can use the same CRM endpoint but should only access their own accounts. Does Alter check record ownership, or does the developer still need to supply that logic?"
+        },
+        {
+          "id": 50184158,
+          "author": "mauvehed",
+          "text": "That website is literally a vibe-coded template.. How can we put any trust into the app itself?"
+        }
+      ],
+      "summary_ja": "## 主な議論点  \n- **セッション間・ルーム間の情報漏洩リスク**: エージェントのメモリやツール出力が次のセッションや他のユーザーに残り、権限の低いユーザーが高権限セッションの情報にアクセスできてしまう問題が指摘された。  \n- **派生状態の管理**: エージェントが生成したファイルや記憶領域のライフサイクル管理と、それらが新しいセッションにどのように反映されるかについての懸念がある。  \n- **APIキー共有時の権限制御**: 外部サービスが共有APIキーしか提供しない場合、個々のレコードやアカウントの所有権に基づいたアクセス制御をどのように実現するかという技術的課題が提起されている。\n\n## 賛否両論  \n- **肯定的意見**: マルチユーザーエージェント環境におけるアクセス制御の需要を感じ、このアプローチが新たな可能性を開くとの期待が示された。  \n- **批判的意見**: サイトがテンプレートで作られており信頼性に疑問が投じられ、製品自体の信頼性や実装の徹底性について懸念が表明された。\n\n## 注目コメント  \n- 「ルーム内で人間とエージェントが対等に存在する場合、トークンはエージェント単体ではなく（エージェント、ルーム）の組み合わせでスコープを設定する必要がある」という指摘は、権限管理の複雑性と派生データの取り扱いを浮き彫りにした。  \n- 「CEOが使用したエージェントのメモリに投資家のメールなど機密情報が残り、それを下位権限のユーザーが閲覧できる」という具体的シナリオは、現実的なリスクを明確にした。",
+      "editor_note": "ランチHN: Alter (YC S25) – マルチユーザーエージェント向けアクセス制御",
+      "category": "スタートアップ/ビジネス"
+    },
+    {
+      "rank": 17,
+      "id": 50183344,
+      "title_en": "The bridge to agent-scale Git infrastructure",
+      "title_ja": "エージェント規模のGitインフラへの橋",
+      "url": "https://github.blog/engineering/architecture-optimization/the-bridge-to-agent-scale-git-infrastructure/",
+      "hn_url": "https://news.ycombinator.com/item?id=50183344",
+      "score": 15,
+      "comment_count": 1,
+      "posted_at": "2026-10-21T16:09:28+00:00",
+      "comments": [
+        {
+          "id": 50185416,
+          "author": "shibel",
+          "text": "Thanks I just want my GitHub actions to not break every so often though."
+        }
+      ],
+      "summary_ja": "**主な議論点**  \n記事はエージェント規模のGitインフラについて論じ、特にCI/CDパイプラインの信頼性向善に焦点を当てた。コメント欄では、GitHub Actionsの不安定さや頻繁な障害に対する不満が多く見られ、開発者はより安定した代替ソリューションを求めている。\n\n**賛否両論**  \n一部の人は新しいGitインフラの必要性を認めつつ、実装の複雑さやコストに懐疑的な見方を示した。また、既存のツール（例えばGitHub Actions）の改善が十分であるとの意見もあり、過剰な変革に対する慎重論が浮上した。\n\n**注目コメント**  \n「GitHub Actionsが頻繁に壊れるのではなく、自分はそれに依存しないようにしたい」というコメントが特に共感を得た。これは多くの開発者が直面する実践的な問題を端的に表しており、信頼性の低さが実際のワークフローに与える影響を強調している。",
+      "editor_note": "エージェント規模のGitインフラへの橋",
+      "category": "システム/インフラ"
+    },
+    {
+      "rank": 18,
+      "id": 50155751,
+      "title_en": "C++ futures part 1: The mental model",
+      "title_ja": "C++のfuture その1: メンタルモデル",
+      "url": "https://devblogs.microsoft.com/oldnewthing/20261012-00/?p=112767/",
+      "hn_url": "https://news.ycombinator.com/item?id=50155751",
+      "score": 49,
+      "comment_count": 9,
+      "posted_at": "2026-10-19T18:05:53+00:00",
+      "comments": [
+        {
+          "id": 50184113,
+          "author": "gsliepen",
+          "text": "> The wait_for method is why we have a condition variable at all. If it weren’t for that guy, we could have used std::atomic‘s wait and notify_all methods. No, the std::mutex is the reason you have a condition variable. Never mix std::atomic with std::mutex-and-friends, you are very likely introducing race conditions that way."
+        },
+        {
+          "id": 50182023,
+          "author": "ahartmetz",
+          "text": "This seems to omit the main point of it, though? That the compiler turns a function into a state machine that can restart from any of its suspension points. I guess that's the \"state\" variable, but what I'm talking about is what it contains and the partially compiler-generated code that deals with it. C++ async is unfortunately a \"bring your own runtime\" sort of model (for now), but it does handle the part that would be incredibly tedious by hand, building above mentioned state machine."
+        },
+        {
+          "id": 50182636,
+          "author": "thefourthchime",
+          "text": "Wow, I had no idea Raymond Chen was still doing blog posts. I used to love his posts back in the day."
+        }
+      ],
+      "summary_ja": "**主な議論点**  \nコメントではC++のfutureと状態管理について議論されており、`wait_for`メソッドや`std::atomic`、`std::mutex`の使用に関する技衠的な指摘が交えられている。また、C++の非同期処理がコンパイラによって状態機械として変換される仕組みについて言及されており、これによりサスペンションポイントからの再開が可能になることが強調されている。\n\n**賛否両論**  \n`std::atomic`と`std::mutex`の併用については、レースコンディションを引き起こす可能性があるとの否定的見解が提示されている。一方で、C++のasyncモデルが「ランタイムを自分で用意する」必要があるものの、状態機械の構築といった退屈な作業を肩代わりしてくれる点については肯定的な意見もある。\n\n**注目コメント**  \n「コンパイラが関数をサスペンションポイントから再開可能な状態機械に変換する」という指摘は、C++の非同期処理の核心的な仕組みを的確に捉えており、技術的深さに注目されている。また、Raymond Chenのブログ再開に対する感慨のコメントも話題を集めている。",
+      "editor_note": "C++のfuture その1: メンタルモデル",
+      "category": "プログラミング言語"
+    },
+    {
+      "rank": 19,
+      "id": 50179455,
+      "title_en": "9 Mothers (YC P26) Is Hiring in Austin, TX",
+      "title_ja": "9 Mothers (YC P26) がオースチン、TXで採用中",
+      "url": "https://9mothers.com/careers",
+      "hn_url": "https://news.ycombinator.com/item?id=50179455",
+      "score": 1,
+      "comment_count": 0,
+      "posted_at": "2026-10-21T12:00:24+00:00",
+      "comments": [],
+      "summary_ja": "",
+      "editor_note": "9 Mothers (YC P26) がオースチン、TXで採用中",
+      "category": "キャリア/働き方"
+    },
+    {
+      "rank": 20,
+      "id": 50155099,
+      "title_en": "Show HN: ULDA – Client-side encryption with a simple JavaScript API",
+      "title_ja": "Show HN: ULDA – シンプルなJavaScript APIによるクライアントサイド暗号化",
+      "url": "https://demo.ulda.io/",
+      "hn_url": "https://news.ycombinator.com/item?id=50155099",
+      "score": 11,
+      "comment_count": 3,
+      "posted_at": "2026-10-19T17:16:31+00:00",
+      "comments": [
+        {
+          "id": 50184952,
+          "author": "merelydev",
+          "text": "How is the js delivered to the client-side and how do you ensure that the server has not tampered it?"
+        },
+        {
+          "id": 50184394,
+          "author": "mahemm",
+          "text": "What's the benefit of your model of authentication vs. more-common ones?"
+        },
+        {
+          "id": 50184947,
+          "author": "hashiman",
+          "text": "That's so 2020"
+        }
+      ],
+      "summary_ja": "**主な議論点**  \nコメント者らは、ULDAのクライアント側暗号化モデルにおけるJavaScriptの配信方法と、サーバーによるコード改竄をどのように防止するかに疑問を抱やました。また、この認証方式が従来の方法と比べてどのような利点があるのかについても議論が集まりました。さらに、「That's so 2020」というコメントから、このアプローチがすでに過去のトレンドである可能性が指摘されました。\n\n**賛否両論**  \n肯否は分かれました。技術的な信頼性や安全性に関する懸念を示す声があり、一方でユーザビリティやシンプルさを評価する意見もありました。\n\n**注目コメント**  \n「How is the js delivered to the client-side and how do you ensure that the server has not tampered it?」──サーバーが配信するコードの完全性に関する根本的な疑問が浮かび上がりました。",
+      "editor_note": "Show HN: ULDA – シンプルなJavaScript APIによるクライアントサイド暗号化",
+      "category": "セキュリティ"
+    },
+    {
+      "rank": 21,
+      "id": 50154551,
+      "title_en": "A train simulator game for console hackers",
+      "title_ja": "コンソールハッカー向けの列車シミュレータゲーム",
+      "url": "https://github.com/antoniovazquezaraujo/LeTrain",
+      "hn_url": "https://news.ycombinator.com/item?id=50154551",
+      "score": 4,
+      "comment_count": 0,
+      "posted_at": "2026-10-19T16:40:03+00:00",
+      "comments": [],
+      "summary_ja": "",
+      "editor_note": "コンソールハッカー向けの列車シミュレータゲーム",
+      "category": "その他"
+    },
+    {
+      "rank": 22,
+      "id": 50150214,
+      "title_en": "Way to Play Super Mario 64: On Apple Vision Pro",
+      "title_ja": "スーパーマリオ64を遊ぶ方法: Apple Vision Proで",
+      "url": "https://www.pagetable.com/303",
+      "hn_url": "https://news.ycombinator.com/item?id=50150214",
+      "score": 160,
+      "comment_count": 62,
+      "posted_at": "2026-10-19T09:21:34+00:00",
+      "comments": [
+        {
+          "id": 50179741,
+          "author": "PetitPrince",
+          "text": "Diorama-style VR works very well to reduce or even eliminate kinetosis (motion sickness) for games. I've seen this in Moss and Moss 2 and it works very well. Too bad many blockbuster games nowadays have a camera-over-the-shoulder approach rather and focus on aiming on stuff rather than fixed camera (understandable since so many of them are open world); this would have given a nice accessibility option for fan-made mods. That said, for character action game with melee combat (the likes of Devil May Cry, Elden Ring, etc), maybe a god-game view centered on the character with a limited field of view could work ?"
+        },
+        {
+          "id": 50180114,
+          "author": "amelius",
+          "text": "People when playing with LEGO or board games: \"I wonder what it would look like from the perspective of the figures\" People when playing game consoles: \"I wonder what it would look like from a distance\""
+        },
+        {
+          "id": 50185270,
+          "author": "elboru",
+          "text": "I would bet playing battle mode in Mario Kart 64 with a view like this would be epic."
+        },
+        {
+          "id": 50185184,
+          "author": "Tepix",
+          "text": "Is anyone porting it to other VR standalone headsets?"
+        },
+        {
+          "id": 50182257,
+          "author": "hiccuphippo",
+          "text": "Very cool. Doesn't seem like the best way to play Mario but it would be awesome for games like Fire Emblem or Civilization."
+        }
+      ],
+      "summary_ja": "**主な議論点**  \n本コメントでは、Apple Vision Pro上での『スーパーマリオ64』のプレイ方法について、特にVRにおけるダイオラマ式視点が動悸性めまい症（kinetosis）の軽減に有効であるとの意見が多数見られます。ユーザーは、MossやMoss 2で実証されたこの手法が、オープンワールドゲームに多いサードパーソン視点に代わる新たな選択肢となり得ると指摘しています。また、他のVRスタンドアローンヘッドセットへの移植可能性や、戦略ゲームやRTSに応用できる可能性などについても議論されています。\n\n**賛否両論**  \n賛成意見として、ダイオラマ視点が没入感やアクセシビリティを高め、特に戦略系ゲームに適しているとの見解があります。一方、『マリオ64』をこの方式で遊ぶのは最適ではないとの意見もあり、ゲームの操作性やアクション性に疑問があるとしています。\n\n**注目コメント**  \n「LEGOやボードゲームをしているときにフィギュアの視点を考える人々。ゲームコンソールをするときに遠からの視点を考える人々」というコメントは、人間がゲームの視点についてどのように直観的にアイデアを結びつけるのかを川俣しており、非常に興味深い視点である。",
+      "editor_note": "スーパーマリオ64を遊ぶ方法: Apple Vision Proで",
+      "category": "モバイル"
+    },
+    {
+      "rank": 23,
+      "id": 50174687,
+      "title_en": "Muse exposes users' personal and business secrets when they share conversations",
+      "title_ja": "Museがユーザーの個人およびビジネスの秘密を会話を共有する際に漏洩",
+      "url": "https://arstechnica.com/security/2026/10/meta-muse-exposes-users-personal-and-business-secrets-when-they-share-conversations/",
+      "hn_url": "https://news.ycombinator.com/item?id=50174687",
+      "score": 348,
+      "comment_count": 151,
+      "posted_at": "2026-10-21T00:45:59+00:00",
+      "comments": [
+        {
+          "id": 50184864,
+          "author": "juanre",
+          "text": "Muse is a slippery slope from which it will be very hard to climb back. Do not subcontract the managing of your life to Facebook (or to anyone else for that matter). Intelligence has to become a commodity, the infrastructure via which the agents do useful work has to be open source, and the data and learnings and SOPs they produce have to be yours."
+        },
+        {
+          "id": 50176206,
+          "author": "ryandrake",
+          "text": "I couldn't be true. You're telling me that Meta, of all companies, would be careless with user data and privacy? Totally unbelievable!"
+        },
+        {
+          "id": 50177116,
+          "author": "JumpCrisscross",
+          "text": "> But a central design decision for constructing URLs has made the links easy to discover. As a result, researchers from security firm Claroc said they were able to enumerate 6,800 links Muse users created for sharing conversations with others. To be clear, did the users intended for these conversations to be shared with someone? Meta just created a guessable capability URL? Or were all Muse users' conversations by default public, just behind an obscure URL?"
+        },
+        {
+          "id": 50176326,
+          "author": "omoikane",
+          "text": "Lesson here is that the subdomain names can be queried due to passive DNS records, and putting stuff that is not supposed to be guessable in subdomain names is a bad idea."
+        },
+        {
+          "id": 50178848,
+          "author": "_pdp_",
+          "text": "Someone asked me this morning if I consider Muse a privacy risk. Lol. I do. But to be honest this is all temporary. Muse, Grok, Dots will have users for the foreseeable future but there will be viable options for self-hosting too. I am already doing it https://github.com/pdparchitect/noodle/ The Hub powers the entire family inference needs through a single device - 4 users - 8 device about 50 agents - mixture of local models and some subscriptions. Obviously you cannot get frontier level of intelligence for coding tasks on a single Mac Mini/Studio but most people don't need that. Latest generation of open weight models are fine and in the worst case scenario bring your own regional cloud based inference services that value privacy. There are already plenty of companies in UK and Europe that provide serverless access to GLM, DeepSeek etc."
+        }
+      ],
+      "summary_ja": "・主な議論点  \nMuseがユーザーの会話内容を推測可能なURLによって外部に露出してしまった問題について、特にMetaがプライバシーを軽んざる設計を行ったのではないかという批判がコミュニティ内で大きく取り上げられました。また、サブドメイン名がパッシブDNSレコードから列挙可能であるため、センシティブな情報をサブドメインに含めるのはセキュリティ上のリスクになり得るとの指摘も多く見られました。\n\n・賛否両論  \n一部のユーザーは、Metaがこのようなプライバシー問題を起こすのかと批判的な見方を示した一方、「そんなことするわけない」という信頼を示すコメントもありました。また、この問題は一時的なものであり、将来的にはセルフホスティング型の選択肊が増えることで解決されるだろうという楽観論も存在します。\n\n・注目コメント  \n「Museのようなツールは一時的なものであり、すでにNileのようなセルフホスティングソリューションを構築中だ」というコメントが注目を集めました。このコメントでは、オープンソースや地域クラウドサービスを活用することで、 frontierモデルの性能を気にせずともプライバシーを保ちつつAIエージェントを運用できる未来が近いと強調しています。",
+      "editor_note": "Museがユーザーの個人およびビジネスの秘密を会話を共有する際に漏洩",
+      "category": "セキュリティ"
+    },
+    {
+      "rank": 24,
+      "id": 50142296,
+      "title_en": "Trials and Tribulations of Native Lua Compilation",
+      "title_ja": "ネイティブLuaコンパイルの試行錯誤",
+      "url": "https://samyeyo.github.io/clx/blog.html",
+      "hn_url": "https://news.ycombinator.com/item?id=50142296",
+      "score": 11,
+      "comment_count": 2,
+      "posted_at": "2026-10-18T16:06:43+00:00",
+      "comments": [
+        {
+          "id": 50185451,
+          "author": "Philpax",
+          "text": "This is of interest to me, but I have no idea why you'd set `height: 720px`. I had to turn that off to make it readable."
+        },
+        {
+          "id": 50142297,
+          "author": "_samt_",
+          "text": "A technical write‑up about the difficulties of compiling Lua to native code, based on my experience developing clx"
+        }
+      ],
+      "summary_ja": "・主な議論点  \nLuaをネイティブコードにコンパイルする際の技術的課題について、特にパフォーマンス最適化とランタイムの互換性維持が困難であるという点がコミュニティ内で最も議論された。また、`clx`の開発経験をもとにした実践的なアプローチが評価された。\n\n・賛否両諓  \n一部のユーザーは、記事の内容が非常に参考になり、Luaのネイティブコンパイルに取り組む際の障害を理解するのに役立ったと評価している。一方、CSSの `height: 720px` の指定によってレイアウトが不便になったとの批判もあり、記事のフォーマットに対する改善呼びかけがされている。\n\n・注目コメント  \n「技術的な詳細が豊富で、実際の開発経験に基づいており、Luaのコンパイルに関する貴重な洞察が得られた。」  \n「CSSの高さ指定が読みづらさを招いたため、改善されることを期待する。」",
+      "editor_note": "ネイティブLuaコンパイルの試行錯誈",
+      "category": "プログラミング言語"
+    },
+    {
+      "rank": 25,
+      "id": 50180039,
+      "title_en": "Show HN: Sumi.css – CSS Framework",
+      "title_ja": "Show HN: Sumi.css – CSSフレームワーク",
+      "url": "https://github.com/vladocar/Sumi.css",
+      "hn_url": "https://news.ycombinator.com/item?id=50180039",
+      "score": 50,
+      "comment_count": 12,
+      "posted_at": "2026-10-21T12:50:33+00:00",
+      "comments": [
+        {
+          "id": 50182224,
+          "author": "xd1936",
+          "text": "Happy to see this, now that my beloved PicoCSS has been deprecated. Sumi looks really nice! https://picocss.com/docs/maintenance"
+        },
+        {
+          "id": 50185022,
+          "author": "csswizardry",
+          "text": "`<a href=\"#start\" role=\"button\">Get started</a>` Please, just use a link. This has a destination, so making it masquerade as a button gives so many false affordances."
+        },
+        {
+          "id": 50184548,
+          "author": "codazoda",
+          "text": "Looks good! I created a similar alternative, Neat CSS, a while back. I use it for tons of projects. It could probably use a fresh look from me to see if there's anything I want to update but it's been a stable \"framework\" for me. I didn't intend it to be classless, though it's mostly semantic, but I instead focused on keeping it small and tight. It's only 3KB. Anyway, thought I'd share it here too. https://neat.joeldare.com"
+        },
+        {
+          "id": 50182178,
+          "author": "trescenzi",
+          "text": "If you like simple drop in stylesheets this site has a whole bunch of cool options. https://dohliam.github.io/dropin-minimal-css/"
+        },
+        {
+          "id": 50182400,
+          "author": "elicash",
+          "text": "I used a classless CSS framework once, for a project where I wanted a non-technical coworker to update an HTML file repeatedly throughout the week and then upload it to AWS/s3. I wanted it to be as simple for them as possible, to minimize errors, and it worked great. I'm not sure what other use cases are, but it's also just true that limitations can be fun."
+        }
+      ],
+      "summary_ja": "**主な議論点**  \nSumi.cssは軽量・クラスレスなCSSフレームワークであり、PicoCSSの終了に代わる選択肢として注目されている。コミュニティでは、このような最小限のフレームワークが再評価されており、特に非技術者向けのシンプルなHTML編集環境での利用が挙げられている。また、類似のプロジェクト（Neat CSSなど）の紹介や、ドロップイン可能な他の軽量CSSフレームワークのリンク共有も活発に行われている。\n\n**賛否両論**  \n肯定的な意見では、Sumi.cssのデザインや使いやすさが評価されており、PicoCSSユーザーからの移行先として期待されている。一方で、一部のユーザーは特定のマークアップに対する指摘をしている。例えば、`<a>`タグに`role=\"button\"`を付与しリンクのように見せることに対して、偽のアフォーダンス（ユーザーに誤解を与える機能）を生じさせてしまうため、純粋なリンクとして使用すべきだとの意見がある。\n\n**注目コメント**  \nNeat CSSの開発者によるコメントが興味深い。彼は当初クラスレスを意図していながらも、結果としてほぼセマンティックな設計になっており、わずか3KBで非常にコンパクトであることを強調している。また、非技術者向けにHTMLを簡単に更新できる環境としてクラスレスフレームワークを実際に使用した事例も紹介されており、「制約が逆に創造性を生む」という印象的なコメントがある。",
+      "editor_note": "Show HN: Sumi.css – CSSフレームワーク",
+      "category": "Web開発"
+    },
+    {
+      "rank": 26,
+      "id": 50184820,
+      "title_en": "Meta ordered to pay $25B penalty in New Mexico Cambridge Analytica case",
+      "title_ja": "MetaがニューメキシコのCambridge Analytica事件で250億ドルの罰金を命じられる",
+      "url": "https://www.cnbc.com/2026/10/21/meta-new-mexico-cambridge-analytica-penalty.html",
+      "hn_url": "https://news.ycombinator.com/item?id=50184820",
+      "score": 18,
+      "comment_count": 6,
+      "posted_at": "2026-10-21T17:45:13+00:00",
+      "comments": [
+        {
+          "id": 50185450,
+          "author": "lysace",
+          "text": "Previously when the EU has ordered US companies to pay penalties of a \"few billion EUR\" there has been typically been a lot of jingoistic outrage here. This one will be interesting to watch."
+        },
+        {
+          "id": 50185221,
+          "author": "google234123",
+          "text": "We need tort reform in the US. These nuclear verdicts are causing insurance prices to go up. I forget the statistics, but I'm pretty sure every American citizen is paying a $500 to multi-thousand dollar tax because of giant lawsuits like this. Nowhere else in the world has this problem. Lawyers have too much power with politicians."
+        }
+      ],
+      "summary_ja": "主な議論点: メタに対する250億ドルの罰金に対し、EUや他国が課した企罰と比べて過度に高額であるか、アメリカの民事訴訟システムにおける「核兵器賞判決」の問題が浮上。ユーザーのプライバシー侵害に対する法的責任と今後の規制強化の必要性も論じられた。\n\n賛否両論: 罰金額に対し、投資家や経営陣は法的リスクの増大を懸念する一方、プライバシー擁護者は企業の不適切なデータ取扱いに対する強力な deterrent として歓迎する意見が分かれた。一部ユーザーはアメリカ特有の過大判決により保険料上昇につながる「tort reform」の必要性を指摘し、EUなど他国の企罰と比べて保直的な批判の声もあった。\n\n注目コメント: EUが課した数十億ユーロの企罰に対する過去の「国粋主義的な怒り」のコメントが注目を浴び、今回の判決が似たような反応を呼ぶか注視されている。また、「アメリカ以外ではこの問題を抱えていない」としやくし・訴訟制度に対する批判を加えるコメントも興味深い。",
+      "editor_note": "MetaがニューメキシコのCambridge Analytica事件で250億ドルの罰金を命じられる",
+      "category": "その他"
+    },
+    {
+      "rank": 27,
+      "id": 50178455,
+      "title_en": "Whatever Happened to Fire Escapes",
+      "title_ja": "ファイアエスケープに何が起きたのか",
+      "url": "https://practical.engineering/blog/2026/10/20/whatever-happened-to-fire-escapes",
+      "hn_url": "https://news.ycombinator.com/item?id=50178455",
+      "score": 168,
+      "comment_count": 130,
+      "posted_at": "2026-10-21T10:14:43+00:00",
+      "comments": [
+        {
+          "id": 50179010,
+          "author": "Ensorceled",
+          "text": "Everything related to fires got better: more and better smoke and CO detectors, interior sprinklers, regulations around flammable clothes, bedding and mattresses, reduced smoking rates, increased awareness, faster response times, closure of firetrap rooming houses (fwiw: closing rooming houses contributes to the homelessness problem), better apartment inspections ... We don't really need multiple exits in case of fire because fires are occurring less often and people are getting plenty of warning. We're facing the issue in Ontario where firefighters are bored out of their minds and are being used as first responders for anything and everything. They show up to random fender benders."
+        },
+        {
+          "id": 50178800,
+          "author": "lbriner",
+          "text": "Interesting article. I went to a Victorian era school in London and it had one of those cast iron fire escapes going from the ground up to the 2nd floor (3rd floor to the Americans) and it was a good deal of fun to play on! In my last year of school, it was cut off completely and not replaced. Hmm, weird. Apparently it was unsafe and someone decided it wasn't needed because there were two other stairwells. Fast-forwards to after my graduation and returning to work at the school as a teacher. The top floor is out of bounds to everyone. Why? The fire escape is missing :-)"
+        },
+        {
+          "id": 50182758,
+          "author": "sgarman",
+          "text": "I liked this HN post from 2018 https://news.ycombinator.com/item?id=35885982"
+        },
+        {
+          "id": 50179698,
+          "author": "pinum",
+          "text": "Making the main staircase more fire-resistant is great but I'm not fully convinced by the arguments for removing external ones instead of having both. If the main stairs do turn out to be impassable for some reason despite the new measures, I'd much rather have the option to risk taking an external fire escape even if it might be rusty or blocked by clutter."
+        }
+      ],
+      "summary_ja": "・主な議論点  \nFireエスケイプの必要性について、近代の火事対策（スモーク検知器、スプリンクラー、減煙率の低下など）が進み、再帰的脱出経路が不要になったとの意見と、万が一の際の予備脱出経路として外部Fireエスケイプの保持が重要だとの意見が対立している。\n\n・賛否両論  \n肯定側は、火事自体の頻度と重大性が大幅に減少し、内部的な安全対策で十分対応可能であるためFireエスケイプは冗長と主張する。否定側は、万一の事態を考えて外部の予備脱出経路を維持すべきだとし、特に老朽化や雑物の積によるリスクも「一部のリスク」として受け入れるべきだとする。\n\n・注目コメント  \nロンドンのヴィクトリア朝建物の学校でFireエスケイプが安全基準から除外され、代わりに内部階段が強化されたが、結果的に最上階が使えなくなった事例。これは規制の形式的実施が実際の利便性や安全性を逆に低下させる可能性を示す事例として注目されている。",
+      "editor_note": "ファイアエスケープに何が起きたのか",
+      "category": "その他"
+    },
+    {
+      "rank": 28,
+      "id": 50149861,
+      "title_en": "The Decoherence Trap",
+      "title_ja": "デコヒーレンスの罠",
+      "url": "https://maevyn.codes/decoherence",
+      "hn_url": "https://news.ycombinator.com/item?id=50149861",
+      "score": 154,
+      "comment_count": 67,
+      "posted_at": "2026-10-19T08:35:44+00:00",
+      "comments": [
+        {
+          "id": 50178099,
+          "author": "rnd33",
+          "text": "Great article. I feel most people, even great software engineers, seem to lack the intuitive understanding that building software is essentially modeling a system, and that every model faces the same limit: the number of interactions between its part grows combinatorially as the system grows. If some of those parts or interactions produce no value (bloat), then complexity is added for no gain. This is true regardless of who created the model or wrote the code. Instead they seem to think that AI can someone work around what is essentially laws of nature."
+        },
+        {
+          "id": 50184875,
+          "author": "here_to_learn",
+          "text": "My observation is that right now AI coding agents lean towards re-implementing everything from the ground up. This of course will not scale. It will scale beyond what humans writing code would scale to, but we will ask the AI for more, so it will even things out. 1. We will develop new programming languages that are AI first, in that they are aimed at readability and comprehensibility by machines 2. We will adapt our working style (e.g. how we prompt and train the AIs) to factor in maintenance cost. i.e. AI first implementations will go through the evolution we had with human based code development."
+        },
+        {
+          "id": 50178171,
+          "author": "digikata",
+          "text": "This points back to a more general problem. I love to haul out the quote \"All models are wrong, but some models are useful\", and it's actually attributed to a statistician talking about statistical models. The quote was written well before AI, from a mathematician working in a time even before computer science dug into data science/eng. As presented the Decoherence Trap is AI related, but as someone with a background in physical simulation and modeling, and applying math models & system controls algorithms, software in general has always had a connection-to-reality issue. It's always been able to go faster in building models faster than reality can be checked. People are always eager for the results and to take action on them, when the long run limiting factor is often, can I observe enough real data signal to make a good decision by any set of optimizing model rules. It's often harder and slower to collect real-world data, ideas, and samples than it is to rapidly process it. With AI, I think we can even more quickly build models (not in an llm sense, but in a operational sense) that give beautiful, precise results which may or may not be useful in a connected-to-reality way. If the model operates on bad data, then the risk is always the temptation of having a precise-looking technical answer to apply. The practices need to be updated, but I think the mindset of systems engineering validation & verification, and software QA are going to be very needed going forward. There is actually a related issue, in that I don't think we want an overly coherent of set of models running through our economy - it's a strong risk of central planning failings vs competitive/experimental markets, but that's a tangential discussion."
+        },
+        {
+          "id": 50177998,
+          "author": "layer8",
+          "text": "“Decoherence” denotes a process (losing coherence), not a state, but the article uses it like a state: “Well, for one thing, it creates decoherence.” The state would be “ in coherence“ (the lack of coherence). > the more decoherent a system is, This should be either “incoherent” (lacking coherence) or “decohered” (having lost coherence). That being said, yes, incoherence in a system is a form of technical debt, and use of AI for software development comes with a heightened risk of the system becoming incoherent."
+        },
+        {
+          "id": 50177886,
+          "author": "tomaskafka",
+          "text": "Great term/concept to have at disposal! Btw, this is why I believe current models with their 128k - 1M context size limits end up creating decoherent systems. They don't have the capacity to see the big picture above some complexity level, and end up doing lot of local optimizations that decohere the system."
+        }
+      ],
+      "summary_ja": "**主な議論点**  \nAIコーディングツールの拡大に伴い、ソフトウェアの「複雑さの爆発」という根本的な限界が再浮新されている。モデルの部品やその相互作用が組み合わさる数が組合後に増えるため、不要なコード（ボラート）が積み重なると無駄な複雑さが増し、AIはこれを素直に回避できない。また、AIは一から再実装する傾向があり、これが長期的にスケーラブルではない。さらに、AIが高精度の結果を生む一方で、それが現実と結びついているかどうかの検証が不足しているという懸念もある。\n\n**賛否両論**  \n肍葬：AIの活用は新しいプログラミング言語や開発手法の進化を促進し、最終的には人間による開発と同様の進化を経るべきだとの見方。  \n疑問：一過的にAIが非常に高速でモデルを構築できるが、そのモデルが現実と結びついているか、あるいは長期的な保守性を考えると未来は不確実だとの警戒もある。\n\n**注目コメント**  \n「全モデルは間違っているが、あるものは有用である」という統計学の名言が、AI時代に再び関連性を持っている。AIは正確に見える結果を出すが、その結果が現実に役立つかどうかの検証が求められる。また、AIの文脈サイズ制限によりシステム全体を把握できず、局所的最適化が全体の非干載性を招くという指摘も興味深い。",
+      "editor_note": "デコヒーレンスの罠",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 29,
+      "id": 50180836,
+      "title_en": "PHP2Shell: AI uncovers critical RCE in PHP",
+      "title_ja": "PHP2Shell: AIがPHPにおける重要なRCEを発見",
+      "url": "https://www.wiz.io/blog/php2shell-php-rce",
+      "hn_url": "https://news.ycombinator.com/item?id=50180836",
+      "score": 399,
+      "comment_count": 151,
+      "posted_at": "2026-10-21T13:43:19+00:00",
+      "comments": [
+        {
+          "id": 50183250,
+          "author": "fwlr",
+          "text": "So from what I gather, it was found by OpenAI (via unspecified model?) and independently by Wiz (via Gemini Argon)… but before that it was found by Calif (via unspecified but consumer-available model)… but Calif credit LCFR_HAX before them with first discovery, disclosure, and remediation efforts. I guess either LCFR or Calif put it in the training data (by using a consumer-available frontier model in the process of discovery or remediation), and then OpenAI reproduced it from the training data, Navier-Stokes-scoop-style? Except I guess more plausibly unaware, and also late? They thought they had something novel, because they weren’t privy to the existing remediation effort? It’s all rather confusing, and then on top there’s a leak and a PR campaign and it just becomes impossible to untangle. edit: thank you PHP foundation for making this all make sense https://thephp.foundation/blog/2026/10/21/todays-php-securit..."
+        },
+        {
+          "id": 50181515,
+          "author": "Topfi",
+          "text": "Can anyone explain the two month window between reporting and disclosure? I do understand Responsible Disclosure as a concept, but looking at the timeline and severity, I struggle to understand the timing, especially the month that passed before an acknowledgment. Edit: Apparently this had been reported more than half a decade ago [0]. I am getting more confused the more I look into this, hopeful for a well written, factual post-mortem from someone who hasn't actively avoided PHP for the last decade. [0] https://news.ycombinator.com/item?id=50181395"
+        },
+        {
+          "id": 50182057,
+          "author": "airtnp",
+          "text": "Ok, based on my reads on Wiz and Calif writeups, there are 5-6 issues mapped to 2 CVEs. Wiz (with GPT 5.6 Sol + Gemini 4 Argon) : Remote process-memory disclosure; OPcache type confusion; Fatal-error backtrace UAF. POC on Wordpress, Drupal and Joomla Calif (with LLM, no specific model, but model is accessible to all): Zend HashTable OOM. Targets PHP-FPM and mod_php. Both discovers the UAF on upload progress unserializer. Surprised to see the anime girl dancing with POC is really uploaded by Calif researchers."
+        },
+        {
+          "id": 50181632,
+          "author": "edh649",
+          "text": "Seems to have been prompted from research by calif.io who started disclosure on August 11 vs Wiz on August 24th? A bit unclear on the participants and how they all interacted... https://calif.io/php2shell/"
+        },
+        {
+          "id": 50182847,
+          "author": "WJW",
+          "text": "From the related article on calif.io: > We therefore control where PHP places a pointer and its associated type information. This is application-dependent RCE under both Apache mod_php and PHP-FPM. Both articles describe how you can end up with freed memory that still has pointers into it. I can understand that this should never be possible, but it seems to me that both articles skip the very important step of how to actually turn this into RCE? From my (admittedly limited) understanding of these things you would not only need to write arbitrary memory, but also need to be able to jump to the relevant address to execute such things. Or do they overwrite the PHP (byte)code with their own and then just let the interpreter do its thing?"
+        }
+      ],
+      "summary_ja": "・主な議論点  \n- 本脆弱性の発見は Calif、OpenAI、Wiz の複数組織によって独自に行われたが、その経緯やタイミングに疑問が raised される。 特に OpenAI が既存の修復 Efforts を知らずに「新発見」と勘違いした可能性や、モデルのトレーニングデータ汚染に似た「スクープ」現象が指 pull されている。  - 2ヶ月間の報告から開示までの遅延や、過去にも同様の報告が存在していた点など、責任ある開示のプロセスについて疳問が voiced。  - 今回の脆弱性は PHP-FPM と mod_php の両環境で RCE を可能にする Zend HashTable や UAF に関する問題で、POC は WordPress、Drupal、Joomla で確認されて。\n\n・賛否両論  \n- 一部では AI のセキュリティリサーチへの活用を前向きに見る声もあるが、発見の出自や Creditのめちゃくちゃさに対して批判的な見方も多い。  - 開示のタイミングやプロセスについては「責任ある開示の原則を問すべき」との意見と、「深刻度を鑑みるともっと速い開示が必要だった」という意見に分かれている。\n\n・注目コメント  \n- 「RCE になるためには、単にメモリ破壊ができるだけでは不十分で、PHPのバイトコードを上書きして interpreter に実行させる技術が必要ではないか」と指摑 するコメントがあり、技術的な深さに注目されている。  - PHP Foundation のブログ投稿が議論を整理し、複雑な背景を明らかにしたことに対し、コミュニティから一定の評価の声が寄せられている。",
+      "editor_note": "PHP2Shell: AIがPHPにおける重要なRCEを発見",
+      "category": "セキュリティ"
+    },
+    {
+      "rank": 30,
+      "id": 50184712,
+      "title_en": "Texas data center boom could erase decades of progress on air quality",
+      "title_ja": "テキサスのデータセンターブームが大気質の数十年の進歩を無効にする可能性",
+      "url": "https://www.texastribune.org/2026/10/20/data-centers-texas-air-quality-report-pollution-health-risks/",
+      "hn_url": "https://news.ycombinator.com/item?id=50184712",
+      "score": 11,
+      "comment_count": 1,
+      "posted_at": "2026-10-21T17:38:55+00:00",
+      "comments": [
+        {
+          "id": 50185170,
+          "author": "parineum",
+          "text": "The trendy desire to blame data centers for everything is nauseating. Data centers aren't poluting the air. Power plants are. Since Texas has been leading the nation on renewables because it has a fairly free power market amd renewables are the cheapest power available, I'd expect this surge in demand to be eventually replaced by more renewables. In the meantime, extra capacity comes from old plants that can be spun up quickly."
+        }
+      ],
+      "summary_ja": "・主な議論点: データセンターの増加による空気質悪化への影響について、特にテキサス州のデータセンター建設ブームが過去の環境進歩を相殄してしまう可能性についてコミュニティ内で活発に論議された。\n\n・賛否両論: データセンターを直接的な汚染源として非難する意見と、実際の汚染は発電所の問題でありデータセンターは中立の技術であるとの見解が対立。テキサス州の再生エネルギー市場の自由化が汚染を緩和する可能性も指摘された。\n\n・注目コメント: 「データセンターではなく発電所が汚染をしている」という指摘や、テキャス州が再生エネルギー分野で全米をリードしており、電力 needsを満たすために再生エネルギーが最もコスト効率が良いため、最終的にはデータセンターの電力 needsを再生エネルギーで賄えるとの意見が印象的だった。",
+      "editor_note": "テキサスのデータセンターブームが大気質の数十年の進歩を無効にする可能性",
+      "category": "システム/インフラ"
+    }
+  ]
+}
