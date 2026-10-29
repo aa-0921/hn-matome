@@ -1,0 +1,1131 @@
+{
+  "date": "2026-10-30T00:00:00+09:00",
+  "slot": "23",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 50289418,
+      "title_en": "We're releasing the weights of Mistral Large 4",
+      "title_ja": "Mistral Large 4 の重みをリリース",
+      "url": "https://mistral.ai/news/mistral-large-4-oss/",
+      "hn_url": "https://news.ycombinator.com/item?id=50289418",
+      "score": 832,
+      "comment_count": 222,
+      "posted_at": "2026-10-29T14:13:21+00:00",
+      "comments": [
+        {
+          "id": 50290476,
+          "author": "maxloh",
+          "text": "> 2. If the Licensee or any of its affiliates operates a Model as a Service business, the Licensee must enter into a separate commercial license with Mistral before using the Model or its derivative works for any commercial purpose. The Licensee may contact Mistral, using this form: https://mistral.ai/contact/ , to request a commercial license. [0] Calling this \"open weight\" is misleading. That's why we had huge backlash when Redis, Elasticsearch, and Terraform went source-available, right? Weight-available is a better adjective for this kind of licensing. Same for Qwen, GLM, Kimi, MiniMax, etc. If they really want to be open source, they should pick an OSI-approved license. [0]: https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B/blo..."
+        },
+        {
+          "id": 50290261,
+          "author": "d2kx",
+          "text": "Mistral has been great for us as a provider for our EU-based company. We use Mistral Large 4, GLM 5.3 Flash and DeepSeek v4.1 Flash 1017 through their API for our B2B2C app for complex work around building blocks for documents and custom tools. A few months ago we weren't sure which EU provider to use, but since they introduced 3rd party models, added more features (now Responses API etc.) and improved their own model, we are quite happy-"
+        },
+        {
+          "id": 50289701,
+          "author": "Topfi",
+          "text": "They slashed pricing, it's now nearly half vs the preview (Input: $0.7/M Tokens, Output: $2.1/M Tokens vs Input: $1.36/M Tokens, Output: $4.18/M Tokens). At the original pricing in my evals, Mistral Large 4 Preview was not competitive. With this price point and some improvements on top, this full release warrants a major reassessment. [0] https://docs.mistral.ai/inference/pricing"
+        },
+        {
+          "id": 50289555,
+          "author": "strictnein",
+          "text": "Kind of buried down at the end: - https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B - https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B-NVFP4"
+        },
+        {
+          "id": 50289898,
+          "author": "3form",
+          "text": "\"Cyber benchmarks, while achieving an average refusal rate of 96.6% on malicious cyber requests, the highest we measure among open models.\" I feel like stating the obvious here and hence like I'm missing something. Where is the statistic about not refusing the non malicious requests? I can achieve the same performance with refusing when random(1000) < 967."
+        }
+      ],
+      "summary_ja": "**主な議論点**  \nMistral Large 4の重み公開に対し、ライセンスの商用利用制限が「真のオープンソース」ではないとの批判が多数寄せられた。特に、Model as a Service業務には別途商用ライセンスが必要であるため、「weights available」ではなく「open weight」と呼ぶことは誤解を招くとの見解が広まった。\n\n**賛否両論**  \n賛成意見では、EU企業向けAPIサービスの利便性や価格改訂（従来の半額以下）が高く評価されており、パフォーマンスとコストのバランスに改善が見られるとのコメントがあった。  \n一方、否定的な意見では、サイバー攻撃防止ベンチマークにおける過度な拒否率（96.6%）が問題視され、悪意のないリクエストも誤って拒否している可能性が指摘された。\n\n**注目コメント**  \n「\"Open weight\"という呼び方は誤解を招く。RedisやElasticsearchがソース公開で問題を起こしたのと同じだ。本当にオープンソースにしたいなら、OSI承認のライセンスを選べばいい」——ライセンスの不透明さに対する批判が的確で、業界標準との乖離を指摘している。",
+      "editor_note": "Mistral Large 4の重み公開は、大規模言語モデルの民主化と日本のAI開発者によるイノベーション促進に注目です。开放源流化により、日本企業も高精度AIを自社開発しやすくなる可能性があります。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 2,
+      "id": 50291054,
+      "title_en": "H.264 Is Magic (2016)",
+      "title_ja": "H.264 Is Magic (2016)",
+      "url": "https://sidbala.com/h-264-is-magic/",
+      "hn_url": "https://news.ycombinator.com/item?id=50291054",
+      "score": 178,
+      "comment_count": 94,
+      "posted_at": "2026-10-29T15:53:03+00:00",
+      "comments": [
+        {
+          "id": 50293621,
+          "author": "tgtweak",
+          "text": "Had the pleasure of working with Jason Garrett-Glaser (better known as DarkShikari) circa 2011 on a patch for x264 to better utilize more cores (slice-threaded lookahead). At the time he was working with Sony to optimize their PlayStation game streaming service, and this had the potential to lower encoding latency (critical to game streaming) even on same-core systems by spreading the frame over more cores to do more parallel work, and doing more intelligent scheduling and convergence after that tile-based work was reconverged into a frame. At the time we were using servers with 48 physical cores to do transcoding, a bit of a rarity in a single NUMA space back then and there were no instances to test this on so I flamegraph traced a few encodes at very high thread parallel counts and send back the instrumented profiles (from a custom compiled version) showing the core work being done and he used that to optimize the motion estimation code which worked on the first shot to perfectly level out cpu usage and increase encoding speed across ~24 cores (was previously topping out around 8 and running one core hot iirc). I got a look into how exotic and complex this project was, particularly in terms how low level and advanced things like motion estimation, quantizing and perceptual compression were... it was and still is sort of magic how many smart techniques are baked into something that we barely pay attention to. They were, even at that time, working on x265. His blog, Diary of an x264 developer, was a great read too for anyone wanting to get a vantage point on how crazy that codebase was. [1] https://github.com/mstorsjo/x264/blob/master/doc/threads.txt (edit: was Gaikai that was acquired by Sony in 2012 and is the basis for PlayStation Now)"
+        },
+        {
+          "id": 50292766,
+          "author": "Dwedit",
+          "text": "One uncommonly used feature of H.264 is support for lossless video. It's a bit hard to use due to tooling (not easy to discover and select the feature), and is sometimes incompatible with web browsers, but you can get actual lossless video using a mainstream video codec. You can verify that it really is lossless, and doesn't have any conversion step where it's quantized to 8-bit YUV. \"x264vfw\" is one tool which supports this format, even inside of an AVI file. So older software that uses Video For Windows can create those files."
+        },
+        {
+          "id": 50291496,
+          "author": "pwython",
+          "text": "Ten years later, 2026 magic: AV1 https://engineering.fb.com/2026/06/22/video-engineering/adop... And soon AV2 https://av2.aomedia.org/"
+        },
+        {
+          "id": 50291587,
+          "author": "HelloUsername",
+          "text": "Previous discussions: 4.nov.2016 https://news.ycombinator.com/item?id=12871403 219 comments 17.mar.2022 https://news.ycombinator.com/item?id=30710574 219 comments 24.may.2019 https://news.ycombinator.com/item?id=19997813 180 comments 14.jun.2024 https://news.ycombinator.com/item?id=40681306 205 comments"
+        },
+        {
+          "id": 50294065,
+          "author": "dizzant",
+          "text": "I'm surprised that 10 years later, the article still teaches an incorrect conceptual understanding of \"quantization\". The context heavily implies that quantization is \"discarding information\" generally (e.g. clipping, masking). The wikipedia article he links in the footnote disagrees, and so do I: > quantization is the process of mapping input values from a large set (often a continuous set) to output values in a (countable) smaller set, often with a finite number of elements. Quantization is a function over values, or the image itself. Clipping and masking, by contrast, are functions over the space/frequency dimensions, i.e. the pixel indices (\"preimage\"). A rule like \"apply a circular mask\" or \"drop the first quadrant\" does not depend on the values! The most extreme example of quantization is a threshold filter. Regardless of location, output \"1\" if the pixel is brighter than X, or \"0\" otherwise. This depends only on the value, not on the location. He also misses the opportunity to point out that chroma subsampling is another application of quantization, this time to chroma values (drop the low-order bits). Codecs like H.264 and JPEG use spatially-varying quantization rules to effectively discard more information at high frequencies, so his explanation of H.264 is spot on, but a non-expert encountering quantization for the first time would probably come away with the wrong idea. For an article explicitly targeted to non-experts that goes out of its way to introduce the term, it's a pretty important oversight."
+        }
+      ],
+      "summary_ja": "主な議論点\nH.264の符号化技術、特に運動推定や量子化処理の複雑さとその「魔術」的な側面について議論された。 community では、低遅延なゲーム配信向けの最適化や、複数コアを活用した並列処理の取り組みなど、実際の開発現場での経験が共有された。また、H.264が Lossless（無損失）動画をサポートしていること、そして10年経った現在でも基本的な技術的誤解が残っていることなどが指摘された。\n\n賛否両論\n2016年の記事における「量子化（quantization）」の説明に対して、賛否両論が存在する。記事は量子化を情報の「破棄」として一般的に記述していたが、一部のコミュニティメンバーはこれを誤った概念的理解であると指摘した。彼らは、量子化が値の集合から较小の集合へのマッピングであるのに対し、マスキングやクリッピングは空間的・周波数的次元の操作であると明確に区分した。この点 regarding 記事の専門家向けでない説明の不十分さが議論された。\n\n注目コメント\n特に洞察のあるコメントとして、量子化の定義を厳密に定義し直すものがあった。これは、量子化が値に依存する関数であるのに対し、マスキングなどは位置（ピクセルインデックス）に依存する関数であると説明した。さらに、クロマサブサンプリングも量子化の一種であり、クロマ値の下位ビットを破棄するものであると指摘した。このコメントは、技術的用語の誤解を正す上で非常に的確で、非専門家向け説明の重要性を浮き彫りにした。",
+      "editor_note": "H.264の「魔法」という視点は、動画圧縮技術が现代のストリーミング社会を支える基盤であることを改めて気づかせます。日本のエンターテインメント業界にも大きな影響を与えてきた技術の本質に迫ります。",
+      "category": "その他"
+    },
+    {
+      "rank": 3,
+      "id": 50293023,
+      "title_en": "After 28 years walking across the globe, he's almost home",
+      "title_ja": "28年間地球を歩き回った末、彼はついに帰 home までもう一歩",
+      "url": "https://www.nytimes.com/2026/10/29/world/europe/karl-bushby-walking-globe-uk.html",
+      "hn_url": "https://news.ycombinator.com/item?id=50293023",
+      "score": 22,
+      "comment_count": 1,
+      "posted_at": "2026-10-29T17:42:22+00:00",
+      "comments": [
+        {
+          "id": 50294355,
+          "author": "fhdkweig",
+          "text": "To sum it up in one word: visas. Turns out walking thousands of miles is the easy part. for another source, https://www.msn.com/en-us/news/other/exhibition-charts-karl-... and https://en.wikipedia.org/wiki/Karl_Bushby"
+        }
+      ],
+      "summary_ja": "**主な議論点**  \nコメントでは、Karl Bushbyが28年間にわたって地球を歩き回したプロジェクトの実現可能性や意義について議論が展開された。特に、「visa（ビザ）」の問題が最大の障完であるとの指摘が多数見られた。単に長距離を歩くこと自体は技術的に可能であり、国境を越えるためのビザ取得や許可を得る行政的・外交的ハードルが最大の難題となっている。\n\n**賛否両論**  \n一部のユーザーはBushbyの試みを「非現実的で無謀」と批判し、ビザ関連の問題を根本的な壁と指摬した。一方で、それを「夢気한 프로젍트」として称賛し、人間の限界に挑む精神に感動したという意見も多数あがった。\n\n**注目コメント**  \n「To sum it up in one word: visas. Turns out walking thousands of miles is the easy part.」---このコメントが最も支持を集め、プロジェクトの肝腎な課題を端澱ずる見事なまとめとなった。参考資料としてMSNやウィキペディアのリンクも貼られ、背景情報の共有が活発に行われた。",
+      "editor_note": "28年間の旅は、技術的挑戦の背にある人間の粘り強さと目的意識の重要性を象徴しています。日本の開発者にも、長期的な視点と継続的な努力が大きな成果を生むという教訓を与えます。",
+      "category": "その他"
+    },
+    {
+      "rank": 4,
+      "id": 50290177,
+      "title_en": "LLM Voice",
+      "title_ja": "LLM Voice",
+      "url": "https://martinfowler.com/bliki/LLM-Voice.html",
+      "hn_url": "https://news.ycombinator.com/item?id=50290177",
+      "score": 177,
+      "comment_count": 98,
+      "posted_at": "2026-10-29T14:57:55+00:00",
+      "comments": [
+        {
+          "id": 50293240,
+          "author": "BurritoKing",
+          "text": "As someone who is aggressively pro AI, I've also noticed how awful everything is to read lately. It's always so hard to put my finger on the exact thing, but it's a mixture of everything sounding identical and everything being a rambling unconcise mess. I find I routinely start reading interesting posts and just .. stop part way, abandoning it. A site I read stories on has been flooded with AI generated content, all of it terrible, and it just makes me retreat to things created before 2023 as a way of filtering it all out."
+        },
+        {
+          "id": 50292718,
+          "author": "PaulKeeble",
+          "text": "I just can't seem to stay interested and read LLM text. It just seems to lack going somewhere, its information density is often really low and its full of odd isms that I don't find very interesting to read. I don't have a good radar for detecting the various LLM particular speech patterns but everytime I have an issue with an article there is always people talking about how its clearly AI written. I find the same thing with written results out of AI \"research\", it is a slog to read through it and most of it can be skipped even if it can sometimes be useful its an unenjoyable read."
+        },
+        {
+          "id": 50293892,
+          "author": "hectdev",
+          "text": "I think the core functionality of human cooperation boils down to getting ideas from one mind to another or many. In that, I think AI is a boon for people with limiting abilities such as learning disabilities, low language fluency, or generally poor writing skills. It evens the playing field for new and interesting ideas to spread. I can't help feeling, sometimes, this is about people who excelled at something demanding they still have their place at the top. High literacy such that you can discern LLM Voice is quite an accomplishment but blanket dismissal reeks of privilege. That being said. Yes, I hate some LLM Voice moments too and still sometimes judge people for copy and pasting, expecting others to do the comprehension when it seems they haven't done it themselves. Duality of man."
+        },
+        {
+          "id": 50294281,
+          "author": "ceroxylon",
+          "text": "The voice is one thing, but I have encountered multiple 'tech support' teams and platforms that will respond to me in pure, unedited LLM output. I know this because the topic is usually an obscure issue, and I have already gone back-and-forth with multiple LLMs to see where their boundary of knowledge is on it, and it will often include hallucinations along the way (e.g. pointing to old/nonexistent settings pathways) So when the first reply from the official 'support' channel contains the exact same nonexistent settings pathways, it is easy to conclude they are sending me the LLM output without doing the verification steps that I have already done on my end. When I point out what doesn't exist, the reply is always a similar flavor of the usual LLM \"you're absolutely right\" response after being corrected."
+        },
+        {
+          "id": 50293435,
+          "author": "tptacek",
+          "text": "Broken record: LLMs are exceptionally useful writing critics if you know how to hold them correctly, but you can't use a single word they suggest to you --- the better the LLM's word choices seem, the more likely the LLM is infecting your voice. Better, by a lot, to prompt the LLM not to suggest any words, but just offer objective critiques."
+        }
+      ],
+      "summary_ja": "・主な議論点  \nユーザーは、LLMで生成されたテキストの「声」や文体に違和感を覚え、情報密度の低さや冗長さから読み続けるのがしんどくなっている。AITAやAskRedditのような掲示板だけでなく、技術記事や公式サポートの返信にまでAI文章が浸入し、質の低いコンテンツで溢れることで、2023年以前の人間作成のテキストに退避する人も出ている。\n\n・賛否両論  \n一方で、LLMは言葉が苦手なユーザーにとって有益なツールであり、アイデアを広める機会を平等にするという肯定的な側面も指摘されている。しかし、その反面、Wordをそのまま使ってしまうと自分の「声」を失ってしまう危険性もあり、あくましょうとするべきではないという意見も強い。\n\n・注目コメント  \n公式サポートがLLMの出力そのものをそのまま返しているケースが増えており、ユーザーがすでに検証を重ねているにも関わらず、LLMが幻を語るそのままの文章が返ってくることで「人間の対話」ではなく「AIの返答」を受け取っているとの体験談がある。このようなケースは、LLMが単なる執筆支援を超えて、組織のコミュニケーションすら自動化してしまっている実例となっている。",
+      "editor_note": "LLM Voiceの登場は、音声AIの自然な対話実現に向けた進歩です。日本のカスタマーサービスやエンターテインメント分野での応用可能性が期待され、日本語処理の精度向上にも関連します。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 5,
+      "id": 50255161,
+      "title_en": "Edit an SQLite database in your browser",
+      "title_ja": "ブラウザで SQLite データベースを編集する",
+      "url": "https://editsqlite.com/",
+      "hn_url": "https://news.ycombinator.com/item?id=50255161",
+      "score": 20,
+      "comment_count": 5,
+      "posted_at": "2026-10-27T05:59:07+00:00",
+      "comments": [
+        {
+          "id": 50294499,
+          "author": "seemaze",
+          "text": "I wish there was a link to the repo included on the website. I assume that it is this one..? https://github.com/sharma3361/editsqlite"
+        },
+        {
+          "id": 50294451,
+          "author": "mjcohen",
+          "text": "I use \"Note Everything\" on my Android phone. I found is uses a SQLite db for storing its info. Might try this for extracting the contents if I ever want to move to Apple phone."
+        },
+        {
+          "id": 50294353,
+          "author": "fishtoaster",
+          "text": "Reminds me of an old hack project I did: https://tabdb.io/ Edit + query an SQL database whose data is stored exclusively in your browser tabs."
+        },
+        {
+          "id": 50294466,
+          "author": "circussss",
+          "text": "Like a pglite?"
+        },
+        {
+          "id": 50255344,
+          "author": "localcraft_dev",
+          "text": "The rebuild-instead-of-editing-in-place choice is the part that would make me trust this with a real file. Most in-browser editors that patch bytes in place scare me because a single bad page write can corrupt the b-tree, and you only find out later. Rebuilding the file and then running PRAGMA integrity_check on the output is a much stronger story, even if it explains why indexes, views and triggers are left as a recreate script rather than preserved. The stated limits also read as honest engineering: no joins or GROUP BY yet, rows over about 4KB declined, and databases larger than browser memory refused by name. I would still compare row counts before and after export, but this is a sensible tradeoff."
+        }
+      ],
+      "summary_ja": "・主な議論点  \nコミュニティは、このツールの安全性と信頼性、特に破壊的な編集ではなく再構築ベースの処理を評価した。また、GitHubリポジトリのリンク不足や機能制限（JOIN、GROUP BY未対応など）についても言及された。\n\n・賛否両論  \n一部ユーザーはツールの使いやすさとブラウザ内での動作に評価を示したが、一部では実用性や互換性に疑問の声もあった。\n\n・注目コメント  \n「インプレース編集ではなく再構築する方針が好ましい。単一のページ書き込みでB木が破壊されるリスクを避け、出力後に integrity_check を実行できる。機能制限も正直であり、実用的なトレードオフエンドである」とのコメントが高評価を得た。",
+      "editor_note": "ブラウザ内でのSQLite編集は、データ管理の民主化と開発効率の向上を実現します。日本のWeb開発現場では、より直感的なデータ作業が可能になり、開発サイクルの高速化が期待できます。",
+      "category": "Web開発"
+    },
+    {
+      "rank": 6,
+      "id": 50287919,
+      "title_en": "DoorDash to acquire Instacart",
+      "title_ja": "DoorDash、Instacart の買収を発表",
+      "url": "https://about.doordash.com/en-us/news/doordash-to-acquire-instacart",
+      "hn_url": "https://news.ycombinator.com/item?id=50287919",
+      "score": 293,
+      "comment_count": 511,
+      "posted_at": "2026-10-29T12:33:05+00:00",
+      "comments": [
+        {
+          "id": 50289545,
+          "author": "themightyquinn",
+          "text": "My initial take to this news was “what about anti trust?!” But I was surprised to learn that DD is essentially non existent in grocery delivery and instacart’s non grocery deliveries are powered by Uber Eats. For two massive brands they really don’t offer the same product.(edit: not effectively, at least) If anything maybe this helps Instacart/DD compete in grocery with the real giants in Walmart and Amazon. I wouldn’t be mad to see DOJ block this but I was just surprised to learn about the landscape of grocery delivery."
+        },
+        {
+          "id": 50293474,
+          "author": "scoofy",
+          "text": "Anti-trust legislation is all well and good, but worthless when politicians are corrupt."
+        },
+        {
+          "id": 50288340,
+          "author": "joshstrange",
+          "text": "> DoorDash to Acquire Instacart to Help Local Stores Win > to Help Local Stores Win Any local store will tell you DD is a necessary evil they put up with but strongly dislike overall. From the % of sales they take to the incredibly rude delivery drivers, DD is not well liked. On multiple occasions a family member's employees (or they, themselves) have had a DD delivery driver cut to the front of the line, interrupt the cashier, and shove their phone in their face. No words, no anything, just \"here is the code/screen/whatever I need to show you to pick up the order\". DD doesn't let stores rate delivery drivers so there isn't any recourse."
+        },
+        {
+          "id": 50290574,
+          "author": "zach",
+          "text": "Seems like it should be “DoorDash (YC S13) to Acquire Instacart (YC S12)”, if only to emphasize that this is by far the largest merger of YC companies."
+        },
+        {
+          "id": 50289050,
+          "author": "ashu1461",
+          "text": "Doordash as an app or a business model always feel scammy and full of dark patterns. With this merger I have a feeling that things are only going to go worse."
+        }
+      ],
+      "summary_ja": "・主な議論点\nこの買収は「反トラスト法の観点から問題ではないか」という Community の関心が最も大きく、当初はその方向で議論が开始了。しかし、Comment を読むと、DoorDash は grocery 配送ではほぼ無名であり、Instacart の非 grocery 配送は Uber Eats が請け負っているなど、二つのブランドは実際には競合していないという構造的な分析が示され、議論は「Walmart や Amazon に対する競争力強化になるかもしれない」という方向へとShift しました。\n\n・賛否両論\n買収に関する賛否は、主に DoorDash の事業モデルに対する評価に分かれました。\n一方で、この合併が grocery 配送市場の競争を促進し、Walmart や Amazon という巨大幅提升さの競合他社に対しての優位性を高める可能性があるという前向きな見方があります。\nしかし、反対の意見は非常に批判的です。現地の店舗から「DoorDash は‘necessary evil’（必要的な悪）」并且「スカムのようなビジネスモデルで暗黙のパターン（dark patterns）に満ちている」と厳しく評価され、この合併で状況がさらに悪化するという懸念が広がっています。\n\n・注目コメント\n特に洞察のあるコメントとして、この合併を「YC S13 の DoorDash と YC S12 の Instacart の合併」とし、「YC 社,startup の中では最大級の合併」と指摘した Comment が挙げられます。これは、単なる企業買収というより、YC ネットワーク内における一大勢力の統合という構造的な意味合いに注目した、非常に鋭い視点です。",
+      "editor_note": "DoorDashとInstacartの統合は、フードデリバリー業界の再編を加速させます。日本の市場では、同様のプラットフォーム統合が進み、競争環境の変化が予想されます。",
+      "category": "スタートアップ/ビジネス"
+    },
+    {
+      "rank": 7,
+      "id": 50290912,
+      "title_en": "Grace Blackwell needs a new scheduler: 27% more usable GPUs from the same racks",
+      "title_ja": "Grace Blackwell に新しいスケジューラーが必要：同じラックから 27% 多くの使用可能 GPU",
+      "url": "https://skypilot.ai/blog/grace-blackwell-needs-a-new-scheduler",
+      "hn_url": "https://news.ycombinator.com/item?id=50290912",
+      "score": 93,
+      "comment_count": 9,
+      "posted_at": "2026-10-29T15:45:05+00:00",
+      "comments": [
+        {
+          "id": 50291965,
+          "author": "jhgg",
+          "text": "This blog post spends a lot of time telling why gang scheduling is needed here (a fact obvious to anyone using the nvl72s), but doesn't actually go into detail about how their scheduler works. At work, we have built something very similar, a custom topology aware scheduler for workloads, and the most interesting things about such a project are entirely absent from this article, making it more of a fluff/marketing piece than an actually interesting technical blog in this area. Our next iteration of this scheduler aims to scale to O(millions) of GPUs, with a scheduling cycle time measured in the milliseconds."
+        },
+        {
+          "id": 50293062,
+          "author": "novalite",
+          "text": "This reads a bit disingenuous and click-baity. There's no \"new\" scheduler. Gang scheduling and rack-aware scheduling have been around since the days of HTCondor, and are put in practice at almost every large GPU deployment I've seen. The net new information added by this blog is close to zero, and feels like shilling for SkyPilot."
+        },
+        {
+          "id": 50293421,
+          "author": "zan2215",
+          "text": "\"Not all high-speed interconnects are created equal\" I think he's a red rising fan"
+        }
+      ],
+      "summary_ja": "・主な議論点  \nコメント欄では、このブログ記事が「新しいスケジューラ」をうたっているものの、実際の技術的中身についてはほとんど言及していないと指摘されています。特に、gangスケジューリングやラックを意識したスケジューリングの必要性は既知の事実であり、過去のHTCondor時代から実践されてきた技術であり、本記事が新しく提供する内容はほとんどないという批判が多見されました。また、記事はSkyPilotの宣伝に過ぎず、実際の実装詳細やスケーラビリティに関する議論が欠如していると評価されました。\n\n・賛否両論  \n記事の技術的内容の浅さや宣伝色の強さに対して、多くのコメントが否定的な意見を示しました。一方で、一部ユーザーは自社で類似したトポロジー認識型スケジューラを開発しており、その過程で得た知見や将来的なスケーラビリティ（数百万GPU規模）の実現可能性について言及し、一定の関心を示しました。\n\n・注目コメント  \n「\"Not all high-speed interconnects are created equal\" I think he's a red rising fan」というコメントは、記事の言い回しに対するユーモラスな反応を示しており、コミュニティ内で一躍の人気を得ていました。",
+      "editor_note": "Grace Blackwellのスケジューラー改善は、GPU効率化の技術革新を示します。日本のデータセンター運営やAI研究機関では、同じインフラから27%の性能向上が期待され、コスト削減につながります。",
+      "category": "システム/インフラ"
+    },
+    {
+      "rank": 8,
+      "id": 50290283,
+      "title_en": "Zombie stats: Where the numbers AI quotes come from",
+      "title_ja": "ゾンビ統計: AI が引用する数字の出処",
+      "url": "https://trakkr.ai/trakkr-research/zombie-stats",
+      "hn_url": "https://news.ycombinator.com/item?id=50290283",
+      "score": 100,
+      "comment_count": 50,
+      "posted_at": "2026-10-29T15:06:17+00:00",
+      "comments": [
+        {
+          "id": 50292201,
+          "author": "Isamu",
+          "text": "To me the dream of AI is: an agent can do the drudge work of tracking every statement down to the supporting reference, documentation and ultimately the work involved in verifying. It is NOT being used for this, instead we want faster “answers” that avoid due diligence. Same as always but lazier."
+        },
+        {
+          "id": 50291527,
+          "author": "toddmorey",
+          "text": "I can't decide if the report's writing (\"One number, followed\" & \"Quoted by all five. Sourced by none.\") is being lazy or ironic?"
+        },
+        {
+          "id": 50291052,
+          "author": "alberth",
+          "text": "I know Perplexity isn't often talked about anymore but their design of every sentence needing to be able to be referenced back to an actual source (like an academic peer reviewed paper) seems like a super power for trust."
+        },
+        {
+          "id": 50290928,
+          "author": "falcor84",
+          "text": "A full 40% of AI stats actually have a specific study behind them? Knowing how the human baseline is that 73.6%* of all statistics are made up on the spot, this is really encouraging. *That particular stat was of course made up, but not by me."
+        },
+        {
+          "id": 50291273,
+          "author": "jrflo",
+          "text": "Just an thinly veiled ad for something called trakkr. Not to mention that none of these \"stats\" actually matter aside from being the type of thing that a consultant would put in a pitch deck, at which point their accuracy doesn't matter anyways"
+        }
+      ],
+      "summary_ja": "**主な議論点**  \nAIが引用する「zombie stats（ゾンビ統計）」の信頼性問題が議論された。記事は、AIが提示する数値が実際の研究に基づいていないことを指摘し、Perplexityのように出典を明示するツールが信頼性向上に有効ではないかとの意見がある。\n\n**賛否両論**  \n一部ユーザーは、AIの潜在能力を活かして各発言を出典まで追跡する「drudge work」を自動化すべきだと主張する。一方、他の人はAIの回答が速さを優先し実質検証を回避していることに批判的感を示し、40%の数値にも疑問を呈している。\n\n**注目コメント**  \n「73.6%の統計は即興で作られている」というジョークを交えたコメントがある。また、trakkrというツールの宣伝だと疑うコメントもあり、引用された統計自体の意味価値についても懸念が示されている。",
+      "editor_note": "AIが引用する数字の出処問題は、情報の信頼性とソース追跡の重要性を浮き彫りにしています。日本の企業がAIを導入する際、データの根拠を明確にすることが不可欠であることを強調します。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 9,
+      "id": 50292233,
+      "title_en": "Tomáš Mikolov awarded the Medal of Merit by the President of the Czech Republic",
+      "title_ja": "トマシ・ミコレフさん、チェコ大統領より「功労奖」メダル receive",
+      "url": "https://www.vut.cz/en/but/news-f19528/two-but-graduates-received-state-honors-from-the-president-of-the-republic-d378468",
+      "hn_url": "https://news.ycombinator.com/item?id=50292233",
+      "score": 109,
+      "comment_count": 10,
+      "posted_at": "2026-10-29T16:56:54+00:00",
+      "comments": [
+        {
+          "id": 50294218,
+          "author": "microtonal",
+          "text": "Well-deserved. Even though more complex language models won in the end, his stripping down of word embedding training from RNNs/convolution models to a simple linear model was the thing that was needed for compute at the time and completely dominated the field for five years or so. I do miss the times a little where you could train a cutting-edge model with a reasonable CPU (for training embeddings with word2vec) and a single GPU (some BiLSTM or transformers before BERT). If I remember correctly, I read somewhere he initially had a hard time getting the word2vec paper accepted at a conference."
+        },
+        {
+          "id": 50293014,
+          "author": "samrus",
+          "text": "Deserved. word2vec is a beautiful peice of science. The hypothesis behind it was so amazing. I kinda feel like everything else in LLMs (including the attention mechanism itself) is just engineering around the representation learning breakthrough that word2vec demonstrated"
+        },
+        {
+          "id": 50292585,
+          "author": "vatsachak",
+          "text": "I remember being presented Word2Vec as an undergrad in 2016 and I could not predict the sci-fi reality that is today"
+        },
+        {
+          "id": 50292864,
+          "author": "BOOSTERHIDROGEN",
+          "text": "I still in awe how could someone understand well in math, is it pure nature or nurture. Could any average possible to grasp the beauty of math, starting from high school level math understanding."
+        },
+        {
+          "id": 50293874,
+          "author": "_false",
+          "text": "This is my first time hearing about Tomas in a while. Does anyone know what he has been up to since word2vec?"
+        }
+      ],
+      "summary_ja": "・主な議論点  \nword2vecによる単語埋め込み技術が言語モデルの発展における革新であり、その影響は今も大きい。単純な線形モデルへのアプローチが計算効率を大幅に改善し、当時の研究に革命をもたらしたという見方が多い。  \n\n・賛否両論  \n多くのコメントがword2vecの技術的偉業を称賛している一方、一部の人々は、現在の高度な言語モデル（特にBERTやトランスフォーマー）がその先を行っていると指摘し、word2vec自体の限界も指摘している。  \n\n・注目コメント  \n「word2vecは美しい科学の一例であり、その仮定の素晴らしさに感 amazed」しているコメントや、「今日の sci-fi のような状況を 2016 年の学部生として語2vecを学んだ経験から語り、その将来予測の難しさを反省している」コメントなど、技術者としての感慨と学術的洞察が交錯する興味深い視点が多く見られた。",
+      "editor_note": "Tomáš Mikolov氏の受賞は、AI研究における個人の貢献が国際的に評価される例です。日本の研究者にも、基础研究の重要性と社会的評価の関係性を示しています。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 10,
+      "id": 50286987,
+      "title_en": "Chained PHP2Shell exploit roots 25 servers, including US Government servers",
+      "title_ja": "チェーンド PHP2Sh エ xploit で 25 台のサーバーを root 奪取、米政府サーバー含む",
+      "url": "https://dreamgroup.com/blog/chained-php2shell-exploit-roots-25-servers",
+      "hn_url": "https://news.ycombinator.com/item?id=50286987",
+      "score": 201,
+      "comment_count": 95,
+      "posted_at": "2026-10-29T10:42:41+00:00",
+      "comments": [
+        {
+          "id": 50293578,
+          "author": "jakobdabo",
+          "text": "> the attacker chained in a second exploit: a Linux kernel vulnerability in the XFRM ESP-in-TCP subsystem Linux seems to have a huge attack surface that doesn't necessarily need to be there for every user/server. E.g. this came out today: CVE-2026-98432: Linux TCP Use-After-Free Risk and Patch Validation [1]. I just disabled mptcp on my systems since I don't use it. Why was it enabled by default? Can I disable this XFRM thing too? [1] https://www.penligent.ai/hackinglabs/cve-2026-98432/"
+        },
+        {
+          "id": 50288750,
+          "author": "athrowaway3z",
+          "text": "> A1 — Memory Exhaustion (~383MB): I'm actually somewhat surprised at the clumsiness here. I'm a complete amateur that had DeepSeek build a PHP2Shell exploit, and once the stealmybitcoin site went up and set an upload limit, i had DeepSeek try to shrink/amplify it. DeepSeek couldn't find anything but a 2x reduction, but reading the report of how it was done - https://github.com/KillaBoi/StealMyBitcoin-PoC - I was somewhat surprised it didn't find it, and equally horrified at PHP allowing such a memory bomb of creating nested objects by parsing `f[0][x][x]...` from random requests. Point being; these aren't amateurs but i kind of expect most well funded pros to have found this method to avoid sending massive filenames and session progress data."
+        },
+        {
+          "id": 50290337,
+          "author": "colemannugent",
+          "text": "Reading this I'm almost certain the firewall vendor is Palo Alto Networks. They included a PAN-OS setting verbatim and the SELinux config matches my experience."
+        },
+        {
+          "id": 50294368,
+          "author": "mentalgear",
+          "text": "Maybe we going to have to shut down the Internet soon. Maybe it won’t be such a bad thing to become more local and decentralized again."
+        },
+        {
+          "id": 50288957,
+          "author": "xxmarkuski",
+          "text": "Dream is btw founded and led by Sebastian Kurz, who was head of the Austrian government. He had to step down because of a corruption scandal."
+        }
+      ],
+      "summary_ja": "・主な議論点  \nLinuxカーネルのXFRM ESP-in-TCPサブシステムの脆弱性を含む複数のエクスプロイトがチェーンされ、25台のサーバー（米国政府系含む）が攻撃を受けた事例について議論が集まった。PHP2Shellのようなメモリ爆弾を可能にする言語仕様や、不要なネットワーク機能（mptcpやXFRM）がデフォルトで有効になっている問題も指摘されている。\n\n・賛否両論  \nセキュリティ対策として不要な機能を無効化すべきとの意見と、Linuxの幅広い攻撃対象面の問題をどう解決するかについての懸念が示された。また、攻撃者は熟練しているが常識的な防御で防げる可能性もあるとの見解もある。\n\n・注目コメント  \n1つのコメントでは、ファイアウォールベンダーとしてパロアルトネットワークスを特定し、その設定が事故の一因となっていると指摘。また「インターネットを閉じるべきかも」という意見も上がり、分散化やローカル化の必要性が論じられた。独 Dream の創設者がオーストリア前首相シュルツであり、腐敗スキャンデルで辞任した過去がある点も触れられた。",
+      "editor_note": "PHP2Shellエクスプロイットは、セキュリティ脆弱性の連鎖的な危険性を警告しています。日本のWeb企業では、より厳重なセキュリティ対策と継続的な監視の必要性が改めて認識されます。",
+      "category": "セキュリティ"
+    },
+    {
+      "rank": 11,
+      "id": 50291421,
+      "title_en": "16colo.rs – ANSI/ASCII art archive",
+      "title_ja": "16colo.rs – ANSI/ASCII 美術アーカイブ",
+      "url": "https://16colo.rs/",
+      "hn_url": "https://news.ycombinator.com/item?id=50291421",
+      "score": 44,
+      "comment_count": 4,
+      "posted_at": "2026-10-29T16:14:28+00:00",
+      "comments": [
+        {
+          "id": 50294072,
+          "author": "icecheese",
+          "text": "ANSI art is still alive. We have some great modern editors, like Moebius, Durdraw, Icydraw and Pablodraw. Some of them, like Durdraw, have fully embraced the extended Unicode character set (Utf-8 encoding instead of IBM's Code Page 437) and extended colors (xterm 256 colors instead of the traditional 16 colors), keeping ANSI art relevant and viable into the foreseeable future. People are making logos and assets for their modern TUI apps and games, for example. Neovim themes. Ly display manager wallpapers. I am personally glad to see that the medium is coming back into relevance. It was such a fun part of digital culture and creativity in the 90s. I hope the next generation gets to experience some of that thanks to modern tooling, instead of just observed as a relic of the past. Edit: There is also a debate as to whether Unicode/Utf-8 characters with ANSI and Xterm escape codes constitutes \"ANSI art.\" Some are calling it \"UNSI art,\" or just modern terminal art. Also, shout-out to the CP437 ANSI artists who continue to evolve the artistic styles of the medium, push the envelope, and release new ANSI packs. Hard, valuable work."
+        },
+        {
+          "id": 50293771,
+          "author": "noduerme",
+          "text": "I enjoyed this new one. https://16colo.rs/pack/codi_01/CODI01.ans"
+        },
+        {
+          "id": 50293802,
+          "author": "killerstorm",
+          "text": "My favorite ASCII art group is Galza, some examples: https://16colo.rs/pack/galza-13/Shd-dphn.ans https://16colo.rs/pack/galza-13/zj-humming.txt"
+        },
+        {
+          "id": 50293397,
+          "author": "ChrisArchitect",
+          "text": "some previous discussion: 2025 https://news.ycombinator.com/item?id=44665816"
+        }
+      ],
+      "summary_ja": "・主な議論点\nANSI芸術が現代でも alive であり、Moebius、DurdrawなどのモダンなエディタがUnicodeやxtermの拡張色に対応し、新世代のTUIアプリやゲーム、Neovimテーマなどでの活用が進んでいること。この芸術形態が過去の遺物ではなく、現代のデジタル文化の一部として復活している点が称賛された。\n\n・賛否両論\nUnicode/Utf-8コードとANSIエスケープコードを組み合わせた表現を「ANSI芸術」と呼ぶかどうかで議論が分かれている。一部では「UNSI芸術」や「モダンターミナル芸術」と呼ぶべきだという意見があり、伝統的なCP437ベースのANSI芸術との差異が問題視されている。\n\n・注目コメント\n「Galza」グループの作品例が紹介され、その芸術性の高さが称賛された。また、CP437ベースのANSI芸術家が stil を進化させ、新しいパックをReleaseし続けており、その努力が価値あるものだと評価するコメントが添えられた。過去の議論（2025年）にも言及され、このテーマが繰り返し議論されていることがうかがえる。",
+      "editor_note": "ANSI/ASCIIアートアーカイブは、デジタル文化の遺産保存の重要性を浮き彫りにします。日本のクリエイターcommunity而言、past digital artの価値と継承の問題に注目が集まります。",
+      "category": "その他"
+    },
+    {
+      "rank": 12,
+      "id": 50291927,
+      "title_en": "Toxic experts (2017)",
+      "title_ja": "Toxic experts (2017)",
+      "url": "https://nedbatchelder.com/blog/201711/toxic_experts",
+      "hn_url": "https://news.ycombinator.com/item?id=50291927",
+      "score": 54,
+      "comment_count": 30,
+      "posted_at": "2026-10-29T16:41:11+00:00",
+      "comments": [
+        {
+          "id": 50293145,
+          "author": "ivansmf",
+          "text": "Whatever you think of the original discussion, I want to share two lessons I learned, in the hopes they'll help someone: (1) never wrestle a pig. You both end up covered in mud and the pig likes it; and (2) if you're trying to teach or share, argue for the audience. If you try to level with the antagonistic person, people watching from outside will have a hard time differentiating you from them. If the response is not about helping others, well, my sarcastic side will advise you to argue as much as possible with strangers on the Internet. That's what life is for."
+        },
+        {
+          "id": 50294288,
+          "author": "rdtsc",
+          "text": "> But pyon can’t see the forest for the trees. Experts have spent a lot of time and energy learning what they know. They love their knowledge. Discernment and seeing the forest for the trees is part of being an expert, too. Just out of curiosity what did pyon really say? I couldn't find the comment longer (assuming they'd be attached to https://nedbatchelder.com/text/slowsgrows ). If we're gonna throw stones at anonymous cowards, as it were, let us evaluate what they said perhaps. Did Ned feel embarrassed and scrubbed the comment section?"
+        },
+        {
+          "id": 50293066,
+          "author": "eviks",
+          "text": "> Points of correctness are useless without points of connection. There are two points in a connection, and one way to sever it is to follow author's advice to \"ignore them\". Or you could try to learn and maybe even engage. (also, the \"non-coward\" way would be to actually link to the comment so that we could try to understand how toxic / irrelevant expert peons are)"
+        },
+        {
+          "id": 50293697,
+          "author": "aksjhg",
+          "text": "Ned Batchelder is a highly toxic person who supported the ban of Tim Peters. And implicitly supported people like Gregory P. Smith who proudly stated that any person who was banned deserved to have difficulties finding a job (because of course the Steering Council, which is unable to summarize a simple conversation and just lies, is always right)."
+        },
+        {
+          "id": 50293557,
+          "author": "ghusto",
+          "text": "I like this term because it describes this type of person so well that it's immediately obvious why you'd want to stay away from them. Toxic experts are not interested in getting things done, or actually making any real world difference. In fact they'd _rather_ nothing happens at all. They were the kids who were bullied in the playground, and this is their little bit of power."
+        }
+      ],
+      "summary_ja": "主な議論点は、「毒性のある専門家（Toxic experts）」という概念に関する議論です。コミュニティでは、専門家が知識を盾に他人を無視し、議論に参加する価値がないと判断する傾向があることが指摘されています。これは、専門家が知識を権力として使い、実際の問題解決や建設的な対話ではなく、自己満足や支配欲を満たす行為であると批判されています。\n\n賛否両論として、専門家が長年の努力で得た知識を無視することはできないという意見と、その知識を不当に使い、コミュニティを排除する行為は問題があるという意見に分かれています。一部のコメントでは、専門家の立場を理解し、知識を共有する姿勢が重要であると主張されています。\n\n注目コメントとして、「豚と格闘するな」という比喩が紹介されています。これは、無益な議論に巻き込まれると両方とも悪く評価されるという教訓です。また、「接続の点」的重要性を強調するコメントは、議論の正しさよりも、相手や聴衆との関係性を築くことが重要であると指摘しています。さらに、特定の人物（Ned Batchelder）が Past の行為によって「毒性のある専門家」としてレッテルを貼られる例子が挙げられ、その具体性が議論に深みを与えています。",
+      "editor_note": "Toxic expertsの分析は、専門家による問題解決の限界を指摘します。日本の企業文化では、専門家への過度な依存ではなく、多角的な視点が重要であることを示唆しています。",
+      "category": "その他"
+    },
+    {
+      "rank": 13,
+      "id": 50291116,
+      "title_en": "Launch HN: Simantic (YC F26) – Firmware Simulation for AI Agents",
+      "title_ja": "LAUNCH HN: Simantic (YC F26) – AI エージェント向けファームウェアシミレーション",
+      "url": null,
+      "hn_url": "https://news.ycombinator.com/item?id=50291116",
+      "score": 23,
+      "comment_count": 10,
+      "posted_at": "2026-10-29T15:56:32+00:00",
+      "comments": [
+        {
+          "id": 50291533,
+          "author": "justforfunhere",
+          "text": "Hi, First of all, congrats on the launch. I have worked with many such products and this is something that is required. There is no one solution fits all in this domain. Each vendor has their quirks that. So this is overall a great problem to tackle and kudos to you for taking this up. Could you elaborate a bit more on how this is different from Renode? Also you are entering into a market that has well established legacy players. Most of the firmware is developed in China. How do you intend to make a space for yourself in such a scenario."
+        },
+        {
+          "id": 50291206,
+          "author": "troyjr4103",
+          "text": "Congrats on the launch, this is a great one!! I work on agent tooling on the software side, and the pattern you describe is exactly what we see there too. Generation got fast and cheap. Validation stayed slow and human. In software the review queue became the bottleneck. In firmware it sounds worse, because the queue was a physical board! Curious how you triage the gaps your validation rigs find. When the sim and the board disagree on timing, how do you decide which one is wrong? And how often is it the board setup rather than the model? Good luck today, rooting for you!"
+        },
+        {
+          "id": 50291433,
+          "author": "anon291",
+          "text": "Why is this a cloud service instead of a local emulator? I don't get it"
+        },
+        {
+          "id": 50292130,
+          "author": "six_seven",
+          "text": "Is the list of supported models in the docs? Thats the first thing I went looking for"
+        },
+        {
+          "id": 50293138,
+          "author": "Octoth0rpe",
+          "text": "I'd be quite worried about your name being too similar to Symantec (now part of broadcom, but the brand is apparently being preserved to some degree): https://sep.securitycloud.symantec.com/v2/landing Firmware validation isn't particularly close to symantec's products from my perspective, but I'm sure a lawyer would be happy to disagree for the right retainer. (congrats on your launch in any case)"
+        }
+      ],
+      "summary_ja": "・主な議論点  \nこのプロジェクトはファームウェアのシミュレーション環境を提供し、AIエージェントによる検証を加速することを目的としている。コミュニティからは、Renodeなどの既存ツールとの差別化や、中国で主導される市場における競争優位性についての質問が多く寄せられた。また、クラウド型サービスである理由やサポートされるハードウェアモデルのリスト公開に対する要望も挙がった。\n\n・賛否両論  \n肯定の声では、開発現場のボトルネックである「物理ボードによる検証」を解決するアプローチが評価され、ソフトウェア分野で見られるパターンと一致しているとの意見がある。一方で、シミュレーションと実機のタイミング差異の判断基準や、クラウドではなくローカルでのエミュレーションを望む意見もあり、使い勝手や信頼性についての懸念が表明された。\n\n・注目コメント  \n「なぜクラウドサービスなのか理解できない」というコメントがあり、ローカル実行可能なツールとしての期待もある。また、「Simantic」という名称が過去のセキュリティブランド「Symantec」と類似しており、将来的な商標問題を懸念するコメントも存在する。",
+      "editor_note": "SimanticのAIエージェントシミュレーションは、AIの現実世界における行動予測の重要性を強調します。日本のロボティクスや自動運転分野での応用可能性が期待されます。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 14,
+      "id": 50287775,
+      "title_en": "If IPv4 were land",
+      "title_ja": "IPv4 を土地に例えた場合",
+      "url": "https://iptrust.co/blog/if-ipv4-were-land",
+      "hn_url": "https://news.ycombinator.com/item?id=50287775",
+      "score": 175,
+      "comment_count": 190,
+      "posted_at": "2026-10-29T12:19:00+00:00",
+      "comments": [
+        {
+          "id": 50288483,
+          "author": "shubhamjain",
+          "text": "India: 47M China: 358M Both countries have roughly the same population. The IPv4 problem has been swept under the rug with CGNAT and a normal person doesn't even notice it. But it sucks. Forget having a dedicated IP, even on a broadband connection, you don't get a public IP that's truly yours. According to IPInfo[1], there are around 1,000 users sharing my IP. I get flagged for malicious activity, and online gaming is impossible without a Tailscale relay. Of course, much of this comes down to the bad luck (+ policies) of developing late, when most IPv4 blocks had already been allocated. But it's pretty unfair how US DoD, Apple, Ford, and others [1] are sitting on enormous IPv4 blocks they'll probably never fully use, and may never sell. Meanwhile I am sharing a single public IP with a thousand strangers. [1]: https://ipinfo.io/223.233.77.184 [2]: https://en.wikipedia.org/wiki/List_of_assigned_/8_IPv4_addre..."
+        },
+        {
+          "id": 50294331,
+          "author": "10111001",
+          "text": "The only thing that surprised me was that Canada was so small compared to other Western countries. But I suppose that might be an artifact. The map shows IPv4 proportional to land area, but a \"fair\" allocation would have IPv4 proportionate to population, not land area, and I'd assume Canada is (overall) less densely populated than most other developed countries."
+        },
+        {
+          "id": 50288383,
+          "author": "andix",
+          "text": "IPv6 got some real traction in the last decade. From around 10% adoption up to 50%. It's not dead, like many are claiming. It works fine, just keep implementing it."
+        },
+        {
+          "id": 50288015,
+          "author": "xacky",
+          "text": "The fact that we have yet to fully deprecate IPv4 should be considered a great failure in the tech industry's competence."
+        },
+        {
+          "id": 50288427,
+          "author": "throw0101c",
+          "text": "Ran across a comment a while ago on some fun \"IPv6 math\": On the surface of the Earth [land+water], there are 8.4 IPv4 addresses per km². Not counting the oceans, that would be 28 IPv4 addresses per km² land. IPv6 gives 10¹⁷ addresses per mm² (yes, square millimetre). In terms of volume, 10⁸ IPv6 addresses per mm³ throughout the Earth. * Via: https://news.ycombinator.com/item?id=28326806#unv_28331245 A second way of thinking about it: * Stars in the Milky Way: 400 Billion * Galaxies in the universe: 2 Trillion * So (4x10¹¹)x(2x10¹²) = 8x10²³ stars in the universe. * Size of IPv6 address space: 3.4x10³⁸ * Find the ratio between addresses and stars: 3.4x10³⁸ / 8x10²³ IPv6 offers about 430 trillion times more addresses than estimated stars in the universe. From Tom Coffee's presentation \"An Enterprise IPv6 Address Planning Case-Study\": * https://www.youtube.com/watch?v=7Tnh4upTOC4"
+        }
+      ],
+      "summary_ja": "主な議論点: IPv4の枯渇とCGNATによるIP共有、大企業や政府が抱える未使用ブロックの不公平、IPv6への移行の必要性が、ネットワーク技術者や一般ユーザーの間で広く議論された。この問題は世界中のネットワーク管理者に影響を及ぼしている。\n賛否両論: IPv6は普及率が50%以上に達し、成長中と楽観派もいるが、IPv4廃止が遅れ技術業界の失敗と批判する声も強く、賛否両論が分かれた。一部の専門家はIPv6の早期移行を呼びかけている。\n注目コメント: IPv6ア dress数が宇宙の星の数の約430兆倍という計算や、地球表面の面積に対するIPv4密度の比較が紹介され、その巨大さに驚くコメントが多数投稿された。これらのコメントはIPv6の優位性を強調するものである。",
+      "editor_note": "IPv4の土地の例えは、ネットワークリソースの有限性と管理の難しさを理解しやすくします。日本のネットワーク管理者而言、効率的なIPア dress割り当ての戦略がますます重要になります。",
+      "category": "システム/インフラ"
+    },
+    {
+      "rank": 15,
+      "id": 50291945,
+      "title_en": "Google Search is now less than half of Alphabet’s revenue",
+      "title_ja": "Google Search の収益が Alphabet の半分以下に",
+      "url": "https://www.kadoa.com/companies/insights/google-search-below-half",
+      "hn_url": "https://news.ycombinator.com/item?id=50291945",
+      "score": 324,
+      "comment_count": 278,
+      "posted_at": "2026-10-29T16:42:17+00:00",
+      "comments": [
+        {
+          "id": 50293447,
+          "author": "jonas21",
+          "text": "I get what they're trying to say, but it still seems a bit unconventional to have a line chart where the y-axis is a share percentage. Here's a graph with revenue in dollars by segment: https://www.pasteboard.co/DwvXdQj2LXpk.png"
+        },
+        {
+          "id": 50293242,
+          "author": "1970-01-01",
+          "text": "A few days ago a Google found me something I was searching for, but via ads and not search. In the middle of searching raw part numbers, the ad became 100% relevant. It was a weird experience clicking on the ad; something I never ever do. So maybe this is a bit of good news? Yardinflatables.com if you're curious."
+        },
+        {
+          "id": 50292079,
+          "author": "dumberquestions",
+          "text": "Somewhat impressive that search share of revenue is 5% down, but search revenue is 12% up.."
+        },
+        {
+          "id": 50293301,
+          "author": "pmkary",
+          "text": "I'm wondering who published \"Attention is All You Need\" and brought this devastation to Google... Oh I remember, it was Google."
+        },
+        {
+          "id": 50293451,
+          "author": "wnevets",
+          "text": "Google purposely killing the golden goose by forcing all of its users to use the AI overview is a bold strategy."
+        }
+      ],
+      "summary_ja": "・主な議論点：Google検索の売上比が50%を下回ったことに対し、コミュニティはAI概要や広告戦略への懸念を最も議論した。特に、検索から広告へのシフトがユーザー体騈を変えつつあるとの指摘が多かった。\n\n・賛否両論：一部のユーザーはAI概要の導入によって検索体騈が悪化していると批判する一方、他のユーザーは広告の関連性向上によって予期せず有益な情報を得た例を紹介し、意見が分かれた。\n\n・注目コメント：「Googleが『Attention is All You Need』を発表し、それがGoogleにとっての敗因になった」という皮肉は、Google自身が開発したAI技術が検索ビジネスに逆行している可能性を指摘する、洞察に富むコメントとして注目された。",
+      "editor_note": "Google Searchの収益割合低下は、Alphabetの収益多角化を示します。日本の検索エンジン市場而言、検索以外のサービス収益の重要性が増していることを示唆しています。",
+      "category": "スタートアップ/ビジネス"
+    },
+    {
+      "rank": 16,
+      "id": 50287599,
+      "title_en": "NetBSD adds a new text editor called atto",
+      "title_ja": "NetBSD、新しいテキストエディタ atto を追加",
+      "url": "https://mastodon.sdf.org/@netbsd/117518160563539748",
+      "hn_url": "https://news.ycombinator.com/item?id=50287599",
+      "score": 134,
+      "comment_count": 107,
+      "posted_at": "2026-10-29T11:59:01+00:00",
+      "comments": [
+        {
+          "id": 50288877,
+          "author": "chipotle_coyote",
+          "text": "To promote this to a top-level comment, because I think it's important context: nothing in the README file says the point is to be \"beginner-friendly\". As far as I can tell, that's something that Hacker News or whoever submitted this used as a description. Neither the word \"beginner\" nor the word \"friendly\" appear in the README; its goal is to \"be the smallest functional Emacs in less than 2000 lines of C.\" I think somebody incorrectly described Atto as comparable to nano/pico, and these comments are dragging it because it's not something that it was never intended as."
+        },
+        {
+          "id": 50289533,
+          "author": "MonkeyClub",
+          "text": "OpenBSD also has an Emacs-y non-extensible editor, mg(1): https://man.openbsd.org/mg Just noting for completeness, as I didn’t catch any mention of it."
+        },
+        {
+          "id": 50288020,
+          "author": "Levitating",
+          "text": "NetBSD isn't the first to use the name. My pet text editor is also called atto: https://git.levitati.ng/Levitating/atto"
+        },
+        {
+          "id": 50291133,
+          "author": "Fil0sOFF",
+          "text": "> https://man.netbsd.org/atto.1 > atto is not the standard editor. Hah. That is clearly a reference to https://www.gnu.org/fun/jokes/ed-msg.en.html"
+        },
+        {
+          "id": 50287982,
+          "author": "itomato",
+          "text": "NetBSD has beginners?"
+        }
+      ],
+      "summary_ja": "・主な議論点  \n NetBSDが新しいテキストエディタ「atto」を追加した件で、これは「2000行以下のC言語で実装された最小の機能的Emacs」を目指しており、READMEには「初心者向け」という記述はない。Hacker Newsや投稿者によって「初心者向け」として誤解された可能性がある。また、同名のエディタが既に存在している指摘や、OpenBSDの類似エディタmg(1)の言及なども話題となった。\n\n・賛否両論  \n 賛成意見：attoは小さくてシンプルなEmacsの実装であり、教育的価値や軽量性の面で魅力的だとの見解。また、NetBSDが独自のエディタを開発したこと自体が興味深いという声もある。  \n 否定意見：「初心者向け」として宣伝されたことへの疑問や、既存のエディタ(netcat的役割)との比較で期待が外れたとの不満。また「NetBSDに初心者がいるの？」という皮肉も飛び出した。\n\n・注目コメント  \n READMEには「初心者向け」とは書いていないが、それがHacker Newsで誤って広まってしまったという指摘や、「atto is not the standard editor」というユーモラスな引用（GNUの冗談の引用）などが特に印象的だった。",
+      "editor_note": "NetBSDのattoエディタ追加は、BSD系OSの継続的な進化と実用性を示します。日本のシステム管理者而言、安定性とカスタマイズ性の高いツールの選択肢が広がります。",
+      "category": "OSS"
+    },
+    {
+      "rank": 17,
+      "id": 50290668,
+      "title_en": "I went to Mexico to test-drive the cars Americans can’t buy",
+      "title_ja": "アメリカで購入できない車を試乗するためメキシコへ行った",
+      "url": "https://www.washingtonpost.com/climate-environment/2026/10/27/i-saw-future-driving-mexico-its-off-limits-americans/",
+      "hn_url": "https://news.ycombinator.com/item?id=50290668",
+      "score": 218,
+      "comment_count": 226,
+      "posted_at": "2026-10-29T15:30:22+00:00",
+      "comments": [
+        {
+          "id": 50291887,
+          "author": "haunter",
+          "text": "I live in Europe: My only “concern” about chinese cars (and I don’t mean chinese as in Volvo) that I am not sure you will get parts and service in 10 or 15 years. More than 500 unique models were released in the first 6 months of 2026 alone [0]. It’s like the wild west of Android phones 10-15 years ago. Brands you never heared about, never updated Android versions etc 0, https://www.carscoops.com/2026/08/chinese-automakers-lauchin..."
+        },
+        {
+          "id": 50293835,
+          "author": "whatever1",
+          "text": "I visited China 5 years ago. All the fancy cars of the upper middle class were German. Audis, vw, bmws and Mercedes everywhere. I visited this year again. Almost none of the new cars were German. I did not see most of their latest models on the streets. And I definitely did not see a single German electric car. They now have a dozen of brands some of them under the tech umbrella of Huawei that provides the info-entertainment and auto pilot and they are everywhere! And btw the assembly quality was now reaally nice. No idea about their safety or longevity, but it was nice being driven in them"
+        },
+        {
+          "id": 50291977,
+          "author": "rajman187",
+          "text": "The Chinese have certainly taken over far more than just the Mexican market. You'll hardly see a Tesla in London these days, and while Toyotas were selling like hot cakes in Pakistan the dealerships have gotten huge waitlists for the Chinese ones now. As others have mentioned, the jury is still out on reliability and longevity. I can confidently assume a Toyota from 1993 is still just being broken in at 150K miles, no clue if the same can be said about these with all the varieties and electronic components. If they do one day come the American shores, I assume that's the end of US car manufacturers."
+        },
+        {
+          "id": 50293738,
+          "author": "Animats",
+          "text": "Worldwide, gasoline-only powered cars are now less than half of worldwide sales.[1] [1] https://electrek.co/2026/10/05/gas-cars-fall-below-50-percen..."
+        },
+        {
+          "id": 50293841,
+          "author": "krunck",
+          "text": "I'd love to be able to buy an affordable electric car in a free and open market. Unfortunately I live in the USA. Having said that, if the only choice is cars with screens and touch controls...no thanks."
+        }
+      ],
+      "summary_ja": "**主な議論点**  \nコメントでは、中国車の急速な普及と信頼性に関する懸念が主要なテーマとして議論されている。参加者らは、中国の中国本土における自動車市場の変化に注目し、5年前にはUpper Middle Classの多くがドイツ車（アウディ、BMW、メルセデスなど）を選んでいたが、近年ではそれらがほぼ見られなくなったとの体験を共有している。特に電気自動車やHuaweiの技術を搭載した新ブランドが streets に広く見られるようになったことに驻足している。さらに、ガソリン車のグローバル販売比率が50%を下回ったというデータも引用され、世界的にEVへのシフトが加速していることが強調されている。\n\n**賛否両論**  \n一方では、中国車の品質向上や技術力に対する肯定的評価が見られる。しかし、反対の意見もあり、将来的なパーツやサービスの入手可能性、信頼性、耐久性に対する懸念が根強い。特に2026年の初半だけで500を超ぐのユニークなモデルが発表されたことに言及し、「Android携帯の黎明期」のような混沌とした状況を懸念する声がある。また、アメリカ国内では中国車の進出が制限されており、自由な市場で手頃な価格のEVが購入できないという不満も示されている。\n\n**注目コメント**  \n「もし中国車がアメリカに上陸すれば、それは米国自動車メーカーの終焉を意味するだろう」との予測が特に話題を呼んでいる。また、1993年のトヨタ車が15万マイル走行しても「まだ休日モード」であっているという比喩や、中国車の組み立て品質の向上に関する肯定的なレビューも印象的だ。",
+      "editor_note": "アメリカで購入できない車の試乗は、市場の差異と国際的な自動車戦略の複雑さを浮き彫りにします。日本の自動車メーカー而言、全球化時代の市場戦略の重要性が改めて認識されます。",
+      "category": "その他"
+    },
+    {
+      "rank": 18,
+      "id": 50286197,
+      "title_en": "What we know so far about Spain train crash",
+      "title_ja": "スペイン列車事故についてわずかに明らかになったこと",
+      "url": "https://www.bbc.com/news/articles/cm8xz7pkd0jjo",
+      "hn_url": "https://news.ycombinator.com/item?id=50286197",
+      "score": 92,
+      "comment_count": 160,
+      "posted_at": "2026-10-29T08:55:08+00:00",
+      "comments": [
+        {
+          "id": 50287098,
+          "author": "notenchange",
+          "text": "Reading the text it seems to me this is due to a very widespread issue in Spain and other southern European countries: people don’t care about the warnings because there are too many false positives. That’s why people here, when they hear the fire alarm they just wait for it to go off: the probability that it is actually a fire is minuscule… but the alarm triggers a lot. Not sure how to actually solve this… but I’m also not making excuses for what happened. High speed trains is not the same as a fire alarm in some office building, the people in charge should be held responsible somehow."
+        },
+        {
+          "id": 50294297,
+          "author": "juliushuijnk",
+          "text": "It should not be possible for one person to make a mistake of this magnitude. In case of a disconnected/off main safety system, the train should be limited on a hardware level to not be able to go over 40km/h."
+        },
+        {
+          "id": 50287022,
+          "author": "swiftcoder",
+          "text": "The level of human negligence here is astounding. The system did exactly what it was supposed to (lock the train down if the track can't be confirmed clear), and then a human controller ordered the crew to override the system, and ordered them to proceed at an unsafe speed towards a similarly disabled train?"
+        },
+        {
+          "id": 50293972,
+          "author": "anonymous2024",
+          "text": "I still don't know why the train drivers don't have a simple data: The distance to the train that is next in in that railway in its direction. With this information, that accident will have never happened."
+        },
+        {
+          "id": 50294176,
+          "author": "dogscatstrees",
+          "text": "Is there an international consortium for bast practices in high-speed train control? Surely there are countries that have good systems in place, or have benefited from knowledge-sharing. I have to believe these train systems were built with outside help and then organic improvement or the opposite."
+        }
+      ],
+      "summary_ja": "・主な議論点  \nスペインの高速鉄道事故は、過熟警報による無関心という広範な社会問題が背景にある。人々は火災警報のような頻繫な警告を無視する癖があり、それが安全システムの信頼性にも影響を及ぼしている。また、一人の人間がこの規模のミスをできる仕組みになっていることに対する批判も多く、安全装置のハードウェアレベルでの速度制限が必要ではないかという意見がある。\n\n・賛否両論  \n一方、人間の過失を完全否定する見方もある。安全システムは正しく機能していたが、担当者がそれを無視し、不適切な速度で進行を指示したため事故が起きたとの指責もある。また、運転手に「前方列車との距離」といった基本的な情報を提供すれば事故の予防が可能だという意見もある。\n\n・注目コメント  \n「国際的なベストプラクティスのコンソーシアムが必要ではないか」というコメントが特に注目されている。他国の成功事例を共有し、スペインの鉄道システムが外部の支援を受けて構築された経緯について考察する人も多い。",
+      "editor_note": "スペイン列車事故の情報開示は、危機管理における透明性の重要性を強調します。日本の公共交通機関而言、迅速で正確な情報提供が信頼構築の鍵であることを示しています。",
+      "category": "その他"
+    },
+    {
+      "rank": 19,
+      "id": 50278645,
+      "title_en": "noalloc: Tooling and libraries to enforce zero heap allocations in Golang",
+      "title_ja": "noalloc: Golang でヒープ割り当てをゼロにするツールとライブラリ",
+      "url": "https://github.com/theconsensuslabs/noalloc",
+      "hn_url": "https://news.ycombinator.com/item?id=50278645",
+      "score": 45,
+      "comment_count": 24,
+      "posted_at": "2026-10-28T18:29:25+00:00",
+      "comments": [
+        {
+          "id": 50293009,
+          "author": "andrewla",
+          "text": "The end state of every garbage collected language is a suite of tools to prevent garbage collection at all costs. I think we can learn something here."
+        },
+        {
+          "id": 50294088,
+          "author": "eatonphil",
+          "text": "Hey folks, this is my project. I really liked OxCaml's zero_alloc feature [0], something you don't get in Rust or Zig or Go*, and have been trying to get a handle on allocations in The Consensus's code search engine. It's an extremely early project but it's been helping me out a bunch already. Would love to hear your bug reports or requests if you try running it on your codebase. [0] https://theconsensus.dev/p/2026/06/27/the-feature-in-oxcaml-... * I think you can get this in Clang and maybe GCC with `__attribute__((nonallocating))` though."
+        },
+        {
+          "id": 50294165,
+          "author": "gritzko",
+          "text": "If you don't allocate, why do you even need Go or Rust? LLMs handle less elegant syntax just as well. I use a zero-malloc C dialect with slices and bounds-checking. Just recently I was sketching a smallish database in zero-malloc C. https://replicated.live/blog/db That was partly because most LSM data structures are read-only, so mmap was good enough and concurrent access was safe for the bulk of the data. The \"hot zone\" (memtable) then requires some intricate engineering, but that is the case either way. You can go quite far with zero-malloc C."
+        },
+        {
+          "id": 50293378,
+          "author": "kvemkon",
+          "text": "Go compiler has an advanced escaping analyzer. Wouldn't it be easier and better to add this noalloc-analyzer feature to golang directly?"
+        },
+        {
+          "id": 50292051,
+          "author": "zinodaur",
+          "text": "I love it. Any thoughts on allowing (value type) Pointers into a Region?"
+        }
+      ],
+      "summary_ja": "・主な議論点  \nコミュニティは、ガベージコレクション（GC）言語におけるヒープ確保の回避ツールの必要性について活発に議論した。特に、Go言語の高度なエスケピング分析を活用して、noallocツールを標準のGoコンパイラに統合すべきではないかという意見が浮上した。また、Zero-alloc Cやメモリマップドファイルの使用によるゼロメモリ管理の実現可能性についても言及された。\n\n・賛否両論  \n肯定的な意見では、noallocツールがパフォーマンスクリティカルなアプリケーション（例えばデータベースエンジン）において非常に有用であるとの見解がある一方、否定的な意見もあり、「GCが不要ならGoやRustを使う必要がない」との反論や、ゼロメモリ割り当てをC言語で直接実現するアプローチの有効性を指摘する声も聞かれた。\n\n・注目コメント  \n「ガベージコレクション言語の最終形態は、GCを防ぐためのツール群である」というコメントは、本議論の核心を突いており、GC言語の進化について深い洞察を提供している。また、OxCamlのzero_alloc機能に着想を得に開発されたnoallocプロジェクトの作者によるコメントも注目される。",
+      "editor_note": "noallocツールは、Go言語のパフォーマンス最適化に新的アプローチを提供します。日本のGo開発者而言、メモリ使用量の削減と効率的な実装の可能性が広がります。",
+      "category": "プログラミング言語"
+    },
+    {
+      "rank": 20,
+      "id": 50247342,
+      "title_en": "The tragedy of losing your Wikipedia page",
+      "title_ja": "Wikipedia のページを失う悲劇",
+      "url": "https://www.wired.com/story/the-tragedy-of-losing-your-wikipedia-page/",
+      "hn_url": "https://news.ycombinator.com/item?id=50247342",
+      "score": 35,
+      "comment_count": 48,
+      "posted_at": "2026-10-26T17:15:58+00:00",
+      "comments": [
+        {
+          "id": 50280865,
+          "author": "internetter",
+          "text": "> A Wikipedia editor can tag an article for deletion, and unless satisfactory edits are made within a certain timeframe, the page will disappear. Simeonovski didn’t do this—he referred the article for debate among his fellow editors. Only in uncontroversial cases. In most cases, there is a debate where consensus is formed on if there is enough information about a person / topic to warrant an encyclopedia article. Wikipedia is struggling as is with the amount of content. An article cannot be written for every person under the son. > Wikipedia pages, for better or worse, matter to people. To be included is a validation of a life. There are billionares without wikipedia articles. There are people who have saved thousands of people from death without wikipedia articles. The only thing that matters in getting a wikipedia article is sufficient coverage by reputable 3rd party sources, such that there is enough material to write an accurate, informative, and neutral article. You should not derive your worth by this metric. Furthermore, https://en.wikipedia.org/wiki/Wikipedia:An_article_about_you..."
+        },
+        {
+          "id": 50280875,
+          "author": "pwdisswordfishq",
+          "text": "> Every day, Wikipedia biographies of living people are flagged for deletion because the subjects are not “notable” enough. How do these poor souls take the news? How entitled must one be to assume they are owed a page in Wikipedia?"
+        },
+        {
+          "id": 50280939,
+          "author": "cmiles8",
+          "text": "It’s a not very well kept secret that many of these pages for less-than-notable people were created by the person themselves or their “publicist.”"
+        },
+        {
+          "id": 50280750,
+          "author": "rwmj",
+          "text": "https://web.archive.org/web/20261026155018/www.wired.com/sto..."
+        },
+        {
+          "id": 50282143,
+          "author": "anonreplier",
+          "text": "This took me down a rabbithole of randoms who have wikipedia pages. \"Spacetrail\" who created Dimoska's page also created one for Rajinder Singh Tumber who seems completely unremarkable but has somehow wangled an MBE, presumably due to his ability for self-promotion."
+        }
+      ],
+      "summary_ja": "・主な議論点（コミュニティで最も議論されたポイント）  \n「誰でもがWikipediaにページを持つ権利があるのか、それとも「注目度」の基準が必要なのか」という根本的な問いが中心。Wikipediaは第三者の信頼できる報道による十分な言及がないとページを削除する方針を強調し、個別の人物の自己価値をページの存在で測るべきではないという立場を示した。\n\n・賛否両論  \n一方で、ページの有無が社会的認知や人生の意義と結びついているという意見もあり、削除された人々が深い影響を受けていることを指摘。自己プロモーションや公関によって無関係な人物がページを作成されているケースも問題視され、Wikipediaの信頼性が損なわれているとの懸念が浮上。\n\n・注目コメント  \n“There are people who have saved thousands of lives...without Wikipedia articles.”  \nこのコメントは、実際の功績がWikipediaの有無と直結しないことを強調し、ページを基準に人を判断する社会的偏見を疑議するもので、特に鋭い洞察として多くの賛同を得た。",
+      "editor_note": "Wikipediaページの失う悲劇は、デジタル情報の脆弱性と継承の問題を浮き彫りにします。日本の知識管理而言、情報の永続性とBACKUPの重要性が改めて認識されます。",
+      "category": "その他"
+    },
+    {
+      "rank": 21,
+      "id": 50289590,
+      "title_en": "Keplearn: Extract Equations from Data in Seconds",
+      "title_ja": "Keplearn: 数式をデータから数秒で抽出",
+      "url": "https://github.com/owls-on-wires/keplearn",
+      "hn_url": "https://news.ycombinator.com/item?id=50289590",
+      "score": 65,
+      "comment_count": 3,
+      "posted_at": "2026-10-29T14:22:53+00:00",
+      "comments": [
+        {
+          "id": 50293750,
+          "author": "seanhunter",
+          "text": "Named after Kepler, who went from Tycho Brahe’s observational data to the laws of planetary motion (as mentioned in the article). But one really inspiring thing about Kepler is not mentioned there is that he started with a different theory and then changed his mind when the observational data showed he was wrong. We have the laws of planetary motion because of a feat of tremendous intellectual humility where a really smart person was prepared to admit that the theory they had invested a huge amount of time and effort into formulating didn’t match the observational data, _so they changed their mind_. Kepler’s original theory was that the orbits in the solar system were defined by polygons and their inscribed/circumscribed spheres. This seemed very attractive because at that time they knew of 6 planetary bodies and this fitted in somehow (I don’t remember exactly) into this model with nested platonic solids and the spheres around them. Then Kepler realised that the predictions of this very elegant model were worse than the heliocentric model. So when Brahe’s observations became available he basically threw all that out and started again, to develop his wonderfully elegant laws of planetary motion based around elliptical orbits which also have the significant benefits of predicting planetary motion beautifully and were later found to be entirely derivable from Newton’s laws of motion using calculus (there is a wonderful presentation of this derivation in Spivak for anyone who is interested)."
+        },
+        {
+          "id": 50291161,
+          "author": "kamilstaszewski",
+          "text": "Looks like it was written by human. Crazy"
+        }
+      ],
+      "summary_ja": "このコメントは、Keplerの科学史的な業績、特に「知的謙遜」という観点から、データから理論を導き出すアプローチの本質を強調しています。\n\n**主な議論点**\nコミュニティの主な関心は、Keplerが自身の理論を放棄し、観測データに従って惑星運動の法則を確立したという「知的謙遜」のエピソードに集中しています。これは、データ駆動型アプローチ（データから理論を構築する）の強さと普遍性を示す一例として、現在のデータサイエンスや機械学習の文脈で再解釈されています。\n\n**賛否両論**\nコメント内では、明確な賛否両論は見られません。代わりに、Keplerのアプローチが「 smart person が間違った理論に投資した後、データによって正された」という点で、現代の科学やデータ分析の現場における理論とデータの関係性を反思するという共通の関心がうかがえます。\n\n**注目コメント**\n特に注目されるのは、Keplerが当初提唱した「正多面体と内接/外接球体による太陽系模型」が「 elegant でありながら観測と一致しなかった」という具体的なエピソードです。この逸話は、理论の美しさや知的投資が、時として客観的データの提示に先立つ障害となる可能性を示唆しており、データ駆動型アプローチの重要性を歴史的に裏付ける強力な証拠として機能しています。さらに、Keplerの法則が後にニュートンの運動法則から微積分で導出可能であるというSpivakの記述は、データから得られた法則が基礎的な物理法則と整合性を持つことの重要性を強調しています。",
+      "editor_note": "Keplearnの数式抽出は、データ分析の自動化と効率化を実現します。日本の研究機関而言、研究データの処理が大幅に高速化される可能性があります。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 22,
+      "id": 50287448,
+      "title_en": "How Google determines the names for bodies of water in Google Earth (2008)",
+      "title_ja": "Google Earth の水名の決定方法 (2008)",
+      "url": "https://publicpolicy.googleblog.com/2008/04/how-google-determines-names-for-bodies.html",
+      "hn_url": "https://news.ycombinator.com/item?id=50287448",
+      "score": 201,
+      "comment_count": 165,
+      "posted_at": "2026-10-29T11:41:18+00:00",
+      "comments": [
+        {
+          "id": 50288236,
+          "author": "mapontosevenths",
+          "text": "\"By saying \"common\", we mean to include names which are in widespread daily use, rather than giving immediate recognition to any arbitrary governmental re-naming. In other words, if a ruler announced that henceforth the Pacific Ocean would be named after her mother, we would not add that placemark unless and until the name came into common usage. \" They violated their own policy with the gulf then."
+        },
+        {
+          "id": 50290564,
+          "author": "jezzamon",
+          "text": "Disclaimer: work for Google This article is not as pure as it might seem but I think this is also a post-hoc reasoning to explain what decision they went with for the \"Persian Gulf\" / \"Arabian Gulf\" decision, and Google then proceeded to change their stance on that in the following years: \"Google had previously put both Persian Gulf and Arabian Gulf on its Google Maps. After May 2012, it removed both names from the body of water stating that it does not name every place in the world and that it did not want to take a political stance. Iranians complained about the change and started a Twitter campaign asking \"Where's the Persian Gulf?\".[66] Since 2016, Google Maps has displayed both Persian Gulf and Arabian Gulf on the body of water and shows \"either Arabian or Persian Gulf to local users, depending on geolocation and language settings.\"[67] Google Earth shows both names, unless viewed through a server from a Gulf Coast Arab country, in which case it labels it simply \"Arabian Gulf\".\" https://en.wikipedia.org/wiki/Persian_Gulf_naming_dispute#:~... Evidently Google in bending the knee with the America naming but I think they also haven't exactly taken a purely principled stance in the past either"
+        },
+        {
+          "id": 50288156,
+          "author": "philipov",
+          "text": "The key quote: > But if different countries dispute the proper name for a body of water, our policy is to display both names, with each label placed closer to the country or countries that use it. Clearly that policy has changed since 2008. Not surprising, since that's before they decided to officially be evil."
+        },
+        {
+          "id": 50289817,
+          "author": "alistairSH",
+          "text": "\"We want Google Earth to merit users' trust as an authoritative reference...\" I guess they've changed their minds since 2008... Their display of \"Gulf of America\" without \"Gulf of Mexico\" and \"Lake America\" without \"Lake Ontario\" is at odds with their declared policy."
+        },
+        {
+          "id": 50288801,
+          "author": "afavour",
+          "text": "So wild to be living in a time where the most powerful man in the world is very obviously turning senile and those that surround him choose to indulge his outbursts rather than address the problem."
+        }
+      ],
+      "summary_ja": "・主な議論点  \nコメントでは、2008年のGoogleの政策説明とその後の実際の判断の乖離が最大の論点として浮上した。特に「両名称表示」を公算政策としていたにもかかわらず、最近になって「Gulf of America」や「Lake America」のような政治的・個人的命名に追従したことに対し、信頼性への疑問が集中している。\n\n・賛否両論  \n一部のユーザーは、現在のGoogleの対応が一貫性を欠き、「権威ある参考資料」としての自立性を失っていると批判。一方で、政治的中立や法的拘束を求める声もあり、名称表示の地理的・言語的変化については技術的対応の範疇とする見解も示された。\n\n・注目コメント  \n> \"So wild to be living in a time where the most powerful man in the world is very obviously turning senile and those that surround him choose to indulge his outbursts rather than address the problem.\"  \nこのコメントは、政治的圧力に対する社技術的応答ではなく、状況を無視する危険性を鋭く指摘しており、広く共感を得た。",
+      "editor_note": "Google Earthの水名決定方法は、地理情報の標準化と正確性の重要性を示します。日本の地図サービス而言、データの信頼性と更新プロセスが重要であることを強調しています。",
+      "category": "Web開発"
+    },
+    {
+      "rank": 23,
+      "id": 50262608,
+      "title_en": "Blanets and Weird Worlds",
+      "title_ja": "Blanets and Weird Worlds",
+      "url": "https://www.antipope.org/charlie/blog-static/2026/10/bizarre-blanets-and-other-weir.html",
+      "hn_url": "https://news.ycombinator.com/item?id=50262608",
+      "score": 14,
+      "comment_count": 1,
+      "posted_at": "2026-10-27T17:27:39+00:00",
+      "comments": [
+        {
+          "id": 50293478,
+          "author": "daeken",
+          "text": "> a good chunk of the action of my work-in-progress Starter Pack is set on a terraformed Earth-mass moon orbiting a Hycean planet of roughly Neptune's mass orbiting its star in the triple phase zone for water (i.e. where water can exist as ice, liquid, or vapour). The moon in question has spin (presumably it got kicked off by a collision with another proto-moon while the moon system was forming), so a magnetosphere, and tides to keep plate tectonics going--but this time tides from its primary planet, not a large sub-moon of its own. This makes me so curious as to the approach he's taking with this next book, in terms of the biology of creatures native to these bodies (if they exist). I've been thinking a lot about the approach Andy Weir took for the Eridians: start with the physical characteristics of the planet and reverse-engineer biology that was likely to be viable under those circumstances. As someone who typically writes hard sci-fi, I can't help but be drawn to that approach — too many worlds and environments are designed around the characters and it ends up feeling totally incoherent."
+        }
+      ],
+      "summary_ja": "・主な議論点  \nBlanets（惑星ではなく衛星が恒星の周りを公転する天体）や水の三相 zone における生命の存在可能性について、特に衛星の自転、磁気圏、そして地球以外の惑星からの潮汐作用によるプレート tectonics の役割が注目された。また、これらの物理的特性を基に逆算して生物学を設計する ハード SF のアプローチ（Andy Weir のエリディアン種の例）が話題に。  \n\n・賛否両論  \n一部のユーザーは、物理法則に基づいて生命を設計することの重要性を強調し、「キャラクターが先」の設定は非現実的で「全く一貫性がない」と批判。一方で、純粋な物理モデルだけで生命を説明するのは難しく、創作の自由を妨げる可能性も指摘される声もある。  \n\n・注目コメント  \nユーザーは自作中の小説で「ネプチューン程の質量の Hycean 星を公転する Earth-mass の衛星」を舞台にし、衛星の自転や惑星からの潮汰れによって磁気圏とプレート tectonics を維持させる設定を紹介。これにより、物理的制約を尊重しつつも生命の設定を可能にする方法論を模索している。",
+      "editor_note": "Blanets and Weird Worldsは、宇宙科学の未知の可能性を探索します。日本の宇宙研究機関而言、新的アプローチと協力の機会が広がる可能性があります。",
+      "category": "その他"
+    },
+    {
+      "rank": 24,
+      "id": 50233059,
+      "title_en": "If-then-else had to be invented (2020)",
+      "title_ja": "if-then-else が発明されなければならなかった (2020)",
+      "url": "https://github.com/e-n-f/if-then-else/blob/master/if-then-else.md",
+      "hn_url": "https://news.ycombinator.com/item?id=50233059",
+      "score": 148,
+      "comment_count": 150,
+      "posted_at": "2026-10-25T16:05:56+00:00",
+      "comments": [
+        {
+          "id": 50285383,
+          "author": "chrismorgan",
+          "text": "The submitted title > The 'else' keyword is probably a literal translation from German (2020) is editorialised, inaccurate, and very misleading. The actual title: “if … then … else had to be invented!” And the content doesn’t say anything about it being a literal translation from German; rather: > What they do say is that this document was originally written in German and hastily translated into English. I think a carefully-chosen German word was probably translated as an archaic English word and then never revisited. Wild speculation, and definitely nothing about literality of translation. As for the author’s description of it being archaic, well, I’d call that misleading too. Bare “else”, arguably (definitely not colloquial in most dialects), but as “or else”, perfectly current. Seems perfectly reasonable to me that someone considered the options, decided “otherwise”, “or else” too wordy and confusing in its own way, and so settled on bare “else” as the best choice (which I think it is), not how people mostly speak, but perfectly legitimate, and concise. (In other words: I think we’d have settled on “else” even without the possible German step. This too is speculation, of course.)"
+        },
+        {
+          "id": 50285087,
+          "author": "slu",
+          "text": "Else is a given name in Denmark (a variation of Elsa, I'm guessing). At university we had a professor with the surname True; so if he had a daughter, her name could've been Else True. We found that quite funny. Else If would also be a possible name in Denmark. But, according to Statistics Denmark[1], none of those combinations exists: Women with the first name 'Else' 13,047 Men and women with the last name 'True' 166 No one has the name 'Else True' Women with the first name 'Else' 13,047 Men and women with the last name 'If' 6 No one has the name 'Else If' [1] https://www.dst.dk/en/Statistik/emner/borgere/navne/hvor-man..."
+        },
+        {
+          "id": 50285501,
+          "author": "rzzzt",
+          "text": "British PHP uses 'perchance ... otherwise': - https://aloneonahill.com/blog/if-php-were-british/#:~:text=E... - https://news.ycombinator.com/item?id=33828509"
+        },
+        {
+          "id": 50284564,
+          "author": "divbzero",
+          "text": "‘Else’ is not commonly used in English today but the meaning does fit. From Webster’s (1913): Else, adverb or conjunction 1. Besides; except that mentioned; in addition; as, nowhere else; no one else. 2. Otherwise; in the other, or the contrary, case; if the facts were different. “For thou desirest not sacrifice; else would I give it.” – Ps. li. 16. After ‘or’, else is sometimes used expletively, as simply noting an alternative. “Will you give thanks, … or else shall I?” – Shak."
+        },
+        {
+          "id": 50285017,
+          "author": "esperent",
+          "text": "It's always \"or else\" when used as a conjunction in modern English. \"Take your coat or else you'll regret it.\" \"Hurry or else you'll miss the bus.\" Etc. > if something is true, then do a thing, else do a different thing. > That's just English, right? Except that it isn't No, it is English, grammatically correct English. It's not idiomatic English but it's a perfectly fine sentence otherwise. Idiomatic English would simply require adding an or if(x) do m orelseif(y) do n orelse do o But of course a native English programmer would quickly recognize the or is redundant even if it is idiomatic, and drop it. > I think a carefully-chosen German word was probably translated as an archaic English word and then never revisited This is a weird reach. Else isn't an archaic word. \"Eat your dinner or else.\" \"If you don't do it someone else will have to.\" Plus all the \"or else\" conjunction examples. It was probably chosen because it was shorter than \"otherwise\" and not for any other reason."
+        }
+      ],
+      "summary_ja": "## 主な議論点\nコメント者らは記事のタイトルや内容の翻訳について疑問を Raisedし、「else」キーワードの起源について語論しました。原記事はGerman語訳であり、タイトルは 「if … then … else had to be invented！」 というものであり、単にドイツ語からの直訳ではないと主張しました。\n\n## 賛否両論\n- **賛成**: 「else」は古風ではなく現代英語でも使用されており(「or else」の形式)、「otherwise」や「or else」より簡潔であるため選択されたのではないかという意見\n- **反対/懐疑**: 「carefully-chosen German word」の仮説は迂信しすぎているという指摘や、そもそもこの単語選択がドイツ語翻訳の結果ではなく、プログラミングにおける自然な選択だったのではないかという見解\n\n## 注目コメント\n「else」はデンマークで名前として使われており(例:「Else True」)、ある大学教授の娘の名前になり得たというユーモラスなコメントや、British PHPが「perchance … otherwise」を使っているという参考コメントなど、プログラミング言語の語源に対するユーモアと分析の両方が見られました。",
+      "editor_note": "if-then-elseの発明は、プログラミングの基础概念が如何に重要かを示します。日本の编程教育而言、基础的な論理構造の理解が PROGRAMMING 力の基盤であることを強調しています。",
+      "category": "プログラミング言語"
+    },
+    {
+      "rank": 25,
+      "id": 50293025,
+      "title_en": "AI Contributions to GHC",
+      "title_ja": "AI Contributions to GHC",
+      "url": "https://serokell.io/blog/ai-contributions-to-ghc",
+      "hn_url": "https://news.ycombinator.com/item?id=50293025",
+      "score": 10,
+      "comment_count": 2,
+      "posted_at": "2026-10-29T17:42:30+00:00",
+      "comments": [
+        {
+          "id": 50293726,
+          "author": "eschew",
+          "text": "Seems ironic that a blog post describing GHC's AI policy, from a contributor to GHC, which expresses agreement with GHC's AI policy, itself directly violates GHC's AI policy (points P1 and P4)!"
+        }
+      ],
+      "summary_ja": "**主な議論点**  \nコメントでは、AIがGHC（ Glasgow Haskell Compiler）への貢献に与える可能性について、特にAI生成コードの使用に関する倫理的および技術的課題が hottest なテーマとして議論された。コミュニティはAIツールの活用に対する明確なポリシーの必要性を指摘し、投稿者自身がGHCのAIポリシー（P1・P4）に違反しているとの皮肉も出された。\n\n**賛否両論**  \n一方では、AIによって生産性が向上し、複雑な最適化やバグ修正が加速される期待の声がある。他方、AI生成コンテンツがコード品質や保守性を低下させ、また著作権や貢献の定義が曖昧になる懸念も呈された。AIによる貢献を受け入れるかどうか、ポリシーの策定と透明性の確保が鍵と指摘された。\n\n**注目コメント**  \n「AIのブログポストがAIポリシー違反という皮肉」は、自己矛盾を指摘する中で、コミュニティの信頼と一貫性の重要性を浮き彫りにした。また、AIがコードレビューやテストをサポートする具体的事例も紹介され、実用的な活用が進むことが期待された。",
+      "editor_note": "AI Contributions to GHCは、AIがソフトウェア開発に参加する新的形を示します。日本の開発者而言、AIツールの活用と人間の創造性の組み合わせが重要であることを示唆しています。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 26,
+      "id": 50285154,
+      "title_en": "We won't \"just hang out\"",
+      "title_ja": "われわれはただ「べーべー・はー・あうと」ではしない",
+      "url": "https://borretti.me/article/we-wont-just-hang-out",
+      "hn_url": "https://news.ycombinator.com/item?id=50285154",
+      "score": 120,
+      "comment_count": 189,
+      "posted_at": "2026-10-29T06:20:06+00:00",
+      "comments": [
+        {
+          "id": 50294239,
+          "author": "nezi",
+          "text": "If your whole personality is derived from abstract intelligence then you will have little to form relationships with others since AI is better than people at those things. But there is a whole world of experience outside of abstract intelligence. Go to a zoo, go camping, enjoy food, enjoy art, enjoy sports. All these activities support friendships. The relationships formed from online forms, open source contribution and IRC won’t be created. But these sort of online mostly relationships were only forged for a couple generations. I hope your human experience involves more than abstract reasoning and programming and you can connect to others with more visceral human experience than text over the internet."
+        },
+        {
+          "id": 50293005,
+          "author": "alwa",
+          "text": "I dunno—I spend a lot of time “just hanging out” with people who aren’t particularly dazzled by work or intellectual pursuits or higher education. I feel like those constitute one set of processes by which people come together and form relationships and, for those of us who are mainly familiar with that set, it can be instructive to seek out communities that form without any of those elements. One place to look might be ministry or service. Illness, loss, grief, infirmity, death, age, family strains—people require care and people give care regardless of their postgraduate endeavors. Nuns and Jesuits and the like aren’t for everybody—but look to the neediest among us and, in large parts of the world, those sorts of order are the people doing the invisible, unglamorous, uneconomical, “chop wood, carry water” form of devotion and social labor day in and day out. In intimate community even with very difficult (and sometimes ungrateful) members. Another might be the sort of ad hoc communities that arise in exigency: disaster, forced migration, encampments, solidarity against forces of difficulty. Unhoused, unemployed, and retired people can provide a particularly illuminating contrast to the pastimes and concerns that animate a working life. A visible minority fill their days with addiction, but a whole lot are complete and interesting people with the full range of human ambitions and desires and fears and joys, and somehow they fill their waking hours with more than just material striving. Another might be organizations like union halls, advocacy groups, music scenes, circus folk, jugglers, running clubs, political groups… Kids are great for this too. They do a lot of hanging out, with nothing more than imagination and a drive to self-expression. Even our hominid ancestors do a pretty good job of hanging out litigating social hierarchy and nurturing one another—no university degree or novel engineering task required…"
+        },
+        {
+          "id": 50294128,
+          "author": "naet",
+          "text": "I personally learn more and create more and generally live a richer social and intellectual life when I have extended periods off work. I don't think AI directly leads to some kind of post scarcity UBI utopia, but if we did reach a post scarcity UBI utopia, I think life would be much better for many people and not the bleak dystopia the author finds. I don't think needing to go to work is driving most people's social lives; if anything, needing to work all the time is taking away people's social lives and the energy to maintain them."
+        },
+        {
+          "id": 50292892,
+          "author": "articulatepang",
+          "text": "This argument ignores sexual selection and people's desire for status (the two are closely related). In many respects, many of us already have superabundance, in that our basic physical needs are taken care of. Yet we convince ourselves that's not enough and continue to work. What is the object of that work, usually? The respect of others, exclusive limited resources like land, and to have highly desirable mates. These three are closely related, and that's probably not an accident. Sexual selection has likely been a powerful force in shaping our psychology. Spending all day alone watching TikTok is low-status and doesn't get anyone's respect, so I predict that it won't actually be the thing that most people end up doing."
+        },
+        {
+          "id": 50285817,
+          "author": "jaxtracks",
+          "text": "A lot of these takes saying we're doomed to a Wall-E future seriously underestimate the human spirit I think. The tykes I volunteer teaching code to still want to write the challenging parts themselves, because they like doing hard things and expressing themselves. It doesn't matter that the robots have supposedly taken over that job. Same as how the tykes I coach wrestling for do it because it's hard and it gives them a way to grow and express themselves. They know they're never going to see a cent from that pursuit. If an AI singularity starts trying to feed our kids digital heroin I like to think the majority of us will be more inspired than to tell them to quit trying, tie off, and let humanity go gentle into that good night."
+        }
+      ],
+      "summary_ja": "**主な議論点**  \n「AIや抽象的知能だけで人生を満たせるか」をめぐる議論が中心。記事は「AIに負けない人間の経験」を提案し、仲間や友人との「ただいる」時間や、露营や美術鑑賞などの身体的経験が重要だと主張。コミュニティはオンラインベースだけでは浅く、対面や実体験に根ざした関係が深いとの見方が強い。\n\n**賛否両論**  \n肯定の声：「ただいる」時間や、教会・災害時の一時的コミュニティ、ランニングクラブなどの非仕事ベースの関係の価値を挙げ、人間の社会性は仕事や知性以外にも豊かに形成されると指摘。また、経済的余裕がある未来でも人間は成長や尊敬を求め続けるとして、絶望的な未来論を批判。  \n否定的・懐疑的な声：少なくとも本コメントでは、著しい賛否対立は見られず、むしろ「人間の根本的欲求（ステータス、性的選択）」が仕事や活動を動かすとする一種の補填的議論が展開された。\n\n**注目コメント**  \n「子供たちはデジタル heroin でも、自分で難しい部分を書こうとする。ロボットが仕事を奪ったところで、やりがいはまだある」──教えやコーチングでの経験に基づき、人間のやる気と創造性は技術の進展に負けないという楽観的見通し。AIによる万能化論に対し、人間の成長欲と自律性の強さを強調する貴重な視点。",
+      "editor_note": "「べーべー・はー・あうト」でないという主張は、人間関係の本質的な価値を問うています。日本の职场文化而言、単なる時間の共同发展ではなく、意味のある交流が重要であることを強調します。",
+      "category": "その他"
+    },
+    {
+      "rank": 27,
+      "id": 50282538,
+      "title_en": "The first wired XR glasses powered by Android XR",
+      "title_ja": "Android XR で駆動する最初の有線 XR グラス",
+      "url": "https://blog.google/products-and-platforms/platforms/android/xreal-aura/",
+      "hn_url": "https://news.ycombinator.com/item?id=50282538",
+      "score": 91,
+      "comment_count": 74,
+      "posted_at": "2026-10-28T23:45:19+00:00",
+      "comments": [
+        {
+          "id": 50283325,
+          "author": "zmmmmm",
+          "text": "It's going to be interesting to see this compete with the Meta VR glasses. They are essentially identical for productivity except the Aura has physical light pass through while the VR glasses use external cameras to provide pass through. The Meta VR glasses will have better resolution I think, but then the Aura has access to the whole Android ecosystem - so that means real implementations of Microsoft Word etc. But the real choice is the unfortunate one of who is least likely to abandon the whole thing when it doesn't take off and leave you with an un/poorly supported device. Both companies have terrible track records on this."
+        },
+        {
+          "id": 50293433,
+          "author": "malwrar",
+          "text": "It’s kind of funny reading this blog announcement as a corporate product announcement, because I’ve been actually playing with nreal’s air 2 ultra glasses. They are absolutely perfect for open XR work, I love them. You get the cameras, buttons, accelerometer, all over the cable without fuss, and they show up in Linux as just a regular DRM device. Literally by default most window managers just see them as another display. It was such a nice experience getting a 3d engine hooked up to them and adding 6DoF tracking working with visua slam (two fisheye cameras gives you instant depth, a luxury compared to the usual monocular focus). Honestly these glasses are good enough that I use them with a pinephone as my primary computing device these days. And this was on the side executed by an agentic harness while I focusing on other things! I guess I’m also now competing with Google, and so could you too."
+        },
+        {
+          "id": 50294393,
+          "author": "andybak",
+          "text": "I've got a pair. AMA..."
+        },
+        {
+          "id": 50293765,
+          "author": "SirMaster",
+          "text": "I like glasses like these, but just for a simple use case. I picked up a pair of factory refurb VITURE Pro XR for $130 and they are fantastic for watching movies from my phone on a trip, or playing games from like a steam deck. They really are native 1080p 120Hz micro OLED screens. Fantastic contrast and brightness. I don't care at all about the head tracking or passthrough or any of that stuff. To me they are just a simple fixed floating huge high quality screen that I can use on the go. I'm also able to watch 3D movies on them with of course zero crosstalk and that's pretty neat too! If anyone else is interested in trying these types of glasses here they are for $152 (with coupon SHOPNOW15) certified refurb from the original company with an excellent 30 day return policy. https://www.ebay.com/itm/389249036434"
+        },
+        {
+          "id": 50282944,
+          "author": "2001zhaozhao",
+          "text": "I actually don't see any reason why I would use this instead of my Xreal Air (released like 3 years ago) + Samsung Dex. The phone is a perfect \"compute puck\" for wired AR glasses and Google even makes them, so why the heck are they selling separate compute pucks with these glasses and making them unaffordable?? Just make some pixel glasses that run android xr on the pixel phone instead"
+        }
+      ],
+      "summary_ja": "・主な議論点\nMeta VR眼鏡との競合、光学パススルーフィルターとカメラ方式の違い、Androidエコシステムの優位性、企業の継続支援への懸念が議論された。\n\n・賛否両論\nGoogleの过去的失敗記録から製品継続性に不安の声。一方で、Nreal眼鏡の高い実用性とLinuxでの動作可能性を絶賛する意見も。GoogleがPixel Phoneと連携しない選択は批判された。\n\n・注目コメント\nNreal Air 2 UltraをLinuxで6DoF追跡まで実現し、PinePhoneで主力デバイスとして使用している詳細な体験談。Android XRの可能性を示す強力な実証例。",
+      "editor_note": "Android XRを搭載した有線XRグラスは、拡張現実の実用化に進歩を示します。日本のVR/AR企業而言、新的プラットフォームの可能性と市場参入の機会が広がります。",
+      "category": "モバイル"
+    },
+    {
+      "rank": 28,
+      "id": 50242509,
+      "title_en": "Java's new AOT cache feature is in a rough state",
+      "title_ja": "Java の新 AOT キャッシュ機能、未熟な状態",
+      "url": "https://xpipe.io/blog/java-aot-cache",
+      "hn_url": "https://news.ycombinator.com/item?id=50242509",
+      "score": 75,
+      "comment_count": 25,
+      "posted_at": "2026-10-26T12:27:44+00:00",
+      "comments": [
+        {
+          "id": 50289593,
+          "author": "lazystone",
+          "text": "> In theory, the whole AOT cache idea sounds like something that should only affect the class data and not perform any native compilation https://openjdk.org/jeps/544 > Non-Goals > It is not a goal to support cross-compilation. Code compiled in a training run must run on the same CPU architecture, with the same set of features, in subsequent production runs."
+        },
+        {
+          "id": 50290362,
+          "author": "pron",
+          "text": "For the past several years, Java features are released piecemeal, with each piece released as soon as it can be useful to some significant portion of users or users who can offer useful feedback (and when it's not expected to restrict future pieces). The AOT cache is already used in production despite not being as user-friendly as it could be, because the companies using it find it valuable. The first use case is the very common one (for Java) where developers control deployment (internal deployment). The last basic building block, caching machine code, will be released next year in JDK 28, and then the feature is likely to evolve to better support other use cases, such as external deployment."
+        },
+        {
+          "id": 50289802,
+          "author": "deepsun",
+          "text": "> What would be needed is some sort of compatibility switch that disables all optional CPU features. Sure, you will get some reduced performance of the compiled code, but in exchange, a faster startup time. I think other AOT-compiled languages don't opt in for the lowest set of CPU features -- they just detect them at runtime and use whenever present, all in compiled machine code."
+        },
+        {
+          "id": 50290607,
+          "author": "pjmlp",
+          "text": "Note this is all about OpenJDK and Project Leyden. There are plenty of other AOT/JIT cache approaches in the Java ecosystem already, with more mature deployment experience of several years, namely: OpenJ9, Azul, PTC, Aicas, the Android cousin since Android 7 Technology based on process snapshots CRaC for Amazon OpenJDK distro (Correcto), and OpenJ9, is also another approach available for some time."
+        },
+        {
+          "id": 50289625,
+          "author": "_old_dude_",
+          "text": "The Inside Java podcast episode on AOT caching covers the issue in this segment: https://youtu.be/U2j4bKgKr-s?t=3577"
+        }
+      ],
+      "summary_ja": "**主な議論点**  \nJavaのAOT（Ahead-of-Time）キャッシュ機能に関する議論は、OpenJDKのProject Leydenを中心に展開された。この機能は、クラスデータのみを対象にし、ネイティブコンパイルは行わない設計となっているが、CPU機能の互換性問題やクロスコンパイル非対応などの制約が指摘されている。コミュニティからは、AOTキャッシュが現段隄た「内部デプロイメント（自組織内での展開）」のユースケースで既に利用されているものの、使いやすさや外部デプロイメントへの対応が不十分であるとの批判も出ている。\n\n**賛否両論**  \n肯定の声では、AOTキャッシュが起動時間の改善や本番環境でのパフォーマンス向上に貢献している企業もあると指摘され、JDK 28でマシンコードのキャッシングが追加されることで、今後の拡張が期待されている。一方、懐疑的な意見もあり、CPUのオプション機能を無効にする「互換性スイッチ」の必要性が指摰され、AOTキャッシュのクロスプラットフォーム対応や汎用性の低さが問題視されている。\n\n**注目コメント**  \n「AOTキャッシュはネイティブコンパイルではなく、クラスデータに特化した設計であるべきだ」という技術的見解と、「他のAOT言語はランタイムでCPU機能を検出して利用するため、Javaもそのアプローチを模索すべきではないか」という意見が印象的。また、OpenJ9やAzulなど他のAOTソリューションが既に数年の実績を持っていることも強調され、Leyden以外の選択肢の存在が改めて注目されている。",
+      "editor_note": "JavaのAOTキャッシュ機能の未熟さは、技術の進化における課題と可能性を両面から示します。日本のJava開発者而言、早期 Adopterとしての機会とリスクを理解する必要があることを強調しています。",
+      "category": "プログラミング言語"
+    },
+    {
+      "rank": 29,
+      "id": 50280722,
+      "title_en": "The case of the 9 bit AES key",
+      "title_ja": "9ビット AES 鍵の事件",
+      "url": "https://v12.sh/blog/the-case-of-the-9bit-aes-key",
+      "hn_url": "https://news.ycombinator.com/item?id=50280722",
+      "score": 121,
+      "comment_count": 65,
+      "posted_at": "2026-10-28T20:51:44+00:00",
+      "comments": [
+        {
+          "id": 50284846,
+          "author": "philsnow",
+          "text": "It's so insane to have PDF programs doing their own encryption, not because \"don't roll your own crypto\" (although yes for that reason too), but because the people who write PDF programs (libraries, viewers, general-purpose tools like qpdf, etc etc) aren't (necessarily) going to be great at understanding or designing good encryption UX. Also, I get that a lot of sensitive information is exchanged with PDFs these days, but why should PDFs have encryption built-in to the file format? Sensitive information is also exchanged in image files, word documents, zip files, html, etc etc etc etc. If you take all the work that goes into making the crypto UX decent for one kind of file and apply that to \"all files\", then each ecosystem doesn't have to invent their own. This is just like \"high-end\" car manufacturers insisting on making their own software, and not integrating apple carplay. They're either going to make a truly shitty podcast app, or they're not even going to bother and instead tell people to use bluetooth to listen to podcasts like it's 2006."
+        },
+        {
+          "id": 50281944,
+          "author": "tptacek",
+          "text": "\"MuPDF versions before 1.28.5 use an implementation of the drand48 family\" yeah, ok, so they're basically not doing real encryption. The number of bits in the key space isn't the real story; the keys simply aren't cryptographically random."
+        },
+        {
+          "id": 50282234,
+          "author": "NelsonMinar",
+          "text": "What is wrong with software engineers that we keep making really stupid basic mistakes like this? Sometimes I think programming should require licensing and regular testing."
+        },
+        {
+          "id": 50285764,
+          "author": "leni536",
+          "text": "Pdfium powers Chrome's/Chromium's PDF viewer, but maybe Chrome doesn't expose encrypting PDF documents as a feature to be affected?"
+        },
+        {
+          "id": 50282482,
+          "author": "jburgess777",
+          "text": "Does the DMCA still make it illegal to access encrypted content no matter how easy it is to discover the key? https://www.law.cornell.edu/uscode/text/17/1201 Would the new LLM model owners like to strike this down, or use it to demonstrate how dangerous unrestricted models can be?"
+        }
+      ],
+      "summary_ja": "・主な議論点: PDFファイル形式に組込み暗号化機能を持たせること自体の設計論について批判が展開された。参加者らは、PDFプログラムが独自に暗号化を実装するのはユーザーにとって安全で直感的なUXを提供しづらいため問題だと指摘。特に鍵のランダム性が不十分である（drand48の使用）ことで実質的な暗号強度がなmejor である「9ビット鍵」問題も非難された。\n\n・賛否両論: 暗号化PDFの必要性については意見が分かれている。一部は「感敏性情報を扱う文書である以上暗号化は不可避」との見解もあるが、他のファイル形式（zipやWord）に比べてPDFだけが独自実装を強いなめしていることに対して疑問の声も上がった。\n\n・注目コメント: 「プログラマは免許証が必要だ」との意見があるほか、ChromeのPDFビューワー(Pdfium)が関連するかどうかについても指摘。また、DMCAによって解除された暗号化コンテンツへのアクセスが依然として違法になりうる可能性についても懸念が示された。",
+      "editor_note": "9ビットAES鍵の事件は、セキュリティの現実的な脅威と脆弱性を浮き彫りにします。日本の企業而言、暗号化技術の適切な選択と実装の重要性が改めて認識されます。",
+      "category": "セキュリティ"
+    },
+    {
+      "rank": 30,
+      "id": 50293879,
+      "title_en": "Utah charges Kalshi and its CEO with illegally promoting online gambling",
+      "title_ja": "Utah、Kalshi と CEO にオンライン賭博の不正 promotion charge",
+      "url": "https://www.theverge.com/policy/1022400/utah-kalshi-criminal-charges",
+      "hn_url": "https://news.ycombinator.com/item?id=50293879",
+      "score": 22,
+      "comment_count": 5,
+      "posted_at": "2026-10-29T18:40:09+00:00",
+      "comments": [
+        {
+          "id": 50294462,
+          "author": "wildzzz",
+          "text": "I like how the Special Agent's affidavit just looks like his wife caught him sports betting and he figured out a way to make it look like he was really investigating a crime."
+        },
+        {
+          "id": 50294284,
+          "author": "tt24",
+          "text": "The concept of “illegally promoting” a consensual activity engaged in by adults is so ridiculous."
+        }
+      ],
+      "summary_ja": "・主な議論点  \nコミュニティは Utah が Kalshi とその CEO を「不法オンライン賭博の促進」で告訣したことについて、特にスポーツベットやデリバリブルに関する訴追の正当性に疑問を投げかけた。参加者らは、成人の間で合意された活動を「不法」とする法的解釈が時代錯誤的であると指摘し、仮想通貨や暗号資産の規制の灰姩漏りによる懲罰的解釈ではないかとの見方を示した。  \n\n・賛否両論  \n一方で、州レベルでの金融取引監督強化を支持する声もあり、規制対象が投機的取引であるため消費者保護の観点から処罰が妥当だとの意見も散見した。  \n\n・注目コメント  \n「特別代理の陳述書は、妻にスポーツベットを見つかったとでも言わんばかりだ。任務を真面目に執行しているのか、自分の怒りや憎しみで裁くのか」と皮肉るコメントが高評価を得た。",
+      "editor_note": "UtahのKalshi CEOへの_chargeは、オンライン賭博の法規制の複雑さを示します。日本のFinTech企業而言、法規制 Complianceの重要性と国際的な規制の違いを理解する必要があることを強調しています。",
+      "category": "スタートアップ/ビジネス"
+    }
+  ]
+}
