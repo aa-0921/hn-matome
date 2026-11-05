@@ -1,0 +1,1155 @@
+{
+  "date": "2026-11-05T00:00:00+09:00",
+  "slot": "12",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 50371246,
+      "title_en": "Residential proxies detected on White House network",
+      "title_ja": "ホワイトハウスネットワークで検出されたリゾンシャルプロキシ",
+      "url": "https://layer3intel.com/blog/residential-proxies-white-house-network",
+      "hn_url": "https://news.ycombinator.com/item?id=50371246",
+      "score": 653,
+      "comment_count": 211,
+      "posted_at": "2026-11-04T20:45:18+00:00",
+      "comments": [
+        {
+          "id": 50372737,
+          "author": "dhosek",
+          "text": "They’re too polite to say it explicitly, but when they say: > Most of the activity happens in the evening, Eastern time: about half of it falls between 5 p.m. and midnight, and almost none happens in the early morning. That pattern suggests a person rather than a public guest Wi-Fi network: someone regularly on the White House network late into the evening, whose device is infected with a proxy SDK. Our data shows the exits, not the device or the person behind them. There really aren’t very many candidates for who that person might be and it really seems like it would be someone who, I don’t know, maybe lives where the traffic is originating."
+        },
+        {
+          "id": 50371633,
+          "author": "btown",
+          "text": "The danger here, of course, is that while these compromised devices are currently being monetized in a relatively benign way (other than bandwidth costs to the user, which to be sure can be nontrivial)… it would be naive to assume that there isn't a Command and Control capability that can assign less benign tasking - or can be compromised to do so. This also puts some of the troubling reports that politicians were bringing phones into SCIFs into context…"
+        },
+        {
+          "id": 50371970,
+          "author": "lakeviewterrace",
+          "text": "So they don't actually know what this network is, just who owns the IP space... time for a blog post to advertise our week-old service! There is no evidence that physically ties this to the WH. It could be in a security lab for all they know. Or a guest network for the news media."
+        },
+        {
+          "id": 50371363,
+          "author": "bronco21016",
+          "text": "Gotta have your SuperBox set up to watch 24 hr cable news working late into the night."
+        },
+        {
+          "id": 50372168,
+          "author": "hackernud3s",
+          "text": "Those are better than residential proxies. Those are White House proxies. I would pay $10/GB for those babies."
+        }
+      ],
+      "summary_ja": "・主な議論点\nコミュニティでは、ホワイトハウスネットワーク内での residential proxy の検出について、その「異常性」と「リスク」が中心に議論された。特に、トラフィックが東海岸の夜間（午後5時から午前0時）に集中し、早朝にほぼ発生しないというパターンから、これは公共のGuest Wi-Fiではなく、特定の人物の個人機器がプロキシSDKで感染した可能性がStrongに指摘された。この感染は現在、帯域幅の消費という「比較的無害な」形で monetize されているが、将来的に Command and Control 機能を介してより悪意のあるタスクに悪用されるリスクが強調された。\n\n・賛否両論\n議論の分かれ目は、この検出をホワイトハウスのネットワークそのものと結びつける証拠の強さだった。一部のコメントは、IP空間の所有者を特定しても、実際にそのネットワークがホワイトハウスであるかは不明で、仮にホワイトハウスでもない可能性（例: 安全実験室、報道機関のGuestネットワーク）があると指摘した。これに対し、他のコメントは、ホワイトハウスという特殊な環境下で起きたことを考虑すると、その可能性は低いと反論した。\n\n・注目コメント\n特に注目されたコメントは、ホワイトハウスのプロキシを「White House proxies」と呼んで、その価値を風刺的に評した「I would pay $10/GB for those babies.」という一文だ。これは、ホワイトハウスのIPアdressは信頼性が非常に高く、そのネットワークをプロキシとして利用する価値が非常に高いという、ネットワーキングやセキュリティの観点からの洞察を風刺的に表現したものである。また、「Gotta have your SuperBox set up to watch 24 hr cable news working late into the night.」というコメントも、事実の可能性をwhileも、深夜まで cable news を見ている人物像を想像して、議論にユーモアを加えた。",
+      "editor_note": "ホワイトハウスネットワークで検出されたリゾンシャルプロキシ (Residential proxies detected on White House network)",
+      "category": "セキュリティ"
+    },
+    {
+      "rank": 2,
+      "id": 50372945,
+      "title_en": "Images 2.6",
+      "title_ja": "画像 2.6",
+      "url": "https://openai.com/index/introducing-images-2-6/",
+      "hn_url": "https://news.ycombinator.com/item?id=50372945",
+      "score": 98,
+      "comment_count": 82,
+      "posted_at": "2026-11-04T23:35:44+00:00",
+      "comments": [
+        {
+          "id": 50373441,
+          "author": "E-Reverance",
+          "text": "Still looks like an eyesore, I genuinely want to know if the engineers who work on the product don't notice it"
+        },
+        {
+          "id": 50373156,
+          "author": "minimaxir",
+          "text": "Using the grid trick for animations to generate the individual frames has been around for awhile and not specific to ChatGPT: I'm surprised it took this long for one of the official providers to make it explicit. However, adherence between frames is generally tricky, and even in the examples there is a lot of noise between frames although that could be due to compression. SVG support is interesting but I suspect shenanigans are afoot since that's not how image generation models work, and it would likely strip any SynthID watermarks. It's possible OpenAI has pipelined a raster-to-vector tool that does the conversion automatically. (I developed a similar pipeline and it works extremely well; I'll open source it at some point) EDIT: Per documentation, there is an explicit `output_format: \"svg\"`, and I am indeed correct there is raster-to-vector in play: > The API creates a reference image and uses it to produce the SVG. The quality setting controls that reference image. Decode data[0].b64_json as base64 and save the resulting UTF-8 XML bytes with a .svg extension. OpenAI claims 50% faster generation with Images 2.6 but curiously price is the same as Image 2.5."
+        },
+        {
+          "id": 50373197,
+          "author": "sroussey",
+          "text": "https://chatgpt.com/share/6aebc6f8-d660-83e8-9cb3-49bdf8caa7... I guess I should have been careful about “half”? These models have a hard time imagining men with naturally blond hair getting grey."
+        },
+        {
+          "id": 50373694,
+          "author": "vunderba",
+          "text": "Decided to try out one of the new features in GPT Image 2.6: the ability to natively generate animated GIF files. I didn't have high expectations, and I still think you can probably get better results by doing a First-Last-Frame using something like Minimax H3 but I was still rather surprised that it could do it at all. Here are some of the results. The last one shows its ability to take an existing image and convert it into an animated GIF. It's a picture of my husky inside a snow globe. https://imgpb.com/OzSMKJ"
+        },
+        {
+          "id": 50373444,
+          "author": "bsboxe",
+          "text": "The input and output pricing per token remains the same between 2.5 and 2.6, although using their image pricing calculator shows a quadrupling of token usage at low and medium quality settings for 2.6. For e.g. at 1024x1024: 2.5 low, 196 tokens, $0.006 2.6 low, 823 tokens, $0.025 2.5 med, 439 tokens, $0.013 2.6 med, 1449 tokens, $0.043 Interestingly, higher quality settings show no change in token usage between the models."
+        }
+      ],
+      "summary_ja": "・主な議論点\nコミュニティの議論は、主に新機能「animated GIF」と「SVG」の実用性と技術的実装に集中した。animated GIFは、既存のツールと比較して優れているかという点で批判的に捉えられ、SVGは SynthID ワータイトクを可能性のある問題として指摘された。また、OpenAIが約束する「50%高速化」の実態と、実際の価格設定の整合性についても疑問が呈された。\n\n・賛否両論\nanimated GIF機能に対しては、Minimax H3などの既存の代替手段の方が結果が良いとする批評と、native生成の可能性に驚く賛両の声が分かれた。SVG機能は、ベクター変換の必要性や SynthID の影響について懸念する意見が多かった。価格面では、高速化の恩恵が低・中クオリティでは実際のtoken数の増加によりコスト増につながるという指摘と、高クオリティでは改变しないという分析が対立した。\n\n・注目コメント\n特に洞察のあるコメントとして、開発者による「raster-to-vector」パイプラインの自作と开放ソース化の表明が挙げられる。これはOpenAIの技術的アプローチを裏付ける実証であり、SVG機能の実装方法に関する議論に深みを与えた。また、具体的なtoken数と価格の比較データを提示するコメントは、価格設定の透明性に関する議論を活発化させた。",
+      "editor_note": "画像 2.6 (Images 2.6)",
+      "category": "その他"
+    },
+    {
+      "rank": 3,
+      "id": 50372929,
+      "title_en": "A thousand fewer paths to root",
+      "title_ja": "ルートへの道が1000本少なくなっています",
+      "url": "https://openai.com/index/a-thousand-fewer-paths-to-root/",
+      "hn_url": "https://news.ycombinator.com/item?id=50372929",
+      "score": 104,
+      "comment_count": 64,
+      "posted_at": "2026-11-04T23:33:14+00:00",
+      "comments": [
+        {
+          "id": 50374137,
+          "author": "rmbryan",
+          "text": "With these vulnerabilities and the ones not listed that are sure to exist, how is the internet still up? How are my lights on? Why aren't power plants exploding by the dozens? What are the mitigating factors that prevent this level of vulnerability from being an existential threat to humanity?"
+        },
+        {
+          "id": 50373228,
+          "author": "Plasmoid",
+          "text": "How did we get to the point where there are a thousand privilege escalation exploits in the kernel? Is the kernel simply too complex to reason about? Is it an underlying flaw in the security model or language implementation? Should we assume that all software is more compromised than the kernel?"
+        },
+        {
+          "id": 50372963,
+          "author": "dangelosaurus",
+          "text": "This is my team’s work. I’m happy to try to answer questions or take questions back to the team. And we're hiring! https://openai.com/careers/search/?q=cyber"
+        },
+        {
+          "id": 50374034,
+          "author": "bzmrgonz",
+          "text": "I wonder what Sidero Labs has to say about this article. My hopes are pegged on their efforts. I have my wagon ready to hitch on their horses. They are not a one pony show anymore guys, Talos OS can be standalone server OS, a hypervisor server or cluster, and their flagship of k8s node or cluster. We get all that in an immutable gitops ready OS. I'm practically sold on their offering."
+        },
+        {
+          "id": 50374059,
+          "author": "ksec",
+          "text": "I wonder if they could run it on OpenBSD and FreeBSD as well."
+        }
+      ],
+      "summary_ja": "・主な議論点\nコミュニティでは、カーネルに存在する多数の昇格昇華脆弱性と、その根本原因についての議論が盛ん发生了。特に、カーネルの複雑性がセキュリティモデルや実装言語の根本的欠陥を露呈しているのか、それとも単なる複雑性の問題であるのかが焦点となった。また、これらの脆弱性が internet やインフラ全体に及ぼす影響と、その対処策についても論じられた。\n\n・賛否両論\n意見の分かれ点は、この状況が人間社会に存在論的脅威となるのか、それとも管理可能なリスクであるのかという点にあった。一部のコメントは、多数の脆弱性が存在するにもかかわらずシステムが機能している理由を問い、根本的な設計の問題を指摘した。他方で、実際の脅威は限定的であり、セキュリティ実践や最新の対策により緩和されているという見方もあった。\n\n・注目コメント\n特に注目されたコメントとして、OpenAI の開発者により、この研究が自らのチームの成果であると明記され、キャリア情報が紹介された点が挙げられる。さらに、Sidero Labs の Talos OS に注目が集まり、その不変性と GitOps 対応がセキュリティ強化の鍵となる可能性が強調された。また、OpenBSD や FreeBSD への対応を求める要望もexpressされた。",
+      "editor_note": "ルートへの道が1000本少なくなっています (A thousand fewer paths to root)",
+      "category": "セキュリティ"
+    },
+    {
+      "rank": 4,
+      "id": 50373308,
+      "title_en": "Starfall – Affordable, routine access to microgravity",
+      "title_ja": "Starfall – 手頃な価格で定期的に微重力にアクセス可能",
+      "url": "https://www.spacex.com/starfall",
+      "hn_url": "https://news.ycombinator.com/item?id=50373308",
+      "score": 67,
+      "comment_count": 26,
+      "posted_at": "2026-11-05T00:18:18+00:00",
+      "comments": [
+        {
+          "id": 50373904,
+          "author": "syntaxing",
+          "text": "Space datacenters sounds dumb and impractical to me. Manufacturing semi conductor in space is actually a pretty interesting idea. I designed a few PVD, CVD, and IBE machines before. Ion thrusters from NASA are what semi conductors use as their source anyway. I can see the business proposition for processes like MBE that requires -12 pressure. It takes days, if not weeks to pump a chamber to those values."
+        },
+        {
+          "id": 50373869,
+          "author": "czhu12",
+          "text": "Quite a bit of money have been raised on the premise that certain things can be easier to make in space than on earth due to gravity, which creates sedimentation Semiconductors, pharmaceuticals, solar cell crystals, and artificial organs are on the short list. The International space station actually has done some experiments on this premise with promising results"
+        },
+        {
+          "id": 50373773,
+          "author": "dakial1",
+          "text": "Here is something that I never imagined there was a use case for. Anyone has any idea of the commercial needs for such a device?"
+        },
+        {
+          "id": 50373992,
+          "author": "cozzyd",
+          "text": "It would be nice if SpaceX published GNSS pseudodistance/carrier phase from all Starlink satellites. It would give excellent realtime tomographic information about the ionosphere..."
+        },
+        {
+          "id": 50373696,
+          "author": "drivebyhooting",
+          "text": "It sounds like a super villain weapon. If you manufacture there how do you recover it?"
+        }
+      ],
+      "summary_ja": "### 主な議論点\nStarfallの記事に関するコメントでは、宇宙での微重力環境が製造業に与える可能性が中心に議論された。コミュニティでは、低重力が沈淀問題を解決し、半導体、製薬、太陽電池結晶、人工臓器などの製造に有利であるという見方がある。特に、国際宇宙ステーション（ISS）での実験で肯定的な結果が得られたことから、技術的可能性が強調された。しかし、宇宙データセンターなどの用途は不実用で commercial needs が不明確であるという懸念もraised。\n\n### 賛否両論\n賛成派は、具体的なプロセス（例：分子ビームエピタキシー [MBE]）で宇宙が有利だと主張し、低重力による圧力制御の容易さや、既存の資金調達事例を挙げて可能性を支持した。一方、反対派は、実用性やロジスティクスの問題（例：宇宙で製造した物の回収方法）を指摘し、「超悪役の兵器のように危険である」と風刺するなど、現実的な課題に疑問を呈した。\n\n### 注目コメント\nPVDやCVD機械の設計経験のあるユーザーが、イオンスラスターやMBEプロセスの圧力要件（-12 Torrなど）で宇宙の優位性を説明し、技術的な洞察を提供した。また、「super villain weapon」という比喩的なコメントは、宇宙製造の潜在的なリスクをユーモアで表現し、議論に深みを与えた。さらに、Starlink衛星のGNSSデータ公開を提案するコメントは、宇宙技術の応用可能性 regarding 関心を示したが、Starfallの核心とは直接関係しない。",
+      "editor_note": "Starfall – 手頃な価格で定期的に微重力にアクセス可能 (Starfall – Affordable, routine access to microgravity)",
+      "category": "スタートアップ/ビジネス"
+    },
+    {
+      "rank": 5,
+      "id": 50364336,
+      "title_en": "AI is forcing us to pay off 40 years of technical debt",
+      "title_ja": "AIが40年分の技術的負債の返済を強いる",
+      "url": "https://spectrum.ieee.org/ai-in-cybersecurity-php2shell-vulnerability",
+      "hn_url": "https://news.ycombinator.com/item?id=50364336",
+      "score": 1070,
+      "comment_count": 638,
+      "posted_at": "2026-11-04T11:52:17+00:00",
+      "comments": [
+        {
+          "id": 50364549,
+          "author": "Arbortheus",
+          "text": "I hope some of these backdoors and/or 0-days being kept under wraps by nation states or corporate espionage companies (Pegasus et al) are being found incidentally through all this. It’s frustrating to have all these 0days and CVEs to patch for now, but in the long run perhaps we’ll leave with more robust software."
+        },
+        {
+          "id": 50364793,
+          "author": "swatcoder",
+          "text": "Is it forcing us to \"pay off\" technical debt or is it starting us on a compulsory endless treadmill of feature-neutral fix-work? Collectively, we just won't know for a while. It totally feels like the former if you watch it find and fix vulnerabilities or other debt-tasks one after another. But only so many of these \"technical debt\" issue are little off-by-one errors that get remedied by a surgically narrow patch. Many enough require some kind of restructuring or redevelopment of their own and it's going to take time to figure out if AI faces the same dilemma as human developers: where each non-trivial change carries the risk of some new issue, ad infinitum. If that happens to be the case, and AI isn't able to magically produce perfect software in finite time, then what's really happened is that the threat of hostile AI exploiting our technical debt will force us to always be burning and churning code just to remain a moving target. It's another \"we'll see\" thing for now, I think."
+        },
+        {
+          "id": 50371375,
+          "author": "Balgair",
+          "text": "Aside: I think I need some help here.[0] I remember reading Godel Escher Bach back in the day, and there is the parable of the record player between the tortoise and the rabbit. And the tortoise keeps building more and more secure record players that the rabbit keeps finding ways to break. GEB then goes on to teach you that, no, in fact, you cannot have a perfectly secure system. Not just practically or economically, but even in theory, all systems are fundamentally breakable. GEB, after a lot of chapters (what a doorstop!) ties that parable into Godel's Incompleteness Theorem, and essentially proves that no, you can't make unbreakable things, as a fundamental point of logic. So, when I look at all this, I see that yes, there is an economics point of view here, that fixing code is just expensive, like making a less and less breakable record player. And that AIs push that breaking and economics point much further along than what we have had. But then I also see a lot of comments here that seem (to me) to be arguing that there is an unbreakable code out there. Am I reading this right? Is there such a thing as 'perfect' code? Or is my outdated reading of GEB still valid or not? [0]Note, I'm not a CS person, more a biophysics person."
+        },
+        {
+          "id": 50364854,
+          "author": "xbmcuser",
+          "text": "I was down voted a lot months ago for saying that a lot of open source software had a false sense of being secure with the assumption that someone else would have audited the code. And this AI auditing is going to make the promise of open source software getting audited by others actually real. Nice to see others waking up to this reality."
+        },
+        {
+          "id": 50371205,
+          "author": "glennfiedler",
+          "text": "I'm always amused when people have a distillation of all human knowledge at their fingertips and all they can do is complain. Yes, we're going to see the bugs exposed by AI and it's going to suck a bit for a few months. But when this is all over, software will be more secure than it has ever been before."
+        }
+      ],
+      "summary_ja": "・主な議論点\nAIが技術的負債（技術的負債）の解消に本格的に取り組み始め、ソフトウェアの脆弱性を自動的に発見・修正するため、セキュリティ向上が期待される一方で、このプロセスが「継続的な修正作業の無限ループ」を引き起こす可能性があるという懸念がlargely議論された。特に、AIが人間と同様に、複雑な変更が新しい問題を引き起こす「技術的負債のジレンマ」に直面するかどうかが注目された。\n\n・賛否両論\n賛成派は、AIが長年放置されてきた脆弱性を次々と発見し、ソフトウェアの全体的なセキュリティを大幅に向上させると主張する。しかし、反対派は、AIが単なる「修正作業の継続」を強いるだけではなく、根本的な構造の見直しを必要とする複雑な負債には対処できず、結果として「常時改変を Continual Burn-and-Churn」状態を強いるだけだと警告する。また、开放源ソフトウェアのセキュリティについて、従来の「他人が監査する」という仮定が実現されるかという議論もあった。\n\n・注目コメント\nGödel, Escher, Bach の「ウサギと亀のレコードプレーヤー」の寓話とゲーデルの不完備性定理を引用したコメントが特に注目された。このコメントは、理論上でも「完全に破壊できないシステム」は存在しないと論じ、AIがこの根本的な制約を深く掘り下げ、経済的・論理的な限界を明確にしたと指摘した。この哲学的・論理的な視点が、技術的負債に関する議論に深みを与えた。",
+      "editor_note": "AIが40年分の技術的負債の返済を強いる (AI is forcing us to pay off 40 years of technical debt)",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 6,
+      "id": 50369925,
+      "title_en": "Ripple-65B Preview: U.S. Open-Weight SOTA on Agentic Coding",
+      "title_ja": "Ripple-65Bプレビュー：エージェント符号化におけるU.S.オープンウェイトSOTA",
+      "url": "https://www.ricursive.com/ripple",
+      "hn_url": "https://news.ycombinator.com/item?id=50369925",
+      "score": 224,
+      "comment_count": 79,
+      "posted_at": "2026-11-04T18:53:29+00:00",
+      "comments": [
+        {
+          "id": 50370633,
+          "author": "advael",
+          "text": "Category narrowing to this degree really has diluted the term \"SOTA\" quite a lot You mean it's state of the art for this subset of benchmarks you're targeting? No? Well surely it's state of the art for models of a certain size category? Huh, what about models that are available for local inference? O, state of the art for open models of a certain size made in the US specifically. Uh. Neat!"
+        },
+        {
+          "id": 50374098,
+          "author": "mark_l_watson",
+          "text": "Oh, I thought this was from the company recursive.com who released the very good for its size model Flint. I am looking at the HF model page https://huggingface.co/ricursiveAI/Ripple-65B-Preview and it looks like I need to wait a day for an Apple Silicon version."
+        },
+        {
+          "id": 50371154,
+          "author": "stewartpark",
+          "text": "It's great to see another competitive open weight model. Congratulations! But as is, it's probably hard to become popular amongst hobbyists and local model enthusiasts like Qwen's 27B class models or MOE models because it's a 65B dense model and inference will be prohibitively slow on consumer grade hardware, and seems like the goal/mission of the company behind this model is to automate chip design. So if I have to assume and connect the dots, this is for the companies who want to use AI in air-gapped environments for chip design so that they protect their IPs (not leaking to third party AI labs/hostile parties) and can afford lots of server grade inference hardware for a quick unlock with the big dense model. Neat!"
+        },
+        {
+          "id": 50370515,
+          "author": "wmf",
+          "text": "Congratulations I guess but it's a pretty bad look to not even mention those other open weight models ."
+        },
+        {
+          "id": 50370626,
+          "author": "2001zhaozhao",
+          "text": "This model scores 80.5 on Terminal Bench 2.1 For reference Qwen 3.8 Flash Next (which is bigger than this model but probably cheaper to run due to MoE) scores 84.3, and Qwen 3.8-27B scores 73.0. I think this model could be competitive, depending on how much it was benchmaxxed compared to Qwen?"
+        }
+      ],
+      "summary_ja": "・主な議論点\n community では、このモデルが「SOTA（最先端）」と称されることが問題視されている。具体的には、その達成が「米国製の65B以下のオープンウェイトモデル」といった、極めて限定的な范畴に留まっていること、およびターゲットとするベンチマークが限定されていることが指摘され、「SOTA」という言葉が過度に濫用されているという批判が相次いでいる。また、65Bという巨大なモデルサイズが、一般のホビーストやローカル推論環境では実用的に困難である点も大きな議論の余地ている。\n\n・賛否両論\n モデルの位置付けについて、肯定的見解と否定的見解が分かれている。肯定的な意見は、競争力のあるオープンウェイトモデルが登場したことを歓迎するものである。一方、否定的な意見は、Qwenなどの競合モデルと比較した際の性能・効率の差（MoEモデル versus デンスモデル）や、開発会社のchip design自動化という特異な目的が、一般ユーザー来说の利便性と合致していない点を問題視している。\n\n・注目コメント\n 特に洞察のあるコメントとして、このモデルが「空気遮断環境（air-gapped environments）におけるchip design」を目的とし、 third-party への情報漏洩を防ぐ企業をターゲットとしているという分析が挙げられる。これは、モデルの尺寸と用途の特殊性を説明する上で、 community の懸念を一部解消する有力な仮説と受け止められた。また、Terminal Bench 2.1 における具体的なスコア比較（Qwen 3.8 Flash Next など）は、性能評価をめぐる議論に具体的なデータを提供した。",
+      "editor_note": "Ripple-65Bプレビュー：エージェント符号化におけるU.S.オープンウェイトSOTA (Ripple-65B Preview: U.S. Open-Weight SOTA on Agentic Coding)",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 7,
+      "id": 50373149,
+      "title_en": "You'll need nerves of steel to work with AI agents",
+      "title_ja": "AIエージェントと協業するには、鉄壁の神経が必要だ",
+      "url": "https://orchidfiles.com/youll-need-nerves-of-steel-to-work-with-ai-agents/",
+      "hn_url": "https://news.ycombinator.com/item?id=50373149",
+      "score": 25,
+      "comment_count": 23,
+      "posted_at": "2026-11-05T00:01:30+00:00",
+      "comments": [
+        {
+          "id": 50373961,
+          "author": "anonymous908213",
+          "text": "Luna is unusable garbage. When I see people in threads talking about how useful Luna is for all of their tasks and it's so cheap and fast, it reads to me like people relating anecdotes about how tasty the garbage scraps they're eating out of the dumpster behind McD's are. Sol Max is the threshold of \"just barely usable\", and even then it's certainly not what the people are hyping it up to be. > But GPT also offers a $100 plan with five times the usage limits. And how long would that last me? Sol usage is basically unlimited on the $100 plan if you're human-in-the-loop, reviewing the code, and not doing some useless Gas Town crime against humanity."
+        },
+        {
+          "id": 50373747,
+          "author": "socketcluster",
+          "text": "It just gets worse as your codebase grows with more code and more files especially. It's like a human developer who is under intense time pressure. If the codebase is large, it might miss an existing function and implement a second one... or it might miss the fact that a database table already exists to solve its current problem and create another one. The solution is to keep the codebase as simple and small as possible and name everything as intuitively as possible with proper separation of concerns. Same principles which were useful before AI are still useful with AI."
+        },
+        {
+          "id": 50373837,
+          "author": "anself",
+          "text": "Most of these issues are vastly improved or mitigated by adding clear instructions in AGENTS.md. I follow a specific process with agents, and it works reasonably well: 1) describe my intended feature or change and then say “please recapitulate my intention and write an implementation plan” 2) read the plan carefully and refine it, make any corrections 3) tell the agent to go, but I check in frequently as it’s going. I watch the stream of thought and make course corrections or pull it out of rabbit holes 4) carefully review the result. Checking that tests actually fail, removing unnecessary changes 5) add instructions in AGENTS.md if I’ve found a new behavior that needs redirection"
+        },
+        {
+          "id": 50374015,
+          "author": "jedbrooke",
+          "text": "> Inability to change the response style In recent months, I’ve been noticing a new pattern in sentence structure more and more often. Here are some examples: There’s a difference between \"I read the text\" and \"I understood the meaning of the text\". We too often mistake \"I’m used to this\" for \"I like this\". The path from \"I’m afraid of making a mistake\" to \"I’m ready to try\" can take years. It’s worth taking the time to setup a style guide for your agent to remove llm-isms like this. Somewhat paradoxically, you can even have the agent help write it. Just include a couple of snippets of “bad” phrasing from previous chats, add some commentary about why it’s bad, and what to replace it with, and put that in your system prompt. I could provide examples but the whole point is that you can tailor it to exactly how you want it. This has the added bonus of being a quick sanity check for model quality. If you start noticing llm-ism appear, then likely the model is not following your instruction’s and the thread should be discarded/you need to switch to a better model"
+        },
+        {
+          "id": 50374025,
+          "author": "sam0x17",
+          "text": "How people are getting anything done at all with less than 5-6 claude max and 4-5 codex pro max plans and codex-lb and better ccflare juggling weekly limits at all times, I will never know."
+        }
+      ],
+      "summary_ja": "このコメントスレッドでは、AIエージェントを実務で使う難しさについて、経験に基づく現実的な議論が交わされています。\n\n**主な議論点**\n community の議論の中心は、AIエージェントが大規模なコードベースで特に問題を引き起こす点にあります。具体的には、既存の関数やデータベーステーブルを見落として重複実装してしまうなど、人間の開発者が時間圧下で犯すミスと似たようなエラーを頻繁に起こすことで、コードの品质が低下するという 것입니다。为此、コードベースを簡素に保ち、名前付けを直感的にすること、関心の分離を明確にすることがAIエージェントを効果的に使うための重要な原則であるという意見が複数あります。\n\n**賛否両論**\n AIエージェントの実用性に対して、極めて否定的な意見と、現実的に活用している意見の対立が明確です。否定的な側面では、特定のモデル（Luna）を「ゴミ」「使い物にならない」と酷評し、Sol Maxでも「刚好 usable（刚好 usability）」の程度とし、過大宣伝を批判する声があります。一方、活用している側は、明確な指示書（AGENTS.md）を作成し、人間がインテントを伝達し、実装計画を確認する、結果を頻繁にチェックするなど、厳密なプロセスを築くことで、AIエージェントを「reasonable（reasonable）」に活用できていると報告しています。\n\n**注目コメント**\n 特に注目されるのは、AIエージェントの「 unable to change the response style（応答スタイルを変更できない）」という欠点に対する解決策です。コメントは、エージェントが「LLM-Ism（LLM特有の表現）」を多用する傾向があると指摘し、望ましい表現と bad phrasing の例を示したスタイルガイドをシステムプロンプトに含めることで、この問題を大幅に改善できると提案しています。さらに、このスタイルguide の作成にエージェント自体を活用でき、その作成プロセス自体がモデルの質を測る「sanity check（健全性チェック）」にもなると指摘し、非常に洞察のある実践的なアドバイスを提供しています。",
+      "editor_note": "AIエージェントと協業するには、鉄壁の神経が必要だ (You'll need nerves of steel to work with AI agents)",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 8,
+      "id": 50366999,
+      "title_en": "Kimi K3.1 Pro model weights are out",
+      "title_ja": "Kimi K3.1 Proモデルの重みが公開",
+      "url": "https://huggingface.co/moonshotai/Kimi-K3.1-Pro",
+      "hn_url": "https://news.ycombinator.com/item?id=50366999",
+      "score": 380,
+      "comment_count": 102,
+      "posted_at": "2026-11-04T15:30:30+00:00",
+      "comments": [
+        {
+          "id": 50367828,
+          "author": "__jf__",
+          "text": "Subtle quote from their website: > Advancing the Frontier of Open Intelligence. Too bad you probably need something like an 8x B300 node to run this. Black Friday is coming soon though, but I fear this open intelligence will be pacing anyone's liquidity frontier so I'll probably keep trailing the frontier for a while with nvidia/qwen3.8-27B-NVFP4 on dual RTX PRO 4000 in TP=2. I can almost fit 450k context in there."
+        },
+        {
+          "id": 50368507,
+          "author": "segmondy",
+          "text": "Doesn't seem to outpace DeepSeekV4.1-Flash by much. Hy4 also announced their models and they have tons of internal benchmark, and K3.1 doesn't score that high on those benchmarks whereas Opus5.5 does, so it seems K3.1 is benchmaxxed."
+        },
+        {
+          "id": 50369634,
+          "author": "dmckinno",
+          "text": "Lots of chatter about how this model is benchmaxxed, but didn’t observe this in our testing. Very strong open model release that is a bit off the frontier but totally amazing for most use-cases. https://x.com/danielmckinn0n/status/2115213822957117535?a=fO..."
+        },
+        {
+          "id": 50369602,
+          "author": "minimaxir",
+          "text": "Third-party inference providers are now hosting it, with more popping up by the hour: https://openrouter.ai/moonshotai/kimi-k3.1-pro Together appears to have double throughput of the Moonshot AI endpoint at the same price point (with Modal having double that throughput), so I suspect there is room for inference providers to optimize...and therefore headroom to cut costs for competition."
+        },
+        {
+          "id": 50369223,
+          "author": "throwa356262",
+          "text": "These releases are meant for companies, not average Joe: https://www.theregister.com/ai-and-ml/2026/11/03/british-fin..."
+        }
+      ],
+      "summary_ja": "Hacker News 上のコメントでは、Kimi K3.1 Pro のリリースについて、その技術的価値と実用上の課題が議論されています。\n\n**主な議論点**\nコミュニティの主な関心は、このモデルが実際の用途でどの程度有用か、そしてその実行に必要なインフラです。多くのコメントが、モデルが「ベンチマーク最適化（benchmaxxed）」されていると指摘し、実際の性能 versus 公開されているスコアの一致性に疑問を投げかけています。また、8台のB300ノードなどの高額なインフラが必要であり、企業向けのリリースであるという見方があります。\n\n**賛否両論**\n opinions は分かれています。一方で、ベンチマークスコアが他モデル（例：DeepSeek V4.1）に及ばず、実用的価値が限定的であるという批判があります。他方で、実際のテストでは非常に強力で、多くの用途では十分に活用できるモデルであるという前向きな評価もありました。\n\n**注目コメント**\n特に注目されたコメントとして、サードパーティの推論プロバイダー（Together AIなど）がホスティングを開始し、価格対性能で競争が進み、コスト削減の余地があるという指摘があります。これは、モデルの民主化と並行して、インフラ最適化が進むという業界の動向を示しています。また、実際のテストで強力な結果が出たという詳細な報告も、議論に深みを与えました。",
+      "editor_note": "Kimi K3.1 Proモデルの重みが公開 (Kimi K3.1 Pro model weights are out)",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 9,
+      "id": 50370610,
+      "title_en": "Insects don't swarm at LED lights",
+      "title_ja": "LEDライトで昆虫は群れない",
+      "url": "https://www.birdsoutsidemywindow.org/2026/11/03/insects-dont-swarm-at-led-lights/",
+      "hn_url": "https://news.ycombinator.com/item?id=50370610",
+      "score": 165,
+      "comment_count": 94,
+      "posted_at": "2026-11-04T19:50:23+00:00",
+      "comments": [
+        {
+          "id": 50372236,
+          "author": "tw04",
+          "text": "I have LED headlights and an LED light bar on my tractor and I can say with 100% confidence that bugs swarm both. To the point I have to wear glasses to keep them out of my eyes if I’m on it for more than about 30 seconds at night. I’m guessing he’s confusing the dramatic drop in insect life overall with a change in behavior due to different lights."
+        },
+        {
+          "id": 50371679,
+          "author": "mahboi",
+          "text": "Welp, they do for mine. I've had to stop turning on outdoor LEDs because angry bees kept showing up, and there'd be 3-10 dead ones on my doorstep every morning. These are white bulbs. Might be \"zombees.\" Also, not sure about white bulbs, but those color-configurable spotlights definitely emit UV at least when set to anything near blue/purple. They cause certain things to glow. Probably white is doing it too but it's harder to see."
+        },
+        {
+          "id": 50370896,
+          "author": "gopalv",
+          "text": "My pet theory is that the dimmable LEDs repel insects (when used as a grow light). The thing that insects can see and we don't is the rapid flashing of a PWM power controller. I wonder if these streetlights have power saving fade-ins as the nightfall approaches instead of clicking on at sunset. Like - https://doi.org/10.1109/CSNT51715.2021.9509652"
+        },
+        {
+          "id": 50372974,
+          "author": "dylan604",
+          "text": "I love to shoot long exposure timelapse of the night sky. I set up a couple of LEDs dimmed as low as possible to light a bit of the foreground (over the course of the long exposure the low light adds up so it looks normal for those not familiar). Out of sheer laziness, I just placed them on either side of my tripod. The next day after processing the shot, it was pretty much ruined because of all of the bugs showing up as tracers in each frame. So, no, not my experience at all."
+        },
+        {
+          "id": 50372214,
+          "author": "legitronics",
+          "text": "I really don’t think UV is playing much of a role here. You could also sort their chart by power usage, or IR produced. The paper conclusion paragraph even states UV and IR as candidates but the article just says UV."
+        }
+      ],
+      "summary_ja": "主な議論点は、LED光源が昆虫を引きつけるかどうかです。多くのコミュニティメンバーが、自宅のLED灯やトラクターのLEDライトに虫が群がるという実体験を報告し、記事の見解に異を唱えました。一方で、UVの関与は限定的であるという科学的な見解も示され、議論が分かれました。\n\n賛否両論の焦点は、虫の反応の差異にあります。一部は、色設定やPWM（パルス幅変調）の点滅が虫の視界に影響していると推測しました。他のコメントでは、青や紫の色調でUVが放出される可能性や、LEDの高速点滅が人間には見えないが虫には見えるという理論が紹介され、多様な要因が議論されました。\n\n注目コメントとして、PWM制御による点滅が虫に影響しているという理論や、長時間露光のTimelapse撮影でLEDが虫を引きつけたという具体例が挙げられます。これらは、光の質や制御方法が虫の行動に影響する可能性を示唆する洞察のある意見です。",
+      "editor_note": "LEDライトで昆虫は群れない (Insects don't swarm at LED lights)",
+      "category": "その他"
+    },
+    {
+      "rank": 10,
+      "id": 50369106,
+      "title_en": "A new Go API for JSON",
+      "title_ja": "JSON用の新しいGo API",
+      "url": "https://go.dev/blog/jsonv2",
+      "hn_url": "https://news.ycombinator.com/item?id=50369106",
+      "score": 231,
+      "comment_count": 96,
+      "posted_at": "2026-11-04T17:52:11+00:00",
+      "comments": [
+        {
+          "id": 50370500,
+          "author": "asim",
+          "text": "At this stage to me Go is the new C compiler. Quite honestly I spent 10 years or more writing Go code. At times 18 hours a day. And now with AI, I get models to write my Go code. I STILL want it to be Go code. Is that strange? No because I understand the performance and safety of Go. But I rarely write it directly anymore. Probably not at all in 6-9 months. Yet I still occasionally look at the code to see what the output looks like. So yea hopefully a nice new addition but only my prompts now matter. So need to make sure they pickup on the new API."
+        },
+        {
+          "id": 50371995,
+          "author": "brunoborges",
+          "text": "> \"JavaScript Object Notation (JSON) is a simple data interchange format [...]\" Clearly it isn't, otherwise every language would have sorted it out by... a long time ago."
+        },
+        {
+          "id": 50369853,
+          "author": "CamouflagedKiwi",
+          "text": "I generally like `encoding/json/v2` and I'm glad they did it. I wish they'd left `MarshalIndent` in there though. The equivalent code is super complicated and non-obvious, so it's a pain to migrate, and it's a pain when you're banging out some quick code and want to dump some readable JSON. I suppose these days the LLMs can write the complicated version for us, of course."
+        },
+        {
+          "id": 50370463,
+          "author": "modulovalue",
+          "text": "I'm working on better SIMD support in Dart and one of the motivations for that work is specializing parser specifications based on schema specifications of that language. Or more concretely, if we had a parser generator + json parser specification that can generate efficient simdjson style parsers, then we should be able to parse json restricted to a subset of json based on a schema at least as efficiently as simdjson can parse general purpose json. That way we could have the best of both worlds, a (potentially lazy) statically type-safe model and simdjson performance! I still think that this is definitely doable, it's just that a lot of infrastructure needs to be built for it. I remember reading that Meta is doing something similar with binary formats. I find it weird that there's nothing like that for json yet."
+        },
+        {
+          "id": 50370505,
+          "author": "dofm",
+          "text": "I… think this is good? I'm just getting the neuron-band back together where Golang is concerned. I have done some in the past for little system tasks, but I am switching away from interpreted languages entirely for web stuff, and initially to Go, as I switch away from hand-coding to at least LLM-supported coding. So I am a bit out of date on the pain points (I never really felt pain points when I last used it, because the jobs I was doing had very small, quite Go-friendly shapes)."
+        }
+      ],
+      "summary_ja": "・主な議論点\nGo言語がAI時代にhow役割を変えるか、特に開発者の役割がコード書くことからプロンプト設計へとシフトしている点が議論の中心となっています。具体的には、AIがGoコードを生成するようになってもGoを継続的に使用する理由や、その今後的发展についての考察がDominantです。\n\n・賛否両論\nJSONの設計思想そのものに対する批判が分かれています。一部では「JSONは単純な交換形式」という定義に対して、実際には複雑で、全ての言語が解決するには至らなかったという指摘があり、この形式の本質的な課題について議論が分かれています。また、新APIから既存の便利な機能（MarshalIndentなど）が削除されたことに対する移行の困難さについても、賛否両論があります。\n\n・注目コメント\nSIMDを活用した高効率なJSONパーサの生成について、ス키마に基づく特定のJSONサブセットに特化することで、汎用パーサ（simdjson）と同等の性能を達成しつつ、静的型安全性も得られるという洞察のあるコメントが注目されます。このアプローチは、Metaがバイナリ形式で試していることと類似した先進的な試みであり、JSON処理の未来を示す可能性があると評価されています。",
+      "editor_note": "JSON用の新しいGo API (A new Go API for JSON)",
+      "category": "プログラミング言語"
+    },
+    {
+      "rank": 11,
+      "id": 50372164,
+      "title_en": "Hacking the Xbox 360 Hypervisor Part 3: Bad Update Improvements",
+      "title_ja": "Xbox 360ハイパーバイザをハックする Part 3: 悪いアップデートの改善",
+      "url": "https://icode4.coffee/?p=1746",
+      "hn_url": "https://news.ycombinator.com/item?id=50372164",
+      "score": 61,
+      "comment_count": 2,
+      "posted_at": "2026-11-04T22:01:49+00:00",
+      "comments": [
+        {
+          "id": 50372305,
+          "author": "ElCapitanMarkla",
+          "text": "Perfectly timed post… I picked up a Corona 360 with 250GB HD yesterday for $50. Installed BadUpdate 1.3 last night and it all worked perfectly. The boy has been having a blast with it"
+        }
+      ],
+      "summary_ja": "・主な議論点\nBad Update 1.3の導入によるXbox 360 Coronaモデルの Jailbreak 成功率の向上と、その簡便さについてが議論の中心となった。特に、高価格で取引される旧世代機を安価で入手し、ソフトウェア更新のみで機能を拡張できる点が community で注目された。\n\n・賛否両論\n賛成派は、手軽で確実な方法として評価し、多くの成功例が報告された。一方、反対派は、_modify_ のリスクや、特定のモデルでのみ動作する制限、そして著作権問題に関する懸念を表明した。\n\n・注目コメント\n「Perfectly timed post…」というコメントは、実際の使用体験として「$50でCorona 360を購入し、BadUpdate 1.3をインストールしたところ、完璧に動作した」という具体的な成功例を示しており、技術的な可能性と実用性の高さを示す洞察のある報告とされた。",
+      "editor_note": "Xbox 360ハイパーバイザをハックする Part 3: 悪いアップデートの改善 (Hacking the Xbox 360 Hypervisor Part 3: Bad Update Improvements)",
+      "category": "セキュリティ"
+    },
+    {
+      "rank": 12,
+      "id": 50370654,
+      "title_en": "Qualcomm Cloud AI 100 Ultra – 150W AI Accelerator Card with 128GB at 548GB/s",
+      "title_ja": "Qualcomm Cloud AI 100 Ultra – 150W AI加速カード、128GBメモリ、548GB/s転送",
+      "url": "https://www.qualcomm.com/data-center/products/cloud-ai-100-ultra",
+      "hn_url": "https://news.ycombinator.com/item?id=50370654",
+      "score": 100,
+      "comment_count": 43,
+      "posted_at": "2026-11-04T19:55:14+00:00",
+      "comments": [
+        {
+          "id": 50371301,
+          "author": "tokepi",
+          "text": "If the specs seem outdated, it’s because this chip launched in 2024. It’s available at cloud providers including Cirrascale"
+        },
+        {
+          "id": 50371453,
+          "author": "thway15269037",
+          "text": "What's the price?"
+        },
+        {
+          "id": 50371072,
+          "author": "pearl_panel5",
+          "text": "Curious how the memory bandwidth actually holds up under sustained inference loads compared to the spec sheet numbers."
+        },
+        {
+          "id": 50371656,
+          "author": "swiftcoder",
+          "text": "So it's an M4 Max Mac Studio, RAM-wise, with a GPU's worth of compute?"
+        },
+        {
+          "id": 50372751,
+          "author": "0917236141",
+          "text": "Seems like a reasonable general-purpose card."
+        }
+      ],
+      "summary_ja": "・主な議論点: コミュニティでは、このカードのメモリ帯域（548GB/s）と計算性能が、実際の継続的推論負荷下で仕様書の数値を維持できるかが大きな関心事だった。また、M4 Max Mac Studioと同等のメモリ容量（128GB）ながらGPU並みの計算力を持つ点が注目され、一般用途としての位置づけが議論された。\n\n・賛否両論: 肯定的な意見は、合理的な汎用カードで価格も手頃だというもの。一方で、具体的な価格が示されず、NVIDIAなどと比較した際の競争力が不明な点、および実性能が仕様書通りかという懸念が存在した。\n\n・注目コメント: 「M4 Max Mac Studioと同等のメモリながら、GPU並みの計算力を持つ」というコメントは、このカードの特徴を的確に捉えている。さらに、「価格は？」「実際の負荷下的な帯域は？」「仕様書の数値は2024年発売のものだが、旧式的に見える」というコメントは、ユーザーが求める关键情報の欠如と実用的な懸念を明確にしている。",
+      "editor_note": "Qualcomm Cloud AI 100 Ultra – 150W AI加速カード、128GBメモリ、548GB/s転送 (Qualcomm Cloud AI 100 Ultra – 150W AI Accelerator Card with 128GB at 548GB/s)",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 13,
+      "id": 50369503,
+      "title_en": "Conductor is joining Meta",
+      "title_ja": "ConductorがMetaに合流",
+      "url": "https://www.conductor.build/announcement",
+      "hn_url": "https://news.ycombinator.com/item?id=50369503",
+      "score": 106,
+      "comment_count": 143,
+      "posted_at": "2026-11-04T18:22:40+00:00",
+      "comments": [
+        {
+          "id": 50370169,
+          "author": "Charlieholtz",
+          "text": "Hi! Co-founder here. Conductor actually kicked off with a HN post many lifetimes ago in July 2025 ( https://news.ycombinator.com/item?id=44594584 ). I owe so much to this community. Thank you all so much! The whole team is around to help answer any questions. You can reach out to me personally at charlie [at] melty.sh."
+        },
+        {
+          "id": 50370063,
+          "author": "iamunr",
+          "text": "Literally just went to go \"all in\" on conductor yesterday, and buy into their cloud setup and hope the company keeps going. And today we're doing a refund + moving the org to t3.codes instead. Boo Meta. Boooooooo."
+        },
+        {
+          "id": 50369878,
+          "author": "markerz",
+          "text": "Things will shut down over the next few months. https://www.conductor.build/announcement : Wednesday, Nov 4 New users can no longer sign up for Conductor or download the app. Friday, Nov 13 Conductor Cloud goes read-only Local Conductor will continue working as normal for now. It will start winding down in early 2027. Flashback to Cloudflare acquiring Deno and hiding the shutdown at the bottom of their announcement -- https://news.ycombinator.com/item?id=50019911 ."
+        },
+        {
+          "id": 50371355,
+          "author": "bqsile",
+          "text": "I switched to T3 codes a few weeks ago after being a power user of Conductor and I understand why the product felt a bit stale now."
+        },
+        {
+          "id": 50370446,
+          "author": "stevenou",
+          "text": "Extremely bummed about this. Having cloud webhooks + workspace/session API + isolated VMs has been a massive productivity boost for me. Does anyone have suggestions for products that can match Conductor Cloud, not just Conductor Local?"
+        }
+      ],
+      "summary_ja": "ConductorはMetaに買収され、サービスが閉鎖されることが発表された。もともと2025年7月のHNS投稿で始まり、コミュニティに感謝の声が上がっている。閉鎖スケジュールは11月4日で新規登録停止、11月13日でクラウド読み取り専用、2027年初頭からローカル版も段階的に停止。ユーザーはT3 Codesなどへの移行を検討し、雲機能の丧失を後悔する声と、代替手段を評価する声が分かれている。CloudflareがDenoを買収した際の閉鎖発表の隠蔽と類似する点を指摘するコメントが注目されている。チームは質問に対応し、返金や移行支援を表明している。一部ユーザーはMetaへの不信感を表明している。社区の反応は多様である。",
+      "editor_note": "ConductorがMetaに合流 (Conductor is joining Meta)",
+      "category": "スタートアップ/ビジネス"
+    },
+    {
+      "rank": 14,
+      "id": 50368804,
+      "title_en": "Launch HN: Kino AI (YC S23) – AI media manager and video editor",
+      "title_ja": "Launch HN: Kino AI (YC S23) – AIメディアマネージャーとビデオエディタ",
+      "url": null,
+      "hn_url": "https://news.ycombinator.com/item?id=50368804",
+      "score": 70,
+      "comment_count": 26,
+      "posted_at": "2026-11-04T17:31:53+00:00",
+      "comments": [
+        {
+          "id": 50369710,
+          "author": "vladgur",
+          "text": "This is awesome. I always wanted to do 2 things and never found enough time * ballroom dance competition videos to share on insta for peers and judges my kid is doing ballroom dancing and as a dance parent i record every competition, but i always struggle to find time to edit it well to share it. I end up with a lot of high quality videos from my sony a6700 or iphone 17 and do some editing with resolve but it takes FOREVER and so i do it rarely * Travel videos to share with friends and colleagues I love travelling and this summer i have hiked through Albanian Alps and Dolomites and wanted to stitch those into a cool video to showcase to my friends and coworkers, but i just dont have enough time. I have a lot of high res videos on my Iphone 17, Insta360 x5 and DJI Avata 2 that i have no time to edit. My dream would to unleash my agents on these huuuge files and to help me organize them by time, and place and then to use agents to pick out the best scenes per place and help me stitch great showcasing videos Does anyone have a good workflow for these? Would Kino be a great tool or is this best done locally with Claude/Codex?"
+        },
+        {
+          "id": 50370451,
+          "author": "krmmalik",
+          "text": "Splendid effort and I'm so glad actual industry experts built something like this than someone like me who is just a vibe-coder. Industry experience counts for so much in such cases. One thing I didn't see and I really hope you'll incorporate it is templates. I did a lot of podcasts two years ago with various guests and every podcast was intended to follow the same format, same title design, intro music, trailer clips etc as well as cut clips for social media. If all these preferences can be fed into a template then, the agent can make realtime decisions on each video and work long horizon and output a full production with just a few commands each time. That, for me, would be the holy grail if backed up by an agent guided template builder. Something to think about."
+        },
+        {
+          "id": 50369212,
+          "author": "moinism",
+          "text": "Truly amazing work Luke and team! Been following Kino for a while now and just looked at your website (a lot better than prev!) the other day. I'm also working on an agentic video product (chatoctopus.com), and I can tell how hard it is compared to what influencer of X (Opus made it in an hour, etc) make it seem like. They don't tell how many times they corrected it, how long it took, and how much it cost. You are one of the four YC companies I know of (Cardboard, Palmier, and Motion/Mosaic being other three) working on that, so I keep visiting occasionally to see if I can get \"inspired\" by something new."
+        },
+        {
+          "id": 50369761,
+          "author": "handfuloflight",
+          "text": "Any chance for a feature that corrects eye contact when reading from a teleprompter? ie. https://www.descript.com/eye-contact https://docs.nvidia.com/nim/maxine/eye-contact/latest/overvi..."
+        },
+        {
+          "id": 50370367,
+          "author": "leofree",
+          "text": "Great potential, wishing you the best. How fast are the exports? Opus 5.5 was taking around the same time as actual video time to export in my tests. Did you find a way to solve this on a real time timeline like this?"
+        }
+      ],
+      "summary_ja": "**主な議論点**\n*Kino AI* は、個人用户的動画編集の効率化に大きな期待をraised。特に、舞蹈 competition や旅行記録など、高画質な大量の動画を手軽に編集・共有したいというニーズがStrongに存在する。 community は、AIエージェントが動画の自動選定や編集を支援するというコンセプトに高い関心を示した。\n\n**賛否両論**\n*   **賛成派**: 専門家による開発（\"actual industry experts\"）を評価し、AI動画編集の難しさを理解した上で製品化している点を肯定。他社（Opusなど）の表面的な成功に疑問を投げかけ、*Kino* のアプローチを信頼する声も。\n*   **懸念派**: 出力速度（エクスポート時間）が実動画時間とほぼ同じだったという他社の報告から、*Kino* も同様の課題を抱えていないかという懸念。また、AIが意図した通りに動くかどうかの不透明さ。\n\n**注目コメント**\n1.  **テンプレート機能の重要性**: ポッドキャストなど、同じフォーマットを繰り返す動画制作において、テンプレートに沿ってAIエージェントが長時間一貫した編集を行う機能（\"holy grail\"）が求められる。\n2.  **YC企業としての位置付け**: 同分野で活動する他のYC企業（Cardboard, Palmier, Motion/Mosaic）と並び、*Kino* を「動画編集AI」の一片として注目している開発者からのコメント。競合動向の観察。\n3.  **専門機能の追加要望**: テロプロンプターからの視線補正機能（eye contact correction）の実装を求める声。NVIDIAなどの先端技術との連動を期待。",
+      "editor_note": "Launch HN: Kino AI (YC S23) – AIメディアマネージャーとビデオエディタ (Launch HN: Kino AI (YC S23) – AI media manager and video editor)",
+      "category": "スタートアップ/ビジネス"
+    },
+    {
+      "rank": 15,
+      "id": 50368626,
+      "title_en": "Progress on provable inference for large language models",
+      "title_ja": "大規模言語モデルの証明可能な推論の進展",
+      "url": "https://www.anthropic.com/research/provable-inference",
+      "hn_url": "https://news.ycombinator.com/item?id=50368626",
+      "score": 174,
+      "comment_count": 84,
+      "posted_at": "2026-11-04T17:17:46+00:00",
+      "comments": [
+        {
+          "id": 50370121,
+          "author": "neuwirth",
+          "text": "This is built on VerInf, work that I did as a MARS fellow. They ripped everything down to the choice of 400B Maverick from us with very little attribution. Cool, I guess... https://github.com/jamespetrie/verinf"
+        },
+        {
+          "id": 50368943,
+          "author": "vessenes",
+          "text": "I've been writing about the need for provable inference (and training) on and off for a number of years; this is welcome news and a good start, and a significant improvement on prior zk results. The problems of inference proof for a closed model provider are more difficult than an open model provider -- you can get a probabilistic proof much more cheaply out of four independent inference providers running the same non-batched prompt than this 90-100x compute hit. Anthropic and others also have a significant problem with these proofs in that they have a lot of incentive internally to have some portions of the pre-prompt secret; I haven't read this newest scheme closely enough to determine if they have a way to hide parts of the prompt with the proof. But if they don't, they are almost certainly not going to want to send these proofs out in the general case. Last, I'll take this moment to soapbox and say for the researchers out there -- provable inference is nice. Provable training corpus information would be spectacular. It would be very, very, very nice to provide a set of model weights and a proof that they had only been trained on a dataset. To be clear, this is a really hard problem, but it would change fundamentally what levels of trust we could have about a given set of weights."
+        },
+        {
+          "id": 50368978,
+          "author": "gopalv",
+          "text": "> In both cases the question is the same: how can a company be sure of which weights are actually running on its servers? > the resulting commitment is good for about 16 million requests, after which the provider has to commit again. > The client downloads the commitment, ~6.5 MB in all, and then one proof per request. Checking a proof takes 17 seconds on 24 threads (and 21 seconds on a single thread), including the offline phase's check I know they mentioned $ETH in the technical report, but this is exactly the mechanic for a crypto currency Proof-of-Work which is expensive by design. When they announced it, I was hoping for a 5% overhead validation that the model that served you is really Fable and not Opus. The quantization bit caught me out, because we saw the boundary crossing from good-context-size to bad is so sharp it feels like longer context requests are sent to quantized models to make more room for more KV-Cache. This would expose those sorts of tricks people can play to have the same GPU do better on short context benchmarks and gracefully degrade on long context. At work, we did a bit of digging[1] into exactly why BaseTen, Fireworks and Together serve Inkling weights differently, we suspected the issue was a combination of how you do disaggregated prefill (+streaming) and quantization for longer context tasks. [1] - https://isotopes.ai/blog/everyone-is-selling-the-same-model-..."
+        },
+        {
+          "id": 50370540,
+          "author": "nemo1618",
+          "text": "For open-weight models, provable inference is trivial: just redo the computation! This is much faster, cheaper, and doesn't require any fancy cryptography, just deterministic inference (which, if you read carefully, the ZKP approach needs too). See https://lukechampine.com/repligraphs Of course, it's unlikely that we'll get open-weight models from OpenAI or Anthropic any time soon. That means we have to choose between a) fancy ZKPs, b) signed responses, or c) comparing results from multiple inference providers. Whatever method ends up being used, it's clear to me that some form of provable inference is inevitable. People haven't caught on to its more significant applications, but they will. (This post touches upon one of them: model-driven audits.) Think about it: we can prove that a particular mind authored a particular artifact. That's never been possible before! You can't prove that Melville wrote Moby Dick, for example; but you can prove that Claude wrote a poem, or that Gemini approved a pull request, or that GPT got a particular score on some eval. This is a more powerful primitive than a cryptographic signature."
+        },
+        {
+          "id": 50368730,
+          "author": "vintagedave",
+          "text": "I've read that providers like those you find on OpenRouter can sometimes route to other models; this would catch that. But I've also heard, as complete rumour, sometimes some named models perform significantly worse on some hosts and the theory is they're running quantized, without that being published. Would this solve that? The post mentions proving a set of weights, but not how those are represented? What would stop a host using true weights for generating the signature, while running on quantized versions? > We prove an exact integer version of the published weights, and a proof asserts that each checked token is that model’s greedy choice. A reply from a floating-point implementation, or sampled decoding, could depart at some position... So, no...?"
+        }
+      ],
+      "summary_ja": "主な議論点は、大規模言語モデルの推論結果に対する「証明可能推論」の進展、特に零知識証明を用いた手法の有効性と課題です。コミュニティでは、この技術がモデル提供者の信頼性を検証する手段として期待される一方で、計算成本の高さや、閉源モデル提供者のインセンティブの問題が指摘されています。\n\n賛否両論は、ZKP手法の計算オーバーヘッド（90〜100倍の計算成本、1リクエストの証明検証に17秒かかること） versus その必要性です。賛成派は、将来的に必須となるとし、反対派は実用上のボトルネックや、提供者の内部インセンティブ（一部のプロンプトを秘匿する傾向）を問題視しています。特に、Anthropicなどの閉源提供者は、証明を一般に送信する動機が弱いという懸念があります。\n\n注目コメントとして、自身のVerInf研究が十分な引用なしに使われたという不満が表明されています。また、「証明可能な推論」ではなく「証明可能な学習データ」の重要性が強調され、モデル重みが特定のデータセットのみで学習されたことを証明できれば、信頼性が根本的に改变するという洞察があります。さらに、重みの表現方法や量子化の問題に言及し、真の重みで署名を生成しながら実際は量子化モデルを実行する这样的な不正を防ぐ困难さが指摘されています。",
+      "editor_note": "大規模言語モデルの証明可能な推論の進展 (Progress on provable inference for large language models)",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 16,
+      "id": 50342219,
+      "title_en": "PageScribe: Handwriting and offline dictionary audio for KOReader",
+      "title_ja": "PageScribe: KOReader用の手書きとオフライン辞書音声",
+      "url": "https://aspireai.kiranadimatyam.com/builds/pagescribe/",
+      "hn_url": "https://news.ycombinator.com/item?id=50342219",
+      "score": 8,
+      "comment_count": 0,
+      "posted_at": "2026-11-02T19:23:48+00:00",
+      "comments": [],
+      "summary_ja": "",
+      "editor_note": "PageScribe: KOReader用の手書きとオフライン辞書音声 (PageScribe: Handwriting and offline dictionary audio for KOReader)",
+      "category": "モバイル"
+    },
+    {
+      "rank": 17,
+      "id": 50369895,
+      "title_en": "Show HN: After a decade of reversing, I got co-op working in DOS Wing Commander",
+      "title_ja": "Show HN: 10年間のリバースエンジニアリングの末、DOSのWing Commanderでコオペレーションが動作",
+      "url": "https://fireflyk64.github.io/wcmulti/",
+      "hn_url": "https://news.ycombinator.com/item?id=50369895",
+      "score": 105,
+      "comment_count": 15,
+      "posted_at": "2026-11-04T18:51:27+00:00",
+      "comments": [
+        {
+          "id": 50370118,
+          "author": "daniel_rh",
+          "text": "Author here: in 2015, I was playing the classic Wing Commander in DOSBox and suddenly realized the game state fit in the 64k data segment. Over ten years my brother and I went through a set of experiments (stop and go, turn, communicate) while probing the memory. We uncovered where the variables were, how to inject calls into the game functions, and how to sync the gamestate across the network, so we can fly the story missions together. My favorite finding is that the camera lives in entity slot 0x3D, which is possibly a \"3D\" reference by the original developers. You can play it at https://fireflyk64.github.io/dosbox in browser. If you own Wing Commander, drag in the installer since no game files are hosted. If you don't, the page will load the original DOS/3Dfx version of Vega Strike, before I open sourced it. I upscaled and redid DOS Vega Strike art using AI, but it now has multiplayer and a similar feel. I'll be in the lobby for the next few hours if anyone wants to fly together. Disclosure: I also used AI for the final step to help compile for the browser and port our TCP networking stack to WebRTC with voice and solve a few lingering bugs."
+        },
+        {
+          "id": 50373926,
+          "author": "EmX_3000",
+          "text": "This reminds me of how I used to cheat at certain games back in the 8-bit olden days. You could change one thing at a time, save, then look through and see what changed on the disk. Eventually you could identify all the locations that held the values for inventory, stats, location, quest stages, NPC state, and so on. All you had to do after that was change those locations and - hopefully - you're all powered up. With the WozMon you could even find the locations in memory, sometimes, and have \"free\" healing spells, for instance, any time you like by popping open the monitor and just changing the values in RAM. Among people my age this is the usual way you'd get started with something resembling hacking. It seems like the author is doing the same type of thing. This is also the basis of cheats and trainers for games, action games tended to be easier and there might only be a handful of flags and variables making cheat menus practical. For RPGs the cheats came in the form of lists of locations on the disk, eventually though there were disk-based full blown character editors available for some handful of games. Also about the same time, some developers started to go to extreme lengths to keep people from cheating by tampering with their save game files. This became quite common in the industry by the 32-bit era. EDIT: I will point out that people would often submit letters to computer magazines with the memory locations of popular games as time went on. But this could take months or a year or more, and a game might never have its secrets laid bare so I suspect a LOT of people just did it manually at home."
+        },
+        {
+          "id": 50372848,
+          "author": "Tepix",
+          "text": "Neat! You're using the data channel for voice? why not the rtc stream?"
+        },
+        {
+          "id": 50372716,
+          "author": "ShakataGaNai",
+          "text": "Oh man. Blast from the past. I loved wing commander back in the day."
+        },
+        {
+          "id": 50372650,
+          "author": "abrookewood",
+          "text": "Really cool write up - thanks for sharing."
+        }
+      ],
+      "summary_ja": "**主な議論点**\nこのプロジェクトの核心は、DOS版『ウイングコマンダー』のメモリ内データを逆解析し、ゲーム状態をネットワーク経由で同期させることで、複数人での協力プレイを実現した点です。コミュニティでは、この技術的挑戦そのものに大きな関心が集まりました。\n\n**賛否両論**\n意见が分かれたのは、この手法の評価です。肯定的な意見は、これは8ビット時代のゲームチートやトレーナー作成と同根の、ある種の「ハッキング」であり、その創造性とレトロゲーム preservation における価値を称賛するものです。一方で、これは単なるチートではなく、公式には存在しない機能を「創り出す」本格的なリバースエンジニアリングであり、革新的であるという意見も見られます。\n\n**注目コメント**\n特に注目されたコメントは、著者と同年代の人が「8ビット時代にディスクやメモリを直接操作してゲームをチートしていた」経験に言及し、その手法が現在のこのプロジェクトの根幹をなしていると指摘したものです。これは技術の系譜に言及した、洞察のあるコメントです。また、ボイス通話の実装方法について「データチャネルを使っているのか、RTCストリームを使っているのか」という技術的な質問も、詳細に興味を持ったcommunityの反応を示しています。",
+      "editor_note": "Show HN: 10年間のリバースエンジニアリングの末、DOSのWing Commanderでコオペレーションが動作 (Show HN: After a decade of reversing, I got co-op working in DOS Wing Commander)",
+      "category": "プログラミング言語"
+    },
+    {
+      "rank": 18,
+      "id": 50366522,
+      "title_en": "Guerrilla bike lanes: San Francisco makes illicit infrastructure permanent (2016)",
+      "title_ja": "グリリラ・バイクライン: サンフランシスコが違法インフラを恒久的に (2016)",
+      "url": "https://99percentinvisible.org/article/guerrilla-bike-lanes-san-francisco-makes-illicit-infrastructure-permanent/",
+      "hn_url": "https://news.ycombinator.com/item?id=50366522",
+      "score": 259,
+      "comment_count": 190,
+      "posted_at": "2026-11-04T15:01:44+00:00",
+      "comments": [
+        {
+          "id": 50368800,
+          "author": "chmod775",
+          "text": "Students at my university in Berlin need to cross a busy road to travel between campus areas, which meant jaywalking or a long trip to a crossing with traffic lights down the road. A steady stream of students late to their next class sprinting across a six lane road is not great. At some point students started painting their own crosswalk, which would be removed again and again by authorities, until the city eventually got the hint and installed a permanent crosswalk with a traffic light and a pedestrian island. Sometimes the way to get something is fixed is by demonstrating the fix."
+        },
+        {
+          "id": 50368375,
+          "author": "darkstar999",
+          "text": "It reminds me of The Guerrilla Artist Who Fixed L.A.'s Worst Freeway Sign https://thelandmag.com/richard-ankrom-guerrilla-public-servi..."
+        },
+        {
+          "id": 50369271,
+          "author": "regentbowerbird",
+          "text": "In Geneva, activists painted bike lanes in three streets in 2023, causing about 2000 swiss francs in damages (or improvements, depending on your view). The Swiss police under prosecutor Walther Cimino proceeded to investigate as if they were a crime syndicate, gathering forensics but also identifying 96 sympathizers and putting them under heavy surveillance, which included requesting total records from their banks, employers, phone companies, email providers (Google through the US DoJ), and even CCTV and purchases from their local supermarket. I'm afraid of the possibility that what used to be \"grassroots civil disobedience\" will now be labeled \"eco-terrorism\" and prosecuted accordingly."
+        },
+        {
+          "id": 50368635,
+          "author": "nonethewiser",
+          "text": "This is an intractable problem with normal sidewalk/streets. Bikes don't belong on the road with cars and they dont belong on sidewalks with pedestrians and they don't belong in between. This is why both drivers and pedestrians hate bikers. Ideally we have entirely separate paths for bikes. Of course this is infeasible for most established cities. Doesn't mean they are't inherently a problem in these cases though."
+        },
+        {
+          "id": 50367008,
+          "author": "ortusdux",
+          "text": "The logical escalation of desire paths - https://99percentinvisible.org/article/least-resistance-desi..."
+        }
+      ],
+      "summary_ja": "**主な議論点**\n自転車レーンの「游击（ゲリラ）」設置を巡る、市民の草の根的行動と自治体の対応に関する議論です。主な焦点は、公式の基础设施整備が遅れる中、市民が自発的に標線を引くなどの直接行動を行うことの正当性と効果です。\n\n**賛否両論**\n賛成派は、こうした行動が自治体に問題を Aware させ、結果的に恒久的な改善を促した事例（ベルリンの横断歩道やサンフランシスコの自転車レーン）を挙げ、市民の創造性と行動力の重要性を強調します。一方、反対派は、こうした行為が法に違反し、秩序の維持や公共の安全、財産への损害を招く可能性があると指摘します。特に、スイスの事例では、活動家たちが重度の監視や裁判の対象となったことから、 civil disobedience が「エコテロ」とレッテルを貼られるリスクがあると警告する声があります。\n\n**注目コメント**\n「欲求経路（desire paths）」の論理的拡大というコメントが注目されます。これは、人々が最も自然に歩く経路（欲求経路）に沿って、公式には整備されていない場所に自発的に Infrastructure を作るという、都市計画の視点から捉えた洞察です。また、自転車が車道と歩道の間という「第三の場所」に適切な居場所がないという、都市設計の根本的な問題を指摘するコメントも、単なる违法行为の議論を超えて、都市の交通体系そのものの設計についての考察を促しています。",
+      "editor_note": "グリリラ・バイクライン: サンフランシスコが違法インフラを恒久的に (2016) (Guerrilla bike lanes: San Francisco makes illicit infrastructure permanent (2016))",
+      "category": "その他"
+    },
+    {
+      "rank": 19,
+      "id": 50338474,
+      "title_en": "Basically no one is using AI agents for their DoorDash orders",
+      "title_ja": "ダッシュアンド Dashの注文でAIエージェントを使っている人はほぼいない",
+      "url": "https://arstechnica.com/ai/2026/10/doordash-says-outside-ai-agents-have-only-led-to-hundreds-of-orders-so-far/",
+      "hn_url": "https://news.ycombinator.com/item?id=50338474",
+      "score": 71,
+      "comment_count": 123,
+      "posted_at": "2026-11-02T15:48:45+00:00",
+      "comments": [
+        {
+          "id": 50373356,
+          "author": "paxy",
+          "text": "People coming up with these tech use cases live in a reality where price sensitivity isn't a thing. \"You can call an Uber with a voice command\" \"You can ask alexa to buy you things\" \"Your AI will order food for you\" Seem like magical ideas that will remove friction and increase sales. Except that regular people compare 13 different options to pick the cheapest one. No one wants to see food appear on their doorstep followed by a bill they cannot pay."
+        },
+        {
+          "id": 50371236,
+          "author": "Grombobulous",
+          "text": "Something that is perhaps “underreported” is that a lot of AI solutions aren’t easier to do than just doing the thing. My budget app, for example: It’s not easier for me to ask the AI bot “show me all my transactions from McDonald’s” than it is to click on the search bar/payee filter and type “McDonald’s.” But if I use the AI bot, I’m burning tokens."
+        },
+        {
+          "id": 50373754,
+          "author": "joegibbs",
+          "text": "“Get me a burrito. Ok cool are there any other places? Ok but how about ones under 50 minutes delivery? Ok now of those which has higher than 4.5 stars? Alright that one looks good, can I get a large lamb burrito with extra salsa and guac? Ok they don’t do lamb that’s fine, beef is good. They don’t do a large size, that’s alright go with a small. Yes confirm payment.” Text is just not a good format for ordering things. You want to see pictures and just click on the options you want - we’ve had people paid 300k working on the optimal visual interface for this for probably 30 years, just trying to improve the sale rate 2%. Agents are good for open ended problems which require stringing together lots of different data sources, which couldn’t be further from ordering food."
+        },
+        {
+          "id": 50374152,
+          "author": "Madmallard",
+          "text": "Why are people even using doordash in 2026? It is pretty much the embodiment of capitalism ruining everything except the shareholder's wallets"
+        },
+        {
+          "id": 50371136,
+          "author": "rolosa",
+          "text": "I would not trust the AI to order food off of these websites for me because the labeled data itself is pretty much shit. Lots of dishes are unlabeled, have really bad pictures or no pictures at all, and the worse is the ones that have AI generated descriptions which are often wrong or not helpful. I'm totally fine with letting it just use my saved credit cards and delivery address (I assume the AI doesn't see them) but I can't trust it to order the food I actually want. E: As an example (n = 1 etc): I am vegetarian. I have never ordered meat dishes, ever. Yet all of these food delivery apps suggest meat dishes for me."
+        }
+      ],
+      "summary_ja": "・主な議論点：AIエイジェントによる食品注文は実用的ではない。価格敏感な消费者は最安値を比較するため、AIの「简化」は無意味。テキストベースの注文は視覚的なインターフェースに劣り、注文に最適でない。また、配信アプリのデータ（画像、説明）が不完全で、AIが正確な注文できない。\n\n・賛否両論：AIエイジェントの利点を主張する声（摩擦を減らす）に対して、実際のユーザー行動（手動で比較）や、AIが「开放-ended」な問題に有効だが、構造化された注文作業には不適切という反論が大勢を占める。\n\n・注目コメント：ベジタリアンのユーザーが、過去に肉料理を注文したことがないのに、アプリが肉料理を推奨するという具体例。AIがユーザーの実際の選好を理解していないこと、データの質の低さを明確に指摘した。",
+      "editor_note": "ダッシュアンド Dashの注文でAIエージェントを使っている人はほぼいない (Basically no one is using AI agents for their DoorDash orders)",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 20,
+      "id": 50366863,
+      "title_en": "OpenAI to acquire Pierre Computer Company",
+      "title_ja": "OpenAIがピエールコンピュータカンパニーを買収",
+      "url": "https://openai.com/index/openai-to-acquire-pierre/",
+      "hn_url": "https://news.ycombinator.com/item?id=50366863",
+      "score": 185,
+      "comment_count": 62,
+      "posted_at": "2026-11-04T15:21:21+00:00",
+      "comments": [
+        {
+          "id": 50371080,
+          "author": "tiffanyh",
+          "text": "I have to imagine this is related to: https://openai.com/index/scaling-git-at-openai/ And you'll see that mitchellh is a big fan of Pierre (and I think investor) https://x.com/mitchellh/status/2036855931569651884?lang=en For those who don't know Pierce, here's a demo from mitchellh: https://x.com/mitchellh/status/2057229385963618787"
+        },
+        {
+          "id": 50371843,
+          "author": "paxy",
+          "text": "We need a term for an acquisition where you buy an entire company because it would be cheaper than paying a monthly subscription fee to use their product."
+        },
+        {
+          "id": 50368299,
+          "author": "frangonf",
+          "text": "I read good things about their diffs library: https://diffs.com/ Whenever I see this acquires or hiring of successful products founders or teams by big labs I ask myself if, apart for the usual obvious reasons that any non ai model company would want them, they are also reusing this human talent to build the dataset of \"how the sausage is made\"."
+        },
+        {
+          "id": 50369407,
+          "author": "Ralfp",
+          "text": "Cool. Pierre Computer is a company founded by original Bootstrap devs: Jacob Thornton and Mark Otto"
+        },
+        {
+          "id": 50374123,
+          "author": "casey2",
+          "text": "OpenAI continues to do everything right, using their position to acquire as many companies as possible. If you don't take a peak at the horror show that is Anthropic everything would look good."
+        }
+      ],
+      "summary_ja": "このコメントでは、OpenAIによるPierre Computerの買収に関するコミュニティの反応が以下のように要約できます。\n\n**主な議論点**\nOpenAIがBootstrapの元開発者によって設立されたPierre Computerを買収したことで、大手AI企業による技術・人材獲得の加速が注目されています。特にPierreが開発したdiffsライブラリや、Mitchell Hashimotoの関与が買収の背景として指摘されています。CommunityはOpenAIが継続的に企業買収を進める戦略を「すべてを正しくやっている」と評価する一方で、その背景にはAnthropicなどの競合企業の問題があるとも指摘しています。\n\n**賛否両論**\nOpenAIの買収戦略に対しては肯定的な意見が大勢を占めていますが、一部で風刺的なコメントが見られます。たとえば「サブスクリプション費を節約するための企業全体の買収」という表現は、買収の動機に対する皮肉を包含了しています。また、買収が単なる技術獲得ではなく、AIモデルのデータセット構築に必要となる「人間の知見」の獲得であるという洞察も示されています。\n\n**注目コメント**\nMitchell Hashimotoの関与や、Pierre ComputerがBootstrapの開発者によって設立されたという背景が特に注目されています。また、OpenAIがAnthropicなどの問題を抱える競合企業と比較して優位性を発揮しているという指摘は、コミュニティ内での評価を高める要因となっています。さらに、買収がAI業界の動向を反映しているという考察も重要な視点です。",
+      "editor_note": "OpenAIがピエールコンピュータカンパニーを買収 (OpenAI to acquire Pierre Computer Company)",
+      "category": "スタートアップ/ビジネス"
+    },
+    {
+      "rank": 21,
+      "id": 50371408,
+      "title_en": "Death Comes for XSLT",
+      "title_ja": "XSLTへの死",
+      "url": "https://dbushell.com/2026/11/03/xslt-rip/",
+      "hn_url": "https://news.ycombinator.com/item?id=50371408",
+      "score": 47,
+      "comment_count": 28,
+      "posted_at": "2026-11-04T20:57:10+00:00",
+      "comments": [
+        {
+          "id": 50374126,
+          "author": "lolive",
+          "text": "Ah! The usual sea serpent. Is XSLT good for transforming a [tree] data structure? H.ll yes ! Can it be adapted to transform JSON trees too? Yes, but it is a hack Is it more declarative than coding mutations in a store? Yes. Is it adapted to partial data chunks retrieval, aggregation and processing [also known as Web 2.0 or XmlHttpRequest or AJAX]? No."
+        },
+        {
+          "id": 50373544,
+          "author": "daylily",
+          "text": "I find XSLT removal a rather bad argument for \"browser vendors bad\". Browser vendors do of course make bad decisions that impact people to serve their own purposes, but in this case the \"people\" in question are just bloggers who want their RSS feed to render pretty on the browser, which isn't all that consequential and makes the whole discussion look like frivolous outrage. There are probably way better examples to lead with. Edit: You don't need XSLT to style your feeds. I've been using a script that does the same [1], because browsers will read and run XHTML <script> tags inside any XML document. [1]: https://dayli.ly/misc/render-feed/"
+        },
+        {
+          "id": 50373307,
+          "author": "kenferry",
+          "text": "Seems rather absolutist. XSLT was an idea that sounded good, but in practice was quite awkward (like many xml technologies) and never got off the ground. Do we really need to hang every failed experiment around browser vendors' necks forever? I would prefer they work on things people care about. From one of the issue trackers: \"While it's important to not break existing web content, it's also important to prevent security vulnerabilities. XSLT has been in maintenance mode in browsers and has been an ongoing source of security issues.\""
+        },
+        {
+          "id": 50372930,
+          "author": "telebub",
+          "text": "I find this whole removal idea a bit lazy. In theory some logic possibly declares some aspects of the BOM/DOM must be JS for introspection reasons, etc, but the reverse can't really be true.. There's nothing that can declare things like XSLT must be more native than a little trick with a otherwise standard JS VM, so the unique security edges of delegating things to a second class backwards support level could be quite small."
+        },
+        {
+          "id": 50373192,
+          "author": "sheepscreek",
+          "text": "I have good memories of using XSLT. It was a neat idea at the time. I suppose the world has nearly moved away from XML (for browsers, not yet for folks still enjoying SOAP APIs). And as a result, XSLT has fallen into obscurity."
+        }
+      ],
+      "summary_ja": "・主な議論点\nXSLTの廃止について、コミュニティでは「ブラウザベンダーの悪意」という解釈 versus 「時代の流れとセキュリティ問題」という現実的な必要性の間で議論が分かれました。XSLTがJSON変換やデータ処理に適しているか、あるいはもはや不要になったのかが焦点です。\n\n・賛否両論\n賛成派は、XSLTが宣言的な変換や部分データ処理に有効であり、ブラウザ廃止は過剰な抗議であると主張しました。反対派は、実践上の不便さやセキュリティリスク、JSONやAJAXへの移行によりXSLTが obsolete になったとし、廃止は現実的な判断であるとしました。\n\n・注目コメント\n「XSLTはRSSフィードのビジュアルレンダリングに使われていたが、これは重要ではない。代わりにスクリプトで同様のことが可能だ」というコメントは、XSLTの実用的価値を相対化する洞察のある指摘でした。また、「失敗した実験を永遠にブラウザベンダーの罪として問うのではなく、未来の技術に集中すべきだ」というコメントは、技術の寿命と開発優先順位についての考察 was でした。",
+      "editor_note": "XSLTへの死 (Death Comes for XSLT)",
+      "category": "プログラミング言語"
+    },
+    {
+      "rank": 22,
+      "id": 50366117,
+      "title_en": "Ask HN: What's your current AI agentic setup?",
+      "title_ja": "Ask HN: 現在のAIエージェント設定は？",
+      "url": null,
+      "hn_url": "https://news.ycombinator.com/item?id=50366117",
+      "score": 122,
+      "comment_count": 145,
+      "posted_at": "2026-11-04T14:37:22+00:00",
+      "comments": [
+        {
+          "id": 50374135,
+          "author": "strangelove026",
+          "text": "https://github.com/seanturner026/f There’s an excalidraw in the reader My manager described this as incomprehensible lol but it’s modeled on conductor but uses Claude code terminal and mods and glues a bunch of open source stuff with a cli I had Claude write. Herdr for sessions, nvim for code review / searching, cli invoked by /slash commands. Beads cli for task tracking. With multi repo support since I end up doing a lot at work across repos at work for a “feature” which is how I delineate chats now. And I’ve got a nice picker for swapping sessions so screen real estate isn’t wasted. Many incremental improvements the sum of which are compelling ime"
+        },
+        {
+          "id": 50374094,
+          "author": "alexfortin",
+          "text": "Models: I pay Z.ai a lite sub which costs me ~9USD/month and for the last months I've been using `glm-5.3-flash` amost exclusively for my day-to-day. I also make use of free models from OpenRouter for simple CI/CD automated stuff but very little so. When I'm out of sub tokens I fall back to DeepSeek credit. I keep my sub/credit usage public at https://a.l3x.in/usage Harness: when building/troubleshooting I use https://pi.dev TUI most of the time, the rest of the time is via an issue/PR driven workflow also powered by Pi with this action I built on top of its SDK: https://github.com/shaftoe/awesome-pi-coding-agent/ My general take on AI at https://a.l3x.in/ai Generally speaking, I think I can hardly be happier than what I am already, the quality of open weight models is incredibly good and the only upgrade I could think of is being able to run one on my workstation one day (I don't even try on my Macbook Air M1), which isn't something crazy to dream about, perhaps in 2/3 years running Deepseek v4 Flash or similar model locally won't require too much of an investment in hardware."
+        },
+        {
+          "id": 50374090,
+          "author": "thefunnyman",
+          "text": "$DAY_JOB gives me GitHub Copilot with generous limits so I use GitHub Copilot CLI. We're a Microsoft shop so that dictates some choices too. My workflow is a windows terminal app with multiple sessions running under wsl2 in each pane since LLMs seem to do better with bash than PowerShell. I don't trust these things much so I've got a careful list of read only tool calls and filesystem sandboxing set up so it can do some useful stuff like read my task board and publish draft PRs without a ton of overbearing permissions prompts. I usually chat with that for a bit on a task until it's plan sounds good then I have it spin up a Docker Sandbox microvm under Windows so it can safely run yolo mode and make all it's changes. When it's ready I carefully review and iterate on the result until it's ready to publish the PR. Bit kludgy but strikes a balance of safety and multitasking I'm comfortable with. IME most folks don't think much about isolation so curious to hear if anyone else has a similarly isolated but better workflow. I'd like to try OpenShell instead of docker sbx but it lacks microvm support for windows and I don't want another layer of nested virtualization since my windows machine itself is a cloud VM. Work also gives me access to GHCP for personal use so I use it for side projects too. Idk what I'd use if I had to pay out of pocket, probably something a cheap Claude plan. For noncoding personal use I mostly just use free tier Gemini. If this stuff ever slows down I'll invest in some GPU nodes for my homelab and run local models."
+        },
+        {
+          "id": 50373796,
+          "author": "Kuyawa",
+          "text": "DeepSeek Harness using DeepSeek Flash API Nothing else, DS is smart enough to do everything I ask for and more, never hallucinates and never disappoints. Apps in Rust, Swift, Node, we even designed a new language better suited for LLMs, a compiler, and it runs beautifully. Haven't coded a single line since May 2026 and I will remember that date as the day AI took over my mundane job as programmer and promoted me to architect or director of my own apps A custom plugin to ring a bell whenever a task is finished and a gong when a question needs an answer, that way I can play backgammon or mahjong in the meantime I can't be happier"
+        },
+        {
+          "id": 50373985,
+          "author": "Arubis",
+          "text": "$200/ea plans on Claude and Codex, plus OpenCode Zen for experimenting with other models, plus Qwen3.8-28b locally. (I test-drove DS4 Flash locally in a 128GiB MBP for a while, but the tokens per second were too slow to be useful for more than being a toy.) At my prior anchor client I had an additional max20 plan; at my current anchor client they have a teams plan. I use both Openrouter and OpenCode to get Kimi, GLM, big Qwen, etc, but not at great scale. I have a security product that consumes API tokens that I built against Opus 4 when that was the strongest available; when I get around to it I’ll likely shift it to prefer GLM or Kimi, slightly for cost but mostly for non-refusal. I spend a lot of time in Claude Code because it’s the only Anthropic subscription-friendly harness. Additionally use OpenCode and codex. Not much time spent in pi these days. I used Aider before Claude Code’s beta. Claude Code’s plugin framework is pretty decent, so I tend to stand up a repo of custom plugins against every client repo I work with. It’s a nice efficiency layer for me up front and often grows into a bonus client deliverable after a couple months of refinement. OpenClaw runs persistently, mostly for little calendar tasks and trying to mitigate my ADHD: energy level check-ins, redirects to use attention for things that matter. It orchestrates Hermes under the hood but I don’t interact with the latter directly. I still mostly just use tmux directly and tell running sessions about each other, sending messages to each other via text files or send-keys/capture-pane. Herdr is installed but mostly unused. The GUI clients aren’t my thing; I’m a born console junkie. What I really want to change next is pulling this all back into emacs."
+        }
+      ],
+      "summary_ja": "以下は、Hacker News の記事「Ask HN: What's your current AI agentic setup?」のコメントから要約した議論です。\n\n**主な議論点**\nコミュニティ全体の議論は、AIエージェントの「作業環境（Harness）」と「モデル選択」の組み合わせに集中していた。多くのユーザーが、自身の作業フローに特化したカスタムツール（CLI、TUI、プラグイン）を構築し、複数のオープンソースツールを連携させることで、効率的な「エージェントオーケストレーション」を実現していることがわかった。特に、コード生成にとどまらず、タスク管理、セッション管理、CI/CDなど、開発作業全体を自動化する傾向が顕著である。\n\n**賛否両論**\nモデル選択では、DeepSeekやGLMなどのオープンウェイトモデルの性能が极高く、商用モデルに匹敵するという評価が複数あった。一方で、ローカル実行の遅さや、特定のタスクにおける refusal（拒否反応）の問題が指摘され、cost vs performance のトレードオフについて意見が分かれた。また、セキュリティ面では、エージェントに与える権限の隔離（サンドボックス、Read-onlyツール）の必要性に同意する者と、実用上の複雑さから完全な隔離を諦めている者とがいた。\n\n**注目コメント**\n「DeepSeek Flash APIのみを使用し、2026年5月以降一行もコードを書していない」というコメントが特に注目された。このユーザーは、AIがCoderとしての役割を完全に引き受け、自身を「アーキテクト」または「ディレクター」に昇格させたと主張し、AIエージェントの可能性の極致を示唆した。また、ConductorをモデルにしたカスタムCLIツールを紹介したコメントは、高度にカスタマイズされた個人専用作業環境の具体例として、他のコミュニティメンバーに大きなインスピレーションを与えた。",
+      "editor_note": "Ask HN: 現在のAIエージェント設定は？ (Ask HN: What's your current AI agentic setup?)",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 23,
+      "id": 50371090,
+      "title_en": "Show HN: Gauge – Open-Source CLI to recursively improve your docs",
+      "title_ja": "Show HN: Gauge – ドキュメントを自動改善するオープンソースCLI",
+      "url": "https://github.com/gauge-sh/gauge-cli",
+      "hn_url": "https://news.ycombinator.com/item?id=50371090",
+      "score": 16,
+      "comment_count": 3,
+      "posted_at": "2026-11-04T20:31:30+00:00",
+      "comments": [
+        {
+          "id": 50372858,
+          "author": "esafak",
+          "text": "Sorry to be pedantic, but it's iteratively . Your README even calls it Iteration . Thanks for sharing."
+        }
+      ],
+      "summary_ja": "・主な議論点\nコミュニティの議論の中心は、Gauge の説明における用語の不一致でした。READ ME が「Iteration（反復）」と呼称しているのに対し、コメントでは「iteratively（反復的に）」という表現が使われていることへの指摘がなされました。この言葉遣いのズレが、ツールの核心を正確に伝えるかという点で注目されました。\n\n・賛否両論\n特に賛否両論は分かれていません。これは単なる用語の不一致への指摘であり、機能そのものに対する賛成・反対の議論 wasn't there。Community はこの細かい点に注意を向けることで、開発者の注意深さや説明の透明性を評価する傾向にあります。\n\n・注目コメント\n「pedantic（細かい点にこだわる）」という自身のコメントを否定しつつ、READ ME の用語と実際の説明の不一致を指摘したコメントが注目されます。このコメントは、open source プロジェクトにおける文書の整合性や、開発者とユーザーの間の明確な コミュニケーション の重要性を象徴しています。",
+      "editor_note": "Show HN: Gauge – ドキュメントを自動改善するオープンソースCLI (Show HN: Gauge – Open-Source CLI to recursively improve your docs)",
+      "category": "OSS"
+    },
+    {
+      "rank": 24,
+      "id": 50365780,
+      "title_en": "Tencent Hy4",
+      "title_ja": "Tencent Hy4",
+      "url": "https://hy.tencent.ai/research/hy4",
+      "hn_url": "https://news.ycombinator.com/item?id=50365780",
+      "score": 187,
+      "comment_count": 61,
+      "posted_at": "2026-11-04T14:11:26+00:00",
+      "comments": [
+        {
+          "id": 50370069,
+          "author": "areoform",
+          "text": "> we are open-sourcing two foundation models co-developed by Hy4 and Hyra 2.0: HyCell for single-cell representation and HyPDE for physical field modeling.\u0005 What a refreshing contrast. Where American startups brag about stopping researchers from writing grants about neglected tropical diseases and making novel anti-depressants, these folks are open sourcing the means to do science. https://news.ycombinator.com/item?id=49651727 That's how you get a civilizational advantage. By allowing people to just do things. It's so bizarre to watch China embrace the wonders of science and technology, while certain American startups and communities repeat \"WHAT ABOUT THE BIOWEAPONS?\" The American century has been fumbled hard."
+        },
+        {
+          "id": 50370062,
+          "author": "simonw",
+          "text": "The game development focus is interesting: > For game development, we partnered with professional developers at Tencent Interactive Entertainment Group (IEG) to curate high-quality training data and build evaluations. We focused on feature implementation, gameplay logic, state tracking, and asset pipelines. We also extensively adapted Hy4 for major engines such as Unreal Engine, Unity, and Godot, and expanded its capabilities to multiplayer game development. Compared with Hy4 preview, Hy4 improves by 19.1% on GameDev and 9.8% on GameLogic. Here's more about that game development studio - https://en.wikipedia.org/wiki/Tencent_Games - they've been around since 2004."
+        },
+        {
+          "id": 50369691,
+          "author": "frangonf",
+          "text": "> Looking ahead > Although Hy4 is one of the strongest open-weight models available today, a notable gap remains between it and top proprietary models, particularly on challenging internal benchmarks for research-level mathematics, long-horizon coding, model self-improvement, and advanced visual question answering. We will continue to steadily scale pre-training and post-training to narrow this gap. I like that they acknowledge that. For working with ai as a tool open models are already great. For millennium problems and doomermaxxing they are not there yet."
+        },
+        {
+          "id": 50369676,
+          "author": "chriddyp",
+          "text": "Landed on the cost/accuracy frontier in our data analytics benchmark: https://plotly.com/blog/tencent-hy4-plotly-data-analytics-be... , right in between GPT-6.1 Sol and GPT-6.1 Terra. Verrrry thorough in its work and therefore verrrrry slow. It spent a long time with each question, running about 26 queries for each question, and in some questions it ran 64 queries. One of the queries that it wrote also took about an hour to run, which affected its overall exam time. Last year the open weight models were the cheap & good alternatives. Then in September/October that cost story got rewritten by the GPT-6 series and Claude's 5 series. Hy4 brings open models back on the cost/accuracy frontier, but its behavior is too thorough + slow. Another thing we're seeing is that post training open models is starting to see results. Particle-1 from last week is also on our frontier, which is post-trained on DeepSeek V4.1 and Fireworks Ember-1 from a few weeks ago was post-trained on Kimi K3. Take these numbers with a grain of salt: this exam is just for short horizon, low-context data analysis tasks, not full-fledged software projects."
+        },
+        {
+          "id": 50369069,
+          "author": "minimaxir",
+          "text": "Slightly worse than Kimi 3.1M Pro (which just released open weights today) but much cheaper even excluding the current 50% off promotion, and Tencent promises to make it even cheaper once it goes open-weight. Interesting price economics."
+        }
+      ],
+      "summary_ja": "・主な議論点\n米国企業の封闭性 versus 中国企業の开放性の対比、ゲーム開発への特化、モデルの性能とコストのバランス、开放モデルの進歩。\n\n・賛否両論\n开放性を評価する声がある一方、Hy4が「非常に徹底的だが遅い」という批判も。性能は優れるが、短時間・低コンテキストのタスクでは非効率な面も。\n\n・注目コメント\n「中国が科学と技術の驚異を embrace しているのに対し、一部の米国企業は『バイオ兵器』と繰り返す。米国世紀は大きく失敗した」という、地政学的対比を鋭く指摘したコメント。また、「开放モデルはツールとしての用途では優れているが、ミレニアム問題や極限状況には未到達」という、現実的な評価も目を引く。",
+      "editor_note": "Tencent Hy4 (Tencent Hy4)",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 25,
+      "id": 50339183,
+      "title_en": "Show HN: The DNA of DOOM – How code structure survives across 44 ports",
+      "title_ja": "Show HN: DOOMのDNA – 44つのポート間で生き続けるコード構造",
+      "url": "https://squid-protocol.github.io/gitgalaxy/museum-of-code/doom-dna/",
+      "hn_url": "https://news.ycombinator.com/item?id=50339183",
+      "score": 25,
+      "comment_count": 14,
+      "posted_at": "2026-11-02T16:23:37+00:00",
+      "comments": [
+        {
+          "id": 50373652,
+          "author": "barbariangrunge",
+          "text": "Interesting project. Out of curiosity, have you done more work studying the engine, eg, an architecture breakdown or programming pattern analysis?"
+        },
+        {
+          "id": 50373782,
+          "author": "to11mtm",
+          "text": "... I think this is a fun experiment. And, I like the article, once I got through the 'jolt'. (Not gonna call it slop, I can tell it a good amount of effort on your part to make it present the data well.) I love Doom, and I love the genealogy of it; dealing with doom modding and dehacked was probably my first foray into any sort of concept of 'programming' (after all, you could do some curious things with dehacked, as far as 'next frame' and how that sometimes could change things in curious ways) I think, to give some constructive feedback; 1. Consider taking a markdown/output from analysis and writing your own starting scaffold. 2. Make sure to review the output and tweak it. 3. Hand refine what the end result is. I'm not saying you shouldn't use AI to help with some of this, I'm just saying, that will help so much more. Cause this is really cool, but yeah it would be nice to have more polish around it."
+        },
+        {
+          "id": 50339390,
+          "author": "blinkbat",
+          "text": "[flagged]"
+        }
+      ],
+      "summary_ja": "・主な議論点\nコミュニティは、DOOMのエンジンが44つのポートで構造的に如何に維持されたかを可視化したこのプロジェクトに興味を持ちました。特に、DOOMのMOD開発やDEHACKEDとの関わりを通じた「编程」の歴史的意義や、エンジンの遺伝子（構造）を追うというコンセプトに賛同する声が複数上がりました。一方で、結果の提示方法や文章の質について懸念が表明されました。\n\n・賛否両論\n賛成派は、DOOMの系譜を研究する fun な実験と評価し、データの提示に努力が見られるとして肯定しました。しかし、否定派（または建設的批判派）は、AIを用いた生成結果の「粗さ」（jolt/slop）を指摘し、出力の校正や手動での refinement の必要性を強調しました。AIの支援を否定せずに、より洗練された完成度が求められるという意見が分かれました。\n\n・注目コメント\n特に注目されたコメントは、DOOM MODding と DEHACKED が自身の「编程」の出発点だったという個人的な体験を語ったもので、プロジェクトの文脈に深みを与えました。また、AI生成の出力に対して「polish（磨き）」を加えることで、さらに価値が高まるという建設的な提案も評価されました。",
+      "editor_note": "Show HN: DOOMのDNA – 44つのポート間で生き続けるコード構造 (Show HN: The DNA of DOOM – How code structure survives across 44 ports)",
+      "category": "プログラミング言語"
+    },
+    {
+      "rank": 26,
+      "id": 50366853,
+      "title_en": "A wave of plastic-free coffee pods and machines",
+      "title_ja": "プラスチックフリーの咖啡ポッドと機械の波",
+      "url": "https://www.cnn.com/2026/11/02/food/coffee-machine-plastic-free",
+      "hn_url": "https://news.ycombinator.com/item?id=50366853",
+      "score": 44,
+      "comment_count": 69,
+      "posted_at": "2026-11-04T15:20:49+00:00",
+      "comments": [
+        {
+          "id": 50367133,
+          "author": "troyvit",
+          "text": "Huh, cool. If you want to save a few bucks you can go with a stainless steel French press or a mason jar if you're into cold brews. You're symbolizing a different kind of status though. This summer was sunny and hot in Colorado, so every morning I'd make a jar of sun coffee. I'd leave it out through the day and overnight. The next morning I'd pull it in, filter it, refill it with grounds and water and take it outside again. It was cool enough to enjoy and really smooth."
+        },
+        {
+          "id": 50367703,
+          "author": "seemaze",
+          "text": "Hate to be the bearer of bad news, but even the $10k slayer espresso machine has a plastic water resevoir. Granted the brewing assembly is mostly plastic free. While I sympathize with the sentiment to eliminate plastic from the transport chain for anything ingestible, it's practically impossible in the modern world. Simple is usually best; glass or ceramic pour over, stainless press, or even the traditional South American coffee sock[0] [0] https://perfectdailygrind.com/2016/01/coffee-sock-old-school..."
+        },
+        {
+          "id": 50373742,
+          "author": "devindotcom",
+          "text": "I have a Technivorm Moccamaster KBG-V and they use good plastic for their parts but it's still plastic (except the thermal carafe etc). There's a new copycat version that's all glass and plastic (Simply Good I think?) but not sure how it actually performs. What I'm surprised at is that no one has made non-plastic drop-in replacement parts for the reservoir, basket, and funnel. The KBG-V is highly modular so it's strange to me that no one has gone this route. It shouldn't change anything significant in the brewing process or quality of the coffee."
+        },
+        {
+          "id": 50367190,
+          "author": "SomaticPirate",
+          "text": "Aeropress makes a glass version although I was never too concerned about the microplastic risk"
+        },
+        {
+          "id": 50367848,
+          "author": "silverFork",
+          "text": "Typical paper cups that are used to serve coffee produce massively more plastic particles and they are more toxic. One cup per year exceeds what whole year of coffee maker plastic releases.. plastic coffee maker: 7-20 particles paper cup : 25000 particles https://getplasticproof.com/blog/does-coffee-have-microplast... https://sifts.co/blogs/microplastics/microplastics-and-coffe... https://sprudge.com/hot-to-go-which-type-of-coffee-has-the-m..."
+        }
+      ],
+      "summary_ja": "主な議論点は、塑料（Plastic）を完全に排除したコーヒー機械の実現可能性と、その優先度に関するものです。コミュニティでは、実用的な代替手段の提案と、塑料問題への現実的なアプローチが盛んに議論されました。\n\n賛否両論は、塑料の完全排除が現実的かどうかに分かれました。賛成派は、 french press や コーヒーソックなど、安価で简单的な方法を推奨しました。しかし、反対派は、高価なエスプレッソマシンですら塑料部品を含むことや、現代の生活では塑料の完全排除が困難であると指摘しました。\n\n注目コメントは、紙コップが咖啡 maker よりもはるかに多くの微細塑料粒子を放出するというデータを示したものです。このコメントは、議論の焦点を「塑料の有無」から「塑料の総量とリスク」へとシフトさせ、咖啡 maker の塑料が比較的小さい問題である可能性を示唆しました。",
+      "editor_note": "プラスチックフリーの咖啡ポッドと機械の波 (A wave of plastic-free coffee pods and machines)",
+      "category": "その他"
+    },
+    {
+      "rank": 27,
+      "id": 50356791,
+      "title_en": "Is Curiosity Good for Us?",
+      "title_ja": "好奇心は私たちに良いのか？",
+      "url": "https://www.lrb.co.uk/the-paper/v48/n20/adam-phillips/is-curiosity-good-for-us",
+      "hn_url": "https://news.ycombinator.com/item?id=50356791",
+      "score": 17,
+      "comment_count": 8,
+      "posted_at": "2026-11-03T19:16:23+00:00",
+      "comments": [
+        {
+          "id": 50373829,
+          "author": "eighty8days",
+          "text": "I need to be curious in order to do my job correctly. If I don't, then I'm neglegent. Sure there's probably some instances where curiosity could lead someone to their demise, but for the vast majority of people, why wouldn't it be a good thing?"
+        },
+        {
+          "id": 50373079,
+          "author": "GolfPopper",
+          "text": "\"What would make someone, anyone, phobic of their curiosity? What might be endangering about curiosity?\" We could send a ship and a crew out to Big Ben and ask Rorsach."
+        },
+        {
+          "id": 50373186,
+          "author": "psychoslave",
+          "text": "That looks very interesting to go read it, but on the other hand who knows where this curiosity might lead to?!"
+        },
+        {
+          "id": 50356902,
+          "author": "iugtmkbdfil834",
+          "text": "Stop daydreaming! Get back to work! Unleashes the leash"
+        }
+      ],
+      "summary_ja": "・主な議論点\n communityでは、好奇心の本質とその社会における役割、特に危険性 versus 有用性のバランスが中心的な議論点了。多くのコメントが、職務や学習において好奇心が不可欠であると強調する一方で、その探求心が予期せぬリスクを伴う可能性也有指摘されています。\n\n・賛否両論\n賛成派は、好奇心が進歩や発見の原動力であり、無関心よりはるかに良いと見なす。一方、反対派は、好奇心が「daydreaming」（空想）や仕事の遅延、甚至に危険な状況を招く可能性があると警告する。この対立は、好奇心の「適度な範囲」に関する議論と重なります。\n\n・注目コメント\n「Stop daydreaming! Get back to work! Unleashes the leash」というコメントは、好奇心が現実の責任から逸脱する危険性を風刺的に表現しており、議論に深みを与えています。また、Rorschach（ロールシャッハ）に船を送るという比喩は、好奇心が未知の领域に足を踏み出すことの両面性を象徴しています。",
+      "editor_note": "好奇心は私たちに良いのか？ (Is Curiosity Good for Us?)",
+      "category": "その他"
+    },
+    {
+      "rank": 28,
+      "id": 50367125,
+      "title_en": "AMD expects to outsell Intel in Q4 for the first time in history",
+      "title_ja": "AMD、歴史上初めてQ4の売上英特尔を上回る見込み",
+      "url": "https://www.tomshardware.com/pc-components/cpus/amd-expects-to-outsell-intel-in-q4-for-the-first-time-in-history-usd17b-guidance-would-exceed-intels-projections",
+      "hn_url": "https://news.ycombinator.com/item?id=50367125",
+      "score": 475,
+      "comment_count": 174,
+      "posted_at": "2026-11-04T15:38:34+00:00",
+      "comments": [
+        {
+          "id": 50368310,
+          "author": "mickeyp",
+          "text": "That says more about Intel's shambolic efforts than it does about AMD's road to damascus moment. Honestly both of them have demonstrated that they have little interest in AI. Intel gave up on Optane right as (a much-improved successor) would've helped with MoE offsetting or even as a highly durable drive for KV caching. AMD have... turned out some decent gaming graphics cards and fine server CPUs but little else. People are out there solding SMDs on old Nvidia mining rig GPUs to use them for inference; their hardware is not depreciating at the normal rate you'd expect from GPUs. DGX spark is finally useful now that AI can write multi-machine inference tooling optimised to it. Where's AMD in all of this? Nowhere."
+        },
+        {
+          "id": 50367758,
+          "author": "lawabider",
+          "text": "I have avoided Intel products since the time some law enforcement forensic team used DCILeech to read the RAM of my server hosted at Hetzner and extracted a LUKS key from it. That was a lifelong lesson. There is no guarantee AMD won't come up with similar shenanigans like Intel's DCI soon and of course we don't know what PSP does behind the scenes, but at least for now, they are generally better for anti-forensics-tuned Linux kernels."
+        },
+        {
+          "id": 50368455,
+          "author": "dlcarrier",
+          "text": "AMD specifically calls out high sales of Instinct products as leading the sales growth. I wonder how their Epyc and Ryzen lines compare to Intels Xeon and Core lines. AMD's Instinct sales are practically nothing compared to competing Nvidia products, but no one† buys Intel Arc accelerators, so that may be the main reason AMD is beating intel. †Disclaimer: I own an Intel Arc GPU"
+        },
+        {
+          "id": 50368395,
+          "author": "dam_jackalopes",
+          "text": "Good. I was bitten by Intel's voltage issues in their 13th gen CPUs. Then again in the 14th gen replacement. They appear bloated, complacent and I hope AMD eats their lunch."
+        },
+        {
+          "id": 50368127,
+          "author": "davoneus",
+          "text": "Having strong competition between the CPU vendors is always a good thing. AMD has made mistakes, but it's hard to argue they don't deserve to outsell Intel for a change."
+        }
+      ],
+      "summary_ja": "主な議論点は、AMDがIntelを売上で上回る这件事について、AMD versus Intelの競争状態そのものの評価と、両社がAI分野でNvidiaに遅れを取っているという批判です。多くのコメントが、この売上順位の変化はIntelの不振が主因であり、AMDの大きな勝利とは言えない、という立場です。AMDはゲーミングGPUやサーバCPUで実績があるが、AIやデータセンターの中心であるGPU-accelerated computing分野ではNvidiaに遠く及ばず、Intelも同様に遅れを取っている、と指摘されます。\n\n賛否両論は、Intel製品の信頼性やセキュリティ面での問題（DCIリーク、電圧問題）によりIntelを避けるユーザーがいる一方で、AMDも将来的に同様の問題を抱える可能性があるという懸念が示されています。また、AMDの売上増はInstinct製品によるものだが、これはNvidiaには及ばず、IntelのArc GPUがほぼ売れていないための相対的な勝利にすぎないという意见があります。\n\n注目コメントとして、Intelの「bloated, complacent（肥大化した、自満的）」な姿勢を批判し、AMDがIntelの「昼寝」を食うことを期待するものや、CPUベンダー間の競争は一般に良いことだとする建設的な評価があります。また、NvidiaのDGX Sparkが有用になりつつある中で、AMDがその場にいないことを指摘するなど、業界全体の動向に関する洞察丰富的なコメントも見られます。",
+      "editor_note": "AMD、歴史上初めてQ4の売上英特尔を上回る見込み (AMD expects to outsell Intel in Q4 for the first time in history)",
+      "category": "スタートアップ/ビジネス"
+    },
+    {
+      "rank": 29,
+      "id": 50369754,
+      "title_en": "Have I befriended a murderer?",
+      "title_ja": "私は殺人犯と友達になったのか？",
+      "url": "https://longreads.com/2026/11/03/murder-friendship-doubt/",
+      "hn_url": "https://news.ycombinator.com/item?id=50369754",
+      "score": 112,
+      "comment_count": 60,
+      "posted_at": "2026-11-04T18:40:54+00:00",
+      "comments": [
+        {
+          "id": 50370829,
+          "author": "saidnooneever",
+          "text": "regardless of what happened truly, id say that someone isn't define by any specific thing that happened in their lives. however people do like to try and make it seem that way, because emotion and subsequent judgement cloud perception and prevent looking past things for a lot of people who cant detach themselves from their own emotions and or judgement. people change all the time, and sitting in a small box without freedoms will surely cause deep introspection even in the most outward of people. you can befriend anyone if theg are friendly to you, regardless of what happened in their lives historically. ofcourse be careful and learn lessons, but no need to be judgemental on things that never involved you in the first place. for most people you can find some slice im their life and mark them as bad (maybe not wife murdering bad, but bad nonetheless). if you look critically at how you view people you will find that the people you do accept in your life simply dont have slices that you know of that trigger your emotions and cause judgement. this is why i like some religions say judgement is only reserved for god. other then that it just causes more negativity from something that was already negative. spreading it more and more. (yes i know this last part will likely be hated on by the atheists, thats ok, judge away ;), still love ya!)"
+        },
+        {
+          "id": 50370811,
+          "author": "BigTTYGothGF",
+          "text": "I'm reminded of Edgar Smith and William Buckley ( https://en.wikipedia.org/wiki/Edgar_Smith_(murderer) ), let's hope that however this particular story ends no one else gets killed."
+        },
+        {
+          "id": 50371955,
+          "author": "upupupandaway",
+          "text": "My father (then a local public person) had a driver who used to take us to school in his absence. Nicest guy ever, would joke around, take us to other places when we didn't wanna go to class, absolutely the best. One day I was looking for the fire extinguisher in the car (then required in my country) and found a Glock G19 underneath the driver's seat. I asked \"what the hell?\" and he said \"this is for me to use in case somebody talks shit about your father\". Upon some investigation, it turns out that the nicest guy in the world was actually living in my city because he was on the run for a murder he committed in another city many years back. The nicest guy in the world had an altercation with another patron at a bar, while drunk, broke a beer bootle on a table, stuck into the stomach of the other guy, and twisted left and right until internal organs started showing. I did befriend a murderer once."
+        },
+        {
+          "id": 50371984,
+          "author": "seizethecheese",
+          "text": "If you're interested in this kind of thing, I just finished reading a book where the author improbably was commissioned to write a book about a serial killer but the killer was a friend of theirs! It's a decent read, the author went on to being a bestselling true crime writer. https://www.goodreads.com/en/book/show/15654.The_Stranger_Be..."
+        },
+        {
+          "id": 50371283,
+          "author": "kevinwang",
+          "text": "Similar in theme to the Nathan Fielder documentary about Elizabeth Holmes \"You Can See Everything\", which is also about a criminal professing their innocence, the journalist/documentarian's relationship with them, and attempting to find out if they lie. Both include a prison visit as well!"
+        }
+      ],
+      "summary_ja": "このコメントスレッドの議論要点は以下の通りです。\n\n**主な議論点**\nコミュニティの核心は、「人間は過去の行為によって定義されるのか」という問いです。コメントの主張は、人間は変化し続ける存在であり、過去の過失や犯罪によって wholly では測れないというものです。感情や判断にとらわれず、個人の現在の姿に焦点を当てるべきだという立場が強調されています。\n\n**賛否両論**\n特に明確な賛否両論は見られませんが、最後のコメントで「無神論者に嫌われるかもしれない」と言及していることから、神の権限のみが審判に値するという宗教的視点 versus 人間による審判の問題性という、世界観の相間がうかがえます。\n\n**注目コメント**\n「私も一度、殺人者と友達になった」という個人的な体験談が特に注目されます。親切で愛娇のある運転手が、実は他都市で殺人を犯した逃亡犯だったというそのエピソードは、人間の多面性と「好人」「悪人」という単純なラベルの限界を象徴する、非常に洞察に富んだコメントです。",
+      "editor_note": "私は殺人犯と友達になったのか？ (Have I befriended a murderer?)",
+      "category": "その他"
+    },
+    {
+      "rank": 30,
+      "id": 50367653,
+      "title_en": "'It's just vape, nail, charity shops': Can anything save UK high street?",
+      "title_ja": "「単なる vape、ネイル、チャリティショップ」: イギリスの高街を救うものは何ですか？",
+      "url": "https://www.theguardian.com/business/2026/nov/04/what-can-save-the-british-high-street-rotherham",
+      "hn_url": "https://news.ycombinator.com/item?id=50367653",
+      "score": 65,
+      "comment_count": 147,
+      "posted_at": "2026-11-04T16:11:33+00:00",
+      "comments": [
+        {
+          "id": 50373862,
+          "author": "guystone",
+          "text": "It comes down to money and the cost of living. Landlords are extracting rent, no room for entrepreneurship. A race to the bottom, but I wouldn’t blame Amazon. Large multinational chains were hollowing out high streets and making them less pleasant before online shopping. As another comment said, councils and government should treat high streets more like public commons, prioritising independent businesses and making places distinctive. What frustrates me is that even prosperous areas with new developments rarely make space for small businesses. Instead, we get “private equity” chain. Ugh, one I saw recently was Bristol University’s new campus by Temple Meads. The wall between the campus and station could have been lined with small, affordable units for independent and student-run businesses. Would love to browse a few interesting shops or grab a decent sandwich before catching a late train. 23m for a new entrance but where are the opportunities. (This is based off the media announcements, not walked through there yet)"
+        },
+        {
+          "id": 50374086,
+          "author": "throwaway-blaze",
+          "text": "Mentions the druggies in passing twice (once in a quote) and an astronomical crime level (160 per 1000 people? So I have a 16% chance of being a victim??) but zero mention of either at the end of the article in terms of fixing the issue. Zero info on who the government hundreds of millions is going towards to help the problem (let me guess: a bunch of nonprofits who won't solve the problem)."
+        },
+        {
+          "id": 50367958,
+          "author": "neom",
+          "text": "Last month I visited the Scottish Borders and generally found this to be true, especially in Hawick, Galashiels, Kelso. I wasn't shocked however as I find the situation in Canada to be very similar (in the UK switch cannabis dispensaries for chippies). 25 years ago when a Wal-Mart came to the small town I grew up in, only took a couple of years to gut the high street, certainly Amazon threw fuel on that fire."
+        },
+        {
+          "id": 50368274,
+          "author": "probably_wrong",
+          "text": "The end of the article raises a point that makes me wonder: that perhaps cities have put the cart before the horse and that people didn't go to the city center but, rather, that the city center was the place where people hung out. And with third-places in life support people have no reason to go to the city center anymore."
+        },
+        {
+          "id": 50367961,
+          "author": "psadri",
+          "text": "I always wondered about the nail / foot spa stores. What is it about these businesses that makes them such good defaults when nothing else seems to be able to survive?"
+        }
+      ],
+      "summary_ja": "**主な議論点**\nコメント community では、英国の高街（high street）衰退の根本原因として、以下の点が広く議論されています。\n1.  **経済的要因**: 地主による高額な賃料抽取が独立店舗の経営を圧迫し、起業機会を奪っていること。大企業やAmazonなどの影響が指摘されています。\n2.  **行政・まちづくりの失敗**: 地方自治体や国が、高街を「公共の commons」として扱うのではなく、大企業や私人の開発優先has been pointed out. 特に、新規開発で小規模事業者用の space が確保されていないことが繰り返し批判されています。\n3.  **社会の変化**: 「サードプレイス」の衰退により、人々が市中心部に集まる理由が失われていること。かつては「人々が集まる場所」だった市中心部が、現在では「人々が行く場所」となっている可能性が指摘されています。\n\n**賛否両論**\n*   **原因の責任の所在**: 一部はAmazonなどのOnline Shoppingや大企業の進出を主要原因とし、他方では、それらが登場する前から高街の衰退が進んでいたと主張する意見があります。また、政府の支援策が具体的でなく、nonprofit に依存している点が批判されています。\n*   **具体的な解決策**: 高街を「公共の space」として位置づけ、独立店舗を優先するなどの政策的アプローチを求める声がありますが、その実効性や実行可能性についての議論は分かれています。\n\n**注目コメント**\n「ネイル salon や足スパが、何故にnothing else seems to be able to survive のような default business になるのか、 Always wondered about...」というコメントが特に注目されます。これは、小売業が一般的な商品やサービスでは競争に勝てない现状において、such low-barrier, service-oriented businesses が唯一の生存手段成为っているという、現在の高街の現実を鋭くついた洞察です。このコメントは、経済的圧力の下で、高街の店舗が「兴趣」から「必要性」へと変化しているというより深層な構造問題を浮き彫りにしています。",
+      "editor_note": "「単なる vape、ネイル、チャリティショップ」: イギリスの高街を救うものは何ですか？ ('It's just vape, nail, charity shops': Can anything save UK high street?)",
+      "category": "その他"
+    }
+  ]
+}
