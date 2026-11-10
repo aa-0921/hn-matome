@@ -1,0 +1,1151 @@
+{
+  "date": "2026-11-10T00:00:00+09:00",
+  "slot": "23",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 50436640,
+      "title_en": "Amazon saves millions by replacing Sonnet 4.6 with Strands Decider",
+      "title_ja": "Amazon、Sonnet 4.6からStrands Deciderに置き換えて数百万円節約",
+      "url": "https://strandsagents.com/blog/amazon-saves-millions-replacing-sonnet-with-strands-decider/",
+      "hn_url": "https://news.ycombinator.com/item?id=50436640",
+      "score": 300,
+      "comment_count": 102,
+      "posted_at": "2026-11-10T06:01:08+00:00",
+      "comments": [
+        {
+          "id": 50436847,
+          "author": "armcat",
+          "text": "About six years ago we built a ticket classification/routing model and pipeline [1]. The initial version was trained using SVMs, it took a couple of minutes to train, and the ticket classification was just a few milliseconds. It's so fascinating to watch how the field moved over to LLMs, and then back to faster/cheaper classifiers again. [1] \"Linnaeus: A highly reusable and adaptable ML based log classification pipeline\", https://arxiv.org/abs/2103.06927 NOTE: the work was actually accepted at the International Conference on Software Engineering (ICSE) in 2021."
+        },
+        {
+          "id": 50436881,
+          "author": "Kaedon",
+          "text": "At ~$21,700 saved per million tickets, saving millions annually would suggest at least 92 million tickets a year to reach $2 million saved. Is that about right? I initially thought of tickets as just customer support, or internal JIRAs, but the article mentions alarms, security findings, and capacity increase requests, so that makes the scale feel more plausible. Still surprising so many tickets go through the system."
+        },
+        {
+          "id": 50437163,
+          "author": "nlpnerd",
+          "text": "Founder of Seldon AI (www.seldon-ai.com) here. We are working on dev tools to help developers with this kind of refactoring and continual production work. Basically there is a whole host of tarpit usage of LLMs in application backends today. This is simply another case of LLMs enabling people to build what they cannot productionize or maintain. Today developers without any AI/ML skillset can prototype a fancy new feature with LLMs, what used to require collecting and curating data to train a pipeline of ML models then serving them in production. The problem comes when it's time to take the new feature into production. That $20 cost with prototype/beta workload is now $30k per month in LLM costs, and those hallucinations that never happened on their 200 test samples is happening 600 times per day. They are then stuck, because they lack the knowledge and budget to build and run the production ML pipeline properly, the infra stack necessary to handle production workload. Management also doesn't understand why they have to invest in rebuilding something that \"seems to work\" with \"outdated methods\". These system one or decision models are a step up from LLMs when it comes to this usage. Problem is that they are still difficult to work with (limited in expression power) for many application logic. Despite the initial popularity, I hear about a lot of frictions refactoring LLM based backend with them, and multiple cases of production rollbacks to LLMs already. I think system one models is a sensible paradigm, and we are on the precipice of something great, but there is a lot more work needed above the model layer to make this work."
+        },
+        {
+          "id": 50437514,
+          "author": "Gasp0de",
+          "text": "This article is so confusing. For example, they say they tried the Strands Decider model and dismissed it for Gemma, then they continue to call the model they used Strands Decider? Did I miss something?"
+        },
+        {
+          "id": 50437307,
+          "author": "psnehanshu",
+          "text": "Ok, but why did they chose Sonnet in the first place? Couldn't they have chosen Haiku or GPT Luna or maybe even some small cheap Chinese model?"
+        }
+      ],
+      "summary_ja": "このコメントスレッドの議論要点は以下の通りである。\n\n**主な議論点**\nMLからLLMへの移行、そして効率的な分類モデルへの回帰という業界の潮流が注目された。Amazonが高コストなLLM（Sonnet）を、より安価で高速な専用モデル（Strands Decider）に置き換えた事例が、大規模なticket処理におけるLLMの「過剰な通用性」とコスト問題を浮き彫りにした。\n\n**賛否両論**\n・賛成派：特定のタスクには専用モデルが適しているという実用的なアプローチを評価する意見が多かった。\n・否定派：記事の記述に混乱（Strands DeciderとGemmaの関係）が生じ、当初から安価なモデルを選んでいたのでは？という疑問が呈された。また、Amazonがなぜ高価なSonnetを起初に選んだのかという根本的な疑問が挙げられた。\n\n**注目コメント**\nSeldon AIの経営者のコメントが特に注目された。LLMはプロトタイピングには便利だが、本番環境ではコストと幻覚（ハルシネーション）の問題で維持が困難であり、開発者が本番MLパイプラインを構築する知識・予算・インフラを欠くという「LLMの過剰な使用（tarpit usage）」を指摘した。これは、本 discussion の核心を突く洞察である。",
+      "editor_note": "Amazonが自社LLMのCost Optimizationを大規模に実施している。Strands DeciderはSonnet 4.6より安価で高性能なため、大企業のAI導入_costs削減の参考になる。日本でも(cloud利用企業は同様の検討が可能だ。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 2,
+      "id": 50429068,
+      "title_en": "Claude Fable 5.2 and Mythos 5.2",
+      "title_ja": "Claude Fable 5.2とMythos 5.2",
+      "url": "https://www.anthropic.com/claude-fable-and-mythos-5-2",
+      "hn_url": "https://news.ycombinator.com/item?id=50429068",
+      "score": 616,
+      "comment_count": 811,
+      "posted_at": "2026-11-09T18:01:10+00:00",
+      "comments": [
+        {
+          "id": 50430766,
+          "author": "postalcoder",
+          "text": "I’ve had a chance to use fable 5.2. Some observations: - Anthropic is finally well balanced across models. Meaning: Opus 5.5 is so good that I do not feel Fable FOMO as I did when it was Fable 5/5.1 vs Opus 4.8/5. And Sonnet 5.5 sometimes makes me forget about Opus. - Fable is good, but you really have to push the ambition of your prompt in order to see proper separation from Opus 5.5. I personally have a hard time telling the difference between Fable 5.2 and Opus 5.5 for ordinary coding tasks. - It’s way faster and more reliable: one of the worst things about fable 5.1 was how slow it was an, on top of that, how frequently it would suffer from max output token overflows. I got none of these issues with 5.2. - Fable is exceptional at drawing. It’s ability to render an image with JavaScript actually has me questioning the value of dedicated image models. I prefer the images I’ve gotten fable/opus to make for me over those from gpt-image, it’s wild to think we’re at this point."
+        },
+        {
+          "id": 50430829,
+          "author": "breakwaterlabs",
+          "text": "- Why are they stacking Fable xHigh against Carbon Med? - How did they produce such a bizarre effort-intel curve for Carbon that goes against every available benchmark? - Why did they leave Carbon-- positioned primarily as a cyber model-- off of the single cyber benchmark comparison? - Why do they switch to comparing against Argon (rather than carbon) for robodojo?"
+        },
+        {
+          "id": 50431037,
+          "author": "advaith08",
+          "text": "We've been early testing Fable 5.2, and have been surprised by its coding ability. It was able to work with an esoteric 600k line fortran codebase to speed up some computational material science work for us by 36 times (!). Given that this could be done in 2 days, we've decided to open-source the results https://github.com/discovered-materials/dm_qe"
+        },
+        {
+          "id": 50430379,
+          "author": "yewenjie",
+          "text": "> Our first formalization of Fermat’s Last Theorem, performed by an unreleased research version of Claude, took 11 days. It relied on a purpose-built harness along with guidance from a human researcher. By contrast, a team of 1,000 Fable 5.2 agents fully formalized the theorem in just 30 hours, with minimal human intervention. Fable 5.2 started from minimal prompts, built its own ways to coordinate, and used no mathematical references, only a list of intermediate theorem statements to score progress. It needed one-third of the action tokens as our first formalization and produced a proof seven times shorter. As can be seen in the figure below, Opus 5.5 (with the same 1,000-agent setup) completed only 26% of the formalization in 18 hours, and barely made any more progress after 30. Most people don't really have intuitions on what it means to push the frontier now (because AI has surpassed everything they are good at, for example, coding). We are truly inside the singularity (using Kurzweil's definition, slightly paraphrased - the time when technology progresses so fast no one can keep track with it)."
+        },
+        {
+          "id": 50435571,
+          "author": "prtmnth",
+          "text": "Why Fable 5.2 and not 5.5? My hypothesis - OpenAI and Anthropic are locked in battle. Whoever takes a step, the other one mirrors. Based on this hypothesis, I think we can expect to see a new Astra model soon given the new Fable release. And it could be that Anthropic released Fable 5.2 and kept 5.5 in reserve, in case the new Astra model performs better than 5.2"
+        }
+      ],
+      "summary_ja": "**主な議論点**\nコミュニティの議論の中心は、Fable 5.2の性能評価と、Anthropicが提示したベンチマーク比較の方法論に対する懸念だった。特に、Opus 5.5との差異、Carbonモデルとの比較の妥当性、および競合戦略の解釈が main topics となった。\n\n**賛否両論**\nFable 5.2の速度と信頼性の向上、および描画能力の高さには広く賛成の声が上がった。しかし、Opus 5.5との一般的なタスクにおける差が小さいこと、特に「Carbon」との比較が奇妙で biased であると指摘する声もあった。また、Anthropicが「Carbon」ではなく「Argon」を robodojo の比較に使ったことや、サイバーベンチマークからCarbonを除外したことは、意図的な選択ではないかという批判を呼んだ。\n\n**注目コメント**\n特に注目されたコメントは、Fermatの最終定理を1,000のFable 5.2エイジェントで30時間で形式化したという報告だった。これはOpus 5.5を大きく上回り、AIの協調能力の可能性を示す象徴的な結果とされた。さらに、AnthropicとOpenAIが互いのモデルを模倣する「ミラーリング」の関係についての仮説は、業界の競争構造に対するcommunityの関心の高さを反映していた。",
+      "editor_note": "Claude Fable 5.2とMythos 5.2が同時リリースされた。Anthropicはモデルの多様化を進めており、日本企業も用途に応じて選択できるようになる。开放源码の動向も注目だ。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 3,
+      "id": 50437790,
+      "title_en": "Queens Public library under ransomware attack e-borrowing suspended",
+      "title_ja": "ランサムウェア攻撃を受けたクイーンズ公共図書館、電子 borrowing 暂停",
+      "url": "https://connect.queenslibrary.org/",
+      "hn_url": "https://news.ycombinator.com/item?id=50437790",
+      "score": 27,
+      "comment_count": 5,
+      "posted_at": "2026-11-10T09:04:39+00:00",
+      "comments": [
+        {
+          "id": 50438130,
+          "author": "RobotToaster",
+          "text": "That seems a pretty terrible target for ransomware, it's not like public libraries have huge amounts of money."
+        },
+        {
+          "id": 50437791,
+          "author": "rustyhancock",
+          "text": "Unfortunately, QPL has suffered a ransomware incident and currently much of the online access is unavailable"
+        },
+        {
+          "id": 50438046,
+          "author": "lynx97",
+          "text": "I wish the headlines around such things were more honest and would just say the truth: \"$company is currently offline because we never really invested in security and thought we could just wing it\""
+        }
+      ],
+      "summary_ja": "主な議論点として、公共図書館がランサムウェア攻撃の標的にされたことの不条理と、公共機関におけるセキュリティ投資の不十分さが挙げられます。コミュニティでは、公共機関は予算が限られる中でデジタルサービスを提供する必要がありながら、十分なセキュリティ対策が取られていないという構造的問題が指摘されています。\n\n賛否両論の点では、公共機関のセキュリティ投資の必要性 versus 予算制約のジレンマが議論されています。一部では「公共機関は市民の税金で運営されている以上、セキュリティを最優先すべきだ」という批判的な意見がありますが、他方で「現実的な予算制約を無視した理想論は無理がある」という現実的な見方もあります。\n\n注目コメントとして、最後のコメントが特に鋭いです。「報道は事実を正直に伝え、企業がセキュリティに投資していなかったという実態を明かすべきだ」というもので、単なる批判ではなく、透明性の重要性を強調する洞察があります。",
+      "editor_note": "Queens Public Libraryがランサムウェア被害でe borrowing停止。公共機関のサイバーセキュリティ強化の重要性が浮き彫りになった。日本でも同様のリスクが存在する。",
+      "category": "セキュリティ"
+    },
+    {
+      "rank": 4,
+      "id": 50431058,
+      "title_en": "USPS now offers official ZIP Code boundary polygons",
+      "title_ja": "USPS、公式ZIP Code境界ポリゴンの提供を開始",
+      "url": "https://postalpro.usps.com/zcb",
+      "hn_url": "https://news.ycombinator.com/item?id=50431058",
+      "score": 623,
+      "comment_count": 318,
+      "posted_at": "2026-11-09T19:58:59+00:00",
+      "comments": [
+        {
+          "id": 50432624,
+          "author": "SwellJoe",
+          "text": "Dang, the prices are crazy. $10k for the lowest tier? I expect federal data to be free. Most federal data related to stuff like regulation (e.g. FCC spectrum use coverage maps), maps for federally-managed lands, etc. is free. And, it should be free. It's a core part of accountability and transparency. Historically there was a copying cost (having a human print physical copies on paper or CD/DVD/tape), which is understandable, but now that the incremental cost of each new copy approaches $0, that's what it should cost users of the data."
+        },
+        {
+          "id": 50431583,
+          "author": "showerst",
+          "text": "I thought these were going to be free and got so excited. FWIW if you're willing to deal with some 'fuzziness' and the occasional missing zip code that's commercial only, the ZCTA shapefiles are free and are close enough for many purposes: https://www.census.gov/programs-surveys/geography/guidance/g..."
+        },
+        {
+          "id": 50432135,
+          "author": "xp84",
+          "text": "This is interesting. For a long time it was pointed out that ZIP codes, unlike say, city or state boundaries, were not properly representable as polygons, since they don't divide up acreage into zones, but rather label postal delivery routes. Suppose I build a new neighborhood way out in the middle of nowhere. The \"polygon\" concept suggests that we could look and see what polygon I'm in, and that will determine what post office delivers my mail. But in reality, if there was no route to that area already, they could decide to make it part of any one of the surrounding routes. I suppose though, as long as you let the polygons map has uncontained areas, where no routes currently exist, it's a doable task to draw polygons around the limits of every route network, as long as you don't mind that they may have lots of weird ragged edges."
+        },
+        {
+          "id": 50431741,
+          "author": "johnnyo",
+          "text": "If this is govt-owned data, shouldn’t it be available with a FOIA request or similar? Can someone with expertise in govt data rights explain? Do any other US govt agencies sell data to the private sector?"
+        },
+        {
+          "id": 50434621,
+          "author": "wills_forward",
+          "text": "Great chance for me to hawk a silly vanity project: https://www.rickwills.com/lab/zip Just a visualization of zip codes. Start typing a number and it highlights the zip codes on a map. Mildly interesting at best, maybe someone will like it."
+        }
+      ],
+      "summary_ja": "このコメントスレッドでは、USPSがZIPコードの境界ポリゴンデータを有料化したことで、連邦データのあり方やZIPコードの地理的表現の難しさについて活発な議論が交わされた。\n\n主な議論点は、政府が保有する基本的な Public データが有料化されるべきか否かである。多くのコメントが、連邦データは透明性と監督の観点から無料であるべきだと主張し、歴史的な複写コストが Joy に至るまでにゼロになった現在、値段を設定する理由が缺乏と指摘された。\n\n賛否両論の中心は、この有料データの価値と代替手段の存在である。一方で、このデータは必須で唯一のものだとする意見がある一方、国勢調査局が無料提供する ZCTA（Zip Code Tabulation Area）の形状ファイルで事足りる许多の用途が存在し、かえって有料化は不要だという反論もあった。\n\n注目コメントとして、ZIPコードが実際には郵便配達ルートのラベルであり、面積を完全に分割する「区域」としては本質的に表現できないという洞察が示された。また、このデータが政府所有であれば FOIA で请求できるかという質問や、自作の ZIPコードビジュアライゼーションの紹介など、多角的な関心がうかがえる。",
+      "editor_note": "USPSが公式ZIP Code境界ポリゴンを提供開始。地理情報分析に活用できるようになり、日本でも郵便番号データの开放が期待される。",
+      "category": "Web開発"
+    },
+    {
+      "rank": 5,
+      "id": 50436410,
+      "title_en": "Your TV can see through walls",
+      "title_ja": "あなたのテレビは壁の向こうを見ている",
+      "url": "https://maurycyz.com/projects/fading/",
+      "hn_url": "https://news.ycombinator.com/item?id=50436410",
+      "score": 124,
+      "comment_count": 46,
+      "posted_at": "2026-11-10T05:24:45+00:00",
+      "comments": [
+        {
+          "id": 50437158,
+          "author": "numlock86",
+          "text": "Wait for people to learn about that you can listen in virtually anywhere through fiber-optic cables, as sound waves are enough to redirect the light in the cable to a measurable degree by \"bending\" the cable itself. Special devices to filter these variances out and transform them back to audio signals are a thing. It's only per line though, as any repeating device will just output a new cleaned up signal again. Oh well, there have always been ways to snoop on someone like that. Back in the day it was CRTs emitting measurable waves through the neighborhood, with some papers even going as far as restoring the displayed image through a wall. Nowadays it's fiber and WiFi, and those seem to be much easier to work with even. Plus everyone carries a device that is tracked by their mobile provider's cell network. shrug"
+        },
+        {
+          "id": 50437776,
+          "author": "armcat",
+          "text": "Several years back we actually made use of the principle mentioned in this post, to more systematically count traffic on the roads [1]. In our case we used LTE/4G radio, and we could even estimate the direction of travel, as well as the type of traffic (pedestrian, small vehicles, large vehicles). It was more accurate than Google Maps because it was independent of the moving phone, i.e. it was \"sensing the obstacles in the environment\". [1] \"Traffic Flow Estimation using LTE Radio Frequency Counters and Machine Learning\", https://arxiv.org/abs/2101.09143"
+        },
+        {
+          "id": 50437086,
+          "author": "swerner",
+          "text": "As anyone observed who had a TV with just basic analog terrestrial antennas, before cable and satellite dishes - it does make a difference to the signal, when and where you stand and countless pieces of physical comedy in TV shows incorporated that."
+        },
+        {
+          "id": 50437203,
+          "author": "1e1a",
+          "text": "See these for a very low cost (<$10) method for observing WiFi and some LTE spectra: https://news.ycombinator.com/item?id=49922674 https://espargos.net/espsdr/"
+        },
+        {
+          "id": 50437014,
+          "author": "fzeindl",
+          "text": "Amazing book about similar topics: “Silence on the wire” by Michal Zalewski https://www.amazon.de/Silence-Wire-Passive-Reconnaissance-In..."
+        }
+      ],
+      "summary_ja": "主な議論点は、テレビの壁穿透技術が単なる実験的な curiosity ではなく、現在の監視技術の一部にすぎないという点です。コミュニティでは、この技術が「時代遅れ」のものであると simultaneously、より現代的で強力な監視手段が存在することを指摘しました。\n\n賛否両論は、この技術の応用範囲にあります。一部は、この原理が交通流量の推定など、実用的・社会的なbenefit を生む可能性があると主張しました。他方、これは監視技術の悪用を助長するリスクがあると懸念する意見もあります。\n\n注目コメントは、LTE/4G電波を用いた交通流量推定の研究を紹介したものです。これは、無線技術が環境の「障害物」を感知することで、モバイル端末の位置に依存しない高精度な交通状況の把握が可能であることを示しており、監視技術が単なるスパイから、都市計画などのポジティブな用途にも応用されうるという洞察を提供しました。",
+      "editor_note": "TVが壁の向こうを見られるという調査結果。IoT機器のプライバシー問題を改めて浮き彫りにした。日本でも監視カメラの増加で懸念が高まっている。",
+      "category": "その他"
+    },
+    {
+      "rank": 6,
+      "id": 50392733,
+      "title_en": "How hard is it to check for whitespace?",
+      "title_ja": "空白文字のチェックがどれほど難しいか？",
+      "url": "https://serce.me/posts/2026-10-30-how-hard-is-it-to-check-for-whitespace",
+      "hn_url": "https://news.ycombinator.com/item?id=50392733",
+      "score": 29,
+      "comment_count": 2,
+      "posted_at": "2026-11-06T14:31:22+00:00",
+      "comments": [
+        {
+          "id": 50437912,
+          "author": "adornKey",
+          "text": "With font.color = white even an ordinary \"W\" could count as whitespace... Something to remember if you see whitespace with an extraordinary width out there in the wild..."
+        },
+        {
+          "id": 50437901,
+          "author": "austin-cheney",
+          "text": "The \\s character class in JavaScript regular expressions includes 25 characters. I don’t know if that perfectly matches the Unicode list of 25 characters, but it does make identifying white space simplistic. White space characters are challenging to differentiate in human readable text, but JavaScript makes that perfectly clear to humans by splitting a string on every character, which is helpful for debugging."
+        }
+      ],
+      "summary_ja": "・主な議論点\n空白文字の定義の複雑さ、特にUnicodeの標準と実際の実装の違いが中心的な議論成了。特に、JavaScriptの正規表現 `\\s` がカバーする文字範囲と、Unicodeが定義する空白文字のリストの整合性について議論された。開発者によって「空白」という概念の解釈が異なり、実務上の実装の難しさが指摘された。\n\n・賛否両論\n「`\\s` を使うことで簡潔に空白を判定できる」という簡便性を評価する意見がある一方で、「Unicodeの全空白文字を網羅していない可能性があり、バグの元になる」という懸念の声もあった。実用上の利便性と、理论上の完全性のどちらを優先するかで意見が分かれた。\n\n・注目コメント\n「`\\s` が25文字をカバーする」というコメントは、具体的な数字を示すことで議論を明確にした。また、人間が読みやすいテキスト中で空白を区別する難しさに言及し、JavaScriptが文字ごとに分割して表示することでデバックを容易にする点を評価するコメントは、実務的な観点から洞察を与えていた。",
+      "editor_note": "空白文字チェックの難しさを解説した記事。Unicodeの複雑さにより、バグの温床になりやすい。日本語も含む国際化対応で特に重要になる。",
+      "category": "プログラミング言語"
+    },
+    {
+      "rank": 7,
+      "id": 50434310,
+      "title_en": "Locating the source of a mysterious beep",
+      "title_ja": "不思議なビープ音の源を特定する",
+      "url": "https://simonwillison.net/2026/Nov/9/mysterious-beeps/",
+      "hn_url": "https://news.ycombinator.com/item?id=50434310",
+      "score": 204,
+      "comment_count": 91,
+      "posted_at": "2026-11-10T00:10:46+00:00",
+      "comments": [
+        {
+          "id": 50437990,
+          "author": "chimpontherun",
+          "text": "Around '05 or so, the house we were staying in started beeping. Smoke alarm sounds, as usual. For almost a day we couldn't find the source. Contacted the owners -- they didn't know it either. They bought the house few years prior, so not much of a help. Standing in the hallways listening at different angles, as the article says, didn't help. No Fable in '05 either. So I had to improvise. Got a ~1 meter stick and two headphones (every headphone is a microphone, even if it sucks as a microphone). Plugged them into the stereo mic port, and started recording in Audacity. The phase shift between L and R pointed directly to the source. Took about 4 or 5 beeps to get the sucker. Turns out, it was hiding above the ceiling tiles in the garage. My wife still tells this story to all her friends as one of my biggest life achievements. Everything I shipped, the companies I founded -- pales in comparison to finding a dead smoke alarm"
+        },
+        {
+          "id": 50436044,
+          "author": "simonw",
+          "text": "I didn't mention this in the article, but this isn't the first time my family has been driven almost spare by a mysterious, hard-to-track beep. Our dog goes outside and hides in the lavender bush if a smoke alarm starts making a \"I need a battery\" noise. So I went into this project with the attitude that I would like to solve this class of problem forever ."
+        },
+        {
+          "id": 50435186,
+          "author": "tristanj",
+          "text": "You can also solve this in O(logn) using a physical binary search: 1) Move half the boxes to another room. 2) Listen for a beep and determine which room the beep comes from. 3) Take the boxes in that room and split them in half again. 4) Repeat until one box is left."
+        },
+        {
+          "id": 50437693,
+          "author": "Confiks",
+          "text": "> I think the most interesting part of this project is that I demonstrated it’s possible to give Claude Code ears Of course it can analyze audio. I made it detect Marijn Frank saying a high pitched \"Hallo\" in a much better way that I could have done myself (subtitle matching), namely by frequency analysis, in the process learning how that works with librosa: https://marijnfrankzegthallo.nl"
+        },
+        {
+          "id": 50438217,
+          "author": "thrawn0r",
+          "text": "Does this work with low rumbling sounds as well? We have this annoying noise we hear from our bedroom, sounds like a dishwasher, but layouts of apartments around dont have their kitchens closeby."
+        }
+      ],
+      "summary_ja": "このコメントスレッドでは、見つけるのが困難なビープ音の源特定に関する議論が展開されています。\n\n主な議論点は、効率的な音源特定の方法です。コメント投稿者らは、段階的に範囲を絞り込む「二分探索」の物理的応用や、左右の耳机で位相差を測る独自の方法など、実践的な解決策を提案しています。\n\n賛否両論は、特に「二分探索」の有効性についてです。一部では、この論理的なアプローチを支持する意見がありますが、他方では、現実的な制約（例：物の配置を変更できないなど）により実行が困難であるという現実論も見られます。\n\n注目コメントは、AI（Claude Code）に音声解析機能を持たせた点です。これは、人間の感覚より優れた周波数分析によって、音声を正確に検出する可能性を示しており、この類の問題の解決に新的アプローチをもたらす可能性があるとして注目されています。",
+      "editor_note": "不思議なビープ音の源を特定する技術的な探査方法。電子機器の troubleshooting に役立つアプローチで、日本でも活用できる実用的な知識だ。",
+      "category": "システム/インフラ"
+    },
+    {
+      "rank": 8,
+      "id": 50437106,
+      "title_en": "Fireworks AI security breach impacts Notion and their customers",
+      "title_ja": "Fireworks AIのセキュリティ侵害がNotionとその顧客に影響",
+      "url": "https://www.notion.com/help/security-incident-involving-a-third-party-ai-vendor",
+      "hn_url": "https://news.ycombinator.com/item?id=50437106",
+      "score": 38,
+      "comment_count": 11,
+      "posted_at": "2026-11-10T07:19:38+00:00",
+      "comments": [
+        {
+          "id": 50438319,
+          "author": "Pi9h",
+          "text": "At Docmost we’re building a self-hosted enterprise wiki that can run in air-gapped environments. We have comparable features to Notion and Confluence. In the past few months, we’ve helped many customers migrate to their own on-prem setups. No software is immune to cyberattacks, but having control over the deployment model can greatly reduce exposure to attacks like this. GitHub: https://github.com/docmost/docmost Website: https://docmost.com"
+        },
+        {
+          "id": 50437794,
+          "author": "edot",
+          "text": "So Fireworks is ZDR by default, yet Notion configured (asked) Fireworks to retain data? Otherwise, how is there anything to leak? On the main fireworks breach page, they also say some customer weights of models and datasets to train them were leaked."
+        },
+        {
+          "id": 50438127,
+          "author": "JumpCrisscross",
+          "text": "Does this reflect on Fireworks’ culture?"
+        },
+        {
+          "id": 50438016,
+          "author": "alentodorov",
+          "text": "the whole incident response post feels like a huge cop-out. “abundance of caution”, the vendor is one of the biggest, so ofc it’s not our fault for choosing them… etc."
+        }
+      ],
+      "summary_ja": "・主な議論点\nFireworks AIのゼロ・データ・リテンション（ZDR）設定とNotion側の設定の問題、およびデータ漏洩の根本原因が/communityでlargely議論の的となっています。特に、FireworksがデフォルトでZDRであるのに、Notionがデータ保持を依頼していたのかどうか、その経緯に疑問が投げかけられています。また、Fireworksのインシデントレスポンスが「過剰な注意深さ」という名の「责任回避」であるという批判も主要集中しています。\n\n・賛否両論\n opinions are divided on where the blame lies. 一部のユーザーは、NotionがFireworksにデータ保持を依頼したことでセキュリティリスクを増大させたと指摘する一方で、他方のユーザーは、Fireworksがそのような設定を提供した本身就是問題であり、その cultures に疑問を投げかけています。さらに、データ漏洩の範囲についても、単なるAPIキーの流出にとどまらず、顧客のモデルやデータセットの重みが流出したという報告に懸念が広がっています。\n\n・注目コメント\n「自社ホスト型（self-hosted）のEnterprise Wikiを提供するDocmost」というコメントが注目されます。これは、セキュリティリスクを減らすには、自社の環境にデータを留める（on-prem）選択肢が重要であると強調しており、現在のクラウドベースのモデルに疑問を投げかけています。また、「the whole incident response post feels like a huge cop-out」というコメントは、Fireworksの公式な対応が誠意に欠けると感じられるとして、communityの不満を巧みに表現しています。",
+      "editor_note": "Fireworks AIのセキュリティ侵害がNotionに影響。サード PARTICIPATE のリスク管理の重要性が示された。日本企業もサプライチェーンのセキュリティを確認する必要がある。",
+      "category": "セキュリティ"
+    },
+    {
+      "rank": 9,
+      "id": 50427362,
+      "title_en": "Payments Canada announces launch of Canada's Real-Time Rail (RTR) payment system",
+      "title_ja": "Payments Canada、カナダのReal-Time Rail (RTR)決済システムの開始を発表",
+      "url": "https://www.payments.ca/canada-launches-real-time-rail-bringing-247-payment-infrastructure-national-economy",
+      "hn_url": "https://news.ycombinator.com/item?id=50427362",
+      "score": 532,
+      "comment_count": 287,
+      "posted_at": "2026-11-09T16:00:45+00:00",
+      "comments": [
+        {
+          "id": 50430343,
+          "author": "ttul",
+          "text": "TBH, if you are launching a startup, it might not be a terrible idea to incorporate in Canada. Canada has the notion of federal incorporation in addition to each province having its own corporate registry. Federal corporations can exist in any province but all the filings are done in one place. The new mega-deduction recently announced [1] results in an effective 6% corporate tax rate, which is among the lowest in the world and certainly in the G-7. Things like the RTR are just one example among many of the efficient infrastructure that Canada is introducing to address a very long term productivity gap (the mega-deduction is another). And, R&D conducted in Canada is always a current-year expense and never capitalized. And there is a refundable tax credit for R&D that works out to about 60% of engineers' salaries (in most provinces). And those salaries are lower than they are in the US (something that engineers in Canada have a right to complain about). [1] https://www.canada.ca/en/department-finance/news/2026/09/gov..."
+        },
+        {
+          "id": 50428639,
+          "author": "QGQBGdeZREunxLe",
+          "text": "Insane that the US does not have a realtime payments network in 2026. FedNow exists but is supported by handful of banks which charge fees to use the feature. > Outgoing transfers cost 0.75% of the transaction amount (minimum of $1, maximum of $30). SoFi does not charge a fee for incoming transactions. > SoFi Plus members save 50%. They pay 0.375% of the transaction amount with a maximum of $15 (minimum remains $1). https://www.sofi.com/banking/instant-money-transfer"
+        },
+        {
+          "id": 50429727,
+          "author": "mlekoszek",
+          "text": "As a Canadian, I like this. It really sounds like they're taking Interac's proprietary e-Transfer system and rolling it out as a public good for any bank to build on. That's pretty cool. It also seems smart to have involved Interac as partner, instead of trying to build around them. Like all things from any government -- let's see how the rollout goes. But I am cautiously happy to hear about this."
+        },
+        {
+          "id": 50428265,
+          "author": "mig39",
+          "text": "Doesn't look like any of Canada's major banks are taking part? > The initial cohort of active RTR system participants includes: Wealthsimple, Questbank, Peoples Trust Company, Paramount Commerce, KOHO, DoBusiness.com™, Digital Commerce Bank, Bank of America,"
+        },
+        {
+          "id": 50427830,
+          "author": "petcat",
+          "text": "Will be curious to see if this ends up requiring Google/Apple accounts and mobile device attestation in order to work."
+        }
+      ],
+      "summary_ja": "以下は、Hacker News のコメントから作成した要約です。\n\n**主な議論点**\nこの加拿大的实时支付系统（RTR）の発表について、コミュニティでは主に以下の点が議論された。\n1.  **加拿大的商业环境の優位性**: RTRは、カナダの長年の生産性格差を解消するための効率的なインフラ整備の一部であり、企業誘致の有利な環境（連邦法人登記、超低率法人税、研究開発費の税額控除など）と結びついて評価された。\n2.  **米国との比較**: 米国が2026年時点で本格的なリアルタイム支払いネットワークを欠く中、カナダの先行は注目された。特に米国・FedNowの高手数料問題が対比された。\n3.  **Interacとの連携**: 既存のInterac e-Transferシステムを公共の財産として展開するという政府のアプローチが称賛され、Interacをパートナーに収める選択が賢明であると opinions が分かれた。\n\n**賛否両論**\n*   **賛成**: カナダの前進的なインフラ整備と、Interacのノウハウを活用した公共財としての展開は、イノベーション促進に有利で、慎重に楽観的な見方を示すコメントが多かった。\n*   **否定的/懸念**: 主要大銀行が参加していない点が指摘され、実際の普及度に疑問が投げかけられた。また、Google/Appleアカウントやモバイル機器の認証が必須になる可能性など、実装の詳細やセキュリティ面への懸念も示された。\n\n**注目コメント**\n*   **カナダの企業環境の分析**: 法人税の実質税率が約6%とG7で最低水準であり、研究開発費が全額即時費用化され、エンジニア給与の約60%が税額控除されるなど、カナダが Start-up にとって極めて魅力的な環境であることを詳細に説明したコメントが特に注目された。\n*   **米国インフラの遅れの具体例**: FedNowの手数料（送金額の0.75%など）を具体的に示し、カナダのRTRと対比させたコメントは、米国インフラの問題点を明確にした。",
+      "editor_note": "カナダのReal-Time Rail決済システム開始。即時送金のインフラ整備が進み、日本でも同様の(real-time payment)の導入が検討されている。",
+      "category": "システム/インフラ"
+    },
+    {
+      "rank": 10,
+      "id": 50429734,
+      "title_en": "E-means: Outperforming k-means in one-tenth the epochs",
+      "title_ja": "E-means：k-meansを10分の1のエポックで上回る",
+      "url": "https://e-means.github.io/",
+      "hn_url": "https://news.ycombinator.com/item?id=50429734",
+      "score": 404,
+      "comment_count": 39,
+      "posted_at": "2026-11-09T18:45:43+00:00",
+      "comments": [
+        {
+          "id": 50432676,
+          "author": "jlhawn",
+          "text": "I wonder if this could be used anywhere as an alternative to Lloyd's algorithm. I have a hobby project which uses Lloyd's to \"relax\" an icosohedral equal area mesh on the surface of a sphere [1]. I'm going to try to swap it out with an adaptation of this and see if it's much better or if I can afford more iterations with this method. Edit: tried it, and it’s definitely not better for this use case. e-means wins by needing fewer passes over a huge dataset, but relaxing a mesh on a sphere has no dataset: each Voronoi cell’s centroid can be computed directly from its geometry. Mini-batches just swap that for a noisy sampled estimate of the same thing. It has the same objective and the same optimum, so at best it matches Lloyd. In practice it was much slower and left the grid noisy, and with small sample budgets it even tangled the mesh. [1] https://webgcm.app/explain/grid#nudging-the-cells-into-shape"
+        },
+        {
+          "id": 50431500,
+          "author": "real_faxenoff",
+          "text": "I adapted the method to my IVF index (the code-daemon project) and achieved a 146x speedup on the GPU. That's impressive!"
+        },
+        {
+          "id": 50435033,
+          "author": "saagarjha",
+          "text": "As far as I can tell this isn't particularly new, people have been doing minibatch k-means for a while, including with an EWA update. I assume the contribution here is that they tried to measure how much better it is and provided code? I'm not sure I agree with their claims though, because they didn't really measure the things that matter–sure, it's better than Lloyd's algorithm, but that's a very low bar. If you are claiming that your algorithm is \"highly parallelizable\" and comes with \"wall-clock speedups\", then the actual metrics that matter here is not number of steps or even basic wall clock time as your size remains fixed, but how your algorithm scales as more data is present or parallelism is required. This algorithm splits up the minibatch across workers and has them compute local updates, then allreduces it. As the amount of data goes up, the comms become much more expensive (since you have to use a worse transport layer), which means that you're basically locked in a desperate attempt to do more local work before you send your partial update to everyone else. If you attempt this (not explored in the paper) you will find that the improvement in clustering by doing this extra work has diminishing returns–you only reduce the number of updates by a few steps (which is what drives your wall clock time). At scale you end up being heavily comms limited and not super parallel at all."
+        },
+        {
+          "id": 50433634,
+          "author": "shiandow",
+          "text": "These kinds of algorithms tend to have equivalent descriptions as expectation maximisation or simulated annealing. I wonder if it's possible to understand their algorithm in that sense. Though I suppose it may be as simple as expectation maximization with a friction term, since Sj = sj - a (sj - Sj). Importantly they note that this update rule keeps the centroid within the convex hull, which is pretty important."
+        },
+        {
+          "id": 50431087,
+          "author": "wood_spirit",
+          "text": "This looks awesome. Obvious in hindsight! The viz really explains it well. Hope it gets added to scipy - it’s much more available in the envs many use than facebooks own faiss library."
+        }
+      ],
+      "summary_ja": "・主な議論点\n社区讨论的核心在于评估「E-means」算法的新颖性与实用性。支持者关注其在特定场景（如GPU加速的IVF索引）下实现的显著加速（146倍），并欣赏其直观的可视化与代码开源。反对观点则认为，该方法本质上是结合了指数移动平均（EMA）更新的「小批量k-means」，并非全新发明，其论文的贡献主要在于实证测量和代码提供。\n\n・賛否両論\n意见分歧点在于对创新性的判断。一方认为，即便基于现有技术，其带来的实际性能提升（如更少的epoch）和易用性（希望加入scipy）是重要贡献。另一方则批评论文的衡量标准不全面，未测试算法在数据规模扩大或并行度增加时的扩展性，指出在分布式环境下通信开销可能成为瓶颈，导致其「高度可并行」的主张站不住脚。\n\n・注目コメント\n一个有趣的见解是将该算法与期望最大化（EM）算法联系起来，指出其更新规则可视为带有「摩擦项」的EM过程，并具有保持质心在凸包内的优良性质。此外，有用户从自身应用出发，报告了在球面网格松弛场景下，E-means相比Lloyd算法表现更差，揭示了该方法并非万能药，其优势高度依赖于具体问题。",
+      "editor_note": "E-meansアルゴリズムがk-meansを上回る。クラスタリングの効率化が進み、データ分析の質が向上する。日本企業のBI活用に役立つ。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 11,
+      "id": 50424581,
+      "title_en": "Foldable Flight: The Best Paper Airplanes",
+      "title_ja": "折りたたみ飛行：最高の紙飛行機",
+      "url": "https://www.foldableflight.com",
+      "hn_url": "https://news.ycombinator.com/item?id=50424581",
+      "score": 1035,
+      "comment_count": 152,
+      "posted_at": "2026-11-09T12:19:22+00:00",
+      "comments": [
+        {
+          "id": 50426720,
+          "author": "literallyanythi",
+          "text": "Scrolled down the page, saw this \"Very Easy\" 1 minute plane https://www.foldableflight.com/planes/mystic Started watching the video not planning on actually making it, saw that it is done with A4 paper and grabbed a random sheet at my desk to follow along. The pocket felt like a nice \"a-ha!\" moment. As someone who only knew the \"naive\" way to make paper airplanes from A4 paper, this is the best performing and prettiest paper airplane I've made in my life! It almost feels like it's not real how smoothly it stays straight in the air compared to all my paper airplanes in childhood. Edit: Tried making the flapping wings AeroDactyl but it didn't work out :( wasn't aerodynamic and didn't flap its wings just went straight to the ground Edit 2: Tried making the Jetstream (another 1 minute plane) and it came out well! Mine is INCREDIBLY asymmetrical and still flies better than any other plane I've made other than the Mystic! Edit 3: Tried making the Advanced Elanus and I made it! But it's a little shoddy and much tougher for sure. Looks cool but it doesn't glide anywhere near as good as in the video (I guess you really need to perfect it.) Final edit: My planes :) https://i.imgur.com/xnMdzJv.jpeg"
+        },
+        {
+          "id": 50425493,
+          "author": "intrasight",
+          "text": "I have a story to share. In 1978 as a preteen, my mother made me take piano lessons. God bless her for trying. Anyway, while waiting for my class in the lobby of the music school, I would often make paper airplanes. One day, an older gentleman came over and said that he wanted to gift me something. What he gave me was his copy of \"The great international paper airplane book\". And remains one of my cherished books or really possessions. But I'm getting older now and feel that the time has come for me to find a 13-year-old worthy of this gift. But it's quite a leap of faith, for me anyway, to convey such a gift. https://archive.org/details/greatinternation00jerr/mode/1up"
+        },
+        {
+          "id": 50430125,
+          "author": "FoldableFlight",
+          "text": "Hi everyone! I'm Kyle — the creator behind Foldable Flight (the website linked in the original post). It's very fun to read these comments and to hear about your experience using the site and folding the planes featured on it! I've been designing paper airplanes since I was a child, and have shared many of my designs freely through my website and on YouTube. Foldable Flight also features planes from many other designers, including the world record planes for distance and time aloft. Please comment with any feedback you have regarding the site. I hope to improve its existing features and to add additional features in the future."
+        },
+        {
+          "id": 50426997,
+          "author": "tombert",
+          "text": "When I would visit my grandmother as a kid, my parents wouldn't let me bring a game console with me, and she lived in the middle of nowhere so I would get bored pretty easily. One summer, I had brought a book on how to make different paper airplanes. My grandmother had this huge crate of dot matrix printer paper [1] that I was given freedom to use to my heart's content. I made hundreds of planes, of varying quality. I even did quasi-scientific tests to see which ones would fly farther, and I used a rubber band extended to the same length each time to try and ensure I was applying roughly the same amount of force in each launch. I look back at that time pretty fondly. It was the only time in my life that I actually had fun visiting my grandmother's house. [1] Even at the time this was somewhat outdated; she had a normal inkjet printer at the time so the paper was basically useless as printer paper."
+        },
+        {
+          "id": 50425385,
+          "author": "magicalhippo",
+          "text": "My dad worked overtime in the evening a fair bit. He'd often bring me when I was a young teen. The building was several stories tall with a huge open central core, just a flight of stairs on one end. I'd go to the top floor, take a bunch of paper from the printer room and fold planes, and send them out into the central space. Go back, tweak the design or try something new, launch again. Don't think I came up with any good designs, but I had a lot of fun trying various ideas."
+        }
+      ],
+      "summary_ja": "・主な議論点\nこのコメントスレッドでは、Foldable Flightというウェブサイトの価値と、紙飛行機を通じたnostalgia（懐かしさ）や创造的趣味が主要な議論点となっています。サイトの創作者、カイルは自身の設計やサイトの目的を説明し、コミュニティの反応に感謝しています。参加者たちは、サイトで提供された設計図に従って実際に紙飛行機を作り、その性能や美しさに驚く経験を共有しています。特に、単純な折り方で驚異的な飛行性能を持つ「Mystic」に多くの人が感動しており、これは従来の「naive」な折り方とは明らかに異なると指摘されています。また、紙飛行機は単なる子供の遊びではなく、科学的な試験や設計の改良を伴う创造的活動であることが強調されています。\n\n・賛否両論\nコメント内では特に明確な賛否両論は見られませんが、特定の設計に困難が生じたという報告があります。例えば、あるユーザーは「AeroDactyl」という設計に挑戦しましたが、翼が flap せず直線的に落下したと报告しています。これに対して、他の設計「Jetstream」は成功し、非対称ながらも非常に優れた飛行性能を示しました。このように、設計によって結果が大きく異なるため、難易度や完成度にばらつきがあることがうかがえます。また、高度な設計「Elanus」は外見はhqでsworthがあるが、動画のような滑空性能は得られなかったという指摘があり、実践における技術の必要性が強調されています。\n\n・注目コメント\n特筆すべきコメントとして、紙飛行機への長年の情熱を語るストーリがあります。あるユーザーは、1978年に音楽学校的で待っている際、年長者から「The Great International Paper Aircraft Book」を贈られ、それが現在まで大切にしているというエピソードを紹介しています。このコメントは、紙飛行機が単なる趣味ではなく、世代間のつながりや知の継承の媒介であり得ることを示唆しています。さらに、祖母との夏の記憶や、父の職場で紙飛行機を飛ばした少年時代の逸話は、この活動が個人の記憶に深く刻まれていることを強調しています。これらのコメントは、Foldable Flightが提供する設計図が、単なる技術情報ではなく、感情や記憶と結びつける力を持つことを示しています。",
+      "editor_note": "紙飛行機の折りたたみ飛行に関する研究。空气力学の基本を学ぶのに役立ち、教育現場で活用できる実践的な内容だ。",
+      "category": "その他"
+    },
+    {
+      "rank": 12,
+      "id": 50434264,
+      "title_en": "Horible public key tricks",
+      "title_ja": "最悪の公開鍵トリック",
+      "url": "https://maurycyz.com/projects/badcert/",
+      "hn_url": "https://news.ycombinator.com/item?id=50434264",
+      "score": 171,
+      "comment_count": 51,
+      "posted_at": "2026-11-10T00:07:17+00:00",
+      "comments": [
+        {
+          "id": 50438362,
+          "author": "miki123211",
+          "text": "On that note: I was always wondering whether you could do stupid CT log tricks. If I remember correctly, Let's Encrypt lets you go up to a hundred domains per certificate, with 256 characters per domain[1]. If you get a short domain like a.bc and start requesting certificates for its subdomains, you can easily get a few kB of user-controlled data embeddable per certificate. Given LE's rate limits, it should, within a few weeks of easily-automated work, be possible to embed child pornography into a CT log, making it illegal to host and destroying it completely. You could do something more useful (and less destructive) with this idea; like embedding a separate public key, with the corresponding private key stored offline in an HSM, which could then be used to sign the location of your new domain in case the old one was seized. This would, in a weird and perverted way, add a lot more censorship resistance to DNS than what it natively provides. You could even use a CT log as a blockchain, with the order of log entries being used for consensus."
+        },
+        {
+          "id": 50437336,
+          "author": "ryan-c",
+          "text": "Previously, Stupid Certificate Tricks (2014): https://news.ycombinator.com/item?id=9516824 This is almost certainly an independent discovery/implementation of the same idea, there's really only one sensible way to do it. There are, of course, several non-sensible ways to do it as well, but..."
+        },
+        {
+          "id": 50435546,
+          "author": "knotimpressed",
+          "text": "The linked pdf at https://tom7.org/httpv/httpv.pdf is extremely long but a great read if you enjoyed the article."
+        },
+        {
+          "id": 50434692,
+          "author": "tptacek",
+          "text": "All serious attackers are man-in-the-middle attackers (usually by tricking victims into diverting their own traffic, not literally by inserting themselves into the network path). Passive-only attackers went extinct along with the backbone-connected Sun servers that were used to launch those attacks. I don't so much care about the rest of this analysis, but you can't call an unauthenticated TLS session \"secure\"."
+        },
+        {
+          "id": 50435567,
+          "author": "sam1r",
+          "text": "Tip: select the the ‘tty’ mode prior to digging in. I’ve never felt a more relaxed feeling (easy on the eyes) while reading any blog in comparison."
+        }
+      ],
+      "summary_ja": "・主な議論点\nコメントでは、Certified Transparency (CT) ログを悪用した「巧妙な公開鍵のトリック」が議論されています。特に、Let's Encryptの証明書にドメイン名として制御できるデータを埋め込み、CTログをデータストレージとして利用するという発想が注目されています。これにより、 child pornography の such as 違法なデータの埋め込みや、逆に、離線で保管した秘密鍵を使ってDNSの監視から守るための「検閲耐性」の強化、あるいはブロックチェーンとしての利用が可能になることが示されています。\n\n・賛否両論\nこのアイデアには、技術的に巧妙であるという賛成意见がありますが、(child pornography の such as) 違法・悪意のある用途に悪用されるリスクが指摘されています。これは、CTログそのものを犯罪的行為の場に変える恐れがあり、重大な倫理的・法的問題を引き起こす可能性があります。一方で、検閲耐性向上などの「正義」の用途と、悪用の可能性が対比されています。\n\n・注目コメント\n特に注目されたコメントは、CTログをブロックチェーンとして利用するというアイデアです。ログエントリの順序を合意に用いることで、従来のブロックチェーンと同様のconsensusメカニズムを実現できる可能性があると指摘され、これはCTログの基本的な設計思想を拡張する洞察として評価されています。また、过去的な「Stupid Certificate Tricks」との関連性や、攻撃者に関する考察（現在はパasive攻撃は extinct であり、大多数の攻撃はMITM）も議論の文脈を深くしています。",
+      "editor_note": "公開鍵の誤用例を紹介する記事。セキュリティ初心者必見で、日本でも暗号化の基本知識として重要だ。",
+      "category": "セキュリティ"
+    },
+    {
+      "rank": 13,
+      "id": 50435898,
+      "title_en": "Ultorg: The User Interface for Relational Databases",
+      "title_ja": "Ultorg：リレーショナルデータベース用UI",
+      "url": "https://www.ultorg.com/",
+      "hn_url": "https://news.ycombinator.com/item?id=50435898",
+      "score": 72,
+      "comment_count": 22,
+      "posted_at": "2026-11-10T03:59:39+00:00",
+      "comments": [
+        {
+          "id": 50436679,
+          "author": "kragen",
+          "text": "Eirik Bakke's Ultorg (SIEUFERD) is amazing and inspirational research, and I'm glad to see that it's finally available to the public after 17 years. It's one of those things that really makes you sit up and take notice of how much better our everyday software could have been. However, I wouldn't be willing to try it under proprietary-software terms. Last week, I was thinking about eliciting open-source software with the Ultorg look and feel from an LLM, thus replicating Bakke's HCI research and enabling other HCI researchers to build on it, which won't be possible under a proprietary license. My notes on Ultorg may be of interest; you can git clone http://canonical.org/~kragen/sw/pavnotes2.git and read sieuferd.md (5200 words). The introduction: > Eirik Bakke’s [SIEUFERD][0] (or, as he sometimes spells it, SIUEFERD) is a really interesting and promising generic database frontend, a “schema-independent database UI”. The elevator pitch is “a new kind of graphical query interface [with] the power of SQL but the ease-of-use of a spreadsheet”. (Unfortunately, he forgot to implement the DDL part of SQL, just doing the DML part.) I can highly recommend Bakke's 5-minute talk on it from 10 years ago at https://vimeo.com/173726371 ."
+        },
+        {
+          "id": 50438090,
+          "author": "Skeime",
+          "text": "I think the novel thing here, that I have not yet seen in any other database app, is the realization that normal SQL joins are not quite what you want in most cases. Often, you are interested in nested results. \"Give me all my customers with a list of their orders.\" However, when you do this with a join, you get a list of the orders with a copy of the customer information attached to each, instead. In Ultorg, you actually get the customer with a list of their orders nested in their row as a sub-table, but with that sub-table's headers cleverly floated to the top, so they're not repeated for each customer. As a second trick, Ultorg manages to remember the relations, so the data is editable in the nested tables. (There are some limitations to this, I believe.) I used the trial version of Ultorg at the beginning of the year (the example in the 2.1.4 changelog is based on my use case), and it was tons of fun to use. Ultorg is great. I wish I had discovered it right at the start of that small project. Unfortunately, I do not have a regular use case for this, and for personal use and occasional unpaid hobby projects, Ultorg's license is not a good fit. So I check the website from time to time whether there's been a change to it; no luck so far. I am no business expert, and I do not know how well Eirik is doing with the current model. However, I do have the impression that he underestimates how many people would have a use case in their private life for it, but not at $35/month. I think this could also help attract new commercial users. After all, it's much easier to convince your boss of purchasing a software if you have already built expertise by using it personally."
+        },
+        {
+          "id": 50436824,
+          "author": "akshayrajeshwar",
+          "text": "Previously used it and it's AMAZING given you have data stored with good practices, e.g. with unique IDs that are consistent among many databases/sheets. I found it's easier to begin with Ultorg's usecase in mind than to migrate existing files to fit its use. And I do agree with the criticisms mentioned in the thread. Ultorg is solving a lot of problems of data organisation and context awareness, so starting a business with a perpetual license would be awesome. Guess I just don't wanna lose access to the tool once I have all the tailored files and fail to pay again. Should mention that Eirik is a joy talk to and will quite possibly accommodate you. All the best to him."
+        },
+        {
+          "id": 50436618,
+          "author": "NetMageSCW",
+          "text": "A small desktop app that is a subscription rubs me the wrong way."
+        },
+        {
+          "id": 50438230,
+          "author": "BrenBarn",
+          "text": "I've wanted something like this for a really long time. Unfortunately I'll never use this because there's no way I'm going to pay for it, let alone pay an ongoing subscription fee, but it looks pretty cool."
+        }
+      ],
+      "summary_ja": "・主な議論点\nUltorgの最大の特徴は、SQLのJOIN文の限界を解決する「入れ子になったテーブル」の表示にあります。通常のJOINでは平坦なリストになりますが、Ultorgは顧客情報の行に注文リストを入れ子表示し、ヘッダーも繰り返さないという革新的なUIです。このデータの編集可能性や、長期にわたる研究の成果としての価値が/communityで很高く評価されています。\n\n・賛否両論\n・技術的価値：HCI研究として非常に優れており、日常のソフトウェアがもっと良かった可能性を感づかせる、という賛声が多数。\n・ライセンス・料金体系： proprietary（プロプライエタリ）ライセンス versus オープンソース希望、およびサブスクリプション versus パーペチュアルライセンス versus 個人利用料金の高さ versus 商用利用の可能性、という点で明確な分かれ目が生じました。一部のユーザーは商用利用の可能性や、個人での習熟を経て会社に推奨するというbenefitを強調しましたが、多くのコミュニティ成员はサブスクリプションや高額な初期費用を拒否しました。\n\n・注目コメント\n「SQLのJOINでは通常、顧客情報が各注文のレコードにコピーされます。しかし、Ultorgでは顧客の行に注文リストが入れ子になり、そのサブテーブルのヘッダーは画面上部に cleverly 浮かべられるため、繰り返されません。さらに、Ultorgは関係性を記憶するため、入れ子になったテーブルでのデータ編集が可能です。」というコメントは、Ultorgの本質的な革新点を非常に明確に説明しています。この入れ子表示と編集可能性の組み合わせが、他のデータベースアプリでは実現されていない novel なアプローチであることを強調しています。",
+      "editor_note": "Ultorgはリレーショナルデータベース用UI。データ分析の可視化を容易にし、日本企業のデータ活用を支援する。",
+      "category": "データベース"
+    },
+    {
+      "rank": 14,
+      "id": 50436706,
+      "title_en": "ClickHouse Acquires Xata",
+      "title_ja": "ClickHouse、Xataを買収",
+      "url": "https://xata.io/blog/xata-is-joining-clickhouse",
+      "hn_url": "https://news.ycombinator.com/item?id=50436706",
+      "score": 34,
+      "comment_count": 6,
+      "posted_at": "2026-11-10T06:14:51+00:00",
+      "comments": [
+        {
+          "id": 50438196,
+          "author": "ianberdin",
+          "text": "It's interesting that xata.io is a standalone product. Whereas in https://playcode.ai , it's just one of the features, it lets you create a new server in a second, which can contain anything, not just a database, and which takes up no space at all if nothing has changed. And you can have as many as you want, tens or twenties of them, which automatically go to sleep when not in use and cost you nothing. This is one of our signature features, made possible by the fact that we built our own file system that allows this. What's more, it even allows moving between data centers within a single second, you fall asleep on one host in one region and wake up on another host, another region, within a second. And of course, there are snapshots and rollbacks back and forth in different directions. It turned out really great, I'm happy with it. What's more, I built the entire cloud infrastructure by myself. There might be companies that are ready to buy the entire Playcode.AI, which includes not only the revolutionary cloud infrastructure but also AI Gateway, AI Harness, AI Agent, and everything needed for creating full-stack applications. It even has its own email Gateway, its own DNS server, and so on. Everything is written in Rust."
+        },
+        {
+          "id": 50438038,
+          "author": "hasyimibhar",
+          "text": "Does this mean we can have scale-to-zero Postgres? One pain we have with Clickhouse Postgres is that we have to pay for dev/staging databases that receive no traffic most of the time."
+        },
+        {
+          "id": 50437777,
+          "author": "te_chris",
+          "text": "I’ve gone all in on the clickhouse stack this year and I continue to be extremely impressed. Our product does physical simulation and generates a lot of time series rows per run (a million or so) so we needed something that could do fast time series aggregations. In clickhouse we’ve got one core db that supports that easily, while also being runnable locally in docker compose for dev. They’ve also made smart acquisitions in the otel observability stack, so our o11y is running on another clickhouse db with hyperdx/click stack included. And they acquired langfuse which mostly just works on top of clickhouse as well, so we’re self hosting that for evals etc. The team has been easy to work with as well. Maybe they’ll get enshittified, I guess that’s inevitable, but it’s good now. I think they’re a model of a co that will do well through the LLM transition - strong core tech plus useful bits on top that are OSS but can be hosted by them if you want."
+        },
+        {
+          "id": 50437370,
+          "author": "hubertzhang",
+          "text": "Like Databrick acquired Neon?"
+        }
+      ],
+      "summary_ja": "・主な議論点\nClickHouseがXataを買収したことで、データベース事業への戦略的拡大が注目されている。コミュニティでは、ClickHouseが単なる分析型DBから、全文検索やAPI層などの機能を備えたフルスタックプラットフォームへと進化している点が議論の中心となった。特に、自社開発のクラウドインフラやスケール-to-ZERO機能に言及され、競合他社 versus ClickHouseの優位性が比較された。\n\n・賛否両論\n賛成派は、ClickHouseの高速な時系列データ処理能力や、Otel観測性スタック、Langfuseなどの連続買収により、 streame lined アーキテクチャが完成しつつあると評価した。一方、懸念派は、企業の買収による「enshittification」（機能劣化）を恐れ、OSS提供的な要素が将来的に制限される可能性を指摘した。また、開発/ステージング用DBのコスト削減を求める声があり、Postgresへのスケール-to-ZERO実装の期待も上がった。\n\n・注目コメント\nDatabricksがNeonを買収した例を引きawanし、ClickHouseの類似戦略を「データプラットフォーム企業の買収合戦」と解釈するコメントが特筆された。これは、大手企業がデータ基盤全体を支配するという市場の大きな潮流を反映しており、単なる製品補完rather than 統合戦略の一部として位置づけられた。",
+      "editor_note": "ClickHouseがXataを買収した。データベース市場の統合が進み、日本企業も選択肢が広がる。",
+      "category": "データベース"
+    },
+    {
+      "rank": 15,
+      "id": 50426175,
+      "title_en": "Semi-transparent, colored cadmium telluride photovoltaic panels in agrivoltaics",
+      "title_ja": "農業ソーラー発電における半透明、彩色カドミウムテルライド光起電パネル",
+      "url": "https://www.anthropocenemagazine.org/2026/10/magenta-solar-panels-may-be-agrivoltaics-cleverest-trick-yet/",
+      "hn_url": "https://news.ycombinator.com/item?id=50426175",
+      "score": 316,
+      "comment_count": 213,
+      "posted_at": "2026-11-09T14:31:39+00:00",
+      "comments": [
+        {
+          "id": 50430877,
+          "author": "efields",
+          "text": "Specialty cut flower grower here. Backyard scale, but we're profitable and have received some grants so that means we have had a USDA relationship for a couple years. The rep I've talked to and am closest with is skeptical of agrivoltaics due to past dealings with solar companies (not sure what she means). There doesn't seem to be enough reliable public data to make it seem like the win-win-win we want it to be. In their mind, you're adding a non-ag industry to the land and that could have downstream consequences in a generation. Maybe you're scheming to get the land re-zoned for light industrial; I honestly have no idea what they're thinking, but they're averse toward it. Most flowers in 7b don't want extreme sun. We use shade cloth frequently, so solar coverage would be fine and of course have the energy co-production. Cut flowers aren't harvested mechanically at our scale, so we wouldn't have to worry about tractor access. Meanwhile, more and more food is produced under cover for a lot of good reasons. Polytunnels, glass houses. You might get some summer shade from solar but what about season extension at the beginning of spring/end of fall? Depending on your crop and location, that could mean 4-8 extra weeks a year. What if you do geothermal energy generation for the tunnel? Now you can grow through the winter and not need the same footprint as solar. That's more appealing to me. Anyway, I'm forever mad at corn ethanol and we should at least replace all that with solar farms. That's probably the right place to start. But also, again, zoning..."
+        },
+        {
+          "id": 50429699,
+          "author": "declan_roberts",
+          "text": "HN is probably over-indexed on people living in high-density cities, which might explain why tech like this and also things like vertical farming are popular here. However there's almost no dimensional constraint for farmland in the United States. We have vast amounts of it and there's really nothing to be gained from \"stacking\" Often these \"solutions\" introduce more problems than they solve. One example being a solar farm designed to be grazed by sheep where the panels are so low to the ground that farmers can't bring in tractors and cut hay when the ruminants are gone for a season. The best solution is still to put solar panels and farmland in different places where each can be optimized without concern for the other."
+        },
+        {
+          "id": 50428919,
+          "author": "foolfoolz",
+          "text": "if your initial reaction is we have tons of empty land why would we ever build solar panels over a farm? this isn’t an either-or question. a farm owner may want to add some revenue with electricity generation. just like a hospital may want to cover their parking lot to offset costs. at giant scale do these solar location choices optimize the absolutely best use of land for cheapest possible electricity generation? no. but at small scale it can make sense for these individual owners https://electrek.co/2026/10/05/six-flags-has-installed-one-o..."
+        },
+        {
+          "id": 50430638,
+          "author": "lantry",
+          "text": "little known fact: US currently grows a lot of corn for ethanol production. If we replaced that all with solar panels we'd have plenty of electricity. The solar vs farm debate is usually framed as a tradeoff with food production but that's not really true https://www.anthropocenemagazine.org/2025/04/new-study-compa..."
+        },
+        {
+          "id": 50428104,
+          "author": "SamBam",
+          "text": "One thing the article doesn't mention is that some plants prefer a little shade. So while broccoli yields may have \"held steady,\" it's possible they could make even more gains elsewhere where it might normally be too sunny. So leafy vegetables like spinach might be doing equivalently fine under the magenta shades in New Jersey, but might actually be even better in Texas."
+        }
+      ],
+      "summary_ja": "### 主な議論点\ncommunityでは、 agrivoltaics（農業用ソーラーパネル）の実用性と効率性について、複数の視点から議論されています。特に、専門的立場からの実務的な懸念、広大な農業用地が存在する米国における「土地の重複利用」の必要性への疑問、そして、農業と発電の両立が本当に「ウィン・ウィン・ウィン」かどうかについての議論が中心です。\n\n### 賛否両論\n*   **賛成論**: 専門の切花農家は、自らの作物（花）が好む半陰れ環境と一致し、機械化による収穫の必要が少ない点で利点があるとし、発電による追加収入の可能性を指摘しました。また、一部の作物（如：葉物野菜）は遮光により収量が向上する可能性があるとも言及しました。\n*   **反対論**: 農業関係者（USDAなど）は、past dealings with solar companiesによる信頼の問題や、信頼できる公開データの不足を理由に慎重な姿勢を示しました。また、広大な農業用地が存在する米国では、農業用地と発電用地を別々に最適化すべきで、「重複利用」はかえって問題を生むとする意見があります。具体例として、 sheep grazing用に設計された低位置のソーラーパネルが、後の機械作業の障害になる等问题が挙げられました。\n\n### 注目コメント\n*   **実務的な懸念**: USDAとの関係者から、「非農業業界を農地に加えることの下流 consequences（例: 工業用地への再編成の可能性）」や、ソーラー企業への过去的な経験から生じる不信感が明かされ、制度的な barriers（zoningなど）が大きな課題であることを強調しました。\n*   **土地利用の根本的疑问**: 「米国には農地が豊富あり、農業と発電を別々の場所で最適化する方が良い」とするコメントは、 agrivoltaicsの根本的な前提に対する疑問を投げかけています。\n*   **作物の生理学的反応**: 「broccoli yields may have 'held steady'」という結果から、「一部の作物は遮光で逆に収量が向上する可能性（例: テキサスでの葉物野菜）がある」という洞察は、農業技術としての可能性を示す興味深い視点です。",
+      "editor_note": "農業ソーラー発電用の半透明光起電パネル。日本でも農地活用が課題で、この技術が注目される可能性がある。",
+      "category": "その他"
+    },
+    {
+      "rank": 16,
+      "id": 50408336,
+      "title_en": "Billion Watts in the Speaker [video]",
+      "title_ja": "スピーカー内的10億ワット [動画]",
+      "url": "https://www.youtube.com/watch?v=PHOcTXYaMfg",
+      "hn_url": "https://news.ycombinator.com/item?id=50408336",
+      "score": 5,
+      "comment_count": 1,
+      "posted_at": "2026-11-07T21:45:50+00:00",
+      "comments": [
+        {
+          "id": 50438361,
+          "author": "Eupolemos",
+          "text": "This is not really a HN subject, I think - that said, I really love this dude. Popping up in my subscription-feed after 5 years was a highlight <3 And it def. IS nerdy :D"
+        }
+      ],
+      "summary_ja": "・主な議論点\nコミュニティでは、この-speakerが約100万ワット（1メガワット）の出力で動作するというその「巨大な出力」に注目が集まりました。通常のオーディオ機器とは異なるスケールであり、その技術的実現可能性や、その目的が純粋なオーティビエンスであるのか、それとも何らかの実験的・科学的用途であるのかが議論の中心となりました。\n\n・賛否両論\n賛成派は、その圧倒的な出力と技術的な挑戦に感心を示し、音響工学の可能性を広げた点を評価しました。一方、反対派は、実用性の欠如や、如此の出力では音質や安全性に問題が生じる可能性があると指摘しました。また、この規模の機器をどこで、どうやって使用するのかという現実的な課題も浮き彫りになりました。\n\n・注目コメント\n特に洞察のあるコメントとして、「これはもともとHNのテーマではないが、このクリエイターが5年ぶりにフィードに現れたのは喜ばしいことだ」というものがあり、コミュニティ内では個人的な connections やその人物への尊敬の念がうかがえるコメントとして紹介されています。",
+      "editor_note": "スピーカー内の10億ワットの動画。音響工学の限界に挑戦し、日本でもオーディオマニアの関心が高い。",
+      "category": "その他"
+    },
+    {
+      "rank": 17,
+      "id": 50435105,
+      "title_en": "Formalizing CPython",
+      "title_ja": "CPythonの形式化",
+      "url": "https://broyojo.com/python-formalization/",
+      "hn_url": "https://news.ycombinator.com/item?id=50435105",
+      "score": 78,
+      "comment_count": 28,
+      "posted_at": "2026-11-10T01:56:48+00:00",
+      "comments": [
+        {
+          "id": 50438311,
+          "author": "tomtom1337",
+          "text": "I'm confused about a few points, would love it if someone could help clear it up! - if the rewrite in Lean happens line-by-line, how can the two implementations differ in their result (Step 2)? - how does this approach know \"something that should always be true\" in Step 3 (is it the intelligence of the LLM \"guessing\"?)."
+        },
+        {
+          "id": 50438169,
+          "author": "debugnik",
+          "text": "Wouldn't it be more productive spending the tokens on adding ACSL annotations to verify CPython with Frama-C? You'd verify the actual runtime instead of an AI translation of it, and fixes could be contributed upstream directly."
+        },
+        {
+          "id": 50436290,
+          "author": "anewhnaccount2",
+          "text": "Same approach for Julias stdlib: https://discourse.julialang.org/t/formalizing-julia-in-lean-..."
+        },
+        {
+          "id": 50436643,
+          "author": "jakobnissen",
+          "text": "I think this approach to bug hunting is super promising (obviously - it finds a ton of bugs). The long-term problem is how this kind of bug-hunting can be done routinely, e.g. as part of a test suite. The approach taken by these people, the same approach as when the Julia folks did it, isn't really automatable, because it requires a lot of both human and AI agent work. I guess longer term it needs to be built into the language, to prevent code and lean proofs from drifting. I.e. it could be opt-in properties that are written along the code, and which is then checked in the test suite. So very similar to ordinary compiler checks, except more expressive and expensive, and done only at test time."
+        },
+        {
+          "id": 50437614,
+          "author": "erfgh",
+          "text": "Does anyone read articles written by AI? This is a serious question."
+        }
+      ],
+      "summary_ja": "主な議論点：CPythonをLeanで再実装する際の妥当性、AI翻訳による差異の可能性、およびその信頼性に関する懸念がコミュニティで広く議論された。特に、ステップ2で二つの実装が異なる結果を示す可能性や、ステップ3で「常に成り立つべきもの」をどう判断するかが問題視された。\n賛否両論：Frama-CやACSLを用いた実際のランタイム検証を推奨する意見と、現在のアプローチは自動化が困難で人間作業を必要とするという批判が分かれ、前者は実際のランタイム検証を強調し後者は自動化可能性の欠如を指摘する。\n注目コメント：将来的に証明を言語内に組み込みテストスイートで検証する仕組みを提唱する洞察や、AIによって書かれた記事の読まれ方に関する質問、Juliaの標準ライブラリへの同様なアプローチの言及が注目された。",
+      "editor_note": "CPythonの形式化に関する研究。Pythonの実装を数学的に証明し、日本でも programming 教育に役立つ。",
+      "category": "プログラミング言語"
+    },
+    {
+      "rank": 18,
+      "id": 50386246,
+      "title_en": "A primer on GPUs and kernel optimization",
+      "title_ja": "GPUとカーネル最適化の入門",
+      "url": "https://www.nabo.dev/blogs/kernel-primer",
+      "hn_url": "https://news.ycombinator.com/item?id=50386246",
+      "score": 157,
+      "comment_count": 14,
+      "posted_at": "2026-11-05T23:48:04+00:00",
+      "comments": [
+        {
+          "id": 50432557,
+          "author": "augment_me",
+          "text": "Crazy to not see a word about benchmarking/evaluation of the kernels. IMO at this time when all performant GPU kernels are generated/hill-climbed, its the largest source of error we see. Should be kernel run with a hot or cold cache in practice? Should your kernel be bitwise equivalent to a ref? What error margins should your kernel have to ref? How many times are you running the kernel to avoid thermal noise? Are you running on separate GPUs to avoid overfitting the current hardware? Can you cudagraph-compiling your kernel to remove launch overhead? Are you A/B B/A interleaving your kernel/reference runs to avoid running thermal bias?"
+        },
+        {
+          "id": 50433417,
+          "author": "kollegekid",
+          "text": "The writing here is so clear. Do you use Llms to write?"
+        },
+        {
+          "id": 50434738,
+          "author": "saagarjha",
+          "text": "> On the H200s used for most of this work, the GPU's main memory is HBM, or high-bandwidth memory. Ironically, this is the slowest memory on the chip. Nit: HBM is off chip, unlike shared memory and registers"
+        },
+        {
+          "id": 50435274,
+          "author": "brcmthrowaway",
+          "text": "Someone needs to write a book on this"
+        }
+      ],
+      "summary_ja": "・主な議論点\nコメント全体では、GPUカーネルの性能評価に関する明確な指針の欠如が最大の議論点となっています。具体的には、キャッシュの温热度、基準とのビット単位の一致、許容誤差範囲、熱ノイズを避けるための実行回数、過学習を防ぐための別GPUでの実行、Launchオーバーヘッドを削減するためのcudagraphコンパイル、および熱的バイアスを排除するためのA/B/B/A交互実行などの要素が、現在のカーネル開発で見落とされているとして指摘されています。\n\n・賛否両論\n特に明確な賛否両論は見られませんが、評価の重要性についての共通の認識はあります。代わりに、条评论が「LLMを使って書かれているのか？」という質問を投げかけており、生成AIの利用に関するコミュニティ内の関心がうかがえます。\n\n・注目コメント\n「HBMはチップ外のメモリであり、 Shared Memory やレジスタよりも遅い」という技術的な正確化が注目されます。これは、main memory が「チップ中最も遅い」という ironical な事実を強調しており、メモリ階層の理解を深める洞察です。",
+      "editor_note": "GPUとカーネル最適化の入門書。日本でもAI開発者に必要とされる基本知識をわかりやすく解説する。",
+      "category": "システム/インフラ"
+    },
+    {
+      "rank": 19,
+      "id": 50437242,
+      "title_en": "M John Harrison becomes first science fiction author to win the Booker prize",
+      "title_ja": "M John Harrison、ブッカー賞を受賞した初のSF作家になる",
+      "url": "https://www.theguardian.com/books/2026/nov/09/m-john-harrison-the-end-of-everything-wins-2026-booker-prize",
+      "hn_url": "https://news.ycombinator.com/item?id=50437242",
+      "score": 53,
+      "comment_count": 26,
+      "posted_at": "2026-11-10T07:40:52+00:00",
+      "comments": [
+        {
+          "id": 50438341,
+          "author": "etcetcetcetceta",
+          "text": "I read The Course of the Heart because I'd heard it was sci/fi lit, it helped that I was enjoying a bit of a gnostic/occult kick at the time, and an author I hold in high esteem considers it one of the greatest works of fiction ever produced. But I found it provincially little britain and too obviously desperately trying to be literary that I was confused by the praise, I don't think I'll read another Harrison, but I'm glad he's won the Booker, not that it carries the same weight any more."
+        },
+        {
+          "id": 50437441,
+          "author": "ddxv",
+          "text": "https://www.goodreads.com/book/show/241835818/reviews Wow, pretty divisive, reviews are all over the place. I haven't read it yet, but the reviews seem to tend towards people annoyed at abstract and flowery plot / writing? I will have to try, but I've also struggled through (possibly) similar books like Gnomon by the British sci-fi author Nick Harkaway which had plots too abstract to properly hold my attention but were well liked by others. Similar but opposite, How to Win the Time War, which was so abstract the whole book was a metaphor, stayed together enough that I followed the plot and enjoyed it (though it was quite short). Curious how other people here found this book?"
+        },
+        {
+          "id": 50438274,
+          "author": "thorin",
+          "text": "I only read his book \"Climbers\" which I thought was really good, non-linear and vague but atmospheric. I am a climber or at least know the world of climbing and M John is also a climber. I'm tempted to read his other books but as mentioned the reviews are quite divisive. Climbers took me back to when I first read Iain Banks books, that is the kind of vibe I was getting."
+        },
+        {
+          "id": 50437551,
+          "author": "nxobject",
+          "text": "Congratulations -- and, it should have happened so, so much more sooner. (It's interesting to think about how Harrison pierced the veil between \"genre\" and \"general literary fiction\": he won the Goldsmiths prize in 2020, and judged the Bookers in 2022. His individual recognition as an author was a process.)"
+        }
+      ],
+      "summary_ja": "・主な議論点\nHarrisonの作品、特に『The Course of the Heart』を巡る評価の多様性が中心的な議論成为了。読者によって「文学的に极高い」と評価される一方で、「抽象的で抽象的」「 Britsh provincial（地方的・ Britsh的）」「文学的であることを必要以上に強調している」として理解し難い、という意见が相次いでいる。Harrisonの書風が「ジェンダー（SF）」と「一般文学」の境界を越えた点は評価されるが、その抽象的な表現や構造は多くの読者を混乱させているようだ。\n\n・賛否両論\n作品の評価が極めて分かれている。抽象的で流麗な文章や複雑なプロットを「文学的美しさ」として捉える読者もいるが、逆に「物語が追えない」「自己表現が過剤」として離れる読者もいる。『Climbers』などは「空気感」があり好評だが、『The Course of the Heart』は特に賛否が分かれ、Goodreadsの评论も両極端に分かれている。\n\n・注目コメント\nHarrisonが「ジェンダー」と「一般文学」の境界を越えた最初のSF作家としてブッカー賞を受賞したことは、文学界におけるジェンダー作品の位置づけの変化を象徴するとして注目されている。また、Harrisonが2020年にGoldsmiths賞を、2022年にはブッカー賞の審査員を務めていたという経歴が、彼の文学的評価の確立の過程を示しているという指摘が、特に洞察深く、文学界の構造的な変化を読み取る視点を提供している。",
+      "editor_note": "M John Harrisonがブッカー賞を受賞。SF作家の受賞は初で、日本でもSF文学の可能性が広がる。",
+      "category": "その他"
+    },
+    {
+      "rank": 20,
+      "id": 50428907,
+      "title_en": "Show HN: Every satellite that passed over any place this week, and its photos",
+      "title_ja": "Show HN: 今週どの場所を通過したすべての人工衛星とその写真",
+      "url": "https://www.watched.earth",
+      "hn_url": "https://news.ycombinator.com/item?id=50428907",
+      "score": 360,
+      "comment_count": 61,
+      "posted_at": "2026-11-09T17:51:31+00:00",
+      "comments": [
+        {
+          "id": 50436607,
+          "author": "lanewinfield",
+          "text": "Nice site. Likely very few people will care this much, but with a couple of very easy changes you would make this feel a LOT less vibe coded. The giveaways: * Instrument Sans (your logo) * Highlighted period in your logo * Highlighted italicized text in your header text (also in Instrument Sans) * Short punchy AI-written sentences. Just merge that into one sentence! (\"Enter any place on Earth to see every satellite that passed over it in the last week and the pictures they took there.\") * The flashing orange square in the upper right (every single vibe coded site has a circular or square version of the LIVE icon) And then, just one more reason to switch from Instrument Sans: the massive kerning gap between \"W\" and \"atched\" in the logotype. I'm being picky, of course. Nice job!"
+        },
+        {
+          "id": 50436037,
+          "author": "adonovan",
+          "text": "Beautifully done, at so many levels: the pincushion view of just how much stuff is up there; the rendering of the orbit of each satellite; the ground track of its aperture; the time series of its passes. So many data sources seamlessly integrated. Even if Claude wrote every line of code, knowing what to ask for is quite a feat. Amazing."
+        },
+        {
+          "id": 50431721,
+          "author": "HoldOnAMinute",
+          "text": "I don't say this lightly: This may be the best combination of style and substance I have ever seen."
+        },
+        {
+          "id": 50438163,
+          "author": "nonameiguess",
+          "text": "The first half of my second career (third maybe) in software was spent in satellite ground processing. My first true culminating project, so to speak, was when the portion of the US Maritime Domain Awareness meant for use by the Navy went to initial operational capability. I checked out your site briefly. It's mildly amusing to note differences between that and a real system in use by military units. It'd be nice to be able to use a selector of some sort rather than typing in a location. The globe itself is most obvious, but a flat map works. If you're going to suggest arbitrary locations underneath the text entry box, you should probably suggest places you actually have imagery for. I don't care what looked at the hotel I'm in this morning and don't know coordinates for places off the top of my head, but I can find them on a map. The real version of a system like this doesn't try to draw orbits and estimate what was overhead when. The imagery archives already have geolocation information you should be able to query directly instead of trying to project backwards like that. There are at least three downsides to the way you've done it. One, users typically don't care whether an image was collected from orbit. They just want to know what happened in location X at time Y. If you have aerial imagery or even ground imagery you can correlate with, augment, or entirely replace orbital imagery if it doesn't exist, that's just as useful. Two, satellites don't need to be overhead to collect on a location. The exact angles they can collect from are classified (and of course depend on atmospheric conditions and potentially other obstructions), but they don't have to be overhead. Three, not all satellites have fixed orbits. You can't always solve Kepler's equations to figure out where they've been from their current velocity. Some make changes to their own orbits. Seeing things like this puts me in weird headspace. I think a lot of you get dazzled by how easy it's become to put together software. I want to reiterate the \"not the bottleneck\" phrase you probably keep hearing. Being able to do something like this relies on decades of past effort to put the sensor platforms in orbit in the place, create imagery from the data they collect, and archiving that imagery in a way that users can query. MDA itself was first announced by George Bush in his 2004 budget request. We went live with our first users in 2016. The effort involved was massive, but we had to invent new sensors, put them in orbit, test them in controlled, uncontested waters, figure out how to simulate data feeds that didn't yet exist in order to create software processing capabilities without being to run against real sensor feeds during the development, figure out how to chip, compress, and redact the massive files we produce so they can be disseminated over radio to tablets on ships in the middle of nowhere to field commanders that don't have top secret clearances with compartments for the collection method, or to partner nations that don't have US clearances at all. The web frontend was such a small part of this that we never even retrained or hired JavaScript developers. The original non-browser frontend was a Java Swing desktop UI, so they just ported it to use the Google Web Toolkit, which transpiles Java to JavaScript, and that code was touched at a rate of maybe a few hundred lines a year, in contrast to every other part of the system involved in orchestrating the batch workload scheduling, order queueing, dissemination logic, everything that made it possible to process more data per hour than any other computing system on the planet, or at least they told us that in 2009. I'm sure that is no longer true thanks to LLM training. But man, we basically wrote our own Borg before Kubernetes existed (they of course migrated to Kubernetes eventually, which is why I'm in a hotel at KubeCon NA). We wrote our own filesystem because we couldn't get the IO throughput we needed from what the proprietary Unixes of the 90s offered. We wrote our own network protocols. We scrounged for replacement parts on eBay to service end of life SGI Altix boxes while the government squabbled over how to fund and who to award a contract to build a classified cloud, meanwhile canceling hardware refresh funding to already running operational systems. There are so many battle stories I really hope I can tell someday before I die when they're declassified. I'm sure the commercial providers you're querying have similar stories. This is a nice effort, by the way. I don't want to come across like I'm downplaying it. I just want the next generation as they get awed at what they can do in days or even hours from a browser to understand you can only do that because of the supporting infrastructure and data that is out there. Bringing that data into existence took a lot of work. It was done by people. Without it, you're drawing ellipses on a screen. We had pocket computers that could do that with a few keystrokes 30 years ago."
+        },
+        {
+          "id": 50428983,
+          "author": "sixtyj",
+          "text": "I have seen a lot of sites with satellites’ overviews… I work in geospatial. This site is really good one as you can see exact image taken by a satellite. Well done."
+        }
+      ],
+      "summary_ja": "このサイトのコメントでは、主に以下の3つの視点から議論が交わされています。\n\n**主な議論点：設計と実装の「vibe coding」批判**\n community では、このサイトがAI（「vibe coding」）で生成された可能性が強く、その設計の甘さが指摘されています。具体的には、フォント（Instrument Sans）、ロゴの強調部分、短いAI風の文章、右上の点滅アイコンなど、典型的な「vibe coded」サイトの特徴が多数挙げられています。また、ロゴ内の文字間隔の不均一など、細部に至るまで批判が加えられています。\n\n**賛否両論：機能の実用性 versus 技術的妥協**\nこのサイトの基本的なアイデア（特定の場所の上空を通過した衛星と画像を表示）には高的な評価が与えられる一方で、その実装方法には大きな疑問が投げかけています。特に、衛星の現在位置から過去の軌道を逆投影して推定している点について、実務家から強い批判があります。その理由は、① 衛星が真上にない角度からも撮影可能である、② 軌道が固定ではない衛星がいる、③ 実際のシステムでは画像データベースから直接検索するため、 Such な推定は不要である、というものです。これに対して、このサイトはあくまで簡易的なビジュアライズであるという見方もあります。\n\n**注目コメント：インフラ的重要性の強調**\n特に洞察のあるコメントとして、かつて軍用の衛星画像処理システムの開発に携わった人物の lengthy コメントが注目されます。彼は、このサイトのような成果が、Web frontend のような「小さな部分」にすぎず、その背後にはセンサー衛星の打ち上げ、データ処理、膨大なデータのアーカイブ、機密情報の取り扱いなど、何十年にもわたる massive なインフラ整備と人間の努力があることを強調しています。彼のコメントは、現在の技術で簡易的にできるようになったことの背後にある、広大で複雑な現実のシステムの存在を閉じ込めるもの变成了。",
+      "editor_note": "人工衛星の通過と写真を提供するサービス。日本でも天文観測や地理情報に活用できる可能性がある。",
+      "category": "その他"
+    },
+    {
+      "rank": 21,
+      "id": 50429430,
+      "title_en": "The first 300-millimeter power silicon carbide (SiC) wafer",
+      "title_ja": "初の300mmパワーアルミナム炭化ケイ素(SiC)ウェーファー",
+      "url": "https://www.infineon.com/press-release/2026/infpr202611-028",
+      "hn_url": "https://news.ycombinator.com/item?id=50429430",
+      "score": 139,
+      "comment_count": 75,
+      "posted_at": "2026-11-09T18:25:01+00:00",
+      "comments": [
+        {
+          "id": 50429853,
+          "author": "bradknowles",
+          "text": "The summary at the top of that page is: Infineon marks innovation milestone with world’s first 300-millimeter power silicon carbide (SiC) wafer PBusiness & Financial Press Nov 09, 2026 Infineon presents industry-first functional power devices processed on 300-millimeter silicon carbide wafers Technological breakthrough underlines Infineon’s innovation strength and leadership in power semiconductors and wide-bandgap technologies 300-millimeter SiC process feasibility lays the foundation for secure, future-proof SiC supply to customers in automotive, renewable energy, industrial and AI data center applications Infineon will present the first processed 300-millimeter SiC wafer to the public at the electronica trade show starting 10 November 2026 in Munich"
+        },
+        {
+          "id": 50433110,
+          "author": "BrandiATMuhkuh",
+          "text": "What surprises me with Infineon is that they seem to not work on a LLM on a chip. In particular that here in Linz Infineon, Apple's 5G modem designer and the Johannes Kepler University with Sepp Hochreiter (Inventor of LSTM) are just next to each other. I watched a interview of Infineon head of AI just recently, and I was like excited to hear about some cool hardware. And all he did is talk about how he uses LLMs."
+        },
+        {
+          "id": 50430875,
+          "author": "johntb86",
+          "text": "Anyone know why it took so long for them to transition to 300mm? As mentioned in the article, they're mainly using existing 300mm equipment designed for silicon, which transitioned years ago. I imagine some process steps are different (mainly growing to larger boule, but probably others), but it doesn't seem like they would be huge blockers."
+        },
+        {
+          "id": 50430189,
+          "author": "novaRom",
+          "text": "Can you guys restart DRAM production in Europe again? If 20 or so years ago it was possible, today is the best economical opportunity."
+        },
+        {
+          "id": 50430731,
+          "author": "mercurywells",
+          "text": "I thought Wolfspeed was already at 300mm at the start of this year?"
+        }
+      ],
+      "summary_ja": "**主な議論点**\nコミュニティの反応は、Infineonの300mm SiCウエーハー発表に対して、その技術的革新性と戦略的意義 versus 実用化の遅れと技術的課題という二つの視点に分かれています。多くのコメントは、Infineonが既存の300mm硅（Si）製造設備を流用した点を指摘し、これは大きな technological breakthrough よりも、むしろ「マーケティング」や「進化」の延長線上の成果であるという批判的な見方をしています。特に、SiCの特有の結晶成長（大きな boule の育成）などの工程で技術的課題が残っていること、および silicon から SiC への移行がなぜこれほど遅かったのかという疑問が投げかけられています。\n\n**賛否両論**\n*   **賛成論（肯定的視点）**: Infineonが世界初というこの成果は、SiCの供給網を安定させ、自動車、再生可能エネルギー、AIデータセンターなど重要な市場で競争力を強化する上で重要な一歩であるという評価があります。これはInfineonの技術力とリーダーシップを示すものと捉えられます。\n*   **反対論（批判的視点）**: 一方で、この成果は Infineon が単に silicon の既存ラインを流用したにすぎず、技術的ブロッカーが大きく weren't だったという疑問がexpressed されています。また、Wolfspeed が既に300mmに移行していた可能性があるという情報も出回っており、Infineonの「世界初」という主張の相対的な位置付けについて議論が分かれています。\n\n**注目コメント**\n*   **技術的洞察**: 「300mm silicon 設備を流用した」という点に注目し、「主な工程は大きな boule の育成など、SiC特有のものだが、大きな阻害要因ではなかったようだ」と、技術的課題を比較的軽視するコメントがあります。これは、Infineonのアプローチが、むしろ現実的で早期実用化を重視した戦略だったことを示唆しています。\n*   **戦略的視点**: 「欧州でDRAM生産を再開できないか」というコメントは、このSiCの進展が、欧州の半導体産業、特に戦略的に重要な分野における自立性の強化という文脈で見られていることを示しています。Infineonのこの取り組みは、単なる企業の技術開発ではなく、欧州全体の産業政策と結びつく可能性があると読者たちが見ている可能性があります。",
+      "editor_note": "初の300mm SiCウェーファー発表。半導体材料の進歩で、日本企業も関心が高い分野だ。",
+      "category": "システム/インフラ"
+    },
+    {
+      "rank": 22,
+      "id": 50435660,
+      "title_en": "CoreWeave bond yield tops 16% as AI credit stress rises",
+      "title_ja": "CoreWeaveの bonds 利回り、AIクレジット圧力で16%超を更新",
+      "url": "https://www.cnbc.com/2026/11/06/coreweave-bond-yield-tops-16percent-as-ai-credit-stress-rises.html",
+      "hn_url": "https://news.ycombinator.com/item?id=50435660",
+      "score": 158,
+      "comment_count": 113,
+      "posted_at": "2026-11-10T03:20:06+00:00",
+      "comments": [
+        {
+          "id": 50436061,
+          "author": "danielodievich",
+          "text": "Just last week I was on the call with a a techy architect from one of the major-major financial services companies, and he was discussing getting token capacity and his words on third best option was \"we'd get it from Coreweave or whoever is still alive\". So yeah, I am pretty sure that if that's the sentiment from software people at the major-major financial company, Coreweave is cooked."
+        },
+        {
+          "id": 50437066,
+          "author": "dragontamer",
+          "text": "CRWV is about to have an earnings report in less than 20 hours. It's probably best to just shut up for a day, wait for the earnings and then talk after that comes out."
+        },
+        {
+          "id": 50436139,
+          "author": "trescenzi",
+          "text": "That’s edging up on credit card rates for strong borrowers wild. NerdWallet has Chase Freedom with a lower bound of 18.49% and Citi Diamond Preferred with 16.74%. https://www.nerdwallet.com/credit-cards/best"
+        },
+        {
+          "id": 50436116,
+          "author": "holysoles",
+          "text": "Aside from the price signal, the fact they were issuing these at a 9.625% coupon rate continues to run up their future debt servicing costs. Coreweave doesnt seem to be in a winner-take-all sector, they have a narrow moat and will have high ongoing capex. I struggle to see how they dont go under eventually even with the ability to restructure debt"
+        },
+        {
+          "id": 50435924,
+          "author": "bix6",
+          "text": "So there’s a chance I can pickup some discounted GPUs next year?"
+        }
+      ],
+      "summary_ja": "**主な議論点**\nコミュニティでは、CoreWeaveの財務状況と市場地位に対する深刻な懸念が広がっています。特に、高金利の社债発行（利回り16%超、クーポン率9.625%）が、同社の将来の負債返済負担を増大させ、財務基盤を脆弱にしているという指摘が複数あります。また、AIインフラ市場で「_winner-take-all_」の状況ではないものの、狭い竞争優位性と継続的な高额資本支出が課題とされ、将来的に破綻する可能性が高いという見方が主流です。\n\n**賛否両論**\n意见の分かれ目は、主に短期的な株価変動 versus 中長期的な倒産リスクの評価です。一部のコメントでは、20時間以内に発表される決算発表を待つべきというアドバイスがあり、一時的な市場の反発や情報の混雑を避ける重要性が強調されています。これに対して、構造的な問題（高負債、競争力不足）は決算では解決しないという悲観的な見方があり、投資判断の視点が分かれています。\n\n**注目コメント**\n特に洞察のあるコメントとして、金融サービス業界の技術者から「第3選択はCoreWeaveか、生きているうちの誰か」という発言が紹介され、主要クライアントからの信頼が薄れている実態が明かされています。また、クレジットカードの金利（18.49%など）と比較してCoreWeaveの融資成本が how high かを具体的な数字で示し、その危険性を浮き彫りにしたコメントは、投資家の現実的な懸念を反映しています。さらに、破綻した場合の影響として「来年、割引価格でGPUが買えるかもしれない」というユーモアを交えたコメントは、コミュニティ内の空気を和らげつつ、問題の深刻さを伝えています。",
+      "editor_note": "CoreWeaveの bonds 利回りが16%超。AIクレジット圧力の高まりを示し、日本でも投資市場の動向が注目される。",
+      "category": "スタートアップ/ビジネス"
+    },
+    {
+      "rank": 23,
+      "id": 50429426,
+      "title_en": "Google Gemini routes personal Drive files and emails to human annotators",
+      "title_ja": "Google Gemini、個人のDriveファイルとメールを人間の annotators に回送",
+      "url": "https://github.com/thisisme6598/gemini_files/",
+      "hn_url": "https://news.ycombinator.com/item?id=50429426",
+      "score": 612,
+      "comment_count": 130,
+      "posted_at": "2026-11-09T18:24:38+00:00",
+      "comments": [
+        {
+          "id": 50432666,
+          "author": "bri3d",
+          "text": "Note that this is specifically Consumer Gemini with Connected Apps; Workspace Gemini (and Workspace Intelligence, the RAG thing for enterprise/Workspace) still claims not to be subject to human review: https://knowledge.workspace.google.com/admin/generative-ai/g... So basically if you use consumer Gemini and specifically authorize the GMail app, for example, then it will sometimes use the GMail tool to load your mail from GMail, and that data (like all data in consumer Gemini) might be given to the human annotation pipeline. This whole thing seems deeply stupid to me from Google's standpoint, although they've never been good at product management - there's _way_ too much nuance to what's going on and even if they aren't technically affected, this kind of thing will almost surely make their paying enterprise customers leery."
+        },
+        {
+          "id": 50431419,
+          "author": "rustyhancock",
+          "text": "Really frustrating that our privacy eroded to the point anyone would think this is reasonable. But it does explain some conversations with Gemini when I wonder why it's talking about particular things. Like asking it about consultation processes for changes to parks only to get a response that's uncannily tuned to the email I got prompting the enquiry. No mention of I just read your emails etc ."
+        },
+        {
+          "id": 50433036,
+          "author": "EMM_386",
+          "text": "It's worse than that. > Google Photos data is used to infer your interests, relationships to people in your photos, and where you've been, including by associating your face with corresponding location data and timestamps. This data is also used to do things for you, like look up your info or add items to your grocery list, and to improve Google services, including training generative AI. How does that work exactly if the images aren't even real and are generated by AI? When Google siphons up these photos to help them train their AI, the AI is now going to make associations as depicted in that photograph? That you really were with that person, in that place, in that situation, on that date? As some sort of a fact? Can someone else create that image and just put it in their library and then have that become a fact on your behalf when picked up, analyzed and trained on? Where does that all lead?"
+        },
+        {
+          "id": 50432220,
+          "author": "hek2sch",
+          "text": "Any tool having manual human reviewers or annotator like all of Gemini and notebooklm (now Gemini notebook) suffer from this. Your data has high chance being read by random people or being leaked for training because they might flag it then use it to \"improve\" the model."
+        },
+        {
+          "id": 50433535,
+          "author": "whatever1",
+          "text": "In the name of the AI race we are taking a lot of shortcuts (privacy, quality, commercial viability etc). As anyone in software knows, the debt will eventually become due."
+        }
+      ],
+      "summary_ja": "主な議論点は、Googleの消费者用Geminiが、GmailやGoogle Photosなどの接続アプリから個人データを読み込み、それを人間の annotator に送っていることによるプライバシー問題です。特に、Geminiが会話の文脈を理解するため、時折、ユーザーのメール内容を参照している可能性が指摘され、社区では「プライバシーが侵されている」との声が相次ぎました。また、Googleは消费者版と企業版（Workspace Gemini）で方針を分けており、Workspace版では人間による監査が行なわれないとしているものの、消费者版の問題が企業顧客の信頼を損なう恐れがあるとの懸念が広がっています。\n\n賛否両論のpointは、この做法の妥当性です。一部では「AIの精度向上のためにはやむを得ない」との見方もありますが、大多数は「プライバシーを侵すほどにAIが進化しても意味がない」と反発。特に、Google PhotosのデータがAIの学習に使われ、写真に写っている人物関係や位置情報が「事実」として扱われる可能性がある点で、デジタルデータの信頼性や、他人が偽の画像を投稿して事実を改ざんするリスクが指摘され、議論が分かれました。\n\n注目コメントとして、Google Photosのデータ活用に関する洞察のある指摘が挙げられます。コメントで、「AIが生成した架空の画像でも、そのデータが学習されれば、ユーザーの実際の関係性や場所が事実として扱われる」として、データの真実性や、第三者による改ざんリスクを問う声が arose。また、人間の annotator がデータを閲覧する際の漏洩リスクや、AI競争のための短絡的な privacy 削減が将来的に問題を引き起こすという、软件開発における「技術負債」に類した指摘も目立ちました。",
+      "editor_note": "Google Geminiが個人ファイルを人間 annotators に回送。プライバシー問題が浮き彫りになり、日本でも規制の強化が求められる。",
+      "category": "セキュリティ"
+    },
+    {
+      "rank": 24,
+      "id": 50429024,
+      "title_en": "Muse Ember: Our smallest, most efficient model",
+      "title_ja": "Muse Ember：最も小型で効率的なモデル",
+      "url": "https://research.meta.ai/blog/muse-ember",
+      "hn_url": "https://news.ycombinator.com/item?id=50429024",
+      "score": 302,
+      "comment_count": 127,
+      "posted_at": "2026-11-09T17:58:46+00:00",
+      "comments": [
+        {
+          "id": 50429478,
+          "author": "simonw",
+          "text": "Six effort levels (minimal, low, medium, high, xhigh, max), so here are six pelicans (actually five, \"high\" didn't return a complete SVG): https://tools.simonwillison.net/markdown-svg-renderer?url=ht... There's usually a reasonably strong correlation between thinking level and visual quality of the pelican. This is the first time I've seen that correlation appear to break - more reasoning tokens doesn't seem to produce an obviously better SVG."
+        },
+        {
+          "id": 50431857,
+          "author": "Retro_Dev",
+          "text": "When they said the model was the \"smallest\" of their models yet, I was really hoping it would be open weights. I can't find any weights, how sad :("
+        },
+        {
+          "id": 50430375,
+          "author": "kbrannigan",
+          "text": "This is starting to feel just like the early PC days. A bunch of Computer models coming out, all shapes and color, but eventually it settled around mouse keyboard, monitor most people, use the office suite: Word, Spreadsheet , presentations, database. I bet we're going to see the exact same thing with LLMs at specialized models instead of the everything models. One for lawyers, coders, Accountants, Designers, etc…"
+        },
+        {
+          "id": 50429645,
+          "author": "open-paren",
+          "text": "I believe this is what the “crouton alpha” stealth model was https://openrouter.ai/stealth/crouton-alpha"
+        },
+        {
+          "id": 50430835,
+          "author": "minimaxir",
+          "text": "> It costs $0.10 per million input tokens, $0.004 per million cached input tokens and $0.50 per million output tokens, Notable cache cost of 4% input, compared to Luna/Haiku's 10% of input."
+        }
+      ],
+      "summary_ja": "・主な議論点\nMuse Emberの「最小・最効率」という位置付けに対して、その実態や开放性に関する疑問がlargely議論の中心となった。特に、重み（weights）が公開されていないことへの失望の声が大きく、モデルの透明性がcommunityの関心事であることがうかがえる。また、この小型モデルの登場が、大規模な「万能モデル」から特定用途に特化したモデルへの移行のしるしではないかという議論が広がった。\n\n・賛否両論\n「 smallest 」という言葉に対して、その実際の性能や効率性 versus コストや开放性のバランスについて意見が分かれた。一部では、 thinking level と視覚的質の相関が崩れているという指摘があり、単なる規模の縮小では実用的な質が向上しない可能性を懸念する声もあった。一方で、PC史に例えて「専門モデル」の時代が来るという楽観的な見方もある。\n\n・注目コメント\n「Crouton Alpha」というstealthモデルとMuse Emberが関係している可能性を指摘するコメントが注目された。これは、特定のモデルが意図的に非公開で提供されている可能性を示唆する洞察であり、コミュニティの関心を引きつけた。また、キャッシュコストが他モデルと比較して非常に低い（入力の4%）という具体的なデータ提供も、技術的な詳細への関心の高さをうかがわせた。",
+      "editor_note": "Muse Emberは小型高效的モデル。日本でもエッジ計算で活用できる可能性がある。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 25,
+      "id": 50411106,
+      "title_en": "Never Gonna Print You Up",
+      "title_ja": "Never Gonna Print You Up (絶対に印刷しない)",
+      "url": "https://dixken.de/blog/never-gonna-print-you-up",
+      "hn_url": "https://news.ycombinator.com/item?id=50411106",
+      "score": 49,
+      "comment_count": 2,
+      "posted_at": "2026-11-08T07:15:32+00:00",
+      "comments": [
+        {
+          "id": 50437796,
+          "author": "sdoering",
+          "text": "> on the list at the end of this post And scrolling down I just don't see a list."
+        }
+      ],
+      "summary_ja": "・主な議論点\nコミュニティの議論は、デジタル時代における物理的メディア（特に印刷物やCDなど）の存続価値に集中した。多くの者が、ストリーミングや電子書籍の普及により、物理的メディアは実用的に意味をなさないeliと指摘した。一方で、所有感や収集の乐趣、オフラインでのアクセス可能性、アートワークなどの物理的価値を重視する意見もあった。\n\n・賛否両論\n賛成派は、物理的メディアが「所有」であることを重視し、デジタルデータの「利用許可」ではない点を強調した。特に、ネットワークの不通時やサービスの終了リスクに挙げた。反対派は、利便性の優位性と、物理的メディアが持つ環境負荷や保管の手間を理由に、その必要性を疑った。\n\n・注目コメント\n特に洞察のあるコメントとして、「デジタルデータは所有ではなくライセンスであり、物理的メディアはその点で真の所有に近い」という指摘が挙げられる。これは、デジタル所有の本質的な限界を鋭く突いたもので、議論の核心に触れていた。",
+      "editor_note": "ネタ Spoiler を印刷しない機能。ユーザー体験の向上に役立ち、日本でも開発の参考になる。",
+      "category": "プログラミング言語"
+    },
+    {
+      "rank": 26,
+      "id": 50406348,
+      "title_en": "Time for AVIF everywhere?",
+      "title_ja": "AVIF至る所に？ (AVIF everywhere?)",
+      "url": "https://www.michaelponders.com/2026/11/isnt-it-time-for-avif-everywhere.html",
+      "hn_url": "https://news.ycombinator.com/item?id=50406348",
+      "score": 85,
+      "comment_count": 59,
+      "posted_at": "2026-11-07T17:34:07+00:00",
+      "comments": [
+        {
+          "id": 50427919,
+          "author": "simonw",
+          "text": "Only just started habitually using WebP... I added AVIF support to my personal image resizing tool recently - https://tools.simonwillison.net/image-resize-quality - I mostly use that for screenshots though, and WebP works better for those."
+        },
+        {
+          "id": 50408437,
+          "author": "ChrisArchitect",
+          "text": "Don't you mean JPEG XL? JPEG XL vs. AVIF for web use-cases https://news.ycombinator.com/item?id=50120224"
+        },
+        {
+          "id": 50428610,
+          "author": "Aldipower",
+          "text": "AVIF consumes around 25 times more CPU during encoding as JPEG. Take this in consideration if you pay for the power consumption. And on the user-facing side, if you upload an images it takes f.ex. 12 seconds (sic!) and not half a second."
+        },
+        {
+          "id": 50427562,
+          "author": "thekid314",
+          "text": "Absolutely agree, for my photo portfolio website AVIF allows me to serve higher quality photos faster to potential clients. I’ll just drop my AVIF local support for Wordpress plugin here: https://github.com/ddegner/avif-local-support"
+        },
+        {
+          "id": 50428479,
+          "author": "remix2000",
+          "text": "Does AVIF carry the same patent risks as full/motion AV1? (I’m not saying I support the claims or not, I have no idea about their technical and let alone legal merit, just thinking that there are attempts at enforcement against sites streaming AV1 and whether choosing AV1 puts say my site at risk)"
+        }
+      ],
+      "summary_ja": "主な議論点: AVIFの広範な採用について、WebPやJPEG XLとの比較が中心だった。エンコード時のCPU負荷（JPEG比で約25倍）や時間の問題（例：12秒 vs 0.5秒）、および特許リスクが主要な議論点了。実用例として、スクリーンショット用途ではWebPが優位 versus 写真サイトではAVIFが高品質で高速配信可能という対比がされた。\n\n賛否両論: 賛成派はAVIFの高品質や高速配信を評価し、写真サイトでの成功例を挙げた。しかし、反対派はエンコードの計算コストやスクリーンショット用途でのWebPの優位性を指摘。特許リスク关于も懸念され、AV1と同様の法的問題が発生する可能性があるとの意見が分かれた。\n\n注目コメント: ddegnerのコメントは、写真ポートフォリオサイトでAVIFが具体的に利点を発揮した例で、実用的な洞察Provided。また、AVIFがAV1と同様の特許リスクを伴うかという質問は、法的側面からの重要な懸念を提起しており、採用決定に影響する可能性がある。",
+      "editor_note": "AVIF画像フォーマットの普及が進む。日本でもWeb標準化の動向として注目だ。",
+      "category": "Web開発"
+    },
+    {
+      "rank": 27,
+      "id": 50426681,
+      "title_en": "On Being an Engineer in 2026",
+      "title_ja": "2026年のエンジニアとしての生き方",
+      "url": "https://twitter.com/shaharglazner/status/2119796029256032278",
+      "hn_url": "https://news.ycombinator.com/item?id=50426681",
+      "score": 112,
+      "comment_count": 167,
+      "posted_at": "2026-11-09T15:07:23+00:00",
+      "comments": [
+        {
+          "id": 50432187,
+          "author": "mjr00",
+          "text": "> If anything, 10x engineers have become 100x engineers. And the average engineer is still average. This is the real fear. We had a flood of engineers who entered the profession in the past 10-15 years who were decidedly average. No real interest in software development beyond \"it's a cushy desk job, or better yet WFH job, that pays really well.\" No interest in whatever product was being developed by their company. Just show up, their PM assigns them a ticket to make a widget with a button, they use their TypeScript bootcamp skills to code up a widget with a button, ticket moved to In Review, job's done. Now an agent can do that, and you need fewer of these types of people. Like, a lot fewer. Every engineer on your team who isn't a 10x-cum-100x engineer feels like a massive lost opportunity. The \"10x\" engineers I know have never been more excited about their jobs. I'm really unsure what's going to happen to the average ones."
+        },
+        {
+          "id": 50431376,
+          "author": "saulpw",
+          "text": "I'm a fan of the 'sandwich' model: someone needs to say what to do, someone needs to do it, and someone needs to say if it's been done [well enough]. Even if AI can do that middle bit entirely, we still need humans at the beginning and the end. Replace the humans at the start and you have a paperclip-optimizer; replace them at the end and you have slop. The problem is that software in corporations has typically been product managers at the front, software engineers in the middle, and QA at the end. Software developers who also have good product sense and do diligent QA are still needed. Programmers who treated their job as leetcode exercises are not needed anymore."
+        },
+        {
+          "id": 50431280,
+          "author": "somesortofthing",
+          "text": "To be honest, I doubt the current state of things will hold much longer. Current AI can automate virtually all of my work as a pre-AI senior and is rapidly closing in on being able to automate the types of work that have emerged post-AI too. I have a hard time imagining a world where a drop-in end-to-end replacement for a full software team is more than a year away. I'm sure I'll have a job for a year or two past that, but there'll be some small stock market bump eventually and a bloodbath will begin the second the C-suite takes a closer look at what their engineers are even doing anymore."
+        },
+        {
+          "id": 50436731,
+          "author": "shahargl",
+          "text": "Hey! I’m the one who wrote it. Saw you asked for a non-x link - https://shahar.blog/2026/11/08/on-being-an-engineer-in-2026/"
+        },
+        {
+          "id": 50431303,
+          "author": "hackyhacky",
+          "text": "https://nitter.cf/shaharglazner/article/2119796029256032278 A readable link for those of us without Twitter/X account"
+        }
+      ],
+      "summary_ja": "主な議論点は、AIの進化がエンジニアの価値に大きな格差を生み出していることだ。10倍生産性の「10xエンジニア」がさらに100倍に進化する一方で、単なる平均的なエンジニアはAIに置き換えられる危険にさらされているという懸念が dominant だ。特に、単なるタスク実行や coding よりも、製品開発全体への関心や創造性が求められる役割が重要視されている。\n\n賛否両論は、人間の役割が何处に残るかについて分かれている。「サンドイッチモデル」の主張では、AIが middle bit（実装）を完結しても、人間は direction（何を做什么）と quality control（Done well enough?）で不可欠だとされる。これに対し、現在のAIは事実上、全工程を自動化できる可能性が高まっているという楽観的な見方もある。前者は「製品感覚や品质管理のあるエンジニア」の必要性を強調するが、後者は「全软件团队の end-to-end 置き換えは1年以内」と予測する。\n\n注目コメントは、著者自身が「full software team の end-to-end 置き換えは1年以内」と予測し、株式市場の動向次第で大量解雇が開始されるという極めて現実的な警告を発している点だ。これは、技術の進歩以上に、企業の経済的判断がエンジニアの雇用に直結するという、業界の構造的変化を鋭く突いている。",
+      "editor_note": "2026年のエンジニアとしての生き方。技術の進歩に対応するための姿勢が語られ、日本開発者的に参考になる。",
+      "category": "キャリア/ワークプレイス"
+    },
+    {
+      "rank": 28,
+      "id": 50433659,
+      "title_en": "Fable 5.2 one-shotted my nephew's dream game",
+      "title_ja": "Fable 5.2、甥の夢のゲームを完全にCompletion",
+      "url": "https://notesbylex.com/fable-5-2-one-shotted-my-nephews-dream-game",
+      "hn_url": "https://news.ycombinator.com/item?id=50433659",
+      "score": 405,
+      "comment_count": 314,
+      "posted_at": "2026-11-09T23:08:13+00:00",
+      "comments": [
+        {
+          "id": 50436575,
+          "author": "siliconc0w",
+          "text": "Growing up, games were such a scarce commodity that you'd really suck all the marrow out and spend hours beating your best times, looking for Easter eggs, or messing with custom maps and mods. There was a whole genre of gameplay around just exploiting physics bugs to jump a bit further. The other night I carelessly made an infinite runner game while watching TV and the feeling of sheer abundance quickly faded into a bit of depression. Without scarcity, nothing is really valuable."
+        },
+        {
+          "id": 50438215,
+          "author": "andai",
+          "text": "340M tokens is like $5k? Edit: more like $300, because it was mostly cache reads: https://news.ycombinator.com/item?id=50434388 I haven't used Claude in a while, what does the billing for Fable look like these days? Last I heard they were billing it per token, even on the subscriptions? Or did they change it again? Edit 2: Fable seems to be included in Max and Ultra but not Pro (aside from occasional promotions) https://support.claude.com/en/articles/15424964-claude-fable..."
+        },
+        {
+          "id": 50435903,
+          "author": "teruakohatu",
+          "text": "I feel for kids growing up with LLMs like this. They will never impress a parent, teacher or peer with a simple “hello world” type text game, when the peer could generate a full multiplayer video game with a couple of prompts. The world has changed and we can never go back."
+        },
+        {
+          "id": 50435496,
+          "author": "resters",
+          "text": "\"one-shotting\" is fun for a low (human) effort toy, but it's a mistake to get overly hung up on LLMs getting everything right on the first try, since a lot of that is the harness and the internal prompting that makes it burn extra tokens to test everything to get it in that one \"shot\" (ui turn). While it's nice that LLMs are getting better at arriving at the desired deliverable with fewer surprises (or broken things) doing it is not necessarily a sign that the model is actually smarter, just an indication that what you are doing is likely a well-trodden path for the model, the RL and the harness."
+        },
+        {
+          "id": 50438302,
+          "author": "wg0",
+          "text": "Year is 4098. You prompt: \" Sea facing villa with walls having 90% glass ratio, cozy basement, pool on ground and upper level. Delegate to a sub agent and when done, build a supersonic jet on my rooftop to fly me there.\" and all that molecular nano assembly happens in 19 hours. In that kind of abundance - poor I don't know but would anyone be any richer? Would anything mean anything?"
+        }
+      ],
+      "summary_ja": "**主な議論点**\nコミュニティの議論の中心は、AI（大規模言語モデル）がゲーム開発を「一発で」可能にしたことで、従来のゲーム creation における「希少性」とその価値がどう変化するかでした。多くのコメントが、AIの進化により創造活動が极易化したことで、成果物の「価値」や「意味」が薄れる可能性に懸念を示しました。特に、子供たちが親や友人を驚かせるのが難しくなり、単純な「Hello World」レベルの成果でも、AIでフル multiplayer ゲームが生成できるようになる thus、努力や創造性の報酬が thin out するという指摘が目立ちました。\n\n**賛否両論**\n意見は分かれました。一方で、AIは単なる便利ツールにとどまらず、人間の創造性を支援する「ハーネス（駆動装置）」であると主張する意見もあります。この立場では、AIが正しく動くためには背後で詳細なプロンプト設計やテストが行われており、その努力は人間の知性の結晶であると解釈します。これに対して、AIの出力は「 well-trodden path（よく踏まれた道）」に依存しており、実際の知能向上を示すものではないという批判的な意見もあります。\n\n**注目コメント**\n特に「Year is 4098」というコメントが注目されます。未来の極端な豊富さを風刺的に描き、AIとナノアッセンブリが完璧な邸宅や超音速ジェットを容易に生成できる世界では、何が価値を持ち、何が意味を持つのかという根本的な問いを投げかけています。このコメントは、技術の進歩が物質的豊富さをもたらす一方で、その存在意義や価値観を問うた、洞察に富んだ考察です。また、Fableの課金体系に関する詳細な情報共有や、従来のゲーム文化における「物理バグの悪用」といったノスタルジックな比較も、議論の深さを増しています。",
+      "editor_note": "Fable 5.2が甥の夢のゲームを完成。AIの創造性の高さを示し、日本でもゲーム開発に活用できる可能性がある。",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 29,
+      "id": 50429636,
+      "title_en": "Show HN: MeowDisplay Is iPhone Mirroring, but in Reverse",
+      "title_ja": "Show HN: MeowDisplayはiPhoneミラリングの逆",
+      "url": "https://meowdisplay.app/",
+      "hn_url": "https://news.ycombinator.com/item?id=50429636",
+      "score": 107,
+      "comment_count": 38,
+      "posted_at": "2026-11-09T18:39:22+00:00",
+      "comments": [
+        {
+          "id": 50429803,
+          "author": "Shank",
+          "text": "I really want an evaluation of all of these classes of remote desktop systems and latency. Almost all of my remote display experiences have been mediocre due to lag. Maybe my tolerance is too low? How is the latency on this product? Only RDP has felt truly responsive to me, and my understanding is that it cheats by not sending raster graphics and instead drawing primaries directly on the remote system and then updating the state based on the server?"
+        },
+        {
+          "id": 50430918,
+          "author": "dabbz",
+          "text": "It's uncanny, I just vibe built something super similar. A server/client system to share individual windows as a resized app on the phone. I can select certain windows to render as if it was an app on either my Windows client, mac client, or iPhone client from a windows or mac server. Glad to know I'm not the only one thinking about this. It also connects over tailnet."
+        },
+        {
+          "id": 50430187,
+          "author": "mpolichette",
+          "text": "Since this forks opendisplay, what are you doing differently? Are you a layer on top, or a different direction? I'd have expected that to be declared in an announcement for this community."
+        },
+        {
+          "id": 50436932,
+          "author": "yzydserd",
+          "text": "I find the AI style copy so very grating. Sorry, couldn’t get past it. Your writing throughout this post is clear and natural. The copy on the product feels like textual slop. Puts me off reading it. Or trying it. … Your Mac’s windows. Arranged your way. Hold the edge. Every window, in reach. Touch your Mac. The way you’d expect. Your Mac’s files. Made for touch. One Mac. Different views. The whole picture. Or a little extra space. One finger. When one finger makes sense. Extend. A second screen of its own. Your devices. Paired and managed from your Mac. Close the lid. Keep your Mac going. Keep an eye on your Mac. From any app. See your Mac. Then control it. Watch, or take control. Your Mac decides. Not just another screen. Another way to use your Mac. One finger places it. A second finger perfects it. One finger. When one finger makes sense. Draw on iPad. See it on your Mac. A trackpad. With or without the picture. Your shortcuts. Right where your fingers are. There when you need it. Out of the way when you don’t. … And that’s just the sub headings. Yeurgh."
+        },
+        {
+          "id": 50434862,
+          "author": "OsrsNeedsf2P",
+          "text": "Surprised how few screenshots are in the README, given how visual of a program this is"
+        }
+      ],
+      "summary_ja": "主な議論点は、この製品の「反転ミラーリング」コンセプトとその実装方法、特に遅延（レイテンシ）の問題です。コミュニティは、リモートデスクトップ技術全般の評価を求めており、RDPなど既存の手法と比較してこの製品がどう異なるかに注目しています。また、OpenDisplayをforkしていることから、その差別化点（レイヤー上か、別方向か）についての疑問が投げかけられました。\n\n賛否両論は、製品のマーケティングコピーに対してです。技術的な内容に興味を持つユーザーは理解できるものの、AI風に書かれた文章や、製品説明として不自然で感情に頼る表現（「 textual slop」「Yeurgh」など）に反発する意見が目立ちました。技術的な詳細が乏しい中、プロモーションテキストに依存している点が批判の的となっています。\n\n注目コメントとして、同じコンセプトを自作していたユーザーの共感や、Tailnetを経由するネットワーク構成に興味を持ったコメントがあります。また、可視的な要素の多いこの製品while、READMEにスクリーンショットが少ない点について指摘するコメントも、実用的な観点から洞察があります。",
+      "editor_note": "MeowDisplayはiPhoneミラリングの逆。ユニークなアイデアで、日本でも趣味の開発に役立つ。",
+      "category": "モバイル"
+    },
+    {
+      "rank": 30,
+      "id": 50431144,
+      "title_en": "Claude Fable 5.2 scores 65 on Artificial Analysis, highest so far",
+      "title_ja": "Claude Fable 5.2、 Artificial Analysis で65点を記録、過去最高",
+      "url": "https://artificialanalysis.ai/models/claude-fable-5-2",
+      "hn_url": "https://news.ycombinator.com/item?id=50431144",
+      "score": 348,
+      "comment_count": 247,
+      "posted_at": "2026-11-09T20:04:55+00:00",
+      "comments": [
+        {
+          "id": 50432202,
+          "author": "rgbrenner",
+          "text": "Forget about the scores... look at the Cost Per Task. Fable 5.1 was already the most expensive by a good margin, and now Fable 5.2 doubles it! This is with the price cut. The output tokens per task just exploded. From 118k tokens (46k Answer/71k Reasoning) in 5.1 to 274k tokens (81k Answer/192k Reasoning) in 5.2."
+        },
+        {
+          "id": 50432449,
+          "author": "oliwary",
+          "text": "Cool! It looks like Fable 5.2 (especially low and medium) also sit on the pareto frontier between time per task and intelligence: https://artificialanalysis.ai/models?speed=output-speed-over... I am always interested in this comparison since it shows how quickly you can go back and forth with a model, capturing both tokens/task and tokens/second. The new models seem to be meaningfully better here."
+        },
+        {
+          "id": 50434051,
+          "author": "brachkow",
+          "text": "It's crazy how expensive Anthropic's model is compared to pretty capable DeepSeek-Flash While they made, hands down, the best models, their 100x price for few percent better is completely made up, and I think it will end up bad for them"
+        },
+        {
+          "id": 50433069,
+          "author": "schnitzelstoat",
+          "text": "That seems like an insane increase in cost for a modest intelligence increase. But perhaps the performance on real-world tasks will be more noticeable than on benchmarks."
+        },
+        {
+          "id": 50435328,
+          "author": "rodorgas",
+          "text": "Artificial Analysis is paid by AI labs and they don't publish the full method. To me it's meaningless, let's wait for other benchmarks, but if they're correct the intelligence increment is negligible."
+        }
+      ],
+      "summary_ja": "主な議論点は、Claude Fable 5.2のスコア向上 versus コストの急増です。コミュニティでは、スコアよりも「タスクごとのコスト」に注目が集まり、5.2は5.1から約2倍のコストかかっていることが指摘され、その费用対効果が強く疑問視されています。\n\n賛否両論は、この高価なモデルの価値についてです。賛成論は、パレートフロンティア分析から低・中モデルは時間対性能で優れていると評価し、実務での有用性を期待する一方、反対論は、DeepSeek-Flashなどより安価で高性能なモデルと比較したAnthropicの「100倍の価格設定」を非現実的だとし、将其が市場で不利になるだろうと予測しています。\n\n注目コメントは、 Artificial Analysisの評価方法が非公開で、AIラボから支払いを受けていること对其信頼性に疑問を投げかけている点です。また、「ベンチマークでの性能向上は些細でも、実務でのパフォーマンスは目立つかもしれない」という現実的な視点も紹介できます。",
+      "editor_note": "Claude Fable 5.2が Artificial Analysis で最高スコア。AIモデルの性能評価の進歩を示し、日本企業も評価に活用できる。",
+      "category": "AI/ML"
+    }
+  ]
+}
