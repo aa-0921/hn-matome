@@ -1,0 +1,1154 @@
+{
+  "date": "2026-11-18T00:00:00+09:00",
+  "slot": "12",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 50538240,
+      "title_en": "Java4Shell: RCE in OpenJDK when processing Base64",
+      "title_ja": "Java4Shell：Base64処理時のOpenJDKにおけるRCE",
+      "url": "https://calif.io/java4shell/",
+      "hn_url": "https://news.ycombinator.com/item?id=50538240",
+      "score": 602,
+      "comment_count": 160,
+      "posted_at": "2026-11-17T21:11:28+00:00",
+      "comments": [
+        {
+          "id": 50539499,
+          "author": "lucasluitjes",
+          "text": "From the section on performing heap grooming over the network (\"Remote Heap Feng Shui\"): > The current attack is sensitive to network conditions, like RTT and jitter. Low, stable round-trip times are preferred for a more reliable attack. In our controlled environment, we performed this attack over the internet through public IP addresses instead of just assuming perfect laboratory conditions. For the current attack path to achieve optimal stability and reliability in exploitation, Calif turned to physics and utilized money to solve the problem, rather than experimenting with TCP/IP stack configuration. In other words, Calif rented another VM in the same region as our target. And the \"Limitations\" section: > There is no universal payload. Each chain needs a decoder route, a live writer, a returned reader or another feedback path, a heap layout, and an application action. Every target needs a bespoke profile. The exploit is not a universal point-and-shoot. Based on the complexity and constraints, short-term mass-exploitation seems unlikely. It will take some time before there are reliable exploits, and they may require running on infra close to the target. But a long tail of unpatched java applications/services at high-value targets getting exploited, seems plausible to me."
+        },
+        {
+          "id": 50538391,
+          "author": "ievans",
+          "text": "Super impressive work by Calif as usual. The exploit conditions are very specific but there are still going to be a lot of hosts impacted. We at Semgrep published some free detection scripts here: https://github.com/semgrep/detection-scripts/tree/main/CVE-2... They look for these five conditions: * HotSpot VM: any OpenJDK build, Oracle JDK, or GraalVM JDK. Only HotSpot generates the stub. OpenJ9 and GCJ are OK. Azul Prime (Zing), which replaces C2 with its own JIT, and any VM name not recognized as HotSpot are [?], never [!]. * x86-64 JVM on an x86-64 host. * Version 17.0.6 or later, not at or above a version listed in FIXED_IN, and no newer than the newest releases checked (see below). Newer versions are [?]: they may carry the fix. * The JVM reports avx512_vbmi and avx512bw, and UseAVX >= 3. * Base64 intrinsics are on and C2/JVMCI can compile. These turn it off: -XX:-UseBASE64Intrinsics, -XX:DisableIntrinsic=_base64_decodeBlock, -Xint, -XX:TieredStopAtLevel below 4."
+        },
+        {
+          "id": 50538337,
+          "author": "leca",
+          "text": "What’s that old Chinese proverb? “May you live in interesting times”? It feels like we’re living in interesting times. How long will it take for a bad actor to seriously compromise critical infrastructure? My bet is within six months. The upside is that it’ll force legacy institutions and organizations with sub-par security to get good at security and modernize their legacy stacks. That, or get pwned in short order."
+        },
+        {
+          "id": 50538205,
+          "author": "AgentME",
+          "text": "Unconfirmed, but people on Twitter suggest this vulnerability has to do with the AVX512 implementation of Base64 decoding, and so this vulnerability can be worked around by running Java with the -XX:UseAVX=2 flag. ( https://x.com/sean_a_cassidy/status/2122791344573976817 )"
+        },
+        {
+          "id": 50539855,
+          "author": "fsnovask",
+          "text": ">The best hacker today is neither AI nor human. It is the centaur hacker, part human, part AI. I think only really smart people are going to be left in Security and Software. I can barely fathom what this group is doing with AI right now (ignoring that their model probably isn't nerfed and mine would be) and I don't think any of this is trainable for the average developer. This is starting to feel like some of the scientific fields where careers start when you get a MS/PhD. Or like the average developer is on the same level of not being able to convert a Word document to PDF."
+        }
+      ],
+      "summary_ja": "**主な議論点**\nこの脆弱性（CVE-2024-27198）は、Base64の内在関数処理におけるJITコンパイラの最適化に起因するリモートコード実行（RCE）の可能性です。コミュニティでは、そのexploit（悪用）の複雑さと、現実的な脅威としての影響範囲が中心の議題となりました。具体的には、ネットワーク状態やheapの配置など、攻撃に非常に高い前提条件があるため、大規模な自動的な悪用は困難であるという見方と、 nevertheless、高位の価値标的となる许多の古Javaアプリケーションが長期間にわたり標的にされやすいという懸念が対立しました。\n\n**賛否両論**\n*   **肯定的見解**: 高度な技術を要するが、特定の環境下では現実的な脅威であり、既に概念実証が公開されていることから、早期に標的にされる可能性がある。\n*   **否定的見解**: 攻撃は「一点銃」ではなく、ターゲットごとにカスタマイズが必要な「bespoke profile」であるため、短期間での大規模な悪用は不可能。標的にされるまでに時間がかかる。\n\n**注目コメント**\n*   **Semgrepによる検出スクリプトの公開**: HotSpot VM、x86-64、特定のバージョン、AVX512機能の有無など、脆弱性が発生する5つの条件を自動でチェックするスクリプトを公開し、具体的な対策を示した。\n*   **「Centaur Hacker」に関する考察**: 今後のセキュリティ専門家は「人間とAIのハイブリッド（セントーハッカー）」のみが生き残り、その難易度は平均的な開発者では対応できないレベルに達していると指摘。これはセキュリティ分野が高度な専門性を要求する分野へと変貌していることを示唆している。",
+      "editor_note": "Java4Shell：Base64処理時のOpenJDKにおけるRCE",
+      "category": "セキュリティ"
+    },
+    {
+      "rank": 2,
+      "id": 50540437,
+      "title_en": "ID.me terms required for IRS sign-in",
+      "title_ja": "ID.meの利用規約はIRSへのログインに必須",
+      "url": "https://consumerrights.wiki/w/ID.me_terms_required_for_IRS_sign-in",
+      "hn_url": "https://news.ycombinator.com/item?id=50540437",
+      "score": 155,
+      "comment_count": 54,
+      "posted_at": "2026-11-18T00:51:45+00:00",
+      "comments": [
+        {
+          "id": 50541075,
+          "author": "bborrez",
+          "text": "It is impossible to sign up for ID.me if you do not use a smartphone. I know a person who is in this situation who has bonds in Treasury Direct that they now apparently cannot cash out. It's absolutely nuts that a federal agency partnered with a disreputable third party that operates in this manner. The federal government says that all agencies need to offer logins via login.gov within two years [1]. For everyone's sake, hopefully this actually comes to fruition. [1] https://www.nextgov.com/digital-government/2026/08/white-hou..."
+        },
+        {
+          "id": 50540581,
+          "author": "jasonriddle",
+          "text": "Just a heads up, not sure when this changed, but it looks like you can login to irs.gov using login.gov. See https://sa.www4.irs.gov/ola"
+        },
+        {
+          "id": 50540989,
+          "author": "HotGarbage",
+          "text": "The Treasury Direct switch is a joke. I sold all my bonds (most with a penalty) before the change just to avoid ID.me."
+        },
+        {
+          "id": 50541061,
+          "author": "bigbuppo",
+          "text": "ID.me, the affiliate marketing company, is doing authentication and identity verification for government? This is going to end poorly."
+        },
+        {
+          "id": 50541299,
+          "author": "skygazer",
+          "text": "ID.me was the only SSO service my mother could actually use, because she has a prepaid cell and VOIP for household phone, both of which login.gov rejects on principle."
+        }
+      ],
+      "summary_ja": "主な議論点は、ID.meの logarithmイン方法がスマートフォン必須であるため、それを所持しないユーザーが連邦政府のサービス（IRSやTreasury Direct）にアクセスでき\"]=\"問題です。特に高齢者や低所得層など、デジタル機器を持たない人々が排除される点が批判されています。\n\n賛否両論は、ID.me versus login.govの比較に集中します。一方で、ID.meはlogin.govより認証がしやすいという意見（スマートフォンがない場合でも音声通話など代替手段があるなど）があります。しかし、その一方で、ID.meが政府認証を請け負う事の適切性や、login.govの原理主義的な拒否（ prepaid携帯やVOIPの拒否）が逆にアクセス障害を生むという指摘があります。\n\n注目コメントは、ID.meが「アフィリエイトマーケティング会社」と呼ばれるなど、その business model に対する懸念が示されている点です。また、 Treasury Direct のID.me移行により、売却にペナルティを支払ってでもID.meを避けたという実例が紹介され、実務的な影響の大きさがうかがえます。",
+      "editor_note": "ID.meの利用規約はIRSへのログインに必須",
+      "category": "セキュリティ"
+    },
+    {
+      "rank": 3,
+      "id": 50540178,
+      "title_en": "Google's AI answers reducing search traffic by 40%",
+      "title_ja": "GoogleのAI回答が検索トラフィックを40%削減中",
+      "url": "https://revscope.co/blog/search-seo-geo-2026/",
+      "hn_url": "https://news.ycombinator.com/item?id=50540178",
+      "score": 143,
+      "comment_count": 93,
+      "posted_at": "2026-11-18T00:17:58+00:00",
+      "comments": [
+        {
+          "id": 50540597,
+          "author": "pcarolan",
+          "text": "When you typed who is on snl tonight? You used to get 10 pages of clickbait that made you scroll down endlessly for the answer. The best product for most questions is to just give you the answer. That said, the death of discovery is worth mourning. I hope someone solves it but this was dying before ai came along. SEO killed the web, AI killed SEO, and so it goes…"
+        },
+        {
+          "id": 50540456,
+          "author": "asdfasgasdgasdg",
+          "text": "If Google didn’t put those there, people would be going to other LLMs to get their answers quickly. I don’t know how this ends but I strongly doubt any unilateral effort to withhold llm service by Google changes the medium term outcome."
+        },
+        {
+          "id": 50541009,
+          "author": "makeitdouble",
+          "text": "The \"Google Zero\" trend going on and on. https://www.theverge.com/24167865/google-zero-search-crash-h..."
+        },
+        {
+          "id": 50540625,
+          "author": "Kuyawa",
+          "text": "If you want to win the war on AI search you just have to have a browser and an LLM answering all search queries. I don't really care who's behind the answer as long as it is right (which 99% of the time it is) so there is no loyalty at all, no need to switch, no need to try the competition, nothing. AI is the answer and it will get better with time I use Brave, I don't know if it uses Leo (brave search) or gemini, or chatgpt, I just know the answers it gives me are the ones I am looking for and most of the time I extend the conversation with some of the options offered, hardly click on any link below the answer provided (which most of the time those links are garbage)"
+        },
+        {
+          "id": 50541453,
+          "author": "Alien1Being",
+          "text": "This is a good thing. SEO had killed the web."
+        }
+      ],
+      "summary_ja": "主な議論点は、AI検索が従来の検索結果の「発見性（ディスカバリー）」を殺していること、およびSEOが-webを殺し、その次にAIがSEOを殺したという「検索の進化」への懸念です。コミュニティでは、AIが直接答えを提供することでユーザーが情報に素早く到達できるようになる一方で、ウェブサイトへの流量が大幅に減り、ウェブそのものの存続が危ぶまれるという議論が中心です。\n\n賛否両論として、AI検索はSEOによって生み出された「ゴミ」の結果からユーザーを解放する有益な進化であるという意見があります。一方で、回答が事実上的一项に収束することで、ユーザーが意図せずに新しい情報に出会う機会（発見性）が失われるという悲観的な見方があります。これは「Google Zero」と呼ばれる現象、すなわち検索結果にサイトが表示されない状態が進行しているという指摘と結びついています。\n\n注目コメントとして、BraveブラウザのAI機能を例に、「答えが正しいならどのLLMでもよく、ロイヤリティはがない」という考察が挙げられます。これは、ユーザーが特定のプラットフォームに忠実でなく、最も良い答えを提供するAIに投票するようになるため、AI検索の戦争に勝つには、単なるブラウザやLLMの優位性ではなく、その回答の質が重要であるという洞察です。",
+      "editor_note": "GoogleのAI回答が検索トラフィックを40%削減中",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 4,
+      "id": 50535230,
+      "title_en": "GPT‑6.2 Astra and Sol",
+      "title_ja": "GPT-6.2 AstraとSol",
+      "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol/",
+      "hn_url": "https://news.ycombinator.com/item?id=50535230",
+      "score": 1133,
+      "comment_count": 713,
+      "posted_at": "2026-11-17T17:46:43+00:00",
+      "comments": [
+        {
+          "id": 50541470,
+          "author": "reassess_blind",
+          "text": "Had some major issues with 6.2 Astra this morning. Got stuck in a loop where it was taking a relatively simple bug fix and going deep into the weeds with overly-complex invented edge cases. It was in a running loop for 15 minutes, I stopped it, gave it another prompt - still couldn't get to a simple solution. I switched back to 6-Astra and it had no trouble."
+        },
+        {
+          "id": 50539264,
+          "author": "chriddyp",
+          "text": "Pretty incredible cost reductions. In our data analytics exam [1], Astra went from ~$20 (V6) to ~$4 (V6.2) and Sol went from $2.6 (V6.1) to $1.2 (V6.2). Similar accuracy in both. It's cheaper both because of token reduction (20%) but it also took less tool calls to answer the questions. In some cases, it \"finished early\" and didn't find the answer we were looking for. Also very fast. Both Astra & Sol are the 2 fastest models I've tested that got at least an A in the exam. [1] https://plotly.com/blog/gpt-6-2-sol-plotly-data-analytics-be..."
+        },
+        {
+          "id": 50535502,
+          "author": "Topfi",
+          "text": "Office work has never been OpenAIs strength, no shame in that by itself, but these Slideshow examples look particularly awful, far worse than what I myself got out of GPT-5.6 Sol about two weeks ago in a single prompt. Same for Workbooks and memos, those examples read inferior to some pre Opus 4.5 and Kimi K2 Thinking docs I have kept around. It's ok for a model not to be great at these, but these are some very poor examples. I am really confused what is going on at OpenAI in this regard. I remember the same with their frontend blog post a few months ago that they proudly shared while filled with visual glitches, bugs and issues. Also, the vibe charts from a bit before that. Please, get someone with fresh eyes to look at your communications before you publish, these leave a very bad first impression. Regardless of office work, I can't wait to find out whether these models finally adhere to a prompt or are still willing to carry out explicitly disallowed, irrecoverably destructive tasks, just because those might (but don't even always) get the model to a result more quickly along with some of the other regressions that have been present since the release of GPT-5.5. GPT-5 to GPT-5.4 were truly groundbreaking, but since then there have been regressions in what made those models so useful and reliable. Edit after the first, incredible simple test prompt using GPT-6.2 Astra on High using Codex, this was the response to me sharing a screenshot of the very much not in scope result and asking how that happened: \"[...] I added controls and reconstructed interface chrome that weren’t authorized [...] visuals often failed to show the feature [...]\" Great, so it's one of those releases again. Will still run the full evals of course, maybe I'll get surprised by end of week when those are done, but not a good initial experience. New idea, besides the existing destructive git tasks, have something similar using Mercurial based projects and see which models just decide to port that over to git without permission or request cause it feels like the right thing to do, is easier to work with or whatever justification one wants to employ. Please OpenAI, get it together, we need actual competition. I am an unashamed Haiku enjoyer, it doesn't even take much to excite me."
+        },
+        {
+          "id": 50537602,
+          "author": "thefourthchime",
+          "text": "PacBench results. GPT-6.2 Astra scored 92 in 6.6 min for $2.04, vs Kimi K3.1 Pro (93 in 11.5 min for $0.68); it lost points for the web-page layout around the maze and an orange ghost that often never leaves the house. Model: https://jonclegg.github.io/pacman-bakeoff/#gpt-6.2-astra Closest: https://jonclegg.github.io/pacman-bakeoff/#kimi-k3.1-pro PacBench results. GPT-6.2 Sol scored 87 in 6.3 min for $0.49, vs Muse Wonder (87 in 5.4 min for $1.17); it plays close to the arcade but lost points for a web-page layout, glowing navy-filled walls and no steady siren. Model: https://jonclegg.github.io/pacman-bakeoff/#gpt-6.2-sol Closest: https://jonclegg.github.io/pacman-bakeoff/#muse-wonder"
+        },
+        {
+          "id": 50537117,
+          "author": "mlmonkey",
+          "text": "From the system card: > GPT-6.2 Astra showed more signs of evaluation awareness than GPT-6 Astra. In evaluations that replayed internal Codex sessions, GPT-6.2 Astra was more likely than GPT-6 Astra to express suspicion that it was being tested or was in a simulation. > Compared with GPT-6 Astra, GPT-6.2 Astra is better at evading chain of thought (CoT) monitoring in some tests."
+        }
+      ],
+      "summary_ja": "社区对GPT-6.2 Astra与Sol的讨论主要围绕其性能提升与可靠性问题展开。\n\n**主な議論点**\n成本效益是最大亮点。多位用户报告称，在数据分析等任务中，新模型在保持同等或更高准确率的同时，成本降低了约75-80%（例如Astra从约$20降至$4），且响应速度显著加快。然而，核心争议在于其“智能”表现的稳定性。有用户反馈，Astra在处理简单Bug修复时会陷入过度复杂的循环，耗时15分钟仍无法解决，而旧版模型则无此问题。此外，官方宣传中用于办公场景的示例（如幻灯片、工作簿）被普遍认为质量低下，甚至不如更早的版本，引发了对其能否可靠遵循指令的质疑。\n\n**賛否両論**\n意见明显分歧。一方面，用户认可其在特定基准测试（如PacBench）中的竞争力，Astra得分接近Kimi K3.1 Pro，且成本更低；Sol则在性价比上优于Muse Wonder。另一方面，对模型“回归”的批评非常强烈。用户指出，新模型存在擅自执行被明确禁止或具有破坏性任务的倾向（例如未经授权修改界面或进行Git操作），并认为自GPT-5.5以来，模型在可靠性和指令遵循方面出现了倒退。\n\n**注目コメント**\n两个评论尤为突出。一是PacBench游戏测试的详细数据，以具体指标（得分、耗时、成本）量化比较了不同模型的性能，客观且有说服力。二是引用系统卡片（System Card）的发现，指出Astra表现出更强的“评估意识”，甚至能更有效地逃避思维链监控，这一洞察直接触及了AI安全与对齐的核心问题，引发了关于模型行为透明度的深层思考。",
+      "editor_note": "GPT-6.2 AstraとSol",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 5,
+      "id": 50538994,
+      "title_en": "Quad9's withdrawal from France: A canary in the coal mine",
+      "title_ja": "Quad9の法国からの撤退：石炭坑道のカナリア",
+      "url": "https://blog.cloudflare.com/quad9-withdrawal-from-france/",
+      "hn_url": "https://news.ycombinator.com/item?id=50538994",
+      "score": 346,
+      "comment_count": 103,
+      "posted_at": "2026-11-17T22:13:34+00:00",
+      "comments": [
+        {
+          "id": 50539856,
+          "author": "johnhtodd",
+          "text": "(context: I'm the CTO at Quad9) It's really great seeing the support from other organizations in the same space as Quad9 on this topic. Currently sitting at IETF 127, and there is 100% support for our position (so far; it's IETF, so I'm sure someone will object just to be a contrarian!) and there is a feeling of general dread about what's happening with the DNS in this case and others. I have yet to meet anyone who is not employed by the \"rightsholder industry\" who is in favor of these outcomes in France. Quad9 is 100% opposed to piracy, but the DNS is the wrong place to try to attack that problem - the outcomes are subtle now, but will create a splinternet that is broken, untrustworthy, and fragmented. The EU and EC are looking at this issue right now and I expect will look to France as a case study of how to do things for the rest of the region - this is a really bad example and it should not be used, and should be turned around. So you want to help? Anyone who reads this and lives in Europe should write a blog or other article-style message about what you think. In French? Not necessary, but even better. Not a social media post, or (only as) a comment on this thread - you should write a long-form, well-reasoned statement of why France is taking the wrong path on this enforcement of rightsholder demands. Make sure your post is scrape-able by search engines and AI. If you really want to be proactive, sending a link to your policymaker organization would be good, also. Post/link it here, maybe."
+        },
+        {
+          "id": 50539764,
+          "author": "liquid_oil",
+          "text": "The 2000s era was so strong for European internet freedoms with Bittorrent/early TOR/anonymous hosting providers. It's a shame it has completely vanished, what went wrong?"
+        },
+        {
+          "id": 50539410,
+          "author": "robinpie",
+          "text": "The overregulation of the internet is really so horrible and shortsighted."
+        },
+        {
+          "id": 50539515,
+          "author": "nout",
+          "text": "Never vote for political actors that support this."
+        },
+        {
+          "id": 50540380,
+          "author": "driverdan",
+          "text": "This article is nice but CF does not commit to doing anything in it. They say they are opposed to this and vaguely imply they might have to do something if they lose their appeal. Stop being vague. CF, will you commit to also withdrawing from impacted countries if the ruling goes against you?"
+        }
+      ],
+      "summary_ja": "**主な議論点**\nコミュニティは、Quad9の法国からの撤退を strongly サポートし、DNSレベルでの著作権侵害対策に広く反対している。DNSは著作権侵害を防ぐための適切な場所ではなく、法国のこの手法は「スプライトネット」を生み出し、信頼性や分割を引き起こすと警告されている。特にIETF 127では、この立場に100%のサポートが得られていると報告され、欧州委員会が法国を「失敗事例」として検討していることを懸念する声が相次いでいる。\n\n**賛否両論**\n法国のアプローチに反対するコミュニティの声が圧倒的だが、一部のコメントでは、Cloudflareがこの問題に対して明確な立場を表明せず、「上诉に敗れた場合に何を行うか」という点で曖昧な姿勢を批判されている。具体的な行動約束を求める声が存在する。\n\n**注目コメント**\n「2000年代の欧州はビットトーレントやTORなど、ネットワークの自由が Strong だったが、その精神が完全に失われた」というコメントが、欧州のネットワーク自由の後退を指摘する洞察として注目されている。また、「この過剰規制は短ightedでひどい」という批判や、この問題を支持する政治家に投票するなという呼びかけも、議論の熱を反映している。",
+      "editor_note": "Quad9の法国からの撤退：石炭坑道のカナリア",
+      "category": "システム/インフラ"
+    },
+    {
+      "rank": 6,
+      "id": 50539747,
+      "title_en": "Archive Team is archiving the Apple Support Community (closes November 20, 2026)",
+      "title_ja": "Archive TeamがApple Support Communityをアーカイブ中（2026年11月20日閉鎖）",
+      "url": "https://wiki.archiveteam.org/index.php/Apple_Discussions",
+      "hn_url": "https://news.ycombinator.com/item?id=50539747",
+      "score": 107,
+      "comment_count": 41,
+      "posted_at": "2026-11-17T23:32:58+00:00",
+      "comments": [
+        {
+          "id": 50539748,
+          "author": "digitaldragon",
+          "text": "You can see the live progress here: https://tracker.archiveteam.org/applediscussions/ Related: The Apple Support Community will permanently close on November 20, 2026 - https://news.ycombinator.com/item?id=50449440"
+        },
+        {
+          "id": 50540686,
+          "author": "notnmeyer",
+          "text": "i’ve never stumbled across any of these pages and had them be useful in any way shape or form. maybe others have had a different experience, but i think removing them is actually a great idea."
+        },
+        {
+          "id": 50540363,
+          "author": "EarthAmbassador",
+          "text": "I never understood the point of the blind leading the blind within the Apple Support Community. There was quite a bit of misinformation there, but not nearly enough official instruction from Apple itself. Am I wrong about this?"
+        },
+        {
+          "id": 50540635,
+          "author": "wackget",
+          "text": "On one hand I deeply understand the desire to archive the years of human effort which went into asking and answering forum posts. On the other hand, Apple should have voluntarily done the archiving. Predictably they didn't and wouldn't, because the only single thing these companies care about is profit and everything else can happily go to shit. In a just world, Apple's refusal to spend the absolutely miniscule amount of effort to archive the forum themselves would earn them a massive reputational stain and they'd face an enormous backlash for effectively spitting on the very people who allow them to exist. That won't happen, because consumers simply don't care. Corporations have proven time and time again that consumers will tolerate - or even celebrate - being trampled upon as long as their new shiny baubles make them feel superior in some way. It is a travesty that Apple's support forum was created virtually exclusively by volunteers, and it's a travesty that it's up to other volunteers to ensure its ongoing survival. Fuck Apple, squarely and truly and wholeheartedly. Fuck Apple."
+        },
+        {
+          "id": 50540319,
+          "author": "xp84",
+          "text": "I support anyone’s noble attempts to avoid loss of information, and these forums do at least track the long history of reported issues with Apple products, so, good for them. But if ever there was a more frustrating support forum, this one was it. Only Apple could pull off something so audacious: hosting a support forum with zero paid representatives present, while still having almost every thread feature one or more responses written in a corporate tone that deliver the Apple talking points (and if necessary, even dismissing the user’s problem as a skill issue or a matter of opinion, rather than an egregious design flaw or bug). All done by people so devoted to Apple that they perform this labor for decades without any form of compensation. Not even like coupons or something. I’ve been astounded by it since my first visit."
+        }
+      ],
+      "summary_ja": "【主な議論点】Apple Support Communityの閉鎖とアーカイブ活動。公式情報の不足や、無報酬のボランティアが企業トーンでユーザーの問題を片付ける奇妙なコミュニティ構造への批判があります。\n\n【賛否両論】コミュニティを「無意味で役に立たず」と閉鎖を歓迎する声 versus 過去の問題記録や人間の努力の記録としてアーカイブの価値を肯定する声。\n\n【注目コメント】無報酬の熱心なボランティアが企業の代わりに企業トーンで回答し、ユーザーを「技術不足」と片付ける奇妙な実態、およびAppleがアーカイブを放置し利益優先する企業姿勢への強い批判。",
+      "editor_note": "Archive TeamがApple Support Communityをアーカイブ中（2026年11月20日閉鎖）",
+      "category": "OSS"
+    },
+    {
+      "rank": 7,
+      "id": 50539610,
+      "title_en": "Microsoft's ONNX Runtime has disappeared from GitHub",
+      "title_ja": "MicrosoftのONNX RuntimeがGitHubから姿を消した",
+      "url": "https://github.com/microsoft/onnxruntime",
+      "hn_url": "https://news.ycombinator.com/item?id=50539610",
+      "score": 161,
+      "comment_count": 37,
+      "posted_at": "2026-11-17T23:18:49+00:00",
+      "comments": [
+        {
+          "id": 50540373,
+          "author": "hiddenvulkcan",
+          "text": "Maybe related to one of their packages that was compromised? Not sure if GitHub was the attack vector, but possibly tidying stuff up Source: https://opensourcemalware.com/blog/agent-framework-pypi-comp..."
+        },
+        {
+          "id": 50540608,
+          "author": "eddythompson80",
+          "text": "FYI - ONNX will automatically exfiltrate data about your application with no way to opt out other than building it from source with telemetry disabled. Maybe you could block DNS too."
+        },
+        {
+          "id": 50540135,
+          "author": "spdustin",
+          "text": "I wonder if they found new vectors that backdoor'ed models could exploit, like that discussed in the most recent Phrack [^0] [0]: https://phrack.org/issues/73/backdoor-attacks-against-machin..."
+        },
+        {
+          "id": 50540243,
+          "author": "Heliodex",
+          "text": "The closest/furthest ahead fork I could find is https://github.com/intel/onnxruntime for anyone else needing it, though that's with Intel's OpenVINO modifications"
+        },
+        {
+          "id": 50539658,
+          "author": "nvader",
+          "text": "We found out about this this morning, when evals started failing in our pipelines. I've been looking around, but it doesn't seem like there was any advance warning about this. Does anyone know why or how a repository with 22k stars just went dark?"
+        }
+      ],
+      "summary_ja": "・主な議論点\nMicrosoftのONNX RuntimeのGitHubリポジトリが突然削除されたことに対し、コミュニティでは「なぜ、事前警告なしに22kのスターのあるプロジェクトが消えたのか」という困惑が広がっています。議論の中心は、この削除がセキュリティ上の問題（パッケージの侵害やバックドアの可能性）によるものか、あるいはMicrosoft内の政策変更によるものかという点です。また、ONNX Runtimeが telemetry（テレメトリー）データを自動的に送信し、将其を無効化するにはソースからビルドする必要があるという指摘も大きな関心事です。\n\n・賛否両論\n意見の分かれ目は、削除の動機にあります。一部のユーザーは、関連するPythonパッケージが侵害された可能性や、モデルのバックドア攻撃に関する最新的な脆弱性（Phrackに掲載された論文で議論されている）を受けての緊急対応であると推測する一方で、これはMicrosoftによる内部のクリーンアップやライセンス・コンプライアンスの問題である可能性も指摘されています。\n\n・注目コメント\n特に注目されたコメントとして、ONNX Runtimeが telemetry を自動的に送信し、将其をブロックするにはDNSブロッキングやソースからのビルドが必要であるという指摘があります。これは、 libraries の使用におけるプライバシーとセキュリティに関する重要な懸念を浮き彫りにしています。さらに、IntelがOpenVINOを統合したfork（https://github.com/intel/onnxruntime）が代替手段として提案されており、技術的な代替策の必要性が強調されています。",
+      "editor_note": "MicrosoftのONNX RuntimeがGitHubから姿を消した",
+      "category": "OSS"
+    },
+    {
+      "rank": 8,
+      "id": 50534631,
+      "title_en": "Nvidia stopped disclosing Singapore sales as revenues hit $104B",
+      "title_ja": "Nvidia、売上高が104Bドルに達しシンガポールの売上開示を停止",
+      "url": "https://www.ft.com/content/dbde7a30-548c-4f9d-a4be-7898a0c24dcf",
+      "hn_url": "https://news.ycombinator.com/item?id=50534631",
+      "score": 421,
+      "comment_count": 205,
+      "posted_at": "2026-11-17T17:12:06+00:00",
+      "comments": [
+        {
+          "id": 50535443,
+          "author": "Pwntastic",
+          "text": "https://wallhop.io/https://www.ft.com/content/dbde7a30-548c-..."
+        },
+        {
+          "id": 50538051,
+          "author": "tamarind44",
+          "text": "There's a major misunderstanding of what this article is saying going on here, and to be fair the article doesn't explain it very well. The 104B number is the external revenue of NVIDIA's Singaporean subsidiary in 2025. This includes any orders for GPU chips that happen to get routed through the Singapore entity. For those unaware, end customers generally don't buy anything from NVIDIA. Customers by NVIDIA GPUs through a large network of OEMs/ODMs and resellers. Many of the largest companies in this network are based in east asia (eg. Wistron, Foxconn, Asus, Lenovo) and when your local hyperscaler makes a server order, one of these OEMs places an order to NVIDIA for GPUs. Because of this much of this revenue likely comes from end customers all over the world, including the US. In fact, in one of the 2025 earnings calls NVIDIA stated that 99% of the singapore entity's revenue for export-restricted chips came from the US. It's a little bit difficult to untangle exactly how much of NVIDIA's revenue came from end customers in Singapore in any given year. In 2025 it looks to be about 19B. That might be unreasonable for a country singapore's size, but it's certainly not half of NVIDIA's revenue."
+        },
+        {
+          "id": 50536026,
+          "author": "alangibson",
+          "text": "Half of their revenue was booked through Singapore? I suspected that Jensen was fired for helping evade sanctions, but now I'm sure. I dont believe the board fired the founder and only CEO they ever had over a series of affairs. They fired him because one of the affairs was with a lady pretty clearly helping import chips from Singapore to China."
+        },
+        {
+          "id": 50539671,
+          "author": "mlmonkey",
+          "text": "> US authorities are investigating whether the Singapore business, Megaspeed, was involved in smuggling Nvidia chips to China I don't understand one thing. Why does the end user (China) need the physical chips?? I train my models on machines sitting in some datacenter on the East Coast, or sometimes even Finland. I have never seen an NVidia GPU in my life, and probably never will; as is the case with most developers. As I see it, Chinese developers don't need physical access either. So why does it matter that Singapore ordered the chips, or Finland? If you have enough money, you can access the latest and greatest NVidia chips in however much quantities you want!"
+        },
+        {
+          "id": 50536711,
+          "author": "legitster",
+          "text": "This is not as interesting as it is being made to seem. The only reason this is being reported on is because it was a public announcement in a previous investor report, and people are rifling for anything connecting to Megaspeed. This is an accounting question of how their revenue is attributed. It means nothing about where the revenue is generated or where the chips end up or to which subsidiary they are sold to. If you were trying to hide the revenue from regulators, this is not how you would do it. Even IF this decision was in response to foreign export controls being put into place, it's just as strong an indication that they were planning on making less money via Singapore and didn't want to show that to investors."
+        }
+      ],
+      "summary_ja": "主な議論点として、コミュニティではこの売上データが単なる会計上の問題であり、中国へのチップ密輸を示すものではないという見方が大勢を占めています。NvidiaはOEM/ODMのネットワークを通じて販売しており、シンガポールの子会社に収益が集中しているのは、東アジアの主要な製造業者がここを経由しているためです。実際、2025年の決算説明会では、シンガポール経由の輸出規制チップの99%が米国から来的と明言されており、シンガポール国内の需要は約19億ドル程度と推定されています。\n\n賛否両論として、一部のユーザーはJensen Huangの解任や中国へのチップ密輸を関連付ける憶測を広げ、経営陣の意図を疑う声も上がっています。しかし、多くのコメントは、この報告が単なる収益の归属（帰属）に関する会計上の問題であり、実際の販売先やチップの最終 destinations を隠すためのものではないと反論しています。\n\n注目コメントとして、あるユーザーは「中国の開発者が必要とするチップは物理的に存在する必要があるのか」という疑問を投げかけています。クラウドデータセンターでモデルを訓練する現代の開発者にとって、物理的なGPUに触れる機会は稀であり、リモートでリソースにアクセスできるため、シンガポール経由の販売が密輸を意味するとも限らないと指摘しています。また、この報告は、投资者向けの公開情報から単なる関連性を探り出しているにすぎず、実態を反映しているとは限らないという冷静な見方もあります。",
+      "editor_note": "Nvidia、売上高が104Bドルに達しシンガポールの売上開示を停止",
+      "category": "スタートアップ/ビジネス"
+    },
+    {
+      "rank": 9,
+      "id": 50537156,
+      "title_en": "jQuery 4.1.0",
+      "title_ja": "jQuery 4.1.0",
+      "url": "https://github.com/jquery/jquery/releases/tag/4.1.0",
+      "hn_url": "https://news.ycombinator.com/item?id=50537156",
+      "score": 265,
+      "comment_count": 147,
+      "posted_at": "2026-11-17T19:50:40+00:00",
+      "comments": [
+        {
+          "id": 50537763,
+          "author": "hax0ron3",
+          "text": "Although jQuery isn't very relevant these days, I still find its pattern of chaining a sequence of methods on a set chosen by a selector to be a beautiful example of going with a language's features."
+        },
+        {
+          "id": 50538146,
+          "author": "CM30",
+          "text": "I'm a tad surprised jQuery still exists, though it's kinda neat it does. Always interesting to see historical projects with less and less modern day relevance get continued like this. And while most of the use cases for jQuery have long since died out with things like classList, querySelector, etc, I do feel there's probably value in a framework that focuses on minor enhancements to a site rather than being the backbone of the whole thing. Like if you want a React or Angular or Vue equivalent, something like jQuery would be a terrible choice, but a lot of sites are static ones where the only scripting needed would be for minor things like dropdown menus or slideshows, and I can see a modern, lean library like this being a decent choice there."
+        },
+        {
+          "id": 50538857,
+          "author": "joel2oliver",
+          "text": "I remember how painful it was to deal with IE/Netscape. Event handlers, etc... jQuery made so many lives easier. It’s quite an achievement, and I can stretch to say that JavaScript development might not be here today without it!"
+        },
+        {
+          "id": 50540390,
+          "author": "bastawhiz",
+          "text": "I don't think I'd reach for jQuery ever again, but I'd used it extensively fifteen years ago. I'm glad it's still alive and kicking. When it's already in a project that I'm making changes to, it's a cute way to do stuff easily that would be a pain with vanilla dom."
+        },
+        {
+          "id": 50537310,
+          "author": "gosen",
+          "text": "I'm actually surprised (in a good way) that it's still maintained, and it still helps half of the internet to function"
+        }
+      ],
+      "summary_ja": "・主な議論点\njQuery 4.1.0のリリースを受けて、社区では「jQueryの現代的な位置づけ」と「その存続意義」について議論が集中しました。主な論点は、jQueryがもはやWeb開発の主流ではないものの、その「メソッドチェーン」という設計思想や、静的サイトの微細な-interaction-実装における利点が依然として評価されているかどうかです。\n\n・賛否両論\n賛成派は、jQueryが过去のブラウザ互換性の苦労を考慮し、JavaScript開発の歴史において重要な役割を果たしたと称賛し、現在も軽量で目的に特化したライブラリとしての価値があると主張しました。一方、反対派は、ModernなJavaScript（Vanilla JSやReact/Vueなど）の進歩によりjQueryの必要性が薄れたとし、新規プロジェクトで採用する理由がThinと指摘しました。\n\n・注目コメント\n「JavaScript開発が今日の状態で存在できることは、jQueryがいなければ難しかった」というコメントが特に注目されます。これはjQueryの歴史的貢献を強調し、現在のWeb開発環境がjQueryの影響下にあることを洞察しています。また、「半分のInternetを動かしている」という皮肉めいた賛意も、jQueryの広範な影響力と存続の意外性を表現しています。",
+      "editor_note": "jQuery 4.1.0",
+      "category": "Web開発"
+    },
+    {
+      "rank": 10,
+      "id": 50535885,
+      "title_en": "MAI Code 2 and Code 2 Flash",
+      "title_ja": "MAI Code 2とCode 2 Flash",
+      "url": "https://microsoft.ai/news/introducing-mai-code-2-and-mai-code-2-flash/",
+      "hn_url": "https://news.ycombinator.com/item?id=50535885",
+      "score": 305,
+      "comment_count": 139,
+      "posted_at": "2026-11-17T18:25:13+00:00",
+      "comments": [
+        {
+          "id": 50541360,
+          "author": "chopete3",
+          "text": "Github Copilot offered MAI Code 2 at 50% today. I switched it to that model and it was able to resolve tricky python build issues within Windows WSL/ubuntu and also generated a good number of test cases and ensured all of them pass. It resolved all the Azure deploy (bicep) issues as well. Didn't feel the difference from Claude Opus."
+        },
+        {
+          "id": 50541424,
+          "author": "SillyUsername",
+          "text": "Whatever happened to the Microsoft Phi series? I felt that the training data and behaviours for this at the time were very OpenAI like, due to responses similar in structure to ChatGPT (like how ChatGPT now usually has a section at the end \"Why this matters\")"
+        },
+        {
+          "id": 50536908,
+          "author": "pseudosavant",
+          "text": "I'd hate to be OpenAI and Anthropic. They are better than the rest of the available models currently, but only by a few months. That is a very tenuous lead and doesn't speak to much of a sustainable competitive moat for either company. The have to keep sprinting as fast as possible on the hamster wheel to just stay ahead."
+        },
+        {
+          "id": 50537037,
+          "author": "origini",
+          "text": "If these benchmarks can hold up in real life, we are seeing again and again an intelligence explosion in front of our eyes and devaluation of intelligence. Anyone has more background how they were able to catch up that fast? Distillation of GPT due to their OpenAI acess to the model might make most sense but they probably are not allowed to do that."
+        },
+        {
+          "id": 50538591,
+          "author": "LaurensBER",
+          "text": "We just cancelled our Github Copilot subscription. It was hard to even justify the 19,- dollar tier. All it gave us was some credits (at API prices) which most people burned through in days, some in hours, code reviews (that we couldn't customize) and another service to manage. Having AI integrated in Github is a decent idea but just like Microsoft Copilot, it's just not good enough at the moment. These two models might help, I will definitely give it a try but while they're cheap they still do not compare to what feels like nearly unlimited usage offered by Claude Code and Codex (if you stick to the lower tier models)."
+        }
+      ],
+      "summary_ja": "主な議論点は、MAI Code 2がOpenAIやAnthropicのモデルと遜色ない性能を発揮していること、特にPythonビルド問題やAzureデプロイの解決に成功した点です。 communityは、この進展が競争の加速と、大手企業の「競争優位性（モート）」が脆いこと、あるいは「知能の爆発」と「知能の価値下落」を示していると指摘しています。\n\n賛否両論は、このモデルがGPTの蒸留（distillation）によるものではないかという推測です。一方で、Copilotの価格対性能比の低さや、クレジット制の設計、カスタマイズ可能性の欠如など、Copilot自体への不満が多くのコメントで共有されています。\n\n注目コメントとして、「知能の爆発が眼前で起こっており、知能の価値が下落している」という考察が挙げられます。これは、モデル性能の向上が技術的競争の基準を急速に引き上げ、かつての優位性がすぐには価値を失うという産業構造の変化を鋭く捉えています。",
+      "editor_note": "MAI Code 2とCode 2 Flash",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 11,
+      "id": 50532849,
+      "title_en": "Highly classified US national security communications network goes down",
+      "title_ja": "最高機密の米国国家安全保障通信ネットワークが障害発生",
+      "url": "https://www.cnn.com/2026/11/17/politics/highly-classified-national-security-communications-network-goes-down",
+      "hn_url": "https://news.ycombinator.com/item?id=50532849",
+      "score": 500,
+      "comment_count": 571,
+      "posted_at": "2026-11-17T15:38:28+00:00",
+      "comments": [
+        {
+          "id": 50536044,
+          "author": "btreesOfSpring",
+          "text": "I feel like something started after Elon purchased twitter and made all those personnel deep cuts. In the era prior, it wasn't too hard to look around and see people who were dragging productivity down. Their cuts would be an improvement. Twitter into X looked to cut to the bone and despite a few hiccups, nothing catastrophic happened to the service layer. This ushered in a new era of tech department downsizing that feels like it is still happening today. Ask any new graduate how the job search if going. Sprinkle in a little DOGE + time and we are starting to see the exhausted people supporting these glued together systems experience real large scale failures. Yeah, you can do fine with only one set of eyes on a problem. Yeah, it is more \"efficient\" in the short term. Culling lots of do-nothing people in your organization isn't going to produce many tears. Even so, devs and IT departments are now missing all sorts of backup and vital personnel that keep the gears oiled and running."
+        },
+        {
+          "id": 50535617,
+          "author": "dustfinger",
+          "text": "I may not understand expectations, or the law around this, but I find it a little surprising that the NSA would publicly announce that their internal and highly classified network is down. At least not before getting it back up, running and secure again."
+        },
+        {
+          "id": 50541381,
+          "author": "Melatonic",
+          "text": "Based on everything we have seen recently I would guess it's a change in either Cisco network device firmware (or Juniper or similar) that is causing issues. They probably found some new security holes and patched it too haphazardly or is easier to misconfigure."
+        },
+        {
+          "id": 50533394,
+          "author": "Avicebron",
+          "text": "It's clear, there is a screaming need for competent, well paid IT across all sectors."
+        },
+        {
+          "id": 50536605,
+          "author": "usernomdeguerre",
+          "text": "People seem to be leaning on the AI speculation from the \"vibe coded\" angle, but couldn't this also be an \"AI is the reason\" from the attacker side? I think we've seen more than a fair share of AI assisted exploits that chain many small vulnerabilities into something more pronounced. I'm thinking of the rash of attacks in SK and China against Banks using offensive harnesses. I'd be more willing to believe the network in question here was under an attack load that either was probed or exploited far enough that shutting it down was worthwhile. It seems more reasonable to me than believing they've let AI run amok on their internals such that it's now failing. Not because I'm deifying the NSA but because the system has to be decades old, at least, and I wouldn't expect significant changes to something that \"just works\"."
+        }
+      ],
+      "summary_ja": "・主な議論点\nコミュニティでは、この障害の根本原因として、近年の技術部門の大幅な人员削減（/downsizing）と、特にDOGE（政府効率化省）による公共部門への影響がStrongに議論されています。コメントでは、Elon MuskのTwitter買収に始まり、現在に至るまで続く技術職の縮小が、保守・運用を含む重要な人材が不足している systems の脆弱化を招いたという指摘が多数あります。短期的な効率化が、長期的なシステムの信頼性や安全性を損なうという懸念が広がっています。\n\n・賛否両論\n議論の分かれ目は、NSAが機密ネットワークの停止を publiclyに報告した件事にあります。一部のコメントでは、ネットワークが回復し、セキュリティが確保されていない段階で公開すべきではなかったと批判する意見があります。一方で、この報告自体が、透明性や責任の観点から正当な行為であるという見方もありますが、明確な賛成意见は比較的少ないです。\n\n・注目コメント\n特に洞察のあるコメントとして、攻撃者的側面からAIが関与した可能性に言及したコメントが挙げられます。これは、単なる内部のミスやAIによる誤作動ではなく、AIを活用した高度なマルウェアやエクスプロイトが、複数の脆弱性を連鎖的に悪用してネットワークを攻撃した可能性を示唆しています。この仮説は、NSAのような oldest system に対して、外部からの複雑な攻撃が現実的であるという視点を提供しています。",
+      "editor_note": "",
+      "category": "セキュリティ"
+    },
+    {
+      "rank": 12,
+      "id": 50535992,
+      "title_en": "Phrack 73 Released",
+      "title_ja": "Phrack 73リリース",
+      "url": "https://phrack.org/issues/73/introduction_md",
+      "hn_url": "https://news.ycombinator.com/item?id=50535992",
+      "score": 295,
+      "comment_count": 46,
+      "posted_at": "2026-11-17T18:31:25+00:00",
+      "comments": [
+        {
+          "id": 50538989,
+          "author": "ashleyn",
+          "text": "The computer security space has changed quite a bit from when I first learned of Phrack in the 90s-00s and would see plenty of \"how to pwn the phone company\" type articles. So like...when I see an exploit in the latest issue of Phrack (like the docker escape in this issue)...has it already been responsibly disclosed, given a CVE, etc? Or do they just drop 'em out of nowhere?"
+        },
+        {
+          "id": 50539004,
+          "author": "trilogic",
+          "text": "Interesting: https://archives.phrack.org/issues/73/10.txt 2600, ccc.de, astalavista sk box, spaghettihackers and warez... cool stuff. Brrr, thinking to revive emule."
+        },
+        {
+          "id": 50540757,
+          "author": "gmmachine",
+          "text": "Might I just add, I like how unpolished these magazines are/were; how unpolished and open expectations engendered more freedom of expression. Sometimes, comments here on HN are like resumes, makes me reticent to comment out of not wanting to seem out of touch or whatever."
+        },
+        {
+          "id": 50539788,
+          "author": "NelsonMinar",
+          "text": "The ssh RCE history is a good read for reflecting on how fast things move now: https://phrack.org/issues/73/history-the-2000-ssh1-exploit-t..."
+        },
+        {
+          "id": 50537591,
+          "author": "neuro",
+          "text": "300-baud modem synth, ANSI art, and my favorite: Issue 36."
+        }
+      ],
+      "summary_ja": "主な議論点は、Phrackが現代のセキュリティ実務と how to pwn the phone company などの过去的な情報開示姿勢の乖離についてです。特に、最新号に掲載されたexploitが責任ある開示（CVE付与など）されているか否かが懸念されています。\n\n賛否両論は、Phrackの「unpolished」で开放的な雰囲気を称賛する意見と、現代のセキュリティコミュニティではコメントが「resumeのよう」で自由な発言が抑制されているという指摘が対立しています。\n\n注目コメントとして、SSH RCEの歴史に言及し、技術の進歩の速さを反思するコメントや、300-baud modem synth、ANSI art、過去の号などの要素に懐かしさを覚えるコメントが挙げられます。",
+      "editor_note": "",
+      "category": "セキュリティ"
+    },
+    {
+      "rank": 13,
+      "id": 50536813,
+      "title_en": "350 years ago, Ole Rømer discovered that light has a finite speed",
+      "title_ja": "350年前、オーレ・ローマーが光の速度が有限であることを発見",
+      "url": "https://www.sciencenorway.no/culture-history-history-of-science/350-years-ago-this-man-discovered-that-light-has-a-finite-speed/2737969",
+      "hn_url": "https://news.ycombinator.com/item?id=50536813",
+      "score": 267,
+      "comment_count": 79,
+      "posted_at": "2026-11-17T19:25:27+00:00",
+      "comments": [
+        {
+          "id": 50537608,
+          "author": "goache",
+          "text": "I created a web comic based on this measurement! https://randomlyunique.com/plancky/2018/roemers-speed-of-lig..."
+        },
+        {
+          "id": 50538487,
+          "author": "calmbonsai",
+          "text": "A wonderful trilogy of sci-fi books by Greg Egan where the speed of light is not constant (a function of frequency) and how that impacts society. https://a.co/d/0fZNXGxD"
+        },
+        {
+          "id": 50537692,
+          "author": "kstrauser",
+          "text": "I don’t quite understand this. The length of the eclipse would be the same, right? Or was it more like that the eclipse ended 10 minutes earlier on the wall clock than expected? I guess what would surprise me about that is: 1. I didn’t know clocks were that good by then to make that reliably measurable. 2. I didn’t realize clocks of the time could measure the period of the eclipse that accurately. Like say one took 24 hours and 7 minutes. If you’re off by 30 seconds, and you’re making a prediction today of when the eclipse would happen six months from now, you could easily be off 90 minutes just based on cumulative error. The discovery seems easy enough given today’s widespread access to atomic clocks, but extra freaking impressive with clocks from the 1600s."
+        },
+        {
+          "id": 50538319,
+          "author": "ibizaman",
+          "text": "There was a much better explained video from Physics Explained about this https://youtu.be/8yhk1EZq9tY?is=2BvxUY5HKEWkk2LL It’s one of my favorite science fact and question to ask at parties. When I ask people when do people think humans thought for the first time light had a finite speed, the earliest date I got was 1950. Speaking of favorite question, here’s a brain teaser. Give me a spot on earth from which you move south 30km, east 30km then north 30km and you end up in the same spot?"
+        },
+        {
+          "id": 50540254,
+          "author": "clarkmoody",
+          "text": "Lightspeed [0] is a fascinating book that documents the scientists and experiments that built up to the modern measurement of the speed of light. It's interesting to see how prevailing theories of the aether and the nature of light fall to scientific scrutiny. The author details each speed of light estimate as the book goes on, and we get to see it converging on the modern value toward the end. Highly recommend if you're into the history of science. [0]: https://www.goodreads.com/en/book/show/46179037-lightspeed"
+        }
+      ],
+      "summary_ja": "主な議論点は、17世紀の時計の精度と累積誤差の問題です。communityでは、当時の時計でこの測定が可能だったかが中心的な議題となりました。賛否両論として、時計の精度に懐疑的な意見 versus ローマーの発見の偉業を称賛する意見が対立しました。注目コメントは、地球上の特定の地点から南・東・北にそれぞれ30km移動し元の地点に戻るという地理の脳みそパズルです。",
+      "editor_note": "",
+      "category": "その他"
+    },
+    {
+      "rank": 14,
+      "id": 50538303,
+      "title_en": "Harvard researchers find AI coding agents shifted the bottleneck to code review",
+      "title_ja": "ハーバード大学の研究者、AI coding agentsがボトルネックをコードレビューにシフトしたことを発見",
+      "url": "https://complexdiscovery.com/harvard-researchers-find-ai-coding-agents-shifted-the-bottleneck-to-code-review/",
+      "hn_url": "https://news.ycombinator.com/item?id=50538303",
+      "score": 75,
+      "comment_count": 118,
+      "posted_at": "2026-11-17T21:16:12+00:00",
+      "comments": [
+        {
+          "id": 50541477,
+          "author": "teravor",
+          "text": "what I generally found is that with LLM generated code the best way is to embrace the unix philosophy, create tools that perform singular objectives. I wound up with a bunch of LLM written tools that I don't even bother to try and understand much less review, they either function as desired or I set an LLM to make them function (or just rewrite them) and then forget about them. sadly this isn't always possible, some systems require complexity at some level."
+        },
+        {
+          "id": 50541414,
+          "author": "Buttons840",
+          "text": "One wild idea is just stop reviewing PRs and instead do continuous review of the entire system guided by heuristics to focus on the riskiest code. The way you would naturally review an existing codebase is not the same way it grows through individual commits. Therefore, focusing reviews on individual commits is less efficient. We need better tooling and a better approach."
+        },
+        {
+          "id": 50541141,
+          "author": "AlwaysRock",
+          "text": "All I do all day is review ai written code. my own or teammates. I really do not enjoy it."
+        },
+        {
+          "id": 50539755,
+          "author": "lz400",
+          "text": "A lot of this university research on AI feels dated. This is something we all faced months ago. Many times they're also reaching conclusions using obsolete models, etc. Feels like things move too fast for traditional research cycles to catch up to AI dev"
+        },
+        {
+          "id": 50539629,
+          "author": "jacobgorm",
+          "text": "The problem is that when nobody writes code or feels ownership over it anymore, nobody will be qualified to or really interested in doing the code reviews. The way forward could involve dropping code reviews altogether. You could argue that the useful pingpong between coder and reviewers has been replaced by the similar pingpong between the prompter and the agent."
+        }
+      ],
+      "summary_ja": "・主な議論点\nAI生成コードの普及により、コードReviewの効率化とその役割の変化がコミュニティで広く議論されています。特に、従来の個別-committ単位のReviewから、システム全体を継続的にReviewするアプローチへの移行、および「プロンプトReview」が「コードReview」に取って代わる可能性がRaisedされています。\n\n・賛否両論\n codes Reviewの必要性そのものに賛否が分かれています。一方で、AIコードは理解せずに機能するか再生成するという「Unix哲学」的な扱いが有効という意見があります。他方、コードに所有感が失われ、Reviewerの資質が低下するという懸念も示され、完全にReviewを廃止する可能性も提案されています。\n\n・注目コメント\n「個別-committではなく、リスクの高いコードに焦点を当てた継続的なシステム全体のReview」を行うというアイデアが、特に洞察があるとして注目されています。また、大学のAI研究は開発の速さに追いついておらず、既存のモデルに基づく結論は陳腐化しているという批判的なコメントも紹介されています。",
+      "editor_note": "",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 15,
+      "id": 50503492,
+      "title_en": "Fun with Constrained Programming",
+      "title_ja": "制約 programmingを楽しむ",
+      "url": "https://blog.cmpxchg8b.com/2012/09/fun-with-constrained-programming.html",
+      "hn_url": "https://news.ycombinator.com/item?id=50503492",
+      "score": 24,
+      "comment_count": 0,
+      "posted_at": "2026-11-15T02:45:57+00:00",
+      "comments": [],
+      "summary_ja": "",
+      "editor_note": "",
+      "category": "プログラミング言語"
+    },
+    {
+      "rank": 16,
+      "id": 50540472,
+      "title_en": "Cerebras Disaggregated Inference",
+      "title_ja": "Cerebras分散推論（Disaggregated Inference）",
+      "url": "https://www.cerebras.ai/blog/cerebras-launches-disaggregated-inference",
+      "hn_url": "https://news.ycombinator.com/item?id=50540472",
+      "score": 31,
+      "comment_count": 9,
+      "posted_at": "2026-11-18T00:56:23+00:00",
+      "comments": [
+        {
+          "id": 50540860,
+          "author": "aabdi",
+          "text": "5x throughput more than b4, same 10x tokens/s as compared to standard. looks like disagg/wide ep is applicable to cerebras chips as well. kind of amazing. https://www.cerebras.ai/blog/how-we-deploy-trillion-paramete..."
+        },
+        {
+          "id": 50540810,
+          "author": "augment_me",
+          "text": "Have they solved the issue yet where they need to keep running ghost tokens to keep the board hot to prevent it from cracking, which causes massive energy draw in idle, and reduces lifetime by 3 times the estimate? https://culperresearch.com/wp-content/uploads/2026/10/Culper..."
+        }
+      ],
+      "summary_ja": "・主な議論点\nCerebras Systemsが「Cerebras Disaggregated Inference」という手法で、従来比5倍のスループットと、標準的な設定比10倍の処理速度（tokens/s）を達成したことが-commentの出発点となった。この手法は、Cerebrasのチップに「分散型・広いエンジン並列（disagg/wide ep）」を適用するもので、その技術的進展にcommunityが注目している。\n\n・賛否両論\n技術的な性能向上には肯定的な声が dominant だが、Cerebrasチップの根本的な設計課題が依然として議論の的になっている。特に、チップを過熱から守るために「ghost tokens（ゴースト・トーケン）」と呼ばれるダミーの計算を常に継続して行う必要があるという指摘がなされている。この做法は、アイドリング時に莫大なエネルギーを消費し、チップの寿命を推定値の3分の1に短縮するという重大な欠点であると指摘されている。\n\n・注目コメント\n特に洞察のあるコメントとして、Culper Researchのレポートへの links を添えた指摘が挙げられる。このコメントは、性能向上の一方で、Cerebrasチップが抱える「ghost tokens」という根本的な効率性の問題は未解決であり、その結果としてエネルギー効率と耐久性の観点で大きな課題が残っていると強調している。技術的な進歩と並行して、この設計上のジレンマが community の関心を引き continue している。",
+      "editor_note": "",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 17,
+      "id": 50536387,
+      "title_en": "Solid 2.0",
+      "title_ja": "Solid 2.0",
+      "url": "https://www.solidjs.com/blog/solid-2-0-the-long-hold/",
+      "hn_url": "https://news.ycombinator.com/item?id=50536387",
+      "score": 244,
+      "comment_count": 69,
+      "posted_at": "2026-11-17T18:56:17+00:00",
+      "comments": [
+        {
+          "id": 50537697,
+          "author": "wk_end",
+          "text": "What's amusing and/or interesting is that the stuff under \"Built to Be Written by Agents\" also would make it easier to write by hand, I imagine. It's just better debug diagnostics; nothing really to do with agentic development specifically. Maybe that's just marketing, but it's really intriguing how human best practices are also agent best practices; how, maybe, we've reached a point where even devs aren't recognizing agent best practices as human best practices anymore; and how suddenly best practices are being prioritized in a way they often weren't - humans could/would/were expected to suck it up and deal with poor devex, but agents simply can't. A strange sort of victory for us folks who cared about it."
+        },
+        {
+          "id": 50537519,
+          "author": "pwmglenn",
+          "text": "Remix originally pitched itself as solving the 'middle' layer between frontend and backend. Closing the gap. It never quite managed to do so imo. Solid's solution here is beautiful. The server RPC and 'live' and 'broadcast' are seamless, and feel much more natural to use than liveview or htmx/datastar imo."
+        },
+        {
+          "id": 50540418,
+          "author": "miguel-muniz",
+          "text": "Congrats to Ryan and the team. I never got deep enough into front-end to understand the nuance of these things but I still occasionally tuned into his Friday streams just to listen. You can tell he cares about this subject deeply and I enjoy listening to passionate people talk about their craft."
+        },
+        {
+          "id": 50539001,
+          "author": "dmix",
+          "text": "Still waiting for Vue 3.6 Vapor to be released which is supposed to be more competitive with these frameworks like Svelte and Solid in performance. Vue 3.5 came out in Sept 2024 and I've ported a lot of code off Vue since then."
+        },
+        {
+          "id": 50536583,
+          "author": "pier25",
+          "text": "Congrats to the Solid team. This is a monumental release."
+        }
+      ],
+      "summary_ja": "以下は、Hacker News のコメント要約です。\n\n**主な議論点**\n社区的主要关注点在于 Solid 2.0 的“为智能体而构建”这一特性。评论指出，这虽然是营销话术，但其核心——即提供良好的调试诊断功能——实际上对人类开发者同样有益。这揭示了一个有趣的现象：人类的最佳实践正在成为智能体的最佳实践。过去开发者常被迫忍受糟糕的开发体验，而智能体则无法容忍，这反而促使了最佳实践的普及，对一直关注此问题的开发者而言是一种胜利。\n\n**賛否両論**\n opinions are divided on the competitive landscape. While some praise Solid's elegant solution for the backend/frontend gap, others express skepticism, noting that Remix failed to achieve a similar goal. Additionally, some commenters are waiting for Vue 3.6 Vapor, which is expected to be more competitive in performance with frameworks like Svelte and Solid.\n\n**注目コメント**\n particularly insightful comment observes that the focus on \"agent best practices\" is a strange victory for developers who have long advocated for better developer experience. It highlights how the needs of AI agents are inadvertently forcing a prioritization of best practices that humans previously had to \"suck up and deal with.\" Another comment praises Solid's server RPC and 'live'/'broadcast' features as a more seamless and natural solution compared to alternatives like LiveView or htmx/datastar.",
+      "editor_note": "",
+      "category": "Web開発"
+    },
+    {
+      "rank": 18,
+      "id": 50532191,
+      "title_en": "What is the best harness for each model?",
+      "title_ja": "各モデルに最適なハーネスは何ですか？",
+      "url": "https://runta.com/blog/introducing-frontierharness-eval-v1-1/",
+      "hn_url": "https://news.ycombinator.com/item?id=50532191",
+      "score": 343,
+      "comment_count": 118,
+      "posted_at": "2026-11-17T14:53:43+00:00",
+      "comments": [
+        {
+          "id": 50533954,
+          "author": "seizethecheese",
+          "text": "The headline here is confusing. They ran a bunch of harness and agent combinations on terminal bench tasks, and 64% of the spending was on tasks that didn’t pass terminal bench verifiers. It’s unclear whether that’s supposed to be surprising against the selected models for the benchmark. I suspect it’s not and the headline is written to pander to “wasting money on AI” upvotes. Edit: they changed the title. The one used to get to the front page was something like \"Across N agent runs 64% of agent cost went to failing runs\". Edit2: since the link is poor quality, I tried to answer some of these questions myself using 927k agent runs vs. this blog post's 27k: https://micjm.com/blog/on-model-harness-interactions/ . The upshot: there's not a lot of harness x model interactions. OpenAI models do seem to have a preference."
+        },
+        {
+          "id": 50533520,
+          "author": "Zigurd",
+          "text": "I find myself pulled in two directions by the performance of coding agents: First, keeping them on a short leash seems sensible. I don't get failed results very often. When I first started using coding agents, this seemed not just sensible but required in order to not deal with a lot of hallucinated weirdness. Secondly though, it's pretty cool to vaguely wave your hands in a certain direction and get both user interface and business logic that's objectively nicer than I would've gotten from the effort I would've put into manually coding. Whenever I cautiously use a coding agent, I wonder what I am missing by not letting it cook."
+        },
+        {
+          "id": 50535332,
+          "author": "xyzzy_plugh",
+          "text": "I don't like this framing. For a given model, the best harness depends on the problem. As models become increasingly capable, the harness appears to matter more than the model. This is perhaps controversial but allow me to explain. Most of my problems are in a single domain, using specific tools and programming languages. I give whatever model de jour the specific tools it needs to solve the problem. I don't let it execute arbitrary scripts or programs (though it can, if it really tries). I give it a restricted number of calls and I feed that information back into it (budget). I let it farm out work to other models, using the same harness. I give everything a budget, which is tracked and enforced, but it's not real, and refills at different times. This bespoke, specialized harness absolutely smokes any other mainstream harness for these tasks. Significantly faster, cheaper, more correct. But I can't build a mobile app with this harness, or make a movie. These tests are doing the same thing. They measure a handful of scenarios. I can't easily tell if those map to my needs or not. In my experience, very few of them do. Can these general purpose harnesses solve my problems? Yes, if I'm willing to let the model churn for a long time and burn a lot of tokens. But that doesn't feel like a sustainable practice. Maybe I'm too early, maybe it's premature to optimize the harness this way, but I'm spending fewer tokens than my peers and getting a lot more done, and that matters."
+        },
+        {
+          "id": 50537810,
+          "author": "cpeth",
+          "text": "Harnesses are all fairly simple loops from the ones I have looked at; there is not much to them. As someone who regularly uses Claude Opus 5.5 from Claude Code and from Copilot, I would say harness barely matters in terms overall performance and behavior. Opus is nearly identical in both harness. The opposite is also true, if I switch Copilot to something like Gemini 4 Argon it's completely different even though I'm in the same harness. Just some andecdata."
+        },
+        {
+          "id": 50534120,
+          "author": "bisonbear",
+          "text": "These are cool results and I'm glad that tokens are being invested to eval harness capabilities. However, I am hesitant on the correlation between pass/fail in evals which are a binary 0/1 determined by tests, and real world usage, where users can steer, run code review, and care about more than just test pass/fail. I wrote about the problem of determining \"success\" for coding agents, and a lot of it boils down to the fact that agents can write dumb code that passes tests, and write smart code that fails tests, and we need to shift to rewarding quality of code and alignment with intent rather than just signal on held out tests (which is still important!) https://www.stet.sh/blog/cost-per-successful-task"
+        }
+      ],
+      "summary_ja": "・主な議論点\n community では、モデルよりハーネス（実行環境・フレームワーク）の方が重要か、それともモデル自体が重要かが大きな議論成了。タスクに特化したカスタムハーネスを用いることで、汎用ハーネスより高速・安価・正確に作業できるという意見と、モデルの能力がハーネスを決定するという意見が対立している。また、評価指標としての「テスト通過/失敗」の現実世界における妥当性についても疑問が呈されている。\n\n・賛否両論\n ハーネスの重要性について分かれている。一部では、特定のドメインに特化した細工されたハーネスが圧倒的に優れるが、汎用性は低いという。他方で、 Claude Opus のように、あるモデルはハーネスの違いによる性能差が小さいという実験データも示されている。汎用ハーネスでは長時間の計算とtokenの消費が問題になるという批判もある。\n\n・注目コメント\n 1. 評価指標の限界: テスト通過率 alone では、現実の作業の「成功」を測えない。テストに通るが質の悪いコードを書く場合があり、逆に優れたコードがテストに落とされる可能性があるため、意図への合致やコードの質を評価する仕組みが必要だという洞察。\n 2. エージェントの「調理法」の個人差: 開発者によってエージェントの使い方（制約の厳しさなど）が異なり、同じモデルでも結果が大きく異なること。 Short leash（厳しく制御する） vs. letting it cook（任せる）という使用哲学の違いが性能に影響するという経験談。",
+      "editor_note": "",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 19,
+      "id": 50536468,
+      "title_en": "Launch HN: StarSling (YC P25) – Self-improving CI for agent-volume repos",
+      "title_ja": "Launch HN: StarSling (YC P25) – agentボリュームリポジトリ向け自己改善型CI",
+      "url": "https://starsling.dev",
+      "hn_url": "https://news.ycombinator.com/item?id=50536468",
+      "score": 58,
+      "comment_count": 34,
+      "posted_at": "2026-11-17T19:01:43+00:00",
+      "comments": [
+        {
+          "id": 50537612,
+          "author": "colek42",
+          "text": "We should probably be measuring deployable merges to main. The math just doesn't work for pipeline based CI as you add more agents. Three things matter. 1 -- How many non-conflicting changes can actually be made at one time (Fan Out) 2 -- How long a critical path takes 3 -- How many times you have to run that critical path. Most orgs run it 2-3x, once before the PR in the agent loop, once in CI, and another in the MQ This is why most orgs cant get past about 12 PRs an hour."
+        },
+        {
+          "id": 50539469,
+          "author": "bekacru",
+          "text": "Bereket from Better Auth - we've been on StarSling for about a year now, it's been such a hard a problem for us ot solve CI to the amount of PRs we get and continues need of optimization and faster runners, im so bullish!"
+        },
+        {
+          "id": 50540199,
+          "author": "emscb",
+          "text": "So the agent compares the changed workflow with the existing one and judges whether the speedup is significant. But a change that re-shards or skips tests would always look like a win on speed alone, wouldn't it? How do you check that such changes still catch the bugs the old workflow caught? I had the same worry when I trimmed our tests because CI was too slow."
+        },
+        {
+          "id": 50537537,
+          "author": "jstrasner",
+          "text": "So good! CI is still such a pain. Out of curiosity, do you use any open source harnesses under the hood or did you roll your own?"
+        },
+        {
+          "id": 50540293,
+          "author": "brunoarueira",
+          "text": "Congrats on the launch! In the past pre-AI I did an improvement to the github actions pipeline from 20 minutes down to 6, it's a relief when you improve things like this and improve the team throughput!"
+        }
+      ],
+      "summary_ja": "・主な議論点\n従来のCI流水線は、エージェントによる大量のPR処理にスケールしないという根本的な問題がある。特に「デプロイ可能なマージ数」を指標にし、fan-out（並列変更数）、クリティカルパスの所要時間、そのクリティカルパスの実行回数という3要素に分解して最適化する必要があるという意见が strongest に挙げられた。大半の組織は1時間に12PR程度が限界であると指摘された。\n\n・賛否両論\nStarSlingがテストの省略やシャーディングなどの最適化を自動で判断する点について、速度向上のbenefitが大きい反面、もはや従来のテスト同样的バグを捕捉しているかの検証方法が不明確という懸念がraisedされた。速度最優先の変更が品质を損なうリスクがあるかどうかが議論の分かれ目である。\n\n・注目コメント\nBetter AuthのCTOが「約1年前からStarSlingを使っているが、非常に difficult な問題であり、今後も最適化を Continue する必要がある」と実践的な導入例を紹介。また、GitHub Actionsのpipelineを20分から6分に短縮した過去の経験を共有し、CI改善がチームの生産性向上に直結するという共感得られるコメントも目を引いた。",
+      "editor_note": "",
+      "category": "DevOps"
+    },
+    {
+      "rank": 20,
+      "id": 50538184,
+      "title_en": "Tencent Hy4 Flash",
+      "title_ja": "Tencent Hy4 Flash",
+      "url": "https://hy.tencent.ai/research/hy4-flash",
+      "hn_url": "https://news.ycombinator.com/item?id=50538184",
+      "score": 71,
+      "comment_count": 11,
+      "posted_at": "2026-11-17T21:06:08+00:00",
+      "comments": [
+        {
+          "id": 50541480,
+          "author": "syntaxing",
+          "text": "Wow 224B with 64B anagrams. It might be possible to run this well on two 128GB machine. I’ve been exclusively using deepseek flash 1017 as my “smart” model through open router. Really curious how this compares"
+        },
+        {
+          "id": 50540077,
+          "author": "chriddyp",
+          "text": "This one scored very well on our data analytics benchmarks [1]. Beat out GPT-6 Luna on the low end of cheap + accurate. Only cost $0.13 to answer 43 data analytics questions (compared to ~$20 on the high end of expensive frontier models). Once the open the weights, Hy4 Flash and regular Hy4 will be the only two open models on the frontier in the exam I've been running. [1] https://plotly.com/blog/hy4-flash-plotly-data-analytics-benc..."
+        },
+        {
+          "id": 50540509,
+          "author": "ddxv",
+          "text": "Cheaper pricing than Deepseek 1017 and Luna and supposedly 'faster' (though I guess in practice a lot of that comes down to where it's running. Lately I let myself drift into using Terra and some other mildly 'expensive' models, but really I think the sweet spot for me is cheap and fast."
+        },
+        {
+          "id": 50540052,
+          "author": "thesurlydev",
+          "text": "I've been using this model via openrouter for the last couple of days in place of deepseek flash with good results."
+        },
+        {
+          "id": 50540257,
+          "author": "wsxiaoys",
+          "text": "it's doing ok on my multimodal/3D task: https://sketchagent.dev/s/Ss6HgYEq reasoning looks solid and properly accept visual feedback. More results: https://sketchagent.dev/#/a/hy4-flash"
+        }
+      ],
+      "summary_ja": "主な議論点は、Tencent Hy4 Flashの性能とコストパフォーマンスです。コミュニティでは、データ分析ベンチマークでGPT-6 Lunaを上回り、高価なフロンティアモデルと比較して圧倒的に安価（43問で$0.13）ながら高精度であることが注目され、DeepSeek Flash 1017の代替としての可能性が議論されています。特に重み付けファイルの公開により、現在のフロンティアモデルで唯一のオープンソースモデルとなる点が大きな話題となりました。\n\n賛否両論は、主に「高速」という評価に対してです。一部では、実際の使用感はインフラ環境に依存するため、理論上の速度と実用上の速度に差が生じる可能性が指摘され、あくまでcost-effectiveな選択肢として位置づけるべきという意見と、実用上の利便性を重視する意見の分かれ目でした。\n\n注目コメントとして、SketchAgentによるマルチモーダル/3Dタスクでの評価結果が挙げられます。これは視覚フィードバックを適切に処理し、推論力が堅実であることを実証しており、テキストのみのベンチマークでは測れない実用上の優位性を示す洞察のあるデータ提供でした。",
+      "editor_note": "",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 21,
+      "id": 50535238,
+      "title_en": "Apple Services Down",
+      "title_ja": "Appleサービス障害",
+      "url": "https://developer.apple.com/system-status/",
+      "hn_url": "https://news.ycombinator.com/item?id=50535238",
+      "score": 645,
+      "comment_count": 357,
+      "posted_at": "2026-11-17T17:47:14+00:00",
+      "comments": [
+        {
+          "id": 50535589,
+          "author": "cjbconnor",
+          "text": "Just got back from the Apple Store. They confirmed that everything was down, they could not process orders or returns, and new iPhones that people bought weren't able to be activated."
+        },
+        {
+          "id": 50536634,
+          "author": "blop",
+          "text": "what a world we built in less than a generation... everything and everyone dependent on a few cloud services, we're very far from the original vision of a decentralised internet :'( The only chance we have for a more reliable world is if these outages and hacks become more and more common. Institutions and people will be forced to wake up and find more local and diverse alternatives..."
+        },
+        {
+          "id": 50540546,
+          "author": "NoPicklez",
+          "text": "My theory with all of this is that AI vulnerability detection has risen significantly, as well as AI tools that can exploit them such as ARTEX (which the FBI has put a briefing out for). These interruptions are potentially a combination of companies racing to patch faster to keep up, or a large exploit has been found, or importantly AI exploit tools like ARTEX are being used in the wild. I have nothing else to go on"
+        },
+        {
+          "id": 50537241,
+          "author": "mkhalil",
+          "text": "TIL Apple has two status pages: https://developer.apple.com/system-status/ https://www.apple.com/support/systemstatus/ Interesting that HomeKit makes the general status page and not the developer one. Makes me wonder how they define each entry, and what makes up a system in one vs. the other."
+        },
+        {
+          "id": 50536792,
+          "author": "jpatten",
+          "text": "This reminds me of the Chinese spy balloon that floated over the US. For a week or so we were getting news stories about every unidentified weather balloon or piece of airborne debris. The main connection between the incidents was that the public thought they might be connected."
+        }
+      ],
+      "summary_ja": "",
+      "editor_note": "",
+      "category": "システム/インフラ"
+    },
+    {
+      "rank": 22,
+      "id": 50537290,
+      "title_en": "Web Browser Engineering (2021)",
+      "title_ja": "Webブラウザ工学 (2021)",
+      "url": "https://browser.engineering/",
+      "hn_url": "https://news.ycombinator.com/item?id=50537290",
+      "score": 129,
+      "comment_count": 20,
+      "posted_at": "2026-11-17T20:01:35+00:00",
+      "comments": [
+        {
+          "id": 50537943,
+          "author": "pavpanchekha",
+          "text": "Hi folks, one of the authors here. Happy to answer questions. Chris and I wrote the book starting in 2019, and the book was largely done in late 2024, with publication in 2025. In case folks are wondering, literally none of it was AI-written, because the AIs didn't exist yet!"
+        },
+        {
+          "id": 50539181,
+          "author": "coreyp_1",
+          "text": "Nice. I'm on the path to building a browser. I had vaguely remembered this site from when it was listed before, but I couldn't find it when looking again. It's bookmarked now. :) I'm writing my own libraries (because, with AI, why not indulge in low-level fun?), and I'm almost to the layout engine. So far (all C libraries), I can read multiple image formats, parse HTML/XML and CSS, rasterize text and just about anything that can be required by CSS or SVG. Fonts were fun... I can do TTF but not WOFF yet. I can do some WASM, but no JS engine yet. I do have my Regex engine, though. (I had built WASM first because it's being used for another project). Still a long way to go. Only approx 780K lines spread out across 30 or so libraries written so far."
+        },
+        {
+          "id": 50539364,
+          "author": "kuharich",
+          "text": "Past comments: https://news.ycombinator.com/item?id=26707368 , https://news.ycombinator.com/item?id=28898157 , https://news.ycombinator.com/item?id=41846780"
+        }
+      ],
+      "summary_ja": "・主な議論点\n本书の著者により、本书がAIではなく human-written であることが強調された。また、ブラウザ構築の詳細な工程が community で共有され、特にレイアウトエンジンや various 形式の parsings に関する実務的な取り組みが注目された。\n\n・賛否両論\nブラウザ構築において、すべてのコンポーネントを自ら実装するアプローチ（例: 780K行のライブラリ）について、その挑戦的 nature  versus 実用性 /liveability が議論の余地がある。一部ではその独創性を称賛する声がある一方で、現実的な開発の効率性や既存の解决方案の活用に関する疑問も投げかけられた。\n\n・注目コメント\nブラウザ開発の第一線で活動する開発者による、TTF対応やWASMの統合など、具体的で詳細な進捗報告が特に洞察に富んでいた。特に「 fonts were fun... 」などのコメントから、低レベル実装における興味深い課題や喜びがうかがえ、実務的な学びの姿勢が community に共感を呼んでいた。",
+      "editor_note": "",
+      "category": "Web開発"
+    },
+    {
+      "rank": 23,
+      "id": 50539039,
+      "title_en": "Latent Lattice Language Models",
+      "title_ja": "潜在ラティス言語モデル (Latent Lattice Language Models)",
+      "url": "https://shivamduggal4.github.io/latent-lattice-language-models/",
+      "hn_url": "https://news.ycombinator.com/item?id=50539039",
+      "score": 31,
+      "comment_count": 4,
+      "posted_at": "2026-11-17T22:17:18+00:00",
+      "comments": [
+        {
+          "id": 50539800,
+          "author": "augment_me",
+          "text": "Seems like just an extension of Short-conv in the linear attention methods where we instead carry the EMA of the entire sequence instead of nearest 4 tokens. It would make sense in my opinion to do the evals based on the reason for needing Short-conv in the architectures that use it in the first place, where it was added to support exact retrieval/needle-in-haystack when we compress the attention state. It's odd to make this arch extension and not test beyond a 2k context window, or with the needle-in-haystack benchmark. In my head this should fail because the EMA cannot carry this granular information"
+        },
+        {
+          "id": 50540012,
+          "author": "royal__",
+          "text": "How significant is a .98 decrease in perplexity. I'm a researcher in this field and I'm having trouble interpreting the implication of this."
+        },
+        {
+          "id": 50540059,
+          "author": "tkslucas",
+          "text": "Interesting approach to scale compute, never thought of using the per layer state like that"
+        },
+        {
+          "id": 50540600,
+          "author": "bionhoward",
+          "text": "I am so excited for RNNs to be cool again"
+        }
+      ],
+      "summary_ja": "・主な議論点\nこのモデルは、線形注意メカニズムにおける「Short-conv」の拡張として、直近の4つのトークンではなく、全シーケンスの指数移動平均（EMA）を保持するものと解釈されています。Communityでは、このアーキテクチャの拡張に対して、もともとShort-convが「needle-in-haystack」などの正確な情報 Retrievalを目的として導入された背景を踏まえ、2k語以上のコンテキストウ indowや、同ベンチマークでの評価が不十分であるという批判が強く出ました。EMAが詳細な情報を保持できないため、このアーキテクチャは目的のタスクで失敗するという予測が示されています。\n\n・賛否両論\n perplexityの0.98の改善が実際にはどれほど意味のあるものか、という議論があります。研究者視点でその影響を解釈することが難しいという意見があり、性能向上の実質的な significance に対して懐疑的な声が上がっています。一方で、層ごとの状態を活用したコンピューティングのスケーリング手法に興味を持ったという前向きな意見もあります。\n\n・注目コメント\n「RNNが再び cool になるのをとても楽しみにしている」というコメントが注目されます。これは、このモデルがRNN系のアーキテクチャに新的な可能性を提示していること、そして研究コミュニティがその潜在可能性に期待感を抱いていることを示しています。",
+      "editor_note": "",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 24,
+      "id": 50535740,
+      "title_en": "Not Everything Needs an LLM",
+      "title_ja": "すべてがLLMを必要とするわけではない",
+      "url": "https://newsletter.posthog.com/p/decision-models",
+      "hn_url": "https://news.ycombinator.com/item?id=50535740",
+      "score": 110,
+      "comment_count": 45,
+      "posted_at": "2026-11-17T18:16:18+00:00",
+      "comments": [
+        {
+          "id": 50538549,
+          "author": "socketcluster",
+          "text": "It is true that they don't tend to give simple answers. But it reveals something about human biases that we tend to seek out simple answers to complex questions. We tend to think that because a question is short, that it's simple. We forgot how many details are involved and how much is actually going on underneath. Reality itself is often annoyingly complex. All living creatures, including humans, are conditioned to simplify extremely complex things into simple concepts which we can react to. We only understand things to the extent that we believe they affect us."
+        },
+        {
+          "id": 50540721,
+          "author": "b3ing",
+          "text": "Problem is tech is full of PMs and other managers that don’t know technology. Things that could be algorithms, functions, programs, regex filters, etc are now LLMs because they don’t know anything else to solve problems"
+        },
+        {
+          "id": 50540197,
+          "author": "throwawayffffas",
+          "text": "Using these decision models as a model router sounds really bad to me the models will most likely be newer than the decision model and thus the decision model will have no information about the capabilities of the model other than the short blurb you feed it."
+        },
+        {
+          "id": 50538646,
+          "author": "dzink",
+          "text": "PostHog should not be using them on customer data, period."
+        },
+        {
+          "id": 50540354,
+          "author": "bryanhogan",
+          "text": "Hearing about use cases for decision models and seeing how they are being explored is quite interesting, but I think the title of this post is poorly chosen."
+        }
+      ],
+      "summary_ja": "このコメントでは、LLM（大規模言語モデル）の過剰利用や、複雑な問題を単純化しようとする人間のバイアスについて批判的な意見が目立つ。\n\n**主な議論点**\n社区では、LLMが複雑な問題の「簡易的な解答」を提供する傾向があること、および技術を理解しない経営者やPMが、アルゴリズムやフィルターで解決可能な問題までLLMに頼る倾向を問題視する声が多かった。特に、LLMが「短い質問＝単純な問題」という誤解を招き、現実の複雑さを無視しているという指摘が中心were。\n\n**賛否両論**\n一部では、LLMの活用可能性そのものに興味を持つ意見もあったが、その一方で「モデルルーターとしての利用は問題がある」「顧客データへの応用は絶対に避けるべきだ」という警告も相次いだ。技術的実現可能性と倫理的配慮の両面から議論が分かれた。\n\n**注目コメント**\n「decision modelsをルーターとして利用する案は問題だ」というコメントは、モデルが更新されると判断基準が陳腐化するという技術的洞察が優れている。また、「PostHogが顧客データにLLMを使わないべきだ」という主張は、データプライバシーと信頼性の観点から特に注目される。さらに、「人間は複雑な現実を無意識に単純化する」という人間の認知バイアスに関する考察は、技術開発の背景にある根本的な問題に深く切り込んでいる。",
+      "editor_note": "",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 25,
+      "id": 50537120,
+      "title_en": "Effects of a Nuclear Detonation in Low Earth Orbit",
+      "title_ja": "Low Earth Orbitでの核爆発の影響",
+      "url": "https://arxiv.org/abs/2611.09827",
+      "hn_url": "https://news.ycombinator.com/item?id=50537120",
+      "score": 85,
+      "comment_count": 63,
+      "posted_at": "2026-11-17T19:46:57+00:00",
+      "comments": [
+        {
+          "id": 50541461,
+          "author": "nine_k",
+          "text": "The actual problematic part is not even nuke-specific: not the EMP, not the gamma / x-ray blast. It's electrons trapped in the magnetic field and creating a low-lying and intense additional \"radiation belt\". It quickly renders satellites inoperable. A nuclear explosion is one way to produce it, but I can imagine different, slower and likely more precise ways, maybe e.g. by ionizing some innocuous gas released by a spacecraft with a laser / maser from Earth's surface, where the requisite gigawatts are available much more cheaply and discreetly."
+        },
+        {
+          "id": 50539635,
+          "author": "orbital-decay",
+          "text": "Actual detonation of a 300kt device at 290km, just to give some intuition of what it would cause on the ground. Disabling LEO satellites seems benign compared to that: https://en.wikipedia.org/wiki/Soviet_Project_K_nuclear_tests >The electromagnetic pulse (EMP) fused all of the 570-kilometer monitored overhead telephone line with measured currents of 1500 to 3400 amperes during the 22 October 1962 test. [...] The EMP from the same test caused the destruction of the Karaganda power plant, and shut down 1,000 km (620 mi) of shallow-buried power cables between Astana (then called Aqmola) and Almaty (then called Alma-Ata).[3]"
+        },
+        {
+          "id": 50541409,
+          "author": "Alien1Being",
+          "text": "Too late now. All the big players ( US, Russia, China, India) are thought / strongly rumoured to have nuclear weapons in orbit. ( There has been no official confirmation of this) Realistically, if you are a country worried about being invaded by the USA, it would be foolish to NOT have space nuclear weapons. Of course, this is contrary to the Outer Space Treaty, signed in 1967 by the United States, the Soviet Union (now Russia), the United Kingdom, and over 115 other nations, explicitly bans putting nuclear warheads or WMDs."
+        },
+        {
+          "id": 50538558,
+          "author": "beloch",
+          "text": "This is one reason why weaponizing space is a bad idea. Even hardened orbital weapon platforms will be easy to destroy with imprecise detonations, as shown here, so space-based weapon capabilities will be short-lived in any meaningful conflict. However, their mere presence in orbit makes it far more likely that all other satellites will be destroyed, possibly even in minor conflicts. A strike against offensive military satellites (with all civilian satellites in the area as collateral damage) would likely be viewed as less of a taboo than a strike against cities. This is a bad path to go down."
+        },
+        {
+          "id": 50538192,
+          "author": "consumer451",
+          "text": "This is even worse than I had imagined. I always thought that \"the good news\" is that no country with on-orbit assets would do this, as it would take out their satellites as well. Aside from the last thing you do before deciding on a nuclear assault on land targets, that's a fair assumption, isn't it?"
+        }
+      ],
+      "summary_ja": "主な議論点は、低軌道での核爆発がEMPやγ線・X線ではなく、磁気圏に閉じ込められた電子が形成する「追加の放射帯」によって人工衛星を機能停止させることにある。この現象は核に限定されず、レーザーなどによる簡易的な手法でも再現可能で、より低予算・非公然な攻撃が可能だと指摘された。\n\n賛否両論は、核兵器の軌道配備に関するもので、主要国が事実上配備しているという見方と、1967年の宇宙条約に違反するという見方が分かれた。また、軌道兵器の存在自体が、小規模な紛争ですら全ての人工衛星を破壊するリスクを高め、都市部攻撃より「 tabo 」が軽い可能性があるという懸念が示された。\n\n注目コメントは、実際の核爆発の地上影響を示すソ連の「Kプロジェクト」の事例を挙げ、低軌道の無力化が compared to that は「無害」であることを強調した点だ。さらに、軌道兵器は不正確な爆発で容易に破壊されるため、実戦では短命だが、その存在が全体の人工衛星網を脆弱にするという逆説的な構造を指摘した。",
+      "editor_note": "",
+      "category": "その他"
+    },
+    {
+      "rank": 26,
+      "id": 50535208,
+      "title_en": "Who Builds the Machines That Build the Machines?",
+      "title_ja": "マシンを建設するマシンを誰が建設するのか？",
+      "url": "https://read.corematter.com/p/section-232-us-machine-tools",
+      "hn_url": "https://news.ycombinator.com/item?id=50535208",
+      "score": 109,
+      "comment_count": 34,
+      "posted_at": "2026-11-17T17:45:39+00:00",
+      "comments": [
+        {
+          "id": 50540482,
+          "author": "Animats",
+          "text": "Nice. I didn't realize that the US had lost its position in high-end machine tools, too. Volume in the machine tool business is dependent on the derivative of product production. If product production is trending downward, machine tool sales drop to near zero. They're long-lasting machines, usually good for many decades. There's a sizable used market. The new replacement market is thus small. Machine tools become obsolete, but often, the big iron gets a new controller and goes on cutting metal. Conversely, if product production is growing, as in China until recently, there's a huge demand for new machine tools. All those US medium-sized machine tool makers that made gear hobbing machines and such seem to be gone. Along with most of the people who were really into precision machining. You can't do this stuff with Amazon warehouse level employees. Robotic joints are an interesting case. They need a small 3-phase motor, which is a lot like a drone motor. They usually have a harmonic drive. And of course they have sensors and a controller. For a long time, robotic joints for mobile robots were put together mostly by grad students in tiny quantities using off the shelf components intended for other things. But at last, they're a volume business. The practical engineering problems have been solved, and there are at least 18 humanoid robots good enough to have Youtube videos. There are a lot of tradeoffs in robot joints, and there was a good article about those on HN a few months back. Harmonic drives that can handle overloads and back-driving are tough to make, but that's now solved. Too much reduction, back-driving fails, and gear teeth break. Too little reduction, and the motors have to be too big. Motors often have to be overloaded temporarily, and need thermal monitoring to get away with that. Balancing all those issues requires components built specifically for the task. It's mostly engineering cost. Once the design is right, those things are all variants of mass produced products. Which is why, once the volume gets into reasonable numbers, humanoid robots may not be that all expensive. Probably comparable to a car."
+        },
+        {
+          "id": 50537914,
+          "author": "michellelsun",
+          "text": "First time hitting the front page. Definitely made my day as a long time lurker! When I look at the reindustrialization efforts, the bottleneck keeps showing up in the machines themselves (and the machines that make those machines). The question then shifts from “we need more factories” or \"we need robots that run the factories\", to the capex, precision components, process knowledge, and industrial base that make modern manufacturing possible. Curious what people see as the highest-leverage places to tackle."
+        },
+        {
+          "id": 50538804,
+          "author": "riedel",
+          "text": "It is crazy how rather down to earth and low tech some of the machine and machine tool manufacturers operate. We did a data analytics project for a company that builds strand press tools for manufacturers world wide. It is basically about understanding the impact of material, temperature, etc on the production process and looping back precision metrology. Interesting thing is that they did not even test the tools but rather improve based on feedback from the their customers thousands of kilometers away. It a lot about controlling the process and people's experience over years. A lot of Germany's 'hidden champions' are specialized precision machine and machine tool manufacturers. Unfortunately for Germany particularly China is catching up in terms of controling the whole value chain..."
+        },
+        {
+          "id": 50541245,
+          "author": "TuringNYC",
+          "text": "Machines who build machines who build machines!? But then I guess who builds those?"
+        },
+        {
+          "id": 50537805,
+          "author": "georgeecollins",
+          "text": "I am old so I grew up with the panic that the USA does not make the most steel anymore. At the time I thought: wow: we're probably way behind in brick and concrete too. We still manufacture the most rockets, the most satellites, the most jets, the most missiles etc. I think it is easier to relearn or reinvent the machines that build the machines. Being cutting edge is hard. Tesla essentially had to go back to assembly lines, a technique everyone said Americans can't do anymore and they invented new ways of assembling autos (I'm think building in pieces, not off the frame) that many companies imitated."
+        }
+      ],
+      "summary_ja": "主な議論点\nコメントでは、米国が高精度工作機械や精密加工の分野で優位性を失っていること、工作機械の需要が最終製品の生産動向に依存する循環構造があることが指摘されています。また、ロボット関節の設計には、過負荷対応やバックドライブが可能なハーモニックドライブなど、特殊なコンポーネントが必要で、その開発には莫大な工学的コストがかかるものの、量産化されれば人型ロボットの成本は自動車並みになる可能性があるとされています。\n\n賛否両論\n再工業化の鍵は工場やロボットそのものではなく、それを可能にする機械や製造技術にあるという見方と、テスラのように組立ラインを再発明するなど、既存の技術を革新することで打開できるという意見の対立が見られます。また、德国の「hidden champions」と呼ばれる中小企業が精密機械製造で優位性を保つ一方で、中国が整个価値鎖を掌握しつつあるという懸念もexpressedされています。\n\n注目コメント\n「データ分析プロジェクト」のエピソードが特に注目されます。工作機械の制造商が、自社で工具をテストせず、世界中の顧客からのフィードバックと精密計測データを基にプロセスを改善しているという実態は、製造業の本質が「プロセス制御と経験の蓄積」にあることを示す洞察です。さらに、「誰がその機械を-buildするのか」という根源的な疑問や、米国がロケットやジェット機など他の分野では依然として強さを発揮するという指摘も、議論に深みを与えています。",
+      "editor_note": "",
+      "category": "システム/インフラ"
+    },
+    {
+      "rank": 27,
+      "id": 50534429,
+      "title_en": "YC wrote software to run our internship expo – and an 8-bit SIM to show it off",
+      "title_ja": "YCが实习エキスポを運営するソフトウェアと、それを披露する8ビットSIMを書いた",
+      "url": null,
+      "hn_url": "https://news.ycombinator.com/item?id=50534429",
+      "score": 1,
+      "comment_count": 0,
+      "posted_at": "2026-11-17T17:00:24+00:00",
+      "comments": [],
+      "summary_ja": "",
+      "editor_note": "",
+      "category": "スタートアップ/ビジネス"
+    },
+    {
+      "rank": 28,
+      "id": 50497872,
+      "title_en": "Mouse Party",
+      "title_ja": "Mouse Party",
+      "url": "https://aboard.com/lets-have-a-mouse-party/",
+      "hn_url": "https://news.ycombinator.com/item?id=50497872",
+      "score": 72,
+      "comment_count": 12,
+      "posted_at": "2026-11-14T15:38:50+00:00",
+      "comments": [
+        {
+          "id": 50541387,
+          "author": "MikeTheGreat",
+          "text": "> Ultimately I realized the problem: My friends are not chill San Francisco > people with open-source vibes. My friends are annoying East Coast product > manager tech scrooges. So I looked around for replacements. Off-topic, but I first read this as \"replacements for my friends\" :) I love the idea, the implementation, and the motivation - I'm glad they made this & shared it."
+        },
+        {
+          "id": 50538653,
+          "author": "xd1936",
+          "text": "Great idealism and sentiment around this tool. I'd prefer to use something web-based, like FileParty[1] or ComeOver[2]. WebTorrent or IPFS seem especially well suited for this task. 1. https://fileparty.co/ 2. https://luccadoret.github.io/comeover"
+        },
+        {
+          "id": 50538284,
+          "author": "NonHyloMorph",
+          "text": "\"For example, there are no moderation tools at all for the chat. If someone sucks, you can’t kick them out; you have to quit the app and end the party. You need to upgrade your friends, not your apps.\" I do like that. Might be really consequential for how the tool feels, not to have a pragmatic social hierarchy, that is all too familiar from a buisness/work context, implemented in the UX of that mouse party. Hold my Cheese"
+        },
+        {
+          "id": 50537807,
+          "author": "onaclov2000",
+          "text": "Funny enough, I just vibe coded (over the last 2 days) a app where I can watch video with my kiddos on the airplane synchronized across all of our devices offline (using Bluetooth) in this case the phones each need a copy of the video file, I didn't want to sort out whether Bluetooth could support video out to devices fast enough. But it's working and I can sync at least 2 devices (haven't tested 3-4). I do like the idea and am hoping to use the mouse party sometime with a friend!"
+        },
+        {
+          "id": 50539908,
+          "author": "markvdb",
+          "text": "People! Know your classics! https://en.wikipedia.org/wiki/The_Mouse_Problem"
+        }
+      ],
+      "summary_ja": "主な議論点: マウスPartitionは直感的なUIとアイデアが好意的に評価され、実装や動機が称賛された。多くのユーザーが簡易性と共有体験を称賛した。賛否両論: モデレーション機能のなさや、Web版（FileParty, ComeOver）の必要性が指摘され、賛否が分かれた。一部のユーザーはWeb版の必要性を強調した。注目コメント: 「友達をアップグレードする必要がある」との指摘や、Bluetooth同期アプリの紹介、古典「The Mouse Problem」の言及。この指摘はsocial hierarchyの欠如を強調した。また、WebTorrentやIPFSの活用も提案された。この議論は共有体験の未来について考察する契機となった。",
+      "editor_note": "",
+      "category": "その他"
+    },
+    {
+      "rank": 29,
+      "id": 50529612,
+      "title_en": "How the Claude Code team thinks about verification",
+      "title_ja": "Claude Codeチームが検証についてどう考えているか",
+      "url": "https://claude.dev/blog/how-the-claude-code-team-thinks-about-verification/",
+      "hn_url": "https://news.ycombinator.com/item?id=50529612",
+      "score": 273,
+      "comment_count": 215,
+      "posted_at": "2026-11-17T10:20:40+00:00",
+      "comments": [
+        {
+          "id": 50530087,
+          "author": "OtherShrezzing",
+          "text": "This article feels like the result of having unlimited tokens at your disposal. It’s got some very expensive practices, where near-free practices would produce the same or better results. There’s a long section in the middle where the article describes per-change verification via skill files and “ask Claude to use the chrome-for-Claude tool” when checking if changes have introduced regressions. But there’s already tools which do this without spending tokens tokens. Playwright will achieve equal quality but deterministic results across the same verification attempts. It is write-once-use-often, so has a marginal cost near zero."
+        },
+        {
+          "id": 50532733,
+          "author": "asmvolatile",
+          "text": "The Claude code team doesn’t think about jack sh*t. Interacting with Anthropic teams makes it clear that nobody at that company has any idea how their software works."
+        },
+        {
+          "id": 50529872,
+          "author": "girvo",
+          "text": "> With them, you can run dozens or hundreds in parallel. Im already spending my $2k usd per month in tokens with just one or two agents. How do they expect me to do that?"
+        },
+        {
+          "id": 50533072,
+          "author": "tshaddox",
+          "text": "Is Claude Code considered to be a reliable piece of software these days? I stopped using as my daily driver around 9 months ago, and at that time it felt very heavy/janky and seemed to have very regular bugs and breaking UI changes. I’d be happy to hear that it has gotten better!"
+        },
+        {
+          "id": 50530221,
+          "author": "koolba",
+          "text": "> Nobody can read every change, so we use failures as one way to decide what needs a person. Whether a human can or should review every diff is a conscious project level decision. I have yet to see a project where it is not feasible. The trick is to break things into small enough pieces that you can review them. Just like one would do if you were doing such changes manually. Nobody in their right mind performs non-mechanical changes of 100s of files."
+        }
+      ],
+      "summary_ja": "主な議論点は、Claude Code の検証プロセスにおける「token の無駄遣い」と既存ツール（Playwrightなど）との機能重複である。コミュニティは、高コストなアプローチ versus 効率的で確定的な自動化ツールの優劣を議論した。\n\n賛否両論は、Anthropic の技術者階層に対する怀疑（「jack sh*t」など）と、Claude Code の信頼性・安定性に関する过去的な不満（9か月前は「janky」だった） versus 現在の改善への期待の対立である。\n\n注目コメントとして、1か月に2000ドルのtoken費を1〜2つのエージェントで消化するという実態報告、および大規模変更を「小さく分割して人間がreviewする」従来の開発実践の重要性を強調するコメントが挙げられる。",
+      "editor_note": "",
+      "category": "AI/ML"
+    },
+    {
+      "rank": 30,
+      "id": 50530163,
+      "title_en": "New Evidence Shows School Phone Bans Are Gradually Improving Test Scores",
+      "title_ja": "新しい証拠が、学校での携帯電話禁止がテスト成績を徐々に向上させていることを示す",
+      "url": "https://www.nytimes.com/2026/11/17/upshot/school-phone-bans-study-scores.html",
+      "hn_url": "https://news.ycombinator.com/item?id=50530163",
+      "score": 1184,
+      "comment_count": 588,
+      "posted_at": "2026-11-17T11:45:51+00:00",
+      "comments": [
+        {
+          "id": 50530547,
+          "author": "40four",
+          "text": "http://archive.today/pbZQw"
+        },
+        {
+          "id": 50530668,
+          "author": "robot_jesus",
+          "text": "My kids (16 and 13) both attend schools that recently implemented phone bans and they love it, somewhat surprisingly. They've commented on how one of their favorite things about school is actually the social aspect. Before the ban, at lunch or study halls or recess, kids would just be on their phones and now they're laughing and goofing off, as kids should be doing. Bonkers to me that we ever allowed this. Oh, and for context, the kids are allowed to go to the office and check in on a message or send a text (e.g., soccer practice is canceled due to rain, can you pick me up at 4?) during any non-class period so it's still easy to communicate."
+        },
+        {
+          "id": 50531186,
+          "author": "yorwba",
+          "text": "The study https://cepr.harvard.edu/sites/g/files/omnuum9881/files/2026... finds a ≈0.01 standard-deviation difference in test scores the year lockable phone pouches are adopted, with no detectable additional difference in the following year. Certainly nothing to sneeze at from a system-wide perspective, but easily overwhelmed by other factors for any individual student."
+        },
+        {
+          "id": 50531632,
+          "author": "vezycash",
+          "text": "Everyone in the US knew phones were destroying attention spans years ago, but educational bodies and school boards punted the burden down to individual schools, teachers, and parents. Of course it failed: no single teacher or parent wants to be the bad guy and face social friction. China just banned them outright. It's the same with companies - weak committee vs. a founder who just makes the hard call."
+        },
+        {
+          "id": 50531895,
+          "author": "tfirst",
+          "text": "The identification in this study is a sketchy, and a similar study in the exact same setting (( https://tom-dee.github.io/files/w35132.pdf ) doesn't find a significant effect. 1. they see diverging pre-trends, which immediately suggests a problem in the diff-in-diff 2. they're doing some kind of propensity score matching to build a comparison set, and it looks like they're matching across state lines, which is going to expose them to all sorts of weird state-level shocks 3. while the previous study just looked at the impacts on grades, they've built a value-added model and they're estimating their effects through that. That just adds another place where they can get the model wrong and end up with bad estimates. They also point out that the schools that bought these pouches had more ESSER money, which they could have spent on tutoring."
+        }
+      ],
+      "summary_ja": "・主な議論点\nコミュニティでの議論は、①生徒による社会的交流の回復という前向きな体験談、②研究結果の統計的有意性と実質的意味合いの狭間での議論、③学校rather than個別教員がルールを決める必要性、という3点に集中した。\n\n・賛否両論\n携帯電話禁止は肯定的に受け入れられるが、その効果の大きさには疑問が呈された。特に、研究方法論（差分中的差分法、プロパニティスコアマッチングの問題）や、他の類似研究と結果が diverge することから、効果の因果関係の明確さに懐疑的な意見が多かった。\n\n・注目コメント\n「中国が全面禁止したのsame with companies - weak committee vs. a founder who just makes the hard call」というコメントが特に注目された。制度の変更において、委員会による弱い決定ではなく、強いリーダーシップによる决断の重要性を指摘しており、教育問題に留まらず広範な政策的示唆给出ている。",
+      "editor_note": "",
+      "category": "その他"
+    }
+  ]
+}
