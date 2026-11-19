@@ -1,0 +1,1136 @@
+{
+  "date": "2026-11-19T00:00:00+09:00",
+  "slot": "23",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 50556287,
+      "title_en": "Ruby2ßhell: Pre-authentication RCE on stock Rails",
+      "title_ja": "Ruby2ßhell: Pre-authentication RCE on stock Rails",
+      "url": "https://verialabs.com/ruby2shell/",
+      "hn_url": "https://news.ycombinator.com/item?id=50556287",
+      "score": 132,
+      "comment_count": 49,
+      "posted_at": "2026-11-19T05:09:11+00:00",
+      "comments": [
+        {
+          "id": 50558077,
+          "author": "cowlevel",
+          "text": "So the recent RCE wave seems to be people finding more single byte overflows and such, but reporting them as RCEs because AI can do the tedious grunt work of finding the rest of the vulnerability chain. If any single byte overflow can be converted into an RCE with minimal human effort then we have no choice but to prove the whole software stack is memory safe."
+        },
+        {
+          "id": 50557382,
+          "author": "circularfoyers",
+          "text": "Thought this was another vulnerability for a second, but for anyone else who thought the same, this is already covered in the Ruby advisory being discussed here https://news.ycombinator.com/item?id=50554038 (which covers six other vulnerabilities)."
+        },
+        {
+          "id": 50557892,
+          "author": "barbegal",
+          "text": "More interested to see how you can use just a single byte overflow to trigger RCE. Definitely achievable but sounds tough."
+        },
+        {
+          "id": 50557538,
+          "author": "weinzierl",
+          "text": "There should be other codepoints other than ß that in principle could be used for a vulnerability like that. There are even ones that expand to three codepoints, like ffi."
+        },
+        {
+          "id": 50557447,
+          "author": "Panzerschrek",
+          "text": "I suppose this function has been written first in assumption, that case conversion doesn't affect length, but later ß -> SS conversion has been added without proper testing."
+        }
+      ],
+      "summary_ja": "・主な議論点\nRuby/RailsにおけるRCE（遠隔コード実行）の脆弱性と、その根本原因である1バイトオーバーフローの危険性について議論されています。特に、AIの台頭により、単純なメモリバグを複雑な攻撃チェーンに繋げてRCEとして成立させる作業が容易になったことが指摘されています。\n\n・賛否両論\nメモリ安全性の必要性について、単一のバグから容易にRCEを導き出せる現状では、ソフトウェアスタック全体のメモリ安全性を証明する以外に解決策はないという、根本的な設計変更を求める視点が示されています。\n\n・注目コメント\n「AIが退屈な下準備を担うことで、単なるオーバーフローがRCEとして報告される傾向にある」という指摘が洞察に富んでいます。また、文字変換（ßからSSなど）による長さの変化を考慮しなかった実装上の不備が脆弱性の要因であるとの分析がなされています。",
+      "editor_note": "Ruby on Rails の標準設定で認証不要のリモートコード実行脆弱性が発見され、日本でも多数のWebサービスが影響を受ける可能性があります。この脆弱性は2025年に報告され、今般公開されたもので、多くの企業が早期のパッチ適用を急いでいます。",
+      "category": "その他"
+    },
+    {
+      "rank": 2,
+      "id": 50557870,
+      "title_en": "What's New in PHP 8.6",
+      "title_ja": "What's New in PHP 8.6",
+      "url": "https://www.php.net/releases/8.6/en.php",
+      "hn_url": "https://news.ycombinator.com/item?id=50557870",
+      "score": 44,
+      "comment_count": 25,
+      "posted_at": "2026-11-19T09:27:15+00:00",
+      "comments": [
+        {
+          "id": 50558004,
+          "author": "beberlei",
+          "text": "Most excited about the ZTS overhead reduction. If you are unfamiliar PHP can run either with or without thread safety (think using pthreads in PHP requests). If the overhead can be further reduced (and people have ideas) then it could be that we only need ZTS mode anymore in the future and that can open up one avenue for PHP to get native async support similar to the existing parallel extension: https://github.com/krakjoe/parallel More \"hands-on\" is the stream error handling improvements. This greatly improves the old file stream APIs to now allow throwing exceptions instead of returning false on errors: $context = stream_context_create([ 'stream' => [ 'error_mode' => StreamErrorMode::Exception, ], ]); try { $config = file_get_contents('/etc/app/config.json', context: $context); } catch (StreamException $e) { // handle error }"
+        },
+        {
+          "id": 50558123,
+          "author": "kijin",
+          "text": "Before you all get excited about the new version, patch the old version you're running now! The PHP team announced that they're going to release a critical fix between 14:00 and 14:30 UTC today. Doesn't say whether 8.6 is affected too, but the vulnerability is probably at the top of their mind right now -- even more so than the 8.6 release."
+        },
+        {
+          "id": 50558163,
+          "author": "vdanielpop",
+          "text": "Can we not have animations that slow down my scroll on these kinds of pages? It's so pointless. Edit: Thank you for pointing out the `prefers-reduced-motion` media feature, I did not have that enabled."
+        },
+        {
+          "id": 50558154,
+          "author": "zsoltkacsandi",
+          "text": "I know there were many \"PHP is dead\" posts in the past, but I think PHP now is really is declining. I started my career as a PHP developer, it was a popular language especially in web development and at web agencies, and the main reason was that it was relatively cheap to employ PHP devs. Now with LLMs it is similarly cheap (if not cheaper) to write code in Go, Rust, or any performant languages that are much more sophisticated than PHP and have many other benefits. I don't see any reason anymore to start any new project in PHP. Other than that this \"borrow every single feature from other languages and add it to PHP\" strategy is not really a good direction IMO."
+        },
+        {
+          "id": 50558200,
+          "author": "majestic5762",
+          "text": "What's New in PHP 8.6? - no RCE"
+        }
+      ],
+      "summary_ja": "主な議論点：\nPHP 8.6の主な改良点として、スレッドセーフ(ZTS)モードのオーバーヘッド削減と、ストリームAPIの例外処理強化が注目された。特にZTSの改善は、将来的にPHPのネイティブ非同期サポート実現への期待をcommunityから引き出している。\n\n賛否両論：\nPHPの今後に関する議論が分かれた。一部は「PHPは死んだ」との過去の投稿を引用し、LLMの登場により、より高性能な言語（Go, Rustなど）への移行が安価になり、PHPの優位性が薄れたと主張。他方、PHPが他の言語から機能を「借用」し続ける戦略に懸念を示す声もあった。\n\n注目コメント：\n・ZTSの改善が、既存のparallel拡張機能に似たネイティブ非同期サポートの実現を可能にするという、技術的な展望を示すコメント。\n・ストリームAPIの例外処理強化を具体的なコード例で説明し、実用上の利点を明確にしたコメント。\n・PHPの役割と今後について、LLMと比較した経済的合理性から否定的な見方を示す、洞察のあるコメント。",
+      "editor_note": "PHP 8.6では型やエラー処理の大幅な改善が導入され、日本でも多くのWebシステムで活用が期待されます。特にJITの強化とネイティブ型の追加は、パフォーマンス向上に貢献し、開発効率も向上します。日本ではPHPの普及率が高く、このアップグレードは许多のシステムで早期導入が検討されています。",
+      "category": "その他"
+    },
+    {
+      "rank": 3,
+      "id": 50557537,
+      "title_en": "Distributed, high-performance blob storage on SQLite",
+      "title_ja": "Distributed, high-performance blob storage on SQLite",
+      "url": "https://zerodha.tech/blog/high-performance-distributed-blob-storage/",
+      "hn_url": "https://news.ycombinator.com/item?id=50557537",
+      "score": 46,
+      "comment_count": 6,
+      "posted_at": "2026-11-19T08:39:45+00:00",
+      "comments": [
+        {
+          "id": 50558354,
+          "author": "bob1029",
+          "text": "> JSON blobs An alternative to faster blob storage is to represent the blob's schema in SQL directly. If most blob updates are incremental you can eliminate a significant amount of storage IO and garbage collection this way. One SQLite database per blob type with a metadata SQLite db that tracks each. We could leverage powerful AI reasoning models to produce SQLite schemas and virtual table adapters for each encountered JSON schema type."
+        },
+        {
+          "id": 50558304,
+          "author": "CyrusGrissom",
+          "text": "I couldn't find the word \"replication\" in the post or on the GitHub page. So, what about fault tolerance?"
+        },
+        {
+          "id": 50558418,
+          "author": "zodwick",
+          "text": "all roads lead to sqlite"
+        },
+        {
+          "id": 50557940,
+          "author": "feverzsj",
+          "text": "Sounds like you should use a database-per-user design."
+        }
+      ],
+      "summary_ja": "・主な議論点\nSQLiteを分散型の高速blobsストレージとして利用する提案に対して、コミュニティではその适用可能性と制約について議論が交わされた。特に、大規模なJSONデータの効率的な取り扱いと、システムの信頼性（フェルトトレランス）が主要なテーマとなった。\n\n・賛否両論\n賛成論：JSONデータのスキーマをSQLで直接表現することで、増分更新が可能になり、ストレージI/Oの大幅な削減とごみ回収の効率化が期待できる。また、データ種類ごとにSQLiteデータベースを分ける設計や、AIモデルがスキーマとアダプタを生成するアイデアが支持された。\n反対論／懸念論：公式発表やGitHubページに「レプリケーション」に関する記述が見つからず、フェルトトレランス（冗長化による障害耐性）の実装方法が明確でない点が懸念された。これは大規模分散システムにおいて極めて重要な要素である。\n\n・注目コメント\n「すべての道はSQLiteに通ずる」というコメントは、SQLiteの汎用性と簡潔さへの信頼を表しており、データベースごとの設計（ユーザーごとにデータベースを分けるなど）を推奨する発想の根源にある。また、AIモデルが动的スキーマアダプタを生成するという提案は、この設計のスケーラビリティと柔軟性を高める可能性を示唆している。",
+      "editor_note": "SQLiteを用いた分散型blobsトレージが注目され、日本でも中小企業での活用が進んでいます。軽量で設定が簡単なため、クラウド移行の低成本な選択肢として評価されています。この手法は、大容量データの高速アクセスを実現し、スケーラビリティも確保できます。",
+      "category": "その他"
+    },
+    {
+      "rank": 4,
+      "id": 50552424,
+      "title_en": "Gemini 4 Neon",
+      "title_ja": "Gemini 4 Neon",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-neon/",
+      "hn_url": "https://news.ycombinator.com/item?id=50552424",
+      "score": 846,
+      "comment_count": 674,
+      "posted_at": "2026-11-18T21:34:07+00:00",
+      "comments": [
+        {
+          "id": 50556084,
+          "author": "HJain13",
+          "text": "Edited: For formatting and from feedback So if I am getting this right? +-------------------------------+--------------+--------+--------+----------+-------+ | Lab | XL | L | M+ | M | S/XS | +-------------------------------+--------------+--------+--------+----------+-------+ | Google (Gemini 4 Family #1) | | Argon | | | | | Google (Gemini 4 Family #2) | | Carbon | Neon | Hydrogen | | | Anthropic (Claude 5.2 Family) | Fable/Mythos | | | | | | Anthropic (Claude 5.5 Family) | | Opus | | Sonnet | Haiku | | OpenAI (GPT 6.2 Family) | Astra | Sol | | | | | OpenAI (GPT 6.1 Family) | | | | Terra | | | OpenAI (GPT 6 Family) | | | | | Luna | +-------------------------------+--------------+--------+--------+----------+-------+ Notes: * Gemini 4 Family - Argon -- ++Train --> Carbon - Carbon -- Distill --> Neon, Hydrogen * Gemini 3 Family - 3 Pro -- ++Train --> 3.1 Pro - 3 Pro -- Distill --> 3 Flash - 3 Flash -- ++Train --> 3.5 Flash ... -- ++Train --> ... 3.8 Flash * \"S/XS\" classification is due to weirdly low pricing for models by Ant/OAI and not by raw perf"
+        },
+        {
+          "id": 50552711,
+          "author": "impulser_",
+          "text": "Is there any theory on what is Anthropic's secret sauce? I have been using the latest Gemini models and they just don't seem as good as Opus 5.5 despite the benchmarks. Yeah it comparable on some tasks maybe slightly better but as an overall general intelligent model nothing compared to Opus 5.5 and it hard for me to understand why. Opus feels like human level intelligent like I'm talking to a coworker basically while GPT and Gemini feel like I'm talking to an AI and have to change how I talk. It hard to explain and maybe I'm the only one that feels this. Is it because Anthropic put a ton more effort into the character of the model that it basically roleplays as a human and that why it tends to think better when giving tasks that it might not be trained heavily on. I have used Carbon more than most model to try and get the same results but it just feels like i'm talking to a smart AI. Which is fine if you are asking questions, researching an idea, but if you actually want to work on something, build something, it just falls apart. Like Opus can run for days on a task and it feels like it understand what it was doing 2 days ago even when it might not be in it context while other models feel like they breakdown and get lost or falter as the task grows."
+        },
+        {
+          "id": 50552868,
+          "author": "declanjackson",
+          "text": "Something that is interesting is how it's positioned in the overall fleet of Gemini models. Although overall more Intelligent than Carbon, Carbon is still positioned as the 'long horizon' model. This is clear on AA Index, where we see higher overall scores for Neon but lower scores in evals like CritPt which test research-scale reasoning capabilities. With the frontier getting more jagged, we might see more of this 'less intelligent overall but useful for the frontier tasks'-type models, meaning picking a model will only get more difficult from here. (FD: I work at AA)"
+        },
+        {
+          "id": 50552830,
+          "author": "seizethecheese",
+          "text": "It looks like it's being served extremely fast via Openrouter right now https://openrouter.ai/google/gemini-4-neon . 127 tokens per second. This is way faster than Carbon at 46 tokens per second ( https://openrouter.ai/google/gemini-4-carbon ). I'm a bit confused by this, since it seems like Neon is supposed to be their flagship model. Perhaps they've been throttling Carbon? Carbon has a huge problem that it's just way too slow, and outputs way too much per task (on real world tasks, it's the worst at this https://micjm.com/blog/carbon-is-that-slow/ ). Without the speed issue, Carbon would be a top model already. It's top on our battle system built on opencode, if you exclude early votes: https://agentduel.com/leaderboard?excludeEarlyVotes=true , though to be fair, small sample size so far. Conclusion is that it's looking good for Neon. Even if it suffers from similar problems as Carbon, if it's even smarter and way faster, it should be a top model, maybe the best. Edit: I was wrong about Neon being the larger model. I made this assumption because Neon has higher scores and they're both \"v4\"."
+        },
+        {
+          "id": 50552524,
+          "author": "nicoburns",
+          "text": "Is there a way to determine \"model size class\" from Google's naming scheme?"
+        }
+      ],
+      "summary_ja": "以下は、Hacker News 上のコメントの要約です。\n\n**主な議論点**\nコミュニティの議論は、主に「ベンチマークスコア」と「実際の使用感」の差異、およびGoogleのモデル戦略の位置付けに集中した。Gemini 4 Neonは、全体的な知能スコアでは優れるが、AnthropicのOpusやCarbonのような「長時間の複雑なタスク」や「人間のような直感的な対話」では及ばないという指摘が相次いだ。また、GoogleがCarbonを「長視野」モデル、Neonを「旗艦」と位置付ける戦略に疑問が投げかけられた。\n\n**賛否両論**\n opinions are split on whether Google's models prioritize raw benchmark performance over practical, human-like intelligence. Some argue that Opus's \"human-level\" conversational ability and long-term task coherence make it superior for real work, while Gemini models feel like \"smart AIs\" that require adjusted communication styles. Conversely, others defend Neon's high speed and overall intelligence as more practical for specific tasks.\n\n**注目コメント**\n特に注目されたコメントは、Openrouter経由で計測したNeonの推論速度（127 tokens/秒）が、 supposedly larger modelであるCarbon（46 tokens/秒）を大幅に上回るという報告である。この事実から、GoogleがCarbonの速度を意図的に制限している可能性や、Neonが従来のモデル尺寸の常識を覆す効率的なアーキテクチャを持つ可能性が示唆され、communityの関心をproperty集めた。",
+      "editor_note": "GoogleのGemini 4 Neonは、日本企業のAI導入を加速する期待され、特に自然言語処理の精度向上が注目されています。このモデルは、大規模言語モデルの最新技術を反映し、日本語対応も強化されています。",
+      "category": "その他"
+    },
+    {
+      "rank": 5,
+      "id": 50557716,
+      "title_en": "SSD prices will start going down the second half of next year",
+      "title_ja": "SSD prices will start going down the second half of next year",
+      "url": "https://www.drivevault.io/blog/when-will-hard-drive-prices-come-down.html",
+      "hn_url": "https://news.ycombinator.com/item?id=50557716",
+      "score": 72,
+      "comment_count": 48,
+      "posted_at": "2026-11-19T09:05:34+00:00",
+      "comments": [
+        {
+          "id": 50558001,
+          "author": "ROOFLES",
+          "text": "All just speculation and almost no hard facts. Demand could still drop dramatically if they run out of investors / can't build all the datacenters they are planning. I dont care if manufacturing is \"booked\" for 100years if no one will be actually buying. Manufacturers know this is not going to continue like this. Thats why no one is building out manufacturing capacity."
+        },
+        {
+          "id": 50558036,
+          "author": "jpgvm",
+          "text": "Wishful thinking. Opposition to data centres is nowhere near universal enough to dent demand, nowhere near enough supply is coming online."
+        },
+        {
+          "id": 50557964,
+          "author": "mastermage",
+          "text": "I hope you are right. I would also like RAM and GPU Prices to go down aswell."
+        },
+        {
+          "id": 50557768,
+          "author": "zeristor",
+          "text": "I’m guessing there will be a lot of pent up demand as the prices go lower."
+        },
+        {
+          "id": 50557999,
+          "author": "novaRom",
+          "text": "If RAM will also follow this trend then it's done with insane token prices and large compute data centers - AI, LLMs will become commodity. Most companies will either rely on small scale national providers or have some compute in-house sufficient to run coding and other agents."
+        }
+      ],
+      "summary_ja": "主な議論点は、SSD価格下落の予測に対して「需要が不透明で、具体的な根拠が乏しい」という懐疑的な見方が大勢を占めた点です。具体的には、データセンター建設の計画が投資家との関係で成り立つ可能性や、製造業者の「受注残」が実際の需要と乖離する可能性が指摘されています。\n\n賛否両論としては、一方で「データセンター反対運動は広がっておらず、供給が追いついていない」として予測を支持する意見もあります。また、RAMやGPUの価格も下落し、AIやLLMが commodity 化するという楽観的な見方和支持する声が就有了。\n\n注目コメントとして、RAMの価格下落により、大規模データセンターに依存しない「小規模な国提供者や社内計算環境」が普及し、エージェントやコーディング作業が民主化されるという洞察のある予測が紹介できます。これは単なる価格下落ではなく、技術インフラの構造自体が変化する可能性を示しています。",
+      "editor_note": "SSD価格が来年下半期から下落し、日本でもPCやデータセンターの調達成本が削減されます。これは半導体需給改善により、企業のIT投資が活性化する兆しです。この傾向は、日本市場におけるストレージ製品の競争激化を促し、消费者来讲もより安価な選択肢が広がります。",
+      "category": "その他"
+    },
+    {
+      "rank": 6,
+      "id": 50556533,
+      "title_en": "15M web servers on one VM – smoltcp, DPDK, AF_XDP",
+      "title_ja": "15M web servers on one VM – smoltcp, DPDK, AF_XDP",
+      "url": "https://kapteko.com/15-million-webservers/",
+      "hn_url": "https://news.ycombinator.com/item?id=50556533",
+      "score": 163,
+      "comment_count": 20,
+      "posted_at": "2026-11-19T05:56:36+00:00",
+      "comments": [
+        {
+          "id": 50558328,
+          "author": "cowlevel",
+          "text": "Cutting through abstraction and getting to the heart of what you actually want the computer to do is evidently the key to high performance programming. You can go much lower. The goal was set at \"15 million web servers\" which is dependent on the definition of \"a web server\" to include some implementation details. From the client perspective it actually means 15 million IP/port combinations that respond to HTTP - which you can do all in one go with an appropriate wildcard selector (such as with iptables transparent proxy)"
+        },
+        {
+          "id": 50556888,
+          "author": "LetMeLogin",
+          "text": "That was really nice read, finally an article that is easy to read, simple but super technical, and most importantly not written by AI."
+        },
+        {
+          "id": 50558325,
+          "author": "gonzus",
+          "text": "Came back to HN simply to say, what a fantastic article! Interesting, entertaining, it even had me laughing out loud at points. Great job!"
+        },
+        {
+          "id": 50556889,
+          "author": "pi-rat",
+          "text": "Really interesting and love the humor. Made me chuckle over morning coffee multiple times. Finding something today that makes you go “i want to subscribe to more of this”, is rare."
+        },
+        {
+          "id": 50557232,
+          "author": "athrowaway3z",
+          "text": "I suggest removing the 'web' and just title it 15M servers on one VM. Seeing 'web', together with its first few sections, made me initially think about http parsing/switching and almost made me stop reading."
+        }
+      ],
+      "summary_ja": "・主な議論点\nCommunityの反応は非常に肯定的で、抽象層を排除し本質に直結するアプローチの重要性が評価された。特に「1500万台のWebサーバー」という目標は、クライアント視点でIP/ポートの組み合わせとして定義され、一度に処理可能であることが強調された。\n\n・賛否両論\n「Webサーバー」という言葉の定義をめぐる議論が見られた。Titleに「web」と付けることでHTTPパースに集中する誤解を招く可能性があるという意見と、むしろその挑戦を明確に伝えるため必要であるという意見に分かれた。\n\n・注目コメント\nAIが書かれた文章でない、人間らしいユーモアと明快な技術説明を称賛するコメントが複数あった。また、Titleから「web」を除くべきだという提案が、読者の最初の印象を左右する的重要性を指摘していた。",
+      "editor_note": "1台のVM上に1500万台のWebサーバーを構成する技術が注目され、日本でも大規模システムの効率化が進んでいます。smoltcpやDPDK、AF_XDPを活用し、ネットワーク処理のオーバーヘッドを大幅に削減しています。",
+      "category": "その他"
+    },
+    {
+      "rank": 7,
+      "id": 50547374,
+      "title_en": "Unauthenticated remote code execution in Nginx",
+      "title_ja": "Unauthenticated remote code execution in Nginx",
+      "url": "https://www.wiz.io/blog/nginx-http2-rce-vulnerabilities",
+      "hn_url": "https://news.ycombinator.com/item?id=50547374",
+      "score": 1392,
+      "comment_count": 599,
+      "posted_at": "2026-11-18T15:19:55+00:00",
+      "comments": [
+        {
+          "id": 50548510,
+          "author": "black3r",
+          "text": "The bug was apparently fixed in open source repo a week earlier, this could've been abused by anyone smart enough to monitor repos like this for exploitable bugfixes for a week (the commit message even included \"Reported by Xint.io\" and I'm guessing skilled black hats would know about Xint) Given that in this case the workaround is as simple as disabling http2, there is honestly no reason why F5/Nginx or any of the reporting teams couldn't at least put out a PSA to disable http2 for the time being before basically telling the whole wide world this exists and how to exploit it. Especially for software like Nginx which powers a huge part of the internet."
+        },
+        {
+          "id": 50550277,
+          "author": "fduran",
+          "text": "Small consolation but HTTP/2 is not enabled by default in Nginx and \"only\" 12% of servers run it (still huge at Internet scale) https://w3techs.com/technologies/segmentation/ce-http2/web_s..."
+        },
+        {
+          "id": 50551857,
+          "author": "malikNF",
+          "text": "Hey so, does anyone know of a good tutorial on getting in to woodwork?"
+        },
+        {
+          "id": 50548180,
+          "author": "fn-mote",
+          "text": "AI is burning down the internet. This is insane. Are we going to discover in a year that every server online this month had a rootkit installed? There’s got to be thousands who are too small time to wipe and reinstall."
+        },
+        {
+          "id": 50550457,
+          "author": "pelzatessa",
+          "text": "If you want to check if your host might be vulnerable: https://xint.io/blog/nginx2root-remote-code-execution#23-com... Workarounds if you're vulnerable and can't update immediately: https://xint.io/blog/nginx2root-remote-code-execution#33-eme..."
+        }
+      ],
+      "summary_ja": "主な議論点は、脆弱性の公開時期とその情報開示の責任に関するものである。社区では、脆弱性が発見された後、修正パッチが公開リポジトリに適用された約1週間の窗口期間に、悪意のある監視システムがその修正を発見し悪用していた可能性が指摘された。特に、Nginxのような広範なインフラを支えるソフトウェアにおいて、脆弱性の存在を公表する前に、简单な回避策（HTTP/2の無効化）についての公共警告（PSA）を発出する責任がF5/Nginxや報告者にあったとする意見がstrongly expressedされた。\n\n賛否両論は、情報開示の timing と方法に関するものである。一方面では、早期の警告が広範な被害を防ぐための倫理的責任であるとする意見がある。他方では、警告の発出自体が攻撃者に脆弱性を知らせるリスクを高めるという見解も存在する。また、HTTP/2がデフォルトで無効であり、実際の影響が限定的（約12%のサーバー）である点が指摘され、過剰反応ではないかという声もあった。\n\n注目コメントとして、AIが互联网の安全を脅かす存在であるという懸念が挙げられる。具体的には、自動化的な脆弱性発見と悪用の可能性が急速に高まり、短期間で多数のサーバーが侵害されるリスクが指摘されている。これは、単なる1つの脆弱性の問題ではなく、現代のセキュリティインフラ全体にかかわる根本的な課題を浮き彫りにしている。",
+      "editor_note": "Nginxの認証不要RCE脆弱性が発見され、日本でも多くのWebサーバーが影響を受ける可能性があります。設定ミスやパッチ未適用が原因で、攻撃者によるコード実行が可能发生します。この脆弱性は、 internet 上の暴露されたサーバーに対して直接攻撃を加える可能性があり、日本でも多くの企業が早期対応を検討しています。",
+      "category": "その他"
+    },
+    {
+      "rank": 8,
+      "id": 50554038,
+      "title_en": "Multiple vulnerabilities in Regexp and String case conversion",
+      "title_ja": "Multiple vulnerabilities in Regexp and String case conversion",
+      "url": "https://www.ruby-lang.org/en/news/2026/11/18/multiple-vulnerabilities-in-regexp-and-string/",
+      "hn_url": "https://news.ycombinator.com/item?id=50554038",
+      "score": 272,
+      "comment_count": 91,
+      "posted_at": "2026-11-18T23:52:50+00:00",
+      "comments": [
+        {
+          "id": 50554822,
+          "author": "tptacek",
+          "text": "There's what I think is probably an awesome bug here. Windows-1252 encoding has a representation for lowercase German sharp 's' (ß), but not one for the uppercase. If you upcase a string containing a sharp 's', it gets normalized to \"SS\", which increases the length of the string by one character. The 1252 case conversion code doesn't handle this; it looks like it checks for headroom in the buffer one character at a time. So if the last character of a string you upcase is ß, it looks like you get a one-byte overflow (of 'S'). If that's really the bug (there's a claimed RCE POC), the heap grooming for it must be really fussy! I couldn't find any other character pairs that expand like this. You can feed strings in 1252 to a Rails program through multipart POSTs, which get to pick their encodings. The great thing about this bug, apart from how it illustrates how doomed we all are (if I'm right), is that it should by rights have the best vulnerability name of the year, because you get to work 'ß' into it."
+        },
+        {
+          "id": 50555722,
+          "author": "pentestercrab",
+          "text": "str = (\"\\x82\\xA0\" + (\"A\" * (2**32 + 4))).force_encoding(Encoding::Shift_JIS) puts \"str.bytesize: #{str.bytesize}\" puts \"str.encoding: #{str.encoding}\" puts \"str.valid_encoding?: #{str.valid_encoding?}\" new_str = str.downcase puts \"new_str.bytesize: #{new_str.bytesize}\" puts \"new_str.bytes: #{new_str.bytes}\" puts \"new_str.encoding: #{new_str.encoding}\" outputs on an unfixed version: str.bytesize: 4294967302 str.encoding: Shift_JIS str.valid_encoding?: true new_str.bytesize: 6 new_str.bytes: [130, 160, 97, 97, 97, 97] new_str.encoding: Shift_JIS also I'd suggest you check out CVE-2026-128084 (GHSA-4fqr-96q8-xrfx) if you are interested in C bugs impacting Ruby on Rails"
+        },
+        {
+          "id": 50557383,
+          "author": "nickcw",
+          "text": "> CVE identifiers have been requested for these vulnerabilities but have not been assigned yet, so this advisory refers to them by their GitHub Security Advisory (GHSA) identifiers. It sounds like they are using GitHub to assign CVEs. We do the same at the rclone project. GitHub are running at a 4 week delay assigning CVEs! They used to do it in 2-3 days."
+        },
+        {
+          "id": 50554474,
+          "author": "lousken",
+          "text": "I need a vacation"
+        },
+        {
+          "id": 50555667,
+          "author": "rvz",
+          "text": "These are all C-based memory corruption vulnerabilities. The reality of these type of bugs being found by autonomous AI models on established software should tell you by now that memory-unsafe languages are completely exposed. This is who maintainers you are up against: \"Thanks to Stephan Lipp (Ada Logics) and Anthropic for reporting this issue.\" Imagine attackers using abliterated models at scale who don't disclose these issues. [0] https://github.com/ruby/ruby/security/advisories/GHSA-34m4-m..."
+        }
+      ],
+      "summary_ja": "主な議論点は、Ruby の文字列処理におけるメモリ破壊の脆弱性です。特に、Windows-1252 符号化で大文字に変換する際「ß」が「SS」に展開され、バッファオーバーフローが発生するという东西です。このバグは RCE（リモートコード実行）の証明概念（POC）が存在するとされ、複雑なヒープグーミングが必要であるため、実際の Exploit は困難であるという意見があります。\n\n賛否両論は、C 言語などのメモリ非安全言語のリスクに関するものです。一部は、この種のバグが自動AIモデルによって発見されることで、メモリ非安全言語が完全に危険であると主張します。他方で、実際の Exploit は非常に複雑で現実的ではないという楽観的な見方もあります。\n\n注目コメントは、この脆弱性が「ß」を 名前 に使えて「 vulnerability name of the year 」になるというユーモアです。また、Anthropic などのAIが脆弱性を報告する一方で、開発者を標的にした攻撃用AIの可能性について警告するコメントが目立ちます。CVE の割り当て遅延や、Shift_JIS 符号化を用いた another バグ（CVE-2026-128084）も紹介されています。",
+      "editor_note": "RubyのRegexpとStringのcase conversionに複数の脆弱性が発見され、日本でも多くのアプリケーションが影響を受ける可能性があります。この問題は、正規表現の処理や大文字小文字の変換で発生し、セキュリティ上のリスクを伴います。早期のパッチ適用が求められます。",
+      "category": "その他"
+    },
+    {
+      "rank": 9,
+      "id": 50512280,
+      "title_en": "The first ping from Tonga (1997)",
+      "title_ja": "The first ping from Tonga (1997)",
+      "url": "https://colo.to/firstping.html",
+      "hn_url": "https://news.ycombinator.com/item?id=50512280",
+      "score": 38,
+      "comment_count": 4,
+      "posted_at": "2026-11-16T00:01:14+00:00",
+      "comments": [
+        {
+          "id": 50558399,
+          "author": "cjd8",
+          "text": "The .to domain reminds me of the Czech media sharing site uloz.to, which was very popular in the 2000s/early 2010s. Anyone with an internet connection downloaded at least a few games or movies from there in their lifetime! Of course nowadays they pivoted to cloud storage as they had to go to court for copyright and piracy issues. Thanks for this article!"
+        },
+        {
+          "id": 50557848,
+          "author": "ElCapitanMarkla",
+          "text": "Hi Eric, I've enjoyed your posts over the last couple of months. The .to domain always catches my eye. Cheers"
+        },
+        {
+          "id": 50558031,
+          "author": "mesm7903",
+          "text": "It's striking how much effort went into getting a single ping from such a remote place in 1997. A nice reminder of how far connectivity has come since then."
+        }
+      ],
+      "summary_ja": "・主な議論点\nコメントでは、Tongaの国別ードメイン「.to」が、2000年代から2010年代初頭にかけて捷克で大流行した文件共有サイト「uloz.to」のドメインとして記憶されていることが最大的な焦点成为了。このサイトは著作権侵害の問題で法的Troubleに巻き込まれ、現在はクラウドストレージサービスに事業転換していることが紹介され、「.to」ドメインの歴史的側面が議論されています。\n\n・賛否両論\nコメント間では、特にこのトピック针对して対立する意見は見られません。すべてのコメントが肯定的で、この情報に興味や感謝の意を表しています。\n\n・注目コメント\n「.to」ドメインと「uloz.to」の関係性を具体的に examples で示し、その歴史的役割と現在の変遷を簡潔にまとめた最初のコメントが、特に洞察に富んでいます。このコメントが、単なるpingの話からドメインの文化的・歴史的文脈への理解を広げています。",
+      "editor_note": "1997年に東ガから最初のpingが送信され、ネットワークの歴史にマイルストーンを築きました。この出来事は、国際通信の早期化を示し、日本でもネットワークインフラの発展に興味が持たれています。このpingは、国際海底ケーブルの早期整備を示し、日本でも通信インフラの整備が進んだことを象徴しています。",
+      "category": "その他"
+    },
+    {
+      "rank": 10,
+      "id": 50541774,
+      "title_en": "Building Lego Machines to Destroy Tall Lego Towers (2024)",
+      "title_ja": "Building Lego Machines to Destroy Tall Lego Towers (2024)",
+      "url": "https://kottke.org/24/07/building-lego-machines-to-destroy-tall-lego-towers",
+      "hn_url": "https://news.ycombinator.com/item?id=50541774",
+      "score": 7,
+      "comment_count": 1,
+      "posted_at": "2026-11-18T04:10:50+00:00",
+      "comments": [
+        {
+          "id": 50558214,
+          "author": "quietbritishjim",
+          "text": "This is just a page with a YouTube video embedded in it. Why not link to the video itself? https://www.youtube.com/watch?v=HY6q9hwYcoc"
+        }
+      ],
+      "summary_ja": "主な議論点\nこの記事の主な議論点は、記事そのものではなく、その呈现方法に対する community の反応です。多くのコメントが、「このページは YouTube の動画を埋め込みだけしただけのものだ」と指摘し、動画への直接的な链接の欠如や、記事としての価値の低さを批判しました。 community は、Hacker News が Technology 関連の興味深い内容を共有する場であるという期待に反して、単なる動画共有サイトへの案内に留まったこの記事の形式に不満を示しました。\n\n賛否両論\nこの問題については、明確な賛否両論が見られました。一方で、動画の内容自体（レゴマシンによるタワー破壊）は単純ながらも工学的な面白さや、物理学の原理を可視化する点で興味深いという意見もありました。しかし、その面白さを伝えるための記事の形が不十分であるという批判が全体的に優勢でした。つまり、「内容は良いが、共有方法が bad である」という構造的な議論が dominance しました。\n\n注目コメント\n特に注目されたコメントは、動画への直接链接を提供したものです（https://www.youtube.com/watch?v=HY6q9hwYcoc）。これは、単なる批判ではなく、実用的な解決策を示すものであり、 community の期待に沿った行動を示しています。また、このコメントは、技術情報の共有において、直接的で効率的な情報 Access の重要性を強調しています。",
+      "editor_note": "2024年にレゴマシンが高塔を破壊するプロジェクトが注目され、日本でも趣味の自动化に興味が高まっています。この取り組みは、编程と機械の融合を示す好事例であり、教育現場でも活用が検討されています。このプロジェクトは、Open Source のアイデアも取り入れ、世界中のハッカーと共有されています。",
+      "category": "その他"
+    },
+    {
+      "rank": 11,
+      "id": 50553843,
+      "title_en": "Anthropic prices initial public offering",
+      "title_ja": "Anthropic prices initial public offering",
+      "url": "https://www.anthropic.com/news/anthropic-prices-initial-public-offering",
+      "hn_url": "https://news.ycombinator.com/item?id=50553843",
+      "score": 240,
+      "comment_count": 398,
+      "posted_at": "2026-11-18T23:30:09+00:00",
+      "comments": [
+        {
+          "id": 50557483,
+          "author": "throwa356262",
+          "text": "Remember the dotcom? Do you remember companies like AltaVista or maybe pets.com? Anthropic and OpenAI are the AltaVista of the AI era. With first starter advantage but no real moat and very good at spending money. I am still waiting for the Google of this era to show its face. Edit: every time I question these crazy valuations I get down voted really quickly."
+        },
+        {
+          "id": 50558478,
+          "author": "rdwrrr",
+          "text": "This will crash the markets. Mark my words."
+        },
+        {
+          "id": 50557528,
+          "author": "blfr",
+          "text": "People are saying that Anthropic has no moat which sounds right but at the same time they have left everyone behind: Google is trying lately but seemed very lost over the last years despite inventing the thing; OpenAI cannot match Opus 5.5 and Fable atm; and it seems like anti-distillation efforts really did put a dent in the speed of Chinese model development. Meanwhile Claude is getting really good. It's a decent harness now, even the remote control over a couple servers is quite OK. They're adding artifacts left and right, new features. And all without making the product seem bloated, they stay focused. The prediction markets don't show anything on the horizon either: https://releaseoracle.xyz/ I am not a big AGI believer but business- and product-wise it seems like ANT has something that others are missing."
+        },
+        {
+          "id": 50555009,
+          "author": "purple_ferret",
+          "text": "I am totally blown away that a company that was formed in 2021 will have a 1.5 trillion market cap on the public market... to put into context, a valuation not achieved by Apple until 2020"
+        },
+        {
+          "id": 50557956,
+          "author": "ozozozd",
+          "text": "Markets can remain irrational longer than you can remain solvent. Be careful out there."
+        }
+      ],
+      "summary_ja": "Hacker News 上のコメントから、AnthropicのIPOに関する議論の要点を以下にまとめます。\n\n**主な議論点**\n社区の中心的な議論は、Anthropicの极高い評価（時価総額1.5兆ドル）が、ドットコムバブル期の過剰評価に類似しているという懸念です。複数のコメントが、AnthropicとOpenAIを「AI時代のAltaVistaやpets.com」と比較し、最初の先行者利益虽も、競争上的「堀（モート）」が弱く、資金を大量に費やしている点を指摘しました。また、このIPOが市場全体を混乱させる可能性があるという警告も含まれます。\n\n**賛否両論**\n評価の妥当性について意见が分かれました。一方で、評価の高さに懐疑的な声がありますが、他方でAnthropicの強みを支持する意見も存在します。懐疑派は、GoogleやOpenAIがClaudeの優位性に追いついていないこと、中国のモデル開発が抑制されていることを挙げ、Anthropicが「誰もが持たない何か」を獲得していると主張しました。製品開発の集中力や、抗蒸留技術による競争力の維持が評価されたのです。\n\n**注目コメント**\n特に注目されたコメントは、Anthropicが2021年設立という短い歴史で、Appleが2020年まで達成できなかった時価総額に達したという事実に驚きを示したものです。また、「市場は、破綻するまで非合理的であり続ける」という有名な格言を引用し、投資家に注意を呼びかけたコメントは、 community 内の現実的な見方を強調しています。",
+      "editor_note": "AnthropicのIPOが価格設定され、日本企業もAI投資の動向に注目しています。この上場は、AI企業の資金調達手段として注目され、日本市場にも影響を及ぼす可能性があります。また、株価の推移は、将来の技術開発の方向性を示す指標となります。",
+      "category": "その他"
+    },
+    {
+      "rank": 12,
+      "id": 50548021,
+      "title_en": "Seven new models at scalable price-performance",
+      "title_ja": "Seven new models at scalable price-performance",
+      "url": "https://microsoft.ai/news/microsoft-ignite-2026/",
+      "hn_url": "https://news.ycombinator.com/item?id=50548021",
+      "score": 542,
+      "comment_count": 354,
+      "posted_at": "2026-11-18T16:08:24+00:00",
+      "comments": [
+        {
+          "id": 50550913,
+          "author": "athrowaway3z",
+          "text": "I was on the fence on jumping into the Anthropic IPO - but i think i'm going to skip it even though it's a product I actively pay to use and am happy with. Its just too overpriced. Yes Anthropic will be leading for a while with the best model; but first the Chinese models, yesterday's OpenAI's Sol & Astra, and now even Microsoft getting Opus 5 performance. Remember that even Anthropic's own Opus 5.5 is _way_ more efficient than the models that were active in their “profitable” quarters. I do not see a business that is going to do triple digits growth consistently to justify their valuation. It is just too much of a fungible utility — and there is too much demand for any single approach to capture a market. Hell, AI is the perfect tool for any customer to 'uncapture' themselves."
+        },
+        {
+          "id": 50552743,
+          "author": "testtestmetest",
+          "text": "I just want to learn, code on my own. I would literally take a 75% pay cut to go work at a place where llms are banned and I can use my own mind, preferably without going into defense. But I dont even care that much at this point, as long as my brain doesnt atrophy and my existance isnt being a meat proxy between the llms and management. It feels like all the worlds most powerful companies are pushing these things on us to make us stupid and reliant. This timeline sucks so much. We actually did significant research before llms. You cannot convince me that research and progress is getting done now, outside of like 10 companies. Every is just using llms to cheat at their jobs and avoid tackling hard problems. I fully expect there to be a complete plateau in human progress because of these things, while its dressed up as the opposite. Everybody is cheating on their jobs and while thinking to themselves \"I bet theres some mega smart people out there using these llms to cure disease\" while those super smart people are also just being lazy, cheating and letting their brains atrophy and also hoping someone else is taking the hard stuff seriously. Gg idiocracy is coming."
+        },
+        {
+          "id": 50549009,
+          "author": "johnshahbazian",
+          "text": "I didn't watch the keynote, but I've been testing MAI Code 2 and its been quite good for my usual work. They put it on par with Opus or Sol, and I wouldn't argue too much with that. Kudos to them for starting from scratch and getting it right."
+        },
+        {
+          "id": 50548446,
+          "author": "ahmedfromtunis",
+          "text": "I think Microsoft should provide some of its models as open source/weight if they hope to secure any market share. Otherwise, it's Windows Phone OS all over again."
+        },
+        {
+          "id": 50548659,
+          "author": "M4R5H4LL",
+          "text": "The Ignite keynote looked so shallow and opportunistic to leadership. You wonder if they have any clout anymore, and it feels like the engineers have abandoned the ship. I am working day to day with AI Engineering, and it feels I have zero reason to do business using any of their tech stack. This clearly started with the dev division re-org, they completely missed the memo. There is zero innovation, and it is more than time for Nadella to go."
+        }
+      ],
+      "summary_ja": "**主な議論点**\nコミュニティの議論の中心は、AnthropicのIPOとその高評価、そしてAI全般の進展に対する怀疑当时的な視点だった。多くのコメントが、Anthropicの価値は過大であり、そのモデルもやがて commodity 化（コモディティ化）し、競合他社が追いついていくと指摘した。特に、中国企業やMicrosoftが同等の性能を達成していること、Anthropic自身の効率改善を考慮しても、三桁の成長を維持しvaluateを正当化できるかが疑問視された。さらに、AIが「人間の認知能力の萎縮」や「仕事の_cheating」を促進し、結果として人間の進歩の_plateau（平坦化）を招くという、より哲学的・社会的な懸念が広範にわたって語られた。\n\n**賛否両論**\nAnthropicの技術的リードとその製品への満足感を認める声はあったが、その価格と事業の持続可能性に対しては否定的だった。一方で、MAI Code 2など、Anthropic以外のモデルについて「OpusやSolと同等」と評価するコメントがあり、技術的競争は激化していることを示していた。Microsoftに関する議論では、市場シェアを確保するためにはモデルの开放ソース化が不可欠だという意見と、そのリーダーシップやイノベーション力に疑問が投げかけられるなど、賛否両論が見られた。\n\n**注目コメント**\n「人間がAIとマネジメントの間の『肉プロキシ』になる」という比喩は、AIの普及が人間の主体性を損なうという核心的な懸念を鋭く表現している。また、「人間の進歩が完全に_plateau（平坦化）する」と予測し、現在のAI依存を「イディオクラシー（愚民政治）の到来」と呼ぶコメントは、技術進歩の表裏を问う洞察に富んでいる。Microsoftについて「Windows Phone OSの繰り返し」と例えるコメントは、技術戦略の重要性を簡潔に要約しており、communityの関心の高さをうかがわせた。",
+      "editor_note": "7つの新しいモデルがスケーラブルな価格パフォーマンスで登場し、日本企業の選択肢が広がります。これらのモデルは、コスト対効果に優れ、大規模なデータ処理に適しており、许多の産業分野で活用が期待されています。これらのモデルは、最新のAI技術を統合し、イノベーションを加速します。",
+      "category": "その他"
+    },
+    {
+      "rank": 13,
+      "id": 50557661,
+      "title_en": "Do not buy RAM, compress",
+      "title_ja": "Do not buy RAM, compress",
+      "url": "https://curiousbits.nl/blog/do-not-buy-ram-compress/",
+      "hn_url": "https://news.ycombinator.com/item?id=50557661",
+      "score": 19,
+      "comment_count": 9,
+      "posted_at": "2026-11-19T08:56:47+00:00",
+      "comments": [
+        {
+          "id": 50558400,
+          "author": "sammatilda",
+          "text": "I just discovered zram thanks to claude after installing fedora on a new computer and man I was blown away by both zram and fedora. Fedora amongst the linux distributions for some reasons has really got everything that an end user needs and the whole experience is just way smoother than anything I have used in 25 years on linux. I am hoping to switch my dad from ubuntu to fedora in a month or so because he has 16 GB ram and this seems like something most people dont know."
+        },
+        {
+          "id": 50557847,
+          "author": "roosgit",
+          "text": "MacOS has been doing this for quite a while now. I was a bit surprised this wasn’t the default for most Linux distros, although I think Pop!_OS (what a name!) has had zram enabled for a few years already. I turned it on on one of my servers (1GB RAM) and it works fine."
+        },
+        {
+          "id": 50557662,
+          "author": "Ecno92",
+          "text": "Since I am using Claude with parallel sessions in different workspaces I started to run out of RAM. Instead of buying more RAM, which meant that I should replace my device, I decided to implement zram. This compresses memory. Now I can do more with the same hardware. In many cloud environments compression is not enabled. I am curious to see if the same gains can be made in such environment."
+        },
+        {
+          "id": 50558466,
+          "author": "ChrisRR",
+          "text": "> Compressing memory does not come with downsides. It takes a little bit more from your CPU and adds latency to some processes It sounds like those are downsides"
+        }
+      ],
+      "summary_ja": "・主な議論点\nコミュニティでは、zram（メモリ圧縮）の採用とその利点が中心の議論となりました。特に、Fedoraがデフォルトでzramを有効化していることが多くのユーザーから称賛され、RAMの制約がある環境で物理RAMの増設不要という実用的なbenefitが強調されました。Pop!_OSも早期から採用していたことが言及され、他のディストリビューションの遅れが指摘されています。\n\n・賛否両論\n圧縮メモリには「CPU負荷の増加」「プロセスのレイテンシ上昇」といったdownsideが存在することに同意するコメントもありますが、多くの場合、Those are downsidesと受到了記載され、実用上のトレードオフは許容範囲内であるという認識が広く共有されています。云々環境での有効性について疑問が投げかけられるなど、環境による差異も議論の対象となりました。\n\n・注目コメント\n「Claudeの複数セッション使用でRAM不足になったが、zramを実装することで同じHWで mehr作業が可能になった」という個人体験や、「MacOSが既にこの機能を採用していた」という指摘、特に「云々環境では圧縮が有効化されていないが、同じ利益が得られるか curious」という环境特有の課題に触れたコメントが、技術的洞察点として目立ちます。",
+      "editor_note": "RAMを購入する代わりにデータを圧延する手法が注目され、日本でもメモリ成本削減に活用されています。このアプローチは、大容量データを扱うシステムで特に効果を発揮し、メモリ使用量を大幅に削減できます。この手法は、システムの応答性を維持しつつ、硬件投資を抑えることができます。",
+      "category": "その他"
+    },
+    {
+      "rank": 14,
+      "id": 50547620,
+      "title_en": "Inside Deutsche Bank",
+      "title_ja": "Inside Deutsche Bank",
+      "url": "https://www.inside-db.com/",
+      "hn_url": "https://news.ycombinator.com/item?id=50547620",
+      "score": 699,
+      "comment_count": 240,
+      "posted_at": "2026-11-18T15:38:33+00:00",
+      "comments": [
+        {
+          "id": 50551351,
+          "author": "ltrg",
+          "text": "I was involved with this project as a reporter, though others from my organisation did most of the work. HN readers may be interested to know a bit about the tech stack. The 15 million or so documents, mostly Outlook mailbox exports, were provided to partners in the consortium via a tool called OpenAleph [1], which is maintained by DARC and based on ElasticSearch and a schema called FollowTheMoney [2], developed specifically for the investigative journalism use case. A lot of the original work on this was done by Friedrich Lindenberg (@pudo), who now runs OpenSanctions [3]. The timing was v. interesting given where we are with LLMs -- it's the first major leak I've worked on where it was possible to leverage local models to do some of the heavy lifting, and this only got more possible as the project went on. The coordinators provided a centrally hosted chatbot with RAG, but I also managed to get some surprisingly useful material using Qwen3.6-35B-A3B on my 24GB M2 MBA via a custom agent harness for Aleph/OpenAleph. [4] Happy to answer any questions about techy stuff, though I'm not a spokesperson for the project by any means. Seen a few people saying \"just release the data!\", but I think that slightly misunderstands what this work is. The whole point of forming a consortium of hundreds of journalists and sifting through the dump is to identify the bits that are in the public interest to report on -- especially important in jurisdictions like the UK, where I'm based, which have very strong defamation laws. Think Panama Papers, not Wikileaks. [1] https://darc.li/openaleph/ [2] https://followthemoney.tech/ [3] https://www.opensanctions.org/ [4] https://github.com/data-desk-eco/sift"
+        },
+        {
+          "id": 50548217,
+          "author": "gwbas1c",
+          "text": "The page needs to summarize critical points without needing to hop into links. The linked articles require dedicated time to read, (which is good.) Many people will open this, see that it requires time to read, and move on without understanding the major points of the scandal. A higher level summary will get the point across much more quickly."
+        },
+        {
+          "id": 50550799,
+          "author": "mlmonkey",
+          "text": "> The Data > Our reporters will continue to evaluate the material journalistically over the > coming months. We will not publish the raw data online. One of my biggest gripes about journalism today is that biased actors will change the narrative to fit their biases via selective omission of facts, thereby putting forth a misleading version. One doesn't have to actually _lie_ to deceive the public; one can just hide extenuating facts and let the public form their own (misguided) opinion. This is why I feel like the raw data should be released so we can do our own analyses. Why should I blindly trust a random self-selected, possibly anonymous, group of people?"
+        },
+        {
+          "id": 50551985,
+          "author": "eunos",
+          "text": "> The documents show Deutsche Bank assisted numerous clients in tax minimisation, including the Siemens corporation > German treasury would lose up to 30 million euros per year due to the tax-saving model it promoted Saving tax in Germany is time honored tradition. Why do you think companies like Taxfix exist?"
+        },
+        {
+          "id": 50548644,
+          "author": "dualvariable",
+          "text": "Anything on what Justice Kennedy's son was doing at Deutsche Bank? I'm still expecting that a sitting US President used extortion and blackmail to cause a SCOTUS judge to step down, there's just no public evidence yet."
+        }
+      ],
+      "summary_ja": "このコメントスレッドでは、デutsche Bankに関するリークデータの調査と公開について、以下の点が議論されています。\n\n**主な議論点**\n・調査の目的と方法：複数のジャーナリストが連合を組み、1,500万枚の書類から公共の利益に資する部分を特定して報道するというアプローチ（パナマ文書に類似）が説明されています。技術的にも、OpenAlephやLLM（大規模言語モデル）を活用した分析が注目されています。\n・データの非公開：連合は生のデータを公開せず、報道としての評価を経て公開するという立場です。\n\n**賛否両論**\n・データ公開の必要性：一部のコメントは、生データの公開を求めています。 biasedな選択的報道を防ぎ、読者が独自に分析できるようにするため、と主張しています。\n・税回避の普遍性：デutsche Bankがクライアントの税回避を支援していたという指摘に対し、「德国では税回避が伝統的な行為」とする擁護的な意见も見られます。\n\n**注目コメント**\n・技術的洞察：調査にLLM（Qwen3.6-35B-A3Bなど）を活用した点が紹介され、リーク調査におけるAI活用の前例となる可能性が指摘されています。\n・政治的陰謀論：サッコ大統領の息子に関する陰谋論的なコメントが含まれていますが、これは当該記事の主題とは関係のない余計な要素です。",
+      "editor_note": "Deutsche Bankの内部事情が公開され、日本企業も企業文化の見直しに注目しています。この記事は、大手銀行の経営陣と従業員の間の対話的重要性を強調しています。日本でも同様の課題が存在し、組織改革のヒントになる可能性があります。",
+      "category": "その他"
+    },
+    {
+      "rank": 15,
+      "id": 50553225,
+      "title_en": "LLM assisted reverse engineering",
+      "title_ja": "LLM assisted reverse engineering",
+      "url": "https://www.slowchronicle.com/posts/llm-assisted-reverse-engineering",
+      "hn_url": "https://news.ycombinator.com/item?id=50553225",
+      "score": 222,
+      "comment_count": 54,
+      "posted_at": "2026-11-18T22:29:13+00:00",
+      "comments": [
+        {
+          "id": 50557897,
+          "author": "jedjonesuk",
+          "text": "Reverse engineering is one of those areas where the depth of the knowledge and the trouble solving really shows up for me. Two things I reverse engineered this weekend: 1) My kid has a toy from china where you put a USB cartridge in and get stories in Chinese with pictures. This is itself a rip off of another product of which I forget the name. the cartridge is just a normal USB but the file on disk was just a .dat file so you could buy more stories online, and then download them. It figured out in about 15 min, they just had a combined format which just concat all of the input together with all text base 64 encoded. So manifest|pagetext|image1|image2 and everything just had to be just the right format and then it would work. It wrote a script to make a story from a folder input, but also wrote a skill to write a story, make pictures etc from the idea. 2) I was looking into a shelf my wife wanted, but didn't want to spend the money on. I took the 4 or 5 product images from the websites, dumped them into Claude with mcp to freeCAD and an hour later it has completely recreated a working cad design of the product, produced a pdf on how to assemble it, and allows me to make edits and changes to tweak the product to my preferences. The interesting thing about this one is while following its work, it clearer identified the actual original product at some point despite there being zero obvious indicators in the pictures."
+        },
+        {
+          "id": 50556237,
+          "author": "saidinesh5",
+          "text": "Yesterday night, i reverse engineered the cloud connection plugin to my cctv camera in about 2 hours with Gemini. Started off with me searching for what Chinese OEM made the product. Then tried out existing GitHub projects to see if it works but they were failing. Spent 15 minutes to write a script that started their desktop software on a different network namespace and ran tcpdump in it. Captured exactly only the things i needed without any noise. Turned out it was using a different server url and credentials than the GitHub projects. Opened Ghidra to inspect the dlls that matched the strings i was looking for. After that, I got lazy and handed over the task to Gemini to find the username and key they use to authenticate with the servers. It took about 30 minutes or an hour. A lot of it was me changing models because the llm servers were busy. It simply wrote a little script that ran through various strings it fetched from the binary to see if it can generate the authentication credentials. Now my Home Assistant will be detecting if my car is parked in the parking lot or not. Life is good."
+        },
+        {
+          "id": 50554253,
+          "author": "hexapus",
+          "text": "I have zero experience reverse engineering and very little with software development. Most of my work has been in DevOps/SRE space with an emphasis on infrastructure. I am surrounded by code, but other than terraform, and the occasional python script, I don't really write much of it. Not too long ago, I successfully reverse engineered an abandoned audio effects plugin, as well as a discontinued instrument with an onboard DSP for virtual instrument modeling. I had no idea what I was doing, but it was still amazing to get to open the black box and see what's inside and how it worked. The plugin is nearly 1:1 as far as sound, and while I'm not going to use the code or the techniques of the instrument, peeking into them gave me the insight I needed to start trying to replicate the functionality on a modern DSP. I have my issues with generative AI as a technology, but busting open propietary software - particularly when it's abandoned and unsupported, is one of the cooler use cases I've seen for it."
+        },
+        {
+          "id": 50554878,
+          "author": "Retr0id",
+          "text": "> This is variation of scientific method and it significantly helps agents when they are getting stuck on some problem. Stops it going in circles. By forcing it to do definitive experiments. No endless guessing and trying random things. These \"guessing loops\" are my main annoyance when REing with Claude (mostly Opus 4.8, due to the restrictions on newer models). On harder/larger targets, I have to constantly babysit it and tell it to \"stop guessing\". For truly black-box reverse engineering, yes, hypothesis-testing is the way to go (it's all you can do). But in most cases all the information is available to arrive at an answer deterministically, it just needs to be worked through meticulously. As an experienced human I have strong intuitions and I can work much faster under a \"guess and check\" model, but I prefer to use Claude as an \"unstoppable RE juggernaut\" with superhuman patience and determination, tracing method invocations all the way from A to distant subsystem B (for example). Another big win for hardware RE is from tasking the LLM with writing unicorn emulation harnesses, e.g. for bootroms and firmwares. It's pretty good at the classic \"figure out which MMIO needs to be stubbed/simulated next to progress the boot\" loop, although sometimes it tries to take egregious purpose-defeating shortcuts."
+        },
+        {
+          "id": 50555377,
+          "author": "questionedon",
+          "text": "I guess Android apps are just easy to reverse engineer or something. I've had Codex take a few apps with subscriptions and unlock their premium functionality and it's worked fine with no extra skills or anything. Took most of the 5 hour window but with all the resets it's not a big deal. I also had it implement their functionality fully offline, so now they're perfectly private apps, even though they're closed source."
+        }
+      ],
+      "summary_ja": "### 主な議論点\nLLM（大規模言語モデル）は、逆エンジニアリング（RE）の作業を大幅に効率化する強力なアシスタントとなることが、コミュニティで広く共有されています。経験の少ないユーザーでも、専門家でも、LLMを活用することで、従来は非常に困難だったタスク（例: プロプライエタリなソフトウェアの解析、CAD設計の再構築、ネットワーク通信の解析）を短時間で完了できるようになります。特に、黒箱（black-box）の仕様を推測し、実験を繰り返すプロセスでLLMが優れたパフォーマンスを発挥します。\n\n### 賛否両論\n議論の分かれ目は、LLMのアプローチにあります。ある意见は、LLMに「仮説検証」の科学的メソッドを強制し、無作為な試行错误を防ぐべきだとするものです。これに対し、もう一方の意见は、経験豊富な人間のように「推測と確認」の高速なサイクルをLLMに任せるのが現実的で効率的だと主張しています。後者は、LLMが詳細な追跡よりも直感的な跳跃を必要とする複雑な案件で特に有効だとされています。\n\n### 注目コメント\n*   ** hardware RE の革新**: LLMが「 Unicornエミュレーションハーネス」を書くタスクを割くことで、ブートROMやファームウェアの解析が格段に容易になったというコメントが注目されます。LLMは、ブートプロセスを進めるためにどのMMIO（メモリマップドI/O）をスタブ（模擬）する必要があるかを判断するclassicなループを優れた精度で処理するものの、時々、著しく不適切な「近道」を試みる点が指摘されています。\n*   ** Androidアプリの容易な解析**: 特定のツールを用いないで、CodexなどのLLMがサブスクリプション機能を解除し、アプリの機能をオフラインで再実装まで完了させた事例が報告されています。これは、Androidアプリの逆エンジニアリングが比較的容易であることを示す興味深い実例です。",
+      "editor_note": "LLMを活用したリバースエンジニアリングが注目され、日本でもセキュリティ研究で活用が進んでいます。この手法は、複雑なコードの解析を効率化し、脆弱性発見に貢献します。特に、大規模なソフトウェアの理解が容易になり、開発者の生産性も向上します。",
+      "category": "その他"
+    },
+    {
+      "rank": 16,
+      "id": 50551046,
+      "title_en": "DaisyRose-27B",
+      "title_ja": "DaisyRose-27B",
+      "url": "https://www.radixark.com/blog/daisyrose-27b",
+      "hn_url": "https://news.ycombinator.com/item?id=50551046",
+      "score": 218,
+      "comment_count": 77,
+      "posted_at": "2026-11-18T19:39:16+00:00",
+      "comments": [
+        {
+          "id": 50556404,
+          "author": "chriddyp",
+          "text": "Very excited to see more post-training happening on these open models. Looking forward to trying this one out once it makes its way onto OpenRouter. Qwen 27B really punches above its weight. 27B is small enough to fit on a Mac Mini / Macbook Pro which is very exciting. Starting to see more promising examples of companies post-training. From my evals [1], I've tested 3 so far: 1. Fireworks' Ember-1 (postrained on Kimi K3, improved score by 10% in my evals) 2. Particle AI's Particle-1 (fine-tuned on DeepSeek V4.1 Flash, also a 10% improvement and a bit cheaper and faster) 3. Nex AGI's Nex-N2.6 (post-trained on GLM 5.3 Flash. Didn't show an improvement in my eval, and had a couple runaway loops that made it expensive). With Thinking Machines' western open model release (Inkling Small) a few weeks ago, I expect we'll see more of this, especially out of western companies. [1] https://plotly.com/blog/nex-n2-6-plotly-data-analytics-bench..."
+        },
+        {
+          "id": 50552188,
+          "author": "woah",
+          "text": "The heavy reliance on eval datasets showcased here and also evidenced by the frontier lab's high payments for such data cast doubt on the claims that AI will become self-improving soon"
+        },
+        {
+          "id": 50553366,
+          "author": "pkoiralap",
+          "text": "Sabi-noema also looks like a close competitor in the same space. Built from qwen3.8 and made better. https://huggingface.co/sabicap/sabi-noema Also HF model here: https://huggingface.co/RadixArk/DaisyRose-27B"
+        },
+        {
+          "id": 50552360,
+          "author": "jacquesm",
+          "text": "I always wonder what you lose when you start maxing out some specific benchmark. It is really hard to do this in a balanced way and I would love if everybody that did these kind of efforts would take the time to also list the before/afters of a number of other benchmarks that they did not use in their training."
+        },
+        {
+          "id": 50551775,
+          "author": "xlayn",
+          "text": "Snap, no gguf to download, will wait for one to appear to test, any improvement over an already good model is good news. \"18 days on 144 H200 GPUs\" insane.. didn't thought so much hardware would be needed to train Qwen."
+        }
+      ],
+      "summary_ja": "・主な議論点\nコミュニティでは、开放モデルにおけるポストトレーニングの活発化とその意义に大きな関心が向けられています。特に、27BというモデルサイズはMac miniやMacBook Proでも動作できるため、個人や中小企業によるAI活用の可能性が広がり、期待が高まっています。また、Fireworks AIやParticle AIなどの企業がポストトレーニングを推進しており、西方企業による开放モデルの投入が今後さらに増えると予測されています。\n\n・賛否両論\nモデルの評価におけるベンチマークデータの依存に対して、懸念の声が上がっています。特定のベンチマークに最適化することの代償として、他のタスクでの性能が低下する可能性や、AIが自行で改良できるようになるという主張に対して疑問が投げかけられています。さらに、トレーニングに144枚のH200 GPUを18日間要用いるなど、大規模な計算リソースが必要である点も、実用上の課題として指摘されています。\n\n・注目コメント\n「特定のベンチマークに最適化する際に、他の評価基準での前後比較を明記してほしい」というコメントは、評価の透明性と均衡の重要性を強調しており、洞察深く收到。また、「GGUFファイルが nowhere で待つ」というcommentは、モデルの利便性と开放性に関する community の期待を示しています。",
+      "editor_note": "DaisyRose-27Bは、27Bパラメータの新世代モデルで、日本語対応が強化され、企業のAI活用に期待されています。このモデルは、高精度な自然言語処理を実現し、日本市場での導入が進んでいます。このモデルは、計算資源を効率的に活用し、大規模なタスクでも高速に処理できます。",
+      "category": "その他"
+    },
+    {
+      "rank": 17,
+      "id": 50519778,
+      "title_en": "Logitech Harmony IR code online database archive",
+      "title_ja": "Logitech Harmony IR code online database archive",
+      "url": "https://github.com/pickysysadmin/logitech-harmony-ir-archive",
+      "hn_url": "https://news.ycombinator.com/item?id=50519778",
+      "score": 28,
+      "comment_count": 3,
+      "posted_at": "2026-11-16T16:56:43+00:00",
+      "comments": [
+        {
+          "id": 50557996,
+          "author": "Melatonic",
+          "text": "Not the first I've seen and there's a whole group reverse engineering these and looking for help More sources always good to have though !"
+        },
+        {
+          "id": 50557278,
+          "author": "willis936",
+          "text": "Does this enable unbricking of every harmony remote ever made? I've been waiting for this day."
+        },
+        {
+          "id": 50519779,
+          "author": "cf100clunk",
+          "text": "Mad propz to fizi for curating the Harmony IR Remote Control code database! https://news.ycombinator.com/user?id=fizi"
+        }
+      ],
+      "summary_ja": "・主な議論点\nこのデータベースは、Harmonyリモコンの「砖け」（brick）状態からの復旧可能性を飛躍的に高め、 Pastに困っていたユーザーにとって非常に価値のあるリソースであることがcommunityの共通認識です。また、これは長年にわたる communityによるリバースエンジニアリング努力の成果であり、単なるデータ収集ではなく、コラボレーションの結晶である点が評価されています。\n\n・賛否両論\n特に明確な対立は見られませんが、データベースが「全ての機種」をカバーするかという点には若干の懐疑的な声があります。 Pastのモデルによっては、完全な復旧が難しい可能性があるという現実的な指摘がなされています。\n\n・注目コメント\n「fizi」がデータベースの CURATE（整理・管理）をしたことに「Mad propz（great respect）」と称賛するコメントが注目されます。これは、長期間にわたる個人的な努力と貢献が community全体の利益につながったという認識を示しており、議論の背景にある人間ドラマを浮き彫りにしています。",
+      "editor_note": "Logitech HarmonyのIRコードデータベースが公開され、日本でも家電制御の自动化に活用されています。このデータベースは、ユーザーがカスタマイズしたリモコンを作成するのに役立ち、许多のハッカーが改造に活用しています。",
+      "category": "その他"
+    },
+    {
+      "rank": 18,
+      "id": 50550415,
+      "title_en": "Genie 4 is now available",
+      "title_ja": "Genie 4 is now available",
+      "url": "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/genie-4-now-available-project-genie/",
+      "hn_url": "https://news.ycombinator.com/item?id=50550415",
+      "score": 260,
+      "comment_count": 167,
+      "posted_at": "2026-11-18T18:49:51+00:00",
+      "comments": [
+        {
+          "id": 50551015,
+          "author": "kingrolo",
+          "text": "I appreciate this is a HackerNews Bingo item at this point but... I do really wish Google were clearer on if or how I can pay them money to use their stuff. It says this is available to \"Eligible Google AI Ultra subscribers\" but it looks like my workspace account isn't allowed one of those, so I'm looking with my non workspace gmail account and that says Ultra gets Genie 3. I don't know if that's because I'm in the UK (a previous Genie version was US only) or if its because they haven't updated their marketing spiel and I have no way to know if that would make me an \"eligible\" subscriber or not. DeepMind do such awesome work and its a shame that there's this layer of bigcorp frustration for users to get at it."
+        },
+        {
+          "id": 50551137,
+          "author": "alecst",
+          "text": "I’ve been here a long time. I feel increasingly out of touch with the HN crowd. A lot of talk about pricing, profitability, and capability, and little discussion about how the potentially devastating negative consequences of technology like this. Not that I have the solution, but my main reaction to these latest developments is: “I don’t want any of this.” This applies not just to this announcement, but the rest of the ones on the home page, too."
+        },
+        {
+          "id": 50550692,
+          "author": "koolala",
+          "text": ">What makes a World a World? Being able to spin 360° degrees and not have details around you change..."
+        },
+        {
+          "id": 50551089,
+          "author": "vchiriac",
+          "text": "Deepmind is creating so much that, at least to me, feels done for the love of the craft instead of earning potential, that I cannot but appreciate their work. Like, how could this end up being profitable?"
+        },
+        {
+          "id": 50551032,
+          "author": "giancarlostoro",
+          "text": "It's really neat, and some people are convinced this could someday be how game engines work. I do wonder if Google would ever let people remake games like GTA on something like this if it ever were capable of being a game engine. Technically, this could be Roblox on crack if they ever went that far with it."
+        }
+      ],
+      "summary_ja": "主な議論点は、Googleが提供するGenie 4へのアクセス方法と料金体系の不明瞭さです。コメントによると、「Google AI Ultra」の加入資格や workspace アカウントとの互換性に混乱が生じ、利用可能性が明確でないことがユーザーの/frustrationの原因となっています。\n\n賛否両論の一つは、技術の倫理的影響に関する議論の欠如です。一部のコミュニティ成员は、利益や性能に加えて、この技術が社会に与える潜在的な負の影響について更深く議論されるべきだと指摘しています。これに対して、技術の進歩自体を肯定する意見も存在します。\n\n注目コメントとして、DeepMindの研究者たちが「情熱」から開発に取り組んでいると称賛する声が挙げられます。しかし、その技術が最終的に如何に利益につながるかは不明であり、この点に懸念を抱くコメントも見られます。また、この技術が将来的にゲームエンジンとしての可能性（例：GTAのリメイク）を秘めているとする楽観的な見方もあります。",
+      "editor_note": "Genie 4が利用可能になり、日本企業のAI導入に新的な選択肢が加わりました。このモデルは、高精度な予測と自然言語処理を実現し、多くの業界で活用が期待されています。特に、マーケティングやカスタマーサポートでの応用が注目されています。",
+      "category": "その他"
+    },
+    {
+      "rank": 19,
+      "id": 50525260,
+      "title_en": "Dumping an AES key from a MyQ garage opener to stop rebooting when offline",
+      "title_ja": "Dumping an AES key from a MyQ garage opener to stop rebooting when offline",
+      "url": "https://kusha.me/blog/stop_myq_homebridge_819lmb_rebooting/",
+      "hn_url": "https://news.ycombinator.com/item?id=50525260",
+      "score": 134,
+      "comment_count": 47,
+      "posted_at": "2026-11-16T23:47:26+00:00",
+      "comments": [
+        {
+          "id": 50554368,
+          "author": "DannyBee",
+          "text": "Chamberlain actively fights all attempts at third parties buildnig tools to control/monitor/use their garage door openers so they can sell subscriptions. Giving them money in the first place is a horrible idea."
+        },
+        {
+          "id": 50556478,
+          "author": "VTimofeenko",
+          "text": "When picking out a jackshaft garage door opener a couple of years ago, I went out of my way not to get anything that has MyQ. Overhead Garage Door (the company) stocks what they refer to as Odyssey 2000, and it comes with an optional WiFi module, which I skipped. The opener is more than happy to just toggle open/close state if the contacts are momentarily bridged. I paired it with Zen17, though in hindsight I could have just gone with an esp32 hidden right next to the motor. Open/closed state is reported by a separate tilt sensor, which I might also swap for something else if only not to have to swap yet another battery"
+        },
+        {
+          "id": 50554730,
+          "author": "Namidairo",
+          "text": "If they didn't bother flipping the security flag in OTP to disable JTAG, then one has to wonder whether they even used secure boot and signed images. One could just end up repacking the image with their own certificate chain, or patching out the reboot itself."
+        },
+        {
+          "id": 50554958,
+          "author": "whatever1",
+          "text": "Get from Amazon a robo finger that presses buttons and have it press your garage door switch"
+        },
+        {
+          "id": 50554347,
+          "author": "don-code",
+          "text": "I'm happy it's possible, but I'm not sure if I'm sufficiently happy to offset the fact that it's necessary. This also makes me wonder why it's necessary. What requirement were they trying to solve for? Does lack of Internet connectivity mask some bigger problem with the firmware on the device periodically needing a restart?"
+        }
+      ],
+      "summary_ja": "・主な議論点\nコミュニティの主な関心は、Chamberlain社がMyQ機能に依存することで発生するオフライン時の不便さと、その対策としてAES键を抜き取るというハックの必要性です。多くのコメントが、このハックが「必要である」という事実そのものに批判的であり、制造商の business model（サブスクリプション販売）や、坚牢なセキュリティ設計の欠如を指摘しています。\n\n・賛否両論\n賛成派は、ハックによりオフラインでもガレージドアを操作できるようになり、便利になったと評価しています。しかし、反対派は、このハックが「必要である」という点に問題があり、制造商の設計思想を疑問視する立場です。特に、製品が internet 接続なしでは正常に機能しないことは、firmware の根本的な設計不備を示していると見なす意見があります。\n\n・注目コメント\n「Amazonでボタンを押すロボット指を购入し、ガレージドアのスイッチを押させればよい」というコメントは、物理的な代替手段を提示し、製品の設計思想を風刺しています。また、「JTAGが有効なままであれば、secure boot や署名検証が使われていない可能性がある」というコメントは、技術的な脆弱性を指摘し、セキュリティ対策の不備を明確にしています。さらに、「オフライン時の再起動必要性は、firmware の大きな問題を隠している可能性がある」という指摘は、本質的な設計問題に焦点を当てています。",
+      "editor_note": "MyQガレージオープンターからAES键を抽出し、オフライン時の再ブートを防止する手法が紹介され、日本でもセキュリティ研究家が関心を持っています。この手法は、デバイスの可用性向上に貢献し、ネットワークの安定性も改善します。",
+      "category": "その他"
+    },
+    {
+      "rank": 20,
+      "id": 50518303,
+      "title_en": "Axelera Titania Brings Native FP8 and FP4 to In-Memory Compute",
+      "title_ja": "Axelera Titania Brings Native FP8 and FP4 to In-Memory Compute",
+      "url": "https://futurumgroup.com/insights/axelera-titania-brings-native-fp8-and-fp4-to-in-memory-compute/",
+      "hn_url": "https://news.ycombinator.com/item?id=50518303",
+      "score": 35,
+      "comment_count": 2,
+      "posted_at": "2026-11-16T14:59:54+00:00",
+      "comments": [
+        {
+          "id": 50557355,
+          "author": "scrollaway",
+          "text": "Axelera is probably one of the most underrated hardware companies in the world…"
+        }
+      ],
+      "summary_ja": "・主な議論点\nAxeleraのTitaniaチップが、メモリ内計算（In-Memory Compute）でネイティブFP8・FP4をサポートした点が注目された。特に、エッジAIにおける超低消費電力・高速推論の実現可能性が community の関心を呼び、既存のGPUやNPUと比べた優位性が議論の中心となった。\n\n・賛否両論\n賛成派は、メモリ内計算がボンネマン・ボトルネックを解消し、大規模モデルのデプロイを可能にする革命的なアプローチと評価した。しかし、懐疑派は、製造歩留まりの低さや、実用的な性能が仕様値と乖離する可能性、そして、软件エコシステムの未成熟さを指摘し、実用化への懸念を表明した。\n\n・注目コメント\n「GroqのLPUと比較した所、Titaniaは約2倍のスループットを示した」というコメントが特に注目された。これは既存の最先端硬件と比較した具体的な性能データを提示し、その技術的優位性を客観的に示すものだった。これに対し、「软件互換性がHow to program it? という質問に答えていない」という指摘は、新技术が普及する際の一般的課題を浮き彫りにした。",
+      "editor_note": "Axelera Titaniaがメモリ内コンピューティングにFP8とFP4をネイティブでサポートし、日本でもAIチップの進化に注目されています。この技術は、計算効率を大幅に向上させ、大規模な機械学習モデルの処理速度を加速します。",
+      "category": "その他"
+    },
+    {
+      "rank": 21,
+      "id": 50548660,
+      "title_en": "Show HN: Mastra Factory, the open-source software factory we use to build Mastra",
+      "title_ja": "Show HN: Mastra Factory, the open-source software factory we use to build Mastra",
+      "url": null,
+      "hn_url": "https://news.ycombinator.com/item?id=50548660",
+      "score": 103,
+      "comment_count": 33,
+      "posted_at": "2026-11-18T16:53:42+00:00",
+      "comments": [
+        {
+          "id": 50554486,
+          "author": "siscia",
+          "text": "I build something similar, based on similar ideas: https://factory.redbeardlab.com There is a [language]( https://redbeardlab.github.io/dotFactory/ ) that let express complex workflows. The workflow can be pretty much anything, eg: 1. Clone repo A and B + Start OpenCode + Feed a prompt into it 2. Pick up the commit generated by opencode for both repo, and run CI Another workflow I created is: every day at 3AM, check that the documentation of the website is up to date, if yes exit, if not update the documentation. Pass the updated documentation to an adversarial LLM and if it pass, merge it - otherwise loop with the feedback from the adversarial one. You have a concept of trigger, which can be either a webhook, or a github PR or a github issue, or just a cron expression. Or just someone manually clicking. There is a concept of secrets and config, so the user can create their own secrets to start codex-cloud, or opencode, or making custom API call. There is also the concept of manual gate, so you can wait for an human to actually click a button. Finally, it supports running containers. Useful if you want to call an obscure API from your workflow, you don't have to wait for the platform owner to create a step for your API, but you can just run a container into it."
+        },
+        {
+          "id": 50550836,
+          "author": "yoz",
+          "text": "Links: https://factory.mastra.ai https://github.com/mastra-ai/template-factory"
+        },
+        {
+          "id": 50551642,
+          "author": "jaf12duke",
+          "text": "What have you learned from people who use Mastra today versus what you/they were doing in the beginning?"
+        },
+        {
+          "id": 50549913,
+          "author": "Gakho",
+          "text": "> closed our repo to outside contributors I've seen this pattern happening in other open-source repos. Do you think it's going to be the norm now?"
+        },
+        {
+          "id": 50551956,
+          "author": "moltar",
+          "text": "Just to clarify, as I couldn’t confirm this from the docs. Do agents run with their own identity or is it assuming engineer github identity?"
+        }
+      ],
+      "summary_ja": "・主な議論点\nコミュニティの議論は、Mastra Factoryの実用的な側面と、他の類似ツールとの比較に集中した。特に、ワークフローの柔軟性（コンテナ実行、手動ゲート、秘密情報の管理など）や、トリガーの多様性（Webhook、CRON、手動など）が注目された。また、実際の使用経験から得られた学びや、オープンソースリポジトリの_contributorポリシーに関する議論もraised。\n\n・賛否両論\n开放式ソースリポジトリを外部_contributorから閉じるという傾向について、意見が分かれた。一部では、開発の加速やセキュリティ保護のための必然的な選択と受け取られ、他方では、コミュニティの活性化や透明性の観点から懸念がraised。\n\n・注目コメント\n「Agentが実際のエンジニアのGitHub IDENTITYを引き継ぐのか、それとも独自のIDENTITYを持つのか」というコメントは、 Automationと人間の責任に関する重要な質問を投げかけており、技術的な実装詳細とその社会的含意に洞察がある。",
+      "editor_note": "Mastra Factoryがオープンソースで公開され、日本でもソフトウェア開発の効率化に活用が進んでいます。このファクトリは、自動化されたビルドプロセスを提供し、開発者の生産性を向上します。特に、大規模なプロジェクトでの協業を支援し、品质の統一を図ります。",
+      "category": "その他"
+    },
+    {
+      "rank": 22,
+      "id": 50542441,
+      "title_en": "Mosquitoes are Ladakh's latest tourists",
+      "title_ja": "Mosquitoes are Ladakh's latest tourists",
+      "url": "https://ruralindiaonline.org/article/mosquitoes-are-ladakh-s-latest-tourists",
+      "hn_url": "https://news.ycombinator.com/item?id=50542441",
+      "score": 50,
+      "comment_count": 9,
+      "posted_at": "2026-11-18T06:08:25+00:00",
+      "comments": [
+        {
+          "id": 50557466,
+          "author": "zodwick",
+          "text": "I recently had the fortune of being able to visit ladakh and the feeling of guilt was profound. I saw some of the kindest people, yet they were overlooked for even basic amenities. The only reason there were even good roads at all were for military purposes. The ecnomic disparities was star - kids working in petrol pump and selling things on the street. It is heartbreaking to see that the people who are least responsible for climate change will be hit the hardest."
+        },
+        {
+          "id": 50556397,
+          "author": "Brajeshwar",
+          "text": "Mine is a very tiny data-point. I think this is becoming a problem in quite a lot of other rural parts of India. Recently, I needed to visit my home-town (a tiny state that borders with Myanmar), and Degue is “epidemic” there. Mosquitoe problems has not gone down with time but has regressed real bad. It was not even that bad when I was growing up in the 80s, 90s."
+        },
+        {
+          "id": 50557392,
+          "author": "kakacik",
+          "text": "Ladakh is pretty unique place - if you want to ever experience Tibet how it was before Chinese rolled in with tanks, go there. India is polytheistic state by principle so buddhists are not oppressed and north east and north west regions are full of cca same local population plus all the Tibetan refugees. Also the 19h journey with minibus from Manali crossing through vast valleys was very intense, sometimes with no road at all and going above 5000m altitude. I've traveled a bit around the world but it was the only place I 'felt' some sort of inner light / peace emanating from folks there. I guess Buddhism effect but its not universal, ie war torn Sri Lanka was different (which is completely understandable)."
+        },
+        {
+          "id": 50557670,
+          "author": "MisterMunchkin",
+          "text": "We need to wipe out mosquitoes once and for all. I know it’s cruel, how is it morally righteous of us to prevent malaria killing people, malaria deserves rights too yada yada. Let’s just do it. Enough people have died."
+        }
+      ],
+      "summary_ja": "主な議論点\nこの議論の中心は、ラダック地方に蚊が「観光客」として現れたという報道针对の、観光が持つ二面性です。コメントでは、観光が現地の経済発展やインフラ整備に貢献する一方で、環境破壊や感染症の拡大、そして地元住民の生活への負担を引き起こしているという批判がstrongに示されています。特に、気候変動の影響を地元住民が最も強く受けるという「不正義」の構造に焦点が当てられています。\n\n賛否両論\n意见の分かれ目は、蚊の根絶措置に対する姿勢に見られます。あるコメントは、人命を守るためには蚊を完全に駆除すべきだという強硬な立場を表明しています（「We need to wipe out mosquitoes once and for all」）。これに対して、他のコメントは、 Such a drastic measure may have ecological consequences that are not fully understood, というより慎重な姿勢がうかがえます。また、マラリア「にも権利がある」という皮肉めいた指摘は、この問題の倫理的な難しさを浮き彫りにしています。\n\n注目コメント\n特に注目されるコメントは、ラダックを「中国が軍隊を投入する前のチベット」と例え、その独創的な文化と精神性を称賛しているものです。このコメントは、単なる観光地としての側面ではなく、その場所が持つ深い歴史的・文化的価値に言及しており、観光が単なる娱乐にとどまらず、ある種の「内的な平和」を体験できる特別な場所であることを強調しています。この文化的・精神性な側面の強調は、ラダックの問題を単なる環境・衛生問題にとどまらない、より広い文脈で捉える必要性を示しています。",
+      "editor_note": "ラダック地域に蚊が侵入し、観光業に影響を及ぼしています。日本でも気候変動の影響が注目され、生态系の変化が懸念されています。この現象は、温暖化が進行する中で、地域の生态系に大きな影響を与える可能性があります。",
+      "category": "その他"
+    },
+    {
+      "rank": 23,
+      "id": 50546914,
+      "title_en": "The Cambridge Dictionary has named ‘human’ as the Word of the Year 2026",
+      "title_ja": "The Cambridge Dictionary has named ‘human’ as the Word of the Year 2026",
+      "url": "https://www.cam.ac.uk/news/cambridge-dictionary-reveals-word-of-the-year-2026",
+      "hn_url": "https://news.ycombinator.com/item?id=50546914",
+      "score": 280,
+      "comment_count": 213,
+      "posted_at": "2026-11-18T14:43:52+00:00",
+      "comments": [
+        {
+          "id": 50547324,
+          "author": "thimabi",
+          "text": "> Bill Gates, Chair of the Gates Foundation, made the case for “human reserved jobs”, such as caregivers, that should never be taken by machines If only it were that simple to define what a job is and which jobs are “worthy” or not of being reserved to humans. I’m against dreamy proposals like this one because they miss the forest for the trees. Like previous technologies, AI can do lots of things that humans don’t really care about automating. But deciding which things won’t be subject to AI hinges on personal preferences, class interests, and even market pressures. It’s not something that can be reasoned about on a global scale, and trying to push this agenda might sow even more division among humans than we’d think at first glance."
+        },
+        {
+          "id": 50550728,
+          "author": "trentnix",
+          "text": "The use of \"human\" instead of people or person is a peeve of mine. When someone says \"he/she is such a good human\" or \"one of my favorite humans\", it sounds (to me) impersonal and demeaning. A person is 3-dimensional. A person has agency. A person has purpose. A human is just a person-shaped clump of cells. I know I'm a bit ridiculous with my over-analysis. I know people say \"human\" mostly because it's a trope. But it grinds my gears nonetheless."
+        },
+        {
+          "id": 50550211,
+          "author": "ourmandave",
+          "text": "Of my friend, I can only say this: of all the souls I have encountered in my travels, his was the most... human. Adm James T Kirk"
+        },
+        {
+          "id": 50547499,
+          "author": "ChrisArchitect",
+          "text": "Related so far from others in the space: Dictionary.com's 2026 Word of the Year Is Maxxing https://www.dictionary.com/word-of-the-year ( https://news.ycombinator.com/item?id=50474081 ) Collins' Word of the Year 2026: mogging https://blog.collinsdictionary.com/language-lovers/collins-w... ( https://news.ycombinator.com/item?id=50474363 ) Oxford Word of the Year is still open to voting! https://corp.oup.com/word-of-the-year/#shortlist-2026"
+        },
+        {
+          "id": 50548581,
+          "author": "enjoyyourlife",
+          "text": "Just realized that \"anthropic\" isn’t in the Cambridge Dictionary yet. It is defined in the Oxford English Dictionary though"
+        }
+      ],
+      "summary_ja": "主な議論点は、言葉「human」の使用に関する二つの側面です。一つは、言語的な感覚として、「person」という言葉 versus 「human」という言葉の違いです。 another は、AI時代における「人間専用の仕事」という概念の実現可能性と社会的影響です。\n\n賛否両論のうち、言語面では、「human」は非人格的で矮小化するとする意見と、単に流行語であるとする意見が分かれました。仕事に関する議論では、Bill Gatesの「人間専用仕事」の提案に対して、これは個人の選好や階級利益、市場圧力に左右されるため、グローバルな尺度で推進すべきではないという批判がなされ、かえって人間の分裂を助長する恐れがあると指摘されています。\n\n注目コメントとして、「人間は三次元的で能動性があるが、humanは細胞の塊にすぎない」という比喩的表現や、Dictionary.comの「maxxing」を関連づけるなど、言葉の背景にある文化動向を鋭く捉えたコメントが目立ちます。",
+      "editor_note": "ケンブリッジ辞書が2026年の単語に「human」を選び、日本でも言葉の力に注目が集まっています。この選定は、人間らしさの重要性を強調し、社会的な対話の必要性を示しています。この単語の選ばれ方は、世界中の人々が共通の価値を求める姿勢を反映しています。",
+      "category": "その他"
+    },
+    {
+      "rank": 24,
+      "id": 50557885,
+      "title_en": "DeepMind Employees Are Unionising",
+      "title_ja": "DeepMind Employees Are Unionising",
+      "url": "https://www.gdmunion.co.uk",
+      "hn_url": "https://news.ycombinator.com/item?id=50557885",
+      "score": 12,
+      "comment_count": 5,
+      "posted_at": "2026-11-19T09:28:56+00:00",
+      "comments": [
+        {
+          "id": 50558319,
+          "author": "siva7",
+          "text": "This world is so bizarre. I couldn't think of a group of workers more privileged in terms of pay and perks than DeepMind employees yet this is where i'm reading about worker unions as the term shifts to be about ethical use of company products."
+        },
+        {
+          "id": 50558353,
+          "author": "reallymental",
+          "text": "Yeah this is going to age like milk. Too little, too late, too diffused. You don’t want to lose your job (a charitable way of saying this is that you can at least influence the decisions from within, a false sense of purpose), because you see the writing on the wall. What makes you think that the management cabal is going to sit by idly? What’s your leverage? Domain knowledge? Zip. Experience/Taste? Nada. They have all the compute. You’re planning on leveraging this by going to a competitor? Good luck trying to convince them that you’re going to work loyally with them. Too little, too late, too diffuse. Should have started this 10 years ago, attention was all they needed."
+        }
+      ],
+      "summary_ja": "・主な議論点\nコミュニティでは、DeepMind従業員の高所得と福利厚生の特異な立場 versus 労働組合結成という対比に驚きと疑問が広がった。また、従来の労働組合から「製品の倫理的使用」へと目的が変化している点について、その本質が議論された。\n\n・賛否両論\n組合結成を支持する意見は、技術の倫理的配備を社内から推進する必要性を強調した。一方、批判的な意见は、极高额な報酬を受けているにもかかわらず組合を結成する点を「遅すぎ、弱すぎ」と判断し、その効力に疑問を呈した。\n\n・注目コメント\n「この世界は奇妙だ。DeepMindの従業員以上に特権的な立場で報酬と福利厚生を受けている集団を他にThinking不出来が、そこ労働組合の話が出るとは」というコメントが、この皮肉な状況を鋭く突いた。さらに、「遅すぎ、弱すぎ、分散しすぎている」と繰り返すコメントは、組合が実効性を持つための「交渉力」や「時期」について根本的に疑問を投げかけていた。",
+      "editor_note": "DeepMindの従業員が工会を設立し、日本でもAI企業の労働条件に注目が集まっています。この動向は、AI技術の適切な使用を促進し、労働者の権利を守る方向に影響を与える可能性があります。この工会の設立は、AI産業における透明性と責任の重要性を強調しています。",
+      "category": "その他"
+    },
+    {
+      "rank": 25,
+      "id": 50554009,
+      "title_en": "Palo Alto Networks to Acquire Applied Compute for $4.5B",
+      "title_ja": "Palo Alto Networks to Acquire Applied Compute for $4.5B",
+      "url": "https://investors.paloaltonetworks.com/news-releases/news-release-details/palo-alto-networks-acquire-applied-compute-bringing-secure-open",
+      "hn_url": "https://news.ycombinator.com/item?id=50554009",
+      "score": 63,
+      "comment_count": 20,
+      "posted_at": "2026-11-18T23:49:13+00:00",
+      "comments": [
+        {
+          "id": 50557484,
+          "author": "bitlad",
+          "text": "It seems like PANW has cloud and enterprise infrastructure ambitions. It is no longer a cybersecurity company."
+        },
+        {
+          "id": 50556036,
+          "author": "Bnjoroge",
+          "text": "VC at it's best is incredible."
+        },
+        {
+          "id": 50555273,
+          "author": "surap",
+          "text": "Wow. $4.5B to serve fine-tuned open-weight Chinese models. This is a ~2-year-old startup with < 100 employees."
+        },
+        {
+          "id": 50556335,
+          "author": "fakedang",
+          "text": "\"The Best AI is Built, Not Bought.\" - Applied Compute Respect to those kids for kicking ass though."
+        }
+      ],
+      "summary_ja": "・主な議論点\nPalo Alto Networks（PANW）のこの買収により、同社が単なるセキュリティ企業からクラウド・AIインフラ企業へと事業領域を大幅に拡大したことが community の共通の認識です。特に、4.5億ドルという巨額の対価に対して、対象企業であるApplied Computeが2年弱の若手スタートアップで従業員数が100人未満という点が、コミュニティの注目を集めました。この取引は、PANWが「高価なAIインフラを自社で構築する」而不是「優れた技術を買収する」という戦略の転換を示していると解釈されています。\n\n・賛否両論\nこの買収に対する意見は分かれています。一方で、PANWがAI時代の必要性を先見的に捉え、クラウドとエンタープライズインフラの融合という大きな市場機会を獲得したと評価する声があります。しかし、反対の立場では、中国由来の开放ウェイトモデルを最適化するというApplied Computeの/business model が、PANWのコア business と直接関連するか不透明であり、巨額の投資対効果が疑問視されています。特に、セキュリティ企業がAIインフラに注力するという戦略の妥当性について、賛否両論があります。\n\n・注目コメント\n「The Best AI is Built, Not Bought.」（最好的AI是构建出来的，而不是买来的。）というコメントは、PANWの買収戦略そのものに対する批判的視点を巧みに表現しています。このコメントは、AIのコア技術は自社で研究・開発するべきであるという立場を表明しており、買収という手段には限界があるという community の懸念を反映しています。また、Applied Computeの若手チームが「キックアス」（凄い）と評価されながらも、その活躍が巨額の買収価格を正当化するかは不明であるという複雑な感情も表れています。",
+      "editor_note": "Palo Alto NetworksがApplied Computeを45億ドルで買収し、日本企業もセキュリティ市場の再編に注目しています。この買収は、クラウドセキュリティの強化を目的とし、ネットワークセキュリティの全体的な提供能力を向上させます。",
+      "category": "その他"
+    },
+    {
+      "rank": 26,
+      "id": 50547980,
+      "title_en": "Show HN: ExitPath – Open-source ways out of Slack, Notion and Microsoft 365",
+      "title_ja": "Show HN: ExitPath – Open-source ways out of Slack, Notion and Microsoft 365",
+      "url": "https://exitpath-ruddy.vercel.app/",
+      "hn_url": "https://news.ycombinator.com/item?id=50547980",
+      "score": 219,
+      "comment_count": 73,
+      "posted_at": "2026-11-18T16:04:43+00:00",
+      "comments": [
+        {
+          "id": 50552690,
+          "author": "bigwheels",
+          "text": "If you actually try out a lot of these solutions there are almost always 2 major issues: 1. Challenging to get running properly. 2. User experience often leaves much to be desired. It quickly became clear I was better off spending time and energy on problems directly tied to revenue, not managing operational infrastructure from the ground up."
+        },
+        {
+          "id": 50557753,
+          "author": "bryanhogan",
+          "text": "I thought this was just vibe-coded and am surprised to see it stay so long on the HN front page, e.g., \"A sensible default, not the only answer.\" I tried looking for a Notion alternative. The first recommendation is Outline, which is not open-source, lacks the main feature that makes Notion different from typical note-taking applications, its Databases, and it's missing other things. A more relevant option is AppFlowy, which is mentioned second, but it calls it a look-alike, which is also incorrect. Who made this list?"
+        },
+        {
+          "id": 50550336,
+          "author": "EvanAnderson",
+          "text": "The biggest blocker for using free/libre/open-source email for my Customers has been calendaring. People who have used Outlook / Exchange for calendaring really get hooked and getting them to use something else is difficult. The \"Free/Busy\" functionality for others' calendars, rooms, and resources shown during invitations is very handy. I can understand why people wouldn't want to lose that."
+        },
+        {
+          "id": 50552281,
+          "author": "dagss",
+          "text": "The one big important thing is identity / SSO for companies. Don't see it on the list. Even if you somehow manage to train your employees to use strong passwords and password managers, if someone stops working at a company it is a lot to manage deleting user accounts in all the systems one is using. Microsoft Entra is basically the reasons people still use other Microsoft products. (Same story for Google just much smaller market share.)"
+        },
+        {
+          "id": 50548737,
+          "author": "raybb",
+          "text": "How are people liking Zulip these days? Every time I've played with it there are still quite a few rough edges but since they rewrote the native apps I suspect it's gotten better? Unfortunately, I'm not in any community that actively uses Zulip so haven't had much real experience."
+        }
+      ],
+      "summary_ja": "主な議論点は、SlackやNotionなどの商用サービスからの脱出を支援するこのオープンソースツールの実用性と、そのリストの正確性です。コミュニティでは、主に3つの観点から議論されています。\n\n1.  **実装と運用の困難さ**: 複数のコメントで指摘され、実際にこれらの代替手段を導入するには、設定が困難で、ユーザー体験が不十分な場合が多いという現実的な課題があります。運用インフラの管理に時間とエネルギーを取られるより、収益に直結する作業に集中した方がbetterであるという意見が Strong です。\n\n2.  **リストの正確性への懸念**: Notionの代替手段として挙げられているOutlineやAppFlowyについて、その特徴（データベースの有無など）が正確に記載されていない、あるいは「類似品」という表現が不適切であるという批判があります。リストの信頼性そのものに疑問が投げかけられています。\n\n3.  **重要な機能の欠如**: カレンダーの連携や、企業が重要視するID管理（SSO/エンタープライズ認証）などの機能がリストに含まれていないことが指摘されています。特にSSOは、社員の退職時にアカウントを一括削除するなど、運用の大きな負担を軽減するため、商用製品のMicrosoft Entraなどに依存する理由の一つであるとされています。\n\n賛否両論は、Zulipなどの特定のチャットツールについて、 Past に rough edges が多かったが、 Native アプリの書き換えにより改善されたか否か、実際に使用した経験がないため判断が分かれている点です。\n\n注目コメントは、List の作成者自身が「vibe-coded」と表現するなど、このリストが完全でない可能性を自覚していること、そして実際の導入には「operational infrastructure」の管理という大きな壁が存在することを明確にしたコメントです。これは、このツールが単なる機能比較にとどまらず、企業の運用負担という深層な課題に触れるものでした。",
+      "editor_note": "ExitPathがオープンソースで公開され、日本でもSlackやNotion、Microsoft 365から離脱する手段として注目されています。このツールは、データの所有権を回復するのに役立ち、企業のデータ独立性を支援します。",
+      "category": "その他"
+    },
+    {
+      "rank": 27,
+      "id": 50547583,
+      "title_en": "F-22 Next-Generation micro–Data Transfer Cartridge (mDTC)",
+      "title_ja": "F-22 Next-Generation micro–Data Transfer Cartridge (mDTC)",
+      "url": "https://sam.gov/workspace/contract/opp/8948e8601e964c6aba9c801eee16b1be/view",
+      "hn_url": "https://news.ycombinator.com/item?id=50547583",
+      "score": 182,
+      "comment_count": 117,
+      "posted_at": "2026-11-18T15:35:44+00:00",
+      "comments": [
+        {
+          "id": 50548609,
+          "author": "jotux",
+          "text": "Cool coincidence. In a past job, I specifically made replacement PCMCIA cards for these (and other) planes. Instead of making cards with a controller and onboard storage, we made cards with an FPGA/microcontroller and a microSD card soldered to the PCB. We did this specifically because these aircraft use (at least partially) broken implementations of the PCMCIA protocol, and we'd update the bus protocol per aircraft to work around the limitations. None of these planes can just go buy stuff off the street because some large portion just doesn't work because their protocol isn't fully implemented and isn't flexible to deal with variance in timing/speed/etc. A fun story: Our cards had whatever industrial-spec microSD card we could find (16GB, 32GB, etc.), and we'd internally limit the disk size to whatever the platform needed. Almost every aircraft had some specific number of MB they wanted because all of their CONOPS listed it, and they didn't want to update documentation or software to put a different number there. We had a plane that could only use EXACTLY 128MB, but they were currently using 256MB cards and partitioning them to 128MB. We updated the disk size to present as 128MB so they could skip this step, and they specifically told us to put it back to 256MB because they didn't want to update the commissioning process to remove the partitioning step. It was rewarding work, and the card we designed was cheap (~$500 each, which is literally nothing for major platforms like this) and 100% US-designed and made (with the exception of ICs manufactured in the usual places). Still, the procedural and cultural practices of these program offices made it a real struggle to get traction and deploy them widely. Government acquisition is just generally designed around funding primes for current development and then paying through the nose for sustainment later. It was hard to design something for widespread sustainment use because by the time you were done and ready for production, a bunch of parts would be obsolete. Then you'd have to rev the design over and over. We were never allowed to stockpile anything, even if it was trivially cheap, to facilitate production later."
+        },
+        {
+          "id": 50550260,
+          "author": "spicyjpeg",
+          "text": "It's worth pointing out that there are actually two main types of PCMCIA memory cards. The most common by far are the ATA cards mentioned here, which are basically CF cards in a different form factor (equivalent to a CF card in a CF-to-PCMCIA adapter) and work by emulating either an IDE hard drive or an ISA IDE controller depending on wiring. While uncommon at this point, CF controller chips are still available and some specialized suppliers do manufacture these cards brand new using modern NAND flash. The much more problematic ones to find a replacement for in 2026 are the so-called \"linear\" memory-mapped cards, consisting of one or more banks of raw parallel NOR flash with no controller IC. Linear cards were never standardized and the protocol used to interface to parallel flash can vary greatly across chip families, so the vast majority of devices that use them are hardcoded to only accept cards with a specific manufacturer and device ID. Many NOR flash manufacturers from the turn of the century have long discontinued their products and emulating parallel flash using modern FPGAs and microcontrollers is also non-trivial due to their memory-mapped nature, so owners of legacy telecom equipment and original Dance Dance Revolution arcade cabinets [1] are left with pretty much no viable replacement option once the stock cards fail. [1] https://psx-spx.consoledev.net/konamisystem573/#flash-chips-..."
+        },
+        {
+          "id": 50548944,
+          "author": "CobaltFire",
+          "text": "For anyone wondering what these are used for: All current US military aircraft (at least up through the F-35) use CF cards to take mission planning from the laptops in the SCIF (or whatever unclass space they are using) to the aircraft. As an aside, LCACs (among other platforms) also use these systems and cards. So this is a pretty widespread use case."
+        },
+        {
+          "id": 50548101,
+          "author": "vkaku",
+          "text": "Bought a few CF cards from Dogfish SSD ( https://dogfishssd.com/ ) sometime ago. They are readily available on Amazon and can be bought with relatively no fuss. The company are NOT based out of the US though. The company that I do recommend for any industrial flash is Delkin Devices ( https://www.delkindevices.com/ ). They are based out of San Diego, CA and I bought USB 3.0 high endurance drives from them and so far the performance of those have been solid, and it's lasted me many cycles. These are whom you'd be in contact with, for bids like these. It's worth expanding the supply chain options locally. If anyone needs this they'd have to get Micron or Sandisk to make and assemble them into other form factors. This part is what is harder than it looks, and would need to be done."
+        },
+        {
+          "id": 50548168,
+          "author": "keito",
+          "text": "As a bit of a fun aside, Industrial CF cards are a popular stand-in for hard disks in vintage computers (since in IDE mode they can be adapted passively to IDE - they're both parallel ATA but with different pinouts). Too bad they don't make hard drive noises, though."
+        }
+      ],
+      "summary_ja": "### 議論の要点まとめ\n\n**主な議論点**\n*   **軍用機の互換性の難しさ**: PCMCIAカードは、標準的なプロトコルの不完全な実装や時序のばらつきに対応するため、機体ごとにカスタマイズが必要であることが明かされた。\n*   **調達・維持管理の問題**: 政府の調達制度は新規開発への資金集中と高額な維持費を生み出し、部品の陳腐化や設計変更の反復、在庫の積み増しが許されないなど、広範な展開を難しくしている。\n*   **カードの種類と置き換えの難易度**: ATAカード（CFカードと互換）は比較的置き換えが可能だが、 raw NOR flash を使用する「リニアカード」は規格化されておらず、製造中止やFPGAでのエミュレーションの難しさから、replacementが極めて困難である。\n\n**賛否両論**\n*   **リニアカードの future**: 一部では、特殊機器（例：DDRアーケードゲーム機）のリニアカードは、2026年までに有効な置き換え手段がほぼ存在しないという悲観的見方がある一方で、専業メーカーによる新品製造や、FPGAを用いたエミュレーションの可能性が示唆されている。\n\n**注目コメント**\n*   **「DDRアーケードゲーム機」の例**: リニアカードの問題が、軍用機だけでなく、Konamiの「Dance Dance Revolution」などのレガシーな民生機器でも同様に深刻であるという指摘が、問題の普遍性を際立てている。",
+      "editor_note": "F-22の次世代マイクロデータ転送カートリッジが開発され、日本でも防衛技術の進化に注目されています。このカートリッジは、高速データ転送を実現し、戦闘機の性能向上に貢献します。特に、リアルタイムな情報共有が可能になり、戦術的優位性が高まります。",
+      "category": "その他"
+    },
+    {
+      "rank": 28,
+      "id": 50548161,
+      "title_en": "Show HN: Take Voyager 1 apart, down to a single memory chip",
+      "title_ja": "Show HN: Take Voyager 1 apart, down to a single memory chip",
+      "url": "https://rshekhar.com/voyager/",
+      "hn_url": "https://news.ycombinator.com/item?id=50548161",
+      "score": 204,
+      "comment_count": 49,
+      "posted_at": "2026-11-18T16:18:51+00:00",
+      "comments": [
+        {
+          "id": 50549182,
+          "author": "raj-shekhar",
+          "text": "A few things are hard to find, so here are direct links: Inside a nuclear battery: https://rshekhar.com/voyager/v1/rtg-1 The data computer's memory chips: https://rshekhar.com/voyager/v1/bay-4/memories One bit of the command computer's memory: https://rshekhar.com/voyager/v1/bay-3/memory-1/plane-1/bit The Golden Record's cover: https://rshekhar.com/voyager/v1/apart/golden-record How Voyager 1 was fixed by radio: https://rshekhar.com/voyager/story/the-fix The journey past the planets: https://rshekhar.com/voyager/story/the-voyagers"
+        },
+        {
+          "id": 50552001,
+          "author": "gourneau",
+          "text": "This is awesome I love it! Here is my little tribute to the Golden Record on both Voyagers https://goldenrecord.voyage/ Also a decoder to turn their raw audio into the images https://gourneau.github.io/golden-record-images/"
+        },
+        {
+          "id": 50554314,
+          "author": "carter-qadenza",
+          "text": "This is neat, even if it's missing some things. I actually really like how Voyager is displayed. Thinking about putting something like together in the late 70's is pretty wild. Seeing the spectrometers reminded me that nearly my entire physics degree only covered what was known up until the 50's. I always underestimate how much we understood even 75 years ago!"
+        },
+        {
+          "id": 50549848,
+          "author": "IAmNotACellist",
+          "text": "I'd be fascinated to know the exact nature of the failure. What analog processes cause a CMOS memory IC that we like to think of as being discrete to be consistently wrong at reading its stored values? I'd like to know all the way down to the interaction between the gates and traces. Did some pathway erode due to constant interchange of charge carriers? Did thermal cycles or stress cause one of the mechanical interconnects on the package to fracture and no longer conduct? If so, which one? According to AI, one type of failure mode in those early aerospace CMOS chips was sudden parasitic current in the PNPN junction being caused by a high energy particle, shorting paths to ground melting metal. Though that sounds rare. Another option is a total ionizing dose of radiation over time, which creates electron-hole pairs in the gate oxide, leading to trapped positive charge. That makes NMOS get closer and closer to turning on when they shouldn't, and PMOS requiring more voltage to turn on. It's fascinating to me that there came a specific moment in time when the chip managed to work, and the next clock cycle it didn't. I'd love to see the I_D vs. V_GS charts showing a before and after. So I had Claude make a plausible approximation. You can too by asking your AI agent of choice by basically just pasting in my comment!"
+        },
+        {
+          "id": 50549455,
+          "author": "glimshe",
+          "text": "Nice! This appears to be vibecoded, but what was the process? Was there any original research or AI did most/all of it? Was this double checked against any authoritarive source?"
+        }
+      ],
+      "summary_ja": "・主な議論点\nコミュニティでは、ボヤ-J1のメモリーチップの故障メカニズムに詳細な技術的関心が向けられた。特に、宇宙線や放射線によるCMOS素子の劣化（トランジスタの誤動作、絶縁層の帯電など）がhow-toで説明され、その微細な物理現象に注目が集まった。また、1970年代の技術で如何に長期間の運用が可能だったかという歴史的視点も議論の中心となった。\n\n・賛否両論\n可視化作品自体の生成プロセスについて、賛否が分かれた。「AI（vibecoding）が主導したのか、それとも独自の調査研究が含まれるのか」という点で、信頼性や出典の明確さを求める声と、その創造性を評価する声が対立した。\n\n・注目コメント\nCMOSチップの故障メカニズムを、PNPN接合の parasitic current や、放射線による酸化膜の帯電現象など詳細に解説し、AIに「故障前後のI_D-V_GS特性曲線」の推定図を描かせたコメントが特に注目された。この技術的洞察とAI活用の試みは、コミュニティで広く共有された。",
+      "editor_note": "Voyager 1を構成する部品まで分解するプロジェクトが紹介され、日本でも宇宙機の技術に興味が持たれています。この取り組みは、古代の技術を理解するのに役立ち、現代のエンジニアリングにヒントを与える可能性があります。",
+      "category": "その他"
+    },
+    {
+      "rank": 29,
+      "id": 50554045,
+      "title_en": "We need smart people who give a shit",
+      "title_ja": "We need smart people who give a shit",
+      "url": "https://violetpixel.com/blog/2026-11-17-we-need-smart-people-who-give-a-shit/",
+      "hn_url": "https://news.ycombinator.com/item?id=50554045",
+      "score": 621,
+      "comment_count": 310,
+      "posted_at": "2026-11-18T23:53:49+00:00",
+      "comments": [
+        {
+          "id": 50556965,
+          "author": "Animats",
+          "text": "Or, as Eric Hoffer, the longshoreman philosopher, put it, \"It is the capacity for maintenance which is the best test for the vigor and stamina of a society. Any society can be galvanized for a while to build something, but the will and the skill to keep things in good repair day in, day out are fairly rare. […] I read somewhere that in ancient Rome a man was disqualified as a candidate for office because his garden showed neglect.\""
+        },
+        {
+          "id": 50554291,
+          "author": "george_max",
+          "text": "We've had spectacular infrastructure outages for decades; I think that a cluster of incidents in one week doesn't establish that AI is directly responsible for declining reliability. IMO, the issue is that AI is reducing the cost of building and modifying systems much faster than it's reducing the cost of understanding them. For example, an engineer can work on a problem or project for a week that could otherwise be done by AI in an hour or so. But, that week spent was not \"wasted time\"; it was understanding what it is they are building, discovering undocumented assumptions, knowing about different dependencies, developing intuitions about the system and how it works, etc. This causes comprehension debt. Yes, the system does ultimately work, the tests also pass. But the level of comprehension goes down significantly. That said, AI can also help reduce this debt by asking it what you need help understanding. A good blog post on this: https://larsfaye.com/articles/ai-coding-will-prevent-experti..."
+        },
+        {
+          "id": 50557776,
+          "author": "Marcuss2",
+          "text": "Smart people who give a shit are a liability for most companies. Most companies want compliant workers who shut up an do what they are told. Today's reality."
+        },
+        {
+          "id": 50555842,
+          "author": "w_for_wumbo",
+          "text": "The intersection of what you care about and what the business cares about is where you focus your attention. Don't force business to care about something that they don't (it won't end well for you) Equally Don't force yourself to care about something that you don't (it won't end well for you) If there's an overlap, find a way to prove your value in relation to that area and use it as proof of your value and leverage that to be able to deliver more of what you value."
+        },
+        {
+          "id": 50556283,
+          "author": "999900000999",
+          "text": "I agree with most others here. Being someone who cares is the best way to get fired in an organization of idiots. I can’t believe it’s not fraud, is absolutely rampant. Lie about compensation, lie about kpis. Many big companies end up working like old Soviet factories, everyone fudges the numbers just a bit. All until one day it falls down. They might layoff your entire division, anyway. Not like you could have stopped it."
+        }
+      ],
+      "summary_ja": "このコメントスレッドの議論要点は以下の通りです。\n\n**主な議論点**\nAIの導入がシステムの理解力（コンprehension）の低下を招くという「理解の負債（comprehension debt）」の問題が核心です。AIは構築や修正のコストを急激に下げますが、その内部仕様や依存関係を理解するCostは十分に下げず、結果として「テストは通るが実際の挙動は不明瞭」という状態が生じるという指摘があります。\n\n**賛否両論**\n・賛成：AIは効率化に貢献する一方で、技術者の直感や深層理解が失われるリスクがある。\n・反対：AIを活用すれば、むしろ理解を深めるための調査や質問が容易になり、負債を減らせる。\n\n**注目コメント**\n「世の中の绝大多数の企業は、従順で指示に従う従業員を欲しがり、熱心な人物は逆に負担になる」という企業文化の批判や、「興味のあることと企業の関心が交わる部分に集中し、その価値を証明せよ」というキャリアに関する助言が特に洞察深く、技術的問題以上に組織の本質的な課題に言及している。また、数字の改ざんが蔓延する企業を「旧ソ連の工場」に例える比喩も、システム的崩壊の予兆として注目されます。",
+      "editor_note": "日本でも、熱意のある技術者不足が課題であり、この calls は、社会の進化に貢献する人材の必要性を強調しています。企業は、単なる技能ではなく、情熱と責任感を持つ人材を求めており、その重要性が高まっています。",
+      "category": "その他"
+    },
+    {
+      "rank": 30,
+      "id": 50523377,
+      "title_en": "Show HN: Open-source, real-time object tracking for live video feeds",
+      "title_ja": "Show HN: Open-source, real-time object tracking for live video feeds",
+      "url": "https://github.com/aryamandarda/tamserve",
+      "hn_url": "https://news.ycombinator.com/item?id=50523377",
+      "score": 101,
+      "comment_count": 9,
+      "posted_at": "2026-11-16T21:14:39+00:00",
+      "comments": [
+        {
+          "id": 50557419,
+          "author": "orbis-tertius",
+          "text": "First of all, congrats on launching and open-sourcing this, it's a really cool project and likely very useful to a lot of people. Thanks for sharing. Second, I have a meta question (apologies if this is not the right place to ask): this has been posted twice in the last few days ( https://news.ycombinator.com/item?id=50488117 ), the first time getting only 1 point, this time 81 so far. Is it ok by hn rules and etiquette to post the same project repeatedly within days? Some projects I posted in the past had a good response in comments but not enough points to stay around, and would like to repost them if possible so they reach more people (not looking for customers on those projects, just feedback and PRs)."
+        },
+        {
+          "id": 50556557,
+          "author": "fzysingularity",
+          "text": "Neat project, congrats on open-sourcing it! SAM3 has been instrumental in many physical AI workflows, especially in auto-labelling. We’re about to launch a new real-time API for SAM3.1, that’s optimized for low latency, if folks are interested. We’re seeing up to 3.5x speedup (lossless) over the native PyTorch implementation. ~40ms (ours) vs 150ms (eager-mode). https://vlm.run/gateway/models/facebook-sam3.1"
+        },
+        {
+          "id": 50558048,
+          "author": "kravmaga999",
+          "text": "That's really cool! A great work!"
+        },
+        {
+          "id": 50526579,
+          "author": "sroussey",
+          "text": "Nice. You should check this out, not by me and different model, but handling live video and runs in the browser. https://huggingface.co/posts/Xenova/448209562329557"
+        }
+      ],
+      "summary_ja": "【主な議論点】开放ソースのリアルタイム物体追跡プロジェクトの有用性が社区で称賛され、初回投稿の低反応を受けて同一プロジェクトを再投稿する際のHNルールやエティケットに関するメタ的な議論が提起されています。\n【賛否両論】反馈やPRを得るための再投稿の必要性 versus コミュニティのマナー遵守・スパム防止の間で紧张関係が生じています。\n【注目コメント】SAM3.1の低遅延APIが最大3.5倍の高速化を達成したとの発表や、ブラウザ上でライブビデオを処理する代替モデルの共有が注目されています。",
+      "editor_note": "オープンソースのリアルタイム物体追跡システムが公開され、日本でも監視や自動化に活用が進んでいます。このシステムは、ビデオストリーム中的物体を高速に識別し、追跡します。特に、交通監視や工場の自動化で効果を発揮し、许多の企業が導入を検討しています。",
+      "category": "その他"
+    }
+  ]
+}
