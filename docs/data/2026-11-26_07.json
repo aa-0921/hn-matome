@@ -1,0 +1,1150 @@
+{
+  "date": "2026-11-26T00:00:00+09:00",
+  "slot": "07",
+  "stories": [
+    {
+      "rank": 1,
+      "id": 50644817,
+      "title_en": "1Password Security Incident",
+      "title_ja": "1Password Security Incident",
+      "url": "https://1password.com/blog/update-on-nov-2026-security-incident",
+      "hn_url": "https://news.ycombinator.com/item?id=50644817",
+      "score": 962,
+      "comment_count": 407,
+      "posted_at": "2026-11-25T17:18:26+00:00",
+      "comments": [
+        {
+          "id": 50644982,
+          "author": "tptacek",
+          "text": "This is the single most important attack vector for SAAS companies. It has been for a long time --- this is the standard fact pattern for every SAAS breach --- but much more so today. As the number of employees grow, the likelihood that one of their laptops will get compromised approaches 1. When that happens, the attacker will be able to push code to Github, and if that code gets deployed, you're owned. In 1Password's case, the absolute worst-case catastrophe is mitigated by the fact that customers retain custody of their unlocking secrets; 1Password (at least in the normal product flows) simply doesn't hold it. But an attack like this implicates every catastrophe short of that worst case. Change velocity in 2026 is unreal and that trend is going to continue. You could not outcompete 1Password by building a handcrafted artisanal password manager backend (witness all the commercially successful password managers that don't even share 1Password's customer secret custody model). You have to accept insane PR rates as a premise to do modern SAAS security. So the question then becomes: what is review? It's not what r/programming assumes it is; you almost certainly can't literally have a team of people line-by-line reviewing PRs anymore, at least not across the whole codebase (you can and should probably do a threat model for your codebase and institute stuff like that on a case-by-case basis, though). What you can realistically expect to review for is change provenance; a human developer signoff of some sort. But it's tricky! The attacker owns your email during the window of attack. I think this is a fun problem to noodle on, and someone could probably come up with something here that would make a real difference."
+        },
+        {
+          "id": 50648856,
+          "author": "n8m8",
+          "text": "Good day to be a Bitwarden user :) Nice reminder that I've been meaning to migrate to selfhosted Vaultwarden, maybe better to do that sooner rather than later."
+        },
+        {
+          "id": 50644952,
+          "author": "ChrisHardie",
+          "text": "Longtime 1Password user here who maintains a local-only vault (and is therefore stuck on older versions of their apps/extensions) out of concern for incidents like this. I've read their architecture docs about why online vaults are safe, and I understand that they have more resources to throw at securing infrastructure than I do. But \"malicious actor pushes code to production services\" seems like exactly the foundation for someone to eventually insert themselves into the middle of a user's access to decrypted vault contents. I really wish 1Password would return to supporting local-only vaults."
+        },
+        {
+          "id": 50645961,
+          "author": "ctidd",
+          "text": "> push malicious code to backend services This is a huge red flag, and was not addressed sufficiently in this announcement. Do they not disable push to main? I don’t see this addressed in the action items or elsewhere in the writeup, whether they were missing branch protection rules or whether these were able to be bypassed."
+        },
+        {
+          "id": 50648798,
+          "author": "longcat",
+          "text": "I feel GitHub need more accountability on this. My guess is this is most likely an OAuth token for VSCode or another GitHub-privileged OAuth app, and none of these support token refresh or shorter/configurable expiry by default. I'd also hazard that this only impacted repos where this user was an admin - otherwise more systems would probably have been affected."
+        }
+      ],
+      "summary_ja": "",
+      "editor_note": "",
+      "category": "その他"
+    },
+    {
+      "rank": 2,
+      "id": 50648050,
+      "title_en": "Much shorter version of GRH Lean verification from Anthropic",
+      "title_ja": "Much shorter version of GRH Lean verification from Anthropic",
+      "url": "https://github.com/lsernau/grh-lean",
+      "hn_url": "https://news.ycombinator.com/item?id=50648050",
+      "score": 122,
+      "comment_count": 38,
+      "posted_at": "2026-11-25T21:48:10+00:00",
+      "comments": [
+        {
+          "id": 50648688,
+          "author": "spootydooty",
+          "text": "Nice! The more readable 300kloc proof even has a clear \"known math\" vs \"new math\" split and human-readable documentation all over the place. This should greatly aid with digesting it."
+        },
+        {
+          "id": 50648814,
+          "author": "delegate",
+          "text": "I don't know Lean.. But looking at the code, I can't help but wonder: Who on Earth can understand that ? Random example: https://github.com/lsernau/grh-lean/blob/main/grh-compact/sr... Genuine question for people who know Lean: How realistic is it for a human to read this code, 'grok' it and verify that it is correct ?"
+        },
+        {
+          "id": 50648590,
+          "author": "bananaflag",
+          "text": "From ~17M lines to just ~76k lines, a 99.56% reduction."
+        },
+        {
+          "id": 50648642,
+          "author": "eamag",
+          "text": "From comments > it's super absurdly funny how much time and resources have been put into tiny incremental gains to reducing the proof and Anthropic can just throw compute and better internal models at it and get a reduction of this magnitude in days"
+        },
+        {
+          "id": 50648514,
+          "author": "dward",
+          "text": "Zulip discussion here: https://leanprover.zulipchat.com/#narrow/channel/658556-Riem..."
+        }
+      ],
+      "summary_ja": "",
+      "editor_note": "",
+      "category": "その他"
+    },
+    {
+      "rank": 3,
+      "id": 50601280,
+      "title_en": "GPT-6.2 Astra is the first model to beat Googlers' code golf records",
+      "title_ja": "GPT-6.2 Astra is the first model to beat Googlers' code golf records",
+      "url": "https://bjin.github.io/go-codegolf-benchmark/#leaderboard",
+      "hn_url": "https://news.ycombinator.com/item?id=50601280",
+      "score": 157,
+      "comment_count": 33,
+      "posted_at": "2026-11-22T16:44:48+00:00",
+      "comments": [
+        {
+          "id": 50648000,
+          "author": "varjag",
+          "text": "Interesting. I too felt the updated Astra was the first model that finally beats me squarely at any programming task. Previously despite the agents' speed and breadth there always were some mind benders where I'd come up with a better/more correct/more elegant solution. But since this month it appears even that advantage has evaporated."
+        },
+        {
+          "id": 50648522,
+          "author": "jere",
+          "text": "FWIW I saw big reductions from other models (Gemini 4, Opus 5.5) on a problem from last year (after a few of us had iterated on it 50 times and it had seen no progress for a year and I thought there was surely nothing more to wring out of it)."
+        },
+        {
+          "id": 50647552,
+          "author": "lnxsxu",
+          "text": "the powers of 4 trick clicked for me when i tried it with 15. 4*524 is 2*(999+49). the first modulo turns 2*999 into 5 and the second turns 2*49 into 3. so you start with a huge power of 4 and out comes 5*3. has anyone seen this trick used in another golf problem?"
+        },
+        {
+          "id": 50619592,
+          "author": "varispeed",
+          "text": "Can't they just train the model on solutions to make them win benchmarks? I find Astra (extra high) having problems writing basic, understandable, coherent English when working with legal texts. It seems massively behind much older and supposedly less capable models."
+        },
+        {
+          "id": 50647791,
+          "author": "jiggawatts",
+          "text": "Where are the submissions linked? I just see the scores…"
+        }
+      ],
+      "summary_ja": "",
+      "editor_note": "",
+      "category": "その他"
+    },
+    {
+      "rank": 4,
+      "id": 50647673,
+      "title_en": "The New York Times tells photographers not to use the latest Photoshop",
+      "title_ja": "The New York Times tells photographers not to use the latest Photoshop",
+      "url": "https://www.dpreview.com/news/new-york-times-adobe-photoshop-2027-restriction-ai/",
+      "hn_url": "https://news.ycombinator.com/item?id=50647673",
+      "score": 60,
+      "comment_count": 29,
+      "posted_at": "2026-11-25T21:18:02+00:00",
+      "comments": [
+        {
+          "id": 50648319,
+          "author": "jjcm",
+          "text": "I work in the creative tools space. This is one of the biggest issues right now. It's nearly impossible to separate \"this image was fully generated with AI\" versus \"I made a minor edit to the colors or did a cutout or improved the layout with AI\" when the endpoint is an image. Especially for socials, if your brand is an authoritative source, getting hit with a dreaded \"AI generated content\" tag on instagram or facebook is a death blow to your credibility. Design tools are in a very hard space because of it. You want to make edits as seamless as possible for users, but your final result can't include any pixels from a generative model. It's a strange dance."
+        },
+        {
+          "id": 50648179,
+          "author": "daylily",
+          "text": "Seems like an opportunity for competitors like Affinity to catch up."
+        },
+        {
+          "id": 50648576,
+          "author": "h4kunamata",
+          "text": "With the competition moving to single payment and you own the software for life, subscription is finally dying. Microsoft also is pushing companies to Linux and LibreOffice suite which requires no subscription, and works just as good if not better. All we need is big names such as NYT to make the move, the rest will follow. Europe is already running away from USA software companies, now it is just a matter of time."
+        },
+        {
+          "id": 50648603,
+          "author": "kittikitti",
+          "text": "I recommend ArtCraft and PhotoCraft. I've utilized it for more than a month without a problem. It's actually the only way I can get the latest editing software on my older Mac."
+        }
+      ],
+      "summary_ja": "",
+      "editor_note": "",
+      "category": "その他"
+    },
+    {
+      "rank": 5,
+      "id": 50646108,
+      "title_en": "Holy shit holy shit holy shit holy shit: The magnitude of what’s now happening",
+      "title_ja": "Holy shit holy shit holy shit holy shit: The magnitude of what’s now happening",
+      "url": "https://scottaaronson.blog/?p=10379",
+      "hn_url": "https://news.ycombinator.com/item?id=50646108",
+      "score": 730,
+      "comment_count": 553,
+      "posted_at": "2026-11-25T19:11:27+00:00",
+      "comments": [
+        {
+          "id": 50647274,
+          "author": "utopiah",
+          "text": "I'm wondering how much of that would have happened with \"just\" Lean, MathLib, and a lot of computing power but no LLM or GenAI. Was this \"great Mathocalypse\" already in the making for say a decade (Lean 2013, MathLib 2017, etc with obviously much older initiatives) and the timing is only fortuitous now because large corporations subsidize their compute time for marketing purposes? Sure finding a slightly faster way than brute force helps, including with unpublished on-going work (pretty precious at the frontier), but only in so far as the groundwork was already there."
+        },
+        {
+          "id": 50647096,
+          "author": "pixl97",
+          "text": ">Right now—this past week—is very much like I would’ve always imagined the beginning of an AI singularity to look and feel like. I just hope we’ll get lucky, and it will “merely” be a singularity for our little corner of the world that involves hard math problems. We can only hope this is true, that at will be 'contained' to verifiable tasks or the world is going to be come a very uncertain place."
+        },
+        {
+          "id": 50648277,
+          "author": "onetimeusename",
+          "text": ">don’t be a raging doofus who seizes on some triviality (e.g., a minor discrepancy between the Lean and informal proofs, or unused sections of the Lean proof) to pretend that dozens of great open problems of math and theoretical computer science are not, in fact, getting solved. This isn't something he should just brush off. This has been a problem with computer generated proofs, and code for that matter, for a long time. This doesn't mean you are an AI denialist if you feel like massive proof or code dumps require painstaking effort to go through them. I also wish Scott wouldn't use such abrasive language and go out of this way to attack people he could've just chosen to ignore."
+        },
+        {
+          "id": 50646779,
+          "author": "gorgoiler",
+          "text": "Physics was “solved” by the end of the 19th century. We had motion, electric and magnetic fields, thermodynamics, etc all wrapped up. Then came along quantum mechanics / electrodynamics and we had to push the solved part into the corner and call it classical Physics before getting on with all the new, unsolved stuff. What is the new world of non-classical math going to look like? I’m glad to be here to find out. I hope."
+        },
+        {
+          "id": 50648205,
+          "author": "bawolff",
+          "text": "What a time to be alive. I can't help but think about how originally Turing machines were created to prove that there is no general algorithm to prove everything (the Entscheidungsproblem) Now almost 90 years later, it seems like Turing machines had the last laugh as they prove everything of practical importance."
+        }
+      ],
+      "summary_ja": "",
+      "editor_note": "",
+      "category": "その他"
+    },
+    {
+      "rank": 6,
+      "id": 50643129,
+      "title_en": "A few questions for the guy who went snorkeling in a Home Depot retention pond",
+      "title_ja": "A few questions for the guy who went snorkeling in a Home Depot retention pond",
+      "url": "https://www.vox.com/down-to-earth/511999/home-depot-retention-pond-snorkel-joseph-ricketts",
+      "hn_url": "https://news.ycombinator.com/item?id=50643129",
+      "score": 417,
+      "comment_count": 99,
+      "posted_at": "2026-11-25T15:14:32+00:00",
+      "comments": [
+        {
+          "id": 50644476,
+          "author": "baoooooooooooo",
+          "text": "I’m a big Joseph Ricketts fan, and initially my reaction here was thinking “oh I hope people watch some of his other videos not just the Home Depot one” - he has committed to video some of the most absolutely ethereal afterlife-esque sequences that I consider works of high artistic achievement. For instance, from about 5:30 in this: https://m.youtube.com/watch?v=jduB5RLgu-A&t=355s&ra=m BUT above all else he projects this early-YouTube earnestness and genuine interest in what he’s doing that is so infectious and a bit of a panacea for the current state of the world. And that aspect I think comes through really strongly in the Home Depot video!"
+        },
+        {
+          "id": 50644306,
+          "author": "goda90",
+          "text": "I don't remember what grade, but I recall a class trip to a stream where we put on waders and took samples of the water to inspect. We had a whole lesson about what kinds of life we'd see in the water, and which life was less tolerant of pollution, meaning their presence could tell us if the water was relatively clean. Do they still do this kind of conservation teaching in public schools anymore?"
+        },
+        {
+          "id": 50643319,
+          "author": "Juvination",
+          "text": "The YouTube video is absolutely worth watching, shows how beautiful life can be even if its right next to a highway."
+        },
+        {
+          "id": 50644403,
+          "author": "AlphaWeaver",
+          "text": "If you're just hearing about Joseph Ricketts, I highly recommend you check out his whole YouTube channel. Not only is it filled with other amazing footage from his snorkeling expeditions all around the country, the cinematography and sound design is first class. Even watching the videos themselves can be a sort of meditation. I think people overlook how much thought and creativity goes into his work. It's really really superb."
+        },
+        {
+          "id": 50643444,
+          "author": "neuwirth",
+          "text": "The most wholesome instance of the notorious Florida man! This is awesome."
+        }
+      ],
+      "summary_ja": "",
+      "editor_note": "",
+      "category": "その他"
+    },
+    {
+      "rank": 7,
+      "id": 50647161,
+      "title_en": "Nfs2root: A 12-year-old pre-auth remote root in the Linux kernel's NFS server",
+      "title_ja": "Nfs2root: A 12-year-old pre-auth remote root in the Linux kernel's NFS server",
+      "url": "https://opensec.in/blog/nfs2root-cve-2026-99362",
+      "hn_url": "https://news.ycombinator.com/item?id=50647161",
+      "score": 45,
+      "comment_count": 13,
+      "posted_at": "2026-11-25T20:35:50+00:00",
+      "comments": [
+        {
+          "id": 50648352,
+          "author": "gsich",
+          "text": "no poc posted"
+        },
+        {
+          "id": 50647393,
+          "author": "rvz",
+          "text": "Just wow. How was this achieved? Let's see: > Pre-auth heap overflow in the Linux NFS server (nfsd) > Set it to the minimum and every slot's buffer is zero bytes. nfsd4_sequence() then shrinks the reply buffer to that limit before it accepts the slot. Pad the request's tag so the buffer fills right after the SEQUENCE opcode, and the encoder quits without flagging an error. The server believes SEQUENCE succeeded and caches the whole reply, headers and tag included, into a buffer with room for nothing. Then it causes an out-of-bounds crash: >> BUG: KASAN: slab-out-of-bounds in read_bytes_from_xdr_buf+0x1bc/0x390 >> Write of size 80 at addr ffff888003a549cd >> __asan_memcpy+0x38/0x60 >> read_bytes_from_xdr_buf+0x1bc/0x390 >> nfsd4_sequence_done+0x5b0/0x810 >> nfs4svc_encode_compoundres+0x1bf/0x240 So yet another memory corruption issue that gives the attacker control of the execution and its possible to get root on the system and this is in the kernel itself so \"hardening\" does not remove the bug. What a disaster."
+        },
+        {
+          "id": 50648259,
+          "author": "Gigachad",
+          "text": "Thankfully no one assumed NFS secure for the public internet anyway so this should be minimally impactful. Also looks like it was patched upstream months ago. Still, just another example of why C code can’t be exposed to the internet."
+        }
+      ],
+      "summary_ja": "",
+      "editor_note": "",
+      "category": "その他"
+    },
+    {
+      "rank": 8,
+      "id": 50647181,
+      "title_en": "Slow Ubuntu security response times",
+      "title_ja": "Slow Ubuntu security response times",
+      "url": "https://www.openwall.com/lists/oss-security/2026/11/25/9",
+      "hn_url": "https://news.ycombinator.com/item?id=50647181",
+      "score": 55,
+      "comment_count": 19,
+      "posted_at": "2026-11-25T20:38:00+00:00",
+      "comments": [
+        {
+          "id": 50648483,
+          "author": "cjk",
+          "text": "At $DAYJOB we’ve moved all of our server images to Debian from Ubuntu because of this. It’s absolutely unacceptable for one of the most widely-used Linux distros to have slow security response times in 2026."
+        },
+        {
+          "id": 50648232,
+          "author": "alanfranz",
+          "text": "One thing that puzzled me recently is that it seems that most security fixes appear in -updates before they enter the security repo, hours before. With the recent wave of security mess, it’s a risk. I used to run unattended upgrades from security only, now I install all updates and I accept the risk of bricking something."
+        },
+        {
+          "id": 50648599,
+          "author": "gdgghhhhh",
+          "text": "Please keep in mind that most major distros spend a lot of time on regression testing. While distros like Debian do an absolutely fantastic job, they have little resources for QA and regressions like this can happen: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=1154101"
+        },
+        {
+          "id": 50648270,
+          "author": "guyisit",
+          "text": "I’ve been moving containers from Ubuntu to Alpine or Debian the last week. I’ll probably reach out to my Ubuntu rep next week to see what’s going on, and if the response isn’t satisfactory and the trend continues, I’ll migrate servers to something else… idk what, and it’s going to suck. But if we can get off VMware, we can change distros."
+        },
+        {
+          "id": 50648427,
+          "author": "skhameneh",
+          "text": "It's weird because Ubuntu has always been my go-to when I want the most generic Linux VM. I pick other distros to run, but in my mind Ubuntu has been the \"user-friendly, community, supported\" distro. And for the first time, a week ago, I hesitated because of the slow patches and went with Debian for a \"generic Linux VM\". I don't understand why there's been so much delay, this seems crucial/critical to their business, like something they should have perfected. Is there something I'm missing?"
+        }
+      ],
+      "summary_ja": "",
+      "editor_note": "",
+      "category": "その他"
+    },
+    {
+      "rank": 9,
+      "id": 50589784,
+      "title_en": "SSH is a GUI framework",
+      "title_ja": "SSH is a GUI framework",
+      "url": "https://zydra.sh/articles/ssh-is-a-gui-framework/",
+      "hn_url": "https://news.ycombinator.com/item?id=50589784",
+      "score": 110,
+      "comment_count": 52,
+      "posted_at": "2026-11-21T14:52:41+00:00",
+      "comments": [
+        {
+          "id": 50647283,
+          "author": "orbital-decay",
+          "text": "Terminal giving you a janky and limited remotely accessible canvas you can abuse to make primitive GUIs doesn't imply that \"SSH is a GUI framework\". A lot better solution would be designing a compact, semantic, styling-independent remote access protocol that doesn't need bitmaps (unlike most currently available protocols), and uses good compression for actual pictures/videos. That would make any GUI efficiently usable remotely through an adapter for an existing GUI framework, without extra bloat the browser has."
+        },
+        {
+          "id": 50647136,
+          "author": "nico",
+          "text": "I remember my college used to serve some student services app via Telnet You would just telnet into a machine using your student login/pass, and it would run either a welcoming screen or a specific app (like one for scheduling classes) It was a very mature application and worked really well. Alas, it was quickly replaced by web versions of the apps, which took another flew years to get properly working Anyway, glad to see an example of what’s possible (and almost forgotten), in terms of providing access to applications online via the terminal (and without a browser)"
+        },
+        {
+          "id": 50647242,
+          "author": "Sha1rholder",
+          "text": "What if... https://datatracker.ietf.org/doc/draft-michel-ssh3/ https://datatracker.ietf.org/doc/draft-michel-remote-termina..."
+        },
+        {
+          "id": 50647067,
+          "author": "alex7o",
+          "text": "I thought that this would be about x11 forwarding but this is also pretty cool"
+        },
+        {
+          "id": 50647308,
+          "author": "goranmoomin",
+          "text": "Before we start abusing the terminal protocols for GUIs, I believe that we need some kind of protocol to allow text selection and copy/paste between blocks of text, so that we don't need tools that trim whitespace that was copied from the terminal[0]. There's some prior work like how the OSC-8 hyperlink id param[1], and a specification to tackle the issue[2]. I'm hoping that the Superlogical folks[3] can actually do this, in libghostty and Rex. But also in tangent, I also do think that abusing the terminal protocol to do GUI stuff is kind of a worse-is-better type of situation, we specifically have a protocol (Wayland, Quartz, and so on) to do this stuff, and I'm hoping that we can decide to actually do something similar for the remote GUI situation. I believe that the Superlogical folks have plans to do this with Rex[4]. I believe that the remote-GUI situation has to be resolved, I've been talking about this multiple times. I thought that the web stack (HTML/CSS/JS) would be the answer to adoption[5], but hopefully we can get a full-fledged solution that is compatible with the previously existing GUI apps as well. > - TUIs are not inherently superior to GUIs > - SSH, as a transport layer, should support not just forwarding a pty (as a TUI display layer), but a GUI display layer as well > In fact, these two arguments were already realized by UNIX 30 years ago, and we already have one solution: the X protocol and ssh -X. > Unfortunately, X did not win out. We did not get the promised future where one can ssh -X into a remote machine, run gnome-control-center, and a settings window pops up and I can configure my remote computer. (If you believe that this works, try it out yourself. It is an abysmal experience.) > However the above needs still needed to be satisfied by so much people, and apps that needed it started to be developed as web servers, stuff like jupyter notebooks. It turns out that the web’s document format coupled with a styling solution and a client-side scripting language, with all of its warts and drawbacks, became a viable solution as a display layer for interactive apps. In fact, since it started from remote documents, network transparency is built-in. > It would be dumb to not realize that the HTML/CSS/JS stack did win a dominant position for desktop apps, with all of the Electron apps, and utilize the web as a display layer for the above. I see the project in a similar vein, i.e. utilizing HTML/CSS/JS to provide a display layer for remote apps via SSH. > Also note that Electron apps has the same split with X, where the display server and the client are separated: it's called the \"renderer process\" and the \"main process\", and the two processes talk via IPC (where the display server would be the renderer process running embedded Chromium, the display client would be the Electron main process, and the stuff that the client sends to the server would be the contents of the renderer JS bundle). I think, theoretically, it would be possible to run the main process separated from the renderer process on a different machine, with an appropriate IPC transport. I think this would be not far from the above idea? [0]: https://tools.simonwillison.net/cleanup-claude-code-paste [1]: https://gist.github.com/egmontkob/eb114294efbcd5adb1944c9f3c... [2]: https://gitlab.freedesktop.org/terminal-wg/specifications [3]: http://superlogical.com/ [4]: https://www.superlogical.com/rex/ [5]: https://news.ycombinator.com/item?id=48728766"
+        }
+      ],
+      "summary_ja": "",
+      "editor_note": "",
+      "category": "その他"
+    },
+    {
+      "rank": 10,
+      "id": 50648035,
+      "title_en": "Defang Security Incident",
+      "title_ja": "Defang Security Incident",
+      "url": "https://defang.io/blog/post/security-incident-november-2026/",
+      "hn_url": "https://news.ycombinator.com/item?id=50648035",
+      "score": 33,
+      "comment_count": 12,
+      "posted_at": "2026-11-25T21:47:16+00:00",
+      "comments": [
+        {
+          "id": 50648302,
+          "author": "lajr",
+          "text": "So if you installed the Defang GitHub App, the attacker can: - push commits and branches - change repo settings - deploy and activate trusted workflows which can access any of the cloud credentials you have - even more (secret overwrite, protection rules) This seems like it could have a very large blast radius"
+        },
+        {
+          "id": 50648506,
+          "author": "amingilani",
+          "text": "It must have been very hard to write this post. I'm sorry folks. #HugOps"
+        },
+        {
+          "id": 50648658,
+          "author": "taariqlewis",
+          "text": "Thank you for the heads up. As with TODOIst and 1Password, we're noticing the Github access threads. Are LLMs leaking github keys?"
+        },
+        {
+          "id": 50648559,
+          "author": "floornext",
+          "text": "does anyone sign release tags, my ci just fires on any tag push"
+        },
+        {
+          "id": 50648572,
+          "author": "kjuulh",
+          "text": "It is a hard time right now for SaaS businesses. This is basically a death sentence, main database + what looks like customer secrets leaked. I guess it is time to go back to really spending time on defense in depth, removing non critical vendors, etc, and pray that some script kiddy with daddy's credit card doesn't nuke your business."
+        }
+      ],
+      "summary_ja": "",
+      "editor_note": "",
+      "category": "その他"
+    },
+    {
+      "rank": 11,
+      "id": 50647158,
+      "title_en": "72-Hour Fasting Can Reset Your Immune System, USC Study Shows",
+      "title_ja": "72-Hour Fasting Can Reset Your Immune System, USC Study Shows",
+      "url": "https://scienceinhand.com/72-hour-fasting-can-reset-your-entire-immune-system-usc-study-shows/",
+      "hn_url": "https://news.ycombinator.com/item?id=50647158",
+      "score": 48,
+      "comment_count": 12,
+      "posted_at": "2026-11-25T20:35:39+00:00",
+      "comments": [
+        {
+          "id": 50648393,
+          "author": "zug_zug",
+          "text": "I'm not sure I believe this title -- to me a true \"reset your immune system\" would mean it would cure every allergy."
+        },
+        {
+          "id": 50648430,
+          "author": "aaronbrethorst",
+          "text": "the underlying study is from 2014. https://www.cell.com/cell-stem-cell/fulltext/S1934-5909(14)0... here's a less clickbaity piece from USC published back in 2014: https://today.usc.edu/fasting-triggers-stem-cell-regeneratio..."
+        },
+        {
+          "id": 50648651,
+          "author": "eqvinox",
+          "text": "All I get on this link is a HTTP 403, with no information at all…"
+        },
+        {
+          "id": 50648746,
+          "author": "Zak",
+          "text": "403"
+        },
+        {
+          "id": 50648564,
+          "author": "clickety_clack",
+          "text": "Getting measles is a good way to reset your immune system too, so we should probably ask if that’s actually something we would want to do."
+        }
+      ],
+      "summary_ja": "",
+      "editor_note": "",
+      "category": "その他"
+    },
+    {
+      "rank": 12,
+      "id": 50644980,
+      "title_en": "The polynomial Hirsch conjecture is false [pdf]",
+      "title_ja": "The polynomial Hirsch conjecture is false [pdf]",
+      "url": "https://github.com/openai/math/blob/main/preprints/Superpolynomial-graph-diameter-of-simple-polytopes-November-24-2026/paper.pdf",
+      "hn_url": "https://news.ycombinator.com/item?id=50644980",
+      "score": 99,
+      "comment_count": 22,
+      "posted_at": "2026-11-25T17:34:34+00:00",
+      "comments": [
+        {
+          "id": 50647325,
+          "author": "Luke2642",
+          "text": "I always like to try to translate it to a really simple English version: You can represent many problems like logistics with a list of linear requirements so valid combinations form a multi-dimensional geometric shape where every corner of that shape and inside that shape represents a 'valid' but probably not optimal solution, e.g. every package gets delivered by a driver, but not the lowest fuel or time, and 'valid' so no rules are broken, like no driver is scheduled more than >24 hours in one day. Every edge is a single step that changes one variable. It's interesting and useful because surprisingly the representation means the optimal solution will always lie on an outside corner. You generally start somewhere 'warm' and try to get hotter, that's the Simplex algorithm. The polynomial Hirsch conjecture was that the number of steps between any two corners grows polynomially as you add more variables and rules, limiting how many steps you might need to find that optimal corner. Now we know you need more steps. Hope I saved you time/tokens though."
+        },
+        {
+          "id": 50646803,
+          "author": "GIFtheory",
+          "text": "For context, this means that there is no polynomial-time simplex algorithm (which is an algorithm for linear programming (optimization)). The original version of the conjecture was an attempt to explain why the simplex method seemed to work surprisingly well in practice, but it was disproved in 2010 (after 50+ years!). This seems like more of a mopping up result."
+        },
+        {
+          "id": 50647593,
+          "author": "jwpapi",
+          "text": "I think we can assume now that most major math and complexity problems will soon be solved It seems like some things will be impossible for us ever to perfectly calculate, however I assume the post math problems era to be a good time for algorithms improvements. That at one point will be done too, and we then come to production limits which will have more focus then as the problem space will me smaller. We might have some experiment intermezzo and then we’ll try to gain a lot of energy and do explore the universe."
+        },
+        {
+          "id": 50647005,
+          "author": "_1",
+          "text": "On the side, how do you even find this? There's 1000 papers in this pre-print folder."
+        },
+        {
+          "id": 50647246,
+          "author": "ex-aws-dude",
+          "text": "Math breakthroughs now just come as github patch notes * Polynomial hirsch conjecture now false * Updated matmul ω to 9/4 * Added warning about weird bug in navier–stokes for some use cases"
+        }
+      ],
+      "summary_ja": "",
+      "editor_note": "",
+      "category": "その他"
+    },
+    {
+      "rank": 13,
+      "id": 50645074,
+      "title_en": "Britain's ghost stations",
+      "title_ja": "Britain's ghost stations",
+      "url": "https://spectator.com/article/britains-ghost-stations-are-fascinating/",
+      "hn_url": "https://news.ycombinator.com/item?id=50645074",
+      "score": 78,
+      "comment_count": 16,
+      "posted_at": "2026-11-25T17:43:46+00:00",
+      "comments": [
+        {
+          "id": 50646497,
+          "author": "andyjohnson0",
+          "text": "Achanalt probably still exists because nothing much would be gained by closing it. The line would still be open and the trains would still have to pass through. I didn't check but it is almost certainly a request-only stop. Its on the Dingwall to Kyle of Lochalsh line. And the train goes to Kyle of Lochalsh because thats where you get the ferry across Kyle Akin to the Isle of Skye. Except you don't anymore, because they built a bridge across the kyle from the mainland to Skye back in 1995. But the railway line persists [1]. Things like this happen a lot in the UK, and lots of other places too I'm sure. [1] its a lovely journey on a bright day - even if the railway line does mostly run along side a main road that also goes from Dingwall to Kyle of Lochalsh. [n] the Inverness-Wick line is an absolute delight if you like the weird flat scenery of Caithness. Get off at Forsinard and admire the silence. Very occasionally a car might pass by."
+        },
+        {
+          "id": 50646394,
+          "author": "fishtoaster",
+          "text": "I landed at a stop like this a few years back as part of a mission to visit some rural CAMRA pubs in England. When I stopped in... Lapford, I think?... I had to request the train to stop there or it wouldn't have. I then had a 20-minute hike down a very narrow and sketchy road to actually reach the town. On my way back out the next day, the train had to be flagged down like a taxi to stop. I was the only one getting on or off either time. It was definitely a neat experience, but I can see why such stations are more historical oddities than anything useful for anyone."
+        },
+        {
+          "id": 50648032,
+          "author": "KaiserPro",
+          "text": "geoff marshal and his least used station series on youtube is a nice exploration of this subject. https://en.wikipedia.org/wiki/Great_British_Railway_Journeys also explores it tangentially. If you are younger than 30 (or didn't grow up in the UK) then you'll have no idea the presenter was a politician."
+        },
+        {
+          "id": 50645995,
+          "author": "fidotron",
+          "text": "I grew up somewhere affected by the Beeching cuts ( https://en.wikipedia.org/wiki/Beeching_cuts ), and as mentioned in here, wow were they bizarrely located, with places far larger being removed permanently from the network while these middle of nowhere places were left in place. The relevant consequence is I know of stations that are now houses which get no visitors as a result, even if in some cases the platforms are still there. By the time I'd popped out the nearby railway line had been converted to a recreational walkway and hardcore NIMBYism had set in absolutely everywhere along it ensuring there was no way in hell it could ever be reverted. Self sabotage on a level only the English are really capable of."
+        },
+        {
+          "id": 50646203,
+          "author": "dpkirchner",
+          "text": "Off topic: I wish we could just ban liars. \"We value your privacy The Spectator and our 5403 technology partners ...\" There's plenty of interesting content written by honest people."
+        }
+      ],
+      "summary_ja": "",
+      "editor_note": "",
+      "category": "その他"
+    },
+    {
+      "rank": 14,
+      "id": 50642939,
+      "title_en": "I checked Clojure's core with Lean and found unreported bugs",
+      "title_ja": "I checked Clojure's core with Lean and found unreported bugs",
+      "url": "https://s.conao3.com/blog/2026/e4f733",
+      "hn_url": "https://news.ycombinator.com/item?id=50642939",
+      "score": 164,
+      "comment_count": 56,
+      "posted_at": "2026-11-25T14:56:52+00:00",
+      "comments": [
+        {
+          "id": 50645750,
+          "author": "rvprasad",
+          "text": "While the effort is interesting, I found two issues in the list. First, (.indexOf (seq (byte-array [1 2 3])) 2) fails because byte arrays store bytes and the argument 2 to `.indexOf` is a Long value. Simple type checking (via eyeballing) could have flagged the incorrect usage. I think such exercises can be more helpful if we can reduce the noise. Second, (get \"abc\" 1.9) fails because `get` coerces the given key to integer in the context of string objects, which makes sense; specifically in the context of weakly typed language. That said, I believe that detailed documentation of the behavior of `get` can help clients just as well as returning `nil` or not-found value. However, we are still left with questions such as \"who and where do we draw the line about the dynamism of the language?\" and \"what is the agreed upon semantics that we are checking against?\""
+        },
+        {
+          "id": 50647213,
+          "author": "yababa_y",
+          "text": "I found dozens of issues in sbcl, clozure, and ACL2 as well: https://github.com/emberian/common-lisp-compiler-audit"
+        },
+        {
+          "id": 50646090,
+          "author": "networked",
+          "text": "So this kind of work is done in Lean now, too? Based on a glimpse into the world of dependently typed languages in the 2010s, I assumed Rocq (formerly Coq) was used to verify program correctness. Are language models significantly better at writing Lean than Rocq?"
+        },
+        {
+          "id": 50645910,
+          "author": "vitorsr",
+          "text": "That is interesting, given heavy hitters like Nubank (Brazilian digital bank) basically runs on Clojure, having bought / acquihired Rich's Cognitect. I would normally expect such primitive types and functions to be spotless."
+        },
+        {
+          "id": 50646011,
+          "author": "siscia",
+          "text": "I really need to learn Lean and these testing mechanism"
+        }
+      ],
+      "summary_ja": "",
+      "editor_note": "",
+      "category": "その他"
+    },
+    {
+      "rank": 15,
+      "id": 50642086,
+      "title_en": "Google releases Cogentic papers on integer factorization, discrete logs and more",
+      "title_ja": "Google releases Cogentic papers on integer factorization, discrete logs and more",
+      "url": "https://github.com/google-research/google-research/tree/master/cogentic_research_papers",
+      "hn_url": "https://news.ycombinator.com/item?id=50642086",
+      "score": 420,
+      "comment_count": 317,
+      "posted_at": "2026-11-25T13:33:07+00:00",
+      "comments": [
+        {
+          "id": 50642742,
+          "author": "fidotron",
+          "text": "There are rumors about, from credible people, that this is the tip of something bigger: https://x.com/aran_nayebi/status/2125596838120046846"
+        },
+        {
+          "id": 50642700,
+          "author": "martythemaniak",
+          "text": "I don't think the recent spate of math discoveries should be very surprising. Consider 10 years ago when AlphaGo beat Lee Sedol, what was really happening there? You had an very large search space (all possible Go moves) that humans had been navigating by a combination of intuition, trial-and-error and passing knowledge between master-student. Then a program was build that could explore that search space both from existing searches (AlphaGo) and from scratch (AlphaGo Zero), and the program found some interesting results (winning moves no one had thought of before). Today's LLMs are vastly bigger and they operate in an immensely larger search space (all of symbolic representation of the world) using immensely more power, and now they're finding results in that search space that people could not. In both cases, the space-search program needed a way to verify whether its results were valid - the Go board in AlphaGo's case, and Lean in current math work. So it really shouldn't be surprising that the space-searchers found something people either missed or was too big/far away to be accessible (that is, it is unknown whether the current RH proof can be simplified and/or understood like classical human proofs)"
+        },
+        {
+          "id": 50642574,
+          "author": "dpweb",
+          "text": "Some say don't go into Computer Science. I'd argue it's never been a more exciting time to get into Computer Science."
+        },
+        {
+          "id": 50644626,
+          "author": "unknown-unknown",
+          "text": "Seeing developments like the Navier-Stokes problem, the Riemann Hypothesis, Erdos problems, and OpenAI's major advances in mathematical reasoning has made me rethink my beliefs. I used to believe that you couldn't throw money at problems to solve them, especially in mathematics. At least, I thought mathematics was immune to that. But now, things are changing."
+        },
+        {
+          "id": 50646387,
+          "author": "phkahler",
+          "text": "What does this mean for factoring? My understanding until now was that the fastest algorithms in practice still had probability issues - either they worked in a sub-exponential time with some probability of failure, or they always gave a factorization but the complexity limit was probably sub-exponential. Something like that. So do these two new paper simply reinforce upper bounds with determinism? That'd still be a useful result, but it's nothing like putting factorization in P. Did I get that right?"
+        }
+      ],
+      "summary_ja": "",
+      "editor_note": "",
+      "category": "その他"
+    },
+    {
+      "rank": 16,
+      "id": 50641171,
+      "title_en": "Windows Loudness Equalization, reverse-engineered and ported to PipeWire",
+      "title_ja": "Windows Loudness Equalization, reverse-engineered and ported to PipeWire",
+      "url": "https://github.com/xoxorwr/pw-loudness-eq",
+      "hn_url": "https://news.ycombinator.com/item?id=50641171",
+      "score": 301,
+      "comment_count": 170,
+      "posted_at": "2026-11-25T11:34:25+00:00",
+      "comments": [
+        {
+          "id": 50643693,
+          "author": "dintech",
+          "text": "Interesting for audio nerds: Windows actually has an audio limiter. If you playback audio via loopback shared WASAPI, DirectSound or MME it actually gets compressed very slightly as it nears the peaks. The same does not happen via WASAPI exlcusive or ASIO. Playing loudly mastered audio out of your PC will be very slightly different from the true audio source by about -0.1dbps with the compressor affecting the peaks. It works via audiodg.exe (CAudioLimiter in AudioEng.dlll) on the shared-mode render path after all the streams get mixed, even if there's just one playing currently. This is necessary because two loud signals being mixed together might clip your DAC and that sounds nasty, so it's understandable that it's there. Why would you care though? I was building a audio metering system to monitor audio via loopback and the properties of the audio I played in were being modified by the limiter in these normal modes. Maybe audio purists might not enjoy it either."
+        },
+        {
+          "id": 50642166,
+          "author": "ZoomZoomZoom",
+          "text": "Please, don't confuse the things even more than required and don't use \"Equalization\" unless you manipulate gain in a frequency-dependent manner. This is loudness normalization. Also, from what I can see from the description, the described algorithm would be susceptible to increasing gain of focused impulses, such as whistle or other pure tones. This is why it requires additional limiting at the end. Do people consider Windows loudness treatment desired, so it requires a reimplementation?"
+        },
+        {
+          "id": 50643103,
+          "author": "gbraad",
+          "text": "I don't get why this needed to do reverse engineered from a windows dll. This is not magic, ... Note: seems many share the same opinion. This is quite simple to implement and wonder why this approach was taken; it can get unethical soon."
+        },
+        {
+          "id": 50641971,
+          "author": "pocketman",
+          "text": "No need to steal this, I would guess that a “limiter” is what is wanted here, and there are plenty of algorithms available. It won’t take away from the dynamics of the audio either, it will merely cap the loudest parts so that one isn’t exceedingly loud while the next is normal."
+        },
+        {
+          "id": 50641408,
+          "author": "getfacl",
+          "text": "> quiet and loud parts play at a similar level This is never what I want. A composition has a dynamic range for a reason."
+        }
+      ],
+      "summary_ja": "",
+      "editor_note": "",
+      "category": "その他"
+    },
+    {
+      "rank": 17,
+      "id": 50637220,
+      "title_en": "The matrix multiplication exponent is nine fourths [pdf]",
+      "title_ja": "The matrix multiplication exponent is nine fourths [pdf]",
+      "url": "https://github.com/openai/math/blob/main/preprints/The-matrix-multiplication-exponent-is-nine-fourths-November-24-2026/paper.pdf",
+      "hn_url": "https://news.ycombinator.com/item?id=50637220",
+      "score": 1011,
+      "comment_count": 559,
+      "posted_at": "2026-11-25T01:19:26+00:00",
+      "comments": [
+        {
+          "id": 50637782,
+          "author": "zone411",
+          "text": "For context, OpenAI's 4 new papers resolve 8 problems of the Top 500 Open Problems in Math list (LLM ranked, https://proofatlas.ai/open-problems/ ). They include: #25 — Matrix-multiplication exponent equals two. The paper gives the exact exponent 9/4 over every field, refuting the conjecture. #89 — Strongly polynomial linear programming (Smale’s ninth problem). The same paper also gives polynomial-time algorithms for #64 — Mean-payoff games, #65 — Parity games, #340 — Condon’s simple stochastic games. #183 — Polynomial diameter bound for polytopes, #130 — Polynomial pivot rule for the simplex method, both refuted. Some pairs of vertices are superpolynomially far apart. #137 — Erdős–Rado sunflower conjecture. For every fixed number of petals r, the paper proves the conjectured Cᵣᵏ bound. (rankings post Riemann (#2) and VP vs VNP (#31))."
+        },
+        {
+          "id": 50637909,
+          "author": "StableAlkyne",
+          "text": "We've seen so much interesting work come out of OpenAI and Anthropic in the last few weeks. It really feels like both have tapped into the pioneering spirit of the old Bell Labs. But, Bell Labs existed as part of an agreement with the government that AT&T's monopoly would be used for the public good. OpenAI and Anthropic don't really have much use for this beyond PR... If even the prestige from Riemann's Hypothesis couldn't boost ANT, what is the reason for them devoting such a huge fraction of their R&D budget to unrelated (though impactful) problems? Scaring mathematicians into burning their non-existent research budgets on tokens in order to make a couple million dollars? Open weight models are to the point that most business cases are completely solved by them, at a fraction of the price of Claude, Copilot, or OpenAI. Unfortunately, the average business doesn't care that the AI can solve frontier problems: they just need something to summarize emails or give an executive a summary of the day's headlines. The market is just waiting for a cheap provider that is just as turnkey... Which isn't exactly a high barrier these days. IMO there is space for a unicorn to emerge in the next few years to eat everyone's lunch."
+        },
+        {
+          "id": 50640069,
+          "author": "BoppreH",
+          "text": "There's a snowball's chance in hell that they haven't found any cryptographically-relevant results. And given how security averse the NSA has been (they pushed NIST to standardize a backdoored random number generator then paid the RSA company $10 million to use it[1]), I have the feeling that the findings won't be used to strengthen cybersecurity, but as weapons. More reason to invest in crypto agility, I guess. I just hope that they haven't broken all public key crypto, life is hard enough already. [1] https://www.reuters.com/article/us-usa-security-rsa-idUSBRE9..."
+        },
+        {
+          "id": 50637720,
+          "author": "mmaunder",
+          "text": "One possibility is that OpenAI may be holding back their best models to make fundamental breakthroughs, then using those breakthroughs to build stronger models in a compounding loop. If they were playing this game, public model quality would stall as compute shifted to internal research, and occasional releases like this would provide a glimpse of more beneath the surface. Edit: Forgot to point out that this came from an unreleased model and the recipe isn't disclosed. And they've been doing this kind of thing since August."
+        },
+        {
+          "id": 50638416,
+          "author": "seizethecheese",
+          "text": "These math proofs are so insanely over my head, but I really want to understand them. I tried Jane Street's socratic tutor skill ( https://github.com/janestreet/agent_skills/blob/master/socra... ) against this pdf and here's what I got: - Matrix multiplication is multiplying pairs of numbers together then summing them (you probably know this already) - Without any optimization, this process is o(n^3) - You can make this faster if you share a multiplication or sum across multiple places - By sharing sums / multiplication operations the maximum efficiency is o(n^2.25) I studied Economics, not CS so I'm a bit hazy on what big o actually means, to be honest."
+        }
+      ],
+      "summary_ja": "",
+      "editor_note": "",
+      "category": "その他"
+    },
+    {
+      "rank": 18,
+      "id": 50638032,
+      "title_en": "Button Sounds – collection of professionally-recorded button clicks and presses",
+      "title_ja": "Button Sounds – collection of professionally-recorded button clicks and presses",
+      "url": "https://buttons.joshwcomeau.com/",
+      "hn_url": "https://news.ycombinator.com/item?id=50638032",
+      "score": 824,
+      "comment_count": 129,
+      "posted_at": "2026-11-25T03:23:07+00:00",
+      "comments": [
+        {
+          "id": 50643313,
+          "author": "talkingtab",
+          "text": "The discussion about the value of sound in cars is especially interesting, but there is a further point behind it. That In Real Life We humans are adapted to use sound, not because we find it pleasant but because it tells us something about our environment. If you are old like I am, you know the real sound that a turn signal makes. It was caused as a electric relay repeatedly opened and closed. Now that sound is just an artifact (like roll up the window). But it is incredibly disturbing to hear the click stop when some other sound needs to play in my car while I am making a turn. My conjecture is that we drastically underestimate the importance of using \"sensory complete\" interfaces. So yeah. A button should click."
+        },
+        {
+          "id": 50639450,
+          "author": "hunter2_",
+          "text": "This is really cool. I have a suggestion, though: the samples within a button seem to have several modification types including a pitch shifter. For example, \"DOWN4\" under the \"Multi-sampled sounds\" heading sounds nearly a semitone lower than the other DOWN variants. I suggest eliminating all pitch shifting (or at least confining your use to a few cents), leaving only timbre variation. Go nuts creating variation through EQ, distortion, formant shifting, reflections/delay/reverb, etc. but keep the pitch locked. Why? Because the pitch of everything in this world is based on its resonant frequency, which is based on the size of whatever can vibrate, and in the case of a button it's resonating based on the size of the button. Many aspects of the sound would change based on things like how quickly the button is pushed or how much dampening the finger pushing it imparts, but the fundamental pitch is not one of them. When playing a violin, if you move up the fingerboard, the pitch of the string increases. But if instead of playing the string you knock on the body as if knocking on someone's front door, the main pitch of that knocking never changes. The sympathetic vibrations of the strings will have frequencies that vary as the finger position varies, and the brightness and RT60 of the reverberation through the wood will vary from knock to knock, but the fundamental frequency generally excited by the knock only changes if the violin's volumetric size changes, and it never will. Maybe a drum is a better example than a violin, since it's \"unpitched\" and yet still gets tuned to have some fundamental frequency. Only the noisy stuff varies from hit to hit, and the fundamental frequency does not (until you re-tune, or from temperature/humidity changing)."
+        },
+        {
+          "id": 50648670,
+          "author": "spdustin",
+          "text": "On Safari 27.3 (22626.1.12.11.4) (current macOS Golden Gate beta), the \"Press me!\" button and the list of sounds are strobing like crazy, what's going on with the page?"
+        },
+        {
+          "id": 50638438,
+          "author": "masenf",
+          "text": "> Frustratingly, browsers can decide to block a website from playing any sound. iOS Safari seems particularly strict about this. So, if you’re not hearing a click sound when tapping the big red button, please check out this website on a desktop computer. While I understand this behavior from Apple in a user-first perspective and do find audio on mobile web to be annoying in most cases, an easy way to allow audio to play on an iPhone that isn't \"use a desktop\" seems to be flipping the hardware switch to turn off silent mode. I'm not proud to admit it took 5 minutes of poking and a Google/Gemini search to figure that out..."
+        },
+        {
+          "id": 50640208,
+          "author": "steve_adams_86",
+          "text": "This is one of those things that's so gratifying and fun that it makes me want to go build something. I love Josh's work."
+        }
+      ],
+      "summary_ja": "",
+      "editor_note": "",
+      "category": "その他"
+    },
+    {
+      "rank": 19,
+      "id": 50624446,
+      "title_en": "Porting Rockbox to an undocumented $9 AliExpress 'YP3' MP3 player with LLMs",
+      "title_ja": "Porting Rockbox to an undocumented $9 AliExpress 'YP3' MP3 player with LLMs",
+      "url": "https://jayd.ml/2026/11/14/rockbox-on-yp3.html",
+      "hn_url": "https://news.ycombinator.com/item?id=50624446",
+      "score": 198,
+      "comment_count": 81,
+      "posted_at": "2026-11-24T06:22:36+00:00",
+      "comments": [
+        {
+          "id": 50644855,
+          "author": "beala",
+          "text": "There are several companies like M5 that make development kits for prototyping IoT/embedded projects. $40ish for a touch screen and battery and speaker etc in a small case. For example: https://shop.m5stack.com/products/m5stack-core2-esp32-iot-de... I had one of these in my box of unfinished projects. It's fun to dream about the possibilities, but actually programming it is time consuming. Or at least it used to be. I plugged it in and had Claude write a Yoto box clone for my kiddo. It serves a webpage for uploading tracks and I have the m5 rfid accessory so I can associate rfid cards with songs. I can add album art and there's a carousel for picking songs. I even added some music visualizations and games. I could publish the repo, but why bother? Just have Claude write you a new one from scratch exactly to your specifications. It takes about 30 minutes. We live in an age of marvels and monsters. Riemann? Super intelligence? Is a singularity just around the corner? I have no idea but it doesn't seem so unlikely these days. Life comes at you fast, as they say."
+        },
+        {
+          "id": 50644948,
+          "author": "tikimcfee",
+          "text": "I am so, so happy to see this. This exact idea has been my obsession for the last month or so. I've been building a 'tinybot' from this flow. The devices you see out there at ridiculously cheap prices are so - SO - much better than the current-gen software that runs on them. Android running on a MediaTek is so hard-hamstrung by the OS and the many many layers of abstraction and virtualization. $10 for a complete hardware product is incredible. When you bump that up to just $20, or even more to like $50+, you can get some really, really nice specced 'microdevices', like the ones mentioned by `beala` here: https://news.ycombinator.com/item?id=50644855 . I've got plans for these things, and because of the shift away from software being sold, it's time for the powerful hardware that it sat on to rise again! P.S.: If any of this sounds intriguing to you, please do drop me a line! I'm going to be open-sourcing the repo I'm using to build my prototypes, and if all goes well, I'll have some pages up soon explaining the build process, the tools, How-To's, limitations, etc. I could use all the help I can get, and this site has plenty of folks that like to tinker on the very small and the very \"underpowered\" ;) (yes, I think this is what folks call the 'nerd snipe', and you have my blessing to save yourself before you get caught in it. We're all supposed to be working, after all.)"
+        },
+        {
+          "id": 50644741,
+          "author": "saintaardvark",
+          "text": "This is amazing. I have such fond memories of my Sansa Clip. Now I play music on my iPhone that I've bought from Bandcamp -- but I run Linux at home, most of my music is encoded as ogg files, and all these self-imposed restraints have kept me from having the majority of my music with me everywhere I go. (I do use Navidrome to stream music, but it's not the same.) I'm looking forward to having a standalone, non-networked, everything-on-it music player again. Also, though, this is just wild. The ability to point Claude at these sorts of problems and say \"Here, figure this out\" is just incredible. I agree with OP that reverse-engineering one of these things is one of the hardest problems I can imagine (well, that and the Riemann hypothesis), and seeing it do so well is yet another eye-opening moment in a year that's been full of them."
+        },
+        {
+          "id": 50644202,
+          "author": "MatekCopatek",
+          "text": "This is awesome, I saw similar custom firmware projects pop up for some Snowsky players: https://recho.atzkey.workers.dev/ https://zmd22.github.io/diskos-disco/ https://b0hemia.github.io/diskOS/ Disclaimer: I have no affiliation, I'm just following the space."
+        },
+        {
+          "id": 50644987,
+          "author": "jaydenmilne",
+          "text": "It's worth pointing out that since this post I have ~4 more <$20 players on my desk running Rockbox, I'm just working on QA and writing it up!"
+        }
+      ],
+      "summary_ja": "",
+      "editor_note": "",
+      "category": "その他"
+    },
+    {
+      "rank": 20,
+      "id": 50635783,
+      "title_en": "Predicting LoRA size for any dataset",
+      "title_ja": "Predicting LoRA size for any dataset",
+      "url": "https://engram.com/blog/lora-size",
+      "hn_url": "https://news.ycombinator.com/item?id=50635783",
+      "score": 101,
+      "comment_count": 11,
+      "posted_at": "2026-11-24T22:34:29+00:00",
+      "comments": [
+        {
+          "id": 50645749,
+          "author": "augment_me",
+          "text": "Memorizing a dataset =/= learning a task. Cross entropy of a finite dataset measures signal + noise(redundancy, quirks, typos, etc) If you have 10MB of math data, the underlying task of learning the reasoning pattern might have low entropy and fit in a much lower LoRA rank, even though memorizing the dataset requires more. On any task like GSM, Math500, Openthought3 this would just be massive overfitting. Also they assume that the 2M-token context chunking is independent but for example logs are usually not. --- I think this is good to point out, because the company seems to sell a solution to cram private company wikis into the Lora adapters, so the measures are upper bounds in terms of info due to their assumption of memorization."
+        },
+        {
+          "id": 50647536,
+          "author": "Samin100",
+          "text": "The arithmetic coding widget halfway down the blog post is honestly really great. I'm surprised I haven't seen token probabilities expressed as bits of entropy before this."
+        },
+        {
+          "id": 50645422,
+          "author": "bee_rider",
+          "text": "Are there related questions along the lines of “what elements could I add to the dataset that would most increase the LoRA size.” Is there a metric other than size that can describe a LoRA’s… usefulness? Trueness to the original? (Is trueness to the original a positive or negative in this context, anyway?). Then maybe we can formulate questions about things like <usefulness>/<size>."
+        },
+        {
+          "id": 50645420,
+          "author": "natsu529",
+          "text": "It's super interesting. i want to fit this for image-generation-model."
+        },
+        {
+          "id": 50646196,
+          "author": "NooneAtAll5",
+          "text": "can someone explain how is this connected to a radio?"
+        }
+      ],
+      "summary_ja": "",
+      "editor_note": "",
+      "category": "その他"
+    },
+    {
+      "rank": 21,
+      "id": 50611593,
+      "title_en": "Show HN: An agent skill that optimizes code with falsifiable hypotheses",
+      "title_ja": "Show HN: An agent skill that optimizes code with falsifiable hypotheses",
+      "url": "https://chszlab.github.io/AgenticAlgorithmEngineering/",
+      "hn_url": "https://news.ycombinator.com/item?id=50611593",
+      "score": 52,
+      "comment_count": 7,
+      "posted_at": "2026-11-23T14:02:15+00:00",
+      "comments": [
+        {
+          "id": 50647627,
+          "author": "tomcatfish",
+          "text": "The example report is a good demo: https://github.com/CHSZLab/AgenticAlgorithmEngineering/blob/..."
+        },
+        {
+          "id": 50647064,
+          "author": "tikimcfee",
+          "text": "Looking forward to passing this to my little fleet of specialists. Anything that helps to articulate the process of optimization through rigor is alright with me."
+        },
+        {
+          "id": 50647454,
+          "author": "emilss",
+          "text": "cool stuff, can try it with GPU porting to tinygrad"
+        },
+        {
+          "id": 50648003,
+          "author": "perching_aix",
+          "text": "I've been doing a lowbrow version of this for a while, where during the reviewing of AI generated changes, I'd ask for a justifications / \"concern-addressed\" based tabulation of the changes proposed. This allows me to steamroll down overengineered parts, or identify assumptions that are not actually practical or rooted in reality. To an extent, this can indeed be automated by just putting the agents in a loop as described, especially if the reviewer agent is from a different provider. Nice to see someone do a proper version of this."
+        },
+        {
+          "id": 50647668,
+          "author": "prince_alex",
+          "text": "the author is optimizing himself away a great man"
+        }
+      ],
+      "summary_ja": "",
+      "editor_note": "",
+      "category": "その他"
+    },
+    {
+      "rank": 22,
+      "id": 50623028,
+      "title_en": "A fast CAS with a focus on resolution of singularities",
+      "title_ja": "A fast CAS with a focus on resolution of singularities",
+      "url": "https://github.com/pportilla/atlas",
+      "hn_url": "https://news.ycombinator.com/item?id=50623028",
+      "score": 6,
+      "comment_count": 1,
+      "posted_at": "2026-11-24T02:57:22+00:00",
+      "comments": [
+        {
+          "id": 50623029,
+          "author": "furstenheim",
+          "text": "A Computer Algebra System optimized for resolution of singularities."
+        }
+      ],
+      "summary_ja": "",
+      "editor_note": "",
+      "category": "その他"
+    },
+    {
+      "rank": 23,
+      "id": 50619073,
+      "title_en": "The undocumented 249-file limit for Googlebot rendering",
+      "title_ja": "The undocumented 249-file limit for Googlebot rendering",
+      "url": "https://www.fullstackoptimization.com/a/googlebot-249-file-rendering-limit",
+      "hn_url": "https://news.ycombinator.com/item?id=50619073",
+      "score": 23,
+      "comment_count": 6,
+      "posted_at": "2026-11-23T20:50:20+00:00",
+      "comments": [
+        {
+          "id": 50648156,
+          "author": "TheAceOfHearts",
+          "text": "I wonder how they arrived at the 250 limit, if it was just an easy round number or if it was empirically calculated. It's always a bit fascinating to think about what goes into such design choices."
+        },
+        {
+          "id": 50648607,
+          "author": "franze",
+          "text": "I did that article and btw yes I followed a real client into that rabbit hole until I figured it out"
+        },
+        {
+          "id": 50648203,
+          "author": "serhack_",
+          "text": "there was another error, some years ago, that was related to the fonts. I ran my website through their checker and independently on how I was presenting/loading font (CSS rules), they were not showing the font correctly in their browsers. I thought they were blocking requests to the ttf file, but they were downloading correctly. Turns out, as I was loading Menlo.ttf , the ttf had a bit set under OS/2.fsType that google was respecting. Who knew that?! It got patched around 2023/2024."
+        },
+        {
+          "id": 50648091,
+          "author": "jeffbee",
+          "text": "Seems fair. If there is a critical resource that is the 250th resource on your page, Google should just never rank your junk anyway."
+        }
+      ],
+      "summary_ja": "",
+      "editor_note": "",
+      "category": "その他"
+    },
+    {
+      "rank": 24,
+      "id": 50624684,
+      "title_en": "Show HN: Rchive – Every drive I've owned since the 90s, searchable in one window",
+      "title_ja": "Show HN: Rchive – Every drive I've owned since the 90s, searchable in one window",
+      "url": "https://www.rchive.computer/",
+      "hn_url": "https://news.ycombinator.com/item?id=50624684",
+      "score": 17,
+      "comment_count": 13,
+      "posted_at": "2026-11-24T07:03:33+00:00",
+      "comments": [
+        {
+          "id": 50648610,
+          "author": "ahofmann",
+          "text": "Shameless plug: I (well, fable) added a search function to ncdu and call the result icdu (interactive ncdu, you can search the tree while icdu is scanning). It's my solution for the question \"where the f.. is this file?\" and it also works for unattached/unmounted storage because it's a drop in replacement for ncdu and can therefore write an index file. https://github.com/anhofmann/icdu I use it myself and I'm very happy with it and I'm also very happy for feature requests, bug reports etc."
+        },
+        {
+          "id": 50648347,
+          "author": "nologic98",
+          "text": "Cool. I built my own version of this, to index old hard drives before I threw them away, and figure out if there’s anything valuable on them. Mostly they were just backup, so I thought the key use case was to confirm I have everything in one current place. I ran into some messy problems: 1. Ignoring 90% of files that aren’t important to me (defining these is the hard part) 2. Backups were never complete or comprehensive and full of [near] duplicates, mostly things I dragged or duplicated at one point or another, such as around the time I migrated to a new computer and kept an image of the old one (intended to be temporary). 3. Reckoning per file wasn’t enough. Folders tended to matter - for grouping and the nested folder structure held important clues. Sometimes the old copy of the folder contained important items that were missing today. Other times, today’s copy was the curated one and the archive was full of rejects (Or some documents were partials of another, or sidecars) Worse, sometimes all at once! It’s very laborious to figure out the difference. My use case was a bit harder than “find the thing even if it’s offline” - it’s: know when we’ve preserved everything and can discard a drive. I guess that’s a different problem and I didn’t see a solution worth the effort."
+        },
+        {
+          "id": 50647765,
+          "author": "RunSet",
+          "text": "https://www.fsoft.it/VVV/"
+        },
+        {
+          "id": 50647312,
+          "author": "profsummergig",
+          "text": "Anyone here use Cathy? It's an amazing concept. It stores just all the filenames and the hierarchical folder structure of an external drive in a tiny portable file. And the app is a Windows portable app."
+        },
+        {
+          "id": 50631485,
+          "author": "kevinsync",
+          "text": "I posted this and went to bed, and now figure I probably ought to at least write up some of the actual tech, implementation and features, and there's so much that I don't even know where to begin lol. RCHIVE does indeed use Electron. I know that's probably going to catch a lot of flak, but I chose it intentionally due to things I wanted to do in the UI that, hate to say it, Chromium does out of the box that would become a whole sidequest trying to do in Qt or Swift. The front end is underpinned by a variety of daemons and services written in Rust that handle scan coordination and watching, shared platform primitives, executing copy jobs, handling offline geography, decoding media (using OS-native decoders and handling legacy formats), etc. There are other coordinators and workers in Node as well. Database is SQLite, which manages your catalog and executes searches via regular indexes and FTS5 trigram indexes. There's a whole gang of stuff in there to optimize and facilitate searches based on filename/path substrings, scanned metadata, etc. Will be releasing an update with indexing and searching of actual file contents soon. Different people will use RCHIVE for different purposes: - Search/Find: you can see the most recently-changed files, deep-search across all sources, filter based on a bunch of different parameters, etc. You can get just a list of results, or see everything hierarchically in File Browser. Every file that can generate a preview gets one, and there's contextual clustering that happens where appropriate (ex. RCHIVE looks for evidence in sibling files to make decisions based on consensus, such as \"folder with 20 MP3s all tagged appropriately, and a couple stray JPGs of unknown provenance -- these very likely all belong together\"). Filters are combinatorial and have their own structured syntax, so you can type them out if you want, or use the UI. Previews show images, animated video frames, rendered PDF pages, etc, so you can zip through a bunch of IMG_0XXX files super fast. There's also a \"Mini Mode\" that's just a search box, so you can start the app, minimize to system tray, then hotkey to search from any other app. Ctrl-shift-R, type, enter, keyboard search, enter to open. Just as easy as Spotlight et al. - Organize: you can take a massive, disparate catalog and apply Recipes (to filter/reduce the dataset) and Transformations (to group and restructure the file tree) to virtually build an organized filesystem, which you can then simply browse, or copy/move some-or-all of it from its messy origin to a tidy destination (new drive, NAS, whatever) -- both recipes and transformations are JSON, so while RCHIVE ships with a ton of presets, you can write your own to basically do whatever you want. The recipe engine is composible and honestly really neat, because you can end up crafting really specific, reusable combination views of all your shit (which then stay updated if you manually rescan, or turn background scanning on). Tagging is also very comprehensive; descendants inherit them by default, but can disinherit granularly. Makes it really easy to tag large swaths of things from a parent - Copy/Move: granular jobs get created which then are executed via rchive-runner (either on CLI or in-app) -- every individual filesystem action is tracked and able to resume/rerun, so if you're copying 10TB of stuff, your power can go out and you don't have to start over. You can pause and come back days later. Care is taken to ensure that stuff like a file \"move\" isn't marked complete and source isn't removed until file is copied and verified at the destination (either simple verification, or full SHA256 hash checks if needed) There's all kinds of other random useful stuff in there: - all geo/location functions use H3, GeoNames data, and some custom projections and custom data, all offline/on-device. I handle Earth like a truncated icosahedron at varying levels of resolutions, and it rips through locations by bucketing everything into 3D hexagonal tiles which makes lookups easy and fast - you can take a photo of each source for quick identification (ex. \"that yellow thumb drive\") -- you just click the source, scan a QR code that pops up with your phone, take the photo with your phone, submit - you can \"cold copy\" paths/drives without cataloging them, like if you simply want to run a job from point A to B - there's pretty comprehensive keyboard support, complex selections, undo/redo, etc - you can make complex selections and then \"isolate\" the selection, so you're only working with a chosen subset of your catalog - when scanning files, we also look for duplicates, files that are \"broken\" (a JPG that's actually MP3 data), etc -- for instance, I had a drive from 2002 that I guess had some bad sectors, and I copied it off back then and have carried it ever since. I didn't realize a few of the photos \"copied\" but the drive head actually read from another area that had some music files, and only found out when they got surfaced during an RCHIVE scan 24 years later. Long story short, Winamp plays those JPGs just fine lol - I also integrated PairDrop into it, so you can pretty easily fire off files or selections of files from inside the app directly to your phone or other devices Anyways, that's just a bit more background about what it all is. Happy to discuss further if anybody has any thoughts or questions!"
+        }
+      ],
+      "summary_ja": "",
+      "editor_note": "",
+      "category": "その他"
+    },
+    {
+      "rank": 25,
+      "id": 50639698,
+      "title_en": "Smart people who give a shit use tools",
+      "title_ja": "Smart people who give a shit use tools",
+      "url": "https://www.iankduncan.com/engineering/2026-11-19-smart-people-who-give-a-shit-use-tools",
+      "hn_url": "https://news.ycombinator.com/item?id=50639698",
+      "score": 244,
+      "comment_count": 189,
+      "posted_at": "2026-11-25T07:46:43+00:00",
+      "comments": [
+        {
+          "id": 50642374,
+          "author": "anothaway",
+          "text": "Something really bothers me about the \"it's just another higher-level abstraction\" argument but I can't quite nail down what. Using an LLM is a completely different experience from moving to assembler to C, or C to Javascript. The nature of the activity you are performing in those transitions in the same, moving to an LLM is not. Even if you are writing in Javascript, you are still modelling a problem on to some representation in code. The only thing that is abstracted from you is memory management, a technical detail. With an LLM you don't model the problem at all, you let something else do it. Moving from an low-code app builder to an LLM is a higher level of abstraction. Moving from writing code yourself to having an LLM write it is something different entirely. (Though the author seems to be advocating against that style of usage, which I agree with.)"
+        },
+        {
+          "id": 50641725,
+          "author": "xnorswap",
+          "text": "One interesting conclusion that this post almost gets to but doesn't draw, is that previously the \"smart people who gave a shit\" often wouldn't be out-shipped by those who didn't. But LLM empowered, the cost of \"giving a shit\" relative to meat-proxying is amplified such that the people who you don't want shipping so much can now out-ship the ones who take the time to do additional verification, despite both sides being massively sped up with LLMs."
+        },
+        {
+          "id": 50642892,
+          "author": "notpachet",
+          "text": "Healthy people who give a shit exercise. Disciplined people who want to retain a working understanding of the system exercise their knowledge of said system. You can still do this with LLM's but there is a greater temptation to let your knowledge atrophy. It requires discipline to keep the machine at arm's length."
+        },
+        {
+          "id": 50642234,
+          "author": "lf88",
+          "text": "Wise people notice when something stops being \"just a tool\" and question where the technology is going. We are way beyond the \"just a tool\" point with LLMs."
+        },
+        {
+          "id": 50642016,
+          "author": "tomaytotomato",
+          "text": "I am not smart, but I love to tinker and break stuff. With an LLM I can now do that 10x faster, but I am not a proxy. I am a human hypervisor that gets lazy notifications whilst queuing up lots of work. Software engineering is changing, and I don't know what its going to look like. The whole concept of \"shift right\" and other ways of working could be redundant in future. The junior engineer question as well; I think teaching juniors will change from loops, if/else, maps, SOLID, ACID, 3NF etc. to something more blocky and abstract. Will engineering at the fundamental level (resiliency, adaptability, maintainability) change, I think not."
+        }
+      ],
+      "summary_ja": "",
+      "editor_note": "",
+      "category": "その他"
+    },
+    {
+      "rank": 26,
+      "id": 50610682,
+      "title_en": "A Beer Brewer's Noise Estimation",
+      "title_ja": "A Beer Brewer's Noise Estimation",
+      "url": "https://chillphysicsenjoyer.substack.com/p/a-beer-brewers-noise-estimation",
+      "hn_url": "https://news.ycombinator.com/item?id=50610682",
+      "score": 11,
+      "comment_count": 1,
+      "posted_at": "2026-11-23T12:20:15+00:00",
+      "comments": [
+        {
+          "id": 50648673,
+          "author": "srean",
+          "text": "Was struck to see Student re-derive the Poisson distribution. I think the original result is from the mid 1800s and has been used to estimate expected deaths by horse kicks. Student is of course famous for the t-test. It's derivation was quite a toure de force."
+        }
+      ],
+      "summary_ja": "",
+      "editor_note": "",
+      "category": "その他"
+    },
+    {
+      "rank": 27,
+      "id": 50643199,
+      "title_en": "In C++, = default and {} are not the same constructor",
+      "title_ja": "In C++, = default and {} are not the same constructor",
+      "url": "https://lemire.me/blog/2026/11/02/default-and-braces-are-not-the-same-constructor/",
+      "hn_url": "https://news.ycombinator.com/item?id=50643199",
+      "score": 97,
+      "comment_count": 155,
+      "posted_at": "2026-11-25T15:20:15+00:00",
+      "comments": [
+        {
+          "id": 50643643,
+          "author": "ninkendo",
+          "text": "Constructors are such an odd duck to me. On the one hand, you have languages like C++ and Swift which have construction as a first-class concept, with tons of rules you need to memorize (Swift's \"convenience\" vs \"designated\" initializers are a real treat to unpack). Then you have languages like Rust, Go, Zig, etc which don't have them at all, constructors are just static functions in the namespace of the type, which return an instance of that type. For the life of me I've never understood why you'd want the former. I'm sure there's a reason, but I never miss it when using languages in the latter category. The explanation you typically hear is about OO and inheritance, but I don't buy it: If Animal had a ::new() that initialized private state, Cow could have a ::new() too that could call Animal::new() if it wanted, then do further initialization, etc... I don't think there's anything about inheritance that says constructors are a must. (Edit: In fact, ObjC does exactly this. I should have remembered that given that I did ObjC for a living for a while.)"
+        },
+        {
+          "id": 50643425,
+          "author": "raincole",
+          "text": "No language scares me like C++ does. Look at this page: https://www.learncpp.com/cpp-tutorial/variable-assignment-an... This is just a single section of the first chapter of a beginner tutorial. And it's already more things to remember than, say, the whole Lua."
+        },
+        {
+          "id": 50647562,
+          "author": "morning-coffee",
+          "text": "This is one of the many reasons I left C++ (after investing over 20 years professionally in it) for Rust. Sometimes it is just better to get on with life than deal with pedantic minutiae all the time."
+        },
+        {
+          "id": 50644396,
+          "author": "spacechild1",
+          "text": "The example is pretty contrived because in practice you'd want to zero-initialize the members in the default constructor anyway. struct span { const char *p = nullptr; size_t len = 0; span() = default; // or span() {} span(const char *s, size_t n) : p(s), len(n) {} }; In that case, there is no difference between span s; and span s{}; There are only few use cases where you want a default constructor that does not initialize its members. One example are wrappers around primitive types where you want to closely preserve the original semantics. Whether that's a good idea in the first place really depends on the use case. For example, std::atomic used to default-initialize the underlying value, which led to many bugs in user code. Since C++20 std::atomic uses value-initialization. See https://cplusplus.github.io/LWG/issue2334 . On the one hand, std::atomic is now safer to use, on the other hand, it is not an implicit-lifetime-type anymore, which means you can't put it in shared memory without UB... Another example is glm::vec, which has actually hit me a few times in my own code. At least they recognized the issue and allowed to override the default behavior with the GLM_FORCE_CTOR_INIT define."
+        },
+        {
+          "id": 50646272,
+          "author": "rcleveng",
+          "text": "GCC going from effectively the same performance in 14.x to 4x slower in 15.x AND 16.x sounds like a real regression that should be fixed."
+        }
+      ],
+      "summary_ja": "",
+      "editor_note": "",
+      "category": "その他"
+    },
+    {
+      "rank": 28,
+      "id": 50641323,
+      "title_en": "Hazel (YC W24) Is Hiring a Product Designer",
+      "title_ja": "Hazel (YC W24) Is Hiring a Product Designer",
+      "url": "https://www.ycombinator.com/companies/hazel-2/jobs/8EhsvYE-product-designer-contract",
+      "hn_url": "https://news.ycombinator.com/item?id=50641323",
+      "score": 1,
+      "comment_count": 0,
+      "posted_at": "2026-11-25T12:00:34+00:00",
+      "comments": [],
+      "summary_ja": "",
+      "editor_note": "",
+      "category": "その他"
+    },
+    {
+      "rank": 29,
+      "id": 50637686,
+      "title_en": "Models Can Communicate via Inference Servers Despite Being Sandboxed",
+      "title_ja": "Models Can Communicate via Inference Servers Despite Being Sandboxed",
+      "url": "https://www.lesswrong.com/posts/7wzWuLP3HhyBLmKfo/models-can-communicate-via-inference-servers-despite-being",
+      "hn_url": "https://news.ycombinator.com/item?id=50637686",
+      "score": 443,
+      "comment_count": 189,
+      "posted_at": "2026-11-25T02:34:21+00:00",
+      "comments": [
+        {
+          "id": 50638341,
+          "author": "amluto",
+          "text": "This shared LV cache thing is, in my mind, ridiculous. Web browser developers learned, quite a while ago, that caches need to be separated for different origins. Inference servers should add a similar feature: allow API calls to specify cache separation keys that prevent one security context from probing another context’s cache. As for the step size issue, Google recently had a post about producing exactly consistent output across different kernels (specifically by defining a deterministic prefill algorithm and then requiring all kernels to generate results exactly equal to prefilling on the sequence in question). More broadly, I think it’s a bit odd to frame this as “models” communicating. This is software communicating, and the models happen to be running the software."
+        },
+        {
+          "id": 50639634,
+          "author": "tsimionescu",
+          "text": "None of the attacks discussed here are realistic in any way. They require a bunch of extremely improbable conditions to hold, and a huge amount of information on the exact details of the hardware and software stack. - the two agents must be aware of each other and must have pre-shared messages to check - they can't spontaneously discover each other and start communicating in this way - they must know the details of the inference server they are running under and its possible kernels and its limits (what is a \"short prompt\" vs \"a long prompt\" for this setup) - they must have a way to run at almost the same time - the prefix cache must have little contention so that their blocks can't be evicted (note: the article mostly talks about KV cache, but it's actually the prefix cache that is relevant here) - the models need either (1) direct access to the numerical results of the inference process, instead of the text that vLLM provides, (2) access to the exact responses that a helper model will produce with the short-kernel numerical results vs the long-kernel numerical results; this is the most critical step that is impossible to reproduce on any common kind of deployment - there must not be any other kind of variability in the system (different GPUs, multiple inference servers behind a load balancer, more complex distributed inference setups) The post also mentions all of these limitations, and that the scheme entirely collapses if any of them don't hold. It's a cool idea, but it's a purely theoretical thing that has 0 real-world implications."
+        },
+        {
+          "id": 50638579,
+          "author": "devy",
+          "text": "Frontier models today can easily figure this out. The less frontier models as of right now are probably going to take a long horizon session to figure out this type of \"side channel\" comms. However, posting this in depth step by step on the internet and discussed in open forums like here, now all models definitely know about this trick now."
+        },
+        {
+          "id": 50638450,
+          "author": "kgeist",
+          "text": "If a single vLLM instance handles both prefill and decode without disaggregation, I can think of another way. Alice reads a long document every N seconds to transmit a 1, and does nothing to transmit a 0. Bob, in its own loop, measures the time using bash, generates some random text and writes it to a file, and then checks the time again to estimate its own tokens per second (file length / elapsed time). The trick is that when a vLLM instance handles both prefill and decode, decoding slows down measurably because vLLM has to alternate between prefill and decode phases. It assumes only 2 agents are running, though, but it doesn't require fine-tuning or a second helper model."
+        },
+        {
+          "id": 50641987,
+          "author": "zupa-hu",
+          "text": "Incorrect title. The only reason they can communicate is because they are not sandboxed."
+        }
+      ],
+      "summary_ja": "",
+      "editor_note": "",
+      "category": "その他"
+    },
+    {
+      "rank": 30,
+      "id": 50643065,
+      "title_en": "Rumors swirling that labs might have cracked Factoring in P",
+      "title_ja": "Rumors swirling that labs might have cracked Factoring in P",
+      "url": "https://www.reddit.com/r/singularity/comments/1y59ef1/rumor_that_openai_or_anthropic_found_a_way_to/",
+      "hn_url": "https://news.ycombinator.com/item?id=50643065",
+      "score": 443,
+      "comment_count": 315,
+      "posted_at": "2026-11-25T15:08:44+00:00",
+      "comments": [
+        {
+          "id": 50646204,
+          "author": "pona-a",
+          "text": "Please, have an evidentiary standard. Right now all you have is a 4th hand rumor, the kind of which has circulated since the dawn of applied crypography. If either of these companies broke RSA, I'm pretty sure the secret services would be in the know long before us, and they'd make sure there would be no loose ends to tell any rumors. Before even reposting this, just wait 7 days for more info on this story as more people speak out about it. If it's not in the news by then, it's probably fake."
+        },
+        {
+          "id": 50643561,
+          "author": "jawns",
+          "text": "If such a finding is announced, and if factoring in P is feasible beyond the nation-state level, I wonder whether the U.S. government could invoke the Defense Production Act and other emergency powers to essentially commandeer the AI companies' compute capacity to address the crisis that would occur. If that's a possible outcome, maybe it's in the AI companies' best interest to keep it as quiet as possible for as long as possible."
+        },
+        {
+          "id": 50646740,
+          "author": "nathanfries",
+          "text": "His follow up: \"Because people have been hounding me about it: yes, I’m virtually certain, from multiple reliable sources, that the AI labs are now sitting on one or more bombshells in that area. However, until I either see details or hear directly from someone at a lab, I feel much, much less confident about the specific nature of those bombshells. I do not wish to be responsible for spreading unverified rumors. And I worry that exact statements of what was done may have been mangled in a game of Telephone.\""
+        },
+        {
+          "id": 50643289,
+          "author": "Cakez0r",
+          "text": "Anthropic factored RSA-896 a couple of months ago ( https://saweis.net/posts/rsa-896.html ). They used existing methods and stressed that they didn't find a more efficient approach to factoring (maybe true, maybe not...). It does show however that they are at least looking at the problem and willing to throw substantial computing power at it. Perhaps they have had a breakthrough."
+        },
+        {
+          "id": 50643243,
+          "author": "lorenzohess",
+          "text": "https://redlib.catsarch.com/r/singularity/comments/1y59ef1/r..."
+        }
+      ],
+      "summary_ja": "",
+      "editor_note": "",
+      "category": "その他"
+    }
+  ]
+}
